@@ -1,0 +1,889 @@
+/* =========================================
+   LNA - JUGADORES
+   ========================================= */
+
+.players-page {
+  width: 100%;
+  min-height: calc(100vh - 76px);
+  background-color: var(--color-background);
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.players-header {
+  width: 100%;
+  padding: 34px 0 30px;
+
+  background-color: var(--color-dark);
+  color: #ffffff;
+
+  border-bottom: 3px solid var(--color-primary);
+}
+
+.players-header .page-container,
+.players-content .page-container {
+  width: min(100% - 32px, var(--container-width));
+  margin: 0 auto;
+}
+
+.players-label {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--color-primary);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.players-header h1 {
+  margin-bottom: 8px;
+
+  color: #ffffff;
+
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.players-header p {
+  max-width: 560px;
+
+  color: #bdbdbd;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   CONTENIDO
+   ========================================= */
+
+.players-content {
+  width: 100%;
+  padding: 28px 0 48px;
+}
+
+
+/* =========================================
+   FILTROS
+   ========================================= */
+
+.players-filters {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 14px;
+
+  margin-bottom: 16px;
+}
+
+.players-search,
+.players-filter {
+  min-width: 0;
+}
+
+.players-search label,
+.players-filter label {
+  display: block;
+  margin-bottom: 7px;
+
+  color: var(--color-text-soft);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.players-search input,
+.players-filter select {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--sports-border);
+  border-radius: var(--radius-small);
+
+  background-color: var(--sports-panel);
+  color: #ffffff;
+
+  outline: none;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.players-search input::placeholder {
+  color: #8d8d8d;
+}
+
+.players-search input:focus,
+.players-filter select:focus {
+  border-color: var(--color-primary);
+  background-color: #252525;
+}
+
+.players-filter select {
+  cursor: pointer;
+}
+
+
+/* =========================================
+   RESULTADOS
+   ========================================= */
+
+.players-result-info {
+  min-height: 44px;
+
+  margin-bottom: 12px;
+  padding: 0 4px;
+
+  display: flex;
+  align-items: center;
+
+  color: var(--color-text-soft);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   GRID DE JUGADORES
+   ========================================= */
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+
+/* =========================================
+   TARJETA DE JUGADOR
+   ========================================= */
+
+.player-card {
+  width: 100%;
+  min-width: 0;
+
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--sports-border);
+  border-radius: var(--radius-medium);
+
+  background-color: var(--sports-panel);
+  color: #ffffff;
+
+  text-align: left;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.player-card:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--color-primary);
+
+  background-color: #252525;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.player-card-main {
+  min-height: 150px;
+
+  padding: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.player-card-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.player-position {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 8px;
+  padding: 4px 7px;
+
+  border: 1px solid var(--sports-border);
+  border-radius: 4px;
+
+  background-color: #202020;
+
+  color: var(--color-primary);
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.player-card-info h2 {
+  max-width: 100%;
+
+  margin-bottom: 5px;
+
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+
+  overflow-wrap: break-word;
+}
+
+.player-nationality {
+  color: #a9a9a9;
+
+  font-size: 11px;
+}
+
+.player-team-logo {
+  width: 54px;
+  height: 54px;
+
+  flex-shrink: 0;
+
+  padding: 6px;
+
+  object-fit: contain;
+
+  background-color: #ffffff;
+
+  border-radius: 50%;
+}
+
+.player-card-footer {
+  min-height: 42px;
+
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-top: 1px solid var(--sports-border-soft);
+
+  background-color: #202020;
+
+  color: #a9a9a9;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.player-card-arrow {
+  color: var(--color-primary);
+
+  font-size: 16px;
+
+  transition: transform 0.2s ease;
+}
+
+.player-card:hover .player-card-arrow {
+  transform: translateX(3px);
+}
+
+
+/* =========================================
+   SIN RESULTADOS
+   ========================================= */
+
+.players-empty {
+  min-height: 240px;
+
+  padding: 40px 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--sports-border);
+  border-radius: var(--radius-medium);
+
+  background-color: #202020;
+
+  text-align: center;
+}
+
+.players-empty > span {
+  margin-bottom: 8px;
+
+  color: var(--color-primary);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.players-empty h2 {
+  margin-bottom: 6px;
+
+  color: #ffffff;
+
+  font-size: 18px;
+}
+
+.players-empty p {
+  max-width: 320px;
+
+  color: #a9a9a9;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   OVERLAY DEL POPUP
+   ========================================= */
+
+.player-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.72);
+}
+
+
+/* =========================================
+   POPUP DEL JUGADOR
+   ========================================= */
+
+.player-modal {
+  position: relative;
+
+  width: min(100%, 560px);
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-medium);
+
+  background-color: #202020;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================
+   CABECERA DEL POPUP
+   ========================================= */
+
+.player-modal-header {
+  min-height: 165px;
+
+  padding: 22px;
+
+  display: grid;
+  grid-template-columns: 80px 1fr 34px;
+  align-items: center;
+
+  gap: 18px;
+
+  background-color: #202020;
+
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.player-modal-logo {
+  width: 64px;
+  height: 64px;
+
+  padding: 7px;
+
+  object-fit: contain;
+
+  background-color: #ffffff;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================
+   INFORMACIÓN DEL JUGADOR
+   ========================================= */
+
+.player-modal-player-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.player-modal-player-info span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--color-primary);
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.player-modal-player-info h2 {
+  margin-bottom: 5px;
+
+  color: #ffffff;
+
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.player-modal-player-info p {
+  margin-bottom: 3px;
+
+  color: #d0d0d0;
+
+  font-size: 12px;
+}
+
+.player-modal-player-info small {
+  color: #a9a9a9;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   BOTÓN CERRAR
+   ========================================= */
+
+.player-modal-close {
+  width: 34px;
+  height: 34px;
+
+  align-self: start;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #444444;
+  border-radius: 50%;
+
+  background-color: #292929;
+
+  color: #ffffff;
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.player-modal-close:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+
+/* =========================================
+   DATOS DEL JUGADOR
+   ========================================= */
+
+.player-modal-details {
+  padding: 18px 22px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  background-color: #202020;
+
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.player-modal-details > div {
+  min-width: 0;
+  min-height: 72px;
+
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #3d3d3d;
+  border-radius: var(--radius-small);
+
+  background-color: #292929;
+
+  text-align: center;
+}
+
+.player-modal-details span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #a9a9a9;
+
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.player-modal-details strong {
+  color: #ffffff;
+
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+
+/* =========================================
+   ESTADÍSTICAS DE LA TEMPORADA
+   ========================================= */
+
+.player-modal-stats-section {
+  width: 100%;
+
+  padding: 18px 22px;
+
+  background-color: #202020 !important;
+  color: #ffffff !important;
+}
+
+.player-modal-section-label {
+  display: block;
+
+  margin-bottom: 11px;
+
+  color: var(--color-primary) !important;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   TABLA DE ESTADÍSTICAS
+   ========================================= */
+
+.player-modal-stats {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  border: 1px solid #444444 !important;
+  border-radius: var(--radius-small);
+
+  overflow: hidden;
+
+  background-color: #292929 !important;
+}
+
+
+/* Cada estadística */
+
+.player-stat {
+  min-width: 0;
+  min-height: 88px;
+
+  padding: 16px 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  background-color: #292929 !important;
+  color: #ffffff !important;
+
+  border-right: 1px solid #444444 !important;
+
+  text-align: center;
+}
+
+.player-stat:last-child {
+  border-right: none !important;
+}
+
+
+/* Número */
+
+.player-stat strong {
+  display: block;
+
+  color: var(--color-primary) !important;
+
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+
+/* PJ / PTS / REB / AST */
+
+.player-stat span {
+  display: block;
+
+  color: #bdbdbd !important;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+
+/* =========================================
+   FOOTER DEL POPUP
+   ========================================= */
+
+.player-modal-footer {
+  min-height: 48px;
+
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #191919;
+
+  border-top: 1px solid #3d3d3d;
+
+  color: #b0b0b0;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+.player-modal-footer strong {
+  color: var(--color-primary);
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1100px) {
+  .players-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 850px) {
+  .players-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .players-search {
+    grid-column: 1 / -1;
+  }
+
+  .players-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+  .players-page {
+    min-height: calc(100vh - 64px);
+  }
+
+  .players-header {
+    padding: 26px 0 24px;
+  }
+
+  .players-header .page-container,
+  .players-content .page-container {
+    width: min(100% - 20px, var(--container-width));
+  }
+
+  .players-header h1 {
+    font-size: 27px;
+  }
+
+  .players-header p {
+    font-size: 13px;
+  }
+
+  .players-content {
+    padding: 18px 0 32px;
+  }
+
+  .players-filters {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .players-search {
+    grid-column: auto;
+  }
+
+  .players-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .player-card-main {
+    min-height: 125px;
+    padding: 16px;
+  }
+
+  .player-card-info h2 {
+    font-size: 15px;
+  }
+
+  .player-team-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+
+  /* POPUP */
+
+  .player-modal-overlay {
+    padding: 10px;
+  }
+
+  .player-modal {
+    max-height: calc(100vh - 20px);
+  }
+
+  .player-modal-header {
+    min-height: 145px;
+
+    padding: 17px;
+
+    grid-template-columns: 58px 1fr 32px;
+
+    gap: 10px;
+  }
+
+  .player-modal-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .player-modal-player-info h2 {
+    font-size: 18px;
+  }
+
+  .player-modal-details {
+    padding: 14px 17px;
+  }
+
+  .player-modal-stats-section {
+    padding: 16px 17px;
+  }
+
+  .player-modal-footer {
+    padding: 0 17px;
+  }
+}
+
+
+/* =========================================
+   MOBILE PEQUEÑO
+   ========================================= */
+
+@media (max-width: 420px) {
+  .players-header h1 {
+    font-size: 24px;
+  }
+
+  .player-card-main {
+    min-height: 115px;
+  }
+
+  .player-team-logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .player-modal-header {
+    grid-template-columns: 50px 1fr 30px;
+    gap: 8px;
+  }
+
+  .player-modal-details {
+    grid-template-columns: 1fr;
+  }
+
+  .player-modal-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .player-stat:nth-child(2) {
+    border-right: none !important;
+  }
+
+  .player-stat:nth-child(-n + 2) {
+    border-bottom: 1px solid #444444 !important;
+  }
+}

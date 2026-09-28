@@ -1,0 +1,1771 @@
+/* =========================================
+   HOME
+   ========================================= */
+
+.home-page {
+  width: 100%;
+  min-height: calc(100vh - 76px);
+  background-color: var(--color-background);
+}
+
+.home-content {
+  width: 100%;
+  padding: 28px 0 48px;
+}
+
+.home-container {
+  width: min(100% - 32px, var(--container-width));
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   DASHBOARD
+   ========================================= */
+
+.home-dashboard {
+  display: grid;
+
+  grid-template-columns:
+    0.95fr
+    1.55fr
+    0.95fr;
+
+  gap: 20px;
+
+  align-items: start;
+}
+
+
+/* =========================================
+   PANELES
+   ========================================= */
+
+.home-panel {
+  min-width: 0;
+
+  overflow: hidden;
+
+  background-color: var(--sports-panel);
+  color: var(--sports-text);
+
+  border: 1px solid var(--sports-border);
+  border-radius: var(--radius-medium);
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================
+   ENCABEZADO DE PANEL
+   ========================================= */
+
+.home-panel-header {
+  min-height: 76px;
+
+  padding: 18px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  background-color: var(--sports-panel-header);
+
+  border-bottom: 1px solid var(--sports-border);
+}
+
+.home-panel-header > div {
+  min-width: 0;
+}
+
+.home-panel-header span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--color-primary);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+}
+
+.home-panel-header h2 {
+  color: var(--sports-text);
+
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.home-panel-header a {
+  flex-shrink: 0;
+
+  color: var(--sports-text-soft);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  transition:
+    color 0.2s ease;
+}
+
+.home-panel-header a:hover {
+  color: var(--color-primary);
+}
+
+
+/* =========================================
+   TABLA DE POSICIONES
+   ========================================= */
+
+.standings-panel {
+  background-color: var(--sports-panel);
+
+  border-color: var(--sports-border);
+}
+
+.standings-table {
+  width: 100%;
+}
+
+
+/* Encabezado */
+
+.standings-table-header {
+  display: grid;
+
+  grid-template-columns:
+    34px
+    minmax(0, 1fr)
+    34px
+    34px;
+
+  align-items: center;
+
+  min-height: 38px;
+
+  padding: 0 14px;
+
+  background-color: var(--sports-panel-header);
+
+  border-bottom: 1px solid var(--sports-border);
+
+  color: var(--sports-text-soft);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.standings-table-header span:nth-child(3),
+.standings-table-header span:nth-child(4) {
+  text-align: center;
+}
+
+
+/* Filas */
+
+.home-standing-row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    34px
+    minmax(0, 1fr)
+    34px
+    34px;
+
+  align-items: center;
+
+  min-height: 52px;
+
+  padding: 0 14px;
+
+  border: 0;
+  border-bottom: 1px solid var(--sports-border-soft);
+
+  background-color: var(--sports-panel-row);
+
+  color: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.home-standing-row:last-child {
+  border-bottom: 0;
+}
+
+.home-standing-row:hover {
+  background-color: var(--sports-panel-row-hover);
+
+  box-shadow:
+    inset 3px 0 0 var(--color-primary);
+}
+
+
+/* Posición */
+
+.home-standing-position {
+  color: #a9a9a9 !important;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* Equipo */
+
+.home-standing-team {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  color: #ffffff !important;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.home-standing-team img {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+}
+
+.home-standing-team span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #ffffff !important;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* PG / PP */
+
+.home-standing-row > strong {
+  color: #ffffff !important;
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   FIXTURE
+   ========================================= */
+
+.fixture-panel {
+  min-width: 0;
+}
+
+
+/* Navegación de fecha */
+
+.fixture-date-navigation {
+  min-height: 66px;
+
+  padding: 8px 14px;
+
+  display: grid;
+
+  grid-template-columns:
+    42px
+    minmax(0, 1fr)
+    42px;
+
+  align-items: center;
+
+  gap: 8px;
+
+  background-color: var(--sports-panel-header);
+
+  border-bottom: 1px solid var(--sports-border);
+
+  color: #ffffff;
+}
+
+.fixture-day-button {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--sports-border);
+
+  border-radius: 50%;
+
+  background-color: transparent;
+
+  color: var(--sports-text-soft);
+
+  font-size: 20px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.fixture-day-button:hover {
+  background-color: var(--color-primary);
+
+  border-color: var(--color-primary);
+
+  color: #ffffff;
+}
+
+.fixture-selected-date {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+}
+
+.fixture-selected-date strong {
+  color: #ffffff !important;
+
+  font-size: 14px;
+}
+
+
+/* Lista */
+
+.home-fixtures {
+  width: 100%;
+}
+
+
+/* Partido */
+
+.home-fixture {
+  min-height: 112px;
+
+  padding: 18px 20px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    100px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 12px;
+
+  background-color: var(--match-row);
+
+  border-bottom: 1px solid var(--match-border-soft);
+
+  color: #ffffff;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.home-fixture:last-child {
+  border-bottom: 0;
+}
+
+.home-fixture:hover {
+  background-color: var(--match-row-hover);
+
+  border-color: var(--match-border);
+}
+
+
+/* Equipos */
+
+.fixture-team {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fixture-team img {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+}
+
+.fixture-team span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #ffffff !important;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fixture-home {
+  justify-content: flex-end;
+
+  text-align: right;
+}
+
+.fixture-away {
+  justify-content: flex-start;
+
+  text-align: left;
+}
+
+
+/* Centro */
+
+.fixture-center {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  text-align: center;
+}
+
+.fixture-center span {
+  color: var(--match-text-soft);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+}
+
+.fixture-time {
+  color: var(--match-accent) !important;
+
+  font-size: 22px;
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+.fixture-score {
+  color: var(--match-accent) !important;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+.fixture-live-text {
+  color: var(--color-primary) !important;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.fixture-tv {
+  color: var(--match-accent) !important;
+
+  font-size: 10px !important;
+
+  letter-spacing: 0 !important;
+
+  text-transform: none !important;
+}
+
+
+/* Estados */
+
+.home-fixture-finished {
+  background-color: var(--match-row);
+}
+
+.home-fixture-live {
+  border-left: 3px solid var(--color-primary);
+}
+
+
+/* Sin partidos */
+
+.home-no-games {
+  min-height: 220px;
+
+  padding: 32px 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.home-no-games > span {
+  margin-bottom: 8px;
+
+  color: var(--color-primary);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.home-no-games h3 {
+  margin-bottom: 6px;
+
+  color: var(--sports-text);
+
+  font-size: 18px;
+}
+
+.home-no-games p {
+  max-width: 280px;
+
+  color: var(--sports-text-soft);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   MÁXIMOS ANOTADORES
+   ========================================= */
+
+.scorers-panel {
+  background-color: var(--sports-panel);
+
+  color: #ffffff;
+
+  border-color: var(--sports-border);
+}
+
+.home-scorers {
+  width: 100%;
+}
+
+.home-scorer {
+  width: 100%;
+
+  min-height: 68px;
+
+  padding: 10px 16px;
+
+  display: grid;
+
+  grid-template-columns:
+    28px
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 10px;
+
+  border: 0;
+
+  border-bottom: 1px solid var(--sports-border-soft);
+
+  background-color: var(--sports-panel-row);
+
+  color: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.home-scorer:last-child {
+  border-bottom: 0;
+}
+
+.home-scorer:hover {
+  background-color: var(--sports-panel-row-hover);
+
+  border-bottom-color: var(--sports-border);
+}
+
+
+/* Posición */
+
+.scorer-position {
+  color: var(--color-primary) !important;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* Información */
+
+.scorer-info {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.scorer-info img {
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  padding: 3px;
+
+  object-fit: contain;
+
+  background-color: #ffffff;
+
+  border-radius: 50%;
+}
+
+.scorer-player-data {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.scorer-player-data strong {
+  overflow: hidden;
+
+  color: #ffffff !important;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scorer-player-data span {
+  overflow: hidden;
+
+  color: var(--sports-text-soft) !important;
+
+  font-size: 10px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* Puntos */
+
+.scorer-points {
+  min-width: 38px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 2px;
+}
+
+.scorer-points strong {
+  color: var(--color-primary) !important;
+
+  font-size: 17px;
+
+  line-height: 1;
+}
+
+.scorer-points span {
+  color: var(--sports-text-muted) !important;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   POPUPS
+   ========================================= */
+
+.home-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 2000;
+
+  padding: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.76);
+}
+
+
+/* =========================================
+   POPUP EQUIPO
+   ========================================= */
+
+.home-team-modal {
+  width: min(100%, 560px);
+
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  border: 2px solid var(--color-primary);
+
+  border-radius: var(--radius-medium);
+
+  background-color: #202020;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+
+/* Header */
+
+.home-team-modal-header {
+  min-height: 150px;
+
+  padding: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  background-color: #202020;
+
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.home-team-modal-heading {
+  min-width: 0;
+}
+
+.home-team-modal-heading > span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--color-primary);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.home-team-modal-heading h2 {
+  margin-bottom: 5px;
+
+  color: #ffffff;
+
+  font-size: 24px;
+
+  line-height: 1.1;
+}
+
+.home-team-modal-heading p {
+  color: #a9a9a9;
+
+  font-size: 11px;
+}
+
+
+/* Cerrar */
+
+.home-modal-close {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #444444;
+
+  border-radius: 50%;
+
+  background-color: #292929;
+
+  color: #ffffff;
+
+  font-size: 23px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.home-modal-close:hover {
+  background-color: var(--color-primary);
+
+  border-color: var(--color-primary);
+}
+
+
+/* Cuerpo */
+
+.home-team-modal-main {
+  padding: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+
+  background-color: #202020;
+}
+
+
+/* Identidad */
+
+.home-team-modal-identity {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+.home-team-modal-logo {
+  width: 76px;
+  height: 76px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+
+  border-radius: 50%;
+
+  background-color: #ffffff;
+}
+
+.home-team-modal-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.home-team-modal-identity > div:last-child {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.home-team-modal-identity span {
+  color: var(--color-primary);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.home-team-modal-identity strong {
+  color: #ffffff;
+
+  font-size: 18px;
+}
+
+.home-team-modal-identity p {
+  color: #a9a9a9;
+
+  font-size: 11px;
+}
+
+
+/* Récord */
+
+.home-team-modal-record {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  overflow: hidden;
+
+  border: 1px solid #444444;
+
+  border-radius: var(--radius-small);
+}
+
+.home-team-modal-record > div {
+  min-height: 76px;
+
+  padding: 12px 8px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  background-color: #292929;
+
+  border-right: 1px solid #444444;
+
+  text-align: center;
+}
+
+.home-team-modal-record > div:last-child {
+  border-right: 0;
+}
+
+.home-team-modal-record span {
+  color: #999999;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+}
+
+.home-team-modal-record strong {
+  color: var(--color-primary);
+
+  font-size: 20px;
+}
+
+
+/* Link */
+
+.home-team-modal-link {
+  min-height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--color-primary);
+
+  border-radius: var(--radius-small);
+
+  background-color: transparent;
+
+  color: var(--color-primary);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.home-team-modal-link:hover {
+  background-color: var(--color-primary);
+
+  color: #ffffff;
+}
+
+
+/* Footer */
+
+.home-team-modal-footer {
+  min-height: 48px;
+
+  padding: 0 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #191919;
+
+  border-top: 1px solid #3d3d3d;
+
+  color: #a9a9a9;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+}
+
+.home-team-modal-footer strong {
+  color: var(--color-primary);
+}
+
+
+/* =========================================
+   POPUP JUGADOR
+   ========================================= */
+
+.home-player-modal {
+  width: min(100%, 560px);
+
+  max-height: calc(100vh - 40px);
+
+  overflow-y: auto;
+
+  border: 2px solid var(--color-primary);
+
+  border-radius: var(--radius-medium);
+
+  background-color: #202020;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+
+/* Header */
+
+.home-player-modal-header {
+  min-height: 165px;
+
+  padding: 22px;
+
+  display: grid;
+
+  grid-template-columns:
+    76px
+    minmax(0, 1fr)
+    36px;
+
+  align-items: center;
+
+  gap: 16px;
+
+  background-color: #202020;
+
+  border-bottom: 2px solid var(--color-primary);
+}
+
+
+/* Escudo */
+
+.home-player-modal-logo {
+  width: 68px;
+  height: 68px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px;
+
+  border-radius: 50%;
+
+  background-color: #ffffff;
+}
+
+.home-player-modal-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+
+/* Información */
+
+.home-player-modal-info {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+.home-player-modal-info > span {
+  margin-bottom: 6px;
+
+  color: var(--color-primary);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+.home-player-modal-info h2 {
+  margin-bottom: 5px;
+
+  color: #ffffff;
+
+  font-size: 23px;
+
+  line-height: 1.1;
+}
+
+.home-player-modal-info p {
+  margin-bottom: 3px;
+
+  color: #d0d0d0;
+
+  font-size: 12px;
+}
+
+.home-player-modal-info small {
+  color: #a9a9a9;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   DATOS DEL JUGADOR
+   ========================================= */
+
+.home-player-modal-details {
+  padding: 18px 22px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  background-color: #202020;
+
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.home-player-modal-details > div {
+  min-height: 72px;
+
+  padding: 12px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #3d3d3d;
+
+  border-radius: var(--radius-small);
+
+  background-color: #292929;
+
+  text-align: center;
+}
+
+.home-player-modal-details span {
+  margin-bottom: 6px;
+
+  color: #a9a9a9;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.home-player-modal-details strong {
+  color: #ffffff;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   ESTADÍSTICAS DEL JUGADOR
+   ========================================= */
+
+.home-player-modal-season {
+  padding: 18px 22px;
+
+  background-color: #202020 !important;
+}
+
+.home-player-modal-label {
+  display: block;
+
+  margin-bottom: 11px;
+
+  color: var(--color-primary) !important;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  text-align: center;
+
+  text-transform: uppercase;
+}
+
+.home-player-modal-stats {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  overflow: hidden;
+
+  border: 1px solid #444444;
+
+  border-radius: var(--radius-small);
+
+  background-color: #292929 !important;
+}
+
+.home-player-modal-stats > div {
+  min-height: 88px;
+
+  padding: 16px 10px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  background-color: #292929 !important;
+
+  border-right: 1px solid #444444;
+
+  text-align: center;
+}
+
+.home-player-modal-stats > div:last-child {
+  border-right: 0;
+}
+
+.home-player-modal-stats strong {
+  color: var(--color-primary) !important;
+
+  font-size: 23px;
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+.home-player-modal-stats span {
+  color: #bdbdbd !important;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+
+/* =========================================
+   FOOTER POPUP JUGADOR
+   ========================================= */
+
+.home-player-modal-footer {
+  min-height: 48px;
+
+  padding: 0 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #191919;
+
+  border-top: 1px solid #3d3d3d;
+
+  color: #a9a9a9;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+}
+
+.home-player-modal-footer strong {
+  color: var(--color-primary);
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1050px) {
+
+  .home-dashboard {
+    grid-template-columns:
+      1fr
+      1.35fr;
+  }
+
+  .scorers-panel {
+    grid-column: 1 / -1;
+  }
+
+  .home-scorers {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .home-scorer:nth-child(odd) {
+    border-right:
+      1px solid var(--sports-border-soft);
+  }
+
+  .home-scorer:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .home-page {
+    min-height:
+      calc(100vh - 64px);
+  }
+
+  .home-content {
+    padding:
+      18px
+      0
+      32px;
+  }
+
+  .home-container {
+    width:
+      min(
+        100% - 20px,
+        var(--container-width)
+      );
+  }
+
+
+  /* Dashboard */
+
+  .home-dashboard {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+  .home-panel {
+    width: 100%;
+  }
+
+
+  /* Fixture primero */
+
+  .fixture-panel {
+    order: -1;
+  }
+
+
+  /* Encabezados */
+
+  .home-panel-header {
+    min-height: 68px;
+
+    padding:
+      15px
+      16px;
+  }
+
+  .home-panel-header h2 {
+    font-size: 18px;
+  }
+
+  .home-panel-header a {
+    font-size: 11px;
+  }
+
+
+  /* Tabla */
+
+  .home-standing-row {
+    min-height: 50px;
+  }
+
+
+  /* Fixture */
+
+  .home-fixture {
+    min-height: 96px;
+
+    padding:
+      14px
+      12px;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      76px
+      minmax(0, 1fr);
+
+    gap: 6px;
+  }
+
+  .fixture-team {
+    gap: 7px;
+
+    font-size: 12px;
+  }
+
+  .fixture-team img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .fixture-time {
+    font-size: 19px;
+  }
+
+  .fixture-score {
+    font-size: 21px;
+  }
+
+  .fixture-date-navigation {
+    min-height: 60px;
+  }
+
+  .fixture-selected-date strong {
+    font-size: 12px;
+  }
+
+
+  /* Anotadores */
+
+  .home-scorers {
+    display: block;
+  }
+
+  .home-scorer:nth-child(odd) {
+    border-right: 0;
+  }
+
+
+  /* Popups */
+
+  .home-modal-overlay {
+    padding: 12px;
+  }
+
+  .home-team-modal,
+  .home-player-modal {
+    max-height:
+      calc(100vh - 24px);
+  }
+
+
+  /* Popup equipo */
+
+  .home-team-modal-header {
+    padding: 18px;
+  }
+
+  .home-team-modal-main {
+    padding: 18px;
+  }
+
+  .home-team-modal-footer {
+    padding:
+      0
+      18px;
+  }
+
+
+  /* Popup jugador */
+
+  .home-player-modal-header {
+    grid-template-columns:
+      58px
+      minmax(0, 1fr)
+      34px;
+
+    padding: 18px;
+  }
+
+  .home-player-modal-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .home-player-modal-info h2 {
+    font-size: 19px;
+  }
+
+  .home-player-modal-details {
+    padding:
+      14px
+      18px;
+  }
+
+  .home-player-modal-season {
+    padding:
+      16px
+      18px;
+  }
+
+  .home-player-modal-footer {
+    padding:
+      0
+      18px;
+  }
+}
+
+
+/* =========================================
+   MOBILE PEQUEÑO
+   ========================================= */
+
+@media (max-width: 480px) {
+
+  .standings-table-header,
+  .home-standing-row {
+    grid-template-columns:
+      28px
+      minmax(0, 1fr)
+      30px
+      30px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .home-standing-team {
+    font-size: 12px;
+  }
+
+  .home-standing-team img {
+    width: 25px;
+    height: 25px;
+  }
+
+
+  /* Fixture */
+
+  .home-fixture {
+    grid-template-columns:
+      minmax(0, 1fr)
+      68px
+      minmax(0, 1fr);
+  }
+
+  .fixture-team {
+    font-size: 11px;
+  }
+
+  .fixture-team img {
+    width: 30px;
+    height: 30px;
+  }
+
+
+  /* Scorers */
+
+  .scorer-info img {
+    width: 27px;
+    height: 27px;
+  }
+
+
+  /* Popup equipo */
+
+  .home-team-modal-header {
+    min-height: 125px;
+
+    padding: 16px;
+  }
+
+  .home-team-modal-heading h2 {
+    font-size: 20px;
+  }
+
+  .home-team-modal-main {
+    padding: 16px;
+  }
+
+  .home-team-modal-identity {
+    gap: 12px;
+  }
+
+  .home-team-modal-logo {
+    width: 62px;
+    height: 62px;
+  }
+
+  .home-team-modal-record {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .home-team-modal-record > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .home-team-modal-record > div:nth-child(-n + 2) {
+    border-bottom: 1px solid #444444;
+  }
+
+
+  /* Popup jugador */
+
+  .home-player-modal-header {
+    grid-template-columns:
+      50px
+      minmax(0, 1fr)
+      32px;
+
+    padding: 16px;
+  }
+
+  .home-player-modal-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .home-player-modal-info h2 {
+    font-size: 18px;
+  }
+
+  .home-player-modal-details {
+    grid-template-columns: 1fr;
+
+    padding:
+      14px
+      16px;
+  }
+
+  .home-player-modal-season {
+    padding:
+      16px;
+  }
+
+  .home-player-modal-stats {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .home-player-modal-stats > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .home-player-modal-stats > div:nth-child(-n + 2) {
+    border-bottom:
+      1px solid #444444;
+  }
+
+  .home-player-modal-footer {
+    padding:
+      0
+      16px;
+  }
+}

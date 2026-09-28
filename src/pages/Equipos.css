@@ -1,0 +1,666 @@
+/* =========================================
+   LNA - EQUIPOS
+   ========================================= */
+
+.teams-page {
+  min-height: calc(100vh - 76px);
+  background-color: var(--color-background);
+}
+
+.page-container {
+  width: min(100% - 32px, var(--container-width));
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.teams-header {
+  padding: 34px 0 30px;
+
+  background-color: var(--sports-panel);
+
+  border-bottom: 1px solid var(--sports-border);
+
+  color: #ffffff;
+}
+
+.teams-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--sports-border);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+
+  text-transform: uppercase;
+}
+
+.teams-header h1 {
+  margin-bottom: 8px;
+
+  color: #ffffff;
+
+  font-size: 32px;
+  line-height: 1;
+
+  letter-spacing: -0.8px;
+}
+
+.teams-header p {
+  max-width: 620px;
+
+  color: var(--sports-text-soft);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   CONTENIDO
+   ========================================= */
+
+.teams-content {
+  padding: 30px 0 60px;
+
+  background-color: var(--color-background);
+}
+
+
+/* =========================================
+   BARRA SUPERIOR
+   ========================================= */
+
+.teams-toolbar {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 16px;
+}
+
+.teams-results {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 8px;
+}
+
+.teams-count-label {
+  color: var(--color-text-soft);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.teams-count {
+  color: var(--color-text);
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+
+/* =========================================
+   BUSCADOR
+   ========================================= */
+
+.teams-search {
+  position: relative;
+
+  width: 270px;
+}
+
+.teams-search input {
+  width: 100%;
+  height: 40px;
+
+  padding: 0 38px;
+
+  background-color: var(--sports-panel);
+
+  border: 1px solid var(--sports-border);
+
+  border-radius: var(--radius-small);
+
+  outline: none;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.teams-search input::placeholder {
+  color: var(--sports-text-soft);
+}
+
+.teams-search input:focus {
+  background-color: var(--sports-panel-row-hover);
+
+  border-color: var(--match-border);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(245, 130, 32, 0.08);
+}
+
+.teams-search-icon {
+  position: absolute;
+
+  top: 50%;
+  left: 13px;
+
+  z-index: 1;
+
+  transform: translateY(-50%);
+
+  color: var(--sports-text-soft);
+
+  font-size: 18px;
+
+  line-height: 1;
+
+  pointer-events: none;
+}
+
+.teams-search-clear {
+  position: absolute;
+
+  top: 50%;
+  right: 9px;
+
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(-50%);
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background-color: transparent;
+
+  color: var(--sports-text-soft);
+
+  font-size: 18px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.teams-search-clear:hover {
+  background-color: var(--sports-panel-row-hover);
+
+  color: var(--match-accent);
+}
+
+
+/* =========================================
+   GRID
+   ========================================= */
+
+.teams-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+/* =========================================
+   TARJETA
+   ========================================= */
+
+.team-card {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+  min-height: 250px;
+
+  padding: 14px;
+
+  overflow: hidden;
+
+  background-color: var(--sports-panel);
+
+  border: 1px solid var(--sports-border);
+
+  border-radius: var(--radius-medium);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+
+  background-color: var(--sports-panel-row-hover);
+
+  border-color: var(--match-border);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================
+   PARTE SUPERIOR
+   ========================================= */
+
+.team-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 20px;
+}
+
+.team-card-number {
+  color: var(--sports-border);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.9px;
+}
+
+.team-card-arrow {
+  color: var(--sports-text-soft);
+
+  font-size: 17px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.team-card:hover .team-card-arrow {
+  color: var(--match-accent);
+
+  transform: translateX(4px);
+}
+
+
+/* =========================================
+   ESCUDO
+   ========================================= */
+
+.team-logo-container {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 112px;
+
+  margin: 4px 0 7px;
+}
+
+.team-logo {
+  display: block;
+
+  width: 82px;
+  height: 82px;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.25s ease;
+}
+
+.team-card:hover .team-logo {
+  transform: scale(1.06);
+}
+
+
+/* =========================================
+   INFORMACIÓN
+   ========================================= */
+
+.team-card-info {
+  min-width: 0;
+
+  margin-top: auto;
+}
+
+.team-card-location {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--sports-border);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+
+  text-transform: uppercase;
+}
+
+.team-card-info h2 {
+  margin-bottom: 4px;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  line-height: 1.2;
+
+  letter-spacing: -0.2px;
+
+  text-overflow: ellipsis;
+}
+
+.team-card-info p {
+  overflow: hidden;
+
+  color: var(--sports-text-soft);
+
+  font-size: 10px;
+
+  line-height: 1.35;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.team-card-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 11px;
+
+  padding-top: 9px;
+
+  border-top: 1px solid var(--sports-border-soft);
+}
+
+.team-card-footer span:first-child {
+  color: var(--sports-text-soft);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+}
+
+.team-card-footer-arrow {
+  color: var(--sports-text-soft);
+
+  font-size: 13px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.team-card:hover .team-card-footer-arrow {
+  color: var(--match-accent);
+
+  transform: translateX(4px);
+}
+
+
+/* =========================================
+   SIN RESULTADOS
+   ========================================= */
+
+.teams-empty {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 22px;
+
+  background-color: var(--sports-panel);
+
+  border: 1px solid var(--sports-border);
+
+  border-radius: var(--radius-medium);
+
+  color: #ffffff;
+}
+
+.teams-empty-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border: 1px solid var(--sports-border);
+
+  border-radius: 50%;
+
+  background-color: var(--sports-panel-row);
+
+  color: var(--sports-border);
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.teams-empty span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--sports-border);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.teams-empty h2 {
+  margin-bottom: 3px;
+
+  color: #ffffff;
+
+  font-size: 15px;
+}
+
+.teams-empty p {
+  color: var(--sports-text-soft);
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+  .teams-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .teams-page {
+    min-height: calc(100vh - 64px);
+  }
+
+  .page-container {
+    width: min(100% - 20px, var(--container-width));
+  }
+
+  .teams-header {
+    padding: 28px 0 24px;
+  }
+
+  .teams-header h1 {
+    font-size: 28px;
+  }
+
+  .teams-header p {
+    font-size: 12px;
+  }
+
+  .teams-content {
+    padding: 24px 0 44px;
+  }
+
+  .teams-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+  }
+
+  .teams-search {
+    width: 100%;
+  }
+
+  .teams-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .team-card {
+    min-height: 225px;
+
+    padding: 12px;
+  }
+
+  .team-logo-container {
+    height: 92px;
+
+    margin: 3px 0 6px;
+  }
+
+  .team-logo {
+    width: 68px;
+    height: 68px;
+  }
+
+  .team-card-info h2 {
+    font-size: 13px;
+  }
+
+  .team-card-info p {
+    font-size: 9px;
+  }
+
+  .team-card-footer {
+    margin-top: 8px;
+
+    padding-top: 7px;
+  }
+}
+
+
+/* =========================================
+   MOBILE PEQUEÑO
+   ========================================= */
+
+@media (max-width: 480px) {
+
+  .teams-grid {
+    gap: 8px;
+  }
+
+  .team-card {
+    min-height: 215px;
+
+    padding: 10px;
+  }
+
+  .team-logo-container {
+    height: 82px;
+  }
+
+  .team-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .team-card-info h2 {
+    font-size: 12px;
+  }
+
+  .team-card-location {
+    font-size: 7px;
+  }
+
+  .team-card-info p {
+    font-size: 8px;
+  }
+
+  .team-card-footer span:first-child {
+    font-size: 7px;
+  }
+}
