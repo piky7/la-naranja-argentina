@@ -553,7 +553,7 @@ function Home() {
                               <>
                                 <strong className="fixture-time">
                                   {match.time ||
-                                    "-"}
+                                    "VS"}
                                 </strong>
 
                                 {match.tv &&
