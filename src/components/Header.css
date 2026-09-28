@@ -13,10 +13,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 32px;
 }
 
-/* LOGO */
+/* =========================================
+   LOGO
+========================================= */
 
 .logo {
   display: flex;
@@ -48,7 +51,9 @@
   letter-spacing: -0.2px;
 }
 
-/* NAVEGACIÓN */
+/* =========================================
+   NAVEGACIÓN DESKTOP
+========================================= */
 
 .navigation {
   display: flex;
@@ -71,22 +76,51 @@
   color: var(--color-primary);
 }
 
-/* BOTÓN MOBILE */
+/* =========================================
+   BOTÓN HAMBURGUESA
+========================================= */
 
 .menu-button {
   display: none;
 
+  width: 44px;
+  height: 44px;
+
+  align-items: center;
+  justify-content: center;
+
   border: 0;
-  background: transparent;
+  border-radius: var(--radius-small);
+
+  background-color: transparent;
   color: var(--color-white);
 
-  font-size: 26px;
+  font-size: 30px;
   line-height: 1;
 
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-/* MOBILE */
+.menu-button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* =========================================
+   MENÚ MOBILE
+========================================= */
+
+.mobile-navigation {
+  display: none;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 768px) {
   .header-container {
@@ -102,6 +136,47 @@
   }
 
   .menu-button {
-    display: block;
+    display: flex;
+  }
+
+  .mobile-navigation {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    background-color: var(--color-dark);
+
+    border-top: 1px solid #292929;
+  }
+
+  .mobile-navigation a {
+    display: flex;
+    align-items: center;
+
+    min-height: 54px;
+
+    padding: 0 20px;
+
+    color: var(--color-white);
+
+    border-bottom: 1px solid #292929;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .mobile-navigation a:hover,
+  .mobile-navigation a:active {
+    background-color: var(--color-dark-soft);
+    color: var(--color-primary);
+  }
+
+  .mobile-navigation a:last-child {
+    border-bottom: 0;
   }
 }

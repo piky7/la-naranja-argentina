@@ -1,29 +1,107 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="header-container">
-        <a href="/" className="logo">
-          <span className="logo-short">LNA</span>
+
+        <Link
+          to="/"
+          className="logo"
+          onClick={closeMenu}
+        >
+          <span className="logo-short">
+            LNA
+          </span>
 
           <span className="logo-name">
             La Naranja Argentina
           </span>
-        </a>
+        </Link>
 
         <nav className="navigation">
-          <a href="/">Inicio</a>
-          <a href="/liga">Liga</a>
-          <a href="/equipos">Equipos</a>
-          <a href="/jugadores">Jugadores</a>
-          <a href="/estadisticas">Estadísticas</a>
+          <Link to="/">
+            Inicio
+          </Link>
+
+          <Link to="/liga">
+            Liga
+          </Link>
+
+          <Link to="/equipos">
+            Equipos
+          </Link>
+
+          <Link to="/jugadores">
+            Jugadores
+          </Link>
+
+          <Link to="/estadisticas">
+            Estadísticas
+          </Link>
         </nav>
 
-        <button className="menu-button" type="button">
-          ☰
+        <button
+          className="menu-button"
+          type="button"
+          onClick={() => setMenuOpen((current) => !current)}
+          aria-label={
+            menuOpen
+              ? "Cerrar menú"
+              : "Abrir menú"
+          }
+          aria-expanded={menuOpen}
+        >
+          {menuOpen ? "×" : "☰"}
         </button>
       </div>
+
+      {menuOpen && (
+        <nav className="mobile-navigation">
+          <Link
+            to="/"
+            onClick={closeMenu}
+          >
+            Inicio
+          </Link>
+
+          <Link
+            to="/liga"
+            onClick={closeMenu}
+          >
+            Liga
+          </Link>
+
+          <Link
+            to="/equipos"
+            onClick={closeMenu}
+          >
+            Equipos
+          </Link>
+
+          <Link
+            to="/jugadores"
+            onClick={closeMenu}
+          >
+            Jugadores
+          </Link>
+
+          <Link
+            to="/estadisticas"
+            onClick={closeMenu}
+          >
+            Estadísticas
+          </Link>
+        </nav>
+      )}
     </header>
   );
 }
