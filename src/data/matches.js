@@ -689,11 +689,17 @@ export const matches = fixture.flatMap(([date, games]) =>
         ? ["TyC Sports"]
         : [],
 
-      status: "scheduled",
+      status: isExampleMatch
+  ? "finished"
+  : "scheduled",
 
-      homeScore: null,
+homeScore: isExampleMatch
+  ? 74
+  : null,
 
-      awayScore: null,
+awayScore: isExampleMatch
+  ? 92
+  : null,
     };
   })
 );

@@ -5,6 +5,7 @@ import { teams } from "../data/teams";
 import { matches } from "../data/matches";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
+import { matchPlayerStats } from "../data/matchStats";
 
 import "./Home.css";
 
@@ -22,6 +23,8 @@ function Home() {
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const [selectedMatch, setSelectedMatch] = useState(null);
+  const [selectedMatchTeam, setSelectedMatchTeam] = useState(null);
 
   const getTeam = (teamId) => {
     return teams.find((team) => team.id === teamId);
@@ -31,6 +34,17 @@ function Home() {
     return playerStats.find(
       (stats) => stats.playerId === playerId
     );
+  };
+
+  const getMatchStats = (match) => {
+    if (matchPlayerStats[match.id]) {
+      return matchPlayerStats[match.id];
+    }
+
+    const fallbackKey =
+      `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+
+    return matchPlayerStats[fallbackKey] || null;
   };
 
   const changeDate = (amount) => {
@@ -118,6 +132,8 @@ function Home() {
       if (event.key === "Escape") {
         setSelectedPlayer(null);
         setSelectedTeam(null);
+        setSelectedMatch(null);
+        setSelectedMatchTeam(null);
       }
     };
 
@@ -487,6 +503,23 @@ function Home() {
                         match.status ===
                         "live";
 
+                      const hasMatchStats =
+                        Boolean(getMatchStats(match));
+
+                      const openMatchStats = () => {
+                        if (
+                          !isFinished ||
+                          !hasMatchStats
+                        ) {
+                          return;
+                        }
+
+                        setSelectedMatch(match);
+                        setSelectedMatchTeam(
+                          match.homeTeam
+                        );
+                      };
+
                       return (
 
                         <article
@@ -498,8 +531,35 @@ function Home() {
                             isLive
                               ? "home-fixture-live"
                               : ""
+                          } ${
+                            isFinished &&
+                            hasMatchStats
+                              ? "home-fixture-clickable"
+                              : ""
                           }`}
                           key={match.id}
+                          onClick={openMatchStats}
+                          onKeyDown={(event) => {
+                            if (
+                              event.key === "Enter" ||
+                              event.key === " "
+                            ) {
+                              event.preventDefault();
+                              openMatchStats();
+                            }
+                          }}
+                          role={
+                            isFinished &&
+                            hasMatchStats
+                              ? "button"
+                              : undefined
+                          }
+                          tabIndex={
+                            isFinished &&
+                            hasMatchStats
+                              ? 0
+                              : undefined
+                          }
                         >
 
                           <div className="fixture-team fixture-home">
@@ -525,6 +585,7 @@ function Home() {
                             {isFinished ? (
 
                               <>
+
                                 <strong className="fixture-score">
                                   {match.homeScore} -{" "}
                                   {match.awayScore}
@@ -533,11 +594,13 @@ function Home() {
                                 <span>
                                   FINAL
                                 </span>
+
                               </>
 
                             ) : isLive ? (
 
                               <>
+
                                 <strong className="fixture-live-text">
                                   EN VIVO
                                 </strong>
@@ -546,11 +609,13 @@ function Home() {
                                   {match.homeScore} -{" "}
                                   {match.awayScore}
                                 </span>
+
                               </>
 
                             ) : (
 
                               <>
+
                                 <strong className="fixture-time">
                                   {match.time ||
                                     "VS"}
@@ -891,6 +956,187 @@ function Home() {
               <strong>
                 {selectedTeam.abbreviation}
               </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      )}
+
+
+      {/* =========================================
+          POPUP ESTADÍSTICAS DEL PARTIDO
+          ========================================= */}
+
+      {selectedMatch && getMatchStats(selectedMatch) && (
+
+        <div
+          className="match-stats-modal-overlay"
+          onClick={() => {
+            setSelectedMatch(null);
+            setSelectedMatchTeam(null);
+          }}
+        >
+
+          <div
+            className="match-stats-modal"
+            onClick={(event) =>
+              event.stopPropagation()
+            }
+          >
+
+            <div className="match-stats-modal-header">
+
+              <div className="match-stats-modal-title">
+
+                <span>
+                  ESTADÍSTICAS DEL PARTIDO
+                </span>
+
+                <h2>
+
+                  {getTeam(
+                    selectedMatch.homeTeam
+                  )?.shortName}
+
+                  <strong>
+                    {selectedMatch.homeScore} -{" "}
+                    {selectedMatch.awayScore}
+                  </strong>
+
+                  {getTeam(
+                    selectedMatch.awayTeam
+                  )?.shortName}
+
+                </h2>
+
+                <p>
+                  FINAL
+                </p>
+
+              </div>
+
+
+              <button
+                type="button"
+                className="match-stats-modal-close"
+                onClick={() => {
+                  setSelectedMatch(null);
+                  setSelectedMatchTeam(null);
+                }}
+                aria-label="Cerrar estadísticas del partido"
+              >
+                ×
+              </button>
+
+            </div>
+
+
+            <div className="match-stats-team-tabs">
+
+              {[
+                selectedMatch.homeTeam,
+                selectedMatch.awayTeam,
+              ].map(
+                (teamId) => {
+
+                  const team =
+                    getTeam(teamId);
+
+                  return (
+
+                    <button
+                      key={teamId}
+                      type="button"
+                      className={`match-stats-team-tab ${
+                        selectedMatchTeam ===
+                        teamId
+                          ? "active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSelectedMatchTeam(
+                          teamId
+                        )
+                      }
+                    >
+                      {team?.shortName ||
+                        teamId}
+                    </button>
+
+                  );
+                }
+              )}
+
+            </div>
+
+
+            <div className="match-stats-table-wrapper">
+
+              <div className="match-stats-table-header">
+
+                <span>
+                  JUGADOR
+                </span>
+
+                <span>
+                  PTS
+                </span>
+
+                <span>
+                  REB
+                </span>
+
+                <span>
+                  AST
+                </span>
+
+                <span>
+                  MIN
+                </span>
+
+              </div>
+
+
+              {(
+                getMatchStats(
+                  selectedMatch
+                )?.[selectedMatchTeam] ||
+                []
+              ).map(
+                (player) => (
+
+                  <div
+                    className="match-stats-player-row"
+                    key={player.id}
+                  >
+
+                    <strong>
+                      {player.name}
+                    </strong>
+
+                    <span>
+                      {player.points}
+                    </span>
+
+                    <span>
+                      {player.rebounds}
+                    </span>
+
+                    <span>
+                      {player.assists}
+                    </span>
+
+                    <span>
+                      {player.minutes}
+                    </span>
+
+                  </div>
+
+                )
+              )}
 
             </div>
 
