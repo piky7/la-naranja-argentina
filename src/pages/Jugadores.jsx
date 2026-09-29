@@ -16,13 +16,25 @@ function Jugadores() {
   const [selectedPlayer, setSelectedPlayer] =
     useState(null);
 
-  const getTeam = (teamId) =>
-    teams.find((team) => team.id === teamId);
+  const getTeam = (teamId) => {
+    return teams.find(
+      (team) => team.id === teamId
+    );
+  };
 
-  const getPlayerStats = (playerId) =>
-    playerStats.find(
+  const getPlayerStats = (playerId) => {
+    return playerStats.find(
       (stats) => stats.playerId === playerId
     );
+  };
+
+  const formatAverage = (value, gamesPlayed) => {
+    if (!gamesPlayed) {
+      return "—";
+    }
+
+    return Number(value ?? 0).toFixed(1);
+  };
 
   const positions = useMemo(() => {
     return [
@@ -54,8 +66,7 @@ function Jugadores() {
 
         const matchesPosition =
           selectedPosition === "todas" ||
-          player.position ===
-            selectedPosition;
+          player.position === selectedPosition;
 
         return (
           matchesSearch &&
@@ -81,6 +92,9 @@ function Jugadores() {
     selectedPlayer
       ? getPlayerStats(selectedPlayer.id)
       : null;
+
+  const selectedGamesPlayed =
+    selectedPlayerStats?.gamesPlayed ?? 0;
 
   return (
     <main className="players-page">
@@ -108,6 +122,7 @@ function Jugadores() {
         </div>
       </section>
 
+
       {/* =========================
           CONTENIDO
       ========================= */}
@@ -115,11 +130,14 @@ function Jugadores() {
       <section className="players-content">
         <div className="page-container">
 
-          {/* FILTROS */}
+          {/* =========================
+              FILTROS
+          ========================= */}
 
           <div className="players-filters">
 
             <div className="players-search">
+
               <label htmlFor="player-search">
                 Buscar jugador
               </label>
@@ -135,9 +153,12 @@ function Jugadores() {
                   )
                 }
               />
+
             </div>
 
+
             <div className="players-filter">
+
               <label htmlFor="team-filter">
                 Equipo
               </label>
@@ -151,6 +172,7 @@ function Jugadores() {
                   )
                 }
               >
+
                 <option value="todos">
                   Todos los equipos
                 </option>
@@ -164,17 +186,23 @@ function Jugadores() {
                     )
                   )
                   .map((team) => (
+
                     <option
                       key={team.id}
                       value={team.id}
                     >
                       {team.name}
                     </option>
+
                   ))}
+
               </select>
+
             </div>
 
+
             <div className="players-filter">
+
               <label htmlFor="position-filter">
                 Posición
               </label>
@@ -188,45 +216,64 @@ function Jugadores() {
                   )
                 }
               >
+
                 <option value="todas">
                   Todas las posiciones
                 </option>
 
                 {positions.map(
                   (position) => (
+
                     <option
                       key={position}
                       value={position}
                     >
                       {position}
                     </option>
+
                   )
                 )}
+
               </select>
+
             </div>
 
           </div>
 
-          {/* INFORMACIÓN */}
+
+          {/* =========================
+              INFORMACIÓN
+          ========================= */}
 
           <div className="players-result-info">
+
             <span>
               {filteredPlayers.length}{" "}
               jugadores
             </span>
+
           </div>
 
-          {/* JUGADORES */}
+
+          {/* =========================
+              JUGADORES
+          ========================= */}
 
           {filteredPlayers.length > 0 ? (
+
             <div className="players-grid">
 
               {filteredPlayers.map((player) => {
+
                 const team = getTeam(
                   player.teamId
                 );
 
+                const stats =
+                  getPlayerStats(player.id);
+
                 return (
+
                   <button
                     key={player.id}
                     type="button"
@@ -256,15 +303,19 @@ function Jugadores() {
 
                       </div>
 
+
                       {team && (
+
                         <img
                           src={team.logo}
                           alt={`Escudo de ${team.name}`}
                           className="player-team-logo"
                         />
+
                       )}
 
                     </div>
+
 
                     <div className="player-card-footer">
 
@@ -280,11 +331,15 @@ function Jugadores() {
                     </div>
 
                   </button>
+
                 );
+
               })}
 
             </div>
+
           ) : (
+
             <div className="players-empty">
 
               <span>
@@ -301,16 +356,19 @@ function Jugadores() {
               </p>
 
             </div>
+
           )}
 
         </div>
       </section>
+
 
       {/* =========================
           POP-UP DEL JUGADOR
       ========================= */}
 
       {selectedPlayer && (
+
         <div
           className="player-modal-overlay"
           onClick={() =>
@@ -325,6 +383,8 @@ function Jugadores() {
             }
           >
 
+            {/* CERRAR */}
+
             <button
               type="button"
               className="player-modal-close"
@@ -336,11 +396,15 @@ function Jugadores() {
               ×
             </button>
 
-            {/* CABECERA */}
+
+            {/* =========================
+                CABECERA
+            ========================= */}
 
             <div className="player-modal-header">
 
               {selectedPlayerTeam && (
+
                 <img
                   src={
                     selectedPlayerTeam.logo
@@ -348,7 +412,9 @@ function Jugadores() {
                   alt={`Escudo de ${selectedPlayerTeam.name}`}
                   className="player-modal-logo"
                 />
+
               )}
+
 
               <div className="player-modal-player-info">
 
@@ -373,11 +439,15 @@ function Jugadores() {
 
             </div>
 
-            {/* DATOS */}
+
+            {/* =========================
+                DATOS DEL JUGADOR
+            ========================= */}
 
             <div className="player-modal-details">
 
               <div>
+
                 <span>
                   POSICIÓN
                 </span>
@@ -386,9 +456,12 @@ function Jugadores() {
                   {selectedPlayer.position ||
                     "—"}
                 </strong>
+
               </div>
 
+
               <div>
+
                 <span>
                   NACIONALIDAD
                 </span>
@@ -397,9 +470,12 @@ function Jugadores() {
                   {selectedPlayer.nationality ||
                     "—"}
                 </strong>
+
               </div>
 
+
               <div>
+
                 <span>
                   NÚMERO
                 </span>
@@ -408,11 +484,15 @@ function Jugadores() {
                   {selectedPlayer.number ??
                     "—"}
                 </strong>
+
               </div>
 
             </div>
 
-            {/* ESTADÍSTICAS */}
+
+            {/* =========================
+                ESTADÍSTICAS
+            ========================= */}
 
             <div className="player-modal-stats-section">
 
@@ -420,57 +500,85 @@ function Jugadores() {
                 ESTADÍSTICAS DE LA TEMPORADA
               </span>
 
+
               <div className="player-modal-stats">
 
+                {/* PJ */}
+
                 <div className="player-stat">
+
                   <strong>
-                    {selectedPlayerStats?.gamesPlayed ??
-                      0}
+                    {selectedGamesPlayed}
                   </strong>
 
                   <span>
                     PJ
                   </span>
+
                 </div>
 
+
+                {/* PTS */}
+
                 <div className="player-stat">
+
                   <strong>
-                    {selectedPlayerStats?.points ??
-                      0}
+                    {formatAverage(
+                      selectedPlayerStats?.points,
+                      selectedGamesPlayed
+                    )}
                   </strong>
 
                   <span>
                     PTS
                   </span>
+
                 </div>
 
+
+                {/* REB */}
+
                 <div className="player-stat">
+
                   <strong>
-                    {selectedPlayerStats?.rebounds ??
-                      0}
+                    {formatAverage(
+                      selectedPlayerStats?.rebounds,
+                      selectedGamesPlayed
+                    )}
                   </strong>
 
                   <span>
                     REB
                   </span>
+
                 </div>
 
+
+                {/* AST */}
+
                 <div className="player-stat">
+
                   <strong>
-                    {selectedPlayerStats?.assists ??
-                      0}
+                    {formatAverage(
+                      selectedPlayerStats?.assists,
+                      selectedGamesPlayed
+                    )}
                   </strong>
 
                   <span>
                     AST
                   </span>
+
                 </div>
 
               </div>
 
             </div>
 
-            {/* FOOTER */}
+
+            {/* =========================
+                FOOTER
+            ========================= */}
 
             <div className="player-modal-footer">
 
@@ -488,6 +596,7 @@ function Jugadores() {
           </div>
 
         </div>
+
       )}
 
     </main>

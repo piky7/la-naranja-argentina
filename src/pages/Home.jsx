@@ -24,7 +24,8 @@ function Home() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
-  const [selectedMatchTeam, setSelectedMatchTeam] = useState(null);
+  const [selectedMatchTeam, setSelectedMatchTeam] =
+    useState(null);
 
   const getTeam = (teamId) => {
     return teams.find((team) => team.id === teamId);
@@ -151,9 +152,9 @@ function Home() {
   }, []);
 
   /*
-   * ================================
+   * =========================================
    * TABLA DE POSICIONES
-   * ================================
+   * =========================================
    */
 
   const standings = useMemo(() => {
@@ -229,9 +230,9 @@ function Home() {
   }, []);
 
   /*
-   * ================================
+   * =========================================
    * PARTIDOS DEL DÍA
-   * ================================
+   * =========================================
    */
 
   const selectedDayMatches = useMemo(() => {
@@ -263,9 +264,9 @@ function Home() {
   }, [selectedDate]);
 
   /*
-   * ================================
-   * MÁXIMOS ANOTADORES
-   * ================================
+   * =========================================
+   * MÁXIMOS ANOTADORES POR PROMEDIO
+   * =========================================
    */
 
   const topScorers = useMemo(() => {
@@ -283,9 +284,13 @@ function Home() {
           ...player,
           team,
           stats,
-          points: stats?.points ?? 0,
+          points: stats?.points ?? null,
         };
       })
+      .filter(
+        (player) =>
+          player.stats?.gamesPlayed > 0
+      )
       .sort((a, b) => {
         if (b.points !== a.points) {
           return b.points - a.points;
@@ -300,9 +305,9 @@ function Home() {
   }, []);
 
   /*
-   * ================================
+   * =========================================
    * RENDER
-   * ================================
+   * =========================================
    */
 
   return (
@@ -314,9 +319,7 @@ function Home() {
 
           <div className="home-dashboard">
 
-            {/* =================================
-                TABLA DE POSICIONES
-                ================================= */}
+            {/* TABLA DE POSICIONES */}
 
             <section className="home-panel standings-panel">
 
@@ -338,81 +341,65 @@ function Home() {
 
               </div>
 
-
               <div className="standings-table">
 
                 <div className="standings-table-header">
 
-                  <span>
-                    #
-                  </span>
-
-                  <span>
-                    Equipo
-                  </span>
-
-                  <span>
-                    PG
-                  </span>
-
-                  <span>
-                    PP
-                  </span>
+                  <span>#</span>
+                  <span>Equipo</span>
+                  <span>PG</span>
+                  <span>PP</span>
 
                 </div>
 
+                {standings.map(
+                  (team, index) => (
 
-                {standings.map((team, index) => (
+                    <button
+                      key={team.id}
+                      type="button"
+                      className="home-standing-row"
+                      onClick={() =>
+                        setSelectedTeam(team)
+                      }
+                    >
 
-                  <button
-                    key={team.id}
-                    type="button"
-                    className="home-standing-row"
-                    onClick={() =>
-                      setSelectedTeam(team)
-                    }
-                  >
-
-                    <span className="home-standing-position">
-                      {index + 1}
-                    </span>
-
-
-                    <span className="home-standing-team">
-
-                      <img
-                        src={team.logo}
-                        alt={`Escudo de ${team.name}`}
-                      />
-
-                      <span>
-                        {team.shortName}
+                      <span className="home-standing-position">
+                        {index + 1}
                       </span>
 
-                    </span>
+                      <span className="home-standing-team">
 
+                        <img
+                          src={team.logo}
+                          alt={`Escudo de ${team.name}`}
+                        />
 
-                    <strong>
-                      {team.wins}
-                    </strong>
+                        <span>
+                          {team.shortName}
+                        </span>
 
+                      </span>
 
-                    <strong>
-                      {team.losses}
-                    </strong>
+                      <strong>
+                        {team.wins}
+                      </strong>
 
-                  </button>
+                      <strong>
+                        {team.losses}
+                      </strong>
 
-                ))}
+                    </button>
+
+                  )
+                )}
 
               </div>
 
             </section>
 
 
-            {/* =================================
-                FIXTURE
-                ================================= */}
+            {/* FIXTURE */}
 
             <section className="home-panel fixture-panel">
 
@@ -438,7 +425,6 @@ function Home() {
 
               </div>
 
-
               <div className="fixture-date-navigation">
 
                 <button
@@ -452,7 +438,6 @@ function Home() {
                   ←
                 </button>
 
-
                 <div className="fixture-selected-date">
 
                   <strong>
@@ -462,7 +447,6 @@ function Home() {
                   </strong>
 
                 </div>
-
 
                 <button
                   type="button"
@@ -476,7 +460,6 @@ function Home() {
                 </button>
 
               </div>
-
 
               {selectedDayMatches.length > 0 ? (
 
@@ -504,21 +487,27 @@ function Home() {
                         "live";
 
                       const hasMatchStats =
-                        Boolean(getMatchStats(match));
-
-                      const openMatchStats = () => {
-                        if (
-                          !isFinished ||
-                          !hasMatchStats
-                        ) {
-                          return;
-                        }
-
-                        setSelectedMatch(match);
-                        setSelectedMatchTeam(
-                          match.homeTeam
+                        Boolean(
+                          getMatchStats(match)
                         );
-                      };
+
+                      const openMatchStats =
+                        () => {
+                          if (
+                            !isFinished ||
+                            !hasMatchStats
+                          ) {
+                            return;
+                          }
+
+                          setSelectedMatch(
+                            match
+                          );
+
+                          setSelectedMatchTeam(
+                            match.homeTeam
+                          );
+                        };
 
                       return (
 
@@ -538,10 +527,15 @@ function Home() {
                               : ""
                           }`}
                           key={match.id}
-                          onClick={openMatchStats}
-                          onKeyDown={(event) => {
+                          onClick={
+                            openMatchStats
+                          }
+                          onKeyDown={(
+                            event
+                          ) => {
                             if (
-                              event.key === "Enter" ||
+                              event.key ===
+                                "Enter" ||
                               event.key === " "
                             ) {
                               event.preventDefault();
@@ -578,7 +572,6 @@ function Home() {
                             )}
 
                           </div>
-
 
                           <div className="fixture-center">
 
@@ -622,7 +615,8 @@ function Home() {
                                 </strong>
 
                                 {match.tv &&
-                                  match.tv.length > 0 && (
+                                  match.tv.length >
+                                    0 && (
                                     <span className="fixture-tv">
                                       {match.tv.join(
                                         " · "
@@ -635,7 +629,6 @@ function Home() {
                             )}
 
                           </div>
-
 
                           <div className="fixture-team fixture-away">
 
@@ -690,9 +683,7 @@ function Home() {
             </section>
 
 
-            {/* =================================
-                MÁXIMOS ANOTADORES
-                ================================= */}
+            {/* MÁXIMOS ANOTADORES */}
 
             <section className="home-panel scorers-panel">
 
@@ -716,73 +707,91 @@ function Home() {
 
               </div>
 
-
               <div className="home-scorers">
 
-                {topScorers.map(
-                  (player, index) => (
+                {topScorers.length > 0 ? (
 
-                    <button
-                      key={player.id}
-                      type="button"
-                      className="home-scorer"
-                      onClick={() =>
-                        setSelectedPlayer(
-                          player
-                        )
-                      }
-                    >
+                  topScorers.map(
+                    (player, index) => (
 
-                      <span className="scorer-position">
-                        {String(
-                          index + 1
-                        ).padStart(2, "0")}
-                      </span>
+                      <button
+                        key={player.id}
+                        type="button"
+                        className="home-scorer"
+                        onClick={() =>
+                          setSelectedPlayer(
+                            player
+                          )
+                        }
+                      >
 
+                        <span className="scorer-position">
+                          {String(
+                            index + 1
+                          ).padStart(2, "0")}
+                        </span>
 
-                      <div className="scorer-info">
+                        <div className="scorer-info">
 
-                        {player.team && (
-                          <img
-                            src={
-                              player.team.logo
-                            }
-                            alt={`Escudo de ${player.team.name}`}
-                          />
-                        )}
+                          {player.team && (
+                            <img
+                              src={
+                                player.team.logo
+                              }
+                              alt={`Escudo de ${player.team.name}`}
+                            />
+                          )}
 
-                        <div className="scorer-player-data">
+                          <div className="scorer-player-data">
+
+                            <strong>
+                              {player.name}
+                            </strong>
+
+                            <span>
+                              {player.team
+                                ?.shortName ||
+                                "Sin equipo"}
+                            </span>
+
+                          </div>
+
+                        </div>
+
+                        <div className="scorer-points">
 
                           <strong>
-                            {player.name}
+                            {player.points.toFixed(
+                              1
+                            )}
                           </strong>
 
                           <span>
-                            {player.team
-                              ?.shortName ||
-                              "Sin equipo"}
+                            PTS
                           </span>
 
                         </div>
 
-                      </div>
+                      </button>
 
-
-                      <div className="scorer-points">
-
-                        <strong>
-                          {player.points}
-                        </strong>
-
-                        <span>
-                          PTS
-                        </span>
-
-                      </div>
-
-                    </button>
-
+                    )
                   )
+
+                ) : (
+
+                  <div className="home-no-scorers">
+
+                    <span>
+                      SIN DATOS
+                    </span>
+
+                    <p>
+                      Todavía no hay estadísticas
+                      disponibles.
+                    </p>
+
+                  </div>
+
                 )}
 
               </div>
@@ -796,9 +805,7 @@ function Home() {
       </section>
 
 
-      {/* =========================================
-          POPUP DEL EQUIPO
-          ========================================= */}
+      {/* POPUP DEL EQUIPO */}
 
       {selectedTeam && (
 
@@ -835,7 +842,6 @@ function Home() {
 
               </div>
 
-
               <button
                 type="button"
                 className="home-modal-close"
@@ -849,7 +855,6 @@ function Home() {
 
             </div>
 
-
             <div className="home-team-modal-main">
 
               <div className="home-team-modal-identity">
@@ -862,7 +867,6 @@ function Home() {
                   />
 
                 </div>
-
 
                 <div>
 
@@ -883,47 +887,31 @@ function Home() {
 
               </div>
 
-
               <div className="home-team-modal-record">
 
                 <div>
-                  <span>
-                    PJ
-                  </span>
-
+                  <span>PJ</span>
                   <strong>
                     {selectedTeam.gamesPlayed}
                   </strong>
                 </div>
 
-
                 <div>
-                  <span>
-                    PG
-                  </span>
-
+                  <span>PG</span>
                   <strong className="home-team-win">
                     {selectedTeam.wins}
                   </strong>
                 </div>
 
-
                 <div>
-                  <span>
-                    PP
-                  </span>
-
+                  <span>PP</span>
                   <strong className="home-team-loss">
                     {selectedTeam.losses}
                   </strong>
                 </div>
 
-
                 <div>
-                  <span>
-                    DIF
-                  </span>
-
+                  <span>DIF</span>
                   <strong>
                     {selectedTeam.difference > 0
                       ? `+${selectedTeam.difference}`
@@ -932,7 +920,6 @@ function Home() {
                 </div>
 
               </div>
-
 
               <Link
                 to={`/equipos/${selectedTeam.id}`}
@@ -946,12 +933,9 @@ function Home() {
 
             </div>
 
-
             <div className="home-team-modal-footer">
 
-              <span>
-                LNA
-              </span>
+              <span>LNA</span>
 
               <strong>
                 {selectedTeam.abbreviation}
@@ -966,190 +950,169 @@ function Home() {
       )}
 
 
-      {/* =========================================
-          POPUP ESTADÍSTICAS DEL PARTIDO
-          ========================================= */}
+      {/* POPUP ESTADÍSTICAS DEL PARTIDO */}
 
-      {selectedMatch && getMatchStats(selectedMatch) && (
-
-        <div
-          className="match-stats-modal-overlay"
-          onClick={() => {
-            setSelectedMatch(null);
-            setSelectedMatchTeam(null);
-          }}
-        >
+      {selectedMatch &&
+        getMatchStats(selectedMatch) && (
 
           <div
-            className="match-stats-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
+            className="match-stats-modal-overlay"
+            onClick={() => {
+              setSelectedMatch(null);
+              setSelectedMatchTeam(null);
+            }}
           >
 
-            <div className="match-stats-modal-header">
+            <div
+              className="match-stats-modal"
+              onClick={(event) =>
+                event.stopPropagation()
+              }
+            >
 
-              <div className="match-stats-modal-title">
+              <div className="match-stats-modal-header">
 
-                <span>
-                  ESTADÍSTICAS DEL PARTIDO
-                </span>
+                <div className="match-stats-modal-title">
 
-                <h2>
+                  <span>
+                    ESTADÍSTICAS DEL PARTIDO
+                  </span>
 
-                  {getTeam(
-                    selectedMatch.homeTeam
-                  )?.shortName}
+                  <h2>
 
-                  <strong>
-                    {selectedMatch.homeScore} -{" "}
-                    {selectedMatch.awayScore}
-                  </strong>
-
-                  {getTeam(
-                    selectedMatch.awayTeam
-                  )?.shortName}
-
-                </h2>
-
-                <p>
-                  FINAL
-                </p>
-
-              </div>
-
-
-              <button
-                type="button"
-                className="match-stats-modal-close"
-                onClick={() => {
-                  setSelectedMatch(null);
-                  setSelectedMatchTeam(null);
-                }}
-                aria-label="Cerrar estadísticas del partido"
-              >
-                ×
-              </button>
-
-            </div>
-
-
-            <div className="match-stats-team-tabs">
-
-              {[
-                selectedMatch.homeTeam,
-                selectedMatch.awayTeam,
-              ].map(
-                (teamId) => {
-
-                  const team =
-                    getTeam(teamId);
-
-                  return (
-
-                    <button
-                      key={teamId}
-                      type="button"
-                      className={`match-stats-team-tab ${
-                        selectedMatchTeam ===
-                        teamId
-                          ? "active"
-                          : ""
-                      }`}
-                      onClick={() =>
-                        setSelectedMatchTeam(
-                          teamId
-                        )
-                      }
-                    >
-                      {team?.shortName ||
-                        teamId}
-                    </button>
-
-                  );
-                }
-              )}
-
-            </div>
-
-
-            <div className="match-stats-table-wrapper">
-
-              <div className="match-stats-table-header">
-
-                <span>
-                  JUGADOR
-                </span>
-
-                <span>
-                  PTS
-                </span>
-
-                <span>
-                  REB
-                </span>
-
-                <span>
-                  AST
-                </span>
-
-                <span>
-                  MIN
-                </span>
-
-              </div>
-
-
-              {(
-                getMatchStats(
-                  selectedMatch
-                )?.[selectedMatchTeam] ||
-                []
-              ).map(
-                (player) => (
-
-                  <div
-                    className="match-stats-player-row"
-                    key={player.id}
-                  >
+                    {getTeam(
+                      selectedMatch.homeTeam
+                    )?.shortName}
 
                     <strong>
-                      {player.name}
+                      {selectedMatch.homeScore} -{" "}
+                      {selectedMatch.awayScore}
                     </strong>
 
-                    <span>
-                      {player.points}
-                    </span>
+                    {getTeam(
+                      selectedMatch.awayTeam
+                    )?.shortName}
 
-                    <span>
-                      {player.rebounds}
-                    </span>
+                  </h2>
 
-                    <span>
-                      {player.assists}
-                    </span>
+                  <p>
+                    FINAL
+                  </p>
 
-                    <span>
-                      {player.minutes}
-                    </span>
+                </div>
 
-                  </div>
+                <button
+                  type="button"
+                  className="match-stats-modal-close"
+                  onClick={() => {
+                    setSelectedMatch(null);
+                    setSelectedMatchTeam(null);
+                  }}
+                  aria-label="Cerrar estadísticas del partido"
+                >
+                  ×
+                </button>
 
-                )
-              )}
+              </div>
+
+              <div className="match-stats-team-tabs">
+
+                {[
+                  selectedMatch.homeTeam,
+                  selectedMatch.awayTeam,
+                ].map(
+                  (teamId) => {
+
+                    const team =
+                      getTeam(teamId);
+
+                    return (
+
+                      <button
+                        key={teamId}
+                        type="button"
+                        className={`match-stats-team-tab ${
+                          selectedMatchTeam ===
+                          teamId
+                            ? "active"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          setSelectedMatchTeam(
+                            teamId
+                          )
+                        }
+                      >
+                        {team?.shortName ||
+                          teamId}
+                      </button>
+
+                    );
+                  }
+                )}
+
+              </div>
+
+              <div className="match-stats-table-wrapper">
+
+                <div className="match-stats-table-header">
+
+                  <span>JUGADOR</span>
+                  <span>PTS</span>
+                  <span>REB</span>
+                  <span>AST</span>
+                  <span>MIN</span>
+
+                </div>
+
+                {(
+                  getMatchStats(
+                    selectedMatch
+                  )?.[selectedMatchTeam] ||
+                  []
+                ).map(
+                  (player) => (
+
+                    <div
+                      className="match-stats-player-row"
+                      key={player.id}
+                    >
+
+                      <strong>
+                        {player.name}
+                      </strong>
+
+                      <span>
+                        {player.points}
+                      </span>
+
+                      <span>
+                        {player.rebounds}
+                      </span>
+
+                      <span>
+                        {player.assists}
+                      </span>
+
+                      <span>
+                        {player.minutes}
+                      </span>
+
+                    </div>
+
+                  )
+                )}
+
+              </div>
 
             </div>
 
           </div>
 
-        </div>
-
-      )}
+        )}
 
 
-      {/* =========================================
-          POPUP DEL JUGADOR
-          ========================================= */}
+      {/* POPUP DEL JUGADOR */}
 
       {selectedPlayer && (
 
@@ -1184,7 +1147,6 @@ function Home() {
 
               )}
 
-
               <div className="home-player-modal-info">
 
                 <span>
@@ -1206,7 +1168,6 @@ function Home() {
 
               </div>
 
-
               <button
                 type="button"
                 className="home-modal-close"
@@ -1220,59 +1181,42 @@ function Home() {
 
             </div>
 
-
             <div className="home-player-modal-details">
 
               <div>
-
-                <span>
-                  POSICIÓN
-                </span>
+                <span>POSICIÓN</span>
 
                 <strong>
                   {selectedPlayer.position ||
                     "—"}
                 </strong>
-
               </div>
 
-
               <div>
-
-                <span>
-                  NACIONALIDAD
-                </span>
+                <span>NACIONALIDAD</span>
 
                 <strong>
                   {selectedPlayer.nationality ||
                     "—"}
                 </strong>
-
               </div>
 
-
               <div>
-
-                <span>
-                  NÚMERO
-                </span>
+                <span>NÚMERO</span>
 
                 <strong>
                   {selectedPlayer.number ??
                     "—"}
                 </strong>
-
               </div>
 
             </div>
-
 
             <div className="home-player-modal-season">
 
               <span className="home-player-modal-label">
                 ESTADÍSTICAS DE LA TEMPORADA
               </span>
-
 
               <div className="home-player-modal-stats">
 
@@ -1287,11 +1231,14 @@ function Home() {
                   </span>
                 </div>
 
-
                 <div>
                   <strong>
                     {selectedPlayer.stats
-                      ?.points ?? 0}
+                      ?.points != null
+                      ? selectedPlayer.stats.points.toFixed(
+                          1
+                        )
+                      : "—"}
                   </strong>
 
                   <span>
@@ -1299,11 +1246,14 @@ function Home() {
                   </span>
                 </div>
 
-
                 <div>
                   <strong>
                     {selectedPlayer.stats
-                      ?.rebounds ?? 0}
+                      ?.rebounds != null
+                      ? selectedPlayer.stats.rebounds.toFixed(
+                          1
+                        )
+                      : "—"}
                   </strong>
 
                   <span>
@@ -1311,11 +1261,14 @@ function Home() {
                   </span>
                 </div>
 
-
                 <div>
                   <strong>
                     {selectedPlayer.stats
-                      ?.assists ?? 0}
+                      ?.assists != null
+                      ? selectedPlayer.stats.assists.toFixed(
+                          1
+                        )
+                      : "—"}
                   </strong>
 
                   <span>
@@ -1326,7 +1279,6 @@ function Home() {
               </div>
 
             </div>
-
 
             <div className="home-player-modal-footer">
 

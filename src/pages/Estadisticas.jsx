@@ -24,6 +24,26 @@ function Estadisticas() {
     );
   };
 
+  /*
+   * =========================================
+   * FORMATEAR PROMEDIOS
+   * =========================================
+   */
+
+  const formatAverage = (value, gamesPlayed) => {
+    if (!gamesPlayed || value === null || value === undefined) {
+      return "—";
+    }
+
+    return Number(value).toFixed(1);
+  };
+
+  /*
+   * =========================================
+   * ORDENAMIENTO
+   * =========================================
+   */
+
   const handleSort = (stat) => {
     if (sortBy === stat) {
       setSortDirection((current) =>
@@ -37,10 +57,15 @@ function Estadisticas() {
     setSortDirection("desc");
   };
 
+  /*
+   * =========================================
+   * FILTRAR Y ORDENAR
+   * =========================================
+   */
+
   const filteredPlayers = useMemo(() => {
-    const normalizedSearch = search
-      .trim()
-      .toLowerCase();
+    const normalizedSearch =
+      search.trim().toLowerCase();
 
     const result = players.filter((player) => {
       const matchesSearch =
@@ -66,8 +91,15 @@ function Estadisticas() {
       const statsA = getPlayerStats(a.id);
       const statsB = getPlayerStats(b.id);
 
-      const valueA = statsA?.[sortBy] ?? 0;
-      const valueB = statsB?.[sortBy] ?? 0;
+      const valueA =
+        statsA?.gamesPlayed > 0
+          ? statsA[sortBy] ?? 0
+          : 0;
+
+      const valueB =
+        statsB?.gamesPlayed > 0
+          ? statsB[sortBy] ?? 0
+          : 0;
 
       if (valueA === valueB) {
         return a.name.localeCompare(b.name, "es");
@@ -84,6 +116,12 @@ function Estadisticas() {
     sortDirection,
   ]);
 
+  /*
+   * =========================================
+   * JUGADOR SELECCIONADO
+   * =========================================
+   */
+
   const selectedPlayerTeam = selectedPlayer
     ? getTeam(selectedPlayer.teamId)
     : null;
@@ -91,6 +129,12 @@ function Estadisticas() {
   const selectedPlayerStats = selectedPlayer
     ? getPlayerStats(selectedPlayer.id)
     : null;
+
+  /*
+   * =========================================
+   * FLECHAS DE ORDENAMIENTO
+   * =========================================
+   */
 
   const getSortArrow = (stat) => {
     if (sortBy !== stat) {
@@ -110,21 +154,17 @@ function Estadisticas() {
           ========================================= */}
 
       <section className="stats-header">
-        <div className="page-container">
-
-          <span className="stats-label">
-            LIGA NACIONAL
+        <div>
+          <span className="section-kicker">
+            Liga Nacional
           </span>
 
-          <h1>
-            Estadísticas
-          </h1>
+          <h1>Estadísticas</h1>
 
           <p>
-            Rendimiento de los jugadores de la
-            Liga Nacional 2026/27.
+            Estadísticas promedio de los jugadores
+            de la temporada.
           </p>
-
         </div>
       </section>
 
@@ -133,314 +173,224 @@ function Estadisticas() {
           CONTENIDO
           ========================================= */}
 
-      <section className="stats-content">
-        <div className="page-container">
+      <section className="stats-container">
 
-          {/* =====================================
-              FILTROS
-              ===================================== */}
+        {/* =========================================
+            FILTROS
+            ========================================= */}
 
-          <div className="stats-toolbar">
+        <div className="stats-filters">
 
-            <div className="stats-search">
-              <label htmlFor="stats-player-search">
-                Buscar jugador
-              </label>
+          <div className="stats-search">
+            <input
+              type="text"
+              placeholder="Buscar jugador..."
+              value={search}
+              onChange={(event) =>
+                setSearch(event.target.value)
+              }
+            />
+          </div>
 
-              <input
-                id="stats-player-search"
-                type="text"
-                placeholder="Nombre del jugador..."
-                value={search}
-                onChange={(event) =>
-                  setSearch(event.target.value)
-                }
-              />
+          <div className="stats-team-filter">
+            <select
+              value={selectedTeam}
+              onChange={(event) =>
+                setSelectedTeam(event.target.value)
+              }
+            >
+              <option value="todos">
+                Todos los equipos
+              </option>
 
-              {search && (
-                <button
-                  type="button"
-                  className="stats-search-clear"
-                  onClick={() => setSearch("")}
-                  aria-label="Limpiar búsqueda"
+              {teams.map((team) => (
+                <option
+                  key={team.id}
+                  value={team.id}
                 >
-                  ×
-                </button>
-              )}
-            </div>
-
-
-            <div className="stats-filter">
-              <label htmlFor="stats-team-filter">
-                Equipo
-              </label>
-
-              <select
-                id="stats-team-filter"
-                value={selectedTeam}
-                onChange={(event) =>
-                  setSelectedTeam(
-                    event.target.value
-                  )
-                }
-              >
-                <option value="todos">
-                  Todos los equipos
+                  {team.name}
                 </option>
-
-                {teams
-                  .slice()
-                  .sort((a, b) =>
-                    a.name.localeCompare(
-                      b.name,
-                      "es"
-                    )
-                  )
-                  .map((team) => (
-                    <option
-                      key={team.id}
-                      value={team.id}
-                    >
-                      {team.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-
+              ))}
+            </select>
           </div>
 
-
-          {/* =====================================
-              INFORMACIÓN
-              ===================================== */}
-
-          <div className="stats-result-bar">
-
-            <div>
-              <span>
-                JUGADORES
-              </span>
-
-              <strong>
-                {filteredPlayers.length}
-              </strong>
-            </div>
-
-            <span className="stats-result-description">
-              PJ · PTS · REB · AST
-            </span>
-
-          </div>
+        </div>
 
 
-          {/* =====================================
-              TABLA
-              ===================================== */}
+        {/* =========================================
+            TABLA
+            ========================================= */}
 
-          {filteredPlayers.length > 0 ? (
+        <div className="stats-table-wrapper">
 
-            <div className="stats-table-wrapper">
+          <table className="stats-table">
 
-              <div className="stats-table">
+            <thead>
+              <tr>
 
-                {/* CABECERA */}
+                <th>
+                  Jugador
+                </th>
 
-                <div className="stats-table-header">
+                <th>
+                  Equipo
+                </th>
 
-                  <span className="stats-player-column">
-                    JUGADOR
-                  </span>
-
-                  <span className="stats-team-column">
-                    EQUIPO
-                  </span>
-
-
-                  {/* PJ */}
-
+                <th>
                   <button
                     type="button"
-                    className={
-                      sortBy === "gamesPlayed"
-                        ? "stats-sort-button active"
-                        : "stats-sort-button"
-                    }
                     onClick={() =>
                       handleSort("gamesPlayed")
                     }
                   >
-                    PJ
-                    <span>
-                      {getSortArrow(
-                        "gamesPlayed"
-                      )}
-                    </span>
+                    PJ {getSortArrow("gamesPlayed")}
                   </button>
+                </th>
 
-
-                  {/* PTS */}
-
+                <th>
                   <button
                     type="button"
-                    className={
-                      sortBy === "points"
-                        ? "stats-sort-button active"
-                        : "stats-sort-button"
-                    }
                     onClick={() =>
                       handleSort("points")
                     }
                   >
-                    PTS
-                    <span>
-                      {getSortArrow("points")}
-                    </span>
+                    PTS {getSortArrow("points")}
                   </button>
+                </th>
 
-
-                  {/* REB */}
-
+                <th>
                   <button
                     type="button"
-                    className={
-                      sortBy === "rebounds"
-                        ? "stats-sort-button active"
-                        : "stats-sort-button"
-                    }
                     onClick={() =>
                       handleSort("rebounds")
                     }
                   >
-                    REB
-                    <span>
-                      {getSortArrow("rebounds")}
-                    </span>
+                    REB {getSortArrow("rebounds")}
                   </button>
+                </th>
 
-
-                  {/* AST */}
-
+                <th>
                   <button
                     type="button"
-                    className={
-                      sortBy === "assists"
-                        ? "stats-sort-button active"
-                        : "stats-sort-button"
-                    }
                     onClick={() =>
                       handleSort("assists")
                     }
                   >
-                    AST
-                    <span>
-                      {getSortArrow("assists")}
-                    </span>
+                    AST {getSortArrow("assists")}
                   </button>
+                </th>
 
-                </div>
+              </tr>
+            </thead>
 
 
-                {/* JUGADORES */}
+            <tbody>
 
-                {filteredPlayers.map((player) => {
-                  const team = getTeam(
-                    player.teamId
-                  );
+              {filteredPlayers.map((player) => {
+                const team = getTeam(player.teamId);
+                const stats = getPlayerStats(player.id);
 
-                  const stats =
-                    getPlayerStats(player.id);
+                return (
+                  <tr
+                    key={player.id}
+                    onClick={() =>
+                      setSelectedPlayer(player)
+                    }
+                  >
 
-                  return (
-                    <button
-                      key={player.id}
-                      type="button"
-                      className="stats-player-row"
-                      onClick={() =>
-                        setSelectedPlayer(player)
-                      }
-                    >
+                    {/* JUGADOR */}
 
+                    <td>
                       <div className="stats-player">
 
-                        {team && (
-                          <span className="stats-player-logo">
-                            <img
-                              src={team.logo}
-                              alt={`Escudo de ${team.name}`}
-                            />
-                          </span>
+                        {player.photo && (
+                          <img
+                            src={player.photo}
+                            alt={player.name}
+                          />
                         )}
 
-                        <div className="stats-player-info">
-
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {player.position}
-                          </span>
-
-                        </div>
+                        <span>
+                          {player.name}
+                        </span>
 
                       </div>
+                    </td>
 
 
+                    {/* EQUIPO */}
+
+                    <td>
                       <div className="stats-team">
-                        {team?.shortName ||
-                          "Sin equipo"}
+
+                        {team?.logo && (
+                          <img
+                            src={team.logo}
+                            alt={team.name}
+                          />
+                        )}
+
+                        <span>
+                          {team?.name || "—"}
+                        </span>
+
                       </div>
+                    </td>
 
 
-                      <div className="stats-value">
-                        {stats?.gamesPlayed ?? 0}
-                      </div>
+                    {/* PJ */}
+
+                    <td>
+                      {stats?.gamesPlayed || 0}
+                    </td>
 
 
-                      <div className="stats-value stats-points">
-                        {stats?.points ?? 0}
-                      </div>
+                    {/* PTS */}
+
+                    <td>
+                      {formatAverage(
+                        stats?.points,
+                        stats?.gamesPlayed
+                      )}
+                    </td>
 
 
-                      <div className="stats-value">
-                        {stats?.rebounds ?? 0}
-                      </div>
+                    {/* REB */}
+
+                    <td>
+                      {formatAverage(
+                        stats?.rebounds,
+                        stats?.gamesPlayed
+                      )}
+                    </td>
 
 
-                      <div className="stats-value">
-                        {stats?.assists ?? 0}
-                      </div>
+                    {/* AST */}
 
-                    </button>
-                  );
-                })}
+                    <td>
+                      {formatAverage(
+                        stats?.assists,
+                        stats?.gamesPlayed
+                      )}
+                    </td>
 
-              </div>
+                  </tr>
+                );
+              })}
 
-            </div>
+            </tbody>
 
-          ) : (
+          </table>
 
+
+          {filteredPlayers.length === 0 && (
             <div className="stats-empty">
-
-              <span>
-                SIN RESULTADOS
-              </span>
-
-              <h2>
-                No encontramos jugadores
-              </h2>
-
-              <p>
-                Probá cambiando la búsqueda o
-                seleccionando otro equipo.
-              </p>
-
+              No se encontraron jugadores.
             </div>
-
           )}
 
         </div>
+
       </section>
 
 
@@ -449,35 +399,40 @@ function Estadisticas() {
           ========================================= */}
 
       {selectedPlayer && (
-
         <div
-          className="stats-modal-overlay"
+          className="stats-player-modal-overlay"
           onClick={() =>
             setSelectedPlayer(null)
           }
         >
 
           <div
-            className="stats-modal"
+            className="stats-player-modal"
             onClick={(event) =>
               event.stopPropagation()
             }
           >
 
-            <div className="stats-modal-header">
+            {/* HEADER DEL JUGADOR */}
+
+            <div className="stats-player-modal-header">
 
               {selectedPlayerTeam && (
-                <img
-                  src={selectedPlayerTeam.logo}
-                  alt={`Escudo de ${selectedPlayerTeam.name}`}
-                  className="stats-modal-logo"
-                />
+                <div className="stats-player-modal-logo">
+
+                  <img
+                    src={selectedPlayerTeam.logo}
+                    alt={`Escudo de ${selectedPlayerTeam.name}`}
+                  />
+
+                </div>
               )}
 
-              <div className="stats-modal-player-info">
+
+              <div className="stats-player-modal-info">
 
                 <span>
-                  {selectedPlayer.position}
+                  {selectedPlayer.position || "—"}
                 </span>
 
                 <h2>
@@ -490,14 +445,15 @@ function Estadisticas() {
                 </p>
 
                 <small>
-                  {selectedPlayer.nationality}
+                  {selectedPlayer.nationality || "—"}
                 </small>
 
               </div>
 
+
               <button
                 type="button"
-                className="stats-modal-close"
+                className="stats-player-modal-close"
                 onClick={() =>
                   setSelectedPlayer(null)
                 }
@@ -509,7 +465,9 @@ function Estadisticas() {
             </div>
 
 
-            <div className="stats-modal-details">
+            {/* DATOS DEL JUGADOR */}
+
+            <div className="stats-player-modal-details">
 
               <div>
                 <span>
@@ -517,10 +475,10 @@ function Estadisticas() {
                 </span>
 
                 <strong>
-                  {selectedPlayer.position ||
-                    "—"}
+                  {selectedPlayer.position || "—"}
                 </strong>
               </div>
+
 
               <div>
                 <span>
@@ -528,10 +486,10 @@ function Estadisticas() {
                 </span>
 
                 <strong>
-                  {selectedPlayer.nationality ||
-                    "—"}
+                  {selectedPlayer.nationality || "—"}
                 </strong>
               </div>
+
 
               <div>
                 <span>
@@ -546,18 +504,20 @@ function Estadisticas() {
             </div>
 
 
-            <div className="stats-modal-season">
+            {/* ESTADÍSTICAS DE LA TEMPORADA */}
 
-              <span className="stats-modal-section-label">
+            <div className="stats-player-modal-season">
+
+              <span className="stats-player-modal-label">
                 ESTADÍSTICAS DE LA TEMPORADA
               </span>
 
-              <div className="stats-modal-grid">
+
+              <div className="stats-player-modal-stats">
 
                 <div>
                   <strong>
-                    {selectedPlayerStats
-                      ?.gamesPlayed ?? 0}
+                    {selectedPlayerStats?.gamesPlayed || 0}
                   </strong>
 
                   <span>
@@ -565,10 +525,13 @@ function Estadisticas() {
                   </span>
                 </div>
 
+
                 <div>
                   <strong>
-                    {selectedPlayerStats
-                      ?.points ?? 0}
+                    {formatAverage(
+                      selectedPlayerStats?.points,
+                      selectedPlayerStats?.gamesPlayed
+                    )}
                   </strong>
 
                   <span>
@@ -576,10 +539,13 @@ function Estadisticas() {
                   </span>
                 </div>
 
+
                 <div>
                   <strong>
-                    {selectedPlayerStats
-                      ?.rebounds ?? 0}
+                    {formatAverage(
+                      selectedPlayerStats?.rebounds,
+                      selectedPlayerStats?.gamesPlayed
+                    )}
                   </strong>
 
                   <span>
@@ -587,10 +553,13 @@ function Estadisticas() {
                   </span>
                 </div>
 
+
                 <div>
                   <strong>
-                    {selectedPlayerStats
-                      ?.assists ?? 0}
+                    {formatAverage(
+                      selectedPlayerStats?.assists,
+                      selectedPlayerStats?.gamesPlayed
+                    )}
                   </strong>
 
                   <span>
@@ -603,15 +572,16 @@ function Estadisticas() {
             </div>
 
 
-            <div className="stats-modal-footer">
+            {/* FOOTER */}
+
+            <div className="stats-player-modal-footer">
 
               <span>
                 LIGA NACIONAL 2026/27
               </span>
 
               <strong>
-                {selectedPlayerTeam?.shortName ||
-                  ""}
+                {selectedPlayerTeam?.abbreviation || ""}
               </strong>
 
             </div>
@@ -619,7 +589,6 @@ function Estadisticas() {
           </div>
 
         </div>
-
       )}
 
     </main>

@@ -7,6 +7,15 @@
   min-height: calc(100vh - 76px);
 
   background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.stats-container {
+  width: min(100% - 32px, var(--container-width));
+
+  margin: 0 auto;
+
+  padding-bottom: 48px;
 }
 
 
@@ -26,14 +35,13 @@
   border-bottom: 3px solid var(--color-primary);
 }
 
-.stats-header .page-container,
-.stats-content .page-container {
+.stats-header > div {
   width: min(100% - 32px, var(--container-width));
 
   margin: 0 auto;
 }
 
-.stats-label {
+.stats-header .section-kicker {
   display: block;
 
   margin-bottom: 8px;
@@ -69,67 +77,38 @@
 
 
 /* =========================================
-   CONTENIDO
+   FILTROS
    ========================================= */
 
-.stats-content {
+.stats-filters {
   width: 100%;
 
-  padding: 28px 0 48px;
-}
+  padding: 28px 0 16px;
 
-
-/* =========================================
-   TOOLBAR
-   ========================================= */
-
-.stats-toolbar {
   display: grid;
 
   grid-template-columns: 1.5fr 1fr;
 
   gap: 14px;
-
-  margin-bottom: 16px;
 }
 
 .stats-search,
-.stats-filter {
+.stats-team-filter {
   min-width: 0;
 }
 
-.stats-search label,
-.stats-filter label {
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: var(--color-text-soft);
-
-  font-size: 10px;
-  font-weight: 800;
-
-  letter-spacing: 0.8px;
-
-  text-transform: uppercase;
-}
-
-.stats-search {
-  position: relative;
-}
-
 .stats-search input,
-.stats-filter select {
+.stats-team-filter select {
   width: 100%;
   height: 46px;
 
   padding: 0 14px;
 
-  border: 1px solid var(--sports-border);
+  border: 1px solid #3d3d3d;
 
   border-radius: var(--radius-small);
 
-  background-color: var(--sports-panel);
+  background-color: #202020;
 
   color: #ffffff;
 
@@ -142,106 +121,19 @@
     background-color 0.2s ease;
 }
 
-.stats-search input {
-  padding-right: 42px;
-}
-
 .stats-search input::placeholder {
   color: #8d8d8d;
 }
 
 .stats-search input:focus,
-.stats-filter select:focus {
+.stats-team-filter select:focus {
   border-color: var(--color-primary);
 
   background-color: #252525;
 }
 
-.stats-filter select {
+.stats-team-filter select {
   cursor: pointer;
-}
-
-.stats-search-clear {
-  position: absolute;
-
-  right: 9px;
-  bottom: 7px;
-
-  width: 32px;
-  height: 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 0;
-
-  border-radius: 50%;
-
-  background-color: transparent;
-
-  color: #aaaaaa;
-
-  font-size: 20px;
-
-  cursor: pointer;
-}
-
-.stats-search-clear:hover {
-  color: var(--color-primary);
-}
-
-
-/* =========================================
-   BARRA DE RESULTADOS
-   ========================================= */
-
-.stats-result-bar {
-  min-height: 52px;
-
-  margin-bottom: 12px;
-
-  padding: 0 4px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-}
-
-.stats-result-bar > div {
-  display: flex;
-
-  align-items: baseline;
-
-  gap: 9px;
-}
-
-.stats-result-bar > div span {
-  color: var(--color-text-soft);
-
-  font-size: 9px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.9px;
-}
-
-.stats-result-bar strong {
-  color: var(--color-primary);
-
-  font-size: 18px;
-}
-
-.stats-result-description {
-  color: var(--color-text-soft);
-
-  font-size: 10px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.6px;
 }
 
 
@@ -254,7 +146,7 @@
 
   overflow-x: auto;
 
-  border: 1px solid var(--sports-border);
+  border: 1px solid #3d3d3d;
 
   border-radius: var(--radius-medium);
 
@@ -265,33 +157,51 @@
   width: 100%;
 
   min-width: 720px;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
 }
 
 
 /* =========================================
-   CABECERA TABLA
+   COLUMNAS
    ========================================= */
 
-.stats-table-header {
-  min-height: 48px;
+.stats-table th:first-child,
+.stats-table td:first-child {
+  width: 34%;
+}
 
-  padding: 0 18px;
+.stats-table th:nth-child(2),
+.stats-table td:nth-child(2) {
+  width: 28%;
+}
 
-  display: grid;
+.stats-table th:nth-child(3),
+.stats-table td:nth-child(3),
+.stats-table th:nth-child(4),
+.stats-table td:nth-child(4),
+.stats-table th:nth-child(5),
+.stats-table td:nth-child(5),
+.stats-table th:nth-child(6),
+.stats-table td:nth-child(6) {
+  width: 9.5%;
+}
 
-  grid-template-columns:
-    minmax(240px, 2fr)
-    minmax(120px, 1fr)
-    70px
-    70px
-    70px
-    70px;
 
-  align-items: center;
+/* =========================================
+   CABECERA
+   ========================================= */
 
-  gap: 10px;
-
+.stats-table thead {
   background-color: #181818;
+}
+
+.stats-table th {
+  height: 46px;
+
+  padding: 0 14px;
 
   border-bottom: 1px solid #3d3d3d;
 
@@ -303,71 +213,85 @@
 
   letter-spacing: 0.8px;
 
-  text-transform: uppercase;
-
   text-align: center;
+
+  text-transform: uppercase;
 }
 
-.stats-table-header .stats-player-column {
+.stats-table th:first-child,
+.stats-table th:nth-child(2) {
   text-align: left;
 }
 
-.stats-table-header .stats-team-column {
-  text-align: left;
+.stats-table th button {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.stats-table th button:hover {
+  color: var(--color-primary);
 }
 
 
 /* =========================================
-   FILA DEL JUGADOR
+   FILAS
    ========================================= */
 
-.stats-player-row {
-  width: 100%;
-
-  min-height: 70px;
-
-  padding: 0 18px;
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(240px, 2fr)
-    minmax(120px, 1fr)
-    70px
-    70px
-    70px
-    70px;
-
-  align-items: center;
-
-  gap: 10px;
-
-  border: 0;
-
-  border-bottom: 1px solid #353535;
+.stats-table tbody tr {
+  height: 64px;
 
   background-color: #202020;
 
-  color: #ffffff;
-
-  text-align: left;
+  border-bottom: 1px solid #353535;
 
   cursor: pointer;
 
   transition:
     background-color 0.2s ease,
-    border-color 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
-.stats-player-row:last-child {
+.stats-table tbody tr:last-child {
   border-bottom: 0;
 }
 
-.stats-player-row:hover {
+.stats-table tbody tr:hover {
   background-color: #292929;
 
   box-shadow:
     inset 3px 0 0 var(--color-primary);
+}
+
+.stats-table td {
+  height: 64px;
+
+  padding: 8px 14px;
+
+  color: #e5e5e5;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  vertical-align: middle;
+
+  text-align: center;
+}
+
+.stats-table td:first-child,
+.stats-table td:nth-child(2) {
+  text-align: left;
 }
 
 
@@ -382,46 +306,19 @@
 
   align-items: center;
 
-  gap: 12px;
+  gap: 11px;
 }
 
-.stats-player-logo {
-  width: 38px;
-  height: 38px;
+.stats-player img {
+  width: 36px;
+  height: 36px;
 
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  padding: 5px;
-
-  border-radius: 50%;
-
-  background-color: #ffffff;
-}
-
-.stats-player-logo img {
-  width: 100%;
-  height: 100%;
+  flex: 0 0 36px;
 
   object-fit: contain;
 }
 
-.stats-player-info {
-  min-width: 0;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 4px;
-}
-
-.stats-player-info strong {
+.stats-player span {
   overflow: hidden;
 
   color: #ffffff;
@@ -437,22 +334,31 @@
   white-space: nowrap;
 }
 
-.stats-player-info span {
-  color: #999999;
-
-  font-size: 9px;
-
-  font-weight: 700;
-
-  text-transform: uppercase;
-}
-
 
 /* =========================================
    EQUIPO
    ========================================= */
 
 .stats-team {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+.stats-team img {
+  width: 32px;
+  height: 32px;
+
+  flex: 0 0 32px;
+
+  object-fit: contain;
+}
+
+.stats-team span {
   overflow: hidden;
 
   color: #bdbdbd;
@@ -460,6 +366,8 @@
   font-size: 11px;
 
   font-weight: 700;
+
+  line-height: 1.2;
 
   text-overflow: ellipsis;
 
@@ -471,20 +379,29 @@
    VALORES
    ========================================= */
 
-.stats-value {
+.stats-table td:nth-child(3) {
+  color: #d5d5d5;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+.stats-table td:nth-child(4) {
+  color: var(--color-primary);
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+.stats-table td:nth-child(5),
+.stats-table td:nth-child(6) {
   color: #e5e5e5;
 
   font-size: 13px;
 
   font-weight: 800;
-
-  text-align: center;
-}
-
-.stats-points {
-  color: var(--color-primary);
-
-  font-size: 15px;
 }
 
 
@@ -493,63 +410,29 @@
    ========================================= */
 
 .stats-empty {
-  min-height: 240px;
+  min-height: 180px;
 
   padding: 40px 24px;
 
   display: flex;
 
-  flex-direction: column;
-
   align-items: center;
 
   justify-content: center;
-
-  border: 1px solid var(--sports-border);
-
-  border-radius: var(--radius-medium);
-
-  background-color: #202020;
-
-  text-align: center;
-}
-
-.stats-empty > span {
-  margin-bottom: 8px;
-
-  color: var(--color-primary);
-
-  font-size: 10px;
-
-  font-weight: 800;
-
-  letter-spacing: 1.2px;
-}
-
-.stats-empty h2 {
-  margin-bottom: 6px;
-
-  color: #ffffff;
-
-  font-size: 18px;
-}
-
-.stats-empty p {
-  max-width: 320px;
 
   color: #a9a9a9;
 
   font-size: 12px;
 
-  line-height: 1.5;
+  text-align: center;
 }
 
 
 /* =========================================
-   POPUP
+   POPUP JUGADOR
    ========================================= */
 
-.stats-modal-overlay {
+.stats-player-modal-overlay {
   position: fixed;
 
   inset: 0;
@@ -567,9 +450,12 @@
   background-color: rgba(0, 0, 0, 0.72);
 }
 
-.stats-modal {
-  position: relative;
 
+/* =========================================
+   CONTENEDOR
+   ========================================= */
+
+.stats-player-modal {
   width: min(100%, 560px);
 
   max-height: calc(100vh - 40px);
@@ -585,46 +471,69 @@
   color: #ffffff;
 
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.35);
+    0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
 
 /* =========================================
-   CABECERA POPUP
+   HEADER DEL JUGADOR
    ========================================= */
 
-.stats-modal-header {
+.stats-player-modal-header {
   min-height: 165px;
 
   padding: 22px;
 
   display: grid;
 
-  grid-template-columns: 80px 1fr 34px;
+  grid-template-columns:
+    76px
+    minmax(0, 1fr)
+    36px;
 
   align-items: center;
 
-  gap: 18px;
+  gap: 16px;
 
   background-color: #202020;
 
   border-bottom: 2px solid var(--color-primary);
 }
 
-.stats-modal-logo {
-  width: 64px;
-  height: 64px;
+
+/* =========================================
+   ESCUDO
+   ========================================= */
+
+.stats-player-modal-logo {
+  width: 68px;
+  height: 68px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
 
   padding: 7px;
 
-  object-fit: contain;
+  border-radius: 50%;
 
   background-color: #ffffff;
-
-  border-radius: 50%;
 }
 
-.stats-modal-player-info {
+.stats-player-modal-logo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   INFORMACIÓN
+   ========================================= */
+
+.stats-player-modal-info {
   min-width: 0;
 
   display: flex;
@@ -636,15 +545,12 @@
   text-align: center;
 }
 
-.stats-modal-player-info span {
-  display: block;
-
+.stats-player-modal-info > span {
   margin-bottom: 6px;
 
   color: var(--color-primary);
 
   font-size: 9px;
-
   font-weight: 800;
 
   letter-spacing: 1px;
@@ -652,17 +558,17 @@
   text-transform: uppercase;
 }
 
-.stats-modal-player-info h2 {
+.stats-player-modal-info h2 {
   margin-bottom: 5px;
 
   color: #ffffff;
 
-  font-size: 22px;
+  font-size: 23px;
 
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
-.stats-modal-player-info p {
+.stats-player-modal-info p {
   margin-bottom: 3px;
 
   color: #d0d0d0;
@@ -670,7 +576,7 @@
   font-size: 12px;
 }
 
-.stats-modal-player-info small {
+.stats-player-modal-info small {
   color: #a9a9a9;
 
   font-size: 10px;
@@ -678,10 +584,10 @@
 
 
 /* =========================================
-   CERRAR POPUP
+   CERRAR
    ========================================= */
 
-.stats-modal-close {
+.stats-player-modal-close {
   width: 34px;
   height: 34px;
 
@@ -690,40 +596,36 @@
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
-  border: 1px solid #444444;
+  border: 0;
 
   border-radius: 50%;
 
-  background-color: #292929;
+  background-color: rgba(255, 255, 255, 0.1);
 
   color: #ffffff;
 
-  font-size: 22px;
+  font-size: 23px;
 
   line-height: 1;
 
   cursor: pointer;
 
   transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
+    background-color 0.2s ease;
 }
 
-.stats-modal-close:hover {
+.stats-player-modal-close:hover {
   background-color: var(--color-primary);
-
-  border-color: var(--color-primary);
 }
 
 
 /* =========================================
-   DATOS DEL POPUP
+   DATOS DEL JUGADOR
    ========================================= */
 
-.stats-modal-details {
+.stats-player-modal-details {
   padding: 18px 22px;
 
   display: grid;
@@ -737,9 +639,7 @@
   border-bottom: 1px solid #3a3a3a;
 }
 
-.stats-modal-details > div {
-  min-width: 0;
-
+.stats-player-modal-details > div {
   min-height: 72px;
 
   padding: 12px;
@@ -761,9 +661,7 @@
   text-align: center;
 }
 
-.stats-modal-details span {
-  display: block;
-
+.stats-player-modal-details span {
   margin-bottom: 6px;
 
   color: #a9a9a9;
@@ -775,35 +673,29 @@
   letter-spacing: 0.8px;
 }
 
-.stats-modal-details strong {
+.stats-player-modal-details strong {
   color: #ffffff;
 
   font-size: 12px;
-
-  line-height: 1.2;
 }
 
 
 /* =========================================
-   ESTADÍSTICAS DEL POPUP
+   ESTADÍSTICAS DE LA TEMPORADA
    ========================================= */
 
-.stats-modal-season {
-  width: 100%;
-
+.stats-player-modal-season {
   padding: 18px 22px;
 
-  background-color: #202020 !important;
-
-  color: #ffffff !important;
+  background-color: #202020;
 }
 
-.stats-modal-section-label {
+.stats-player-modal-label {
   display: block;
 
   margin-bottom: 11px;
 
-  color: var(--color-primary) !important;
+  color: var(--color-primary);
 
   font-size: 9px;
 
@@ -811,12 +703,12 @@
 
   letter-spacing: 1px;
 
-  text-transform: uppercase;
-
   text-align: center;
+
+  text-transform: uppercase;
 }
 
-.stats-modal-grid {
+.stats-player-modal-stats {
   width: 100%;
 
   display: grid;
@@ -829,10 +721,10 @@
 
   overflow: hidden;
 
-  background-color: #292929 !important;
+  background-color: #292929;
 }
 
-.stats-modal-grid > div {
+.stats-player-modal-stats > div {
   min-width: 0;
 
   min-height: 88px;
@@ -849,21 +741,21 @@
 
   gap: 7px;
 
-  background-color: #292929 !important;
+  background-color: #292929;
 
   border-right: 1px solid #444444;
 
   text-align: center;
 }
 
-.stats-modal-grid > div:last-child {
+.stats-player-modal-stats > div:last-child {
   border-right: 0;
 }
 
-.stats-modal-grid strong {
+.stats-player-modal-stats strong {
   display: block;
 
-  color: var(--color-primary) !important;
+  color: var(--color-primary);
 
   font-size: 23px;
 
@@ -872,10 +764,10 @@
   line-height: 1;
 }
 
-.stats-modal-grid span {
+.stats-player-modal-stats span {
   display: block;
 
-  color: #bdbdbd !important;
+  color: #bdbdbd;
 
   font-size: 9px;
 
@@ -886,10 +778,10 @@
 
 
 /* =========================================
-   FOOTER POPUP
+   FOOTER
    ========================================= */
 
-.stats-modal-footer {
+.stats-player-modal-footer {
   min-height: 48px;
 
   padding: 0 22px;
@@ -904,7 +796,7 @@
 
   border-top: 1px solid #3d3d3d;
 
-  color: #b0b0b0;
+  color: #a9a9a9;
 
   font-size: 9px;
 
@@ -913,7 +805,7 @@
   letter-spacing: 0.7px;
 }
 
-.stats-modal-footer strong {
+.stats-player-modal-footer strong {
   color: var(--color-primary);
 }
 
@@ -923,8 +815,14 @@
    ========================================= */
 
 @media (max-width: 850px) {
-  .stats-toolbar {
+  .stats-filters {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-table th,
+  .stats-table td {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -938,12 +836,17 @@
     min-height: calc(100vh - 64px);
   }
 
+  .stats-container {
+    width: min(100% - 20px, var(--container-width));
+
+    padding-bottom: 32px;
+  }
+
   .stats-header {
     padding: 26px 0 24px;
   }
 
-  .stats-header .page-container,
-  .stats-content .page-container {
+  .stats-header > div {
     width: min(100% - 20px, var(--container-width));
   }
 
@@ -955,22 +858,12 @@
     font-size: 13px;
   }
 
-  .stats-content {
-    padding: 18px 0 32px;
-  }
+  .stats-filters {
+    padding: 18px 0 12px;
 
-  .stats-toolbar {
     grid-template-columns: 1fr;
 
     gap: 10px;
-  }
-
-  .stats-result-bar {
-    min-height: 46px;
-  }
-
-  .stats-result-description {
-    display: none;
   }
 
   .stats-table-wrapper {
@@ -978,48 +871,106 @@
   }
 
   .stats-table {
-    min-width: 680px;
+    min-width: 700px;
   }
+
+  .stats-table tbody tr,
+  .stats-table td {
+    height: 60px;
+  }
+
+  .stats-player img {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+  }
+
+  .stats-player {
+    gap: 9px;
+  }
+
+  .stats-player span {
+    font-size: 12px;
+  }
+
+  .stats-team img {
+    width: 28px;
+    height: 28px;
+
+    flex-basis: 28px;
+  }
+
+  .stats-team span {
+    font-size: 10px;
+  }
+
+  .stats-table td:nth-child(4) {
+    font-size: 13px;
+  }
+
+  .stats-table td:nth-child(5),
+  .stats-table td:nth-child(6) {
+    font-size: 12px;
+  }
+
 
   /* POPUP */
 
-  .stats-modal-overlay {
+  .stats-player-modal-overlay {
     padding: 10px;
   }
 
-  .stats-modal {
+  .stats-player-modal {
     max-height: calc(100vh - 20px);
   }
 
-  .stats-modal-header {
+  .stats-player-modal-header {
     min-height: 145px;
 
-    padding: 17px;
+    padding: 16px;
 
-    grid-template-columns: 58px 1fr 32px;
+    grid-template-columns:
+      50px
+      minmax(0, 1fr)
+      32px;
 
     gap: 10px;
   }
 
-  .stats-modal-logo {
-    width: 50px;
-    height: 50px;
+  .stats-player-modal-logo {
+    width: 46px;
+    height: 46px;
   }
 
-  .stats-modal-player-info h2 {
+  .stats-player-modal-info h2 {
     font-size: 18px;
   }
 
-  .stats-modal-details {
-    padding: 14px 17px;
+  .stats-player-modal-details {
+    grid-template-columns: 1fr;
+
+    padding: 14px 16px;
   }
 
-  .stats-modal-season {
-    padding: 16px 17px;
+  .stats-player-modal-season {
+    padding: 16px;
   }
 
-  .stats-modal-footer {
-    padding: 0 17px;
+  .stats-player-modal-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-player-modal-stats > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .stats-player-modal-stats > div:nth-child(-n + 2) {
+    border-bottom: 1px solid #444444;
+  }
+
+  .stats-player-modal-footer {
+    padding: 0 16px;
   }
 }
 
@@ -1033,25 +984,25 @@
     font-size: 24px;
   }
 
-  .stats-modal-header {
-    grid-template-columns: 50px 1fr 30px;
+  .stats-table {
+    min-width: 680px;
+  }
+
+  .stats-player-modal-header {
+    grid-template-columns:
+      44px
+      minmax(0, 1fr)
+      30px;
 
     gap: 8px;
   }
 
-  .stats-modal-details {
+  .stats-player-modal-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .stats-player-modal-details {
     grid-template-columns: 1fr;
-  }
-
-  .stats-modal-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .stats-modal-grid > div:nth-child(2) {
-    border-right: 0;
-  }
-
-  .stats-modal-grid > div:nth-child(-n + 2) {
-    border-bottom: 1px solid #444444;
   }
 }
