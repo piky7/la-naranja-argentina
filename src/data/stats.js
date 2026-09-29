@@ -9,13 +9,27 @@ import { matchPlayerStats } from "./matchStats";
  * Los IDs utilizados en los boxscores pueden
  * ser diferentes a los IDs de players.js.
  *
- * Acá relacionamos solamente los jugadores
- * cuya correspondencia conocemos con seguridad.
+ * Acá relacionamos los jugadores del boxscore
+ * con sus IDs definitivos de players.js.
  */
 
 const playerIdByMatchStatId = {
+  /*
+   * LANÚS
+   */
   "franchino-m": "martin-franchino",
+  "james-c": "christian-james",
+  "merchant-e": "junior-merchant",
+  "johnson-m": "melvin-johnson",
+  "sacchi-a": "alejo-sacchi",
+  "andujar-l": "lucas-andujar",
+  "celiz-j": "joaquin-celiz",
+  "ramirez-c": "fabian-ramirez-barrios",
+  "whitfield-r": "robert-whitfield",
 
+  /*
+   * GIMNASIA
+   */
   "chacon-m": "marcos-chacon",
   "toretta-e": "emiliano-toretta",
   "rivero-c": "carlos-rivero",
@@ -54,8 +68,7 @@ Object.values(matchPlayerStats).forEach(
 
           /*
            * Si todavía no conocemos la relación
-           * con players.js, no lo incorporamos a
-           * las estadísticas de los jugadores.
+           * con players.js, no lo incorporamos.
            */
           if (!playerId) {
             return;
@@ -84,8 +97,7 @@ Object.values(matchPlayerStats).forEach(
 
           /*
            * Convertimos MM:SS a segundos para
-           * poder calcular también el promedio
-           * de minutos posteriormente.
+           * calcular el promedio de minutos.
            */
           if (player.minutes) {
             const [
