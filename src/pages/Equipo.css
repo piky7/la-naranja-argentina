@@ -1562,7 +1562,7 @@
 
 
 /* =========================================
-   MOBILE
+   MOBILE MODAL PARTIDO
    ========================================= */
 
 @media (max-width: 700px) {
@@ -1627,14 +1627,6 @@
    ========================================= */
 
 @media (max-width: 900px) {
-
-  /*
-   * Se mantienen las tres columnas:
-   *
-   * Jugadores
-   * Próximos partidos
-   * Resultados
-   */
 
   .team-columns {
     grid-template-columns:
@@ -1726,13 +1718,29 @@
 
 
   /*
-   * En celular sí pasamos a una sola columna.
+   * En celular:
+   *
+   * 1. Próximos partidos
+   * 2. Últimos partidos
+   * 3. Jugadores
    */
 
   .team-columns {
     grid-template-columns: 1fr;
 
     gap: 26px;
+  }
+
+  .team-columns .team-section:nth-child(1) {
+    order: 3;
+  }
+
+  .team-columns .team-section:nth-child(2) {
+    order: 1;
+  }
+
+  .team-columns .team-section:nth-child(3) {
+    order: 2;
   }
 
 
