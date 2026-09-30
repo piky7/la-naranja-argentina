@@ -1,15 +1,13 @@
 const fixture = [
   // SEPTIEMBRE 2026
 
-   
-
   ["2026-09-28", [
     ["lanus", "gimnasia"],
   ]],
 
   ["2026-09-30", [
-    ["argentino", "ferro"],
     ["penarol", "gimnasia"],
+    ["argentino", "ferro"],
     ["san-martin", "instituto"],
   ]],
 
@@ -668,6 +666,18 @@ export const matches = fixture.flatMap(([date, games]) =>
       homeTeam === "lanus" &&
       awayTeam === "gimnasia";
 
+    const isTodayMatch =
+      date === "2026-09-30";
+
+    const todayMatchTimes = {
+      "penarol-gimnasia": "20:30",
+      "argentino-ferro": "21:00",
+      "san-martin-instituto": "21:30",
+    };
+
+    const todayMatchKey =
+      `${homeTeam}-${awayTeam}`;
+
     return {
       id: `${date}-${homeTeam}-${awayTeam}-${index + 1}`,
 
@@ -679,7 +689,9 @@ export const matches = fixture.flatMap(([date, games]) =>
 
       time: isExampleMatch
         ? "22:05"
-        : null,
+        : isTodayMatch
+          ? todayMatchTimes[todayMatchKey] || null
+          : null,
 
       venue: isExampleMatch
         ? "Comodoro"
@@ -687,19 +699,21 @@ export const matches = fixture.flatMap(([date, games]) =>
 
       tv: isExampleMatch
         ? ["TyC Sports"]
-        : [],
+        : isTodayMatch
+          ? ["Basquet Pass"]
+          : [],
 
       status: isExampleMatch
-  ? "finished"
-  : "scheduled",
+        ? "finished"
+        : "scheduled",
 
-homeScore: isExampleMatch
-  ? 74
-  : null,
+      homeScore: isExampleMatch
+        ? 74
+        : null,
 
-awayScore: isExampleMatch
-  ? 92
-  : null,
+      awayScore: isExampleMatch
+        ? 92
+        : null,
     };
   })
 );
