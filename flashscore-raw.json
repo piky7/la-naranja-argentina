@@ -1,0 +1,175 @@
+{
+  "eventId": "6aymxfHr",
+  "homeTeam": "San Martín",
+  "awayTeam": "Instituto de Córdoba",
+  "homeScore": 73,
+  "awayScore": 81,
+  "status": "finished",
+  "tv": [
+    "Básquet Pass"
+  ],
+  "players": [
+    {
+      "name": "Colomb D.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "colomb-diego/Kb0PLuOa/",
+      "points": 2,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "19:37"
+    },
+    {
+      "name": "Gorosito J.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "gorosito-juan/SO3XJJhC/",
+      "points": 9,
+      "rebounds": 0,
+      "assists": 2,
+      "minutes": "18:40"
+    },
+    {
+      "name": "Giletto S.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "giletto-salvador/0pKa0IRb/",
+      "points": 8,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "34:23"
+    },
+    {
+      "name": "Garcia G.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "garcia-gaston/6PEwjM5c/",
+      "points": 11,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "21:07"
+    },
+    {
+      "name": "Moreira",
+      "teamCode": "SAN",
+      "flashscoreSlug": "moreira/OS2rz7Ig/",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "13:53"
+    },
+    {
+      "name": "Rearte M.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "rearte-mateo/Yaev84Ph/",
+      "points": 15,
+      "rebounds": 4,
+      "assists": 3,
+      "minutes": "20:34"
+    },
+    {
+      "name": "Ramallo G.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "ramallo-geronimo/Kxie9z1R/",
+      "points": 2,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "15:28"
+    },
+    {
+      "name": "Berra Fernandez L.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "berra-lautaro/rc6v7gd4/",
+      "points": 16,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "26:07"
+    },
+    {
+      "name": "Lugo S.",
+      "teamCode": "SAN",
+      "flashscoreSlug": "lugo-sebastian/U7g3SOe9/",
+      "points": 4,
+      "rebounds": 10,
+      "assists": 1,
+      "minutes": "30:10"
+    },
+    {
+      "name": "Pomare K.",
+      "teamCode": "INS",
+      "flashscoreSlug": "suarez-kadir/46tROQJI/",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "06:31"
+    },
+    {
+      "name": "Vildoza L.",
+      "teamCode": "INS",
+      "flashscoreSlug": "vildoza-leonardo/dlABjQd4/",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 4,
+      "minutes": "11:51"
+    },
+    {
+      "name": "Whelan G.",
+      "teamCode": "INS",
+      "flashscoreSlug": "whelan-gaston/pCoVSYhQ/",
+      "points": 7,
+      "rebounds": 7,
+      "assists": 4,
+      "minutes": "28:09"
+    },
+    {
+      "name": "Jones T.",
+      "teamCode": "INS",
+      "flashscoreSlug": "jones-torren/I3M2BsYm/",
+      "points": 9,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "27:38"
+    },
+    {
+      "name": "Andersson L.",
+      "teamCode": "INS",
+      "flashscoreSlug": "andersson-lucas/fB9sf15E/",
+      "points": 10,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "08:60"
+    },
+    {
+      "name": "Lugarini B.",
+      "teamCode": "INS",
+      "flashscoreSlug": "lugarini-bautista/Aw7SLKYt/",
+      "points": 10,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "28:16"
+    },
+    {
+      "name": "Corbalan J.",
+      "teamCode": "INS",
+      "flashscoreSlug": "corbalan-juan-pablo/rBXrtoQp/",
+      "points": 14,
+      "rebounds": 5,
+      "assists": 3,
+      "minutes": "31:48"
+    },
+    {
+      "name": "Aguerre F.",
+      "teamCode": "INS",
+      "flashscoreSlug": "aguerre-federico/0I85FkRD/",
+      "points": 12,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "24:05"
+    },
+    {
+      "name": "Carreras X.",
+      "teamCode": "INS",
+      "flashscoreSlug": "carreras-xavier/0xqJTkSG/",
+      "points": 19,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "32:41"
+    }
+  ]
+}

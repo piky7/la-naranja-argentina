@@ -518,6 +518,16 @@ export const players = [
 },
 
 {
+  id: "ben-stevens",
+  name: "Ben Stevens",
+  teamId: "gimnasia",
+  position: "Interno",
+  number: null,
+  nationality: null,
+  category: "E",
+},
+
+{
   id: "anyelo-cisneros",
   name: "Anyelo Cisneros",
   teamId: "gimnasia",
