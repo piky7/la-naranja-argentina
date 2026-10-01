@@ -38,15 +38,42 @@ function Home() {
   };
 
   const getMatchStats = (match) => {
-    if (matchPlayerStats[match.id]) {
-      return matchPlayerStats[match.id];
-    }
+  if (!match) {
+    return null;
+  }
 
-    const fallbackKey =
-      `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  // 1. Buscar por ID directo del partido
+  const directStats =
+    matchPlayerStats[match.id];
 
-    return matchPlayerStats[fallbackKey] || null;
-  };
+  if (directStats) {
+    return directStats;
+  }
+
+  // 2. Buscar por fecha + local + visitante
+  const normalizedId =
+    `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+
+  const normalizedStats =
+    matchPlayerStats[normalizedId];
+
+  if (normalizedStats) {
+    return normalizedStats;
+  }
+
+  // 3. Buscar por local + visitante
+  const simpleId =
+    `${match.homeTeam}-${match.awayTeam}`;
+
+  const simpleStats =
+    matchPlayerStats[simpleId];
+
+  if (simpleStats) {
+    return simpleStats;
+  }
+
+  return null;
+};
 
   const changeDate = (amount) => {
     const [year, month, day] = selectedDate
@@ -1070,38 +1097,45 @@ function Home() {
                     selectedMatch
                   )?.[selectedMatchTeam] ||
                   []
-                ).map(
-                  (player) => (
-
-                    <div
-                      className="match-stats-player-row"
-                      key={player.id}
-                    >
-
-                      <strong>
-                        {player.name}
-                      </strong>
-
-                      <span>
-                        {player.points}
-                      </span>
-
-                      <span>
-                        {player.rebounds}
-                      </span>
-
-                      <span>
-                        {player.assists}
-                      </span>
-
-                      <span>
-                        {player.minutes}
-                      </span>
-
-                    </div>
-
+                )
+                  .slice()
+                  .sort(
+                    (a, b) =>
+                      (Number(b.points) || 0) -
+                      (Number(a.points) || 0)
                   )
-                )}
+                  .map(
+                    (player) => (
+
+                      <div
+                        className="match-stats-player-row"
+                        key={player.id}
+                      >
+
+                        <strong>
+                          {player.name}
+                        </strong>
+
+                        <span>
+                          {player.points}
+                        </span>
+
+                        <span>
+                          {player.rebounds}
+                        </span>
+
+                        <span>
+                          {player.assists}
+                        </span>
+
+                        <span>
+                          {player.minutes}
+                        </span>
+
+                      </div>
+
+                    )
+                  )}
 
               </div>
 
@@ -1205,8 +1239,7 @@ function Home() {
                 <span>NÚMERO</span>
 
                 <strong>
-                  {selectedPlayer.number ??
-                    "—"}
+                  {selectedPlayer.number ?? "—"}
                 </strong>
               </div>
 

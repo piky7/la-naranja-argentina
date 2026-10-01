@@ -176,13 +176,30 @@ function getMatchStats(match) {
     return null;
   }
 
+  // Primero intentamos encontrar el partido por su ID.
+  if (matchPlayerStats[match.id]) {
+    return matchPlayerStats[match.id];
+  }
+
+  // Si no existe, usamos la clave automática:
+  // fecha-local-visitante
   const matchKey =
     `${match.date}-${match.homeTeam}-${match.awayTeam}`;
 
-  return (
-    matchPlayerStats[matchKey] ||
-    null
-  );
+  if (matchPlayerStats[matchKey]) {
+    return matchPlayerStats[matchKey];
+  }
+
+  // Compatibilidad con partidos que fueron guardados
+  // sin la fecha.
+  const legacyKey =
+    `${match.homeTeam}-${match.awayTeam}`;
+
+  if (matchPlayerStats[legacyKey]) {
+    return matchPlayerStats[legacyKey];
+  }
+
+  return null;
 }
 
 
@@ -1287,45 +1304,52 @@ function Equipo() {
                       selectedMatchStats[
                         selectedMatch.homeTeam
                       ] || []
-                    ).map(
-                      (player) => (
-
-                        <div
-                          className="match-stat-player"
-                          key={player.id}
-                        >
-
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              player.points
-                            )}
-                          </span>
-
-                          <span>
-                            {formatStat(
-                              player.rebounds
-                            )}
-                          </span>
-
-                          <span>
-                            {formatStat(
-                              player.assists
-                            )}
-                          </span>
-
-                          <span>
-                            {player.minutes ||
-                              "—"}
-                          </span>
-
-                        </div>
-
+                    )
+                      .slice()
+                      .sort(
+                        (a, b) =>
+                          (Number(b.points) || 0) -
+                          (Number(a.points) || 0)
                       )
-                    )}
+                      .map(
+                        (player) => (
+
+                          <div
+                            className="match-stat-player"
+                            key={player.id}
+                          >
+
+                            <strong>
+                              {player.name}
+                            </strong>
+
+                            <span>
+                              {formatStat(
+                                player.points
+                              )}
+                            </span>
+
+                            <span>
+                              {formatStat(
+                                player.rebounds
+                              )}
+                            </span>
+
+                            <span>
+                              {formatStat(
+                                player.assists
+                              )}
+                            </span>
+
+                            <span>
+                              {player.minutes ||
+                                "—"}
+                            </span>
+
+                          </div>
+
+                        )
+                      )}
 
                   </div>
 
@@ -1397,45 +1421,52 @@ function Equipo() {
                       selectedMatchStats[
                         selectedMatch.awayTeam
                       ] || []
-                    ).map(
-                      (player) => (
-
-                        <div
-                          className="match-stat-player"
-                          key={player.id}
-                        >
-
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              player.points
-                            )}
-                          </span>
-
-                          <span>
-                            {formatStat(
-                              player.rebounds
-                            )}
-                          </span>
-
-                          <span>
-                            {formatStat(
-                              player.assists
-                            )}
-                          </span>
-
-                          <span>
-                            {player.minutes ||
-                              "—"}
-                          </span>
-
-                        </div>
-
+                    )
+                      .slice()
+                      .sort(
+                        (a, b) =>
+                          (Number(b.points) || 0) -
+                          (Number(a.points) || 0)
                       )
-                    )}
+                      .map(
+                        (player) => (
+
+                          <div
+                            className="match-stat-player"
+                            key={player.id}
+                          >
+
+                            <strong>
+                              {player.name}
+                            </strong>
+
+                            <span>
+                              {formatStat(
+                                player.points
+                              )}
+                            </span>
+
+                            <span>
+                              {formatStat(
+                                player.rebounds
+                              )}
+                            </span>
+
+                            <span>
+                              {formatStat(
+                                player.assists
+                              )}
+                            </span>
+
+                            <span>
+                              {player.minutes ||
+                                "—"}
+                            </span>
+
+                          </div>
+
+                        )
+                      )}
 
                   </div>
 

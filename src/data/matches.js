@@ -1,3 +1,5 @@
+import { matchResults } from "./matchResults";
+
 const fixture = [
   // SEPTIEMBRE 2026
 
@@ -678,8 +680,27 @@ export const matches = fixture.flatMap(([date, games]) =>
     const todayMatchKey =
       `${homeTeam}-${awayTeam}`;
 
+    /*
+     * RESULTADO AUTOMÁTICO
+     *
+     * La automatización genera las claves con:
+     *
+     * fecha-local-visitante
+     *
+     * Ejemplo:
+     *
+     * 2026-09-30-penarol-gimnasia
+     */
+
+    const resultKey =
+      `${date}-${homeTeam}-${awayTeam}`;
+
+    const automaticResult =
+      matchResults[resultKey];
+
     return {
-      id: `${date}-${homeTeam}-${awayTeam}-${index + 1}`,
+      id:
+        `${date}-${homeTeam}-${awayTeam}-${index + 1}`,
 
       date,
 
@@ -687,33 +708,60 @@ export const matches = fixture.flatMap(([date, games]) =>
 
       awayTeam,
 
-      time: isExampleMatch
-        ? "22:05"
-        : isTodayMatch
-          ? todayMatchTimes[todayMatchKey] || null
-          : null,
+      time:
+        automaticResult?.time ??
+        (
+          isExampleMatch
+            ? "22:05"
+            : isTodayMatch
+              ? todayMatchTimes[
+                  todayMatchKey
+                ] || null
+              : null
+        ),
 
-      venue: isExampleMatch
-        ? "Comodoro"
-        : null,
+      venue:
+        automaticResult?.venue ??
+        (
+          isExampleMatch
+            ? "Comodoro"
+            : null
+        ),
 
-      tv: isExampleMatch
-        ? ["TyC Sports"]
-        : isTodayMatch
-          ? ["Basquet Pass"]
-          : [],
+      tv:
+        automaticResult?.tv?.length
+          ? automaticResult.tv
+          : (
+              isExampleMatch
+                ? ["TyC Sports"]
+                : isTodayMatch
+                  ? ["Basquet Pass"]
+                  : []
+            ),
 
-      status: isExampleMatch
-        ? "finished"
-        : "scheduled",
+      status:
+        automaticResult?.status ??
+        (
+          isExampleMatch
+            ? "finished"
+            : "scheduled"
+        ),
 
-      homeScore: isExampleMatch
-        ? 74
-        : null,
+      homeScore:
+        automaticResult?.homeScore ??
+        (
+          isExampleMatch
+            ? 74
+            : null
+        ),
 
-      awayScore: isExampleMatch
-        ? 92
-        : null,
+      awayScore:
+        automaticResult?.awayScore ??
+        (
+          isExampleMatch
+            ? 92
+            : null
+        ),
     };
   })
 );

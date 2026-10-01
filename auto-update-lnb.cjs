@@ -48,6 +48,9 @@ function main() {
 
   // 1. Descubrir nuevamente los partidos
   runScript("discover-mids.cjs");
+  runScript(
+  "update-match-results.cjs"
+);
 
   // 2. Cargar partidos terminados
   const matches = loadFinishedMatches();
