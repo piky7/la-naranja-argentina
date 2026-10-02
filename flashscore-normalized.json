@@ -1,7 +1,7 @@
 {
-  "matchId": "Lanus-gimnasia",
+  "matchId": "lanus-gimnasia",
   "eventId": "xQfNLYW1",
-  "homeTeam": "Lanus",
+  "homeTeam": "lanus",
   "awayTeam": "gimnasia",
   "homeScore": 74,
   "awayScore": 92,
@@ -137,6 +137,15 @@
       "minutes": "19:30"
     },
     {
+      "id": "natalio-santacroce",
+      "name": "Santacroce N.",
+      "teamId": "gimnasia",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "01:51"
+    },
+    {
       "id": "marcos-chacon",
       "name": "Chacon M.",
       "teamId": "gimnasia",
@@ -164,6 +173,15 @@
       "minutes": "15:06"
     },
     {
+      "id": "ciro-melo",
+      "name": "Melo C.",
+      "teamId": "gimnasia",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "02:57"
+    },
+    {
       "id": "ben-stevens",
       "name": "Stevens B.",
       "teamId": "gimnasia",
@@ -182,16 +200,5 @@
       "minutes": "17:31"
     }
   ],
-  "unmappedPlayers": [
-    {
-      "name": "Santacroce N.",
-      "teamCode": "NAS",
-      "teamId": "gimnasia"
-    },
-    {
-      "name": "Melo C.",
-      "teamCode": "NAS",
-      "teamId": "gimnasia"
-    }
-  ]
+  "unmappedPlayers": []
 }

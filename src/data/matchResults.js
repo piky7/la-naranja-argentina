@@ -1,4 +1,12 @@
 export const matchResults = {
+  "2026-10-01-olimpico-platense": {
+    status: "finished",
+    homeScore: 74,
+    awayScore: 82,
+    time: null,
+    venue: null,
+    tv: [],
+  },
   "2026-09-30-san-martin-instituto": {
     status: "finished",
     homeScore: 73,

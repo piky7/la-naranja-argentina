@@ -49,6 +49,9 @@ function main() {
   // 1. Descubrir nuevamente los partidos
   runScript("discover-mids.cjs");
   runScript(
+  "sync-fixture.cjs"
+);
+  runScript(
   "update-match-results.cjs"
 );
 

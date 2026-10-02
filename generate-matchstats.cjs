@@ -31,19 +31,166 @@ function main() {
     throw new Error("El partido no tiene jugadores.");
   }
 
-  const matchId = match.matchId;
+  /*
+    --------------------------------------------------
+    IDENTIFICAR LOS TEAM ID REALES DE LNA
+    --------------------------------------------------
+
+    El normalizador guarda los jugadores con:
+
+    player.teamId
+
+    Ejemplo:
+
+    san-martin
+    instituto
+
+    Mientras que Flashscore puede devolver:
+
+    San Martín
+    Instituto de Córdoba
+
+    Por eso NO debemos comparar directamente
+    player.teamId con match.awayTeam.
+  */
+
+  function getTeamIdForMatchTeam(
+    matchTeam,
+    players,
+    expectedTeamPosition
+  ) {
+    /*
+      1. Primero intentamos encontrar jugadores
+         cuyo teamId coincida directamente.
+    */
+
+    const directPlayers =
+      players.filter(
+        (player) =>
+          player.teamId === matchTeam
+      );
+
+    if (
+      directPlayers.length > 0
+    ) {
+      return matchTeam;
+    }
+
+    /*
+      2. Si no coincide directamente,
+         buscamos los teamId disponibles.
+
+         Esto permite detectar:
+
+         "Instituto de Córdoba"
+         →
+         "instituto"
+    */
+
+    const teamCounts = {};
+
+    players.forEach(
+      (player) => {
+        if (!player.teamId) {
+          return;
+        }
+
+        teamCounts[player.teamId] =
+          (teamCounts[player.teamId] || 0) + 1;
+      }
+    );
+
+    const availableTeams =
+      Object.entries(teamCounts)
+        .sort(
+          (a, b) =>
+            b[1] - a[1]
+        )
+        .map(
+          ([teamId]) =>
+            teamId
+        );
+
+    /*
+      Si solamente hay un equipo disponible,
+      lo usamos como respaldo.
+    */
+
+    if (
+      availableTeams.length === 1
+    ) {
+      return availableTeams[0];
+    }
+
+    /*
+      Si hay varios equipos, usamos
+      la posición esperada.
+
+      El primer teamId corresponde al local
+      y el segundo al visitante.
+    */
+
+    if (
+      expectedTeamPosition <
+      availableTeams.length
+    ) {
+      return availableTeams[
+        expectedTeamPosition
+      ];
+    }
+
+    return null;
+  }
+
+  const homeTeamId =
+    getTeamIdForMatchTeam(
+      match.homeTeam,
+      match.players,
+      0
+    );
+
+  const awayTeamId =
+    getTeamIdForMatchTeam(
+      match.awayTeam,
+      match.players,
+      1
+    );
+
+  if (!homeTeamId) {
+    throw new Error(
+      `No se pudo identificar el teamId LNA del local: ${match.homeTeam}`
+    );
+  }
+
+  if (!awayTeamId) {
+    throw new Error(
+      `No se pudo identificar el teamId LNA del visitante: ${match.awayTeam}`
+    );
+  }
+
+  /*
+    --------------------------------------------------
+    FILTRAR JUGADORES
+    --------------------------------------------------
+  */
 
   const homePlayers =
     match.players.filter(
       (player) =>
-        player.teamId === match.homeTeam
+        player.teamId === homeTeamId
     );
 
   const awayPlayers =
     match.players.filter(
       (player) =>
-        player.teamId === match.awayTeam
+        player.teamId === awayTeamId
     );
+
+  /*
+    --------------------------------------------------
+    FORMATEAR JUGADORES
+    --------------------------------------------------
+  */
 
   function formatPlayers(players) {
     return players
@@ -60,12 +207,27 @@ function main() {
       .join(",\n");
   }
 
+  /*
+    --------------------------------------------------
+    MATCH ID
+    --------------------------------------------------
+
+    Usamos los IDs LNA reales.
+
+    Ejemplo:
+
+    san-martin-instituto
+  */
+
+  const matchId =
+    `${homeTeamId}-${awayTeamId}`;
+
   const block = `  "${matchId}": {
-    "${match.homeTeam}": [
+    "${homeTeamId}": [
 ${formatPlayers(homePlayers)}
     ],
 
-    "${match.awayTeam}": [
+    "${awayTeamId}": [
 ${formatPlayers(awayPlayers)}
     ],
   },`;
@@ -81,11 +243,21 @@ ${formatPlayers(awayPlayers)}
   console.log("");
 
   console.log(
-    `Jugadores ${match.homeTeam}: ${homePlayers.length}`
+    `Equipo local LNA: ${homeTeamId}`
   );
 
   console.log(
-    `Jugadores ${match.awayTeam}: ${awayPlayers.length}`
+    `Equipo visitante LNA: ${awayTeamId}`
+  );
+
+  console.log("");
+
+  console.log(
+    `Jugadores ${homeTeamId}: ${homePlayers.length}`
+  );
+
+  console.log(
+    `Jugadores ${awayTeamId}: ${awayPlayers.length}`
   );
 
   console.log("");

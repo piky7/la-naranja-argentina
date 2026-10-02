@@ -516,7 +516,23 @@ export const players = [
   nationality: "Argentina",
   category: "U21",
 },
+{
+  id: "natalio-santacroce",
+  name: "Natalio Santacroce",
+  teamId: "gimnasia",
+  position: "Alero",
+  number: 4,
+  nationality: "Argentina",
+},
 
+{
+  id: "ciro-melo",
+  name: "Ciro Melo",
+  teamId: "gimnasia",
+  position: "Escolta",
+  number: 13,
+  nationality: "Argentina",
+},
 {
   id: "ben-stevens",
   name: "Ben Stevens",
@@ -702,6 +718,15 @@ export const players = [
 {
   id: "juan-pablo-corbalan",
   name: "Juan Pablo Corbalán",
+  teamId: "instituto",
+  position: "Escolta",
+  number: null,
+  nationality: "Argentina",
+},
+
+{
+  id: "lucas-andersson",
+  name: "Lucas Andersson",
   teamId: "instituto",
   position: "Escolta",
   number: null,

@@ -1,8 +1,23 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 50,
-  "finishedMatches": 4,
+  "finishedMatches": 5,
   "matches": [
+    {
+      "eventId": "EPvezYoe",
+      "homeTeam": "olimpico",
+      "homeName": "Olimpico",
+      "awayTeam": "platense",
+      "awayName": "Platense",
+      "homeScore": 74,
+      "awayScore": 82,
+      "status": "finished",
+      "timestamp": 1790902800,
+      "homeSlug": "olimpico",
+      "awaySlug": "ca-platense",
+      "homeId": "ERbTiFhJ",
+      "awayId": "SIolf8Y3"
+    },
     {
       "eventId": "6aymxfHr",
       "homeTeam": "san-martin",
@@ -62,21 +77,6 @@
       "awaySlug": "gimnasia",
       "homeId": "zy0PhewD",
       "awayId": "Cn0pHIpQ"
-    },
-    {
-      "eventId": "EPvezYoe",
-      "homeTeam": "olimpico",
-      "homeName": "Olimpico",
-      "awayTeam": "platense",
-      "awayName": "Platense",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "timestamp": 1790901000,
-      "homeSlug": "olimpico",
-      "awaySlug": "ca-platense",
-      "homeId": "ERbTiFhJ",
-      "awayId": "SIolf8Y3"
     },
     {
       "eventId": "Mkr3YBG7",
@@ -755,6 +755,21 @@
     }
   ],
   "finished": [
+    {
+      "eventId": "EPvezYoe",
+      "homeTeam": "olimpico",
+      "homeName": "Olimpico",
+      "awayTeam": "platense",
+      "awayName": "Platense",
+      "homeScore": 74,
+      "awayScore": 82,
+      "status": "finished",
+      "timestamp": 1790902800,
+      "homeSlug": "olimpico",
+      "awaySlug": "ca-platense",
+      "homeId": "ERbTiFhJ",
+      "awayId": "SIolf8Y3"
+    },
     {
       "eventId": "6aymxfHr",
       "homeTeam": "san-martin",

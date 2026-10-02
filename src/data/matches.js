@@ -1,4 +1,5 @@
 import { matchResults } from "./matchResults";
+import { flashscoreSchedule } from "./flashscoreSchedule";
 
 const fixture = [
   // SEPTIEMBRE 2026
@@ -668,56 +669,59 @@ export const matches = fixture.flatMap(([date, games]) =>
       homeTeam === "lanus" &&
       awayTeam === "gimnasia";
 
-    const isTodayMatch =
-      date === "2026-09-30";
-
-    const todayMatchTimes = {
-      "penarol-gimnasia": "20:30",
-      "argentino-ferro": "21:00",
-      "san-martin-instituto": "21:30",
-    };
-
-    const todayMatchKey =
+    const matchKey =
       `${homeTeam}-${awayTeam}`;
+
+    /*
+     * DATOS DE FLASHSCORE
+     *
+     * Si Flashscore conoce la fecha/hora,
+     * esos datos tienen prioridad sobre
+     * el fixture manual.
+     */
+    const flashscoreMatch =
+      flashscoreSchedule[matchKey];
+
+    const effectiveDate =
+      flashscoreMatch?.date ??
+      date;
 
     /*
      * RESULTADO AUTOMÁTICO
      *
-     * La automatización genera las claves con:
-     *
-     * fecha-local-visitante
-     *
-     * Ejemplo:
-     *
-     * 2026-09-30-penarol-gimnasia
+     * Se busca usando la fecha efectiva.
      */
-
     const resultKey =
-      `${date}-${homeTeam}-${awayTeam}`;
+      `${effectiveDate}-${homeTeam}-${awayTeam}`;
 
     const automaticResult =
       matchResults[resultKey];
 
     return {
       id:
-        `${date}-${homeTeam}-${awayTeam}-${index + 1}`,
+        `${effectiveDate}-${homeTeam}-${awayTeam}-${index + 1}`,
 
-      date,
+      date:
+        effectiveDate,
 
       homeTeam,
 
       awayTeam,
 
+      /*
+       * PRIORIDAD:
+       * 1. Resultado automático
+       * 2. Hora de Flashscore
+       * 3. Ejemplo antiguo
+       * 4. null → la interfaz muestra VS
+       */
       time:
         automaticResult?.time ??
+        flashscoreMatch?.time ??
         (
           isExampleMatch
             ? "22:05"
-            : isTodayMatch
-              ? todayMatchTimes[
-                  todayMatchKey
-                ] || null
-              : null
+            : null
         ),
 
       venue:
@@ -734,9 +738,7 @@ export const matches = fixture.flatMap(([date, games]) =>
           : (
               isExampleMatch
                 ? ["TyC Sports"]
-                : isTodayMatch
-                  ? ["Basquet Pass"]
-                  : []
+                : []
             ),
 
       status:
