@@ -26,7 +26,7 @@ export const flashscoreSchedule = {
   },
   "regatas-instituto": {
     "date": "2026-10-02",
-    "time": "21:30",
+    "time": "21:00",
     "eventId": "Mkr3YBG7"
   },
   "quimsa-platense": {
@@ -36,12 +36,12 @@ export const flashscoreSchedule = {
   },
   "gimnasia-la-union": {
     "date": "2026-10-04",
-    "time": "21:00",
+    "time": "20:30",
     "eventId": "00TdfgwR"
   },
   "ferro-regatas": {
-    "date": "2026-10-05",
-    "time": "17:00",
+    "date": "2027-01-12",
+    "time": "18:00",
     "eventId": "4dIzmBV0"
   },
   "quimsa-atenas": {
@@ -61,12 +61,12 @@ export const flashscoreSchedule = {
   },
   "boca-obera": {
     "date": "2026-10-07",
-    "time": "20:30",
+    "time": "21:05",
     "eventId": "KtEa3WFs"
   },
   "olimpico-atenas": {
     "date": "2026-10-07",
-    "time": "21:30",
+    "time": "22:00",
     "eventId": "OAST8hhK"
   },
   "racing-chivilcoy-san-martin": {
@@ -248,5 +248,310 @@ export const flashscoreSchedule = {
     "date": "2026-10-31",
     "time": "18:00",
     "eventId": "OxBumvsI"
+  },
+  "atenas-racing-chivilcoy": {
+    "date": "2026-11-01",
+    "time": "18:00",
+    "eventId": "6FmvVEDl"
+  },
+  "instituto-gimnasia": {
+    "date": "2026-11-01",
+    "time": "18:00",
+    "eventId": "vTonThr1"
+  },
+  "quimsa-penarol": {
+    "date": "2026-11-02",
+    "time": "18:00",
+    "eventId": "ngkfRWCD"
+  },
+  "atenas-gimnasia": {
+    "date": "2026-11-03",
+    "time": "18:00",
+    "eventId": "GSVJshcf"
+  },
+  "independiente-oliva-racing-chivilcoy": {
+    "date": "2026-11-03",
+    "time": "18:00",
+    "eventId": "82SBqESs"
+  },
+  "la-union-argentino": {
+    "date": "2026-11-03",
+    "time": "18:00",
+    "eventId": "CWttkz5K"
+  },
+  "olimpico-lanus": {
+    "date": "2026-11-04",
+    "time": "18:00",
+    "eventId": "OhZRuWR6"
+  },
+  "independiente-oliva-gimnasia": {
+    "date": "2026-11-05",
+    "time": "18:00",
+    "eventId": "23KL1DlQ"
+  },
+  "instituto-racing-chivilcoy": {
+    "date": "2026-11-05",
+    "time": "18:00",
+    "eventId": "YoBidiCm"
+  },
+  "obera-argentino": {
+    "date": "2026-11-05",
+    "time": "18:00",
+    "eventId": "d6XZwAdJ"
+  },
+  "ferro-san-martin": {
+    "date": "2026-11-06",
+    "time": "18:00",
+    "eventId": "6a9afVt0"
+  },
+  "quimsa-lanus": {
+    "date": "2026-11-06",
+    "time": "18:00",
+    "eventId": "EPC7h9BC"
+  },
+  "san-lorenzo-regatas": {
+    "date": "2026-11-06",
+    "time": "18:00",
+    "eventId": "6XUEjmtP"
+  },
+  "boca-la-union": {
+    "date": "2026-11-07",
+    "time": "18:00",
+    "eventId": "OCiMfaht"
+  },
+  "quimsa-instituto": {
+    "date": "2026-11-08",
+    "time": "18:00",
+    "eventId": "CGdpkeMH"
+  },
+  "racing-chivilcoy-regatas": {
+    "date": "2026-11-08",
+    "time": "18:00",
+    "eventId": "v3bxiHi5"
+  },
+  "san-lorenzo-san-martin": {
+    "date": "2026-11-08",
+    "time": "18:00",
+    "eventId": "WxeUhwNh"
+  },
+  "lanus-la-union": {
+    "date": "2026-11-09",
+    "time": "18:00",
+    "eventId": "bXfhmZjU"
+  },
+  "argentino-regatas": {
+    "date": "2026-11-10",
+    "time": "18:00",
+    "eventId": "UZyI3fyB"
+  },
+  "boca-san-martin": {
+    "date": "2026-11-10",
+    "time": "18:00",
+    "eventId": "M9Y95G6b"
+  },
+  "olimpico-instituto": {
+    "date": "2026-11-10",
+    "time": "18:00",
+    "eventId": "ldz27xxn"
+  },
+  "platense-penarol": {
+    "date": "2026-11-11",
+    "time": "18:00",
+    "eventId": "Y53konLq"
+  },
+  "atenas-san-lorenzo": {
+    "date": "2026-11-12",
+    "time": "18:00",
+    "eventId": "6J1cqQkd"
+  },
+  "ferro-penarol": {
+    "date": "2026-11-13",
+    "time": "18:00",
+    "eventId": "YPgq7Ts3"
+  },
+  "gimnasia-platense": {
+    "date": "2026-11-14",
+    "time": "18:00",
+    "eventId": "E3ea3osS"
+  },
+  "independiente-oliva-san-lorenzo": {
+    "date": "2026-11-14",
+    "time": "18:00",
+    "eventId": "tjci57CF"
+  },
+  "argentino-lanus": {
+    "date": "2026-11-15",
+    "time": "18:00",
+    "eventId": "A7nOJ6R8"
+  },
+  "la-union-atenas": {
+    "date": "2026-11-15",
+    "time": "18:00",
+    "eventId": "AmdUcP4k"
+  },
+  "san-martin-quimsa": {
+    "date": "2026-11-15",
+    "time": "18:00",
+    "eventId": "IDaxd3Z1"
+  },
+  "instituto-boca": {
+    "date": "2027-01-10",
+    "time": "18:00",
+    "eventId": "SQsI8tJ7"
+  },
+  "lanus-ferro": {
+    "date": "2027-01-10",
+    "time": "18:00",
+    "eventId": "K0vAA2le"
+  },
+  "penarol-ferro": {
+    "date": "2027-01-10",
+    "time": "18:00",
+    "eventId": "IXkWHpdL"
+  },
+  "platense-san-martin": {
+    "date": "2027-01-10",
+    "time": "18:00",
+    "eventId": "nmt2COJr"
+  },
+  "gimnasia-san-martin": {
+    "date": "2027-01-12",
+    "time": "18:00",
+    "eventId": "SpYBUNuR"
+  },
+  "independiente-oliva-boca": {
+    "date": "2027-01-12",
+    "time": "18:00",
+    "eventId": "fXZ3WqBE"
+  },
+  "la-union-instituto": {
+    "date": "2027-01-13",
+    "time": "18:00",
+    "eventId": "xKJsP13l"
+  },
+  "atenas-boca": {
+    "date": "2027-01-14",
+    "time": "18:00",
+    "eventId": "IcLcLJ2D"
+  },
+  "independiente-oliva-penarol": {
+    "date": "2027-01-14",
+    "time": "18:00",
+    "eventId": "ppNkNuY0"
+  },
+  "obera-instituto": {
+    "date": "2027-01-15",
+    "time": "18:00",
+    "eventId": "p4DqqNfK"
+  },
+  "racing-chivilcoy-olimpico": {
+    "date": "2027-01-15",
+    "time": "18:00",
+    "eventId": "0UIEw1Is"
+  },
+  "atenas-penarol": {
+    "date": "2027-01-16",
+    "time": "18:00",
+    "eventId": "YsHMyumf"
+  },
+  "argentino-olimpico": {
+    "date": "2027-01-17",
+    "time": "18:00",
+    "eventId": "t8KUZIH6"
+  },
+  "instituto-penarol": {
+    "date": "2027-01-18",
+    "time": "18:00",
+    "eventId": "lYNxYdnJ"
+  },
+  "platense-regatas": {
+    "date": "2027-01-18",
+    "time": "18:00",
+    "eventId": "v1ZmuEgn"
+  },
+  "boca-lanus": {
+    "date": "2027-01-19",
+    "time": "18:00",
+    "eventId": "Ysy4yWhB"
+  },
+  "san-lorenzo-la-union": {
+    "date": "2027-01-19",
+    "time": "18:00",
+    "eventId": "QHXewhOb"
+  },
+  "gimnasia-regatas": {
+    "date": "2027-01-20",
+    "time": "18:00",
+    "eventId": "xvQsUmoo"
+  },
+  "quimsa-independiente-oliva": {
+    "date": "2027-01-20",
+    "time": "18:00",
+    "eventId": "6eZBZ9NN"
+  },
+  "ferro-la-union": {
+    "date": "2027-01-21",
+    "time": "18:00",
+    "eventId": "2HHTiiwh"
+  },
+  "olimpico-independiente-oliva": {
+    "date": "2027-01-22",
+    "time": "18:00",
+    "eventId": "zVFyjV74"
+  },
+  "obera-san-martin": {
+    "date": "2027-01-23",
+    "time": "18:00",
+    "eventId": "reJql9xH"
+  },
+  "penarol-argentino": {
+    "date": "2027-01-23",
+    "time": "18:00",
+    "eventId": "jLMinm7T"
+  },
+  "platense-argentino": {
+    "date": "2027-01-23",
+    "time": "18:00",
+    "eventId": "ni8NtRUj"
+  },
+  "boca-racing-chivilcoy": {
+    "date": "2027-01-25",
+    "time": "18:00",
+    "eventId": "vaA84UMc"
+  },
+  "ferro-argentino": {
+    "date": "2027-01-25",
+    "time": "18:00",
+    "eventId": "nPDG28iA"
+  },
+  "instituto-atenas": {
+    "date": "2027-01-26",
+    "time": "18:00",
+    "eventId": "KxCO0nMM"
+  },
+  "la-union-san-martin": {
+    "date": "2027-01-26",
+    "time": "18:00",
+    "eventId": "dI52g4Ed"
+  },
+  "obera-platense": {
+    "date": "2027-01-26",
+    "time": "18:00",
+    "eventId": "jL2feQqp"
+  },
+  "lanus-racing-chivilcoy": {
+    "date": "2027-01-27",
+    "time": "18:00",
+    "eventId": "lChlH763"
+  },
+  "la-union-platense": {
+    "date": "2027-01-28",
+    "time": "18:00",
+    "eventId": "42a4DP5S"
+  },
+  "regatas-ferro": {
+    "date": "2027-01-28",
+    "time": "18:00",
+    "eventId": "dxddFoyG"
   }
 };
