@@ -2243,3 +2243,508 @@
   color: var(--color-primary);
   letter-spacing: 0.2px;
 }
+
+/* =========================================
+   JUGADORES DESTACADOS - POPUP PARTIDO
+   ========================================= */
+
+.match-highlighted-section {
+  padding: 18px 20px;
+
+  background-color: #202020;
+
+  border-top: 1px solid #3d3d3d;
+  border-bottom: 1px solid #3d3d3d;
+}
+
+
+/* Título */
+
+.match-highlighted-title {
+  margin-bottom: 14px;
+
+  text-align: center;
+}
+
+.match-highlighted-title > span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--color-primary);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+.match-highlighted-title h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+
+/* =========================================
+   EQUIPOS
+   ========================================= */
+
+.match-highlighted-teams {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+.match-highlighted-team {
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid #3d3d3d;
+
+  border-radius: var(--radius-small);
+
+  background-color: #292929;
+}
+
+
+/* Encabezado del equipo */
+
+.match-highlighted-team-header {
+  min-height: 44px;
+
+  padding: 8px 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  background-color: #242424;
+
+  border-bottom: 1px solid #3d3d3d;
+}
+
+.match-highlighted-team-header img {
+  width: 24px;
+  height: 24px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+}
+
+.match-highlighted-team-header strong {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   CATEGORÍAS
+   ========================================= */
+
+.match-highlighted-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 0;
+}
+
+.match-highlighted-category {
+  min-width: 0;
+
+  padding: 9px 7px;
+
+  border-right: 1px solid #3d3d3d;
+}
+
+.match-highlighted-category:last-child {
+  border-right: 0;
+}
+
+.match-highlighted-category > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--color-primary);
+
+  font-size: 7px;
+  font-weight: 800;
+
+  letter-spacing: 0.6px;
+
+  text-align: center;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================
+   JUGADORES
+   ========================================= */
+
+.match-highlighted-player {
+  width: 100%;
+
+  min-width: 0;
+
+  padding: 6px 3px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 3px;
+
+  border: 0;
+
+  border-radius: 4px;
+
+  background-color: transparent;
+
+  color: #ffffff;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease;
+}
+
+.match-highlighted-player:hover {
+  background-color: #353535;
+}
+
+.match-highlighted-player strong {
+  width: 100%;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.match-highlighted-player span {
+  color: var(--color-primary);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+  .match-highlighted-section {
+    padding: 16px 12px;
+  }
+
+  .match-highlighted-teams {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  .match-highlighted-team-header {
+    min-height: 42px;
+  }
+
+  .match-highlighted-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .match-highlighted-category {
+    padding:
+      8px
+      5px;
+  }
+
+  .match-highlighted-category > span {
+    font-size: 7px;
+  }
+
+  .match-highlighted-player strong {
+    font-size: 8px;
+  }
+
+  .match-highlighted-player span {
+    font-size: 8px;
+  }
+
+}
+
+/* =========================================
+   POPUP - PRÓXIMO PARTIDO
+   HORARIO + TV
+========================================= */
+
+.match-modal-schedule {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.match-modal-schedule strong {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.match-modal-tv {
+  font-size: 12px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: 0.2px;
+}
+
+
+/* =========================================
+   POPUP - JUGADORES DESTACADOS
+========================================= */
+
+.match-highlighted-section {
+  padding: 20px 22px 24px;
+}
+
+.match-highlighted-title {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.match-highlighted-title span {
+  display: block;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.match-highlighted-title h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.1;
+  font-weight: 900;
+  color: #fff;
+}
+
+.match-highlighted-teams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.match-highlighted-team {
+  border: 1px solid var(--sports-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.match-highlighted-team-header {
+  min-height: 54px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-bottom: 1px solid var(--sports-border);
+}
+
+.match-highlighted-team-header img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.match-highlighted-team-header strong {
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+}
+
+.match-highlighted-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.match-highlighted-category {
+  min-width: 0;
+  padding: 13px 10px 15px;
+  text-align: center;
+  border-right: 1px solid var(--sports-border);
+}
+
+.match-highlighted-category:last-child {
+  border-right: none;
+}
+
+.match-highlighted-category > span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+.match-highlighted-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 4px 2px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.match-highlighted-player:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.match-highlighted-player strong {
+  display: block;
+  max-width: 100%;
+  font-size: 12px;
+  line-height: 1.15;
+  font-weight: 900;
+  color: #fff;
+}
+
+.match-highlighted-player span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .match-modal-schedule strong {
+    font-size: 28px;
+  }
+
+  .match-modal-tv {
+    font-size: 11px;
+  }
+
+  .match-highlighted-section {
+    padding: 17px 12px 20px;
+  }
+
+  .match-highlighted-title h3 {
+    font-size: 19px;
+  }
+
+  .match-highlighted-teams {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .match-highlighted-team-header strong {
+    font-size: 14px;
+  }
+
+  .match-highlighted-category {
+    padding: 12px 6px 13px;
+  }
+
+  .match-highlighted-category > span {
+    font-size: 8px;
+  }
+
+  .match-highlighted-player strong {
+    font-size: 11px;
+  }
+
+  .match-highlighted-player span {
+    font-size: 10px;
+  }
+}
+
+/* =========================================
+   POPUP PRÓXIMO PARTIDO
+   HORARIO + TV
+   ========================================= */
+
+.match-modal-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.match-modal-score strong {
+  display: block;
+  line-height: 1;
+}
+
+.match-modal-score span {
+  display: block;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
