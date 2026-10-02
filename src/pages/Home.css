@@ -2054,8 +2054,11 @@
   align-items: center;
 }
 
+
+/* Encabezados de estadísticas */
+
 .match-stats-table-header {
-  min-height: 34px;
+  min-height: 36px;
 
   padding: 0 16px;
 
@@ -2065,7 +2068,7 @@
 
   color: var(--sports-text-muted);
 
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.8px;
 }
@@ -2074,8 +2077,11 @@
   text-align: center;
 }
 
+
+/* Filas de jugadores */
+
 .match-stats-player-row {
-  min-height: 43px;
+  min-height: 45px;
 
   padding: 0 16px;
 
@@ -2085,7 +2091,7 @@
 
   color: var(--sports-text);
 
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .match-stats-player-row:hover {
@@ -2096,24 +2102,30 @@
   border-bottom: 0;
 }
 
+
+/* Nombre */
+
 .match-stats-player-row strong {
   min-width: 0;
 
   overflow: hidden;
 
-  color: var(--sports-text);
+  color: #ffffff;
 
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 800;
 
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.match-stats-player-row span {
-  color: var(--sports-text-soft);
 
-  font-size: 10px;
+/* Estadísticas */
+
+.match-stats-player-row span {
+  color: #ffffff;
+
+  font-size: 11px;
   font-weight: 700;
 
   text-align: center;
@@ -2121,6 +2133,7 @@
 
 .match-stats-player-row span:first-of-type {
   color: var(--color-primary);
+
   font-weight: 900;
 }
 
@@ -2167,12 +2180,24 @@
     padding-right: 12px;
   }
 
+  .match-stats-table-header {
+    min-height: 34px;
+
+    font-size: 8px;
+  }
+
+  .match-stats-player-row {
+    min-height: 43px;
+
+    font-size: 11px;
+  }
+
   .match-stats-player-row strong {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .match-stats-player-row span {
-    font-size: 9px;
+    font-size: 10px;
   }
 
 }

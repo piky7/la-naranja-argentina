@@ -176,13 +176,10 @@ function getMatchStats(match) {
     return null;
   }
 
-  // Primero intentamos encontrar el partido por su ID.
   if (matchPlayerStats[match.id]) {
     return matchPlayerStats[match.id];
   }
 
-  // Si no existe, usamos la clave automática:
-  // fecha-local-visitante
   const matchKey =
     `${match.date}-${match.homeTeam}-${match.awayTeam}`;
 
@@ -190,8 +187,6 @@ function getMatchStats(match) {
     return matchPlayerStats[matchKey];
   }
 
-  // Compatibilidad con partidos que fueron guardados
-  // sin la fecha.
   const legacyKey =
     `${match.homeTeam}-${match.awayTeam}`;
 
@@ -507,10 +502,6 @@ function Equipo() {
 
           {/* =========================================
               TRES COLUMNAS
-              
-              JUGADORES
-              PRÓXIMOS PARTIDOS
-              RESULTADOS
               ========================================= */}
 
           <div className="team-columns">
@@ -820,11 +811,6 @@ function Equipo() {
                         );
 
 
-                      /*
-                       * Determinamos si el equipo
-                       * de la página ganó o perdió.
-                       */
-
                       const teamScore = home
                         ? match.homeScore
                         : match.awayScore;
@@ -963,6 +949,7 @@ function Equipo() {
 
       {/* =========================================
           POP-UP DEL JUGADOR
+          MISMA ESTRUCTURA QUE ESTADÍSTICAS
           ========================================= */}
 
       {selectedPlayer && (
@@ -982,8 +969,8 @@ function Equipo() {
           >
 
             <button
-              className="player-modal-close"
               type="button"
+              className="player-modal-close"
               onClick={() =>
                 setSelectedPlayer(null)
               }
@@ -993,7 +980,15 @@ function Equipo() {
             </button>
 
 
+            {/* HEADER */}
+
             <div className="player-modal-header">
+
+              <img
+                src={team.logo}
+                alt={`Escudo de ${team.name}`}
+                className="player-modal-logo"
+              />
 
               <div className="player-modal-player-info">
 
@@ -1006,17 +1001,66 @@ function Equipo() {
                 </h2>
 
                 <p>
-                  {team.name} ·{" "}
-                  {selectedPlayer.nationality}
+                  {team.name}
                 </p>
+
+                <small>
+                  {selectedPlayer.nationality}
+                </small>
 
               </div>
 
             </div>
 
 
-            <div className="player-modal-divider" />
+            {/* DATOS DEL JUGADOR */}
 
+            <div className="player-modal-details">
+
+              <div>
+
+                <span>
+                  POSICIÓN
+                </span>
+
+                <strong>
+                  {selectedPlayer.position ||
+                    "—"}
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  NACIONALIDAD
+                </span>
+
+                <strong>
+                  {selectedPlayer.nationality ||
+                    "—"}
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  NÚMERO
+                </span>
+
+                <strong>
+                  {selectedPlayer.number ?? "—"}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            {/* ESTADÍSTICAS */}
 
             <div className="player-modal-section">
 
@@ -1044,7 +1088,9 @@ function Equipo() {
                   <strong>
                     {selectedPlayerStats?.points !== null &&
                     selectedPlayerStats?.points !== undefined
-                      ? selectedPlayerStats.points.toFixed(1)
+                      ? Number(
+                          selectedPlayerStats.points
+                        ).toFixed(1)
                       : "—"}
                   </strong>
 
@@ -1060,7 +1106,9 @@ function Equipo() {
                   <strong>
                     {selectedPlayerStats?.rebounds !== null &&
                     selectedPlayerStats?.rebounds !== undefined
-                      ? selectedPlayerStats.rebounds.toFixed(1)
+                      ? Number(
+                          selectedPlayerStats.rebounds
+                        ).toFixed(1)
                       : "—"}
                   </strong>
 
@@ -1076,7 +1124,9 @@ function Equipo() {
                   <strong>
                     {selectedPlayerStats?.assists !== null &&
                     selectedPlayerStats?.assists !== undefined
-                      ? selectedPlayerStats.assists.toFixed(1)
+                      ? Number(
+                          selectedPlayerStats.assists
+                        ).toFixed(1)
                       : "—"}
                   </strong>
 
@@ -1091,6 +1141,8 @@ function Equipo() {
             </div>
 
 
+            {/* FOOTER */}
+
             <div className="player-modal-footer">
 
               <span>
@@ -1098,7 +1150,7 @@ function Equipo() {
               </span>
 
               <strong>
-                {selectedPlayer.position}
+                {team.shortName || ""}
               </strong>
 
             </div>
@@ -1131,9 +1183,7 @@ function Equipo() {
           >
 
 
-            {/* =====================================
-                CERRAR
-                ===================================== */}
+            {/* CERRAR */}
 
             <button
               className="match-modal-close"
@@ -1147,9 +1197,7 @@ function Equipo() {
             </button>
 
 
-            {/* =====================================
-                HEADER
-                ===================================== */}
+            {/* HEADER */}
 
             <div className="match-modal-header">
 
@@ -1170,9 +1218,6 @@ function Equipo() {
 
               <div className="match-modal-teams">
 
-
-                {/* LOCAL */}
-
                 <div className="match-modal-team">
 
                   {selectedMatchHomeTeam && (
@@ -1192,8 +1237,6 @@ function Equipo() {
                 </div>
 
 
-                {/* RESULTADO */}
-
                 <div className="match-modal-score">
 
                   <strong>
@@ -1204,8 +1247,6 @@ function Equipo() {
 
                 </div>
 
-
-                {/* VISITANTE */}
 
                 <div className="match-modal-team">
 
@@ -1230,14 +1271,11 @@ function Equipo() {
             </div>
 
 
-            {/* =====================================
-                ESTADÍSTICAS
-                ===================================== */}
+            {/* ESTADÍSTICAS */}
 
             {selectedMatchStats ? (
 
               <div className="match-modal-content">
-
 
                 {/* LOCAL */}
 
@@ -1496,9 +1534,7 @@ function Equipo() {
             )}
 
 
-            {/* =====================================
-                FOOTER
-                ===================================== */}
+            {/* FOOTER */}
 
             <div className="match-modal-footer">
 

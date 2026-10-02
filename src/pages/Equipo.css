@@ -214,10 +214,6 @@
 
 /* =========================================
    TRES COLUMNAS
-
-   JUGADORES
-   PRÓXIMOS PARTIDOS
-   RESULTADOS
    ========================================= */
 
 .team-columns {
@@ -787,6 +783,8 @@
   animation:
     player-modal-in
     0.22s ease;
+
+  box-sizing: border-box;
 }
 
 @keyframes player-modal-in {
@@ -856,7 +854,7 @@
 
 
 /* =========================================
-   HEADER DEL MODAL
+   HEADER DEL MODAL DEL JUGADOR
    ========================================= */
 
 .player-modal-header {
@@ -864,7 +862,14 @@
 
   align-items: center;
 
-  padding: 28px 30px 25px;
+  width: 100%;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  padding:
+    28px 58px 25px 30px;
 
   background-color: var(--sports-panel-header);
 
@@ -873,10 +878,21 @@
   color: #ffffff;
 }
 
+
+/*
+ * IMPORTANTE:
+ * El bloque ocupa todo el ancho disponible y
+ * deja espacio suficiente para la X.
+ */
+
 .player-modal-player-info {
+  width: 100%;
+
   min-width: 0;
 
-  padding-right: 30px;
+  max-width: 100%;
+
+  box-sizing: border-box;
 }
 
 .player-modal-player-info > span {
@@ -895,24 +911,57 @@
 }
 
 .player-modal-player-info h2 {
+  display: block;
+
+  width: 100%;
+
+  max-width: 100%;
+
   margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
 
   color: #ffffff;
 
   font-size: 24px;
-  line-height: 1.1;
+  line-height: 1.12;
 
   font-weight: 800;
 
   letter-spacing: -0.5px;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
+
+  word-break: normal;
 }
 
 .player-modal-player-info p {
-  margin-top: 7px;
+  display: block;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  margin:
+    7px 0 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
 
   color: var(--sports-text-soft);
 
   font-size: 11px;
+
+  line-height: 1.4;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
 }
 
 
@@ -1200,7 +1249,7 @@
 
 .match-modal-header {
   padding:
-    27px 35px 24px;
+    7px 15px 2px;
 
   background-color:
     var(--sports-panel-header);
@@ -1214,12 +1263,14 @@
 .match-modal-label {
   display: block;
 
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 
   color: var(--sports-border);
 
   font-size: 9px;
   font-weight: 800;
+
+  line-height: 1;
 
   letter-spacing: 1px;
 
@@ -1231,22 +1282,27 @@
 
   color: #ffffff;
 
-  font-size: 12px;
+  font-size: 11px;
+
+  line-height: 1;
+
+  font-weight: 700;
 }
 
 .match-modal-status {
   display: inline-block;
 
-  margin-top: 7px;
+  margin-top: 3px;
 
   color: var(--sports-text-soft);
 
   font-size: 8px;
   font-weight: 800;
 
+  line-height: 1;
+
   letter-spacing: 1px;
 }
-
 
 .match-modal-teams {
   display: grid;
@@ -1258,9 +1314,9 @@
 
   align-items: center;
 
-  gap: 28px;
+  gap: 20px;
 
-  margin-top: 20px;
+  margin-top: -1px;
 }
 
 .match-modal-team {
@@ -1269,14 +1325,16 @@
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
+  gap: 9px;
 
   min-width: 0;
 }
 
 .match-modal-team img {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
+
+  flex-shrink: 0;
 
   object-fit: contain;
 }
@@ -1285,13 +1343,19 @@
   color: #ffffff;
 
   font-size: 13px;
+
+  line-height: 1.1;
+
   font-weight: 800;
+
+  white-space: nowrap;
 }
 
 .match-modal-score strong {
   color: var(--match-accent);
 
   font-size: 30px;
+
   line-height: 1;
 
   font-weight: 900;
@@ -1408,7 +1472,7 @@
 
   color: var(--sports-text-soft);
 
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 800;
 
   letter-spacing: 0.6px;
@@ -1463,7 +1527,7 @@
 
   color: #ffffff;
 
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
 
   white-space: nowrap;
@@ -1474,7 +1538,7 @@
 .match-stat-player span {
   color: var(--sports-text-soft);
 
-  font-size: 9px;
+  font-size: 10px;
 
   text-align: center;
 }
@@ -1585,32 +1649,52 @@
 
   .match-modal-header {
     padding:
-      24px 18px 20px;
+      5px 12px 7px;
+  }
+
+  .match-modal-label {
+    font-size: 7px;
+  }
+
+  .match-modal-date {
+    font-size: 9px;
+  }
+
+  .match-modal-status {
+    font-size: 6px;
   }
 
   .match-modal-teams {
-    gap: 10px;
+    gap: 7px;
+
+    margin-top: 2px;
   }
 
   .match-modal-team {
     flex-direction: column;
 
-    gap: 6px;
+    gap: 2px;
   }
 
   .match-modal-team img {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
   }
 
   .match-modal-team strong {
-    font-size: 10px;
+    max-width: 100px;
+
+    font-size: 8px;
+
+    line-height: 1.1;
 
     text-align: center;
+
+    white-space: normal;
   }
 
   .match-modal-score strong {
-    font-size: 25px;
+    font-size: 22px;
   }
 
   .match-modal-content {
@@ -1716,15 +1800,6 @@
     padding: 14px 16px;
   }
 
-
-  /*
-   * En celular:
-   *
-   * 1. Próximos partidos
-   * 2. Últimos partidos
-   * 3. Jugadores
-   */
-
   .team-columns {
     grid-template-columns: 1fr;
 
@@ -1742,7 +1817,6 @@
   .team-columns .team-section:nth-child(3) {
     order: 2;
   }
-
 
   .section-heading-team h2 {
     font-size: 19px;
@@ -1808,20 +1882,40 @@
   }
 
   .player-modal-header {
+    width: 100%;
+
     padding:
-      25px 21px 21px;
+      25px 52px 21px 21px;
   }
 
   .player-modal-player-info {
-    padding-right: 24px;
+    width: 100%;
+
+    max-width: 100%;
   }
 
   .player-modal-player-info h2 {
+    width: 100%;
+
+    max-width: 100%;
+
     font-size: 20px;
+
+    line-height: 1.15;
+
+    white-space: normal;
+
+    overflow-wrap: break-word;
   }
 
   .player-modal-player-info p {
+    width: 100%;
+
+    max-width: 100%;
+
     font-size: 10px;
+
+    line-height: 1.4;
   }
 
   .player-modal-section {
@@ -1884,6 +1978,21 @@
     font-size: 8px;
   }
 
+  .player-modal-header {
+    padding:
+      23px 50px 19px 18px;
+  }
+
+  .player-modal-player-info h2 {
+    font-size: 19px;
+
+    line-height: 1.15;
+  }
+
+  .player-modal-player-info p {
+    font-size: 9px;
+  }
+
   .player-stats-grid {
     grid-template-columns:
       repeat(2, 1fr);
@@ -1897,6 +2006,8 @@
       32px
       32px
       43px;
+
+    font-size: 7px;
   }
 
   .match-stat-player {
@@ -1909,11 +2020,11 @@
   }
 
   .match-stat-player strong {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .match-stat-player span {
-    font-size: 8px;
+    font-size: 9px;
   }
 
 }
