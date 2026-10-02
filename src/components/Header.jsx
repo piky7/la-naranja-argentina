@@ -13,20 +13,39 @@ function Header() {
     <header className="header">
       <div className="header-container">
 
+        {/* LOGO */}
         <Link
           to="/"
           className="logo"
           onClick={closeMenu}
         >
-          <span className="logo-short">
-            LNA
-          </span>
-
-          <span className="logo-name">
-            La Naranja Argentina
-          </span>
+          <img
+            src="/logo-lna.png"
+            alt="La Naranja Argentina"
+            className="logo-image"
+          />
         </Link>
 
+        {/* IDENTIDAD */}
+        <div className="header-brand">
+          <div className="header-tagline">
+            <span>EL BÁSQUET ARGENTINO,</span>
+            <strong>EN UN SOLO LUGAR.</strong>
+          </div>
+
+          <div className="header-league">
+            LIGA NACIONAL
+          </div>
+        </div>
+
+        {/* DECORACIÓN */}
+        <div className="header-ball" aria-hidden="true">
+          <div className="header-ball-line header-ball-line-1"></div>
+          <div className="header-ball-line header-ball-line-2"></div>
+          <div className="header-ball-line header-ball-line-3"></div>
+        </div>
+
+        {/* NAVEGACIÓN */}
         <nav className="navigation">
           <Link to="/">
             Inicio
@@ -49,6 +68,7 @@ function Header() {
           </Link>
         </nav>
 
+        {/* BOTÓN MOBILE */}
         <button
           className="menu-button"
           type="button"
@@ -64,6 +84,7 @@ function Header() {
         </button>
       </div>
 
+      {/* MENÚ MOBILE */}
       {menuOpen && (
         <nav className="mobile-navigation">
           <Link

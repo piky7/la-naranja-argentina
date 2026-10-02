@@ -1,71 +1,91 @@
 :root {
+
   /* =========================================
      COLORES PRINCIPALES
-     ========================================= */
+  ========================================= */
 
   --color-primary: #f58220;
+
   --color-primary-dark: #d9650d;
 
-  --color-dark: #111111;
-  --color-dark-soft: #1c1c1c;
+  --color-dark: #0d0f11;
 
-  --color-background: #f5f5f5;
+  --color-dark-soft: #181b1f;
+
+  --color-background: #0f1113;
+
   --color-white: #ffffff;
 
-  --color-text: #222222;
-  --color-text-soft: #666666;
+  --color-text: #ffffff;
 
-  --border-color: #e5e5e5;
+  --color-text-soft: #a9adb2;
+
+  --border-color: #292d32;
 
 
   /* =========================================
      IDENTIDAD DEPORTIVA
-     ========================================= */
+  ========================================= */
 
   /* Fondo general de la web */
-  --sports-page-background: #f5f5f5;
+
+  --sports-page-background: #0f1113;
 
   /* Panel principal */
-  --sports-panel: #171717;
+
+  --sports-panel: #17191c;
 
   /* Cabecera de panel */
-  --sports-panel-header: #111111;
+
+  --sports-panel-header: #101214;
 
   /* Filas y tarjetas dentro de paneles */
-  --sports-panel-row: #202020;
+
+  --sports-panel-row: #202328;
 
   /* Hover */
-  --sports-panel-row-hover: #292929;
+
+  --sports-panel-row-hover: #292d32;
 
   /* Bordes principales */
+
   --sports-border: #f58220;
 
   /* Bordes secundarios */
-  --sports-border-soft: #333333;
+
+  --sports-border-soft: #30343a;
 
   /* Texto principal dentro de paneles */
+
   --sports-text: #ffffff;
 
   /* Texto secundario */
+
   --sports-text-soft: #bdbdbd;
 
   /* Texto apagado */
+
   --sports-text-muted: #888888;
 
 
   /* =========================================
      TABLAS
-     ========================================= */
+  ========================================= */
 
-  --table-background: #171717;
-  --table-header: #111111;
-  --table-row: #202020;
-  --table-row-hover: #292929;
+  --table-background: #17191c;
+
+  --table-header: #101214;
+
+  --table-row: #202328;
+
+  --table-row-hover: #292d32;
 
   --table-border: #f58220;
-  --table-border-soft: #333333;
+
+  --table-border-soft: #30343a;
 
   --table-text: #ffffff;
+
   --table-text-soft: #bdbdbd;
 
   --table-accent: #f58220;
@@ -73,16 +93,20 @@
 
   /* =========================================
      TARJETAS DE PARTIDOS
-     ========================================= */
+  ========================================= */
 
-  --match-background: #171717;
-  --match-row: #202020;
-  --match-row-hover: #242424;
+  --match-background: #17191c;
+
+  --match-row: #202328;
+
+  --match-row-hover: #292d32;
 
   --match-border: #f58220;
-  --match-border-soft: #333333;
+
+  --match-border-soft: #30343a;
 
   --match-text: #ffffff;
+
   --match-text-soft: #bdbdbd;
 
   --match-accent: #f58220;
@@ -90,16 +114,19 @@
 
   /* =========================================
      RADIOS
-     ========================================= */
+  ========================================= */
 
   --radius-small: 8px;
+
   --radius-medium: 12px;
+
   --radius-large: 18px;
 
 
   /* =========================================
      CONTENEDOR
-     ========================================= */
+  ========================================= */
 
   --container-width: 1200px;
+
 }
