@@ -48,14 +48,21 @@ function main() {
 
   // 1. Descubrir nuevamente los partidos
   runScript("discover-mids.cjs");
-  runScript(
-  "sync-fixture.cjs"
-);
-  runScript(
-  "update-match-results.cjs"
-);
 
-  // 2. Cargar partidos terminados
+  runScript(
+    "sync-fixture.cjs"
+  );
+
+  runScript(
+    "update-match-results.cjs"
+  );
+
+  // 2. Actualizar televisación
+  runScript(
+    "update-broadcasts.cjs"
+  );
+
+  // 3. Cargar partidos terminados
   const matches = loadFinishedMatches();
 
   console.log("");
@@ -82,7 +89,7 @@ function main() {
     console.log("");
   });
 
-  // 3. Procesar cada partido
+  // 4. Procesar cada partido
   for (const [index, match] of matches.entries()) {
     console.log("");
     console.log("########################################");

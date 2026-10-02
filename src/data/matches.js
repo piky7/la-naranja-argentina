@@ -1,5 +1,6 @@
 import { matchResults } from "./matchResults";
 import { flashscoreSchedule } from "./flashscoreSchedule";
+import { broadcasts } from "./broadcasts";
 
 const fixture = [
   // SEPTIEMBRE 2026
@@ -696,6 +697,20 @@ export const matches = fixture.flatMap(([date, games]) =>
 
     const automaticResult =
       matchResults[resultKey];
+      /*
+ * TELEVISACIÓN
+ *
+ * Básquet Plus informa únicamente los partidos
+ * que tienen TyC Sports o DSports.
+ *
+ * Si no aparece allí y el partido todavía no
+ * se jugó, usamos Básquet Pass como fallback.
+ */
+const broadcastKey =
+  `${effectiveDate}-${homeTeam}-${awayTeam}`;
+
+const broadcast =
+  broadcasts[broadcastKey];
 
     return {
       id:
@@ -732,14 +747,18 @@ export const matches = fixture.flatMap(([date, games]) =>
             : null
         ),
 
-      tv:
-        automaticResult?.tv?.length
-          ? automaticResult.tv
-          : (
-              isExampleMatch
-                ? ["TyC Sports"]
-                : []
-            ),
+    tv:
+  automaticResult?.tv?.length
+    ? automaticResult.tv
+    : broadcast?.channel
+      ? [broadcast.channel]
+      : (!automaticResult || automaticResult.status === "scheduled")
+        ? ["Básquet Pass"]
+        : (
+            isExampleMatch
+              ? ["TyC Sports"]
+              : []
+          ),
 
       status:
         automaticResult?.status ??

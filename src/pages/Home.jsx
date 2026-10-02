@@ -367,91 +367,80 @@ function Home() {
    * =========================================
    */
 
-  const standings = useMemo(() => {
-    return teams
-      .map((team) => {
-        const teamMatches =
-          matches.filter(
-            (match) =>
-              match.status === "finished" &&
-              (
-                match.homeTeam === team.id ||
-                match.awayTeam === team.id
-              )
-          );
-
-
-        let wins = 0;
-        let losses = 0;
-        let pointsFor = 0;
-        let pointsAgainst = 0;
-
-
-        teamMatches.forEach((match) => {
-          const isHome =
-            match.homeTeam === team.id;
-
-
-          const teamScore = isHome
-            ? match.homeScore
-            : match.awayScore;
-
-
-          const opponentScore = isHome
-            ? match.awayScore
-            : match.homeScore;
-
-
-          if (
-            teamScore === null ||
-            opponentScore === null
-          ) {
-            return;
-          }
-
-
-          pointsFor += teamScore;
-          pointsAgainst += opponentScore;
-
-
-          if (teamScore > opponentScore) {
-            wins++;
-          }
-
-
-          if (teamScore < opponentScore) {
-            losses++;
-          }
-        });
-
-
-        return {
-          ...team,
-          gamesPlayed: teamMatches.length,
-          wins,
-          losses,
-          pointsFor,
-          pointsAgainst,
-          difference:
-            pointsFor - pointsAgainst,
-        };
-      })
-      .sort((a, b) => {
-        if (b.wins !== a.wins) {
-          return b.wins - a.wins;
-        }
-
-
-        if (a.losses !== b.losses) {
-          return a.losses - b.losses;
-        }
-
-
-        return (
-          b.difference - a.difference
+ const standings = useMemo(() => {
+  return teams
+    .map((team) => {
+      const teamMatches =
+        matches.filter(
+          (match) =>
+            match.status === "finished" &&
+            (
+              match.homeTeam === team.id ||
+              match.awayTeam === team.id
+            )
         );
+
+      let wins = 0;
+      let losses = 0;
+      let pointsFor = 0;
+      let pointsAgainst = 0;
+
+      teamMatches.forEach((match) => {
+        const isHome =
+          match.homeTeam === team.id;
+
+        const teamScore = isHome
+          ? match.homeScore
+          : match.awayScore;
+
+        const opponentScore = isHome
+          ? match.awayScore
+          : match.homeScore;
+
+        if (
+          teamScore === null ||
+          opponentScore === null
+        ) {
+          return;
+        }
+
+        pointsFor += teamScore;
+        pointsAgainst += opponentScore;
+
+        if (teamScore > opponentScore) {
+          wins++;
+        }
+
+        if (teamScore < opponentScore) {
+          losses++;
+        }
       });
-  }, []);
+
+      return {
+        ...team,
+        gamesPlayed: teamMatches.length,
+        wins,
+        losses,
+        pointsFor,
+        pointsAgainst,
+        difference:
+          pointsFor - pointsAgainst,
+      };
+    })
+    .sort((a, b) => {
+      if (b.wins !== a.wins) {
+        return b.wins - a.wins;
+      }
+
+      if (a.losses !== b.losses) {
+        return a.losses - b.losses;
+      }
+
+      return (
+        b.difference - a.difference
+      );
+    });
+}, [teams, matches]);
 
 
   /*

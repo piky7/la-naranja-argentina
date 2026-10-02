@@ -180,7 +180,7 @@ function parseTv(text) {
     return ["DSports"];
   }
 
-  return ["Básquet Pass"];
+  return [];
 }
 
 function parsePlayers(text) {
