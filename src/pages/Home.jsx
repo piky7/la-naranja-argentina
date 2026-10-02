@@ -43,6 +43,92 @@ function Home() {
   };
 
 
+  /*
+   * =========================================
+   * RÉCORD DEL EQUIPO
+   * =========================================
+   */
+
+  const getTeamRecord = (teamId) => {
+    const teamMatches = matches.filter(
+      (match) =>
+        match.status === "finished" &&
+        (
+          match.homeTeam === teamId ||
+          match.awayTeam === teamId
+        )
+    );
+
+
+    let wins = 0;
+    let losses = 0;
+
+
+    teamMatches.forEach((match) => {
+      const isHome =
+        match.homeTeam === teamId;
+
+
+      const teamScore = isHome
+        ? match.homeScore
+        : match.awayScore;
+
+
+      const opponentScore = isHome
+        ? match.awayScore
+        : match.homeScore;
+
+
+      if (
+        teamScore === null ||
+        teamScore === undefined ||
+        opponentScore === null ||
+        opponentScore === undefined
+      ) {
+        return;
+      }
+
+
+      if (teamScore > opponentScore) {
+        wins++;
+      }
+
+
+      if (teamScore < opponentScore) {
+        losses++;
+      }
+    });
+
+
+    return {
+      wins,
+      losses,
+    };
+  };
+
+
+  /*
+   * =========================================
+   * POSICIÓN DEL EQUIPO
+   * =========================================
+   */
+
+  const getTeamPosition = (teamId) => {
+    const positionIndex =
+      standings.findIndex(
+        (team) => team.id === teamId
+      );
+
+
+    if (positionIndex === -1) {
+      return null;
+    }
+
+
+    return positionIndex + 1;
+  };
+
+
   const getPlayerStats = (playerId) => {
     return playerStats.find(
       (stats) => stats.playerId === playerId
@@ -649,6 +735,44 @@ function Home() {
                         );
 
 
+                      const homeRecord =
+                        homeTeam
+                          ? getTeamRecord(
+                              homeTeam.id
+                            )
+                          : {
+                              wins: 0,
+                              losses: 0,
+                            };
+
+
+                      const awayRecord =
+                        awayTeam
+                          ? getTeamRecord(
+                              awayTeam.id
+                            )
+                          : {
+                              wins: 0,
+                              losses: 0,
+                            };
+
+
+                      const homePosition =
+                        homeTeam
+                          ? getTeamPosition(
+                              homeTeam.id
+                            )
+                          : null;
+
+
+                      const awayPosition =
+                        awayTeam
+                          ? getTeamPosition(
+                              awayTeam.id
+                            )
+                          : null;
+
+
                       const isFinished =
                         match.status ===
                         "finished";
@@ -734,9 +858,23 @@ function Home() {
 
                           <div className="fixture-team fixture-home">
 
-                            <span>
-                              {homeTeam?.shortName}
-                            </span>
+                            <div className="fixture-team-name">
+
+                              <span>
+                                {homeTeam?.shortName}
+                              </span>
+
+                              {homeTeam && (
+
+                                <small>
+                                  {homePosition}° •{" "}
+                                  {homeRecord.wins}-
+                                  {homeRecord.losses}
+                                </small>
+
+                              )}
+
+                            </div>
 
 
                             {homeTeam && (
@@ -828,9 +966,23 @@ function Home() {
                             )}
 
 
-                            <span>
-                              {awayTeam?.shortName}
-                            </span>
+                            <div className="fixture-team-name">
+
+                              <span>
+                                {awayTeam?.shortName}
+                              </span>
+
+                              {awayTeam && (
+
+                                <small>
+                                  {awayPosition}° •{" "}
+                                  {awayRecord.wins}-
+                                  {awayRecord.losses}
+                                </small>
+
+                              )}
+
+                            </div>
 
                           </div>
 
@@ -1258,8 +1410,30 @@ function Home() {
 
 
                   <strong>
+
                     {selectedMatchHomeTeam?.shortName ||
                       selectedMatchHomeTeam?.name}
+
+                    {selectedMatchHomeTeam && (
+
+                      <small>
+                        {getTeamPosition(
+                          selectedMatchHomeTeam.id
+                        )}° •{" "}
+                        {
+                          getTeamRecord(
+                            selectedMatchHomeTeam.id
+                          ).wins
+                        }-
+                        {
+                          getTeamRecord(
+                            selectedMatchHomeTeam.id
+                          ).losses
+                        }
+                      </small>
+
+                    )}
+
                   </strong>
 
                 </div>
@@ -1295,8 +1469,30 @@ function Home() {
 
 
                   <strong>
+
                     {selectedMatchAwayTeam?.shortName ||
                       selectedMatchAwayTeam?.name}
+
+                    {selectedMatchAwayTeam && (
+
+                      <small>
+                        {getTeamPosition(
+                          selectedMatchAwayTeam.id
+                        )}° •{" "}
+                        {
+                          getTeamRecord(
+                            selectedMatchAwayTeam.id
+                          ).wins
+                        }-
+                        {
+                          getTeamRecord(
+                            selectedMatchAwayTeam.id
+                          ).losses
+                        }
+                      </small>
+
+                    )}
+
                   </strong>
 
                 </div>
