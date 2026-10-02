@@ -1,0 +1,53 @@
+name: Actualizar LNB automáticamente
+
+on:
+  schedule:
+    # Ejecutar cada 15 minutos
+    - cron: "*/15 * * * *"
+
+  # Permite ejecutarlo manualmente desde GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-lnb:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar el repositorio
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Instalar Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 3. Instalar dependencias
+      - name: Instalar dependencias
+        run: npm ci
+
+      # 4. Ejecutar actualización automática
+      - name: Actualizar datos de LNB
+        run: node auto-update-lnb.cjs
+
+      # 5. Guardar los cambios en GitHub
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No hay cambios para guardar."
+          else
+            git commit -m "Actualización automática LNB"
+            git push
+          fi
