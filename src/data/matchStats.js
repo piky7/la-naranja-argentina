@@ -176,7 +176,7 @@ export const matchPlayerStats = {
   },
 
   "penarol-gimnasia": {
-    penarol: [
+    "penarol": [
       {
         id: "ivan-basualdo",
         name: "Basualdo I.",
@@ -264,10 +264,10 @@ export const matchPlayerStats = {
         rebounds: 2,
         assists: 0,
         minutes: "12:05",
-      },
+      }
     ],
 
-    gimnasia: [
+    "gimnasia": [
       {
         id: "obi-okafor",
         name: "Okafor O.",
@@ -347,12 +347,12 @@ export const matchPlayerStats = {
         rebounds: 0,
         assists: 0,
         minutes: "07:10",
-      },
+      }
     ],
   },
 
   "argentino-ferro": {
-    argentino: [
+    "argentino": [
       {
         id: "dylan-smith",
         name: "Smith D.",
@@ -432,10 +432,10 @@ export const matchPlayerStats = {
         rebounds: 1,
         assists: 0,
         minutes: "02:27",
-      },
+      }
     ],
 
-    ferro: [
+    "ferro": [
       {
         id: "emiliano-lezcano",
         name: "Lezcano E.",
@@ -524,6 +524,14 @@ export const matchPlayerStats = {
         assists: 0,
         minutes: "00:36",
       },
+      {
+        id: "jano-martinez",
+        name: "Jara C.",
+        points: 0,
+        rebounds: 0,
+        assists: 0,
+        minutes: "00:37",
+      }
     ],
   },
 "san-martin-Instituto de Córdoba": {
@@ -714,6 +722,14 @@ export const matchPlayerStats = {
         rebounds: 5,
         assists: 2,
         minutes: "27:38",
+      },
+      {
+        id: "lucas-andersson",
+        name: "Andersson L.",
+        points: 10,
+        rebounds: 0,
+        assists: 0,
+        minutes: "08:60",
       },
       {
         id: "bautista-lugarini",
