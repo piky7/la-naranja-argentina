@@ -1,4 +1,12 @@
 export const matchResults = {
+  "2026-10-02-regatas-instituto": {
+    status: "finished",
+    homeScore: 73,
+    awayScore: 63,
+    time: null,
+    venue: null,
+    tv: [],
+  },
   "2026-10-01-olimpico-platense": {
     status: "finished",
     homeScore: 74,

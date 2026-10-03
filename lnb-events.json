@@ -1,8 +1,23 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 109,
-  "finishedMatches": 5,
+  "totalMatches": 110,
+  "finishedMatches": 6,
   "matches": [
+    {
+      "eventId": "Mkr3YBG7",
+      "homeTeam": "regatas",
+      "homeName": "Regatas",
+      "awayTeam": "instituto",
+      "awayName": "Instituto de Córdoba",
+      "homeScore": 73,
+      "awayScore": 63,
+      "status": "finished",
+      "timestamp": 1790985600,
+      "homeSlug": "regatas",
+      "awaySlug": "instituto-de-cordoba",
+      "homeId": "SAdHfH80",
+      "awayId": "rJPlbMMq"
+    },
     {
       "eventId": "EPvezYoe",
       "homeTeam": "olimpico",
@@ -1640,6 +1655,21 @@
     }
   ],
   "finished": [
+    {
+      "eventId": "Mkr3YBG7",
+      "homeTeam": "regatas",
+      "homeName": "Regatas",
+      "awayTeam": "instituto",
+      "awayName": "Instituto de Córdoba",
+      "homeScore": 73,
+      "awayScore": 63,
+      "status": "finished",
+      "timestamp": 1790985600,
+      "homeSlug": "regatas",
+      "awaySlug": "instituto-de-cordoba",
+      "homeId": "SAdHfH80",
+      "awayId": "rJPlbMMq"
+    },
     {
       "eventId": "EPvezYoe",
       "homeTeam": "olimpico",
