@@ -1,6 +1,6 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 110,
+  "totalMatches": 109,
   "finishedMatches": 5,
   "matches": [
     {
@@ -77,21 +77,6 @@
       "awaySlug": "gimnasia",
       "homeId": "zy0PhewD",
       "awayId": "Cn0pHIpQ"
-    },
-    {
-      "eventId": "Mkr3YBG7",
-      "homeTeam": "regatas",
-      "homeName": "Regatas",
-      "awayTeam": "instituto",
-      "awayName": "Instituto de Córdoba",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "timestamp": 1790985600,
-      "homeSlug": "regatas",
-      "awaySlug": "instituto-de-cordoba",
-      "homeId": "SAdHfH80",
-      "awayId": "rJPlbMMq"
     },
     {
       "eventId": "EqVldF8E",
