@@ -1850,15 +1850,25 @@
   background-color: rgba(0, 0, 0, 0.72);
 
   backdrop-filter: blur(5px);
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .match-stats-modal {
   position: relative;
 
   width: min(100%, 520px);
-  max-height: min(720px, 90vh);
+
+  height: min(720px, calc(100vh - 40px));
+  max-height: calc(100vh - 40px);
+
+  display: flex;
+  flex-direction: column;
 
   overflow: hidden;
+
+  flex-shrink: 0;
 
   background-color: var(--sports-panel);
 
@@ -2044,6 +2054,12 @@
   max-height: 500px;
 
   overflow-y: auto;
+
+  flex: 1;
+
+  min-height: 0;
+
+  -webkit-overflow-scrolling: touch;
 }
 
 .match-stats-table-header,
@@ -2145,12 +2161,21 @@
 @media (max-width: 480px) {
 
   .match-stats-modal-overlay {
-    padding: 12px;
+    padding: 10px;
+
+    align-items: flex-start;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .match-stats-modal {
     width: 100%;
-    max-height: 92vh;
+
+    height: calc(100vh - 20px);
+    max-height: calc(100vh - 20px);
+
+    margin: 0 auto;
   }
 
   .match-stats-modal-header {
@@ -2202,6 +2227,7 @@
 
 }
 
+
 /* =========================================
    NOMBRE + RÉCORD DEL EQUIPO
    ========================================= */
@@ -2225,6 +2251,7 @@
   letter-spacing: 0.2px;
 }
 
+
 /* =========================================
    RÉCORD EN POPUP DE PARTIDO
    ========================================= */
@@ -2243,6 +2270,7 @@
   color: var(--color-primary);
   letter-spacing: 0.2px;
 }
+
 
 /* =========================================
    JUGADORES DESTACADOS - POPUP PARTIDO
@@ -2514,6 +2542,7 @@
 
 }
 
+
 /* =========================================
    POPUP - PRÓXIMO PARTIDO
    HORARIO + TV
@@ -2679,6 +2708,7 @@
 ========================================= */
 
 @media (max-width: 600px) {
+
   .match-modal-schedule strong {
     font-size: 28px;
   }
@@ -2720,6 +2750,7 @@
     font-size: 10px;
   }
 }
+
 
 /* =========================================
    POPUP PRÓXIMO PARTIDO
