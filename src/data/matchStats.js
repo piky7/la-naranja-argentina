@@ -539,7 +539,7 @@ export const matchPlayerStats = {
     "san-martin": [
       {
         id: "diego-collomb",
-        name: "Colomb D.",
+        name: "Collomb D.",
         points: 2,
         rebounds: 4,
         assists: 2,
