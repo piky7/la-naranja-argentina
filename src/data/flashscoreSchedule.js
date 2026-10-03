@@ -553,5 +553,40 @@ export const flashscoreSchedule = {
     "date": "2027-01-28",
     "time": "18:00",
     "eventId": "dxddFoyG"
+  },
+  "instituto-san-lorenzo": {
+    "date": "2026-11-16",
+    "time": "18:00",
+    "eventId": "hKZ6vPIs"
+  },
+  "obera-atenas": {
+    "date": "2026-11-17",
+    "time": "18:00",
+    "eventId": "8AtNzsI6"
+  },
+  "racing-chivilcoy-lanus": {
+    "date": "2026-11-17",
+    "time": "18:00",
+    "eventId": "0pwFx3mf"
+  },
+  "regatas-quimsa": {
+    "date": "2026-11-17",
+    "time": "18:00",
+    "eventId": "tOvVYKnJ"
+  },
+  "olimpico-ferro": {
+    "date": "2026-11-19",
+    "time": "18:00",
+    "eventId": "YVtGdOvQ"
+  },
+  "atenas-instituto": {
+    "date": "2026-11-20",
+    "time": "18:00",
+    "eventId": "4EXoi22m"
+  },
+  "quimsa-ferro": {
+    "date": "2026-11-21",
+    "time": "18:00",
+    "eventId": "xSVgktXa"
   }
 };
