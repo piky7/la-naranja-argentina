@@ -6,7 +6,9 @@
   "homeScore": 74,
   "awayScore": 92,
   "status": "finished",
-  "tv": [],
+  "tv": [
+    "TyC Sports"
+  ],
   "players": [
     {
       "id": "martin-franchino",

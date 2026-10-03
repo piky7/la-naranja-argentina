@@ -8,6 +8,116 @@ const matchStatsFile =
 
 /*
 ========================================
+NORMALIZAR MATCH ID
+========================================
+
+Convierte variantes como:
+
+2026-09-28-lanus-gimnasia
+lanus-gimnasia
+
+en:
+
+lanus-gimnasia
+*/
+
+function normalizeMatchId(matchId) {
+  let normalized = matchId
+    .trim()
+    .toLowerCase();
+
+  /*
+    Eliminamos una fecha al comienzo:
+
+    2026-09-28-lanus-gimnasia
+    ↓
+    lanus-gimnasia
+  */
+
+  normalized =
+    normalized.replace(
+      /^\d{4}-\d{2}-\d{2}-/,
+      ""
+    );
+
+  /*
+    Normalizamos algunos nombres históricos
+    que pueden haber quedado guardados
+    con otra variante.
+  */
+
+  normalized =
+    normalized
+      .replace(
+        /instituto-de-córdoba/gi,
+        "instituto"
+      )
+      .replace(
+        /instituto-de-cordoba/gi,
+        "instituto"
+      );
+
+  return normalized;
+}
+
+/*
+========================================
+EXTRAER TODOS LOS MATCH IDS
+========================================
+*/
+
+function getAllMatchIds(source) {
+  const regex =
+    /^\s*"([^"]+)":\s*\{/gm;
+
+  const ids = [];
+
+  let match;
+
+  while (
+    (match = regex.exec(source)) !== null
+  ) {
+    ids.push(match[1]);
+  }
+
+  return ids;
+}
+
+/*
+========================================
+BUSCAR MATCH ID EQUIVALENTE
+========================================
+*/
+
+function findEquivalentMatchId(
+  source,
+  targetMatchId
+) {
+  const targetNormalized =
+    normalizeMatchId(
+      targetMatchId
+    );
+
+  const existingIds =
+    getAllMatchIds(source);
+
+  for (
+    const existingId of existingIds
+  ) {
+    if (
+      normalizeMatchId(
+        existingId
+      ) === targetNormalized
+    ) {
+      return existingId;
+    }
+  }
+
+  return null;
+}
+
+/*
+========================================
 EXTRAER EL BLOQUE DE UN PARTIDO
 ========================================
 */
@@ -25,11 +135,6 @@ function extractMatchBlock(
   if (start === -1) {
     return null;
   }
-
-  /*
-    Buscamos la llave inicial del objeto
-    del partido.
-  */
 
   const objectStart =
     source.indexOf(
@@ -52,11 +157,6 @@ function extractMatchBlock(
   ) {
     const char =
       source[i];
-
-    /*
-      Control de strings para no contar
-      llaves que estén dentro de textos.
-    */
 
     if (inString) {
       if (escaped) {
@@ -89,10 +189,6 @@ function extractMatchBlock(
       depth--;
 
       if (depth === 0) {
-        /*
-          Incluimos la coma posterior si existe.
-        */
-
         let end =
           i + 1;
 
@@ -159,11 +255,6 @@ NORMALIZAR BLOQUE GENERADO
 function normalizeGeneratedBlock(
   source
 ) {
-  /*
-    Eliminamos posibles espacios iniciales
-    para insertarlo de forma limpia.
-  */
-
   return source.trim();
 }
 
@@ -274,26 +365,35 @@ function main() {
 
   /*
   ----------------------------------------
-  BUSCAR SI YA EXISTE
+  BUSCAR PARTIDO EQUIVALENTE
   ----------------------------------------
   */
 
-  const existingBlock =
-    extractMatchBlock(
+  const equivalentMatchId =
+    findEquivalentMatchId(
       matchStats,
       matchId
     );
 
   /*
   ========================================
-  CASO 1: PARTIDO YA EXISTE
+  CASO 1:
+  EL PARTIDO YA EXISTE
   ========================================
   */
 
-  if (existingBlock) {
+  if (equivalentMatchId) {
     console.log(
-      `El partido "${matchId}" ya existe en matchStats.js.`
+      `Partido equivalente encontrado: ${equivalentMatchId}`
     );
+
+    if (
+      equivalentMatchId !== matchId
+    ) {
+      console.log(
+        `El ID generado "${matchId}" corresponde al mismo partido.`
+      );
+    }
 
     console.log(
       "Actualizando estadísticas existentes..."
@@ -301,12 +401,37 @@ function main() {
 
     console.log("");
 
+    const existingBlock =
+      extractMatchBlock(
+        matchStats,
+        equivalentMatchId
+      );
+
+    if (!existingBlock) {
+      throw new Error(
+        `No se pudo extraer el bloque existente ${equivalentMatchId}.`
+      );
+    }
+
+    /*
+      Si el ID existente es diferente,
+      usamos el ID canónico generado.
+
+      Así eliminamos también la variante
+      antigua y dejamos solamente:
+
+      "lanus-gimnasia"
+    */
+
+    const replacement =
+      cleanGeneratedBlock;
+
     matchStats =
       matchStats.slice(
         0,
         existingBlock.start
       ) +
-      cleanGeneratedBlock +
+      replacement +
       matchStats.slice(
         existingBlock.end
       );
@@ -322,6 +447,10 @@ function main() {
     );
 
     console.log(
+      `ID utilizado: ${matchId}`
+    );
+
+    console.log(
       `Archivo actualizado: ${matchStatsFile}`
     );
 
@@ -332,7 +461,8 @@ function main() {
 
   /*
   ========================================
-  CASO 2: PARTIDO NUEVO
+  CASO 2:
+  PARTIDO NUEVO
   ========================================
   */
 
@@ -345,15 +475,6 @@ function main() {
   );
 
   console.log("");
-
-  /*
-    Buscamos el cierre del objeto principal:
-
-      };
-
-    y agregamos el nuevo partido
-    inmediatamente antes.
-  */
 
   const finalIndex =
     matchStats.lastIndexOf(
@@ -376,11 +497,6 @@ function main() {
     matchStats.slice(
       finalIndex
     );
-
-  /*
-    Si ya existe contenido antes del nuevo
-    bloque, aseguramos una coma.
-  */
 
   let separator =
     "";

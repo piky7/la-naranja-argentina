@@ -48,6 +48,49 @@ function Home() {
 
   /*
    * =========================================
+   * DETECTAR PARTIDO TERMINADO
+   *
+   * Normalmente usamos status === "finished".
+   *
+   * Como respaldo, si ya existen ambos
+   * resultados y el partido no está en vivo,
+   * también lo consideramos terminado.
+   * =========================================
+   */
+
+  const isMatchFinished = (match) => {
+    if (!match) {
+      return false;
+    }
+
+
+    if (match.status === "finished") {
+      return true;
+    }
+
+
+    if (match.status === "live") {
+      return false;
+    }
+
+
+    const hasHomeScore =
+      match.homeScore !== null &&
+      match.homeScore !== undefined &&
+      match.homeScore !== "";
+
+    const hasAwayScore =
+      match.awayScore !== null &&
+      match.awayScore !== undefined &&
+      match.awayScore !== "";
+
+
+    return hasHomeScore && hasAwayScore;
+  };
+
+
+  /*
+   * =========================================
    * RÉCORD DEL EQUIPO
    * =========================================
    */
@@ -55,7 +98,7 @@ function Home() {
   const getTeamRecord = (teamId) => {
     const teamMatches = matches.filter(
       (match) =>
-        match.status === "finished" &&
+        isMatchFinished(match) &&
         (
           match.homeTeam === teamId ||
           match.awayTeam === teamId
@@ -454,7 +497,7 @@ function Home() {
         const teamMatches =
           matches.filter(
             (match) =>
-              match.status === "finished" &&
+              isMatchFinished(match) &&
               (
                 match.homeTeam === team.id ||
                 match.awayTeam === team.id
@@ -548,19 +591,25 @@ function Home() {
           match.date === selectedDate
       )
       .sort((a, b) => {
-        const statusOrder = {
-          finished: 0,
-          live: 1,
-          scheduled: 2,
+        const getStatusOrder = (match) => {
+          if (isMatchFinished(match)) {
+            return 0;
+          }
+
+          if (match.status === "live") {
+            return 1;
+          }
+
+          return 2;
         };
 
 
         const statusA =
-          statusOrder[a.status] ?? 3;
+          getStatusOrder(a);
 
 
         const statusB =
-          statusOrder[b.status] ?? 3;
+          getStatusOrder(b);
 
 
         if (statusA !== statusB) {
@@ -852,14 +901,24 @@ function Home() {
                           : null;
 
 
+                      /*
+                       * IMPORTANTE:
+                       * Un partido puede haber recibido
+                       * el resultado pero todavía conservar
+                       * temporalmente otro status.
+                       *
+                       * Si tiene ambos marcadores,
+                       * lo tratamos como terminado.
+                       */
+
                       const isFinished =
-                        match.status ===
-                        "finished";
+                        isMatchFinished(match);
 
 
                       const isLive =
                         match.status ===
-                        "live";
+                        "live" &&
+                        !isFinished;
 
 
                       const hasMatchStats =
@@ -919,8 +978,11 @@ function Home() {
                           isFinished &&
                           hasMatchStats
                         ) ||
-                        match.status ===
-                          "scheduled";
+                        (
+                          match.status ===
+                          "scheduled" &&
+                          !isFinished
+                        );
 
 
                       return (
