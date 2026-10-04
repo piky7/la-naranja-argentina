@@ -1,8 +1,23 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 111,
-  "finishedMatches": 6,
+  "finishedMatches": 7,
   "matches": [
+    {
+      "eventId": "EqVldF8E",
+      "homeTeam": "quimsa",
+      "homeName": "Quimsa",
+      "awayTeam": "platense",
+      "awayName": "Platense",
+      "homeScore": 94,
+      "awayScore": 67,
+      "status": "finished",
+      "timestamp": 1791073800,
+      "homeSlug": "quimsa",
+      "awaySlug": "ca-platense",
+      "homeId": "E7pXLvd8",
+      "awayId": "SIolf8Y3"
+    },
     {
       "eventId": "Mkr3YBG7",
       "homeTeam": "regatas",
@@ -92,21 +107,6 @@
       "awaySlug": "gimnasia",
       "homeId": "zy0PhewD",
       "awayId": "Cn0pHIpQ"
-    },
-    {
-      "eventId": "EqVldF8E",
-      "homeTeam": "quimsa",
-      "homeName": "Quimsa",
-      "awayTeam": "platense",
-      "awayName": "Platense",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "timestamp": 1791073800,
-      "homeSlug": "quimsa",
-      "awaySlug": "ca-platense",
-      "homeId": "E7pXLvd8",
-      "awayId": "SIolf8Y3"
     },
     {
       "eventId": "00TdfgwR",
@@ -1670,6 +1670,21 @@
     }
   ],
   "finished": [
+    {
+      "eventId": "EqVldF8E",
+      "homeTeam": "quimsa",
+      "homeName": "Quimsa",
+      "awayTeam": "platense",
+      "awayName": "Platense",
+      "homeScore": 94,
+      "awayScore": 67,
+      "status": "finished",
+      "timestamp": 1791073800,
+      "homeSlug": "quimsa",
+      "awaySlug": "ca-platense",
+      "homeId": "E7pXLvd8",
+      "awayId": "SIolf8Y3"
+    },
     {
       "eventId": "Mkr3YBG7",
       "homeTeam": "regatas",

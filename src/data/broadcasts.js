@@ -3,13 +3,6 @@
 // No editar manualmente.
 
 export const broadcasts = {
-  "2026-10-05-quimsa-atenas": {
-    "date": "2026-10-05",
-    "time": "22:00",
-    "homeTeam": "quimsa",
-    "awayTeam": "atenas",
-    "channel": "TyC Sports"
-  },
   "2026-10-08-san-lorenzo-gimnasia": {
     "date": "2026-10-08",
     "time": "22:00",

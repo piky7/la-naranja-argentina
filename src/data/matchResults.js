@@ -1,4 +1,12 @@
 export const matchResults = {
+  "2026-10-03-quimsa-platense": {
+    status: "finished",
+    homeScore: 94,
+    awayScore: 67,
+    time: null,
+    venue: null,
+    tv: [],
+  },
   "2026-10-02-regatas-instituto": {
     status: "finished",
     homeScore: 73,
