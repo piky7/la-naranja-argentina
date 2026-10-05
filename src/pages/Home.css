@@ -2793,3 +2793,37 @@
 .match-stat-player:hover {
   background: rgba(255, 255, 255, 0.03);
 }
+
+.match-highlighted-team-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.team-form {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.team-form-result {
+  width: 17px;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+}
+
+.team-form-win {
+  background-color: #249447;
+}
+
+.team-form-loss {
+  background-color: #e87524;
+}

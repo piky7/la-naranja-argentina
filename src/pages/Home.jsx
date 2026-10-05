@@ -49,12 +49,6 @@ function Home() {
   /*
    * =========================================
    * DETECTAR PARTIDO TERMINADO
-   *
-   * Normalmente usamos status === "finished".
-   *
-   * Como respaldo, si ya existen ambos
-   * resultados y el partido no está en vivo,
-   * también lo consideramos terminado.
    * =========================================
    */
 
@@ -155,6 +149,66 @@ function Home() {
 
   /*
    * =========================================
+   * ÚLTIMOS 3 PARTIDOS DEL EQUIPO
+   *
+   * G = ganó
+   * P = perdió
+   *
+   * Se muestran de izquierda a derecha:
+   * más antiguo → más reciente.
+   *
+   * La letra de la derecha es siempre
+   * el último partido disputado.
+   * =========================================
+   */
+
+  const getRecentForm = (teamId) => {
+    const finishedMatches = matches
+      .filter(
+        (match) =>
+          isMatchFinished(match) &&
+          (
+            match.homeTeam === teamId ||
+            match.awayTeam === teamId
+          )
+      )
+      .sort((a, b) => {
+        const dateA =
+          `${a.date} ${a.time || "00:00"}`;
+
+        const dateB =
+          `${b.date} ${b.time || "00:00"}`;
+
+        return dateB.localeCompare(dateA);
+      })
+      .slice(0, 3)
+      .reverse();
+
+
+    return finishedMatches.map((match) => {
+      const isHome =
+        match.homeTeam === teamId;
+
+
+      const teamScore = isHome
+        ? match.homeScore
+        : match.awayScore;
+
+
+      const opponentScore = isHome
+        ? match.awayScore
+        : match.homeScore;
+
+
+      return teamScore > opponentScore
+        ? "G"
+        : "P";
+    });
+  };
+
+
+  /*
+   * =========================================
    * POSICIÓN DEL EQUIPO
    * =========================================
    */
@@ -234,8 +288,6 @@ function Home() {
     }
 
 
-    // 1. Buscar por ID directo del partido
-
     const directStats =
       matchPlayerStats[match.id];
 
@@ -243,8 +295,6 @@ function Home() {
       return directStats;
     }
 
-
-    // 2. Buscar por fecha + local + visitante
 
     const normalizedId =
       `${match.date}-${match.homeTeam}-${match.awayTeam}`;
@@ -256,8 +306,6 @@ function Home() {
       return normalizedStats;
     }
 
-
-    // 3. Buscar por local + visitante
 
     const simpleId =
       `${match.homeTeam}-${match.awayTeam}`;
@@ -277,8 +325,6 @@ function Home() {
   /*
    * =========================================
    * JUGADORES DESTACADOS
-   *
-   * SE USAN PROMEDIOS DE TEMPORADA
    * =========================================
    */
 
@@ -719,9 +765,7 @@ function Home() {
 
           <div className="home-dashboard">
 
-            {/* =========================================
-                TABLA DE POSICIONES
-                ========================================= */}
+            {/* TABLA DE POSICIONES */}
 
             <section className="home-panel standings-panel">
 
@@ -809,9 +853,7 @@ function Home() {
             </section>
 
 
-            {/* =========================================
-                FIXTURE
-                ========================================= */}
+            {/* FIXTURE */}
 
             <section className="home-panel fixture-panel">
 
@@ -935,16 +977,6 @@ function Home() {
                           : null;
 
 
-                      /*
-                       * IMPORTANTE:
-                       * Un partido puede haber recibido
-                       * el resultado pero todavía conservar
-                       * temporalmente otro status.
-                       *
-                       * Si tiene ambos marcadores,
-                       * lo tratamos como terminado.
-                       */
-
                       const isFinished =
                         isMatchFinished(match);
 
@@ -964,13 +996,6 @@ function Home() {
                       const openMatchStats =
                         () => {
 
-                          /*
-                           * PARTIDO TERMINADO
-                           *
-                           * Abre las estadísticas
-                           * reales del partido.
-                           */
-
                           if (isFinished) {
 
                             if (!hasMatchStats) {
@@ -985,13 +1010,6 @@ function Home() {
                             return;
                           }
 
-
-                          /*
-                           * PARTIDO FUTURO
-                           *
-                           * Abre el popup de
-                           * jugadores destacados.
-                           */
 
                           if (
                             match.status ===
@@ -1244,9 +1262,7 @@ function Home() {
             </section>
 
 
-            {/* =========================================
-                MÁXIMOS ANOTADORES
-                ========================================= */}
+            {/* MÁXIMOS ANOTADORES */}
 
             <section className="home-panel scorers-panel">
 
@@ -1375,9 +1391,7 @@ function Home() {
       </section>
 
 
-      {/* =========================================
-          POPUP DEL EQUIPO
-          ========================================= */}
+      {/* POPUP DEL EQUIPO */}
 
       {selectedTeam && (
 
@@ -1553,9 +1567,7 @@ function Home() {
       )}
 
 
-      {/* =========================================
-          POPUP PARTIDO TERMINADO
-          ========================================= */}
+      {/* POPUP PARTIDO TERMINADO */}
 
       {selectedMatch && (
 
@@ -1709,15 +1721,9 @@ function Home() {
             </div>
 
 
-            {/* =========================================
-                ESTADÍSTICAS COMPLETAS DEL PARTIDO
-                ========================================= */}
-
             {selectedMatchStats ? (
 
               <div className="match-modal-content">
-
-                {/* LOCAL */}
 
                 <section className="match-stats-team">
 
@@ -1756,25 +1762,11 @@ function Home() {
 
                   <div className="match-stats-head">
 
-                    <span>
-                      JUGADOR
-                    </span>
-
-                    <span>
-                      PTS
-                    </span>
-
-                    <span>
-                      REB
-                    </span>
-
-                    <span>
-                      AST
-                    </span>
-
-                    <span>
-                      MIN
-                    </span>
+                    <span>JUGADOR</span>
+                    <span>PTS</span>
+                    <span>REB</span>
+                    <span>AST</span>
+                    <span>MIN</span>
 
                   </div>
 
@@ -1821,13 +1813,11 @@ function Home() {
                               {player.name}
                             </strong>
 
-
                             <span>
                               {formatStat(
                                 player.points
                               )}
                             </span>
-
 
                             <span>
                               {formatStat(
@@ -1835,13 +1825,11 @@ function Home() {
                               )}
                             </span>
 
-
                             <span>
                               {formatStat(
                                 player.assists
                               )}
                             </span>
-
 
                             <span>
                               {player.minutes ||
@@ -1857,8 +1845,6 @@ function Home() {
 
                 </section>
 
-
-                {/* VISITANTE */}
 
                 <section className="match-stats-team">
 
@@ -1897,25 +1883,11 @@ function Home() {
 
                   <div className="match-stats-head">
 
-                    <span>
-                      JUGADOR
-                    </span>
-
-                    <span>
-                      PTS
-                    </span>
-
-                    <span>
-                      REB
-                    </span>
-
-                    <span>
-                      AST
-                    </span>
-
-                    <span>
-                      MIN
-                    </span>
+                    <span>JUGADOR</span>
+                    <span>PTS</span>
+                    <span>REB</span>
+                    <span>AST</span>
+                    <span>MIN</span>
 
                   </div>
 
@@ -1962,13 +1934,11 @@ function Home() {
                               {player.name}
                             </strong>
 
-
                             <span>
                               {formatStat(
                                 player.points
                               )}
                             </span>
-
 
                             <span>
                               {formatStat(
@@ -1976,13 +1946,11 @@ function Home() {
                               )}
                             </span>
 
-
                             <span>
                               {formatStat(
                                 player.assists
                               )}
                             </span>
-
 
                             <span>
                               {player.minutes ||
@@ -2024,9 +1992,7 @@ function Home() {
 
             <div className="match-modal-footer">
 
-              <span>
-                LNA
-              </span>
+              <span>LNA</span>
 
               <strong>
                 ESTADÍSTICAS DEL PARTIDO
@@ -2041,9 +2007,7 @@ function Home() {
       )}
 
 
-      {/* =========================================
-          POPUP PRÓXIMO PARTIDO
-          ========================================= */}
+      {/* POPUP PRÓXIMO PARTIDO */}
 
       {selectedUpcomingMatch && (
 
@@ -2212,9 +2176,7 @@ function Home() {
             </div>
 
 
-            {/* =========================================
-                JUGADORES DESTACADOS
-                ========================================= */}
+            {/* JUGADORES DESTACADOS */}
 
             <section className="match-highlighted-section">
 
@@ -2250,10 +2212,40 @@ function Home() {
 
                     )}
 
-                    <strong>
-                      {selectedUpcomingHomeTeam?.shortName ||
-                        selectedUpcomingHomeTeam?.name}
-                    </strong>
+
+                    <div className="match-highlighted-team-title">
+
+                      <strong>
+                        {selectedUpcomingHomeTeam?.shortName ||
+                          selectedUpcomingHomeTeam?.name}
+                      </strong>
+
+
+                      <div className="team-form">
+
+                        {selectedUpcomingHomeTeam &&
+                          getRecentForm(
+                            selectedUpcomingHomeTeam.id
+                          ).map(
+                            (result, index) => (
+
+                              <span
+                                key={`${selectedUpcomingHomeTeam.id}-form-${index}`}
+                                className={`team-form-result ${
+                                  result === "G"
+                                    ? "team-form-win"
+                                    : "team-form-loss"
+                                }`}
+                              >
+                                {result}
+                              </span>
+
+                            )
+                          )}
+
+                      </div>
+
+                    </div>
 
                   </div>
 
@@ -2419,10 +2411,40 @@ function Home() {
 
                     )}
 
-                    <strong>
-                      {selectedUpcomingAwayTeam?.shortName ||
-                        selectedUpcomingAwayTeam?.name}
-                    </strong>
+
+                    <div className="match-highlighted-team-title">
+
+                      <strong>
+                        {selectedUpcomingAwayTeam?.shortName ||
+                          selectedUpcomingAwayTeam?.name}
+                      </strong>
+
+
+                      <div className="team-form">
+
+                        {selectedUpcomingAwayTeam &&
+                          getRecentForm(
+                            selectedUpcomingAwayTeam.id
+                          ).map(
+                            (result, index) => (
+
+                              <span
+                                key={`${selectedUpcomingAwayTeam.id}-form-${index}`}
+                                className={`team-form-result ${
+                                  result === "G"
+                                    ? "team-form-win"
+                                    : "team-form-loss"
+                                }`}
+                              >
+                                {result}
+                              </span>
+
+                            )
+                          )}
+
+                      </div>
+
+                    </div>
 
                   </div>
 
@@ -2594,9 +2616,7 @@ function Home() {
       )}
 
 
-      {/* =========================================
-          POPUP DEL JUGADOR
-          ========================================= */}
+      {/* POPUP DEL JUGADOR */}
 
       {selectedPlayer && (
 
