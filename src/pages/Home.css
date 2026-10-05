@@ -497,7 +497,7 @@
 
 /* =========================================
    CORRECCIÓN DEL RESULTADO
-   ========================================= */
+========================================= */
 
 .fixture-score {
   width: 100%;
@@ -770,7 +770,7 @@
 
 
 /* =========================================
-   POPUPS GENERALES
+   POPUPS
    ========================================= */
 
 .home-modal-overlay {
@@ -1847,11 +1847,14 @@
 
   padding: 20px;
 
+  box-sizing: border-box;
+
   background-color: rgba(0, 0, 0, 0.72);
 
   backdrop-filter: blur(5px);
 
-  overflow-y: auto;
+  overflow: hidden;
+
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1860,8 +1863,9 @@
 
   width: min(100%, 520px);
 
-  height: min(720px, calc(100vh - 40px));
-  max-height: calc(100vh - 40px);
+  height: min(720px, calc(100dvh - 40px));
+
+  max-height: calc(100dvh - 40px);
 
   display: flex;
   flex-direction: column;
@@ -1900,6 +1904,8 @@
 
 .match-stats-modal-header {
   position: relative;
+
+  flex-shrink: 0;
 
   padding: 22px 50px 18px 22px;
 
@@ -2003,6 +2009,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 
+  flex-shrink: 0;
+
   border-bottom: 1px solid var(--sports-border);
 }
 
@@ -2051,15 +2059,18 @@
    ========================================= */
 
 .match-stats-table-wrapper {
-  max-height: 500px;
-
-  overflow-y: auto;
-
   flex: 1;
 
   min-height: 0;
 
+  max-height: none;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
   -webkit-overflow-scrolling: touch;
+
+  overscroll-behavior: contain;
 }
 
 .match-stats-table-header,
@@ -2077,7 +2088,7 @@
 }
 
 
-/* Encabezados */
+/* Encabezados de estadísticas */
 
 .match-stats-table-header {
   min-height: 36px;
@@ -2100,7 +2111,7 @@
 }
 
 
-/* Filas */
+/* Filas de jugadores */
 
 .match-stats-player-row {
   min-height: 45px;
@@ -2166,11 +2177,8 @@
 
 .fixture-team-name {
   display: flex;
-
   flex-direction: column;
-
   align-items: inherit;
-
   gap: 3px;
 }
 
@@ -2180,13 +2188,9 @@
 
 .fixture-team-name small {
   font-size: 9px;
-
   line-height: 1;
-
   font-weight: 800;
-
   color: var(--color-primary);
-
   letter-spacing: 0.2px;
 }
 
@@ -2197,23 +2201,16 @@
 
 .match-modal-team strong {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   gap: 3px;
 }
 
 .match-modal-team strong small {
   font-size: 9px;
-
   line-height: 1;
-
   font-weight: 800;
-
   color: var(--color-primary);
-
   letter-spacing: 0.2px;
 }
 
@@ -2223,7 +2220,7 @@
    ========================================= */
 
 .match-highlighted-section {
-  padding: 20px 22px 24px;
+  padding: 18px 20px;
 
   background-color: #202020;
 
@@ -2235,37 +2232,33 @@
 /* Título */
 
 .match-highlighted-title {
-  text-align: center;
+  margin-bottom: 14px;
 
-  margin-bottom: 18px;
+  text-align: center;
 }
 
-.match-highlighted-title span {
+.match-highlighted-title > span {
   display: block;
 
-  font-size: 11px;
-
-  line-height: 1;
-
-  font-weight: 900;
+  margin-bottom: 4px;
 
   color: var(--color-primary);
 
+  font-size: 8px;
+  font-weight: 800;
+
   letter-spacing: 1px;
 
-  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 .match-highlighted-title h3 {
   margin: 0;
 
-  font-size: 22px;
-
-  line-height: 1.1;
-
-  font-weight: 900;
-
   color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 800;
 }
 
 
@@ -2279,28 +2272,28 @@
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 16px;
+  gap: 12px;
 }
 
 .match-highlighted-team {
   min-width: 0;
 
-  border: 1px solid var(--sports-border);
-
-  border-radius: 10px;
-
   overflow: hidden;
+
+  border: 1px solid #3d3d3d;
+
+  border-radius: var(--radius-small);
 
   background-color: #292929;
 }
 
 
-/* Encabezado */
+/* Encabezado del equipo */
 
 .match-highlighted-team-header {
-  min-height: 54px;
+  min-height: 44px;
 
-  padding: 10px 14px;
+  padding: 8px 10px;
 
   display: flex;
 
@@ -2308,16 +2301,16 @@
 
   justify-content: center;
 
-  gap: 9px;
-
-  border-bottom: 1px solid var(--sports-border);
+  gap: 8px;
 
   background-color: #242424;
+
+  border-bottom: 1px solid #3d3d3d;
 }
 
 .match-highlighted-team-header img {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
 
   flex-shrink: 0;
 
@@ -2329,76 +2322,13 @@
 
   overflow: hidden;
 
-  font-size: 15px;
-
-  line-height: 1;
-
-  font-weight: 900;
-
   color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
 
   text-overflow: ellipsis;
-
   white-space: nowrap;
-}
-
-
-/* =========================================
-   FORMA ÚLTIMOS 3 PARTIDOS
-   ========================================= */
-
-.match-highlighted-team-title {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 8px;
-
-  flex-wrap: wrap;
-
-  min-width: 0;
-}
-
-.team-form {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 3px;
-
-  flex-shrink: 0;
-}
-
-.team-form-result {
-  width: 17px;
-  height: 17px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 3px;
-
-  font-size: 8px;
-
-  line-height: 1;
-
-  font-weight: 900;
-
-  color: #ffffff;
-}
-
-.team-form-win {
-  background-color: #249447;
-}
-
-.team-form-loss {
-  background-color: #e87524;
 }
 
 
@@ -2411,36 +2341,37 @@
 
   grid-template-columns:
     repeat(3, minmax(0, 1fr));
+
+  gap: 0;
 }
 
 .match-highlighted-category {
   min-width: 0;
 
-  padding: 13px 10px 15px;
+  padding: 9px 7px;
 
-  text-align: center;
-
-  border-right: 1px solid var(--sports-border);
+  border-right: 1px solid #3d3d3d;
 }
 
 .match-highlighted-category:last-child {
-  border-right: none;
+  border-right: 0;
 }
 
 .match-highlighted-category > span {
   display: block;
 
-  margin-bottom: 10px;
-
-  font-size: 9px;
-
-  line-height: 1;
-
-  font-weight: 900;
+  margin-bottom: 7px;
 
   color: var(--color-primary);
 
-  letter-spacing: 0.5px;
+  font-size: 7px;
+  font-weight: 800;
+
+  letter-spacing: 0.6px;
+
+  text-align: center;
+
+  text-transform: uppercase;
 }
 
 
@@ -2449,20 +2380,19 @@
    ========================================= */
 
 .match-highlighted-player {
+  width: 100%;
+
+  min-width: 0;
+
+  padding: 6px 3px;
+
   display: flex;
 
   flex-direction: column;
 
   align-items: center;
-  justify-content: center;
 
-  width: 100%;
-
-  min-width: 0;
-
-  min-height: 48px;
-
-  padding: 4px 2px;
+  gap: 3px;
 
   border: 0;
 
@@ -2472,49 +2402,41 @@
 
   color: #ffffff;
 
+  text-align: center;
+
   cursor: pointer;
 
-  text-align: center;
+  transition:
+    background-color 0.2s ease;
 }
 
 .match-highlighted-player:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background-color: #353535;
 }
 
 .match-highlighted-player strong {
-  display: block;
-
   width: 100%;
-
-  max-width: 100%;
 
   overflow: hidden;
 
-  font-size: 12px;
-
-  line-height: 1.15;
-
-  font-weight: 900;
-
   color: #ffffff;
 
-  text-overflow: ellipsis;
+  font-size: 8px;
+  font-weight: 800;
 
+  line-height: 1.2;
+
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .match-highlighted-player span {
-  display: block;
+  color: var(--color-primary);
 
-  margin-top: 4px;
-
-  font-size: 11px;
+  font-size: 8px;
+  font-weight: 800;
 
   line-height: 1;
-
-  font-weight: 900;
-
-  color: var(--color-primary);
 }
 
 
@@ -2525,97 +2447,199 @@
 
 .match-modal-schedule {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 2px;
-
   text-align: center;
 }
 
 .match-modal-schedule strong {
   font-size: 34px;
-
   line-height: 1;
-
   font-weight: 900;
-
   color: var(--color-primary);
 }
 
 .match-modal-tv {
   font-size: 12px;
-
   line-height: 1.1;
-
   font-weight: 800;
-
   color: var(--color-primary);
-
   letter-spacing: 0.2px;
 }
 
 
 /* =========================================
+   POPUP - JUGADORES DESTACADOS
+   ========================================= */
+
+.match-highlighted-section {
+  padding: 20px 22px 24px;
+}
+
+.match-highlighted-title {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.match-highlighted-title span {
+  display: block;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.match-highlighted-title h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.1;
+  font-weight: 900;
+  color: #fff;
+}
+
+.match-highlighted-teams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.match-highlighted-team {
+  border: 1px solid var(--sports-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.match-highlighted-team-header {
+  min-height: 54px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-bottom: 1px solid var(--sports-border);
+}
+
+.match-highlighted-team-header img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.match-highlighted-team-header strong {
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+}
+
+.match-highlighted-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.match-highlighted-category {
+  min-width: 0;
+  padding: 13px 10px 15px;
+  text-align: center;
+  border-right: 1px solid var(--sports-border);
+}
+
+.match-highlighted-category:last-child {
+  border-right: none;
+}
+
+.match-highlighted-category > span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+.match-highlighted-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 4px 2px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.match-highlighted-player:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.match-highlighted-player strong {
+  display: block;
+  max-width: 100%;
+  font-size: 12px;
+  line-height: 1.15;
+  font-weight: 900;
+  color: #fff;
+}
+
+.match-highlighted-player span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+
+/* =========================================
    POPUP PRÓXIMO PARTIDO
+   HORARIO + TV
    ========================================= */
 
 .match-modal-score {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 5px;
 }
 
 .match-modal-score strong {
   display: block;
-
   line-height: 1;
 }
 
 .match-modal-score span {
   display: block;
-
   color: var(--color-primary);
-
   font-size: 12px;
-
   font-weight: 900;
-
   line-height: 1;
-
   text-align: center;
-
   white-space: nowrap;
 }
 
 
 /* =========================================
-   PARTIDO FINALIZADO - JUGADORES CLICKABLE
+   BOTÓN DE JUGADOR EN STATS
    ========================================= */
 
 .match-stat-player {
   width: 100%;
-
   border: 0;
-
   background: transparent;
-
   color: inherit;
-
   font: inherit;
-
   text-align: left;
-
   cursor: pointer;
 }
 
@@ -2625,7 +2649,50 @@
 
 
 /* =========================================
-   POPUPS EN CELULAR
+   RÉCORD DE ÚLTIMOS PARTIDOS
+   ========================================= */
+
+.match-highlighted-team-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.team-form {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.team-form-result {
+  width: 17px;
+  height: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 900;
+
+  color: #fff;
+}
+
+.team-form-win {
+  background-color: #249447;
+}
+
+.team-form-loss {
+  background-color: #e87524;
+}
+
+
+/* =========================================
+   MOBILE - POPUPS
    ========================================= */
 
 @media (max-width: 600px) {
@@ -2636,24 +2703,16 @@
 
   .match-modal-overlay {
     position: fixed;
-
     inset: 0;
-
     z-index: 1200;
 
-    display: flex;
+    display: block;
 
-    align-items: flex-start;
+    box-sizing: border-box;
 
-    justify-content: center;
-
-    padding:
-      72px
-      12px
-      24px;
+    padding: 12px;
 
     overflow-y: auto;
-
     -webkit-overflow-scrolling: touch;
 
     background-color: rgba(0, 0, 0, 0.72);
@@ -2663,18 +2722,14 @@
 
   .match-modal {
     width: 100%;
-
     max-width: 520px;
 
     max-height: none;
-
     height: auto;
 
     margin: 0 auto;
 
     overflow: visible;
-
-    flex-shrink: 0;
   }
 
 
@@ -2684,64 +2739,54 @@
 
   .match-stats-modal-overlay {
     position: fixed;
-
     inset: 0;
-
     z-index: 1200;
 
     display: flex;
 
     align-items: flex-start;
-
     justify-content: center;
 
+    box-sizing: border-box;
+
     padding:
-      72px
       12px
-      24px;
+      12px
+      20px;
 
-    overflow-y: auto;
-
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
 
     background-color: rgba(0, 0, 0, 0.72);
 
     backdrop-filter: blur(5px);
+
+    -webkit-overflow-scrolling: auto;
   }
 
   .match-stats-modal {
     width: 100%;
-
     max-width: 520px;
 
-    height: auto;
+    height: calc(100dvh - 32px);
 
-    max-height: none;
+    max-height: calc(100dvh - 32px);
 
     margin: 0 auto;
 
-    overflow: visible;
+    display: flex;
+    flex-direction: column;
 
-    flex-shrink: 0;
+    overflow: hidden;
   }
 
 
   /* -----------------------------------------
-     TABLA DE ESTADÍSTICAS
-     ----------------------------------------- */
-
-  .match-stats-table-wrapper {
-    max-height: none;
-
-    overflow: visible;
-  }
-
-
-  /* -----------------------------------------
-     HEADER PARTIDO FINALIZADO
+     HEADER DEL PARTIDO
      ----------------------------------------- */
 
   .match-stats-modal-header {
+    flex-shrink: 0;
+
     padding:
       20px
       45px
@@ -2749,20 +2794,26 @@
       16px;
   }
 
-  .match-stats-modal-title h2 {
-    gap: 8px;
-
-    font-size: 15px;
-  }
-
-  .match-stats-modal-title h2 strong {
-    font-size: 20px;
-  }
-
 
   /* -----------------------------------------
-     TABLA PARTIDO FINALIZADO
+     TABLAS
      ----------------------------------------- */
+
+  .match-stats-table-wrapper {
+    flex: 1;
+
+    min-height: 0;
+
+    max-height: none;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+
+    overscroll-behavior: contain;
+  }
+
 
   .match-stats-table-header,
   .match-stats-player-row {
@@ -2774,7 +2825,6 @@
       50px;
 
     padding-left: 12px;
-
     padding-right: 12px;
   }
 
@@ -2817,10 +2867,7 @@
      ----------------------------------------- */
 
   .match-highlighted-section {
-    padding:
-      17px
-      12px
-      20px;
+    padding: 17px 12px 20px;
   }
 
   .match-highlighted-title h3 {
@@ -2829,47 +2876,15 @@
 
   .match-highlighted-teams {
     grid-template-columns: 1fr;
-
     gap: 12px;
-  }
-
-  .match-highlighted-team-header {
-    min-height: 50px;
-
-    padding:
-      9px
-      12px;
   }
 
   .match-highlighted-team-header strong {
     font-size: 14px;
   }
 
-  .match-highlighted-team-header img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .match-highlighted-team-title {
-    gap: 7px;
-  }
-
-  .team-form {
-    gap: 3px;
-  }
-
-  .team-form-result {
-    width: 16px;
-    height: 16px;
-
-    font-size: 8px;
-  }
-
   .match-highlighted-category {
-    padding:
-      12px
-      6px
-      13px;
+    padding: 12px 6px 13px;
   }
 
   .match-highlighted-category > span {
@@ -2887,34 +2902,66 @@
 
 
 /* =========================================
-   MOBILE MUY PEQUEÑO
+   MOBILE PEQUEÑO
    ========================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
 
-  .match-modal-overlay,
   .match-stats-modal-overlay {
     padding:
-      60px
-      8px
-      20px;
-  }
-
-  .match-highlighted-section {
-    padding:
-      15px
-      9px
+      10px
+      10px
       18px;
   }
 
-  .match-highlighted-team-header strong {
-    font-size: 13px;
+  .match-stats-modal {
+    height: calc(100dvh - 28px);
+    max-height: calc(100dvh - 28px);
   }
 
-  .team-form-result {
-    width: 15px;
-    height: 15px;
-
-    font-size: 7px;
+  .match-stats-modal-header {
+    padding:
+      18px
+      45px
+      15px
+      14px;
   }
+
+  .match-stats-modal-title h2 {
+    gap: 8px;
+
+    font-size: 15px;
+  }
+
+  .match-stats-modal-title h2 strong {
+    font-size: 20px;
+  }
+
+  .match-stats-team-tab {
+    min-height: 43px;
+  }
+
+  .match-stats-table-header,
+  .match-stats-player-row {
+    grid-template-columns:
+      minmax(0, 1fr)
+      38px
+      38px
+      38px
+      48px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .match-stats-table-header {
+    min-height: 33px;
+
+    font-size: 8px;
+  }
+
+  .match-stats-player-row {
+    min-height: 42px;
+  }
+
 }
