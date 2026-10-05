@@ -21,6 +21,7 @@ const teamMap = {
   IND: "independiente-oliva",
   INS: "instituto",
   LAU: "la-union",
+  UNI: "la-union",
   OBE: "obera",
   OLI: "olimpico",
   PLA: "platense",

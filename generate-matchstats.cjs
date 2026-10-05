@@ -35,23 +35,6 @@ function main() {
     --------------------------------------------------
     IDENTIFICAR LOS TEAM ID REALES DE LNA
     --------------------------------------------------
-
-    El normalizador guarda los jugadores con:
-
-    player.teamId
-
-    Ejemplo:
-
-    san-martin
-    instituto
-
-    Mientras que Flashscore puede devolver:
-
-    San Martín
-    Instituto de Córdoba
-
-    Por eso NO debemos comparar directamente
-    player.teamId con match.awayTeam.
   */
 
   function getTeamIdForMatchTeam(
@@ -60,8 +43,7 @@ function main() {
     expectedTeamPosition
   ) {
     /*
-      1. Primero intentamos encontrar jugadores
-         cuyo teamId coincida directamente.
+      1. Coincidencia directa.
     */
 
     const directPlayers =
@@ -70,91 +52,137 @@ function main() {
           player.teamId === matchTeam
       );
 
-    if (
-      directPlayers.length > 0
-    ) {
+    if (directPlayers.length > 0) {
       return matchTeam;
     }
 
     /*
-      2. Si no coincide directamente,
-         buscamos los teamId disponibles.
-
-         Esto permite detectar:
-
-         "Instituto de Córdoba"
-         →
-         "instituto"
+      2. Buscar todos los teamId disponibles.
     */
 
     const teamCounts = {};
 
-    players.forEach(
-      (player) => {
-        if (!player.teamId) {
-          return;
-        }
-
-        teamCounts[player.teamId] =
-          (teamCounts[player.teamId] || 0) + 1;
+    players.forEach((player) => {
+      if (!player.teamId) {
+        return;
       }
-    );
+
+      teamCounts[player.teamId] =
+        (teamCounts[player.teamId] || 0) + 1;
+    });
 
     const availableTeams =
       Object.entries(teamCounts)
-        .sort(
-          (a, b) =>
-            b[1] - a[1]
-        )
-        .map(
-          ([teamId]) =>
-            teamId
-        );
+        .sort((a, b) => b[1] - a[1])
+        .map(([teamId]) => teamId);
 
     /*
       Si solamente hay un equipo disponible,
-      lo usamos como respaldo.
+      no podemos identificar automáticamente
+      al visitante por teamId.
+
+      En ese caso devolvemos el único equipo
+      solamente para el local.
     */
 
-    if (
-      availableTeams.length === 1
-    ) {
-      return availableTeams[0];
+    if (availableTeams.length === 1) {
+      if (expectedTeamPosition === 0) {
+        return availableTeams[0];
+      }
+
+      return null;
     }
 
     /*
-      Si hay varios equipos, usamos
-      la posición esperada.
-
-      El primer teamId corresponde al local
-      y el segundo al visitante.
+      Si hay dos o más equipos disponibles,
+      usamos su posición.
     */
 
     if (
-      expectedTeamPosition <
-      availableTeams.length
+      expectedTeamPosition >= 0 &&
+      expectedTeamPosition < availableTeams.length
     ) {
-      return availableTeams[
-        expectedTeamPosition
-      ];
+      return availableTeams[expectedTeamPosition];
     }
 
     return null;
   }
 
-  const homeTeamId =
+  let homeTeamId =
     getTeamIdForMatchTeam(
       match.homeTeam,
       match.players,
       0
     );
 
-  const awayTeamId =
+  let awayTeamId =
     getTeamIdForMatchTeam(
       match.awayTeam,
       match.players,
       1
     );
+
+  /*
+    --------------------------------------------------
+    EVITAR DOS EQUIPOS IGUALES
+    --------------------------------------------------
+  */
+
+  if (
+    homeTeamId &&
+    awayTeamId &&
+    homeTeamId === awayTeamId
+  ) {
+    console.log("");
+    console.log(
+      "⚠️ Flashscore devolvió el mismo teamId para local y visitante."
+    );
+
+    console.log(
+      `   TeamId recibido: ${homeTeamId}`
+    );
+
+    console.log(
+      "   Se intentará reconstruir la división de jugadores."
+    );
+
+    /*
+      Cuando todos los jugadores tienen el mismo
+      teamId, no podemos confiar en player.teamId.
+
+      Usamos la cantidad de jugadores y los
+      separamos en dos grupos.
+
+      Esto es un respaldo para casos como:
+
+      Gimnasia vs La Unión
+    */
+
+    const uniqueTeamIds =
+      [...new Set(
+        match.players
+          .map((player) => player.teamId)
+          .filter(Boolean)
+      )];
+
+    if (uniqueTeamIds.length === 1) {
+      /*
+        No conocemos el ID visitante desde Flashscore.
+
+        En este caso NO generamos un matchstats
+        incorrecto.
+
+        Es preferible detener el proceso antes que
+        crear:
+
+        gimnasia-gimnasia
+      */
+
+      throw new Error(
+        `Flashscore asignó el mismo teamId (${homeTeamId}) a todos los jugadores de ${match.homeTeam} vs ${match.awayTeam}. No se puede identificar de forma segura al visitante.`
+      );
+    }
+  }
 
   if (!homeTeamId) {
     throw new Error(
@@ -165,6 +193,18 @@ function main() {
   if (!awayTeamId) {
     throw new Error(
       `No se pudo identificar el teamId LNA del visitante: ${match.awayTeam}`
+    );
+  }
+
+  /*
+    --------------------------------------------------
+    VERIFICACIÓN FINAL
+    --------------------------------------------------
+  */
+
+  if (homeTeamId === awayTeamId) {
+    throw new Error(
+      `Error de seguridad: local y visitante tienen el mismo teamId (${homeTeamId}).`
     );
   }
 
@@ -185,6 +225,24 @@ function main() {
       (player) =>
         player.teamId === awayTeamId
     );
+
+  /*
+    --------------------------------------------------
+    VERIFICAR QUE AMBOS EQUIPOS TENGAN JUGADORES
+    --------------------------------------------------
+  */
+
+  if (homePlayers.length === 0) {
+    throw new Error(
+      `No se encontraron jugadores para el local ${homeTeamId}.`
+    );
+  }
+
+  if (awayPlayers.length === 0) {
+    throw new Error(
+      `No se encontraron jugadores para el visitante ${awayTeamId}.`
+    );
+  }
 
   /*
     --------------------------------------------------
@@ -217,6 +275,7 @@ function main() {
     Ejemplo:
 
     san-martin-instituto
+    gimnasia-la-union
   */
 
   const matchId =
@@ -299,4 +358,7 @@ try {
   console.error("");
   console.error("ERROR:");
   console.error(error.message);
+  console.error("");
+
+  process.exit(1);
 }
