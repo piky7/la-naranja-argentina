@@ -70,6 +70,14 @@ function getPlayerStats(playerId) {
   );
 }
 
+function getPlayer(playerId, playerName) {
+  return players.find(
+    (player) =>
+      player.id === playerId ||
+      player.name === playerName
+  );
+}
+
 
 function formatDate(date) {
   const dateObject = new Date(
@@ -1357,9 +1365,25 @@ function Equipo() {
                             key={player.id}
                           >
 
-                            <strong>
-                              {player.name}
-                            </strong>
+                            <button
+  type="button"
+  className="match-stat-player-name"
+ onClick={(event) => {
+  event.stopPropagation();
+
+  const playerData = getPlayer(
+    player.id,
+    player.name
+  );
+
+  if (playerData) {
+    setSelectedMatch(null);
+    setSelectedPlayer(playerData);
+  }
+}}
+>
+  {player.name}
+</button>
 
                             <span>
                               {formatStat(
@@ -1474,9 +1498,25 @@ function Equipo() {
                             key={player.id}
                           >
 
-                            <strong>
-                              {player.name}
-                            </strong>
+                            <button
+  type="button"
+  className="match-stat-player-name"
+onClick={(event) => {
+  event.stopPropagation();
+
+  const playerData = getPlayer(
+    player.id,
+    player.name
+  );
+
+  if (playerData) {
+    setSelectedMatch(null);
+    setSelectedPlayer(playerData);
+  }
+}}
+>
+  {player.name}
+</button>
 
                             <span>
                               {formatStat(

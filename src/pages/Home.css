@@ -4234,3 +4234,109 @@
   }
 
 }
+
+/* =========================================
+   ESCUDOS CLICKEABLES DENTRO DE POPUPS
+   ========================================= */
+
+.home-team-modal-logo,
+.home-player-modal-logo,
+.match-modal-team-logo-button {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+
+/* Escudo del popup de equipo */
+
+.home-team-modal-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Escudo del popup del jugador */
+
+.home-player-modal-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Escudos de local y visitante
+   en los popups de partido */
+
+.match-modal-team-logo-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Pequeño feedback al pasar el mouse */
+
+.home-team-modal-logo:hover img,
+.home-player-modal-logo:hover img,
+.match-modal-team-logo-button:hover img {
+  transform: scale(1.06);
+}
+
+
+/* Transición */
+
+.home-team-modal-logo img,
+.home-player-modal-logo img,
+.match-modal-team-logo-button img {
+  transition: transform 0.18s ease;
+}
+
+.home-modal-team-logo-button,
+.home-player-modal-logo-button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: transparent !important;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.home-modal-team-logo-button:hover,
+.home-modal-team-logo-button:active,
+.home-modal-team-logo-button:focus,
+.home-modal-team-logo-button:focus-visible,
+.home-player-modal-logo-button:hover,
+.home-player-modal-logo-button:active,
+.home-player-modal-logo-button:focus,
+.home-player-modal-logo-button:focus-visible {
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.home-modal-team-logo-button img,
+.home-player-modal-logo-button img {
+  background: transparent !important;
+  border: none;
+  box-shadow: none;
+}
+
+.home-modal-team-logo-button img,
+.home-player-modal-logo-button img {
+  transition: transform 0.18s ease;
+}
+
+.home-modal-team-logo-button:hover img,
+.home-player-modal-logo-button:hover img {
+  transform: scale(1.05);
+}

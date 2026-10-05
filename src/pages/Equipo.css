@@ -721,25 +721,13 @@
 
 .player-modal-overlay {
   position: fixed;
-
   inset: 0;
-
-  z-index: 1000;
-
+  z-index: 1200;
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   padding: 20px;
-
-  background-color: rgba(0, 0, 0, 0.68);
-
-  backdrop-filter: blur(4px);
-
-  animation:
-    player-modal-overlay-in
-    0.2s ease;
+  background: rgba(0, 0, 0, 0.75);
 }
 
 @keyframes player-modal-overlay-in {
@@ -1110,25 +1098,13 @@
 
 .match-modal-overlay {
   position: fixed;
-
   inset: 0;
-
   z-index: 1100;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   padding: 20px;
-
-  background-color: rgba(0, 0, 0, 0.72);
-
-  backdrop-filter: blur(5px);
-
-  animation:
-    match-modal-overlay-in
-    0.2s ease;
+  background: rgba(0, 0, 0, 0.75);
 }
 
 @keyframes match-modal-overlay-in {
@@ -1249,7 +1225,7 @@
 
 .match-modal-header {
   padding:
-    7px 15px 2px;
+    8px 15px 5px;
 
   background-color:
     var(--sports-panel-header);
@@ -1314,9 +1290,9 @@
 
   align-items: center;
 
-  gap: 20px;
+  gap: 14px;
 
-  margin-top: -1px;
+  margin-top: 2px;
 }
 
 .match-modal-team {
@@ -1331,8 +1307,8 @@
 }
 
 .match-modal-team img {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
 
   flex-shrink: 0;
 
@@ -1354,7 +1330,7 @@
 .match-modal-score strong {
   color: var(--match-accent);
 
-  font-size: 30px;
+  font-size: 26px;
 
   line-height: 1;
 
@@ -1375,9 +1351,9 @@
     1fr
     1fr;
 
-  gap: 16px;
+  gap: 10px;
 
-  padding: 20px;
+  padding: 12px;
 }
 
 
@@ -1401,7 +1377,7 @@
 }
 
 .match-stats-team-header {
-  padding: 14px 15px;
+  padding: 9px 11px;
 
   background-color:
     var(--sports-panel-header);
@@ -1419,8 +1395,8 @@
 }
 
 .match-stats-team-header img {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
 
   object-fit: contain;
 }
@@ -1500,17 +1476,17 @@
 
   grid-template-columns:
     minmax(0, 1fr)
-    36px
-    36px
-    36px
-    48px;
+    34px
+    34px
+    34px
+    44px;
 
   align-items: center;
 
-  min-height: 39px;
+  min-height: 34px;
 
   padding:
-    6px 10px;
+    4px 8px;
 
   border-bottom:
     1px solid var(--sports-border-soft);
@@ -1522,17 +1498,38 @@
   border-bottom: 0;
 }
 
-.match-stat-player strong {
+.match-stat-player-name {
   overflow: hidden;
+
+  width: 100%;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
 
   color: #ffffff;
 
-  font-size: 11px;
+  font: inherit;
+
+  font-size: 10px;
   font-weight: 700;
+
+  text-align: left;
 
   white-space: nowrap;
 
   text-overflow: ellipsis;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease;
+}
+
+.match-stat-player-name:hover {
+  color: var(--match-accent);
 }
 
 .match-stat-player span {
@@ -1631,20 +1628,28 @@
 
 @media (max-width: 700px) {
 
-  .match-modal-overlay {
-    align-items: flex-end;
-
+   .match-modal-overlay {
+    align-items: flex-start;
+    justify-content: center;
     padding: 10px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .match-modal {
+   .match-modal {
     width: 100%;
+    max-width: 850px;
+    height: calc(100vh - 20px);
+    max-height: calc(100vh - 20px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
 
-    max-height:
-      calc(100vh - 20px);
-
-    border-radius:
-      16px 16px 12px 12px;
+ .match-modal-content {
+    min-width: 0;
+    overflow: visible;
   }
 
   .match-modal-header {
@@ -1958,6 +1963,8 @@
     height: 58px;
   }
 
+ 
+
   .team-main-logo img {
     width: 47px;
     height: 47px;
@@ -2010,18 +2017,23 @@
     font-size: 7px;
   }
 
-  .match-stat-player {
-    grid-template-columns:
-      minmax(0, 1fr)
-      32px
-      32px
-      32px
-      43px;
-  }
+.match-stat-player {
+  grid-template-columns:
+    minmax(0, 1fr)
+    30px
+    30px
+    30px
+    40px;
 
-  .match-stat-player strong {
-    font-size: 10px;
-  }
+  min-height: 32px;
+
+  padding:
+    4px 7px;
+}
+
+.match-stat-player-name {
+  font-size: 9px;
+}
 
   .match-stat-player span {
     font-size: 9px;

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { teams } from "../data/teams";
 import { matches } from "../data/matches";
@@ -188,11 +189,19 @@ function Liga() {
         </span>
 
         <span className="standing-team">
-          <img
-            src={team.logo}
-            alt={`Escudo de ${team.name}`}
-            className="standing-logo"
-          />
+          <Link
+            to={`/equipos/${team.id}`}
+            className="team-logo-link"
+            onClick={(event) =>
+              event.stopPropagation()
+            }
+          >
+            <img
+              src={team.logo}
+              alt={`Escudo de ${team.name}`}
+              className="standing-logo"
+            />
+          </Link>
 
           <span>{team.shortName}</span>
         </span>
@@ -292,11 +301,19 @@ function Liga() {
 
                         <div className="match-team">
 
-                          <img
-                            src={homeTeam.logo}
-                            alt={`Escudo de ${homeTeam.name}`}
-                            className="match-team-logo"
-                          />
+                          <Link
+                            to={`/equipos/${homeTeam.id}`}
+                            className="team-logo-link"
+                            onClick={(event) =>
+                              event.stopPropagation()
+                            }
+                          >
+                            <img
+                              src={homeTeam.logo}
+                              alt={`Escudo de ${homeTeam.name}`}
+                              className="match-team-logo"
+                            />
+                          </Link>
 
                           <span>
                             {homeTeam.shortName}
@@ -312,11 +329,19 @@ function Liga() {
 
                         <div className="match-team">
 
-                          <img
-                            src={awayTeam.logo}
-                            alt={`Escudo de ${awayTeam.name}`}
-                            className="match-team-logo"
-                          />
+                          <Link
+                            to={`/equipos/${awayTeam.id}`}
+                            className="team-logo-link"
+                            onClick={(event) =>
+                              event.stopPropagation()
+                            }
+                          >
+                            <img
+                              src={awayTeam.logo}
+                              alt={`Escudo de ${awayTeam.name}`}
+                              className="match-team-logo"
+                            />
+                          </Link>
 
                           <span>
                             {awayTeam.shortName}
@@ -490,11 +515,19 @@ function Liga() {
 
                           <div className="result-team">
 
-                            <img
-                              src={homeTeam.logo}
-                              alt={`Escudo de ${homeTeam.name}`}
-                              className="result-logo"
-                            />
+                            <Link
+                              to={`/equipos/${homeTeam.id}`}
+                              className="team-logo-link"
+                              onClick={(event) =>
+                                event.stopPropagation()
+                              }
+                            >
+                              <img
+                                src={homeTeam.logo}
+                                alt={`Escudo de ${homeTeam.name}`}
+                                className="result-logo"
+                              />
+                            </Link>
 
                             <span>
                               {homeTeam.shortName}
@@ -526,11 +559,19 @@ function Liga() {
                               {awayTeam.shortName}
                             </span>
 
-                            <img
-                              src={awayTeam.logo}
-                              alt={`Escudo de ${awayTeam.name}`}
-                              className="result-logo"
-                            />
+                            <Link
+                              to={`/equipos/${awayTeam.id}`}
+                              className="team-logo-link"
+                              onClick={(event) =>
+                                event.stopPropagation()
+                              }
+                            >
+                              <img
+                                src={awayTeam.logo}
+                                alt={`Escudo de ${awayTeam.name}`}
+                                className="result-logo"
+                              />
+                            </Link>
 
                           </div>
 
@@ -622,11 +663,19 @@ function Liga() {
 
                             <div>
 
-                              <img
-                                src={homeTeam.logo}
-                                alt={`Escudo de ${homeTeam.name}`}
-                                className="upcoming-logo"
-                              />
+                              <Link
+                                to={`/equipos/${homeTeam.id}`}
+                                className="team-logo-link"
+                                onClick={(event) =>
+                                  event.stopPropagation()
+                                }
+                              >
+                                <img
+                                  src={homeTeam.logo}
+                                  alt={`Escudo de ${homeTeam.name}`}
+                                  className="upcoming-logo"
+                                />
+                              </Link>
 
                               <span>
                                 {homeTeam.shortName}
@@ -646,11 +695,19 @@ function Liga() {
                                 {awayTeam.shortName}
                               </span>
 
-                              <img
-                                src={awayTeam.logo}
-                                alt={`Escudo de ${awayTeam.name}`}
-                                className="upcoming-logo"
-                              />
+                              <Link
+                                to={`/equipos/${awayTeam.id}`}
+                                className="team-logo-link"
+                                onClick={(event) =>
+                                  event.stopPropagation()
+                                }
+                              >
+                                <img
+                                  src={awayTeam.logo}
+                                  alt={`Escudo de ${awayTeam.name}`}
+                                  className="upcoming-logo"
+                                />
+                              </Link>
 
                             </div>
 
@@ -713,11 +770,19 @@ function Liga() {
 
             <div className="team-modal-header">
 
-              <img
-                src={selectedTeam.logo}
-                alt={`Escudo de ${selectedTeam.name}`}
-                className="team-modal-logo"
-              />
+              <Link
+                to={`/equipos/${selectedTeam.id}`}
+                className="team-logo-link"
+                onClick={(event) =>
+                  event.stopPropagation()
+                }
+              >
+                <img
+                  src={selectedTeam.logo}
+                  alt={`Escudo de ${selectedTeam.name}`}
+                  className="team-modal-logo"
+                />
+              </Link>
 
               <div>
 
@@ -965,10 +1030,18 @@ function Liga() {
 
                 <div className="match-modal-team">
 
-                  <img
-                    src={homeTeam.logo}
-                    alt={`Escudo de ${homeTeam.name}`}
-                  />
+                  <Link
+                    to={`/equipos/${homeTeam.id}`}
+                    className="team-logo-link"
+                    onClick={(event) =>
+                      event.stopPropagation()
+                    }
+                  >
+                    <img
+                      src={homeTeam.logo}
+                      alt={`Escudo de ${homeTeam.name}`}
+                    />
+                  </Link>
 
                   <span>
                     {homeTeam.name}
@@ -1006,10 +1079,18 @@ function Liga() {
 
                 <div className="match-modal-team">
 
-                  <img
-                    src={awayTeam.logo}
-                    alt={`Escudo de ${awayTeam.name}`}
-                  />
+                  <Link
+                    to={`/equipos/${awayTeam.id}`}
+                    className="team-logo-link"
+                    onClick={(event) =>
+                      event.stopPropagation()
+                    }
+                  >
+                    <img
+                      src={awayTeam.logo}
+                      alt={`Escudo de ${awayTeam.name}`}
+                    />
+                  </Link>
 
                   <span>
                     {awayTeam.name}
@@ -1087,10 +1168,18 @@ function Liga() {
 
                       <div className="match-player-team-heading">
 
-                        <img
-                          src={homeTeam.logo}
-                          alt={`Escudo de ${homeTeam.name}`}
-                        />
+                        <Link
+                          to={`/equipos/${homeTeam.id}`}
+                          className="team-logo-link"
+                          onClick={(event) =>
+                            event.stopPropagation()
+                          }
+                        >
+                          <img
+                            src={homeTeam.logo}
+                            alt={`Escudo de ${homeTeam.name}`}
+                          />
+                        </Link>
 
                         <div>
 
@@ -1118,10 +1207,18 @@ function Liga() {
 
                       <div className="match-player-team-heading">
 
-                        <img
-                          src={awayTeam.logo}
-                          alt={`Escudo de ${awayTeam.name}`}
-                        />
+                        <Link
+                          to={`/equipos/${awayTeam.id}`}
+                          className="team-logo-link"
+                          onClick={(event) =>
+                            event.stopPropagation()
+                          }
+                        >
+                          <img
+                            src={awayTeam.logo}
+                            alt={`Escudo de ${awayTeam.name}`}
+                          />
+                        </Link>
 
                         <div>
 
