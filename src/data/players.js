@@ -573,6 +573,16 @@ export const players = [
 },
 
 {
+  id: "segundo-lasarte",
+  name: "Segundo Lasarte",
+  teamId: "gimnasia",
+  position: "Alero",
+  number: null,
+  nationality: "Argentina",
+  category: "U21",
+},
+
+{
   id: "carlos-rivero",
   name: "Carlos Rivero",
   teamId: "gimnasia",
@@ -874,6 +884,16 @@ export const players = [
   number: null,
   nationality: null,
   category: "E",
+},
+
+{
+  id: "enzo-maglietti",
+  name: "Enzo Maglietti",
+  teamId: "la-union",
+  position: "Base",
+  number: 6,
+  nationality: "Argentina",
+  category: "U21",
 },
 
   // LANÚS

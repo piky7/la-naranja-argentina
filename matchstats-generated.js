@@ -65,6 +65,14 @@
         minutes: "12:16",
       },
       {
+        id: "segundo-lasarte",
+        name: "Lasarte S.",
+        points: 0,
+        rebounds: 0,
+        assists: 0,
+        minutes: "00:00",
+      },
+      {
         id: "ben-stevens",
         name: "Stevens B.",
         points: 0,
@@ -138,6 +146,14 @@
         rebounds: 4,
         assists: 0,
         minutes: "17:58",
+      },
+      {
+        id: "enzo-maglietti",
+        name: "Maglietti E. G.",
+        points: 0,
+        rebounds: 0,
+        assists: 0,
+        minutes: "00:19",
       },
       {
         id: "franco-alorda",

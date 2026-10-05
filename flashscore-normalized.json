@@ -81,6 +81,15 @@
       "minutes": "12:16"
     },
     {
+      "id": "segundo-lasarte",
+      "name": "Lasarte S.",
+      "teamId": "gimnasia",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:00"
+    },
+    {
       "id": "ben-stevens",
       "name": "Stevens B.",
       "teamId": "gimnasia",
@@ -162,6 +171,15 @@
       "minutes": "17:58"
     },
     {
+      "id": "enzo-maglietti",
+      "name": "Maglietti E. G.",
+      "teamId": "la-union",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:19"
+    },
+    {
       "id": "franco-alorda",
       "name": "Alorda F.",
       "teamId": "la-union",
@@ -171,16 +189,5 @@
       "minutes": "07:07"
     }
   ],
-  "unmappedPlayers": [
-    {
-      "name": "Lasarte S.",
-      "teamCode": "NAS",
-      "teamId": "gimnasia"
-    },
-    {
-      "name": "Maglietti E. G.",
-      "teamCode": "UNI",
-      "teamId": "la-union"
-    }
-  ]
+  "unmappedPlayers": []
 }
