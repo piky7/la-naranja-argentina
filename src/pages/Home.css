@@ -3252,3 +3252,43 @@
   }
 
 }
+
+/* =========================================
+   POPUP DE PARTIDO FINALIZADO - MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  .match-modal-finished-overlay {
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px;
+  }
+
+  .match-modal-finished-overlay .match-modal-finished {
+    width: 100%;
+    max-width: 520px;
+    max-height: none;
+    height: auto;
+    overflow: visible;
+    margin: 12px auto;
+    flex-shrink: 0;
+  }
+
+  .match-modal-finished-overlay .match-modal-header {
+    flex-shrink: 0;
+  }
+
+  .match-modal-finished-overlay .match-modal-content {
+    overflow: visible;
+    max-height: none;
+  }
+
+  .match-modal-finished-overlay .match-stats-list {
+    overflow: visible;
+    max-height: none;
+  }
+
+}

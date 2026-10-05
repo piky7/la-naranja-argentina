@@ -1572,14 +1572,14 @@ function Home() {
       {selectedMatch && (
 
         <div
-          className="match-modal-overlay"
+          className="match-modal-overlay match-modal-finished-overlay"
           onClick={() =>
             setSelectedMatch(null)
           }
         >
 
           <div
-            className="match-modal"
+            className="match-modal match-modal-finished"
             onClick={(event) =>
               event.stopPropagation()
             }
