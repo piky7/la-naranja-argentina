@@ -2707,6 +2707,86 @@
    MOBILE
 ========================================= */
 
+/* =========================================================
+   POPUPS EN CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  /* -----------------------------------------
+     POPUP DE PRÓXIMO PARTIDO
+     ----------------------------------------- */
+
+  .match-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+
+    display: block;
+
+    padding: 12px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    background-color: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(5px);
+  }
+
+  .match-modal {
+    width: 100%;
+    max-width: 520px;
+
+    max-height: none;
+    height: auto;
+
+    margin: 0 auto;
+
+    overflow: visible;
+  }
+
+
+  /* -----------------------------------------
+     POPUP DE PARTIDO FINALIZADO
+     ----------------------------------------- */
+
+  .match-stats-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+
+    display: block;
+
+    padding: 12px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    background-color: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(5px);
+  }
+
+  .match-stats-modal {
+    width: 100%;
+    max-width: 520px;
+
+    max-height: none;
+    height: auto;
+
+    margin: 0 auto;
+
+    overflow: visible;
+  }
+
+
+  /* -----------------------------------------
+     TABLAS DE ESTADÍSTICAS
+     ----------------------------------------- */
+
+  .match-stats-table-wrapper {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 @media (max-width: 600px) {
 
   .match-modal-schedule strong {
@@ -2827,3 +2907,4 @@
 .team-form-loss {
   background-color: #e87524;
 }
+
