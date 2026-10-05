@@ -663,126 +663,163 @@ const fixture = [
   ]],
 ];
 
-export const matches = fixture.flatMap(([date, games]) =>
-  games.map(([homeTeam, awayTeam], index) => {
-    const isExampleMatch =
-      date === "2026-09-28" &&
-      homeTeam === "lanus" &&
-      awayTeam === "gimnasia";
+export const matches = fixture.flatMap(
+  ([date, games]) =>
+    games.map(
+      ([homeTeam, awayTeam], index) => {
+        const isExampleMatch =
+          date === "2026-09-28" &&
+          homeTeam === "lanus" &&
+          awayTeam === "gimnasia";
 
-    const matchKey =
-      `${homeTeam}-${awayTeam}`;
+        const matchKey =
+          `${homeTeam}-${awayTeam}`;
 
-    /*
-     * DATOS DE FLASHSCORE
-     *
-     * Si Flashscore conoce la fecha/hora,
-     * esos datos tienen prioridad sobre
-     * el fixture manual.
-     */
-    const flashscoreMatch =
-      flashscoreSchedule[matchKey];
+        const flashscoreMatch =
+          flashscoreSchedule[matchKey];
 
-    const effectiveDate =
-      flashscoreMatch?.date ??
-      date;
+        /*
+         * Si Flashscore tiene una fecha,
+         * tiene prioridad sobre el fixture.
+         *
+         * Si el partido está aplazado,
+         * conservamos la fecha del fixture.
+         */
 
-    /*
-     * RESULTADO AUTOMÁTICO
-     *
-     * Se busca usando la fecha efectiva.
-     */
-    const resultKey =
-      `${effectiveDate}-${homeTeam}-${awayTeam}`;
+        const effectiveDate =
+          flashscoreMatch?.status === "postponed"
+            ? date
+            : flashscoreMatch?.date ?? date;
 
-    const automaticResult =
-      matchResults[resultKey];
-      /*
- * TELEVISACIÓN
- *
- * Básquet Plus informa únicamente los partidos
- * que tienen TyC Sports o DSports.
- *
- * Si no aparece allí y el partido todavía no
- * se jugó, usamos Básquet Pass como fallback.
- */
-const broadcastKey =
-  `${effectiveDate}-${homeTeam}-${awayTeam}`;
+        /*
+         * ======================================
+         * RESULTADO AUTOMÁTICO
+         * ======================================
+         */
 
-const broadcast =
-  broadcasts[broadcastKey];
+        const resultKey =
+          `${effectiveDate}-${homeTeam}-${awayTeam}`;
 
-    return {
-      id:
-        `${effectiveDate}-${homeTeam}-${awayTeam}-${index + 1}`,
+        const automaticResult =
+          matchResults[resultKey];
 
-      date:
-        effectiveDate,
+        /*
+         * ======================================
+         * TELEVISACIÓN
+         * ======================================
+         */
 
-      homeTeam,
+        const broadcastKey =
+          `${effectiveDate}-${homeTeam}-${awayTeam}`;
 
-      awayTeam,
+        const broadcast =
+          broadcasts[broadcastKey];
 
-      /*
-       * PRIORIDAD:
-       * 1. Resultado automático
-       * 2. Hora de Flashscore
-       * 3. Ejemplo antiguo
-       * 4. null → la interfaz muestra VS
-       */
-      time:
-        automaticResult?.time ??
-        flashscoreMatch?.time ??
-        (
-          isExampleMatch
-            ? "22:05"
-            : null
-        ),
+        /*
+         * ======================================
+         * ESTADO
+         * ======================================
+         */
 
-      venue:
-        automaticResult?.venue ??
-        (
-          isExampleMatch
-            ? "Comodoro"
-            : null
-        ),
+        const status =
+          flashscoreMatch?.status === "postponed"
+            ? "postponed"
+            : automaticResult?.status ??
+              (
+                isExampleMatch
+                  ? "finished"
+                  : "scheduled"
+              );
 
-    tv:
-  automaticResult?.tv?.length
-    ? automaticResult.tv
-    : broadcast?.channel
-      ? [broadcast.channel]
-      : (!automaticResult || automaticResult.status === "scheduled")
-        ? ["Básquet Pass"]
-        : (
-            isExampleMatch
-              ? ["TyC Sports"]
-              : []
-          ),
+        /*
+         * ======================================
+         * HORA
+         * ======================================
+         *
+         * Si está aplazado:
+         *
+         * NO mostrar la hora vieja.
+         */
 
-      status:
-        automaticResult?.status ??
-        (
-          isExampleMatch
-            ? "finished"
-            : "scheduled"
-        ),
+        const time =
+          status === "postponed"
+            ? null
+            : automaticResult?.time ??
+              flashscoreMatch?.time ??
+              (
+                isExampleMatch
+                  ? "22:05"
+                  : null
+              );
 
-      homeScore:
-        automaticResult?.homeScore ??
-        (
-          isExampleMatch
-            ? 74
-            : null
-        ),
+        /*
+         * ======================================
+         * TV
+         * ======================================
+         *
+         * Un partido aplazado no debe mostrar
+         * Básquet Pass automáticamente.
+         */
 
-      awayScore:
-        automaticResult?.awayScore ??
-        (
-          isExampleMatch
-            ? 92
-            : null
-        ),
-    };
-  })
+        const tv =
+          status === "postponed"
+            ? []
+            : automaticResult?.tv?.length
+              ? automaticResult.tv
+              : broadcast?.channel
+                ? [broadcast.channel]
+                : (
+                    !automaticResult ||
+                    automaticResult.status === "scheduled"
+                  )
+                    ? ["Básquet Pass"]
+                    : (
+                        isExampleMatch
+                          ? ["TyC Sports"]
+                          : []
+                      );
+
+        return {
+          id:
+            `${effectiveDate}-${homeTeam}-${awayTeam}-${index + 1}`,
+
+          date:
+            effectiveDate,
+
+          homeTeam,
+
+          awayTeam,
+
+          time,
+
+          venue:
+            automaticResult?.venue ??
+            (
+              isExampleMatch
+                ? "Comodoro"
+                : null
+            ),
+
+          tv,
+
+          status,
+
+          homeScore:
+            automaticResult?.homeScore ??
+            (
+              isExampleMatch
+                ? 74
+                : null
+            ),
+
+          awayScore:
+            automaticResult?.awayScore ??
+            (
+              isExampleMatch
+                ? 92
+                : null
+            ),
+        };
+      }
+    )
 );

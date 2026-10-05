@@ -70,9 +70,12 @@ function normalizeTeam(name) {
     "San Lorenzo": "san-lorenzo",
 
     "Racing": "racing-chivilcoy",
-    "Racing de Chivilcoy": "racing-chivilcoy",
+    "Racing de Chivilcoy":
+      "racing-chivilcoy",
 
-    "Independiente": "independiente-oliva",
+    "Independiente":
+      "independiente-oliva",
+
     "Independiente de Oliva":
       "independiente-oliva",
   };
@@ -86,6 +89,59 @@ function normalizeTeam(name) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, "-");
+}
+
+/*
+========================================
+ESTADO FLASHscore
+========================================
+
+AB = 3 → Finalizado
+
+Los demás códigos pueden representar
+estados especiales de Flashscore.
+
+45 es utilizado por Flashscore para
+partidos aplazados en determinados feeds.
+
+Guardamos SIEMPRE el código original
+para poder diagnosticar futuros casos.
+*/
+
+function getMatchStatus(statusCode) {
+  if (statusCode === "3") {
+    return "finished";
+  }
+
+  /*
+   * Estado aplazado.
+   *
+   * Flashscore utiliza códigos internos
+   * que pueden variar según deporte/feed.
+   */
+  if (
+    statusCode === "45"
+  ) {
+    return "postponed";
+  }
+
+  /*
+   * Otros estados especiales conocidos.
+   *
+   * No los tratamos como finalizados.
+   */
+  if (
+    [
+      "11",
+      "12",
+      "13",
+      "38",
+    ].includes(statusCode)
+  ) {
+    return "special";
+  }
+
+  return "scheduled";
 }
 
 function parseEvent(block) {
@@ -124,20 +180,6 @@ function parseEvent(block) {
   const awaySlug =
     getValue(block, "WV");
 
-  /*
-   * IDs internos de los equipos en Flashscore.
-   *
-   * En los eventos de Flashscore:
-   *
-   * PX = equipo local
-   * PY = equipo visitante
-   *
-   * Ejemplo Peñarol - Gimnasia:
-   *
-   * PX = 0OnqJxtR
-   * PY = Cn0pHIpQ
-   */
-
   const homeId =
     getValue(block, "PX");
 
@@ -145,24 +187,19 @@ function parseEvent(block) {
     getValue(block, "PY");
 
   const homeScore =
-    homeScoreRaw !== null
+    homeScoreRaw !== null &&
+    homeScoreRaw !== ""
       ? Number(homeScoreRaw)
       : null;
 
   const awayScore =
-    awayScoreRaw !== null
+    awayScoreRaw !== null &&
+    awayScoreRaw !== ""
       ? Number(awayScoreRaw)
       : null;
 
-  let status = "scheduled";
-
-  if (
-    statusCode === "3" &&
-    Number.isFinite(homeScore) &&
-    Number.isFinite(awayScore)
-  ) {
-    status = "finished";
-  }
+  const status =
+    getMatchStatus(statusCode);
 
   return {
     eventId,
@@ -183,6 +220,8 @@ function parseEvent(block) {
 
     status,
 
+    statusCode,
+
     timestamp:
       timestampRaw
         ? Number(timestampRaw)
@@ -199,9 +238,18 @@ function parseEvent(block) {
 }
 
 async function main() {
-  console.log("========================================");
-  console.log("DESCUBRIDOR AUTOMÁTICO DE PARTIDOS LNB");
-  console.log("========================================");
+  console.log(
+    "========================================"
+  );
+
+  console.log(
+    "DESCUBRIDOR AUTOMÁTICO DE PARTIDOS LNB"
+  );
+
+  console.log(
+    "========================================"
+  );
+
   console.log("");
 
   console.log(
@@ -267,9 +315,18 @@ async function main() {
 
   console.log("");
 
-  console.log("========================================");
-  console.log("PARTIDOS ENCONTRADOS");
-  console.log("========================================");
+  console.log(
+    "========================================"
+  );
+
+  console.log(
+    "PARTIDOS ENCONTRADOS"
+  );
+
+  console.log(
+    "========================================"
+  );
+
   console.log("");
 
   matches.forEach(
@@ -287,6 +344,10 @@ async function main() {
       );
 
       console.log(
+        `   Código Flashscore: ${match.statusCode ?? "sin código"}`
+      );
+
+      console.log(
         `   LNA: ${match.homeTeam} - ${match.awayTeam}`
       );
 
@@ -298,23 +359,72 @@ async function main() {
     }
   );
 
+  /*
+  ========================================
+  PARTIDOS TERMINADOS
+  ========================================
+  */
+
   const finished =
     matches.filter(
       (match) =>
         match.status === "finished"
     );
 
-  console.log("========================================");
+  /*
+  ========================================
+  PARTIDOS APLAZADOS
+  ========================================
+  */
+
+  const postponed =
+    matches.filter(
+      (match) =>
+        match.status === "postponed"
+    );
+
+  console.log(
+    "========================================"
+  );
+
   console.log(
     `PARTIDOS TERMINADOS: ${finished.length}`
   );
-  console.log("========================================");
+
+  console.log(
+    "========================================"
+  );
+
   console.log("");
 
   finished.forEach(
     (match) => {
       console.log(
         `${match.eventId} | ${match.homeTeam} ${match.homeScore}-${match.awayScore} ${match.awayTeam}`
+      );
+    }
+  );
+
+  console.log("");
+
+  console.log(
+    "========================================"
+  );
+
+  console.log(
+    `PARTIDOS APLAZADOS: ${postponed.length}`
+  );
+
+  console.log(
+    "========================================"
+  );
+
+  console.log("");
+
+  postponed.forEach(
+    (match) => {
+      console.log(
+        `${match.eventId} | ${match.homeName} vs ${match.awayName} | código ${match.statusCode}`
       );
     }
   );
@@ -330,9 +440,14 @@ async function main() {
     finishedMatches:
       finished.length,
 
+    postponedMatches:
+      postponed.length,
+
     matches,
 
     finished,
+
+    postponed,
   };
 
   fs.writeFileSync(
@@ -351,19 +466,41 @@ async function main() {
 
   console.log("");
 
-  console.log("========================================");
-  console.log("FIN");
-  console.log("========================================");
+  console.log(
+    "========================================"
+  );
+
+  console.log(
+    "FIN"
+  );
+
+  console.log(
+    "========================================"
+  );
 }
 
 main().catch(
   (error) => {
     console.error("");
-    console.error("========================================");
-    console.error("ERROR");
-    console.error("========================================");
+
+    console.error(
+      "========================================"
+    );
+
+    console.error(
+      "ERROR"
+    );
+
+    console.error(
+      "========================================"
+    );
+
     console.error("");
-    console.error(error.message);
+
+    console.error(
+      error.message
+    );
+
     console.error("");
 
     process.exit(1);

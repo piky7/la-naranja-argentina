@@ -1167,9 +1167,10 @@ function Home() {
                               <>
 
                                 <strong className="fixture-time">
-                                  {match.time ||
-                                    "VS"}
-                                </strong>
+  {match.status === "postponed"
+    ? "Susp"
+    : match.time || "VS"}
+</strong>
 
 
                                 {match.tv &&
