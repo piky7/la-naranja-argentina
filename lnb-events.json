@@ -1,6 +1,6 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 111,
+  "totalMatches": 110,
   "finishedMatches": 7,
   "matches": [
     {
@@ -107,21 +107,6 @@
       "awaySlug": "gimnasia",
       "homeId": "zy0PhewD",
       "awayId": "Cn0pHIpQ"
-    },
-    {
-      "eventId": "00TdfgwR",
-      "homeTeam": "gimnasia",
-      "homeName": "Gimnasia",
-      "awayTeam": "la-union",
-      "awayName": "La Union",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "timestamp": 1791156600,
-      "homeSlug": "gimnasia",
-      "awaySlug": "la-union",
-      "homeId": "Cn0pHIpQ",
-      "awayId": "tE0LgyO6"
     },
     {
       "eventId": "WrKSlX0l",
