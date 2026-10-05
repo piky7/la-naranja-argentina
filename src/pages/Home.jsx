@@ -190,6 +190,40 @@ function Home() {
 
   /*
    * =========================================
+   * BUSCAR INFORMACIÓN DEL JUGADOR
+   * DESDE LAS ESTADÍSTICAS DEL PARTIDO
+   * =========================================
+   */
+
+  const getMatchPlayerInfo = (matchPlayer) => {
+    if (!matchPlayer) {
+      return null;
+    }
+
+
+    const playerInfo =
+      players.find(
+        (player) =>
+          player.id === matchPlayer.id ||
+          player.name === matchPlayer.name
+      );
+
+
+    if (!playerInfo) {
+      return null;
+    }
+
+
+    return {
+      ...playerInfo,
+      team: getTeam(playerInfo.teamId),
+      stats: getPlayerStats(playerInfo.id),
+    };
+  };
+
+
+  /*
+   * =========================================
    * BUSCAR ESTADÍSTICAS DEL PARTIDO
    * =========================================
    */
@@ -1761,9 +1795,26 @@ function Home() {
                       .map(
                         (player) => (
 
-                          <div
+                          <button
+                            type="button"
                             className="match-stat-player"
                             key={player.id}
+                            onClick={(event) => {
+                              event.stopPropagation();
+
+                              const playerInfo =
+                                getMatchPlayerInfo(
+                                  player
+                                );
+
+                              if (!playerInfo) {
+                                return;
+                              }
+
+                              setSelectedPlayer(
+                                playerInfo
+                              );
+                            }}
                           >
 
                             <strong>
@@ -1797,7 +1848,7 @@ function Home() {
                                 "—"}
                             </span>
 
-                          </div>
+                          </button>
 
                         )
                       )}
@@ -1885,9 +1936,26 @@ function Home() {
                       .map(
                         (player) => (
 
-                          <div
+                          <button
+                            type="button"
                             className="match-stat-player"
                             key={player.id}
+                            onClick={(event) => {
+                              event.stopPropagation();
+
+                              const playerInfo =
+                                getMatchPlayerInfo(
+                                  player
+                                );
+
+                              if (!playerInfo) {
+                                return;
+                              }
+
+                              setSelectedPlayer(
+                                playerInfo
+                              );
+                            }}
                           >
 
                             <strong>
@@ -1921,7 +1989,7 @@ function Home() {
                                 "—"}
                             </span>
 
-                          </div>
+                          </button>
 
                         )
                       )}
