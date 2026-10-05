@@ -2965,3 +2965,290 @@
   }
 
 }
+
+/* =========================================================
+   CORRECCIÓN DEFINITIVA - POPUP PARTIDO EN CELULAR
+   Evita que el encabezado y los escudos queden cortados
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  /* Overlay del popup */
+  .match-stats-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 12px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-overflow-scrolling: touch;
+
+    background-color: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(5px);
+
+    box-sizing: border-box;
+  }
+
+
+  /* Popup */
+  .match-stats-modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 520px;
+
+    height: auto;
+    max-height: none;
+
+    min-height: 0;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: visible;
+
+    box-sizing: border-box;
+
+    transform: none !important;
+  }
+
+
+  /* Encabezado */
+  .match-stats-modal-header {
+    position: relative;
+
+    width: 100%;
+    min-height: 130px;
+
+    height: auto;
+
+    padding: 18px 45px 18px 16px;
+
+    display: block;
+
+    overflow: visible;
+
+    box-sizing: border-box;
+  }
+
+
+  /* Contenido del encabezado */
+  .match-stats-modal-title {
+    width: 100%;
+
+    display: block;
+
+    overflow: visible;
+
+    box-sizing: border-box;
+  }
+
+
+  /* Título con equipos / resultado */
+  .match-stats-modal-title h2 {
+    width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    overflow: visible;
+
+    box-sizing: border-box;
+  }
+
+
+  /* Escudos que aparecen dentro del encabezado */
+  .match-stats-modal-title h2 img {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+    min-height: 42px;
+
+    max-width: 42px;
+    max-height: 42px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+
+    display: block;
+
+    overflow: visible;
+  }
+
+
+  /* Resultado */
+  .match-stats-modal-title h2 strong {
+    flex-shrink: 0;
+
+    font-size: 20px;
+    line-height: 1;
+  }
+
+
+  /* Texto debajo del resultado */
+  .match-stats-modal-title p {
+    margin-top: 8px;
+
+    line-height: 1.3;
+
+    text-align: center;
+  }
+
+
+  /* Botón cerrar */
+  .match-stats-modal-close {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    z-index: 20;
+  }
+
+
+  /* Tabs de equipos */
+  .match-stats-team-tabs {
+    position: relative;
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    box-sizing: border-box;
+  }
+
+
+  /* Tabla */
+  .match-stats-table-wrapper {
+    width: 100%;
+
+    max-height: none;
+
+    overflow: visible;
+
+    flex: none;
+
+    box-sizing: border-box;
+  }
+}
+
+
+/* =========================================================
+   CORRECCIÓN EXTRA PARA LOS ESCUDOS DEL POPUP
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .match-stats-modal img {
+    max-width: 100%;
+  }
+
+  .match-stats-modal-title img {
+    object-fit: contain !important;
+  }
+
+}
+
+
+/* =========================================================
+   JUGADORES DESTACADOS + FORMA RECIENTE
+   ========================================================= */
+
+.match-highlighted-team-title {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-wrap: nowrap;
+}
+
+.match-highlighted-team-title strong {
+  min-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.team-form {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 3px;
+}
+
+.team-form-result {
+  width: 17px;
+  height: 17px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 3px;
+
+  font-size: 8px;
+  line-height: 1;
+
+  font-weight: 900;
+
+  color: #ffffff;
+}
+
+.team-form-win {
+  background-color: #249447;
+}
+
+.team-form-loss {
+  background-color: #e87524;
+}
+
+
+/* En pantallas pequeñas */
+@media (max-width: 600px) {
+
+  .match-highlighted-team-title {
+    gap: 6px;
+  }
+
+  .team-form-result {
+    width: 16px;
+    height: 16px;
+
+    font-size: 8px;
+  }
+
+}
