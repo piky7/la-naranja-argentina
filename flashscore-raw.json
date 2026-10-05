@@ -1,191 +1,200 @@
 {
-  "eventId": "00TdfgwR",
-  "homeTeam": "Gimnasia",
-  "awayTeam": "La Union",
-  "homeScore": 92,
-  "awayScore": 86,
+  "eventId": "xQfNLYW1",
+  "homeTeam": "Lanus",
+  "awayTeam": "Gimnasia",
+  "homeScore": 74,
+  "awayScore": 92,
   "status": "finished",
   "tv": [],
   "players": [
     {
+      "name": "Franchino M.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "franchino-martin/2m5MIr46/",
+      "points": 23,
+      "rebounds": 10,
+      "assists": 1,
+      "minutes": "33:41"
+    },
+    {
+      "name": "James C.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "james-christian/fPZexqj9/",
+      "points": 17,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "20:32"
+    },
+    {
+      "name": "Andujar L.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "lucas-andujar/O8bGuy08/",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 7,
+      "minutes": "34:58"
+    },
+    {
+      "name": "Johnson M.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "johnson-melvin/x0iC8IYu/",
+      "points": 10,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "28:20"
+    },
+    {
+      "name": "Ramírez C.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "ramirez-claudio/WboPS5bt/",
+      "points": 0,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "27:27"
+    },
+    {
+      "name": "Whitfield R.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "whitfield-robert/SIbHXjtd/",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "16:02"
+    },
+    {
+      "name": "Merchant E.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "merchant-edgar/lEfOf75C/",
+      "points": 11,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "18:59"
+    },
+    {
+      "name": "Sacchi A.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "sacchi-alejo/bFbVGMYI/",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "14:59"
+    },
+    {
+      "name": "Celiz J.",
+      "teamCode": "LAN",
+      "flashscoreSlug": "celiz-joaquin/I18saA4L/",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "05:02"
+    },
+    {
       "name": "Okafor O.",
       "teamCode": "NAS",
       "flashscoreSlug": "okafor-obiajulum/Y7D5MQ4s/",
-      "points": 3,
-      "rebounds": 2,
-      "assists": 1,
-      "minutes": "17:07"
+      "points": 7,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "14:52"
     },
     {
       "name": "Inyaco F.",
       "teamCode": "NAS",
       "flashscoreSlug": "inyaco-felipe/UDeTDISq/",
-      "points": 20,
-      "rebounds": 0,
+      "points": 3,
+      "rebounds": 2,
       "assists": 1,
-      "minutes": "25:27"
+      "minutes": "18:48"
     },
     {
       "name": "Dato M.",
       "teamCode": "NAS",
       "flashscoreSlug": "dato-martiniano/0dMYaM8c/",
-      "points": 10,
-      "rebounds": 4,
-      "assists": 2,
-      "minutes": "27:07"
+      "points": 8,
+      "rebounds": 0,
+      "assists": 3,
+      "minutes": "22:28"
     },
     {
       "name": "Toretta E.",
       "teamCode": "NAS",
       "flashscoreSlug": "toretta-emiliano/UJVHGBXj/",
-      "points": 7,
-      "rebounds": 3,
-      "assists": 0,
-      "minutes": "13:49"
+      "points": 8,
+      "rebounds": 1,
+      "assists": 10,
+      "minutes": "25:48"
     },
     {
       "name": "Rivero C.",
       "teamCode": "NAS",
       "flashscoreSlug": "rivero-carlos/xOOHJtM0/",
-      "points": 6,
-      "rebounds": 9,
+      "points": 13,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "19:30"
+    },
+    {
+      "name": "Santacroce N.",
+      "teamCode": "NAS",
+      "flashscoreSlug": "santacroce-natalio/2wbQOBoR/",
+      "points": 0,
+      "rebounds": 0,
       "assists": 0,
-      "minutes": "24:25"
+      "minutes": "01:51"
     },
     {
       "name": "Chacon M.",
       "teamCode": "NAS",
       "flashscoreSlug": "chacon-marcos/bZQJVd5H/",
-      "points": 17,
+      "points": 28,
       "rebounds": 4,
-      "assists": 2,
-      "minutes": "23:33"
+      "assists": 5,
+      "minutes": "29:23"
     },
     {
       "name": "Carrasco S.",
       "teamCode": "NAS",
       "flashscoreSlug": "carrasco-barria-sebastian/6BOhrD0P/",
-      "points": 17,
-      "rebounds": 5,
-      "assists": 3,
-      "minutes": "26:11"
+      "points": 0,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "14:12"
     },
     {
       "name": "Forestier V.",
       "teamCode": "NAS",
       "flashscoreSlug": "forestier-valentin/hnNvYKV0/",
-      "points": 4,
+      "points": 2,
       "rebounds": 1,
-      "assists": 0,
-      "minutes": "12:16"
+      "assists": 2,
+      "minutes": "15:06"
     },
     {
-      "name": "Lasarte S.",
+      "name": "Melo C.",
       "teamCode": "NAS",
-      "flashscoreSlug": "lasarte-segundo/WzHq4Gdc/",
+      "flashscoreSlug": "melo-ciro/fclT5z9a/",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
-      "minutes": "00:00"
+      "minutes": "02:57"
     },
     {
       "name": "Stevens B.",
       "teamCode": "NAS",
       "flashscoreSlug": "stevens-benjamin/lbYuXjnS/",
-      "points": 0,
-      "rebounds": 5,
-      "assists": 3,
-      "minutes": "15:35"
+      "points": 8,
+      "rebounds": 8,
+      "assists": 0,
+      "minutes": "17:32"
     },
     {
       "name": "Balbo G.",
       "teamCode": "NAS",
       "flashscoreSlug": "balbo-gino/UZ6EK4Zg/",
-      "points": 8,
-      "rebounds": 0,
-      "assists": 1,
-      "minutes": "14:30"
-    },
-    {
-      "name": "Beavers B.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "beavers-brandon/WCObrHqI/",
-      "points": 14,
-      "rebounds": 5,
-      "assists": 1,
-      "minutes": "31:17"
-    },
-    {
-      "name": "Marina M.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "marina-mariano/tSBnmIGi/",
-      "points": 21,
-      "rebounds": 6,
-      "assists": 1,
-      "minutes": "27:21"
-    },
-    {
-      "name": "Acevedo S.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "acevedo-sebastian/8zMS50yt/",
-      "points": 4,
+      "points": 15,
       "rebounds": 3,
-      "assists": 1,
-      "minutes": "23:20"
-    },
-    {
-      "name": "Elsener A.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "elsener-alexis/tGA4PptH/",
-      "points": 7,
-      "rebounds": 5,
-      "assists": 2,
-      "minutes": "25:36"
-    },
-    {
-      "name": "Graterol W.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "graterol-windi/nRf1PhYI/",
-      "points": 20,
-      "rebounds": 5,
-      "assists": 2,
-      "minutes": "32:53"
-    },
-    {
-      "name": "Nuno T.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "nuno-tomas/Yc0fO2Z5/",
-      "points": 17,
-      "rebounds": 6,
-      "assists": 1,
-      "minutes": "34:09"
-    },
-    {
-      "name": "Facello A.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "facello-agustin/pQvq4yX0/",
-      "points": 0,
-      "rebounds": 4,
       "assists": 0,
-      "minutes": "17:58"
-    },
-    {
-      "name": "Maglietti E. G.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "maglietti-enzo/KYSakg33/",
-      "points": 0,
-      "rebounds": 0,
-      "assists": 0,
-      "minutes": "00:19"
-    },
-    {
-      "name": "Alorda F.",
-      "teamCode": "UNI",
-      "flashscoreSlug": "alorda-franco/2VKO51DB/",
-      "points": 3,
-      "rebounds": 0,
-      "assists": 0,
-      "minutes": "07:07"
+      "minutes": "17:31"
     }
   ]
 }
