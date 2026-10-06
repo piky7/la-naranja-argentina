@@ -88,9 +88,12 @@ function parseEvents(text) {
   return events;
 }
 
-function parseScore(text) {
+function parseLiveGameInfo(text) {
   const fields = parseFeedFields(text);
 
+  /*
+   * Marcador
+   */
   const homeValues = fields.DE || [];
   const awayValues = fields.DF || [];
 
@@ -102,6 +105,62 @@ function parseScore(text) {
     ? Number(awayValues[awayValues.length - 1])
     : null;
 
+  /*
+   * Período / cuarto.
+   *
+   * Probamos distintos campos que puede utilizar
+   * Flashscore según el feed.
+   */
+  const period =
+    fields.QT?.[fields.QT.length - 1] ||
+    fields.PS?.[fields.PS.length - 1] ||
+    fields.PE?.[fields.PE.length - 1] ||
+    null;
+
+  /*
+   * Reloj del partido.
+   */
+  const clock =
+    fields.TM?.[fields.TM.length - 1] ||
+    fields.TS?.[fields.TS.length - 1] ||
+    fields.CL?.[fields.CL.length - 1] ||
+    null;
+
+  let quarter = null;
+
+  if (period) {
+    const numericPeriod = Number(period);
+
+    if (
+      Number.isFinite(numericPeriod) &&
+      numericPeriod >= 1 &&
+      numericPeriod <= 4
+    ) {
+      quarter = numericPeriod;
+    }
+  }
+
+  /*
+   * Queremos mostrar solamente los minutos,
+   * sin segundos.
+   *
+   * Ejemplo:
+   * 05:42 → 5
+   * 03:18 → 3
+   * 00:47 → 0
+   */
+  let minutesRemaining = null;
+
+  if (clock) {
+    const match = String(clock).match(
+      /^(\d{1,2})(?::\d{2})?/
+    );
+
+    if (match) {
+      minutesRemaining = Number(match[1]);
+    }
+  }
+
   return {
     homeScore: Number.isFinite(homeScore)
       ? homeScore
@@ -110,6 +169,10 @@ function parseScore(text) {
     awayScore: Number.isFinite(awayScore)
       ? awayScore
       : null,
+
+    quarter,
+
+    minutesRemaining,
   };
 }
 
@@ -261,18 +324,27 @@ async function getLiveMatches() {
         continue;
       }
 
-      const score =
-        parseScore(feed);
+      const liveInfo =
+        parseLiveGameInfo(feed);
 
       results.push({
         eventId: match.eventId,
+
         homeTeam: match.homeTeam,
         awayTeam: match.awayTeam,
+
         homeName: match.homeName,
         awayName: match.awayName,
-        homeScore: score.homeScore,
-        awayScore: score.awayScore,
+
+        homeScore: liveInfo.homeScore,
+        awayScore: liveInfo.awayScore,
+
+        quarter: liveInfo.quarter,
+        minutesRemaining:
+          liveInfo.minutesRemaining,
+
         timestamp: match.timestamp,
+
         status: "live",
         isLive: true,
       });
