@@ -1044,37 +1044,61 @@ const [liveMatches, setLiveMatches] = useState([]);
                 </div>
               </div>
 
-              <div className="home-team-modal-record">
-                <div>
-                  <span>PJ</span>
-                  <strong>
-                    {selectedTeam.gamesPlayed}
-                  </strong>
-                </div>
+            <div className="home-team-modal-record">
+  <div>
+    <span>PJ</span>
+    <strong>
+      {selectedTeam.gamesPlayed}
+    </strong>
+  </div>
 
-                <div>
-                  <span>PG</span>
-                  <strong className="home-team-win">
-                    {selectedTeam.wins}
-                  </strong>
-                </div>
+  <div>
+    <span>PG</span>
+    <strong className="home-team-win">
+      {selectedTeam.wins}
+    </strong>
+  </div>
 
-                <div>
-                  <span>PP</span>
-                  <strong className="home-team-loss">
-                    {selectedTeam.losses}
-                  </strong>
-                </div>
+  <div>
+    <span>PP</span>
+    <strong className="home-team-loss">
+      {selectedTeam.losses}
+    </strong>
+  </div>
 
-                <div>
-                  <span>DIF</span>
-                  <strong>
-                    {selectedTeam.difference > 0
-                      ? `+${selectedTeam.difference}`
-                      : selectedTeam.difference}
-                  </strong>
-                </div>
-              </div>
+  <div>
+    <span>DIF</span>
+    <strong>
+      {selectedTeam.difference > 0
+        ? `+${selectedTeam.difference}`
+        : selectedTeam.difference}
+    </strong>
+  </div>
+
+  <div>
+    <span>PTS/P</span>
+    <strong>
+      {selectedTeam.gamesPlayed > 0
+        ? (
+            selectedTeam.pointsFor /
+            selectedTeam.gamesPlayed
+          ).toFixed(1)
+        : "—"}
+    </strong>
+  </div>
+
+  <div>
+    <span>REC/P</span>
+    <strong>
+      {selectedTeam.gamesPlayed > 0
+        ? (
+            selectedTeam.pointsAgainst /
+            selectedTeam.gamesPlayed
+          ).toFixed(1)
+        : "—"}
+    </strong>
+  </div>
+</div>
 
               <Link
                 to={`/equipos/${selectedTeam.id}`}

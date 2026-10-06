@@ -957,7 +957,7 @@
   display: grid;
 
   grid-template-columns:
-    repeat(4, 1fr);
+    repeat(6, 1fr);
 
   overflow: hidden;
 
@@ -967,9 +967,9 @@
 }
 
 .home-team-modal-record > div {
-  min-height: 76px;
+  min-height: 68px;
 
-  padding: 12px 8px;
+  padding: 8px 5px;
 
   display: flex;
 
@@ -978,7 +978,7 @@
   align-items: center;
   justify-content: center;
 
-  gap: 5px;
+  gap: 4px;
 
   background-color: #292929;
 
