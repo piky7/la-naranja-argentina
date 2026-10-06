@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 113,
-  "finishedMatches": 8,
+  "totalMatches": 114,
+  "finishedMatches": 9,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "WrKSlX0l",
+      "homeTeam": "quimsa",
+      "homeName": "Quimsa",
+      "awayTeam": "atenas",
+      "awayName": "Atenas",
+      "homeScore": 83,
+      "awayScore": 77,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791248700,
+      "homeSlug": "quimsa",
+      "awaySlug": "atenas",
+      "homeId": "E7pXLvd8",
+      "awayId": "hbqyLbBE"
+    },
     {
       "eventId": "00TdfgwR",
       "homeTeam": "gimnasia",
@@ -1814,6 +1830,22 @@
     }
   ],
   "finished": [
+    {
+      "eventId": "WrKSlX0l",
+      "homeTeam": "quimsa",
+      "homeName": "Quimsa",
+      "awayTeam": "atenas",
+      "awayName": "Atenas",
+      "homeScore": 83,
+      "awayScore": 77,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791248700,
+      "homeSlug": "quimsa",
+      "awaySlug": "atenas",
+      "homeId": "E7pXLvd8",
+      "awayId": "hbqyLbBE"
+    },
     {
       "eventId": "00TdfgwR",
       "homeTeam": "gimnasia",

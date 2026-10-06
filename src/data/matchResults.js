@@ -1,4 +1,12 @@
 export const matchResults = {
+  "2026-10-05-quimsa-atenas": {
+    status: "finished",
+    homeScore: 83,
+    awayScore: 77,
+    time: null,
+    venue: null,
+    tv: [],
+  },
   "2026-10-04-gimnasia-la-union": {
     status: "finished",
     homeScore: 92,

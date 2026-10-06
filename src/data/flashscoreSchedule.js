@@ -64,10 +64,10 @@ export const flashscoreSchedule = {
   },
   "quimsa-atenas": {
     "date": "2026-10-05",
-    "time": null,
+    "time": "22:05",
     "eventId": "WrKSlX0l",
-    "status": "postponed",
-    "statusCode": "1"
+    "status": "finished",
+    "statusCode": "3"
   },
   "platense-la-union": {
     "date": "2026-10-06",
