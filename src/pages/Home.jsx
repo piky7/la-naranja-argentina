@@ -503,9 +503,19 @@ function Home() {
                     className="home-standing-row"
                     onClick={() => setSelectedTeam(team)}
                   >
-                    <span className="home-standing-position">
-                      {index + 1}
-                    </span>
+                    <span
+  className={`standing-position ${
+    index + 1 <= 4
+      ? "standing-position-direct"
+      : index + 1 <= 12
+        ? "standing-position-reclasificacion"
+        : index + 1 >= 17
+          ? "standing-position-descenso"
+          : ""
+  }`}
+>
+  {index + 1}
+</span>
 
                     <span className="home-standing-team">
                       <img
