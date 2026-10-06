@@ -401,6 +401,14 @@ export const matchPlayerStats = {
         assists: 0,
         minutes: "00:37",
       },
+       {
+        id: "joaquin-fernandez",
+        name: "Fernandez J.",
+        points: 16,
+        rebounds: 7,
+        assists: 0,
+        minutes: "17:50",
+      },
       {
         id: "piero-di-prinzio",
         name: "Di Prinzio P.",
