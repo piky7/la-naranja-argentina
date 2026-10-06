@@ -81,11 +81,28 @@ function Estadisticas() {
       return matchesSearch && matchesTeam;
     });
 
-    if (!sortBy) {
-      return result.sort((a, b) =>
-        a.name.localeCompare(b.name, "es")
-      );
+   if (!sortBy) {
+  return result.sort((a, b) => {
+    const statsA = getPlayerStats(a.id);
+    const statsB = getPlayerStats(b.id);
+
+    const pointsA =
+      statsA?.gamesPlayed > 0
+        ? statsA.points ?? 0
+        : 0;
+
+    const pointsB =
+      statsB?.gamesPlayed > 0
+        ? statsB.points ?? 0
+        : 0;
+
+    if (pointsA === pointsB) {
+      return a.name.localeCompare(b.name, "es");
     }
+
+    return pointsB - pointsA;
+  });
+}
 
     return result.sort((a, b) => {
       const statsA = getPlayerStats(a.id);
