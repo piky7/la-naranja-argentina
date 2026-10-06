@@ -22,6 +22,8 @@ const headers = {
     "es-AR,es;q=0.9,en;q=0.8",
 };
 
+const MAX_MATCH_DURATION = 4 * 60 * 60;
+
 async function getFeed(url) {
   const response = await fetch(url, {
     headers,
@@ -117,7 +119,8 @@ function parseScore(
   const parts = text.split("¬");
 
   for (const part of parts) {
-    const separator = part.indexOf("÷");
+    const separator =
+      part.indexOf("÷");
 
     if (separator === -1) {
       continue;
@@ -179,13 +182,7 @@ function parseScore(
 }
 
 /*
- * Determina el estado real del partido
- * usando el horario + información del feed.
- *
- * NO usamos DI=-1 como "finalizado",
- * porque comprobamos que Flashscore
- * devuelve DI=-1 incluso para un partido
- * que todavía no comenzó.
+ * Determina el estado real del partido.
  */
 function detectStatus(
   match,
@@ -200,8 +197,7 @@ function detectStatus(
     Number(match.timestamp);
 
   /*
-   * Si el partido todavía está en el futuro,
-   * necesariamente está programado.
+   * Todavía no comenzó.
    */
   if (
     eventTimestamp &&
@@ -211,14 +207,15 @@ function detectStatus(
   }
 
   /*
-   * Si tenemos marcador explícito en el feed,
-   * consideramos que hay actividad de partido.
+   * Si existen ambos marcadores
+   * en el feed, consideramos que
+   * el partido tiene actividad.
    */
   const hasHomeScore =
-  /DE÷-?\d+¬/.test(feed);
+    /DE÷-?\d+¬/.test(feed);
 
   const hasAwayScore =
-  /DF÷-?\d+¬/.test(feed);
+    /DF÷-?\d+¬/.test(feed);
 
   if (
     hasHomeScore &&
@@ -228,17 +225,7 @@ function detectStatus(
   }
 
   /*
-   * DS puede indicar información de estado
-   * adicional del evento.
-   *
-   * No lo usamos todavía para declarar LIVE
-   * por sí solo.
-   */
-
-  /*
-   * Si el horario ya pasó pero no tenemos
-   * datos de juego, dejamos el estado como
-   * "unknown" en vez de inventar que terminó.
+   * No inventamos estados.
    */
   return "unknown";
 }
@@ -266,14 +253,6 @@ async function checkMatch(match) {
       `   DS: ${feed.DS ?? "—"}`
     );
 
-    console.log(
-      `   DD: ${feed.DD ?? "—"}`
-    );
-
-    console.log(
-      `   DC: ${feed.DC ?? "—"}`
-    );
-
     const score =
       parseScore(
         text,
@@ -287,11 +266,6 @@ async function checkMatch(match) {
         text
       );
 
-    /*
-     * Si no hay marcador en el feed,
-     * NO utilizamos el marcador viejo
-     * para declarar que está jugando.
-     */
     return {
       eventId:
         match.eventId,
@@ -366,6 +340,90 @@ async function checkMatch(match) {
   }
 }
 
+function shouldCheckMatch(match) {
+  const now =
+    Math.floor(
+      Date.now() / 1000
+    );
+
+  const timestamp =
+    Number(match.timestamp);
+
+  if (!timestamp) {
+    return false;
+  }
+
+  /*
+   * No consultar partidos que
+   * todavía no comenzaron.
+   */
+  if (now < timestamp) {
+    return false;
+  }
+
+  /*
+   * No consultar partidos que
+   * comenzaron hace más de 4 horas.
+   */
+  if (
+    now >
+    timestamp + MAX_MATCH_DURATION
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function loadExistingLive() {
+  if (!fs.existsSync(outputFile)) {
+    return [];
+  }
+
+  try {
+    const data =
+      JSON.parse(
+        fs.readFileSync(
+          outputFile,
+          "utf8"
+        )
+      );
+
+    return Array.isArray(
+      data.liveMatches
+    )
+      ? data.liveMatches
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLiveMatches(
+  liveMatches,
+  today
+) {
+  const output = {
+    updatedAt:
+      new Date().toISOString(),
+
+    date:
+      today,
+
+    liveMatches,
+  };
+
+  fs.writeFileSync(
+    outputFile,
+    JSON.stringify(
+      output,
+      null,
+      2
+    ),
+    "utf8"
+  );
+}
+
 async function main() {
   console.log("");
 
@@ -398,9 +456,7 @@ async function main() {
   const todayMatches =
     matches.filter(
       (match) => {
-        if (
-          !match.timestamp
-        ) {
+        if (!match.timestamp) {
           return false;
         }
 
@@ -418,10 +474,47 @@ async function main() {
 
   console.log("");
 
+  /*
+   * Solo revisamos partidos
+   * que podrían estar en vivo.
+   */
+  const matchesToCheck =
+    todayMatches.filter(
+      shouldCheckMatch
+    );
+
+  console.log(
+    `Partidos que requieren consulta: ${matchesToCheck.length}`
+  );
+
+  console.log("");
+
+  if (
+    matchesToCheck.length === 0
+  ) {
+    console.log(
+      "🟢 No hay partidos dentro de la ventana LIVE."
+    );
+
+    console.log("");
+
+    console.log(
+      "No se consulta Flashscore."
+    );
+
+    console.log("");
+
+    console.log(
+      "========================================"
+    );
+
+    return;
+  }
+
   const results = [];
 
   for (
-    const match of todayMatches
+    const match of matchesToCheck
   ) {
     console.log(
       `Revisando: ${match.homeName} - ${match.awayName}`
@@ -442,13 +535,6 @@ async function main() {
 
     if (
       result.status ===
-      "scheduled"
-    ) {
-      console.log(
-        "   🟡 Programado"
-      );
-    } else if (
-      result.status ===
       "live"
     ) {
       console.log(
@@ -463,7 +549,7 @@ async function main() {
       "unknown"
     ) {
       console.log(
-        "   ⚪ Estado todavía no identificado"
+        "   ⚪ Sin actividad LIVE detectada"
       );
     } else if (
       result.status ===
@@ -483,70 +569,74 @@ async function main() {
         match.isLive
     );
 
-  const output = {
-    updatedAt:
-      new Date().toISOString(),
+  const existingLive =
+    loadExistingLive();
 
-    date:
-      today,
-
-    liveMatches,
-  };
-
-  fs.writeFileSync(
-    outputFile,
-    JSON.stringify(
-      output,
-      null,
-      2
-    ),
-    "utf8"
-  );
-
-  console.log(
-    "========================================"
-  );
-
-  console.log(
-    "RESULTADO LIVE"
-  );
-
-  console.log(
-    "========================================"
-  );
-
-  console.log("");
-
+  /*
+   * Si no hay LIVE y tampoco había
+   * un LIVE anterior, no escribimos nada.
+   *
+   * Esto evita generar commits
+   * innecesarios cada minuto.
+   */
   if (
-    liveMatches.length === 0
+    liveMatches.length === 0 &&
+    existingLive.length === 0
   ) {
     console.log(
       "🟢 No hay partidos en vivo."
     );
-  } else {
+
     console.log(
-      `🔴 Partidos en vivo: ${liveMatches.length}`
+      "No se modifica live-matches.json."
+    );
+  } else {
+    /*
+     * Si había un partido LIVE y ahora
+     * terminó, limpiamos el archivo.
+     *
+     * Si sigue LIVE, actualizamos.
+     */
+    saveLiveMatches(
+      liveMatches,
+      today
     );
 
-    console.log("");
+    if (
+      liveMatches.length === 0
+    ) {
+      console.log(
+        "⚪ No hay partidos en vivo."
+      );
 
-    liveMatches.forEach(
-      (match) => {
-        console.log(
-          `🔴 ${match.homeName} - ${match.awayName}`
-        );
+      console.log(
+        "🧹 Se limpió live-matches.json."
+      );
+    } else {
+      console.log(
+        `🔴 Partidos en vivo: ${liveMatches.length}`
+      );
 
-        console.log(
-          `   Marcador: ${match.homeScore}-${match.awayScore}`
-        );
+      console.log("");
 
-        console.log(
-          `   Event ID: ${match.eventId}`
-        );
+      liveMatches.forEach(
+        (match) => {
+          console.log(
+            `🔴 ${match.homeName} - ${match.awayName}`
+          );
 
-        console.log("");
-      }
-    );
+          console.log(
+            `   Marcador: ${match.homeScore}-${match.awayScore}`
+          );
+
+          console.log(
+            `   Event ID: ${match.eventId}`
+          );
+
+          console.log("");
+        }
+      );
+    }
   }
 
   console.log(
@@ -554,7 +644,7 @@ async function main() {
   );
 
   console.log(
-    `Archivo generado: ${outputFile}`
+    "FIN UPDATE LIVE"
   );
 
   console.log(
