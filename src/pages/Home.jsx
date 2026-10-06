@@ -6,7 +6,7 @@ import { matches } from "../data/matches";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
-import liveMatchesData from "../data/live-matches.json";
+
 
 import "./Home.css";
 
@@ -26,7 +26,8 @@ function Home() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
-  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+ const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+const [liveMatches, setLiveMatches] = useState([]);
 
   const getTeam = (teamId) => {
     return teams.find((team) => team.id === teamId);
@@ -348,6 +349,56 @@ function Home() {
     };
   }, []);
 
+  useEffect(() => {
+  let active = true;
+
+  const fetchLiveMatches = async () => {
+    try {
+      const response = await fetch(
+        "https://lna-live.lnab.workers.dev/api/live",
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Error HTTP ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+
+      if (!active) {
+        return;
+      }
+
+      setLiveMatches(
+        Array.isArray(data.liveMatches)
+          ? data.liveMatches
+          : []
+      );
+    } catch (error) {
+      console.error(
+        "Error obteniendo partidos LIVE:",
+        error
+      );
+    }
+  };
+
+  fetchLiveMatches();
+
+  const interval = setInterval(
+    fetchLiveMatches,
+    10000
+  );
+
+  return () => {
+    active = false;
+    clearInterval(interval);
+  };
+}, []);
+
   const standings = useMemo(() => {
     return teams
       .map((team) => {
@@ -469,13 +520,7 @@ function Home() {
       .slice(0, 5);
   }, []);
 
-    const liveMatches = useMemo(() => {
-    if (!liveMatchesData?.liveMatches) {
-      return [];
-    }
-
-    return liveMatchesData.liveMatches;
-  }, []);
+    
 
   return (
     <main className="home-page">

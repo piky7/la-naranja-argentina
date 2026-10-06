@@ -1,0 +1,10 @@
+name = "lna-live"
+main = "worker.js"
+compatibility_date = "2026-10-06"
+
+[triggers]
+crons = ["*/1 * * * *"]
+
+[[kv_namespaces]]
+binding = "LNA_LIVE"
+id = "9f7689134fd84dba84602f225285ec6e"
