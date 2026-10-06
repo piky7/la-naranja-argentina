@@ -4629,3 +4629,55 @@
     font-size: 17px;
   }
 }
+
+.match-highlighted-team-averages {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--sports-border);
+}
+
+.match-highlighted-team-averages > div {
+  min-height: 54px;
+  padding: 7px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background-color: #292929;
+  border-right: 1px solid var(--sports-border);
+  text-align: center;
+}
+
+.match-highlighted-team-averages > div:last-child {
+  border-right: 0;
+}
+
+.match-highlighted-team-averages span {
+  color: #999999;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+.match-highlighted-team-averages strong {
+  color: var(--color-primary);
+  font-size: 17px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+@media (max-width: 600px) {
+  .match-highlighted-team-averages > div {
+    min-height: 48px;
+    padding: 6px 5px;
+  }
+
+  .match-highlighted-team-averages span {
+    font-size: 7px;
+  }
+
+  .match-highlighted-team-averages strong {
+    font-size: 15px;
+  }
+}

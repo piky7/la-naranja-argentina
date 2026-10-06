@@ -250,6 +250,29 @@ const [liveMatches, setLiveMatches] = useState([]);
     return value;
   };
 
+  const getTeamAverages = (teamId) => {
+  const team = standings.find(
+    (item) => item.id === teamId
+  );
+
+  if (!team || team.gamesPlayed <= 0) {
+    return {
+      pointsFor: null,
+      pointsAgainst: null,
+    };
+  }
+
+  return {
+    pointsFor: (
+      team.pointsFor / team.gamesPlayed
+    ).toFixed(1),
+
+    pointsAgainst: (
+      team.pointsAgainst / team.gamesPlayed
+    ).toFixed(1),
+  };
+};
+
   const selectedMatchStats = selectedMatch
     ? getMatchStats(selectedMatch)
     : null;
@@ -1686,6 +1709,31 @@ const [liveMatches, setLiveMatches] = useState([]);
                       </div>
                     </div>
                   </div>
+                  {selectedUpcomingHomeTeam && (
+  <div className="match-highlighted-team-averages">
+    <div>
+      <span>PTS/P</span>
+      <strong>
+        {
+          getTeamAverages(
+            selectedUpcomingHomeTeam.id
+          ).pointsFor ?? "—"
+        }
+      </strong>
+    </div>
+
+    <div>
+      <span>REC/P</span>
+      <strong>
+        {
+          getTeamAverages(
+            selectedUpcomingHomeTeam.id
+          ).pointsAgainst ?? "—"
+        }
+      </strong>
+    </div>
+  </div>
+)}
 
                   <div className="match-highlighted-grid">
                     <div className="match-highlighted-category">
@@ -1827,7 +1875,31 @@ const [liveMatches, setLiveMatches] = useState([]);
                       </div>
                     </div>
                   </div>
+{selectedUpcomingAwayTeam && (
+  <div className="match-highlighted-team-averages">
+    <div>
+      <span>PTS/P</span>
+      <strong>
+        {
+          getTeamAverages(
+            selectedUpcomingAwayTeam.id
+          ).pointsFor ?? "—"
+        }
+      </strong>
+    </div>
 
+    <div>
+      <span>REC/P</span>
+      <strong>
+        {
+          getTeamAverages(
+            selectedUpcomingAwayTeam.id
+          ).pointsAgainst ?? "—"
+        }
+      </strong>
+    </div>
+  </div>
+)}
                   <div className="match-highlighted-grid">
                     <div className="match-highlighted-category">
                       <span>PUNTOS</span>
