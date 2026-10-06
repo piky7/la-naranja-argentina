@@ -64,9 +64,9 @@ export const flashscoreSchedule = {
   },
   "quimsa-atenas": {
     "date": "2026-10-05",
-    "time": "22:05",
+    "time": null,
     "eventId": "WrKSlX0l",
-    "status": "scheduled",
+    "status": "postponed",
     "statusCode": "1"
   },
   "platense-la-union": {
@@ -737,17 +737,23 @@ export const flashscoreSchedule = {
   "instituto-atenas": {
     "date": "2027-01-26",
     "time": "18:00",
-    "eventId": "KxCO0nMM"
+    "eventId": "KxCO0nMM",
+    "status": "scheduled",
+    "statusCode": "1"
   },
   "la-union-san-martin": {
     "date": "2027-01-26",
     "time": "18:00",
-    "eventId": "dI52g4Ed"
+    "eventId": "dI52g4Ed",
+    "status": "scheduled",
+    "statusCode": "1"
   },
   "obera-platense": {
     "date": "2027-01-26",
     "time": "18:00",
-    "eventId": "jL2feQqp"
+    "eventId": "jL2feQqp",
+    "status": "scheduled",
+    "statusCode": "1"
   },
   "lanus-racing-chivilcoy": {
     "date": "2027-01-27",
