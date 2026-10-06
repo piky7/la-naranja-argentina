@@ -22,7 +22,7 @@ jobs:
           node-version: 20
 
       - name: Ejecutar detector Live
-        run: node scripts/live-lnb.cjs
+        run: node live-lnb.cjs
 
       - name: Verificar cambios
         id: changes
