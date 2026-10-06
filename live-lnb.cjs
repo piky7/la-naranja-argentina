@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const eventsFile = "lnb-events.json";
-const outputFile = "live-matches.json";
+const outputFile = "src/data/live-matches.json";
 
 const headers = {
   "x-fsign": "SW9D1eZo",
@@ -112,51 +112,67 @@ function parseScore(
   fallbackHome,
   fallbackAway
 ) {
-  const homePatterns = [
-    /AG÷(-?\d+)¬/,
-    /AB÷(-?\d+)¬/,
-  ];
+  const fields = {};
 
-  const awayPatterns = [
-    /AH÷(-?\d+)¬/,
-    /AC÷(-?\d+)¬/,
-  ];
+  const parts = text.split("¬");
 
-  let homeScore = null;
-  let awayScore = null;
+  for (const part of parts) {
+    const separator = part.indexOf("÷");
 
-  for (const pattern of homePatterns) {
-    const match =
-      text.match(pattern);
-
-    if (match) {
-      homeScore =
-        Number(match[1]);
-
-      break;
+    if (separator === -1) {
+      continue;
     }
+
+    const key = part
+      .slice(0, separator)
+      .replace(/^~/, "");
+
+    const value =
+      part.slice(separator + 1);
+
+    if (!key) {
+      continue;
+    }
+
+    if (!fields[key]) {
+      fields[key] = [];
+    }
+
+    fields[key].push(value);
   }
 
-  for (const pattern of awayPatterns) {
-    const match =
-      text.match(pattern);
+  const homeValues =
+    fields.DE || [];
 
-    if (match) {
-      awayScore =
-        Number(match[1]);
+  const awayValues =
+    fields.DF || [];
 
-      break;
-    }
-  }
+  const homeScore =
+    homeValues.length
+      ? Number(
+          homeValues[
+            homeValues.length - 1
+          ]
+        )
+      : fallbackHome ?? null;
+
+  const awayScore =
+    awayValues.length
+      ? Number(
+          awayValues[
+            awayValues.length - 1
+          ]
+        )
+      : fallbackAway ?? null;
 
   return {
     homeScore:
-      homeScore !== null
+      Number.isFinite(homeScore)
         ? homeScore
         : fallbackHome ?? null,
 
     awayScore:
-      awayScore !== null
+      Number.isFinite(awayScore)
         ? awayScore
         : fallbackAway ?? null,
   };
@@ -199,12 +215,10 @@ function detectStatus(
    * consideramos que hay actividad de partido.
    */
   const hasHomeScore =
-    /AG÷-?\d+¬/.test(feed) ||
-    /AB÷-?\d+¬/.test(feed);
+  /DE÷-?\d+¬/.test(feed);
 
   const hasAwayScore =
-    /AH÷-?\d+¬/.test(feed) ||
-    /AC÷-?\d+¬/.test(feed);
+  /DF÷-?\d+¬/.test(feed);
 
   if (
     hasHomeScore &&

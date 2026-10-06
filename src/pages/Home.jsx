@@ -6,6 +6,7 @@ import { matches } from "../data/matches";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
+import liveMatchesData from "../data/live-matches.json";
 
 import "./Home.css";
 
@@ -468,10 +469,86 @@ function Home() {
       .slice(0, 5);
   }, []);
 
+    const liveMatches = useMemo(() => {
+    if (!liveMatchesData?.liveMatches) {
+      return [];
+    }
+
+    return liveMatchesData.liveMatches;
+  }, []);
+
   return (
     <main className="home-page">
       <section className="home-content">
         <div className="home-container">
+          {liveMatches.length > 0 && (
+  <section className="home-live-panel">
+    <div className="home-live-header">
+      <div>
+        <span>AHORA</span>
+        <h2>Partidos en vivo</h2>
+      </div>
+
+      <div className="home-live-indicator">
+        <span></span>
+        EN VIVO
+      </div>
+    </div>
+
+    <div className="home-live-matches">
+      {liveMatches.map((liveMatch) => {
+        const homeTeam = getTeam(liveMatch.homeTeam);
+        const awayTeam = getTeam(liveMatch.awayTeam);
+
+        return (
+          <article
+            key={liveMatch.eventId}
+            className="home-live-match"
+          >
+            <div className="home-live-team home-live-team-home">
+              {homeTeam && (
+                <img
+                  src={homeTeam.logo}
+                  alt={`Escudo de ${homeTeam.name}`}
+                />
+              )}
+
+              <strong>
+                {homeTeam?.shortName ||
+                  liveMatch.homeName}
+              </strong>
+            </div>
+
+            <div className="home-live-score">
+              <span>EN VIVO</span>
+
+              <strong>
+                {liveMatch.homeScore} -{" "}
+                {liveMatch.awayScore}
+              </strong>
+            </div>
+
+            <div className="home-live-team home-live-team-away">
+              {awayTeam && (
+                <img
+                  src={awayTeam.logo}
+                  alt={`Escudo de ${awayTeam.name}`}
+                />
+              )}
+
+              <strong>
+                {awayTeam?.shortName ||
+                  liveMatch.awayName}
+              </strong>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+)}
+
+<div className="home-dashboard"></div>
           <div className="home-dashboard">
 
             {/* TABLA DE POSICIONES */}

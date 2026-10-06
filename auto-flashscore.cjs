@@ -1,26 +1,20 @@
 const fs = require("fs");
 
-const eventId =
-  process.argv[2];
+const eventId = process.argv[2];
 
 if (!eventId) {
   console.error("");
   console.error("ERROR:");
-  console.error(
-    "Tenés que indicar un event ID."
-  );
+  console.error("Tenés que indicar un event ID.");
   console.error("");
   console.error("Ejemplo:");
-  console.error(
-    "node auto-flashscore.cjs ATkHsGgL"
-  );
+  console.error("node auto-flashscore.cjs ATkHsGgL");
   console.error("");
 
   process.exit(1);
 }
 
-const eventsFile =
-  "lnb-events.json";
+const eventsFile = "lnb-events.json";
 
 function loadMatch() {
   if (!fs.existsSync(eventsFile)) {
@@ -29,13 +23,9 @@ function loadMatch() {
     );
   }
 
-  const data =
-    JSON.parse(
-      fs.readFileSync(
-        eventsFile,
-        "utf8"
-      )
-    );
+  const data = JSON.parse(
+    fs.readFileSync(eventsFile, "utf8")
+  );
 
   if (!Array.isArray(data.matches)) {
     throw new Error(
@@ -43,11 +33,9 @@ function loadMatch() {
     );
   }
 
-  const match =
-    data.matches.find(
-      (item) =>
-        item.eventId === eventId
-    );
+  const match = data.matches.find(
+    (item) => item.eventId === eventId
+  );
 
   if (!match) {
     throw new Error(
@@ -78,13 +66,9 @@ const headers = {
 };
 
 async function getFeed(url) {
-  const response =
-    await fetch(
-      url,
-      {
-        headers,
-      }
-    );
+  const response = await fetch(url, {
+    headers,
+  });
 
   if (!response.ok) {
     throw new Error(
@@ -96,10 +80,9 @@ async function getFeed(url) {
 }
 
 function extractOgTitle(page) {
-  const match =
-    page.match(
-      /<meta property="og:title" content="([^"]+)"/
-    );
+  const match = page.match(
+    /<meta property="og:title" content="([^"]+)"/
+  );
 
   if (!match) {
     throw new Error(
@@ -110,72 +93,218 @@ function extractOgTitle(page) {
   return match[1];
 }
 
-function parseMatchFromTitle(title) {
-  const match =
-    title.match(
-      /^(.+?)\s+-\s+(.+?)\s+(-?\d+)-(-?\d+)$/
-    );
+function parseMatchFromTitle(title, fallbackHome, fallbackAway) {
+  const match = title.match(
+    /^(.+?)\s+-\s+(.+?)\s+(-?\d+)-(-?\d+)$/
+  );
 
-  if (!match) {
-    throw new Error(
-      `No se pudo interpretar el título: ${title}`
-    );
+  if (match) {
+    return {
+      homeTeam: match[1],
+      awayTeam: match[2],
+      homeScore: Number(match[3]),
+      awayScore: Number(match[4]),
+    };
+  }
+
+  /*
+   * Durante un partido en vivo Flashscore puede
+   * devolver og:title sin marcador.
+   *
+   * En ese caso usamos los nombres descubiertos
+   * previamente en lnb-events.json.
+   */
+
+  const teamsOnly = title.match(
+    /^(.+?)\s+-\s+(.+?)$/
+  );
+
+  if (teamsOnly) {
+    return {
+      homeTeam: teamsOnly[1],
+      awayTeam: teamsOnly[2],
+      homeScore: fallbackHome,
+      awayScore: fallbackAway,
+    };
   }
 
   return {
-    homeTeam:
-      match[1],
-
-    awayTeam:
-      match[2],
-
-    homeScore:
-      Number(match[3]),
-
-    awayScore:
-      Number(match[4]),
+    homeTeam: fallbackHome,
+    awayTeam: fallbackAway,
+    homeScore: 0,
+    awayScore: 0,
   };
 }
 
-function parseStatus(text) {
-  const statusMatch =
-    text.match(
-      /DI÷([^¬]+)/
-    );
 
-  if (!statusMatch) {
+/* =========================================
+   PARSER DEL FEED DE PARTIDO
+   ========================================= */
+
+function parseFeedFields(text) {
+  const fields = {};
+
+  const parts = text.split("¬");
+
+  for (const part of parts) {
+    const separator = part.indexOf("÷");
+
+    if (separator === -1) {
+      continue;
+    }
+
+    const key = part
+      .slice(0, separator)
+      .replace(/^~/, "");
+
+    const value = part.slice(separator + 1);
+
+    if (!key) {
+      continue;
+    }
+
+    if (!fields[key]) {
+      fields[key] = [];
+    }
+
+    fields[key].push(value);
+  }
+
+  return fields;
+}
+
+
+/* =========================================
+   ESTADO DEL PARTIDO
+   ========================================= */
+
+function parseStatus(text) {
+  const fields = parseFeedFields(text);
+
+  const statusValues = fields.DI || [];
+
+  if (!statusValues.length) {
     return "unknown";
   }
 
   const statusCode =
-    statusMatch[1];
+    statusValues[statusValues.length - 1];
+
+  /*
+   * En el feed observado:
+   *
+   * DI÷6
+   * DI÷7
+   *
+   * cambia mientras el partido está en curso.
+   */
 
   if (statusCode === "-1") {
     return "finished";
   }
 
-  return statusCode;
+  return "live";
 }
+
+
+/* =========================================
+   MARCADOR EN VIVO
+   ========================================= */
+
+function parseLiveScore(text, fallbackHome = 0, fallbackAway = 0) {
+  const fields = parseFeedFields(text);
+
+  const homeValues = fields.DE || [];
+  const awayValues = fields.DF || [];
+
+  const homeScore =
+    homeValues.length
+      ? Number(homeValues[homeValues.length - 1])
+      : fallbackHome;
+
+  const awayScore =
+    awayValues.length
+      ? Number(awayValues[awayValues.length - 1])
+      : fallbackAway;
+
+  return {
+    homeScore:
+      Number.isFinite(homeScore)
+        ? homeScore
+        : fallbackHome,
+
+    awayScore:
+      Number.isFinite(awayScore)
+        ? awayScore
+        : fallbackAway,
+  };
+}
+
+
+/* =========================================
+   PARCIALES POR CUARTO
+   ========================================= */
+
+function parseQuarterScores(text) {
+  const fields = parseFeedFields(text);
+
+  const quarters = [];
+
+  const quarterPairs = [
+    ["1", "IG", "IH"],
+    ["2", "IK", "IL"],
+    ["3", "IM", "IN"],
+    ["4", "IO", "IP"],
+    ["OT", "IQ", "IR"],
+  ];
+
+  for (const [period, homeKey, awayKey] of quarterPairs) {
+    const home = fields[homeKey];
+    const away = fields[awayKey];
+
+    if (
+      home === undefined &&
+      away === undefined
+    ) {
+      continue;
+    }
+
+    quarters.push({
+      period,
+
+      home:
+        home !== undefined &&
+        Number.isFinite(Number(home))
+          ? Number(home)
+          : null,
+
+      away:
+        away !== undefined &&
+        Number.isFinite(Number(away))
+          ? Number(away)
+          : null,
+    });
+  }
+
+  return quarters;
+}
+
+
+/* =========================================
+   TV
+   ========================================= */
 
 function parseTv(text) {
   if (
-    text.includes(
-      "tycsports.com"
-    ) ||
-    text.includes(
-      "TyC Sports"
-    )
+    text.includes("tycsports.com") ||
+    text.includes("TyC Sports")
   ) {
     return ["TyC Sports"];
   }
 
   if (
-    text.includes(
-      "DSports"
-    ) ||
-    text.includes(
-      "DirectTV"
-    )
+    text.includes("DSports") ||
+    text.includes("DirectTV")
   ) {
     return ["DSports"];
   }
@@ -183,13 +312,16 @@ function parseTv(text) {
   return [];
 }
 
+
+/* =========================================
+   JUGADORES
+   ========================================= */
+
 function parsePlayers(text) {
   const players = [];
 
   const generalStart =
-    text.indexOf(
-      "PA÷General"
-    );
+    text.indexOf("PA÷General");
 
   if (generalStart === -1) {
     throw new Error(
@@ -206,25 +338,17 @@ function parsePlayers(text) {
 
   let generalBlock;
 
-  if (
-    nextSectionStart === -1
-  ) {
-    generalBlock =
-      text.slice(
-        generalStart
-      );
+  if (nextSectionStart === -1) {
+    generalBlock = text.slice(generalStart);
   } else {
-    generalBlock =
-      text.slice(
-        generalStart,
-        nextSectionStart
-      );
+    generalBlock = text.slice(
+      generalStart,
+      nextSectionStart
+    );
   }
 
   const playerBlocks =
-    generalBlock.split(
-      "~PJ÷"
-    );
+    generalBlock.split("~PJ÷");
 
   for (
     const block of playerBlocks.slice(1)
@@ -232,22 +356,15 @@ function parsePlayers(text) {
     const playerNameEnd =
       block.indexOf("¬");
 
-    if (
-      playerNameEnd === -1
-    ) {
+    if (playerNameEnd === -1) {
       continue;
     }
 
     const name =
-      block.slice(
-        0,
-        playerNameEnd
-      );
+      block.slice(0, playerNameEnd);
 
     const statsMatch =
-      block.match(
-        /¬PC÷([^¬~]+)/
-      );
+      block.match(/¬PC÷([^¬~]+)/);
 
     if (!statsMatch) {
       continue;
@@ -275,9 +392,7 @@ function parsePlayers(text) {
       values[3] || null;
 
     const teamMatch =
-      block.match(
-        /¬PN÷([^¬~]+)/
-      );
+      block.match(/¬PN÷([^¬~]+)/);
 
     const teamCode =
       teamMatch
@@ -308,6 +423,11 @@ function parsePlayers(text) {
   return players;
 }
 
+
+/* =========================================
+   MAIN
+   ========================================= */
+
 async function main() {
   try {
     console.log(
@@ -330,11 +450,6 @@ async function main() {
 
     console.log("");
 
-    /*
-     * Buscamos el partido descubierto
-     * previamente por discover-mids.cjs.
-     */
-
     const discoveredMatch =
       loadMatch();
 
@@ -343,18 +458,6 @@ async function main() {
     );
 
     console.log("");
-
-    /*
-     * Flashscore utiliza en la URL:
-     *
-     * visitante primero
-     * local después
-     *
-     * Ejemplo:
-     *
-     * gimnasia-Cn0pHIpQ/
-     * penarol-0OnqJxtR/
-     */
 
     if (
       !discoveredMatch.homeSlug ||
@@ -374,9 +477,7 @@ async function main() {
       "URL del partido:"
     );
 
-    console.log(
-      matchPageUrl
-    );
+    console.log(matchPageUrl);
 
     console.log("");
 
@@ -385,9 +486,7 @@ async function main() {
     );
 
     const page =
-      await getFeed(
-        matchPageUrl
-      );
+      await getFeed(matchPageUrl);
 
     console.log(
       `Página: ${page.length} caracteres`
@@ -396,21 +495,21 @@ async function main() {
     console.log("");
 
     const title =
-      extractOgTitle(
-        page
-      );
+      extractOgTitle(page);
 
     const match =
-      parseMatchFromTitle(
-        title
-      );
+  parseMatchFromTitle(
+    title,
+    discoveredMatch.homeName,
+    discoveredMatch.awayName
+  );
 
     console.log(
       `Partido: ${match.homeTeam} - ${match.awayTeam}`
     );
 
     console.log(
-      `Resultado: ${match.homeScore}-${match.awayScore}`
+      `Resultado base: ${match.homeScore}-${match.awayScore}`
     );
 
     console.log("");
@@ -432,12 +531,11 @@ async function main() {
       playersText,
       matchText,
       tvText,
-    ] =
-      await Promise.all([
-        getFeed(playersUrl),
-        getFeed(matchUrl),
-        getFeed(tvUrl),
-      ]);
+    ] = await Promise.all([
+      getFeed(playersUrl),
+      getFeed(matchUrl),
+      getFeed(tvUrl),
+    ]);
 
     console.log(
       `Feed jugadores: ${playersText.length} caracteres`
@@ -452,21 +550,35 @@ async function main() {
     );
 
     console.log("");
+console.log("========================================");
+console.log("FEED PARTIDO RAW");
+console.log("========================================");
+console.log(matchText);
+console.log("========================================");
+console.log("");
+
+    console.log("");
 
     const status =
-      parseStatus(
-        matchText
+      parseStatus(matchText);
+
+    const liveScore =
+      parseLiveScore(
+        matchText,
+        match.homeScore,
+        match.awayScore
       );
+
+    const quarterScores =
+      parseQuarterScores(matchText);
 
     const players =
-      parsePlayers(
-        playersText
-      );
+  playersText.length > 20
+    ? parsePlayers(playersText)
+    : [];
 
     const tv =
-      parseTv(
-        tvText
-      );
+      parseTv(tvText);
 
     const result = {
       eventId,
@@ -478,12 +590,14 @@ async function main() {
         match.awayTeam,
 
       homeScore:
-        match.homeScore,
+        liveScore.homeScore,
 
       awayScore:
-        match.awayScore,
+        liveScore.awayScore,
 
       status,
+
+      quarterScores,
 
       tv,
 
@@ -527,8 +641,28 @@ async function main() {
     );
 
     console.log(
+      `Cuartos detectados: ${result.quarterScores.length}`
+    );
+
+    console.log(
       `Jugadores encontrados: ${result.players.length}`
     );
+
+    if (result.quarterScores.length) {
+      console.log("");
+
+      console.log(
+        "PARCIALES:"
+      );
+
+      result.quarterScores.forEach(
+        (quarter) => {
+          console.log(
+            `${quarter.period}: ${quarter.home}-${quarter.away}`
+          );
+        }
+      );
+    }
 
     console.log(
       "========================================"

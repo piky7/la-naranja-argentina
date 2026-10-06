@@ -4443,3 +4443,149 @@
     0 0 10px rgba(248, 113, 113, 0.10);
   transform: scale(1.05);
 }
+
+/* =========================================
+   PARTIDOS EN VIVO
+   ========================================= */
+
+.home-live-panel {
+  margin-bottom: 18px;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  background: var(--sports-panel);
+  overflow: hidden;
+}
+
+.home-live-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.home-live-header span:first-child {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.home-live-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.home-live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+  color: #f87171;
+}
+
+.home-live-indicator span {
+  width: 8px;
+  height: 8px;
+  margin: 0;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.55);
+}
+
+.home-live-matches {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(260px, 1fr)
+  );
+}
+
+.home-live-match {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+}
+
+.home-live-team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.home-live-team img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.home-live-team strong {
+  font-size: 12px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.home-live-team-away {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.home-live-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.home-live-score span {
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: #f87171;
+}
+
+.home-live-score strong {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .home-live-header {
+    padding: 13px 14px;
+  }
+
+  .home-live-match {
+    gap: 8px;
+    padding: 15px 12px;
+  }
+
+  .home-live-team {
+    gap: 7px;
+  }
+
+  .home-live-team img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .home-live-team strong {
+    font-size: 10px;
+  }
+
+  .home-live-score strong {
+    font-size: 17px;
+  }
+}
