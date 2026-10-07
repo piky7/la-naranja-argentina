@@ -155,105 +155,105 @@ export const flashscoreSchedule = {
   },
   "olimpico-boca": {
     "date": "2026-10-12",
-    "time": "17:00",
+    "time": "22:00",
     "eventId": "MTCEHMzh",
     "status": "scheduled",
     "statusCode": "1"
   },
   "argentino-gimnasia": {
     "date": "2026-10-12",
-    "time": "17:00",
+    "time": "21:30",
     "eventId": "UgGMF054",
     "status": "scheduled",
     "statusCode": "1"
   },
   "atenas-ferro": {
     "date": "2026-10-12",
-    "time": "17:00",
+    "time": "21:00",
     "eventId": "xKJUDvzH",
     "status": "scheduled",
     "statusCode": "1"
   },
   "obera-racing-chivilcoy": {
     "date": "2026-10-13",
-    "time": "17:00",
+    "time": "21:00",
     "eventId": "4KYQdf9j",
     "status": "scheduled",
     "statusCode": "1"
   },
   "lanus-penarol": {
     "date": "2026-10-14",
-    "time": "17:00",
+    "time": "20:30",
     "eventId": "WQQCKc1c",
     "status": "scheduled",
     "statusCode": "1"
   },
   "la-union-racing-chivilcoy": {
     "date": "2026-10-15",
-    "time": "17:00",
+    "time": "21:00",
     "eventId": "xOTKIyW9",
     "status": "scheduled",
     "statusCode": "1"
   },
   "platense-obera": {
     "date": "2026-10-16",
-    "time": "17:00",
+    "time": "20:30",
     "eventId": "AySSGF0M",
     "status": "scheduled",
     "statusCode": "1"
   },
   "san-lorenzo-penarol": {
     "date": "2026-10-16",
-    "time": "17:00",
+    "time": "21:05",
     "eventId": "tKIbBgOq",
     "status": "scheduled",
     "statusCode": "1"
   },
   "regatas-olimpico": {
     "date": "2026-10-18",
-    "time": "17:00",
+    "time": "20:30",
     "eventId": "tv9hXzo3",
     "status": "scheduled",
     "statusCode": "1"
   },
   "san-lorenzo-obera": {
     "date": "2026-10-18",
-    "time": "17:00",
+    "time": "11:05",
     "eventId": "lpM69Xhd",
     "status": "scheduled",
     "statusCode": "1"
   },
   "independiente-oliva-lanus": {
     "date": "2026-10-19",
-    "time": "17:00",
+    "time": "21:00",
     "eventId": "E5MaVEFF",
     "status": "scheduled",
     "statusCode": "1"
   },
   "ferro-platense": {
     "date": "2026-10-20",
-    "time": "17:00",
+    "time": "21:30",
     "eventId": "I1BwOW7k",
     "status": "scheduled",
     "statusCode": "1"
   },
   "san-martin-olimpico": {
     "date": "2026-10-20",
-    "time": "17:00",
+    "time": "21:00",
     "eventId": "MVP7ThpS",
     "status": "scheduled",
     "statusCode": "1"
   },
   "argentino-boca": {
     "date": "2026-10-21",
-    "time": "17:00",
+    "time": "21:00",
     "eventId": "QREoMAx2",
     "status": "scheduled",
     "statusCode": "1"
   },
   "instituto-lanus": {
     "date": "2026-10-21",
-    "time": "17:00",
+    "time": "21:35",
     "eventId": "j56XqEU8",
     "status": "scheduled",
     "statusCode": "1"
