@@ -294,9 +294,9 @@ export const flashscoreSchedule = {
     "statusCode": "1"
   },
   "la-union-independiente-oliva": {
-    "date": "2026-10-27",
-    "time": "18:00",
-    "eventId": "nyCpvqbm",
+    "date": "2026-11-16",
+    "time": "20:01",
+    "eventId": "x8g6EFsB",
     "status": "scheduled",
     "statusCode": "1"
   },
@@ -336,9 +336,9 @@ export const flashscoreSchedule = {
     "statusCode": "1"
   },
   "obera-independiente-oliva": {
-    "date": "2026-10-29",
-    "time": "18:00",
-    "eventId": "ra9PjMsg",
+    "date": "2026-11-18",
+    "time": "20:01",
+    "eventId": "OOiECgCN",
     "status": "scheduled",
     "statusCode": "1"
   },
