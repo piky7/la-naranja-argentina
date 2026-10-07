@@ -107,9 +107,6 @@ function parseLiveGameInfo(text) {
 
   /*
    * Período / cuarto.
-   *
-   * Probamos distintos campos que puede utilizar
-   * Flashscore según el feed.
    */
   const period =
     fields.QT?.[fields.QT.length - 1] ||
@@ -141,10 +138,8 @@ function parseLiveGameInfo(text) {
   }
 
   /*
-   * Queremos mostrar solamente los minutos,
-   * sin segundos.
+   * Mostramos solamente los minutos.
    *
-   * Ejemplo:
    * 05:42 → 5
    * 03:18 → 3
    * 00:47 → 0
@@ -179,13 +174,18 @@ function parseLiveGameInfo(text) {
 function detectStatus(text, timestamp) {
   const now = Math.floor(Date.now() / 1000);
 
-  // Todavía no comenzó
+  /*
+   * Todavía no comenzó.
+   */
   if (timestamp && now < timestamp) {
     return "scheduled";
   }
 
   const fields = parseFeedFields(text);
 
+  /*
+   * Código de estado de Flashscore.
+   */
   const statusValues = fields.DI || [];
 
   const statusCode =
@@ -193,22 +193,56 @@ function detectStatus(text, timestamp) {
       ? statusValues[statusValues.length - 1]
       : null;
 
-  // Flashscore indica partido terminado
+  /*
+   * Flashscore indica partido terminado.
+   */
   if (statusCode === "-1") {
     return "finished";
   }
 
+  /*
+   * Marcador obtenido desde los campos
+   * parseados del feed.
+   *
+   * Esto es más robusto que buscar
+   * directamente con una expresión regular
+   * sobre el texto completo.
+   */
+  const homeValues = fields.DE || [];
+  const awayValues = fields.DF || [];
+
+  const homeScore =
+    homeValues.length
+      ? Number(homeValues[homeValues.length - 1])
+      : null;
+
+  const awayScore =
+    awayValues.length
+      ? Number(awayValues[awayValues.length - 1])
+      : null;
+
   const hasHomeScore =
-    /DE÷-?\d+¬/.test(text);
+    Number.isFinite(homeScore);
 
   const hasAwayScore =
-    /DF÷-?\d+¬/.test(text);
+    Number.isFinite(awayScore);
 
-  // Hay marcador → consideramos que está LIVE
+  /*
+   * Si ambos equipos tienen marcador,
+   * consideramos que el partido está LIVE.
+   */
   if (hasHomeScore && hasAwayScore) {
     return "live";
   }
 
+  /*
+   * Si el partido ya comenzó pero Flashscore
+   * no entregó momentáneamente toda la información,
+   * devolvemos unknown.
+   *
+   * updateLive() manejará este caso sin borrar
+   * un LIVE anterior.
+   */
   return "unknown";
 }
 
@@ -226,7 +260,7 @@ async function getFeed(url) {
   return await response.text();
 }
 
-async function getLiveMatches() {
+async function getLiveMatches(previousLiveMatches = []) {
   const eventsUrl =
     "https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/lnb-events.json";
 
@@ -260,9 +294,6 @@ async function getLiveMatches() {
    *
    * - Desde 10 minutos antes del comienzo.
    * - Hasta 4 horas después del comienzo.
-   *
-   * El Cron sigue ejecutándose cada minuto,
-   * pero fuera de esta ventana NO consultamos Flashscore.
    */
   const todayMatches = data.matches.filter(
     (match) => {
@@ -298,6 +329,12 @@ async function getLiveMatches() {
 
   const results = [];
 
+  /*
+   * Guardamos los partidos que tuvieron
+   * algún problema temporal de consulta.
+   */
+  const failedOrUnknownEventIds = new Set();
+
   for (const match of todayMatches) {
     try {
       const feedUrl =
@@ -317,46 +354,176 @@ async function getLiveMatches() {
       );
 
       /*
-       * Si terminó o todavía no empezó,
-       * no lo mostramos como LIVE.
+       * Partido terminado:
+       *
+       * NO preservamos el LIVE anterior.
+       * Esto permite que desaparezca correctamente
+       * cuando realmente terminó.
        */
-      if (status !== "live") {
+      if (status === "finished") {
         continue;
       }
 
-      const liveInfo =
-        parseLiveGameInfo(feed);
+      /*
+       * Todavía no comenzó.
+       */
+      if (status === "scheduled") {
+        continue;
+      }
 
-      results.push({
-        eventId: match.eventId,
+      /*
+       * Si Flashscore respondió pero no pudimos
+       * interpretar temporalmente el marcador,
+       * preservaremos el LIVE anterior.
+       */
+      if (status === "unknown") {
+        failedOrUnknownEventIds.add(
+          match.eventId
+        );
 
-        homeTeam: match.homeTeam,
-        awayTeam: match.awayTeam,
+        continue;
+      }
 
-        homeName: match.homeName,
-        awayName: match.awayName,
+      /*
+       * LIVE confirmado.
+       */
+      if (status === "live") {
+        const liveInfo =
+          parseLiveGameInfo(feed);
 
-        homeScore: liveInfo.homeScore,
-        awayScore: liveInfo.awayScore,
+        results.push({
+          eventId: match.eventId,
 
-        quarter: liveInfo.quarter,
-        minutesRemaining:
-          liveInfo.minutesRemaining,
+          homeTeam: match.homeTeam,
+          awayTeam: match.awayTeam,
 
-        timestamp: match.timestamp,
+          homeName: match.homeName,
+          awayName: match.awayName,
 
-        status: "live",
-        isLive: true,
-      });
+          homeScore: liveInfo.homeScore,
+          awayScore: liveInfo.awayScore,
 
+          quarter: liveInfo.quarter,
+
+          minutesRemaining:
+            liveInfo.minutesRemaining,
+
+          timestamp: match.timestamp,
+
+          status: "live",
+          isLive: true,
+        });
+      }
     } catch (error) {
+      /*
+       * Si Flashscore falla momentáneamente,
+       * no debemos borrar un LIVE que ya teníamos.
+       */
+      failedOrUnknownEventIds.add(
+        match.eventId
+      );
+
       console.log(
         `Error en ${match.homeName} - ${match.awayName}: ${error.message}`
       );
     }
   }
 
+  /*
+   * Preservamos los partidos que ya estaban LIVE
+   * cuando Flashscore respondió con error o
+   * información incompleta.
+   *
+   * NO preservamos partidos que Flashscore
+   * confirmó como terminados.
+   */
+  for (const previousMatch of previousLiveMatches) {
+    if (
+      !failedOrUnknownEventIds.has(
+        previousMatch.eventId
+      )
+    ) {
+      continue;
+    }
+
+    const alreadyExists =
+      results.some(
+        (match) =>
+          match.eventId ===
+          previousMatch.eventId
+      );
+
+    if (alreadyExists) {
+      continue;
+    }
+
+    const stillInsideWindow =
+      previousMatch.timestamp &&
+      getArgentinaDate(
+        Number(previousMatch.timestamp)
+      ) === today &&
+      (now -
+        Number(previousMatch.timestamp)) /
+        60 <=
+        240;
+
+    if (!stillInsideWindow) {
+      continue;
+    }
+
+    console.log(
+      `Preservando LIVE anterior: ${previousMatch.homeName} - ${previousMatch.awayName}`
+    );
+
+    results.push(previousMatch);
+  }
+
   return results;
+}
+
+function liveMatchesAreEqual(
+  first,
+  second
+) {
+  if (!Array.isArray(first)) {
+    return false;
+  }
+
+  if (!Array.isArray(second)) {
+    return false;
+  }
+
+  if (first.length !== second.length) {
+    return false;
+  }
+
+  const normalize = (matches) =>
+    [...matches]
+      .map((match) => ({
+        eventId: match.eventId,
+        homeTeam: match.homeTeam,
+        awayTeam: match.awayTeam,
+        homeName: match.homeName,
+        awayName: match.awayName,
+        homeScore: match.homeScore,
+        awayScore: match.awayScore,
+        quarter: match.quarter,
+        minutesRemaining:
+          match.minutesRemaining,
+        timestamp: match.timestamp,
+        status: match.status,
+        isLive: match.isLive,
+      }))
+      .sort((a, b) =>
+        String(a.eventId).localeCompare(
+          String(b.eventId)
+        )
+      );
+
+  return (
+    JSON.stringify(normalize(first)) ===
+    JSON.stringify(normalize(second))
+  );
 }
 
 async function updateLive(env) {
@@ -367,8 +534,89 @@ async function updateLive(env) {
     `Actualización LIVE: ${today}`
   );
 
-  const liveMatches =
-    await getLiveMatches();
+  /*
+   * Primero leemos lo que ya tenemos guardado.
+   *
+   * Esto nos permite:
+   * 1. preservar un LIVE si Flashscore falla
+   *    momentáneamente;
+   * 2. evitar escrituras innecesarias de KV.
+   */
+  let previousData = null;
+
+  try {
+    const storedData =
+      await env.LNA_LIVE.get(
+        "live-matches"
+      );
+
+    if (storedData) {
+      previousData =
+        JSON.parse(storedData);
+    }
+  } catch (error) {
+    console.log(
+      `Error leyendo LIVE anterior: ${error.message}`
+    );
+  }
+
+  const previousLiveMatches =
+    previousData &&
+    previousData.date === today &&
+    Array.isArray(
+      previousData.liveMatches
+    )
+      ? previousData.liveMatches
+      : [];
+
+  let liveMatches;
+
+  try {
+    liveMatches =
+      await getLiveMatches(
+        previousLiveMatches
+      );
+  } catch (error) {
+    /*
+     * Si falla completamente la consulta,
+     * NO sobrescribimos KV con [].
+     *
+     * Esto evita que un error temporal de
+     * GitHub o Flashscore haga desaparecer
+     * el LIVE de la web.
+     */
+    console.log(
+      `Error actualizando LIVE: ${error.message}`
+    );
+
+    console.log(
+      "Se conserva el LIVE anterior."
+    );
+
+    return;
+  }
+
+  /*
+   * Si los datos LIVE no cambiaron,
+   * no hacemos ninguna escritura.
+   *
+   * El Cron continúa ejecutándose cada minuto,
+   * pero KV no recibe un write innecesario.
+   */
+  if (
+    previousData &&
+    previousData.date === today &&
+    liveMatchesAreEqual(
+      previousLiveMatches,
+      liveMatches
+    )
+  ) {
+    console.log(
+      `Sin cambios LIVE. No se escribe en KV. Partidos LIVE: ${liveMatches.length}`
+    );
+
+    return;
+  }
 
   const output = {
     updatedAt:
@@ -413,8 +661,10 @@ export default {
         data ||
           JSON.stringify({
             updatedAt: null,
+
             date:
               getTodayArgentina(),
+
             liveMatches: [],
           }),
         {
