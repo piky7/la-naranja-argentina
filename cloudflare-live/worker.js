@@ -11,6 +11,18 @@ const HEADERS = {
   "Accept-Language": "es-AR,es;q=0.9,en;q=0.8",
 };
 
+/*
+ * El cron sigue ejecutándose cada minuto.
+ *
+ * Sin embargo, si solamente cambia el reloj del partido,
+ * KV se actualiza como máximo una vez cada 2 minutos.
+ *
+ * Los cambios importantes (marcador, cuarto, aparición,
+ * finalización, etc.) se guardan inmediatamente.
+ */
+const CLOCK_WRITE_INTERVAL_MS =
+  2 * 60 * 1000;
+
 function getArgentinaDate(timestamp) {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Argentina/Buenos_Aires",
@@ -203,10 +215,6 @@ function detectStatus(text, timestamp) {
   /*
    * Marcador obtenido desde los campos
    * parseados del feed.
-   *
-   * Esto es más robusto que buscar
-   * directamente con una expresión regular
-   * sobre el texto completo.
    */
   const homeValues = fields.DE || [];
   const awayValues = fields.DF || [];
@@ -236,12 +244,8 @@ function detectStatus(text, timestamp) {
   }
 
   /*
-   * Si el partido ya comenzó pero Flashscore
-   * no entregó momentáneamente toda la información,
-   * devolvemos unknown.
-   *
-   * updateLive() manejará este caso sin borrar
-   * un LIVE anterior.
+   * Si ya comenzó pero Flashscore no entregó
+   * momentáneamente toda la información.
    */
   return "unknown";
 }
@@ -357,8 +361,6 @@ async function getLiveMatches(previousLiveMatches = []) {
        * Partido terminado:
        *
        * NO preservamos el LIVE anterior.
-       * Esto permite que desaparezca correctamente
-       * cuando realmente terminó.
        */
       if (status === "finished") {
         continue;
@@ -372,9 +374,7 @@ async function getLiveMatches(previousLiveMatches = []) {
       }
 
       /*
-       * Si Flashscore respondió pero no pudimos
-       * interpretar temporalmente el marcador,
-       * preservaremos el LIVE anterior.
+       * Información temporalmente incompleta.
        */
       if (status === "unknown") {
         failedOrUnknownEventIds.add(
@@ -417,7 +417,7 @@ async function getLiveMatches(previousLiveMatches = []) {
     } catch (error) {
       /*
        * Si Flashscore falla momentáneamente,
-       * no debemos borrar un LIVE que ya teníamos.
+       * no debemos borrar un LIVE anterior.
        */
       failedOrUnknownEventIds.add(
         match.eventId
@@ -431,11 +431,8 @@ async function getLiveMatches(previousLiveMatches = []) {
 
   /*
    * Preservamos los partidos que ya estaban LIVE
-   * cuando Flashscore respondió con error o
-   * información incompleta.
-   *
-   * NO preservamos partidos que Flashscore
-   * confirmó como terminados.
+   * cuando Flashscore respondió con error
+   * o información incompleta.
    */
   for (const previousMatch of previousLiveMatches) {
     if (
@@ -481,7 +478,26 @@ async function getLiveMatches(previousLiveMatches = []) {
   return results;
 }
 
-function liveMatchesAreEqual(
+/*
+ * Compara solamente el estado importante
+ * del partido.
+ *
+ * minutesRemaining queda fuera deliberadamente.
+ *
+ * De esta forma:
+ *
+ * 45 - 44 / Q2 / 5 min
+ * 45 - 44 / Q2 / 4 min
+ *
+ * se consideran el mismo estado importante.
+ *
+ * Pero:
+ *
+ * 46 - 44 / Q2 / 4 min
+ *
+ * sí genera una actualización inmediata.
+ */
+function liveMatchStatesAreEqual(
   first,
   second
 ) {
@@ -501,16 +517,20 @@ function liveMatchesAreEqual(
     [...matches]
       .map((match) => ({
         eventId: match.eventId,
+
         homeTeam: match.homeTeam,
         awayTeam: match.awayTeam,
+
         homeName: match.homeName,
         awayName: match.awayName,
+
         homeScore: match.homeScore,
         awayScore: match.awayScore,
+
         quarter: match.quarter,
-        minutesRemaining:
-          match.minutesRemaining,
+
         timestamp: match.timestamp,
+
         status: match.status,
         isLive: match.isLive,
       }))
@@ -526,6 +546,49 @@ function liveMatchesAreEqual(
   );
 }
 
+/*
+ * Detecta si solamente cambió el reloj.
+ */
+function liveMatchClocksAreDifferent(
+  first,
+  second
+) {
+  if (!Array.isArray(first)) {
+    return true;
+  }
+
+  if (!Array.isArray(second)) {
+    return true;
+  }
+
+  if (first.length !== second.length) {
+    return true;
+  }
+
+  const firstMap = new Map(
+    first.map((match) => [
+      String(match.eventId),
+      match.minutesRemaining,
+    ])
+  );
+
+  for (const match of second) {
+    const previousClock =
+      firstMap.get(
+        String(match.eventId)
+      );
+
+    if (
+      previousClock !==
+      match.minutesRemaining
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 async function updateLive(env) {
   const today =
     getTodayArgentina();
@@ -536,11 +599,6 @@ async function updateLive(env) {
 
   /*
    * Primero leemos lo que ya tenemos guardado.
-   *
-   * Esto nos permite:
-   * 1. preservar un LIVE si Flashscore falla
-   *    momentáneamente;
-   * 2. evitar escrituras innecesarias de KV.
    */
   let previousData = null;
 
@@ -580,10 +638,6 @@ async function updateLive(env) {
     /*
      * Si falla completamente la consulta,
      * NO sobrescribimos KV con [].
-     *
-     * Esto evita que un error temporal de
-     * GitHub o Flashscore haga desaparecer
-     * el LIVE de la web.
      */
     console.log(
       `Error actualizando LIVE: ${error.message}`
@@ -597,20 +651,95 @@ async function updateLive(env) {
   }
 
   /*
-   * Si los datos LIVE no cambiaron,
-   * no hacemos ninguna escritura.
+   * PRIMER CASO:
    *
-   * El Cron continúa ejecutándose cada minuto,
-   * pero KV no recibe un write innecesario.
+   * No existe información anterior.
+   *
+   * Hay que guardar el estado inicial.
    */
   if (
-    previousData &&
-    previousData.date === today &&
-    liveMatchesAreEqual(
+    !previousData ||
+    previousData.date !== today
+  ) {
+    const output = {
+      updatedAt:
+        new Date().toISOString(),
+
+      date: today,
+
+      liveMatches,
+    };
+
+    await env.LNA_LIVE.put(
+      "live-matches",
+      JSON.stringify(output)
+    );
+
+    console.log(
+      `Primera actualización LIVE guardada. Partidos LIVE: ${liveMatches.length}`
+    );
+
+    return;
+  }
+
+  /*
+   * SEGUNDO CASO:
+   *
+   * Cambió algo importante:
+   *
+   * - apareció un partido
+   * - desapareció un partido
+   * - cambió el marcador
+   * - cambió el cuarto
+   * - terminó un partido
+   *
+   * En estos casos escribimos inmediatamente.
+   */
+  const importantStateChanged =
+    !liveMatchStatesAreEqual(
       previousLiveMatches,
       liveMatches
-    )
-  ) {
+    );
+
+  if (importantStateChanged) {
+    const output = {
+      updatedAt:
+        new Date().toISOString(),
+
+      date: today,
+
+      liveMatches,
+    };
+
+    await env.LNA_LIVE.put(
+      "live-matches",
+      JSON.stringify(output)
+    );
+
+    console.log(
+      `Cambio importante LIVE. KV actualizado. Partidos LIVE: ${liveMatches.length}`
+    );
+
+    return;
+  }
+
+  /*
+   * TERCER CASO:
+   *
+   * El marcador y el estado son iguales,
+   * pero cambió únicamente el reloj.
+   */
+  const clockChanged =
+    liveMatchClocksAreDifferent(
+      previousLiveMatches,
+      liveMatches
+    );
+
+  /*
+   * Si tampoco cambió el reloj,
+   * no hacemos absolutamente nada.
+   */
+  if (!clockChanged) {
     console.log(
       `Sin cambios LIVE. No se escribe en KV. Partidos LIVE: ${liveMatches.length}`
     );
@@ -618,6 +747,52 @@ async function updateLive(env) {
     return;
   }
 
+  /*
+   * El reloj cambió.
+   *
+   * Comprobamos cuándo fue la última escritura.
+   */
+  const lastWriteTime =
+    previousData.updatedAt
+      ? new Date(
+          previousData.updatedAt
+        ).getTime()
+      : 0;
+
+  const now =
+    Date.now();
+
+  const timeSinceLastWrite =
+    now - lastWriteTime;
+
+  /*
+   * Si todavía no pasaron 2 minutos,
+   * NO escribimos solamente por el reloj.
+   */
+  if (
+    timeSinceLastWrite <
+    CLOCK_WRITE_INTERVAL_MS
+  ) {
+    console.log(
+      `Solo cambió el reloj. No se escribe todavía. Próxima actualización de reloj en ${Math.max(
+        0,
+        Math.ceil(
+          (
+            CLOCK_WRITE_INTERVAL_MS -
+            timeSinceLastWrite
+          ) / 1000
+        )
+      )} segundos.`
+    );
+
+    return;
+  }
+
+  /*
+   * Ya pasaron 2 minutos.
+   *
+   * Guardamos el nuevo reloj.
+   */
   const output = {
     updatedAt:
       new Date().toISOString(),
@@ -633,7 +808,7 @@ async function updateLive(env) {
   );
 
   console.log(
-    `Partidos LIVE guardados: ${liveMatches.length}`
+    `Actualización periódica del reloj. KV actualizado. Partidos LIVE: ${liveMatches.length}`
   );
 }
 
