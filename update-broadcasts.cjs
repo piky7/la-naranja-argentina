@@ -492,7 +492,45 @@ async function main() {
   );
   console.log("");
 
-  const broadcasts = {};
+  let broadcasts = {};
+
+  /*
+   * Conservamos las televisaciones que ya
+   * estaban guardadas anteriormente.
+   *
+   * Esto evita que una falla temporal del
+   * parser o un cambio en la página de
+   * Básquet Plus borre canales correctos.
+   */
+  if (fs.existsSync(OUTPUT)) {
+    try {
+      const existingContent =
+        fs.readFileSync(
+          OUTPUT,
+          "utf8"
+        );
+
+      const match =
+        existingContent.match(
+          /export const broadcasts = (\{[\s\S]*\});/
+        );
+
+      if (match) {
+        broadcasts =
+          JSON.parse(
+            match[1]
+          );
+
+        console.log(
+          `[TV] Conservando ${Object.keys(broadcasts).length} televisaciones existentes.`
+        );
+      }
+    } catch (error) {
+      console.log(
+        `[TV] ⚠️ No se pudieron leer las televisaciones existentes: ${error.message}`
+      );
+    }
+  }
 
   for (
     const url of URLS
