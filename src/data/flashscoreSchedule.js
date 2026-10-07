@@ -154,7 +154,7 @@ export const flashscoreSchedule = {
     "statusCode": "1"
   },
   "olimpico-boca": {
-    "date": "2026-10-11",
+    "date": "2026-10-12",
     "time": "17:00",
     "eventId": "MTCEHMzh",
     "status": "scheduled",

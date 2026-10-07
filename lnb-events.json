@@ -325,22 +325,6 @@
       "awayId": "Cn0pHIpQ"
     },
     {
-      "eventId": "MTCEHMzh",
-      "homeTeam": "olimpico",
-      "homeName": "Olimpico",
-      "awayTeam": "boca",
-      "awayName": "Boca Juniors",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1791748800,
-      "homeSlug": "olimpico",
-      "awaySlug": "boca-juniors",
-      "homeId": "ERbTiFhJ",
-      "awayId": "pn7Cecgf"
-    },
-    {
       "eventId": "UgGMF054",
       "homeTeam": "argentino",
       "homeName": "Argentino",
@@ -371,6 +355,22 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "hbqyLbBE",
       "awayId": "2qroXLyp"
+    },
+    {
+      "eventId": "MTCEHMzh",
+      "homeTeam": "olimpico",
+      "homeName": "Olimpico",
+      "awayTeam": "boca",
+      "awayName": "Boca Juniors",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1791835200,
+      "homeSlug": "olimpico",
+      "awaySlug": "boca-juniors",
+      "homeId": "ERbTiFhJ",
+      "awayId": "pn7Cecgf"
     },
     {
       "eventId": "4KYQdf9j",
