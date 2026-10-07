@@ -1,4 +1,12 @@
 export const matchResults = {
+  "2026-10-06-platense-la-union": {
+    status: "finished",
+    homeScore: 86,
+    awayScore: 90,
+    time: null,
+    venue: null,
+    tv: [],
+  },
   "2026-10-05-quimsa-atenas": {
     status: "finished",
     homeScore: 83,

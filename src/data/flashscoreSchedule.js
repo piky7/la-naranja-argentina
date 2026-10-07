@@ -71,10 +71,10 @@ export const flashscoreSchedule = {
   },
   "platense-la-union": {
     "date": "2026-10-06",
-    "time": null,
+    "time": "20:30",
     "eventId": "CMLrok0D",
-    "status": "postponed",
-    "statusCode": "1"
+    "status": "finished",
+    "statusCode": "3"
   },
   "penarol-regatas": {
     "date": "2026-10-07",

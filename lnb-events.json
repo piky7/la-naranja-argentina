@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 113,
-  "finishedMatches": 9,
+  "totalMatches": 114,
+  "finishedMatches": 10,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "CMLrok0D",
+      "homeTeam": "platense",
+      "homeName": "Platense",
+      "awayTeam": "la-union",
+      "awayName": "La Union",
+      "homeScore": 86,
+      "awayScore": 90,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791329400,
+      "homeSlug": "ca-platense",
+      "awaySlug": "la-union",
+      "homeId": "SIolf8Y3",
+      "awayId": "tE0LgyO6"
+    },
     {
       "eventId": "WrKSlX0l",
       "homeTeam": "quimsa",
@@ -1814,6 +1830,22 @@
     }
   ],
   "finished": [
+    {
+      "eventId": "CMLrok0D",
+      "homeTeam": "platense",
+      "homeName": "Platense",
+      "awayTeam": "la-union",
+      "awayName": "La Union",
+      "homeScore": 86,
+      "awayScore": 90,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791329400,
+      "homeSlug": "ca-platense",
+      "awaySlug": "la-union",
+      "homeId": "SIolf8Y3",
+      "awayId": "tE0LgyO6"
+    },
     {
       "eventId": "WrKSlX0l",
       "homeTeam": "quimsa",
