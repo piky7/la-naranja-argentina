@@ -1,0 +1,101 @@
+{
+  "generatedAt": "2026-10-08T13:24:52.776Z",
+  "matches": {
+    "2026-10-07-olimpico-atenas": {
+      "status": "published",
+      "homeScore": 87,
+      "awayScore": 91,
+      "homeTeam": "olimpico",
+      "awayTeam": "atenas",
+      "hasStats": true
+    },
+    "2026-10-07-boca-obera": {
+      "status": "published",
+      "homeScore": 96,
+      "awayScore": 73,
+      "homeTeam": "boca",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-10-06-platense-la-union": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 90,
+      "homeTeam": "platense",
+      "awayTeam": "la-union",
+      "hasStats": true
+    },
+    "2026-10-05-quimsa-atenas": {
+      "status": "published",
+      "homeScore": 83,
+      "awayScore": 77,
+      "homeTeam": "quimsa",
+      "awayTeam": "atenas",
+      "hasStats": true
+    },
+    "2026-10-04-gimnasia-la-union": {
+      "status": "published",
+      "homeScore": 92,
+      "awayScore": 86,
+      "homeTeam": "gimnasia",
+      "awayTeam": "la-union",
+      "hasStats": true
+    },
+    "2026-10-03-quimsa-platense": {
+      "status": "published",
+      "homeScore": 94,
+      "awayScore": 67,
+      "homeTeam": "quimsa",
+      "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-10-02-regatas-instituto": {
+      "status": "published",
+      "homeScore": 73,
+      "awayScore": 63,
+      "homeTeam": "regatas",
+      "awayTeam": "instituto",
+      "hasStats": true
+    },
+    "2026-10-01-olimpico-platense": {
+      "status": "published",
+      "homeScore": 74,
+      "awayScore": 82,
+      "homeTeam": "olimpico",
+      "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-09-30-san-martin-instituto": {
+      "status": "published",
+      "homeScore": 73,
+      "awayScore": 81,
+      "homeTeam": "san-martin",
+      "awayTeam": "instituto",
+      "hasStats": true
+    },
+    "2026-09-30-argentino-ferro": {
+      "status": "published",
+      "homeScore": 79,
+      "awayScore": 68,
+      "homeTeam": "argentino",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-09-30-penarol-gimnasia": {
+      "status": "published",
+      "homeScore": 62,
+      "awayScore": 57,
+      "homeTeam": "penarol",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-09-28-lanus-gimnasia": {
+      "status": "published",
+      "homeScore": 74,
+      "awayScore": 92,
+      "homeTeam": "lanus",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    }
+  }
+}

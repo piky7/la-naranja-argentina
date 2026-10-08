@@ -551,17 +551,27 @@ const [liveMatches, setLiveMatches] = useState([]);
         <div className="home-container">
           {liveMatches.length > 0 && (
   <section className="home-live-panel">
-    <div className="home-live-header">
-      <div>
-        <span>AHORA</span>
-        <h2>Partidos en vivo</h2>
-      </div>
+   <div className="home-live-header">
+  <div>
+    <span>ACTUALIDAD</span>
+    <h2>
+      {liveMatches.some(
+        (match) => match.status === "live"
+      )
+        ? "Partidos en vivo"
+        : "Últimos partidos"}
+    </h2>
+  </div>
 
-      <div className="home-live-indicator">
-        <span></span>
-        EN VIVO
-      </div>
-    </div>
+  <div className="home-live-indicator">
+    <span></span>
+    {liveMatches.some(
+      (match) => match.status === "live"
+    )
+      ? "EN VIVO"
+      : "FINALIZADO"}
+  </div>
+</div>
 
     <div className="home-live-matches">
       {liveMatches.map((liveMatch) => {
@@ -588,14 +598,21 @@ const [liveMatches, setLiveMatches] = useState([]);
             </div>
 
             <div className="home-live-score">
-  <span>EN VIVO</span>
+  <span>
+    {liveMatch.status === "finished"
+      ? "FINALIZADO"
+      : "EN VIVO"}
+  </span>
 
   <strong>
-    {liveMatch.homeScore} -{" "}
-    {liveMatch.awayScore}
+    {liveMatch.homeScore} - {liveMatch.awayScore}
   </strong>
 
-  {liveMatch.isHalftime ? (
+  {liveMatch.status === "finished" ? (
+    <small className="home-live-period">
+      FINALIZADO
+    </small>
+  ) : liveMatch.isHalftime ? (
     <small className="home-live-period">
       ENTRETIEMPO
     </small>
@@ -761,15 +778,15 @@ const [liveMatches, setLiveMatches] = useState([]);
                     const liveMatch = liveMatches.find(
   (live) =>
     live.homeTeam === match.homeTeam &&
-    live.awayTeam === match.awayTeam
+    live.awayTeam === match.awayTeam &&
+    live.status === "live"
 );
 
-const isFinished =
-  isMatchFinished(match);
+const isFinished = isMatchFinished(match);
 
 const isLive =
-  Boolean(liveMatch) ||
-  (match.status === "live" && !isFinished);
+  !isFinished &&
+  (Boolean(liveMatch) || match.status === "live");
 
                     const hasMatchStats =
                       Boolean(getMatchStats(match));

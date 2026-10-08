@@ -23,6 +23,84 @@ const HEADERS = {
 const CLOCK_WRITE_INTERVAL_MS =
   2 * 60 * 1000;
 
+  
+const PUBLISHED_MATCHES_URL =
+  "https://lanaranjaargentina.lnab.workers.dev/published-matches.json";
+
+async function getPublishedMatches() {
+  try {
+    const response = await fetch(PUBLISHED_MATCHES_URL, {
+      headers: {
+        Accept: "application/json",
+      },
+      cf: {
+        cacheTtl: 0,
+        cacheEverything: false,
+      },
+    });
+
+    if (!response.ok) {
+      console.log(
+        `No se pudo comprobar la publicación: HTTP ${response.status}`
+      );
+      return null;
+    }
+
+    const data = await response.json();
+
+    if (!data || typeof data.matches !== "object") {
+      return null;
+    }
+
+    return data.matches;
+  } catch (error) {
+    console.log(
+      "Error consultando partidos publicados:",
+      error.message
+    );
+    return null;
+  }
+}
+
+
+function isMatchPublished(match, publishedMatches) {
+  if (
+    !publishedMatches ||
+    !match ||
+    match.status !== "finished"
+  ) {
+    return false;
+  }
+
+  const timestamp = Number(match.timestamp);
+
+  if (!Number.isFinite(timestamp) || timestamp <= 0) {
+    return false;
+  }
+
+  const date = getArgentinaDate(timestamp);
+
+  const key =
+    `${date}-${match.homeTeam}-${match.awayTeam}`;
+
+  const published = publishedMatches[key];
+
+  return (
+    published?.status === "published" &&
+    published.hasStats === true &&
+    published.homeTeam === match.homeTeam &&
+    published.awayTeam === match.awayTeam &&
+    Number(published.homeScore) ===
+      Number(match.homeScore) &&
+    Number(published.awayScore) ===
+      Number(match.awayScore) &&
+    match.homeScore != null &&
+    match.awayScore != null
+  );
+}
+
+
+
 function getArgentinaDate(timestamp) {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Argentina/Buenos_Aires",
@@ -284,6 +362,7 @@ async function getFeed(url) {
   return await response.text();
 }
 
+
 async function getLiveMatches(previousLiveMatches = []) {
   const eventsUrl =
     "https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/lnb-events.json";
@@ -296,210 +375,171 @@ async function getLiveMatches(previousLiveMatches = []) {
   });
 
   if (!response.ok) {
-    throw new Error(
-      `No se pudo obtener lnb-events.json: ${response.status}`
-    );
+    throw new Error(`Error cargando eventos: ${response.status}`);
   }
 
   const data = await response.json();
 
   if (!Array.isArray(data.matches)) {
-    throw new Error(
-      "lnb-events.json no contiene la lista de partidos."
-    );
+    throw new Error("Formato inválido de lnb-events.json");
   }
 
   const today = getTodayArgentina();
-
   const now = Math.floor(Date.now() / 1000);
 
-  /*
-   * Ventana de consulta:
-   *
-   * - Desde 10 minutos antes del comienzo.
-   * - Hasta 4 horas después del comienzo.
-   */
-  const todayMatches = data.matches.filter(
-    (match) => {
-      if (!match.timestamp) {
-        return false;
-      }
-
-      if (
-        getArgentinaDate(match.timestamp) !== today
-      ) {
-        return false;
-      }
-
-      const matchTimestamp =
-        Number(match.timestamp);
-
-      const minutesUntilStart =
-        (matchTimestamp - now) / 60;
-
-      const minutesSinceStart =
-        (now - matchTimestamp) / 60;
-
-      return (
-        minutesUntilStart <= 10 &&
-        minutesSinceStart <= 240
-      );
-    }
-  );
-
-  console.log(
-    `Partidos dentro de la ventana de consulta: ${todayMatches.length}`
-  );
+  // Si falla la comprobación de publicación,
+  // conservamos los partidos en lugar de eliminarlos.
+  const publishedMatches = await getPublishedMatches();
 
   const results = [];
+  const processedEventIds = new Set();
 
-  /*
-   * Guardamos los partidos que tuvieron
-   * algún problema temporal de consulta.
-   */
-  const failedOrUnknownEventIds = new Set();
+  const candidates = new Map();
 
-  for (const match of todayMatches) {
-    try {
-      const feedUrl =
-        `https://global.flashscore.ninja/204/x/feed/dc_1_${match.eventId}`;
+  // Partidos del día que pueden estar en juego.
+  for (const match of data.matches) {
+    const timestamp = Number(match.timestamp);
 
-      const feed =
-        await getFeed(feedUrl);
+    if (!Number.isFinite(timestamp) || timestamp <= 0) {
+      continue;
+    }
 
-      const status =
-        detectStatus(
-          feed,
-          Number(match.timestamp)
-        );
-
-      console.log(
-        `${match.homeName} - ${match.awayName}: ${status}`
-      );
-
-      /*
-       * Partido terminado:
-       *
-       * NO preservamos el LIVE anterior.
-       */
-      if (status === "finished") {
-        continue;
-      }
-
-      /*
-       * Todavía no comenzó.
-       */
-      if (status === "scheduled") {
-        continue;
-      }
-
-      /*
-       * Información temporalmente incompleta.
-       */
-      if (status === "unknown") {
-        failedOrUnknownEventIds.add(
-          match.eventId
-        );
-
-        continue;
-      }
-
-      /*
-       * LIVE confirmado.
-       */
-      if (status === "live") {
-        const liveInfo =
-          parseLiveGameInfo(feed);
-
-        results.push({
-          eventId: match.eventId,
-
-          homeTeam: match.homeTeam,
-          awayTeam: match.awayTeam,
-
-          homeName: match.homeName,
-          awayName: match.awayName,
-
-          homeScore: liveInfo.homeScore,
-          awayScore: liveInfo.awayScore,
-
-          quarter: liveInfo.quarter,
-
-          minutesRemaining:
-            liveInfo.minutesRemaining,
-
-          isHalftime:
-            liveInfo.isHalftime,
-
-          timestamp: match.timestamp,
-
-          status: "live",
-          isLive: true,
-        });
-      }
-    } catch (error) {
-      /*
-       * Si Flashscore falla momentáneamente,
-       * no debemos borrar un LIVE anterior.
-       */
-      failedOrUnknownEventIds.add(
-        match.eventId
-      );
-
-      console.log(
-        `Error en ${match.homeName} - ${match.awayName}: ${error.message}`
-      );
+    if (
+      getArgentinaDate(timestamp) === today &&
+      (timestamp - now) / 60 <= 10 &&
+      (now - timestamp) / 60 <= 240
+    ) {
+      candidates.set(String(match.eventId), match);
     }
   }
 
-  /*
-   * Preservamos los partidos que ya estaban LIVE
-   * cuando Flashscore respondió con error
-   * o información incompleta.
-   */
-  for (const previousMatch of previousLiveMatches) {
-    if (
-      !failedOrUnknownEventIds.has(
-        previousMatch.eventId
-      )
-    ) {
+  // Los partidos que ya estaban en el LIVE no deben
+  // desaparecer simplemente por pasar las 4 horas.
+  for (const previous of previousLiveMatches) {
+    const id = String(previous.eventId);
+
+    if (!candidates.has(id)) {
+      candidates.set(id, previous);
+    }
+  }
+
+  for (const match of candidates.values()) {
+    const eventId = String(match.eventId);
+
+    if (processedEventIds.has(eventId)) {
       continue;
     }
 
-    const alreadyExists =
-      results.some(
-        (match) =>
-          match.eventId ===
-          previousMatch.eventId
-      );
+    processedEventIds.add(eventId);
 
-    if (alreadyExists) {
-      continue;
-    }
-
-    const stillInsideWindow =
-      previousMatch.timestamp &&
-      getArgentinaDate(
-        Number(previousMatch.timestamp)
-      ) === today &&
-      (now -
-        Number(previousMatch.timestamp)) /
-        60 <=
-        240;
-
-    if (!stillInsideWindow) {
-      continue;
-    }
-
-    console.log(
-      `Preservando LIVE anterior: ${previousMatch.homeName} - ${previousMatch.awayName}`
+    const previous = previousLiveMatches.find(
+      (item) => String(item.eventId) === eventId
     );
 
-    results.push(previousMatch);
+    // Solo se retira cuando el resultado y las
+    // estadísticas figuran en la web publicada.
+    
+
+    try {
+      const feed = await getFeed(
+        `https://global.flashscore.ninja/204/x/feed/dc_1_${eventId}`
+      );
+
+      const status = detectStatus(
+        feed,
+        Number(match.timestamp)
+      );
+
+      if (status === "scheduled") {
+        if (previous) {
+          results.push(previous);
+        }
+        continue;
+      }
+
+      if (status === "unknown") {
+        if (previous) {
+          results.push(previous);
+        }
+        continue;
+      }
+
+      const liveInfo = parseLiveGameInfo(feed);
+
+      const isFinished =
+        status === "finished" ||
+        previous?.status === "finished";
+
+      // Si ya estaba finalizado, no retrocedemos
+      // a EN VIVO por una respuesta inconsistente.
+      const finalStatus = isFinished
+        ? "finished"
+        : "live";
+
+      const homeScore =
+        liveInfo.homeScore ?? previous?.homeScore ?? null;
+
+      const awayScore =
+        liveInfo.awayScore ?? previous?.awayScore ?? null;
+
+      // No publicamos un marcador vacío.
+      if (homeScore === null || awayScore === null) {
+        if (previous) {
+          results.push(previous);
+        }
+        continue;
+      }
+
+      
+const updatedMatch = {
+  eventId: match.eventId,
+  homeTeam: match.homeTeam,
+  awayTeam: match.awayTeam,
+  homeName: match.homeName,
+  awayName: match.awayName,
+  homeScore,
+  awayScore,
+  quarter: isFinished ? null : liveInfo.quarter,
+  minutesRemaining: isFinished
+    ? null
+    : liveInfo.minutesRemaining,
+  isHalftime: isFinished
+    ? false
+    : liveInfo.isHalftime,
+  timestamp: match.timestamp,
+  status: finalStatus,
+  isLive: !isFinished,
+};
+
+// Comprobamos la publicación únicamente después
+// de conocer el estado y marcador más recientes.
+if (isMatchPublished(updatedMatch, publishedMatches)) {
+  console.log(
+    `Partido finalizado y publicado: ${eventId}`
+  );
+  continue;
+}
+
+// Mientras no esté publicado, permanece en LIVE.
+results.push(updatedMatch);
+
+    } catch (error) {
+      console.log(
+        `Error consultando partido ${eventId}:`,
+        error.message
+      );
+
+      // Si Flashscore falla, conservamos
+      // el último estado conocido.
+      if (previous) {
+        results.push(previous);
+      }
+    }
   }
 
   return results;
 }
+
 
 /*
  * Compara solamente el estado importante
@@ -647,13 +687,9 @@ async function updateLive(env) {
   }
 
   const previousLiveMatches =
-    previousData &&
-    previousData.date === today &&
-    Array.isArray(
-      previousData.liveMatches
-    )
-      ? previousData.liveMatches
-      : [];
+  Array.isArray(previousData?.liveMatches)
+    ? previousData.liveMatches
+    : [];
 
   let liveMatches;
 
