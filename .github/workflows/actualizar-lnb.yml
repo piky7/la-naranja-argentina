@@ -43,7 +43,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-                    git add \
+          git add \
             src/data/matches.js \
             src/data/matchResults.js \
             src/data/matchStats.js \
@@ -55,8 +55,8 @@ jobs:
             echo "No hay cambios para guardar."
           else
             git commit -m "Actualización automática LNB"
-git -c rebase.autoStash=true pull --rebase origin main
-git push origin HEAD:main
+            git -c rebase.autoStash=true pull --rebase origin main
+            git push origin HEAD:main
           fi
 
       - name: Informar errores de actualización
