@@ -1,4 +1,20 @@
 export const matchResults = {
+  "2026-10-07-olimpico-atenas": {
+    status: "finished",
+    homeScore: 87,
+    awayScore: 91,
+    time: null,
+    venue: null,
+    tv: [],
+  },
+  "2026-10-07-boca-obera": {
+    status: "finished",
+    homeScore: 96,
+    awayScore: 73,
+    time: null,
+    venue: null,
+    tv: [],
+  },
   "2026-10-06-platense-la-union": {
     status: "finished",
     homeScore: 86,
