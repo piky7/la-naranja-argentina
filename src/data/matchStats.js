@@ -206,7 +206,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "26:39"
     },
     {
-      "id": "franco-giorgetti",
+      "id": "flashscore-penarol-giorgetti-franco",
       "name": "Giorgetti Franco .",
       "points": 2,
       "rebounds": 3,
@@ -395,7 +395,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "00:37"
     },
     {
-      "id": "piero-di-prinzio",
+      "id": "flashscore-argentino-di-prinzio-p",
       "name": "Di Prinzio P.",
       "points": 0,
       "rebounds": 0,
@@ -469,7 +469,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "21:46"
     },
     {
-      "id": "valentin-bettiga",
+      "id": "flashscore-ferro-bettiga-l",
       "name": "Bettiga L.",
       "points": 4,
       "rebounds": 9,
@@ -525,7 +525,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "00:36"
     },
     {
-      "id": "jano-martinez",
+      "id": "flashscore-ferro-jara-c",
       "name": "Jara C.",
       "points": 0,
       "rebounds": 0,
@@ -592,7 +592,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "15:28"
     },
     {
-      "id": "lautaro-berra",
+      "id": "flashscore-san-martin-berra-fernandez-l",
       "name": "Berra Fernandez L.",
       "points": 16,
       "rebounds": 4,
@@ -685,7 +685,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
 },"olimpico-platense": {
   "olimpico": [
     {
-      "id": "austin-wtighten",
+      "id": "flashscore-olimpico-wrighten-a",
       "name": "Wrighten A.",
       "points": 8,
       "rebounds": 1,
@@ -717,7 +717,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "27:15"
     },
     {
-      "id": "elisias-hall",
+      "id": "flashscore-olimpico-elisias-h",
       "name": "Elisias H.",
       "points": 10,
       "rebounds": 3,
@@ -850,7 +850,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
 },"regatas-instituto": {
   "regatas": [
     {
-      "id": "ivan-gramajo",
+      "id": "flashscore-regatas-gramajo-p",
       "name": "Gramajo P.",
       "points": 11,
       "rebounds": 1,
@@ -1055,7 +1055,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "20:48"
     },
     {
-      "id": "ignacio-laterza",
+      "id": "flashscore-quimsa-laterza-j",
       "name": "Laterza J.",
       "points": 2,
       "rebounds": 0,
@@ -1358,7 +1358,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "17:58"
     },
     {
-      "id": "enzo-maglietti",
+      "id": "flashscore-la-union-maglietti-e-g",
       "name": "Maglietti E. G.",
       "points": 0,
       "rebounds": 0,
@@ -1838,7 +1838,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "06:25"
     },
     {
-      "id": "juan-cruz-oberto",
+      "id": "flashscore-obera-oberto-j-c",
       "name": "Oberto J. C.",
       "points": 7,
       "rebounds": 2,
@@ -1847,11 +1847,10 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
-
 "olimpico-atenas": {
   "olimpico": [
     {
-      "id": "austin-wtighten",
+      "id": "flashscore-olimpico-wrighten-a",
       "name": "Wrighten A.",
       "points": 25,
       "rebounds": 3,
@@ -1883,7 +1882,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "23:25"
     },
     {
-      "id": "elisias-hall",
+      "id": "flashscore-olimpico-elisias-h",
       "name": "Elisias H.",
       "points": 10,
       "rebounds": 3,

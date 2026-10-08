@@ -67,44 +67,60 @@ CARGAR JUGADORES DE PLAYERS.JS
 ========================================
 */
 
+
 function loadPlayers() {
   if (!fs.existsSync(playersFile)) {
+    throw new Error(`No existe ${playersFile}.`);
+  }
+
+  const source = fs.readFileSync(playersFile, "utf8");
+
+  const transformed = source.replace(
+    /^\s*export\s+const\s+players\s*=/m,
+    "const players ="
+  );
+
+  if (transformed === source) {
     throw new Error(
-      `No existe ${playersFile}.`
+      "No se encontró export const players en players.js."
     );
   }
 
-  const source =
-    fs.readFileSync(
-      playersFile,
-      "utf8"
-    );
+  const { Script } = require("vm");
 
-  const players = [];
+  const players = new Script(
+    `${transformed}\nplayers;`
+  ).runInNewContext({}, { timeout: 1000 });
 
-  const playerRegex =
-    /\{\s*id:\s*"([^"]+)"[\s\S]*?name:\s*"([^"]+)"[\s\S]*?teamId:\s*"([^"]+)"/g;
-
-  let match;
-
-  while (
-    (match = playerRegex.exec(source)) !== null
-  ) {
-    players.push({
-      id: match[1],
-      name: match[2],
-      teamId: match[3],
-    });
-  }
-
-  if (players.length === 0) {
+  if (!Array.isArray(players) || players.length === 0) {
     throw new Error(
       "No se pudieron leer jugadores desde players.js."
     );
   }
 
+  const ids = new Set();
+
+  for (const player of players) {
+    if (
+      typeof player.id !== "string" ||
+      typeof player.name !== "string" ||
+      typeof player.teamId !== "string"
+    ) {
+      throw new Error("Se encontró un jugador con datos inválidos.");
+    }
+
+    if (ids.has(player.id)) {
+      throw new Error(`ID de jugador duplicado: ${player.id}`);
+    }
+
+    ids.add(player.id);
+  }
+
+  console.log(`Jugadores cargados: ${players.length}`);
+
   return players;
 }
+
 
 /*
 ========================================
@@ -174,221 +190,110 @@ BUSCAR JUGADOR
 ========================================
 */
 
-function findPlayerId(
-  flashscoreName,
-  teamId,
-  players
-) {
-  const normalizedName =
-    normalizeText(
-      flashscoreName
-    );
 
-  const words =
-    normalizedName
-      .split(" ")
-      .filter(Boolean);
+function findPlayerId(flashscoreName, teamId, players) {
+  const normalizedName = normalizeText(flashscoreName);
+  // Equivalencias verificadas de Flashscore.
+const playerAliases = {
+  "lanus|ramirez c": "fabian-ramirez-barrios",
+  "lanus|merchant e": "junior-merchant",
+};
 
-  if (words.length === 0) {
+const aliasKey = `${teamId}|${normalizedName}`;
+const aliasId = playerAliases[aliasKey];
+
+if (aliasId) {
+  const exists = players.some(
+    (player) =>
+      player.id === aliasId &&
+      player.teamId === teamId
+  );
+
+  if (exists) {
+    return aliasId;
+  }
+}
+
+  if (!normalizedName || !teamId) {
     return null;
   }
 
-  const firstWord =
-    words[0];
+  const words = normalizedName.split(" ").filter(Boolean);
 
-  const remainingWords =
-    words.slice(1);
+  const candidates = players.filter(
+    (player) => player.teamId === teamId
+  );
 
-  const candidates =
-    players.filter(
-      (player) =>
-        player.teamId === teamId
-    );
+  // 1. Coincidencia exacta del nombre completo.
+  const exact = candidates.filter(
+    (player) =>
+      normalizeText(player.name) === normalizedName
+  );
 
-  /*
-  ----------------------------------------
-  1. NOMBRE COMPLETO EXACTO
-  ----------------------------------------
-  */
-
-  const exact =
-    candidates.find(
-      (player) =>
-        normalizeText(
-          player.name
-        ) === normalizedName
-    );
-
-  if (exact) {
-    return exact.id;
+  if (exact.length === 1) {
+    return exact[0].id;
   }
 
-  /*
-  ----------------------------------------
-  2. APELLIDO EXACTO
-  ----------------------------------------
-  */
+  if (exact.length > 1) {
+    return null;
+  }
 
-  const surnameCandidates =
-    candidates.filter(
-      (player) => {
-        const playerWords =
-          normalizeText(
-            player.name
-          ).split(" ");
+  // 2. Coincidencia por apellido + inicial.
+  // Flashscore puede mostrar "Vildoza J."
+  // mientras players.js guarda "José Vildoza".
+  if (
+    words.length === 2 &&
+    words[1].length === 1
+  ) {
+    const surname = words[0];
+    const initial = words[1];
 
-        return playerWords.includes(
-          firstWord
-        );
+    const matches = candidates.filter((player) => {
+      const parts = normalizeText(player.name)
+        .split(" ")
+        .filter(Boolean);
+
+      if (parts.length < 2) {
+        return false;
       }
-    );
 
-  if (
-    surnameCandidates.length === 1
-  ) {
-    return surnameCandidates[0].id;
-  }
+      const firstName = parts[0];
+      const surnames = parts.slice(1);
 
-  /*
-  ----------------------------------------
-  3. APELLIDO + INICIAL
-  ----------------------------------------
-  */
-
-  if (
-    surnameCandidates.length > 1
-  ) {
-    for (
-      const candidate of surnameCandidates
-    ) {
-      const candidateWords =
-        normalizeText(
-          candidate.name
-        ).split(" ");
-
-      const initialsMatch =
-        remainingWords.some(
-          (word) => {
-            if (!word) {
-              return false;
-            }
-
-            return candidateWords.some(
-              (candidateWord) =>
-                candidateWord.startsWith(
-                  word.charAt(0)
-                )
-            );
-          }
-        );
-
-      if (initialsMatch) {
-        return candidate.id;
-      }
-    }
-  }
-
-  /*
-  ----------------------------------------
-  4. APELLIDO CON PEQUEÑA DIFERENCIA
-  ----------------------------------------
-  */
-
-  const fuzzyCandidates =
-    candidates
-      .map(
-        (candidate) => {
-          const candidateWords =
-            normalizeText(
-              candidate.name
-            ).split(" ");
-
-          let bestDistance =
-            Infinity;
-
-          for (
-            const candidateWord of candidateWords
-          ) {
-            const distance =
-              levenshtein(
-                firstWord,
-                candidateWord
-              );
-
-            if (
-              distance <
-              bestDistance
-            ) {
-              bestDistance =
-                distance;
-            }
-          }
-
-          return {
-            candidate,
-            distance:
-              bestDistance,
-          };
-        }
-      )
-      .sort(
-        (a, b) =>
-          a.distance -
-          b.distance
+      return (
+        firstName.startsWith(initial) &&
+        surnames.includes(surname)
       );
+    });
 
-  if (
-    fuzzyCandidates.length > 0
-  ) {
-    const best =
-      fuzzyCandidates[0];
-
-    if (
-      best.distance <= 2
-    ) {
-      return best.candidate.id;
+    if (matches.length === 1) {
+      return matches[0].id;
     }
   }
 
-  /*
-  ----------------------------------------
-  5. CASOS ESPECIALES
-  ----------------------------------------
-  */
+  // 3. Coincidencia por apellido único.
+  // Solo para nombres de una palabra.
+  if (words.length === 1) {
+    const surname = words[0];
 
-  for (
-    const candidate of candidates
-  ) {
-    const candidateWords =
-      normalizeText(
-        candidate.name
-      ).split(" ");
+    const matches = candidates.filter((player) => {
+      const parts = normalizeText(player.name)
+        .split(" ")
+        .filter(Boolean);
 
-    const surnameMatch =
-      candidateWords.includes(
-        firstWord
-      );
+      return parts.slice(1).includes(surname);
+    });
 
-    if (!surnameMatch) {
-      continue;
-    }
-
-    const extraMatch =
-      remainingWords.some(
-        (word) =>
-          word.length > 2 &&
-          candidateWords.includes(
-            word
-          )
-      );
-
-    if (extraMatch) {
-      return candidate.id;
+    if (matches.length === 1) {
+      return matches[0].id;
     }
   }
 
+  // 4. Sin coincidencia suficientemente segura.
+  // El normalizador podrá crear un ID provisional.
   return null;
 }
+
 
 /*
 ========================================

@@ -107,13 +107,17 @@ function processMatch(match, index, total) {
     match.eventId,
   ]);
 
-  runScript("normalizer-flashscore.cjs");
+ runScript("normalizer-flashscore.cjs");
 
-  runScript("generate-matchstats.cjs");
+runScript("generate-matchstats.cjs");
 
-  validateGeneratedStats(match);
+validateGeneratedStats(match);
 
-  runScript("update-matchstats.cjs");
+runScript("update-matchstats.cjs");
+
+// Registrar jugadores nuevos únicamente después
+// de actualizar correctamente las estadísticas.
+runScript("sync-new-players.cjs", ["--apply"]);
 
   console.log("");
   console.log(
