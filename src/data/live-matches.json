@@ -1,19 +1,33 @@
 {
-  "updatedAt": "2026-10-06T23:56:36.342Z",
-  "date": "2026-10-06",
+  "updatedAt": "2026-10-08T02:38:36.331Z",
+  "date": "2026-10-07",
   "liveMatches": [
     {
-      "eventId": "CMLrok0D",
-      "homeTeam": "platense",
-      "awayTeam": "la-union",
-      "homeName": "Platense",
-      "awayName": "La Union",
-      "homeScore": 24,
-      "awayScore": 32,
-      "timestamp": 1791329400,
+      "eventId": "KtEa3WFs",
+      "homeTeam": "boca",
+      "awayTeam": "obera",
+      "homeName": "Boca Juniors",
+      "awayName": "Obera TC",
+      "homeScore": 96,
+      "awayScore": 73,
+      "timestamp": 1791417900,
       "status": "live",
       "isLive": true,
-      "feedStatus": "2",
+      "feedStatus": "-1",
+      "feedScoreStatus": "0"
+    },
+    {
+      "eventId": "OAST8hhK",
+      "homeTeam": "olimpico",
+      "awayTeam": "atenas",
+      "homeName": "Olimpico",
+      "awayName": "Atenas",
+      "homeScore": 67,
+      "awayScore": 76,
+      "timestamp": 1791421200,
+      "status": "live",
+      "isLive": true,
+      "feedStatus": "3",
       "feedScoreStatus": "0"
     }
   ]
