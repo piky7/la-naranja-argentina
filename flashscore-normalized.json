@@ -1,201 +1,212 @@
 {
-  "matchId": "lanus-gimnasia",
-  "eventId": "xQfNLYW1",
-  "homeTeam": "lanus",
-  "awayTeam": "gimnasia",
-  "homeScore": 74,
-  "awayScore": 92,
+  "matchId": "boca-obera",
+  "eventId": "KtEa3WFs",
+  "homeTeam": "boca",
+  "awayTeam": "obera",
+  "homeScore": 96,
+  "awayScore": 73,
   "status": "finished",
-  "tv": [],
+  "tv": [
+    "DSports"
+  ],
   "players": [
     {
-      "id": "martin-franchino",
-      "name": "Franchino M.",
-      "teamId": "lanus",
-      "points": 23,
-      "rebounds": 10,
-      "assists": 1,
-      "minutes": "33:41"
+      "id": "mike-warren",
+      "name": "Warren M.",
+      "teamId": "boca",
+      "points": 15,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "21:11"
     },
     {
-      "id": "christian-james",
-      "name": "James C.",
-      "teamId": "lanus",
-      "points": 17,
+      "id": "jose-vildoza",
+      "name": "Vildoza J.",
+      "teamId": "boca",
+      "points": 22,
+      "rebounds": 4,
+      "assists": 4,
+      "minutes": "21:53"
+    },
+    {
+      "id": "tomas-monacchi",
+      "name": "Monacchi T.",
+      "teamId": "boca",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "19:33"
+    },
+    {
+      "id": "leonardo-lema",
+      "name": "Lema L.",
+      "teamId": "boca",
+      "points": 11,
+      "rebounds": 8,
+      "assists": 1,
+      "minutes": "23:20"
+    },
+    {
+      "id": "francisco-caffaro",
+      "name": "Caffaro F.",
+      "teamId": "boca",
+      "points": 9,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "19:09"
+    },
+    {
+      "id": "lucas-faggiano",
+      "name": "Faggiano L.",
+      "teamId": "boca",
+      "points": 4,
       "rebounds": 3,
       "assists": 2,
-      "minutes": "20:32"
+      "minutes": "18:07"
     },
     {
-      "id": "lucas-andujar",
-      "name": "Andujar L.",
-      "teamId": "lanus",
+      "id": "nicolas-stenta",
+      "name": "Stenta N.",
+      "teamId": "boca",
+      "points": 3,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "16:59"
+    },
+    {
+      "id": "kriss-helmanis",
+      "name": "Helmanis K.",
+      "teamId": "boca",
+      "points": 6,
+      "rebounds": 8,
+      "assists": 5,
+      "minutes": "19:05"
+    },
+    {
+      "id": "valentino-finetti",
+      "name": "Finetti V.",
+      "teamId": "boca",
+      "points": 0,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "02:44"
+    },
+    {
+      "id": "agustin-barreiro",
+      "name": "Barreiro A.",
+      "teamId": "boca",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "16:31"
+    },
+    {
+      "id": "martin-cuello",
+      "name": "Cuello M.",
+      "teamId": "boca",
+      "points": 7,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "19:33"
+    },
+    {
+      "id": "elias-torrens",
+      "name": "Torrens E.",
+      "teamId": "boca",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "01:56"
+    },
+    {
+      "id": "bruno-sansimoni",
+      "name": "Sansimoni B.",
+      "teamId": "obera",
+      "points": 10,
+      "rebounds": 3,
+      "assists": 5,
+      "minutes": "23:57"
+    },
+    {
+      "id": "agustin-brocal",
+      "name": "Brocal A.",
+      "teamId": "obera",
+      "points": 9,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "28:51"
+    },
+    {
+      "id": "will-vorhees",
+      "name": "Vorhees W.",
+      "teamId": "obera",
+      "points": 14,
+      "rebounds": 6,
+      "assists": 2,
+      "minutes": "22:08"
+    },
+    {
+      "id": "ty-prince",
+      "name": "Prince T.",
+      "teamId": "obera",
       "points": 6,
       "rebounds": 2,
-      "assists": 7,
-      "minutes": "34:58"
-    },
-    {
-      "id": "melvin-johnson",
-      "name": "Johnson M.",
-      "teamId": "lanus",
-      "points": 10,
-      "rebounds": 1,
-      "assists": 1,
-      "minutes": "28:20"
-    },
-    {
-      "id": "fabian-ramirez-barrios",
-      "name": "Ramírez C.",
-      "teamId": "lanus",
-      "points": 0,
-      "rebounds": 5,
       "assists": 2,
-      "minutes": "27:27"
+      "minutes": "22:12"
     },
     {
-      "id": "robert-whitfield",
-      "name": "Whitfield R.",
-      "teamId": "lanus",
-      "points": 0,
-      "rebounds": 1,
-      "assists": 0,
-      "minutes": "16:02"
-    },
-    {
-      "id": "junior-merchant",
-      "name": "Merchant E.",
-      "teamId": "lanus",
-      "points": 11,
-      "rebounds": 4,
-      "assists": 0,
-      "minutes": "18:59"
-    },
-    {
-      "id": "alejo-sacchi",
-      "name": "Sacchi A.",
-      "teamId": "lanus",
-      "points": 7,
-      "rebounds": 1,
+      "id": "jonatan-torresi",
+      "name": "Torresi J.",
+      "teamId": "obera",
+      "points": 9,
+      "rebounds": 3,
       "assists": 1,
-      "minutes": "14:59"
+      "minutes": "19:14"
     },
     {
-      "id": "joaquin-celiz",
-      "name": "Celiz J.",
-      "teamId": "lanus",
-      "points": 0,
-      "rebounds": 0,
-      "assists": 0,
-      "minutes": "05:02"
-    },
-    {
-      "id": "obi-okafor",
-      "name": "Okafor O.",
-      "teamId": "gimnasia",
-      "points": 7,
-      "rebounds": 4,
-      "assists": 2,
-      "minutes": "14:52"
-    },
-    {
-      "id": "felipe-inyaco",
-      "name": "Inyaco F.",
-      "teamId": "gimnasia",
-      "points": 3,
-      "rebounds": 2,
-      "assists": 1,
-      "minutes": "18:48"
-    },
-    {
-      "id": "martiniano-dato",
-      "name": "Dato M.",
-      "teamId": "gimnasia",
-      "points": 8,
-      "rebounds": 0,
+      "id": "victor-fernandez",
+      "name": "Fernandez V.",
+      "teamId": "obera",
+      "points": 9,
+      "rebounds": 1,
       "assists": 3,
-      "minutes": "22:28"
+      "minutes": "16:03"
     },
     {
-      "id": "emiliano-toretta",
-      "name": "Toretta E.",
-      "teamId": "gimnasia",
-      "points": 8,
-      "rebounds": 1,
-      "assists": 10,
-      "minutes": "25:48"
-    },
-    {
-      "id": "carlos-rivero",
-      "name": "Rivero C.",
-      "teamId": "gimnasia",
-      "points": 13,
-      "rebounds": 5,
-      "assists": 2,
-      "minutes": "19:30"
-    },
-    {
-      "id": "natalio-santacroce",
-      "name": "Santacroce N.",
-      "teamId": "gimnasia",
-      "points": 0,
-      "rebounds": 0,
-      "assists": 0,
-      "minutes": "01:51"
-    },
-    {
-      "id": "marcos-chacon",
-      "name": "Chacon M.",
-      "teamId": "gimnasia",
-      "points": 28,
+      "id": "alejo-azpilicueta",
+      "name": "Azpilicueta A.",
+      "teamId": "obera",
+      "points": 2,
       "rebounds": 4,
-      "assists": 5,
-      "minutes": "29:23"
-    },
-    {
-      "id": "sebastian-carrasco",
-      "name": "Carrasco S.",
-      "teamId": "gimnasia",
-      "points": 0,
-      "rebounds": 1,
       "assists": 1,
-      "minutes": "14:12"
+      "minutes": "19:07"
     },
     {
-      "id": "valentin-forestier",
-      "name": "Forestier V.",
-      "teamId": "gimnasia",
+      "id": "santiago-barrales",
+      "name": "Barrales S.",
+      "teamId": "obera",
+      "points": 5,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "23:26"
+    },
+    {
+      "id": "albano-costa",
+      "name": "Costa A.",
+      "teamId": "obera",
       "points": 2,
       "rebounds": 1,
-      "assists": 2,
-      "minutes": "15:06"
+      "assists": 0,
+      "minutes": "06:25"
     },
     {
-      "id": "ciro-melo",
-      "name": "Melo C.",
-      "teamId": "gimnasia",
-      "points": 0,
-      "rebounds": 0,
-      "assists": 0,
-      "minutes": "02:57"
-    },
-    {
-      "id": "ben-stevens",
-      "name": "Stevens B.",
-      "teamId": "gimnasia",
-      "points": 8,
-      "rebounds": 8,
-      "assists": 0,
-      "minutes": "17:32"
-    },
-    {
-      "id": "gino-balbo",
-      "name": "Balbo G.",
-      "teamId": "gimnasia",
-      "points": 15,
-      "rebounds": 3,
-      "assists": 0,
-      "minutes": "17:31"
+      "id": "juan-cruz-oberto",
+      "name": "Oberto J. C.",
+      "teamId": "obera",
+      "points": 7,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "18:37"
     }
   ],
   "unmappedPlayers": []

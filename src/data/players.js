@@ -1013,6 +1013,16 @@ export const players = [
 },
 
 {
+  id: "albano-costa",
+  name: "Albano Costa",
+  teamId: "obera",
+  position: "Base",
+  number: 13,
+  nationality: "Argentina",
+  category: "U21",
+},
+
+{
   id: "victor-fernandez",
   name: "Víctor Fernández",
   teamId: "obera",

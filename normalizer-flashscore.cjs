@@ -634,6 +634,13 @@ function main() {
     "Obera":
       "obera",
 
+
+"Oberá TC":
+  "obera",
+
+"Obera TC":
+  "obera",
+
     "Olímpico":
       "olimpico",
 
