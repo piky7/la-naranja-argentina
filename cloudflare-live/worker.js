@@ -27,22 +27,28 @@ const CLOCK_WRITE_INTERVAL_MS =
 const PUBLISHED_MATCHES_URL =
   "https://lanaranjaargentina.lnab.workers.dev/published-matches.json";
 
-async function getPublishedMatches() {
+async function getPublishedMatches(env) {
   try {
-    const response = await fetch(PUBLISHED_MATCHES_URL, {
-      headers: {
-        Accept: "application/json",
-      },
-      cf: {
-        cacheTtl: 0,
-        cacheEverything: false,
-      },
-    });
+    const response = await env.LNA_WEB.fetch(
+  new Request(PUBLISHED_MATCHES_URL, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+);
 
     if (!response.ok) {
       console.log(
-        `No se pudo comprobar la publicación: HTTP ${response.status}`
-      );
+  "Error publicación:",
+  response.status,
+  "URL:",
+  response.url,
+  "Content-Type:",
+  response.headers.get("content-type"),
+  "Body:",
+  (await response.text()).slice(0, 300)
+);
       return null;
     }
 
@@ -363,7 +369,7 @@ async function getFeed(url) {
 }
 
 
-async function getLiveMatches(previousLiveMatches = []) {
+async function getLiveMatches(previousLiveMatches = [], env) {
   const eventsUrl =
     "https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/lnb-events.json";
 
@@ -389,7 +395,7 @@ async function getLiveMatches(previousLiveMatches = []) {
 
   // Si falla la comprobación de publicación,
   // conservamos los partidos en lugar de eliminarlos.
-  const publishedMatches = await getPublishedMatches();
+  const publishedMatches = await getPublishedMatches(env);
 
   const results = [];
   const processedEventIds = new Set();
@@ -694,10 +700,10 @@ async function updateLive(env) {
   let liveMatches;
 
   try {
-    liveMatches =
-      await getLiveMatches(
-        previousLiveMatches
-      );
+    liveMatches = await getLiveMatches(
+  previousLiveMatches,
+  env
+);
   } catch (error) {
     /*
      * Si falla completamente la consulta,

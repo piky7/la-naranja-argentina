@@ -8,3 +8,14 @@ crons = ["*/1 * * * *"]
 [[kv_namespaces]]
 binding = "LNA_LIVE"
 id = "9f7689134fd84dba84602f225285ec6e"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+
+[[services]]
+binding = "LNA_WEB"
+service = "lanaranjaargentina"
