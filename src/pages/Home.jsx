@@ -588,13 +588,29 @@ const [liveMatches, setLiveMatches] = useState([]);
             </div>
 
             <div className="home-live-score">
-              <span>EN VIVO</span>
+  <span>EN VIVO</span>
 
-              <strong>
-                {liveMatch.homeScore} -{" "}
-                {liveMatch.awayScore}
-              </strong>
-            </div>
+  <strong>
+    {liveMatch.homeScore} -{" "}
+    {liveMatch.awayScore}
+  </strong>
+
+  {liveMatch.isHalftime ? (
+    <small className="home-live-period">
+      ENTRETIEMPO
+    </small>
+  ) : liveMatch.quarter ? (
+    <small className="home-live-period">
+      {liveMatch.quarter}.º CUARTO
+      {liveMatch.minutesRemaining !== null &&
+      liveMatch.minutesRemaining !== undefined
+        ? ` · ${String(
+            liveMatch.minutesRemaining
+          ).padStart(2, "0")} MIN`
+        : ""}
+    </small>
+  ) : null}
+</div>
 
             <div className="home-live-team home-live-team-away">
               {awayTeam && (
@@ -742,12 +758,18 @@ const [liveMatches, setLiveMatches] = useState([]);
                       ? getTeamPosition(awayTeam.id)
                       : null;
 
-                    const isFinished =
-                      isMatchFinished(match);
+                    const liveMatch = liveMatches.find(
+  (live) =>
+    live.homeTeam === match.homeTeam &&
+    live.awayTeam === match.awayTeam
+);
 
-                    const isLive =
-                      match.status === "live" &&
-                      !isFinished;
+const isFinished =
+  isMatchFinished(match);
+
+const isLive =
+  Boolean(liveMatch) ||
+  (match.status === "live" && !isFinished);
 
                     const hasMatchStats =
                       Boolean(getMatchStats(match));
@@ -849,17 +871,33 @@ const [liveMatches, setLiveMatches] = useState([]);
                               <span>FINAL</span>
                             </>
                           ) : isLive ? (
-                            <>
-                              <strong className="fixture-live-text">
-                                EN VIVO
-                              </strong>
+  <>
+    <strong className="fixture-live-text">
+      EN VIVO
+    </strong>
 
-                              <span>
-                                {match.homeScore} -{" "}
-                                {match.awayScore}
-                              </span>
-                            </>
-                          ) : (
+    <span>
+      {liveMatch?.homeScore ?? match.homeScore} -{" "}
+      {liveMatch?.awayScore ?? match.awayScore}
+    </span>
+
+    {liveMatch?.isHalftime ? (
+      <small className="fixture-live-period">
+        ENTRETIEMPO
+      </small>
+    ) : liveMatch?.quarter ? (
+      <small className="fixture-live-period">
+        {liveMatch.quarter}.º CUARTO
+        {liveMatch.minutesRemaining !== null &&
+        liveMatch.minutesRemaining !== undefined
+          ? ` · ${String(
+              liveMatch.minutesRemaining
+            ).padStart(2, "0")} MIN`
+          : ""}
+      </small>
+    ) : null}
+  </>
+) : (
                             <>
                               <strong className="fixture-time">
                                 {match.status ===

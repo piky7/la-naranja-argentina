@@ -499,6 +499,26 @@
   letter-spacing: 0.8px;
 }
 
+.fixture-live-period {
+  color: var(--match-text-soft) !important;
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap;
+}
+
+.home-live-period {
+  color: #999999;
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .fixture-tv {
   color: var(--match-accent) !important;
 
