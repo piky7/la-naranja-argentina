@@ -150,6 +150,19 @@ function parseLiveGameInfo(text) {
   }
 
   /*
+   * Detectamos el entretiempo.
+   *
+   * Flashscore puede dejar el cuarto en 2
+   * pero dejar de enviar un reloj de juego.
+   *
+   * Si estamos en el segundo cuarto y no existe
+   * reloj disponible, lo tratamos como entretiempo.
+   */
+  const isHalftime =
+    quarter === 2 &&
+    !clock;
+
+  /*
    * Mostramos solamente los minutos.
    *
    * 05:42 → 5
@@ -159,12 +172,12 @@ function parseLiveGameInfo(text) {
   let minutesRemaining = null;
 
   if (clock) {
-    const match = String(clock).match(
+    const clockMatch = String(clock).match(
       /^(\d{1,2})(?::\d{2})?/
     );
 
-    if (match) {
-      minutesRemaining = Number(match[1]);
+    if (clockMatch) {
+      minutesRemaining = Number(clockMatch[1]);
     }
   }
 
@@ -180,6 +193,8 @@ function parseLiveGameInfo(text) {
     quarter,
 
     minutesRemaining,
+
+    isHalftime,
   };
 }
 
@@ -238,6 +253,11 @@ function detectStatus(text, timestamp) {
   /*
    * Si ambos equipos tienen marcador,
    * consideramos que el partido está LIVE.
+   *
+   * Esto también permite que el partido
+   * siga siendo LIVE durante el entretiempo,
+   * cuando Flashscore puede dejar de enviar
+   * temporalmente el reloj.
    */
   if (hasHomeScore && hasAwayScore) {
     return "live";
@@ -408,6 +428,9 @@ async function getLiveMatches(previousLiveMatches = []) {
           minutesRemaining:
             liveInfo.minutesRemaining,
 
+          isHalftime:
+            liveInfo.isHalftime,
+
           timestamp: match.timestamp,
 
           status: "live",
@@ -484,6 +507,8 @@ async function getLiveMatches(previousLiveMatches = []) {
  *
  * minutesRemaining queda fuera deliberadamente.
  *
+ * isHalftime sí forma parte del estado importante.
+ *
  * De esta forma:
  *
  * 45 - 44 / Q2 / 5 min
@@ -493,9 +518,9 @@ async function getLiveMatches(previousLiveMatches = []) {
  *
  * Pero:
  *
- * 46 - 44 / Q2 / 4 min
+ * 45 - 44 / Q2 / ENTRETIEMPO
  *
- * sí genera una actualización inmediata.
+ * es un cambio importante.
  */
 function liveMatchStatesAreEqual(
   first,
@@ -528,6 +553,9 @@ function liveMatchStatesAreEqual(
         awayScore: match.awayScore,
 
         quarter: match.quarter,
+
+        isHalftime:
+          match.isHalftime || false,
 
         timestamp: match.timestamp,
 
@@ -691,6 +719,7 @@ async function updateLive(env) {
    * - desapareció un partido
    * - cambió el marcador
    * - cambió el cuarto
+   * - comenzó o terminó el entretiempo
    * - terminó un partido
    *
    * En estos casos escribimos inmediatamente.
