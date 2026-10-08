@@ -9,6 +9,14 @@ export const players = [
   number: 22,
   nationality: "Argentina",
 },
+{
+  id: "josh-ferguson",
+  name: "Josh Ferguson",
+  teamId: "argentino",
+  position: "Pívot",
+  number: 4,
+  nationality: "EEUU",
+},
 
 {
   id: "joaquin-fernandez",
@@ -356,6 +364,15 @@ export const players = [
   number: null,
   nationality: "Argentina",
   category: "U23",
+},
+
+{
+  id: "camilo-jara",
+  name: "Camilo Jara",
+  teamId: "ferro",
+  position: null,
+  number: null,
+  nationality: "Argentina",
 },
 
 {

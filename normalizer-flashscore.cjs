@@ -197,6 +197,10 @@ function findPlayerId(flashscoreName, teamId, players) {
 const playerAliases = {
   "lanus|ramirez c": "fabian-ramirez-barrios",
   "lanus|merchant e": "junior-merchant",
+  "argentino|ferguson j": "josh-ferguson",
+"argentino|di prinzio p": "piero-di-prinzio",
+"ferro|bettiga l": "valentin-bettiga",
+ "ferro|jara c": "camilo-jara",
 };
 
 const aliasKey = `${teamId}|${normalizedName}`;

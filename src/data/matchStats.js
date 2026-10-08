@@ -1,4 +1,5 @@
-export const matchPlayerStats = {"lanus-gimnasia": {
+export const matchPlayerStats = {
+"lanus-gimnasia": {
   "lanus": [
     {
       "id": "martin-franchino",
@@ -171,7 +172,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "17:31"
     }
   ]
-},"penarol-gimnasia": {
+},
+"penarol-gimnasia": {
   "penarol": [
     {
       "id": "ivan-basualdo",
@@ -344,7 +346,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "07:10"
     }
   ]
-},"argentino-ferro": {
+},
+"argentino-ferro": {
   "argentino": [
     {
       "id": "dylan-smith",
@@ -395,7 +398,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "00:37"
     },
     {
-      "id": "flashscore-argentino-di-prinzio-p",
+      "id": "piero-di-prinzio",
       "name": "Di Prinzio P.",
       "points": 0,
       "rebounds": 0,
@@ -427,7 +430,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "02:27"
     },
     {
-      "id": "flashscore-argentino-ferguson-j",
+      "id": "josh-ferguson",
       "name": "Ferguson J.",
       "points": 7,
       "rebounds": 10,
@@ -469,7 +472,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "21:46"
     },
     {
-      "id": "flashscore-ferro-bettiga-l",
+      "id": "valentin-bettiga",
       "name": "Bettiga L.",
       "points": 4,
       "rebounds": 9,
@@ -525,7 +528,7 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "00:36"
     },
     {
-      "id": "flashscore-ferro-jara-c",
+      "id": "camilo-jara",
       "name": "Jara C.",
       "points": 0,
       "rebounds": 0,
@@ -533,7 +536,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "00:37"
     }
   ]
-},"san-martin-instituto": {
+},
+"san-martin-instituto": {
   "san-martin": [
     {
       "id": "diego-collomb",
@@ -682,7 +686,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "32:41"
     }
   ]
-},"olimpico-platense": {
+},
+"olimpico-platense": {
   "olimpico": [
     {
       "id": "flashscore-olimpico-wrighten-a",
@@ -847,7 +852,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "16:43"
     }
   ]
-},"regatas-instituto": {
+},
+"regatas-instituto": {
   "regatas": [
     {
       "id": "flashscore-regatas-gramajo-p",
@@ -1012,7 +1018,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "19:38"
     }
   ]
-},"quimsa-platense": {
+},
+"quimsa-platense": {
   "quimsa": [
     {
       "id": "flashscore-quimsa-bogado-s",
@@ -1209,7 +1216,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "09:57"
     }
   ]
-},"gimnasia-la-union": {
+},
+"gimnasia-la-union": {
   "gimnasia": [
     {
       "id": "obi-okafor",
@@ -1374,7 +1382,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "07:07"
     }
   ]
-},"quimsa-atenas": {
+},
+"quimsa-atenas": {
   "quimsa": [
     {
       "id": "tyren-johnson",
@@ -1515,7 +1524,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "29:42"
     }
   ]
-},"platense-la-union": {
+},
+"platense-la-union": {
   "platense": [
     {
       "id": "federico-grun",
