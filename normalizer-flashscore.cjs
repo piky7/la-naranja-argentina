@@ -49,6 +49,18 @@ function normalizeText(text) {
     .trim();
 }
 
+
+function createProvisionalPlayerId(name, teamId) {
+  const normalizedName = normalizeText(name);
+
+  if (!normalizedName) {
+    return null;
+  }
+
+  return `flashscore-${teamId}-${normalizedName.replace(/\s+/g, "-")}`;
+}
+
+
 /*
 ========================================
 CARGAR JUGADORES DE PLAYERS.JS
@@ -470,19 +482,40 @@ function normalizePlayers(
           lnaPlayers
         );
 
-      if (!playerId) {
-        unmapped.push({
-          name:
-            player.name,
+      
+if (!playerId) {
+  const provisionalId = createProvisionalPlayerId(
+    player.name,
+    teamId
+  );
 
-          teamCode:
-            player.teamCode,
+  if (!provisionalId) {
+    unmapped.push({
+      name: player.name,
+      teamCode: player.teamCode,
+      teamId,
+    });
 
-          teamId,
-        });
+    return;
+  }
 
-        return;
-      }
+  normalized.push({
+    id: provisionalId,
+    name: player.name,
+    teamId,
+    points: Number(player.points) || 0,
+    rebounds: Number(player.rebounds) || 0,
+    assists: Number(player.assists) || 0,
+    minutes: player.minutes || null,
+  });
+
+  console.log(
+    `Jugador provisional incorporado: ${player.name} (${teamId})`
+  );
+
+  return;
+}
+
 
       normalized.push({
         id:

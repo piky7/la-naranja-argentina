@@ -1,175 +1,50 @@
+
 const fs = require("fs");
+const { Script } = require("vm");
 
-const generatedFile =
-  "matchstats-generated.js";
-
-const matchStatsFile =
-  "src/data/matchStats.js";
-
-/*
-========================================
-NORMALIZAR MATCH ID
-========================================
-
-Convierte variantes como:
-
-2026-09-28-lanus-gimnasia
-lanus-gimnasia
-
-en:
-
-lanus-gimnasia
-*/
+const generatedFile = "matchstats-generated.js";
+const matchStatsFile = "src/data/matchStats.js";
 
 function normalizeMatchId(matchId) {
-  let normalized = matchId
+  return matchId
     .trim()
-    .toLowerCase();
-
-  /*
-    Eliminamos una fecha al comienzo:
-
-    2026-09-28-lanus-gimnasia
-    ↓
-    lanus-gimnasia
-  */
-
-  normalized =
-    normalized.replace(
-      /^\d{4}-\d{2}-\d{2}-/,
-      ""
-    );
-
-  /*
-    Normalizamos algunos nombres históricos
-    que pueden haber quedado guardados
-    con otra variante.
-  */
-
-  normalized =
-    normalized
-      .replace(
-        /instituto-de-córdoba/gi,
-        "instituto"
-      )
-      .replace(
-        /instituto-de-cordoba/gi,
-        "instituto"
-      );
-
-  return normalized;
+    .toLowerCase()
+    .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+    .replace(/instituto-de-córdoba/gi, "instituto")
+    .replace(/instituto-de-cordoba/gi, "instituto");
 }
 
-/*
-========================================
-EXTRAER TODOS LOS MATCH IDS
-========================================
-*/
+function extractMatchBlock(source, matchId) {
+  const escapedId = matchId.replace(
+    /[.*+?^${}()|[\]\\]/g,
+    "\\$&"
+  );
 
-function getAllMatchIds(source) {
-  const regex =
-    /^\s*"([^"]+)":\s*\{/gm;
+  const regex = new RegExp(
+    `^\\s*"${escapedId}"\\s*:\\s*\\{`,
+    "m"
+  );
 
-  const ids = [];
+  const match = regex.exec(source);
 
-  let match;
+  if (!match) return null;
 
-  while (
-    (match = regex.exec(source)) !== null
-  ) {
-    ids.push(match[1]);
-  }
-
-  return ids;
-}
-
-/*
-========================================
-BUSCAR MATCH ID EQUIVALENTE
-========================================
-*/
-
-function findEquivalentMatchId(
-  source,
-  targetMatchId
-) {
-  const targetNormalized =
-    normalizeMatchId(
-      targetMatchId
-    );
-
-  const existingIds =
-    getAllMatchIds(source);
-
-  for (
-    const existingId of existingIds
-  ) {
-    if (
-      normalizeMatchId(
-        existingId
-      ) === targetNormalized
-    ) {
-      return existingId;
-    }
-  }
-
-  return null;
-}
-
-/*
-========================================
-EXTRAER EL BLOQUE DE UN PARTIDO
-========================================
-*/
-
-function extractMatchBlock(
-  source,
-  matchId
-) {
-  const search =
-    `"${matchId}": {`;
-
-  const start =
-    source.indexOf(search);
-
-  if (start === -1) {
-    return null;
-  }
-
-  const objectStart =
-    source.indexOf(
-      "{",
-      start
-    );
-
-  if (objectStart === -1) {
-    return null;
-  }
+  const start = match.index;
+  const objectStart = source.indexOf("{", start);
 
   let depth = 0;
   let inString = false;
   let escaped = false;
 
-  for (
-    let i = objectStart;
-    i < source.length;
-    i++
-  ) {
-    const char =
-      source[i];
+  for (let i = objectStart; i < source.length; i++) {
+    const char = source[i];
 
     if (inString) {
       if (escaped) {
         escaped = false;
-        continue;
-      }
-
-      if (char === "\\") {
+      } else if (char === "\\") {
         escaped = true;
-        continue;
-      }
-
-      if (char === '"') {
+      } else if (char === '"') {
         inString = false;
       }
 
@@ -183,38 +58,27 @@ function extractMatchBlock(
 
     if (char === "{") {
       depth++;
-    }
-
-    if (char === "}") {
+    } else if (char === "}") {
       depth--;
 
       if (depth === 0) {
-        let end =
-          i + 1;
+        let end = i + 1;
 
         while (
           end < source.length &&
-          /\s/.test(
-            source[end]
-          )
+          /\s/.test(source[end])
         ) {
           end++;
         }
 
-        if (
-          source[end] === ","
-        ) {
+        if (source[end] === ",") {
           end++;
         }
 
         return {
           start,
           end,
-          text:
-            source.slice(
-              start,
-              end
-            ),
+          text: source.slice(start, end),
         };
       }
     }
@@ -223,349 +87,185 @@ function extractMatchBlock(
   return null;
 }
 
-/*
-========================================
-EXTRAER MATCH ID DEL ARCHIVO GENERADO
-========================================
-*/
+function getMatchIds(source) {
+  const regex = /^\s*"([^"]+)"\s*:\s*\{/gm;
+  const ids = [];
+  let match;
 
-function getGeneratedMatchId(
-  source
-) {
-  const match =
-    source.match(
-      /"([^"]+)":\s*\{/
-    );
-
-  if (!match) {
-    throw new Error(
-      "No se pudo detectar el partido generado."
-    );
+  while ((match = regex.exec(source)) !== null) {
+    ids.push(match[1]);
   }
 
-  return match[1];
+  return ids;
 }
 
-/*
-========================================
-NORMALIZAR BLOQUE GENERADO
-========================================
-*/
-
-function normalizeGeneratedBlock(
-  source
-) {
-  return source.trim();
+function normalizeBlock(block) {
+  return block
+    .trim()
+    .replace(/,\s*$/, "")
+    .trimEnd() + ",";
 }
 
-/*
-========================================
-MAIN
-========================================
-*/
+function validateSyntax(source) {
+  const transformed = source
+    .replace(
+      /^\s*export\s+const\s+matchPlayerStats\s*=/m,
+      "const matchPlayerStats ="
+    )
+    .replace(
+      /^\s*export\s+const\s+matchStats\s*=/m,
+      "const matchStats ="
+    );
+
+  new Script(transformed);
+}
 
 function main() {
-  console.log(
-    "========================================"
-  );
-
-  console.log(
-    "ACTUALIZADOR AUTOMÁTICO DE MATCHSTATS"
-  );
-
-  console.log(
-    "========================================"
-  );
-
   console.log("");
+  console.log("========================================");
+  console.log("ACTUALIZADOR AUTOMÁTICO DE MATCHSTATS");
+  console.log("========================================");
 
-  /*
-  ----------------------------------------
-  VALIDAR ARCHIVOS
-  ----------------------------------------
-  */
-
-  if (
-    !fs.existsSync(
-      generatedFile
-    )
-  ) {
+  if (!fs.existsSync(generatedFile)) {
     throw new Error(
-      `No existe ${generatedFile}. Ejecutá primero generate-matchstats.cjs.`
+      `No existe ${generatedFile}`
     );
   }
 
-  if (
-    !fs.existsSync(
-      matchStatsFile
-    )
-  ) {
+  if (!fs.existsSync(matchStatsFile)) {
     throw new Error(
-      `No existe ${matchStatsFile}.`
+      `No existe ${matchStatsFile}`
     );
   }
 
-  /*
-  ----------------------------------------
-  LEER ARCHIVOS
-  ----------------------------------------
-  */
-
-  const generated =
-    fs.readFileSync(
-      generatedFile,
-      "utf8"
-    );
-
-  let matchStats =
-    fs.readFileSync(
-      matchStatsFile,
-      "utf8"
-    );
-
-  /*
-  ----------------------------------------
-  DETECTAR PARTIDO
-  ----------------------------------------
-  */
-
-  const matchId =
-    getGeneratedMatchId(
-      generated
-    );
-
-  console.log(
-    `Partido detectado: ${matchId}`
+  const generated = fs.readFileSync(
+    generatedFile,
+    "utf8"
   );
 
-  console.log("");
+  let matchStats = fs.readFileSync(
+    matchStatsFile,
+    "utf8"
+  );
 
-  /*
-  ----------------------------------------
-  EXTRAER BLOQUE GENERADO
-  ----------------------------------------
-  */
+  const generatedIds = getMatchIds(generated);
 
-  const generatedBlock =
-    extractMatchBlock(
+  if (generatedIds.length === 0) {
+    throw new Error(
+      "No se encontraron estadísticas generadas."
+    );
+  }
+
+  let added = 0;
+  let updated = 0;
+
+  for (const matchId of generatedIds) {
+    const generatedBlock = extractMatchBlock(
       generated,
       matchId
     );
 
-  if (!generatedBlock) {
-    throw new Error(
-      `No se pudo extraer el bloque del partido ${matchId} desde ${generatedFile}.`
-    );
-  }
+    if (!generatedBlock) {
+      throw new Error(
+        `No se pudo extraer ${matchId}`
+      );
+    }
 
-  const cleanGeneratedBlock =
-    normalizeGeneratedBlock(
+    const cleanBlock = normalizeBlock(
       generatedBlock.text
     );
 
-  /*
-  ----------------------------------------
-  BUSCAR PARTIDO EQUIVALENTE
-  ----------------------------------------
-  */
-
-  const equivalentMatchId =
-    findEquivalentMatchId(
-      matchStats,
-      matchId
+    const equivalentId = getMatchIds(
+      matchStats
+    ).find(
+      (id) =>
+        normalizeMatchId(id) ===
+        normalizeMatchId(matchId)
     );
 
-  /*
-  ========================================
-  CASO 1:
-  EL PARTIDO YA EXISTE
-  ========================================
-  */
-
-  if (equivalentMatchId) {
-    console.log(
-      `Partido equivalente encontrado: ${equivalentMatchId}`
-    );
-
-    if (
-      equivalentMatchId !== matchId
-    ) {
-      console.log(
-        `El ID generado "${matchId}" corresponde al mismo partido.`
-      );
-    }
-
-    console.log(
-      "Actualizando estadísticas existentes..."
-    );
-
-    console.log("");
-
-    const existingBlock =
-      extractMatchBlock(
+    if (equivalentId) {
+      const existingBlock = extractMatchBlock(
         matchStats,
-        equivalentMatchId
+        equivalentId
       );
 
-    if (!existingBlock) {
-      throw new Error(
-        `No se pudo extraer el bloque existente ${equivalentMatchId}.`
+      if (!existingBlock) {
+        throw new Error(
+          `No se pudo actualizar ${equivalentId}`
+        );
+      }
+
+      matchStats =
+        matchStats.slice(0, existingBlock.start) +
+        cleanBlock +
+        matchStats.slice(existingBlock.end);
+
+      updated++;
+
+      console.log(
+        `ACTUALIZADO: ${matchId}`
+      );
+    } else {
+      const finalIndex = matchStats.lastIndexOf("};");
+
+      if (finalIndex === -1) {
+        throw new Error(
+          "No se encontró el cierre de matchStats.js"
+        );
+      }
+
+      const before = matchStats
+        .slice(0, finalIndex)
+        .trimEnd();
+
+      const after = matchStats.slice(finalIndex);
+
+      const separator =
+        before.endsWith("}") ? "," : "";
+
+      matchStats =
+        before +
+        separator +
+        "\n\n" +
+        cleanBlock +
+        "\n" +
+        after;
+
+      added++;
+
+      console.log(
+        `AGREGADO: ${matchId}`
       );
     }
+  }
 
-    /*
-      Si el ID existente es diferente,
-      usamos el ID canónico generado.
+  validateSyntax(matchStats);
 
-      Así eliminamos también la variante
-      antigua y dejamos solamente:
-
-      "lanus-gimnasia"
-    */
-
-    const replacement =
-      cleanGeneratedBlock;
-
-    matchStats =
-      matchStats.slice(
-        0,
-        existingBlock.start
-      ) +
-      replacement +
-      matchStats.slice(
-        existingBlock.end
-      );
-
+  if (
+    matchStats !==
+    fs.readFileSync(matchStatsFile, "utf8")
+  ) {
     fs.writeFileSync(
       matchStatsFile,
       matchStats,
       "utf8"
     );
-
-    console.log(
-      "Partido actualizado correctamente."
-    );
-
-    console.log(
-      `ID utilizado: ${matchId}`
-    );
-
-    console.log(
-      `Archivo actualizado: ${matchStatsFile}`
-    );
-
-    console.log("");
-
-    return;
   }
-
-  /*
-  ========================================
-  CASO 2:
-  PARTIDO NUEVO
-  ========================================
-  */
-
-  console.log(
-    `El partido "${matchId}" no existe en matchStats.js.`
-  );
-
-  console.log(
-    "Agregando estadísticas..."
-  );
 
   console.log("");
-
-  const finalIndex =
-    matchStats.lastIndexOf(
-      "};"
-    );
-
-  if (finalIndex === -1) {
-    throw new Error(
-      `No se encontró el cierre final de ${matchStatsFile}.`
-    );
-  }
-
-  const before =
-    matchStats.slice(
-      0,
-      finalIndex
-    );
-
-  const after =
-    matchStats.slice(
-      finalIndex
-    );
-
-  let separator =
-    "";
-
-  const trimmedBefore =
-    before.trimEnd();
-
-  if (
-    trimmedBefore.endsWith("}") &&
-    !trimmedBefore.endsWith("},")
-  ) {
-    separator = ",";
-  }
-
-  matchStats =
-    trimmedBefore +
-    separator +
-    "\n\n" +
-    cleanGeneratedBlock +
-    "\n" +
-    after;
-
-  fs.writeFileSync(
-    matchStatsFile,
-    matchStats,
-    "utf8"
-  );
-
-  console.log(
-    "Partido agregado correctamente."
-  );
-
-  console.log(
-    `Archivo actualizado: ${matchStatsFile}`
-  );
-
+  console.log("========================================");
+  console.log("ACTUALIZACIÓN COMPLETADA");
+  console.log("========================================");
+  console.log(`Partidos agregados: ${added}`);
+  console.log(`Partidos actualizados: ${updated}`);
   console.log("");
 }
-
-/*
-========================================
-EJECUTAR
-========================================
-*/
 
 try {
   main();
 } catch (error) {
   console.error("");
-
-  console.error(
-    "========================================"
-  );
-
-  console.error(
-    "ERROR"
-  );
-
-  console.error(
-    "========================================"
-  );
-
-  console.error("");
-
-  console.error(
-    error.message
-  );
-
-  console.error("");
-
+  console.error("ERROR ACTUALIZANDO MATCHSTATS");
+  console.error(error.message);
   process.exit(1);
 }

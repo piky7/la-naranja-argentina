@@ -87,15 +87,15 @@ export const flashscoreSchedule = {
     "date": "2026-10-07",
     "time": "21:05",
     "eventId": "KtEa3WFs",
-    "status": "scheduled",
-    "statusCode": "1"
+    "status": "finished",
+    "statusCode": "3"
   },
   "olimpico-atenas": {
     "date": "2026-10-07",
     "time": "22:00",
     "eventId": "OAST8hhK",
-    "status": "scheduled",
-    "statusCode": "1"
+    "status": "finished",
+    "statusCode": "3"
   },
   "racing-chivilcoy-san-martin": {
     "date": "2026-10-08",
