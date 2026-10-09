@@ -568,17 +568,61 @@ const [liveDate, setLiveDate] = useState(null);
           difference: pointsFor - pointsAgainst,
         };
       })
-      .sort((a, b) => {
-        if (b.wins !== a.wins) {
-          return b.wins - a.wins;
-        }
 
-        if (a.losses !== b.losses) {
-          return a.losses - b.losses;
-        }
+.sort((a, b) => {
+  const percentageA = a.gamesPlayed > 0
+    ? a.wins / a.gamesPlayed
+    : 0;
 
-        return b.difference - a.difference;
-      });
+  const percentageB = b.gamesPlayed > 0
+    ? b.wins / b.gamesPlayed
+    : 0;
+
+  // 1. Mayor porcentaje de victorias
+  if (Math.abs(percentageB - percentageA) > 0.000001) {
+    return percentageB - percentageA;
+  }
+
+  // 2. Enfrentamientos directos
+  const directMatches = matches.filter(
+    (match) =>
+      isMatchFinished(match) &&
+      (
+        (match.homeTeam === a.id && match.awayTeam === b.id) ||
+        (match.homeTeam === b.id && match.awayTeam === a.id)
+      ) &&
+      match.homeScore != null &&
+      match.awayScore != null
+  );
+
+  let directWinsA = 0;
+  let directWinsB = 0;
+
+  directMatches.forEach((match) => {
+    const aScore = match.homeTeam === a.id
+      ? Number(match.homeScore)
+      : Number(match.awayScore);
+
+    const bScore = match.homeTeam === b.id
+      ? Number(match.homeScore)
+      : Number(match.awayScore);
+
+    if (aScore > bScore) directWinsA++;
+    if (bScore > aScore) directWinsB++;
+  });
+
+  if (directWinsA !== directWinsB) {
+    return directWinsB - directWinsA;
+  }
+
+  // 3. Diferencia de puntos
+  if (b.difference !== a.difference) {
+    return b.difference - a.difference;
+  }
+
+  return a.name.localeCompare(b.name, "es");
+});
+
   }, []);
 
   const selectedDayMatches = useMemo(() => {
