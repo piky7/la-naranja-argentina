@@ -2630,6 +2630,11 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "period": "4",
       "home": 25,
       "away": 26
+    },
+    {
+      "period": "PR",
+      "home": 36,
+      "away": 33
     }
   ]
 },
