@@ -1461,7 +1461,7 @@ const finishedMatch = {
 
             {selectedMatchStats.quarterScores.map((quarter) => (
               <th key={quarter.period}>
-                {quarter.period === "OT"
+                {quarter.period === "OT" || quarter.period === "PR"
                   ? "PR"
                   : `${quarter.period}C`}
               </th>
