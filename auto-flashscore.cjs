@@ -245,6 +245,7 @@ function parseLiveScore(text, fallbackHome = 0, fallbackAway = 0) {
    PARCIALES POR CUARTO
    ========================================= */
 
+
 function parseQuarterScores(text) {
   const fields = parseFeedFields(text);
 
@@ -253,6 +254,7 @@ function parseQuarterScores(text) {
     ["2", "BC", "BD"],
     ["3", "BE", "BF"],
     ["4", "BG", "BH"],
+    ["PR", "BI", "BJ"],
   ];
 
   const quarters = [];
@@ -263,7 +265,9 @@ function parseQuarterScores(text) {
 
     if (
       homeValue === undefined ||
-      awayValue === undefined
+      awayValue === undefined ||
+      homeValue === "" ||
+      awayValue === ""
     ) {
       continue;
     }
@@ -287,6 +291,7 @@ function parseQuarterScores(text) {
 
   return quarters;
 }
+
 
 
 /* =========================================
