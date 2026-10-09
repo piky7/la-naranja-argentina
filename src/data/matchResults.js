@@ -1,4 +1,28 @@
 export const matchResults = {
+  "2026-10-08-san-lorenzo-gimnasia": {
+    status: "finished",
+    homeScore: 89,
+    awayScore: 73,
+    time: null,
+    venue: null,
+    tv: [],
+  },
+  "2026-10-08-independiente-oliva-ferro": {
+    status: "finished",
+    homeScore: 92,
+    awayScore: 97,
+    time: null,
+    venue: null,
+    tv: [],
+  },
+  "2026-10-08-racing-chivilcoy-san-martin": {
+    status: "finished",
+    homeScore: 126,
+    awayScore: 123,
+    time: null,
+    venue: null,
+    tv: [],
+  },
   "2026-10-07-olimpico-atenas": {
     status: "finished",
     homeScore: 87,

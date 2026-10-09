@@ -2007,4 +2007,338 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"independiente-oliva-ferro": {
+  "independiente-oliva": [
+    {
+      "id": "agustin-caffaro",
+      "name": "Caffaro A.",
+      "points": 21,
+      "rebounds": 9,
+      "assists": 0,
+      "minutes": "25:05"
+    },
+    {
+      "id": "flashscore-independiente-oliva-guerrero-j-m",
+      "name": "Guerrero J. M.",
+      "points": 8,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "18:13"
+    },
+    {
+      "id": "patricio-tabarez",
+      "name": "Tabarez P.",
+      "points": 5,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "23:13"
+    },
+    {
+      "id": "fortuna-rolfi",
+      "name": "Rolfi F.",
+      "points": 20,
+      "rebounds": 5,
+      "assists": 6,
+      "minutes": "31:17"
+    },
+    {
+      "id": "rolando-vallejos",
+      "name": "Vallejos R.",
+      "points": 5,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "22:42"
+    },
+    {
+      "id": "flashscore-independiente-oliva-marcucci-n-j",
+      "name": "Marcucci N. J.",
+      "points": 2,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "14:23"
+    },
+    {
+      "id": "felipe-barrionuevo",
+      "name": "Barrionuevo F.",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "21:47"
+    },
+    {
+      "id": "agustin-pautasso",
+      "name": "Pautasso A.",
+      "points": 9,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "19:11"
+    },
+    {
+      "id": "andriy-grytsak",
+      "name": "Grytsak A.",
+      "points": 9,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "14:29"
+    },
+    {
+      "id": "flashscore-independiente-oliva-filipetti-e",
+      "name": "Filipetti E.",
+      "points": 1,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "09:39"
+    }
+  ],
+  "ferro": [
+    {
+      "id": "emiliano-lezcano",
+      "name": "Lezcano E.",
+      "points": 25,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "29:58"
+    },
+    {
+      "id": "jano-martinez",
+      "name": "Martinez J.",
+      "points": 5,
+      "rebounds": 6,
+      "assists": 3,
+      "minutes": "25:47"
+    },
+    {
+      "id": "federico-zezular",
+      "name": "Zezular F.",
+      "points": 9,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "29:58"
+    },
+    {
+      "id": "facundo-pinero",
+      "name": "Pinero F.",
+      "points": 9,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "20:03"
+    },
+    {
+      "id": "valentin-bettiga",
+      "name": "Bettiga L.",
+      "points": 13,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "32:21"
+    },
+    {
+      "id": "jose-defelippo",
+      "name": "Defelippo J.",
+      "points": 8,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "15:49"
+    },
+    {
+      "id": "kevin-hernandez",
+      "name": "Hernandez K.",
+      "points": 16,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "11:03"
+    },
+    {
+      "id": "felipe-rodriguez",
+      "name": "Rodriguez F.",
+      "points": 1,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "16:32"
+    },
+    {
+      "id": "rodrigo-gallegos",
+      "name": "Gallegos R.",
+      "points": 7,
+      "rebounds": 2,
+      "assists": 5,
+      "minutes": "15:18"
+    },
+    {
+      "id": "camilo-rodriguez",
+      "name": "Rodriguez C.",
+      "points": 4,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "03:11"
+    }
+  ]
+},
+
+"racing-chivilcoy-san-martin": {
+  "racing-chivilcoy": [
+    {
+      "id": "mateo-chiarini",
+      "name": "Chiarini M.",
+      "points": 32,
+      "rebounds": 4,
+      "assists": 5,
+      "minutes": "40:02"
+    },
+    {
+      "id": "pedro-barral",
+      "name": "Barral P.",
+      "points": 22,
+      "rebounds": 3,
+      "assists": 11,
+      "minutes": "36:25"
+    },
+    {
+      "id": "marcos-delia",
+      "name": "Delia M.",
+      "points": 7,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "27:10"
+    },
+    {
+      "id": "juan-bocca",
+      "name": "Bocca J.",
+      "points": 17,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "30:16"
+    },
+    {
+      "id": "nicolas-romano",
+      "name": "Romano N.",
+      "points": 23,
+      "rebounds": 6,
+      "assists": 2,
+      "minutes": "31:46"
+    },
+    {
+      "id": "manuel-rodriguez",
+      "name": "Rodriguez M.",
+      "points": 5,
+      "rebounds": 7,
+      "assists": 0,
+      "minutes": "18:32"
+    },
+    {
+      "id": "santiago-assum",
+      "name": "Assum S.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "13:47"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
+      "points": 2,
+      "rebounds": 0,
+      "assists": 3,
+      "minutes": "13:35"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
+      "points": 14,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "25:16"
+    },
+    {
+      "id": "abraham-barahona",
+      "name": "Barahona A.",
+      "points": 2,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "09:30"
+    },
+    {
+      "id": "matias-morera",
+      "name": "Morera M.",
+      "points": 2,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "03:42"
+    }
+  ],
+  "san-martin": [
+    {
+      "id": "salvador-giletto",
+      "name": "Giletto S.",
+      "points": 12,
+      "rebounds": 6,
+      "assists": 2,
+      "minutes": "37:48"
+    },
+    {
+      "id": "gaston-garcia",
+      "name": "Garcia G.",
+      "points": 11,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "19:03"
+    },
+    {
+      "id": "mateo-rearte",
+      "name": "Rearte M.",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "11:39"
+    },
+    {
+      "id": "flashscore-san-martin-berra-fernandez-l",
+      "name": "Berra Fernandez L.",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "11:23"
+    },
+    {
+      "id": "sebastian-lugo",
+      "name": "Lugo S.",
+      "points": 26,
+      "rebounds": 12,
+      "assists": 1,
+      "minutes": "43:56"
+    },
+    {
+      "id": "diego-collomb",
+      "name": "Collomb D.",
+      "points": 30,
+      "rebounds": 5,
+      "assists": 3,
+      "minutes": "38:20"
+    },
+    {
+      "id": "juanse-gorosito",
+      "name": "Gorosito J.",
+      "points": 18,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "37:50"
+    },
+    {
+      "id": "daniel-moreira",
+      "name": "Moreira",
+      "points": 20,
+      "rebounds": 15,
+      "assists": 3,
+      "minutes": "38:37"
+    },
+    {
+      "id": "geronimo-ramallo",
+      "name": "Ramallo G.",
+      "points": 2,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "11:25"
+    }
+  ]
+},
 };
