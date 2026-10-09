@@ -618,13 +618,12 @@ const [liveMatches, setLiveMatches] = useState([]);
     </small>
   ) : liveMatch.quarter ? (
     <small className="home-live-period">
-      {liveMatch.quarter}.º CUARTO
-      {liveMatch.minutesRemaining !== null &&
-      liveMatch.minutesRemaining !== undefined
-        ? ` · ${String(
-            liveMatch.minutesRemaining
-          ).padStart(2, "0")} MIN`
-        : ""}
+      
+{liveMatch.quarter}.º CUARTO
+{liveMatch.minutesRemaining != null
+  ? ` · ${liveMatch.minutesRemaining}'`
+  : ""}
+
     </small>
   ) : null}
 </div>
@@ -904,13 +903,12 @@ const isLive =
       </small>
     ) : liveMatch?.quarter ? (
       <small className="fixture-live-period">
-        {liveMatch.quarter}.º CUARTO
-        {liveMatch.minutesRemaining !== null &&
-        liveMatch.minutesRemaining !== undefined
-          ? ` · ${String(
-              liveMatch.minutesRemaining
-            ).padStart(2, "0")} MIN`
-          : ""}
+        
+{liveMatch.quarter}.º CUARTO
+{liveMatch.minutesRemaining != null
+  ? ` · ${liveMatch.minutesRemaining}'`
+  : ""}
+
       </small>
     ) : null}
   </>
