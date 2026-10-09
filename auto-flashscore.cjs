@@ -248,41 +248,40 @@ function parseLiveScore(text, fallbackHome = 0, fallbackAway = 0) {
 function parseQuarterScores(text) {
   const fields = parseFeedFields(text);
 
-  const quarters = [];
-
   const quarterPairs = [
-    ["1", "IG", "IH"],
-    ["2", "IK", "IL"],
-    ["3", "IM", "IN"],
-    ["4", "IO", "IP"],
-    ["OT", "IQ", "IR"],
+    ["1", "BA", "BB"],
+    ["2", "BC", "BD"],
+    ["3", "BE", "BF"],
+    ["4", "BG", "BH"],
   ];
 
+  const quarters = [];
+
   for (const [period, homeKey, awayKey] of quarterPairs) {
-    const home = fields[homeKey];
-    const away = fields[awayKey];
+    const homeValue = fields[homeKey]?.at(-1);
+    const awayValue = fields[awayKey]?.at(-1);
 
     if (
-      home === undefined &&
-      away === undefined
+      homeValue === undefined ||
+      awayValue === undefined
+    ) {
+      continue;
+    }
+
+    const home = Number(homeValue);
+    const away = Number(awayValue);
+
+    if (
+      !Number.isFinite(home) ||
+      !Number.isFinite(away)
     ) {
       continue;
     }
 
     quarters.push({
       period,
-
-      home:
-        home !== undefined &&
-        Number.isFinite(Number(home))
-          ? Number(home)
-          : null,
-
-      away:
-        away !== undefined &&
-        Number.isFinite(Number(away))
-          ? Number(away)
-          : null,
+      home,
+      away,
     });
   }
 
@@ -515,27 +514,32 @@ async function main() {
     console.log("");
 
     const playersUrl =
-      `https://global.flashscore.ninja/204/x/feed/df_psn_1_${eventId}`;
+  `https://global.flashscore.ninja/204/x/feed/df_psn_1_${eventId}`;
 
-    const matchUrl =
-      `https://global.flashscore.ninja/204/x/feed/dc_1_${eventId}`;
+const matchUrl =
+  `https://global.flashscore.ninja/204/x/feed/dc_1_${eventId}`;
 
-    const tvUrl =
-      `https://global.flashscore.ninja/204/x/feed/df_dos_1_${eventId}_`;
+const quartersUrl =
+  `https://global.flashscore.ninja/204/x/feed/df_sur_1_${eventId}`;
+
+const tvUrl =
+  `https://global.flashscore.ninja/204/x/feed/df_dos_1_${eventId}_`;
 
     console.log(
       "Descargando feeds..."
     );
 
     const [
-      playersText,
-      matchText,
-      tvText,
-    ] = await Promise.all([
-      getFeed(playersUrl),
-      getFeed(matchUrl),
-      getFeed(tvUrl),
-    ]);
+  playersText,
+  matchText,
+  quartersText,
+  tvText,
+] = await Promise.all([
+  getFeed(playersUrl),
+  getFeed(matchUrl),
+  getFeed(quartersUrl),
+  getFeed(tvUrl),
+]);
 
     console.log(
       `Feed jugadores: ${playersText.length} caracteres`
@@ -544,6 +548,10 @@ async function main() {
     console.log(
       `Feed partido: ${matchText.length} caracteres`
     );
+
+    console.log(
+  `Feed parciales: ${quartersText.length} caracteres`
+);
 
     console.log(
       `Feed TV: ${tvText.length} caracteres`
@@ -570,7 +578,7 @@ console.log("");
       );
 
     const quarterScores =
-      parseQuarterScores(matchText);
+  parseQuarterScores(quartersText);
 
     const players =
   playersText.length > 20

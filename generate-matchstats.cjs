@@ -96,9 +96,13 @@ function main() {
     `${homeTeamId}-${awayTeamId}`;
 
   const matchData = {
-    [homeTeamId]: homePlayers,
-    [awayTeamId]: awayPlayers,
-  };
+  [homeTeamId]: homePlayers,
+  [awayTeamId]: awayPlayers,
+
+  quarterScores: Array.isArray(match.quarterScores)
+    ? match.quarterScores
+    : [],
+};
 
   const block =
     `  ${JSON.stringify(matchId)}: ` +

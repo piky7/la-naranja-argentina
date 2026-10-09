@@ -1,5 +1,4 @@
-export const matchPlayerStats = {
-"lanus-gimnasia": {
+export const matchPlayerStats = {"lanus-gimnasia": {
   "lanus": [
     {
       "id": "martin-franchino",
@@ -171,9 +170,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "17:31"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 12,
+      "away": 26
+    },
+    {
+      "period": "2",
+      "home": 15,
+      "away": 26
+    },
+    {
+      "period": "3",
+      "home": 18,
+      "away": 21
+    },
+    {
+      "period": "4",
+      "home": 29,
+      "away": 19
+    }
   ]
-},
-"penarol-gimnasia": {
+},"penarol-gimnasia": {
   "penarol": [
     {
       "id": "ivan-basualdo",
@@ -345,9 +365,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "07:10"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 17,
+      "away": 14
+    },
+    {
+      "period": "2",
+      "home": 13,
+      "away": 15
+    },
+    {
+      "period": "3",
+      "home": 14,
+      "away": 6
+    },
+    {
+      "period": "4",
+      "home": 18,
+      "away": 22
+    }
   ]
-},
-"argentino-ferro": {
+},"argentino-ferro": {
   "argentino": [
     {
       "id": "dylan-smith",
@@ -535,9 +576,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "00:37"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 21,
+      "away": 17
+    },
+    {
+      "period": "2",
+      "home": 23,
+      "away": 20
+    },
+    {
+      "period": "3",
+      "home": 14,
+      "away": 22
+    },
+    {
+      "period": "4",
+      "home": 21,
+      "away": 9
+    }
   ]
-},
-"san-martin-instituto": {
+},"san-martin-instituto": {
   "san-martin": [
     {
       "id": "diego-collomb",
@@ -685,9 +747,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "32:41"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 19,
+      "away": 22
+    },
+    {
+      "period": "2",
+      "home": 23,
+      "away": 19
+    },
+    {
+      "period": "3",
+      "home": 12,
+      "away": 17
+    },
+    {
+      "period": "4",
+      "home": 19,
+      "away": 23
+    }
   ]
-},
-"olimpico-platense": {
+},"olimpico-platense": {
   "olimpico": [
     {
       "id": "flashscore-olimpico-wrighten-a",
@@ -851,9 +934,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "16:43"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 8,
+      "away": 18
+    },
+    {
+      "period": "2",
+      "home": 26,
+      "away": 21
+    },
+    {
+      "period": "3",
+      "home": 16,
+      "away": 12
+    },
+    {
+      "period": "4",
+      "home": 24,
+      "away": 31
+    }
   ]
-},
-"regatas-instituto": {
+},"regatas-instituto": {
   "regatas": [
     {
       "id": "flashscore-regatas-gramajo-p",
@@ -1017,9 +1121,30 @@ export const matchPlayerStats = {
       "assists": 1,
       "minutes": "19:38"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 17,
+      "away": 12
+    },
+    {
+      "period": "2",
+      "home": 12,
+      "away": 19
+    },
+    {
+      "period": "3",
+      "home": 18,
+      "away": 16
+    },
+    {
+      "period": "4",
+      "home": 26,
+      "away": 16
+    }
   ]
-},
-"quimsa-platense": {
+},"quimsa-platense": {
   "quimsa": [
     {
       "id": "flashscore-quimsa-bogado-s",
@@ -1215,9 +1340,30 @@ export const matchPlayerStats = {
       "assists": 1,
       "minutes": "09:57"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 22,
+      "away": 14
+    },
+    {
+      "period": "2",
+      "home": 25,
+      "away": 14
+    },
+    {
+      "period": "3",
+      "home": 31,
+      "away": 13
+    },
+    {
+      "period": "4",
+      "home": 16,
+      "away": 26
+    }
   ]
-},
-"gimnasia-la-union": {
+},"gimnasia-la-union": {
   "gimnasia": [
     {
       "id": "obi-okafor",
@@ -1381,9 +1527,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "07:07"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 21,
+      "away": 16
+    },
+    {
+      "period": "2",
+      "home": 30,
+      "away": 19
+    },
+    {
+      "period": "3",
+      "home": 17,
+      "away": 28
+    },
+    {
+      "period": "4",
+      "home": 24,
+      "away": 23
+    }
   ]
-},
-"quimsa-atenas": {
+},"quimsa-atenas": {
   "quimsa": [
     {
       "id": "tyren-johnson",
@@ -1523,9 +1690,30 @@ export const matchPlayerStats = {
       "assists": 3,
       "minutes": "29:42"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 16,
+      "away": 21
+    },
+    {
+      "period": "2",
+      "home": 27,
+      "away": 23
+    },
+    {
+      "period": "3",
+      "home": 23,
+      "away": 13
+    },
+    {
+      "period": "4",
+      "home": 17,
+      "away": 20
+    }
   ]
-},
-"platense-la-union": {
+},"platense-la-union": {
   "platense": [
     {
       "id": "federico-grun",
@@ -1673,9 +1861,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "13:56"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 19,
+      "away": 28
+    },
+    {
+      "period": "2",
+      "home": 19,
+      "away": 29
+    },
+    {
+      "period": "3",
+      "home": 22,
+      "away": 20
+    },
+    {
+      "period": "4",
+      "home": 26,
+      "away": 13
+    }
   ]
-},
-"boca-obera": {
+},"boca-obera": {
   "boca": [
     {
       "id": "mike-warren",
@@ -1855,9 +2064,30 @@ export const matchPlayerStats = {
       "assists": 1,
       "minutes": "18:37"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 26,
+      "away": 21
+    },
+    {
+      "period": "2",
+      "home": 30,
+      "away": 11
+    },
+    {
+      "period": "3",
+      "home": 21,
+      "away": 21
+    },
+    {
+      "period": "4",
+      "home": 19,
+      "away": 20
+    }
   ]
-},
-"olimpico-atenas": {
+},"olimpico-atenas": {
   "olimpico": [
     {
       "id": "flashscore-olimpico-wrighten-a",
@@ -2005,10 +2235,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "00:05"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 17,
+      "away": 21
+    },
+    {
+      "period": "2",
+      "home": 24,
+      "away": 17
+    },
+    {
+      "period": "3",
+      "home": 25,
+      "away": 29
+    },
+    {
+      "period": "4",
+      "home": 21,
+      "away": 24
+    }
   ]
-},
-
-"independiente-oliva-ferro": {
+},"independiente-oliva-ferro": {
   "independiente-oliva": [
     {
       "id": "agustin-caffaro",
@@ -2172,10 +2422,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "03:11"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 28,
+      "away": 33
+    },
+    {
+      "period": "2",
+      "home": 23,
+      "away": 14
+    },
+    {
+      "period": "3",
+      "home": 23,
+      "away": 27
+    },
+    {
+      "period": "4",
+      "home": 18,
+      "away": 23
+    }
   ]
-},
-
-"racing-chivilcoy-san-martin": {
+},"racing-chivilcoy-san-martin": {
   "racing-chivilcoy": [
     {
       "id": "mateo-chiarini",
@@ -2339,9 +2609,30 @@ export const matchPlayerStats = {
       "assists": 0,
       "minutes": "11:25"
     }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 30,
+      "away": 18
+    },
+    {
+      "period": "2",
+      "home": 16,
+      "away": 23
+    },
+    {
+      "period": "3",
+      "home": 19,
+      "away": 23
+    },
+    {
+      "period": "4",
+      "home": 25,
+      "away": 26
+    }
   ]
 },
-
 "san-lorenzo-gimnasia": {
   "san-lorenzo": [
     {
@@ -2521,6 +2812,28 @@ export const matchPlayerStats = {
       "rebounds": 0,
       "assists": 0,
       "minutes": "04:34"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 20,
+      "away": 22
+    },
+    {
+      "period": "2",
+      "home": 18,
+      "away": 18
+    },
+    {
+      "period": "3",
+      "home": 29,
+      "away": 14
+    },
+    {
+      "period": "4",
+      "home": 22,
+      "away": 19
     }
   ]
 },

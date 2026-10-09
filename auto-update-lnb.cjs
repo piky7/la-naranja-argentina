@@ -63,18 +63,41 @@ function validateGeneratedStats(match) {
     );
   }
 
-  if (
-    !content.includes(
-      `"${expectedKey}"`
-    )
-  ) {
+  if (!content.includes(`"${expectedKey}"`)) {
     throw new Error(
       `Las estadísticas generadas no corresponden a ${expectedKey}`
     );
   }
 
+  const normalizedFile = "flashscore-normalized.json";
+
+  if (!fs.existsSync(normalizedFile)) {
+    throw new Error(
+      "No se generó flashscore-normalized.json"
+    );
+  }
+
+  const normalized = JSON.parse(
+    fs.readFileSync(normalizedFile, "utf8")
+  );
+
+  const quarters = normalized.quarterScores;
+
+  if (
+    !Array.isArray(quarters) ||
+    quarters.length < 4
+  ) {
+    throw new Error(
+      `Parciales incompletos para ${expectedKey}. No se actualizarán sus estadísticas.`
+    );
+  }
+
   console.log(
     `Estadísticas verificadas: ${expectedKey}`
+  );
+
+  console.log(
+    `Cuartos detectados: ${quarters.length}`
   );
 }
 

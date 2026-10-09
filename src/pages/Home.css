@@ -4701,3 +4701,91 @@
     font-size: 15px;
   }
 }
+
+/* PUNTOS POR CUARTO */
+
+.match-quarters {
+  margin: 18px 22px 22px;
+  padding: 18px;
+  background: #15191f;
+  border: 1px solid #303640;
+  border-radius: 12px;
+}
+
+.match-quarters-title {
+  margin-bottom: 15px;
+}
+
+.match-quarters-title span {
+  color: #f58220;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.match-quarters-title h3 {
+  color: #f5f5f5;
+  font-size: 16px;
+  margin: 5px 0 0;
+}
+
+.match-quarters-scroll {
+  overflow-x: auto;
+}
+
+.match-quarters-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  color: #e9edf2;
+  font-size: 13px;
+}
+
+.match-quarters-table th,
+.match-quarters-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #303640;
+  white-space: nowrap;
+}
+
+.match-quarters-table thead th {
+  color: #8f99a6;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.match-quarters-table th:first-child {
+  text-align: left;
+}
+
+.match-quarters-table tbody th {
+  color: #fff;
+  font-weight: 700;
+}
+
+.match-quarters-total {
+  color: #f58220;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.match-quarters-table tbody tr:last-child th,
+.match-quarters-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 600px) {
+  .match-quarters {
+    margin: 12px;
+    padding: 12px;
+  }
+
+  .match-quarters-table {
+    font-size: 12px;
+  }
+
+  .match-quarters-table th,
+  .match-quarters-table td {
+    padding: 10px 6px;
+  }
+}

@@ -101,22 +101,22 @@ export const flashscoreSchedule = {
     "date": "2026-10-08",
     "time": "21:00",
     "eventId": "zXKFalF6",
-    "status": "scheduled",
-    "statusCode": "1"
+    "status": "finished",
+    "statusCode": "3"
   },
   "independiente-oliva-ferro": {
     "date": "2026-10-08",
     "time": "21:30",
     "eventId": "8pJNcSqJ",
-    "status": "scheduled",
-    "statusCode": "1"
+    "status": "finished",
+    "statusCode": "3"
   },
   "san-lorenzo-gimnasia": {
     "date": "2026-10-08",
     "time": "22:05",
     "eventId": "CGUY4qin",
-    "status": "scheduled",
-    "statusCode": "1"
+    "status": "finished",
+    "statusCode": "3"
   },
   "lanus-obera": {
     "date": "2026-10-09",
@@ -162,7 +162,7 @@ export const flashscoreSchedule = {
   },
   "argentino-gimnasia": {
     "date": "2026-10-12",
-    "time": "21:30",
+    "time": "20:30",
     "eventId": "UgGMF054",
     "status": "scheduled",
     "statusCode": "1"
@@ -758,17 +758,23 @@ export const flashscoreSchedule = {
   "lanus-racing-chivilcoy": {
     "date": "2027-01-27",
     "time": "18:00",
-    "eventId": "lChlH763"
+    "eventId": "lChlH763",
+    "status": "scheduled",
+    "statusCode": "1"
   },
   "la-union-platense": {
     "date": "2027-01-28",
     "time": "18:00",
-    "eventId": "42a4DP5S"
+    "eventId": "42a4DP5S",
+    "status": "scheduled",
+    "statusCode": "1"
   },
   "regatas-ferro": {
     "date": "2027-01-28",
     "time": "18:00",
-    "eventId": "dxddFoyG"
+    "eventId": "dxddFoyG",
+    "status": "scheduled",
+    "statusCode": "1"
   },
   "instituto-san-lorenzo": {
     "date": "2026-11-16",

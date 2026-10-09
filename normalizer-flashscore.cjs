@@ -686,6 +686,9 @@ function main() {
     status:
       raw.status ||
       "unknown",
+      quarterScores: Array.isArray(raw.quarterScores)
+  ? raw.quarterScores
+  : [],
 
     tv:
       Array.isArray(raw.tv)
