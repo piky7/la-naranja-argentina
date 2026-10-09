@@ -552,7 +552,13 @@ const tvUrl =
     console.log(
   `Feed parciales: ${quartersText.length} caracteres`
 );
-
+console.log("");
+console.log("========================================");
+console.log("FEED PARCIALES RAW");
+console.log("========================================");
+console.log(quartersText);
+console.log("========================================");
+console.log("");
     console.log(
       `Feed TV: ${tvText.length} caracteres`
     );
