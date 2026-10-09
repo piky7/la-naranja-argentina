@@ -1,6 +1,6 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 119,
+  "totalMatches": 118,
   "finishedMatches": 15,
   "postponedMatches": 0,
   "matches": [
@@ -229,22 +229,6 @@
       "awayId": "Cn0pHIpQ"
     },
     {
-      "eventId": "KtYt3NLb",
-      "homeTeam": "lanus",
-      "homeName": "Lanus",
-      "awayTeam": "obera",
-      "awayName": "Obera TC",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1791588600,
-      "homeSlug": "lanus",
-      "awaySlug": "obera-tc",
-      "homeId": "zy0PhewD",
-      "awayId": "KdCRV01k"
-    },
-    {
       "eventId": "0KZdauLN",
       "homeTeam": "instituto",
       "homeName": "Instituto de Córdoba",
@@ -437,22 +421,6 @@
       "awayId": "0OnqJxtR"
     },
     {
-      "eventId": "xQfNLYW1",
-      "homeTeam": "lanus",
-      "homeName": "Lanus",
-      "awayTeam": "gimnasia",
-      "awayName": "Gimnasia",
-      "homeScore": 74,
-      "awayScore": 92,
-      "status": "finished",
-      "statusCode": "3",
-      "timestamp": 1790643900,
-      "homeSlug": "lanus",
-      "awaySlug": "gimnasia",
-      "homeId": "zy0PhewD",
-      "awayId": "Cn0pHIpQ"
-    },
-    {
       "eventId": "lpM69Xhd",
       "homeTeam": "san-lorenzo",
       "homeName": "San Lorenzo",
@@ -483,6 +451,22 @@
       "awaySlug": "olimpico",
       "homeId": "SAdHfH80",
       "awayId": "ERbTiFhJ"
+    },
+    {
+      "eventId": "xQfNLYW1",
+      "homeTeam": "lanus",
+      "homeName": "Lanus",
+      "awayTeam": "gimnasia",
+      "awayName": "Gimnasia",
+      "homeScore": 74,
+      "awayScore": 92,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1790643900,
+      "homeSlug": "lanus",
+      "awaySlug": "gimnasia",
+      "homeId": "zy0PhewD",
+      "awayId": "Cn0pHIpQ"
     },
     {
       "eventId": "E5MaVEFF",
