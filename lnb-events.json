@@ -1,6 +1,6 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 116,
+  "totalMatches": 117,
   "finishedMatches": 12,
   "postponedMatches": 0,
   "matches": [
@@ -195,38 +195,6 @@
       "awaySlug": "gimnasia",
       "homeId": "zy0PhewD",
       "awayId": "Cn0pHIpQ"
-    },
-    {
-      "eventId": "zXKFalF6",
-      "homeTeam": "racing-chivilcoy",
-      "homeName": "Racing de Chivilcoy",
-      "awayTeam": "san-martin",
-      "awayName": "San Martín",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1791504000,
-      "homeSlug": "racing-de-chivilcoy",
-      "awaySlug": "san-martin",
-      "homeId": "U9SgFDqR",
-      "awayId": "U5F8QbRb"
-    },
-    {
-      "eventId": "8pJNcSqJ",
-      "homeTeam": "independiente-oliva",
-      "homeName": "Independiente de Oliva",
-      "awayTeam": "ferro",
-      "awayName": "Ferro",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1791505800,
-      "homeSlug": "independiente-de-oliva",
-      "awaySlug": "ferro-carril-oeste",
-      "homeId": "bX27OjMs",
-      "awayId": "2qroXLyp"
     },
     {
       "eventId": "CGUY4qin",
@@ -1859,6 +1827,54 @@
       "awaySlug": "ca-platense",
       "homeId": "KdCRV01k",
       "awayId": "SIolf8Y3"
+    },
+    {
+      "eventId": "lChlH763",
+      "homeTeam": "lanus",
+      "homeName": "Lanus",
+      "awayTeam": "racing-chivilcoy",
+      "awayName": "Racing de Chivilcoy",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1801083600,
+      "homeSlug": "lanus",
+      "awaySlug": "racing-de-chivilcoy",
+      "homeId": "zy0PhewD",
+      "awayId": "U9SgFDqR"
+    },
+    {
+      "eventId": "42a4DP5S",
+      "homeTeam": "la-union",
+      "homeName": "La Union",
+      "awayTeam": "platense",
+      "awayName": "Platense",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1801170000,
+      "homeSlug": "la-union",
+      "awaySlug": "ca-platense",
+      "homeId": "tE0LgyO6",
+      "awayId": "SIolf8Y3"
+    },
+    {
+      "eventId": "dxddFoyG",
+      "homeTeam": "regatas",
+      "homeName": "Regatas",
+      "awayTeam": "ferro",
+      "awayName": "Ferro",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1801170000,
+      "homeSlug": "regatas",
+      "awaySlug": "ferro-carril-oeste",
+      "homeId": "SAdHfH80",
+      "awayId": "2qroXLyp"
     }
   ],
   "finished": [
