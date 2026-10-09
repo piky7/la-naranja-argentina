@@ -2341,4 +2341,187 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"san-lorenzo-gimnasia": {
+  "san-lorenzo": [
+    {
+      "id": "raynere-thornton",
+      "name": "Thornton R.",
+      "points": 15,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "33:17"
+    },
+    {
+      "id": "marcos-mata",
+      "name": "Mata M.",
+      "points": 10,
+      "rebounds": 7,
+      "assists": 2,
+      "minutes": "22:10"
+    },
+    {
+      "id": "flashscore-san-lorenzo-aguirre-g",
+      "name": "Aguirre G.",
+      "points": 12,
+      "rebounds": 1,
+      "assists": 3,
+      "minutes": "21:12"
+    },
+    {
+      "id": "cliron-hornbeak",
+      "name": "Hornbeak C.",
+      "points": 7,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "19:04"
+    },
+    {
+      "id": "eric-flor",
+      "name": "Flor E.",
+      "points": 5,
+      "rebounds": 1,
+      "assists": 3,
+      "minutes": "21:40"
+    },
+    {
+      "id": "lucas-gargallo",
+      "name": "Gargallo L.",
+      "points": 3,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "17:43"
+    },
+    {
+      "id": "thiago-roca",
+      "name": "Roca T.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "04:20"
+    },
+    {
+      "id": "flashscore-san-lorenzo-actis-j",
+      "name": "Actis J.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:40"
+    },
+    {
+      "id": "santiago-calderon",
+      "name": "Calderon S.",
+      "points": 14,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "18:48"
+    },
+    {
+      "id": "valentino-nesci",
+      "name": "Nesci V.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:27"
+    },
+    {
+      "id": "leonel-schattmann",
+      "name": "Schattmann L.",
+      "points": 12,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "20:09"
+    },
+    {
+      "id": "antun-maricevic",
+      "name": "Maricevic A.",
+      "points": 11,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "20:30"
+    }
+  ],
+  "gimnasia": [
+    {
+      "id": "obi-okafor",
+      "name": "Okafor O.",
+      "points": 2,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "14:41"
+    },
+    {
+      "id": "felipe-inyaco",
+      "name": "Inyaco F.",
+      "points": 6,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "22:27"
+    },
+    {
+      "id": "martiniano-dato",
+      "name": "Dato M.",
+      "points": 12,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "31:50"
+    },
+    {
+      "id": "emiliano-toretta",
+      "name": "Toretta E.",
+      "points": 15,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "29:46"
+    },
+    {
+      "id": "carlos-rivero",
+      "name": "Rivero C.",
+      "points": 5,
+      "rebounds": 9,
+      "assists": 0,
+      "minutes": "20:34"
+    },
+    {
+      "id": "marcos-chacon",
+      "name": "Chacon M.",
+      "points": 13,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "25:36"
+    },
+    {
+      "id": "sebastian-carrasco",
+      "name": "Carrasco S.",
+      "points": 15,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "21:12"
+    },
+    {
+      "id": "valentin-forestier",
+      "name": "Forestier V.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "09:54"
+    },
+    {
+      "id": "ben-stevens",
+      "name": "Stevens B.",
+      "points": 5,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "19:26"
+    },
+    {
+      "id": "gino-balbo",
+      "name": "Balbo G.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "04:34"
+    }
+  ]
+},
 };

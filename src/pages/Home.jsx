@@ -2,13 +2,22 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { teams } from "../data/teams";
-import { matches } from "../data/matches";
+import { matches as baseMatches } from "../data/matches";
+import { matchResults } from "../data/matchResults";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
 
 
 import "./Home.css";
+
+// Los resultados publicados tienen prioridad sobre el fixture original.
+const matches = baseMatches.map((match) => {
+  const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  const result = matchResults[key] ?? matchResults[match.id];
+  return result ? { ...match, ...result } : match;
+});
+
 
 function Home() {
   const navigate = useNavigate();
@@ -28,6 +37,15 @@ function Home() {
   const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 const [liveMatches, setLiveMatches] = useState([]);
+const [liveDate, setLiveDate] = useState(null);
+
+  // DI representa minutos jugados dentro del cuarto (sin segundos).
+  const getRemainingMinutes = (minutesPlayed) => {
+    if (minutesPlayed == null) return null;
+    const minutes = Number(minutesPlayed);
+    if (!Number.isFinite(minutes)) return null;
+    return Math.max(0, Math.min(10, 10 - minutes));
+  };
 
   const getTeam = (teamId) => {
     return teams.find((team) => team.id === teamId);
@@ -396,7 +414,8 @@ const [liveMatches, setLiveMatches] = useState([]);
         return;
       }
 
-      setLiveMatches(
+      setLiveDate(data.date ?? null);
+       setLiveMatches(
         Array.isArray(data.liveMatches)
           ? data.liveMatches
           : []
@@ -421,6 +440,78 @@ const [liveMatches, setLiveMatches] = useState([]);
     clearInterval(interval);
   };
 }, []);
+
+  // El panel LIVE solo retira partidos finalizados cuando el resultado
+  // y la planilla de ambos equipos ya están disponibles en el Home.
+  const visibleLiveMatches = liveMatches.filter((liveMatch) => {
+  // Los partidos en juego siempre se muestran.
+  if (liveMatch.status !== "finished") {
+    return true;
+  }
+
+  // Buscar el partido correspondiente en el fixture.
+  const fixtureMatch = matches.find(
+    (match) =>
+      match.homeTeam === liveMatch.homeTeam &&
+      match.awayTeam === liveMatch.awayTeam
+  );
+
+  // Si todavía no está en el fixture, mantenerlo visible.
+  if (!fixtureMatch) {
+    return true;
+  }
+
+  const key = `${fixtureMatch.date}-${fixtureMatch.homeTeam}-${fixtureMatch.awayTeam}`;
+
+  const result =
+    matchResults[key] ?? matchResults[fixtureMatch.id];
+
+  const stats = getMatchStats(fixtureMatch);
+
+  const hasPublishedResult =
+    result?.status === "finished" &&
+    result.homeScore != null &&
+    result.awayScore != null;
+
+  const hasPublishedStats = Boolean(stats);
+
+  // Solo ocultarlo cuando resultado y popup estén disponibles.
+  return !(hasPublishedResult && hasPublishedStats);
+});
+
+  // Si se publica una versión nueva de la web mientras el usuario la mira,
+  // recargar una sola vez para obtener los nuevos resultados y estadísticas.
+  // En desarrollo, Vite aplica los cambios con HMR.
+  useEffect(() => {
+    const hasPendingFinal = visibleLiveMatches.some(
+      (match) => match.status === "finished"
+    );
+    if (!hasPendingFinal || import.meta.env.DEV) return;
+
+    const currentScript = document.querySelector('script[type="module"][src]')
+      ?.getAttribute("src");
+    if (!currentScript) return;
+
+    const checkDeployment = async () => {
+      try {
+        const response = await fetch(`/?lna_check=${Date.now()}`, {
+          cache: "no-store",
+        });
+        if (!response.ok) return;
+        const html = await response.text();
+        const nextScript = html.match(/<script[^>]*type=["']module["'][^>]*src=["']([^"']+)["']/i)
+          ?? html.match(/<script[^>]*src=["']([^"']+)["'][^>]*type=["']module["']/i);
+        if (nextScript?.[1] && nextScript[1] !== currentScript) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.warn("No se pudo comprobar la nueva versión de LNA", error);
+      }
+    };
+
+    const interval = setInterval(checkDeployment, 60000);
+    return () => clearInterval(interval);
+  }, [visibleLiveMatches.some((match) => match.status === "finished")]);
 
   const standings = useMemo(() => {
     return teams
@@ -549,13 +640,13 @@ const [liveMatches, setLiveMatches] = useState([]);
     <main className="home-page">
       <section className="home-content">
         <div className="home-container">
-          {liveMatches.length > 0 && (
+          {visibleLiveMatches.length > 0 && (
   <section className="home-live-panel">
    <div className="home-live-header">
   <div>
     <span>ACTUALIDAD</span>
     <h2>
-      {liveMatches.some(
+      {visibleLiveMatches.some(
         (match) => match.status === "live"
       )
         ? "Partidos en vivo"
@@ -565,7 +656,7 @@ const [liveMatches, setLiveMatches] = useState([]);
 
   <div className="home-live-indicator">
     <span></span>
-    {liveMatches.some(
+    {visibleLiveMatches.some(
       (match) => match.status === "live"
     )
       ? "EN VIVO"
@@ -574,7 +665,7 @@ const [liveMatches, setLiveMatches] = useState([]);
 </div>
 
     <div className="home-live-matches">
-      {liveMatches.map((liveMatch) => {
+      {visibleLiveMatches.map((liveMatch) => {
         const homeTeam = getTeam(liveMatch.homeTeam);
         const awayTeam = getTeam(liveMatch.awayTeam);
 
@@ -621,7 +712,7 @@ const [liveMatches, setLiveMatches] = useState([]);
       
 {liveMatch.quarter}.º CUARTO
 {liveMatch.minutesRemaining != null
-  ? ` · ${liveMatch.minutesRemaining}'`
+  ? ` · ${getRemainingMinutes(liveMatch.minutesRemaining)}' RESTANTES`
   : ""}
 
     </small>
@@ -648,7 +739,6 @@ const [liveMatches, setLiveMatches] = useState([]);
   </section>
 )}
 
-<div className="home-dashboard"></div>
           <div className="home-dashboard">
 
             {/* TABLA DE POSICIONES */}
@@ -774,18 +864,33 @@ const [liveMatches, setLiveMatches] = useState([]);
                       ? getTeamPosition(awayTeam.id)
                       : null;
 
-                    const liveMatch = liveMatches.find(
-  (live) =>
-    live.homeTeam === match.homeTeam &&
-    live.awayTeam === match.awayTeam &&
-    live.status === "live"
-);
+                    const liveMatch = liveDate === match.date
+  ? liveMatches.find(
+      (live) =>
+        live.homeTeam === match.homeTeam &&
+        live.awayTeam === match.awayTeam
+    )
+  : null;
 
-const isFinished = isMatchFinished(match);
-
+// Los resultados publicados son definitivos; el LIVE sirve de respaldo.
+const isFinished =
+  isMatchFinished(match) ||
+  (liveMatch?.status === "finished" && !liveMatch?.isHalftime);
 const isLive =
   !isFinished &&
-  (Boolean(liveMatch) || match.status === "live");
+  (liveMatch?.status === "live" || match.status === "live");
+const finalHomeScore = isMatchFinished(match)
+  ? match.homeScore
+  : liveMatch?.homeScore ?? match.homeScore;
+const finalAwayScore = isMatchFinished(match)
+  ? match.awayScore
+  : liveMatch?.awayScore ?? match.awayScore;
+const finishedMatch = {
+  ...match,
+  homeScore: finalHomeScore,
+  awayScore: finalAwayScore,
+  status: isFinished ? "finished" : match.status,
+};
 
                     const hasMatchStats =
                       Boolean(getMatchStats(match));
@@ -880,8 +985,8 @@ const isLive =
                           {isFinished ? (
                             <>
                               <strong className="fixture-score">
-                                {match.homeScore} -{" "}
-                                {match.awayScore}
+                                {finalHomeScore} -{" "}
+                                {finalAwayScore}
                               </strong>
 
                               <span>FINAL</span>
@@ -906,7 +1011,7 @@ const isLive =
         
 {liveMatch.quarter}.º CUARTO
 {liveMatch.minutesRemaining != null
-  ? ` · ${liveMatch.minutesRemaining}'`
+  ? ` · ${getRemainingMinutes(liveMatch.minutesRemaining)}' RESTANTES`
   : ""}
 
       </small>

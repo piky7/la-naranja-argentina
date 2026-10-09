@@ -29,6 +29,7 @@ const teamMap = {
   RAC: "racing-chivilcoy",
   REG: "regatas",
   SLO: "san-lorenzo",
+CAS: "san-lorenzo",
   SMA: "san-martin",
   SAN: "san-martin",
 };
