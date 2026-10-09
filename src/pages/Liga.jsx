@@ -2,11 +2,17 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { teams } from "../data/teams";
-import { matches } from "../data/matches";
+import { matches as baseMatches } from "../data/matches";
+import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
 
 import "./Liga.css";
+const matches = baseMatches.map((match) => {
+  const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  const result = matchResults[key] ?? matchResults[match.id];
 
+  return result ? { ...match, ...result } : match;
+});
 function Liga() {
   const getLocalDate = () => {
     const date = new Date();
@@ -94,17 +100,65 @@ function Liga() {
           ...stats,
         };
       })
-      .sort((a, b) => {
-        if (b.wins !== a.wins) {
-          return b.wins - a.wins;
-        }
 
-        if (a.losses !== b.losses) {
-          return a.losses - b.losses;
-        }
+.sort((a, b) => {
+  const percentageA = a.gamesPlayed > 0
+    ? a.wins / a.gamesPlayed
+    : 0;
 
-        return b.difference - a.difference;
-      });
+  const percentageB = b.gamesPlayed > 0
+    ? b.wins / b.gamesPlayed
+    : 0;
+
+  // 1. Porcentaje de victorias
+  if (percentageA !== percentageB) {
+    return percentageB - percentageA;
+  }
+
+  // 2. Enfrentamiento directo
+  const directMatches = matches.filter(
+    (match) =>
+      match.status === "finished" &&
+      (
+        (match.homeTeam === a.id && match.awayTeam === b.id) ||
+        (match.homeTeam === b.id && match.awayTeam === a.id)
+      ) &&
+      match.homeScore != null &&
+      match.awayScore != null
+  );
+
+  let directWinsA = 0;
+  let directWinsB = 0;
+
+  directMatches.forEach((match) => {
+    const scoreA = Number(
+      match.homeTeam === a.id
+        ? match.homeScore
+        : match.awayScore
+    );
+
+    const scoreB = Number(
+      match.homeTeam === b.id
+        ? match.homeScore
+        : match.awayScore
+    );
+
+    if (scoreA > scoreB) directWinsA++;
+    if (scoreB > scoreA) directWinsB++;
+  });
+
+  if (directWinsA !== directWinsB) {
+    return directWinsB - directWinsA;
+  }
+
+  // 3. Diferencia de puntos
+  if (b.difference !== a.difference) {
+    return b.difference - a.difference;
+  }
+
+  return a.name.localeCompare(b.name, "es");
+});
+
   }, []);
 
   /*
