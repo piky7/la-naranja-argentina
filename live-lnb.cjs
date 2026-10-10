@@ -184,49 +184,30 @@ function parseScore(
 /*
  * Determina el estado real del partido.
  */
-function detectStatus(
-  match,
-  feed
-) {
-  const now =
-    Math.floor(
-      Date.now() / 1000
-    );
+function detectStatus(match, feed) {
+  const now = Math.floor(Date.now() / 1000);
+  const eventTimestamp = Number(match.timestamp);
 
-  const eventTimestamp =
-    Number(match.timestamp);
-
-  /*
-   * Todavía no comenzó.
-   */
-  if (
-    eventTimestamp &&
-    now < eventTimestamp
-  ) {
+  // Partido que todavía no comenzó.
+  if (eventTimestamp && now < eventTimestamp) {
     return "scheduled";
   }
 
-  /*
-   * Si existen ambos marcadores
-   * en el feed, consideramos que
-   * el partido tiene actividad.
-   */
-  const hasHomeScore =
-    /DE÷-?\d+¬/.test(feed);
+  // Estado de finalización confirmado por el feed.
+  const finalizado = /(?:^|[¬~])DI÷-1(?:[¬~]|$)/.test(feed);
 
-  const hasAwayScore =
-    /DF÷-?\d+¬/.test(feed);
+  if (finalizado) {
+    return "finished";
+  }
 
-  if (
-    hasHomeScore &&
-    hasAwayScore
-  ) {
+  // Marcadores disponibles.
+  const hasHomeScore = /(?:^|[¬~])DE÷\d+(?:[¬~]|$)/.test(feed);
+  const hasAwayScore = /(?:^|[¬~])DF÷\d+(?:[¬~]|$)/.test(feed);
+
+  if (hasHomeScore && hasAwayScore) {
     return "live";
   }
 
-  /*
-   * No inventamos estados.
-   */
   return "unknown";
 }
 
