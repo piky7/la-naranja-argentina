@@ -293,7 +293,7 @@ async function main() {
   }
 
   for (const block of blocks) {
-  ) {
+  
     const event =
       parseEvent(
         `AA÷${block}`
