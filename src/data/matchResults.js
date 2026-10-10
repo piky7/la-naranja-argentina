@@ -127,4 +127,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-10-instituto-ferro": {
+    status: "finished",
+    homeScore: 97,
+    awayScore: 94,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
