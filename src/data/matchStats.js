@@ -3022,4 +3022,190 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
+
+"instituto-ferro": {
+  "instituto": [
+    {
+      "id": "leandro-vildoza",
+      "name": "Vildoza L.",
+      "points": 2,
+      "rebounds": 5,
+      "assists": 4,
+      "minutes": "33:41"
+    },
+    {
+      "id": "torren-jones",
+      "name": "Jones T.",
+      "points": 7,
+      "rebounds": 9,
+      "assists": 2,
+      "minutes": "26:47"
+    },
+    {
+      "id": "bautista-lugarini",
+      "name": "Lugarini B.",
+      "points": 22,
+      "rebounds": 12,
+      "assists": 1,
+      "minutes": "43:45"
+    },
+    {
+      "id": "juan-pablo-corbalan",
+      "name": "Corbalan J.",
+      "points": 20,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "42:28"
+    },
+    {
+      "id": "xavier-carreras",
+      "name": "Carreras X.",
+      "points": 9,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "30:36"
+    },
+    {
+      "id": "kadir-pomare",
+      "name": "Pomare K.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "03:12"
+    },
+    {
+      "id": "gaston-whelan",
+      "name": "Whelan G.",
+      "points": 21,
+      "rebounds": 5,
+      "assists": 3,
+      "minutes": "31:28"
+    },
+    {
+      "id": "lucas-andersson",
+      "name": "Andersson L.",
+      "points": 4,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "12:52"
+    },
+    {
+      "id": "federico-aguerre",
+      "name": "Aguerre F.",
+      "points": 12,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "25:10"
+    }
+  ],
+  "ferro": [
+    {
+      "id": "emiliano-lezcano",
+      "name": "Lezcano E.",
+      "points": 14,
+      "rebounds": 4,
+      "assists": 7,
+      "minutes": "42:32"
+    },
+    {
+      "id": "jano-martinez",
+      "name": "Martinez J.",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 9,
+      "minutes": "35:11"
+    },
+    {
+      "id": "facundo-pinero",
+      "name": "Pinero F.",
+      "points": 4,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "20:55"
+    },
+    {
+      "id": "valentin-bettiga",
+      "name": "Bettiga L.",
+      "points": 5,
+      "rebounds": 6,
+      "assists": 3,
+      "minutes": "21:18"
+    },
+    {
+      "id": "federico-zezular",
+      "name": "Zezular F.",
+      "points": 13,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "22:57"
+    },
+    {
+      "id": "jose-defelippo",
+      "name": "Defelippo J.",
+      "points": 9,
+      "rebounds": 7,
+      "assists": 2,
+      "minutes": "27:50"
+    },
+    {
+      "id": "kevin-hernandez",
+      "name": "Hernandez K.",
+      "points": 24,
+      "rebounds": 9,
+      "assists": 1,
+      "minutes": "35:40"
+    },
+    {
+      "id": "felipe-rodriguez",
+      "name": "Rodriguez F.",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "17:49"
+    },
+    {
+      "id": "rodrigo-gallegos",
+      "name": "Gallegos R.",
+      "points": 4,
+      "rebounds": 0,
+      "assists": 2,
+      "minutes": "18:20"
+    },
+    {
+      "id": "camilo-rodriguez",
+      "name": "Rodriguez C.",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "07:28"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 12,
+      "away": 17
+    },
+    {
+      "period": "2",
+      "home": 20,
+      "away": 22
+    },
+    {
+      "period": "3",
+      "home": 22,
+      "away": 12
+    },
+    {
+      "period": "4",
+      "home": 19,
+      "away": 22
+    },
+    {
+      "period": "PR",
+      "home": 24,
+      "away": 21
+    }
+  ]
+},
 };
