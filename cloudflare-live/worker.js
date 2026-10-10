@@ -268,19 +268,38 @@ async function collectMatches(previous, env) {
     }
   }
 
-  for (const match of previous) {
-    if (
-      match.eventId &&
-      !candidates.has(String(match.eventId))
-    ) {
-      candidates.set(
-        String(match.eventId),
-        match
-      );
-    }
+ for (const match of previous) {
+  const timestamp = Number(match.timestamp);
+
+  if (
+    !match.eventId ||
+    !Number.isFinite(timestamp) ||
+    timestamp <= 0 ||
+    argentinaDate(timestamp * 1000) !== today
+  ) {
+    continue;
   }
 
+  if (!candidates.has(String(match.eventId))) {
+    candidates.set(String(match.eventId), match);
+  }
+}
+
   const results = [];
+
+ console.log(
+  `[LIVE DIAGNÓSTICO] Fecha: ${today} | ` +
+  `Hora: ${new Date().toISOString()} | ` +
+  `Candidatos: ${candidates.size}`
+);
+
+for (const match of candidates.values()) {
+  console.log(
+    `[LIVE CANDIDATO] ${match.homeTeam} vs ${match.awayTeam} | ` +
+    `ID: ${match.eventId} | ` +
+    `Inicio: ${new Date(Number(match.timestamp) * 1000).toISOString()}`
+  );
+}
 
   for (const match of candidates.values()) {
     const id = String(match.eventId);
