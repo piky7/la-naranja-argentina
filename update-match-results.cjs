@@ -54,7 +54,55 @@ function main() {
     );
   }
 
-  const results = {};
+  
+const results = {};
+
+// Conservar resultados que ya fueron publicados.
+if (fs.existsSync(outputFile)) {
+  const previousContent = fs.readFileSync(
+    outputFile,
+    "utf8"
+  );
+
+  const entryRegex =
+    /"(\d{4}-\d{2}-\d{2}-[^"]+)":\s*\{([\s\S]*?)\n\s*\},/g;
+
+  let match;
+  let preserved = 0;
+
+  while ((match = entryRegex.exec(previousContent)) !== null) {
+    const key = match[1];
+    const body = match[2];
+
+    const status = body.match(/status:\s*"([^"]+)"/);
+    const homeScore = body.match(/homeScore:\s*(\d+)/);
+    const awayScore = body.match(/awayScore:\s*(\d+)/);
+
+    if (
+      status?.[1] !== "finished" ||
+      !homeScore ||
+      !awayScore
+    ) {
+      continue;
+    }
+
+    results[key] = {
+      status: "finished",
+      homeScore: Number(homeScore[1]),
+      awayScore: Number(awayScore[1]),
+      time: null,
+      venue: null,
+      tv: [],
+    };
+
+    preserved++;
+  }
+
+  console.log(
+    `Resultados anteriores conservados: ${preserved}`
+  );
+}
+
 
   data.finished.forEach((match) => {
     const date =
