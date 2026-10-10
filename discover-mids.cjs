@@ -309,6 +309,43 @@ async function main() {
     matches.push(event);
   }
 
+  /*
+  ========================================
+  CONSERVAR PARTIDOS YA DESCUBIERTOS
+  ========================================
+  */
+
+  if (fs.existsSync("lnb-events.json")) {
+    const previous = JSON.parse(
+      fs.readFileSync("lnb-events.json", "utf8")
+    );
+
+    if (Array.isArray(previous.matches)) {
+      const currentIds = new Set(
+        matches.map((match) => match.eventId)
+      );
+
+      let recovered = 0;
+
+      for (const oldMatch of previous.matches) {
+        if (
+          !oldMatch.eventId ||
+          currentIds.has(oldMatch.eventId)
+        ) {
+          continue;
+        }
+
+        matches.push(oldMatch);
+        currentIds.add(oldMatch.eventId);
+        recovered++;
+      }
+
+      console.log(
+        `Partidos anteriores conservados: ${recovered}`
+      );
+    }
+  }
+
   console.log(
     `Partidos encontrados: ${matches.length}`
   );
