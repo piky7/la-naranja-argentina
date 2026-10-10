@@ -2842,7 +2842,6 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
-
 "lanus-obera": {
   "lanus": [
     {
