@@ -1,20 +1,5 @@
 {
-  "updatedAt": "2026-10-10T15:19:11.351Z",
+  "updatedAt": "2026-10-10T19:22:34.923Z",
   "date": "2026-10-10",
-  "liveMatches": [
-    {
-      "eventId": "0KZdauLN",
-      "homeTeam": "instituto",
-      "awayTeam": "ferro",
-      "homeName": "Instituto de Córdoba",
-      "awayName": "Ferro",
-      "homeScore": 24,
-      "awayScore": 25,
-      "timestamp": 1791642600,
-      "status": "live",
-      "isLive": true,
-      "feedStatus": "6",
-      "feedScoreStatus": "0"
-    }
-  ]
+  "liveMatches": []
 }
