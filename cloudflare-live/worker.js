@@ -322,6 +322,13 @@ for (const match of candidates.values()) {
         timestamp,
         now
       );
+     console.log(
+  `[LIVE FLASHScore] ${id} | ` +
+  `Estado: ${status} | ` +
+  `DI: ${last(fields, "DI")} | ` +
+  `Local: ${last(fields, "DE")} | ` +
+  `Visitante: ${last(fields, "DF")}`
+);
 
       if (
         status === "scheduled" ||
