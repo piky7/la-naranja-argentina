@@ -283,9 +283,17 @@ async function main() {
   const blocks =
     html.split("AA÷").slice(1);
 
+
   const matches = [];
 
+  if (blocks.length === 0) {
+    throw new Error(
+      "Flashscore no devolvió bloques de partidos. Se conserva el archivo anterior."
+    );
+  }
+
   for (const block of blocks) {
+  ) {
     const event =
       parseEvent(
         `AA÷${block}`
