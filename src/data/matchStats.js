@@ -3022,7 +3022,6 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
-
 "instituto-ferro": {
   "instituto": [
     {
