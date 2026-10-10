@@ -489,27 +489,39 @@ async function main() {
 
   console.log("");
 
-  if (
-    matchesToCheck.length === 0
-  ) {
+
+if (
+  matchesToCheck.length === 0
+) {
+  console.log(
+    "🟢 No hay partidos dentro de la ventana LIVE."
+  );
+
+  console.log(
+    "No se consulta Flashscore."
+  );
+
+  const existingLive = loadExistingLive();
+
+  if (existingLive.length > 0) {
+    saveLiveMatches([], today);
+
     console.log(
-      "🟢 No hay partidos dentro de la ventana LIVE."
+      "🧹 LIVE anterior eliminado."
     );
-
-    console.log("");
-
+  } else {
     console.log(
-      "No se consulta Flashscore."
+      "No hay LIVE anterior para limpiar."
     );
-
-    console.log("");
-
-    console.log(
-      "========================================"
-    );
-
-    return;
   }
+
+  console.log(
+    "========================================"
+  );
+
+  return;
+}
+
 
   const results = [];
 
