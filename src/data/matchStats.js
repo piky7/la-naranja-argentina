@@ -2842,4 +2842,185 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
+
+"lanus-obera": {
+  "lanus": [
+    {
+      "id": "juan-brussino",
+      "name": "Brussino J.",
+      "points": 9,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "21:28"
+    },
+    {
+      "id": "christian-james",
+      "name": "James C.",
+      "points": 4,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "20:48"
+    },
+    {
+      "id": "melvin-johnson",
+      "name": "Johnson M.",
+      "points": 5,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "27:13"
+    },
+    {
+      "id": "fabian-ramirez-barrios",
+      "name": "Ramírez C.",
+      "points": 5,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "12:28"
+    },
+    {
+      "id": "flashscore-lanus-bombino-p",
+      "name": "Bombino P.",
+      "points": 16,
+      "rebounds": 10,
+      "assists": 2,
+      "minutes": "24:27"
+    },
+    {
+      "id": "robert-whitfield",
+      "name": "Whitfield R.",
+      "points": 12,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "26:37"
+    },
+    {
+      "id": "martin-franchino",
+      "name": "Franchino M.",
+      "points": 5,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "26:42"
+    },
+    {
+      "id": "junior-merchant",
+      "name": "Merchant E.",
+      "points": 6,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "17:54"
+    },
+    {
+      "id": "lucas-andujar",
+      "name": "Andujar L.",
+      "points": 5,
+      "rebounds": 7,
+      "assists": 4,
+      "minutes": "22:24"
+    }
+  ],
+  "obera": [
+    {
+      "id": "ty-prince",
+      "name": "Prince T.",
+      "points": 15,
+      "rebounds": 6,
+      "assists": 2,
+      "minutes": "24:41"
+    },
+    {
+      "id": "jonatan-torresi",
+      "name": "Torresi J.",
+      "points": 6,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "27:34"
+    },
+    {
+      "id": "bruno-sansimoni",
+      "name": "Sansimoni B.",
+      "points": 5,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "25:37"
+    },
+    {
+      "id": "agustin-brocal",
+      "name": "Brocal A.",
+      "points": 3,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "29:20"
+    },
+    {
+      "id": "will-vorhees",
+      "name": "Vorhees W.",
+      "points": 9,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "12:44"
+    },
+    {
+      "id": "victor-fernandez",
+      "name": "Fernandez V.",
+      "points": 4,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "16:54"
+    },
+    {
+      "id": "alejo-azpilicueta",
+      "name": "Azpilicueta A.",
+      "points": 2,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "12:56"
+    },
+    {
+      "id": "santiago-barrales",
+      "name": "Barrales S.",
+      "points": 2,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "19:49"
+    },
+    {
+      "id": "albano-costa",
+      "name": "Costa A.",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "03:09"
+    },
+    {
+      "id": "flashscore-obera-oberto-j-c",
+      "name": "Oberto J. C.",
+      "points": 10,
+      "rebounds": 8,
+      "assists": 1,
+      "minutes": "27:16"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 12,
+      "away": 14
+    },
+    {
+      "period": "2",
+      "home": 25,
+      "away": 15
+    },
+    {
+      "period": "3",
+      "home": 12,
+      "away": 14
+    },
+    {
+      "period": "4",
+      "home": 18,
+      "away": 15
+    }
+  ]
+},
 };

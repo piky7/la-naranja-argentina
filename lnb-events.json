@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
-  "totalMatches": 118,
-  "finishedMatches": 15,
+  "totalMatches": 119,
+  "finishedMatches": 16,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "KtYt3NLb",
+      "homeTeam": "lanus",
+      "homeName": "Lanus",
+      "awayTeam": "obera",
+      "awayName": "Obera TC",
+      "homeScore": 67,
+      "awayScore": 58,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791588600,
+      "homeSlug": "lanus",
+      "awaySlug": "obera-tc",
+      "homeId": "zy0PhewD",
+      "awayId": "KdCRV01k"
+    },
     {
       "eventId": "CGUY4qin",
       "homeTeam": "san-lorenzo",
@@ -1894,6 +1910,22 @@
     }
   ],
   "finished": [
+    {
+      "eventId": "KtYt3NLb",
+      "homeTeam": "lanus",
+      "homeName": "Lanus",
+      "awayTeam": "obera",
+      "awayName": "Obera TC",
+      "homeScore": 67,
+      "awayScore": 58,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791588600,
+      "homeSlug": "lanus",
+      "awaySlug": "obera-tc",
+      "homeId": "zy0PhewD",
+      "awayId": "KdCRV01k"
+    },
     {
       "eventId": "CGUY4qin",
       "homeTeam": "san-lorenzo",

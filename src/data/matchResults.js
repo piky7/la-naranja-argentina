@@ -119,4 +119,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-09-lanus-obera": {
+    status: "finished",
+    homeScore: 67,
+    awayScore: 58,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
