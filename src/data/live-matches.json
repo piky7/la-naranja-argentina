@@ -1,20 +1,5 @@
 {
-  "updatedAt": "2026-10-09T23:45:58.732Z",
+  "updatedAt": "2026-10-10T00:50:03.219Z",
   "date": "2026-10-09",
-  "liveMatches": [
-    {
-      "eventId": "KtYt3NLb",
-      "homeTeam": "lanus",
-      "awayTeam": "obera",
-      "homeName": "Lanus",
-      "awayName": "Obera TC",
-      "homeScore": 4,
-      "awayScore": 9,
-      "timestamp": 1791588600,
-      "status": "live",
-      "isLive": true,
-      "feedStatus": "6",
-      "feedScoreStatus": "0"
-    }
-  ]
+  "liveMatches": []
 }
