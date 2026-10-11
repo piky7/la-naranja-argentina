@@ -3591,4 +3591,185 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
+
+"quimsa-boca": {
+  "quimsa": [
+    {
+      "id": "tyren-johnson",
+      "name": "Johnson T.",
+      "points": 16,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "19:48"
+    },
+    {
+      "id": "francisco-conrradi",
+      "name": "Conrradi F.",
+      "points": 13,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "28:03"
+    },
+    {
+      "id": "matias-solanas",
+      "name": "Solanas M.",
+      "points": 12,
+      "rebounds": 1,
+      "assists": 3,
+      "minutes": "27:38"
+    },
+    {
+      "id": "franco-mendez",
+      "name": "Mendez F.",
+      "points": 23,
+      "rebounds": 6,
+      "assists": 10,
+      "minutes": "28:42"
+    },
+    {
+      "id": "javier-saiz",
+      "name": "Saiz J.",
+      "points": 5,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "17:24"
+    },
+    {
+      "id": "nicolas-copello",
+      "name": "Copello N.",
+      "points": 4,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "14:58"
+    },
+    {
+      "id": "flashscore-quimsa-rutenberg-f",
+      "name": "Rutenberg F.",
+      "points": 9,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "20:19"
+    },
+    {
+      "id": "tayavek-gallizzi",
+      "name": "Gallizzi T.",
+      "points": 11,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "22:24"
+    },
+    {
+      "id": "nicolas-martinez",
+      "name": "Martinez N.",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "20:44"
+    }
+  ],
+  "boca": [
+    {
+      "id": "mike-warren",
+      "name": "Warren M.",
+      "points": 14,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "22:48"
+    },
+    {
+      "id": "jose-vildoza",
+      "name": "Vildoza J.",
+      "points": 4,
+      "rebounds": 5,
+      "assists": 8,
+      "minutes": "25:38"
+    },
+    {
+      "id": "tomas-monacchi",
+      "name": "Monacchi T.",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "29:38"
+    },
+    {
+      "id": "leonardo-lema",
+      "name": "Lema L.",
+      "points": 27,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "28:21"
+    },
+    {
+      "id": "francisco-caffaro",
+      "name": "Caffaro F.",
+      "points": 20,
+      "rebounds": 10,
+      "assists": 0,
+      "minutes": "27:20"
+    },
+    {
+      "id": "lucas-faggiano",
+      "name": "Faggiano L.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "14:22"
+    },
+    {
+      "id": "nicolas-stenta",
+      "name": "Stenta N.",
+      "points": 3,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "11:06"
+    },
+    {
+      "id": "kriss-helmanis",
+      "name": "Helmanis K.",
+      "points": 0,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "12:28"
+    },
+    {
+      "id": "agustin-barreiro",
+      "name": "Barreiro A.",
+      "points": 13,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "11:51"
+    },
+    {
+      "id": "martin-cuello",
+      "name": "Cuello M.",
+      "points": 9,
+      "rebounds": 2,
+      "assists": 4,
+      "minutes": "16:28"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 23,
+      "away": 33
+    },
+    {
+      "period": "2",
+      "home": 26,
+      "away": 21
+    },
+    {
+      "period": "3",
+      "home": 31,
+      "away": 21
+    },
+    {
+      "period": "4",
+      "home": 25,
+      "away": 21
+    }
+  ]
+},
 };
