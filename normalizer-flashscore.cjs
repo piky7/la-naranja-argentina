@@ -439,7 +439,16 @@ function normalizePlayers(
           teamId,
           lnaPlayers
         );
+if (playerId === "REVISAR_IDENTIDAD") {
+  unmapped.push({
+    name: player.name,
+    teamCode: player.teamCode,
+    teamId,
+    reason: "Identidad ambigua",
+  });
 
+  return;
+}
       
 if (!playerId) {
   const provisionalId = createProvisionalPlayerId(
