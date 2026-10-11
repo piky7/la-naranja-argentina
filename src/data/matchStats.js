@@ -3387,4 +3387,209 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
+
+"racing-chivilcoy-gimnasia": {
+  "racing-chivilcoy": [
+    {
+      "id": "mateo-chiarini",
+      "name": "Chiarini M.",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "25:49"
+    },
+    {
+      "id": "pedro-barral",
+      "name": "Barral P.",
+      "points": 9,
+      "rebounds": 6,
+      "assists": 3,
+      "minutes": "32:01"
+    },
+    {
+      "id": "marcos-delia",
+      "name": "Delia M.",
+      "points": 10,
+      "rebounds": 7,
+      "assists": 0,
+      "minutes": "26:31"
+    },
+    {
+      "id": "juan-bocca",
+      "name": "Bocca J.",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "22:10"
+    },
+    {
+      "id": "nicolas-romano",
+      "name": "Romano N.",
+      "points": 25,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "27:17"
+    },
+    {
+      "id": "manuel-rodriguez",
+      "name": "Rodriguez M.",
+      "points": 9,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "20:13"
+    },
+    {
+      "id": "santiago-assum",
+      "name": "Assum S.",
+      "points": 2,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "16:48"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "04:27"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
+      "points": 6,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "13:54"
+    },
+    {
+      "id": "tomas-delia",
+      "name": "Delia T.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:37"
+    },
+    {
+      "id": "abraham-barahona",
+      "name": "Barahona A.",
+      "points": 1,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "05:04"
+    },
+    {
+      "id": "matias-morera",
+      "name": "Morera M.",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "05:09"
+    }
+  ],
+  "gimnasia": [
+    {
+      "id": "felipe-inyaco",
+      "name": "Inyaco F.",
+      "points": 4,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "17:27"
+    },
+    {
+      "id": "martiniano-dato",
+      "name": "Dato M.",
+      "points": 10,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "28:38"
+    },
+    {
+      "id": "valentin-forestier",
+      "name": "Forestier V.",
+      "points": 5,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "18:60"
+    },
+    {
+      "id": "emiliano-toretta",
+      "name": "Toretta E.",
+      "points": 11,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "26:10"
+    },
+    {
+      "id": "carlos-rivero",
+      "name": "Rivero C.",
+      "points": 13,
+      "rebounds": 9,
+      "assists": 3,
+      "minutes": "29:04"
+    },
+    {
+      "id": "obi-okafor",
+      "name": "Okafor O.",
+      "points": 8,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "13:54"
+    },
+    {
+      "id": "marcos-chacon",
+      "name": "Chacon M.",
+      "points": 19,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "24:14"
+    },
+    {
+      "id": "sebastian-carrasco",
+      "name": "Carrasco S.",
+      "points": 4,
+      "rebounds": 1,
+      "assists": 4,
+      "minutes": "19:22"
+    },
+    {
+      "id": "ben-stevens",
+      "name": "Stevens B.",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "13:11"
+    },
+    {
+      "id": "gino-balbo",
+      "name": "Balbo G.",
+      "points": 0,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "08:59"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 18,
+      "away": 20
+    },
+    {
+      "period": "2",
+      "home": 19,
+      "away": 17
+    },
+    {
+      "period": "3",
+      "home": 16,
+      "away": 16
+    },
+    {
+      "period": "4",
+      "home": 19,
+      "away": 25
+    }
+  ]
+},
 };

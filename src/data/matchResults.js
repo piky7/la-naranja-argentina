@@ -151,4 +151,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-10-racing-chivilcoy-gimnasia": {
+    status: "finished",
+    homeScore: 72,
+    awayScore: 78,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };

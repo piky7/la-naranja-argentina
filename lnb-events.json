@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 125,
-  "finishedMatches": 19,
+  "finishedMatches": 20,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "UZPSgJro",
+      "homeTeam": "racing-chivilcoy",
+      "homeName": "Racing de Chivilcoy",
+      "awayTeam": "gimnasia",
+      "awayName": "Gimnasia",
+      "homeScore": 72,
+      "awayScore": 78,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791678600,
+      "homeSlug": "racing-de-chivilcoy",
+      "awaySlug": "gimnasia",
+      "homeId": "U9SgFDqR",
+      "awayId": "Cn0pHIpQ"
+    },
     {
       "eventId": "4vHTAp4S",
       "homeTeam": "quimsa",
@@ -195,22 +211,6 @@
       "awaySlug": "la-union",
       "homeId": "Cn0pHIpQ",
       "awayId": "tE0LgyO6"
-    },
-    {
-      "eventId": "EqVldF8E",
-      "homeTeam": "quimsa",
-      "homeName": "Quimsa",
-      "awayTeam": "platense",
-      "awayName": "Platense",
-      "homeScore": 94,
-      "awayScore": 67,
-      "status": "finished",
-      "statusCode": "3",
-      "timestamp": 1791073800,
-      "homeSlug": "quimsa",
-      "awaySlug": "ca-platense",
-      "homeId": "E7pXLvd8",
-      "awayId": "SIolf8Y3"
     },
     {
       "eventId": "UgGMF054",
@@ -418,6 +418,22 @@
       "homeSlug": "ferro-carril-oeste",
       "awaySlug": "ca-platense",
       "homeId": "2qroXLyp",
+      "awayId": "SIolf8Y3"
+    },
+    {
+      "eventId": "EqVldF8E",
+      "homeTeam": "quimsa",
+      "homeName": "Quimsa",
+      "awayTeam": "platense",
+      "awayName": "Platense",
+      "homeScore": 94,
+      "awayScore": 67,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791073800,
+      "homeSlug": "quimsa",
+      "awaySlug": "ca-platense",
+      "homeId": "E7pXLvd8",
       "awayId": "SIolf8Y3"
     },
     {
@@ -1987,25 +2003,25 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
-    },
+    }
+  ],
+  "finished": [
     {
       "eventId": "UZPSgJro",
       "homeTeam": "racing-chivilcoy",
       "homeName": "Racing de Chivilcoy",
       "awayTeam": "gimnasia",
       "awayName": "Gimnasia",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
+      "homeScore": 72,
+      "awayScore": 78,
+      "status": "finished",
+      "statusCode": "3",
       "timestamp": 1791678600,
       "homeSlug": "racing-de-chivilcoy",
       "awaySlug": "gimnasia",
       "homeId": "U9SgFDqR",
       "awayId": "Cn0pHIpQ"
-    }
-  ],
-  "finished": [
+    },
     {
       "eventId": "4vHTAp4S",
       "homeTeam": "quimsa",
