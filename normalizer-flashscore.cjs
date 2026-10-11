@@ -251,7 +251,9 @@ const originalMatches = originalCandidates.filter((player) => {
 if (originalMatches.length === 1) {
   return originalMatches[0].id;
 }
-
+if (originalMatches.length > 1) {
+  return null;
+}
   // 1. Coincidencia exacta del nombre completo.
   const exact = candidates.filter(
     (player) =>
