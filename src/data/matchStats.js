@@ -810,7 +810,7 @@ export const matchPlayerStats = {
       "minutes": "27:15"
     },
     {
-      "id": "flashscore-olimpico-elisias-h",
+      "id": "elisias-hall",
       "name": "Elisias H.",
       "points": 10,
       "rebounds": 3,
@@ -2134,7 +2134,7 @@ export const matchPlayerStats = {
       "minutes": "23:25"
     },
     {
-      "id": "flashscore-olimpico-elisias-h",
+      "id": "elisias-hall",
       "name": "Elisias H.",
       "points": 10,
       "rebounds": 3,
