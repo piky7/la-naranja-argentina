@@ -190,10 +190,8 @@ const [liveDate, setLiveDate] = useState(null);
     }
 
     const playerInfo = players.find(
-      (player) =>
-        player.id === matchPlayer.id ||
-        player.name === matchPlayer.name
-    );
+  (player) => player.id === matchPlayer.id
+);
 
     if (!playerInfo) {
       return null;
