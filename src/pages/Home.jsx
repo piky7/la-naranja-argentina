@@ -569,6 +569,7 @@ const [liveDate, setLiveDate] = useState(null);
         };
       })
 
+
 .sort((a, b) => {
   const percentageA = a.gamesPlayed > 0
     ? a.wins / a.gamesPlayed
@@ -597,31 +598,55 @@ const [liveDate, setLiveDate] = useState(null);
 
   let directWinsA = 0;
   let directWinsB = 0;
+  let directPointsA = 0;
+  let directPointsB = 0;
 
   directMatches.forEach((match) => {
-    const aScore = match.homeTeam === a.id
-      ? Number(match.homeScore)
-      : Number(match.awayScore);
+    const aScore = Number(
+      match.homeTeam === a.id
+        ? match.homeScore
+        : match.awayScore
+    );
 
-    const bScore = match.homeTeam === b.id
-      ? Number(match.homeScore)
-      : Number(match.awayScore);
+    const bScore = Number(
+      match.homeTeam === b.id
+        ? match.homeScore
+        : match.awayScore
+    );
 
     if (aScore > bScore) directWinsA++;
     if (bScore > aScore) directWinsB++;
+
+    directPointsA += aScore;
+    directPointsB += bScore;
   });
 
   if (directWinsA !== directWinsB) {
     return directWinsB - directWinsA;
   }
 
-  // 3. Diferencia de puntos
+  // 3. Diferencia de puntos entre ambos equipos
+  if (
+    directMatches.length > 0 &&
+    directPointsA !== directPointsB
+  ) {
+    return directPointsB - directPointsA;
+  }
+
+  // 4. Mayor cantidad de partidos jugados
+  if (b.gamesPlayed !== a.gamesPlayed) {
+    return b.gamesPlayed - a.gamesPlayed;
+  }
+
+  // 5. Mejor diferencia general de puntos
   if (b.difference !== a.difference) {
     return b.difference - a.difference;
   }
 
+  // 6. Orden alfabético
   return a.name.localeCompare(b.name, "es");
 });
+
 
   }, []);
 
