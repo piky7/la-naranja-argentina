@@ -135,4 +135,20 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-10-quimsa-boca": {
+    status: "finished",
+    homeScore: 105,
+    awayScore: 96,
+    time: null,
+    venue: null,
+    tv: [],
+  },
+  "2026-10-10-argentino-san-martin": {
+    status: "finished",
+    homeScore: 82,
+    awayScore: 79,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
