@@ -2068,7 +2068,7 @@ export const matchPlayerStats = {
       "minutes": "06:25"
     },
     {
-      "id": "flashscore-obera-oberto-j-c",
+      "id": "juan-cruz-oberto",
       "name": "Oberto J. C.",
       "points": 7,
       "rebounds": 2,
@@ -3005,7 +3005,7 @@ export const matchPlayerStats = {
       "minutes": "03:09"
     },
     {
-      "id": "flashscore-obera-oberto-j-c",
+      "id": "juan-cruz-oberto",
       "name": "Oberto J. C.",
       "points": 10,
       "rebounds": 8,
