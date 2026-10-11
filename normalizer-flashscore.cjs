@@ -449,7 +449,21 @@ if (playerId === "REVISAR_IDENTIDAD") {
 
   return;
 }
-      
+      if (!playerId) {
+  const nameParts = normalizeText(player.name)
+    .split(" ")
+    .filter(Boolean);
+
+  const hasInitial = nameParts.some(
+    (part) => part.length === 1
+  );
+
+  if (hasInitial) {
+    console.log(
+      `Jugador abreviado pendiente de identificar: ${player.name} (${teamId})`
+    );
+  }
+}
 if (!playerId) {
   const provisionalId = createProvisionalPlayerId(
     player.name,
