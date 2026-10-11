@@ -259,9 +259,21 @@ function Liga() {
         className="standing-row"
         onClick={() => setSelectedTeam(team)}
       >
-        <span className="standing-position">
-          {position}
-        </span>
+  
+<span
+  className={`standing-position ${
+    position <= 4
+      ? "standing-position-direct"
+      : position <= 12
+        ? "standing-position-reclasificacion"
+        : position >= 17
+          ? "standing-position-descenso"
+          : ""
+  }`}
+>
+  {position}
+</span>
+
 
         <span className="standing-team">
           <Link
