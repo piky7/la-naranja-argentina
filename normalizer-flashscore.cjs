@@ -252,7 +252,7 @@ if (originalMatches.length === 1) {
   return originalMatches[0].id;
 }
 if (originalMatches.length > 1) {
-  return null;
+  return "REVISAR_IDENTIDAD";
 }
   // 1. Coincidencia exacta del nombre completo.
   const exact = candidates.filter(
@@ -265,8 +265,8 @@ if (originalMatches.length > 1) {
   }
 
   if (exact.length > 1) {
-    return null;
-  }
+  return "REVISAR_IDENTIDAD";
+}
 // Coincidencia de nombre completo con orden invertido.
 // Ejemplo: "Giorgetti Franco" = "Franco Giorgetti".
 
