@@ -229,6 +229,29 @@ if (aliasId) {
     (player) => player.teamId === teamId
   );
 
+  // Priorizar las fichas originales sobre las provisionales.
+const originalCandidates = candidates.filter(
+  (player) => !player.id.startsWith("flashscore-")
+);
+
+const originalMatches = originalCandidates.filter((player) => {
+  const playerWords = normalizeText(player.name)
+    .split(" ")
+    .filter(Boolean);
+
+  return (
+    words.length >= 2 &&
+    words.every((word) => word.length > 1) &&
+    playerWords.length === words.length &&
+    [...playerWords].sort().join(" ") ===
+      [...words].sort().join(" ")
+  );
+});
+
+if (originalMatches.length === 1) {
+  return originalMatches[0].id;
+}
+
   // 1. Coincidencia exacta del nombre completo.
   const exact = candidates.filter(
     (player) =>
