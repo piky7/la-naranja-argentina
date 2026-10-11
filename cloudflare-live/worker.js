@@ -322,6 +322,25 @@ for (const match of candidates.values()) {
         timestamp,
         now
       );
+
+     if (last(fields, "DI") === "-1") {
+  console.log(
+    `[LIVE ESTADO DETALLADO] ${id} | ` +
+    JSON.stringify({
+      DI: last(fields, "DI"),
+      DA: last(fields, "DA"),
+      DB: last(fields, "DB"),
+      DC: last(fields, "DC"),
+      DD: last(fields, "DD"),
+      DE: last(fields, "DE"),
+      DF: last(fields, "DF"),
+      DG: last(fields, "DG"),
+      DH: last(fields, "DH"),
+      AC: last(fields, "AC"),
+      AB: last(fields, "AB"),
+    })
+  );
+}
      console.log(
   `[LIVE FLASHScore] ${id} | ` +
   `Estado: ${status} | ` +
