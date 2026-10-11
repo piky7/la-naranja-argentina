@@ -1,34 +1,5 @@
 {
-  "updatedAt": "2026-10-11T01:20:03.927Z",
-  "date": "2026-10-10",
-  "liveMatches": [
-    {
-      "eventId": "4vHTAp4S",
-      "homeTeam": "quimsa",
-      "awayTeam": "boca",
-      "homeName": "Quimsa",
-      "awayName": "Boca Juniors",
-      "homeScore": 53,
-      "awayScore": 57,
-      "timestamp": 1791677100,
-      "status": "live",
-      "isLive": true,
-      "feedStatus": "2",
-      "feedScoreStatus": "0"
-    },
-    {
-      "eventId": "hfWl11jB",
-      "homeTeam": "argentino",
-      "awayTeam": "san-martin",
-      "homeName": "Argentino",
-      "awayName": "San Martín",
-      "homeScore": 50,
-      "awayScore": 40,
-      "timestamp": 1791676800,
-      "status": "live",
-      "isLive": true,
-      "feedStatus": "4",
-      "feedScoreStatus": "0"
-    }
-  ]
+  "updatedAt": "2026-10-11T07:20:50.023Z",
+  "date": "2026-10-11",
+  "liveMatches": []
 }
