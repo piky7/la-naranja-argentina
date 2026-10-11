@@ -1,4 +1,4 @@
-const fs = require("fs");
+ const fs = require("fs");
 
 const inputFile = "flashscore-raw.json";
 const outputFile = "flashscore-normalized.json";
@@ -202,6 +202,8 @@ const playerAliases = {
 "argentino|di prinzio p": "piero-di-prinzio",
 "ferro|bettiga l": "valentin-bettiga",
  "ferro|jara c": "camilo-jara",
+  "olimpico|elisias h": "elisias-hall",
+  "olimpico|wrighten a": "austin-wtighten",
 };
 
 const aliasKey = `${teamId}|${normalizedName}`;
