@@ -1,4 +1,5 @@
-export const matchPlayerStats = {"lanus-gimnasia": {
+export const matchPlayerStats = {
+"lanus-gimnasia": {
   "lanus": [
     {
       "id": "martin-franchino",
@@ -193,7 +194,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 19
     }
   ]
-},"penarol-gimnasia": {
+},
+"penarol-gimnasia": {
   "penarol": [
     {
       "id": "ivan-basualdo",
@@ -228,8 +230,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "minutes": "26:39"
     },
     {
-      "id": "flashscore-penarol-giorgetti-franco",
-      "name": "Giorgetti Franco .",
+    "id": "franco-giorgetti",
+"name": "Franco Giorgetti",
       "points": 2,
       "rebounds": 3,
       "assists": 1,
@@ -388,7 +390,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 22
     }
   ]
-},"argentino-ferro": {
+},
+"argentino-ferro": {
   "argentino": [
     {
       "id": "dylan-smith",
@@ -599,7 +602,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 9
     }
   ]
-},"san-martin-instituto": {
+},
+"san-martin-instituto": {
   "san-martin": [
     {
       "id": "diego-collomb",
@@ -770,7 +774,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 23
     }
   ]
-},"olimpico-platense": {
+},
+"olimpico-platense": {
   "olimpico": [
     {
       "id": "flashscore-olimpico-wrighten-a",
@@ -957,7 +962,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 31
     }
   ]
-},"regatas-instituto": {
+},
+"regatas-instituto": {
   "regatas": [
     {
       "id": "flashscore-regatas-gramajo-p",
@@ -1144,7 +1150,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 16
     }
   ]
-},"quimsa-platense": {
+},
+"quimsa-platense": {
   "quimsa": [
     {
       "id": "flashscore-quimsa-bogado-s",
@@ -1363,7 +1370,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 26
     }
   ]
-},"gimnasia-la-union": {
+},
+"gimnasia-la-union": {
   "gimnasia": [
     {
       "id": "obi-okafor",
@@ -1550,7 +1558,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 23
     }
   ]
-},"quimsa-atenas": {
+},
+"quimsa-atenas": {
   "quimsa": [
     {
       "id": "tyren-johnson",
@@ -1713,7 +1722,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 20
     }
   ]
-},"platense-la-union": {
+},
+"platense-la-union": {
   "platense": [
     {
       "id": "federico-grun",
@@ -1884,7 +1894,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 13
     }
   ]
-},"boca-obera": {
+},
+"boca-obera": {
   "boca": [
     {
       "id": "mike-warren",
@@ -2087,7 +2098,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 20
     }
   ]
-},"olimpico-atenas": {
+},
+"olimpico-atenas": {
   "olimpico": [
     {
       "id": "flashscore-olimpico-wrighten-a",
@@ -2258,7 +2270,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 24
     }
   ]
-},"independiente-oliva-ferro": {
+},
+"independiente-oliva-ferro": {
   "independiente-oliva": [
     {
       "id": "agustin-caffaro",
@@ -2445,7 +2458,8 @@ export const matchPlayerStats = {"lanus-gimnasia": {
       "away": 23
     }
   ]
-},"racing-chivilcoy-san-martin": {
+},
+"racing-chivilcoy-san-martin": {
   "racing-chivilcoy": [
     {
       "id": "mateo-chiarini",
