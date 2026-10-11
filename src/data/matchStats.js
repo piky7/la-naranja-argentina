@@ -3207,4 +3207,185 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
+
+"argentino-san-martin": {
+  "argentino": [
+    {
+      "id": "dylan-smith",
+      "name": "Smith D.",
+      "points": 14,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "22:27"
+    },
+    {
+      "id": "zyon-patterson",
+      "name": "Patterson Z.",
+      "points": 10,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "18:29"
+    },
+    {
+      "id": "leandro-cerminato",
+      "name": "Cerminato L.",
+      "points": 11,
+      "rebounds": 7,
+      "assists": 0,
+      "minutes": "30:60"
+    },
+    {
+      "id": "romulo-gusmao",
+      "name": "Romulo Gusmao",
+      "points": 1,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "09:03"
+    },
+    {
+      "id": "jeremias-sandrini",
+      "name": "Sandrini J.",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "21:56"
+    },
+    {
+      "id": "joaquin-fernandez",
+      "name": "Fernandez J.",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "18:04"
+    },
+    {
+      "id": "santiago-perez-douthat",
+      "name": "Pérez S.",
+      "points": 16,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "23:17"
+    },
+    {
+      "id": "cristian-cardo",
+      "name": "Cardo C.",
+      "points": 0,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "23:22"
+    },
+    {
+      "id": "santiago-bilbao",
+      "name": "Bilbao S.",
+      "points": 3,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "07:43"
+    },
+    {
+      "id": "josh-ferguson",
+      "name": "Ferguson J.",
+      "points": 9,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "24:39"
+    }
+  ],
+  "san-martin": [
+    {
+      "id": "salvador-giletto",
+      "name": "Giletto S.",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "27:59"
+    },
+    {
+      "id": "gaston-garcia",
+      "name": "Garcia G.",
+      "points": 12,
+      "rebounds": 4,
+      "assists": 3,
+      "minutes": "26:11"
+    },
+    {
+      "id": "mateo-rearte",
+      "name": "Rearte M.",
+      "points": 14,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "23:50"
+    },
+    {
+      "id": "flashscore-san-martin-berra-fernandez-l",
+      "name": "Berra Fernandez L.",
+      "points": 7,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "18:08"
+    },
+    {
+      "id": "sebastian-lugo",
+      "name": "Lugo S.",
+      "points": 9,
+      "rebounds": 6,
+      "assists": 4,
+      "minutes": "32:01"
+    },
+    {
+      "id": "diego-collomb",
+      "name": "Collomb D.",
+      "points": 13,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "25:18"
+    },
+    {
+      "id": "juanse-gorosito",
+      "name": "Gorosito J.",
+      "points": 5,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "13:45"
+    },
+    {
+      "id": "daniel-moreira",
+      "name": "Moreira",
+      "points": 12,
+      "rebounds": 10,
+      "assists": 1,
+      "minutes": "22:24"
+    },
+    {
+      "id": "geronimo-ramallo",
+      "name": "Ramallo G.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "10:24"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 28,
+      "away": 24
+    },
+    {
+      "period": "2",
+      "home": 17,
+      "away": 16
+    },
+    {
+      "period": "3",
+      "home": 15,
+      "away": 16
+    },
+    {
+      "period": "4",
+      "home": 22,
+      "away": 23
+    }
+  ]
+},
 };
