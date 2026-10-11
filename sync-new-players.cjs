@@ -16,6 +16,13 @@ function normalizeText(value) {
     .trim()
     .replace(/\s+/g, " ");
 }
+function normalizePlayerName(value) {
+  return normalizeText(value)
+    .split(" ")
+    .filter(Boolean)
+    .sort()
+    .join(" ");
+}
 
 function readPlayers(source) {
   // Leemos el array existente sin modificarlo.
@@ -76,10 +83,10 @@ function main() {
 
   const knownIds = new Set(existing.map(p => p.id));
   const knownNames = new Set(
-    existing.map(
-      p => `${p.teamId}|${normalizeText(p.name)}`
-    )
-  );
+  existing.map(
+    p => `${p.teamId}|${normalizePlayerName(p.name)}`
+  )
+);
 
   const additions = [];
   const skipped = [];
@@ -143,7 +150,7 @@ if (
       continue;
     }
 
-    const nameKey = `${teamId}|${normalizeText(name)}`;
+    const nameKey = `${teamId}|${normalizePlayerName(name)}`;
 
     if (knownIds.has(id) || knownNames.has(nameKey)) {
       continue;
