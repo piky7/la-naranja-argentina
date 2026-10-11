@@ -242,7 +242,30 @@ if (aliasId) {
   if (exact.length > 1) {
     return null;
   }
+// Coincidencia de nombre completo con orden invertido.
+// Ejemplo: "Giorgetti Franco" = "Franco Giorgetti".
 
+if (
+  words.length >= 2 &&
+  words.every((word) => word.length > 1)
+) {
+  const sortedName = [...words].sort().join(" ");
+
+  const invertedMatches = candidates.filter((player) => {
+    const playerWords = normalizeText(player.name)
+      .split(" ")
+      .filter(Boolean);
+
+    return (
+      playerWords.length === words.length &&
+      [...playerWords].sort().join(" ") === sortedName
+    );
+  });
+
+  if (invertedMatches.length === 1) {
+    return invertedMatches[0].id;
+  }
+}
   // 2. Coincidencia por apellido + inicial.
   // Flashscore puede mostrar "Vildoza J."
   // mientras players.js guarda "José Vildoza".
