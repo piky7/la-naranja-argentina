@@ -61,20 +61,28 @@ function scoreValue(value) {
     : null;
 }
 
+
 function detectStatus(fields, timestamp, nowSeconds) {
   if (timestamp && nowSeconds < timestamp) {
     return "scheduled";
   }
 
-  if (last(fields, "DI") === "-1") {
+  const di = last(fields, "DI");
+  const da = last(fields, "DA");
+  const db = last(fields, "DB");
+
+  // Patrón de final observado en tres partidos.
+  if (di === "-1" && da === "3" && db === "3") {
     return "finished";
   }
 
-  return scoreValue(last(fields, "DE")) != null &&
-    scoreValue(last(fields, "DF")) != null
-    ? "live"
-    : "unknown";
+  const hasScores =
+    scoreValue(last(fields, "DE")) != null &&
+    scoreValue(last(fields, "DF")) != null;
+
+  return hasScores ? "live" : "unknown";
 }
+
 
 async function feed(endpoint) {
   const response = await fetch(
