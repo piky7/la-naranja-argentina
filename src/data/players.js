@@ -1935,12 +1935,3 @@ export const players = [
 },
 
   // JUGADORES INCORPORADOS AUTOMÁTICAMENTE
-  {
-    id: "flashscore-penarol-giorgetti-franco",
-    name: "Giorgetti Franco .",
-    teamId: "penarol",
-    position: null,
-    number: null,
-    nationality: null,
-  },
-];
