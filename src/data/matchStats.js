@@ -778,7 +778,7 @@ export const matchPlayerStats = {
 "olimpico-platense": {
   "olimpico": [
     {
-      "id": "flashscore-olimpico-wrighten-a",
+      "id": "austin-wtighten",
       "name": "Wrighten A.",
       "points": 8,
       "rebounds": 1,
@@ -2102,7 +2102,7 @@ export const matchPlayerStats = {
 "olimpico-atenas": {
   "olimpico": [
     {
-      "id": "flashscore-olimpico-wrighten-a",
+      "id": "austin-wtighten",
       "name": "Wrighten A.",
       "points": 25,
       "rebounds": 3,
