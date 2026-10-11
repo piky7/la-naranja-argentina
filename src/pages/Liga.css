@@ -390,11 +390,95 @@
     inset 3px 0 0 var(--sports-border);
 }
 
+
+/* =========================================
+   CÍRCULOS DE POSICIONES - LIGA
+   ========================================= */
+
 .standing-position {
-  color: var(--sports-border);
-  font-size: 11px;
-  font-weight: 800;
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+
+  color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.025);
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
 }
+
+/* 1.º al 4.º - Playoffs directos */
+
+.standing-position-direct {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.75);
+  background: rgba(74, 222, 128, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(74, 222, 128, 0.04),
+    0 0 8px rgba(74, 222, 128, 0.06);
+}
+
+/* 5.º al 12.º - Reclasificación */
+
+.standing-position-reclasificacion {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.75);
+  background: rgba(251, 191, 36, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(251, 191, 36, 0.04),
+    0 0 8px rgba(251, 191, 36, 0.06);
+}
+
+/* 13.º al 16.º - Sin clasificación */
+/* Utilizan el círculo gris predeterminado */
+
+/* 17.º y 18.º - Descenso */
+
+.standing-position-descenso {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.75);
+  background: rgba(248, 113, 113, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(248, 113, 113, 0.04),
+    0 0 8px rgba(248, 113, 113, 0.06);
+}
+
+/* Efecto al pasar el cursor */
+
+.standing-row:hover .standing-position {
+  transform: scale(1.05);
+}
+
+.standing-row:hover .standing-position-direct {
+  background: rgba(74, 222, 128, 0.14);
+  border-color: rgba(74, 222, 128, 0.95);
+}
+
+.standing-row:hover .standing-position-reclasificacion {
+  background: rgba(251, 191, 36, 0.14);
+  border-color: rgba(251, 191, 36, 0.95);
+}
+
+.standing-row:hover .standing-position-descenso {
+  background: rgba(248, 113, 113, 0.14);
+  border-color: rgba(248, 113, 113, 0.95);
+}
+
 
 .standing-team {
   min-width: 0;
