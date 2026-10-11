@@ -101,6 +101,7 @@ function Liga() {
         };
       })
 
+
 .sort((a, b) => {
   const percentageA = a.gamesPlayed > 0
     ? a.wins / a.gamesPlayed
@@ -110,12 +111,12 @@ function Liga() {
     ? b.wins / b.gamesPlayed
     : 0;
 
-  // 1. Porcentaje de victorias
-  if (percentageA !== percentageB) {
+  // 1. Mayor porcentaje de victorias
+  if (Math.abs(percentageB - percentageA) > 0.000001) {
     return percentageB - percentageA;
   }
 
-  // 2. Enfrentamiento directo
+  // 2. Enfrentamientos directos
   const directMatches = matches.filter(
     (match) =>
       match.status === "finished" &&
@@ -129,6 +130,8 @@ function Liga() {
 
   let directWinsA = 0;
   let directWinsB = 0;
+  let directPointsA = 0;
+  let directPointsB = 0;
 
   directMatches.forEach((match) => {
     const scoreA = Number(
@@ -145,19 +148,37 @@ function Liga() {
 
     if (scoreA > scoreB) directWinsA++;
     if (scoreB > scoreA) directWinsB++;
+
+    directPointsA += scoreA;
+    directPointsB += scoreB;
   });
 
   if (directWinsA !== directWinsB) {
     return directWinsB - directWinsA;
   }
 
-  // 3. Diferencia de puntos
+  // 3. Diferencia de puntos entre ambos equipos
+  if (
+    directMatches.length > 0 &&
+    directPointsA !== directPointsB
+  ) {
+    return directPointsB - directPointsA;
+  }
+
+  // 4. Mayor cantidad de partidos jugados
+  if (b.gamesPlayed !== a.gamesPlayed) {
+    return b.gamesPlayed - a.gamesPlayed;
+  }
+
+  // 5. Mejor diferencia general de puntos
   if (b.difference !== a.difference) {
     return b.difference - a.difference;
   }
 
+  // 6. Orden alfabético
   return a.name.localeCompare(b.name, "es");
 });
+
 
   }, []);
 
