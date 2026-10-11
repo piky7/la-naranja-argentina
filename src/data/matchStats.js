@@ -3591,7 +3591,6 @@ export const matchPlayerStats = {"lanus-gimnasia": {
     }
   ]
 },
-
 "quimsa-boca": {
   "quimsa": [
     {
