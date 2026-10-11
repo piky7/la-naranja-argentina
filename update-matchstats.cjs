@@ -119,7 +119,50 @@ function validateSyntax(source) {
 
   new Script(transformed);
 }
+function preserveExistingPlayerIds(existingBlock, generatedBlock) {
+  const existingIds = new Map();
 
+  const playerRegex =
+    /"id"\s*:\s*"([^"]+)"\s*,\s*"name"\s*:\s*"([^"]+)"/g;
+
+  for (const match of existingBlock.matchAll(playerRegex)) {
+    const [, id, name] = match;
+
+    if (!id.startsWith("flashscore-")) {
+      const key = name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "");
+
+      if (!existingIds.has(key)) {
+        existingIds.set(key, id);
+      }
+    }
+  }
+
+  return generatedBlock.replace(
+    playerRegex,
+    (fullMatch, id, name) => {
+      const key = name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "");
+
+      const existingId = existingIds.get(key);
+
+      if (!existingId || !id.startsWith("flashscore-")) {
+        return fullMatch;
+      }
+
+      return fullMatch.replace(
+        `"${id}"`,
+        `"${existingId}"`
+      );
+    }
+  );
+}
 function main() {
   console.log("");
   console.log("========================================");
@@ -195,10 +238,15 @@ function main() {
         );
       }
 
-      matchStats =
-        matchStats.slice(0, existingBlock.start) +
-        cleanBlock +
-        matchStats.slice(existingBlock.end);
+      const protectedBlock = preserveExistingPlayerIds(
+  existingBlock.text,
+  cleanBlock
+);
+
+matchStats =
+  matchStats.slice(0, existingBlock.start) +
+  protectedBlock +
+  matchStats.slice(existingBlock.end);
 
       updated++;
 
