@@ -213,22 +213,6 @@
       "awayId": "SIolf8Y3"
     },
     {
-      "eventId": "UZPSgJro",
-      "homeTeam": "racing-chivilcoy",
-      "homeName": "Racing de Chivilcoy",
-      "awayTeam": "gimnasia",
-      "awayName": "Gimnasia",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1791678600,
-      "homeSlug": "racing-de-chivilcoy",
-      "awaySlug": "gimnasia",
-      "homeId": "U9SgFDqR",
-      "awayId": "Cn0pHIpQ"
-    },
-    {
       "eventId": "UgGMF054",
       "homeTeam": "argentino",
       "homeName": "Argentino",
@@ -1971,6 +1955,22 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
+    },
+    {
+      "eventId": "UZPSgJro",
+      "homeTeam": "racing-chivilcoy",
+      "homeName": "Racing de Chivilcoy",
+      "awayTeam": "gimnasia",
+      "awayName": "Gimnasia",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1791678600,
+      "homeSlug": "racing-de-chivilcoy",
+      "awaySlug": "gimnasia",
+      "homeId": "U9SgFDqR",
+      "awayId": "Cn0pHIpQ"
     },
     {
       "eventId": "4vHTAp4S",
