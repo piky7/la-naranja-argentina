@@ -5386,3 +5386,35 @@
     font-size: 11px;
   }
 }
+
+/* LNA - Encabezado compacto de próximos partidos */
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .match-modal-header {
+    padding: 16px 12px 18px;
+  }
+
+  .match-modal-upcoming .match-modal-teams {
+    margin-top: 12px;
+    margin-bottom: 0;
+    gap: 8px;
+  }
+
+  .match-modal-upcoming .match-modal-team {
+    gap: 5px;
+  }
+
+  .match-modal-upcoming .match-modal-team img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+  }
+
+  .match-modal-upcoming .match-modal-score strong {
+    font-size: 28px;
+  }
+
+  .match-modal-upcoming .match-modal-score span {
+    font-size: 11px;
+  }
+}
