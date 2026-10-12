@@ -339,9 +339,12 @@ for (const [matchId, matchData] of Object.entries(allMatches)) {
   const ids = new Set();
 
   for (const [teamId, players] of Object.entries(matchData)) {
-    if (!Array.isArray(players)) continue;
+  // Los resultados por cuarto no son jugadores.
+  if (teamId === "quarterScores") continue;
 
-   for (const player of players) {
+  if (!Array.isArray(players)) continue;
+
+  for (const player of players) {
   if (
     typeof player.id !== "string" ||
     !player.id.trim()
