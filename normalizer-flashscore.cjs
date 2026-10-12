@@ -515,61 +515,7 @@ normalized.push({
 });
 
 
-  if (!provisionalId) {
-    unmapped.push({
-      name: player.name,
-      teamCode: player.teamCode,
-      teamId,
-    });
 
-    return;
-  }
-
-  const officialPlayer = lnaPlayers.find(
-  (item) => item.id === playerId && item.teamId === teamId
-);
-
-normalized.push({
-  id: playerId,
-  name: officialPlayer?.name || player.name,
-  teamId,
-  points: Number(player.points) || 0,
-  rebounds: Number(player.rebounds) || 0,
-  assists: Number(player.assists) || 0,
-  minutes: player.minutes || null,
-});
-
-  console.log(
-    `Jugador provisional incorporado: ${player.name} (${teamId})`
-  );
-
-  return;
-}
-
-
-      normalized.push({
-        id:
-          playerId,
-
-        name:
-          player.name,
-
-        teamId,
-
-        points:
-          Number(player.points) || 0,
-
-        rebounds:
-          Number(player.rebounds) || 0,
-
-        assists:
-          Number(player.assists) || 0,
-
-        minutes:
-          player.minutes || null,
-      });
-    }
-  );
 
   return {
     normalized,
