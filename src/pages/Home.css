@@ -5520,3 +5520,54 @@
     font-size: 12px;
   }
 }
+/* =====================================
+   LNA - JUGADORES DESTACADOS EN 2 COLUMNAS
+===================================== */
+
+.match-modal-upcoming .match-highlighted-teams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.match-modal-upcoming .match-highlighted-team {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.match-modal-upcoming .match-highlighted-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.match-modal-upcoming .match-highlighted-category {
+  min-width: 0;
+  border-right: none;
+  border-bottom: 1px solid rgba(255, 136, 0, 0.25);
+}
+
+.match-modal-upcoming .match-highlighted-category:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .match-highlighted-teams {
+    gap: 8px;
+  }
+
+  .match-modal-upcoming .match-highlighted-team-header {
+    padding: 10px 5px;
+  }
+
+  .match-modal-upcoming .match-highlighted-category {
+    padding: 10px 5px;
+  }
+
+  .match-modal-upcoming .match-highlighted-player strong {
+    font-size: 11px;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+}
