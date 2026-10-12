@@ -5600,3 +5600,23 @@
     padding: 4px 2px;
   }
 }
+/* LNA - Reducir altura de tarjetas de jugadores */
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .match-highlighted-category {
+    min-height: 0;
+    height: auto;
+    padding: 10px 5px;
+  }
+
+  .match-modal-upcoming .match-highlighted-player {
+    min-height: 0;
+    height: auto;
+    padding: 4px 0;
+    margin: 0;
+  }
+
+  .match-modal-upcoming .match-highlighted-player + .match-highlighted-player {
+    margin-top: 8px;
+  }
+}
