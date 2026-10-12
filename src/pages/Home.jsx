@@ -1899,7 +1899,7 @@ const finishedMatch = {
           }
         >
           <div
-            className="match-modal"
+          className="match-modal match-modal-upcoming"
             onClick={(event) =>
               event.stopPropagation()
             }
