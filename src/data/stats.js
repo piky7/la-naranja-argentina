@@ -77,7 +77,7 @@ export const playerStats = players.map((player) => {
     assists:
       totals.assists / gamesPlayed,
 
-    minutes:
-      totals.minutes / gamesPlayed,
+ minutes:
+  totals.minutes / gamesPlayed / 60,
   };
 });
