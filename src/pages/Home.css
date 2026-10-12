@@ -5418,3 +5418,31 @@
     font-size: 11px;
   }
 }
+
+/* LNA - Encabezado próximo partido más compacto */
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .match-modal-header {
+    min-height: 0;
+    height: auto;
+    padding: 18px 12px 22px;
+  }
+
+  .match-modal-upcoming .match-modal-teams {
+    margin-top: 18px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 0;
+  }
+
+  .match-modal-upcoming .match-modal-team img {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+  }
+
+  .match-modal-upcoming .match-modal-score strong {
+    font-size: 30px;
+  }
+}
