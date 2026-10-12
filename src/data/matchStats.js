@@ -1226,7 +1226,7 @@ export const matchPlayerStats = {
       "minutes": "07:14"
     },
     {
-      "id": "flashscore-quimsa-rutenberg-f",
+      "id": "facundo-rutenberg",
       "name": "Rutenberg F.",
       "points": 9,
       "rebounds": 0,
@@ -1610,7 +1610,7 @@ export const matchPlayerStats = {
       "minutes": "22:38"
     },
     {
-      "id": "flashscore-quimsa-rutenberg-f",
+      "id": "facundo-rutenberg",
       "name": "Rutenberg F.",
       "points": 18,
       "rebounds": 2,
@@ -3656,7 +3656,7 @@ export const matchPlayerStats = {
       "minutes": "14:58"
     },
     {
-      "id": "flashscore-quimsa-rutenberg-f",
+      "id": "facundo-rutenberg",
       "name": "Rutenberg F.",
       "points": 9,
       "rebounds": 2,
