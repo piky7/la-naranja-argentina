@@ -200,8 +200,8 @@ const playerAliases = {
   "lanus|merchant e": "junior-merchant",
   "argentino|ferguson j": "josh-ferguson",
 "argentino|di prinzio p": "piero-di-prinzio",
-"ferro|bettiga l": "valentin-bettiga",
  "ferro|jara c": "camilo-jara",
+ "ferro|bettiga l": "valentin-bettiga",
   "olimpico|elisias h": "elisias-hall",
   "olimpico|wrighten a": "austin-wtighten",
  "obera|oberto j c": "juan-cruz-oberto",
@@ -443,14 +443,10 @@ function normalizePlayers(
           lnaPlayers
         );
 if (playerId === "REVISAR_IDENTIDAD") {
-  unmapped.push({
-    name: player.name,
-    teamCode: player.teamCode,
-    teamId,
-    reason: "Identidad ambigua",
-  });
-
-  return;
+  throw new Error(
+    `Identidad ambigua: ${player.name} (${teamId}). ` +
+    "Se conserva el partido anterior sin sobrescribir sus estadísticas."
+  );
 }
       if (!playerId) {
   const nameParts = normalizeText(player.name)
@@ -483,15 +479,19 @@ if (!playerId) {
     return;
   }
 
-  normalized.push({
-    id: provisionalId,
-    name: player.name,
-    teamId,
-    points: Number(player.points) || 0,
-    rebounds: Number(player.rebounds) || 0,
-    assists: Number(player.assists) || 0,
-    minutes: player.minutes || null,
-  });
+  const officialPlayer = lnaPlayers.find(
+  (item) => item.id === playerId && item.teamId === teamId
+);
+
+normalized.push({
+  id: playerId,
+  name: officialPlayer?.name || player.name,
+  teamId,
+  points: Number(player.points) || 0,
+  rebounds: Number(player.rebounds) || 0,
+  assists: Number(player.assists) || 0,
+  minutes: player.minutes || null,
+});
 
   console.log(
     `Jugador provisional incorporado: ${player.name} (${teamId})`
