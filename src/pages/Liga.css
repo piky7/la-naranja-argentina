@@ -1841,3 +1841,317 @@
 .team-logo-link img {
   cursor: pointer;
 }
+
+/* ==========================================
+   LNA - POSICIONES RESPONSIVE
+   ========================================== */
+
+.league-standings-grid {
+  display: block;
+}
+
+@media (max-width: 768px) {
+
+  .standings-card {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .league-standings-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0;
+    width: 100%;
+  }
+
+  .league-standings-grid .standings-column {
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .league-standings-grid .standings-column:first-child {
+    border-right: 1px solid var(--sports-border-soft);
+  }
+
+  .league-standings-grid .standings-header,
+  .league-standings-grid .standing-row {
+    display: grid;
+  grid-template-columns: 21px minmax(0, 1fr) 17px 17px;
+    align-items: center;
+    column-gap: 3px;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0 4px;
+  }
+
+  .league-standings-grid .standings-header {
+    min-height: 28px;
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+
+  .league-standings-grid .standing-row {
+    min-height: 34px;
+  }
+
+  .league-standings-grid .standing-position {
+    width: 18px;
+    height: 18px;
+    min-width: 0;
+    font-size: 8px;
+  }
+
+  .league-standings-grid .standing-team {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .league-standings-grid .team-logo-link {
+    flex: 0 0 16px;
+    width: 18px;
+    min-width: 0;
+  }
+
+  .league-standings-grid .standing-logo {
+    display: block;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+
+  .league-standings-grid .standing-team > span {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 8px;
+  }
+
+  .league-standings-grid .standing-value {
+    min-width: 0;
+    font-size: 9px;
+    text-align: center;
+  }
+}
+
+/* LNA - PARTIDOS DE HOY MOBILE */
+
+@media (max-width: 768px) {
+  .today-matches {
+    gap: 10px;
+  }
+
+  .today-match-card .match-date {
+    padding: 7px 12px;
+  }
+
+  .today-match-card .match-teams {
+    grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr);
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  .today-match-card .match-team {
+    gap: 5px;
+    font-size: 12px;
+  }
+
+  .today-match-card .match-team-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .today-match-card .match-details {
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .today-match-card .match-details strong {
+    font-size: 13px;
+  }
+}
+
+/* LNA - POSICIONES EN DOS COLUMNAS DESKTOP */
+
+@media (min-width: 769px) {
+  .standings-card {
+    display: block;
+    width: 100%;
+  }
+
+  .league-standings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
+  }
+
+  .league-standings-grid .standings-column {
+    min-width: 0;
+  }
+
+  .league-standings-grid .standings-column:first-child {
+    border-right: 1px solid var(--sports-border-soft);
+  }
+
+  .league-standings-grid .standings-header,
+  .league-standings-grid .standing-row {
+    grid-template-columns: 25px minmax(0, 1fr) 22px 22px;
+    gap: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .league-standings-grid .standing-position {
+    width: 23px;
+    height: 23px;
+    min-width: 0;
+  }
+
+  .league-standings-grid .standing-logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .league-standings-grid .standing-team {
+    gap: 4px;
+  }
+
+  .league-standings-grid .standing-team span {
+    font-size: 10px;
+  }
+}
+
+/* LNA - RESULTADOS MOBILE */
+
+@media (max-width: 768px) {
+  .results-card .result-teams {
+    grid-template-columns: minmax(0, 1fr) 76px minmax(0, 1fr);
+    gap: 8px;
+    min-height: 68px;
+    padding: 10px 12px;
+  }
+
+  .results-card .result-team {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .results-card .result-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .results-card .result-score {
+    min-width: 0;
+    gap: 5px;
+  }
+
+  .results-card .result-score strong {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .results-card .result-score span {
+    font-size: 12px;
+  }
+
+  .results-card .result-date {
+    padding: 7px 12px;
+    font-size: 9px;
+  }
+}
+
+/* ==========================================
+   LNA - PRÓXIMOS PARTIDOS MOBILE
+   ========================================== */
+
+@media (max-width: 768px) {
+
+  .upcoming-card .upcoming-match {
+    grid-template-columns: 65px minmax(0, 1fr);
+    min-height: 64px;
+  }
+
+  .upcoming-card .upcoming-date {
+    gap: 4px;
+    padding: 8px 5px;
+  }
+
+  .upcoming-card .upcoming-date span {
+    font-size: 9px;
+  }
+
+  .upcoming-card .upcoming-date strong {
+    font-size: 12px;
+  }
+
+  .upcoming-card .upcoming-teams {
+    grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+    gap: 6px;
+    padding: 9px 10px;
+  }
+
+  .upcoming-card .upcoming-teams > div {
+    min-width: 0;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .upcoming-card .upcoming-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .upcoming-card .upcoming-vs {
+    font-size: 9px;
+  }
+}
+
+/* LNA - MEJORAR LEGIBILIDAD DE POSICIONES MOBILE */
+
+@media (max-width: 768px) {
+
+  .league-standings-grid .standings-header,
+  .league-standings-grid .standing-row {
+    grid-template-columns: 21px minmax(0, 1fr) 17px 17px;
+  }
+
+  .league-standings-grid .standing-row {
+    min-height: 38px;
+  }
+
+  .league-standings-grid .standing-team > span {
+    font-size: 10px;
+  }
+
+  .league-standings-grid .team-logo-link {
+    flex: 0 0 18px;
+    width: 18px;
+  }
+
+  .league-standings-grid .standing-logo {
+    width: 18px;
+    height: 18px;
+  }
+
+  .league-standings-grid .standing-position {
+    width: 19px;
+    height: 19px;
+    font-size: 9px;
+  }
+
+  .league-standings-grid .standing-value {
+    font-size: 10px;
+  }
+}

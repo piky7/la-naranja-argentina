@@ -524,24 +524,33 @@ function Liga() {
 
               <div className="standings-card">
 
-                <div className="standings-column">
+              <div className="league-standings-grid">
+  <div className="standings-column">
+    <div className="standings-header">
+      <span>#</span>
+      <span>Equipo</span>
+      <span>PG</span>
+      <span>PP</span>
+    </div>
 
-                  <div className="standings-header">
-                    <span>#</span>
-                    <span>Equipo</span>
-                    <span>PG</span>
-                    <span>PP</span>
-                  </div>
+    {standings.slice(0, 9).map((team, index) =>
+      renderStandingRow(team, index)
+    )}
+  </div>
 
-                  {standings.map(
-                    (team, index) =>
-                      renderStandingRow(
-                        team,
-                        index
-                      )
-                  )}
+  <div className="standings-column">
+    <div className="standings-header">
+      <span>#</span>
+      <span>Equipo</span>
+      <span>PG</span>
+      <span>PP</span>
+    </div>
 
-                </div>
+    {standings.slice(9, 18).map((team, index) =>
+      renderStandingRow(team, index + 9)
+    )}
+  </div>
+</div>
 
               </div>
 

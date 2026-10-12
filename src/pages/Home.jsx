@@ -822,7 +822,7 @@ const [liveDate, setLiveDate] = useState(null);
                 </Link>
               </div>
 
-              <div className="standings-table">
+              <div className="standings-table standings-table-desktop">
                 <div className="standings-table-header">
                   <span>#</span>
                   <span>Equipo</span>
@@ -867,6 +867,58 @@ const [liveDate, setLiveDate] = useState(null);
                   </button>
                 ))}
               </div>
+              <div className="standings-table-mobile">
+  {[standings.slice(0, 9), standings.slice(9, 18)].map(
+    (column, columnIndex) => (
+      <div className="standings-mobile-column" key={columnIndex}>
+        <div className="standings-table-header">
+          <span>#</span>
+          <span>Equipo</span>
+          <span>PG</span>
+          <span>PP</span>
+        </div>
+
+        {column.map((team, index) => {
+          const position = columnIndex * 9 + index + 1;
+
+          return (
+            <button
+              key={team.id}
+              type="button"
+              className="home-standing-row"
+              onClick={() => setSelectedTeam(team)}
+            >
+              <span
+                className={`standing-position ${
+                  position <= 4
+                    ? "standing-position-direct"
+                    : position <= 12
+                      ? "standing-position-reclasificacion"
+                      : position >= 17
+                        ? "standing-position-descenso"
+                        : ""
+                }`}
+              >
+                {position}
+              </span>
+
+              <span className="home-standing-team">
+                <img
+                  src={team.logo}
+                  alt={`Escudo de ${team.name}`}
+                />
+                <span>{team.shortName}</span>
+              </span>
+
+              <strong>{team.wins}</strong>
+              <strong>{team.losses}</strong>
+            </button>
+          );
+        })}
+      </div>
+    )
+  )}
+</div>
             </section>
 
             {/* FIXTURE */}

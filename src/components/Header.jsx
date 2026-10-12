@@ -1,6 +1,8 @@
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
+import { House, Trophy, Shield, ChartNoAxesColumn } from "lucide-react";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,120 +12,136 @@ function Header() {
   };
 
   return (
-    <header className="header">
-      <div className="header-container">
+    <>
+      <header className="header">
+        <div className="header-container">
 
-        {/* LOGO */}
-        <Link
-          to="/"
-          className="logo"
-          onClick={closeMenu}
-        >
-          <img
-            src="/logo-lna.png"
-            alt="La Naranja Argentina"
-            className="logo-image"
-          />
-        </Link>
-
-        {/* IDENTIDAD */}
-        <div className="header-brand">
-          <div className="header-tagline">
-            <span>EL BÁSQUET ARGENTINO,</span>
-            <strong>EN UN SOLO LUGAR.</strong>
-          </div>
-
-          <div className="header-league">
-            LIGA NACIONAL
-          </div>
-        </div>
-
-        {/* DECORACIÓN */}
-        <div className="header-ball" aria-hidden="true">
-          <div className="header-ball-line header-ball-line-1"></div>
-          <div className="header-ball-line header-ball-line-2"></div>
-          <div className="header-ball-line header-ball-line-3"></div>
-        </div>
-
-        {/* NAVEGACIÓN */}
-        <nav className="navigation">
-          <Link to="/">
-            Inicio
-          </Link>
-
-          <Link to="/liga">
-            Liga
-          </Link>
-
-          <Link to="/equipos">
-            Equipos
-          </Link>
-
-          <Link to="/jugadores">
-            Jugadores
-          </Link>
-
-          <Link to="/estadisticas">
-            Estadísticas
-          </Link>
-        </nav>
-
-        {/* BOTÓN MOBILE */}
-        <button
-          className="menu-button"
-          type="button"
-          onClick={() => setMenuOpen((current) => !current)}
-          aria-label={
-            menuOpen
-              ? "Cerrar menú"
-              : "Abrir menú"
-          }
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? "×" : "☰"}
-        </button>
-      </div>
-
-      {/* MENÚ MOBILE */}
-      {menuOpen && (
-        <nav className="mobile-navigation">
+          {/* LOGO */}
           <Link
             to="/"
+            className="logo"
             onClick={closeMenu}
           >
-            Inicio
+            <img
+              src="/logo-lna.png"
+              alt="La Naranja Argentina"
+              className="logo-image"
+            />
           </Link>
 
-          <Link
-            to="/liga"
-            onClick={closeMenu}
-          >
-            Liga
-          </Link>
+          {/* IDENTIDAD */}
+          <div className="header-brand">
+            <div className="header-tagline">
+              <span>EL BÁSQUET ARGENTINO,</span>
+              <strong>EN UN SOLO LUGAR.</strong>
+            </div>
 
-          <Link
-            to="/equipos"
-            onClick={closeMenu}
-          >
-            Equipos
-          </Link>
+            <div className="header-league">
+              LIGA NACIONAL
+            </div>
+          </div>
 
-          <Link
-            to="/jugadores"
-            onClick={closeMenu}
-          >
-            Jugadores
-          </Link>
+          {/* DECORACIÓN */}
+          <div className="header-ball" aria-hidden="true">
+            <div className="header-ball-line header-ball-line-1"></div>
+            <div className="header-ball-line header-ball-line-2"></div>
+            <div className="header-ball-line header-ball-line-3"></div>
+          </div>
 
-          <Link
-            to="/estadisticas"
-            onClick={closeMenu}
+          {/* NAVEGACIÓN ESCRITORIO */}
+          <nav className="navigation">
+            <Link to="/">Inicio</Link>
+            <Link to="/liga">Liga</Link>
+            <Link to="/equipos">Equipos</Link>
+            <Link to="/jugadores">Jugadores</Link>
+            <Link to="/estadisticas">Estadísticas</Link>
+          </nav>
+
+          {/* BOTÓN MOBILE */}
+          <button
+            className="menu-button"
+            type="button"
+            onClick={() => setMenuOpen((current) => !current)}
+            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menuOpen}
           >
-            Estadísticas
-          </Link>
-        </nav>
-      )}
-    </header>
+            {menuOpen ? "×" : "☰"}
+          </button>
+        </div>
+
+        {/* MENÚ MOBILE */}
+        {menuOpen && (
+          <nav className="mobile-navigation">
+            <Link to="/" onClick={closeMenu}>
+              Inicio
+            </Link>
+
+            <Link to="/liga" onClick={closeMenu}>
+              Liga
+            </Link>
+
+            <Link to="/equipos" onClick={closeMenu}>
+              Equipos
+            </Link>
+
+            <Link to="/jugadores" onClick={closeMenu}>
+              Jugadores
+            </Link>
+
+            <Link to="/estadisticas" onClick={closeMenu}>
+              Estadísticas
+            </Link>
+          </nav>
+        )}
+      </header>
+
+     {/* NAVEGACIÓN INFERIOR MOBILE */}
+<nav
+  className="bottom-navigation"
+  aria-label="Navegación inferior"
+>
+  <NavLink
+    to="/"
+    end
+    className={({ isActive }) =>
+      `bottom-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <House size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Inicio</span>
+  </NavLink>
+
+  <NavLink
+    to="/liga"
+    className={({ isActive }) =>
+      `bottom-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <Trophy size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Liga</span>
+  </NavLink>
+
+  <NavLink
+    to="/equipos"
+    className={({ isActive }) =>
+      `bottom-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <Shield size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Equipos</span>
+  </NavLink>
+
+  <NavLink
+    to="/estadisticas"
+    className={({ isActive }) =>
+      `bottom-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <ChartNoAxesColumn size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Estadísticas</span>
+  </NavLink>
+</nav>
+    </>
   );
 }
 

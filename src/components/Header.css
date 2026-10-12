@@ -449,3 +449,80 @@
     border-bottom: 0;
   }
 }
+
+/* ==========================================
+   LNA - NAVEGACIÓN INFERIOR MOBILE
+   ========================================== */
+
+/* Oculta la barra en escritorio */
+.bottom-navigation {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .bottom-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+
+    min-height: 64px;
+    padding: 7px 8px;
+    padding-bottom: calc(7px + env(safe-area-inset-bottom, 0px));
+
+    background: #11151c;
+    border-top: 1px solid rgba(255, 132, 0, 0.3);
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .bottom-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    min-width: 0;
+    padding: 5px 2px;
+
+    color: #929aa7;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .bottom-nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 23px;
+
+    font-size: 21px;
+    line-height: 1;
+  }
+
+  .bottom-nav-link.active {
+    color: #ff8a00;
+  }
+
+  .bottom-nav-link.active .bottom-nav-icon {
+    color: #ff8a00;
+  }
+
+  .bottom-nav-link:focus-visible {
+    outline: 2px solid #ff8a00;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* Espacio para que la barra no tape el contenido */
+  body {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+}

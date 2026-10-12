@@ -4789,3 +4789,236 @@
     padding: 10px 6px;
   }
 }
+
+/* =====================================
+   LNA - TABLA DE POSICIONES MOBILE
+   ===================================== */
+
+/* Escritorio: conservar la tabla original */
+.standings-table-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Ocultar la tabla de escritorio */
+  .standings-table-desktop {
+    display: none;
+  }
+
+  /* Dos columnas: 1-9 y 10-18 */
+  .standings-table-mobile {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+
+  .standings-mobile-column {
+    min-width: 0;
+  }
+
+  .standings-mobile-column .standings-table-header,
+  .standings-mobile-column .home-standing-row {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) 19px 19px;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 3px;
+  }
+
+  .standings-mobile-column .home-standing-row {
+    width: 100%;
+    min-height: 39px;
+  }
+
+  .standings-mobile-column .standing-position {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    font-size: 9px;
+  }
+
+  .standings-mobile-column .home-standing-team {
+    min-width: 0;
+    gap: 3px;
+    font-size: 10px;
+  }
+
+  .standings-mobile-column .home-standing-team img {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .standings-mobile-column .home-standing-team span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .standings-mobile-column .home-standing-row > strong {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .standings-mobile-column .standings-table-header {
+    font-size: 9px;
+  }
+}
+
+/* =====================================
+   LNA - POSICIONES DOBLE COLUMNA PC
+   ===================================== */
+
+@media (min-width: 769px) {
+  .home-dashboard {
+  grid-template-columns:
+    minmax(430px, 1.3fr)
+    minmax(380px, 1.35fr)
+    minmax(230px, 0.8fr);
+}
+
+  .standings-table-desktop {
+    display: none;
+  }
+
+  .standings-table-mobile {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+  }
+
+  .standings-mobile-column {
+    min-width: 0;
+  }
+
+  .standings-mobile-column .standings-table-header,
+  .standings-mobile-column .home-standing-row {
+    display: grid;
+    grid-template-columns: 25px minmax(0, 1fr) 22px 22px;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 4px;
+  }
+
+  .standings-mobile-column .home-standing-row {
+    min-height: 43px;
+  }
+
+  .standings-mobile-column .standing-position {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    font-size: 10px;
+  }
+
+  .standings-mobile-column .home-standing-team {
+    min-width: 0;
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .standings-mobile-column .home-standing-team img {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+  }
+
+  .standings-mobile-column .home-standing-team span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .standings-mobile-column .home-standing-row > strong {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .standings-mobile-column .standings-table-header {
+    font-size: 10px;
+  }
+}
+
+/* =====================================
+   LNA - ORDEN DEL HOME EN CELULARES
+   ===================================== */
+
+@media (max-width: 768px) {
+  .home-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* 1. Fixture */
+  .fixture-panel {
+    order: 1;
+  }
+
+  /* 2. Tabla de posiciones */
+  .standings-panel {
+    order: 2;
+  }
+
+  /* 3. Máximos anotadores */
+  .scorers-panel {
+    order: 3;
+  }
+}
+
+/* =====================================
+   LNA - FIXTURE COMPACTO MOBILE
+   ===================================== */
+
+@media (max-width: 768px) {
+  .home-fixtures {
+    gap: 8px;
+  }
+
+  .home-fixture {
+    min-height: 82px;
+    padding: 10px 8px;
+    gap: 6px;
+  }
+
+  .fixture-team {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .fixture-team img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .fixture-team-name {
+    min-width: 0;
+  }
+
+  .fixture-team-name > span {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .fixture-team-name small {
+    font-size: 9px;
+  }
+
+  .fixture-center {
+    min-width: 70px;
+  }
+
+  .fixture-score,
+  .fixture-time {
+    font-size: 20px;
+  }
+
+  .fixture-tv {
+    font-size: 9px;
+  }
+}
