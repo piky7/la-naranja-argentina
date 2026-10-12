@@ -2143,31 +2143,7 @@ const finishedMatch = {
                       </div>
                     </div>
                   </div>
-                  {selectedUpcomingHomeTeam && (
-  <div className="match-highlighted-team-averages">
-    <div>
-      <span>PTS/P</span>
-      <strong>
-        {
-          getTeamAverages(
-            selectedUpcomingHomeTeam.id
-          ).pointsFor ?? "—"
-        }
-      </strong>
-    </div>
 
-    <div>
-      <span>REC/P</span>
-      <strong>
-        {
-          getTeamAverages(
-            selectedUpcomingHomeTeam.id
-          ).pointsAgainst ?? "—"
-        }
-      </strong>
-    </div>
-  </div>
-)}
 
                   <div className="match-highlighted-grid">
                     <div className="match-highlighted-category">
@@ -2309,31 +2285,7 @@ const finishedMatch = {
                       </div>
                     </div>
                   </div>
-{selectedUpcomingAwayTeam && (
-  <div className="match-highlighted-team-averages">
-    <div>
-      <span>PTS/P</span>
-      <strong>
-        {
-          getTeamAverages(
-            selectedUpcomingAwayTeam.id
-          ).pointsFor ?? "—"
-        }
-      </strong>
-    </div>
 
-    <div>
-      <span>REC/P</span>
-      <strong>
-        {
-          getTeamAverages(
-            selectedUpcomingAwayTeam.id
-          ).pointsAgainst ?? "—"
-        }
-      </strong>
-    </div>
-  </div>
-)}
                   <div className="match-highlighted-grid">
                     <div className="match-highlighted-category">
                       <span>PUNTOS</span>
