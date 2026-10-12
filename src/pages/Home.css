@@ -5571,3 +5571,32 @@
     overflow-wrap: break-word;
   }
 }
+/* LNA - Compactar jugadores destacados */
+
+.match-modal-upcoming .match-highlighted-category {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.match-modal-upcoming .match-highlighted-player {
+  padding: 5px 2px;
+  margin: 0;
+}
+
+.match-modal-upcoming .match-highlighted-player strong {
+  line-height: 1.25;
+}
+
+.match-modal-upcoming .match-highlighted-player span {
+  line-height: 1.2;
+}
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .match-highlighted-category {
+    padding: 8px 4px;
+  }
+
+  .match-modal-upcoming .match-highlighted-player {
+    padding: 4px 2px;
+  }
+}
