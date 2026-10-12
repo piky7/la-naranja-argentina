@@ -2045,6 +2045,57 @@ const finishedMatch = {
             </div>
 
             <section className="match-highlighted-section">
+              {/* COMPARATIVA DE EQUIPOS */}
+
+<div className="upcoming-team-comparison">
+  <span className="upcoming-comparison-label">
+    COMPARATIVA DE EQUIPOS
+  </span>
+
+  <div className="upcoming-comparison-row">
+    <strong>
+      {selectedUpcomingHomeTeam?.shortName}
+    </strong>
+
+    <span>EQUIPOS</span>
+
+    <strong>
+      {selectedUpcomingAwayTeam?.shortName}
+    </strong>
+  </div>
+
+  <div className="upcoming-comparison-row">
+    <strong>
+      {getTeamAverages(
+        selectedUpcomingMatch.homeTeam
+      ).pointsFor ?? "—"}
+    </strong>
+
+    <span>PTS/P</span>
+
+    <strong>
+      {getTeamAverages(
+        selectedUpcomingMatch.awayTeam
+      ).pointsFor ?? "—"}
+    </strong>
+  </div>
+
+  <div className="upcoming-comparison-row">
+    <strong>
+      {getTeamAverages(
+        selectedUpcomingMatch.homeTeam
+      ).pointsAgainst ?? "—"}
+    </strong>
+
+    <span>REC/P</span>
+
+    <strong>
+      {getTeamAverages(
+        selectedUpcomingMatch.awayTeam
+      ).pointsAgainst ?? "—"}
+    </strong>
+  </div>
+</div>
               <div className="match-highlighted-title">
                 <span>PROMEDIOS DE TEMPORADA</span>
 
