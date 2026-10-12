@@ -514,7 +514,8 @@ normalized.push({
   minutes: player.minutes || null,
 });
 
-
+    }
+  );
 
 
   return {
