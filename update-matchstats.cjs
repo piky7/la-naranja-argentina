@@ -121,7 +121,7 @@ function validateSyntax(source) {
 }
 function preserveExistingPlayerIds(existingBlock, generatedBlock) {
   const existingIds = new Map();
-
+const usedIds = new Set();
   const playerRegex =
     /"id"\s*:\s*"([^"]+)"\s*,\s*"name"\s*:\s*"([^"]+)"/g;
 
@@ -152,14 +152,34 @@ function preserveExistingPlayerIds(existingBlock, generatedBlock) {
 
       const existingId = existingIds.get(key);
 
-      if (!existingId || !id.startsWith("flashscore-")) {
-        return fullMatch;
-      }
+   if (!id.startsWith("flashscore-")) {
+  if (usedIds.has(id)) {
+    throw new Error(
+      `ID duplicado en las estadísticas generadas: ${id}`
+    );
+  }
 
-      return fullMatch.replace(
-        `"${id}"`,
-        `"${existingId}"`
-      );
+  usedIds.add(id);
+  return fullMatch;
+}
+
+if (!existingId) {
+  return fullMatch;
+}
+
+if (usedIds.has(existingId)) {
+  throw new Error(
+    `ID histórico duplicado: ${existingId}. ` +
+    "Se cancela la actualización para proteger las estadísticas."
+  );
+}
+
+usedIds.add(existingId);
+
+return fullMatch.replace(
+  `"${id}"`,
+  `"${existingId}"`
+);
     }
   );
 }
@@ -286,7 +306,39 @@ matchStats =
       );
     }
   }
+const { Script: ValidationScript } = require("vm");
 
+const validationSource = matchStats
+  .replace(
+    /^\s*export\s+const\s+matchPlayerStats\s*=/m,
+    "const matchPlayerStats ="
+  )
+  .replace(
+    /^\s*export\s+const\s+matchStats\s*=/m,
+    "const matchStats ="
+  );
+
+const allMatches = new ValidationScript(
+  `${validationSource}\nmatchPlayerStats;`
+).runInNewContext({}, { timeout: 1000 });
+
+for (const [matchId, matchData] of Object.entries(allMatches)) {
+  const ids = new Set();
+
+  for (const [teamId, players] of Object.entries(matchData)) {
+    if (!Array.isArray(players)) continue;
+
+    for (const player of players) {
+      if (ids.has(player.id)) {
+        throw new Error(
+          `ID duplicado en ${matchId}: ${player.id}`
+        );
+      }
+
+      ids.add(player.id);
+    }
+  }
+}
   validateSyntax(matchStats);
 
   if (
