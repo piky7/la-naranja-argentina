@@ -341,15 +341,25 @@ for (const [matchId, matchData] of Object.entries(allMatches)) {
   for (const [teamId, players] of Object.entries(matchData)) {
     if (!Array.isArray(players)) continue;
 
-    for (const player of players) {
-      if (ids.has(player.id)) {
-        throw new Error(
-          `ID duplicado en ${matchId}: ${player.id}`
-        );
-      }
+   for (const player of players) {
+  if (
+    typeof player.id !== "string" ||
+    !player.id.trim()
+  ) {
+    throw new Error(
+      `Jugador sin ID en ${matchId}, equipo ${teamId}: ` +
+      `${player.name || "nombre desconocido"}`
+    );
+  }
 
-      ids.add(player.id);
-    }
+  if (ids.has(player.id)) {
+    throw new Error(
+      `ID duplicado en ${matchId}: ${player.id}`
+    );
+  }
+
+  ids.add(player.id);
+}
   }
 }
   validateSyntax(matchStats);
