@@ -5620,3 +5620,36 @@
     margin-top: 8px;
   }
 }
+/* LNA - Jugadores destacados estilo boceto */
+
+.match-modal-upcoming .match-highlighted-player {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+  min-height: 0;
+  padding: 5px 0;
+  margin: 0;
+  text-align: left;
+}
+
+.match-modal-upcoming .match-highlighted-player strong {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  white-space: normal;
+}
+
+.match-modal-upcoming .match-highlighted-player span {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ff9000;
+  white-space: nowrap;
+  text-align: right;
+}
