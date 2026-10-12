@@ -205,6 +205,7 @@ const playerAliases = {
   "olimpico|elisias h": "elisias-hall",
   "olimpico|wrighten a": "austin-wtighten",
  "obera|oberto j c": "juan-cruz-oberto",
+ "quimsa|rutenberg f": "facundo-rutenberg",
 };
 
 const aliasKey = `${teamId}|${normalizedName}`;
