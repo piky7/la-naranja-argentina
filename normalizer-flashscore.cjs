@@ -871,9 +871,7 @@ try {
     "========================================"
   );
 
-  console.error(
-    error.message
-  );
+  console.error(error.stack || error.message);
 
   console.error("");
 
