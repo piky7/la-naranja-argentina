@@ -122,6 +122,22 @@ function validateSyntax(source) {
 function preserveExistingPlayerIds(existingBlock, generatedBlock) {
   const existingIds = new Map();
 const usedIds = new Set();
+  const officialIdRegex =
+  /"id"\s*:\s*"([^"]+)"\s*,\s*"name"\s*:\s*"([^"]+)"/g;
+
+for (const match of generatedBlock.matchAll(officialIdRegex)) {
+  const id = match[1];
+
+  if (!id.startsWith("flashscore-")) {
+    if (usedIds.has(id)) {
+      throw new Error(
+        `ID oficial duplicado en las estadísticas generadas: ${id}`
+      );
+    }
+
+    usedIds.add(id);
+  }
+}
   const playerRegex =
     /"id"\s*:\s*"([^"]+)"\s*,\s*"name"\s*:\s*"([^"]+)"/g;
 
@@ -153,11 +169,8 @@ const usedIds = new Set();
       const existingId = existingIds.get(key);
 
    if (!id.startsWith("flashscore-")) {
-  if (usedIds.has(id)) {
-    throw new Error(
-      `ID duplicado en las estadísticas generadas: ${id}`
-    );
-  }
+  return fullMatch;
+}
 
   usedIds.add(id);
   return fullMatch;
