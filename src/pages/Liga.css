@@ -2155,3 +2155,223 @@
     font-size: 10px;
   }
 }
+
+/* =====================================
+   LNA - MARCADOR PARTIDO FINALIZADO
+===================================== */
+
+.league-match-final-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 110px;
+}
+
+.league-match-final-label {
+  color: #a5acb8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.league-match-final-score strong {
+  color: #ff8500;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+  .league-match-final-score {
+    min-width: 95px;
+    gap: 5px;
+  }
+
+  .league-match-final-score strong {
+    font-size: 28px;
+  }
+
+  .league-match-final-label {
+    font-size: 9px;
+  }
+}
+
+/* =====================================
+   LNA - PUNTOS POR CUARTO (LIGA)
+===================================== */
+
+.league-match-quarters {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.league-match-quarters h3 {
+  margin: 6px 0 14px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.league-match-quarters-table {
+  width: 100%;
+  overflow-x: auto;
+  background: #171b23;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+}
+
+.league-match-quarters-table table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.league-match-quarters-table th,
+.league-match-quarters-table td {
+  padding: 11px 5px;
+  text-align: center;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+.league-match-quarters-table th:first-child {
+  width: 27%;
+  text-align: left;
+  padding-left: 12px;
+}
+
+.league-match-quarters-table thead th {
+  color: #9299a6;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.league-match-quarters-table tbody tr + tr {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.league-match-quarters-table tbody th {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.league-match-quarters-table .league-match-quarters-total {
+  color: #ff8500;
+  font-weight: 900;
+  font-size: 15px;
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+  .league-match-quarters {
+    padding: 12px;
+  }
+
+  .league-match-quarters h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .league-match-quarters-table th,
+  .league-match-quarters-table td {
+    padding: 10px 3px;
+    font-size: 11px;
+  }
+
+  .league-match-quarters-table th:first-child {
+    width: 29%;
+    padding-left: 8px;
+  }
+
+  .league-match-quarters-table thead th {
+    font-size: 9px;
+  }
+
+  .league-match-quarters-table .league-match-quarters-total {
+    font-size: 13px;
+  }
+}
+
+/* =====================================
+   LNA - ESTADÍSTICAS INDIVIDUALES MOBILE
+===================================== */
+
+@media (max-width: 600px) {
+
+  .match-player-table-header,
+  .match-player-row {
+    grid-template-columns:
+      minmax(0, 1fr)
+      38px
+      32px
+      32px
+      32px;
+
+    column-gap: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .match-player-table-header {
+    min-height: 34px;
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+
+  .match-player-row {
+    min-height: 43px;
+    font-size: 11px;
+  }
+
+  .match-player-name span {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .match-player-row strong {
+    font-size: 12px;
+  }
+}
+
+/* =====================================
+   LNA - NOMBRES DE JUGADORES EN LIGA
+===================================== */
+
+.match-player-name {
+  min-width: 0;
+}
+
+.match-player-name .match-stat-player {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+
+  background: transparent;
+  border: none;
+  color: #f5f5f5;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: left;
+
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+
+  cursor: pointer;
+}
+
+.match-player-name .match-stat-player:hover {
+  color: #ff8500;
+}

@@ -5,8 +5,11 @@ import { teams } from "../data/teams";
 import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
+import { players } from "../data/players";
+import { playerStats } from "../data/stats";
 
 import "./Liga.css";
+import "./Home.css";
 const matches = baseMatches.map((match) => {
   const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
   const result = matchResults[key] ?? matchResults[match.id];
@@ -28,9 +31,88 @@ function Liga() {
 
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   const getTeam = (teamId) =>
     teams.find((team) => team.id === teamId);
+  const getMatchPlayerInfo = (matchPlayer) => {
+  if (!matchPlayer) return null;
+
+  const playerInfo = players.find(
+    (player) => player.id === matchPlayer.id
+  );
+
+  if (!playerInfo) return null;
+
+  return {
+    ...playerInfo,
+    team: getTeam(playerInfo.teamId),
+    stats: playerStats.find(
+      (stats) => stats.playerId === playerInfo.id
+    ),
+  };
+};
+
+const getPlayerLastMatches = (player) => {
+  if (!player) return [];
+
+  return matches
+    .filter((match) => {
+      if (match.status !== "finished") return false;
+
+      const teamId = player.teamId;
+
+      if (
+        match.homeTeam !== teamId &&
+        match.awayTeam !== teamId
+      ) {
+        return false;
+      }
+
+      const stats =
+        matchPlayerStats[match.id] ||
+        matchPlayerStats[
+          `${match.date}-${match.homeTeam}-${match.awayTeam}`
+        ] ||
+        matchPlayerStats[
+          `${match.homeTeam}-${match.awayTeam}`
+        ];
+
+      return stats?.[teamId]?.some(
+        (item) => item.id === player.id
+      );
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 2)
+    .map((match) => {
+      const stats =
+        matchPlayerStats[match.id] ||
+        matchPlayerStats[
+          `${match.date}-${match.homeTeam}-${match.awayTeam}`
+        ] ||
+        matchPlayerStats[
+          `${match.homeTeam}-${match.awayTeam}`
+        ];
+
+      const playerMatch = stats[player.teamId].find(
+        (item) => item.id === player.id
+      );
+
+      const rivalId =
+        match.homeTeam === player.teamId
+          ? match.awayTeam
+          : match.homeTeam;
+
+      return {
+        id: match.id,
+        date: match.date,
+        rival: getTeam(rivalId)?.shortName || rivalId,
+        points: playerMatch.points,
+        rebounds: playerMatch.rebounds,
+        assists: playerMatch.assists,
+      };
+    });
+};
 
   const formatDate = (date) => {
     const [year, month, day] = date.split("-");
@@ -990,11 +1072,14 @@ function Liga() {
         const statsKeyWithoutDate =
           `${selectedMatch.homeTeam}-${selectedMatch.awayTeam}`;
 
-        const matchStats =
-          matchPlayerStats[statsKeyWithDate] ||
-          matchPlayerStats[statsKeyWithoutDate] ||
-          null;
+       const matchStats =
+  matchPlayerStats[statsKeyWithDate] ||
+  matchPlayerStats[statsKeyWithoutDate] ||
+  null;
 
+const quarterScores = matchStats?.quarterScores || null;
+
+console.table(quarterScores);
         const homePlayerStats =
           matchStats?.[selectedMatch.homeTeam] || [];
 
@@ -1044,10 +1129,22 @@ function Liga() {
                 >
 
                   <div className="match-player-name">
-                    <span>
-                      {player.name}
-                    </span>
-                  </div>
+  <button
+  type="button"
+  className="match-stat-player"
+  onClick={(event) => {
+    event.stopPropagation();
+
+    const playerInfo = getMatchPlayerInfo(player);
+
+    if (!playerInfo) return;
+
+    setSelectedPlayer(playerInfo);
+  }}
+>
+  {player.name}
+</button>
+</div>
 
                   <span>
                     {player.minutes || "-"}
@@ -1143,32 +1240,28 @@ function Liga() {
                     {homeTeam.name}
                   </span>
 
-                  {isFinished && (
-                    <strong>
-                      {homeScore}
-                    </strong>
-                  )}
+                  
 
                 </div>
 
 
                 <div className="match-modal-center">
 
-                  {isFinished ? (
-                    <>
-                      <span className="match-modal-final">
-                        FINAL
-                      </span>
+                 {isFinished ? (
+  <div className="league-match-final-score">
+    <span className="league-match-final-label">
+      FINAL
+    </span>
 
-                      <span className="match-modal-difference">
-                        DIF. {difference}
-                      </span>
-                    </>
-                  ) : (
-                    <span className="match-modal-vs">
-                      VS
-                    </span>
-                  )}
+    <strong>
+      {homeScore} - {awayScore}
+    </strong>
+  </div>
+) : (
+  <span className="match-modal-vs">
+    VS
+  </span>
+)}
 
                 </div>
 
@@ -1192,11 +1285,7 @@ function Liga() {
                     {awayTeam.name}
                   </span>
 
-                  {isFinished && (
-                    <strong>
-                      {awayScore}
-                    </strong>
-                  )}
+                 
 
                 </div>
 
@@ -1237,7 +1326,60 @@ function Liga() {
                 </div>
               )}
 
+{/* =========================
+    PUNTOS POR CUARTO
+========================= */}
 
+{isFinished && quarterScores && (
+  <div className="league-match-quarters">
+    <span className="section-label">
+      DESGLOSE DEL MARCADOR
+    </span>
+
+    <h3>Puntos por cuarto</h3>
+
+    <div className="league-match-quarters-table">
+      <table>
+        <thead>
+          <tr>
+            <th>EQUIPO</th>
+            <th>1C</th>
+            <th>2C</th>
+            <th>3C</th>
+            <th>4C</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th>{homeTeam?.shortName || selectedMatch.homeTeam}</th>
+
+{quarterScores.map((quarter, index) => (
+  <td key={index}>{quarter.home}</td>
+))}
+
+            <td className="league-match-quarters-total">
+              {homeScore}
+            </td>
+          </tr>
+
+          <tr>
+            <th>{awayTeam?.shortName || selectedMatch.awayTeam}</th>
+
+{quarterScores.map((quarter, index) => (
+  <td key={index}>{quarter.away}</td>
+))}
+
+            <td className="league-match-quarters-total">
+              {awayScore}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
               {/* =========================
                   ESTADÍSTICAS INDIVIDUALES
               ========================= */}
@@ -1347,7 +1489,136 @@ function Liga() {
           </div>
         );
       })()}
+{/* POPUP DEL JUGADOR */}
 
+{selectedPlayer && (
+  <div
+    className="home-modal-overlay"
+    style={{ zIndex: 9999 }}
+    onClick={() => setSelectedPlayer(null)}
+  >
+    <div
+      className="home-player-modal"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <div className="home-player-modal-header">
+        {selectedPlayer.team && (
+          <div className="home-player-modal-logo">
+            <img
+              src={selectedPlayer.team.logo}
+              alt={selectedPlayer.team.name}
+            />
+          </div>
+        )}
+
+        <div className="home-player-modal-info">
+          <span>{selectedPlayer.position}</span>
+          <h2>{selectedPlayer.name}</h2>
+          <p>{selectedPlayer.team?.name || "Equipo no disponible"}</p>
+          <small>{selectedPlayer.nationality}</small>
+        </div>
+
+        <button
+          type="button"
+          className="home-modal-close"
+          onClick={() => setSelectedPlayer(null)}
+          aria-label="Cerrar"
+        >
+          ×
+        </button>
+      </div>
+
+      <div className="home-player-modal-details">
+        <div>
+          <span>POSICIÓN</span>
+          <strong>{selectedPlayer.position || "—"}</strong>
+        </div>
+        <div>
+          <span>NACIONALIDAD</span>
+          <strong>{selectedPlayer.nationality || "—"}</strong>
+        </div>
+        <div>
+          <span>NÚMERO</span>
+          <strong>{selectedPlayer.number ?? "—"}</strong>
+        </div>
+      </div>
+
+      <div className="home-player-modal-season">
+        <span className="home-player-modal-label">
+          ESTADÍSTICAS DE LA TEMPORADA
+        </span>
+
+        <div className="home-player-modal-stats">
+          {[
+            ["PJ", selectedPlayer.stats?.gamesPlayed ?? 0],
+            ["PTS", selectedPlayer.stats?.points],
+            ["REB", selectedPlayer.stats?.rebounds],
+            ["AST", selectedPlayer.stats?.assists],
+          ].map(([label, value]) => (
+            <div key={label}>
+              <strong>
+                {value == null
+                  ? "—"
+                  : label === "PJ"
+                    ? value
+                    : Number(value).toFixed(1)}
+              </strong>
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="home-player-modal-recent-section">
+        <span className="home-player-modal-label">
+          ÚLTIMOS 2 PARTIDOS
+        </span>
+
+        {getPlayerLastMatches(selectedPlayer).length > 0 ? (
+          <div className="home-player-modal-recent-list">
+            {getPlayerLastMatches(selectedPlayer).map((match) => (
+              <div
+                className="home-player-modal-recent-match"
+                key={match.id}
+              >
+                <div className="home-player-modal-recent-header">
+                  <strong>vs. {match.rival}</strong>
+                  <span>
+                    {match.date.split("-").reverse().join("/")}
+                  </span>
+                </div>
+
+                <div className="home-player-modal-recent-stats">
+                  <div>
+                    <strong>{match.points}</strong>
+                    <span>PTS</span>
+                  </div>
+                  <div>
+                    <strong>{match.rebounds}</strong>
+                    <span>REB</span>
+                  </div>
+                  <div>
+                    <strong>{match.assists}</strong>
+                    <span>AST</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="home-player-modal-recent-empty">
+            Todavía no hay estadísticas de partidos disponibles.
+          </p>
+        )}
+      </div>
+
+      <div className="home-player-modal-footer">
+        <span>LIGA NACIONAL 2026/27</span>
+        <strong>{selectedPlayer.team?.shortName || ""}</strong>
+      </div>
+    </div>
+  </div>
+)}
     </main>
   );
 }

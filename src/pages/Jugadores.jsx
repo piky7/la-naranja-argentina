@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { players } from "../data/players";
 import { teams } from "../data/teams";
 import { playerStats } from "../data/stats";
+import { matches } from "../data/matches";
+import { matchPlayerStats } from "../data/matchStats";
 
 import "./Jugadores.css";
 
@@ -95,7 +97,55 @@ function Jugadores() {
 
   const selectedGamesPlayed =
     selectedPlayerStats?.gamesPlayed ?? 0;
+const selectedPlayerLastMatches = selectedPlayer
+  ? matches
+      .filter((match) => {
+        if (match.status !== "finished") return false;
 
+        const teamId = selectedPlayer.teamId;
+
+        if (
+          match.homeTeam !== teamId &&
+          match.awayTeam !== teamId
+        ) {
+          return false;
+        }
+
+        const matchKey = `${match.homeTeam}-${match.awayTeam}`;
+        const teamStats = matchPlayerStats[matchKey]?.[teamId];
+
+        return (
+          Array.isArray(teamStats) &&
+          teamStats.some(
+            (player) => player.id === selectedPlayer.id
+          )
+        );
+      })
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .slice(0, 2)
+      .map((match) => {
+        const teamId = selectedPlayer.teamId;
+        const matchKey = `${match.homeTeam}-${match.awayTeam}`;
+
+        const stats = matchPlayerStats[matchKey][teamId].find(
+          (player) => player.id === selectedPlayer.id
+        );
+
+        const rivalId =
+          match.homeTeam === teamId
+            ? match.awayTeam
+            : match.homeTeam;
+
+        return {
+          id: match.id,
+          date: match.date,
+          rival: getTeam(rivalId)?.shortName || rivalId,
+          points: stats.points,
+          rebounds: stats.rebounds,
+          assists: stats.assists,
+        };
+      })
+  : [];
   return (
     <main className="players-page">
 
@@ -575,7 +625,55 @@ function Jugadores() {
 
             </div>
 
+{/* =========================
+    ÚLTIMOS 2 PARTIDOS
+========================= */}
 
+<div className="player-modal-recent-section">
+  <span className="player-modal-section-label">
+    ÚLTIMOS 2 PARTIDOS
+  </span>
+
+  {selectedPlayerLastMatches.length > 0 ? (
+    <div className="player-modal-recent-list">
+      {selectedPlayerLastMatches.map((match) => (
+        <div
+          className="player-modal-recent-match"
+          key={match.id}
+        >
+          <div className="player-modal-recent-header">
+            <strong>vs. {match.rival}</strong>
+
+            <span>
+              {match.date.split("-").reverse().join("/")}
+            </span>
+          </div>
+
+          <div className="player-modal-recent-stats">
+            <div>
+              <strong>{match.points}</strong>
+              <span>PTS</span>
+            </div>
+
+            <div>
+              <strong>{match.rebounds}</strong>
+              <span>REB</span>
+            </div>
+
+            <div>
+              <strong>{match.assists}</strong>
+              <span>AST</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="player-modal-recent-empty">
+      Todavía no hay estadísticas de partidos disponibles.
+    </p>
+  )}
+</div>
             {/* =========================
                 FOOTER
             ========================= */}

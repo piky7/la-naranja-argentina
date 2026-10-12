@@ -5022,3 +5022,274 @@
     font-size: 9px;
   }
 }
+
+/* =====================================
+   LNA - POPUP JUGADOR COMPACTO MOBILE
+   ===================================== */
+
+@media (max-width: 600px) {
+
+  .home-player-modal {
+    width: 100%;
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    border-radius: 14px;
+  }
+
+  .home-player-modal-header {
+    min-height: 100px;
+    grid-template-columns: 52px minmax(0, 1fr) 32px;
+    gap: 10px;
+    padding: 16px 12px;
+  }
+
+  .home-player-modal-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .home-player-modal-info {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .home-player-modal-info h2 {
+    font-size: 17px;
+    line-height: 1.2;
+  }
+
+  .home-player-modal-info p {
+    font-size: 11px;
+  }
+
+  .home-player-modal-details {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .home-player-modal-details > div {
+    min-width: 0;
+    min-height: 66px;
+    padding: 8px 4px;
+  }
+
+  .home-player-modal-details span {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+
+  .home-player-modal-details strong {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .home-player-modal-season {
+    padding: 12px 10px 16px;
+  }
+
+  .home-player-modal-label {
+    text-align: left;
+    font-size: 10px;
+  }
+
+  .home-player-modal-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .home-player-modal-stats > div {
+    min-width: 0;
+    min-height: 76px;
+    padding: 12px 4px;
+    border-bottom: 0 !important;
+    border-right: 1px solid #444 !important;
+  }
+
+  .home-player-modal-stats > div:last-child {
+    border-right: 0 !important;
+  }
+
+  .home-player-modal-stats strong {
+    font-size: 21px;
+  }
+
+  .home-player-modal-stats span {
+    font-size: 9px;
+  }
+
+  .home-player-modal-footer {
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 8px;
+  }
+}
+
+/* =====================================
+   HOME - ÚLTIMOS 2 PARTIDOS DEL JUGADOR
+===================================== */
+
+.home-player-modal-recent-section {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.home-player-modal-recent-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.home-player-modal-recent-match {
+  min-width: 0;
+  padding: 12px;
+  background: #171b23;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+}
+
+.home-player-modal-recent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.home-player-modal-recent-header strong {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.home-player-modal-recent-header span {
+  color: #9299a6;
+  font-size: 10px;
+}
+
+.home-player-modal-recent-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  text-align: center;
+}
+
+.home-player-modal-recent-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-player-modal-recent-stats strong {
+  color: #ff8500;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.home-player-modal-recent-stats span {
+  color: #a5acb8;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.home-player-modal-recent-empty {
+  margin: 12px 0 0;
+  color: #a5acb8;
+  font-size: 12px;
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+  .home-player-modal-recent-section {
+    padding: 12px;
+  }
+
+  .home-player-modal-recent-list {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .home-player-modal-recent-match {
+    padding: 9px 6px;
+  }
+
+  .home-player-modal-recent-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    margin-bottom: 10px;
+  }
+
+  .home-player-modal-recent-stats strong {
+    font-size: 17px;
+  }
+
+  .home-player-modal-recent-stats span {
+    font-size: 9px;
+  }
+}
+
+/* =========================================
+   LNA - ENCABEZADO PARTIDO FINALIZADO
+   ========================================= */
+
+@media (max-width: 600px) {
+
+ .match-modal-finished .match-modal-header {
+  min-height: 0;
+  padding: 8px 16px 10px;
+  gap: 8px;
+}
+
+  .match-modal-finished .match-modal-team img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+  }
+
+  .match-modal-finished .match-modal-team strong {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .match-modal-finished .match-modal-score strong {
+    font-size: 30px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .match-modal-finished .match-modal-score span {
+    font-size: 10px;
+  }
+}
+
+/* =====================================
+   LNA - ESTADÍSTICAS DE PARTIDO EN MÓVIL
+===================================== */
+
+@media (max-width: 600px) {
+  .match-modal-finished .match-stats-head {
+    font-size: 10px;
+  }
+
+  .match-modal-finished .match-stat-player {
+    min-height: 39px;
+  }
+
+  .match-modal-finished .match-stat-player strong {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .match-modal-finished .match-stat-player span {
+    font-size: 11px;
+  }
+
+  .match-modal-finished .match-stats-team-header h3 {
+    font-size: 13px;
+  }
+}

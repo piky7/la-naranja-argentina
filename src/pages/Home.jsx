@@ -183,7 +183,55 @@ const [liveDate, setLiveDate] = useState(null);
       (stats) => stats.playerId === playerId
     );
   };
+const getPlayerLastMatches = (player) => {
+  if (!player) return [];
 
+  return matches
+    .filter((match) => {
+      if (!isMatchFinished(match)) return false;
+
+      const teamId = player.teamId;
+
+      if (
+        match.homeTeam !== teamId &&
+        match.awayTeam !== teamId
+      ) {
+        return false;
+      }
+
+      const matchStats = getMatchStats(match);
+      const teamStats = matchStats?.[teamId];
+
+      return (
+        Array.isArray(teamStats) &&
+        teamStats.some(
+          (item) => item.id === player.id
+        )
+      );
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 2)
+    .map((match) => {
+      const teamId = player.teamId;
+      const stats = getMatchStats(match)[teamId].find(
+        (item) => item.id === player.id
+      );
+
+      const rivalId =
+        match.homeTeam === teamId
+          ? match.awayTeam
+          : match.homeTeam;
+
+      return {
+        id: match.id,
+        date: match.date,
+        rival: getTeam(rivalId)?.shortName || rivalId,
+        points: stats.points,
+        rebounds: stats.rebounds,
+        assists: stats.assists,
+      };
+    });
+};
   const getMatchPlayerInfo = (matchPlayer) => {
     if (!matchPlayer) {
       return null;
@@ -1592,7 +1640,9 @@ const finishedMatch = {
 
         <tbody>
           <tr>
-            <th>{selectedMatch.homeTeam}</th>
+            <th>
+  {selectedMatchHomeTeam?.shortName || selectedMatch.homeTeam}
+</th>
 
             {selectedMatchStats.quarterScores.map((quarter) => (
               <td key={quarter.period}>{quarter.home}</td>
@@ -1604,7 +1654,9 @@ const finishedMatch = {
           </tr>
 
           <tr>
-            <th>{selectedMatch.awayTeam}</th>
+           <th>
+  {selectedMatchAwayTeam?.shortName || selectedMatch.awayTeam}
+</th>
 
             {selectedMatchStats.quarterScores.map((quarter) => (
               <td key={quarter.period}>{quarter.away}</td>
@@ -2498,7 +2550,52 @@ const finishedMatch = {
                 </div>
               </div>
             </div>
+{/* ÚLTIMOS 2 PARTIDOS */}
 
+<div className="home-player-modal-recent-section">
+  <span className="home-player-modal-label">
+    ÚLTIMOS 2 PARTIDOS
+  </span>
+
+  {getPlayerLastMatches(selectedPlayer).length > 0 ? (
+    <div className="home-player-modal-recent-list">
+      {getPlayerLastMatches(selectedPlayer).map((match) => (
+        <div
+          className="home-player-modal-recent-match"
+          key={match.id}
+        >
+          <div className="home-player-modal-recent-header">
+            <strong>vs. {match.rival}</strong>
+            <span>
+              {match.date.split("-").reverse().join("/")}
+            </span>
+          </div>
+
+          <div className="home-player-modal-recent-stats">
+            <div>
+              <strong>{match.points}</strong>
+              <span>PTS</span>
+            </div>
+
+            <div>
+              <strong>{match.rebounds}</strong>
+              <span>REB</span>
+            </div>
+
+            <div>
+              <strong>{match.assists}</strong>
+              <span>AST</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <p className="home-player-modal-recent-empty">
+      Todavía no hay estadísticas de partidos disponibles.
+    </p>
+  )}
+</div>
             <div className="home-player-modal-footer">
               <span>
                 LIGA NACIONAL 2026/27

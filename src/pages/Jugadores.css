@@ -887,3 +887,240 @@
     border-bottom: 1px solid #444444 !important;
   }
 }
+
+/* ==========================================
+   LNA - POPUP JUGADOR REDISEÑO MOBILE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+  .player-modal-overlay {
+    padding: 12px;
+  }
+
+  .player-modal {
+    width: 100%;
+    max-height: calc(100dvh - 24px);
+    border-radius: 14px;
+  }
+
+  /* Encabezado compacto */
+
+  .player-modal-header {
+    min-height: 0;
+    padding: 22px 14px 18px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .player-modal-logo {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .player-modal-player-info {
+    align-items: flex-start;
+    text-align: left;
+    padding-right: 30px;
+  }
+
+  .player-modal-player-info h2 {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .player-modal-player-info p {
+    font-size: 12px;
+  }
+
+  .player-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Datos personales en tres columnas */
+
+  .player-modal-details {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 12px;
+  }
+
+  .player-modal-details > div {
+    min-height: 68px;
+    padding: 8px 4px;
+  }
+
+  .player-modal-details span {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+
+  .player-modal-details strong {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  /* Estadísticas en una sola fila */
+
+  .player-modal-stats-section {
+    padding: 16px 12px 20px;
+  }
+
+  .player-modal-section-label {
+    text-align: left;
+    font-size: 10px;
+  }
+
+  .player-modal-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .player-stat {
+    min-height: 76px;
+    padding: 12px 4px;
+    border-bottom: none !important;
+    border-right: 1px solid #444 !important;
+  }
+
+  .player-stat:nth-child(2) {
+    border-right: 1px solid #444 !important;
+  }
+
+  .player-stat:last-child {
+    border-right: none !important;
+  }
+
+  .player-stat strong {
+    font-size: 21px;
+  }
+
+  .player-stat span {
+    font-size: 9px;
+  }
+
+  /* Pie del popup */
+
+  .player-modal-footer {
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 8px;
+  }
+}
+
+/* =====================================
+   POPUP - ÚLTIMOS 2 PARTIDOS
+===================================== */
+
+.player-modal-recent-section {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.player-modal-recent-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.player-modal-recent-match {
+  min-width: 0;
+  padding: 12px;
+  background: #171b23;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+}
+
+.player-modal-recent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.player-modal-recent-header strong {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.player-modal-recent-header span {
+  color: #9299a6;
+  font-size: 10px;
+}
+
+.player-modal-recent-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  text-align: center;
+}
+
+.player-modal-recent-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.player-modal-recent-stats strong {
+  color: #ff8500;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.player-modal-recent-stats span {
+  color: #a5acb8;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.player-modal-recent-empty {
+  margin: 12px 0 0;
+  color: #a5acb8;
+  font-size: 12px;
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+  .player-modal-recent-section {
+    padding: 12px;
+  }
+
+  .player-modal-recent-list {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .player-modal-recent-match {
+    padding: 9px 6px;
+  }
+
+  .player-modal-recent-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    margin-bottom: 10px;
+  }
+
+  .player-modal-recent-stats strong {
+    font-size: 17px;
+  }
+
+  .player-modal-recent-stats span {
+    font-size: 9px;
+  }
+}
