@@ -464,11 +464,56 @@ if (playerId === "REVISAR_IDENTIDAD") {
     );
   }
 }
+
 if (!playerId) {
   const provisionalId = createProvisionalPlayerId(
     player.name,
     teamId
   );
+
+  if (!provisionalId) {
+    unmapped.push({
+      name: player.name,
+      teamCode: player.teamCode,
+      teamId,
+    });
+
+    return;
+  }
+
+  normalized.push({
+    id: provisionalId,
+    name: player.name,
+    teamId,
+    points: Number(player.points) || 0,
+    rebounds: Number(player.rebounds) || 0,
+    assists: Number(player.assists) || 0,
+    minutes: player.minutes || null,
+  });
+
+  console.log(
+    `Jugador provisional incorporado: ${player.name} (${teamId})`
+  );
+
+  return;
+}
+
+const officialPlayer = lnaPlayers.find(
+  (item) =>
+    item.id === playerId &&
+    item.teamId === teamId
+);
+
+normalized.push({
+  id: playerId,
+  name: officialPlayer?.name || player.name,
+  teamId,
+  points: Number(player.points) || 0,
+  rebounds: Number(player.rebounds) || 0,
+  assists: Number(player.assists) || 0,
+  minutes: player.minutes || null,
+});
+
 
   if (!provisionalId) {
     unmapped.push({
