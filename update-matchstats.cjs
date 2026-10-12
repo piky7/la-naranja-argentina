@@ -121,78 +121,78 @@ function validateSyntax(source) {
 }
 function preserveExistingPlayerIds(existingBlock, generatedBlock) {
   const existingIds = new Map();
-const usedIds = new Set();
-  const officialIdRegex =
-  /"id"\s*:\s*"([^"]+)"\s*,\s*"name"\s*:\s*"([^"]+)"/g;
+  const usedIds = new Set();
 
-for (const match of generatedBlock.matchAll(officialIdRegex)) {
-  const id = match[1];
-
-  if (!id.startsWith("flashscore-")) {
-    if (usedIds.has(id)) {
-      throw new Error(
-        `ID oficial duplicado en las estadísticas generadas: ${id}`
-      );
-    }
-
-    usedIds.add(id);
-  }
-}
   const playerRegex =
     /"id"\s*:\s*"([^"]+)"\s*,\s*"name"\s*:\s*"([^"]+)"/g;
 
+  function normalizeName(name) {
+    return name
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]/g, "");
+  }
+
+  // Recuperar las identidades históricas.
   for (const match of existingBlock.matchAll(playerRegex)) {
     const [, id, name] = match;
 
     if (!id.startsWith("flashscore-")) {
-      const key = name
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9]/g, "");
+      const key = normalizeName(name);
 
-      if (!existingIds.has(key)) {
-        existingIds.set(key, id);
+      if (existingIds.has(key) && existingIds.get(key) !== id) {
+        throw new Error(
+          `Identidad histórica ambigua: ${name}`
+        );
       }
+
+      existingIds.set(key, id);
     }
   }
 
+  // Reservar todos los IDs oficiales generados.
+  for (const match of generatedBlock.matchAll(playerRegex)) {
+    const id = match[1];
+
+    if (!id.startsWith("flashscore-")) {
+      if (usedIds.has(id)) {
+        throw new Error(
+          `ID oficial duplicado: ${id}`
+        );
+      }
+
+      usedIds.add(id);
+    }
+  }
+
+  // Recuperar IDs históricos solo cuando corresponde.
   return generatedBlock.replace(
     playerRegex,
     (fullMatch, id, name) => {
-      const key = name
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9]/g, "");
+      if (!id.startsWith("flashscore-")) {
+        return fullMatch;
+      }
 
+      const key = normalizeName(name);
       const existingId = existingIds.get(key);
 
-   if (!id.startsWith("flashscore-")) {
-  return fullMatch;
-}
+      if (!existingId) {
+        return fullMatch;
+      }
 
-  usedIds.add(id);
-  return fullMatch;
-}
+      if (usedIds.has(existingId)) {
+        throw new Error(
+          `Conflicto de identidad: ${existingId}`
+        );
+      }
 
-if (!existingId) {
-  return fullMatch;
-}
+      usedIds.add(existingId);
 
-if (usedIds.has(existingId)) {
-  throw new Error(
-    `ID histórico duplicado: ${existingId}. ` +
-    "Se cancela la actualización para proteger las estadísticas."
-  );
-}
-
-usedIds.add(existingId);
-
-return fullMatch.replace(
-  `"${id}"`,
-  `"${existingId}"`
-);
+      return fullMatch.replace(
+        `"${id}"`,
+        `"${existingId}"`
+      );
     }
   );
 }
