@@ -5446,3 +5446,77 @@
     font-size: 30px;
   }
 }
+/* =====================================
+   LNA - COMPARATIVA PRÓXIMO PARTIDO
+===================================== */
+
+.match-modal-upcoming .upcoming-team-comparison {
+  margin: 0 0 20px;
+  padding: 16px;
+  background: #1b2028;
+  border: 1px solid rgba(255, 136, 0, 0.65);
+  border-radius: 12px;
+}
+
+.match-modal-upcoming .upcoming-comparison-label {
+  display: block;
+  margin-bottom: 16px;
+  color: #ff9000;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+.match-modal-upcoming .upcoming-comparison-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 75px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.match-modal-upcoming .upcoming-comparison-row:last-child {
+  border-bottom: none;
+}
+
+.match-modal-upcoming .upcoming-comparison-row strong {
+  color: #ff9000;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.match-modal-upcoming .upcoming-comparison-row:first-of-type strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.match-modal-upcoming .upcoming-comparison-row span {
+  color: #aab0b9;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .upcoming-team-comparison {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .match-modal-upcoming .upcoming-comparison-row {
+    grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1fr);
+    gap: 5px;
+    padding: 10px 0;
+  }
+
+  .match-modal-upcoming .upcoming-comparison-row strong {
+    font-size: 18px;
+  }
+
+  .match-modal-upcoming .upcoming-comparison-row:first-of-type strong {
+    font-size: 12px;
+  }
+}
