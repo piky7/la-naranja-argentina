@@ -37,13 +37,25 @@ Object.values(matchPlayerStats).forEach((match) => {
       totalsByPlayer[playerId].assists +=
         Number(player.assists) || 0;
 
-      if (player.minutes) {
-        const [minutes, seconds] =
-          player.minutes.split(":").map(Number);
+      if (typeof player.minutes === "string") {
+  const parts = player.minutes.split(":");
 
-        totalsByPlayer[playerId].minutes +=
-          (minutes * 60) + seconds;
-      }
+  if (parts.length === 2) {
+    const minutes = Number(parts[0]);
+    const seconds = Number(parts[1]);
+
+    if (
+      Number.isInteger(minutes) &&
+      Number.isInteger(seconds) &&
+      minutes >= 0 &&
+      seconds >= 0 &&
+      seconds < 60
+    ) {
+      totalsByPlayer[playerId].minutes +=
+        minutes * 60 + seconds;
+    }
+  }
+}
     });
   });
 });
