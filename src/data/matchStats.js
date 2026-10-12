@@ -3,7 +3,7 @@ export const matchPlayerStats = {
   "lanus": [
     {
       "id": "martin-franchino",
-      "name": "Franchino M.",
+      "name": "Martín Franchino",
       "points": 23,
       "rebounds": 10,
       "assists": 1,
@@ -11,7 +11,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "christian-james",
-      "name": "James C.",
+      "name": "Christian James",
       "points": 17,
       "rebounds": 3,
       "assists": 2,
@@ -19,7 +19,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-andujar",
-      "name": "Andujar L.",
+      "name": "Lucas Andújar",
       "points": 6,
       "rebounds": 2,
       "assists": 7,
@@ -27,7 +27,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "melvin-johnson",
-      "name": "Johnson M.",
+      "name": "Melvin Johnson",
       "points": 10,
       "rebounds": 1,
       "assists": 1,
@@ -35,7 +35,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "fabian-ramirez-barrios",
-      "name": "Ramírez C.",
+      "name": "Fabián Ramírez Barrios",
       "points": 0,
       "rebounds": 5,
       "assists": 2,
@@ -43,7 +43,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "robert-whitfield",
-      "name": "Whitfield R.",
+      "name": "Robert Whitfield",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -51,7 +51,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "junior-merchant",
-      "name": "Merchant E.",
+      "name": "Junior Merchant",
       "points": 11,
       "rebounds": 4,
       "assists": 0,
@@ -59,7 +59,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "alejo-sacchi",
-      "name": "Sacchi A.",
+      "name": "Alejo Sacchi",
       "points": 7,
       "rebounds": 1,
       "assists": 1,
@@ -67,7 +67,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "joaquin-celiz",
-      "name": "Celiz J.",
+      "name": "Joaquín Celiz",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -77,7 +77,7 @@ export const matchPlayerStats = {
   "gimnasia": [
     {
       "id": "obi-okafor",
-      "name": "Okafor O.",
+      "name": "Obi Okafor",
       "points": 7,
       "rebounds": 4,
       "assists": 2,
@@ -85,7 +85,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-inyaco",
-      "name": "Inyaco F.",
+      "name": "Felipe Inyaco",
       "points": 3,
       "rebounds": 2,
       "assists": 1,
@@ -93,7 +93,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martiniano-dato",
-      "name": "Dato M.",
+      "name": "Martiniano Dato",
       "points": 8,
       "rebounds": 0,
       "assists": 3,
@@ -101,7 +101,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emiliano-toretta",
-      "name": "Toretta E.",
+      "name": "Emiliano Toretta",
       "points": 8,
       "rebounds": 1,
       "assists": 10,
@@ -109,7 +109,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "carlos-rivero",
-      "name": "Rivero C.",
+      "name": "Carlos Rivero",
       "points": 13,
       "rebounds": 5,
       "assists": 2,
@@ -117,7 +117,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "natalio-santacroce",
-      "name": "Santacroce N.",
+      "name": "Natalio Santacroce",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -125,7 +125,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-chacon",
-      "name": "Chacon M.",
+      "name": "Marcos Chacón",
       "points": 28,
       "rebounds": 4,
       "assists": 5,
@@ -133,7 +133,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-carrasco",
-      "name": "Carrasco S.",
+      "name": "Sebastián Carrasco",
       "points": 0,
       "rebounds": 1,
       "assists": 1,
@@ -141,7 +141,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-forestier",
-      "name": "Forestier V.",
+      "name": "Valentín Forestier",
       "points": 2,
       "rebounds": 1,
       "assists": 2,
@@ -149,7 +149,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ciro-melo",
-      "name": "Melo C.",
+      "name": "Ciro Melo",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -157,7 +157,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ben-stevens",
-      "name": "Stevens B.",
+      "name": "Ben Stevens",
       "points": 8,
       "rebounds": 8,
       "assists": 0,
@@ -165,7 +165,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gino-balbo",
-      "name": "Balbo G.",
+      "name": "Gino Balbo",
       "points": 15,
       "rebounds": 3,
       "assists": 0,
@@ -199,7 +199,7 @@ export const matchPlayerStats = {
   "penarol": [
     {
       "id": "ivan-basualdo",
-      "name": "Basualdo I.",
+      "name": "Iván Basualdo",
       "points": 6,
       "rebounds": 6,
       "assists": 0,
@@ -207,7 +207,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "andres-jaime",
-      "name": "Jaime A.",
+      "name": "Andrés Jaime",
       "points": 12,
       "rebounds": 8,
       "assists": 2,
@@ -215,7 +215,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-vega",
-      "name": "Vega S.",
+      "name": "Sebastián Vega",
       "points": 5,
       "rebounds": 4,
       "assists": 1,
@@ -223,15 +223,15 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-perez-tapia",
-      "name": "Pérez A.",
+      "name": "Agustín Pérez Tapia",
       "points": 16,
       "rebounds": 4,
       "assists": 1,
       "minutes": "26:39"
     },
     {
-    "id": "franco-giorgetti",
-"name": "Franco Giorgetti",
+      "id": "franco-giorgetti",
+      "name": "Franco Giorgetti",
       "points": 2,
       "rebounds": 3,
       "assists": 1,
@@ -239,7 +239,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "al-thornton",
-      "name": "Thornton A.",
+      "name": "Al Thornton",
       "points": 6,
       "rebounds": 5,
       "assists": 2,
@@ -247,7 +247,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "luciano-guerra",
-      "name": "Guerra L.",
+      "name": "Luciano Guerra",
       "points": 7,
       "rebounds": 4,
       "assists": 2,
@@ -255,7 +255,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ignacio-bednarek",
-      "name": "Bednarek I.",
+      "name": "Ignacio Bednarek",
       "points": 4,
       "rebounds": 5,
       "assists": 0,
@@ -263,7 +263,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "selem-safar",
-      "name": "Safar S.",
+      "name": "Selem Safar",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -271,7 +271,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gonzalo-aman",
-      "name": "Aman G.",
+      "name": "Gonzalo Aman",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -279,7 +279,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-chiaraviglio",
-      "name": "Chiaraviglio N.",
+      "name": "Nicolás Chiaraviglio",
       "points": 4,
       "rebounds": 2,
       "assists": 0,
@@ -289,7 +289,7 @@ export const matchPlayerStats = {
   "gimnasia": [
     {
       "id": "obi-okafor",
-      "name": "Okafor O.",
+      "name": "Obi Okafor",
       "points": 2,
       "rebounds": 4,
       "assists": 0,
@@ -297,7 +297,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-inyaco",
-      "name": "Inyaco F.",
+      "name": "Felipe Inyaco",
       "points": 6,
       "rebounds": 4,
       "assists": 1,
@@ -305,7 +305,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martiniano-dato",
-      "name": "Dato M.",
+      "name": "Martiniano Dato",
       "points": 15,
       "rebounds": 4,
       "assists": 4,
@@ -313,7 +313,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emiliano-toretta",
-      "name": "Toretta E.",
+      "name": "Emiliano Toretta",
       "points": 5,
       "rebounds": 2,
       "assists": 2,
@@ -321,7 +321,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "carlos-rivero",
-      "name": "Rivero C.",
+      "name": "Carlos Rivero",
       "points": 8,
       "rebounds": 6,
       "assists": 1,
@@ -329,7 +329,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-chacon",
-      "name": "Chacon M.",
+      "name": "Marcos Chacón",
       "points": 6,
       "rebounds": 5,
       "assists": 3,
@@ -337,7 +337,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-carrasco",
-      "name": "Carrasco S.",
+      "name": "Sebastián Carrasco",
       "points": 9,
       "rebounds": 3,
       "assists": 2,
@@ -345,7 +345,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-forestier",
-      "name": "Forestier V.",
+      "name": "Valentín Forestier",
       "points": 2,
       "rebounds": 4,
       "assists": 0,
@@ -353,7 +353,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ben-stevens",
-      "name": "Stevens B.",
+      "name": "Ben Stevens",
       "points": 4,
       "rebounds": 6,
       "assists": 0,
@@ -361,7 +361,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gino-balbo",
-      "name": "Balbo G.",
+      "name": "Gino Balbo",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -395,7 +395,7 @@ export const matchPlayerStats = {
   "argentino": [
     {
       "id": "dylan-smith",
-      "name": "Smith D.",
+      "name": "Dylan Smith",
       "points": 11,
       "rebounds": 4,
       "assists": 2,
@@ -403,7 +403,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "zyon-patterson",
-      "name": "Patterson Z.",
+      "name": "Zyon Patterson",
       "points": 5,
       "rebounds": 3,
       "assists": 0,
@@ -411,7 +411,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "leandro-cerminato",
-      "name": "Cerminato L.",
+      "name": "Leandro Cerminato",
       "points": 9,
       "rebounds": 4,
       "assists": 0,
@@ -419,7 +419,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "romulo-gusmao",
-      "name": "Romulo Gusmao",
+      "name": "Rómulo Gusmao",
       "points": 4,
       "rebounds": 4,
       "assists": 1,
@@ -427,7 +427,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jeremias-sandrini",
-      "name": "Sandrini J.",
+      "name": "Jeremías Sandrini",
       "points": 9,
       "rebounds": 3,
       "assists": 1,
@@ -435,7 +435,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martino-caporaletti",
-      "name": "Caporaletti M.",
+      "name": "Martino Caporaletti",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -443,7 +443,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "piero-di-prinzio",
-      "name": "Di Prinzio P.",
+      "name": "Piero Di Prinzio",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -451,7 +451,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-perez-douthat",
-      "name": "Pérez S.",
+      "name": "Santiago Pérez Douthat",
       "points": 12,
       "rebounds": 4,
       "assists": 1,
@@ -459,7 +459,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "cristian-cardo",
-      "name": "Cardo C.",
+      "name": "Cristian Cardo",
       "points": 6,
       "rebounds": 5,
       "assists": 1,
@@ -467,7 +467,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-bilbao",
-      "name": "Bilbao S.",
+      "name": "Santiago Bilbao",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -475,7 +475,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "josh-ferguson",
-      "name": "Ferguson J.",
+      "name": "Josh Ferguson",
       "points": 7,
       "rebounds": 10,
       "assists": 0,
@@ -485,7 +485,7 @@ export const matchPlayerStats = {
   "ferro": [
     {
       "id": "emiliano-lezcano",
-      "name": "Lezcano E.",
+      "name": "Emiliano Lezcano",
       "points": 11,
       "rebounds": 0,
       "assists": 3,
@@ -493,7 +493,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jano-martinez",
-      "name": "Martinez J.",
+      "name": "Jano Martínez",
       "points": 2,
       "rebounds": 6,
       "assists": 3,
@@ -501,7 +501,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-zezular",
-      "name": "Zezular F.",
+      "name": "Federico Zezular",
       "points": 7,
       "rebounds": 3,
       "assists": 0,
@@ -509,7 +509,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "kevin-hernandez",
-      "name": "Hernandez K.",
+      "name": "Kevin Hernández",
       "points": 9,
       "rebounds": 5,
       "assists": 1,
@@ -517,7 +517,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-bettiga",
-      "name": "Bettiga L.",
+      "name": "Valentín Bettiga",
       "points": 4,
       "rebounds": 9,
       "assists": 1,
@@ -525,7 +525,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jose-defelippo",
-      "name": "Defelippo J.",
+      "name": "José Defelippo",
       "points": 10,
       "rebounds": 2,
       "assists": 0,
@@ -533,7 +533,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-pinero",
-      "name": "Pinero F.",
+      "name": "Facundo Piñero",
       "points": 12,
       "rebounds": 2,
       "assists": 0,
@@ -541,7 +541,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-rodriguez",
-      "name": "Rodriguez F.",
+      "name": "Felipe Rodríguez",
       "points": 2,
       "rebounds": 4,
       "assists": 1,
@@ -549,7 +549,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "rodrigo-gallegos",
-      "name": "Gallegos R.",
+      "name": "Rodrigo Gallegos",
       "points": 7,
       "rebounds": 4,
       "assists": 0,
@@ -557,7 +557,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "camilo-rodriguez",
-      "name": "Rodriguez C.",
+      "name": "Camilo Rodríguez",
       "points": 2,
       "rebounds": 0,
       "assists": 1,
@@ -565,7 +565,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "alejandro-diez",
-      "name": "Diez A.",
+      "name": "Alejandro Diez",
       "points": 2,
       "rebounds": 1,
       "assists": 0,
@@ -573,7 +573,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "camilo-jara",
-      "name": "Jara C.",
+      "name": "Camilo Jara",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -607,7 +607,7 @@ export const matchPlayerStats = {
   "san-martin": [
     {
       "id": "diego-collomb",
-      "name": "Collomb D.",
+      "name": "Diego Collomb",
       "points": 2,
       "rebounds": 4,
       "assists": 2,
@@ -615,7 +615,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juanse-gorosito",
-      "name": "Gorosito J.",
+      "name": "Juanse Gorosito",
       "points": 9,
       "rebounds": 0,
       "assists": 2,
@@ -623,7 +623,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "salvador-giletto",
-      "name": "Giletto S.",
+      "name": "Salvador Giletto",
       "points": 8,
       "rebounds": 4,
       "assists": 2,
@@ -631,7 +631,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-garcia",
-      "name": "Garcia G.",
+      "name": "Gastón García",
       "points": 11,
       "rebounds": 2,
       "assists": 1,
@@ -639,7 +639,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "daniel-moreira",
-      "name": "Moreira",
+      "name": "Daniel Moreira",
       "points": 6,
       "rebounds": 4,
       "assists": 0,
@@ -647,7 +647,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mateo-rearte",
-      "name": "Rearte M.",
+      "name": "Mateo Rearte",
       "points": 15,
       "rebounds": 4,
       "assists": 3,
@@ -655,7 +655,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "geronimo-ramallo",
-      "name": "Ramallo G.",
+      "name": "Gerónimo Ramallo",
       "points": 2,
       "rebounds": 3,
       "assists": 1,
@@ -671,7 +671,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-lugo",
-      "name": "Lugo S.",
+      "name": "Sebastián Lugo",
       "points": 4,
       "rebounds": 10,
       "assists": 1,
@@ -681,7 +681,7 @@ export const matchPlayerStats = {
   "instituto": [
     {
       "id": "kadir-pomare",
-      "name": "Pomare K.",
+      "name": "Kadir Pomare",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -689,7 +689,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "leandro-vildoza",
-      "name": "Vildoza L.",
+      "name": "Leandro Vildoza",
       "points": 0,
       "rebounds": 0,
       "assists": 4,
@@ -697,7 +697,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-whelan",
-      "name": "Whelan G.",
+      "name": "Gastón Whelan",
       "points": 7,
       "rebounds": 7,
       "assists": 4,
@@ -705,7 +705,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "torren-jones",
-      "name": "Jones T.",
+      "name": "Torren Jones",
       "points": 9,
       "rebounds": 5,
       "assists": 2,
@@ -713,7 +713,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-andersson",
-      "name": "Andersson L.",
+      "name": "Lucas Andersson",
       "points": 10,
       "rebounds": 0,
       "assists": 0,
@@ -721,7 +721,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "bautista-lugarini",
-      "name": "Lugarini B.",
+      "name": "Bautista Lugarini",
       "points": 10,
       "rebounds": 5,
       "assists": 1,
@@ -729,7 +729,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-pablo-corbalan",
-      "name": "Corbalan J.",
+      "name": "Juan Pablo Corbalán",
       "points": 14,
       "rebounds": 5,
       "assists": 3,
@@ -737,7 +737,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-aguerre",
-      "name": "Aguerre F.",
+      "name": "Federico Aguerre",
       "points": 12,
       "rebounds": 6,
       "assists": 1,
@@ -745,7 +745,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "xavier-carreras",
-      "name": "Carreras X.",
+      "name": "Xavier Carreras",
       "points": 19,
       "rebounds": 3,
       "assists": 0,
@@ -779,7 +779,7 @@ export const matchPlayerStats = {
   "olimpico": [
     {
       "id": "austin-wtighten",
-      "name": "Wrighten A.",
+      "name": "Austin Wtighten",
       "points": 8,
       "rebounds": 1,
       "assists": 0,
@@ -787,7 +787,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "andrew-corum",
-      "name": "Corum A.",
+      "name": "Andrew Corum",
       "points": 22,
       "rebounds": 17,
       "assists": 0,
@@ -795,7 +795,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-perez",
-      "name": "Pérez L.",
+      "name": "Lucas Pérez",
       "points": 12,
       "rebounds": 7,
       "assists": 4,
@@ -803,7 +803,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "guido-mariani",
-      "name": "Mariani G.",
+      "name": "Guido Mariani",
       "points": 3,
       "rebounds": 4,
       "assists": 1,
@@ -811,7 +811,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "elisias-hall",
-      "name": "Elisias H.",
+      "name": "Elisias Hall",
       "points": 10,
       "rebounds": 3,
       "assists": 0,
@@ -819,7 +819,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santino-romegialli",
-      "name": "Romegialli S.",
+      "name": "Santino Romegialli",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -827,7 +827,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ezequiel-paz",
-      "name": "Paz E.",
+      "name": "Ezequiel Paz",
       "points": 9,
       "rebounds": 5,
       "assists": 0,
@@ -835,7 +835,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jeremias-frontera",
-      "name": "Frontera J.",
+      "name": "Jeremías Frontera",
       "points": 5,
       "rebounds": 3,
       "assists": 2,
@@ -843,7 +843,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-vergara",
-      "name": "Vergara A.",
+      "name": "Agustín Vergara",
       "points": 0,
       "rebounds": 1,
       "assists": 1,
@@ -851,7 +851,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "joaquin-lopez-lorenz",
-      "name": "Lopez J.",
+      "name": "Joaquín López Lorenz",
       "points": 5,
       "rebounds": 2,
       "assists": 1,
@@ -861,7 +861,7 @@ export const matchPlayerStats = {
   "platense": [
     {
       "id": "mariano-goicoechea",
-      "name": "Goicoechea M.",
+      "name": "Mariano Goicoechea",
       "points": 0,
       "rebounds": 0,
       "assists": 1,
@@ -869,7 +869,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-smaniotti",
-      "name": "Smaniotti F.",
+      "name": "Franco Smaniotti",
       "points": 10,
       "rebounds": 5,
       "assists": 0,
@@ -877,7 +877,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-terra",
-      "name": "Terra F.",
+      "name": "Facundo Terra",
       "points": 12,
       "rebounds": 5,
       "assists": 1,
@@ -885,7 +885,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "erik-copes",
-      "name": "Copes E.",
+      "name": "Erik Copes",
       "points": 12,
       "rebounds": 6,
       "assists": 0,
@@ -893,7 +893,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mauro-cosolito",
-      "name": "Cosolito M.",
+      "name": "Mauro Cosolito",
       "points": 1,
       "rebounds": 3,
       "assists": 0,
@@ -901,7 +901,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-grun",
-      "name": "Grun F.",
+      "name": "Federico Grun",
       "points": 13,
       "rebounds": 4,
       "assists": 3,
@@ -909,7 +909,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ramiro-santiago",
-      "name": "Santiago R.",
+      "name": "Ramiro Santiago",
       "points": 7,
       "rebounds": 1,
       "assists": 1,
@@ -917,7 +917,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "julian-morales",
-      "name": "Morales J.",
+      "name": "Julián Morales",
       "points": 15,
       "rebounds": 5,
       "assists": 1,
@@ -925,7 +925,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-cordoba",
-      "name": "Cordoba G.",
+      "name": "Gastón Córdoba",
       "points": 5,
       "rebounds": 0,
       "assists": 1,
@@ -933,7 +933,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-burgos",
-      "name": "Burgos N.",
+      "name": "Nicolás Burgos",
       "points": 7,
       "rebounds": 7,
       "assists": 0,
@@ -975,7 +975,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-orresta",
-      "name": "Orresta S.",
+      "name": "Sebastián Orresta",
       "points": 7,
       "rebounds": 4,
       "assists": 1,
@@ -983,7 +983,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jose-montero",
-      "name": "Montero J.",
+      "name": "José Montero",
       "points": 5,
       "rebounds": 1,
       "assists": 3,
@@ -991,7 +991,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "fausto-ruesga",
-      "name": "Ruesga F.",
+      "name": "Fausto Ruesga",
       "points": 16,
       "rebounds": 15,
       "assists": 1,
@@ -999,7 +999,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "roberto-acuna",
-      "name": "Acuna R.",
+      "name": "Roberto Acuña",
       "points": 16,
       "rebounds": 6,
       "assists": 2,
@@ -1007,7 +1007,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "keith-stone",
-      "name": "Stone K.",
+      "name": "Keith Stone",
       "points": 2,
       "rebounds": 1,
       "assists": 1,
@@ -1015,7 +1015,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "francisco-farabello",
-      "name": "Farabello F.",
+      "name": "Francisco Farabello",
       "points": 13,
       "rebounds": 3,
       "assists": 2,
@@ -1023,7 +1023,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "exequiel-lezcano",
-      "name": "Lezcano E.",
+      "name": "Exequiel Lezcano",
       "points": 3,
       "rebounds": 0,
       "assists": 0,
@@ -1031,7 +1031,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "elian-centeno",
-      "name": "Centeno E.",
+      "name": "Elian Centeno",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -1039,7 +1039,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "francisco-ferraro",
-      "name": "Ferraro F.",
+      "name": "Francisco Ferraro",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -1057,7 +1057,7 @@ export const matchPlayerStats = {
   "instituto": [
     {
       "id": "gaston-whelan",
-      "name": "Whelan G.",
+      "name": "Gastón Whelan",
       "points": 10,
       "rebounds": 6,
       "assists": 3,
@@ -1065,7 +1065,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "torren-jones",
-      "name": "Jones T.",
+      "name": "Torren Jones",
       "points": 17,
       "rebounds": 9,
       "assists": 0,
@@ -1073,7 +1073,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "bautista-lugarini",
-      "name": "Lugarini B.",
+      "name": "Bautista Lugarini",
       "points": 10,
       "rebounds": 6,
       "assists": 2,
@@ -1081,7 +1081,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-pablo-corbalan",
-      "name": "Corbalan J.",
+      "name": "Juan Pablo Corbalán",
       "points": 11,
       "rebounds": 3,
       "assists": 4,
@@ -1089,7 +1089,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "xavier-carreras",
-      "name": "Carreras X.",
+      "name": "Xavier Carreras",
       "points": 4,
       "rebounds": 3,
       "assists": 1,
@@ -1097,7 +1097,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "kadir-pomare",
-      "name": "Pomare K.",
+      "name": "Kadir Pomare",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -1105,7 +1105,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "leandro-vildoza",
-      "name": "Vildoza L.",
+      "name": "Leandro Vildoza",
       "points": 2,
       "rebounds": 1,
       "assists": 1,
@@ -1113,7 +1113,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-andersson",
-      "name": "Andersson L.",
+      "name": "Lucas Andersson",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -1121,7 +1121,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-aguerre",
-      "name": "Aguerre F.",
+      "name": "Federico Aguerre",
       "points": 9,
       "rebounds": 4,
       "assists": 1,
@@ -1163,7 +1163,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "francisco-conrradi",
-      "name": "Conrradi F.",
+      "name": "Francisco Conrradi",
       "points": 7,
       "rebounds": 6,
       "assists": 3,
@@ -1171,7 +1171,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-copello",
-      "name": "Copello N.",
+      "name": "Nicolás Copello",
       "points": 13,
       "rebounds": 1,
       "assists": 2,
@@ -1179,7 +1179,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tayavek-gallizzi",
-      "name": "Gallizzi T.",
+      "name": "Tayavek Gallizzi",
       "points": 2,
       "rebounds": 2,
       "assists": 0,
@@ -1187,7 +1187,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tyren-johnson",
-      "name": "Johnson T.",
+      "name": "Tyren Johnson",
       "points": 15,
       "rebounds": 2,
       "assists": 2,
@@ -1203,7 +1203,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-martinez",
-      "name": "Martinez N.",
+      "name": "Nicolás Martínez",
       "points": 17,
       "rebounds": 6,
       "assists": 1,
@@ -1211,7 +1211,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-mendez",
-      "name": "Mendez F.",
+      "name": "Franco Méndez",
       "points": 9,
       "rebounds": 6,
       "assists": 4,
@@ -1227,7 +1227,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-rutenberg",
-      "name": "Rutenberg F.",
+      "name": "Facundo Rutenberg",
       "points": 9,
       "rebounds": 0,
       "assists": 1,
@@ -1235,7 +1235,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "javier-saiz",
-      "name": "Saiz J.",
+      "name": "Javier Saiz",
       "points": 7,
       "rebounds": 4,
       "assists": 1,
@@ -1243,7 +1243,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "matias-solanas",
-      "name": "Solanas M.",
+      "name": "Matías Solanas",
       "points": 12,
       "rebounds": 4,
       "assists": 1,
@@ -1253,7 +1253,7 @@ export const matchPlayerStats = {
   "platense": [
     {
       "id": "nicolas-burgos",
-      "name": "Burgos N.",
+      "name": "Nicolás Burgos",
       "points": 13,
       "rebounds": 7,
       "assists": 1,
@@ -1261,7 +1261,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "erik-copes",
-      "name": "Copes E.",
+      "name": "Erik Copes",
       "points": 2,
       "rebounds": 6,
       "assists": 0,
@@ -1269,7 +1269,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-cordoba",
-      "name": "Cordoba G.",
+      "name": "Gastón Córdoba",
       "points": 0,
       "rebounds": 1,
       "assists": 1,
@@ -1277,7 +1277,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mauro-cosolito",
-      "name": "Cosolito M.",
+      "name": "Mauro Cosolito",
       "points": 10,
       "rebounds": 2,
       "assists": 2,
@@ -1285,7 +1285,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mariano-goicoechea",
-      "name": "Goicoechea M.",
+      "name": "Mariano Goicoechea",
       "points": 13,
       "rebounds": 2,
       "assists": 2,
@@ -1293,7 +1293,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-grun",
-      "name": "Grun F.",
+      "name": "Federico Grun",
       "points": 0,
       "rebounds": 2,
       "assists": 0,
@@ -1301,7 +1301,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "julian-morales",
-      "name": "Morales J.",
+      "name": "Julián Morales",
       "points": 2,
       "rebounds": 2,
       "assists": 0,
@@ -1317,7 +1317,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ramiro-santiago",
-      "name": "Santiago R.",
+      "name": "Ramiro Santiago",
       "points": 13,
       "rebounds": 4,
       "assists": 2,
@@ -1325,7 +1325,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-smaniotti",
-      "name": "Smaniotti F.",
+      "name": "Franco Smaniotti",
       "points": 2,
       "rebounds": 3,
       "assists": 2,
@@ -1333,7 +1333,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-terra",
-      "name": "Terra F.",
+      "name": "Facundo Terra",
       "points": 8,
       "rebounds": 3,
       "assists": 0,
@@ -1341,7 +1341,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "anthoan-urbina",
-      "name": "Urbina A.",
+      "name": "Anthoan Urbina",
       "points": 4,
       "rebounds": 0,
       "assists": 1,
@@ -1375,7 +1375,7 @@ export const matchPlayerStats = {
   "gimnasia": [
     {
       "id": "obi-okafor",
-      "name": "Okafor O.",
+      "name": "Obi Okafor",
       "points": 3,
       "rebounds": 2,
       "assists": 1,
@@ -1383,7 +1383,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-inyaco",
-      "name": "Inyaco F.",
+      "name": "Felipe Inyaco",
       "points": 20,
       "rebounds": 0,
       "assists": 1,
@@ -1391,7 +1391,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martiniano-dato",
-      "name": "Dato M.",
+      "name": "Martiniano Dato",
       "points": 10,
       "rebounds": 4,
       "assists": 2,
@@ -1399,7 +1399,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emiliano-toretta",
-      "name": "Toretta E.",
+      "name": "Emiliano Toretta",
       "points": 7,
       "rebounds": 3,
       "assists": 0,
@@ -1407,7 +1407,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "carlos-rivero",
-      "name": "Rivero C.",
+      "name": "Carlos Rivero",
       "points": 6,
       "rebounds": 9,
       "assists": 0,
@@ -1415,7 +1415,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-chacon",
-      "name": "Chacon M.",
+      "name": "Marcos Chacón",
       "points": 17,
       "rebounds": 4,
       "assists": 2,
@@ -1423,7 +1423,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-carrasco",
-      "name": "Carrasco S.",
+      "name": "Sebastián Carrasco",
       "points": 17,
       "rebounds": 5,
       "assists": 3,
@@ -1431,7 +1431,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-forestier",
-      "name": "Forestier V.",
+      "name": "Valentín Forestier",
       "points": 4,
       "rebounds": 1,
       "assists": 0,
@@ -1439,7 +1439,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "segundo-lasarte",
-      "name": "Lasarte S.",
+      "name": "Segundo Lasarte",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -1447,7 +1447,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ben-stevens",
-      "name": "Stevens B.",
+      "name": "Ben Stevens",
       "points": 0,
       "rebounds": 5,
       "assists": 3,
@@ -1455,7 +1455,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gino-balbo",
-      "name": "Balbo G.",
+      "name": "Gino Balbo",
       "points": 8,
       "rebounds": 0,
       "assists": 1,
@@ -1465,7 +1465,7 @@ export const matchPlayerStats = {
   "la-union": [
     {
       "id": "brandon-beavers",
-      "name": "Beavers B.",
+      "name": "Brandon Beavers",
       "points": 14,
       "rebounds": 5,
       "assists": 1,
@@ -1473,7 +1473,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mariano-marina",
-      "name": "Marina M.",
+      "name": "Mariano Marina",
       "points": 21,
       "rebounds": 6,
       "assists": 1,
@@ -1481,7 +1481,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-acevedo",
-      "name": "Acevedo S.",
+      "name": "Sebastián Acevedo",
       "points": 4,
       "rebounds": 3,
       "assists": 1,
@@ -1489,7 +1489,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "alexis-elsener",
-      "name": "Elsener A.",
+      "name": "Alexis Elsener",
       "points": 7,
       "rebounds": 5,
       "assists": 2,
@@ -1497,7 +1497,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "windi-graterol",
-      "name": "Graterol W.",
+      "name": "Windi Graterol",
       "points": 20,
       "rebounds": 5,
       "assists": 2,
@@ -1505,7 +1505,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tomas-nuno",
-      "name": "Nuno T.",
+      "name": "Tomás Nuno",
       "points": 17,
       "rebounds": 6,
       "assists": 1,
@@ -1513,7 +1513,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-facello",
-      "name": "Facello A.",
+      "name": "Agustín Facello",
       "points": 0,
       "rebounds": 4,
       "assists": 0,
@@ -1529,7 +1529,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-alorda",
-      "name": "Alorda F.",
+      "name": "Franco Alorda",
       "points": 3,
       "rebounds": 0,
       "assists": 0,
@@ -1563,7 +1563,7 @@ export const matchPlayerStats = {
   "quimsa": [
     {
       "id": "tyren-johnson",
-      "name": "Johnson T.",
+      "name": "Tyren Johnson",
       "points": 0,
       "rebounds": 2,
       "assists": 1,
@@ -1571,7 +1571,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "francisco-conrradi",
-      "name": "Conrradi F.",
+      "name": "Francisco Conrradi",
       "points": 10,
       "rebounds": 2,
       "assists": 4,
@@ -1579,7 +1579,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "matias-solanas",
-      "name": "Solanas M.",
+      "name": "Matías Solanas",
       "points": 24,
       "rebounds": 3,
       "assists": 2,
@@ -1587,7 +1587,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-mendez",
-      "name": "Mendez F.",
+      "name": "Franco Méndez",
       "points": 6,
       "rebounds": 4,
       "assists": 2,
@@ -1595,7 +1595,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "javier-saiz",
-      "name": "Saiz J.",
+      "name": "Javier Saiz",
       "points": 5,
       "rebounds": 5,
       "assists": 1,
@@ -1603,7 +1603,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-copello",
-      "name": "Copello N.",
+      "name": "Nicolás Copello",
       "points": 11,
       "rebounds": 7,
       "assists": 2,
@@ -1611,7 +1611,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-rutenberg",
-      "name": "Rutenberg F.",
+      "name": "Facundo Rutenberg",
       "points": 18,
       "rebounds": 2,
       "assists": 1,
@@ -1619,7 +1619,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-martinez",
-      "name": "Martinez N.",
+      "name": "Nicolás Martínez",
       "points": 7,
       "rebounds": 4,
       "assists": 2,
@@ -1627,7 +1627,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tayavek-gallizzi",
-      "name": "Gallizzi T.",
+      "name": "Tayavek Gallizzi",
       "points": 2,
       "rebounds": 1,
       "assists": 1,
@@ -1637,7 +1637,7 @@ export const matchPlayerStats = {
   "atenas": [
     {
       "id": "franco-balbi",
-      "name": "Balbi F.",
+      "name": "Franco Balbi",
       "points": 10,
       "rebounds": 3,
       "assists": 4,
@@ -1645,7 +1645,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "adonys-henriquez",
-      "name": "Henríquez A.",
+      "name": "Adonys Henríquez",
       "points": 2,
       "rebounds": 6,
       "assists": 3,
@@ -1653,7 +1653,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-arengo",
-      "name": "Arengo J.",
+      "name": "Juan Arengo",
       "points": 15,
       "rebounds": 3,
       "assists": 2,
@@ -1661,7 +1661,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "daniel-laster",
-      "name": "Laster D.",
+      "name": "Daniel Laster",
       "points": 17,
       "rebounds": 3,
       "assists": 0,
@@ -1669,7 +1669,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "bryan-carabali",
-      "name": "Carabali B.",
+      "name": "Bryan Carabalí",
       "points": 12,
       "rebounds": 5,
       "assists": 0,
@@ -1677,7 +1677,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "benjamin-imaz",
-      "name": "Imaz B.",
+      "name": "Benjamín Imaz",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -1685,7 +1685,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-vazquez",
-      "name": "Vazquez F.",
+      "name": "Facundo Vázquez",
       "points": 9,
       "rebounds": 1,
       "assists": 2,
@@ -1693,7 +1693,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gonzalo-bressan",
-      "name": "Bressan G.",
+      "name": "Gonzalo Bressán",
       "points": 12,
       "rebounds": 10,
       "assists": 3,
@@ -1727,7 +1727,7 @@ export const matchPlayerStats = {
   "platense": [
     {
       "id": "federico-grun",
-      "name": "Grun F.",
+      "name": "Federico Grun",
       "points": 9,
       "rebounds": 4,
       "assists": 3,
@@ -1735,7 +1735,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-smaniotti",
-      "name": "Smaniotti F.",
+      "name": "Franco Smaniotti",
       "points": 14,
       "rebounds": 6,
       "assists": 1,
@@ -1743,7 +1743,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-terra",
-      "name": "Terra F.",
+      "name": "Facundo Terra",
       "points": 5,
       "rebounds": 1,
       "assists": 4,
@@ -1751,7 +1751,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "erik-copes",
-      "name": "Copes E.",
+      "name": "Erik Copes",
       "points": 20,
       "rebounds": 7,
       "assists": 0,
@@ -1759,7 +1759,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mauro-cosolito",
-      "name": "Cosolito M.",
+      "name": "Mauro Cosolito",
       "points": 10,
       "rebounds": 4,
       "assists": 3,
@@ -1767,7 +1767,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mariano-goicoechea",
-      "name": "Goicoechea M.",
+      "name": "Mariano Goicoechea",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -1775,7 +1775,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ramiro-santiago",
-      "name": "Santiago R.",
+      "name": "Ramiro Santiago",
       "points": 13,
       "rebounds": 1,
       "assists": 2,
@@ -1783,7 +1783,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "julian-morales",
-      "name": "Morales J.",
+      "name": "Julián Morales",
       "points": 13,
       "rebounds": 1,
       "assists": 5,
@@ -1791,7 +1791,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-cordoba",
-      "name": "Cordoba G.",
+      "name": "Gastón Córdoba",
       "points": 2,
       "rebounds": 1,
       "assists": 1,
@@ -1799,7 +1799,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-burgos",
-      "name": "Burgos N.",
+      "name": "Nicolás Burgos",
       "points": 0,
       "rebounds": 2,
       "assists": 0,
@@ -1809,7 +1809,7 @@ export const matchPlayerStats = {
   "la-union": [
     {
       "id": "brandon-beavers",
-      "name": "Beavers B.",
+      "name": "Brandon Beavers",
       "points": 12,
       "rebounds": 3,
       "assists": 6,
@@ -1817,7 +1817,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mariano-marina",
-      "name": "Marina M.",
+      "name": "Mariano Marina",
       "points": 12,
       "rebounds": 1,
       "assists": 4,
@@ -1825,7 +1825,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-acevedo",
-      "name": "Acevedo S.",
+      "name": "Sebastián Acevedo",
       "points": 17,
       "rebounds": 6,
       "assists": 3,
@@ -1833,7 +1833,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "alexis-elsener",
-      "name": "Elsener A.",
+      "name": "Alexis Elsener",
       "points": 10,
       "rebounds": 6,
       "assists": 4,
@@ -1841,7 +1841,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "windi-graterol",
-      "name": "Graterol W.",
+      "name": "Windi Graterol",
       "points": 16,
       "rebounds": 6,
       "assists": 1,
@@ -1849,7 +1849,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tomas-nuno",
-      "name": "Nuno T.",
+      "name": "Tomás Nuno",
       "points": 4,
       "rebounds": 2,
       "assists": 0,
@@ -1857,7 +1857,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-facello",
-      "name": "Facello A.",
+      "name": "Agustín Facello",
       "points": 13,
       "rebounds": 0,
       "assists": 4,
@@ -1865,7 +1865,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-alorda",
-      "name": "Alorda F.",
+      "name": "Franco Alorda",
       "points": 6,
       "rebounds": 0,
       "assists": 0,
@@ -1899,7 +1899,7 @@ export const matchPlayerStats = {
   "boca": [
     {
       "id": "mike-warren",
-      "name": "Warren M.",
+      "name": "Mike Warren",
       "points": 15,
       "rebounds": 4,
       "assists": 0,
@@ -1907,7 +1907,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jose-vildoza",
-      "name": "Vildoza J.",
+      "name": "José Vildoza",
       "points": 22,
       "rebounds": 4,
       "assists": 4,
@@ -1915,7 +1915,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tomas-monacchi",
-      "name": "Monacchi T.",
+      "name": "Tomás Monacchi",
       "points": 7,
       "rebounds": 1,
       "assists": 0,
@@ -1923,7 +1923,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "leonardo-lema",
-      "name": "Lema L.",
+      "name": "Leo Lema",
       "points": 11,
       "rebounds": 8,
       "assists": 1,
@@ -1931,7 +1931,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "francisco-caffaro",
-      "name": "Caffaro F.",
+      "name": "Francisco Cáffaro",
       "points": 9,
       "rebounds": 4,
       "assists": 2,
@@ -1939,7 +1939,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-faggiano",
-      "name": "Faggiano L.",
+      "name": "Lucas Faggiano",
       "points": 4,
       "rebounds": 3,
       "assists": 2,
@@ -1947,7 +1947,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-stenta",
-      "name": "Stenta N.",
+      "name": "Nicolás Stenta",
       "points": 3,
       "rebounds": 1,
       "assists": 2,
@@ -1955,7 +1955,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "kriss-helmanis",
-      "name": "Helmanis K.",
+      "name": "Kriss Helmanis",
       "points": 6,
       "rebounds": 8,
       "assists": 5,
@@ -1963,7 +1963,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentino-finetti",
-      "name": "Finetti V.",
+      "name": "Valentino Finetti",
       "points": 0,
       "rebounds": 2,
       "assists": 0,
@@ -1971,7 +1971,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-barreiro",
-      "name": "Barreiro A.",
+      "name": "Agustín Barreiro",
       "points": 12,
       "rebounds": 3,
       "assists": 1,
@@ -1979,7 +1979,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martin-cuello",
-      "name": "Cuello M.",
+      "name": "Martín Cuello",
       "points": 7,
       "rebounds": 3,
       "assists": 1,
@@ -1987,7 +1987,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "elias-torrens",
-      "name": "Torrens E.",
+      "name": "Elías Torrens",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -1997,7 +1997,7 @@ export const matchPlayerStats = {
   "obera": [
     {
       "id": "bruno-sansimoni",
-      "name": "Sansimoni B.",
+      "name": "Bruno Sansimoni",
       "points": 10,
       "rebounds": 3,
       "assists": 5,
@@ -2005,7 +2005,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-brocal",
-      "name": "Brocal A.",
+      "name": "Agustín Brocal",
       "points": 9,
       "rebounds": 2,
       "assists": 2,
@@ -2013,7 +2013,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "will-vorhees",
-      "name": "Vorhees W.",
+      "name": "Will Vorhees",
       "points": 14,
       "rebounds": 6,
       "assists": 2,
@@ -2021,7 +2021,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ty-prince",
-      "name": "Prince T.",
+      "name": "Ty Prince",
       "points": 6,
       "rebounds": 2,
       "assists": 2,
@@ -2029,7 +2029,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jonatan-torresi",
-      "name": "Torresi J.",
+      "name": "Jonatan Torresi",
       "points": 9,
       "rebounds": 3,
       "assists": 1,
@@ -2037,7 +2037,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "victor-fernandez",
-      "name": "Fernandez V.",
+      "name": "Víctor Fernández",
       "points": 9,
       "rebounds": 1,
       "assists": 3,
@@ -2045,7 +2045,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "alejo-azpilicueta",
-      "name": "Azpilicueta A.",
+      "name": "Alejo Azpilicueta",
       "points": 2,
       "rebounds": 4,
       "assists": 1,
@@ -2053,7 +2053,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-barrales",
-      "name": "Barrales S.",
+      "name": "Santiago Barrales",
       "points": 5,
       "rebounds": 5,
       "assists": 1,
@@ -2061,7 +2061,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "albano-costa",
-      "name": "Costa A.",
+      "name": "Albano Costa",
       "points": 2,
       "rebounds": 1,
       "assists": 0,
@@ -2069,7 +2069,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-cruz-oberto",
-      "name": "Oberto J. C.",
+      "name": "Juan Cruz Oberto",
       "points": 7,
       "rebounds": 2,
       "assists": 1,
@@ -2103,7 +2103,7 @@ export const matchPlayerStats = {
   "olimpico": [
     {
       "id": "austin-wtighten",
-      "name": "Wrighten A.",
+      "name": "Austin Wtighten",
       "points": 25,
       "rebounds": 3,
       "assists": 2,
@@ -2111,7 +2111,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "andrew-corum",
-      "name": "Corum A.",
+      "name": "Andrew Corum",
       "points": 14,
       "rebounds": 10,
       "assists": 3,
@@ -2119,7 +2119,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-perez",
-      "name": "Pérez L.",
+      "name": "Lucas Pérez",
       "points": 9,
       "rebounds": 3,
       "assists": 7,
@@ -2127,7 +2127,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "guido-mariani",
-      "name": "Mariani G.",
+      "name": "Guido Mariani",
       "points": 0,
       "rebounds": 5,
       "assists": 2,
@@ -2135,7 +2135,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "elisias-hall",
-      "name": "Elisias H.",
+      "name": "Elisias Hall",
       "points": 10,
       "rebounds": 3,
       "assists": 1,
@@ -2143,7 +2143,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santino-romegialli",
-      "name": "Romegialli S.",
+      "name": "Santino Romegialli",
       "points": 15,
       "rebounds": 6,
       "assists": 1,
@@ -2151,7 +2151,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ezequiel-paz",
-      "name": "Paz E.",
+      "name": "Ezequiel Paz",
       "points": 7,
       "rebounds": 2,
       "assists": 0,
@@ -2159,7 +2159,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jeremias-frontera",
-      "name": "Frontera J.",
+      "name": "Jeremías Frontera",
       "points": 3,
       "rebounds": 3,
       "assists": 3,
@@ -2167,7 +2167,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "joaquin-lopez-lorenz",
-      "name": "Lopez J.",
+      "name": "Joaquín López Lorenz",
       "points": 4,
       "rebounds": 2,
       "assists": 0,
@@ -2177,7 +2177,7 @@ export const matchPlayerStats = {
   "atenas": [
     {
       "id": "franco-balbi",
-      "name": "Balbi F.",
+      "name": "Franco Balbi",
       "points": 11,
       "rebounds": 2,
       "assists": 3,
@@ -2185,7 +2185,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "adonys-henriquez",
-      "name": "Henríquez A.",
+      "name": "Adonys Henríquez",
       "points": 15,
       "rebounds": 4,
       "assists": 4,
@@ -2193,7 +2193,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-arengo",
-      "name": "Arengo J.",
+      "name": "Juan Arengo",
       "points": 23,
       "rebounds": 3,
       "assists": 4,
@@ -2201,7 +2201,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "daniel-laster",
-      "name": "Laster D.",
+      "name": "Daniel Laster",
       "points": 11,
       "rebounds": 4,
       "assists": 1,
@@ -2209,7 +2209,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "bryan-carabali",
-      "name": "Carabali B.",
+      "name": "Bryan Carabalí",
       "points": 7,
       "rebounds": 15,
       "assists": 2,
@@ -2217,7 +2217,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-vazquez",
-      "name": "Vazquez F.",
+      "name": "Facundo Vázquez",
       "points": 9,
       "rebounds": 3,
       "assists": 3,
@@ -2225,7 +2225,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gonzalo-bressan",
-      "name": "Bressan G.",
+      "name": "Gonzalo Bressán",
       "points": 15,
       "rebounds": 6,
       "assists": 1,
@@ -2233,7 +2233,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "german-misetich",
-      "name": "Misetich G.",
+      "name": "Germán Misetich",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2241,7 +2241,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "benjamin-imaz",
-      "name": "Imaz B.",
+      "name": "Benjamín Imaz",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2275,7 +2275,7 @@ export const matchPlayerStats = {
   "independiente-oliva": [
     {
       "id": "agustin-caffaro",
-      "name": "Caffaro A.",
+      "name": "Agustín Cáffaro",
       "points": 21,
       "rebounds": 9,
       "assists": 0,
@@ -2291,7 +2291,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "patricio-tabarez",
-      "name": "Tabarez P.",
+      "name": "Patricio Tabárez",
       "points": 5,
       "rebounds": 3,
       "assists": 2,
@@ -2299,7 +2299,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "fortuna-rolfi",
-      "name": "Rolfi F.",
+      "name": "Fortunato Rolfi",
       "points": 20,
       "rebounds": 5,
       "assists": 6,
@@ -2307,7 +2307,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "rolando-vallejos",
-      "name": "Vallejos R.",
+      "name": "Rolando Vallejos",
       "points": 5,
       "rebounds": 3,
       "assists": 1,
@@ -2323,7 +2323,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-barrionuevo",
-      "name": "Barrionuevo F.",
+      "name": "Felipe Barrionuevo",
       "points": 12,
       "rebounds": 3,
       "assists": 3,
@@ -2331,7 +2331,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-pautasso",
-      "name": "Pautasso A.",
+      "name": "Agustín Pautasso",
       "points": 9,
       "rebounds": 5,
       "assists": 1,
@@ -2339,7 +2339,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "andriy-grytsak",
-      "name": "Grytsak A.",
+      "name": "Andriy Grytsak",
       "points": 9,
       "rebounds": 5,
       "assists": 0,
@@ -2357,7 +2357,7 @@ export const matchPlayerStats = {
   "ferro": [
     {
       "id": "emiliano-lezcano",
-      "name": "Lezcano E.",
+      "name": "Emiliano Lezcano",
       "points": 25,
       "rebounds": 3,
       "assists": 3,
@@ -2365,7 +2365,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jano-martinez",
-      "name": "Martinez J.",
+      "name": "Jano Martínez",
       "points": 5,
       "rebounds": 6,
       "assists": 3,
@@ -2373,7 +2373,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-zezular",
-      "name": "Zezular F.",
+      "name": "Federico Zezular",
       "points": 9,
       "rebounds": 6,
       "assists": 1,
@@ -2381,7 +2381,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-pinero",
-      "name": "Pinero F.",
+      "name": "Facundo Piñero",
       "points": 9,
       "rebounds": 1,
       "assists": 1,
@@ -2389,7 +2389,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-bettiga",
-      "name": "Bettiga L.",
+      "name": "Valentín Bettiga",
       "points": 13,
       "rebounds": 7,
       "assists": 1,
@@ -2397,7 +2397,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jose-defelippo",
-      "name": "Defelippo J.",
+      "name": "José Defelippo",
       "points": 8,
       "rebounds": 1,
       "assists": 0,
@@ -2405,7 +2405,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "kevin-hernandez",
-      "name": "Hernandez K.",
+      "name": "Kevin Hernández",
       "points": 16,
       "rebounds": 4,
       "assists": 0,
@@ -2413,7 +2413,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-rodriguez",
-      "name": "Rodriguez F.",
+      "name": "Felipe Rodríguez",
       "points": 1,
       "rebounds": 0,
       "assists": 0,
@@ -2421,7 +2421,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "rodrigo-gallegos",
-      "name": "Gallegos R.",
+      "name": "Rodrigo Gallegos",
       "points": 7,
       "rebounds": 2,
       "assists": 5,
@@ -2429,7 +2429,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "camilo-rodriguez",
-      "name": "Rodriguez C.",
+      "name": "Camilo Rodríguez",
       "points": 4,
       "rebounds": 0,
       "assists": 0,
@@ -2463,7 +2463,7 @@ export const matchPlayerStats = {
   "racing-chivilcoy": [
     {
       "id": "mateo-chiarini",
-      "name": "Chiarini M.",
+      "name": "Mateo Chiarini",
       "points": 32,
       "rebounds": 4,
       "assists": 5,
@@ -2471,7 +2471,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "pedro-barral",
-      "name": "Barral P.",
+      "name": "Pedro Barral",
       "points": 22,
       "rebounds": 3,
       "assists": 11,
@@ -2479,7 +2479,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-delia",
-      "name": "Delia M.",
+      "name": "Marcos Delía",
       "points": 7,
       "rebounds": 3,
       "assists": 0,
@@ -2487,7 +2487,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-bocca",
-      "name": "Bocca J.",
+      "name": "Juan Bocca",
       "points": 17,
       "rebounds": 2,
       "assists": 3,
@@ -2495,7 +2495,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-romano",
-      "name": "Romano N.",
+      "name": "Nicolás Romano",
       "points": 23,
       "rebounds": 6,
       "assists": 2,
@@ -2503,7 +2503,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "manuel-rodriguez",
-      "name": "Rodriguez M.",
+      "name": "Manuel Rodríguez",
       "points": 5,
       "rebounds": 7,
       "assists": 0,
@@ -2511,7 +2511,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-assum",
-      "name": "Assum S.",
+      "name": "Santiago Assum",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2535,7 +2535,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "abraham-barahona",
-      "name": "Barahona A.",
+      "name": "Abraham Barahona",
       "points": 2,
       "rebounds": 4,
       "assists": 0,
@@ -2543,7 +2543,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "matias-morera",
-      "name": "Morera M.",
+      "name": "Matías Morera",
       "points": 2,
       "rebounds": 0,
       "assists": 0,
@@ -2553,7 +2553,7 @@ export const matchPlayerStats = {
   "san-martin": [
     {
       "id": "salvador-giletto",
-      "name": "Giletto S.",
+      "name": "Salvador Giletto",
       "points": 12,
       "rebounds": 6,
       "assists": 2,
@@ -2561,7 +2561,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-garcia",
-      "name": "Garcia G.",
+      "name": "Gastón García",
       "points": 11,
       "rebounds": 1,
       "assists": 2,
@@ -2569,7 +2569,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mateo-rearte",
-      "name": "Rearte M.",
+      "name": "Mateo Rearte",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -2585,7 +2585,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-lugo",
-      "name": "Lugo S.",
+      "name": "Sebastián Lugo",
       "points": 26,
       "rebounds": 12,
       "assists": 1,
@@ -2593,7 +2593,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "diego-collomb",
-      "name": "Collomb D.",
+      "name": "Diego Collomb",
       "points": 30,
       "rebounds": 5,
       "assists": 3,
@@ -2601,7 +2601,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juanse-gorosito",
-      "name": "Gorosito J.",
+      "name": "Juanse Gorosito",
       "points": 18,
       "rebounds": 3,
       "assists": 2,
@@ -2609,7 +2609,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "daniel-moreira",
-      "name": "Moreira",
+      "name": "Daniel Moreira",
       "points": 20,
       "rebounds": 15,
       "assists": 3,
@@ -2617,7 +2617,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "geronimo-ramallo",
-      "name": "Ramallo G.",
+      "name": "Gerónimo Ramallo",
       "points": 2,
       "rebounds": 5,
       "assists": 0,
@@ -2656,7 +2656,7 @@ export const matchPlayerStats = {
   "san-lorenzo": [
     {
       "id": "raynere-thornton",
-      "name": "Thornton R.",
+      "name": "Raynere Thornton",
       "points": 15,
       "rebounds": 1,
       "assists": 2,
@@ -2664,7 +2664,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-mata",
-      "name": "Mata M.",
+      "name": "Marcos Mata",
       "points": 10,
       "rebounds": 7,
       "assists": 2,
@@ -2680,7 +2680,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "cliron-hornbeak",
-      "name": "Hornbeak C.",
+      "name": "Cli’Ron Hornbeak",
       "points": 7,
       "rebounds": 4,
       "assists": 0,
@@ -2688,7 +2688,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "eric-flor",
-      "name": "Flor E.",
+      "name": "Eric Flor",
       "points": 5,
       "rebounds": 1,
       "assists": 3,
@@ -2696,7 +2696,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-gargallo",
-      "name": "Gargallo L.",
+      "name": "Lucas Gargallo",
       "points": 3,
       "rebounds": 4,
       "assists": 2,
@@ -2704,7 +2704,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "thiago-roca",
-      "name": "Roca T.",
+      "name": "Thiago Roca",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2720,7 +2720,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-calderon",
-      "name": "Calderon S.",
+      "name": "Santiago Calderón",
       "points": 14,
       "rebounds": 0,
       "assists": 1,
@@ -2728,7 +2728,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentino-nesci",
-      "name": "Nesci V.",
+      "name": "Valentino Nesci",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2736,7 +2736,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "leonel-schattmann",
-      "name": "Schattmann L.",
+      "name": "Leonel Schattmann",
       "points": 12,
       "rebounds": 2,
       "assists": 3,
@@ -2744,7 +2744,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "antun-maricevic",
-      "name": "Maricevic A.",
+      "name": "Antun Maricevic",
       "points": 11,
       "rebounds": 5,
       "assists": 1,
@@ -2754,7 +2754,7 @@ export const matchPlayerStats = {
   "gimnasia": [
     {
       "id": "obi-okafor",
-      "name": "Okafor O.",
+      "name": "Obi Okafor",
       "points": 2,
       "rebounds": 2,
       "assists": 1,
@@ -2762,7 +2762,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-inyaco",
-      "name": "Inyaco F.",
+      "name": "Felipe Inyaco",
       "points": 6,
       "rebounds": 1,
       "assists": 1,
@@ -2770,7 +2770,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martiniano-dato",
-      "name": "Dato M.",
+      "name": "Martiniano Dato",
       "points": 12,
       "rebounds": 1,
       "assists": 2,
@@ -2778,7 +2778,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emiliano-toretta",
-      "name": "Toretta E.",
+      "name": "Emiliano Toretta",
       "points": 15,
       "rebounds": 2,
       "assists": 2,
@@ -2786,7 +2786,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "carlos-rivero",
-      "name": "Rivero C.",
+      "name": "Carlos Rivero",
       "points": 5,
       "rebounds": 9,
       "assists": 0,
@@ -2794,7 +2794,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-chacon",
-      "name": "Chacon M.",
+      "name": "Marcos Chacón",
       "points": 13,
       "rebounds": 5,
       "assists": 1,
@@ -2802,7 +2802,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-carrasco",
-      "name": "Carrasco S.",
+      "name": "Sebastián Carrasco",
       "points": 15,
       "rebounds": 1,
       "assists": 1,
@@ -2810,7 +2810,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-forestier",
-      "name": "Forestier V.",
+      "name": "Valentín Forestier",
       "points": 0,
       "rebounds": 0,
       "assists": 1,
@@ -2818,7 +2818,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ben-stevens",
-      "name": "Stevens B.",
+      "name": "Ben Stevens",
       "points": 5,
       "rebounds": 7,
       "assists": 1,
@@ -2826,7 +2826,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gino-balbo",
-      "name": "Balbo G.",
+      "name": "Gino Balbo",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2860,7 +2860,7 @@ export const matchPlayerStats = {
   "lanus": [
     {
       "id": "juan-brussino",
-      "name": "Brussino J.",
+      "name": "Juan Brussino",
       "points": 9,
       "rebounds": 4,
       "assists": 2,
@@ -2868,7 +2868,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "christian-james",
-      "name": "James C.",
+      "name": "Christian James",
       "points": 4,
       "rebounds": 6,
       "assists": 0,
@@ -2876,7 +2876,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "melvin-johnson",
-      "name": "Johnson M.",
+      "name": "Melvin Johnson",
       "points": 5,
       "rebounds": 0,
       "assists": 1,
@@ -2884,7 +2884,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "fabian-ramirez-barrios",
-      "name": "Ramírez C.",
+      "name": "Fabián Ramírez Barrios",
       "points": 5,
       "rebounds": 2,
       "assists": 0,
@@ -2900,7 +2900,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "robert-whitfield",
-      "name": "Whitfield R.",
+      "name": "Robert Whitfield",
       "points": 12,
       "rebounds": 2,
       "assists": 0,
@@ -2908,7 +2908,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martin-franchino",
-      "name": "Franchino M.",
+      "name": "Martín Franchino",
       "points": 5,
       "rebounds": 6,
       "assists": 1,
@@ -2916,7 +2916,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "junior-merchant",
-      "name": "Merchant E.",
+      "name": "Junior Merchant",
       "points": 6,
       "rebounds": 3,
       "assists": 0,
@@ -2924,7 +2924,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-andujar",
-      "name": "Andujar L.",
+      "name": "Lucas Andújar",
       "points": 5,
       "rebounds": 7,
       "assists": 4,
@@ -2934,7 +2934,7 @@ export const matchPlayerStats = {
   "obera": [
     {
       "id": "ty-prince",
-      "name": "Prince T.",
+      "name": "Ty Prince",
       "points": 15,
       "rebounds": 6,
       "assists": 2,
@@ -2942,7 +2942,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jonatan-torresi",
-      "name": "Torresi J.",
+      "name": "Jonatan Torresi",
       "points": 6,
       "rebounds": 3,
       "assists": 1,
@@ -2950,7 +2950,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "bruno-sansimoni",
-      "name": "Sansimoni B.",
+      "name": "Bruno Sansimoni",
       "points": 5,
       "rebounds": 3,
       "assists": 2,
@@ -2958,7 +2958,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-brocal",
-      "name": "Brocal A.",
+      "name": "Agustín Brocal",
       "points": 3,
       "rebounds": 3,
       "assists": 4,
@@ -2966,7 +2966,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "will-vorhees",
-      "name": "Vorhees W.",
+      "name": "Will Vorhees",
       "points": 9,
       "rebounds": 4,
       "assists": 0,
@@ -2974,7 +2974,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "victor-fernandez",
-      "name": "Fernandez V.",
+      "name": "Víctor Fernández",
       "points": 4,
       "rebounds": 2,
       "assists": 0,
@@ -2982,7 +2982,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "alejo-azpilicueta",
-      "name": "Azpilicueta A.",
+      "name": "Alejo Azpilicueta",
       "points": 2,
       "rebounds": 3,
       "assists": 0,
@@ -2990,7 +2990,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-barrales",
-      "name": "Barrales S.",
+      "name": "Santiago Barrales",
       "points": 2,
       "rebounds": 5,
       "assists": 0,
@@ -2998,7 +2998,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "albano-costa",
-      "name": "Costa A.",
+      "name": "Albano Costa",
       "points": 2,
       "rebounds": 1,
       "assists": 0,
@@ -3006,7 +3006,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-cruz-oberto",
-      "name": "Oberto J. C.",
+      "name": "Juan Cruz Oberto",
       "points": 10,
       "rebounds": 8,
       "assists": 1,
@@ -3040,7 +3040,7 @@ export const matchPlayerStats = {
   "instituto": [
     {
       "id": "leandro-vildoza",
-      "name": "Vildoza L.",
+      "name": "Leandro Vildoza",
       "points": 2,
       "rebounds": 5,
       "assists": 4,
@@ -3048,7 +3048,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "torren-jones",
-      "name": "Jones T.",
+      "name": "Torren Jones",
       "points": 7,
       "rebounds": 9,
       "assists": 2,
@@ -3056,7 +3056,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "bautista-lugarini",
-      "name": "Lugarini B.",
+      "name": "Bautista Lugarini",
       "points": 22,
       "rebounds": 12,
       "assists": 1,
@@ -3064,7 +3064,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-pablo-corbalan",
-      "name": "Corbalan J.",
+      "name": "Juan Pablo Corbalán",
       "points": 20,
       "rebounds": 5,
       "assists": 2,
@@ -3072,7 +3072,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "xavier-carreras",
-      "name": "Carreras X.",
+      "name": "Xavier Carreras",
       "points": 9,
       "rebounds": 7,
       "assists": 1,
@@ -3080,7 +3080,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "kadir-pomare",
-      "name": "Pomare K.",
+      "name": "Kadir Pomare",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -3088,7 +3088,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-whelan",
-      "name": "Whelan G.",
+      "name": "Gastón Whelan",
       "points": 21,
       "rebounds": 5,
       "assists": 3,
@@ -3096,7 +3096,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-andersson",
-      "name": "Andersson L.",
+      "name": "Lucas Andersson",
       "points": 4,
       "rebounds": 1,
       "assists": 1,
@@ -3104,7 +3104,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-aguerre",
-      "name": "Aguerre F.",
+      "name": "Federico Aguerre",
       "points": 12,
       "rebounds": 2,
       "assists": 1,
@@ -3114,7 +3114,7 @@ export const matchPlayerStats = {
   "ferro": [
     {
       "id": "emiliano-lezcano",
-      "name": "Lezcano E.",
+      "name": "Emiliano Lezcano",
       "points": 14,
       "rebounds": 4,
       "assists": 7,
@@ -3122,7 +3122,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jano-martinez",
-      "name": "Martinez J.",
+      "name": "Jano Martínez",
       "points": 12,
       "rebounds": 3,
       "assists": 9,
@@ -3130,7 +3130,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-pinero",
-      "name": "Pinero F.",
+      "name": "Facundo Piñero",
       "points": 4,
       "rebounds": 1,
       "assists": 0,
@@ -3138,7 +3138,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-bettiga",
-      "name": "Bettiga L.",
+      "name": "Valentín Bettiga",
       "points": 5,
       "rebounds": 6,
       "assists": 3,
@@ -3146,7 +3146,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "federico-zezular",
-      "name": "Zezular F.",
+      "name": "Federico Zezular",
       "points": 13,
       "rebounds": 6,
       "assists": 0,
@@ -3154,7 +3154,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jose-defelippo",
-      "name": "Defelippo J.",
+      "name": "José Defelippo",
       "points": 9,
       "rebounds": 7,
       "assists": 2,
@@ -3162,7 +3162,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "kevin-hernandez",
-      "name": "Hernandez K.",
+      "name": "Kevin Hernández",
       "points": 24,
       "rebounds": 9,
       "assists": 1,
@@ -3170,7 +3170,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "felipe-rodriguez",
-      "name": "Rodriguez F.",
+      "name": "Felipe Rodríguez",
       "points": 7,
       "rebounds": 1,
       "assists": 0,
@@ -3178,7 +3178,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "rodrigo-gallegos",
-      "name": "Gallegos R.",
+      "name": "Rodrigo Gallegos",
       "points": 4,
       "rebounds": 0,
       "assists": 2,
@@ -3186,7 +3186,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "camilo-rodriguez",
-      "name": "Rodriguez C.",
+      "name": "Camilo Rodríguez",
       "points": 2,
       "rebounds": 1,
       "assists": 1,
@@ -3225,7 +3225,7 @@ export const matchPlayerStats = {
   "argentino": [
     {
       "id": "dylan-smith",
-      "name": "Smith D.",
+      "name": "Dylan Smith",
       "points": 14,
       "rebounds": 3,
       "assists": 0,
@@ -3233,7 +3233,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "zyon-patterson",
-      "name": "Patterson Z.",
+      "name": "Zyon Patterson",
       "points": 10,
       "rebounds": 6,
       "assists": 1,
@@ -3241,7 +3241,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "leandro-cerminato",
-      "name": "Cerminato L.",
+      "name": "Leandro Cerminato",
       "points": 11,
       "rebounds": 7,
       "assists": 0,
@@ -3249,7 +3249,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "romulo-gusmao",
-      "name": "Romulo Gusmao",
+      "name": "Rómulo Gusmao",
       "points": 1,
       "rebounds": 5,
       "assists": 0,
@@ -3257,7 +3257,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jeremias-sandrini",
-      "name": "Sandrini J.",
+      "name": "Jeremías Sandrini",
       "points": 12,
       "rebounds": 3,
       "assists": 1,
@@ -3265,7 +3265,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "joaquin-fernandez",
-      "name": "Fernandez J.",
+      "name": "Joaquín Fernández",
       "points": 6,
       "rebounds": 4,
       "assists": 1,
@@ -3273,7 +3273,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-perez-douthat",
-      "name": "Pérez S.",
+      "name": "Santiago Pérez Douthat",
       "points": 16,
       "rebounds": 2,
       "assists": 0,
@@ -3281,7 +3281,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "cristian-cardo",
-      "name": "Cardo C.",
+      "name": "Cristian Cardo",
       "points": 0,
       "rebounds": 6,
       "assists": 0,
@@ -3289,7 +3289,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-bilbao",
-      "name": "Bilbao S.",
+      "name": "Santiago Bilbao",
       "points": 3,
       "rebounds": 1,
       "assists": 0,
@@ -3297,7 +3297,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "josh-ferguson",
-      "name": "Ferguson J.",
+      "name": "Josh Ferguson",
       "points": 9,
       "rebounds": 6,
       "assists": 1,
@@ -3307,7 +3307,7 @@ export const matchPlayerStats = {
   "san-martin": [
     {
       "id": "salvador-giletto",
-      "name": "Giletto S.",
+      "name": "Salvador Giletto",
       "points": 7,
       "rebounds": 1,
       "assists": 0,
@@ -3315,7 +3315,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gaston-garcia",
-      "name": "Garcia G.",
+      "name": "Gastón García",
       "points": 12,
       "rebounds": 4,
       "assists": 3,
@@ -3323,7 +3323,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "mateo-rearte",
-      "name": "Rearte M.",
+      "name": "Mateo Rearte",
       "points": 14,
       "rebounds": 1,
       "assists": 0,
@@ -3339,7 +3339,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-lugo",
-      "name": "Lugo S.",
+      "name": "Sebastián Lugo",
       "points": 9,
       "rebounds": 6,
       "assists": 4,
@@ -3347,7 +3347,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "diego-collomb",
-      "name": "Collomb D.",
+      "name": "Diego Collomb",
       "points": 13,
       "rebounds": 2,
       "assists": 0,
@@ -3355,7 +3355,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juanse-gorosito",
-      "name": "Gorosito J.",
+      "name": "Juanse Gorosito",
       "points": 5,
       "rebounds": 2,
       "assists": 0,
@@ -3363,7 +3363,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "daniel-moreira",
-      "name": "Moreira",
+      "name": "Daniel Moreira",
       "points": 12,
       "rebounds": 10,
       "assists": 1,
@@ -3371,7 +3371,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "geronimo-ramallo",
-      "name": "Ramallo G.",
+      "name": "Gerónimo Ramallo",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -3405,7 +3405,7 @@ export const matchPlayerStats = {
   "racing-chivilcoy": [
     {
       "id": "mateo-chiarini",
-      "name": "Chiarini M.",
+      "name": "Mateo Chiarini",
       "points": 6,
       "rebounds": 4,
       "assists": 1,
@@ -3413,7 +3413,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "pedro-barral",
-      "name": "Barral P.",
+      "name": "Pedro Barral",
       "points": 9,
       "rebounds": 6,
       "assists": 3,
@@ -3421,7 +3421,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-delia",
-      "name": "Delia M.",
+      "name": "Marcos Delía",
       "points": 10,
       "rebounds": 7,
       "assists": 0,
@@ -3429,7 +3429,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "juan-bocca",
-      "name": "Bocca J.",
+      "name": "Juan Bocca",
       "points": 4,
       "rebounds": 3,
       "assists": 1,
@@ -3437,7 +3437,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-romano",
-      "name": "Romano N.",
+      "name": "Nicolás Romano",
       "points": 25,
       "rebounds": 2,
       "assists": 0,
@@ -3445,7 +3445,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "manuel-rodriguez",
-      "name": "Rodriguez M.",
+      "name": "Manuel Rodríguez",
       "points": 9,
       "rebounds": 3,
       "assists": 1,
@@ -3453,7 +3453,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "santiago-assum",
-      "name": "Assum S.",
+      "name": "Santiago Assum",
       "points": 2,
       "rebounds": 3,
       "assists": 1,
@@ -3477,7 +3477,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tomas-delia",
-      "name": "Delia T.",
+      "name": "Tomás Delía",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -3485,7 +3485,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "abraham-barahona",
-      "name": "Barahona A.",
+      "name": "Abraham Barahona",
       "points": 1,
       "rebounds": 0,
       "assists": 0,
@@ -3493,7 +3493,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "matias-morera",
-      "name": "Morera M.",
+      "name": "Matías Morera",
       "points": 0,
       "rebounds": 1,
       "assists": 0,
@@ -3503,7 +3503,7 @@ export const matchPlayerStats = {
   "gimnasia": [
     {
       "id": "felipe-inyaco",
-      "name": "Inyaco F.",
+      "name": "Felipe Inyaco",
       "points": 4,
       "rebounds": 1,
       "assists": 1,
@@ -3511,7 +3511,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martiniano-dato",
-      "name": "Dato M.",
+      "name": "Martiniano Dato",
       "points": 10,
       "rebounds": 4,
       "assists": 2,
@@ -3519,7 +3519,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "valentin-forestier",
-      "name": "Forestier V.",
+      "name": "Valentín Forestier",
       "points": 5,
       "rebounds": 1,
       "assists": 1,
@@ -3527,7 +3527,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emiliano-toretta",
-      "name": "Toretta E.",
+      "name": "Emiliano Toretta",
       "points": 11,
       "rebounds": 2,
       "assists": 2,
@@ -3535,7 +3535,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "carlos-rivero",
-      "name": "Rivero C.",
+      "name": "Carlos Rivero",
       "points": 13,
       "rebounds": 9,
       "assists": 3,
@@ -3543,7 +3543,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "obi-okafor",
-      "name": "Okafor O.",
+      "name": "Obi Okafor",
       "points": 8,
       "rebounds": 4,
       "assists": 0,
@@ -3551,7 +3551,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "marcos-chacon",
-      "name": "Chacon M.",
+      "name": "Marcos Chacón",
       "points": 19,
       "rebounds": 2,
       "assists": 1,
@@ -3559,7 +3559,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "sebastian-carrasco",
-      "name": "Carrasco S.",
+      "name": "Sebastián Carrasco",
       "points": 4,
       "rebounds": 1,
       "assists": 4,
@@ -3567,7 +3567,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "ben-stevens",
-      "name": "Stevens B.",
+      "name": "Ben Stevens",
       "points": 4,
       "rebounds": 3,
       "assists": 0,
@@ -3575,7 +3575,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "gino-balbo",
-      "name": "Balbo G.",
+      "name": "Gino Balbo",
       "points": 0,
       "rebounds": 2,
       "assists": 1,
@@ -3609,7 +3609,7 @@ export const matchPlayerStats = {
   "quimsa": [
     {
       "id": "tyren-johnson",
-      "name": "Johnson T.",
+      "name": "Tyren Johnson",
       "points": 16,
       "rebounds": 2,
       "assists": 1,
@@ -3617,7 +3617,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "francisco-conrradi",
-      "name": "Conrradi F.",
+      "name": "Francisco Conrradi",
       "points": 13,
       "rebounds": 2,
       "assists": 1,
@@ -3625,7 +3625,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "matias-solanas",
-      "name": "Solanas M.",
+      "name": "Matías Solanas",
       "points": 12,
       "rebounds": 1,
       "assists": 3,
@@ -3633,7 +3633,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "franco-mendez",
-      "name": "Mendez F.",
+      "name": "Franco Méndez",
       "points": 23,
       "rebounds": 6,
       "assists": 10,
@@ -3641,7 +3641,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "javier-saiz",
-      "name": "Saiz J.",
+      "name": "Javier Saiz",
       "points": 5,
       "rebounds": 4,
       "assists": 1,
@@ -3649,7 +3649,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-copello",
-      "name": "Copello N.",
+      "name": "Nicolás Copello",
       "points": 4,
       "rebounds": 1,
       "assists": 0,
@@ -3657,7 +3657,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "facundo-rutenberg",
-      "name": "Rutenberg F.",
+      "name": "Facundo Rutenberg",
       "points": 9,
       "rebounds": 2,
       "assists": 3,
@@ -3665,7 +3665,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tayavek-gallizzi",
-      "name": "Gallizzi T.",
+      "name": "Tayavek Gallizzi",
       "points": 11,
       "rebounds": 4,
       "assists": 1,
@@ -3673,7 +3673,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-martinez",
-      "name": "Martinez N.",
+      "name": "Nicolás Martínez",
       "points": 12,
       "rebounds": 3,
       "assists": 0,
@@ -3683,7 +3683,7 @@ export const matchPlayerStats = {
   "boca": [
     {
       "id": "mike-warren",
-      "name": "Warren M.",
+      "name": "Mike Warren",
       "points": 14,
       "rebounds": 2,
       "assists": 2,
@@ -3691,7 +3691,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "jose-vildoza",
-      "name": "Vildoza J.",
+      "name": "José Vildoza",
       "points": 4,
       "rebounds": 5,
       "assists": 8,
@@ -3699,7 +3699,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "tomas-monacchi",
-      "name": "Monacchi T.",
+      "name": "Tomás Monacchi",
       "points": 6,
       "rebounds": 4,
       "assists": 1,
@@ -3707,7 +3707,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "leonardo-lema",
-      "name": "Lema L.",
+      "name": "Leo Lema",
       "points": 27,
       "rebounds": 5,
       "assists": 0,
@@ -3715,7 +3715,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "francisco-caffaro",
-      "name": "Caffaro F.",
+      "name": "Francisco Cáffaro",
       "points": 20,
       "rebounds": 10,
       "assists": 0,
@@ -3723,7 +3723,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "lucas-faggiano",
-      "name": "Faggiano L.",
+      "name": "Lucas Faggiano",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -3731,7 +3731,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "nicolas-stenta",
-      "name": "Stenta N.",
+      "name": "Nicolás Stenta",
       "points": 3,
       "rebounds": 0,
       "assists": 1,
@@ -3739,7 +3739,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "kriss-helmanis",
-      "name": "Helmanis K.",
+      "name": "Kriss Helmanis",
       "points": 0,
       "rebounds": 2,
       "assists": 1,
@@ -3747,7 +3747,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "agustin-barreiro",
-      "name": "Barreiro A.",
+      "name": "Agustín Barreiro",
       "points": 13,
       "rebounds": 3,
       "assists": 0,
@@ -3755,7 +3755,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "martin-cuello",
-      "name": "Cuello M.",
+      "name": "Martín Cuello",
       "points": 9,
       "rebounds": 2,
       "assists": 4,
