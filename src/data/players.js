@@ -1450,6 +1450,15 @@ export const players = [
   nationality: "Argentina",
 },
 
+ {
+  id: "facundo-rutenberg",
+  name: "Facundo Rutenberg",
+  teamId: "quimsa",
+  position: null,
+  number: null,
+  nationality: null,
+},
+
 {
   id: "ignacio-laterza",
   name: "Ignacio Laterza",
