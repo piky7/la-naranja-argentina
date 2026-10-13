@@ -135,6 +135,41 @@ const [liveDate, setLiveDate] = useState(null);
     };
   };
 
+  const getTeamLastTwoMatches = (teamId) => {
+  return standingsMatches
+    .filter(
+      (match) =>
+        isMatchFinished(match) &&
+        match.homeScore != null &&
+        match.awayScore != null &&
+        (match.homeTeam === teamId || match.awayTeam === teamId)
+    )
+    .sort((a, b) => {
+      const dateA = `${a.date} ${a.time || "00:00"}`;
+      const dateB = `${b.date} ${b.time || "00:00"}`;
+
+      return dateB.localeCompare(dateA);
+    })
+    .slice(0, 2)
+    .map((match) => {
+      const isHome = match.homeTeam === teamId;
+
+      const teamScore = Number(
+        isHome ? match.homeScore : match.awayScore
+      );
+
+      const opponentScore = Number(
+        isHome ? match.awayScore : match.homeScore
+      );
+
+      return {
+        ...match,
+        home: getTeam(match.homeTeam),
+        away: getTeam(match.awayTeam),
+        result: teamScore > opponentScore ? "G" : "P",
+      };
+    });
+};
   const getRecentForm = (teamId) => {
     const finishedMatches = matches
       .filter(
@@ -1259,7 +1294,7 @@ const finishedMatch = {
 
       {/* POPUP DEL EQUIPO */}
 
-      {selectedTeam && (
+     {selectedTeam && !selectedMatch && (
         <div
           className="home-modal-overlay"
           onClick={() => setSelectedTeam(null)}
@@ -1382,6 +1417,69 @@ const finishedMatch = {
         : "—"}
     </strong>
   </div>
+</div>
+
+<div className="home-team-last-matches">
+  <h3>ÚLTIMOS 2 PARTIDOS</h3>
+
+  {getTeamLastTwoMatches(selectedTeam.id).length > 0 ? (
+    getTeamLastTwoMatches(selectedTeam.id).map((match) => (
+      
+<button
+  type="button"
+  className="home-team-last-match"
+  key={match.id}
+  disabled={!getMatchStats(match)}
+ onClick={() => {
+  if (!getMatchStats(match)) return;
+
+  setSelectedMatch(match);
+}}
+  title={
+    getMatchStats(match)
+      ? "Ver estadísticas del partido"
+      : "Estadísticas no disponibles"
+  }
+>
+
+        <span className="home-team-last-match-date">
+          {formatDate(match.date)}
+        </span>
+
+        <div className="home-team-last-match-score">
+          <div>
+            {match.home?.logo && (
+              <img src={match.home.logo} alt="" />
+            )}
+            <span>{match.home?.shortName || match.homeTeam}</span>
+          </div>
+
+          <strong>
+            {match.homeScore} - {match.awayScore}
+          </strong>
+
+          <div>
+            {match.away?.logo && (
+              <img src={match.away.logo} alt="" />
+            )}
+            <span>{match.away?.shortName || match.awayTeam}</span>
+          </div>
+        </div>
+
+        <span
+          className={`home-team-last-match-result ${
+            match.result === "G" ? "is-win" : "is-loss"
+          }`}
+        >
+          {match.result === "G" ? "VICTORIA" : "DERROTA"}
+        </span>
+      </button>
+    ))
+  ) : (
+    <p className="home-team-last-matches-empty">
+      Todavía no hay partidos finalizados.
+    </p>
+  )}
 </div>
 
               <Link

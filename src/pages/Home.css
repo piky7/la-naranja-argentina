@@ -5787,3 +5787,356 @@
     font-size: 30px;
   }
 }
+
+
+/* =========================================
+   LNA - POPUP PRÓXIMO PARTIDO COMPACTO PC
+   ========================================= */
+
+@media (min-width: 769px) {
+  .match-modal-upcoming {
+    width: min(90vw, 680px);
+    max-height: 86dvh;
+  }
+
+  .match-modal-upcoming .match-modal-header {
+    min-height: 0;
+    height: auto;
+    padding: 14px 24px 18px;
+  }
+
+  .match-modal-upcoming .match-modal-teams {
+    min-height: 0;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .match-modal-upcoming .match-modal-team img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  .match-modal-upcoming .match-modal-schedule strong {
+    font-size: 28px;
+  }
+
+  .match-modal-upcoming .upcoming-team-comparison {
+    padding: 14px 16px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .match-modal-upcoming .upcoming-comparison-row {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .match-modal-upcoming .match-highlighted-section {
+    padding: 12px 18px 16px;
+  }
+
+  .match-modal-upcoming .match-highlighted-title {
+    margin-bottom: 10px;
+  }
+
+  .match-modal-upcoming .match-highlighted-title h3 {
+    font-size: 18px;
+  }
+
+  .match-modal-upcoming .match-highlighted-team-header {
+    min-height: 40px;
+    padding: 6px 10px;
+  }
+
+  .match-modal-upcoming .match-highlighted-category {
+    padding: 8px 6px;
+  }
+}
+
+
+/* =========================================
+   LNA - PARTIDO FINALIZADO COMPACTO PC
+   ========================================= */
+
+@media (min-width: 769px) {
+
+  .match-modal-finished {
+    width: min(90vw, 760px);
+    max-height: 86dvh;
+  }
+
+  /* Encabezado y resultado */
+
+  .match-modal-finished .match-modal-header {
+    min-height: 0;
+    height: auto;
+    padding: 12px 24px 16px;
+  }
+
+  .match-modal-finished .match-modal-teams {
+    min-height: 0;
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .match-modal-finished .match-modal-team img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  .match-modal-finished .match-modal-team strong {
+    font-size: 13px;
+  }
+
+  .match-modal-finished .match-modal-score strong {
+    font-size: 30px;
+  }
+
+  /* Puntos por cuarto */
+
+  .match-modal-finished .match-quarters {
+    margin: 12px 18px;
+    padding: 12px 16px;
+  }
+
+  .match-modal-finished .match-quarters-title {
+    margin-bottom: 8px;
+  }
+
+  .match-modal-finished .match-quarters-title h3 {
+    font-size: 15px;
+  }
+
+  .match-modal-finished .match-quarters-table th,
+  .match-modal-finished .match-quarters-table td {
+    padding: 8px 6px;
+  }
+
+  /* Estadísticas de jugadores */
+
+  .match-modal-finished .match-stats-team-header {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .match-modal-finished .match-stat-player {
+    min-height: 34px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+
+/* =========================================
+   LNA - ÚLTIMOS PARTIDOS POPUP EQUIPO
+   ========================================= */
+
+.home-team-last-matches {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.home-team-last-matches h3 {
+  margin: 0 0 4px;
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.home-team-last-match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: #292929;
+  border: 1px solid #414141;
+  border-radius: 8px;
+}
+
+.home-team-last-match-date {
+  color: #a9a9a9;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.home-team-last-match-score {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.home-team-last-match-score > div {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.home-team-last-match-score > div:last-child {
+  justify-content: flex-start;
+}
+
+.home-team-last-match-score img {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.home-team-last-match-score span {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-team-last-match-score > strong {
+  color: var(--color-primary);
+  font-size: 19px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.home-team-last-match-result {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+}
+
+.home-team-last-match-result.is-win {
+  color: #48c774;
+}
+
+.home-team-last-match-result.is-loss {
+  color: #f28c45;
+}
+
+.home-team-last-matches-empty {
+  color: #a9a9a9;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .home-team-last-match {
+    padding: 10px 8px;
+  }
+
+  .home-team-last-match-score {
+    gap: 6px;
+  }
+
+  .home-team-last-match-score > div {
+    gap: 5px;
+  }
+
+  .home-team-last-match-score img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .home-team-last-match-score span {
+    font-size: 10px;
+  }
+
+  .home-team-last-match-score > strong {
+    font-size: 16px;
+  }
+}
+
+
+/* =========================================
+   LNA - ÚLTIMOS 2 PARTIDOS EN DOS COLUMNAS
+   ========================================= */
+
+.home-team-last-matches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.home-team-last-matches h3,
+.home-team-last-matches-empty {
+  grid-column: 1 / -1;
+}
+
+.home-team-last-match {
+  min-width: 0;
+  padding: 10px 8px;
+  gap: 7px;
+}
+
+.home-team-last-match-score {
+  gap: 5px;
+}
+
+.home-team-last-match-score > div {
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.home-team-last-match-score > div:last-child {
+  justify-content: center;
+}
+
+.home-team-last-match-score img {
+  width: 25px;
+  height: 25px;
+}
+
+.home-team-last-match-score span {
+  max-width: 100%;
+  font-size: 10px;
+}
+
+.home-team-last-match-score > strong {
+  font-size: 17px;
+}
+
+/* Celular: mantener ambos partidos en paralelo */
+
+@media (max-width: 768px) {
+  .home-team-last-matches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .home-team-last-match {
+    padding: 9px 4px;
+  }
+
+  .home-team-last-match-score {
+    gap: 3px;
+  }
+
+  .home-team-last-match-score img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .home-team-last-match-score span {
+    font-size: 9px;
+  }
+
+  .home-team-last-match-score > strong {
+    font-size: 14px;
+  }
+}
