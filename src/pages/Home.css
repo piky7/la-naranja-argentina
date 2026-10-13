@@ -6140,3 +6140,347 @@
     font-size: 14px;
   }
 }
+
+
+/* HOME LNA - DISTRIBUCIÓN EN DOS COLUMNAS */
+
+@media (min-width: 1024px) {
+  .home-dashboard {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .standings-panel,
+  .fixture-panel {
+    min-width: 0;
+  }
+}
+
+
+/* =========================================
+   LNA - PESTAÑAS DINÁMICAS DEL HOME
+   ========================================= */
+
+.home-stats-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: #151719;
+  border-bottom: 1px solid #353535;
+}
+
+.home-stats-tab {
+  min-width: 0;
+  padding: 13px 8px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #a3a3a3;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.home-stats-tab:hover {
+  background: #242424;
+  color: #ffffff;
+}
+
+.home-stats-tab.active {
+  background: #222222;
+  border-bottom-color: #ff7900;
+  color: #ffffff;
+}
+
+.home-stats-tab:focus-visible {
+  outline: 2px solid #ff7900;
+  outline-offset: -3px;
+}
+
+@media (max-width: 768px) {
+  .home-stats-tab {
+    padding: 11px 5px;
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+}
+
+
+/* =========================================
+   LNA - TABLA DE POSICIONES COMPACTA
+   ========================================= */
+
+@media (min-width: 1024px) {
+  .standings-panel .home-standing-row {
+    min-height: 35px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .standings-panel .home-standing-team img {
+    width: 21px;
+    height: 21px;
+    object-fit: contain;
+  }
+
+  .standings-panel .standing-position {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+  }
+
+  .standings-panel .standings-table-header {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .standings-panel .home-stats-tab {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+/* LNA - TOP 10 ANOTADORES EN DOS COLUMNAS */
+
+.standings-panel .home-scorers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(5, auto);
+  grid-auto-flow: column;
+  gap: 0;
+}
+
+.standings-panel .home-scorers-grid .home-scorer {
+  min-width: 0;
+  width: 100%;
+}
+
+.standings-panel .home-scorers-grid .scorer-info {
+  min-width: 0;
+}
+
+.standings-panel .home-scorers-grid .scorer-player-data {
+  min-width: 0;
+}
+
+.standings-panel .home-scorers-grid .scorer-player-data strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================
+   LNA - TOP 10 ANOTADORES: PJ Y PTS
+   ========================================= */
+
+.standings-panel .home-scorers-grid .home-scorer {
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+}
+
+.standings-panel .home-scorers-grid .scorer-points {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.standings-panel .home-scorers-grid .scorer-games,
+.standings-panel .home-scorers-grid .scorer-average {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 32px;
+}
+
+.standings-panel .home-scorers-grid .scorer-games strong,
+.standings-panel .home-scorers-grid .scorer-average strong {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.standings-panel .home-scorers-grid .scorer-average strong {
+  color: #ff7900;
+}
+
+.standings-panel .home-scorers-grid .scorer-games span,
+.standings-panel .home-scorers-grid .scorer-average span {
+  color: #999999;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* Adaptación a celulares */
+
+@media (max-width: 768px) {
+  .standings-panel .home-scorers-grid .home-scorer {
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+    gap: 4px;
+    padding: 8px 5px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-points {
+    gap: 5px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-games,
+  .standings-panel .home-scorers-grid .scorer-average {
+    min-width: 24px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-games strong,
+  .standings-panel .home-scorers-grid .scorer-average strong {
+    font-size: 11px;
+  }
+}
+
+/* LNA - MAXIMOS ANOTADORES COMPACTOS */
+
+.standings-panel .home-scorers-grid .home-scorer {
+  grid-template-columns: 22px minmax(0, 1fr) 75px;
+  gap: 5px;
+  padding: 7px 8px;
+  min-height: 43px;
+}
+
+.standings-panel .home-scorers-grid .scorer-points {
+  display: grid;
+  grid-template-columns: 25px 42px;
+  gap: 5px;
+  align-items: center;
+  justify-content: end;
+}
+
+.standings-panel .home-scorers-grid .scorer-games,
+.standings-panel .home-scorers-grid .scorer-average {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  gap: 3px;
+  min-width: 0;
+}
+
+.standings-panel .home-scorers-grid .scorer-games strong,
+.standings-panel .home-scorers-grid .scorer-average strong {
+  font-size: 12px;
+}
+
+.standings-panel .home-scorers-grid .scorer-games span,
+.standings-panel .home-scorers-grid .scorer-average span {
+  font-size: 8px;
+}
+
+.standings-panel .home-scorers-grid .scorer-player-data strong {
+  font-size: 11px;
+}
+
+
+
+/* LNA - ANOTADORES MOBILE REFINADO */
+
+@media (max-width: 768px) {
+  .standings-panel .home-scorers-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(5, auto);
+    grid-auto-flow: column;
+  }
+
+  .standings-panel .home-scorers-grid .home-scorer {
+    display: grid;
+    grid-template-columns: 17px 25px minmax(0, 1fr) 36px;
+    align-items: center;
+    gap: 4px;
+    min-height: 65px;
+    padding: 10px 5px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-points {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-average,
+  .standings-panel .home-scorers-grid .scorer-games {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-average strong {
+    font-size: 13px;
+    color: #ff7900;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-average span {
+    font-size: 7px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-games {
+    flex-direction: row;
+    gap: 3px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-games strong {
+    font-size: 9px;
+    color: #a0a0a0;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-games span {
+    font-size: 8px;
+    color: #777;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-player-data strong {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+}
+
+/* LNA - CORRECCION NOMBRES ANOTADORES MOBILE */
+
+@media (max-width: 768px) {
+  .standings-panel .home-scorers-grid .home-scorer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 65px;
+    padding: 9px 5px;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-player-data {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-player-data strong {
+    display: block;
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .standings-panel .home-scorers-grid .scorer-points {
+    flex: 0 0 34px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 2px;
+  }
+}

@@ -34,7 +34,7 @@ function Home() {
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
-  const [selectedMatch, setSelectedMatch] = useState(null);
+const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
@@ -813,7 +813,7 @@ const standingsMatches = matches.map((match) => {
 
         return a.name.localeCompare(b.name, "es");
       })
-      .slice(0, 5);
+      .slice(0, 10);
   }, []);
 
     
@@ -831,8 +831,19 @@ const standingsMatches = matches.map((match) => {
             <section className="home-panel standings-panel">
               <div className="home-panel-header">
                 <div>
-                  <span>TEMPORADA</span>
-                  <h2>Tabla de posiciones</h2>
+                 
+<span>
+  {homeStatsTab === "posiciones"
+    ? "TEMPORADA"
+    : "ESTADÍSTICAS"}
+</span>
+
+<h2>
+  {homeStatsTab === "posiciones"
+    ? "Tabla de posiciones"
+    : "Máximos anotadores"}
+</h2>
+
                 </div>
 
                 <Link to="/liga">
@@ -840,6 +851,29 @@ const standingsMatches = matches.map((match) => {
                 </Link>
               </div>
 
+<div className="home-stats-tabs">
+  <button
+    type="button"
+    className={`home-stats-tab ${
+      homeStatsTab === "posiciones" ? "active" : ""
+    }`}
+    onClick={() => setHomeStatsTab("posiciones")}
+  >
+    POSICIONES
+  </button>
+
+  <button
+    type="button"
+    className={`home-stats-tab ${
+      homeStatsTab === "anotadores" ? "active" : ""
+    }`}
+    onClick={() => setHomeStatsTab("anotadores")}
+  >
+    MÁXIMOS ANOTADORES
+  </button>
+</div>
+{homeStatsTab === "posiciones" && (
+  <>
               <div className="standings-table standings-table-desktop">
                 <div className="standings-table-header">
                   <span>#</span>
@@ -885,6 +919,7 @@ const standingsMatches = matches.map((match) => {
                   </button>
                 ))}
               </div>
+              
               <div className="standings-table-mobile">
   {[standings.slice(0, 9), standings.slice(9, 18)].map(
     (column, columnIndex) => (
@@ -937,7 +972,65 @@ const standingsMatches = matches.map((match) => {
     )
   )}
 </div>
+  </>
+)}
+{homeStatsTab === "anotadores" && (
+    <div className="home-scorers home-scorers-grid">
+    {topScorers.length > 0 ? (
+      topScorers.map((player, index) => (
+        <button
+          key={player.id}
+          type="button"
+          className="home-scorer"
+          onClick={() => setSelectedPlayer(player)}
+        >
+          <span className="scorer-position">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          <div className="scorer-info">
+            {player.team && (
+              <img
+                src={player.team.logo}
+                alt={`Escudo de ${player.team.name}`}
+              />
+            )}
+
+            <div className="scorer-player-data">
+              <strong>{player.name}</strong>
+              <span>
+                {player.team?.shortName || "Sin equipo"}
+              </span>
+            </div>
+          </div>
+
+          
+<div className="scorer-points">
+  <div className="scorer-games">
+    <strong>{player.stats?.gamesPlayed ?? 0}</strong>
+    <span>PJ</span>
+  </div>
+
+  <div className="scorer-average">
+    <strong>{player.points.toFixed(1)}</strong>
+    <span>PTS</span>
+  </div>
+</div>
+
+        </button>
+      ))
+    ) : (
+      <div className="home-no-scorers">
+        <span>SIN DATOS</span>
+        <p>Todavía no hay estadísticas disponibles.</p>
+      </div>
+    )}
+  </div>
+)}
             </section>
+            
+
+
 
             {/* FIXTURE */}
 
@@ -1220,74 +1313,7 @@ const finishedMatch = {
 
             {/* MÁXIMOS ANOTADORES */}
 
-            <section className="home-panel scorers-panel">
-              <div className="home-panel-header">
-                <div>
-                  <span>ESTADÍSTICAS</span>
-                  <h2>Máximos anotadores</h2>
-                </div>
-
-                <Link to="/estadisticas">
-                  Ver todos →
-                </Link>
-              </div>
-
-              <div className="home-scorers">
-                {topScorers.length > 0 ? (
-                  topScorers.map((player, index) => (
-                    <button
-                      key={player.id}
-                      type="button"
-                      className="home-scorer"
-                      onClick={() =>
-                        setSelectedPlayer(player)
-                      }
-                    >
-                      <span className="scorer-position">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-
-                      <div className="scorer-info">
-                        {player.team && (
-                          <img
-                            src={player.team.logo}
-                            alt={`Escudo de ${player.team.name}`}
-                          />
-                        )}
-
-                        <div className="scorer-player-data">
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {player.team?.shortName ||
-                              "Sin equipo"}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="scorer-points">
-                        <strong>
-                          {player.points.toFixed(1)}
-                        </strong>
-
-                        <span>PTS</span>
-                      </div>
-                    </button>
-                  ))
-                ) : (
-                  <div className="home-no-scorers">
-                    <span>SIN DATOS</span>
-
-                    <p>
-                      Todavía no hay estadísticas
-                      disponibles.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </section>
+           
           </div>
         </div>
       </section>
