@@ -32,7 +32,7 @@ function Liga() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-
+const [resultsPage, setResultsPage] = useState(null);
   const getTeam = (teamId) =>
     teams.find((team) => team.id === teamId);
   const getMatchPlayerInfo = (matchPlayer) => {
@@ -286,21 +286,33 @@ const getPlayerLastMatches = (player) => {
     =========================
   */
 
-  const results = matches
-    .filter(
-      (match) =>
-        match.status === "finished"
-    )
-    .sort((a, b) => {
-      if (a.date !== b.date) {
-        return b.date.localeCompare(a.date);
-      }
+  const allResults = matches
+  .filter((match) => match.status === "finished")
+  .sort((a, b) => {
+    if (a.date !== b.date) {
+      return b.date.localeCompare(a.date);
+    }
 
-      return (b.time || "").localeCompare(
-        a.time || ""
-      );
-    })
-    .slice(0, 10);
+    return (b.time || "").localeCompare(
+      a.time || ""
+    );
+  });
+
+const resultsPerPage = 10;
+
+const totalResultsPages = Math.ceil(
+  allResults.length / resultsPerPage
+);
+
+const currentResultsPage = Math.min(
+  Math.max(resultsPage ?? totalResultsPages - 1, 0),
+  Math.max(totalResultsPages - 1, 0)
+);
+
+const results = allResults.slice(
+  (totalResultsPages - 1 - currentResultsPage) * resultsPerPage,
+  (totalResultsPages - currentResultsPage) * resultsPerPage
+);
 
   /*
     =========================
@@ -652,12 +664,90 @@ const getPlayerLastMatches = (player) => {
                     ÚLTIMOS 10
                   </span>
 
-                  <h2>
-                    Resultados
-                  </h2>
+                  
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  }}
+>
+  <h2 style={{ margin: 0 }}>
+    Resultados
+  </h2>
+
+  {totalResultsPages > 1 && (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+      }}
+    >
+      <button
+        type="button"
+        aria-label="Ver resultados anteriores"
+        disabled={currentResultsPage === 0}
+        onClick={() =>
+          setResultsPage(currentResultsPage - 1)
+        }
+        style={{
+          background: "#22252b",
+          color: currentResultsPage === 0 ? "#777" : "#ff8c00",
+          border: "1px solid #444",
+          borderRadius: "6px",
+          width: "26px",
+          height: "26px",
+          cursor: currentResultsPage === 0 ? "not-allowed" : "pointer",
+        }}
+      >
+        ‹
+      </button>
+
+      <span
+        style={{
+          color: "#bbb",
+          fontSize: "12px",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {currentResultsPage + 1}/{totalResultsPages}
+      </span>
+
+      <button
+        type="button"
+        aria-label="Ver resultados más recientes"
+        disabled={currentResultsPage === totalResultsPages - 1}
+        onClick={() =>
+          setResultsPage(currentResultsPage + 1)
+        }
+        style={{
+          background: "#22252b",
+          color:
+            currentResultsPage === totalResultsPages - 1
+              ? "#777"
+              : "#ff8c00",
+          border: "1px solid #444",
+          borderRadius: "6px",
+          width: "26px",
+          height: "26px",
+          cursor:
+            currentResultsPage === totalResultsPages - 1
+              ? "not-allowed"
+              : "pointer",
+        }}
+      >
+        ›
+      </button>
+    </div>
+  )}
+</div>
+
 
                 </div>
               </div>
+
+
 
 
               <div className="results-card">
@@ -769,6 +859,8 @@ const getPlayerLastMatches = (player) => {
                 )}
 
               </div>
+
+
 
             </div>
 

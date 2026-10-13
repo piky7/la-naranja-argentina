@@ -234,6 +234,7 @@ function Equipo() {
 
   const [selectedMatch, setSelectedMatch] =
     useState(null);
+    const [resultsPage, setResultsPage] = useState(null);
 
   const team = getTeam(teamId);
 
@@ -329,26 +330,32 @@ function Equipo() {
      MÁS RECIENTE → MÁS ANTIGUO
      ========================================= */
 
-  const finishedMatches =
-    teamMatches
-      .filter(
-        (match) =>
-          match.status === "finished"
-      )
-      .sort((a, b) => {
-        if (a.date !== b.date) {
-          return b.date.localeCompare(
-            a.date
-          );
-        }
+  
+const allFinishedMatches = teamMatches
+  .filter((match) => match.status === "finished")
+  .sort((a, b) => {
+    if (a.date !== b.date) {
+      return b.date.localeCompare(a.date);
+    }
 
-        return (
-          (b.time || "").localeCompare(
-            a.time || ""
-          )
-        );
-      })
-      .slice(0, 6);
+    return (b.time || "").localeCompare(a.time || "");
+  });
+
+const resultsPerPage = 10;
+const totalResultsPages = Math.ceil(
+  allFinishedMatches.length / resultsPerPage
+);
+
+const currentResultsPage = Math.min(
+  Math.max(resultsPage ?? totalResultsPages - 1, 0),
+  Math.max(totalResultsPages - 1, 0)
+);
+
+const finishedMatches = allFinishedMatches.slice(
+  (totalResultsPages - 1 - currentResultsPage) * resultsPerPage,
+  (totalResultsPages - currentResultsPage) * resultsPerPage
+);
+
 
 
   /* =========================================
@@ -779,14 +786,84 @@ function Equipo() {
                     RESULTADOS
                   </span>
 
-                  <h2>
-                    Últimos partidos
-                  </h2>
+                  
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  }}
+>
+  <h2 style={{ margin: 0 }}>Últimos partidos</h2>
+
+  {totalResultsPages > 1 && (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+      }}
+    >
+      <button
+        type="button"
+        aria-label="Ver resultados anteriores"
+        disabled={currentResultsPage === 0}
+        onClick={() => setResultsPage(currentResultsPage - 1)}
+        style={{
+          background: "#22252b",
+          color: currentResultsPage === 0 ? "#777" : "#ff8c00",
+          border: "1px solid #444",
+          borderRadius: "6px",
+          width: "26px",
+          height: "26px",
+          cursor: currentResultsPage === 0 ? "not-allowed" : "pointer",
+        }}
+      >
+        ‹
+      </button>
+
+      <span
+        style={{
+          color: "#bbb",
+          fontSize: "12px",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {currentResultsPage + 1}/{totalResultsPages}
+      </span>
+
+      <button
+        type="button"
+        aria-label="Ver resultados más recientes"
+        disabled={currentResultsPage === totalResultsPages - 1}
+        onClick={() => setResultsPage(currentResultsPage + 1)}
+        style={{
+          background: "#22252b",
+          color:
+            currentResultsPage === totalResultsPages - 1
+              ? "#777"
+              : "#ff8c00",
+          border: "1px solid #444",
+          borderRadius: "6px",
+          width: "26px",
+          height: "26px",
+          cursor:
+            currentResultsPage === totalResultsPages - 1
+              ? "not-allowed"
+              : "pointer",
+        }}
+      >
+        ›
+      </button>
+    </div>
+  )}
+</div>
+
 
                 </div>
 
                 <strong>
-                  {finishedMatches.length}
+                  {allFinishedMatches.length}
                 </strong>
 
               </div>
