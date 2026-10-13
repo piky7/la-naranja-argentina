@@ -3785,7 +3785,6 @@ export const matchPlayerStats = {
     }
   ]
 },
-
 "atenas-ferro": {
   "atenas": [
     {
@@ -3958,7 +3957,6 @@ export const matchPlayerStats = {
     }
   ]
 },
-
 "argentino-gimnasia": {
   "argentino": [
     {
