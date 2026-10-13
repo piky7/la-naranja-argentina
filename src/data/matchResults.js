@@ -175,4 +175,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-12-olimpico-boca": {
+    status: "finished",
+    homeScore: 93,
+    awayScore: 80,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
