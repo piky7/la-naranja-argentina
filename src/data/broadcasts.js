@@ -89,17 +89,10 @@ export const broadcasts = {
   },
   "2026-10-16-san-lorenzo-penarol": {
     "date": "2026-10-16",
-    "time": "21:00",
+    "time": "21:05",
     "homeTeam": "san-lorenzo",
     "awayTeam": "penarol",
     "channel": "DSports"
-  },
-  "2026-10-18-san-lorenzo-olimpico": {
-    "date": "2026-10-18",
-    "time": "11:00",
-    "homeTeam": "san-lorenzo",
-    "awayTeam": "olimpico",
-    "channel": "TyC Sports"
   },
   "2026-10-20-ferro-platense": {
     "date": "2026-10-20",
@@ -110,9 +103,72 @@ export const broadcasts = {
   },
   "2026-10-21-instituto-lanus": {
     "date": "2026-10-21",
-    "time": "21:30",
+    "time": "21:35",
     "homeTeam": "instituto",
     "awayTeam": "lanus",
     "channel": "DSports"
+  },
+  "2026-10-13-obera-racing-chivilcoy": {
+    "date": "2026-10-13",
+    "time": "21:00",
+    "homeTeam": "obera",
+    "awayTeam": "racing-chivilcoy",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-14-lanus-penarol": {
+    "date": "2026-10-14",
+    "time": "20:30",
+    "homeTeam": "lanus",
+    "awayTeam": "penarol",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-15-la-union-racing-chivilcoy": {
+    "date": "2026-10-15",
+    "time": "21:00",
+    "homeTeam": "la-union",
+    "awayTeam": "racing-chivilcoy",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-16-platense-obera": {
+    "date": "2026-10-16",
+    "time": "20:30",
+    "homeTeam": "platense",
+    "awayTeam": "obera",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-18-san-lorenzo-obera": {
+    "date": "2026-10-18",
+    "time": "11:05",
+    "homeTeam": "san-lorenzo",
+    "awayTeam": "obera",
+    "channel": "TyC Sports"
+  },
+  "2026-10-18-regatas-olimpico": {
+    "date": "2026-10-18",
+    "time": "20:30",
+    "homeTeam": "regatas",
+    "awayTeam": "olimpico",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-19-independiente-oliva-lanus": {
+    "date": "2026-10-19",
+    "time": "21:00",
+    "homeTeam": "independiente-oliva",
+    "awayTeam": "lanus",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-20-san-martin-olimpico": {
+    "date": "2026-10-20",
+    "time": "21:00",
+    "homeTeam": "san-martin",
+    "awayTeam": "olimpico",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-21-argentino-boca": {
+    "date": "2026-10-21",
+    "time": "21:00",
+    "homeTeam": "argentino",
+    "awayTeam": "boca",
+    "channel": "Básquet Pass"
   }
 };

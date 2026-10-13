@@ -2,8 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const URLS = [
-  "https://basquetplus.com/lnb",
-  "https://basquetplus.com/liga-nacional-lnb-televisados-semana-semanal-jornada-primera-basquetpass-tyc-dsports",
+  "https://www.unocontraunoweb.com/2026/09/30/lnb-calendario-2026-27-dias-horarios-y-tv-partidos/",
 ];
 
 const OUTPUT = path.join(
@@ -137,7 +136,40 @@ function normalizeText(text) {
     .trim()
     .toLowerCase();
 }
+function parseSpanishDate(text) {
+  const months = {
+    enero: 1,
+    febrero: 2,
+    marzo: 3,
+    abril: 4,
+    mayo: 5,
+    junio: 6,
+    julio: 7,
+    agosto: 8,
+    septiembre: 9,
+    octubre: 10,
+    noviembre: 11,
+    diciembre: 12,
+  };
 
+  const match = text
+    .toLowerCase()
+    .match(/\b(\d{1,2})\s+de\s+([a-záéíóú]+)\b/);
+
+  if (!match) return null;
+
+  const day = match[1].padStart(2, "0");
+  const monthNumber = months[match[2]];
+
+  if (!monthNumber) return null;
+
+  const month = String(monthNumber).padStart(2, "0");
+
+  // Temporada 2026/27
+  const year = monthNumber >= 9 ? 2026 : 2027;
+
+  return `${year}-${month}-${day}`;
+}
 function normalizeChannel(text) {
   const normalized =
     normalizeText(text);
@@ -456,7 +488,63 @@ function extractBroadcasts(html) {
 
   return broadcasts;
 }
+function extractUnoContraUno(html) {
+  const found = {};
 
+  const text = decodeHtml(html)
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<\/(?:p|div|h[1-6]|li|tr)>/gi, "\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\r/g, "")
+    .replace(/[ \t]+/g, " ");
+
+  let currentDate = null;
+
+  for (const rawLine of text.split("\n")) {
+    const line = rawLine.trim();
+    if (!line) continue;
+
+    const dateMatch = line.match(
+      /^(?:lunes|martes|miércoles|miercoles|jueves|viernes|sábado|sabado|domingo)\s+\d{1,2}\s+de\s+[a-záéíóú]+/i
+    );
+
+    if (dateMatch) {
+      currentDate = parseSpanishDate(dateMatch[0]);
+      continue;
+    }
+
+    if (!currentDate) continue;
+
+    const gameMatch = line.match(
+      /\b(\d{1,2}):(\d{2})\s+(.+?)\s+(?:vs\.?|versus)\s+(.+?)(?:\.\s*|\s+)(?:TV|Streaming)\s*:\s*(.+)/i
+    );
+
+    if (!gameMatch) continue;
+
+    const home = findTeam(gameMatch[3]);
+    const away = findTeam(gameMatch[4]);
+    const channel = normalizeChannel(gameMatch[5]);
+
+    if (!home || !away || !channel) continue;
+
+    const time = `${gameMatch[1].padStart(2, "0")}:${gameMatch[2]}`;
+    const key = `${currentDate}-${home.slug}-${away.slug}`;
+
+    found[key] = {
+      date: currentDate,
+      time,
+      homeTeam: home.slug,
+      awayTeam: away.slug,
+      channel,
+    };
+
+    console.log(`[TV] ${key} → ${channel}`);
+  }
+
+  return found;
+}
 function mergeBroadcasts(
   target,
   source
@@ -473,8 +561,8 @@ function writeBroadcastFile(
 ) {
   const content =
 `// ESTE ARCHIVO ES GENERADO AUTOMÁTICAMENTE.
-// Fuente: Básquet Plus
-// No editar manualmente.
+// Fuente: Uno Contra Uno
+// // No editar manualmente.
 
 export const broadcasts = ${JSON.stringify(
   broadcasts,
@@ -561,13 +649,32 @@ async function main() {
       const html =
         await fetchPage(url);
 
-      const found =
-        extractBroadcasts(html);
+     const found =
+  extractUnoContraUno(html);
 
-      mergeBroadcasts(
-        broadcasts,
-        found
-      );
+      // Uno Contra Uno tiene prioridad para los partidos publicados.
+// Conservamos los datos anteriores solo si no contradicen
+// un partido confirmado para la misma fecha y equipo.
+for (const [key, value] of Object.entries(found)) {
+  for (const oldKey of Object.keys(broadcasts)) {
+    const old = broadcasts[oldKey];
+
+    if (
+      old.date === value.date &&
+      (
+        old.homeTeam === value.homeTeam ||
+        old.awayTeam === value.awayTeam ||
+        old.homeTeam === value.awayTeam ||
+        old.awayTeam === value.homeTeam
+      ) &&
+      oldKey !== key
+    ) {
+      delete broadcasts[oldKey];
+    }
+  }
+
+  broadcasts[key] = value;
+}
     } catch (error) {
       console.log(
         `[TV] ⚠️ Error consultando ${url}: ${error.message}`
