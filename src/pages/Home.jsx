@@ -755,104 +755,7 @@ const getPlayerLastMatches = (player) => {
     <main className="home-page">
       <section className="home-content">
         <div className="home-container">
-          {visibleLiveMatches.length > 0 && (
-  <section className="home-live-panel">
-   <div className="home-live-header">
-  <div>
-    <span>ACTUALIDAD</span>
-    <h2>
-      {visibleLiveMatches.some(
-        (match) => match.status === "live"
-      )
-        ? "Partidos en vivo"
-        : "Últimos partidos"}
-    </h2>
-  </div>
-
-  <div className="home-live-indicator">
-    <span></span>
-    {visibleLiveMatches.some(
-      (match) => match.status === "live"
-    )
-      ? "EN VIVO"
-      : "FINALIZADO"}
-  </div>
-</div>
-
-    <div className="home-live-matches">
-      {visibleLiveMatches.map((liveMatch) => {
-        const homeTeam = getTeam(liveMatch.homeTeam);
-        const awayTeam = getTeam(liveMatch.awayTeam);
-
-        return (
-          <article
-            key={liveMatch.eventId}
-            className="home-live-match"
-          >
-            <div className="home-live-team home-live-team-home">
-              {homeTeam && (
-                <img
-                  src={homeTeam.logo}
-                  alt={`Escudo de ${homeTeam.name}`}
-                />
-              )}
-
-              <strong>
-                {homeTeam?.shortName ||
-                  liveMatch.homeName}
-              </strong>
-            </div>
-
-            <div className="home-live-score">
-  <span>
-    {liveMatch.status === "finished"
-      ? "FINALIZADO"
-      : "EN VIVO"}
-  </span>
-
-  <strong>
-    {liveMatch.homeScore} - {liveMatch.awayScore}
-  </strong>
-
-  {liveMatch.status === "finished" ? (
-    <small className="home-live-period">
-      FINALIZADO
-    </small>
-  ) : liveMatch.isHalftime ? (
-    <small className="home-live-period">
-      ENTRETIEMPO
-    </small>
-  ) : liveMatch.quarter ? (
-    <small className="home-live-period">
-      
-{liveMatch.quarter}.º CUARTO
-{liveMatch.minutesRemaining != null
-  ? ` · ${getRemainingMinutes(liveMatch.minutesRemaining)}' RESTANTES`
-  : ""}
-
-    </small>
-  ) : null}
-</div>
-
-            <div className="home-live-team home-live-team-away">
-              {awayTeam && (
-                <img
-                  src={awayTeam.logo}
-                  alt={`Escudo de ${awayTeam.name}`}
-                />
-              )}
-
-              <strong>
-                {awayTeam?.shortName ||
-                  liveMatch.awayName}
-              </strong>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-  </section>
-)}
+          
 
           <div className="home-dashboard">
 
@@ -1160,29 +1063,30 @@ const finishedMatch = {
                             </>
                           ) : isLive ? (
   <>
-    <strong className="fixture-live-text">
+    <span className="fixture-live-badge">
+      <span className="fixture-live-dot"></span>
       EN VIVO
-    </strong>
-
-    <span>
-      {liveMatch?.homeScore ?? match.homeScore} -{" "}
-      {liveMatch?.awayScore ?? match.awayScore}
     </span>
 
-    {liveMatch?.isHalftime ? (
-      <small className="fixture-live-period">
-        ENTRETIEMPO
-      </small>
-    ) : liveMatch?.quarter ? (
-      <small className="fixture-live-period">
-        
-{liveMatch.quarter}.º CUARTO
-{liveMatch.minutesRemaining != null
-  ? ` · ${getRemainingMinutes(liveMatch.minutesRemaining)}' RESTANTES`
-  : ""}
+    <strong className="fixture-live-score">
+      {liveMatch?.homeScore ?? match.homeScore ?? 0}
+      {" - "}
+      {liveMatch?.awayScore ?? match.awayScore ?? 0}
+    </strong>
 
-      </small>
-    ) : null}
+    <small className="fixture-live-period">
+      {liveMatch?.isHalftime
+        ? "ENTRETIEMPO"
+        : liveMatch?.quarter
+          ? `${liveMatch.quarter}.º CUARTO${
+              liveMatch.minutesRemaining != null
+                ? ` · ${getRemainingMinutes(
+                    liveMatch.minutesRemaining
+                  )}' RESTANTES`
+                : ""
+            }`
+          : "PARTIDO EN JUEGO"}
+    </small>
   </>
 ) : (
                             <>
