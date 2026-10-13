@@ -558,11 +558,43 @@ const getPlayerLastMatches = (player) => {
     const interval = setInterval(checkDeployment, 60000);
     return () => clearInterval(interval);
   }, [visibleLiveMatches.some((match) => match.status === "finished")]);
+// Incorporar resultados LIVE finalizados que todavía
+// no fueron publicados en matchResults.js.
+const standingsMatches = matches.map((match) => {
+  // Si ya tenemos el resultado definitivo publicado,
+  // conservarlo como fuente principal.
+  if (isMatchFinished(match)) {
+    return match;
+  }
 
+  const liveMatch =
+    liveDate === match.date
+      ? liveMatches.find(
+          (live) =>
+            live.homeTeam === match.homeTeam &&
+            live.awayTeam === match.awayTeam &&
+            live.status === "finished" &&
+            !live.isHalftime &&
+            live.homeScore != null &&
+            live.awayScore != null
+        )
+      : null;
+
+  if (!liveMatch) {
+    return match;
+  }
+
+  return {
+    ...match,
+    homeScore: Number(liveMatch.homeScore),
+    awayScore: Number(liveMatch.awayScore),
+    status: "finished",
+  };
+});
   const standings = useMemo(() => {
     return teams
       .map((team) => {
-        const teamMatches = matches.filter(
+        const teamMatches = standingsMatches.filter(
           (match) =>
             isMatchFinished(match) &&
             (match.homeTeam === team.id ||
@@ -631,7 +663,7 @@ const getPlayerLastMatches = (player) => {
   }
 
   // 2. Enfrentamientos directos
-  const directMatches = matches.filter(
+  const directMatches = standingsMatches.filter(
     (match) =>
       isMatchFinished(match) &&
       (
@@ -694,7 +726,7 @@ const getPlayerLastMatches = (player) => {
 });
 
 
-  }, []);
+  }, [liveMatches, liveDate]);
 
   const selectedDayMatches = useMemo(() => {
     return matches
