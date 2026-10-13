@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 125,
-  "finishedMatches": 21,
+  "finishedMatches": 22,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "xKJUDvzH",
+      "homeTeam": "atenas",
+      "homeName": "Atenas",
+      "awayTeam": "ferro",
+      "awayName": "Ferro",
+      "homeScore": 91,
+      "awayScore": 86,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791849600,
+      "homeSlug": "atenas",
+      "awaySlug": "ferro-carril-oeste",
+      "homeId": "hbqyLbBE",
+      "awayId": "2qroXLyp"
+    },
     {
       "eventId": "UgGMF054",
       "homeTeam": "argentino",
@@ -1987,25 +2003,25 @@
       "awaySlug": "boca-juniors",
       "homeId": "ERbTiFhJ",
       "awayId": "pn7Cecgf"
-    },
+    }
+  ],
+  "finished": [
     {
       "eventId": "xKJUDvzH",
       "homeTeam": "atenas",
       "homeName": "Atenas",
       "awayTeam": "ferro",
       "awayName": "Ferro",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
+      "homeScore": 91,
+      "awayScore": 86,
+      "status": "finished",
+      "statusCode": "3",
       "timestamp": 1791849600,
       "homeSlug": "atenas",
       "awaySlug": "ferro-carril-oeste",
       "homeId": "hbqyLbBE",
       "awayId": "2qroXLyp"
-    }
-  ],
-  "finished": [
+    },
     {
       "eventId": "UgGMF054",
       "homeTeam": "argentino",

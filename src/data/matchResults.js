@@ -167,4 +167,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-12-atenas-ferro": {
+    status: "finished",
+    homeScore: 91,
+    awayScore: 86,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
