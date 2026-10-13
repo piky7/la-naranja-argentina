@@ -5723,3 +5723,67 @@
   background: #ef4444;
   box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
 }
+
+/* =====================================
+   LNA - REDISEÑO POPUP FINALIZADO
+   MISMO ESTILO QUE PRÓXIMO PARTIDO
+===================================== */
+
+.match-modal-finished {
+  background: #11151c;
+  border: 1px solid rgba(255, 132, 0, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 20px 65px rgba(0, 0, 0, 0.55);
+}
+
+/* Encabezado con degradado */
+
+.match-modal-finished .match-modal-header {
+  background: linear-gradient(
+    180deg,
+    #202630 0%,
+    #141920 100%
+  );
+
+  border-bottom: 1px solid rgba(255, 132, 0, 0.3);
+}
+
+/* Resultado final */
+
+.match-modal-finished .match-modal-score strong {
+  color: #ff9000;
+  font-weight: 900;
+}
+
+/* Ajustes para celular */
+
+@media (max-width: 600px) {
+
+  .match-modal-finished {
+    border-radius: 12px;
+  }
+
+  .match-modal-finished .match-modal-header {
+    min-height: 0;
+    height: auto;
+    padding: 18px 12px 22px;
+  }
+
+  .match-modal-finished .match-modal-teams {
+    margin-top: 18px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 0;
+  }
+
+  .match-modal-finished .match-modal-team img {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+  }
+
+  .match-modal-finished .match-modal-score strong {
+    font-size: 30px;
+  }
+}
