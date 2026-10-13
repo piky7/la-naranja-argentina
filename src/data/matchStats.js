@@ -4145,4 +4145,177 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"olimpico-boca": {
+  "olimpico": [
+    {
+      "id": "austin-wtighten",
+      "name": "Austin Wtighten",
+      "points": 27,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "36:23"
+    },
+    {
+      "id": "lucas-perez",
+      "name": "Lucas Pérez",
+      "points": 14,
+      "rebounds": 2,
+      "assists": 9,
+      "minutes": "35:58"
+    },
+    {
+      "id": "santino-romegialli",
+      "name": "Santino Romegialli",
+      "points": 6,
+      "rebounds": 11,
+      "assists": 1,
+      "minutes": "36:47"
+    },
+    {
+      "id": "ezequiel-paz",
+      "name": "Ezequiel Paz",
+      "points": 18,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "25:21"
+    },
+    {
+      "id": "elisias-hall",
+      "name": "Elisias Hall",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "09:43"
+    },
+    {
+      "id": "jeremias-frontera",
+      "name": "Jeremías Frontera",
+      "points": 14,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "21:54"
+    },
+    {
+      "id": "guido-mariani",
+      "name": "Guido Mariani",
+      "points": 6,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "25:54"
+    },
+    {
+      "id": "joaquin-lopez-lorenz",
+      "name": "Joaquín López Lorenz",
+      "points": 4,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "08:01"
+    }
+  ],
+  "boca": [
+    {
+      "id": "jose-vildoza",
+      "name": "José Vildoza",
+      "points": 9,
+      "rebounds": 0,
+      "assists": 3,
+      "minutes": "32:49"
+    },
+    {
+      "id": "tomas-monacchi",
+      "name": "Tomás Monacchi",
+      "points": 15,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "28:41"
+    },
+    {
+      "id": "leonardo-lema",
+      "name": "Leo Lema",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "23:58"
+    },
+    {
+      "id": "francisco-caffaro",
+      "name": "Francisco Cáffaro",
+      "points": 26,
+      "rebounds": 10,
+      "assists": 3,
+      "minutes": "27:51"
+    },
+    {
+      "id": "martin-cuello",
+      "name": "Martín Cuello",
+      "points": 7,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "18:11"
+    },
+    {
+      "id": "mike-warren",
+      "name": "Mike Warren",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "20:32"
+    },
+    {
+      "id": "lucas-faggiano",
+      "name": "Lucas Faggiano",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "04:25"
+    },
+    {
+      "id": "nicolas-stenta",
+      "name": "Nicolás Stenta",
+      "points": 6,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "13:45"
+    },
+    {
+      "id": "kriss-helmanis",
+      "name": "Kriss Helmanis",
+      "points": 0,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "11:12"
+    },
+    {
+      "id": "agustin-barreiro",
+      "name": "Agustín Barreiro",
+      "points": 9,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "18:37"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 35,
+      "away": 17
+    },
+    {
+      "period": "2",
+      "home": 20,
+      "away": 17
+    },
+    {
+      "period": "3",
+      "home": 19,
+      "away": 29
+    },
+    {
+      "period": "4",
+      "home": 19,
+      "away": 17
+    }
+  ]
+},
 };
