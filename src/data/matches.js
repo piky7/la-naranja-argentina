@@ -764,10 +764,10 @@ export const matches = fixture.flatMap(
         const tv =
           status === "postponed"
             ? []
-            : automaticResult?.tv?.length
-              ? automaticResult.tv
-              : broadcast?.channel
-                ? [broadcast.channel]
+    : broadcast?.channel
+  ? [broadcast.channel]
+  : automaticResult?.tv?.length
+    ? automaticResult.tv
                 : (
                     !automaticResult ||
                     automaticResult.status === "scheduled"
