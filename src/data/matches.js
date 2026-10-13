@@ -79,7 +79,7 @@ const fixture = [
   ]],
 
   ["2026-10-15", [
-    ["independiente-oliva", "atenas"],
+   
     ["lanus", "penarol"],
     ["la-union", "racing-chivilcoy"],
   ]],
@@ -665,7 +665,18 @@ const fixture = [
 
 export const matches = fixture.flatMap(
   ([date, games]) =>
-    games.map(
+    games
+  .filter(([homeTeam, awayTeam]) => {
+    const matchKey = `${homeTeam}-${awayTeam}`;
+    const hasFlashscore = Boolean(flashscoreSchedule[matchKey]);
+
+    const hasResult = Object.keys(matchResults).some(
+      (key) => key.includes(`-${matchKey}`)
+    );
+
+    return hasFlashscore || hasResult;
+  })
+  .map(
       ([homeTeam, awayTeam], index) => {
         const isExampleMatch =
           date === "2026-09-28" &&
