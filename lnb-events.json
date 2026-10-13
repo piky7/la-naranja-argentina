@@ -213,22 +213,6 @@
       "awayId": "tE0LgyO6"
     },
     {
-      "eventId": "xKJUDvzH",
-      "homeTeam": "atenas",
-      "homeName": "Atenas",
-      "awayTeam": "ferro",
-      "awayName": "Ferro",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1791849600,
-      "homeSlug": "atenas",
-      "awaySlug": "ferro-carril-oeste",
-      "homeId": "hbqyLbBE",
-      "awayId": "2qroXLyp"
-    },
-    {
       "eventId": "MTCEHMzh",
       "homeTeam": "olimpico",
       "homeName": "Olimpico",
@@ -1986,6 +1970,22 @@
       "homeSlug": "ca-platense",
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
+      "awayId": "2qroXLyp"
+    },
+    {
+      "eventId": "xKJUDvzH",
+      "homeTeam": "atenas",
+      "homeName": "Atenas",
+      "awayTeam": "ferro",
+      "awayName": "Ferro",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1791849600,
+      "homeSlug": "atenas",
+      "awaySlug": "ferro-carril-oeste",
+      "homeId": "hbqyLbBE",
       "awayId": "2qroXLyp"
     },
     {
