@@ -86,5 +86,33 @@ export const broadcasts = {
     "homeTeam": "racing-chivilcoy",
     "awayTeam": "gimnasia",
     "channel": "Básquet Pass"
+  },
+  "2026-10-16-san-lorenzo-penarol": {
+    "date": "2026-10-16",
+    "time": "21:00",
+    "homeTeam": "san-lorenzo",
+    "awayTeam": "penarol",
+    "channel": "DSports"
+  },
+  "2026-10-18-san-lorenzo-olimpico": {
+    "date": "2026-10-18",
+    "time": "11:00",
+    "homeTeam": "san-lorenzo",
+    "awayTeam": "olimpico",
+    "channel": "TyC Sports"
+  },
+  "2026-10-20-ferro-platense": {
+    "date": "2026-10-20",
+    "time": "21:30",
+    "homeTeam": "ferro",
+    "awayTeam": "platense",
+    "channel": "TyC Sports"
+  },
+  "2026-10-21-instituto-lanus": {
+    "date": "2026-10-21",
+    "time": "21:30",
+    "homeTeam": "instituto",
+    "awayTeam": "lanus",
+    "channel": "DSports"
   }
 };

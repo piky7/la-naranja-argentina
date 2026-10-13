@@ -70,6 +70,16 @@ const TEAM_ALIASES = {
   "San Martín (C)": "san-martin",
   "San Martín": "san-martin",
   "San Martin": "san-martin",
+  
+  // Abreviaturas utilizadas por Básquet Plus
+  "SLA": "san-lorenzo",
+  "PEÑ": "penarol",
+  "OTC": "olimpico",
+  "FCO": "ferro",
+  "PLA": "platense",
+  "INS": "instituto",
+  "LAN": "lanus",
+
 };
 
 function fetchPage(url) {
@@ -211,10 +221,18 @@ function findTwoTeams(text) {
   for (
     const team of entries
   ) {
-    const index =
-      normalized.indexOf(
-        team.normalized
-      );
+    
+const escapedName = team.normalized.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const teamRegex = new RegExp(
+  `(?<![a-z0-9])${escapedName}(?![a-z0-9])`,
+  "i"
+);
+
+const match = teamRegex.exec(normalized);
+
+const index = match ? match.index : -1;
+
 
     if (index === -1) {
       continue;
