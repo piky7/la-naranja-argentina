@@ -1,6 +1,6 @@
 // ESTE ARCHIVO ES GENERADO AUTOMÁTICAMENTE.
-// Fuente: Básquet Plus
-// No editar manualmente.
+// Fuente: Uno Contra Uno
+// // No editar manualmente.
 
 export const broadcasts = {
   "2026-10-05-quimsa-atenas": {
