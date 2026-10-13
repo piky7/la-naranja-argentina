@@ -6484,3 +6484,288 @@
     gap: 2px;
   }
 }
+
+/* ÚLTIMOS PARTIDOS - POPUP PRÓXIMO PARTIDO */
+
+.match-modal-upcoming .upcoming-last-matches {
+  margin-top: 14px;
+}
+
+.match-modal-upcoming .upcoming-last-matches h3 {
+  color: #f5f5f5;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  margin: 0 0 10px;
+}
+
+.match-modal-upcoming .upcoming-last-matches-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.match-modal-upcoming .upcoming-last-team {
+  min-width: 0;
+  background: #171c25;
+  border: 1px solid #303846;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.match-modal-upcoming .upcoming-last-team > strong {
+  display: block;
+  color: #ff963d;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.match-modal-upcoming .upcoming-last-result {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  width: 100%;
+  padding: 9px;
+  margin-top: 6px;
+  background: #10151d;
+  border: 1px solid #303846;
+  border-radius: 7px;
+  color: #f5f5f5;
+  text-align: center;
+  cursor: pointer;
+}
+
+.match-modal-upcoming .upcoming-last-result:hover:not(:disabled) {
+  border-color: #ff963d;
+  background: #202733;
+}
+
+.match-modal-upcoming .upcoming-last-result:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.match-modal-upcoming .upcoming-last-result > span:first-child {
+  font-size: 11px;
+  color: #aab3c2;
+}
+
+.match-modal-upcoming .upcoming-last-result > strong {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.match-modal-upcoming .upcoming-last-result .is-win {
+  color: #4ade80;
+  font-weight: 700;
+}
+
+.match-modal-upcoming .upcoming-last-result .is-loss {
+  color: #fb7185;
+  font-weight: 700;
+}
+
+.match-modal-upcoming .upcoming-last-team p {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+@media (max-width: 520px) {
+  .match-modal-upcoming .upcoming-last-matches-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+/* Escudos y marcador de últimos partidos */
+
+.match-modal-upcoming .upcoming-last-score {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.match-modal-upcoming .upcoming-last-score-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.match-modal-upcoming .upcoming-last-score-team img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.match-modal-upcoming .upcoming-last-score-team span {
+  color: #e5e7eb;
+  font-size: 10px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.match-modal-upcoming .upcoming-last-score > strong {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Dos equipos en paralelo */
+.match-modal-upcoming .upcoming-last-matches-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* Dos partidos en paralelo dentro de cada equipo */
+.match-modal-upcoming .upcoming-last-team {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 8px;
+  min-width: 0;
+}
+
+.match-modal-upcoming .upcoming-last-team > strong {
+  grid-column: 1 / -1;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+.match-modal-upcoming .upcoming-last-result {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: 6px 3px;
+  gap: 4px;
+}
+
+.match-modal-upcoming .upcoming-last-score {
+  gap: 3px;
+}
+
+.match-modal-upcoming .upcoming-last-score-team img {
+  width: 22px;
+  height: 22px;
+}
+
+.match-modal-upcoming .upcoming-last-score-team span {
+  font-size: 9px;
+}
+
+.match-modal-upcoming .upcoming-last-score > strong {
+  font-size: 12px;
+}
+
+/* Mantener los equipos lado a lado también en celular */
+@media (max-width: 520px) {
+  .match-modal-upcoming .upcoming-last-matches-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* COMPARATIVA COMPACTA - PRÓXIMO PARTIDO */
+
+.match-modal-upcoming .upcoming-team-comparison {
+  padding: 9px 14px;
+  margin: 8px 0;
+  border-radius: 9px;
+}
+
+.match-modal-upcoming .upcoming-comparison-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.match-modal-upcoming .upcoming-comparison-row {
+  display: grid;
+  grid-template-columns: 1fr 75px 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  min-height: 0;
+  margin: 0;
+}
+
+.match-modal-upcoming .upcoming-comparison-row strong {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.match-modal-upcoming .upcoming-comparison-row span {
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+/* ÚLTIMOS PARTIDOS - VERSIÓN CELULAR */
+
+@media (max-width: 600px) {
+  /* Oberá izquierda, Racing derecha */
+  .match-modal-upcoming .upcoming-last-matches-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  /* Dos resultados apilados dentro de cada equipo */
+  .match-modal-upcoming .upcoming-last-team {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 7px;
+    min-width: 0;
+  }
+
+  .match-modal-upcoming .upcoming-last-team > strong {
+    margin: 0 0 3px;
+    text-align: center;
+  }
+
+  .match-modal-upcoming .upcoming-last-result {
+    padding: 5px 4px;
+    margin: 0;
+  }
+}
+
+  /* Escudos y marcador en una línea */
+  .match-modal-upcoming .upcoming-last-score {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .match-modal-upcoming .upcoming-last-score-team {
+    gap: 2px;
+  }
+
+  .match-modal-upcoming .upcoming-last-score-team img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Evitar nombres verticales */
+  .match-modal-upcoming .upcoming-last-score-team span {
+    font-size: 10px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: normal;
+  }
+
+  .match-modal-upcoming .upcoming-last-score > strong {
+    font-size: 14px;
+  }
+
+  .match-modal-upcoming .upcoming-last-result > span:first-child {
+    font-size: 10px;
+  }
+
+}

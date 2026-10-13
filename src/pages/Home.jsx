@@ -2156,6 +2156,74 @@ const finishedMatch = {
     </strong>
   </div>
 </div>
+<div className="upcoming-last-matches">
+  <h3>ÚLTIMOS 2 PARTIDOS</h3>
+
+  <div className="upcoming-last-matches-grid">
+    {[
+      selectedUpcomingMatch.homeTeam,
+      selectedUpcomingMatch.awayTeam,
+    ].map((teamId) => (
+      <div className="upcoming-last-team" key={teamId}>
+        <strong>{getTeam(teamId)?.shortName}</strong>
+
+        {getTeamLastTwoMatches(teamId).map((match) => {
+          const hasStats = Boolean(getMatchStats(match));
+
+          return (
+            <button
+              type="button"
+              key={match.id}
+              className="upcoming-last-result"
+              disabled={!hasStats}
+              onClick={() => {
+                setSelectedUpcomingMatch(null);
+                setSelectedMatch(match);
+              }}
+              title={
+                hasStats
+                  ? "Ver estadísticas del partido"
+                  : "Estadísticas no disponibles"
+              }
+            >
+              <span>{formatDate(match.date)}</span>
+
+             <div className="upcoming-last-score">
+  <div className="upcoming-last-score-team">
+    {match.home?.logo && (
+      <img src={match.home.logo} alt="" />
+    )}
+    <span>{match.home?.shortName || match.homeTeam}</span>
+  </div>
+
+  <strong>
+    {match.homeScore} - {match.awayScore}
+  </strong>
+
+  <div className="upcoming-last-score-team">
+    {match.away?.logo && (
+      <img src={match.away.logo} alt="" />
+    )}
+    <span>{match.away?.shortName || match.awayTeam}</span>
+  </div>
+</div>
+
+              <span className={
+                match.result === "G" ? "is-win" : "is-loss"
+              }>
+                {match.result}
+              </span>
+            </button>
+          );
+        })}
+
+        {getTeamLastTwoMatches(teamId).length === 0 && (
+          <p>Sin resultados recientes</p>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
               <div className="match-highlighted-title">
                 <span>PROMEDIOS DE TEMPORADA</span>
 
