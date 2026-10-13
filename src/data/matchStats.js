@@ -3785,4 +3785,366 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"atenas-ferro": {
+  "atenas": [
+    {
+      "id": "franco-balbi",
+      "name": "Franco Balbi",
+      "points": 22,
+      "rebounds": 5,
+      "assists": 5,
+      "minutes": "30:39"
+    },
+    {
+      "id": "adonys-henriquez",
+      "name": "Adonys Henríquez",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "34:14"
+    },
+    {
+      "id": "juan-arengo",
+      "name": "Juan Arengo",
+      "points": 15,
+      "rebounds": 3,
+      "assists": 6,
+      "minutes": "29:54"
+    },
+    {
+      "id": "daniel-laster",
+      "name": "Daniel Laster",
+      "points": 10,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "29:43"
+    },
+    {
+      "id": "bryan-carabali",
+      "name": "Bryan Carabalí",
+      "points": 15,
+      "rebounds": 8,
+      "assists": 0,
+      "minutes": "22:16"
+    },
+    {
+      "id": "benjamin-imaz",
+      "name": "Benjamín Imaz",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "07:26"
+    },
+    {
+      "id": "facundo-vazquez",
+      "name": "Facundo Vázquez",
+      "points": 17,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "26:32"
+    },
+    {
+      "id": "gonzalo-bressan",
+      "name": "Gonzalo Bressán",
+      "points": 6,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "19:15"
+    }
+  ],
+  "ferro": [
+    {
+      "id": "emiliano-lezcano",
+      "name": "Emiliano Lezcano",
+      "points": 26,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "32:10"
+    },
+    {
+      "id": "jano-martinez",
+      "name": "Jano Martínez",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 6,
+      "minutes": "36:20"
+    },
+    {
+      "id": "facundo-pinero",
+      "name": "Facundo Piñero",
+      "points": 20,
+      "rebounds": 2,
+      "assists": 4,
+      "minutes": "28:30"
+    },
+    {
+      "id": "felipe-rodriguez",
+      "name": "Felipe Rodríguez",
+      "points": 3,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "22:20"
+    },
+    {
+      "id": "valentin-bettiga",
+      "name": "Valentín Bettiga",
+      "points": 14,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "26:04"
+    },
+    {
+      "id": "federico-zezular",
+      "name": "Federico Zezular",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:50"
+    },
+    {
+      "id": "jose-defelippo",
+      "name": "José Defelippo",
+      "points": 8,
+      "rebounds": 8,
+      "assists": 3,
+      "minutes": "24:15"
+    },
+    {
+      "id": "rodrigo-gallegos",
+      "name": "Rodrigo Gallegos",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "16:06"
+    },
+    {
+      "id": "camilo-rodriguez",
+      "name": "Camilo Rodríguez",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "04:59"
+    },
+    {
+      "id": "kevin-hernandez",
+      "name": "Kevin Hernández",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "08:26"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 16,
+      "away": 20
+    },
+    {
+      "period": "2",
+      "home": 24,
+      "away": 28
+    },
+    {
+      "period": "3",
+      "home": 24,
+      "away": 18
+    },
+    {
+      "period": "4",
+      "home": 27,
+      "away": 20
+    }
+  ]
+},
+
+"argentino-gimnasia": {
+  "argentino": [
+    {
+      "id": "dylan-smith",
+      "name": "Dylan Smith",
+      "points": 5,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "20:54"
+    },
+    {
+      "id": "zyon-patterson",
+      "name": "Zyon Patterson",
+      "points": 4,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "23:07"
+    },
+    {
+      "id": "leandro-cerminato",
+      "name": "Leandro Cerminato",
+      "points": 10,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "22:41"
+    },
+    {
+      "id": "romulo-gusmao",
+      "name": "Rómulo Gusmao",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "10:44"
+    },
+    {
+      "id": "jeremias-sandrini",
+      "name": "Jeremías Sandrini",
+      "points": 9,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "23:44"
+    },
+    {
+      "id": "joaquin-fernandez",
+      "name": "Joaquín Fernández",
+      "points": 9,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "16:37"
+    },
+    {
+      "id": "santiago-perez-douthat",
+      "name": "Santiago Pérez Douthat",
+      "points": 16,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "26:46"
+    },
+    {
+      "id": "cristian-cardo",
+      "name": "Cristian Cardo",
+      "points": 12,
+      "rebounds": 9,
+      "assists": 0,
+      "minutes": "24:50"
+    },
+    {
+      "id": "santiago-bilbao",
+      "name": "Santiago Bilbao",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "03:28"
+    },
+    {
+      "id": "josh-ferguson",
+      "name": "Josh Ferguson",
+      "points": 11,
+      "rebounds": 11,
+      "assists": 1,
+      "minutes": "27:09"
+    }
+  ],
+  "gimnasia": [
+    {
+      "id": "felipe-inyaco",
+      "name": "Felipe Inyaco",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "17:57"
+    },
+    {
+      "id": "martiniano-dato",
+      "name": "Martiniano Dato",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "02:02"
+    },
+    {
+      "id": "valentin-forestier",
+      "name": "Valentín Forestier",
+      "points": 0,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "14:07"
+    },
+    {
+      "id": "emiliano-toretta",
+      "name": "Emiliano Toretta",
+      "points": 8,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "21:26"
+    },
+    {
+      "id": "carlos-rivero",
+      "name": "Carlos Rivero",
+      "points": 10,
+      "rebounds": 11,
+      "assists": 1,
+      "minutes": "24:28"
+    },
+    {
+      "id": "obi-okafor",
+      "name": "Obi Okafor",
+      "points": 13,
+      "rebounds": 9,
+      "assists": 0,
+      "minutes": "23:19"
+    },
+    {
+      "id": "marcos-chacon",
+      "name": "Marcos Chacón",
+      "points": 22,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "35:34"
+    },
+    {
+      "id": "sebastian-carrasco",
+      "name": "Sebastián Carrasco",
+      "points": 9,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "26:31"
+    },
+    {
+      "id": "ben-stevens",
+      "name": "Ben Stevens",
+      "points": 4,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "15:32"
+    },
+    {
+      "id": "gino-balbo",
+      "name": "Gino Balbo",
+      "points": 9,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "19:03"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 21,
+      "away": 19
+    },
+    {
+      "period": "2",
+      "home": 24,
+      "away": 18
+    },
+    {
+      "period": "3",
+      "home": 23,
+      "away": 29
+    },
+    {
+      "period": "4",
+      "home": 14,
+      "away": 21
+    }
+  ]
+},
 };
