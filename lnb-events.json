@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 125,
-  "finishedMatches": 20,
+  "finishedMatches": 21,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "UgGMF054",
+      "homeTeam": "argentino",
+      "homeName": "Argentino",
+      "awayTeam": "gimnasia",
+      "awayName": "Gimnasia",
+      "homeScore": 82,
+      "awayScore": 87,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791847800,
+      "homeSlug": "argentino",
+      "awaySlug": "gimnasia",
+      "homeId": "xGjz8hBO",
+      "awayId": "Cn0pHIpQ"
+    },
     {
       "eventId": "UZPSgJro",
       "homeTeam": "racing-chivilcoy",
@@ -195,22 +211,6 @@
       "awaySlug": "atenas",
       "homeId": "E7pXLvd8",
       "awayId": "hbqyLbBE"
-    },
-    {
-      "eventId": "00TdfgwR",
-      "homeTeam": "gimnasia",
-      "homeName": "Gimnasia",
-      "awayTeam": "la-union",
-      "awayName": "La Union",
-      "homeScore": 92,
-      "awayScore": 86,
-      "status": "finished",
-      "statusCode": "3",
-      "timestamp": 1791156600,
-      "homeSlug": "gimnasia",
-      "awaySlug": "la-union",
-      "homeId": "Cn0pHIpQ",
-      "awayId": "tE0LgyO6"
     },
     {
       "eventId": "4KYQdf9j",
@@ -451,6 +451,22 @@
       "awaySlug": "boca-juniors",
       "homeId": "U9SgFDqR",
       "awayId": "pn7Cecgf"
+    },
+    {
+      "eventId": "00TdfgwR",
+      "homeTeam": "gimnasia",
+      "homeName": "Gimnasia",
+      "awayTeam": "la-union",
+      "awayName": "La Union",
+      "homeScore": 92,
+      "awayScore": 86,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791156600,
+      "homeSlug": "gimnasia",
+      "awaySlug": "la-union",
+      "homeId": "Cn0pHIpQ",
+      "awayId": "tE0LgyO6"
     },
     {
       "eventId": "EqVldF8E",
@@ -1987,25 +2003,25 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "hbqyLbBE",
       "awayId": "2qroXLyp"
-    },
+    }
+  ],
+  "finished": [
     {
       "eventId": "UgGMF054",
       "homeTeam": "argentino",
       "homeName": "Argentino",
       "awayTeam": "gimnasia",
       "awayName": "Gimnasia",
-      "homeScore": 2,
-      "awayScore": 2,
-      "status": "scheduled",
-      "statusCode": "2",
+      "homeScore": 82,
+      "awayScore": 87,
+      "status": "finished",
+      "statusCode": "3",
       "timestamp": 1791847800,
       "homeSlug": "argentino",
       "awaySlug": "gimnasia",
       "homeId": "xGjz8hBO",
       "awayId": "Cn0pHIpQ"
-    }
-  ],
-  "finished": [
+    },
     {
       "eventId": "UZPSgJro",
       "homeTeam": "racing-chivilcoy",

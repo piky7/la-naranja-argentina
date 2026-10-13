@@ -159,4 +159,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-12-argentino-gimnasia": {
+    status: "finished",
+    homeScore: 82,
+    awayScore: 87,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
