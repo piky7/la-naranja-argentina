@@ -838,10 +838,16 @@ const standingsMatches = matches.map((match) => {
     : "ESTADÍSTICAS"}
 </span>
 
-<h2>
-  {homeStatsTab === "posiciones"
-    ? "Tabla de posiciones"
-    : "Máximos anotadores"}
+<h2 className="home-stats-hero-title">
+  {homeStatsTab === "posiciones" ? (
+    <>
+      TABLA DE <span>POSICIONES</span>
+    </>
+  ) : (
+    <>
+      MÁXIMOS <span>ANOTADORES</span>
+    </>
+  )}
 </h2>
 
                 </div>
@@ -1035,16 +1041,31 @@ const standingsMatches = matches.map((match) => {
             {/* FIXTURE */}
 
             <section className="home-panel fixture-panel">
-              <div className="home-panel-header">
-                <div>
-                  <span>{getDateLabel(selectedDate)}</span>
-                  <h2>Fixture</h2>
-                </div>
+              <div className="fixture-hero-header">
+  <span className="fixture-hero-league">
+    LIGA NACIONAL 2026/27
+  </span>
 
-                <Link to="/liga">
-                  Ver todos →
-                </Link>
-              </div>
+  <h2 className="fixture-hero-title">
+  {selectedDate === today ? (
+    <>
+      PARTIDOS <span>DE HOY</span>
+    </>
+  ) : selectedDate < today ? (
+    <>
+      RESULTADOS <span>DEL DÍA</span>
+    </>
+  ) : (
+    <>
+      PRÓXIMOS <span>PARTIDOS</span>
+    </>
+  )}
+</h2>
+
+  <Link to="/liga" className="fixture-hero-link">
+    Ver todos →
+  </Link>
+</div>
 
               <div className="fixture-date-navigation">
                 <button
