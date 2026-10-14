@@ -4317,4 +4317,201 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"obera-racing-chivilcoy": {
+  "obera": [
+    {
+      "id": "ty-prince",
+      "name": "Ty Prince",
+      "points": 4,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "15:27"
+    },
+    {
+      "id": "jonatan-torresi",
+      "name": "Jonatan Torresi",
+      "points": 6,
+      "rebounds": 7,
+      "assists": 0,
+      "minutes": "20:49"
+    },
+    {
+      "id": "bruno-sansimoni",
+      "name": "Bruno Sansimoni",
+      "points": 11,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "23:36"
+    },
+    {
+      "id": "agustin-brocal",
+      "name": "Agustín Brocal",
+      "points": 13,
+      "rebounds": 1,
+      "assists": 3,
+      "minutes": "31:31"
+    },
+    {
+      "id": "will-vorhees",
+      "name": "Will Vorhees",
+      "points": 12,
+      "rebounds": 10,
+      "assists": 1,
+      "minutes": "24:17"
+    },
+    {
+      "id": "victor-fernandez",
+      "name": "Víctor Fernández",
+      "points": 5,
+      "rebounds": 1,
+      "assists": 4,
+      "minutes": "16:24"
+    },
+    {
+      "id": "alejo-azpilicueta",
+      "name": "Alejo Azpilicueta",
+      "points": 9,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "23:25"
+    },
+    {
+      "id": "santiago-barrales",
+      "name": "Santiago Barrales",
+      "points": 4,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "23:49"
+    },
+    {
+      "id": "albano-costa",
+      "name": "Albano Costa",
+      "points": 1,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "04:59"
+    },
+    {
+      "id": "juan-cruz-oberto",
+      "name": "Juan Cruz Oberto",
+      "points": 13,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "15:43"
+    }
+  ],
+  "racing-chivilcoy": [
+    {
+      "id": "mateo-chiarini",
+      "name": "Mateo Chiarini",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "10:32"
+    },
+    {
+      "id": "pedro-barral",
+      "name": "Pedro Barral",
+      "points": 16,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "31:52"
+    },
+    {
+      "id": "marcos-delia",
+      "name": "Marcos Delía",
+      "points": 7,
+      "rebounds": 6,
+      "assists": 3,
+      "minutes": "29:55"
+    },
+    {
+      "id": "juan-bocca",
+      "name": "Juan Bocca",
+      "points": 10,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "24:11"
+    },
+    {
+      "id": "nicolas-romano",
+      "name": "Nicolás Romano",
+      "points": 15,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "23:49"
+    },
+    {
+      "id": "manuel-rodriguez",
+      "name": "Manuel Rodríguez",
+      "points": 7,
+      "rebounds": 10,
+      "assists": 4,
+      "minutes": "25:02"
+    },
+    {
+      "id": "santiago-assum",
+      "name": "Santiago Assum",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "11:35"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
+      "points": 5,
+      "rebounds": 1,
+      "assists": 3,
+      "minutes": "21:30"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
+      "points": 7,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "13:12"
+    },
+    {
+      "id": "tomas-delia",
+      "name": "Tomás Delía",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "01:52"
+    },
+    {
+      "id": "abraham-barahona",
+      "name": "Abraham Barahona",
+      "points": 4,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "06:29"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 23,
+      "away": 17
+    },
+    {
+      "period": "2",
+      "home": 22,
+      "away": 27
+    },
+    {
+      "period": "3",
+      "home": 18,
+      "away": 19
+    },
+    {
+      "period": "4",
+      "home": 15,
+      "away": 21
+    }
+  ]
+},
 };
