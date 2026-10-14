@@ -31,8 +31,7 @@ jobs:
 
       - name: Instalar dependencias
         run: npm ci
-      - name: Probar acceso a Uno Contra Uno
-        run: node test-tv-source.cjs
+
       - name: Actualizar datos de LNB
         id: actualizar
         continue-on-error: true
