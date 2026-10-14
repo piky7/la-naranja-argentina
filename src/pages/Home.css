@@ -7060,3 +7060,21 @@
     letter-spacing: 0.2px;
   }
 }
+
+/* LNA - COMPATIBILIDAD DE DEGRADADOS */
+
+.fixture-hero-title,
+.standings-panel .home-stats-hero-title,
+.fixture-panel .fixture-time {
+  display: block;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  filter: none;
+}
+
+.fixture-hero-title span,
+.standings-panel .home-stats-hero-title span {
+  display: inline;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
