@@ -79,7 +79,9 @@ async function main() {
 
     if (!matchStats || typeof matchStats !== "object") continue;
 
-    const teamIds = Object.keys(matchStats);
+    const teamIds = Object.keys(matchStats).filter(
+  (key) => key !== "quarterScores"
+);
 
     if (teamIds.length !== 2) continue;
 
