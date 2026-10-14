@@ -229,22 +229,6 @@
       "awayId": "KdCRV01k"
     },
     {
-      "eventId": "WQQCKc1c",
-      "homeTeam": "lanus",
-      "homeName": "Lanus",
-      "awayTeam": "penarol",
-      "awayName": "Peñarol",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1792020600,
-      "homeSlug": "lanus",
-      "awaySlug": "penarol",
-      "homeId": "zy0PhewD",
-      "awayId": "0OnqJxtR"
-    },
-    {
       "eventId": "xOTKIyW9",
       "homeTeam": "la-union",
       "homeName": "La Union",
@@ -453,6 +437,38 @@
       "awayId": "pn7Cecgf"
     },
     {
+      "eventId": "zucRYmM7",
+      "homeTeam": "racing-chivilcoy",
+      "homeName": "Racing de Chivilcoy",
+      "awayTeam": "quimsa",
+      "awayName": "Quimsa",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1792962000,
+      "homeSlug": "racing-de-chivilcoy",
+      "awaySlug": "quimsa",
+      "homeId": "U9SgFDqR",
+      "awayId": "E7pXLvd8"
+    },
+    {
+      "eventId": "txpDdiEE",
+      "homeTeam": "lanus",
+      "homeName": "Lanus",
+      "awayTeam": "regatas",
+      "awayName": "Regatas",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1793048400,
+      "homeSlug": "lanus",
+      "awaySlug": "regatas",
+      "homeId": "zy0PhewD",
+      "awayId": "SAdHfH80"
+    },
+    {
       "eventId": "CMLrok0D",
       "homeTeam": "platense",
       "homeName": "Platense",
@@ -611,38 +627,6 @@
       "awaySlug": "gimnasia",
       "homeId": "zy0PhewD",
       "awayId": "Cn0pHIpQ"
-    },
-    {
-      "eventId": "zucRYmM7",
-      "homeTeam": "racing-chivilcoy",
-      "homeName": "Racing de Chivilcoy",
-      "awayTeam": "quimsa",
-      "awayName": "Quimsa",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1792962000,
-      "homeSlug": "racing-de-chivilcoy",
-      "awaySlug": "quimsa",
-      "homeId": "U9SgFDqR",
-      "awayId": "E7pXLvd8"
-    },
-    {
-      "eventId": "txpDdiEE",
-      "homeTeam": "lanus",
-      "homeName": "Lanus",
-      "awayTeam": "regatas",
-      "awayName": "Regatas",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1793048400,
-      "homeSlug": "lanus",
-      "awaySlug": "regatas",
-      "homeId": "zy0PhewD",
-      "awayId": "SAdHfH80"
     },
     {
       "eventId": "nyCpvqbm",
@@ -2003,6 +1987,22 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
+    },
+    {
+      "eventId": "WQQCKc1c",
+      "homeTeam": "lanus",
+      "homeName": "Lanus",
+      "awayTeam": "penarol",
+      "awayName": "Peñarol",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1792020600,
+      "homeSlug": "lanus",
+      "awaySlug": "penarol",
+      "homeId": "zy0PhewD",
+      "awayId": "0OnqJxtR"
     }
   ],
   "finished": [
