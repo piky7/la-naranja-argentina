@@ -2375,3 +2375,49 @@
 .match-player-name .match-stat-player:hover {
   color: #ff8500;
 }
+
+/* ==========================================
+   LNA - PARTIDOS DE HOY COMPACTOS
+   ========================================== */
+
+.today-match-card .match-date {
+  padding: 6px 12px;
+  font-size: 9px;
+}
+
+.today-match-card .match-teams {
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.today-match-card .match-team {
+  gap: 5px;
+  font-size: 11px;
+}
+
+.today-match-card .match-team-logo {
+  width: 34px;
+  height: 34px;
+}
+
+.today-match-card .match-details {
+  gap: 8px;
+  padding: 7px 10px;
+  font-size: 10px;
+}
+
+.today-match-card .match-details strong {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .today-match-card .match-teams {
+    padding: 10px;
+  }
+
+  .today-match-card .match-team-logo {
+    width: 32px;
+    height: 32px;
+  }
+}

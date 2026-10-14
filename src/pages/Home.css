@@ -6769,3 +6769,26 @@
   }
 
 }
+/* Estadísticas de partidos: distribución de equipos */
+
+.match-modal-finished .match-player-stats {
+  width: 100%;
+}
+
+.match-modal-finished .match-player-team-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.match-modal-finished .match-stats-team {
+  min-width: 0;
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .match-modal-finished .match-player-team-stats {
+    grid-template-columns: 1fr;
+  }
+}

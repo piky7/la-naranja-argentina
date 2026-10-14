@@ -1951,7 +1951,7 @@ const finishedMatch = {
 
       {/* POPUP PRÓXIMO PARTIDO */}
 
-      {selectedUpcomingMatch && (
+      {selectedUpcomingMatch && !selectedMatch && (
         <div
           className="match-modal-overlay"
           onClick={() =>
@@ -2176,10 +2176,9 @@ const finishedMatch = {
               key={match.id}
               className="upcoming-last-result"
               disabled={!hasStats}
-              onClick={() => {
-                setSelectedUpcomingMatch(null);
-                setSelectedMatch(match);
-              }}
+             onClick={() => {
+  setSelectedMatch(match);
+}}
               title={
                 hasStats
                   ? "Ver estadísticas del partido"
