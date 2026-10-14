@@ -6987,3 +6987,50 @@
     drop-shadow(0 5px 8px rgba(0, 0, 0, 0.75))
     drop-shadow(0 0 9px rgba(255, 140, 0, 0.22));
 }
+/* LNA - FECHA DEPORTIVA */
+
+.fixture-panel .fixture-date-sport strong {
+  display: inline-block;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  border-bottom: 2px solid #ff8c00;
+  padding-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+  .fixture-panel .fixture-date-sport strong {
+    font-size: 20px;
+  }
+}
+
+/* LNA - HORARIO DE PARTIDOS DESTACADO */
+
+.fixture-panel .fixture-time {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+
+  background: linear-gradient(
+    180deg,
+    #ffbc66 0%,
+    #ff8c00 50%,
+    #e36a00 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  filter: drop-shadow(0 2px 4px rgba(255, 140, 0, 0.18));
+}
+
+@media (max-width: 768px) {
+  .fixture-panel .fixture-time {
+    font-size: 27px;
+  }
+}
