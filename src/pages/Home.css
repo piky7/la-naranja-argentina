@@ -7034,3 +7034,29 @@
     font-size: 27px;
   }
 }
+/* LNA - PESTAÑAS DE ESTADÍSTICAS DEPORTIVAS */
+
+.standings-panel .home-stats-tab {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Pestaña seleccionada */
+.standings-panel .home-stats-tab.active {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 140, 0, 0.18);
+}
+
+/* Adaptación a celulares */
+@media (max-width: 768px) {
+  .standings-panel .home-stats-tab {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+  }
+}
