@@ -526,3 +526,82 @@
     padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* ==========================================
+   LNA - BARRA FLOTANTE ESTILO INSTAGRAM
+   ========================================== */
+
+@media (max-width: 768px) {
+
+  .bottom-navigation {
+    position: fixed;
+
+    /* Flotante, respetando el área inferior del iPhone */
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    left: 16px;
+    right: 16px;
+
+    width: auto;
+    min-height: 62px;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+
+    padding: 7px 8px;
+
+    /* Efecto cristal oscuro */
+    background: rgba(24, 28, 37, 0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    /* Forma cápsula */
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 999px;
+
+    /* Profundidad */
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    z-index: 1000;
+  }
+
+  .bottom-nav-link {
+    min-height: 48px;
+    padding: 5px 2px;
+    gap: 4px;
+
+    border-radius: 999px;
+
+    color: #a0a6b2;
+    font-size: 10px;
+    font-weight: 600;
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .bottom-nav-link svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  /* Botón activo */
+  .bottom-nav-link.active {
+    color: #ff8c00;
+
+    background: rgba(255, 140, 0, 0.09);
+  }
+
+  .bottom-nav-link.active svg {
+    stroke-width: 2.4;
+  }
+
+  /* Espacio para que la barra no tape el contenido */
+  body {
+    padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
