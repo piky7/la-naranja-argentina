@@ -105,7 +105,14 @@ async function main() {
       hasStats: true,
     };
   }
-
+// Evitar borrar partidos publicados si la generación falla
+// o no encuentra estadísticas válidas.
+if (Object.keys(publishedMatches).length === 0) {
+  console.warn(
+    "No se encontraron partidos válidos. Se conserva published-matches.json."
+  );
+  return;
+}
   const output = {
     generatedAt: new Date().toISOString(),
     matches: publishedMatches,
