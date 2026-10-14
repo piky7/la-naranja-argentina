@@ -1,18 +1,19 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lanaranjaargentina.lnab.workers.dev/</loc>
+    <loc>https://lanaranjaargentina.com.ar/</loc>
   </url>
   <url>
-    <loc>https://lanaranjaargentina.lnab.workers.dev/liga</loc>
+    <loc>https://lanaranjaargentina.com.ar/liga</loc>
   </url>
   <url>
-    <loc>https://lanaranjaargentina.lnab.workers.dev/equipos</loc>
+    <loc>https://lanaranjaargentina.com.ar/equipos</loc>
   </url>
   <url>
-    <loc>https://lanaranjaargentina.lnab.workers.dev/jugadores</loc>
+    <loc>https://lanaranjaargentina.com.ar/jugadores</loc>
   </url>
   <url>
-    <loc>https://lanaranjaargentina.lnab.workers.dev/estadisticas</loc>
+    <loc>https://lanaranjaargentina.com.ar/estadisticas</loc>
   </url>
 </urlset>
