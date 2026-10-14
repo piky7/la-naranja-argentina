@@ -6971,3 +6971,19 @@
     font-size: clamp(17px, 4.5vw, 23px);
   }
 }
+
+/* LNA - PROFUNDIDAD EN ESCUDOS DEL FIXTURE */
+
+.fixture-panel .fixture-team img {
+  filter:
+    drop-shadow(0 4px 5px rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 7px rgba(255, 255, 255, 0.10));
+
+  transition: filter 0.25s ease;
+}
+
+.fixture-panel .home-fixture:hover .fixture-team img {
+  filter:
+    drop-shadow(0 5px 8px rgba(0, 0, 0, 0.75))
+    drop-shadow(0 0 9px rgba(255, 140, 0, 0.22));
+}
