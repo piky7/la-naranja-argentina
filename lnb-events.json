@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 125,
-  "finishedMatches": 23,
+  "finishedMatches": 24,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "4KYQdf9j",
+      "homeTeam": "obera",
+      "homeName": "Obera TC",
+      "awayTeam": "racing-chivilcoy",
+      "awayName": "Racing de Chivilcoy",
+      "homeScore": 78,
+      "awayScore": 84,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1791936000,
+      "homeSlug": "obera-tc",
+      "awaySlug": "racing-de-chivilcoy",
+      "homeId": "KdCRV01k",
+      "awayId": "U9SgFDqR"
+    },
     {
       "eventId": "MTCEHMzh",
       "homeTeam": "olimpico",
@@ -1987,25 +2003,25 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
-    },
+    }
+  ],
+  "finished": [
     {
       "eventId": "4KYQdf9j",
       "homeTeam": "obera",
       "homeName": "Obera TC",
       "awayTeam": "racing-chivilcoy",
       "awayName": "Racing de Chivilcoy",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
+      "homeScore": 78,
+      "awayScore": 84,
+      "status": "finished",
+      "statusCode": "3",
       "timestamp": 1791936000,
       "homeSlug": "obera-tc",
       "awaySlug": "racing-de-chivilcoy",
       "homeId": "KdCRV01k",
       "awayId": "U9SgFDqR"
-    }
-  ],
-  "finished": [
+    },
     {
       "eventId": "MTCEHMzh",
       "homeTeam": "olimpico",

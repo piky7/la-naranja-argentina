@@ -183,4 +183,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-13-obera-racing-chivilcoy": {
+    status: "finished",
+    homeScore: 78,
+    awayScore: 84,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
