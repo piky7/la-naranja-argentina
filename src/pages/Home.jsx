@@ -1077,11 +1077,19 @@ const standingsMatches = matches.map((match) => {
                   ←
                 </button>
 
-                <div className="fixture-selected-date">
-                  <strong>
-                    {formatDate(selectedDate)}
-                  </strong>
-                </div>
+              <div className="fixture-selected-date fixture-date-sport">
+  <strong>
+    {new Intl.DateTimeFormat("es-AR", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      timeZone: "UTC",
+    })
+      .format(new Date(`${selectedDate}T12:00:00Z`))
+      .replace(/\./g, "")
+      .toUpperCase()}
+  </strong>
+</div>
 
                 <button
                   type="button"
