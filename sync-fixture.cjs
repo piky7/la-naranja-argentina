@@ -590,6 +590,25 @@ function main() {
     "utf8"
   );
 
+  /*
+========================================
+PUBLICAR EVENTOS PARA LIVE
+========================================
+*/
+
+fs.mkdirSync("public", {
+  recursive: true,
+});
+
+fs.copyFileSync(
+  inputFile,
+  "public/lnb-events.json"
+);
+
+console.log(
+  "Eventos LIVE publicados en public/lnb-events.json"
+);
+
   const finalCount =
     Object.keys(schedule).length;
 

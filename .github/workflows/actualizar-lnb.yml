@@ -49,6 +49,7 @@ jobs:
             src/data/players.js \
             src/data/broadcasts.js \
             lnb-events.json
+            public/lnb-events.json
 
           if git diff --cached --quiet; then
             echo "No hay cambios para guardar."
