@@ -191,4 +191,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-14-lanus-penarol": {
+    status: "finished",
+    homeScore: 77,
+    awayScore: 84,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };

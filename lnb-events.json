@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 125,
-  "finishedMatches": 24,
+  "finishedMatches": 25,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "WQQCKc1c",
+      "homeTeam": "lanus",
+      "homeName": "Lanus",
+      "awayTeam": "penarol",
+      "awayName": "Peñarol",
+      "homeScore": 77,
+      "awayScore": 84,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1792020600,
+      "homeSlug": "lanus",
+      "awaySlug": "penarol",
+      "homeId": "zy0PhewD",
+      "awayId": "0OnqJxtR"
+    },
     {
       "eventId": "4KYQdf9j",
       "homeTeam": "obera",
@@ -1987,25 +2003,25 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
-    },
+    }
+  ],
+  "finished": [
     {
       "eventId": "WQQCKc1c",
       "homeTeam": "lanus",
       "homeName": "Lanus",
       "awayTeam": "penarol",
       "awayName": "Peñarol",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
+      "homeScore": 77,
+      "awayScore": 84,
+      "status": "finished",
+      "statusCode": "3",
       "timestamp": 1792020600,
       "homeSlug": "lanus",
       "awaySlug": "penarol",
       "homeId": "zy0PhewD",
       "awayId": "0OnqJxtR"
-    }
-  ],
-  "finished": [
+    },
     {
       "eventId": "4KYQdf9j",
       "homeTeam": "obera",
