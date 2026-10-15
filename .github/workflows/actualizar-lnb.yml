@@ -42,13 +42,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add \
+                    git add \
             src/data/matches.js \
             src/data/matchResults.js \
             src/data/matchStats.js \
             src/data/players.js \
             src/data/broadcasts.js \
-            lnb-events.json
+            lnb-events.json \
             public/lnb-events.json
 
           if git diff --cached --quiet; then
