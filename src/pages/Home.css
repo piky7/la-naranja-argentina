@@ -7060,5 +7060,88 @@
     letter-spacing: 0.2px;
   }
 }
-/* LNA - COMPATIBILIDAD DE DEGRADADOS */
 
+/* MARCADOR FINAL LNA */
+
+.fixture-panel .fixture-center .fixture-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  background: none;
+  filter: none;
+}
+
+/* Ganador - degradado naranja LNA */
+.fixture-panel .fixture-score .fixture-score-winner {
+  font-size: inherit;
+  font-weight: 400;
+
+  background: linear-gradient(
+    180deg,
+    #ffbc66 0%,
+    #ff8c00 50%,
+    #e36a00 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Perdedor - degradado blanco a gris LNA */
+.fixture-panel .fixture-score .fixture-score-loser {
+  font-size: inherit;
+  font-weight: 400;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #c4c9d0 50%,
+    #858d99 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Separador */
+.fixture-panel .fixture-score .fixture-score-separator {
+  font-size: 22px;
+  font-weight: 400;
+  color: #707783 !important;
+  -webkit-text-fill-color: #707783 !important;
+}
+
+/* LNA - Alineación de resultados en celulares */
+@media (max-width: 480px) {
+  .fixture-panel .home-fixture {
+    grid-template-columns:
+      minmax(0, 1fr)
+      104px
+      minmax(0, 1fr);
+
+    gap: 4px;
+  }
+
+  .fixture-panel .fixture-center {
+    width: 100%;
+    min-width: 0;
+    justify-self: center;
+  }
+
+  .fixture-panel .fixture-score {
+    width: 100%;
+    justify-content: center;
+    gap: 4px;
+  }
+}

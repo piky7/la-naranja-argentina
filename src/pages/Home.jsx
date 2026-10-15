@@ -1243,10 +1243,29 @@ const finishedMatch = {
                         <div className="fixture-center">
                           {isFinished ? (
                             <>
-                              <strong className="fixture-score">
-                                {finalHomeScore} -{" "}
-                                {finalAwayScore}
-                              </strong>
+                             <strong className="fixture-score">
+  <span
+    className={
+      Number(finalHomeScore) > Number(finalAwayScore)
+        ? "fixture-score-winner"
+        : "fixture-score-loser"
+    }
+  >
+    {finalHomeScore}
+  </span>
+
+  <span className="fixture-score-separator"> - </span>
+
+  <span
+    className={
+      Number(finalAwayScore) > Number(finalHomeScore)
+        ? "fixture-score-winner"
+        : "fixture-score-loser"
+    }
+  >
+    {finalAwayScore}
+  </span>
+</strong>
 
                               <span>FINAL</span>
                             </>
