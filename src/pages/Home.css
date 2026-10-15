@@ -203,11 +203,13 @@
   border-bottom: 0;
 }
 
-.home-standing-row:hover {
-  background-color: var(--sports-panel-row-hover);
+@media (hover: hover) and (pointer: fine) {
+  .home-standing-row:hover {
+    background-color: var(--sports-panel-row-hover);
 
-  box-shadow:
-    inset 3px 0 0 var(--color-primary);
+    box-shadow:
+      inset 3px 0 0 var(--color-primary);
+  }
 }
 
 .home-standing-position {
