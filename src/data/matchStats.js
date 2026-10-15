@@ -4513,4 +4513,193 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"lanus-penarol": {
+  "lanus": [
+    {
+      "id": "juan-brussino",
+      "name": "Juan Brussino",
+      "points": 15,
+      "rebounds": 1,
+      "assists": 3,
+      "minutes": "23:56"
+    },
+    {
+      "id": "christian-james",
+      "name": "Christian James",
+      "points": 11,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "25:28"
+    },
+    {
+      "id": "melvin-johnson",
+      "name": "Melvin Johnson",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "23:49"
+    },
+    {
+      "id": "fabian-ramirez-barrios",
+      "name": "Fabián Ramírez Barrios",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "21:06"
+    },
+    {
+      "id": "flashscore-lanus-bombino-p",
+      "name": "Bombino P.",
+      "points": 10,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "26:07"
+    },
+    {
+      "id": "robert-whitfield",
+      "name": "Robert Whitfield",
+      "points": 9,
+      "rebounds": 0,
+      "assists": 3,
+      "minutes": "14:38"
+    },
+    {
+      "id": "junior-merchant",
+      "name": "Junior Merchant",
+      "points": 8,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "18:57"
+    },
+    {
+      "id": "alejo-sacchi",
+      "name": "Alejo Sacchi",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "11:46"
+    },
+    {
+      "id": "lucas-andujar",
+      "name": "Lucas Andújar",
+      "points": 2,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "18:08"
+    },
+    {
+      "id": "martin-franchino",
+      "name": "Martín Franchino",
+      "points": 6,
+      "rebounds": 9,
+      "assists": 0,
+      "minutes": "16:05"
+    }
+  ],
+  "penarol": [
+    {
+      "id": "andres-jaime",
+      "name": "Andrés Jaime",
+      "points": 5,
+      "rebounds": 1,
+      "assists": 4,
+      "minutes": "21:08"
+    },
+    {
+      "id": "ivan-basualdo",
+      "name": "Iván Basualdo",
+      "points": 11,
+      "rebounds": 11,
+      "assists": 2,
+      "minutes": "20:58"
+    },
+    {
+      "id": "agustin-perez-tapia",
+      "name": "Agustín Pérez Tapia",
+      "points": 18,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "27:57"
+    },
+    {
+      "id": "nicolas-chiaraviglio",
+      "name": "Nicolás Chiaraviglio",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "12:02"
+    },
+    {
+      "id": "franco-giorgetti",
+      "name": "Franco Giorgetti",
+      "points": 3,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "20:18"
+    },
+    {
+      "id": "al-thornton",
+      "name": "Al Thornton",
+      "points": 11,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "25:54"
+    },
+    {
+      "id": "luciano-guerra",
+      "name": "Luciano Guerra",
+      "points": 16,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "22:26"
+    },
+    {
+      "id": "ignacio-bednarek",
+      "name": "Ignacio Bednarek",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "12:35"
+    },
+    {
+      "id": "selem-safar",
+      "name": "Selem Safar",
+      "points": 9,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "12:03"
+    },
+    {
+      "id": "sebastian-vega",
+      "name": "Sebastián Vega",
+      "points": 7,
+      "rebounds": 8,
+      "assists": 3,
+      "minutes": "24:39"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 26,
+      "away": 18
+    },
+    {
+      "period": "2",
+      "home": 17,
+      "away": 27
+    },
+    {
+      "period": "3",
+      "home": 23,
+      "away": 26
+    },
+    {
+      "period": "4",
+      "home": 11,
+      "away": 13
+    }
+  ]
+},
 };
