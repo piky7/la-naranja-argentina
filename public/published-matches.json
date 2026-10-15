@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T12:03:00.081Z",
+  "generatedAt": "2026-10-15T12:03:09.392Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -191,6 +191,14 @@
       "awayScore": 84,
       "homeTeam": "obera",
       "awayTeam": "racing-chivilcoy",
+      "hasStats": true
+    },
+    "2026-10-14-lanus-penarol": {
+      "status": "published",
+      "homeScore": 77,
+      "awayScore": 84,
+      "homeTeam": "lanus",
+      "awayTeam": "penarol",
       "hasStats": true
     }
   }

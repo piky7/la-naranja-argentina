@@ -13,7 +13,7 @@ const HEADERS = {
 };
 
 const EVENTS_URL =
-  "https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/lnb-events.json";
+  "https://lanaranjaargentina.com.ar/lnb-events.json";
 
 const PUBLISHED_MATCHES_URL =
   "https://lanaranjaargentina.lnab.workers.dev/published-matches.json";

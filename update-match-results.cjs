@@ -186,6 +186,36 @@ if (fs.existsSync(outputFile)) {
     "utf8"
   );
 
+  /*
+========================================
+PUBLICAR RESULTADOS PARA LA WEB
+========================================
+*/
+
+fs.mkdirSync("public", {
+  recursive: true,
+});
+
+const publicResultsFile =
+  "public/match-results.json";
+
+fs.writeFileSync(
+  publicResultsFile,
+  JSON.stringify(
+    {
+      updatedAt: new Date().toISOString(),
+      results,
+    },
+    null,
+    2
+  ) + "\n",
+  "utf8"
+);
+
+console.log(
+  `Resultados públicos generados: ${publicResultsFile}`
+);
+
   console.log(
     `Resultados actualizados: ${Object.keys(results).length}`
   );

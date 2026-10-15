@@ -12,11 +12,7 @@ import { matchPlayerStats } from "../data/matchStats";
 import "./Home.css";
 
 // Los resultados publicados tienen prioridad sobre el fixture original.
-const matches = baseMatches.map((match) => {
-  const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-  const result = matchResults[key] ?? matchResults[match.id];
-  return result ? { ...match, ...result } : match;
-});
+
 
 
 function Home() {
@@ -38,6 +34,20 @@ const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selected
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
+const [remoteResults, setRemoteResults] = useState({});
+const matches = useMemo(() => {
+  return baseMatches.map((match) => {
+    const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+
+    const result =
+      remoteResults[key] ??
+      remoteResults[match.id] ??
+      matchResults[key] ??
+      matchResults[match.id];
+
+    return result ? { ...match, ...result } : match;
+  });
+}, [remoteResults]);
 
   // DI representa minutos jugados dentro del cuarto (sin segundos).
   const getRemainingMinutes = (minutesPlayed) => {
@@ -522,6 +532,45 @@ const getPlayerLastMatches = (player) => {
   };
 }, []);
 
+useEffect(() => {
+  let active = true;
+
+  const fetchResults = async () => {
+    try {
+      const response = await fetch(
+        `/match-results.json?t=${Date.now()}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (!active || !data.results) return;
+
+      setRemoteResults(data.results);
+    } catch (error) {
+      console.error(
+        "Error obteniendo resultados actualizados:",
+        error
+      );
+    }
+  };
+
+  fetchResults();
+
+  const interval = setInterval(fetchResults, 120000);
+
+  return () => {
+    active = false;
+    clearInterval(interval);
+  };
+}, []);
+
   // El panel LIVE solo retira partidos finalizados cuando el resultado
   // y la planilla de ambos equipos ya están disponibles en el Home.
   const visibleLiveMatches = liveMatches.filter((liveMatch) => {
@@ -761,7 +810,7 @@ const standingsMatches = matches.map((match) => {
 });
 
 
-  }, [liveMatches, liveDate]);
+ }, [matches, liveMatches, liveDate]);
 
   const selectedDayMatches = useMemo(() => {
     return matches
@@ -788,8 +837,7 @@ const standingsMatches = matches.map((match) => {
 
         return (a.time || "").localeCompare(b.time || "");
       });
-  }, [selectedDate]);
-
+}, [selectedDate, matches]);
   const topScorers = useMemo(() => {
     return players
       .map((player) => {
