@@ -79,6 +79,48 @@
   letter-spacing: -0.35px;
 }
 
+/* TÍTULOS ESTILO HOME - LNA */
+
+.section-heading .league-hero-title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #e8e8e8 35%,
+    #a5a5a5 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-heading .league-hero-title span {
+  background: linear-gradient(
+    180deg,
+    #ffb347 0%,
+    #ff8c00 45%,
+    #c85b00 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .section-heading .league-hero-title {
+    font-size: 28px;
+  }
+}
+
 
 /* =========================================================
    BOTONES CLICKEABLES

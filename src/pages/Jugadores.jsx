@@ -149,29 +149,7 @@ const selectedPlayerLastMatches = selectedPlayer
   return (
     <main className="players-page">
 
-      {/* =========================
-          HEADER
-      ========================= */}
-
-      <section className="players-header">
-        <div className="page-container">
-
-          <span className="players-label">
-            LIGA NACIONAL
-          </span>
-
-          <h1>
-            Jugadores
-          </h1>
-
-          <p>
-            Planteles y estadísticas de los
-            jugadores de la Liga Nacional.
-          </p>
-
-        </div>
-      </section>
-
+      
 
       {/* =========================
           CONTENIDO

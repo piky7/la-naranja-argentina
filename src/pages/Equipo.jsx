@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import "./Equipo.css";
+import "./Home.css";
 
 import { teams } from "../data/teams";
 import { players } from "../data/players";
@@ -68,6 +69,52 @@ function getPlayerStats(playerId) {
     (stats) =>
       stats.playerId === playerId
   );
+}
+
+function getPlayerLastMatches(player) {
+  if (!player) return [];
+
+  return matches
+    .filter((match) => {
+      if (match.status !== "finished") return false;
+
+      const teamId = player.teamId;
+
+      if (
+        match.homeTeam !== teamId &&
+        match.awayTeam !== teamId
+      ) {
+        return false;
+      }
+
+      const teamStats = getMatchStats(match)?.[teamId];
+
+      return (
+        Array.isArray(teamStats) &&
+        teamStats.some((item) => item.id === player.id)
+      );
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 2)
+    .map((match) => {
+      const stats = getMatchStats(match)[player.teamId].find(
+        (item) => item.id === player.id
+      );
+
+      const rivalId =
+        match.homeTeam === player.teamId
+          ? match.awayTeam
+          : match.homeTeam;
+
+      return {
+        id: match.id,
+        date: match.date,
+        rival: getTeam(rivalId)?.shortName || rivalId,
+        points: stats.points,
+        rebounds: stats.rebounds,
+        assists: stats.assists,
+      };
+    });
 }
 
 function getPlayer(playerId, playerName) {
@@ -581,6 +628,20 @@ const finishedMatches = allFinishedMatches.slice(
                           <small>
                             {player.nationality}
                           </small>
+                          <div className="team-player-averages">
+  {(() => {
+    const stats = getPlayerStats(player.id);
+
+    return (
+      <>
+        <span>PJ <strong>{stats?.gamesPlayed ?? 0}</strong></span>
+        <span>PTS <strong>{stats?.points?.toFixed(1) ?? "—"}</strong></span>
+        <span>REB <strong>{stats?.rebounds?.toFixed(1) ?? "—"}</strong></span>
+        <span>AST <strong>{stats?.assists?.toFixed(1) ?? "—"}</strong></span>
+      </>
+    );
+  })()}
+</div>
 
                         </div>
 
@@ -1039,19 +1100,18 @@ const finishedMatches = allFinishedMatches.slice(
 
       {selectedPlayer && (
 
-        <div
-          className="player-modal-overlay"
-          onClick={() =>
-            setSelectedPlayer(null)
-          }
-        >
-
-          <div
-            className="player-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
-          >
+       <div
+  className="home-modal-overlay"
+  onClick={() =>
+    setSelectedPlayer(null)
+  }
+>
+  <div
+    className="home-player-modal"
+    onClick={(event) =>
+      event.stopPropagation()
+    }
+  >
 
             <button
               type="button"
@@ -1067,40 +1127,50 @@ const finishedMatches = allFinishedMatches.slice(
 
             {/* HEADER */}
 
-            <div className="player-modal-header">
+          {/* HEADER */}
 
-              <img
-                src={team.logo}
-                alt={`Escudo de ${team.name}`}
-                className="player-modal-logo"
-              />
+<div className="home-player-modal-header">
 
-              <div className="player-modal-player-info">
+  <div className="home-player-modal-logo">
+    <Link
+      to={`/equipos/${team.id}`}
+      className="home-player-modal-logo-button"
+      aria-label={`Ir al equipo ${team.name}`}
+    >
+      <img
+        src={team.logo}
+        alt={`Escudo de ${team.name}`}
+      />
+    </Link>
+  </div>
 
-                <span>
-                  {selectedPlayer.position}
-                </span>
+  <div className="home-player-modal-info">
 
-                <h2>
-                  {selectedPlayer.name}
-                </h2>
+    <span>{selectedPlayer.position}</span>
 
-                <p>
-                  {team.name}
-                </p>
+    <h2>{selectedPlayer.name}</h2>
 
-                <small>
-                  {selectedPlayer.nationality}
-                </small>
+    <p>{team.name}</p>
 
-              </div>
+    <small>{selectedPlayer.nationality}</small>
 
-            </div>
+  </div>
+
+  <button
+    type="button"
+    className="home-modal-close"
+    onClick={() => setSelectedPlayer(null)}
+    aria-label="Cerrar"
+  >
+    ×
+  </button>
+
+</div>
 
 
             {/* DATOS DEL JUGADOR */}
 
-            <div className="player-modal-details">
+            <div className="home-player-modal-details">
 
               <div>
 
@@ -1147,15 +1217,15 @@ const finishedMatches = allFinishedMatches.slice(
 
             {/* ESTADÍSTICAS */}
 
-            <div className="player-modal-section">
+            <div className="home-player-modal-season">
 
-              <span>
-                ESTADÍSTICAS DE LA TEMPORADA
-              </span>
+              <span className="home-player-modal-label">
+  ESTADÍSTICAS DE LA TEMPORADA
+</span>
 
-              <div className="player-stats-grid">
+              <div className="home-player-modal-stats">
 
-                <div className="player-stat-card">
+                <div>
 
                   <strong>
                     {selectedPlayerStats?.gamesPlayed ?? 0}
@@ -1168,7 +1238,7 @@ const finishedMatches = allFinishedMatches.slice(
                 </div>
 
 
-                <div className="player-stat-card">
+                <div>
 
                   <strong>
                     {selectedPlayerStats?.points !== null &&
@@ -1186,7 +1256,7 @@ const finishedMatches = allFinishedMatches.slice(
                 </div>
 
 
-                <div className="player-stat-card">
+                <div>
 
                   <strong>
                     {selectedPlayerStats?.rebounds !== null &&
@@ -1204,7 +1274,7 @@ const finishedMatches = allFinishedMatches.slice(
                 </div>
 
 
-                <div className="player-stat-card">
+                <div>
 
                   <strong>
                     {selectedPlayerStats?.assists !== null &&
@@ -1225,10 +1295,67 @@ const finishedMatches = allFinishedMatches.slice(
 
             </div>
 
+{/* ÚLTIMOS DOS PARTIDOS */}
 
+<div className="home-player-modal-recent-section">
+
+  <span className="home-player-modal-label">
+  ÚLTIMOS 2 PARTIDOS
+</span>
+
+  {getPlayerLastMatches(selectedPlayer).length > 0 ? (
+
+    <div className="home-player-modal-recent-list">
+
+      {getPlayerLastMatches(selectedPlayer).map((match) => (
+
+        <div
+          className="home-player-modal-recent-match"
+          key={match.id}
+        >
+
+          <div className="home-player-modal-recent-header">
+            <strong>vs {match.rival}</strong>
+            <span>{formatDate(match.date)}</span>
+          </div>
+
+          <div className="home-player-modal-recent-stats">
+
+            <div>
+  <strong>{match.points ?? 0}</strong>
+  <span>PTS</span>
+</div>
+
+<div>
+  <strong>{match.rebounds ?? 0}</strong>
+  <span>REB</span>
+</div>
+
+<div>
+  <strong>{match.assists ?? 0}</strong>
+  <span>AST</span>
+</div>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  ) : (
+
+    <p className="home-player-modal-recent-empty">
+      Todavía no hay partidos con estadísticas disponibles.
+    </p>
+
+  )}
+
+</div>
             {/* FOOTER */}
 
-            <div className="player-modal-footer">
+            <div className="home-player-modal-footer">
 
               <span>
                 LIGA NACIONAL 2026/27

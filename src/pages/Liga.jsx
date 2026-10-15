@@ -496,26 +496,7 @@ const results = allResults.slice(
   return (
     <main className="league-page">
 
-      {/* =========================
-          HEADER
-      ========================= */}
-
-      <section className="league-header">
-        <div className="page-container">
-
-          <span className="league-label">
-            LIGA NACIONAL
-          </span>
-
-          <h1>Liga</h1>
-
-          <p>
-            Partidos, resultados y tabla de
-            posiciones de la Liga Nacional.
-          </p>
-
-        </div>
-      </section>
+     
 
 
       {/* =========================
@@ -538,9 +519,9 @@ const results = allResults.slice(
                   HOY
                 </span>
 
-                <h2>
-                  Partidos de hoy
-                </h2>
+                <h2 className="league-hero-title">
+  PARTIDOS <span>DE HOY</span>
+</h2>
 
               </div>
             </div>
@@ -704,9 +685,9 @@ onClick={() => {
                     TEMPORADA
                   </span>
 
-                  <h2>
-                    Posiciones
-                  </h2>
+                 <h2 className="league-hero-title">
+  TABLA DE <span>POSICIONES</span>
+</h2>
 
                 </div>
               </div>
@@ -768,9 +749,9 @@ onClick={() => {
     gap: "12px",
   }}
 >
-  <h2 style={{ margin: 0 }}>
-    Resultados
-  </h2>
+  <h2 className="league-hero-title" style={{ margin: 0 }}>
+  RESULTADOS
+</h2>
 
   {totalResultsPages > 1 && (
     <div
@@ -974,9 +955,9 @@ onClick={() => {
                     PRÓXIMOS 10
                   </span>
 
-                  <h2>
-                    Próximos partidos
-                  </h2>
+                  <h2 className="league-hero-title">
+  PRÓXIMOS <span>PARTIDOS</span>
+</h2>
 
                 </div>
               </div>

@@ -166,26 +166,7 @@ function Estadisticas() {
   return (
     <main className="stats-page">
 
-      {/* =========================================
-          HEADER
-          ========================================= */}
-
-      <section className="stats-header">
-        <div>
-          <span className="section-kicker">
-            Liga Nacional
-          </span>
-
-          <h1>Estadísticas</h1>
-
-          <p>
-            Estadísticas promedio de los jugadores
-            de la temporada.
-          </p>
-        </div>
-      </section>
-
-
+     
       {/* =========================================
           CONTENIDO
           ========================================= */}

@@ -22,28 +22,7 @@ function Equipos() {
   return (
     <main className="teams-page">
 
-      {/* =========================================
-          HEADER
-          ========================================= */}
-
-      <section className="teams-header">
-        <div className="page-container">
-
-          <span className="teams-label">
-            LIGA NACIONAL
-          </span>
-
-          <h1>
-            Equipos
-          </h1>
-
-          <p>
-            Conocé los equipos que forman parte de
-            la Liga Nacional.
-          </p>
-
-        </div>
-      </section>
+     
 
 
       {/* =========================================
