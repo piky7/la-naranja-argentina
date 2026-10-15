@@ -1,20 +1,5 @@
 {
-  "updatedAt": "2026-10-15T01:06:25.643Z",
-  "date": "2026-10-14",
-  "liveMatches": [
-    {
-      "eventId": "WQQCKc1c",
-      "homeTeam": "lanus",
-      "awayTeam": "penarol",
-      "homeName": "Lanus",
-      "awayName": "Peñarol",
-      "homeScore": 70,
-      "awayScore": 76,
-      "timestamp": 1792020600,
-      "status": "live",
-      "isLive": true,
-      "feedStatus": "5",
-      "feedScoreStatus": "0"
-    }
-  ]
+  "updatedAt": "2026-10-15T04:28:57.395Z",
+  "date": "2026-10-15",
+  "liveMatches": []
 }
