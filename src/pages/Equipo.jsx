@@ -1113,16 +1113,7 @@ const finishedMatches = allFinishedMatches.slice(
     }
   >
 
-            <button
-              type="button"
-              className="player-modal-close"
-              onClick={() =>
-                setSelectedPlayer(null)
-              }
-              aria-label="Cerrar"
-            >
-              ×
-            </button>
+            
 
 
             {/* HEADER */}
