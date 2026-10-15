@@ -4513,7 +4513,6 @@ export const matchPlayerStats = {
     }
   ]
 },
-
 "lanus-penarol": {
   "lanus": [
     {
