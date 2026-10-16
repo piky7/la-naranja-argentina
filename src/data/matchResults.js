@@ -199,4 +199,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-15-la-union-racing-chivilcoy": {
+    status: "finished",
+    homeScore: 68,
+    awayScore: 74,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
