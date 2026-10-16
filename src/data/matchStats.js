@@ -2526,7 +2526,7 @@ export const matchPlayerStats = {
       "minutes": "13:35"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "id": "emilio-stucky",
       "name": "Stucky N.",
       "points": 14,
       "rebounds": 6,
@@ -3468,7 +3468,7 @@ export const matchPlayerStats = {
       "minutes": "04:27"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "id": "emilio-stucky",
       "name": "Stucky N.",
       "points": 6,
       "rebounds": 3,
@@ -4466,7 +4466,7 @@ export const matchPlayerStats = {
       "minutes": "21:30"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "id": "emilio-stucky",
       "name": "Stucky N.",
       "points": 7,
       "rebounds": 0,
@@ -4826,7 +4826,7 @@ export const matchPlayerStats = {
       "minutes": "31:01"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "id": "emilio-stucky",
       "name": "Stucky N.",
       "points": 14,
       "rebounds": 5,
