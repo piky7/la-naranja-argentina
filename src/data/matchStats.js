@@ -2518,8 +2518,8 @@ export const matchPlayerStats = {
       "minutes": "13:47"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 2,
       "rebounds": 0,
       "assists": 3,
@@ -3460,8 +3460,8 @@ export const matchPlayerStats = {
       "minutes": "16:48"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 0,
       "rebounds": 1,
       "assists": 1,
@@ -4458,8 +4458,8 @@ export const matchPlayerStats = {
       "minutes": "11:35"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 5,
       "rebounds": 1,
       "assists": 3,
@@ -4818,8 +4818,8 @@ export const matchPlayerStats = {
       "minutes": "30:11"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 7,
       "rebounds": 3,
       "assists": 1,
