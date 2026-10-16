@@ -217,6 +217,7 @@ const playerAliases = {
   "quimsa|bogado s": "sebastian-bogado",
   "quimsa|roth e": "enzo-roth",
   "platense|pappalardi g": "giovanni-pappalardi",
+  "san-lorenzo|actis j": "joaquin-actis",
   "la-union|maglietti e g": "enzo-maglietti",
   "independiente-oliva|guerrero j m": "juan-martin-guerrero",
   "independiente-oliva|marcucci n j": "nicolas-marcucci",
