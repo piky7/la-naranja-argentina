@@ -1742,62 +1742,116 @@
   color: #2d170c;
 }
 
+
 /* =========================================
-   TABLA COMPACTA EN CELULAR
+   LNA - TABLA DE JUGADORES COMPACTA
    ========================================= */
 
 @media (max-width: 600px) {
-  .stats-table td {
-    height: 46px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+  .stats-table {
+    border-collapse: collapse;
+  }
+
+  .stats-table tbody tr {
+    height: 38px;
+  }
+
+  .stats-table tbody td {
+    height: 38px;
+    padding: 2px 3px;
+    line-height: 1.1;
+  }
+
+  .stats-table th {
+    height: 34px;
+    padding: 3px;
   }
 
   .stats-table th:first-child,
   .stats-table td:first-child {
-    width: 45%;
+    width: 47%;
   }
 
   .stats-table th:nth-child(2),
   .stats-table td:nth-child(2) {
     width: 13%;
-    text-align: center;
   }
 
   .stats-table th:nth-child(n+3),
   .stats-table td:nth-child(n+3) {
-    width: 10.5%;
+    width: 10%;
   }
 
   .stats-player {
+    display: flex;
+    align-items: center;
     gap: 5px;
+    min-height: 0;
   }
 
   .stats-player > span:not(.stats-rank) {
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .stats-player img {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
   }
 
   .stats-rank {
-    width: 19px;
-    height: 22px;
-    flex-basis: 19px;
-    font-size: 10px;
+    width: 23px;
+    height: 25px;
+    flex: 0 0 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: #303030;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
   }
+
+ 
+/* Ranking: oro, plata y bronce */
+@media (max-width: 600px) {
+  .stats-table .stats-rank.stats-rank-1 {
+    background: linear-gradient(135deg, #ffe68a, #e7ac24);
+    color: #302000;
+  }
+
+  .stats-table .stats-rank.stats-rank-2 {
+    background: linear-gradient(135deg, #f0f0f0, #a4acb5);
+    color: #202020;
+  }
+
+  .stats-table .stats-rank.stats-rank-3 {
+    background: linear-gradient(135deg, #efa46a, #b96932);
+    color: #2d170c;
+  }
+}
+
 
   .stats-team {
     justify-content: center;
+    gap: 0;
+  }
+
+  .stats-team img {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
   }
 
   .stats-team span {
     display: none;
   }
-
-  .stats-team img {
-    width: 23px;
-    height: 23px;
-    flex-basis: 23px;
-  }
 }
+
 
 /* =========================================
    LNA - ESCUDO JUNTO AL NOMBRE DEL LÍDER
@@ -1861,3 +1915,80 @@
     color: var(--color-primary);
   }
 }
+
+
+/* =========================================
+   LNA - TABLA MOBILE ESTILO BOCETO
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  /* Filas más compactas */
+  .stats-table td {
+    height: 43px;
+    padding: 4px 3px;
+  }
+
+  .stats-table th {
+    height: 36px;
+    padding: 0 3px;
+  }
+
+  /* Distribución de columnas */
+  .stats-table th:first-child,
+  .stats-table td:first-child {
+    width: 47%;
+  }
+
+  .stats-table th:nth-child(2),
+  .stats-table td:nth-child(2) {
+    width: 13%;
+  }
+
+  .stats-table th:nth-child(n+3),
+  .stats-table td:nth-child(n+3) {
+    width: 10%;
+  }
+
+  /* Ranking + nombre */
+  .stats-player {
+    gap: 7px;
+  }
+
+  .stats-rank {
+    width: 21px;
+    height: 24px;
+    flex: 0 0 21px;
+    border-radius: 5px;
+    font-size: 11px;
+  }
+
+  .stats-player > span:not(.stats-rank) {
+    font-size: 10px;
+    font-weight: 800;
+  }
+
+  /* Escudos */
+  .stats-team img {
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
+  }
+
+  /* Valores */
+  .stats-table td:nth-child(3),
+  .stats-table td:nth-child(5),
+  .stats-table td:nth-child(6) {
+    font-size: 10px;
+  }
+
+  .stats-table td:nth-child(4) {
+    font-size: 11px;
+  }
+
+  .stats-table td.stats-active-column {
+    font-weight: 900;
+    color: var(--color-primary);
+  }
+}
+
