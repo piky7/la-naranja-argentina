@@ -2891,8 +2891,8 @@ export const matchPlayerStats = {
       "minutes": "12:28"
     },
     {
-      "id": "flashscore-lanus-bombino-p",
-      "name": "Bombino P.",
+      "id": "pedro-bombino",
+      "name": "Pedro Bombino",
       "points": 16,
       "rebounds": 10,
       "assists": 2,
@@ -4548,8 +4548,8 @@ export const matchPlayerStats = {
       "minutes": "21:06"
     },
     {
-      "id": "flashscore-lanus-bombino-p",
-      "name": "Bombino P.",
+      "id": "pedro-bombino",
+      "name": "Pedro Bombino",
       "points": 10,
       "rebounds": 6,
       "assists": 0,
