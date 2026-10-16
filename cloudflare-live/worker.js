@@ -72,10 +72,13 @@ function detectStatus(fields, timestamp, nowSeconds) {
   const db = last(fields, "DB");
 
   // Patrón de final observado en tres partidos.
-  if (di === "-1" && da === "3" && db === "3") {
-    return "finished";
-  }
-
+if (
+  di === "-1" &&
+  da === "3" &&
+  (db === "3" || db === "10")
+) {
+  return "finished";
+}
   const hasScores =
     scoreValue(last(fields, "DE")) != null &&
     scoreValue(last(fields, "DF")) != null;
