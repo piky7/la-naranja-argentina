@@ -2527,7 +2527,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emilio-stucky",
-      "name": "Stucky N.",
+      "name": "Emilio Stucky",
       "points": 14,
       "rebounds": 6,
       "assists": 1,
@@ -3469,7 +3469,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emilio-stucky",
-      "name": "Stucky N.",
+      "name": "Emilio Stucky",
       "points": 6,
       "rebounds": 3,
       "assists": 1,
@@ -4467,7 +4467,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emilio-stucky",
-      "name": "Stucky N.",
+      "name": "Emilio Stucky",
       "points": 7,
       "rebounds": 0,
       "assists": 1,
@@ -4827,7 +4827,7 @@ export const matchPlayerStats = {
     },
     {
       "id": "emilio-stucky",
-      "name": "Stucky N.",
+      "name": "Emilio Stucky",
       "points": 14,
       "rebounds": 5,
       "assists": 1,
