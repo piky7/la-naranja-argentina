@@ -830,6 +830,16 @@ export const players = [
   // LA UNIÓN
 
 {
+  id: "hugo-paez",
+  name: "Hugo Páez",
+  teamId: "la-union",
+  position: null,
+  number: null,
+  nationality: null,
+  category: "U21",
+},
+
+{
   id: "agustin-facello",
   name: "Agustín Facello",
   teamId: "la-union",
