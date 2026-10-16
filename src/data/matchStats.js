@@ -2518,16 +2518,16 @@ export const matchPlayerStats = {
       "minutes": "13:47"
     },
     {
-      "id": "ignacio-respaud",
-      "name": "Ignacio Respaud",
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
       "points": 2,
       "rebounds": 0,
       "assists": 3,
       "minutes": "13:35"
     },
     {
-      "id": "emilio-stucky",
-      "name": "Emilio Stucky",
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
       "points": 14,
       "rebounds": 6,
       "assists": 1,
@@ -3460,16 +3460,16 @@ export const matchPlayerStats = {
       "minutes": "16:48"
     },
     {
-      "id": "ignacio-respaud",
-      "name": "Ignacio Respaud",
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
       "points": 0,
       "rebounds": 1,
       "assists": 1,
       "minutes": "04:27"
     },
     {
-      "id": "emilio-stucky",
-      "name": "Emilio Stucky",
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
       "points": 6,
       "rebounds": 3,
       "assists": 1,
@@ -4458,16 +4458,16 @@ export const matchPlayerStats = {
       "minutes": "11:35"
     },
     {
-      "id": "ignacio-respaud",
-      "name": "Ignacio Respaud",
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
       "points": 5,
       "rebounds": 1,
       "assists": 3,
       "minutes": "21:30"
     },
     {
-      "id": "emilio-stucky",
-      "name": "Emilio Stucky",
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
       "points": 7,
       "rebounds": 0,
       "assists": 1,
@@ -4818,16 +4818,16 @@ export const matchPlayerStats = {
       "minutes": "30:11"
     },
     {
-      "id": "ignacio-respaud",
-      "name": "Ignacio Respaud",
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
       "points": 7,
       "rebounds": 3,
       "assists": 1,
       "minutes": "31:01"
     },
     {
-      "id": "emilio-stucky",
-      "name": "Emilio Stucky",
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
       "points": 14,
       "rebounds": 5,
       "assists": 1,
