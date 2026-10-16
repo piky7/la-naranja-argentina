@@ -212,6 +212,7 @@ const playerAliases = {
   "lanus|bombino p": "pedro-bombino",
   "san-martin|berra fernandez l": "lautaro-berra",
   "regatas|gramajo p": "ivan-gramajo",
+  "regatas|ledesma a": "alan-ledesma",
   "quimsa|laterza j": "ignacio-laterza",
   "la-union|maglietti e g": "enzo-maglietti",
   "independiente-oliva|guerrero j m": "juan-martin-guerrero",
