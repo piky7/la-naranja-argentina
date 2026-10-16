@@ -1347,6 +1347,16 @@ export const players = [
   // PLATENSE
 
 {
+  id: "giovanni-pappalardi",
+  name: "Giovanni Pappalardi",
+  teamId: "platense",
+  position: null,
+  number: null,
+  nationality: null,
+  category: "Juvenil",
+},
+
+{
   id: "ramiro-santiago",
   name: "Ramiro Santiago",
   teamId: "platense",
