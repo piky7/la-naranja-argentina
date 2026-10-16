@@ -1520,8 +1520,8 @@ export const matchPlayerStats = {
       "minutes": "17:58"
     },
     {
-      "id": "flashscore-la-union-maglietti-e-g",
-      "name": "Maglietti E. G.",
+      "id": "enzo-maglietti",
+      "name": "Enzo Maglietti",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2282,8 +2282,8 @@ export const matchPlayerStats = {
       "minutes": "25:05"
     },
     {
-      "id": "flashscore-independiente-oliva-guerrero-j-m",
-      "name": "Guerrero J. M.",
+      "id": "juan-martin-guerrero",
+      "name": "Juan Martín Guerrero",
       "points": 8,
       "rebounds": 2,
       "assists": 3,
@@ -2314,8 +2314,8 @@ export const matchPlayerStats = {
       "minutes": "22:42"
     },
     {
-      "id": "flashscore-independiente-oliva-marcucci-n-j",
-      "name": "Marcucci N. J.",
+      "id": "nicolas-marcucci",
+      "name": "Nicolás Marcucci",
       "points": 2,
       "rebounds": 3,
       "assists": 0,
@@ -2346,8 +2346,8 @@ export const matchPlayerStats = {
       "minutes": "14:29"
     },
     {
-      "id": "flashscore-independiente-oliva-filipetti-e",
-      "name": "Filipetti E.",
+      "id": "enzo-filippetti",
+      "name": "Enzo Fillipetti",
       "points": 1,
       "rebounds": 0,
       "assists": 1,
@@ -2671,8 +2671,8 @@ export const matchPlayerStats = {
       "minutes": "22:10"
     },
     {
-      "id": "flashscore-san-lorenzo-aguirre-g",
-      "name": "Aguirre G.",
+      "id": "nicolas-aguirre",
+      "name": "Nicolás Aguirre",
       "points": 12,
       "rebounds": 1,
       "assists": 3,
