@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T00:23:53.323Z",
+  "updatedAt": "2026-10-16T01:44:39.966Z",
   "date": "2026-10-15",
   "liveMatches": [
     {
@@ -8,12 +8,12 @@
       "awayTeam": "racing-chivilcoy",
       "homeName": "La Union",
       "awayName": "Racing de Chivilcoy",
-      "homeScore": 19,
-      "awayScore": 9,
+      "homeScore": 62,
+      "awayScore": 58,
       "timestamp": 1792108800,
       "status": "live",
       "isLive": true,
-      "feedStatus": "10",
+      "feedStatus": "7",
       "feedScoreStatus": "0"
     }
   ]
