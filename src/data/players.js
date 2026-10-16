@@ -1804,6 +1804,16 @@ export const players = [
 // SAN LORENZO
 
 {
+  id: "joaquin-actis",
+  name: "Joaquín Actis",
+  teamId: "san-lorenzo",
+  position: "Base",
+  number: null,
+  nationality: null,
+  category: "U21",
+},
+
+{
   id: "nicolas-aguirre",
   name: "Nicolás Aguirre",
   teamId: "san-lorenzo",
