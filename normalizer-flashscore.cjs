@@ -215,6 +215,7 @@ const playerAliases = {
   "regatas|ledesma a": "alan-ledesma",
   "quimsa|laterza j": "ignacio-laterza",
   "quimsa|bogado s": "sebastian-bogado",
+  "quimsa|roth e": "enzo-roth",
   "la-union|maglietti e g": "enzo-maglietti",
   "independiente-oliva|guerrero j m": "juan-martin-guerrero",
   "independiente-oliva|marcucci n j": "nicolas-marcucci",
