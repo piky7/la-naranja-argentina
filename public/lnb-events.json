@@ -229,22 +229,6 @@
       "awayId": "U5F8QbRb"
     },
     {
-      "eventId": "AySSGF0M",
-      "homeTeam": "platense",
-      "homeName": "Platense",
-      "awayTeam": "obera",
-      "awayName": "Obera TC",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1792193400,
-      "homeSlug": "ca-platense",
-      "awaySlug": "obera-tc",
-      "homeId": "SIolf8Y3",
-      "awayId": "KdCRV01k"
-    },
-    {
       "eventId": "tKIbBgOq",
       "homeTeam": "san-lorenzo",
       "homeName": "San Lorenzo",
@@ -2003,6 +1987,22 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
+    },
+    {
+      "eventId": "AySSGF0M",
+      "homeTeam": "platense",
+      "homeName": "Platense",
+      "awayTeam": "obera",
+      "awayName": "Obera TC",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1792193400,
+      "homeSlug": "ca-platense",
+      "awaySlug": "obera-tc",
+      "homeId": "SIolf8Y3",
+      "awayId": "KdCRV01k"
     }
   ],
   "finished": [
