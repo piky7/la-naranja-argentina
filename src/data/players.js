@@ -1470,7 +1470,7 @@ export const players = [
 
 {
   id: "ignacio-laterza",
-  name: "Ignacio Laterza",
+  name: "Juan Ignacio Laterza",
   teamId: "quimsa",
   position: "Base",
   number: null,
