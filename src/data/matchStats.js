@@ -4701,4 +4701,190 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"la-union-racing-chivilcoy": {
+  "la-union": [
+    {
+      "id": "brandon-beavers",
+      "name": "Brandon Beavers",
+      "points": 5,
+      "rebounds": 5,
+      "assists": 3,
+      "minutes": "26:10"
+    },
+    {
+      "id": "mariano-marina",
+      "name": "Mariano Marina",
+      "points": 14,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "36:02"
+    },
+    {
+      "id": "sebastian-acevedo",
+      "name": "Sebastián Acevedo",
+      "points": 8,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "33:28"
+    },
+    {
+      "id": "alexis-elsener",
+      "name": "Alexis Elsener",
+      "points": 14,
+      "rebounds": 11,
+      "assists": 1,
+      "minutes": "33:45"
+    },
+    {
+      "id": "windi-graterol",
+      "name": "Windi Graterol",
+      "points": 5,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "32:40"
+    },
+    {
+      "id": "agustin-facello",
+      "name": "Agustín Facello",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "25:03"
+    },
+    {
+      "id": "flashscore-la-union-paez-h",
+      "name": "Paez H.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:00"
+    },
+    {
+      "id": "franco-alorda",
+      "name": "Franco Alorda",
+      "points": 4,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "12:12"
+    },
+    {
+      "id": "tomas-nuno",
+      "name": "Tomás Nuno",
+      "points": 12,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "25:39"
+    }
+  ],
+  "racing-chivilcoy": [
+    {
+      "id": "pedro-barral",
+      "name": "Pedro Barral",
+      "points": 12,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "41:13"
+    },
+    {
+      "id": "manuel-rodriguez",
+      "name": "Manuel Rodríguez",
+      "points": 11,
+      "rebounds": 11,
+      "assists": 0,
+      "minutes": "31:46"
+    },
+    {
+      "id": "marcos-delia",
+      "name": "Marcos Delía",
+      "points": 4,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "31:26"
+    },
+    {
+      "id": "juan-bocca",
+      "name": "Juan Bocca",
+      "points": 3,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "11:54"
+    },
+    {
+      "id": "nicolas-romano",
+      "name": "Nicolás Romano",
+      "points": 19,
+      "rebounds": 8,
+      "assists": 1,
+      "minutes": "30:11"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-respaud-j",
+      "name": "Respaud J.",
+      "points": 7,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "31:01"
+    },
+    {
+      "id": "flashscore-racing-chivilcoy-stucky-n",
+      "name": "Stucky N.",
+      "points": 14,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "20:02"
+    },
+    {
+      "id": "tomas-delia",
+      "name": "Tomás Delía",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "12:12"
+    },
+    {
+      "id": "abraham-barahona",
+      "name": "Abraham Barahona",
+      "points": 2,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "08:11"
+    },
+    {
+      "id": "matias-morera",
+      "name": "Matías Morera",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "07:06"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 19,
+      "away": 9
+    },
+    {
+      "period": "2",
+      "home": 19,
+      "away": 18
+    },
+    {
+      "period": "3",
+      "home": 12,
+      "away": 21
+    },
+    {
+      "period": "4",
+      "home": 15,
+      "away": 17
+    },
+    {
+      "period": "PR",
+      "home": 3,
+      "away": 9
+    }
+  ]
+},
 };
