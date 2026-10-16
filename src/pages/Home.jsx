@@ -560,20 +560,25 @@ const getPlayerLastMatches = (player) => {
   return !(hasPublishedResult && hasPublishedStats);
 });
 
-  // Si se publica una versión nueva de la web mientras el usuario la mira,
-  // recargar una sola vez para obtener los nuevos resultados y estadísticas.
-  // En desarrollo, Vite aplica los cambios con HMR.
+  // Detectar nuevas publicaciones incluso cuando la PWA vuelve del segundo plano.
+  // No interferir con la navegación: comprobar al volver y, si hay un final
+  // pendiente de estadísticas, mantener también la revisión periódica.
   useEffect(() => {
-    const hasPendingFinal = visibleLiveMatches.some(
-      (match) => match.status === "finished"
-    );
-    if (!hasPendingFinal || import.meta.env.DEV) return;
+    if (import.meta.env.DEV) return;
 
     const currentScript = document.querySelector('script[type="module"][src]')
       ?.getAttribute("src");
     if (!currentScript) return;
 
+    let checking = false;
+    let lastCheck = 0;
+    let needsRefresh = false;
+
     const checkDeployment = async () => {
+      if (checking || document.visibilityState !== "visible") return;
+      if (Date.now() - lastCheck < 15000) return;
+      lastCheck = Date.now();
+      checking = true;
       try {
         const response = await fetch(`/?lna_check=${Date.now()}`, {
           cache: "no-store",
@@ -583,16 +588,38 @@ const getPlayerLastMatches = (player) => {
         const nextScript = html.match(/<script[^>]*type=["']module["'][^>]*src=["']([^"']+)["']/i)
           ?? html.match(/<script[^>]*src=["']([^"']+)["'][^>]*type=["']module["']/i);
         if (nextScript?.[1] && nextScript[1] !== currentScript) {
-          window.location.reload();
+          needsRefresh = true;
+          // Solo recargar al volver a la pantalla principal, sin interrumpir popups.
+          if (!document.querySelector('[role="dialog"]')) {
+            window.location.reload();
+          }
         }
       } catch (error) {
         console.warn("No se pudo comprobar la nueva versión de LNA", error);
+      } finally {
+        checking = false;
       }
     };
 
-    const interval = setInterval(checkDeployment, 60000);
-    return () => clearInterval(interval);
-  }, [visibleLiveMatches.some((match) => match.status === "finished")]);
+    const onReturn = () => {
+      if (document.visibilityState !== "visible") return;
+      if (needsRefresh && !document.querySelector('[role="dialog"]')) {
+        window.location.reload();
+        return;
+      }
+      void checkDeployment();
+    };
+
+    document.addEventListener("visibilitychange", onReturn);
+    window.addEventListener("focus", onReturn);
+    // Revisar también mientras la app está abierta, sin recargar constantemente.
+    const interval = setInterval(onReturn, 60000);
+    return () => {
+      document.removeEventListener("visibilitychange", onReturn);
+      window.removeEventListener("focus", onReturn);
+      clearInterval(interval);
+    };
+  }, []);
 // Incorporar resultados LIVE finalizados que todavía
 // no fueron publicados en matchResults.js.
 const standingsMatches = matches.map((match) => {
