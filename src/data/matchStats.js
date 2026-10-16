@@ -1308,8 +1308,8 @@ export const matchPlayerStats = {
       "minutes": "14:12"
     },
     {
-      "id": "flashscore-platense-pappalardi-g",
-      "name": "Pappalardi G.",
+      "id": "giovanni-pappalardi",
+      "name": "Giovanni Pappalardi",
       "points": 0,
       "rebounds": 3,
       "assists": 0,
@@ -2711,8 +2711,8 @@ export const matchPlayerStats = {
       "minutes": "04:20"
     },
     {
-      "id": "flashscore-san-lorenzo-actis-j",
-      "name": "Actis J.",
+      "id": "joaquin-actis",
+      "name": "Joaquín Actis",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -4752,8 +4752,8 @@ export const matchPlayerStats = {
       "minutes": "25:03"
     },
     {
-      "id": "flashscore-la-union-paez-h",
-      "name": "Paez H.",
+      "id": "hugo-paez",
+      "name": "Hugo Páez",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
