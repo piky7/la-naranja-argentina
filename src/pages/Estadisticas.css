@@ -1128,3 +1128,490 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =========================================
+   LÍDERES DE LA TEMPORADA
+   ========================================= */
+
+.stats-leaders {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0 10px;
+}
+
+.stats-leader-card {
+  min-width: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid #484038;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #292420, #1d1d1d 75%);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.stats-leader-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.stats-leader-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stats-leader-title {
+  color: #f5f5f5;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+}
+
+.stats-leader-medal {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffe2a0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff0a8, #d49a28);
+  box-shadow: 0 3px 12px rgba(227, 166, 49, 0.25);
+}
+
+.stats-leader-medal span {
+  color: #483008;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.stats-leader-player {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.stats-leader-player > strong {
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.stats-leader-team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stats-leader-team img {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+}
+
+.stats-leader-team span {
+  color: #bdbdbd;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.stats-leader-value {
+  margin-top: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stats-leader-value strong {
+  color: var(--color-primary);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.stats-leader-value span {
+  color: #a9a9a9;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.stats-leader-empty {
+  color: #a9a9a9;
+  font-size: 12px;
+}
+
+/* =========================================
+   LÍDERES - TABLET
+   ========================================= */
+
+@media (max-width: 850px) {
+  .stats-leaders {
+    gap: 10px;
+  }
+
+  .stats-leader-card {
+    padding: 14px;
+  }
+
+  .stats-leader-player > strong {
+    font-size: 16px;
+  }
+
+  .stats-leader-value strong {
+    font-size: 29px;
+  }
+}
+
+/* =========================================
+   LÍDERES - MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+  .stats-leaders {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .stats-leader-card {
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .stats-leader-medal {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .stats-leader-medal span {
+    font-size: 18px;
+  }
+
+  .stats-leader-player > strong {
+    font-size: 18px;
+  }
+
+  .stats-leader-value strong {
+    font-size: 30px;
+  }
+}
+
+
+/* =========================================
+   LNA - LÍDERES COMPACTOS Y CENTRADOS
+   ========================================= */
+
+.stats-leaders {
+  gap: 10px;
+  margin: 16px 0 6px;
+}
+
+.stats-leader-card {
+  min-height: 0;
+  padding: 14px 12px;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+}
+
+.stats-leader-top {
+  width: 100%;
+  flex-direction: column-reverse;
+  justify-content: center;
+  gap: 7px;
+}
+
+.stats-leader-medal {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.stats-leader-medal span {
+  font-size: 17px;
+}
+
+.stats-leader-title {
+  font-size: 10px;
+  letter-spacing: 0.6px;
+}
+
+.stats-leader-player {
+  width: 100%;
+  align-items: center;
+  gap: 5px;
+}
+
+.stats-leader-player > strong {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.stats-leader-team {
+  justify-content: center;
+  gap: 6px;
+}
+
+.stats-leader-team img {
+  width: 22px;
+  height: 22px;
+}
+
+.stats-leader-team span {
+  font-size: 10px;
+}
+
+.stats-leader-value {
+  margin-top: 2px;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stats-leader-value strong {
+  font-size: 30px;
+}
+
+.stats-leader-value span {
+  font-size: 9px;
+}
+
+/* =========================================
+   MOBILE: TRES TARJETAS EN UNA FILA
+   ========================================= */
+
+@media (max-width: 600px) {
+  .stats-leaders {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin: 12px 0 4px;
+  }
+
+  .stats-leader-card {
+    padding: 10px 5px;
+    gap: 6px;
+  }
+
+  .stats-leader-medal {
+    width: 27px;
+    height: 27px;
+    flex-basis: 27px;
+  }
+
+  .stats-leader-medal span {
+    font-size: 14px;
+  }
+
+  .stats-leader-title {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+
+  .stats-leader-player > strong {
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .stats-leader-team {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .stats-leader-team img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .stats-leader-team span {
+    max-width: 100%;
+    font-size: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .stats-leader-value strong {
+    font-size: 24px;
+  }
+
+  .stats-leader-value span {
+    font-size: 8px;
+  }
+}
+
+/* =========================================
+   AJUSTES FINALES DE TARJETAS
+   ========================================= */
+
+@media (min-width: 601px) {
+  .stats-leaders {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-leader-team span {
+    display: none;
+  }
+
+  .stats-leader-team img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .stats-leader-card {
+    gap: 7px;
+  }
+
+  .stats-leader-player {
+    gap: 7px;
+  }
+}
+
+
+/* =========================================
+   FILTROS DE ESTADÍSTICAS
+   ========================================= */
+
+.stats-filters {
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 130px;
+  align-items: end;
+}
+
+.stats-games-filter {
+  min-width: 0;
+}
+
+.stats-games-filter label {
+  display: block;
+  margin-bottom: 4px;
+  color: #a9a9a9;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.stats-games-filter select {
+  width: 100%;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid #3d3d3d;
+  border-radius: var(--radius-small);
+  background-color: #202020;
+  color: #ffffff;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+}
+
+.stats-games-filter select:focus {
+  border-color: var(--color-primary);
+}
+
+@media (max-width: 600px) {
+  .stats-filters {
+    grid-template-columns: minmax(0, 1fr) 110px;
+    gap: 8px;
+  }
+
+  .stats-search {
+    grid-column: 1 / -1;
+  }
+
+  .stats-team-filter {
+    grid-column: 1;
+  }
+
+  .stats-games-filter {
+    grid-column: 2;
+  }
+
+  .stats-games-filter select {
+    height: 42px;
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================
+   LNA - FILTROS UNIFORMES
+   ========================================= */
+
+.stats-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 130px;
+  gap: 12px;
+  align-items: end;
+}
+
+.stats-search,
+.stats-team-filter,
+.stats-games-filter {
+  min-width: 0;
+}
+
+.stats-search label,
+.stats-team-filter label,
+.stats-games-filter label {
+  display: block;
+  margin-bottom: 6px;
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.stats-search input,
+.stats-team-filter select,
+.stats-games-filter select {
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+}
+
+/* =========================================
+   VISTA CELULAR
+   ========================================= */
+
+@media (max-width: 600px) {
+  .stats-filters {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px 8px;
+    align-items: end;
+  }
+
+  .stats-search {
+    grid-column: 1 / -1;
+  }
+
+  .stats-team-filter {
+    grid-column: 1;
+  }
+
+  .stats-games-filter {
+    grid-column: 2;
+  }
+
+  .stats-search input,
+  .stats-team-filter select,
+  .stats-games-filter select {
+    height: 42px;
+    font-size: 12px;
+  }
+
+  .stats-search label,
+  .stats-team-filter label,
+  .stats-games-filter label {
+    font-size: 9px;
+    margin-bottom: 5px;
+  }
+}
+

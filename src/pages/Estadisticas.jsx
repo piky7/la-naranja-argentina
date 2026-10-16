@@ -9,6 +9,7 @@ import "./Estadisticas.css";
 function Estadisticas() {
   const [search, setSearch] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("todos");
+  const [minGames, setMinGames] = useState(0);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   const [sortBy, setSortBy] = useState(null);
@@ -78,7 +79,12 @@ function Estadisticas() {
         selectedTeam === "todos" ||
         player.teamId === selectedTeam;
 
-      return matchesSearch && matchesTeam;
+      const stats = getPlayerStats(player.id);
+
+const matchesMinGames =
+  (stats?.gamesPlayed || 0) >= minGames;
+
+return matchesSearch && matchesTeam && matchesMinGames;
     });
 
    if (!sortBy) {
@@ -129,6 +135,7 @@ function Estadisticas() {
   }, [
     search,
     selectedTeam,
+    minGames,
     sortBy,
     sortDirection,
   ]);
@@ -146,6 +153,58 @@ function Estadisticas() {
   const selectedPlayerStats = selectedPlayer
     ? getPlayerStats(selectedPlayer.id)
     : null;
+
+
+  /*
+   * =========================================
+   * LÍDERES DE LA TEMPORADA
+   * =========================================
+   */
+
+  const seasonLeaders = useMemo(() => {
+    const eligiblePlayers = players
+      .map((player) => ({
+        player,
+        stats: playerStats.find(
+          (stats) => stats.playerId === player.id
+        ),
+      }))
+      .filter(
+        ({ stats }) => stats && stats.gamesPlayed > 0
+      );
+
+    const findLeader = (stat) => {
+      const sorted = [...eligiblePlayers].sort(
+        (a, b) =>
+          (Number(b.stats[stat]) || 0) -
+          (Number(a.stats[stat]) || 0)
+      );
+
+      return sorted[0] || null;
+    };
+
+    return [
+      {
+        key: "points",
+        title: "MÁXIMO ANOTADOR",
+        abbreviation: "PTS",
+        leader: findLeader("points"),
+      },
+      {
+        key: "rebounds",
+        title: "MÁXIMO REBOTEADOR",
+        abbreviation: "REB",
+        leader: findLeader("rebounds"),
+      },
+      {
+        key: "assists",
+        title: "MÁXIMO ASISTIDOR",
+        abbreviation: "AST",
+        leader: findLeader("assists"),
+      },
+    ];
+  }, []);
+
 
   /*
    * =========================================
@@ -173,6 +232,65 @@ function Estadisticas() {
 
       <section className="stats-container">
 
+{/* =========================================
+    LÍDERES DE LA TEMPORADA
+    ========================================= */}
+
+<div className="stats-leaders">
+  {seasonLeaders.map(({ key, title, abbreviation, leader }) => {
+    const team = leader
+      ? getTeam(leader.player.teamId)
+      : null;
+
+    return (
+      <div className="stats-leader-card" key={key}>
+        <div className="stats-leader-top">
+          <span className="stats-leader-title">
+            {title}
+          </span>
+
+          <div className="stats-leader-medal">
+            <span>1</span>
+          </div>
+        </div>
+
+        {leader ? (
+          <>
+            <div className="stats-leader-player">
+              <strong>{leader.player.name}</strong>
+
+              <div className="stats-leader-team">
+                {team?.logo && (
+                  <img
+                    src={team.logo}
+                    alt={team.name}
+                  />
+                )}
+                <span>{team?.name || "—"}</span>
+              </div>
+            </div>
+
+            <div className="stats-leader-value">
+              <strong>
+                {formatAverage(
+                  leader.stats[key],
+                  leader.stats.gamesPlayed
+                )}
+              </strong>
+              <span>{abbreviation} / PARTIDO</span>
+            </div>
+          </>
+        ) : (
+          <p className="stats-leader-empty">
+            Sin estadísticas disponibles
+          </p>
+        )}
+      </div>
+    );
+  })}
+</div>
+
+
         {/* =========================================
             FILTROS
             ========================================= */}
@@ -180,7 +298,11 @@ function Estadisticas() {
         <div className="stats-filters">
 
           <div className="stats-search">
+            <label htmlFor="stats-player-search">
+  BUSCAR JUGADOR
+</label>
             <input
+            id="stats-player-search"
               type="text"
               placeholder="Buscar jugador..."
               value={search}
@@ -191,7 +313,11 @@ function Estadisticas() {
           </div>
 
           <div className="stats-team-filter">
+            <label htmlFor="stats-team-select">
+  EQUIPO
+</label>
             <select
+            id="stats-team-select"
               value={selectedTeam}
               onChange={(event) =>
                 setSelectedTeam(event.target.value)
@@ -208,16 +334,39 @@ function Estadisticas() {
                 >
                   {team.name}
                 </option>
+             
               ))}
+            </select>
+          </div>
+
+          {/* FILTRO MÍNIMO DE PARTIDOS JUGADOS */}
+
+          <div className="stats-games-filter">
+            <label htmlFor="stats-min-games">
+  MÍN. PJ
+</label>
+            <select
+              id="stats-min-games"
+              value={minGames}
+              onChange={(event) =>
+                setMinGames(Number(event.target.value))
+              }
+            >
+              <option value={0}>Todos</option>
+              <option value={1}>1 partido</option>
+              <option value={2}>2 partidos</option>
+              <option value={3}>3 partidos</option>
+              <option value={5}>5 partidos</option>
+              <option value={10}>10 partidos</option>
             </select>
           </div>
 
         </div>
 
-
         {/* =========================================
             TABLA
             ========================================= */}
+
 
         <div className="stats-table-wrapper">
 
