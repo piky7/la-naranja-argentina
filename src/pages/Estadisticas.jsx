@@ -3,10 +3,22 @@ import { useMemo, useState } from "react";
 import { players } from "../data/players";
 import { teams } from "../data/teams";
 import { playerStats } from "../data/stats";
-
 import "./Estadisticas.css";
+import { matches as baseMatches } from "../data/matches";
+import { matchResults } from "../data/matchResults";
+import { matchPlayerStats } from "../data/matchStats";
+import PlayerModal from "../components/PlayerModal";
+import "../pages/Home.css";
+import { useNavigate } from "react-router-dom";
 
+const matches = baseMatches.map((match) => {
+  const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  const result = matchResults[key] ?? matchResults[match.id];
+
+  return result ? { ...match, ...result } : match;
+});
 function Estadisticas() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("todos");
   const [minGames, setMinGames] = useState(0);
@@ -24,6 +36,81 @@ function Estadisticas() {
       (stats) => stats.playerId === playerId
     );
   };
+
+const getMatchStats = (match) => {
+  if (!match) return null;
+
+  const directStats = matchPlayerStats[match.id];
+
+  if (directStats) return directStats;
+
+  const normalizedId =
+    `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+
+  const normalizedStats = matchPlayerStats[normalizedId];
+
+  if (normalizedStats) return normalizedStats;
+
+  const simpleId = `${match.homeTeam}-${match.awayTeam}`;
+
+  return matchPlayerStats[simpleId] || null;
+};
+
+const getPlayerLastMatches = (player) => {
+  if (!player) return [];
+
+  return matches
+    .filter((match) => {
+      const finished =
+  match.status === "finished" ||
+  (match.status !== "live" &&
+    match.homeScore != null &&
+    match.homeScore !== "" &&
+    match.awayScore != null &&
+    match.awayScore !== "");
+
+if (!finished) return false;
+
+      const teamId = player.teamId;
+
+      if (
+        match.homeTeam !== teamId &&
+        match.awayTeam !== teamId
+      ) {
+        return false;
+      }
+
+      const teamStats = getMatchStats(match)?.[teamId];
+
+      return (
+        Array.isArray(teamStats) &&
+        teamStats.some((item) => item.id === player.id)
+      );
+    })
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 2)
+    .map((match) => {
+      const teamId = player.teamId;
+
+      const stats = getMatchStats(match)[teamId].find(
+        (item) => item.id === player.id
+      );
+
+      const rivalId =
+        match.homeTeam === teamId
+          ? match.awayTeam
+          : match.homeTeam;
+
+      return {
+        id: match.id,
+        date: match.date,
+        rival: getTeam(rivalId)?.shortName || rivalId,
+        points: stats.points,
+        rebounds: stats.rebounds,
+        assists: stats.assists,
+      };
+    });
+};
 
   /*
    * =========================================
@@ -548,202 +635,22 @@ return matchesSearch && matchesTeam && matchesMinGames;
       </section>
 
 
-      {/* =========================================
-          POPUP DEL JUGADOR
-          ========================================= */}
+   
+{/* POPUP DEL JUGADOR - COMPARTIDO CON HOME */}
 
-      {selectedPlayer && (
-        <div
-          className="stats-player-modal-overlay"
-          onClick={() =>
-            setSelectedPlayer(null)
-          }
-        >
+<PlayerModal
+  player={selectedPlayer}
+  team={selectedPlayerTeam}
+  stats={selectedPlayerStats}
+  recentMatches={
+    selectedPlayer
+      ? getPlayerLastMatches(selectedPlayer)
+      : []
+  }
+  onClose={() => setSelectedPlayer(null)}
+   onTeamClick={(teamId) => navigate(`/equipos/${teamId}`)}
+/>
 
-          <div
-            className="stats-player-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
-          >
-
-            {/* HEADER DEL JUGADOR */}
-
-            <div className="stats-player-modal-header">
-
-              {selectedPlayerTeam && (
-                <div className="stats-player-modal-logo">
-
-                  <img
-                    src={selectedPlayerTeam.logo}
-                    alt={`Escudo de ${selectedPlayerTeam.name}`}
-                  />
-
-                </div>
-              )}
-
-
-              <div className="stats-player-modal-info">
-
-                <span>
-                  {selectedPlayer.position || "—"}
-                </span>
-
-                <h2>
-                  {selectedPlayer.name}
-                </h2>
-
-                <p>
-                  {selectedPlayerTeam?.name ||
-                    "Equipo no disponible"}
-                </p>
-
-                <small>
-                  {selectedPlayer.nationality || "—"}
-                </small>
-
-              </div>
-
-
-              <button
-                type="button"
-                className="stats-player-modal-close"
-                onClick={() =>
-                  setSelectedPlayer(null)
-                }
-                aria-label="Cerrar"
-              >
-                ×
-              </button>
-
-            </div>
-
-
-            {/* DATOS DEL JUGADOR */}
-
-            <div className="stats-player-modal-details">
-
-              <div>
-                <span>
-                  POSICIÓN
-                </span>
-
-                <strong>
-                  {selectedPlayer.position || "—"}
-                </strong>
-              </div>
-
-
-              <div>
-                <span>
-                  NACIONALIDAD
-                </span>
-
-                <strong>
-                  {selectedPlayer.nationality || "—"}
-                </strong>
-              </div>
-
-
-              <div>
-                <span>
-                  NÚMERO
-                </span>
-
-                <strong>
-                  {selectedPlayer.number ?? "—"}
-                </strong>
-              </div>
-
-            </div>
-
-
-            {/* ESTADÍSTICAS DE LA TEMPORADA */}
-
-            <div className="stats-player-modal-season">
-
-              <span className="stats-player-modal-label">
-                ESTADÍSTICAS DE LA TEMPORADA
-              </span>
-
-
-              <div className="stats-player-modal-stats">
-
-                <div>
-                  <strong>
-                    {selectedPlayerStats?.gamesPlayed || 0}
-                  </strong>
-
-                  <span>
-                    PJ
-                  </span>
-                </div>
-
-
-                <div>
-                  <strong>
-                    {formatAverage(
-                      selectedPlayerStats?.points,
-                      selectedPlayerStats?.gamesPlayed
-                    )}
-                  </strong>
-
-                  <span>
-                    PTS
-                  </span>
-                </div>
-
-
-                <div>
-                  <strong>
-                    {formatAverage(
-                      selectedPlayerStats?.rebounds,
-                      selectedPlayerStats?.gamesPlayed
-                    )}
-                  </strong>
-
-                  <span>
-                    REB
-                  </span>
-                </div>
-
-
-                <div>
-                  <strong>
-                    {formatAverage(
-                      selectedPlayerStats?.assists,
-                      selectedPlayerStats?.gamesPlayed
-                    )}
-                  </strong>
-
-                  <span>
-                    AST
-                  </span>
-                </div>
-
-              </div>
-
-            </div>
-
-
-            {/* FOOTER */}
-
-            <div className="stats-player-modal-footer">
-
-              <span>
-                LIGA NACIONAL 2026/27
-              </span>
-
-              <strong>
-                {selectedPlayerTeam?.abbreviation || ""}
-              </strong>
-
-            </div>
-
-          </div>
-
-        </div>
-      )}
 
     </main>
   );
