@@ -1451,6 +1451,16 @@ export const players = [
  // QUIMSA
 
 {
+  id: "sebastian-bogado",
+  name: "Sebastián Bogado",
+  teamId: "quimsa",
+  position: null,
+  number: null,
+  nationality: null,
+  category: "Juvenil",
+},
+
+{
   id: "francisco-conrradi",
   name: "Francisco Conrradi",
   teamId: "quimsa",
