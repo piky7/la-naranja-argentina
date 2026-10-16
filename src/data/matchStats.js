@@ -662,8 +662,8 @@ export const matchPlayerStats = {
       "minutes": "15:28"
     },
     {
-      "id": "lautaro-berra",
-      "name": "Lautaro Berra",
+      "id": "flashscore-san-martin-berra-fernandez-l",
+      "name": "Berra Fernandez L.",
       "points": 16,
       "rebounds": 4,
       "assists": 2,
@@ -966,8 +966,8 @@ export const matchPlayerStats = {
 "regatas-instituto": {
   "regatas": [
     {
-      "id": "ivan-gramajo",
-      "name": "Iván Gramajo",
+      "id": "flashscore-regatas-gramajo-p",
+      "name": "Gramajo P.",
       "points": 11,
       "rebounds": 1,
       "assists": 2,
@@ -2576,8 +2576,8 @@ export const matchPlayerStats = {
       "minutes": "11:39"
     },
     {
-      "id": "lautaro-berra",
-      "name": "Lautaro Berra",
+      "id": "flashscore-san-martin-berra-fernandez-l",
+      "name": "Berra Fernandez L.",
       "points": 4,
       "rebounds": 3,
       "assists": 0,
@@ -3330,8 +3330,8 @@ export const matchPlayerStats = {
       "minutes": "23:50"
     },
     {
-      "id": "lautaro-berra",
-      "name": "Lautaro Berra",
+      "id": "flashscore-san-martin-berra-fernandez-l",
+      "name": "Berra Fernandez L.",
       "points": 7,
       "rebounds": 5,
       "assists": 0,
