@@ -1658,6 +1658,16 @@ export const players = [
 // REGATAS CORRIENTES
 
 {
+  id: "alan-ledesma",
+  name: "Alan Ledesma",
+  teamId: "regatas",
+  position: null,
+  number: null,
+  nationality: null,
+  category: "Juvenil",
+},
+
+{
   id: "sebastian-orresta",
   name: "Sebastián Orresta",
   teamId: "regatas",
