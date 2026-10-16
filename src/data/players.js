@@ -687,7 +687,7 @@ export const players = [
 
 {
   id: "enzo-filippetti",
-  name: "Enzo Filippetti",
+  name: "Enzo Fillipetti",
   teamId: "independiente-oliva",
   position: "Interno",
   number: null,
