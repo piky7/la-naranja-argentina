@@ -662,8 +662,8 @@ export const matchPlayerStats = {
       "minutes": "15:28"
     },
     {
-      "id": "flashscore-san-martin-berra-fernandez-l",
-      "name": "Berra Fernandez L.",
+      "id": "lautaro-berra",
+      "name": "Lautaro Berra",
       "points": 16,
       "rebounds": 4,
       "assists": 2,
@@ -966,8 +966,8 @@ export const matchPlayerStats = {
 "regatas-instituto": {
   "regatas": [
     {
-      "id": "flashscore-regatas-gramajo-p",
-      "name": "Gramajo P.",
+      "id": "ivan-gramajo",
+      "name": "Iván Gramajo",
       "points": 11,
       "rebounds": 1,
       "assists": 2,
@@ -1520,8 +1520,8 @@ export const matchPlayerStats = {
       "minutes": "17:58"
     },
     {
-      "id": "flashscore-la-union-maglietti-e-g",
-      "name": "Maglietti E. G.",
+      "id": "enzo-maglietti",
+      "name": "Enzo Maglietti",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -2282,8 +2282,8 @@ export const matchPlayerStats = {
       "minutes": "25:05"
     },
     {
-      "id": "flashscore-independiente-oliva-guerrero-j-m",
-      "name": "Guerrero J. M.",
+      "id": "juan-martin-guerrero",
+      "name": "Juan Martín Guerrero",
       "points": 8,
       "rebounds": 2,
       "assists": 3,
@@ -2314,8 +2314,8 @@ export const matchPlayerStats = {
       "minutes": "22:42"
     },
     {
-      "id": "flashscore-independiente-oliva-marcucci-n-j",
-      "name": "Marcucci N. J.",
+      "id": "nicolas-marcucci",
+      "name": "Nicolás Marcucci",
       "points": 2,
       "rebounds": 3,
       "assists": 0,
@@ -2346,8 +2346,8 @@ export const matchPlayerStats = {
       "minutes": "14:29"
     },
     {
-      "id": "flashscore-independiente-oliva-filipetti-e",
-      "name": "Filipetti E.",
+      "id": "enzo-filippetti",
+      "name": "Enzo Fillipetti",
       "points": 1,
       "rebounds": 0,
       "assists": 1,
@@ -2518,16 +2518,16 @@ export const matchPlayerStats = {
       "minutes": "13:47"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 2,
       "rebounds": 0,
       "assists": 3,
       "minutes": "13:35"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
-      "name": "Stucky N.",
+      "id": "emilio-stucky",
+      "name": "Emilio Stucky",
       "points": 14,
       "rebounds": 6,
       "assists": 1,
@@ -2576,8 +2576,8 @@ export const matchPlayerStats = {
       "minutes": "11:39"
     },
     {
-      "id": "flashscore-san-martin-berra-fernandez-l",
-      "name": "Berra Fernandez L.",
+      "id": "lautaro-berra",
+      "name": "Lautaro Berra",
       "points": 4,
       "rebounds": 3,
       "assists": 0,
@@ -2671,8 +2671,8 @@ export const matchPlayerStats = {
       "minutes": "22:10"
     },
     {
-      "id": "flashscore-san-lorenzo-aguirre-g",
-      "name": "Aguirre G.",
+      "id": "nicolas-aguirre",
+      "name": "Nicolás Aguirre",
       "points": 12,
       "rebounds": 1,
       "assists": 3,
@@ -3330,8 +3330,8 @@ export const matchPlayerStats = {
       "minutes": "23:50"
     },
     {
-      "id": "flashscore-san-martin-berra-fernandez-l",
-      "name": "Berra Fernandez L.",
+      "id": "lautaro-berra",
+      "name": "Lautaro Berra",
       "points": 7,
       "rebounds": 5,
       "assists": 0,
@@ -3460,16 +3460,16 @@ export const matchPlayerStats = {
       "minutes": "16:48"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 0,
       "rebounds": 1,
       "assists": 1,
       "minutes": "04:27"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
-      "name": "Stucky N.",
+      "id": "emilio-stucky",
+      "name": "Emilio Stucky",
       "points": 6,
       "rebounds": 3,
       "assists": 1,
@@ -4458,16 +4458,16 @@ export const matchPlayerStats = {
       "minutes": "11:35"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 5,
       "rebounds": 1,
       "assists": 3,
       "minutes": "21:30"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
-      "name": "Stucky N.",
+      "id": "emilio-stucky",
+      "name": "Emilio Stucky",
       "points": 7,
       "rebounds": 0,
       "assists": 1,
@@ -4818,16 +4818,16 @@ export const matchPlayerStats = {
       "minutes": "30:11"
     },
     {
-      "id": "flashscore-racing-chivilcoy-respaud-j",
-      "name": "Respaud J.",
+      "id": "ignacio-respaud",
+      "name": "Ignacio Respaud",
       "points": 7,
       "rebounds": 3,
       "assists": 1,
       "minutes": "31:01"
     },
     {
-      "id": "flashscore-racing-chivilcoy-stucky-n",
-      "name": "Stucky N.",
+      "id": "emilio-stucky",
+      "name": "Emilio Stucky",
       "points": 14,
       "rebounds": 5,
       "assists": 1,
