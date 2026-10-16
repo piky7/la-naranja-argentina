@@ -1046,8 +1046,8 @@ export const matchPlayerStats = {
       "minutes": "3:46"
     },
     {
-      "id": "flashscore-regatas-ledesma-a",
-      "name": "Ledesma A.",
+      "id": "alan-ledesma",
+      "name": "Alan Ledesma",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -1154,8 +1154,8 @@ export const matchPlayerStats = {
 "quimsa-platense": {
   "quimsa": [
     {
-      "id": "flashscore-quimsa-bogado-s",
-      "name": "Bogado S.",
+      "id": "sebastian-bogado",
+      "name": "Sebastián Bogado",
       "points": 1,
       "rebounds": 0,
       "assists": 0,
@@ -1218,8 +1218,8 @@ export const matchPlayerStats = {
       "minutes": "21:56"
     },
     {
-      "id": "flashscore-quimsa-roth-e",
-      "name": "Roth E.",
+      "id": "enzo-roth",
+      "name": "Enzo Roth",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
