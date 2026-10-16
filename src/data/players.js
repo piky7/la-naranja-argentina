@@ -1451,6 +1451,16 @@ export const players = [
  // QUIMSA
 
 {
+  id: "enzo-roth",
+  name: "Enzo Roth",
+  teamId: "quimsa",
+  position: null,
+  number: null,
+  nationality: null,
+  category: "Juvenil",
+},
+
+{
   id: "sebastian-bogado",
   name: "Sebastián Bogado",
   teamId: "quimsa",
