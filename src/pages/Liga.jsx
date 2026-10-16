@@ -550,9 +550,17 @@ onClick={() => {
 }}
                     >
 
-                      <div className="match-date">
-                        {formatDate(match.date)}
-                      </div>
+                      
+<div className="match-date">
+  <span>{formatDate(match.date)}</span>
+
+  {match.tv?.length > 0 && (
+    <span className="match-date-tv">
+      📺 {match.tv.join(" · ")}
+    </span>
+  )}
+</div>
+
 
 
                       <div className="match-teams">
@@ -579,10 +587,10 @@ onClick={() => {
 
                         </div>
 
-
-                        <div className="match-vs">
-                          VS
-                        </div>
+<div className="match-vs">
+  
+  <span>VS</span>
+</div>
 
 
                         <div className="match-team">

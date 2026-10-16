@@ -2130,50 +2130,55 @@
 }
 
 /* ==========================================
-   LNA - PRÓXIMOS PARTIDOS MOBILE
+   LNA - PRÓXIMOS PARTIDOS COMPACTOS MOBILE
    ========================================== */
 
 @media (max-width: 768px) {
-
   .upcoming-card .upcoming-match {
-    grid-template-columns: 65px minmax(0, 1fr);
-    min-height: 64px;
+    grid-template-columns: 55px minmax(0, 1fr);
+    min-height: 52px;
   }
 
   .upcoming-card .upcoming-date {
-    gap: 4px;
-    padding: 8px 5px;
+    gap: 3px;
+    padding: 5px 3px;
   }
 
   .upcoming-card .upcoming-date span {
     font-size: 9px;
+    line-height: 1.2;
   }
 
   .upcoming-card .upcoming-date strong {
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 1.2;
   }
 
   .upcoming-card .upcoming-teams {
-    grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
-    gap: 6px;
-    padding: 9px 10px;
+    grid-template-columns:
+      minmax(0, 1fr) 22px minmax(0, 1fr);
+    gap: 5px;
+    padding: 5px 7px;
   }
 
   .upcoming-card .upcoming-teams > div {
     min-width: 0;
-    gap: 6px;
-    font-size: 11px;
+    gap: 5px;
+    font-size: 10px;
+    line-height: 1.2;
   }
 
   .upcoming-card .upcoming-logo {
-    width: 28px;
-    height: 28px;
+    width: 23px;
+    height: 23px;
   }
 
   .upcoming-card .upcoming-vs {
     font-size: 9px;
+    font-weight: 900;
   }
 }
+
 
 /* LNA - MEJORAR LEGIBILIDAD DE POSICIONES MOBILE */
 
@@ -2437,44 +2442,170 @@
    LNA - PARTIDOS DE HOY COMPACTOS
    ========================================== */
 
-.today-match-card .match-date {
-  padding: 6px 12px;
-  font-size: 9px;
-}
-
-.today-match-card .match-teams {
-  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
-  gap: 8px;
-  padding: 10px 12px;
-}
-
-.today-match-card .match-team {
-  gap: 5px;
-  font-size: 11px;
-}
-
-.today-match-card .match-team-logo {
-  width: 34px;
-  height: 34px;
-}
-
-.today-match-card .match-details {
-  gap: 8px;
-  padding: 7px 10px;
-  font-size: 10px;
-}
-
-.today-match-card .match-details strong {
-  font-size: 12px;
-}
-
 @media (max-width: 768px) {
-  .today-match-card .match-teams {
-    padding: 10px;
+
+  .today-matches {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
+  .today-match-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "date"
+    "teams";
+  overflow: hidden;
+  min-height: 0;
+}
+
+  .today-match-card .match-date {
+  grid-area: date;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 10px;
+  font-size: 9px;
+  text-align: left;
+}
+
+.today-match-card .match-date-tv {
+  color: #bcbcbc;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: right;
+}
+ .today-match-card .match-teams {
+  grid-area: teams;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+}
+.today-match-card .match-center-time {
+  color: var(--match-accent);
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+ .today-match-card .match-team {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 11px;
+  text-align: center;
+}
+
+
+
+ .today-match-card .match-team:last-child {
+  flex-direction: row-reverse;
+  justify-content: center;
+  text-align: center;
+}
+
+
   .today-match-card .match-team-logo {
-    width: 32px;
-    height: 32px;
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+  }
+
+  .today-match-card .match-vs {
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--match-accent);
+  }
+
+ .today-match-card .match-details {
+  display: none;
+}
+
+  .today-match-card .match-details strong {
+    font-size: 12px;
+  }
+}
+
+.today-match-card .match-team span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.today-match-card .match-vs span {
+  color: var(--sports-text-soft);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+/* =========================================
+   LNA - RESULTADOS COMPACTOS MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .results-card .result-match {
+    position: relative;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+  padding-left: 55px;
+    border-bottom: 1px solid var(--sports-border-soft);
+  }
+
+  .results-card .result-date {
+    position: absolute;
+ left: 7px;
+     top: 50%;
+    transform: translateY(-50%);
+    width: 43px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 9px;
+    line-height: 1.3;
+    text-align: center;
+    letter-spacing: 0;
+  }
+
+  .results-card .result-teams {
+    width: 100%;
+    min-height: 58px;
+    grid-template-columns:
+    minmax(0, 1fr) 65px minmax(0, 1fr);
+      gap: 5px;
+  padding: 6px 8px;
+  }
+
+  .results-card .result-team {
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .results-card .result-logo {
+    width: 25px;
+    height: 25px;
+  }
+
+  .results-card .result-score {
+    gap: 4px;
+  }
+
+  .results-card .result-score strong {
+    font-size: 17px;
+    font-weight: 900;
+  }
+
+  .results-card .result-score span {
+    font-size: 11px;
   }
 }
