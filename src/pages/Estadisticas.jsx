@@ -12,7 +12,7 @@ function Estadisticas() {
   const [minGames, setMinGames] = useState(0);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 
-  const [sortBy, setSortBy] = useState(null);
+  const [sortBy, setSortBy] = useState("points");
   const [sortDirection, setSortDirection] = useState("desc");
 
   const getTeam = (teamId) => {
@@ -433,7 +433,7 @@ return matchesSearch && matchesTeam && matchesMinGames;
 
             <tbody>
 
-              {filteredPlayers.map((player) => {
+              {filteredPlayers.map((player, index) => {
                 const team = getTeam(player.teamId);
                 const stats = getPlayerStats(player.id);
 
@@ -448,7 +448,14 @@ return matchesSearch && matchesTeam && matchesMinGames;
                     {/* JUGADOR */}
 
                     <td>
-                      <div className="stats-player">
+  <div className="stats-player">
+    <span
+      className={`stats-rank ${
+        index < 3 ? `stats-rank-${index + 1}` : ""
+      }`}
+    >
+      {index + 1}
+    </span>
 
                         {player.photo && (
                           <img
@@ -494,32 +501,32 @@ return matchesSearch && matchesTeam && matchesMinGames;
 
                     {/* PTS */}
 
-                    <td>
-                      {formatAverage(
-                        stats?.points,
-                        stats?.gamesPlayed
-                      )}
-                    </td>
+                  <td className={sortBy === "points" ? "stats-active-column" : ""}>
+  {formatAverage(
+    stats?.points,
+    stats?.gamesPlayed
+  )}
+</td>
 
 
                     {/* REB */}
 
-                    <td>
-                      {formatAverage(
-                        stats?.rebounds,
-                        stats?.gamesPlayed
-                      )}
-                    </td>
+                   <td className={sortBy === "rebounds" ? "stats-active-column" : ""}>
+  {formatAverage(
+    stats?.rebounds,
+    stats?.gamesPlayed
+  )}
+</td>
 
 
                     {/* AST */}
 
-                    <td>
-                      {formatAverage(
-                        stats?.assists,
-                        stats?.gamesPlayed
-                      )}
-                    </td>
+                    <td className={sortBy === "assists" ? "stats-active-column" : ""}>
+  {formatAverage(
+    stats?.assists,
+    stats?.gamesPlayed
+  )}
+</td>
 
                   </tr>
                 );

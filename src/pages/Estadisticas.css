@@ -1615,3 +1615,249 @@
   }
 }
 
+/* =========================================
+   LNA - ORDEN VISUAL DE ESTADÍSTICAS
+   ========================================= */
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-filters {
+  order: 1;
+}
+
+.stats-leaders {
+  order: 2;
+}
+
+.stats-table-wrapper {
+  order: 3;
+}
+
+/* Separación entre secciones */
+.stats-leaders {
+  margin-top: 12px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 600px) {
+  .stats-filters {
+    padding-top: 14px;
+    padding-bottom: 8px;
+  }
+
+  .stats-leaders {
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+}
+
+
+/* =========================================
+   LNA - TARJETAS ESTILO RANKING
+   ========================================= */
+
+.stats-leader-card {
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.stats-leader-top {
+  order: 1;
+}
+
+.stats-leader-value {
+  order: 2;
+  margin-top: 0;
+}
+
+.stats-leader-player {
+  order: 3;
+}
+
+.stats-leader-value strong {
+  font-size: 34px;
+}
+
+.stats-leader-player > strong {
+  font-size: 15px;
+}
+
+/* =========================================
+   TARJETAS EN CELULAR
+   ========================================= */
+
+@media (max-width: 600px) {
+  .stats-leader-card {
+    padding: 12px 5px;
+    gap: 8px;
+  }
+
+  .stats-leader-value strong {
+    font-size: 25px;
+  }
+
+  .stats-leader-player > strong {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .stats-leader-team img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* =========================================
+   LNA - RANKING DE JUGADORES
+   ========================================= */
+
+.stats-rank {
+  width: 23px;
+  height: 25px;
+  flex: 0 0 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #a9a9a9;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.stats-rank-1 {
+  background: linear-gradient(135deg, #ffe68a, #e7ac24);
+  color: #302000;
+}
+
+.stats-rank-2 {
+  background: linear-gradient(135deg, #f0f0f0, #a4acb5);
+  color: #202020;
+}
+
+.stats-rank-3 {
+  background: linear-gradient(135deg, #efa46a, #b96932);
+  color: #2d170c;
+}
+
+/* =========================================
+   TABLA COMPACTA EN CELULAR
+   ========================================= */
+
+@media (max-width: 600px) {
+  .stats-table td {
+    height: 46px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .stats-table th:first-child,
+  .stats-table td:first-child {
+    width: 45%;
+  }
+
+  .stats-table th:nth-child(2),
+  .stats-table td:nth-child(2) {
+    width: 13%;
+    text-align: center;
+  }
+
+  .stats-table th:nth-child(n+3),
+  .stats-table td:nth-child(n+3) {
+    width: 10.5%;
+  }
+
+  .stats-player {
+    gap: 5px;
+  }
+
+  .stats-player > span:not(.stats-rank) {
+    font-size: 9px;
+  }
+
+  .stats-rank {
+    width: 19px;
+    height: 22px;
+    flex-basis: 19px;
+    font-size: 10px;
+  }
+
+  .stats-team {
+    justify-content: center;
+  }
+
+  .stats-team span {
+    display: none;
+  }
+
+  .stats-team img {
+    width: 23px;
+    height: 23px;
+    flex-basis: 23px;
+  }
+}
+
+/* =========================================
+   LNA - ESCUDO JUNTO AL NOMBRE DEL LÍDER
+   ========================================= */
+
+@media (max-width: 600px) {
+  .stats-leader-player {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .stats-leader-team {
+    display: contents;
+  }
+
+  .stats-leader-team img {
+    order: -1;
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+    object-fit: contain;
+  }
+
+  .stats-leader-player > strong {
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .stats-leader-team span {
+    display: none;
+  }
+}
+
+/* =========================================
+   LNA - COLUMNA ACTIVA DEL RANKING
+   ========================================= */
+
+/* Quitar el naranja fijo de PTS */
+.stats-table td:nth-child(4) {
+  color: #e5e5e5;
+}
+
+/* Destacar la estadística seleccionada */
+.stats-table td.stats-active-column {
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+/* Mantener el color activo en celular */
+@media (max-width: 600px) {
+  .stats-table td:nth-child(4) {
+    color: #e5e5e5;
+  }
+
+  .stats-table td.stats-active-column {
+    color: var(--color-primary);
+  }
+}
