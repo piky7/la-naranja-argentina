@@ -1018,6 +1018,15 @@ export const players = [
   nationality: null,
 },
 
+{
+  id: "pedro-bombino",
+  name: "Pedro Bombino",
+  teamId: "lanus",
+  position: "Interno",
+  number: null,
+  nationality: "Cuba",
+},
+
   // OBERÁ
 
 {
