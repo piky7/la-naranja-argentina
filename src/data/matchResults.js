@@ -207,4 +207,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-16-platense-obera": {
+    status: "finished",
+    homeScore: 86,
+    awayScore: 80,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };

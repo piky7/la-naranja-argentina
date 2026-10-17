@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 125,
-  "finishedMatches": 26,
+  "finishedMatches": 27,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "AySSGF0M",
+      "homeTeam": "platense",
+      "homeName": "Platense",
+      "awayTeam": "obera",
+      "awayName": "Obera TC",
+      "homeScore": 86,
+      "awayScore": 80,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1792193400,
+      "homeSlug": "ca-platense",
+      "awaySlug": "obera-tc",
+      "homeId": "SIolf8Y3",
+      "awayId": "KdCRV01k"
+    },
     {
       "eventId": "xOTKIyW9",
       "homeTeam": "la-union",
@@ -1987,25 +2003,25 @@
       "awaySlug": "penarol",
       "homeId": "6JVDDNoE",
       "awayId": "0OnqJxtR"
-    },
+    }
+  ],
+  "finished": [
     {
       "eventId": "AySSGF0M",
       "homeTeam": "platense",
       "homeName": "Platense",
       "awayTeam": "obera",
       "awayName": "Obera TC",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
+      "homeScore": 86,
+      "awayScore": 80,
+      "status": "finished",
+      "statusCode": "3",
       "timestamp": 1792193400,
       "homeSlug": "ca-platense",
       "awaySlug": "obera-tc",
       "homeId": "SIolf8Y3",
       "awayId": "KdCRV01k"
-    }
-  ],
-  "finished": [
+    },
     {
       "eventId": "xOTKIyW9",
       "homeTeam": "la-union",
