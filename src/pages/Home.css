@@ -7147,3 +7147,128 @@
     gap: 4px;
   }
 }
+
+/* LNA - Partido finalizado: comparativa compacta en celular.
+   Se limita al popup finalizado; no modifica próximos partidos. */
+@media (max-width: 600px) {
+  .match-modal-finished .match-modal-header {
+    padding: 9px 12px 10px;
+    min-height: 0;
+    height: auto;
+  }
+  .match-modal-finished .match-modal-label {
+    font-size: 9px;
+  }
+  .match-modal-finished .match-modal-date,
+  .match-modal-finished .match-modal-status {
+    font-size: 10px;
+  }
+  .match-modal-finished .match-modal-teams {
+    margin: 7px 0 0;
+    padding: 0;
+    min-height: 0;
+    gap: 5px;
+  }
+  .match-modal-finished .match-modal-team {
+    gap: 3px;
+    min-width: 0;
+  }
+  .match-modal-finished .match-modal-team img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+  }
+  .match-modal-finished .match-modal-team strong {
+    font-size: 10px;
+    line-height: 1.15;
+  }
+  .match-modal-finished .match-modal-team small {
+    font-size: 9px;
+  }
+  .match-modal-finished .match-modal-score strong {
+    font-size: 26px;
+  }
+  .match-modal-finished .match-quarters {
+    margin: 9px 10px;
+    padding: 10px 9px;
+  }
+  .match-modal-finished .match-quarters-title {
+    margin-bottom: 7px;
+  }
+  .match-modal-finished .match-quarters-title h3 {
+    font-size: 15px;
+  }
+  .match-modal-finished .match-quarters-table th,
+  .match-modal-finished .match-quarters-table td {
+    padding: 6px 3px;
+    font-size: 10px;
+  }
+  .match-modal-finished .match-modal-content {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 7px;
+    padding: 0 9px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .match-modal-finished .match-stats-team {
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+  .match-modal-finished .match-stats-team-header {
+    padding: 6px 5px;
+  }
+  .match-modal-finished .match-stats-team-header > div {
+    min-width: 0;
+    gap: 4px;
+  }
+  .match-modal-finished .match-stats-team-header img {
+    width: 21px;
+    height: 21px;
+    object-fit: contain;
+  }
+  .match-modal-finished .match-stats-team-header h3 {
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .match-modal-finished .match-stats-team-header span {
+    font-size: 7px;
+  }
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 20px 18px 18px 30px;
+    column-gap: 1px;
+    align-items: center;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+  }
+  .match-modal-finished .match-stats-head {
+    font-size: 7px;
+    letter-spacing: 0;
+    min-height: 26px;
+  }
+  .match-modal-finished .match-stat-player {
+    min-height: 31px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  .match-modal-finished .match-stat-player strong {
+    font-size: 8px;
+    line-height: 1.15;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .match-modal-finished .match-stat-player span {
+    font-size: 8px;
+    line-height: 1.1;
+  }
+}
