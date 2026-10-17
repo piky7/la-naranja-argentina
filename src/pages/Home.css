@@ -7416,10 +7416,21 @@
   }
   .match-modal-finished .match-modal-score strong {
     display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
     align-items: baseline;
     justify-content: center;
     gap: 3px;
+    white-space: nowrap;
     color: #c4cad3;
+  }
+  .match-modal-finished .match-modal-score strong > span {
+    display: inline !important;
+    flex: 0 0 auto;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    white-space: nowrap;
   }
   .match-modal-finished .match-modal-score strong .match-score-winner {
     color: #ff8c00 !important;
@@ -7450,7 +7461,7 @@
   .match-modal-finished .match-stat-player:nth-child(even) {
     background: #151a20;
   }
-  .match-modal-finished .match-stat-player span:first-of-type {
+  .match-modal-finished .match-stats-team .match-stats-list .match-stat-player > span:nth-child(2) {
     color: #ff8c00 !important;
     -webkit-text-fill-color: #ff8c00 !important;
   }
