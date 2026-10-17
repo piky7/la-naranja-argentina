@@ -7469,3 +7469,43 @@
     color: #b8bec8;
   }
 }
+
+
+/* LNA - Prioridad visual al resultado, sin ampliar tabla de cuartos */
+@media (max-width: 600px) {
+  .match-modal-finished .match-modal-teams {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 4px;
+    padding: 9px 10px;
+  }
+  .match-modal-finished .match-modal-team {
+    gap: 5px;
+  }
+  .match-modal-finished .match-modal-team img {
+    width: 36px;
+    height: 36px;
+  }
+  .match-modal-finished .match-modal-team strong {
+    font-size: 11px;
+    line-height: 1.12;
+  }
+  .match-modal-finished .match-modal-score {
+    padding: 0 8px;
+  }
+  .match-modal-finished .match-modal-score strong {
+    font-size: 30px;
+    white-space: nowrap;
+  }
+  .match-modal-finished .match-quarters {
+    margin: 8px 10px;
+    padding: 7px 9px;
+  }
+  .match-modal-finished .match-quarters-title {
+    display: none;
+  }
+  .match-modal-finished .match-quarters-table th,
+  .match-modal-finished .match-quarters-table td {
+    padding: 5px 3px;
+    font-size: 10px;
+  }
+}
