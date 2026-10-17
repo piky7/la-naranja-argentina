@@ -8114,3 +8114,53 @@
       linear-gradient(90deg, transparent 3.5%, #c9945b 3.5% 3.65%, transparent 3.65%, transparent 96.35%, #c9945b 96.35% 96.5%, transparent 96.5%);
   }
 }
+
+/* Ficha de equipo desde la tabla de posiciones: diseño LNA v2 */
+.home-team-modal-v2{width:min(96vw,690px);max-height:calc(100dvh - 35px);overflow-y:auto;background:#07111b;border:2px solid #ff8709;border-radius:16px;color:#fff}
+.home-team-modal-v2 .team-v2-hero{position:relative;overflow:hidden;min-height:130px;padding:20px 22px;background:linear-gradient(115deg,#081827,#08111b);border-bottom:1px solid #ff8709}
+.home-team-modal-v2 .team-v2-watermark{position:absolute;width:220px;height:220px;object-fit:contain;right:-35px;top:-52px;opacity:.11;filter:grayscale(1)}
+.home-team-modal-v2 .team-v2-close{position:absolute;right:12px;top:12px;z-index:2}
+.home-team-modal-v2 .team-v2-identity{display:flex;align-items:center;gap:16px;position:relative;z-index:1;padding-right:32px}
+.home-team-modal-v2 .team-v2-crest{border:0;background:none;padding:0;flex-shrink:0;cursor:pointer}
+.home-team-modal-v2 .team-v2-crest img{width:85px;height:85px;object-fit:contain}
+.home-team-modal-v2 .team-v2-identity span{font-size:11px;font-weight:800;letter-spacing:1px;color:#ff8c00}
+.home-team-modal-v2 .team-v2-identity h2{font-size:clamp(21px,4.6vw,32px);line-height:1.12;margin:5px 0}
+.home-team-modal-v2 .team-v2-identity p{font-size:13px;color:#b6bdc8}
+.home-team-modal-v2 .team-v2-body{padding:14px;display:grid;gap:12px}
+.home-team-modal-v2 .team-v2-section{border:1px solid #e97909;border-radius:10px;padding:10px;background:#091622;min-width:0}
+.home-team-modal-v2 .team-v2-section>h3{text-align:center}
+.home-team-modal-v2 .team-v2-section h3{font-size:14px;letter-spacing:.5px;color:#ff8c00;margin:0 0 8px}
+.home-team-modal-v2 .team-v2-section-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:7px}
+.home-team-modal-v2 .team-v2-section-head h3{margin:0}
+.home-team-modal-v2 .team-v2-section-head a{font-size:11px;font-weight:700;color:#ff9b2e;text-decoration:none;text-align:right}
+.home-team-modal-v2 .team-v2-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #263d4c;border-radius:8px;overflow:hidden}
+.home-team-modal-v2 .team-v2-stats>div{padding:9px 3px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;border-right:1px solid #263d4c;border-bottom:1px solid #263d4c}
+.home-team-modal-v2 .team-v2-stats>div:nth-child(4n){border-right:0}
+.home-team-modal-v2 .team-v2-stats>div:nth-last-child(-n+4){border-bottom:0}
+.home-team-modal-v2 .team-v2-stats span{color:#aab5c3;font-size:10px;font-weight:800}
+.home-team-modal-v2 .team-v2-stats strong{color:#ff8c00;font-size:21px}
+.home-team-modal-v2 .team-v2-next{display:grid;grid-template-columns:1fr 1.2fr 1fr;align-items:center;gap:6px;width:100%;padding:10px 6px;border:1px solid #2c4655;border-radius:8px;background:radial-gradient(circle at 50% 50%,#2a2017,#0b1824 70%);color:#fff;cursor:pointer}
+.home-team-modal-v2 .team-v2-next>div{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.home-team-modal-v2 .team-v2-next img{width:48px;height:48px;object-fit:contain}
+.home-team-modal-v2 .team-v2-next>div>strong{font-size:12px;text-align:center}
+.home-team-modal-v2 .team-v2-next-center strong{font-size:27px!important;color:#ff8c00;white-space:nowrap}
+.home-team-modal-v2 .team-v2-next-center span{font-size:10px;color:#d6b28b;text-align:center}
+.home-team-modal-v2 .team-v2-recent{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.home-team-modal-v2 .team-v2-recent button{border:1px solid #344658;border-radius:8px;padding:8px 5px;background:#0b1927;color:#fff;cursor:pointer;min-width:0}
+.home-team-modal-v2 .team-v2-recent button:disabled{opacity:.65;cursor:default}
+.home-team-modal-v2 .team-v2-date{display:block;color:#aeb6c2;font-size:10px;margin-bottom:5px}
+.home-team-modal-v2 .team-v2-result{display:flex;align-items:center;justify-content:space-around;gap:3px}
+.home-team-modal-v2 .team-v2-result img{width:30px;height:30px;object-fit:contain;min-width:0}
+.home-team-modal-v2 .team-v2-result strong{font-size:18px;color:#ff8c00;white-space:nowrap}
+.home-team-modal-v2 .team-v2-win,.home-team-modal-v2 .team-v2-loss{display:block;font-size:10px;font-weight:800;margin-top:5px}
+.home-team-modal-v2 .team-v2-win{color:#32d580}.home-team-modal-v2 .team-v2-loss{color:#ff656e}
+.home-team-modal-v2 .team-v2-players{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.home-team-modal-v2 .team-v2-player-category{border:1px solid #304352;border-radius:7px;padding:6px;min-width:0}
+.home-team-modal-v2 .team-v2-player-category h4{font-size:10px;color:#ff8c00;text-align:center;background:#30231a;border-radius:5px;padding:5px 2px;margin:0 0 5px}
+.home-team-modal-v2 .team-v2-player-category button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;width:100%;padding:6px 2px;border:0;border-bottom:1px solid #2c3b49;background:transparent;color:#fff;text-align:left;cursor:pointer}
+.home-team-modal-v2 .team-v2-player-category button:last-of-type{border-bottom:0}
+.home-team-modal-v2 .team-v2-player-category button span{font-size:11px;line-height:1.25;overflow-wrap:anywhere}
+.home-team-modal-v2 .team-v2-player-category button strong{font-size:12px;color:#ff8c00}
+.home-team-modal-v2 .team-v2-player-category p{font-size:10px;color:#aeb6c2}
+.home-team-modal-v2 .team-v2-full-link{display:block;border:1px solid #ff8c00;border-radius:8px;text-align:center;color:#ff8c00;font-size:12px;font-weight:800;text-decoration:none;padding:10px}
+@media(max-width:480px){.home-team-modal-v2{width:calc(100vw - 18px);max-height:calc(100dvh - 26px)}.home-team-modal-v2 .team-v2-hero{padding:15px 12px}.home-team-modal-v2 .team-v2-crest img{width:62px;height:62px}.home-team-modal-v2 .team-v2-identity{gap:10px}.home-team-modal-v2 .team-v2-body{padding:9px;gap:8px}.home-team-modal-v2 .team-v2-section{padding:8px}.home-team-modal-v2 .team-v2-stats strong{font-size:18px}.home-team-modal-v2 .team-v2-result img{width:25px;height:25px}.home-team-modal-v2 .team-v2-result strong{font-size:15px}.home-team-modal-v2 .team-v2-player-category{padding:4px}.home-team-modal-v2 .team-v2-player-category button span{font-size:10px}.home-team-modal-v2 .team-v2-player-category button strong{font-size:11px}}
