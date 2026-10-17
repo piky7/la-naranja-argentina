@@ -1695,8 +1695,13 @@ const finishedMatch = {
 
                   <div className="match-modal-score">
                     <strong>
-                      {selectedMatch.homeScore} -{" "}
-                      {selectedMatch.awayScore}
+                      <span className={Number(selectedMatch.homeScore) > Number(selectedMatch.awayScore) ? "match-score-winner" : "match-score-loser"}>
+                        {selectedMatch.homeScore}
+                      </span>
+                      <span className="match-score-dash"> - </span>
+                      <span className={Number(selectedMatch.awayScore) > Number(selectedMatch.homeScore) ? "match-score-winner" : "match-score-loser"}>
+                        {selectedMatch.awayScore}
+                      </span>
                     </strong>
                   </div>
 
