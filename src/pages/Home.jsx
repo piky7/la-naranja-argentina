@@ -2498,6 +2498,14 @@ const finishedMatch = {
             }
           >
             <div className="home-player-modal-header">
+              {selectedPlayer.team?.logo && (
+                <img
+                  className="home-player-modal-watermark"
+                  src={selectedPlayer.team.logo}
+                  alt=""
+                  aria-hidden="true"
+                />
+              )}
               {selectedPlayer.team && (
                 <div className="home-player-modal-logo">
                   <button
