@@ -798,17 +798,23 @@
    ========================================= */
 .teams-page .teams-page-title {
   margin: 0;
-  color: #f2f2f2;
   font-family: "Anton", Impact, sans-serif;
   font-size: 28px;
   font-weight: 400;
   line-height: 1.15;
   letter-spacing: .4px;
   text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, #e8e8e8 35%, #a5a5a5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .teams-page .teams-page-title span {
-  color: #ff8c00;
+  background: linear-gradient(180deg, #ffb347 0%, #ff8c00 45%, #c85b00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .teams-page .team-card {
