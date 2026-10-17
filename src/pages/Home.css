@@ -7607,3 +7607,360 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/* ==========================================
+   LNA - PROXIMO PARTIDO: OPCION 3 CANCHA
+   Estilos aislados al popup de proximos partidos.
+   ========================================== */
+.match-modal-upcoming {
+  --upcoming-orange: #ff8c00;
+  background: #0a1017;
+  border: 1px solid var(--upcoming-orange);
+  border-radius: 14px;
+}
+
+.match-modal-upcoming .match-modal-header {
+  position: relative;
+  padding: 14px 16px 12px;
+  min-height: 0;
+  height: auto;
+  background:
+    radial-gradient(ellipse at 20% 54%, rgba(117, 55, 12, .55), transparent 38%),
+    radial-gradient(ellipse at 80% 54%, rgba(117, 55, 12, .55), transparent 38%),
+    repeating-linear-gradient(0deg, transparent 0 19px, rgba(170, 105, 40, .07) 20px 21px),
+    #080e14;
+  border-bottom: 1px solid rgba(255, 140, 0, .55);
+  overflow: hidden;
+}
+
+.match-modal-upcoming .match-modal-header::before {
+  content: "";
+  position: absolute;
+  inset: 26% 2% 2%;
+  pointer-events: none;
+  opacity: .26;
+  background:
+    radial-gradient(circle at 16% 50%, transparent 0 18%, #caa176 18.5% 19%, transparent 19.5%),
+    radial-gradient(circle at 84% 50%, transparent 0 18%, #caa176 18.5% 19%, transparent 19.5%),
+    linear-gradient(90deg, transparent 49.85%, #caa176 50%, transparent 50.15%);
+}
+
+.match-modal-upcoming .match-modal-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.match-modal-upcoming .match-modal-teams {
+  margin: 9px 0 0;
+  padding: 0;
+  min-height: 0;
+}
+
+.match-modal-upcoming .match-modal-team img,
+.match-modal-upcoming .home-modal-team-logo-button img {
+  width: clamp(43px, 11vw, 70px);
+  height: clamp(43px, 11vw, 70px);
+  object-fit: contain;
+}
+
+.match-modal-upcoming .match-modal-score strong {
+  color: var(--upcoming-orange);
+  font-size: clamp(23px, 6vw, 38px);
+}
+
+.match-modal-upcoming .match-highlighted-section {
+  padding: 8px 12px 10px;
+  background: #0a1017;
+  border: 0;
+}
+
+.match-modal-upcoming .upcoming-team-comparison {
+  margin: 2px 0 9px;
+  padding: 8px 10px;
+  background: #0d1620;
+  border: 1px solid var(--upcoming-orange);
+  border-radius: 9px;
+}
+
+.match-modal-upcoming .upcoming-comparison-label {
+  margin: 0 0 5px;
+  text-align: center;
+  color: var(--upcoming-orange);
+  font-size: 11px;
+}
+
+.match-modal-upcoming .upcoming-comparison-row:not(.upcoming-comparison-stat) {
+  display: none;
+}
+
+.match-modal-upcoming .upcoming-comparison-row.upcoming-comparison-stat {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 39px minmax(0, 1fr) 38px;
+  gap: 5px;
+  align-items: center;
+  padding: 3px 0;
+  min-height: 0;
+}
+
+.match-modal-upcoming .upcoming-comparison-stat > strong {
+  color: var(--upcoming-orange);
+  font-size: 13px;
+  text-align: center;
+}
+
+.match-modal-upcoming .upcoming-comparison-stat > span {
+  color: #b8bec9;
+  font-size: 9px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.match-modal-upcoming .upcoming-comparison-track {
+  height: 7px;
+  border-radius: 99px;
+  background: #293440;
+  overflow: hidden;
+}
+
+.match-modal-upcoming .upcoming-comparison-track > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #e6530b, #ff9a20);
+}
+
+.match-modal-upcoming .upcoming-last-matches {
+  margin: 0 0 9px;
+}
+
+.match-modal-upcoming .upcoming-last-matches h3 {
+  margin: 0 0 5px;
+  color: var(--upcoming-orange);
+  text-align: center;
+  font-size: 12px;
+}
+
+.match-modal-upcoming .upcoming-last-matches-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.match-modal-upcoming .upcoming-last-team {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  background: #0c1620;
+  border: 1px solid var(--upcoming-orange);
+  border-radius: 8px;
+}
+
+.match-modal-upcoming .upcoming-last-team > strong {
+  grid-column: auto;
+  margin: 0 0 2px;
+  font-size: 11px;
+  text-align: center;
+  color: #f2f2f2;
+}
+
+.match-modal-upcoming .upcoming-last-result {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 12px;
+  align-items: center;
+  gap: 3px;
+  padding: 5px 3px;
+  min-height: 34px;
+  margin: 0;
+  background: #0a111a;
+  border: 1px solid #2b3543;
+  border-radius: 5px;
+}
+
+.match-modal-upcoming .upcoming-last-result > span:first-child {
+  font-size: 9px;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.match-modal-upcoming .upcoming-last-score {
+  grid-template-columns: 17px minmax(0, 1fr) 17px;
+  gap: 3px;
+}
+
+.match-modal-upcoming .upcoming-last-score-team {
+  gap: 0;
+}
+
+.match-modal-upcoming .upcoming-last-score-team img {
+  width: 17px;
+  height: 17px;
+}
+
+.match-modal-upcoming .upcoming-last-score-team span {
+  display: none;
+}
+
+.match-modal-upcoming .upcoming-last-score > strong {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.match-modal-upcoming .upcoming-last-result > span:last-child {
+  font-size: 12px;
+  text-align: center;
+}
+
+.match-modal-upcoming .match-highlighted-title {
+  margin: 3px 0 7px;
+}
+
+.match-modal-upcoming .match-highlighted-title h3 {
+  color: var(--upcoming-orange);
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.match-modal-upcoming .match-highlighted-title h3 span {
+  color: #e7a25d;
+}
+
+.match-modal-upcoming .match-highlighted-teams {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.match-modal-upcoming .match-highlighted-team {
+  background: #0c1620;
+  border: 1px solid var(--upcoming-orange);
+  border-radius: 8px;
+}
+
+.match-modal-upcoming .match-highlighted-team-header {
+  min-height: 0;
+  padding: 5px 7px;
+  background: transparent;
+}
+
+.match-modal-upcoming .match-highlighted-team-header img {
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+}
+
+.match-modal-upcoming .match-highlighted-team-title strong {
+  font-size: 11px;
+}
+
+.match-modal-upcoming .team-form {
+  display: none;
+}
+
+.match-modal-upcoming .match-highlighted-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.match-modal-upcoming .match-highlighted-category {
+  min-height: 0;
+  height: auto;
+  padding: 4px 5px;
+  border-bottom: 0;
+}
+
+.match-modal-upcoming .match-highlighted-category > span {
+  display: block;
+  margin-bottom: 3px;
+  padding: 3px 2px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #332618, #201c18);
+  color: var(--upcoming-orange);
+  font-size: 9px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.match-modal-upcoming .match-highlighted-player {
+  min-height: 0;
+  padding: 3px 0;
+  gap: 3px;
+}
+
+.match-modal-upcoming .match-highlighted-player + .match-highlighted-player {
+  margin-top: 0;
+}
+
+.match-modal-upcoming .match-highlighted-player strong {
+  font-size: 10px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.match-modal-upcoming .match-highlighted-player span {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .match-modal-upcoming {
+    width: calc(100vw - 16px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+  }
+
+  .match-modal-upcoming .match-modal-header {
+    padding: 10px 10px 8px;
+  }
+
+  .match-modal-upcoming .match-highlighted-section {
+    padding: 7px 8px 9px;
+  }
+
+  .match-modal-upcoming .upcoming-last-matches-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .match-modal-upcoming .upcoming-last-team {
+    padding: 4px;
+    gap: 3px;
+  }
+
+  .match-modal-upcoming .upcoming-last-result {
+    padding: 4px 2px;
+    grid-template-columns: 31px minmax(0, 1fr) 10px;
+    gap: 2px;
+  }
+
+  .match-modal-upcoming .upcoming-last-result > span:first-child {
+    font-size: 8px;
+  }
+
+  .match-modal-upcoming .upcoming-last-score {
+    grid-template-columns: 14px minmax(0, 1fr) 14px;
+    gap: 1px;
+  }
+
+  .match-modal-upcoming .upcoming-last-score-team img {
+    width: 14px;
+    height: 14px;
+  }
+
+  .match-modal-upcoming .upcoming-last-score > strong {
+    font-size: 10px;
+  }
+
+  .match-modal-upcoming .match-highlighted-category {
+    padding: 3px 4px;
+  }
+
+  .match-modal-upcoming .match-highlighted-player {
+    padding: 2px 0;
+  }
+
+  .match-modal-upcoming .match-highlighted-player strong,
+  .match-modal-upcoming .match-highlighted-player span {
+    font-size: 9px;
+  }
+}
