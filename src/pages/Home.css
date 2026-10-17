@@ -8375,3 +8375,66 @@
   .match-modal-finished .match-stat-player { background: #0b1927; }
   .match-modal-finished .match-stat-player:nth-child(even) { background: #122131; }
 }
+
+/* LNA - retoques finales resultados: marcas de agua y planillas compactas */
+.match-modal-finished .match-modal-header {
+  position: relative;
+  isolation: isolate;
+}
+.match-modal-finished .match-finished-watermarks {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+.match-modal-finished .match-finished-watermarks img {
+  width: 34%;
+  height: 160%;
+  object-fit: contain;
+  opacity: .075;
+  filter: grayscale(1);
+}
+.match-modal-finished .match-finished-watermarks img:first-child {
+  transform: translate(-25%, 10%);
+}
+.match-modal-finished .match-finished-watermarks img:last-child {
+  transform: translate(25%, 10%);
+}
+@media (max-width: 600px) {
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    grid-template-columns: minmax(0, 1fr) 17px 16px 16px 29px;
+    column-gap: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .match-modal-finished .match-stat-player {
+    min-height: 28px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .match-modal-finished .match-stat-player strong {
+    display: block;
+    font-size: clamp(7px, 1.9vw, 9px);
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: visible;
+    overflow-wrap: normal;
+    letter-spacing: -0.2px;
+  }
+  .match-modal-finished .match-stat-player span {
+    font-size: 7.5px;
+  }
+  .match-modal-finished .match-stats-head {
+    min-height: 22px;
+    font-size: 7px;
+  }
+  .match-modal-finished .match-finished-watermarks img {
+    width: 42%;
+    height: 160%;
+  }
+}
