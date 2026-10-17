@@ -570,6 +570,8 @@ const getPlayerLastMatches = (player) => {
       ?.getAttribute("src");
     if (!currentScript) return;
 
+    // Evitar comprobaciones y recargas mientras la PWA termina de iniciar.
+    const startupGraceUntil = Date.now() + 30000;
     let checking = false;
     let lastCheck = 0;
     let needsRefresh = false;
@@ -603,6 +605,7 @@ const getPlayerLastMatches = (player) => {
 
     const onReturn = () => {
       if (document.visibilityState !== "visible") return;
+      if (Date.now() < startupGraceUntil) return;
       if (needsRefresh && !document.querySelector('[role="dialog"]')) {
         window.location.reload();
         return;
