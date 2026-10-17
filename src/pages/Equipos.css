@@ -665,3 +665,130 @@
   }
 }
 
+
+/* =========================================
+   LNA - EQUIPOS: LISTA COMPACTA (OPCION 2)
+   Solo presentacion, conserva enlaces y busqueda.
+   ========================================= */
+.teams-page .teams-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 960px;
+}
+
+.teams-page .team-card {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  grid-template-rows: auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 75px;
+  padding: 10px 15px;
+  border: 1px solid var(--sports-border-soft);
+  border-radius: 9px;
+  background: var(--sports-panel);
+  transform: none;
+}
+
+.teams-page .team-card:hover {
+  transform: none;
+  border-color: var(--match-border);
+}
+
+.teams-page .team-logo-container {
+  grid-column: 1;
+  grid-row: 1;
+  width: 54px;
+  height: 54px;
+  margin: 0;
+}
+
+.teams-page .team-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.teams-page .team-card-info {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+}
+
+.teams-page .team-card-info h2 {
+  margin: 0 0 5px;
+  font-size: 15px;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.teams-page .team-card-info p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.teams-page .team-card-location {
+  display: none;
+}
+
+.teams-page .team-card-top {
+  grid-column: 3;
+  grid-row: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.teams-page .team-card-number {
+  color: var(--sports-text-soft);
+  font-size: 10px;
+  letter-spacing: .5px;
+}
+
+.teams-page .team-card-arrow {
+  color: var(--match-accent);
+  font-size: 23px;
+}
+
+.teams-page .team-card-footer {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .teams-page .teams-grid {
+    gap: 4px;
+  }
+
+  .teams-page .team-card {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 67px;
+    padding: 8px 10px;
+  }
+
+  .teams-page .team-logo-container {
+    width: 44px;
+    height: 44px;
+  }
+
+  .teams-page .team-logo {
+    width: 42px;
+    height: 42px;
+  }
+
+  .teams-page .team-card-info h2 {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .teams-page .team-card-info p {
+    font-size: 10px;
+  }
+
+  .teams-page .team-card-top {
+    gap: 9px;
+  }
+}
