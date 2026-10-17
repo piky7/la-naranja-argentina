@@ -8485,3 +8485,133 @@
     gap: 7px;
   }
 }
+
+/* LNA - ficha de jugador con estilo de popups deportivos */
+.home-player-modal {
+  width: min(100%, 560px);
+  border: 2px solid #ff8500;
+  border-radius: 18px;
+  background: #071522;
+  overflow-x: hidden;
+  box-shadow: 0 20px 65px rgba(0,0,0,.65);
+}
+.home-player-modal-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 130px;
+  background: linear-gradient(125deg,#061725 0%,#0a1c2b 62%,#102235 100%);
+  border-bottom: 2px solid #ff8500;
+}
+.home-player-modal-watermark {
+  position: absolute;
+  z-index: -1;
+  right: -9%;
+  top: -38%;
+  width: 52%;
+  height: 185%;
+  object-fit: contain;
+  opacity: .095;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+.home-player-modal-logo {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+.home-player-modal-logo-button {
+  position: relative;
+  z-index: 1;
+}
+.home-player-modal-info {
+  align-items: flex-start;
+  text-align: left;
+}
+.home-player-modal-info > span {
+  font-size: 11px;
+  letter-spacing: 1.3px;
+}
+.home-player-modal-info h2 {
+  font-size: clamp(19px, 4vw, 27px);
+}
+.home-player-modal-info p { font-size: 14px; color: #f0f3f7; }
+.home-player-modal-info small { font-size: 12px; color: #aeb8c7; }
+.home-player-modal-details {
+  margin: 12px 12px 0;
+  padding: 0;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+}
+.home-player-modal-details > div {
+  min-height: 65px;
+  padding: 8px 5px;
+  background: #091b2b;
+  border: 1px solid #ff8500;
+  border-radius: 10px;
+}
+.home-player-modal-details span { color: #abb6c5; }
+.home-player-modal-details strong { color: #fff; }
+.home-player-modal-season,
+.home-player-modal-recent-section {
+  margin: 12px 12px 0;
+  padding: 12px;
+  background: #071725 !important;
+  border: 1px solid #ff8500;
+  border-radius: 12px;
+}
+.home-player-modal-label {
+  text-align: left;
+  font-size: 12px;
+  margin-bottom: 10px;
+  letter-spacing: .6px;
+}
+.home-player-modal-stats {
+  background: #071a2a !important;
+  border: 1px solid #2b4354;
+  border-radius: 9px;
+}
+.home-player-modal-stats > div {
+  min-height: 65px;
+  padding: 9px 4px;
+  background: #071a2a !important;
+  border-right: 1px solid #2b4354;
+}
+.home-player-modal-stats strong { font-size: 25px; }
+.home-player-modal-stats span { color: #b3becc; }
+.home-player-modal-recent-list { margin-top: 0; }
+.home-player-modal-recent-match {
+  background: #071a2a;
+  border: 1px solid #2b4354;
+}
+.home-player-modal-recent-header strong { font-size: 13px; }
+.home-player-modal-recent-stats strong { color: #ff8500; }
+.home-player-modal-footer {
+  margin-top: 12px;
+  background: #06111c;
+  border-top: 1px solid #284052;
+}
+@media (max-width:600px) {
+  .home-player-modal { max-height: calc(100dvh - 30px); }
+  .home-player-modal-header {
+    min-height: 116px;
+    grid-template-columns: 56px minmax(0,1fr) 34px;
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  .home-player-modal-logo { width: 54px; height: 54px; }
+  .home-player-modal-watermark { width: 62%; right: -15%; opacity: .09; }
+  .home-player-modal-info h2 { font-size: clamp(17px, 4.4vw, 22px); }
+  .home-player-modal-info p { font-size: 12px; }
+  .home-player-modal-info small { font-size: 11px; }
+  .home-player-modal-details { margin: 10px 10px 0; padding: 0; }
+  .home-player-modal-details > div { min-height: 59px; padding: 7px 3px; }
+  .home-player-modal-season,
+  .home-player-modal-recent-section { margin: 10px 10px 0; padding: 10px; }
+  .home-player-modal-stats > div { min-height: 62px; padding: 8px 3px; }
+  .home-player-modal-stats strong { font-size: 23px; }
+  .home-player-modal-recent-match { padding: 10px 8px; }
+  .home-player-modal-recent-header { margin-bottom: 8px; }
+  .home-player-modal-footer { margin-top: 10px; }
+}
