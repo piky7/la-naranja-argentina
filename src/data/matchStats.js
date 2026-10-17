@@ -5066,4 +5066,185 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"san-lorenzo-penarol": {
+  "san-lorenzo": [
+    {
+      "id": "lucas-gargallo",
+      "name": "Lucas Gargallo",
+      "points": 8,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "23:37"
+    },
+    {
+      "id": "raynere-thornton",
+      "name": "Raynere Thornton",
+      "points": 17,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "34:37"
+    },
+    {
+      "id": "nicolas-aguirre",
+      "name": "Nicolás Aguirre",
+      "points": 15,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "26:46"
+    },
+    {
+      "id": "cliron-hornbeak",
+      "name": "Cli’Ron Hornbeak",
+      "points": 3,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "10:34"
+    },
+    {
+      "id": "leonel-schattmann",
+      "name": "Leonel Schattmann",
+      "points": 12,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "25:15"
+    },
+    {
+      "id": "thiago-roca",
+      "name": "Thiago Roca",
+      "points": 6,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "14:11"
+    },
+    {
+      "id": "marcos-mata",
+      "name": "Marcos Mata",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "21:54"
+    },
+    {
+      "id": "santiago-calderon",
+      "name": "Santiago Calderón",
+      "points": 7,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "14:30"
+    },
+    {
+      "id": "antun-maricevic",
+      "name": "Antun Maricevic",
+      "points": 11,
+      "rebounds": 9,
+      "assists": 0,
+      "minutes": "28:36"
+    }
+  ],
+  "penarol": [
+    {
+      "id": "ivan-basualdo",
+      "name": "Iván Basualdo",
+      "points": 14,
+      "rebounds": 8,
+      "assists": 1,
+      "minutes": "24:14"
+    },
+    {
+      "id": "andres-jaime",
+      "name": "Andrés Jaime",
+      "points": 16,
+      "rebounds": 3,
+      "assists": 7,
+      "minutes": "24:59"
+    },
+    {
+      "id": "sebastian-vega",
+      "name": "Sebastián Vega",
+      "points": 2,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "27:06"
+    },
+    {
+      "id": "agustin-perez-tapia",
+      "name": "Agustín Pérez Tapia",
+      "points": 17,
+      "rebounds": 7,
+      "assists": 2,
+      "minutes": "26:15"
+    },
+    {
+      "id": "franco-giorgetti",
+      "name": "Franco Giorgetti",
+      "points": 10,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "21:47"
+    },
+    {
+      "id": "al-thornton",
+      "name": "Al Thornton",
+      "points": 8,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "18:41"
+    },
+    {
+      "id": "luciano-guerra",
+      "name": "Luciano Guerra",
+      "points": 13,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "15:01"
+    },
+    {
+      "id": "ignacio-bednarek",
+      "name": "Ignacio Bednarek",
+      "points": 3,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "15:18"
+    },
+    {
+      "id": "selem-safar",
+      "name": "Selem Safar",
+      "points": 7,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "13:45"
+    },
+    {
+      "id": "nicolas-chiaraviglio",
+      "name": "Nicolás Chiaraviglio",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "12:54"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 22,
+      "away": 28
+    },
+    {
+      "period": "2",
+      "home": 22,
+      "away": 17
+    },
+    {
+      "period": "3",
+      "home": 18,
+      "away": 26
+    },
+    {
+      "period": "4",
+      "home": 23,
+      "away": 21
+    }
+  ]
+},
 };
