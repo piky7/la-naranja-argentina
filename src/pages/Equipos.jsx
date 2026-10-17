@@ -39,13 +39,9 @@ function Equipos() {
           <div className="teams-toolbar">
 
             <div className="teams-results">
-              <span className="teams-count-label">
-                EQUIPOS
-              </span>
-
-              <strong className="teams-count">
-                {filteredTeams.length}
-              </strong>
+              <h1 className="teams-page-title">
+                EQU<span>IPOS</span>
+              </h1>
             </div>
 
             <div className="teams-search">
@@ -136,7 +132,9 @@ function Equipos() {
                     </h2>
 
                     <p>
-                      {team.province}
+                      {team.city === team.province
+                        ? team.city
+                        : `${team.city} · ${team.province}`}
                     </p>
 
                   </div>
