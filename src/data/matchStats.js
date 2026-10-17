@@ -4886,4 +4886,185 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"platense-obera": {
+  "platense": [
+    {
+      "id": "mariano-goicoechea",
+      "name": "Mariano Goicoechea",
+      "points": 3,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "11:14"
+    },
+    {
+      "id": "federico-grun",
+      "name": "Federico Grun",
+      "points": 8,
+      "rebounds": 4,
+      "assists": 5,
+      "minutes": "20:40"
+    },
+    {
+      "id": "gaston-cordoba",
+      "name": "Gastón Córdoba",
+      "points": 17,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "30:04"
+    },
+    {
+      "id": "facundo-terra",
+      "name": "Facundo Terra",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 6,
+      "minutes": "23:01"
+    },
+    {
+      "id": "nicolas-burgos",
+      "name": "Nicolás Burgos",
+      "points": 16,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "31:03"
+    },
+    {
+      "id": "ramiro-santiago",
+      "name": "Ramiro Santiago",
+      "points": 8,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "16:59"
+    },
+    {
+      "id": "franco-smaniotti",
+      "name": "Franco Smaniotti",
+      "points": 4,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "16:36"
+    },
+    {
+      "id": "julian-morales",
+      "name": "Julián Morales",
+      "points": 7,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "15:40"
+    },
+    {
+      "id": "giovanni-pappalardi",
+      "name": "Giovanni Pappalardi",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "01:59"
+    },
+    {
+      "id": "mauro-cosolito",
+      "name": "Mauro Cosolito",
+      "points": 17,
+      "rebounds": 9,
+      "assists": 1,
+      "minutes": "32:45"
+    }
+  ],
+  "obera": [
+    {
+      "id": "ty-prince",
+      "name": "Ty Prince",
+      "points": 10,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "31:40"
+    },
+    {
+      "id": "jonatan-torresi",
+      "name": "Jonatan Torresi",
+      "points": 8,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "26:28"
+    },
+    {
+      "id": "bruno-sansimoni",
+      "name": "Bruno Sansimoni",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "15:22"
+    },
+    {
+      "id": "agustin-brocal",
+      "name": "Agustín Brocal",
+      "points": 17,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "31:41"
+    },
+    {
+      "id": "will-vorhees",
+      "name": "Will Vorhees",
+      "points": 7,
+      "rebounds": 12,
+      "assists": 1,
+      "minutes": "23:13"
+    },
+    {
+      "id": "victor-fernandez",
+      "name": "Víctor Fernández",
+      "points": 10,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "24:38"
+    },
+    {
+      "id": "alejo-azpilicueta",
+      "name": "Alejo Azpilicueta",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "11:52"
+    },
+    {
+      "id": "santiago-barrales",
+      "name": "Santiago Barrales",
+      "points": 16,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "18:20"
+    },
+    {
+      "id": "juan-cruz-oberto",
+      "name": "Juan Cruz Oberto",
+      "points": 0,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "16:47"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 21,
+      "away": 17
+    },
+    {
+      "period": "2",
+      "home": 20,
+      "away": 24
+    },
+    {
+      "period": "3",
+      "home": 24,
+      "away": 25
+    },
+    {
+      "period": "4",
+      "home": 21,
+      "away": 14
+    }
+  ]
+},
 };
