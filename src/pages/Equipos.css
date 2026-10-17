@@ -792,3 +792,63 @@
     gap: 9px;
   }
 }
+
+/* =========================================
+   LNA - EQUIPOS: AJUSTES FINALES DE LISTA
+   ========================================= */
+.teams-page .teams-page-title {
+  margin: 0;
+  color: #f2f2f2;
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.teams-page .teams-page-title span {
+  color: #ff8c00;
+}
+
+.teams-page .team-card {
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.teams-page .team-card:active,
+.teams-page .team-card:focus-visible {
+  background-color: var(--sports-panel-row-hover);
+  border-color: var(--match-accent);
+  box-shadow: inset 3px 0 0 var(--match-accent);
+}
+
+@media (max-width: 768px) {
+  .teams-page .teams-page-title {
+    font-size: 24px;
+  }
+
+  .teams-page .team-card {
+    min-height: 59px;
+    padding: 6px 10px;
+    gap: 9px;
+  }
+
+  .teams-page .team-logo-container {
+    width: 42px;
+    height: 42px;
+  }
+
+  .teams-page .team-logo {
+    width: 39px;
+    height: 39px;
+  }
+
+  .teams-page .team-card-info h2 {
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  .teams-page .team-card-info p {
+    font-size: 10px;
+  }
+}
