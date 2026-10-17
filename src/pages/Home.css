@@ -7514,9 +7514,9 @@
 /* LNA - Nombres de jugadores legibles en planillas dobles (mobile) */
 @media (max-width: 600px) {
   .match-modal-finished .match-stat-player {
-    min-height: 37px;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    min-height: 33px;
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
   .match-modal-finished .match-stat-player strong {
     display: -webkit-box;
