@@ -229,22 +229,6 @@
       "awayId": "U5F8QbRb"
     },
     {
-      "eventId": "tKIbBgOq",
-      "homeTeam": "san-lorenzo",
-      "homeName": "San Lorenzo",
-      "awayTeam": "penarol",
-      "awayName": "Peñarol",
-      "homeScore": 9,
-      "awayScore": 5,
-      "status": "scheduled",
-      "statusCode": "2",
-      "timestamp": 1792195500,
-      "homeSlug": "san-lorenzo",
-      "awaySlug": "penarol",
-      "homeId": "6JVDDNoE",
-      "awayId": "0OnqJxtR"
-    },
-    {
       "eventId": "lpM69Xhd",
       "homeTeam": "san-lorenzo",
       "homeName": "San Lorenzo",
@@ -437,6 +421,38 @@
       "awayId": "SAdHfH80"
     },
     {
+      "eventId": "nyCpvqbm",
+      "homeTeam": "la-union",
+      "homeName": "La Union",
+      "awayTeam": "independiente-oliva",
+      "awayName": "Independiente de Oliva",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1793134800,
+      "homeSlug": "la-union",
+      "awaySlug": "independiente-de-oliva",
+      "homeId": "tE0LgyO6",
+      "awayId": "bX27OjMs"
+    },
+    {
+      "eventId": "KlAhxNSa",
+      "homeTeam": "penarol",
+      "homeName": "Peñarol",
+      "awayTeam": "san-martin",
+      "awayName": "San Martín",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1793134800,
+      "homeSlug": "penarol",
+      "awaySlug": "san-martin",
+      "homeId": "0OnqJxtR",
+      "awayId": "U5F8QbRb"
+    },
+    {
       "eventId": "OAST8hhK",
       "homeTeam": "olimpico",
       "homeName": "Olimpico",
@@ -627,38 +643,6 @@
       "awaySlug": "gimnasia",
       "homeId": "zy0PhewD",
       "awayId": "Cn0pHIpQ"
-    },
-    {
-      "eventId": "nyCpvqbm",
-      "homeTeam": "la-union",
-      "homeName": "La Union",
-      "awayTeam": "independiente-oliva",
-      "awayName": "Independiente de Oliva",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1793134800,
-      "homeSlug": "la-union",
-      "awaySlug": "independiente-de-oliva",
-      "homeId": "tE0LgyO6",
-      "awayId": "bX27OjMs"
-    },
-    {
-      "eventId": "KlAhxNSa",
-      "homeTeam": "penarol",
-      "homeName": "Peñarol",
-      "awayTeam": "san-martin",
-      "awayName": "San Martín",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1793134800,
-      "homeSlug": "penarol",
-      "awaySlug": "san-martin",
-      "homeId": "0OnqJxtR",
-      "awayId": "U5F8QbRb"
     },
     {
       "eventId": "SED0z1cC",
@@ -1987,6 +1971,22 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
+    },
+    {
+      "eventId": "tKIbBgOq",
+      "homeTeam": "san-lorenzo",
+      "homeName": "San Lorenzo",
+      "awayTeam": "penarol",
+      "awayName": "Peñarol",
+      "homeScore": 9,
+      "awayScore": 5,
+      "status": "scheduled",
+      "statusCode": "2",
+      "timestamp": 1792195500,
+      "homeSlug": "san-lorenzo",
+      "awaySlug": "penarol",
+      "homeId": "6JVDDNoE",
+      "awayId": "0OnqJxtR"
     },
     {
       "eventId": "AySSGF0M",
