@@ -5066,7 +5066,6 @@ export const matchPlayerStats = {
     }
   ]
 },
-
 "san-lorenzo-penarol": {
   "san-lorenzo": [
     {
