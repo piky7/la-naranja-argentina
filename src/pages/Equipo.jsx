@@ -2131,31 +2131,27 @@ onClick={(event) => {
       COMPARATIVA DE EQUIPOS
     </span>
 
-    <div className="upcoming-comparison-row">
-      <strong>{selectedUpcomingHomeTeam?.shortName}</strong>
-      <span>EQUIPOS</span>
-      <strong>{selectedUpcomingAwayTeam?.shortName}</strong>
-    </div>
-
-    <div className="upcoming-comparison-row">
-      <strong>
-        {getTeamAverages(selectedUpcomingMatch.homeTeam).pointsFor ?? "—"}
-      </strong>
-      <span>PTS/P</span>
-      <strong>
-        {getTeamAverages(selectedUpcomingMatch.awayTeam).pointsFor ?? "—"}
-      </strong>
-    </div>
-
-    <div className="upcoming-comparison-row">
-      <strong>
-        {getTeamAverages(selectedUpcomingMatch.homeTeam).pointsAgainst ?? "—"}
-      </strong>
-      <span>REC/P</span>
-      <strong>
-        {getTeamAverages(selectedUpcomingMatch.awayTeam).pointsAgainst ?? "—"}
-      </strong>
-    </div>
+    {[
+      ["PTS/P", "pointsFor"],
+      ["REC/P", "pointsAgainst"],
+    ].map(([label, key]) => {
+      const homeValue = getTeamAverages(selectedUpcomingMatch.homeTeam)[key];
+      const awayValue = getTeamAverages(selectedUpcomingMatch.awayTeam)[key];
+      const maxValue = Math.max(Number(homeValue) || 0, Number(awayValue) || 0, 1);
+      return (
+        <div className="upcoming-comparison-row upcoming-comparison-stat" key={key}>
+          <strong>{homeValue ?? "—"}</strong>
+          <div className="upcoming-comparison-track" aria-hidden="true">
+            <span style={{ width: `${(Math.max(0, Number(homeValue) || 0) / maxValue) * 100}%` }} />
+          </div>
+          <span>{label}</span>
+          <div className="upcoming-comparison-track" aria-hidden="true">
+            <span style={{ width: `${(Math.max(0, Number(awayValue) || 0) / maxValue) * 100}%` }} />
+          </div>
+          <strong>{awayValue ?? "—"}</strong>
+        </div>
+      );
+    })}
   </div>
 
 <div className="upcoming-last-matches">
@@ -2234,8 +2230,8 @@ onClick={(event) => {
 </div>
 
 <div className="match-highlighted-title">
-  <span>PROMEDIOS DE TEMPORADA</span>
-  <h3>Jugadores destacados</h3>
+  <h3>JUGADORES DESTACADOS</h3>
+  <span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA</span>
 </div>
 
 <div className="match-highlighted-teams">
