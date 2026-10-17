@@ -8438,3 +8438,50 @@
     height: 160%;
   }
 }
+
+/* LNA - legibilidad final de planillas y uniformidad de parciales */
+.match-modal-finished .match-quarters-table tbody tr td:first-child,
+.match-modal-finished .match-quarters-table tbody tr:nth-child(odd) td:first-child {
+  background: #0d1a28;
+  color: #f2f4f7;
+}
+.match-modal-finished .match-quarters-table tbody tr:nth-child(even) td:first-child {
+  background: #132131;
+  color: #f2f4f7;
+}
+@media (max-width: 600px) {
+  .match-modal-finished .match-stat-player {
+    min-height: 35px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    grid-template-columns: minmax(0, 1fr) 18px 17px 17px 31px;
+    column-gap: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .match-modal-finished .match-stat-player strong {
+    font-size: clamp(8px, 2.1vw, 10px);
+    line-height: 1.18;
+    letter-spacing: -0.18px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .match-modal-finished .match-stat-player span {
+    font-size: clamp(8px, 2vw, 9px);
+    line-height: 1.15;
+  }
+  .match-modal-finished .match-stats-head {
+    font-size: 7.5px;
+    min-height: 25px;
+  }
+  .match-modal-finished .match-modal-content {
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 7px;
+  }
+}
