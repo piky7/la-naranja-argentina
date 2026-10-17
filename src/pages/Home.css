@@ -8164,3 +8164,114 @@
 .home-team-modal-v2 .team-v2-player-category p{font-size:10px;color:#aeb6c2}
 .home-team-modal-v2 .team-v2-full-link{display:block;border:1px solid #ff8c00;border-radius:8px;text-align:center;color:#ff8c00;font-size:12px;font-weight:800;text-decoration:none;padding:10px}
 @media(max-width:480px){.home-team-modal-v2{width:calc(100vw - 18px);max-height:calc(100dvh - 26px)}.home-team-modal-v2 .team-v2-hero{padding:15px 12px}.home-team-modal-v2 .team-v2-crest img{width:62px;height:62px}.home-team-modal-v2 .team-v2-identity{gap:10px}.home-team-modal-v2 .team-v2-body{padding:9px;gap:8px}.home-team-modal-v2 .team-v2-section{padding:8px}.home-team-modal-v2 .team-v2-stats strong{font-size:18px}.home-team-modal-v2 .team-v2-result img{width:25px;height:25px}.home-team-modal-v2 .team-v2-result strong{font-size:15px}.home-team-modal-v2 .team-v2-player-category{padding:4px}.home-team-modal-v2 .team-v2-player-category button span{font-size:10px}.home-team-modal-v2 .team-v2-player-category button strong{font-size:11px}}
+
+/* LNA: compactar ficha de equipo para iPhone sin perder datos */
+@media (max-width: 600px) {
+  .home-team-modal-v2 {
+    max-height: calc(100dvh - 18px);
+  }
+  .home-team-modal-v2 .team-v2-hero {
+    min-height: 100px;
+    padding: 10px 12px;
+  }
+  .home-team-modal-v2 .team-v2-watermark {
+    width: 170px;
+    height: 170px;
+    top: -40px;
+  }
+  .home-team-modal-v2 .team-v2-identity {
+    gap: 10px;
+  }
+  .home-team-modal-v2 .team-v2-crest img {
+    width: 58px;
+    height: 58px;
+  }
+  .home-team-modal-v2 .team-v2-identity h2 {
+    margin: 2px 0;
+    font-size: clamp(19px, 5vw, 25px);
+  }
+  .home-team-modal-v2 .team-v2-identity p {
+    margin: 0;
+    font-size: 12px;
+  }
+  .home-team-modal-v2 .team-v2-body {
+    padding: 7px;
+    gap: 6px;
+  }
+  .home-team-modal-v2 .team-v2-section {
+    padding: 6px 8px;
+  }
+  .home-team-modal-v2 .team-v2-section h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  .home-team-modal-v2 .team-v2-section-head {
+    margin-bottom: 5px;
+  }
+  .home-team-modal-v2 .team-v2-section-head h3 {
+    margin: 0;
+  }
+  .home-team-modal-v2 .team-v2-stats > div {
+    padding: 5px 2px;
+    gap: 1px;
+  }
+  .home-team-modal-v2 .team-v2-stats strong {
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  .home-team-modal-v2 .team-v2-stats span {
+    font-size: 9px;
+  }
+  .home-team-modal-v2 .team-v2-next {
+    padding: 5px 4px;
+    gap: 4px;
+  }
+  .home-team-modal-v2 .team-v2-next > div {
+    gap: 2px;
+  }
+  .home-team-modal-v2 .team-v2-next img {
+    width: 38px;
+    height: 38px;
+  }
+  .home-team-modal-v2 .team-v2-next-center strong {
+    font-size: 23px !important;
+  }
+  .home-team-modal-v2 .team-v2-recent {
+    gap: 6px;
+  }
+  .home-team-modal-v2 .team-v2-recent button {
+    padding: 5px 4px;
+  }
+  .home-team-modal-v2 .team-v2-date {
+    margin-bottom: 2px;
+  }
+  .home-team-modal-v2 .team-v2-result img {
+    width: 23px;
+    height: 23px;
+  }
+  .home-team-modal-v2 .team-v2-win,
+  .home-team-modal-v2 .team-v2-loss {
+    margin-top: 2px;
+  }
+  .home-team-modal-v2 .team-v2-players {
+    gap: 5px;
+  }
+  .home-team-modal-v2 .team-v2-player-category {
+    padding: 3px;
+  }
+  .home-team-modal-v2 .team-v2-player-category h4 {
+    padding: 3px 2px;
+    margin-bottom: 2px;
+  }
+  .home-team-modal-v2 .team-v2-player-category button {
+    gap: 2px;
+    padding: 3px 2px;
+  }
+  .home-team-modal-v2 .team-v2-full-link {
+    padding: 7px;
+  }
+  .home-team-modal-v2 .home-team-modal-footer {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+}
