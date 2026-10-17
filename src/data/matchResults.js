@@ -215,4 +215,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-16-san-lorenzo-penarol": {
+    status: "finished",
+    homeScore: 85,
+    awayScore: 92,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };

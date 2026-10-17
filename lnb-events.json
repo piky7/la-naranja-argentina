@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 125,
-  "finishedMatches": 27,
+  "finishedMatches": 28,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "tKIbBgOq",
+      "homeTeam": "san-lorenzo",
+      "homeName": "San Lorenzo",
+      "awayTeam": "penarol",
+      "awayName": "Peñarol",
+      "homeScore": 85,
+      "awayScore": 92,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1792195500,
+      "homeSlug": "san-lorenzo",
+      "awaySlug": "penarol",
+      "homeId": "6JVDDNoE",
+      "awayId": "0OnqJxtR"
+    },
     {
       "eventId": "AySSGF0M",
       "homeTeam": "platense",
@@ -1987,25 +2003,25 @@
       "awaySlug": "ferro-carril-oeste",
       "homeId": "SIolf8Y3",
       "awayId": "2qroXLyp"
-    },
+    }
+  ],
+  "finished": [
     {
       "eventId": "tKIbBgOq",
       "homeTeam": "san-lorenzo",
       "homeName": "San Lorenzo",
       "awayTeam": "penarol",
       "awayName": "Peñarol",
-      "homeScore": 9,
-      "awayScore": 5,
-      "status": "scheduled",
-      "statusCode": "2",
+      "homeScore": 85,
+      "awayScore": 92,
+      "status": "finished",
+      "statusCode": "3",
       "timestamp": 1792195500,
       "homeSlug": "san-lorenzo",
       "awaySlug": "penarol",
       "homeId": "6JVDDNoE",
       "awayId": "0OnqJxtR"
-    }
-  ],
-  "finished": [
+    },
     {
       "eventId": "AySSGF0M",
       "homeTeam": "platense",
