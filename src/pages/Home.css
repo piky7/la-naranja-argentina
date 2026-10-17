@@ -7964,3 +7964,100 @@
     font-size: 9px;
   }
 }
+
+/* LNA - Cancha realista y protagonistas ampliados (solo encabezado) */
+.match-modal-upcoming .match-modal-header {
+  padding: 16px 16px 18px;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(120, 58, 17, .25), transparent 75%),
+    linear-gradient(180deg, #111b25 0%, #0a1119 100%);
+}
+
+/* Vista cenital: circulo central, linea de mitad y areas de ambos lados */
+.match-modal-upcoming .match-modal-header::before {
+  inset: 14% 2% 2%;
+  opacity: .32;
+  background:
+    radial-gradient(ellipse 15% 47% at 50% 55%, transparent 96%, #c9945b 98%, #c9945b 100%, transparent 102%),
+    linear-gradient(90deg, transparent calc(50% - .65px), #c9945b calc(50% - .65px), #c9945b calc(50% + .65px), transparent calc(50% + .65px)),
+    linear-gradient(90deg, transparent 4%, #c9945b 4%, #c9945b 4.3%, transparent 4.3%, transparent 95.7%, #c9945b 95.7%, #c9945b 96%, transparent 96%);
+}
+
+.match-modal-upcoming .match-modal-header::after {
+  content: "";
+  position: absolute;
+  inset: 29% 2% 5%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .28;
+  background:
+    linear-gradient(#c9945b, #c9945b) 5% 10% / 15% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 5% 90% / 15% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 20% 10% / 1px 80% no-repeat,
+    linear-gradient(#c9945b, #c9945b) 80% 10% / 15% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 80% 90% / 15% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 80% 10% / 1px 80% no-repeat;
+}
+
+.match-modal-upcoming .match-modal-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.match-modal-upcoming .match-modal-teams {
+  margin-top: 13px;
+  gap: 9px;
+}
+
+.match-modal-upcoming .match-modal-team img,
+.match-modal-upcoming .home-modal-team-logo-button img {
+  width: clamp(60px, 15vw, 90px);
+  height: clamp(60px, 15vw, 90px);
+  object-fit: contain;
+}
+
+.match-modal-upcoming .match-modal-team > strong {
+  font-size: clamp(13px, 3.2vw, 17px);
+  line-height: 1.15;
+}
+
+.match-modal-upcoming .match-modal-team strong small {
+  font-size: 11px;
+}
+
+.match-modal-upcoming .match-modal-schedule strong,
+.match-modal-upcoming .match-modal-score strong {
+  font-size: clamp(38px, 9vw, 54px);
+  line-height: 1.05;
+}
+
+.match-modal-upcoming .match-modal-tv,
+.match-modal-upcoming .match-modal-score span {
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .match-modal-header {
+    padding: 12px 10px 15px;
+  }
+
+  .match-modal-upcoming .match-modal-teams {
+    margin-top: 12px;
+    gap: 6px;
+  }
+
+  .match-modal-upcoming .match-modal-team img,
+  .match-modal-upcoming .home-modal-team-logo-button img {
+    width: clamp(61px, 17vw, 78px);
+    height: clamp(61px, 17vw, 78px);
+  }
+
+  .match-modal-upcoming .match-modal-team > strong {
+    font-size: 13px;
+  }
+
+  .match-modal-upcoming .match-modal-schedule strong,
+  .match-modal-upcoming .match-modal-score strong {
+    font-size: clamp(37px, 10vw, 47px);
+  }
+}
