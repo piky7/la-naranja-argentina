@@ -7398,3 +7398,63 @@
     padding: 5px 3px;
   }
 }
+
+
+/* LNA - Acabado visual del popup finalizado: franja, ganador y planillas */
+@media (max-width: 600px) {
+  .match-modal-finished .match-modal-header {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+  .match-modal-finished .match-modal-teams {
+    background: #0d1116;
+    border-top: 1px solid #303640;
+    border-bottom: 1px solid #303640;
+    padding: 9px 12px;
+    margin-top: 5px;
+  }
+  .match-modal-finished .match-modal-score strong {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 3px;
+    color: #c4cad3;
+  }
+  .match-modal-finished .match-modal-score strong .match-score-winner {
+    color: #ff8c00 !important;
+    -webkit-text-fill-color: #ff8c00 !important;
+  }
+  .match-modal-finished .match-modal-score strong .match-score-loser {
+    color: #c4cad3 !important;
+    -webkit-text-fill-color: #c4cad3 !important;
+  }
+  .match-modal-finished .match-modal-score strong .match-score-dash {
+    color: #ff8c00 !important;
+    -webkit-text-fill-color: #ff8c00 !important;
+  }
+  .match-modal-finished .match-stats-team {
+    background: #101419;
+    border-color: #323a44;
+  }
+  .match-modal-finished .match-stats-team-header {
+    background: #0b0f13;
+  }
+  .match-modal-finished .match-stats-head {
+    background: #1a1f26;
+  }
+  .match-modal-finished .match-stat-player {
+    background: #11161c;
+    border-bottom-color: #2b323a;
+  }
+  .match-modal-finished .match-stat-player:nth-child(even) {
+    background: #151a20;
+  }
+  .match-modal-finished .match-stat-player span:first-of-type {
+    color: #ff8c00 !important;
+    -webkit-text-fill-color: #ff8c00 !important;
+  }
+  .match-modal-finished .match-stat-player span:not(:first-of-type) {
+    color: #b8bec8;
+  }
+}
