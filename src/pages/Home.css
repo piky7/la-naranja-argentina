@@ -7509,3 +7509,28 @@
     font-size: 10px;
   }
 }
+
+
+/* LNA - Nombres de jugadores legibles en planillas dobles (mobile) */
+@media (max-width: 600px) {
+  .match-modal-finished .match-stat-player {
+    min-height: 37px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .match-modal-finished .match-stat-player strong {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+    font-size: 8px;
+    line-height: 1.16;
+  }
+  .match-modal-finished .match-stats-list {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
