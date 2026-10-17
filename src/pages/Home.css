@@ -7272,3 +7272,66 @@
     line-height: 1.1;
   }
 }
+
+
+/* LNA - Header horizontal del partido finalizado (mobile) */
+@media (max-width: 600px) {
+  .match-modal-finished .match-modal-header {
+    padding: 8px 12px 9px;
+  }
+  .match-modal-finished .match-modal-teams {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 6px;
+    margin-top: 7px;
+    min-height: 0;
+  }
+  .match-modal-finished .match-modal-team {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    gap: 6px;
+    text-align: left;
+  }
+  .match-modal-finished .match-modal-team:last-child {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    text-align: right;
+  }
+  .match-modal-finished .match-modal-team .home-modal-team-logo-button {
+    flex: 0 0 auto;
+  }
+  .match-modal-finished .match-modal-team img {
+    width: 32px;
+    height: 32px;
+  }
+  .match-modal-finished .match-modal-team strong {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    gap: 3px;
+    font-size: 10px;
+    line-height: 1.15;
+    text-align: left;
+  }
+  .match-modal-finished .match-modal-team:last-child strong {
+    align-items: flex-end;
+    text-align: right;
+  }
+  .match-modal-finished .match-modal-team strong small {
+    font-size: 9px;
+    white-space: nowrap;
+  }
+  .match-modal-finished .match-modal-score {
+    min-width: 0;
+    justify-self: center;
+  }
+  .match-modal-finished .match-modal-score strong {
+    font-size: 25px;
+    white-space: nowrap;
+  }
+}
