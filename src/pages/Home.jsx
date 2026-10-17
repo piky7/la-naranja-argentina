@@ -2285,7 +2285,8 @@ const finishedMatch = {
   </div>
 </div>
               <div className="match-highlighted-title">
-                <h3>JUGADORES DESTACADOS <span>· PROMEDIOS DE TEMPORADA</span></h3>
+                <h3>JUGADORES DESTACADOS</h3>
+                <span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA</span>
               </div>
 
               <div className="match-highlighted-teams">
