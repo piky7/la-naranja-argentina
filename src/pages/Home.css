@@ -8061,3 +8061,56 @@
     font-size: clamp(37px, 10vw, 47px);
   }
 }
+
+/* LNA - Retoques finales: cancha proporcionada y subtitulo discreto */
+.match-modal-upcoming .match-modal-header::before {
+  inset: 20% 2% 5%;
+  opacity: .21;
+  background:
+    radial-gradient(circle at 50% 53%, transparent 0 45px, #c9945b 46px 47px, transparent 48px),
+    linear-gradient(90deg, transparent calc(50% - .5px), #c9945b calc(50% - .5px), #c9945b calc(50% + .5px), transparent calc(50% + .5px)),
+    linear-gradient(90deg, transparent 3.5%, #c9945b 3.5% 3.65%, transparent 3.65%, transparent 96.35%, #c9945b 96.35% 96.5%, transparent 96.5%);
+}
+
+.match-modal-upcoming .match-modal-header::after {
+  inset: 28% 2% 8%;
+  opacity: .18;
+  background:
+    linear-gradient(#c9945b, #c9945b) 4% 12% / 17% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 4% 88% / 17% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 21% 12% / 1px 76% no-repeat,
+    linear-gradient(#c9945b, #c9945b) 79% 12% / 17% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 79% 88% / 17% 1px no-repeat,
+    linear-gradient(#c9945b, #c9945b) 79% 12% / 1px 76% no-repeat;
+}
+
+.match-modal-upcoming .match-highlighted-title {
+  margin: 3px 0 8px;
+  text-align: center;
+}
+
+.match-modal-upcoming .match-highlighted-title h3 {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.match-modal-upcoming .match-highlighted-title .upcoming-highlighted-subtitle {
+  display: block;
+  margin: 3px 0 0;
+  color: #aab0b9;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+  .match-modal-upcoming .match-modal-header::before {
+    background:
+      radial-gradient(circle at 50% 53%, transparent 0 34px, #c9945b 35px 36px, transparent 37px),
+      linear-gradient(90deg, transparent calc(50% - .5px), #c9945b calc(50% - .5px), #c9945b calc(50% + .5px), transparent calc(50% + .5px)),
+      linear-gradient(90deg, transparent 3.5%, #c9945b 3.5% 3.65%, transparent 3.65%, transparent 96.35%, #c9945b 96.35% 96.5%, transparent 96.5%);
+  }
+}
