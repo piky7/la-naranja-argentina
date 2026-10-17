@@ -7335,3 +7335,66 @@
     white-space: nowrap;
   }
 }
+
+
+/* LNA - Ajuste final del encabezado y parciales, como el boceto móvil */
+@media (max-width: 600px) {
+  .match-modal-finished .match-modal-header {
+    padding: 7px 12px 8px;
+  }
+  .match-modal-finished .match-modal-label {
+    margin-bottom: 2px;
+    line-height: 1.15;
+  }
+  .match-modal-finished .match-modal-date {
+    line-height: 1.15;
+  }
+  .match-modal-finished .match-modal-status {
+    margin-top: 2px;
+    line-height: 1.1;
+  }
+  .match-modal-finished .match-modal-teams {
+    margin-top: 5px;
+    gap: 5px;
+  }
+  .match-modal-finished .match-modal-team img {
+    width: 31px;
+    height: 31px;
+  }
+  .match-modal-finished .match-modal-score {
+    position: relative;
+    padding: 0 10px;
+  }
+  .match-modal-finished .match-modal-score::before,
+  .match-modal-finished .match-modal-score::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    height: 27px;
+    transform: translateY(-50%);
+    background: #ff8c00;
+    opacity: .9;
+  }
+  .match-modal-finished .match-modal-score::before { left: 0; }
+  .match-modal-finished .match-modal-score::after { right: 0; }
+  .match-modal-finished .match-modal-score strong {
+    font-size: 24px;
+    line-height: 1;
+  }
+  .match-modal-finished .match-quarters {
+    margin: 8px 10px;
+    padding: 9px 9px;
+  }
+  .match-modal-finished .match-quarters-title {
+    margin-bottom: 5px;
+  }
+  .match-modal-finished .match-quarters-title h3 {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .match-modal-finished .match-quarters-table th,
+  .match-modal-finished .match-quarters-table td {
+    padding: 5px 3px;
+  }
+}
