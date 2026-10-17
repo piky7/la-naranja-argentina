@@ -1522,6 +1522,14 @@ const finishedMatch = {
               </button>
 
               <div className="match-modal-header">
+                <div className="match-finished-watermarks" aria-hidden="true">
+                  {selectedMatchHomeTeam?.logo && (
+                    <img src={selectedMatchHomeTeam.logo} alt="" />
+                  )}
+                  {selectedMatchAwayTeam?.logo && (
+                    <img src={selectedMatchAwayTeam.logo} alt="" />
+                  )}
+                </div>
                 <span className="match-modal-label">
                   LIGA NACIONAL 2026/27
                 </span>
