@@ -8275,3 +8275,103 @@
     padding-bottom: 6px;
   }
 }
+
+/* LNA 2026: resultado final con estética de las nuevas fichas */
+.match-modal-finished {
+  background: #07111b;
+  border: 2px solid #ff8709;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.match-modal-finished .match-modal-header {
+  background: linear-gradient(125deg, #0c1b29 0%, #08121d 75%, #1c1b1a 100%);
+  border-bottom: 1px solid #ff8709;
+}
+.match-modal-finished .match-modal-label,
+.match-modal-finished .match-modal-status {
+  color: #ff9000;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.match-modal-finished .match-modal-date { color: #e4e8ed; }
+.match-modal-finished .match-modal-teams {
+  background: transparent;
+  border-color: rgba(255,135,9,.45);
+}
+.match-modal-finished .match-quarters {
+  background: #091622;
+  border: 1px solid #ff8709;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.match-modal-finished .match-quarters-table { border-radius: 8px; overflow: hidden; }
+.match-modal-finished .match-quarters-table th {
+  background: #122130;
+  color: #aeb8c7;
+}
+.match-modal-finished .match-quarters-table td {
+  background: #0d1a28;
+  color: #f2f4f7;
+  border-color: #2b4050;
+}
+.match-modal-finished .match-quarters-table tr:nth-child(even) td {
+  background: #132131;
+}
+.match-modal-finished .match-stats-team {
+  background: #091622;
+  border: 1px solid #ff8709;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.match-modal-finished .match-stats-team-header {
+  background: #0c1b29;
+  border-bottom: 1px solid #ff8709;
+}
+.match-modal-finished .match-stats-team-header h3 { color: #f6f7f9; }
+.match-modal-finished .match-stats-team-header span { color: #b0bac6; }
+.match-modal-finished .match-stats-head {
+  background: #172330;
+  color: #b9c4d0;
+  border-color: #304354;
+}
+.match-modal-finished .match-stat-player {
+  background: #0b1927;
+  border-color: #293c4c;
+}
+.match-modal-finished .match-stat-player:nth-child(even) { background: #122131; }
+.match-modal-finished .match-stat-player strong { color: #f4f5f8; }
+.match-modal-finished .match-stat-player span:not(:first-of-type) { color: #bfc8d2; }
+.match-modal-finished .match-stats-team .match-stats-list .match-stat-player > span:nth-child(2) {
+  color: #ff8c00 !important;
+  -webkit-text-fill-color: #ff8c00 !important;
+}
+.match-modal-finished .match-modal-footer {
+  background: #0b121a;
+  border-top: 1px solid #304354;
+}
+@media(max-width:600px) {
+  .match-modal-finished .match-modal-header {
+    padding-top: 10px;
+    background: linear-gradient(125deg, #0c1b29, #08121d);
+  }
+  .match-modal-finished .match-modal-teams {
+    background: transparent;
+    border-color: rgba(255,135,9,.4);
+  }
+  .match-modal-finished .match-quarters {
+    margin: 8px 10px;
+    padding: 7px 9px;
+  }
+  .match-modal-finished .match-modal-content {
+    gap: 7px;
+    padding: 0 9px;
+  }
+  .match-modal-finished .match-stats-team {
+    background: #091622;
+    border-color: #ff8709;
+  }
+  .match-modal-finished .match-stats-team-header { background: #0c1b29; }
+  .match-modal-finished .match-stats-head { background: #172330; }
+  .match-modal-finished .match-stat-player { background: #0b1927; }
+  .match-modal-finished .match-stat-player:nth-child(even) { background: #122131; }
+}
