@@ -2609,3 +2609,19 @@
     font-size: 11px;
   }
 }
+
+
+/* LNA: profundidad tipográfica sutil — nombres, resultados y estadísticas */
+.match-team span,
+.standing-team span,
+.standing-value,
+.result-team span,
+.result-score strong,
+.upcoming-teams span:not(.upcoming-vs),
+.team-modal-header h3,
+.team-modal-stats strong,
+.match-modal-team strong,
+.match-modal-final,
+.match-modal-stats strong {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
+}
