@@ -1124,3 +1124,11 @@
     font-size: 9px;
   }
 }
+
+/* LNA: profundidad tipográfica sutil — nombres, resultados y estadísticas */
+.player-card-info h2,
+.player-modal-player-info h2,
+.player-modal-details strong,
+.player-stat strong {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
+}
