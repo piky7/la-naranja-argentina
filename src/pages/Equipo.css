@@ -2546,3 +2546,19 @@
     gap: 7px;
   }
 }
+
+
+/* LNA: profundidad tipográfica sutil — nombres, resultados y estadísticas */
+.team-header-info h1,
+.team-record,
+.team-info-card strong,
+.team-player-info h3,
+.team-player-averages strong,
+.team-match-side strong,
+.team-result-score,
+.player-modal-player-info h2,
+.player-stat-card strong,
+.match-modal-team strong,
+.match-modal-score strong {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
+}
