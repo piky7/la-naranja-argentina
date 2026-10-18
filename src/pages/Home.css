@@ -8631,3 +8631,16 @@
 .standings-panel .standing-position {
   text-shadow: 0 2px 5px rgba(0, 0, 0, .7), 0 0 6px rgba(255, 255, 255, .10);
 }
+
+
+/* LNA: profundidad tipográfica sutil — nombres, resultados y estadísticas */
+.home-team-modal-heading h2,
+.home-team-modal-record strong,
+.home-player-modal-info h2,
+.home-player-modal-stats strong,
+.match-stats-modal-title h2,
+.match-stats-team-header,
+.match-stat-player,
+.match-modal-score strong {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
+}
