@@ -33,7 +33,7 @@ jobs:
           for (const url of urls) {
             const file = path.join("dist", url.pathname === "/" ? "index.html" : url.pathname.slice(1) + "/index.html");
             const html = fs.readFileSync(file, "utf8");
-            if (!html.includes('<link rel="canonical" href="' + url.origin + url.pathname.replace(/\/$/, "") + '"')) throw new Error("Canonical incorrecto: " + file);
+            if (!html.includes('<link rel="canonical" href="' + url.origin + (url.pathname === "/" ? "/" : url.pathname.replace(/\/$/, "")) + '"')) throw new Error("Canonical incorrecto: " + file);
             if (!/<title>[^<]+<\/title>/.test(html)) throw new Error("Falta título: " + file);
             if (!html.includes('name="description"')) throw new Error("Falta descripción: " + file);
           }
