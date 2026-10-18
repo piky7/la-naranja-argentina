@@ -8615,3 +8615,19 @@
   .home-player-modal-recent-header { margin-bottom: 8px; }
   .home-player-modal-footer { margin-top: 10px; }
 }
+
+
+/* LNA: profundidad sutil en textos del fixture y la tabla del Home */
+.fixture-panel .fixture-team-name > span,
+.standings-panel .home-standing-team span {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .65), 0 0 8px rgba(255, 255, 255, .08);
+}
+.fixture-panel .fixture-time,
+.fixture-panel .fixture-score,
+.fixture-panel .fixture-live-score {
+  text-shadow: 0 2px 5px rgba(0, 0, 0, .65), 0 0 12px rgba(255, 125, 25, .22);
+}
+.standings-panel .home-standing-row > strong,
+.standings-panel .standing-position {
+  text-shadow: 0 2px 5px rgba(0, 0, 0, .7), 0 0 6px rgba(255, 255, 255, .10);
+}
