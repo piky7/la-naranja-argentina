@@ -261,22 +261,6 @@
       "awayId": "U5F8QbRb"
     },
     {
-      "eventId": "lpM69Xhd",
-      "homeTeam": "san-lorenzo",
-      "homeName": "San Lorenzo",
-      "awayTeam": "obera",
-      "awayName": "Obera TC",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1792332300,
-      "homeSlug": "san-lorenzo",
-      "awaySlug": "obera-tc",
-      "homeId": "6JVDDNoE",
-      "awayId": "KdCRV01k"
-    },
-    {
       "eventId": "tv9hXzo3",
       "homeTeam": "regatas",
       "homeName": "Regatas",
@@ -2163,6 +2147,22 @@
       "awaySlug": "boca-juniors",
       "homeId": "bX27OjMs",
       "awayId": "pn7Cecgf"
+    },
+    {
+      "eventId": "lpM69Xhd",
+      "homeTeam": "san-lorenzo",
+      "homeName": "San Lorenzo",
+      "awayTeam": "obera",
+      "awayName": "Obera TC",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1792332300,
+      "homeSlug": "san-lorenzo",
+      "awaySlug": "obera-tc",
+      "homeId": "6JVDDNoE",
+      "awayId": "KdCRV01k"
     },
     {
       "eventId": "xKJsP13l",
