@@ -1992,3 +1992,14 @@
   }
 }
 
+
+
+/* LNA: profundidad tipográfica sutil — nombres, resultados y estadísticas */
+.stats-player span,
+.stats-team span,
+.stats-table td:nth-child(4),
+.stats-player-modal-info h2,
+.stats-player-modal-details strong,
+.stats-player-modal-stats strong {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
+}
