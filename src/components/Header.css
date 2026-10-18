@@ -605,3 +605,58 @@
   }
 }
 
+
+/* ==========================================
+   LNA - NAV INFERIOR COMPACTA (2026)
+   Solo presentación; conserva enlaces y estados.
+   ========================================== */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    right: 12px;
+    min-height: 52px;
+    padding: 3px 6px;
+    background: rgba(15, 18, 24, 0.96);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.48),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .bottom-nav-link {
+    position: relative;
+    min-height: 46px;
+    gap: 2px;
+    padding: 4px 2px 6px;
+    font-size: 11px;
+    line-height: 1.1;
+  }
+
+  .bottom-nav-link svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .bottom-nav-link.active {
+    background: rgba(255, 140, 0, 0.12);
+    color: #ff8c00;
+  }
+
+  .bottom-nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ff8c00;
+    transform: translateX(-50%);
+    box-shadow: 0 0 7px rgba(255, 140, 0, 0.55);
+    pointer-events: none;
+  }
+
+  body {
+    padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+  }
+}
