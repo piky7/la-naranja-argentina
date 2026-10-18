@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import SeoMeta from "./components/SeoMeta";
+import AnalyticsPageViews from "./components/AnalyticsPageViews";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
@@ -18,6 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <SeoMeta />
+      <AnalyticsPageViews />
       <Header />
 
       <Routes>
