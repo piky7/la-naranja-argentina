@@ -223,4 +223,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-18-san-lorenzo-obera": {
+    status: "finished",
+    homeScore: 73,
+    awayScore: 78,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
