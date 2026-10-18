@@ -1,0 +1,44 @@
+name: Verificar SEO estático
+
+on:
+  pull_request:
+    paths:
+      - "scripts/generate-seo-pages.cjs"
+      - "package.json"
+      - "public/sitemap.xml"
+      - ".github/workflows/verificar-seo.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Verificar páginas HTML y metadatos
+        run: |
+          node - <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+          const xml = fs.readFileSync("public/sitemap.xml", "utf8");
+          const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => new URL(m[1]));
+          if (urls.length !== 25) throw new Error("Se esperaban 25 URLs: " + urls.length);
+          for (const url of urls) {
+            const file = path.join("dist", url.pathname === "/" ? "index.html" : url.pathname.slice(1) + "/index.html");
+            const html = fs.readFileSync(file, "utf8");
+            if (!html.includes('<link rel="canonical" href="' + url.origin + url.pathname.replace(/\/$/, "") + '"')) throw new Error("Canonical incorrecto: " + file);
+            if (!/<title>[^<]+<\/title>/.test(html)) throw new Error("Falta título: " + file);
+            if (!html.includes('name="description"')) throw new Error("Falta descripción: " + file);
+          }
+          const boca = fs.readFileSync("dist/equipos/boca/index.html", "utf8");
+          if (!boca.includes("<title>Boca Juniors | Plantel, Resultados y Estadísticas</title>")) throw new Error("Título Boca incorrecto");
+          if (!fs.existsSync("dist/sitemap.xml")) throw new Error("Sitemap no publicado");
+          console.log("SEO correcto para " + urls.length + " rutas");
+          NODE
