@@ -1,0 +1,46 @@
+{
+  "fuente": "Liga Nacional",
+  "url": "https://www.laliganacional.com.ar/laliga/partido/v2Wb-CGvXuvpROp-O_Kam-jizIrLNBnqKVw_jGz9MFLOy82Y3fdU7mBA==/san-lorenzo-vs-obera",
+  "estadisticas": {
+    "Tiros de campo": {
+      "local": "24 / 62 38%",
+      "visitante": "26 / 63 41%"
+    },
+    "Tiros 2P": {
+      "local": "14 / 33 42%",
+      "visitante": "20 / 44 45%"
+    },
+    "Tiros 3P": {
+      "local": "10 / 29 34%",
+      "visitante": "6 / 19 32%"
+    },
+    "Tiros Libres": {
+      "local": "15 / 21 71%",
+      "visitante": "20 / 23 87%"
+    },
+    "Rebotes totales": {
+      "local": "36",
+      "visitante": "31"
+    },
+    "Asistencias": {
+      "local": "8",
+      "visitante": "20"
+    },
+    "Recuperaciones": {
+      "local": "8",
+      "visitante": "9"
+    },
+    "Tapones": {
+      "local": "0",
+      "visitante": "1"
+    },
+    "Pérdidas": {
+      "local": "16",
+      "visitante": "13"
+    },
+    "Faltas cometidas": {
+      "local": "19",
+      "visitante": "19"
+    }
+  }
+}
