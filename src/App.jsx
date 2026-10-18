@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
+import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
@@ -16,6 +17,7 @@ import Acerca from "./pages/Acerca";
 function App() {
   return (
     <BrowserRouter>
+      <SeoMeta />
       <Header />
 
       <Routes>
