@@ -91,7 +91,7 @@ const [liveDate, setLiveDate] = useState(null);
   };
 
   const getTeamRecord = (teamId) => {
-    const teamMatches = matches.filter(
+    const teamMatches = standingsMatches.filter(
       (match) =>
         isMatchFinished(match) &&
         (match.homeTeam === teamId || match.awayTeam === teamId)
