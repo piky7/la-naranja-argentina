@@ -1,6 +1,5 @@
-
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
 import SeoMeta from "./components/SeoMeta";
@@ -22,45 +21,20 @@ function AnimatedRoutes() {
 
   useEffect(() => {
     const direction = location.state?.swipeDirection;
-    if (!direction) { setAnimation(""); return; }
-    setAnimation(direction === "left" ? "page-enter-from-right" : "page-enter-from-left");
+    setAnimation(direction === "left" ? "page-enter-from-right" :
+      direction === "right" ? "page-enter-from-left" : "");
   }, [location.key, location.state]);
 
   return (
-    <div key={location.key} className={animation} onAnimationEnd={() => setAnimation("")}>
+    <div key={location.key} className={animation}>
       <Routes location={location}>
-  return (
-    <BrowserRouter>
-      <SeoMeta />
-      <SwipeNavigation />
-      <Header />
-
-      <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/liga" element={<Liga />} />
-
         <Route path="/equipos" element={<Equipos />} />
-
-        <Route
-          path="/equipos/:teamId"
-          element={<Equipo />}
-        />
-
-        <Route
-          path="/jugadores"
-          element={<Jugadores />}
-        />
-
-        <Route
-          path="/estadisticas"
-          element={<Estadisticas />}
-        />
-
-        <Route
-          path="/privacidad"
-          element={<Privacidad />}
-        />
+        <Route path="/equipos/:teamId" element={<Equipo />} />
+        <Route path="/jugadores" element={<Jugadores />} />
+        <Route path="/estadisticas" element={<Estadisticas />} />
+        <Route path="/privacidad" element={<Privacidad />} />
         <Route path="/acerca" element={<Acerca />} />
       </Routes>
     </div>
