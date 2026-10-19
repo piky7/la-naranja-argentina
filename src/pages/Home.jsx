@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { teams } from "../data/teams";
@@ -9,6 +9,7 @@ import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
 
 
+import FixtureCalendar from "../components/FixtureCalendar";
 import "./Home.css";
 
 // Los resultados publicados tienen prioridad sobre el fixture original.
@@ -32,7 +33,6 @@ function Home() {
   const today = getLocalDateString();
 
   const [selectedDate, setSelectedDate] = useState(today);
-  const fixtureDateInputRef = useRef(null);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
@@ -1108,45 +1108,7 @@ const standingsMatches = matches.map((match) => {
                   ‹
                 </button>
 
-              <div className="fixture-selected-date fixture-date-sport">
-  <button
-    type="button"
-    className="fixture-date-trigger"
-    onClick={() => {
-      const input = fixtureDateInputRef.current;
-      if (!input) return;
-      if (typeof input.showPicker === "function") {
-        try { input.showPicker(); return; } catch { /* fallback for Safari */ }
-      }
-      input.focus();
-      input.click();
-    }}
-    aria-label="Elegir fecha del fixture"
-  >
-  <strong>
-    {new Intl.DateTimeFormat("es-AR", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      timeZone: "UTC",
-    })
-      .format(new Date(`${selectedDate}T12:00:00Z`))
-      .replace(/\./g, "")
-      .toUpperCase()}
-  </strong>
-  </button>
-  <input
-    ref={fixtureDateInputRef}
-    className="fixture-date-picker-input"
-    type="date"
-    value={selectedDate}
-    onChange={(event) => {
-      if (event.target.value) setSelectedDate(event.target.value);
-    }}
-    aria-label="Elegir fecha del fixture"
-    title="Elegir fecha"
-  />
-</div>
+              <FixtureCalendar selectedDate={selectedDate} onSelect={setSelectedDate} />
 
                 <button
                   type="button"
