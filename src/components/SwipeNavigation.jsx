@@ -6,22 +6,10 @@ const MIN_DISTANCE = 75;
 const MAX_VERTICAL_DISTANCE = 65;
 const MAX_DURATION = 650;
 
-function isInteractive(target) {
+function isBlocked(target) {
   return target instanceof Element && Boolean(
-    target.closest('button, a, input, textarea, select, [role="dialog"], [aria-modal="true"], [data-no-swipe], [contenteditable="true"], .modal, .popup, .swiper, .carousel')
+    target.closest('input, textarea, select, [contenteditable="true"], [data-no-swipe], [role="dialog"], [aria-modal="true"], .modal, .popup, .swiper, .carousel')
   );
-}
-
-function hasHorizontalScroll(target) {
-  let node = target instanceof Element ? target : null;
-  while (node && node !== document.body) {
-    if (node.scrollWidth > node.clientWidth + 8) {
-      const overflow = getComputedStyle(node).overflowX;
-      if (overflow === "auto" || overflow === "scroll") return true;
-    }
-    node = node.parentElement;
-  }
-  return false;
 }
 
 export default function SwipeNavigation() {
@@ -34,7 +22,7 @@ export default function SwipeNavigation() {
     let start = null;
 
     function onStart(event) {
-      if (event.touches.length !== 1 || isInteractive(event.target) || hasHorizontalScroll(event.target)) {
+      if (event.touches.length !== 1 || isBlocked(event.target)) {
         start = null;
         return;
       }
@@ -55,7 +43,7 @@ export default function SwipeNavigation() {
       const index = pages.indexOf(pathname);
       if (index < 0) return;
       const nextIndex = index + (dx < 0 ? 1 : -1);
-      if (nextIndex >= 0 && nextIndex < pages.length) navigate(pages[nextIndex]);
+      if (nextIndex >= 0 && nextIndex < pages.length) navigate(pages[nextIndex], { state: { swipeDirection: dx < 0 ? "left" : "right" } });
     }
 
     function onCancel() { start = null; }
