@@ -5246,7 +5246,6 @@ export const matchPlayerStats = {
     }
   ]
 },
-
 "regatas-olimpico": {
   "regatas": [
     {
