@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
+import SwipeNavigation from "./components/SwipeNavigation";
 
 import Home from "./pages/Home";
 import Liga from "./pages/Liga";
@@ -18,6 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <SeoMeta />
+      <SwipeNavigation />
       <Header />
 
       <Routes>
