@@ -8879,3 +8879,16 @@
     background: #34363e;
   }
 }
+
+
+/* Calendario: modal centrado para que el fixture no recorte las semanas */
+.fixture-panel .fixture-calendar-popover {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(340px, calc(100vw - 36px));
+  max-height: min(540px, calc(100dvh - 48px));
+  overflow-y: auto;
+  z-index: 9999;
+}
