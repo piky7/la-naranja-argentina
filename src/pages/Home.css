@@ -8812,3 +8812,70 @@
   outline: 2px solid #ff8c00;
   outline-offset: 4px;
 }
+
+
+/* Calendario personalizado del fixture */
+.fixture-panel .fixture-date-navigation { overflow: visible; }
+.fixture-panel .fixture-calendar-anchor { position: relative; z-index: 5; }
+.fixture-panel .fixture-calendar-popover {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(310px, calc(100vw - 44px));
+  padding: 16px;
+  background: #17191f;
+  color: #f7f7f7;
+  border: 1px solid #ff8c00;
+  border-radius: 14px;
+  box-shadow: 0 14px 35px rgba(0,0,0,.55);
+  z-index: 80;
+}
+.fixture-panel .fixture-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+.fixture-panel .fixture-calendar-header button {
+  width: 36px; height: 36px; border: 1px solid #444;
+  border-radius: 8px; background: #24262e; color: #fff;
+  font-size: 27px; cursor: pointer;
+}
+.fixture-panel .fixture-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+  text-align: center;
+}
+.fixture-panel .fixture-calendar-weekday {
+  font-size: 12px; font-weight: 700; color: #aaa;
+  padding: 6px 0;
+}
+.fixture-panel .fixture-calendar-grid button {
+  min-width: 0; height: 35px;
+  border: 0; border-radius: 8px;
+  background: transparent; color: #eee;
+  font-size: 14px; cursor: pointer;
+}
+.fixture-panel .fixture-calendar-grid button.is-selected {
+  background: #ff8c00; color: #101014; font-weight: 800;
+}
+.fixture-panel .fixture-calendar-grid button:active,
+.fixture-panel .fixture-calendar-header button:active {
+  background: #a95408;
+}
+.fixture-panel .fixture-calendar-today {
+  display: block; width: 100%; margin-top: 14px; padding: 9px;
+  border: 1px solid #ff8c00; border-radius: 8px;
+  background: transparent; color: #ff9b2b; font-weight: 700;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .fixture-panel .fixture-calendar-grid button:hover:not(.is-selected) {
+    background: #34363e;
+  }
+}
