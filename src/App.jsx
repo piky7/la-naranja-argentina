@@ -1,5 +1,6 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Header from "./components/Header";
 import SeoMeta from "./components/SeoMeta";
@@ -15,7 +16,19 @@ import Estadisticas from "./pages/Estadisticas";
 import Privacidad from "./pages/Privacidad";
 import Acerca from "./pages/Acerca";
 
-function App() {
+function AnimatedRoutes() {
+  const location = useLocation();
+  const [animation, setAnimation] = useState("");
+
+  useEffect(() => {
+    const direction = location.state?.swipeDirection;
+    if (!direction) { setAnimation(""); return; }
+    setAnimation(direction === "left" ? "page-enter-from-right" : "page-enter-from-left");
+  }, [location.key, location.state]);
+
+  return (
+    <div key={location.key} className={animation} onAnimationEnd={() => setAnimation("")}>
+      <Routes location={location}>
   return (
     <BrowserRouter>
       <SeoMeta />
@@ -50,7 +63,17 @@ function App() {
         />
         <Route path="/acerca" element={<Acerca />} />
       </Routes>
+    </div>
+  );
+}
 
+function App() {
+  return (
+    <BrowserRouter>
+      <SeoMeta />
+      <SwipeNavigation />
+      <Header />
+      <AnimatedRoutes />
       <Footer />
     </BrowserRouter>
   );
