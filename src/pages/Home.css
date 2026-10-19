@@ -8639,3 +8639,32 @@
 .match-modal-score strong {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
 }
+
+
+/* Pulso suave del indicador de partidos en vivo */
+.fixture-live-dot {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  animation: lna-live-heartbeat 1.8s ease-in-out infinite;
+}
+.fixture-live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid #ef4444;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: lna-live-ring 1.8s ease-out infinite;
+}
+@keyframes lna-live-ring {
+  0% { transform: scale(1); opacity: 0.9; }
+  75%, 100% { transform: scale(3); opacity: 0; }
+}
+@keyframes lna-live-heartbeat {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fixture-live-dot, .fixture-live-dot::after { animation: none; }
+}
