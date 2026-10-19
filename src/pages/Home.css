@@ -8721,3 +8721,32 @@
     background: transparent;
   }
 }
+
+
+/* Selector nativo de fecha integrado en el título del fixture */
+.fixture-panel .fixture-selected-date.fixture-date-sport {
+  position: relative;
+  cursor: pointer;
+}
+.fixture-panel .fixture-date-picker-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 16px;
+  border: 0;
+  background: transparent;
+}
+.fixture-panel .fixture-date-picker-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.fixture-panel .fixture-selected-date.fixture-date-sport:focus-within strong {
+  color: #ff8c00;
+}
