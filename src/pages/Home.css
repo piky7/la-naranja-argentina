@@ -8892,3 +8892,41 @@
   overflow-y: auto;
   z-index: 9999;
 }
+
+
+/* Calendario compacto para móviles */
+.fixture-panel .fixture-calendar-popover {
+  width: min(292px, calc(100vw - 40px));
+  padding: 12px;
+  border-radius: 12px;
+  max-height: calc(100dvh - 36px);
+}
+.fixture-panel .fixture-calendar-header {
+  margin-bottom: 8px;
+  gap: 5px;
+  font-size: 15px;
+}
+.fixture-panel .fixture-calendar-header button {
+  width: 30px;
+  height: 30px;
+  font-size: 22px;
+  border-radius: 7px;
+}
+.fixture-panel .fixture-calendar-grid {
+  gap: 2px;
+}
+.fixture-panel .fixture-calendar-weekday {
+  font-size: 11px;
+  padding: 4px 0;
+}
+.fixture-panel .fixture-calendar-grid button {
+  height: 32px;
+  font-size: 13px;
+  border-radius: 7px;
+}
+.fixture-panel .fixture-calendar-today {
+  margin-top: 9px;
+  padding: 7px;
+  font-size: 13px;
+  border-radius: 7px;
+}
