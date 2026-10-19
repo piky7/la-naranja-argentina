@@ -8786,3 +8786,29 @@
   outline: 2px solid #ff8c00;
   outline-offset: 5px;
 }
+
+
+/* Fecha del fixture: texto limpio, sin brillo ni resaltado persistente */
+.fixture-panel .fixture-date-trigger,
+.fixture-panel .fixture-date-trigger:hover,
+.fixture-panel .fixture-date-trigger:focus,
+.fixture-panel .fixture-date-trigger:active {
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+  border-radius: 0;
+  filter: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.fixture-panel .fixture-date-trigger strong {
+  color: #f0f0f0 !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-text-stroke: 0;
+  -webkit-font-smoothing: antialiased;
+}
+.fixture-panel .fixture-date-trigger:focus-visible {
+  outline: 2px solid #ff8c00;
+  outline-offset: 4px;
+}
