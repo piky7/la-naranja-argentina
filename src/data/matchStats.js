@@ -5426,4 +5426,185 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"san-lorenzo-obera": {
+  "san-lorenzo": [
+    {
+      "id": "raynere-thornton",
+      "name": "Raynere Thornton",
+      "points": 16,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "35:16"
+    },
+    {
+      "id": "marcos-mata",
+      "name": "Marcos Mata",
+      "points": 11,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "25:16"
+    },
+    {
+      "id": "nicolas-aguirre",
+      "name": "Nicolás Aguirre",
+      "points": 11,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "30:53"
+    },
+    {
+      "id": "cliron-hornbeak",
+      "name": "Cli’Ron Hornbeak",
+      "points": 7,
+      "rebounds": 6,
+      "assists": 0,
+      "minutes": "16:11"
+    },
+    {
+      "id": "leonel-schattmann",
+      "name": "Leonel Schattmann",
+      "points": 13,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "29:41"
+    },
+    {
+      "id": "lucas-gargallo",
+      "name": "Lucas Gargallo",
+      "points": 5,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "19:28"
+    },
+    {
+      "id": "thiago-roca",
+      "name": "Thiago Roca",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "03:11"
+    },
+    {
+      "id": "santiago-calderon",
+      "name": "Santiago Calderón",
+      "points": 3,
+      "rebounds": 0,
+      "assists": 2,
+      "minutes": "16:27"
+    },
+    {
+      "id": "antun-maricevic",
+      "name": "Antun Maricevic",
+      "points": 7,
+      "rebounds": 9,
+      "assists": 1,
+      "minutes": "23:37"
+    }
+  ],
+  "obera": [
+    {
+      "id": "ty-prince",
+      "name": "Ty Prince",
+      "points": 1,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "15:44"
+    },
+    {
+      "id": "santiago-barrales",
+      "name": "Santiago Barrales",
+      "points": 8,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "33:21"
+    },
+    {
+      "id": "bruno-sansimoni",
+      "name": "Bruno Sansimoni",
+      "points": 14,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "23:56"
+    },
+    {
+      "id": "agustin-brocal",
+      "name": "Agustín Brocal",
+      "points": 7,
+      "rebounds": 5,
+      "assists": 3,
+      "minutes": "26:23"
+    },
+    {
+      "id": "will-vorhees",
+      "name": "Will Vorhees",
+      "points": 19,
+      "rebounds": 5,
+      "assists": 3,
+      "minutes": "25:47"
+    },
+    {
+      "id": "jonatan-torresi",
+      "name": "Jonatan Torresi",
+      "points": 6,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "20:16"
+    },
+    {
+      "id": "victor-fernandez",
+      "name": "Víctor Fernández",
+      "points": 7,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "15:57"
+    },
+    {
+      "id": "alejo-azpilicueta",
+      "name": "Alejo Azpilicueta",
+      "points": 8,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "24:11"
+    },
+    {
+      "id": "albano-costa",
+      "name": "Albano Costa",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "00:12"
+    },
+    {
+      "id": "juan-cruz-oberto",
+      "name": "Juan Cruz Oberto",
+      "points": 8,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "14:13"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 18,
+      "away": 21
+    },
+    {
+      "period": "2",
+      "home": 26,
+      "away": 25
+    },
+    {
+      "period": "3",
+      "home": 14,
+      "away": 17
+    },
+    {
+      "period": "4",
+      "home": 15,
+      "away": 15
+    }
+  ]
+},
 };
