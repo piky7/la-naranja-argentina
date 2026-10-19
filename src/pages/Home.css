@@ -8750,3 +8750,39 @@
 .fixture-panel .fixture-selected-date.fixture-date-sport:focus-within strong {
   color: #ff8c00;
 }
+
+
+/* Safari iOS: ocultar por completo la fecha nativa duplicada */
+.fixture-panel .fixture-date-picker-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  inset: auto;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  pointer-events: none;
+  font-size: 16px;
+  color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.fixture-panel .fixture-date-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.fixture-panel .fixture-date-trigger:focus-visible {
+  outline: 2px solid #ff8c00;
+  outline-offset: 5px;
+}
