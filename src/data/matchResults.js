@@ -231,4 +231,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-18-regatas-olimpico": {
+    status: "finished",
+    homeScore: 80,
+    awayScore: 83,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };

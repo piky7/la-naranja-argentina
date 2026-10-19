@@ -1,9 +1,25 @@
 {
   "source": "https://www.flashscore.com.ar/basquetbol/argentina/lnb/",
   "totalMatches": 167,
-  "finishedMatches": 29,
+  "finishedMatches": 30,
   "postponedMatches": 0,
   "matches": [
+    {
+      "eventId": "tv9hXzo3",
+      "homeTeam": "regatas",
+      "homeName": "Regatas",
+      "awayTeam": "olimpico",
+      "awayName": "Olimpico",
+      "homeScore": 80,
+      "awayScore": 83,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1792366200,
+      "homeSlug": "regatas",
+      "awaySlug": "olimpico",
+      "homeId": "SAdHfH80",
+      "awayId": "ERbTiFhJ"
+    },
     {
       "eventId": "lpM69Xhd",
       "homeTeam": "san-lorenzo",
@@ -2149,22 +2165,6 @@
       "awayId": "pn7Cecgf"
     },
     {
-      "eventId": "tv9hXzo3",
-      "homeTeam": "regatas",
-      "homeName": "Regatas",
-      "awayTeam": "olimpico",
-      "awayName": "Olimpico",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1792366200,
-      "homeSlug": "regatas",
-      "awaySlug": "olimpico",
-      "homeId": "SAdHfH80",
-      "awayId": "ERbTiFhJ"
-    },
-    {
       "eventId": "xKJsP13l",
       "homeTeam": "la-union",
       "homeName": "La Union",
@@ -2678,6 +2678,22 @@
     }
   ],
   "finished": [
+    {
+      "eventId": "tv9hXzo3",
+      "homeTeam": "regatas",
+      "homeName": "Regatas",
+      "awayTeam": "olimpico",
+      "awayName": "Olimpico",
+      "homeScore": 80,
+      "awayScore": 83,
+      "status": "finished",
+      "statusCode": "3",
+      "timestamp": 1792366200,
+      "homeSlug": "regatas",
+      "awaySlug": "olimpico",
+      "homeId": "SAdHfH80",
+      "awayId": "ERbTiFhJ"
+    },
     {
       "eventId": "lpM69Xhd",
       "homeTeam": "san-lorenzo",
