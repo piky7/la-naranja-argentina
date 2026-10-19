@@ -1119,6 +1119,16 @@ const standingsMatches = matches.map((match) => {
       .replace(/\./g, "")
       .toUpperCase()}
   </strong>
+  <input
+    className="fixture-date-picker-input"
+    type="date"
+    value={selectedDate}
+    onChange={(event) => {
+      if (event.target.value) setSelectedDate(event.target.value);
+    }}
+    aria-label="Elegir fecha del fixture"
+    title="Elegir fecha"
+  />
 </div>
 
                 <button
