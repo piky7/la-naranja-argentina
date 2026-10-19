@@ -8668,3 +8668,38 @@
 @media (prefers-reduced-motion: reduce) {
   .fixture-live-dot, .fixture-live-dot::after { animation: none; }
 }
+
+
+/* Fixture: navegación minimalista con chevrons (opción 1) */
+.fixture-panel .fixture-day-button {
+  width: 42px;
+  height: 52px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #f3f3f3;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 46px;
+  font-weight: 200;
+  line-height: 1;
+  box-shadow: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+.fixture-panel .fixture-day-button:first-child {
+  border-right: 1px solid rgba(255,255,255,0.16);
+}
+.fixture-panel .fixture-day-button:last-child {
+  border-left: 1px solid rgba(255,255,255,0.16);
+}
+.fixture-panel .fixture-day-button:hover,
+.fixture-panel .fixture-day-button:focus-visible {
+  background: transparent;
+  border-color: rgba(255,255,255,0.16);
+  color: #ff8c00;
+}
+.fixture-panel .fixture-day-button:active {
+  transform: scale(0.9);
+}
+@media (max-width: 600px) {
+  .fixture-panel .fixture-day-button { width: 36px; height: 46px; font-size: 40px; }
+}
