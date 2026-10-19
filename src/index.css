@@ -134,3 +134,17 @@ tbody td {
 tbody tr:last-child td {
   border-bottom: 0;
 }
+
+/* Navegación horizontal entre secciones principales */
+@keyframes page-slide-in-right {
+  from { opacity: 0.7; transform: translateX(42px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes page-slide-in-left {
+  from { opacity: 0.7; transform: translateX(-42px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter-from-right { animation: page-slide-in-right 260ms ease-out both; }
+  .page-enter-from-left { animation: page-slide-in-left 260ms ease-out both; }
+}
