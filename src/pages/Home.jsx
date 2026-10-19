@@ -1104,7 +1104,7 @@ const standingsMatches = matches.map((match) => {
                   onClick={() => changeDate(-1)}
                   aria-label="Día anterior"
                 >
-                  ←
+                  ‹
                 </button>
 
               <div className="fixture-selected-date fixture-date-sport">
@@ -1127,7 +1127,7 @@ const standingsMatches = matches.map((match) => {
                   onClick={() => changeDate(1)}
                   aria-label="Día siguiente"
                 >
-                  →
+                  ›
                 </button>
               </div>
 
