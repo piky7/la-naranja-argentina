@@ -8703,3 +8703,21 @@
 @media (max-width: 600px) {
   .fixture-panel .fixture-day-button { width: 36px; height: 46px; font-size: 40px; }
 }
+
+
+/* En pantallas táctiles, evitar que :hover quede pegado tras tocar una fecha */
+@media (hover: none) and (pointer: coarse) {
+  .fixture-panel .fixture-day-button,
+  .fixture-panel .fixture-day-button:hover,
+  .fixture-panel .fixture-day-button:focus,
+  .fixture-panel .fixture-day-button:focus-visible {
+    background: transparent;
+    color: #f3f3f3;
+    box-shadow: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .fixture-panel .fixture-day-button:active {
+    color: #ff8c00;
+    background: transparent;
+  }
+}
