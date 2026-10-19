@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { teams } from "../data/teams";
@@ -32,6 +32,7 @@ function Home() {
   const today = getLocalDateString();
 
   const [selectedDate, setSelectedDate] = useState(today);
+  const fixtureDateInputRef = useRef(null);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
@@ -1108,6 +1109,20 @@ const standingsMatches = matches.map((match) => {
                 </button>
 
               <div className="fixture-selected-date fixture-date-sport">
+  <button
+    type="button"
+    className="fixture-date-trigger"
+    onClick={() => {
+      const input = fixtureDateInputRef.current;
+      if (!input) return;
+      if (typeof input.showPicker === "function") {
+        try { input.showPicker(); return; } catch { /* fallback for Safari */ }
+      }
+      input.focus();
+      input.click();
+    }}
+    aria-label="Elegir fecha del fixture"
+  >
   <strong>
     {new Intl.DateTimeFormat("es-AR", {
       weekday: "short",
@@ -1119,7 +1134,9 @@ const standingsMatches = matches.map((match) => {
       .replace(/\./g, "")
       .toUpperCase()}
   </strong>
+  </button>
   <input
+    ref={fixtureDateInputRef}
     className="fixture-date-picker-input"
     type="date"
     value={selectedDate}
