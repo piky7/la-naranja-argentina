@@ -5246,4 +5246,185 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"regatas-olimpico": {
+  "regatas": [
+    {
+      "id": "ivan-gramajo",
+      "name": "Iván Gramajo",
+      "points": 25,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "36:12"
+    },
+    {
+      "id": "sebastian-orresta",
+      "name": "Sebastián Orresta",
+      "points": 2,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "30:30"
+    },
+    {
+      "id": "jose-montero",
+      "name": "José Montero",
+      "points": 16,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "29:20"
+    },
+    {
+      "id": "fausto-ruesga",
+      "name": "Fausto Ruesga",
+      "points": 6,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "25:09"
+    },
+    {
+      "id": "roberto-acuna",
+      "name": "Roberto Acuña",
+      "points": 10,
+      "rebounds": 6,
+      "assists": 1,
+      "minutes": "18:23"
+    },
+    {
+      "id": "keith-stone",
+      "name": "Keith Stone",
+      "points": 8,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "14:51"
+    },
+    {
+      "id": "francisco-farabello",
+      "name": "Francisco Farabello",
+      "points": 11,
+      "rebounds": 0,
+      "assists": 2,
+      "minutes": "17:32"
+    },
+    {
+      "id": "exequiel-lezcano",
+      "name": "Exequiel Lezcano",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "06:26"
+    },
+    {
+      "id": "elian-centeno",
+      "name": "Elian Centeno",
+      "points": 2,
+      "rebounds": 11,
+      "assists": 0,
+      "minutes": "21:37"
+    }
+  ],
+  "olimpico": [
+    {
+      "id": "austin-wtighten",
+      "name": "Austin Wtighten",
+      "points": 18,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "26:53"
+    },
+    {
+      "id": "santino-romegialli",
+      "name": "Santino Romegialli",
+      "points": 12,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "28:15"
+    },
+    {
+      "id": "lucas-perez",
+      "name": "Lucas Pérez",
+      "points": 8,
+      "rebounds": 6,
+      "assists": 8,
+      "minutes": "28:05"
+    },
+    {
+      "id": "ezequiel-paz",
+      "name": "Ezequiel Paz",
+      "points": 10,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "21:31"
+    },
+    {
+      "id": "elisias-hall",
+      "name": "Elisias Hall",
+      "points": 16,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "29:11"
+    },
+    {
+      "id": "flashscore-olimpico-lorenzen-l",
+      "name": "Lorenzen L.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "06:34"
+    },
+    {
+      "id": "jeremias-frontera",
+      "name": "Jeremías Frontera",
+      "points": 17,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "15:04"
+    },
+    {
+      "id": "agustin-vergara",
+      "name": "Agustín Vergara",
+      "points": 0,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "20:19"
+    },
+    {
+      "id": "guido-mariani",
+      "name": "Guido Mariani",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "13:19"
+    },
+    {
+      "id": "joaquin-lopez-lorenz",
+      "name": "Joaquín López Lorenz",
+      "points": 2,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "10:49"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 16,
+      "away": 25
+    },
+    {
+      "period": "2",
+      "home": 23,
+      "away": 17
+    },
+    {
+      "period": "3",
+      "home": 18,
+      "away": 19
+    },
+    {
+      "period": "4",
+      "home": 23,
+      "away": 22
+    }
+  ]
+},
 };
