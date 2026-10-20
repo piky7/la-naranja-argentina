@@ -9375,3 +9375,76 @@
     text-align: center;
   }
 }
+
+
+/* LNA: selector de equipos del boxscore solo en celulares */
+.match-mobile-team-tabs { display: none; }
+@media (max-width: 600px) {
+  .match-modal-finished .match-mobile-team-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    margin: 7px 12px 0;
+    padding: 3px;
+    border: 1px solid #38414b;
+    border-radius: 10px;
+    background: #0d1620;
+  }
+  .match-modal-finished .match-mobile-team-tabs button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+    min-height: 36px;
+    padding: 5px 7px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #d3d9e1;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .match-modal-finished .match-mobile-team-tabs button.active {
+    background: #ff8c00;
+    color: #101820;
+  }
+  .match-modal-finished .match-mobile-team-tabs img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex: none;
+  }
+  .match-modal-finished .match-mobile-team-tabs span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .match-modal-finished .match-mobile-show-home > .match-stats-team:nth-child(2),
+  .match-modal-finished .match-mobile-show-away > .match-stats-team:nth-child(1) {
+    display: none !important;
+  }
+  .match-modal-finished .match-modal-content {
+    gap: 0 !important;
+    padding-top: 7px !important;
+  }
+  .match-modal-finished .match-stats-team-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .match-modal-finished .match-stat-player {
+    min-height: 29px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+  .match-modal-finished .match-stat-player strong {
+    white-space: nowrap !important;
+    display: block !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    font-size: 10.5px !important;
+  }
+  .match-modal-finished .match-stat-player span { font-size: 10px !important; }
+}
