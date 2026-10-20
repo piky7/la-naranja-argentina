@@ -8972,3 +8972,123 @@
 .lna-upcoming-panel{grid-column:1/-1}
 .lna-desktop-upcoming-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+
+/* =====================================================
+   LNA 2026 - POPUPS COMPACTOS SOLO ESCRITORIO
+   Mantener estética móvil aprobada; no alterar <= 1099px
+   ===================================================== */
+@media (min-width: 1100px) {
+  /* Resultado final: una sola zona desplazable como respaldo. */
+  .match-modal-finished-overlay {
+    padding: 10px !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .match-modal-finished-scroll {
+    width: min(100%, 1120px);
+    height: auto;
+    max-height: calc(100dvh - 20px);
+    padding: 0;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: block;
+    scrollbar-width: thin;
+    scrollbar-color: #ff8709 #111b26;
+    border-radius: 12px;
+  }
+  .match-modal-finished-scroll .match-modal-finished,
+  .match-modal-finished {
+    width: 100%;
+    max-width: none;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0;
+    overflow: visible !important;
+    background: #07111b;
+    border: 1px solid #ff8709;
+    border-radius: 12px;
+  }
+  .match-modal-finished .match-modal-header {
+    min-height: 0;
+    padding: 8px 16px 10px;
+    background: linear-gradient(125deg,#0c1b29,#08121d);
+  }
+  .match-modal-finished .match-modal-teams {
+    margin-top: 4px;
+    padding: 0;
+    min-height: 0;
+  }
+  .match-modal-finished .match-modal-team img,
+  .match-modal-finished .match-modal-team-logo-button img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+  .match-modal-finished .match-modal-team strong { font-size: 11px; }
+  .match-modal-finished .match-modal-score strong { font-size: 26px; }
+  .match-modal-finished .match-modal-label,
+  .match-modal-finished .match-modal-status,
+  .match-modal-finished .match-modal-date { font-size: 9px; }
+  .match-modal-finished .match-quarters {
+    margin: 6px 12px;
+    padding: 7px 10px;
+    border-radius: 8px;
+  }
+  .match-modal-finished .match-quarters-title { margin-bottom: 3px; }
+  .match-modal-finished .match-quarters-title h3 { font-size: 12px; }
+  .match-modal-finished .match-quarters-table th,
+  .match-modal-finished .match-quarters-table td { padding: 4px 5px; font-size: 11px; }
+  .match-modal-finished-scroll .match-modal-content,
+  .match-modal-finished .match-modal-content {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 8px;
+    padding: 0 12px 8px;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .match-modal-finished .match-stats-team { min-width: 0; }
+  .match-modal-finished .match-stats-team-header { padding: 5px 8px; }
+  .match-modal-finished .match-stats-head { min-height: 22px; font-size: 9px; }
+  .match-modal-finished .match-stat-player {
+    min-height: 25px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .match-modal-finished .match-stat-player strong { font-size: 10px; line-height: 1.1; }
+  .match-modal-finished .match-stat-player span { font-size: 9px; }
+  .match-modal-finished .match-modal-footer { padding: 6px 12px; }
+
+  /* Próximo partido: cabecera y secciones de datos condensadas. */
+  .match-modal-upcoming {
+    width: min(96vw, 980px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #0a1017;
+    scrollbar-width: thin;
+    scrollbar-color: #ff8709 #111b26;
+  }
+  .match-modal-upcoming .match-modal-header { padding: 8px 16px 10px; }
+  .match-modal-upcoming .match-modal-teams { margin-top: 4px; }
+  .match-modal-upcoming .match-modal-team img,
+  .match-modal-upcoming .home-modal-team-logo-button img {
+    width: 38px;
+    height: 38px;
+  }
+  .match-modal-upcoming .match-modal-score strong { font-size: 29px; }
+  .match-modal-upcoming .match-modal-team strong { font-size: 12px; }
+  .match-modal-upcoming .match-highlighted-section { padding: 5px 12px 8px; }
+  .match-modal-upcoming .upcoming-team-comparison { margin: 2px 0 6px; padding: 5px 9px; }
+  .match-modal-upcoming .upcoming-comparison-label { margin-bottom: 2px; font-size: 10px; }
+  .match-modal-upcoming .upcoming-comparison-row.upcoming-comparison-stat { padding: 2px 0; }
+  .match-modal-upcoming .upcoming-last-matches { margin-bottom: 6px; }
+  .match-modal-upcoming .upcoming-last-matches h3 { margin-bottom: 3px; font-size: 11px; }
+  .match-modal-upcoming .upcoming-last-team { padding: 4px; gap: 2px; }
+  .match-modal-upcoming .upcoming-last-result { min-height: 26px; padding: 3px; }
+  .match-modal-upcoming .match-highlighted-title { margin-bottom: 5px; }
+  .match-modal-upcoming .match-highlighted-category { padding: 4px 6px; }
+}
