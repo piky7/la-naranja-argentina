@@ -9266,3 +9266,112 @@
     column-gap: 2px;
   }
 }
+
+
+/* LNA - Estadísticas de partidos en celulares */
+@media (max-width: 600px) {
+  .match-modal-finished .match-stats-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .match-modal-finished .match-stats-team {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    display: grid;
+    grid-template-columns:
+      minmax(110px, 1fr)
+      32px 32px 32px 48px 32px;
+    column-gap: 4px;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .match-modal-finished .match-stats-head {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+
+  .match-modal-finished .match-stat-player {
+    min-height: 42px;
+  }
+
+  .match-modal-finished .match-stat-player strong,
+  .match-modal-finished .match-stat-player-name {
+    min-width: 0;
+    font-size: 11px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .match-modal-finished .match-stat-player span {
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+/* LNA - Tablas de estadísticas responsive */
+@media (max-width: 600px) {
+
+  /* Local arriba, visitante abajo */
+  .match-modal-finished .match-modal-content,
+  .match-modal-finished-scroll .match-modal-content {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+    padding: 10px 12px 16px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .match-modal-finished .match-stats-team {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Nombre + cinco estadísticas */
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    display: grid !important;
+    grid-template-columns:
+      minmax(0, 1fr)
+      32px 32px 32px 48px 32px !important;
+    column-gap: 5px !important;
+    align-items: center;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    box-sizing: border-box;
+  }
+
+  .match-modal-finished .match-stats-head {
+    font-size: 9px !important;
+    letter-spacing: 0;
+  }
+
+  .match-modal-finished .match-stat-player {
+    min-height: 40px;
+  }
+
+  .match-modal-finished .match-stat-player strong,
+  .match-modal-finished .match-stat-player-name {
+    min-width: 0;
+    font-size: 11px !important;
+    text-align: left;
+  }
+
+  .match-modal-finished .match-stat-player span {
+    font-size: 10px !important;
+    text-align: center;
+  }
+}
