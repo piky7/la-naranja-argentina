@@ -9092,3 +9092,70 @@
   .match-modal-upcoming .match-highlighted-title { margin-bottom: 5px; }
   .match-modal-upcoming .match-highlighted-category { padding: 4px 6px; }
 }
+
+/* LNA: replicar en escritorio la franja de resultado del diseño móvil */
+@media (min-width: 1100px) {
+  .match-modal-finished .match-modal-header {
+    padding: 8px 0 0;
+    background: linear-gradient(125deg,#0c1b29,#08121d);
+  }
+  .match-modal-finished .match-modal-label,
+  .match-modal-finished .match-modal-date,
+  .match-modal-finished .match-modal-status {
+    display: block;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .match-modal-finished .match-modal-teams {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+    align-items: center;
+    gap: 10px;
+    background: #0d1116;
+    border-top: 1px solid #303640;
+    border-bottom: 1px solid #303640;
+    margin-top: 6px;
+    padding: 8px 18px;
+  }
+  .match-modal-finished .match-modal-team {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 0;
+  }
+  .match-modal-finished .match-modal-team img,
+  .match-modal-finished .home-modal-team-logo-button img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+  .match-modal-finished .match-modal-score strong {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+    font-size: 30px;
+    color: #c4cad3;
+  }
+  .match-modal-finished .match-modal-score strong > span {
+    display: inline !important;
+    flex: 0 0 auto;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: nowrap;
+  }
+  .match-modal-finished .match-modal-score strong .match-score-winner,
+  .match-modal-finished .match-modal-score strong .match-score-dash {
+    color: #ff8c00 !important;
+    -webkit-text-fill-color: #ff8c00 !important;
+  }
+  .match-modal-finished .match-modal-score strong .match-score-loser {
+    color: #c4cad3 !important;
+    -webkit-text-fill-color: #c4cad3 !important;
+  }
+}
