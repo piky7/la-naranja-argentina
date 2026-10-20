@@ -9448,3 +9448,117 @@
   }
   .match-modal-finished .match-stat-player span { font-size: 10px !important; }
 }
+
+
+/* LNA - Jugador del partido (valoración oficial) */
+.match-modal-finished .match-mvp-card {
+  display: block;
+  width: calc(100% - 24px);
+  margin: 8px 12px 5px;
+  padding: 10px 12px;
+  border: 1px solid #ff8c00;
+  border-radius: 11px;
+  background: linear-gradient(115deg, #161a1d, #0b1520);
+  color: #f4f6f9;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.match-modal-finished .match-mvp-heading {
+  display: block;
+  margin-bottom: 9px;
+  color: #ff981f;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+.match-modal-finished .match-mvp-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.match-modal-finished .match-mvp-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.match-modal-finished .match-mvp-identity > img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex: none;
+}
+.match-modal-finished .match-mvp-name {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.match-modal-finished .match-mvp-name strong {
+  font-size: 15px;
+  line-height: 1.15;
+}
+.match-modal-finished .match-mvp-name small {
+  font-size: 11px;
+  color: #b7c0ca;
+}
+.match-modal-finished .match-mvp-numbers {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+  flex: 0 1 365px;
+}
+.match-modal-finished .match-mvp-numbers > span {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  padding: 6px 4px;
+  background: #0a121b;
+  border: 1px solid #2d3946;
+  border-radius: 6px;
+  min-width: 0;
+}
+.match-modal-finished .match-mvp-numbers strong {
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.match-modal-finished .match-mvp-numbers small {
+  font-size: 9px;
+  color: #b7c0ca;
+}
+.match-modal-finished .match-mvp-numbers .match-mvp-valuation {
+  border-color: #b66b0e;
+  background: #34210e;
+}
+.match-modal-finished .match-mvp-valuation strong,
+.match-modal-finished .match-mvp-valuation small { color: #ff9b21; }
+.match-modal-finished .match-mvp-card:hover { border-color: #ffb44d; }
+
+@media (max-width: 600px) {
+  .match-modal-finished .match-mvp-card {
+    padding: 8px 9px;
+    margin: 7px 12px 5px;
+  }
+  .match-modal-finished .match-mvp-heading {
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+  .match-modal-finished .match-mvp-body {
+    display: grid;
+    gap: 7px;
+  }
+  .match-modal-finished .match-mvp-identity > img {
+    width: 32px;
+    height: 32px;
+  }
+  .match-modal-finished .match-mvp-name strong { font-size: 13px; }
+  .match-modal-finished .match-mvp-name small { font-size: 10px; }
+  .match-modal-finished .match-mvp-numbers {
+    width: 100%;
+    gap: 4px;
+  }
+  .match-modal-finished .match-mvp-numbers > span { padding: 4px 2px; }
+  .match-modal-finished .match-mvp-numbers strong { font-size: 14px; }
+  .match-modal-finished .match-mvp-numbers small { font-size: 8px; }
+}
