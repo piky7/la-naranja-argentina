@@ -9159,3 +9159,26 @@
     -webkit-text-fill-color: #c4cad3 !important;
   }
 }
+
+/* Marcas de agua proporcionadas en el encabezado compacto de PC */
+@media (min-width: 1100px) {
+  .match-modal-finished .match-modal-header {
+    overflow: hidden;
+  }
+  .match-modal-finished .match-finished-watermarks {
+    inset: 0 12%;
+    align-items: center;
+    justify-content: space-between;
+    z-index: -1;
+  }
+  .match-modal-finished .match-finished-watermarks img {
+    width: 110px;
+    max-width: 17%;
+    height: 90%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: .055;
+    filter: grayscale(1);
+    transform: none !important;
+  }
+}
