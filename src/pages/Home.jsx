@@ -572,7 +572,7 @@ const getPlayerLastMatches = (player) => {
     if (!currentScript) return;
 
     // Evitar comprobaciones y recargas mientras la PWA termina de iniciar.
-    const startupGraceUntil = Date.now() + 30000;
+    const startupGraceUntil = Date.now() + 5000;
     let checking = false;
     let lastCheck = 0;
     let needsRefresh = false;
@@ -583,6 +583,11 @@ const getPlayerLastMatches = (player) => {
       lastCheck = Date.now();
       checking = true;
       try {
+        // Pedir al navegador que compruebe también si cambió el service worker.
+        if ("serviceWorker" in navigator) {
+          const registration = await navigator.serviceWorker.getRegistration();
+          if (registration) await registration.update();
+        }
         const response = await fetch(`/?lna_check=${Date.now()}`, {
           cache: "no-store",
         });
