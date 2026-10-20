@@ -239,4 +239,12 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-19-independiente-oliva-lanus": {
+    status: "finished",
+    homeScore: 108,
+    awayScore: 93,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
