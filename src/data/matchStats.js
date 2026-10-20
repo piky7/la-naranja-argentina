@@ -5363,8 +5363,8 @@ export const matchPlayerStats = {
       "minutes": "29:11"
     },
     {
-      "id": "flashscore-olimpico-lorenzen-l",
-      "name": "Lorenzen L.",
+      "id": "lucas-lorenzen",
+      "name": "Lucas Lorenzen",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
@@ -5681,8 +5681,8 @@ export const matchPlayerStats = {
       "minutes": "16:11"
     },
     {
-      "id": "flashscore-independiente-oliva-mainoldi-r",
-      "name": "Mainoldi R.",
+      "id": "raniero-mainoldi",
+      "name": "Raniero Mainoldi",
       "points": 0,
       "rebounds": 0,
       "assists": 0,
