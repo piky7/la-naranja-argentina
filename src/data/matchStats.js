@@ -5606,4 +5606,201 @@ export const matchPlayerStats = {
     }
   ]
 },
+
+"independiente-oliva-lanus": {
+  "independiente-oliva": [
+    {
+      "id": "agustin-caffaro",
+      "name": "Agustín Cáffaro",
+      "points": 17,
+      "rebounds": 9,
+      "assists": 0,
+      "minutes": "23:26"
+    },
+    {
+      "id": "juan-martin-guerrero",
+      "name": "Juan Martín Guerrero",
+      "points": 11,
+      "rebounds": 2,
+      "assists": 3,
+      "minutes": "16:59"
+    },
+    {
+      "id": "patricio-tabarez",
+      "name": "Patricio Tabárez",
+      "points": 13,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "20:32"
+    },
+    {
+      "id": "fortuna-rolfi",
+      "name": "Fortunato Rolfi",
+      "points": 13,
+      "rebounds": 2,
+      "assists": 7,
+      "minutes": "23:01"
+    },
+    {
+      "id": "rolando-vallejos",
+      "name": "Rolando Vallejos",
+      "points": 14,
+      "rebounds": 6,
+      "assists": 2,
+      "minutes": "22:13"
+    },
+    {
+      "id": "nicolas-marcucci",
+      "name": "Nicolás Marcucci",
+      "points": 14,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "18:40"
+    },
+    {
+      "id": "felipe-barrionuevo",
+      "name": "Felipe Barrionuevo",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 3,
+      "minutes": "21:51"
+    },
+    {
+      "id": "agustin-pautasso",
+      "name": "Agustín Pautasso",
+      "points": 0,
+      "rebounds": 2,
+      "assists": 2,
+      "minutes": "19:28"
+    },
+    {
+      "id": "andriy-grytsak",
+      "name": "Andriy Grytsak",
+      "points": 7,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "16:11"
+    },
+    {
+      "id": "flashscore-independiente-oliva-mainoldi-r",
+      "name": "Mainoldi R.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "01:06"
+    },
+    {
+      "id": "enzo-filippetti",
+      "name": "Enzo Fillipetti",
+      "points": 12,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "16:34"
+    }
+  ],
+  "lanus": [
+    {
+      "id": "robert-whitfield",
+      "name": "Robert Whitfield",
+      "points": 12,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "25:59"
+    },
+    {
+      "id": "juan-brussino",
+      "name": "Juan Brussino",
+      "points": 3,
+      "rebounds": 2,
+      "assists": 7,
+      "minutes": "16:47"
+    },
+    {
+      "id": "christian-james",
+      "name": "Christian James",
+      "points": 8,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "22:47"
+    },
+    {
+      "id": "fabian-ramirez-barrios",
+      "name": "Fabián Ramírez Barrios",
+      "points": 19,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "24:13"
+    },
+    {
+      "id": "pedro-bombino",
+      "name": "Pedro Bombino",
+      "points": 17,
+      "rebounds": 8,
+      "assists": 1,
+      "minutes": "24:13"
+    },
+    {
+      "id": "martin-franchino",
+      "name": "Martín Franchino",
+      "points": 14,
+      "rebounds": 7,
+      "assists": 2,
+      "minutes": "23:49"
+    },
+    {
+      "id": "junior-merchant",
+      "name": "Junior Merchant",
+      "points": 8,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "07:44"
+    },
+    {
+      "id": "alejo-sacchi",
+      "name": "Alejo Sacchi",
+      "points": 3,
+      "rebounds": 5,
+      "assists": 1,
+      "minutes": "09:57"
+    },
+    {
+      "id": "lucas-andujar",
+      "name": "Lucas Andújar",
+      "points": 4,
+      "rebounds": 4,
+      "assists": 5,
+      "minutes": "25:15"
+    },
+    {
+      "id": "melvin-johnson",
+      "name": "Melvin Johnson",
+      "points": 5,
+      "rebounds": 0,
+      "assists": 1,
+      "minutes": "19:14"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 26,
+      "away": 18
+    },
+    {
+      "period": "2",
+      "home": 34,
+      "away": 22
+    },
+    {
+      "period": "3",
+      "home": 25,
+      "away": 25
+    },
+    {
+      "period": "4",
+      "home": 23,
+      "away": 28
+    }
+  ]
+},
 };
