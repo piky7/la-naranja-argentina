@@ -391,6 +391,24 @@ const getPlayerLastMatches = (player) => {
     ? getTeam(selectedMatch.awayTeam)
     : null;
 
+  // MVP del partido: mayor valoración oficial entre ambos planteles.
+  const selectedMatchMvp = selectedMatch && selectedMatchStats
+    ? [selectedMatch.homeTeam, selectedMatch.awayTeam]
+        .flatMap((teamId) =>
+          (selectedMatchStats[teamId] || []).map((player) => ({
+            player,
+            teamId,
+            team: getTeam(teamId),
+            valuation: getOfficialValuation(selectedMatch, teamId, player.id),
+          }))
+        )
+        .filter(({ valuation }) => valuation != null && Number.isFinite(Number(valuation)))
+        .sort((a, b) =>
+          Number(b.valuation) - Number(a.valuation) ||
+          (Number(b.player.points) || 0) - (Number(a.player.points) || 0)
+        )[0] || null
+    : null;
+
   const selectedUpcomingHomeTeam = selectedUpcomingMatch
     ? getTeam(selectedUpcomingMatch.homeTeam)
     : null;
@@ -1782,6 +1800,39 @@ const finishedMatch = {
     </div>
   </section>
 )}
+
+              {selectedMatchMvp && (
+                <button
+                  type="button"
+                  className="match-mvp-card"
+                  aria-label={`Abrir ficha de ${selectedMatchMvp.player.name}, jugador del partido`}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    const playerInfo = getMatchPlayerInfo(selectedMatchMvp.player);
+                    if (playerInfo) setSelectedPlayer(playerInfo);
+                  }}
+                >
+                  <span className="match-mvp-heading">♛ JUGADOR DEL PARTIDO</span>
+                  <span className="match-mvp-body">
+                    <span className="match-mvp-identity">
+                      {selectedMatchMvp.team?.logo && (
+                        <img src={selectedMatchMvp.team.logo} alt="" />
+                      )}
+                      <span className="match-mvp-name">
+                        <strong>{selectedMatchMvp.player.name}</strong>
+                        <small>{selectedMatchMvp.team?.name || selectedMatchMvp.teamId}</small>
+                      </span>
+                    </span>
+                    <span className="match-mvp-numbers">
+                      <span><strong>{formatStat(selectedMatchMvp.player.points)}</strong><small>PTS</small></span>
+                      <span><strong>{formatStat(selectedMatchMvp.player.rebounds)}</strong><small>REB</small></span>
+                      <span><strong>{formatStat(selectedMatchMvp.player.assists)}</strong><small>AST</small></span>
+                      <span><strong>{selectedMatchMvp.player.minutes || "—"}</strong><small>MIN</small></span>
+                      <span className="match-mvp-valuation"><strong>{selectedMatchMvp.valuation}</strong><small>VAL</small></span>
+                    </span>
+                  </span>
+                </button>
+              )}
 
               {selectedMatchStats ? (
                 <>
