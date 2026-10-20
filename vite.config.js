@@ -37,6 +37,19 @@ export default defineConfig({
 
       workbox: {
         navigateFallback: "/index.html",
+        // Las navegaciones buscan primero la versión actual en la red.
+        // Los recursos estáticos versionados siguen en precaché.
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.mode === "navigate",
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "lna-navigation-v1",
+              networkTimeoutSeconds: 4,
+              expiration: { maxEntries: 10, maxAgeSeconds: 86400 },
+            },
+          },
+        ],
       },
     }),
   ],
