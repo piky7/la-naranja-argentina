@@ -1,0 +1,160 @@
+
+const fs = require("node:fs");
+const cheerio = require("cheerio");
+
+const URL_PARTIDO =
+  process.argv[2] ||
+  "https://www.laliganacional.com.ar/laliga/partido/v2mutwzkFpVB_zfttBUINRQ0TlDYJTLYTqAu6sF8Pq3SSU5pCs1H6x_g==/platense-vs-obera";
+
+const OUTPUT = process.argv[3] || "liga-normalized.json";
+
+function obtenerJugador($, fila) {
+  const onclick = $(fila).attr("onclick") || "";
+
+  // Leemos el objeto JSON sin ejecutar el onclick.
+  const inicio = onclick.indexOf("{");
+  if (inicio === -1) return null;
+
+  let profundidad = 0;
+  let fin = -1;
+  let dentroDeCadena = false;
+  let escapado = false;
+
+  for (let i = inicio; i < onclick.length; i++) {
+    const caracter = onclick[i];
+
+    if (dentroDeCadena) {
+      if (escapado) escapado = false;
+      else if (caracter === "\\") escapado = true;
+      else if (caracter === '"') dentroDeCadena = false;
+    } else {
+      if (caracter === '"') dentroDeCadena = true;
+      else if (caracter === "{") profundidad++;
+      else if (caracter === "}") {
+        profundidad--;
+        if (profundidad === 0) {
+          fin = i + 1;
+          break;
+        }
+      }
+    }
+  }
+
+  if (fin === -1) return null;
+
+  const datos = JSON.parse(onclick.slice(inicio, fin));
+
+  return {
+    officialPlayerId: datos.IdJugador,
+    officialTeamId: datos.IdEquipo,
+    name: datos.NombreCompleto || datos.Nombre,
+    number: datos.Dorsal,
+    points: datos.Puntos,
+    rebounds: datos.RebotesTotales,
+    assists: datos.Asistencias,
+    minutes: datos.TiempoJuego,
+    valuation: datos.Valoracion,
+    starter: datos.CincoInicial,
+    steals: datos.Recuperaciones,
+    turnovers: datos.Perdidas,
+    offensiveRebounds: datos.ReboteOfensivo,
+    defensiveRebounds: datos.ReboteDefensivo,
+    twoPointers: datos.TirosDos,
+    threePointers: datos.TirosTres,
+    freeThrows: datos.TirosLibres,
+    plusMinus: datos.MasMenos,
+  };
+}
+
+async function main() {
+  console.log("Descargando partido oficial...");
+
+  const respuesta = await fetch(URL_PARTIDO, {
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+      Accept: "text/html",
+    },
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(`HTTP ${respuesta.status}`);
+  }
+
+  const html = await respuesta.text();
+  const $ = cheerio.load(html);
+  const equipos = [];
+
+  $(".tabla-estadisticas").each((_, tabla) => {
+    const contenedor = $(tabla)
+  .closest(".table-responsive");
+
+const encabezado = contenedor
+  .prevAll(".nombre-equipo")
+  .first();
+    const imagen = encabezado.find("img").first();
+
+    const nombre = encabezado.find("strong").first().text().trim();
+    const escudo = imagen.attr("src") || "";
+    const ids = escudo.match(/\/escudos\/(\d+)\/(\d+)/);
+
+    if (!nombre || !ids) {
+      throw new Error("No se pudo identificar el equipo de una tabla.");
+    }
+
+    const jugadores = [];
+
+    $(tabla).find("tbody tr").each((_, fila) => {
+      const jugador = obtenerJugador($, fila);
+      if (jugador) jugadores.push(jugador);
+    });
+
+    equipos.push({
+      name: nombre,
+      officialClubId: Number(ids[1]),
+      officialTeamId: Number(ids[2]),
+      players: jugadores,
+      totalPlayerPoints: jugadores.reduce(
+        (suma, jugador) => suma + jugador.points,
+        0
+      ),
+    });
+  });
+
+  if (equipos.length !== 2) {
+    throw new Error(
+      `Se esperaban 2 equipos y se encontraron ${equipos.length}.`
+    );
+  }
+
+  for (const equipo of equipos) {
+    if (!equipo.players.length) {
+      throw new Error(`No se encontraron jugadores de ${equipo.name}`);
+    }
+  }
+
+  const resultado = {
+    source: "Liga Nacional",
+    matchUrl: URL_PARTIDO,
+    teams: equipos,
+  };
+
+  fs.writeFileSync(
+    OUTPUT,
+    JSON.stringify(resultado, null, 2),
+    "utf8"
+  );
+
+  console.log("Extracción completada:");
+  for (const equipo of equipos) {
+    console.log(
+      `${equipo.name}: ${equipo.players.length} jugadores, ` +
+      `${equipo.totalPlayerPoints} puntos`
+    );
+  }
+  console.log(`Archivo generado: ${OUTPUT}`);
+}
+
+main().catch((error) => {
+  console.error("Error:", error.message);
+  process.exitCode = 1;
+});

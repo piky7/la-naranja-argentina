@@ -1,0 +1,115 @@
+{
+  "source": "Liga Nacional",
+  "dateFrom": "2026-10-15",
+  "dateTo": "2026-10-19",
+  "matches": [
+    {
+      "date": "2026-10-15",
+      "time": "21:00",
+      "home": {
+        "name": "LA UNION FSA",
+        "officialClubId": 1541,
+        "officialTeamId": 114763
+      },
+      "away": {
+        "name": "RACING (CH)",
+        "officialClubId": 1992,
+        "officialTeamId": 114607
+      },
+      "homeScore": 68,
+      "awayScore": 74,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Juw0t9Mp6-J6U6jmNFFzCauGtCUHUDbMUtzhSAYpkHf7HbNoD4pChg==/la-union-fsa-vs-racing-ch"
+    },
+    {
+      "date": "2026-10-16",
+      "time": "20:30",
+      "home": {
+        "name": "PLATENSE",
+        "officialClubId": 80,
+        "officialTeamId": 112549
+      },
+      "away": {
+        "name": "OBERÁ",
+        "officialClubId": 2305,
+        "officialTeamId": 113652
+      },
+      "homeScore": 86,
+      "awayScore": 80,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PLwGlbv89UhvMOeyV0M05IxhnYmQ-jB0UY-yNohygtO4N9UFY7jw4g==/platense-vs-obera"
+    },
+    {
+      "date": "2026-10-16",
+      "time": "21:05",
+      "home": {
+        "name": "SAN LORENZO",
+        "officialClubId": 88,
+        "officialTeamId": 113373
+      },
+      "away": {
+        "name": "PEÑAROL (MDP)",
+        "officialClubId": 2376,
+        "officialTeamId": 114902
+      },
+      "homeScore": 85,
+      "awayScore": 92,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LTR3iDWnXpCzzGFL7xA0ZojRE6gJcd-d3ybvOsUbpD3i_GVcDtfvsA==/san-lorenzo-vs-penarol-mdp"
+    },
+    {
+      "date": "2026-10-18",
+      "time": "11:05",
+      "home": {
+        "name": "SAN LORENZO",
+        "officialClubId": 88,
+        "officialTeamId": 113373
+      },
+      "away": {
+        "name": "OBERÁ",
+        "officialClubId": 2305,
+        "officialTeamId": 113652
+      },
+      "homeScore": 73,
+      "awayScore": 78,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2dJYvRlct2TykUEr93JoKRVxDJFWc_KyoUQSBOQVH_IvC_qwcIve5KQ==/san-lorenzo-vs-obera"
+    },
+    {
+      "date": "2026-10-18",
+      "time": "20:30",
+      "home": {
+        "name": "REGATAS (C)",
+        "officialClubId": 1424,
+        "officialTeamId": 114561
+      },
+      "away": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "homeScore": 80,
+      "awayScore": 83,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v20CzTMOidxtiw3b7zPTy9gEExJIQzfCQHcLHoOaVAPxja65Az57ki3Q==/regatas-c-vs-olimpico-lb"
+    },
+    {
+      "date": "2026-10-19",
+      "time": "21:00",
+      "home": {
+        "name": "INDEPENDIENTE (O)",
+        "officialClubId": 2025,
+        "officialTeamId": 114628
+      },
+      "away": {
+        "name": "LANÚS",
+        "officialClubId": 63,
+        "officialTeamId": 112600
+      },
+      "homeScore": 108,
+      "awayScore": 93,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2kmWFJ3jw9XQOnOkwsi6_H3_6rWECQPUKba0fdQPfhGQgMWNFYH2PUg==/independiente-o-vs-lanus"
+    }
+  ]
+}
