@@ -1,0 +1,110 @@
+[
+  {
+    "matchKey": "la-union-racing-chivilcoy",
+    "teamId": "la-union",
+    "officialPlayerId": 430816,
+    "name": "TALAVERA ESPINOLA, ALEJANDRO DANIEL"
+  },
+  {
+    "matchKey": "la-union-racing-chivilcoy",
+    "teamId": "la-union",
+    "officialPlayerId": 429468,
+    "name": "MARIANO, FACUNDO"
+  },
+  {
+    "matchKey": "la-union-racing-chivilcoy",
+    "teamId": "racing-chivilcoy",
+    "officialPlayerId": 428118,
+    "name": "DIAZ, JOAQUIN ROMAN "
+  },
+  {
+    "matchKey": "platense-obera",
+    "teamId": "platense",
+    "officialPlayerId": 184197,
+    "name": "BLAZICA CRISTOBAL, VICENTE"
+  },
+  {
+    "matchKey": "platense-obera",
+    "teamId": "platense",
+    "officialPlayerId": 273373,
+    "name": "GONCALVES, JOAQUIN"
+  },
+  {
+    "matchKey": "platense-obera",
+    "teamId": "obera",
+    "officialPlayerId": 130590,
+    "name": "MOUSQUERE, MILTON NADIR"
+  },
+  {
+    "matchKey": "platense-obera",
+    "teamId": "obera",
+    "officialPlayerId": 429447,
+    "name": "CARATINO, MANUEL"
+  },
+  {
+    "matchKey": "san-lorenzo-penarol",
+    "teamId": "san-lorenzo",
+    "officialPlayerId": 188845,
+    "name": "TALLADE, SANTIAGO"
+  },
+  {
+    "matchKey": "san-lorenzo-penarol",
+    "teamId": "penarol",
+    "officialPlayerId": 274342,
+    "name": "CHAPERO, MARTIN "
+  },
+  {
+    "matchKey": "san-lorenzo-obera",
+    "teamId": "san-lorenzo",
+    "officialPlayerId": 188845,
+    "name": "TALLADE, SANTIAGO"
+  },
+  {
+    "matchKey": "san-lorenzo-obera",
+    "teamId": "obera",
+    "officialPlayerId": 430497,
+    "name": "SANTOS SIMAO COSTA, MATHEUS"
+  },
+  {
+    "matchKey": "san-lorenzo-obera",
+    "teamId": "obera",
+    "officialPlayerId": 130590,
+    "name": "MOUSQUERE, MILTON NADIR"
+  },
+  {
+    "matchKey": "regatas-olimpico",
+    "teamId": "olimpico",
+    "officialPlayerId": 432336,
+    "name": "LORENZEN, LUCAS VERNON"
+  },
+  {
+    "matchKey": "regatas-olimpico",
+    "teamId": "olimpico",
+    "officialPlayerId": 430621,
+    "name": "CACERES COMELLI, MARIANO VALENTIN"
+  },
+  {
+    "matchKey": "regatas-olimpico",
+    "teamId": "olimpico",
+    "officialPlayerId": 431734,
+    "name": "PEREYRA, FRANCISCO"
+  },
+  {
+    "matchKey": "independiente-oliva-lanus",
+    "teamId": "independiente-oliva",
+    "officialPlayerId": 276420,
+    "name": "HOREN, EZEQUIEL JOEL"
+  },
+  {
+    "matchKey": "independiente-oliva-lanus",
+    "teamId": "independiente-oliva",
+    "officialPlayerId": 385605,
+    "name": "MAINOLDI, RANIERO"
+  },
+  {
+    "matchKey": "independiente-oliva-lanus",
+    "teamId": "lanus",
+    "officialPlayerId": 431355,
+    "name": "CORIA FA, JOAQUIN"
+  }
+]
