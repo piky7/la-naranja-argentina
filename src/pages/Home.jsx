@@ -854,6 +854,17 @@ const standingsMatches = matches.map((match) => {
 
     
 
+  // Módulos editoriales exclusivos de escritorio, derivados de los datos existentes.
+  const upcomingDesktop = matches
+    .filter((match) => match.date > today && !isMatchFinished(match) && match.status !== "postponed")
+    .sort((a, b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || ""))
+    .slice(0, 4);
+
+  const recentDesktop = matches
+    .filter((match) => isMatchFinished(match) && match.date <= today)
+    .sort((a, b) => b.date.localeCompare(a.date) || (b.time || "").localeCompare(a.time || ""))
+    .slice(0, 5);
+
   return (
     <main className="home-page">
       <section className="home-content">
@@ -1383,9 +1394,70 @@ const finishedMatch = {
               )}
             </section>
 
-            {/* MÁXIMOS ANOTADORES */}
+            {/* Agenda de escritorio: el LIVE permanece exclusivamente en Partidos de hoy. */}
+            <section className="home-panel lna-desktop-panel lna-upcoming-panel" aria-label="Próximos partidos">
+              <div className="lna-desktop-heading">
+                <h2>PRÓXIMOS <span>PARTIDOS</span></h2>
+                <Link to="/liga">Ver todos →</Link>
+              </div>
+              <div className="lna-desktop-upcoming-list">
+                {upcomingDesktop.length ? upcomingDesktop.map((match) => {
+                  const home = getTeam(match.homeTeam);
+                  const away = getTeam(match.awayTeam);
+                  return (
+                    <button key={match.id} type="button" className="lna-desktop-upcoming-row" onClick={() => setSelectedUpcomingMatch(match)}>
+                      <time dateTime={match.date}>{formatDate(match.date)}</time>
+                      <span className="lna-desktop-upcoming-teams">
+                        <span>{home && <img src={home.logo} alt="" loading="lazy" />}{home?.shortName || match.homeTeam}</span>
+                        <span>{away && <img src={away.logo} alt="" loading="lazy" />}{away?.shortName || match.awayTeam}</span>
+                      </span>
+                      <strong>{match.time || "A confirmar"}</strong>
+                    </button>
+                  );
+                }) : <p className="lna-desktop-empty">No hay próximos partidos confirmados.</p>}
+              </div>
+            </section>
+          </div>
 
-           
+          <div className="lna-desktop-secondary">
+            <section className="home-panel lna-desktop-panel">
+              <div className="lna-desktop-heading">
+                <h2>ÚLTIMOS <span>RESULTADOS</span></h2>
+                <Link to="/liga">Ver todos →</Link>
+              </div>
+              <div className="lna-desktop-results-list">
+                {recentDesktop.length ? recentDesktop.map((match) => {
+                  const home = getTeam(match.homeTeam);
+                  const away = getTeam(match.awayTeam);
+                  const hasStats = Boolean(getMatchStats(match));
+                  return (
+                    <button key={match.id} type="button" className="lna-desktop-result-row" disabled={!hasStats} onClick={() => setSelectedMatch(match)}>
+                      <time dateTime={match.date}>{formatDate(match.date)}</time>
+                      <span className="lna-desktop-result-team">{home && <img src={home.logo} alt="" loading="lazy" />}{home?.shortName || match.homeTeam}</span>
+                      <strong>{match.homeScore} - {match.awayScore}</strong>
+                      <span className="lna-desktop-result-team">{away && <img src={away.logo} alt="" loading="lazy" />}{away?.shortName || match.awayTeam}</span>
+                    </button>
+                  );
+                }) : <p className="lna-desktop-empty">Todavía no hay resultados.</p>}
+              </div>
+            </section>
+            <section className="home-panel lna-desktop-panel">
+              <div className="lna-desktop-heading">
+                <h2>MÁXIMOS <span>ANOTADORES</span></h2>
+                <Link to="/jugadores">Ver jugadores →</Link>
+              </div>
+              <div className="lna-desktop-scorers-list">
+                {topScorers.slice(0, 5).map((player, index) => (
+                  <button key={player.id} type="button" className="lna-desktop-scorer-row" onClick={() => setSelectedPlayer(player)}>
+                    <span className="lna-desktop-rank">{index + 1}</span>
+                    {player.team && <img src={player.team.logo} alt="" loading="lazy" />}
+                    <span className="lna-desktop-scorer-name"><strong>{player.name}</strong><small>{player.team?.shortName || "Sin equipo"}</small></span>
+                    <strong className="lna-desktop-scorer-points">{player.points == null ? "—" : Number(player.points).toFixed(1)}</strong>
+                  </button>
+                ))}
+                {!topScorers.length && <p className="lna-desktop-empty">Todavía no hay estadísticas.</p>}
+              </div>
+            </section>
           </div>
         </div>
       </section>
