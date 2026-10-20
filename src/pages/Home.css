@@ -9182,3 +9182,52 @@
     transform: none !important;
   }
 }
+
+/* Solución definitiva PC: las marcas de agua ocupan SOLO la banda de título.
+   La banda del marcador es independiente y no recorta ni desplaza los logos. */
+@media (min-width: 1100px) {
+  .match-modal-finished .match-modal-header {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .match-modal-finished .match-finished-watermarks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: 54px;
+    inset: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 90px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .match-modal-finished .match-finished-watermarks img {
+    display: block;
+    width: 64px;
+    height: 46px;
+    max-width: none;
+    max-height: none;
+    flex: 0 0 64px;
+    object-fit: contain;
+    opacity: .11;
+    filter: grayscale(1);
+    transform: none !important;
+  }
+  .match-modal-finished .match-modal-label,
+  .match-modal-finished .match-modal-date,
+  .match-modal-finished .match-modal-status {
+    position: relative;
+    z-index: 1;
+  }
+  .match-modal-finished .match-modal-teams {
+    position: relative;
+    z-index: 1;
+  }
+}
