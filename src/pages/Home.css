@@ -8930,3 +8930,45 @@
   font-size: 13px;
   border-radius: 7px;
 }
+
+/* HOME LNA: módulos nuevos exclusivos de escritorio */
+.lna-desktop-panel,.lna-desktop-secondary{display:none}
+@media(min-width:1100px){
+.home-container{width:min(calc(100% - 48px),1540px)}
+.home-dashboard{display:grid;grid-template-columns:minmax(0,1.48fr) minmax(0,1.15fr) minmax(0,.84fr);gap:18px;align-items:start}
+.home-dashboard>.standings-panel,.home-dashboard>.fixture-panel{min-width:0}
+.lna-desktop-panel{display:block;min-width:0}
+.lna-desktop-secondary{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;align-items:start}
+.lna-desktop-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px;padding:14px 16px;background:#141719;border-bottom:1px solid #34373b;position:relative}
+.lna-desktop-heading:after{content:"";position:absolute;bottom:-1px;left:16px;width:45px;height:3px;background:#ff870d}
+.lna-desktop-heading h2{font-family:Anton,Impact,sans-serif;font-size:20px;font-weight:400;letter-spacing:.3px;color:#f5f5f5}
+.lna-desktop-heading h2 span{color:#ff8c16}
+.lna-desktop-heading a{color:#bfc3c8;white-space:nowrap;font-size:11px}
+.lna-desktop-heading a:hover{color:#ff9b35}
+.lna-desktop-upcoming-row,.lna-desktop-result-row,.lna-desktop-scorer-row{display:grid;align-items:center;width:100%;color:#f4f4f4;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.09);text-align:left;cursor:pointer;transition:background .18s ease}
+.lna-desktop-upcoming-row:hover,.lna-desktop-result-row:hover:not(:disabled),.lna-desktop-scorer-row:hover{background:#22272b}
+.lna-desktop-upcoming-row:last-child,.lna-desktop-result-row:last-child,.lna-desktop-scorer-row:last-child{border-bottom:0}
+.lna-desktop-upcoming-row{grid-template-columns:55px minmax(0,1fr) 67px;gap:9px;min-height:88px;padding:12px 10px}
+.lna-desktop-upcoming-row time{font-size:10px;font-weight:800;color:#aeb5bd;text-align:center;line-height:1.4}
+.lna-desktop-upcoming-teams{min-width:0;display:grid;gap:8px}
+.lna-desktop-upcoming-teams>span{display:flex;align-items:center;gap:7px;min-width:0;font-size:11px;font-weight:700}
+.lna-desktop-upcoming-teams img,.lna-desktop-result-team img,.lna-desktop-scorer-row>img{width:25px;height:25px;object-fit:contain;flex:none}
+.lna-desktop-upcoming-row>strong{font-size:14px;color:#ff9019;text-align:right;overflow-wrap:anywhere}
+.lna-desktop-result-row{grid-template-columns:75px minmax(0,1fr) 90px minmax(0,1fr);gap:10px;padding:11px 16px;min-height:62px}
+.lna-desktop-result-row:disabled{cursor:default;opacity:.9}
+.lna-desktop-result-row time{font-size:11px;color:#b6bcc3}
+.lna-desktop-result-team{display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;font-weight:700}
+.lna-desktop-result-row>strong{text-align:center;color:#ff8c16;font-size:19px;white-space:nowrap}
+.lna-desktop-scorer-row{grid-template-columns:29px 29px minmax(0,1fr) 62px;gap:12px;padding:10px 16px;min-height:62px}
+.lna-desktop-rank{width:26px;height:26px;display:grid;place-items:center;border:1px solid #f18b16;border-radius:50%;font-size:12px;font-weight:800}
+.lna-desktop-scorer-name{display:grid;gap:3px;min-width:0}
+.lna-desktop-scorer-name strong{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lna-desktop-scorer-name small{font-size:10px;color:#aeb4bc}
+.lna-desktop-scorer-points{text-align:right;color:#ff9019;font-size:20px}
+.lna-desktop-empty{padding:24px 14px;color:#b9bec4;font-size:12px}
+}
+@media(min-width:1100px) and (max-width:1270px){
+.home-dashboard{grid-template-columns:minmax(0,1.45fr) minmax(0,1.2fr)}
+.lna-upcoming-panel{grid-column:1/-1}
+.lna-desktop-upcoming-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
