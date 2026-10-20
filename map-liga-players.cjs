@@ -118,6 +118,38 @@ for (const official of officialPlayers.values()) {
   }
 
   // El dorsal sirve para sugerir, nunca para asignar solo.
+
+  // Segunda búsqueda: nombres compuestos y segundos nombres.
+  const tokensOficiales = new Set(
+    normalize(
+      parts.length > 1
+        ? `${givenNames} ${surname}`
+        : official.officialName
+    ).split(" ").filter(Boolean)
+  );
+
+  const coincidenciasAmpliadas = candidates.filter((player) => {
+    const tokensLNA = normalize(player.name)
+      .split(" ")
+      .filter(Boolean);
+
+    if (tokensLNA.length < 2) return false;
+
+    return tokensLNA.every((token) =>
+      tokensOficiales.has(token)
+    );
+  });
+
+  if (coincidenciasAmpliadas.length === 1) {
+    matched.push({
+      ...official,
+      lnaPlayerId: coincidenciasAmpliadas[0].id,
+      lnaName: coincidenciasAmpliadas[0].name,
+      matchType: "expanded-name",
+    });
+    continue;
+  }
+
   const sameNumber = candidates.filter(
     (player) =>
       player.number !== null &&
