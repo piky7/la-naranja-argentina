@@ -35,11 +35,16 @@ function Home() {
 
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [mobileMatchTeam, setMobileMatchTeam] = useState("home");
   const [selectedTeam, setSelectedTeam] = useState(null);
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
+
+  useEffect(() => {
+    setMobileMatchTeam("home");
+  }, [selectedMatch?.id]);
 
   // DI representa minutos jugados dentro del cuarto (sin segundos).
   const getRemainingMinutes = (minutesPlayed) => {
@@ -1779,7 +1784,18 @@ const finishedMatch = {
 )}
 
               {selectedMatchStats ? (
-                <div className="match-modal-content">
+                <>
+                  <div className="match-mobile-team-tabs" role="group" aria-label="Estadísticas por equipo">
+                    <button type="button" className={mobileMatchTeam === "home" ? "active" : ""} aria-pressed={mobileMatchTeam === "home"} onClick={() => setMobileMatchTeam("home")}>
+                      {selectedMatchHomeTeam?.logo && <img src={selectedMatchHomeTeam.logo} alt="" />}
+                      <span>{selectedMatchHomeTeam?.shortName || selectedMatchHomeTeam?.name || "Local"}</span>
+                    </button>
+                    <button type="button" className={mobileMatchTeam === "away" ? "active" : ""} aria-pressed={mobileMatchTeam === "away"} onClick={() => setMobileMatchTeam("away")}>
+                      {selectedMatchAwayTeam?.logo && <img src={selectedMatchAwayTeam.logo} alt="" />}
+                      <span>{selectedMatchAwayTeam?.shortName || selectedMatchAwayTeam?.name || "Visitante"}</span>
+                    </button>
+                  </div>
+                  <div className={"match-modal-content match-mobile-show-" + mobileMatchTeam}>
                   <section className="match-stats-team">
                     <div className="match-stats-team-header">
                       <div>
@@ -1986,6 +2002,7 @@ const finishedMatch = {
                     </div>
                   </section>
                 </div>
+                </>
               ) : (
                 <div className="match-modal-no-stats">
                   <span>📊</span>
