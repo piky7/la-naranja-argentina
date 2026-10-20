@@ -9562,3 +9562,79 @@
   .match-modal-finished .match-mvp-numbers strong { font-size: 14px; }
   .match-modal-finished .match-mvp-numbers small { font-size: 8px; }
 }
+
+
+/* LNA - Compactación del popup finalizado para iPhone */
+@media (max-width: 600px) {
+  .match-modal-finished .match-mvp-card {
+    padding: 7px 9px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+  }
+  .match-modal-finished .match-mvp-heading {
+    margin-bottom: 5px;
+  }
+  .match-modal-finished .match-mvp-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    align-items: center;
+    gap: 7px;
+  }
+  .match-modal-finished .match-mvp-identity {
+    gap: 6px;
+  }
+  .match-modal-finished .match-mvp-identity > img {
+    width: 29px;
+    height: 29px;
+  }
+  .match-modal-finished .match-mvp-name strong {
+    font-size: 12px;
+  }
+  .match-modal-finished .match-mvp-name small {
+    font-size: 9px;
+    line-height: 1.1;
+  }
+  .match-modal-finished .match-mvp-numbers {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2px;
+    width: 100%;
+    min-width: 0;
+  }
+  .match-modal-finished .match-mvp-numbers > span {
+    padding: 4px 0;
+  }
+  .match-modal-finished .match-mvp-numbers strong {
+    font-size: 11px;
+    letter-spacing: -.35px;
+  }
+  .match-modal-finished .match-mvp-numbers small {
+    font-size: 7px;
+  }
+  .match-modal-finished .match-mobile-team-tabs {
+    margin-top: 5px;
+  }
+  .match-modal-finished .match-mobile-team-tabs button {
+    min-height: 33px;
+  }
+  .match-modal-finished .match-modal-content {
+    padding-top: 5px !important;
+    padding-bottom: 6px !important;
+  }
+  .match-modal-finished .match-stats-team-header {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .match-modal-finished .match-stat-player {
+    min-height: 27px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+}
+@media (max-width: 370px) {
+  .match-modal-finished .match-mvp-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .match-modal-finished .match-mvp-numbers strong {
+    font-size: 13px;
+  }
+}
