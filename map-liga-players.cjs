@@ -44,6 +44,7 @@ for (const match of playersSource.matchAll(/\{[^{}]*\}/g)) {
   const name = block.match(/\bname:\s*["']([^"']+)["']/);
   const team = block.match(/\bteamId:\s*["']([^"']+)["']/);
   const number = block.match(/\bnumber:\s*(\d+)/);
+  const officialId = block.match(/\bofficialPlayerId:\s*(\d+)/);
 
   if (!id || !name || !team) continue;
 
@@ -52,6 +53,7 @@ for (const match of playersSource.matchAll(/\{[^{}]*\}/g)) {
     name: name[1],
     teamId: team[1],
     number: number ? Number(number[1]) : null,
+    officialPlayerId: officialId ? Number(officialId[1]) : null,
   });
 }
 
@@ -81,6 +83,7 @@ const manualAliases = {
   429641: "austin-wtighten",
   382324: "junior-merchant",
   326007: "enzo-filippetti",
+  377826: "agustin-perez-tapia",
 };
 
 const matched = [];
@@ -93,7 +96,29 @@ for (const official of officialPlayers.values()) {
   const candidates = players.filter(
     (player) => player.teamId === teamId
   );
+  const idMatches = candidates.filter(
+    (player) =>
+      player.officialPlayerId === Number(official.officialPlayerId)
+  );
 
+  if (idMatches.length > 1) {
+    throw new Error(
+      `ID oficial duplicado: ${official.officialPlayerId}`
+    );
+  }
+
+  if (idMatches.length === 1) {
+    const player = idMatches[0];
+
+    matched.push({
+      ...official,
+      lnaPlayerId: player.id,
+      lnaName: player.name,
+      matchType: "official-id",
+    });
+
+    continue;
+  }
   const aliasId = manualAliases[official.officialPlayerId];
 
   if (aliasId) {

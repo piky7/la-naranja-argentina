@@ -84,19 +84,19 @@ const fixture = [
     ["la-union", "racing-chivilcoy"],
   ]],
 
-  ["2026-10-17", [
-    ["san-lorenzo", "penarol"],
-    ["platense", "obera"],
-  ]],
+ ["2026-10-16", [
+  ["san-lorenzo", "penarol"],
+  ["platense", "obera"],
+]],
 
-  ["2026-10-18", [
-    ["regatas", "olimpico"],
-  ]],
+["2026-10-18", [
+  ["regatas", "olimpico"],
+  ["san-lorenzo", "obera"],
+]],
 
-  ["2026-10-19", [
-    ["independiente-oliva", "lanus"],
-    ["san-lorenzo", "obera"],
-  ]],
+["2026-10-19", [
+  ["independiente-oliva", "lanus"],
+]],
 
   ["2026-10-20", [
     ["ferro", "platense"],
