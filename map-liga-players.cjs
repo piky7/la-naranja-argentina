@@ -74,6 +74,15 @@ for (const match of history.matches) {
   }
 }
 
+const manualAliases = {
+  429023: "ty-prince",
+  211116: "al-thornton",
+  326092: "will-vorhees",
+  429641: "austin-wtighten",
+  382324: "junior-merchant",
+  326007: "enzo-filippetti",
+};
+
 const matched = [];
 const review = [];
 const unmatched = [];
@@ -84,6 +93,26 @@ for (const official of officialPlayers.values()) {
   const candidates = players.filter(
     (player) => player.teamId === teamId
   );
+
+  const aliasId = manualAliases[official.officialPlayerId];
+
+  if (aliasId) {
+    const player = candidates.find((p) => p.id === aliasId);
+
+    if (player) {
+      matched.push({
+        ...official,
+        lnaPlayerId: player.id,
+        lnaName: player.name,
+        matchType: "manual-alias",
+      });
+      continue;
+    }
+
+    throw new Error(
+      `Alias inválido: ${official.officialPlayerId} -> ${aliasId}`
+    );
+  }
 
   const officialName = normalize(official.officialName);
 
