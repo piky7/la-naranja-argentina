@@ -9231,3 +9231,38 @@
     z-index: 1;
   }
 }
+
+/* Columna VAL - estadísticas de partido */
+
+.match-modal-finished .match-stats-head,
+.match-modal-finished .match-stat-player {
+  grid-template-columns:
+    minmax(0, 1fr)
+    34px
+    34px
+    34px
+    46px
+    34px;
+}
+
+.match-modal-finished .match-stats-head span:last-child,
+.match-modal-finished .match-stat-player span:last-child {
+  color: #ff9b32;
+  font-weight: 800;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    grid-template-columns:
+      minmax(0, 1fr)
+      27px
+      27px
+      27px
+      40px
+      29px;
+
+    column-gap: 2px;
+  }
+}

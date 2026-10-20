@@ -7,6 +7,7 @@ import { matchResults } from "../data/matchResults";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
+import { getOfficialValuation } from "../utils/getOfficialValuation";
 
 
 import FixtureCalendar from "../components/FixtureCalendar";
@@ -1802,12 +1803,13 @@ const finishedMatch = {
                     </div>
 
                     <div className="match-stats-head">
-                      <span>JUGADOR</span>
-                      <span>PTS</span>
-                      <span>REB</span>
-                      <span>AST</span>
-                      <span>MIN</span>
-                    </div>
+  <span>JUGADOR</span>
+  <span>PTS</span>
+  <span>REB</span>
+  <span>AST</span>
+  <span>MIN</span>
+  <span>VAL</span>
+</div>
 
                     <div className="match-stats-list">
                       {(
@@ -1866,8 +1868,16 @@ const finishedMatch = {
                             </span>
 
                             <span>
-                              {player.minutes || "—"}
-                            </span>
+  {player.minutes || "—"}
+</span>
+
+<span>
+  {getOfficialValuation(
+    selectedMatch,
+    selectedMatch.homeTeam,
+    player.id
+  ) ?? "—"}
+</span>
                           </button>
                         ))}
                     </div>
@@ -1896,12 +1906,13 @@ const finishedMatch = {
                     </div>
 
                     <div className="match-stats-head">
-                      <span>JUGADOR</span>
-                      <span>PTS</span>
-                      <span>REB</span>
-                      <span>AST</span>
-                      <span>MIN</span>
-                    </div>
+  <span>JUGADOR</span>
+  <span>PTS</span>
+  <span>REB</span>
+  <span>AST</span>
+  <span>MIN</span>
+  <span>VAL</span>
+</div>
 
                     <div className="match-stats-list">
                       {(
@@ -1960,8 +1971,16 @@ const finishedMatch = {
                             </span>
 
                             <span>
-                              {player.minutes || "—"}
-                            </span>
+  {player.minutes || "—"}
+</span>
+
+<span>
+  {getOfficialValuation(
+    selectedMatch,
+    selectedMatch.awayTeam,
+    player.id
+  ) ?? "—"}
+</span>
                           </button>
                         ))}
                     </div>

@@ -2562,3 +2562,19 @@
 .match-modal-score strong {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
 }
+.match-modal-finished .match-stats-head,
+.match-modal-finished .match-stat-player {
+  grid-template-columns:
+    minmax(0, 1fr)
+    34px 34px 34px 46px 34px;
+}
+
+@media (max-width: 480px) {
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    grid-template-columns:
+      minmax(0, 1fr)
+      27px 27px 27px 40px 29px;
+    column-gap: 2px;
+  }
+}

@@ -7,7 +7,7 @@ import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
-
+import { getOfficialValuation } from "../utils/getOfficialValuation";
 import "./Liga.css";
 import "./Home.css";
 const matches = baseMatches.map((match) => {
@@ -1613,6 +1613,7 @@ console.table(quarterScores);
         <span>REB</span>
         <span>AST</span>
         <span>MIN</span>
+        <span>VAL</span>
       </div>
 
       <div className="match-stats-list">
@@ -1642,6 +1643,13 @@ console.table(quarterScores);
               <span>{player.assists ?? "—"}</span>
 
               <span>{player.minutes || "—"}</span>
+              <span>
+  {getOfficialValuation(
+    selectedMatch,
+    team.id,
+    player.id
+) ?? "—"}
+</span>
             </button>
           ))
         ) : (

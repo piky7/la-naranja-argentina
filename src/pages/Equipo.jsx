@@ -5,7 +5,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 import "./Equipo.css";
 import "./Home.css";
-
+import { getOfficialValuation } from "../utils/getOfficialValuation";
 import { teams } from "../data/teams";
 import { players } from "../data/players";
 import { matches } from "../data/matches";
@@ -1797,6 +1797,7 @@ const awayTeam = getTeam(match.awayTeam);
                       <span>REB</span>
                       <span>AST</span>
                       <span>MIN</span>
+                      <span>VAL</span>
                     </div>
 
                     <div className="match-stats-list">
@@ -1855,6 +1856,13 @@ const awayTeam = getTeam(match.awayTeam);
                             <span>
                               {player.minutes || "—"}
                             </span>
+                            <span>
+  {getOfficialValuation(
+    selectedMatch,
+    selectedMatch.homeTeam,
+    player.id
+  ) ?? "—"}
+</span>
                           </button>
                         ))}
                     </div>
@@ -1888,6 +1896,7 @@ const awayTeam = getTeam(match.awayTeam);
                       <span>REB</span>
                       <span>AST</span>
                       <span>MIN</span>
+                      <span>VAL</span>
                     </div>
 
                     <div className="match-stats-list">
@@ -1946,6 +1955,13 @@ const awayTeam = getTeam(match.awayTeam);
                             <span>
                               {player.minutes || "—"}
                             </span>
+                            <span>
+  {getOfficialValuation(
+    selectedMatch,
+    selectedMatch.awayTeam,
+    player.id
+  ) ?? "—"}
+</span>
                           </button>
                         ))}
                     </div>
