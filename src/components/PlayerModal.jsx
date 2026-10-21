@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { teams } from "../data/teams";
 import { matches } from "../data/matches";
 import { playerStats } from "../data/stats";
@@ -56,7 +57,7 @@ export default function PlayerModal({
     rival: teams.find((item) => item.shortName === game.rival) || { shortName: game.rival },
   }));
 
-  return (
+  return createPortal(
     <div className="home-modal-overlay" onClick={onClose}>
       <div
         className="home-player-modal"
@@ -188,6 +189,7 @@ export default function PlayerModal({
           <strong>{team?.shortName || ""}</strong>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
