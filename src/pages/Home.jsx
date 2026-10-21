@@ -1522,24 +1522,10 @@ const finishedMatch = {
               </div>
             </header>
             <div className="team-v2-body">
-              <section className="team-v2-section">
-                <h3>TEMPORADA 2026/27</h3>
-                <div className="team-v2-stats">
-                  {[
-                    ["PJ", selectedTeam.gamesPlayed],
-                    ["PG", selectedTeam.wins],
-                    ["PP", selectedTeam.losses],
-                    ["DIF", selectedTeam.difference > 0 ? "+" + selectedTeam.difference : selectedTeam.difference],
-                    ["PTS/P", selectedTeam.gamesPlayed ? (selectedTeam.pointsFor / selectedTeam.gamesPlayed).toFixed(1) : "—"],
-                    ["REC/P", selectedTeam.gamesPlayed ? (selectedTeam.pointsAgainst / selectedTeam.gamesPlayed).toFixed(1) : "—"],
-                  ].map(([label, value]) => (
-                    <div key={label}><span>{label}</span><strong>{value}</strong></div>
-                  ))}
-                </div>
-              </section>
               {(() => {
                 const official = getUpcomingOfficialCollective(selectedTeam.id);
                 const metrics = [
+                  ["PTS/P", "points"], ["REC/P", "pointsAgainst"],
                   ["REB/P", "rebounds"], ["AST/P", "assists"],
                   ["RECUP/P", "steals"], ["TAP/P", "blocks"],
                   ["PÉRD/P", "turnovers"], ["FALTAS/P", "fouls"],
