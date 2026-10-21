@@ -1,3 +1,4 @@
+const { parseOfficialFinal } = require("./scripts/parse-official-final.cjs");
 
 const fs = require("node:fs");
 const cheerio = require("cheerio");
@@ -134,6 +135,7 @@ const encabezado = contenedor
 
   const resultado = {
     source: "Liga Nacional",
+    ...parseOfficialFinal($, URL_PARTIDO),
     matchUrl: URL_PARTIDO,
     teams: equipos,
   };

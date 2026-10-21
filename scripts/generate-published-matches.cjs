@@ -1,6 +1,8 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { assertPublishableResult } = require("./official-final.cjs");
+const auditedFinals = require("./audited-official-finals.json");
 
 const ROOT = process.cwd();
 
@@ -80,6 +82,20 @@ async function main() {
     const matchStats = stats[resultKey] ?? stats[teamsKey];
 
     if (!matchStats || typeof matchStats !== "object") continue;
+
+    if (result.source === "Liga Nacional") {
+      try {
+        // Existing audited results remain byte-for-byte unchanged in source.
+        const checked = auditedFinals[resultKey] && !result.finalEvidence
+          ? { ...result, finalEvidence: {
+            type: "audited-history-through-2026-10-19", officialUrl: result.officialUrl,
+          } }
+          : result;
+        assertPublishableResult(resultKey, checked, matchStats);
+      } catch {
+        continue;
+      }
+    }
 
     const homeTeam = result.homeTeam ?? matchStats.homeTeam;
     const awayTeam = result.awayTeam ?? matchStats.awayTeam;

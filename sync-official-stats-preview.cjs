@@ -1,3 +1,5 @@
+const auditedFinals = require("./scripts/audited-official-finals.json");
+const { isConfirmedFinal } = require("./scripts/official-final.cjs");
 const fs = require("node:fs");
 
 const FIXTURE_FILE = "liga-events.json";
@@ -77,43 +79,23 @@ async function main() {
   const skipped = [];
   let verified = 0;
 
-  // Los resultados se toman directamente del fixture oficial, incluso si
-  // una estadística individual debe quedar retenida por falta de mapeo.
-  const todayArgentina = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "America/Argentina/Buenos_Aires",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(new Date());
-
-  for (const official of fixture.matches) {
-    const homeTeam = teamMap[official.home.officialTeamId];
-    const awayTeam = teamMap[official.away.officialTeamId];
-    if (!homeTeam || !awayTeam) continue;
-    if (official.date >= todayArgentina) continue;
-    if (!Number.isInteger(official.homeScore) || !Number.isInteger(official.awayScore)) continue;
-    if (official.homeScore === 0 && official.awayScore === 0) continue;
-    const key = `${official.date}-${homeTeam}-${awayTeam}`;
-    resultsByMatch[key] = {
-      status: "finished",
-      homeScore: official.homeScore,
-      awayScore: official.awayScore,
-      time: official.time || null,
-      homeTeam,
-      awayTeam,
-      venue: null,
-      tv: [],
-      source: "Liga Nacional",
-      officialUrl: official.officialUrl,
-    };
-  }
-
   for (const record of history.matches) {
     const official = fixtureByUrl.get(record.officialUrl);
     if (!official) {
       const reason = "La URL no figura en el fixture oficial actual.";
       skipped.push({ date: record.date, reason });
       console.log("OMITIDO", record.date, reason, record.officialUrl);
+      continue;
+    }
+
+    // Preserve only the already audited historical snapshot. New games fail closed.
+    const historicalKey = `${record.date}-${teamMap[official.home.officialTeamId]}-${teamMap[official.away.officialTeamId]}`;
+    const baseline = auditedFinals[historicalKey];
+    const historical = record.date === official.date && baseline &&
+      baseline.officialUrl === record.officialUrl &&
+      baseline.homeScore === official.homeScore && baseline.awayScore === official.awayScore;
+    if (!historical && !isConfirmedFinal(record)) {
+      skipped.push({ date: record.date, reason: "Sin evidencia oficial de finalización." });
       continue;
     }
 
@@ -127,6 +109,7 @@ async function main() {
     }
 
     if (
+      record.date !== official.date ||
       !Number.isInteger(official.homeScore) ||
       !Number.isInteger(official.awayScore) ||
       official.homeScore === 0 && official.awayScore === 0 ||
@@ -236,6 +219,14 @@ async function main() {
       [awayTeamId]: awayPlayers,
     };
 
+    resultsByMatch[key] = {
+      status: "finished", homeScore: official.homeScore, awayScore: official.awayScore,
+      time: official.time || null, homeTeam: homeTeamId, awayTeam: awayTeamId,
+      venue: null, tv: [], source: "Liga Nacional", officialUrl: official.officialUrl,
+      finalEvidence: historical
+        ? { type: "audited-history-through-2026-10-19", officialUrl: official.officialUrl }
+        : record.finalEvidence,
+    };
     verified++;
     console.log(`VERIFICADO LNB: ${record.date} ${official.home.name} ${official.homeScore}-${official.awayScore} ${official.away.name}; puntos individuales coinciden y jugadores identificados.`);
   }
@@ -256,9 +247,7 @@ async function main() {
   console.log(`Partidos omitidos por validación/mapeo: ${skipped.length}`);
   console.log(`Vista previa generada: ${OUTPUT_FILE}`);
 
-  // Puede haber más resultados oficiales que estadísticas individuales verificadas:
-  // los resultados salen del fixture oficial; las estadísticas exigen además
-  // que todos los jugadores estén identificados y sus puntos sumen el marcador.
+  // Results and statistics must pass the same validation.
   if (Object.keys(statsByMatch).length !== verified || Object.keys(resultsByMatch).length < verified) {
     throw new Error("La cantidad de estadísticas verificadas no coincide con sus claves únicas o faltan resultados oficiales.");
   }

@@ -1,3 +1,4 @@
+const { isConfirmedFinal } = require("./scripts/official-final.cjs");
 
 const fs = require("node:fs");
 const { spawnSync } = require("node:child_process");
@@ -109,6 +110,13 @@ async function main() {
 
     const datos = leerJSON(TEMP);
 
+    if (!isConfirmedFinal({ ...datos, officialUrl: partido.officialUrl }) ||
+        datos.homeScore !== partido.homeScore || datos.awayScore !== partido.awayScore) {
+      console.log("Sin finalización oficial o marcador del fixture desactualizado.");
+      omitidos++;
+      continue;
+    }
+
     const local = datos.teams.find(
       (e) => e.officialTeamId === partido.home.officialTeamId
     );
@@ -133,6 +141,8 @@ async function main() {
     }
 
     const registro = {
+      status: datos.status,
+      finalEvidence: datos.finalEvidence,
       date: partido.date,
       time: partido.time,
       officialUrl: partido.officialUrl,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T12:04:47.456Z",
+  "generatedAt": "2026-10-21T12:20:28.458Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -247,6 +247,22 @@
       "awayScore": 93,
       "homeTeam": "independiente-oliva",
       "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-10-20-san-martin-olimpico": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 106,
+      "homeTeam": "san-martin",
+      "awayTeam": "olimpico",
+      "hasStats": true
+    },
+    "2026-10-20-ferro-platense": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 81,
+      "homeTeam": "ferro",
+      "awayTeam": "platense",
       "hasStats": true
     }
   }

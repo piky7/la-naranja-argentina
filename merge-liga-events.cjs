@@ -25,6 +25,11 @@ for (const partido of nuevo.matches) {
   if (!partidos.has(key)) {
     partidos.set(key, partido);
     agregados++;
+  } else {
+    // Refresh existing snapshots too: their scores may still be partial.
+    // Official encrypted URLs rotate between requests; keep the working URL
+    // used by the history while refreshing this match's mutable fields.
+    partidos.set(key, { ...partido, officialUrl: partidos.get(key).officialUrl });
   }
 }
 
