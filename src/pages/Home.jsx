@@ -2454,7 +2454,11 @@ const finishedMatch = {
                           const value = Number(player.stats[category.key]);
                           const isLeader = max > 0 && Math.abs(value - max) < 0.00001;
                           return <button key={player.id} type="button" className="upcoming-player-entry"
-                            onClick={() => setSelectedPlayer(player)}>
+                            onClick={() => setSelectedPlayer({
+                              ...player,
+                              team: getTeam(player.teamId),
+                              stats: getPlayerStats(player.id),
+                            })}>
                             {team?.logo && <img src={team.logo} alt="" className="upcoming-player-crest" />}
                             <div className="upcoming-player-info">
                               <span className="upcoming-player-name">{player.name}</span>
