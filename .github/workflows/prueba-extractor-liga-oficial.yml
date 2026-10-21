@@ -1,0 +1,67 @@
+name: Probar extractor oficial de estadísticas
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/prueba-extractor-liga-oficial.yml"
+      - "extractor-liga.cjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probar-extractor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Extraer estadísticas de un partido terminado
+        run: |
+          node extractor-liga.cjs "https://www.laliganacional.com.ar/laliga/partido/v2kxKmD-zO6hYv1dnwEnZPcrVUQ920f68VEGsE0kMlWVfdSg6wMtD1-A==/lanus-vs-gimnasia-cr" "liga-prueba-oficial.json"
+
+      - name: Validar los datos extraídos
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const data = JSON.parse(fs.readFileSync("liga-prueba-oficial.json", "utf8"));
+          if (data.teams?.length !== 2) throw new Error("No se encontraron exactamente dos equipos.");
+          const expected = [
+            { id: 112600, name: "LANÚS", score: 74 },
+            { id: 112553, name: "GIMNASIA (CR)", score: 92 }
+          ];
+          for (const team of expected) {
+            const found = data.teams.find(t => t.officialTeamId === team.id);
+            if (!found) throw new Error("No se identificó el equipo: " + team.name);
+            if (!Array.isArray(found.players) || found.players.length === 0) throw new Error("No se extrajeron jugadores de " + team.name);
+            const points = found.players.reduce((sum, p) => sum + Number(p.points || 0), 0);
+            console.log(`${found.name}: ${found.players.length} jugadores; puntos extraídos: ${points}; marcador esperado: ${team.score}`);
+            if (points !== team.score) throw new Error(`Los puntos de ${team.name} no coinciden: ${points} vs ${team.score}`);
+            for (const field of ["rebounds", "assists", "minutes", "valuation"]) {
+              if (!(field in found.players[0])) throw new Error("Falta el campo " + field + " en los datos de jugadores.");
+            }
+          }
+          console.log("PRUEBA CORRECTA: equipos, jugadores y puntos coinciden con el marcador oficial.");
+          '
+
+      - name: Guardar resultado de la prueba
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: liga-prueba-oficial
+          path: liga-prueba-oficial.json
+          if-no-files-found: ignore
+          retention-days: 7
