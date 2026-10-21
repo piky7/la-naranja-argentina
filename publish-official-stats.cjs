@@ -17,6 +17,34 @@ async function main() {
   const matchStats = structuredClone(currentStats);
   const matchResults = structuredClone(currentResults);
 
+  // Eliminar el fallback histórico de Flashscore para partidos cubiertos por
+  // el fixture oficial. Si no hay estadísticas oficiales validadas, la web
+  // debe mostrar que no hay estadísticas disponibles, nunca reutilizar datos
+  // antiguos de otra fuente como si fueran oficiales.
+  const officialStatsKeys = new Set(Object.keys(preview.matchStats || {}));
+  let legacyStatsRemoved = 0;
+  let unverifiedStatsRemoved = 0;
+
+  for (const [key, result] of Object.entries(preview.matchResults || {})) {
+    if (result.source !== "Liga Nacional" || !result.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) {
+      throw new Error("No se puede limpiar ni reemplazar un partido sin origen oficial: " + key);
+    }
+    if (!result.homeTeam || !result.awayTeam) {
+      throw new Error("Faltan los equipos internos para aplicar la política de fuente oficial: " + key);
+    }
+
+    const legacyKey = `${result.homeTeam}-${result.awayTeam}`;
+    if (Object.prototype.hasOwnProperty.call(matchStats, legacyKey)) {
+      delete matchStats[legacyKey];
+      legacyStatsRemoved++;
+    }
+
+    if (!officialStatsKeys.has(key) && Object.prototype.hasOwnProperty.call(matchStats, key)) {
+      delete matchStats[key];
+      unverifiedStatsRemoved++;
+    }
+  }
+
   let statsAdded = 0;
   for (const [key, record] of Object.entries(preview.matchStats || {})) {
     if (record.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) {
@@ -61,7 +89,9 @@ async function main() {
   console.log("Publicación oficial preparada:");
   console.log("Estadísticas oficiales incorporadas:", statsAdded);
   console.log("Resultados oficiales incorporados/actualizados:", resultsAdded);
-  console.log("Partidos con estadísticas incompletas permanecen sin estadísticas nuevas.");
+  console.log("Claves antiguas eliminadas para evitar fallback a Flashscore:", legacyStatsRemoved);
+  console.log("Estadísticas previas sin validación oficial retiradas:", unverifiedStatsRemoved);
+  console.log("Los partidos sin estadísticas oficiales verificadas quedan sin estadísticas de jugador, en lugar de mostrar datos de otra fuente.");
 }
 
 main().catch((error) => {
