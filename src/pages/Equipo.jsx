@@ -1569,6 +1569,34 @@ const awayTeam = getTeam(match.awayTeam);
   </section>
 )}
 
+              {selectedMatchMvp && (
+                <button type="button" className="match-mvp-card"
+                  aria-label={`Abrir ficha de ${selectedMatchMvp.player.name}, jugador del partido`}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    const playerInfo = players.find(p => p.id === selectedMatchMvp.player.id);
+                    if (playerInfo) setSelectedPlayer(playerInfo);
+                  }}>
+                  <span className="match-mvp-heading">♛ JUGADOR DEL PARTIDO</span>
+                  <span className="match-mvp-body">
+                    <span className="match-mvp-identity">
+                      {selectedMatchMvp.team?.logo && <img src={selectedMatchMvp.team.logo} alt="" />}
+                      <span className="match-mvp-name">
+                        <strong>{selectedMatchMvp.player.name}</strong>
+                        <small>{selectedMatchMvp.team?.name || selectedMatchMvp.teamId}</small>
+                      </span>
+                    </span>
+                    <span className="match-mvp-numbers">
+                      <span><strong>{selectedMatchMvp.player.points ?? "—"}</strong><small>PTS</small></span>
+                      <span><strong>{selectedMatchMvp.player.rebounds ?? "—"}</strong><small>REB</small></span>
+                      <span><strong>{selectedMatchMvp.player.assists ?? "—"}</strong><small>AST</small></span>
+                      <span><strong>{selectedMatchMvp.player.minutes || "—"}</strong><small>MIN</small></span>
+                      <span className="match-mvp-valuation"><strong>{selectedMatchMvp.valuation}</strong><small>VAL</small></span>
+                    </span>
+                  </span>
+                </button>
+              )}
+
               {selectedMatchStats ? (
                 <MatchStatsTabs
                   key={selectedMatch.date + selectedMatch.homeTeam + selectedMatch.awayTeam}
@@ -1790,34 +1818,6 @@ const awayTeam = getTeam(match.awayTeam);
                     partido todavía no fue cargada.
                   </p>
                 </div>
-              )}
-
-              {selectedMatchMvp && (
-                <button type="button" className="match-mvp-card"
-                  aria-label={`Abrir ficha de ${selectedMatchMvp.player.name}, jugador del partido`}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    const playerInfo = players.find(p => p.id === selectedMatchMvp.player.id);
-                    if (playerInfo) setSelectedPlayer(playerInfo);
-                  }}>
-                  <span className="match-mvp-heading">♛ JUGADOR DEL PARTIDO</span>
-                  <span className="match-mvp-body">
-                    <span className="match-mvp-identity">
-                      {selectedMatchMvp.team?.logo && <img src={selectedMatchMvp.team.logo} alt="" />}
-                      <span className="match-mvp-name">
-                        <strong>{selectedMatchMvp.player.name}</strong>
-                        <small>{selectedMatchMvp.team?.name || selectedMatchMvp.teamId}</small>
-                      </span>
-                    </span>
-                    <span className="match-mvp-numbers">
-                      <span><strong>{selectedMatchMvp.player.points ?? "—"}</strong><small>PTS</small></span>
-                      <span><strong>{selectedMatchMvp.player.rebounds ?? "—"}</strong><small>REB</small></span>
-                      <span><strong>{selectedMatchMvp.player.assists ?? "—"}</strong><small>AST</small></span>
-                      <span><strong>{selectedMatchMvp.player.minutes || "—"}</strong><small>MIN</small></span>
-                      <span className="match-mvp-valuation"><strong>{selectedMatchMvp.valuation}</strong><small>VAL</small></span>
-                    </span>
-                  </span>
-                </button>
               )}
 
               <div className="match-modal-footer">
