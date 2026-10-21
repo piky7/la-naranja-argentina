@@ -40,19 +40,13 @@ function Estadisticas() {
 const getMatchStats = (match) => {
   if (!match) return null;
 
-  const directStats = matchPlayerStats[match.id];
-
+  const normalizedId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  const directStats = matchPlayerStats[match.id] || matchPlayerStats[normalizedId];
   if (directStats) return directStats;
 
-  const normalizedId =
-    `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-
-  const normalizedStats = matchPlayerStats[normalizedId];
-
-  if (normalizedStats) return normalizedStats;
+  if (match.officialUrl) return null;
 
   const simpleId = `${match.homeTeam}-${match.awayTeam}`;
-
   return matchPlayerStats[simpleId] || null;
 };
 

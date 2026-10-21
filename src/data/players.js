@@ -692,6 +692,7 @@ export const players = [
 
 {
   id: "enzo-filippetti",
+  officialPlayerId: 326007,
   name: "Enzo Fillipetti",
   teamId: "independiente-oliva",
   position: "Interno",
@@ -1008,6 +1009,7 @@ export const players = [
 
 {
   id: "junior-merchant",
+  officialPlayerId: 382324,
   name: "Junior Merchant",
   teamId: "lanus",
   position: "Interno",
@@ -1111,6 +1113,7 @@ export const players = [
 
 {
   id: "ty-prince",
+  officialPlayerId: 429023,
   name: "Ty Prince",
   teamId: "obera",
   position: "Alero",
@@ -1121,6 +1124,7 @@ export const players = [
 
 {
   id: "will-vorhees",
+  officialPlayerId: 326092,
   name: "Will Vorhees",
   teamId: "obera",
   position: "Interno",
@@ -1160,6 +1164,7 @@ export const players = [
 
 {
   id: "austin-wtighten",
+  officialPlayerId: 429641,
   name: "Austin Wtighten",
   teamId: "olimpico",
   position: "Escolta",
@@ -1286,6 +1291,7 @@ export const players = [
 
 {
   id: "agustin-perez-tapia",
+  officialPlayerId: 377826,
   name: "Agustín Pérez Tapia",
   teamId: "penarol",
   position: "Escolta",
@@ -1351,6 +1357,7 @@ export const players = [
 
 {
   id: "al-thornton",
+  officialPlayerId: 211116,
   name: "Al Thornton",
   teamId: "penarol",
   position: "Interno",

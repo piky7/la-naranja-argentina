@@ -75,21 +75,25 @@ async function main() {
     if (!dateMatch) continue;
 
     const teamsKey = dateMatch[1];
-    const matchStats = stats[teamsKey];
+    // Las estadísticas oficiales usan la clave completa con fecha.
+    // El formato anterior de Flashscore solo usaba los equipos.
+    const matchStats = stats[resultKey] ?? stats[teamsKey];
 
     if (!matchStats || typeof matchStats !== "object") continue;
 
-    const teamIds = Object.keys(matchStats).filter(
-  (key) => key !== "quarterScores"
-);
+    const homeTeam = result.homeTeam ?? matchStats.homeTeam;
+    const awayTeam = result.awayTeam ?? matchStats.awayTeam;
 
-    if (teamIds.length !== 2) continue;
-
-    const [homeTeam, awayTeam] = teamIds;
-
-    // Verificamos que las estadísticas correspondan
-    // exactamente al partido.
+    if (!homeTeam || !awayTeam) continue;
     if (`${homeTeam}-${awayTeam}` !== teamsKey) continue;
+
+    // Ignorar campos de metadatos y validar únicamente los dos planteles.
+    if (
+      !Array.isArray(matchStats[homeTeam]) ||
+      !Array.isArray(matchStats[awayTeam])
+    ) {
+      continue;
+    }
 
     if (
       !hasValidPlayers(matchStats[homeTeam]) ||
