@@ -6,6 +6,64 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 74,
     "awayScore": 92,
+    "teamStats": {
+      "lanus": {
+        "fieldGoals": {
+          "made": 24,
+          "attempted": 53,
+          "percentage": 45
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 30,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 7,
+          "attempted": 23,
+          "percentage": 30
+        },
+        "freeThrows": {
+          "made": 19,
+          "attempted": 27,
+          "percentage": 70
+        },
+        "rebounds": 27,
+        "assists": 14,
+        "steals": 10,
+        "blocks": 3,
+        "turnovers": 17,
+        "fouls": 14
+      },
+      "gimnasia": {
+        "fieldGoals": {
+          "made": 37,
+          "attempted": 67,
+          "percentage": 55
+        },
+        "twoPointers": {
+          "made": 23,
+          "attempted": 38,
+          "percentage": 61
+        },
+        "threePointers": {
+          "made": 14,
+          "attempted": 29,
+          "percentage": 48
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 9,
+          "percentage": 44
+        },
+        "rebounds": 29,
+        "assists": 26,
+        "steals": 11,
+        "blocks": 0,
+        "turnovers": 15,
+        "fouls": 26
+      }
+    },
     "lanus": [
       {
         "id": "robert-whitfield",
@@ -1207,65 +1265,7 @@ export const matchPlayerStats = {
         "home": 29,
         "away": 19
       }
-    ],
-    "teamStats": {
-      "lanus": {
-        "fieldGoals": {
-          "made": 24,
-          "attempted": 53,
-          "percentage": 45
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 30,
-          "percentage": 57
-        },
-        "threePointers": {
-          "made": 7,
-          "attempted": 23,
-          "percentage": 30
-        },
-        "freeThrows": {
-          "made": 19,
-          "attempted": 27,
-          "percentage": 70
-        },
-        "rebounds": 27,
-        "assists": 14,
-        "steals": 10,
-        "blocks": 3,
-        "turnovers": 17,
-        "fouls": 14
-      },
-      "gimnasia": {
-        "fieldGoals": {
-          "made": 37,
-          "attempted": 67,
-          "percentage": 55
-        },
-        "twoPointers": {
-          "made": 23,
-          "attempted": 38,
-          "percentage": 61
-        },
-        "threePointers": {
-          "made": 14,
-          "attempted": 29,
-          "percentage": 48
-        },
-        "freeThrows": {
-          "made": 4,
-          "attempted": 9,
-          "percentage": 44
-        },
-        "rebounds": 29,
-        "assists": 26,
-        "steals": 11,
-        "blocks": 0,
-        "turnovers": 15,
-        "fouls": 26
-      }
-    }
+    ]
   },
   "2026-09-30-penarol-gimnasia": {
     "source": "Liga Nacional",
@@ -1274,6 +1274,64 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 62,
     "awayScore": 57,
+    "teamStats": {
+      "penarol": {
+        "fieldGoals": {
+          "made": 22,
+          "attempted": 60,
+          "percentage": 36
+        },
+        "twoPointers": {
+          "made": 20,
+          "attempted": 38,
+          "percentage": 53
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 22,
+          "percentage": 9
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 21,
+          "percentage": 76
+        },
+        "rebounds": 42,
+        "assists": 9,
+        "steals": 6,
+        "blocks": 4,
+        "turnovers": 10,
+        "fouls": 17
+      },
+      "gimnasia": {
+        "fieldGoals": {
+          "made": 22,
+          "attempted": 61,
+          "percentage": 36
+        },
+        "twoPointers": {
+          "made": 18,
+          "attempted": 37,
+          "percentage": 49
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 24,
+          "percentage": 17
+        },
+        "freeThrows": {
+          "made": 9,
+          "attempted": 14,
+          "percentage": 64
+        },
+        "rebounds": 38,
+        "assists": 13,
+        "steals": 6,
+        "blocks": 4,
+        "turnovers": 10,
+        "fouls": 25
+      }
+    },
     "penarol": [
       {
         "id": "al-thornton",
@@ -2475,65 +2533,7 @@ export const matchPlayerStats = {
         "home": 18,
         "away": 22
       }
-    ],
-    "teamStats": {
-      "penarol": {
-        "fieldGoals": {
-          "made": 22,
-          "attempted": 60,
-          "percentage": 36
-        },
-        "twoPointers": {
-          "made": 20,
-          "attempted": 38,
-          "percentage": 53
-        },
-        "threePointers": {
-          "made": 2,
-          "attempted": 22,
-          "percentage": 9
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 21,
-          "percentage": 76
-        },
-        "rebounds": 42,
-        "assists": 9,
-        "steals": 6,
-        "blocks": 4,
-        "turnovers": 10,
-        "fouls": 17
-      },
-      "gimnasia": {
-        "fieldGoals": {
-          "made": 22,
-          "attempted": 61,
-          "percentage": 36
-        },
-        "twoPointers": {
-          "made": 18,
-          "attempted": 37,
-          "percentage": 49
-        },
-        "threePointers": {
-          "made": 4,
-          "attempted": 24,
-          "percentage": 17
-        },
-        "freeThrows": {
-          "made": 9,
-          "attempted": 14,
-          "percentage": 64
-        },
-        "rebounds": 38,
-        "assists": 13,
-        "steals": 6,
-        "blocks": 4,
-        "turnovers": 10,
-        "fouls": 25
-      }
-    }
+    ]
   },
   "2026-09-30-argentino-ferro": {
     "source": "Liga Nacional",
@@ -2542,6 +2542,64 @@ export const matchPlayerStats = {
     "awayTeam": "ferro",
     "homeScore": 79,
     "awayScore": 68,
+    "teamStats": {
+      "argentino": {
+        "fieldGoals": {
+          "made": 29,
+          "attempted": 59,
+          "percentage": 49
+        },
+        "twoPointers": {
+          "made": 23,
+          "attempted": 38,
+          "percentage": 61
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 21,
+          "percentage": 29
+        },
+        "freeThrows": {
+          "made": 15,
+          "attempted": 23,
+          "percentage": 65
+        },
+        "rebounds": 45,
+        "assists": 6,
+        "steals": 6,
+        "blocks": 2,
+        "turnovers": 14,
+        "fouls": 20
+      },
+      "ferro": {
+        "fieldGoals": {
+          "made": 24,
+          "attempted": 68,
+          "percentage": 35
+        },
+        "twoPointers": {
+          "made": 16,
+          "attempted": 30,
+          "percentage": 53
+        },
+        "threePointers": {
+          "made": 8,
+          "attempted": 38,
+          "percentage": 21
+        },
+        "freeThrows": {
+          "made": 12,
+          "attempted": 16,
+          "percentage": 75
+        },
+        "rebounds": 36,
+        "assists": 10,
+        "steals": 10,
+        "blocks": 2,
+        "turnovers": 8,
+        "fouls": 24
+      }
+    },
     "argentino": [
       {
         "id": "joaquin-fernandez",
@@ -3743,65 +3801,7 @@ export const matchPlayerStats = {
         "home": 21,
         "away": 9
       }
-    ],
-    "teamStats": {
-      "argentino": {
-        "fieldGoals": {
-          "made": 29,
-          "attempted": 59,
-          "percentage": 49
-        },
-        "twoPointers": {
-          "made": 23,
-          "attempted": 38,
-          "percentage": 61
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 21,
-          "percentage": 29
-        },
-        "freeThrows": {
-          "made": 15,
-          "attempted": 23,
-          "percentage": 65
-        },
-        "rebounds": 45,
-        "assists": 6,
-        "steals": 6,
-        "blocks": 2,
-        "turnovers": 14,
-        "fouls": 20
-      },
-      "ferro": {
-        "fieldGoals": {
-          "made": 24,
-          "attempted": 68,
-          "percentage": 35
-        },
-        "twoPointers": {
-          "made": 16,
-          "attempted": 30,
-          "percentage": 53
-        },
-        "threePointers": {
-          "made": 8,
-          "attempted": 38,
-          "percentage": 21
-        },
-        "freeThrows": {
-          "made": 12,
-          "attempted": 16,
-          "percentage": 75
-        },
-        "rebounds": 36,
-        "assists": 10,
-        "steals": 10,
-        "blocks": 2,
-        "turnovers": 8,
-        "fouls": 24
-      }
-    }
+    ]
   },
   "2026-09-30-san-martin-instituto": {
     "source": "Liga Nacional",
@@ -3810,6 +3810,64 @@ export const matchPlayerStats = {
     "awayTeam": "instituto",
     "homeScore": 73,
     "awayScore": 81,
+    "teamStats": {
+      "san-martin": {
+        "fieldGoals": {
+          "made": 25,
+          "attempted": 59,
+          "percentage": 42
+        },
+        "twoPointers": {
+          "made": 14,
+          "attempted": 26,
+          "percentage": 54
+        },
+        "threePointers": {
+          "made": 11,
+          "attempted": 33,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 12,
+          "attempted": 19,
+          "percentage": 63
+        },
+        "rebounds": 35,
+        "assists": 14,
+        "steals": 7,
+        "blocks": 1,
+        "turnovers": 12,
+        "fouls": 19
+      },
+      "instituto": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 62,
+          "percentage": 48
+        },
+        "twoPointers": {
+          "made": 19,
+          "attempted": 32,
+          "percentage": 59
+        },
+        "threePointers": {
+          "made": 11,
+          "attempted": 30,
+          "percentage": 37
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 14,
+          "percentage": 71
+        },
+        "rebounds": 32,
+        "assists": 15,
+        "steals": 8,
+        "blocks": 2,
+        "turnovers": 13,
+        "fouls": 18
+      }
+    },
     "san-martin": [
       {
         "id": "diego-collomb",
@@ -5011,65 +5069,7 @@ export const matchPlayerStats = {
         "home": 19,
         "away": 23
       }
-    ],
-    "teamStats": {
-      "san-martin": {
-        "fieldGoals": {
-          "made": 25,
-          "attempted": 59,
-          "percentage": 42
-        },
-        "twoPointers": {
-          "made": 14,
-          "attempted": 26,
-          "percentage": 54
-        },
-        "threePointers": {
-          "made": 11,
-          "attempted": 33,
-          "percentage": 33
-        },
-        "freeThrows": {
-          "made": 12,
-          "attempted": 19,
-          "percentage": 63
-        },
-        "rebounds": 35,
-        "assists": 14,
-        "steals": 7,
-        "blocks": 1,
-        "turnovers": 12,
-        "fouls": 19
-      },
-      "instituto": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 62,
-          "percentage": 48
-        },
-        "twoPointers": {
-          "made": 19,
-          "attempted": 32,
-          "percentage": 59
-        },
-        "threePointers": {
-          "made": 11,
-          "attempted": 30,
-          "percentage": 37
-        },
-        "freeThrows": {
-          "made": 10,
-          "attempted": 14,
-          "percentage": 71
-        },
-        "rebounds": 32,
-        "assists": 15,
-        "steals": 8,
-        "blocks": 2,
-        "turnovers": 13,
-        "fouls": 18
-      }
-    }
+    ]
   },
   "2026-10-01-olimpico-platense": {
     "source": "Liga Nacional",
@@ -5078,6 +5078,64 @@ export const matchPlayerStats = {
     "awayTeam": "platense",
     "homeScore": 74,
     "awayScore": 82,
+    "teamStats": {
+      "olimpico": {
+        "fieldGoals": {
+          "made": 22,
+          "attempted": 60,
+          "percentage": 36
+        },
+        "twoPointers": {
+          "made": 14,
+          "attempted": 33,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 8,
+          "attempted": 27,
+          "percentage": 30
+        },
+        "freeThrows": {
+          "made": 22,
+          "attempted": 30,
+          "percentage": 73
+        },
+        "rebounds": 43,
+        "assists": 9,
+        "steals": 7,
+        "blocks": 2,
+        "turnovers": 18,
+        "fouls": 20
+      },
+      "platense": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 71,
+          "percentage": 42
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 42,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 29,
+          "percentage": 31
+        },
+        "freeThrows": {
+          "made": 13,
+          "attempted": 19,
+          "percentage": 68
+        },
+        "rebounds": 36,
+        "assists": 8,
+        "steals": 12,
+        "blocks": 7,
+        "turnovers": 11,
+        "fouls": 23
+      }
+    },
     "olimpico": [
       {
         "id": "austin-wtighten",
@@ -6279,65 +6337,7 @@ export const matchPlayerStats = {
         "home": 24,
         "away": 31
       }
-    ],
-    "teamStats": {
-      "olimpico": {
-        "fieldGoals": {
-          "made": 22,
-          "attempted": 60,
-          "percentage": 36
-        },
-        "twoPointers": {
-          "made": 14,
-          "attempted": 33,
-          "percentage": 42
-        },
-        "threePointers": {
-          "made": 8,
-          "attempted": 27,
-          "percentage": 30
-        },
-        "freeThrows": {
-          "made": 22,
-          "attempted": 30,
-          "percentage": 73
-        },
-        "rebounds": 43,
-        "assists": 9,
-        "steals": 7,
-        "blocks": 2,
-        "turnovers": 18,
-        "fouls": 20
-      },
-      "platense": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 71,
-          "percentage": 42
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 42,
-          "percentage": 50
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 29,
-          "percentage": 31
-        },
-        "freeThrows": {
-          "made": 13,
-          "attempted": 19,
-          "percentage": 68
-        },
-        "rebounds": 36,
-        "assists": 8,
-        "steals": 12,
-        "blocks": 7,
-        "turnovers": 11,
-        "fouls": 23
-      }
-    }
+    ]
   },
   "2026-10-02-regatas-instituto": {
     "source": "Liga Nacional",
@@ -6346,6 +6346,64 @@ export const matchPlayerStats = {
     "awayTeam": "instituto",
     "homeScore": 73,
     "awayScore": 63,
+    "teamStats": {
+      "regatas": {
+        "fieldGoals": {
+          "made": 24,
+          "attempted": 63,
+          "percentage": 38
+        },
+        "twoPointers": {
+          "made": 16,
+          "attempted": 33,
+          "percentage": 48
+        },
+        "threePointers": {
+          "made": 8,
+          "attempted": 30,
+          "percentage": 27
+        },
+        "freeThrows": {
+          "made": 17,
+          "attempted": 21,
+          "percentage": 81
+        },
+        "rebounds": 32,
+        "assists": 12,
+        "steals": 6,
+        "blocks": 1,
+        "turnovers": 5,
+        "fouls": 21
+      },
+      "instituto": {
+        "fieldGoals": {
+          "made": 25,
+          "attempted": 60,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 22,
+          "attempted": 41,
+          "percentage": 54
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 19,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 13,
+          "percentage": 77
+        },
+        "rebounds": 33,
+        "assists": 12,
+        "steals": 4,
+        "blocks": 0,
+        "turnovers": 7,
+        "fouls": 20
+      }
+    },
     "regatas": [
       {
         "id": "keith-stone",
@@ -7547,65 +7605,7 @@ export const matchPlayerStats = {
         "home": 26,
         "away": 16
       }
-    ],
-    "teamStats": {
-      "regatas": {
-        "fieldGoals": {
-          "made": 24,
-          "attempted": 63,
-          "percentage": 38
-        },
-        "twoPointers": {
-          "made": 16,
-          "attempted": 33,
-          "percentage": 48
-        },
-        "threePointers": {
-          "made": 8,
-          "attempted": 30,
-          "percentage": 27
-        },
-        "freeThrows": {
-          "made": 17,
-          "attempted": 21,
-          "percentage": 81
-        },
-        "rebounds": 32,
-        "assists": 12,
-        "steals": 6,
-        "blocks": 1,
-        "turnovers": 5,
-        "fouls": 21
-      },
-      "instituto": {
-        "fieldGoals": {
-          "made": 25,
-          "attempted": 60,
-          "percentage": 41
-        },
-        "twoPointers": {
-          "made": 22,
-          "attempted": 41,
-          "percentage": 54
-        },
-        "threePointers": {
-          "made": 3,
-          "attempted": 19,
-          "percentage": 16
-        },
-        "freeThrows": {
-          "made": 10,
-          "attempted": 13,
-          "percentage": 77
-        },
-        "rebounds": 33,
-        "assists": 12,
-        "steals": 4,
-        "blocks": 0,
-        "turnovers": 7,
-        "fouls": 20
-      }
-    }
+    ]
   },
   "2026-10-03-quimsa-platense": {
     "source": "Liga Nacional",
@@ -7614,6 +7614,64 @@ export const matchPlayerStats = {
     "awayTeam": "platense",
     "homeScore": 94,
     "awayScore": 67,
+    "teamStats": {
+      "quimsa": {
+        "fieldGoals": {
+          "made": 29,
+          "attempted": 58,
+          "percentage": 50
+        },
+        "twoPointers": {
+          "made": 16,
+          "attempted": 28,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 13,
+          "attempted": 30,
+          "percentage": 43
+        },
+        "freeThrows": {
+          "made": 23,
+          "attempted": 28,
+          "percentage": 82
+        },
+        "rebounds": 31,
+        "assists": 15,
+        "steals": 14,
+        "blocks": 3,
+        "turnovers": 14,
+        "fouls": 17
+      },
+      "platense": {
+        "fieldGoals": {
+          "made": 22,
+          "attempted": 61,
+          "percentage": 36
+        },
+        "twoPointers": {
+          "made": 13,
+          "attempted": 33,
+          "percentage": 39
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 28,
+          "percentage": 32
+        },
+        "freeThrows": {
+          "made": 14,
+          "attempted": 16,
+          "percentage": 88
+        },
+        "rebounds": 35,
+        "assists": 11,
+        "steals": 6,
+        "blocks": 2,
+        "turnovers": 17,
+        "fouls": 29
+      }
+    },
     "quimsa": [
       {
         "id": "tyren-johnson",
@@ -8815,65 +8873,7 @@ export const matchPlayerStats = {
         "home": 16,
         "away": 26
       }
-    ],
-    "teamStats": {
-      "quimsa": {
-        "fieldGoals": {
-          "made": 29,
-          "attempted": 58,
-          "percentage": 50
-        },
-        "twoPointers": {
-          "made": 16,
-          "attempted": 28,
-          "percentage": 57
-        },
-        "threePointers": {
-          "made": 13,
-          "attempted": 30,
-          "percentage": 43
-        },
-        "freeThrows": {
-          "made": 23,
-          "attempted": 28,
-          "percentage": 82
-        },
-        "rebounds": 31,
-        "assists": 15,
-        "steals": 14,
-        "blocks": 3,
-        "turnovers": 14,
-        "fouls": 17
-      },
-      "platense": {
-        "fieldGoals": {
-          "made": 22,
-          "attempted": 61,
-          "percentage": 36
-        },
-        "twoPointers": {
-          "made": 13,
-          "attempted": 33,
-          "percentage": 39
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 28,
-          "percentage": 32
-        },
-        "freeThrows": {
-          "made": 14,
-          "attempted": 16,
-          "percentage": 88
-        },
-        "rebounds": 35,
-        "assists": 11,
-        "steals": 6,
-        "blocks": 2,
-        "turnovers": 17,
-        "fouls": 29
-      }
-    }
+    ]
   },
   "2026-10-04-gimnasia-la-union": {
     "source": "Liga Nacional",
@@ -8882,6 +8882,64 @@ export const matchPlayerStats = {
     "awayTeam": "la-union",
     "homeScore": 92,
     "awayScore": 86,
+    "teamStats": {
+      "gimnasia": {
+        "fieldGoals": {
+          "made": 33,
+          "attempted": 72,
+          "percentage": 45
+        },
+        "twoPointers": {
+          "made": 18,
+          "attempted": 33,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 15,
+          "attempted": 39,
+          "percentage": 38
+        },
+        "freeThrows": {
+          "made": 11,
+          "attempted": 18,
+          "percentage": 61
+        },
+        "rebounds": 33,
+        "assists": 13,
+        "steals": 8,
+        "blocks": 3,
+        "turnovers": 8,
+        "fouls": 23
+      },
+      "la-union": {
+        "fieldGoals": {
+          "made": 31,
+          "attempted": 59,
+          "percentage": 52
+        },
+        "twoPointers": {
+          "made": 27,
+          "attempted": 41,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 18,
+          "percentage": 22
+        },
+        "freeThrows": {
+          "made": 20,
+          "attempted": 29,
+          "percentage": 69
+        },
+        "rebounds": 34,
+        "assists": 8,
+        "steals": 3,
+        "blocks": 1,
+        "turnovers": 13,
+        "fouls": 22
+      }
+    },
     "gimnasia": [
       {
         "id": "obi-okafor",
@@ -10083,65 +10141,7 @@ export const matchPlayerStats = {
         "home": 24,
         "away": 23
       }
-    ],
-    "teamStats": {
-      "gimnasia": {
-        "fieldGoals": {
-          "made": 33,
-          "attempted": 72,
-          "percentage": 45
-        },
-        "twoPointers": {
-          "made": 18,
-          "attempted": 33,
-          "percentage": 55
-        },
-        "threePointers": {
-          "made": 15,
-          "attempted": 39,
-          "percentage": 38
-        },
-        "freeThrows": {
-          "made": 11,
-          "attempted": 18,
-          "percentage": 61
-        },
-        "rebounds": 33,
-        "assists": 13,
-        "steals": 8,
-        "blocks": 3,
-        "turnovers": 8,
-        "fouls": 23
-      },
-      "la-union": {
-        "fieldGoals": {
-          "made": 31,
-          "attempted": 59,
-          "percentage": 52
-        },
-        "twoPointers": {
-          "made": 27,
-          "attempted": 41,
-          "percentage": 66
-        },
-        "threePointers": {
-          "made": 4,
-          "attempted": 18,
-          "percentage": 22
-        },
-        "freeThrows": {
-          "made": 20,
-          "attempted": 29,
-          "percentage": 69
-        },
-        "rebounds": 34,
-        "assists": 8,
-        "steals": 3,
-        "blocks": 1,
-        "turnovers": 13,
-        "fouls": 22
-      }
-    }
+    ]
   },
   "2026-10-05-quimsa-atenas": {
     "source": "Liga Nacional",
@@ -10150,6 +10150,64 @@ export const matchPlayerStats = {
     "awayTeam": "atenas",
     "homeScore": 83,
     "awayScore": 77,
+    "teamStats": {
+      "quimsa": {
+        "fieldGoals": {
+          "made": 28,
+          "attempted": 57,
+          "percentage": 49
+        },
+        "twoPointers": {
+          "made": 13,
+          "attempted": 25,
+          "percentage": 52
+        },
+        "threePointers": {
+          "made": 15,
+          "attempted": 32,
+          "percentage": 47
+        },
+        "freeThrows": {
+          "made": 12,
+          "attempted": 15,
+          "percentage": 80
+        },
+        "rebounds": 30,
+        "assists": 16,
+        "steals": 6,
+        "blocks": 3,
+        "turnovers": 16,
+        "fouls": 21
+      },
+      "atenas": {
+        "fieldGoals": {
+          "made": 27,
+          "attempted": 62,
+          "percentage": 43
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 35,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 27,
+          "percentage": 22
+        },
+        "freeThrows": {
+          "made": 17,
+          "attempted": 22,
+          "percentage": 77
+        },
+        "rebounds": 31,
+        "assists": 14,
+        "steals": 14,
+        "blocks": 2,
+        "turnovers": 12,
+        "fouls": 20
+      }
+    },
     "quimsa": [
       {
         "id": "lucio-mantovani",
@@ -11351,65 +11409,7 @@ export const matchPlayerStats = {
         "home": 17,
         "away": 20
       }
-    ],
-    "teamStats": {
-      "quimsa": {
-        "fieldGoals": {
-          "made": 28,
-          "attempted": 57,
-          "percentage": 49
-        },
-        "twoPointers": {
-          "made": 13,
-          "attempted": 25,
-          "percentage": 52
-        },
-        "threePointers": {
-          "made": 15,
-          "attempted": 32,
-          "percentage": 47
-        },
-        "freeThrows": {
-          "made": 12,
-          "attempted": 15,
-          "percentage": 80
-        },
-        "rebounds": 30,
-        "assists": 16,
-        "steals": 6,
-        "blocks": 3,
-        "turnovers": 16,
-        "fouls": 21
-      },
-      "atenas": {
-        "fieldGoals": {
-          "made": 27,
-          "attempted": 62,
-          "percentage": 43
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 35,
-          "percentage": 60
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 27,
-          "percentage": 22
-        },
-        "freeThrows": {
-          "made": 17,
-          "attempted": 22,
-          "percentage": 77
-        },
-        "rebounds": 31,
-        "assists": 14,
-        "steals": 14,
-        "blocks": 2,
-        "turnovers": 12,
-        "fouls": 20
-      }
-    }
+    ]
   },
   "2026-10-06-platense-la-union": {
     "source": "Liga Nacional",
@@ -11418,6 +11418,64 @@ export const matchPlayerStats = {
     "awayTeam": "la-union",
     "homeScore": 86,
     "awayScore": 90,
+    "teamStats": {
+      "platense": {
+        "fieldGoals": {
+          "made": 29,
+          "attempted": 62,
+          "percentage": 46
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 32,
+          "percentage": 53
+        },
+        "threePointers": {
+          "made": 12,
+          "attempted": 30,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 28,
+          "percentage": 57
+        },
+        "rebounds": 28,
+        "assists": 19,
+        "steals": 13,
+        "blocks": 1,
+        "turnovers": 13,
+        "fouls": 22
+      },
+      "la-union": {
+        "fieldGoals": {
+          "made": 32,
+          "attempted": 54,
+          "percentage": 59
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 32,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 11,
+          "attempted": 22,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 15,
+          "attempted": 18,
+          "percentage": 83
+        },
+        "rebounds": 24,
+        "assists": 22,
+        "steals": 12,
+        "blocks": 1,
+        "turnovers": 16,
+        "fouls": 25
+      }
+    },
     "platense": [
       {
         "id": "anthoan-urbina",
@@ -12619,65 +12677,7 @@ export const matchPlayerStats = {
         "home": 26,
         "away": 13
       }
-    ],
-    "teamStats": {
-      "platense": {
-        "fieldGoals": {
-          "made": 29,
-          "attempted": 62,
-          "percentage": 46
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 32,
-          "percentage": 53
-        },
-        "threePointers": {
-          "made": 12,
-          "attempted": 30,
-          "percentage": 40
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 28,
-          "percentage": 57
-        },
-        "rebounds": 28,
-        "assists": 19,
-        "steals": 13,
-        "blocks": 1,
-        "turnovers": 13,
-        "fouls": 22
-      },
-      "la-union": {
-        "fieldGoals": {
-          "made": 32,
-          "attempted": 54,
-          "percentage": 59
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 32,
-          "percentage": 66
-        },
-        "threePointers": {
-          "made": 11,
-          "attempted": 22,
-          "percentage": 50
-        },
-        "freeThrows": {
-          "made": 15,
-          "attempted": 18,
-          "percentage": 83
-        },
-        "rebounds": 24,
-        "assists": 22,
-        "steals": 12,
-        "blocks": 1,
-        "turnovers": 16,
-        "fouls": 25
-      }
-    }
+    ]
   },
   "2026-10-07-boca-obera": {
     "source": "Liga Nacional",
@@ -12686,6 +12686,64 @@ export const matchPlayerStats = {
     "awayTeam": "obera",
     "homeScore": 96,
     "awayScore": 73,
+    "teamStats": {
+      "boca": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 69,
+          "percentage": 43
+        },
+        "twoPointers": {
+          "made": 18,
+          "attempted": 33,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 12,
+          "attempted": 36,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 24,
+          "attempted": 28,
+          "percentage": 86
+        },
+        "rebounds": 41,
+        "assists": 18,
+        "steals": 4,
+        "blocks": 0,
+        "turnovers": 10,
+        "fouls": 19
+      },
+      "obera": {
+        "fieldGoals": {
+          "made": 29,
+          "attempted": 69,
+          "percentage": 42
+        },
+        "twoPointers": {
+          "made": 23,
+          "attempted": 40,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 29,
+          "percentage": 21
+        },
+        "freeThrows": {
+          "made": 9,
+          "attempted": 13,
+          "percentage": 69
+        },
+        "rebounds": 29,
+        "assists": 18,
+        "steals": 7,
+        "blocks": 0,
+        "turnovers": 10,
+        "fouls": 25
+      }
+    },
     "boca": [
       {
         "id": "mike-warren",
@@ -13887,65 +13945,7 @@ export const matchPlayerStats = {
         "home": 19,
         "away": 20
       }
-    ],
-    "teamStats": {
-      "boca": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 69,
-          "percentage": 43
-        },
-        "twoPointers": {
-          "made": 18,
-          "attempted": 33,
-          "percentage": 55
-        },
-        "threePointers": {
-          "made": 12,
-          "attempted": 36,
-          "percentage": 33
-        },
-        "freeThrows": {
-          "made": 24,
-          "attempted": 28,
-          "percentage": 86
-        },
-        "rebounds": 41,
-        "assists": 18,
-        "steals": 4,
-        "blocks": 0,
-        "turnovers": 10,
-        "fouls": 19
-      },
-      "obera": {
-        "fieldGoals": {
-          "made": 29,
-          "attempted": 69,
-          "percentage": 42
-        },
-        "twoPointers": {
-          "made": 23,
-          "attempted": 40,
-          "percentage": 57
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 29,
-          "percentage": 21
-        },
-        "freeThrows": {
-          "made": 9,
-          "attempted": 13,
-          "percentage": 69
-        },
-        "rebounds": 29,
-        "assists": 18,
-        "steals": 7,
-        "blocks": 0,
-        "turnovers": 10,
-        "fouls": 25
-      }
-    }
+    ]
   },
   "2026-10-07-olimpico-atenas": {
     "source": "Liga Nacional",
@@ -13954,6 +13954,64 @@ export const matchPlayerStats = {
     "awayTeam": "atenas",
     "homeScore": 87,
     "awayScore": 91,
+    "teamStats": {
+      "olimpico": {
+        "fieldGoals": {
+          "made": 29,
+          "attempted": 70,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 39,
+          "percentage": 44
+        },
+        "threePointers": {
+          "made": 12,
+          "attempted": 31,
+          "percentage": 39
+        },
+        "freeThrows": {
+          "made": 17,
+          "attempted": 22,
+          "percentage": 77
+        },
+        "rebounds": 37,
+        "assists": 19,
+        "steals": 6,
+        "blocks": 0,
+        "turnovers": 9,
+        "fouls": 26
+      },
+      "atenas": {
+        "fieldGoals": {
+          "made": 33,
+          "attempted": 65,
+          "percentage": 50
+        },
+        "twoPointers": {
+          "made": 23,
+          "attempted": 38,
+          "percentage": 61
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 27,
+          "percentage": 37
+        },
+        "freeThrows": {
+          "made": 15,
+          "attempted": 22,
+          "percentage": 68
+        },
+        "rebounds": 37,
+        "assists": 18,
+        "steals": 4,
+        "blocks": 4,
+        "turnovers": 11,
+        "fouls": 18
+      }
+    },
     "olimpico": [
       {
         "id": "austin-wtighten",
@@ -15106,65 +15164,7 @@ export const matchPlayerStats = {
         "home": 21,
         "away": 24
       }
-    ],
-    "teamStats": {
-      "olimpico": {
-        "fieldGoals": {
-          "made": 29,
-          "attempted": 70,
-          "percentage": 41
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 39,
-          "percentage": 44
-        },
-        "threePointers": {
-          "made": 12,
-          "attempted": 31,
-          "percentage": 39
-        },
-        "freeThrows": {
-          "made": 17,
-          "attempted": 22,
-          "percentage": 77
-        },
-        "rebounds": 37,
-        "assists": 19,
-        "steals": 6,
-        "blocks": 0,
-        "turnovers": 9,
-        "fouls": 26
-      },
-      "atenas": {
-        "fieldGoals": {
-          "made": 33,
-          "attempted": 65,
-          "percentage": 50
-        },
-        "twoPointers": {
-          "made": 23,
-          "attempted": 38,
-          "percentage": 61
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 27,
-          "percentage": 37
-        },
-        "freeThrows": {
-          "made": 15,
-          "attempted": 22,
-          "percentage": 68
-        },
-        "rebounds": 37,
-        "assists": 18,
-        "steals": 4,
-        "blocks": 4,
-        "turnovers": 11,
-        "fouls": 18
-      }
-    }
+    ]
   },
   "2026-10-08-racing-chivilcoy-san-martin": {
     "source": "Liga Nacional",
@@ -15173,6 +15173,64 @@ export const matchPlayerStats = {
     "awayTeam": "san-martin",
     "homeScore": 126,
     "awayScore": 123,
+    "teamStats": {
+      "racing-chivilcoy": {
+        "fieldGoals": {
+          "made": 40,
+          "attempted": 83,
+          "percentage": 48
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 38,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 19,
+          "attempted": 45,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 27,
+          "attempted": 38,
+          "percentage": 71
+        },
+        "rebounds": 35,
+        "assists": 25,
+        "steals": 9,
+        "blocks": 4,
+        "turnovers": 6,
+        "fouls": 32
+      },
+      "san-martin": {
+        "fieldGoals": {
+          "made": 40,
+          "attempted": 78,
+          "percentage": 51
+        },
+        "twoPointers": {
+          "made": 26,
+          "attempted": 44,
+          "percentage": 59
+        },
+        "threePointers": {
+          "made": 14,
+          "attempted": 34,
+          "percentage": 41
+        },
+        "freeThrows": {
+          "made": 29,
+          "attempted": 37,
+          "percentage": 78
+        },
+        "rebounds": 51,
+        "assists": 13,
+        "steals": 5,
+        "blocks": 2,
+        "turnovers": 14,
+        "fouls": 29
+      }
+    },
     "racing-chivilcoy": [
       {
         "id": "mateo-chiarini",
@@ -16379,65 +16437,7 @@ export const matchPlayerStats = {
         "home": 36,
         "away": 33
       }
-    ],
-    "teamStats": {
-      "racing-chivilcoy": {
-        "fieldGoals": {
-          "made": 40,
-          "attempted": 83,
-          "percentage": 48
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 38,
-          "percentage": 55
-        },
-        "threePointers": {
-          "made": 19,
-          "attempted": 45,
-          "percentage": 42
-        },
-        "freeThrows": {
-          "made": 27,
-          "attempted": 38,
-          "percentage": 71
-        },
-        "rebounds": 35,
-        "assists": 25,
-        "steals": 9,
-        "blocks": 4,
-        "turnovers": 6,
-        "fouls": 32
-      },
-      "san-martin": {
-        "fieldGoals": {
-          "made": 40,
-          "attempted": 78,
-          "percentage": 51
-        },
-        "twoPointers": {
-          "made": 26,
-          "attempted": 44,
-          "percentage": 59
-        },
-        "threePointers": {
-          "made": 14,
-          "attempted": 34,
-          "percentage": 41
-        },
-        "freeThrows": {
-          "made": 29,
-          "attempted": 37,
-          "percentage": 78
-        },
-        "rebounds": 51,
-        "assists": 13,
-        "steals": 5,
-        "blocks": 2,
-        "turnovers": 14,
-        "fouls": 29
-      }
-    }
+    ]
   },
   "2026-10-08-independiente-oliva-ferro": {
     "source": "Liga Nacional",
@@ -16446,6 +16446,64 @@ export const matchPlayerStats = {
     "awayTeam": "ferro",
     "homeScore": 92,
     "awayScore": 97,
+    "teamStats": {
+      "independiente-oliva": {
+        "fieldGoals": {
+          "made": 31,
+          "attempted": 64,
+          "percentage": 48
+        },
+        "twoPointers": {
+          "made": 18,
+          "attempted": 28,
+          "percentage": 64
+        },
+        "threePointers": {
+          "made": 13,
+          "attempted": 36,
+          "percentage": 36
+        },
+        "freeThrows": {
+          "made": 17,
+          "attempted": 28,
+          "percentage": 61
+        },
+        "rebounds": 38,
+        "assists": 17,
+        "steals": 5,
+        "blocks": 0,
+        "turnovers": 13,
+        "fouls": 30
+      },
+      "ferro": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 62,
+          "percentage": 48
+        },
+        "twoPointers": {
+          "made": 20,
+          "attempted": 31,
+          "percentage": 65
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 31,
+          "percentage": 32
+        },
+        "freeThrows": {
+          "made": 27,
+          "attempted": 33,
+          "percentage": 82
+        },
+        "rebounds": 30,
+        "assists": 14,
+        "steals": 8,
+        "blocks": 2,
+        "turnovers": 11,
+        "fouls": 25
+      }
+    },
     "independiente-oliva": [
       {
         "id": "agustin-caffaro",
@@ -17647,65 +17705,7 @@ export const matchPlayerStats = {
         "home": 18,
         "away": 23
       }
-    ],
-    "teamStats": {
-      "independiente-oliva": {
-        "fieldGoals": {
-          "made": 31,
-          "attempted": 64,
-          "percentage": 48
-        },
-        "twoPointers": {
-          "made": 18,
-          "attempted": 28,
-          "percentage": 64
-        },
-        "threePointers": {
-          "made": 13,
-          "attempted": 36,
-          "percentage": 36
-        },
-        "freeThrows": {
-          "made": 17,
-          "attempted": 28,
-          "percentage": 61
-        },
-        "rebounds": 38,
-        "assists": 17,
-        "steals": 5,
-        "blocks": 0,
-        "turnovers": 13,
-        "fouls": 30
-      },
-      "ferro": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 62,
-          "percentage": 48
-        },
-        "twoPointers": {
-          "made": 20,
-          "attempted": 31,
-          "percentage": 65
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 31,
-          "percentage": 32
-        },
-        "freeThrows": {
-          "made": 27,
-          "attempted": 33,
-          "percentage": 82
-        },
-        "rebounds": 30,
-        "assists": 14,
-        "steals": 8,
-        "blocks": 2,
-        "turnovers": 11,
-        "fouls": 25
-      }
-    }
+    ]
   },
   "2026-10-08-san-lorenzo-gimnasia": {
     "source": "Liga Nacional",
@@ -17714,6 +17714,64 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 89,
     "awayScore": 73,
+    "teamStats": {
+      "san-lorenzo": {
+        "fieldGoals": {
+          "made": 32,
+          "attempted": 58,
+          "percentage": 55
+        },
+        "twoPointers": {
+          "made": 22,
+          "attempted": 41,
+          "percentage": 54
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 17,
+          "percentage": 59
+        },
+        "freeThrows": {
+          "made": 15,
+          "attempted": 19,
+          "percentage": 79
+        },
+        "rebounds": 25,
+        "assists": 17,
+        "steals": 7,
+        "blocks": 1,
+        "turnovers": 13,
+        "fouls": 14
+      },
+      "gimnasia": {
+        "fieldGoals": {
+          "made": 28,
+          "attempted": 64,
+          "percentage": 43
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 39,
+          "percentage": 54
+        },
+        "threePointers": {
+          "made": 7,
+          "attempted": 25,
+          "percentage": 28
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 15,
+          "percentage": 67
+        },
+        "rebounds": 28,
+        "assists": 10,
+        "steals": 9,
+        "blocks": 1,
+        "turnovers": 12,
+        "fouls": 18
+      }
+    },
     "san-lorenzo": [
       {
         "id": "lucas-gargallo",
@@ -18915,65 +18973,7 @@ export const matchPlayerStats = {
         "home": 22,
         "away": 19
       }
-    ],
-    "teamStats": {
-      "san-lorenzo": {
-        "fieldGoals": {
-          "made": 32,
-          "attempted": 58,
-          "percentage": 55
-        },
-        "twoPointers": {
-          "made": 22,
-          "attempted": 41,
-          "percentage": 54
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 17,
-          "percentage": 59
-        },
-        "freeThrows": {
-          "made": 15,
-          "attempted": 19,
-          "percentage": 79
-        },
-        "rebounds": 25,
-        "assists": 17,
-        "steals": 7,
-        "blocks": 1,
-        "turnovers": 13,
-        "fouls": 14
-      },
-      "gimnasia": {
-        "fieldGoals": {
-          "made": 28,
-          "attempted": 64,
-          "percentage": 43
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 39,
-          "percentage": 54
-        },
-        "threePointers": {
-          "made": 7,
-          "attempted": 25,
-          "percentage": 28
-        },
-        "freeThrows": {
-          "made": 10,
-          "attempted": 15,
-          "percentage": 67
-        },
-        "rebounds": 28,
-        "assists": 10,
-        "steals": 9,
-        "blocks": 1,
-        "turnovers": 12,
-        "fouls": 18
-      }
-    }
+    ]
   },
   "2026-10-09-lanus-obera": {
     "source": "Liga Nacional",
@@ -18982,6 +18982,64 @@ export const matchPlayerStats = {
     "awayTeam": "obera",
     "homeScore": 67,
     "awayScore": 58,
+    "teamStats": {
+      "lanus": {
+        "fieldGoals": {
+          "made": 24,
+          "attempted": 71,
+          "percentage": 33
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 41,
+          "percentage": 41
+        },
+        "threePointers": {
+          "made": 7,
+          "attempted": 30,
+          "percentage": 23
+        },
+        "freeThrows": {
+          "made": 12,
+          "attempted": 20,
+          "percentage": 60
+        },
+        "rebounds": 40,
+        "assists": 10,
+        "steals": 15,
+        "blocks": 4,
+        "turnovers": 13,
+        "fouls": 17
+      },
+      "obera": {
+        "fieldGoals": {
+          "made": 21,
+          "attempted": 58,
+          "percentage": 36
+        },
+        "twoPointers": {
+          "made": 18,
+          "attempted": 35,
+          "percentage": 51
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 23,
+          "percentage": 13
+        },
+        "freeThrows": {
+          "made": 13,
+          "attempted": 16,
+          "percentage": 81
+        },
+        "rebounds": 38,
+        "assists": 10,
+        "steals": 8,
+        "blocks": 2,
+        "turnovers": 20,
+        "fouls": 21
+      }
+    },
     "lanus": [
       {
         "id": "robert-whitfield",
@@ -20183,65 +20241,7 @@ export const matchPlayerStats = {
         "home": 18,
         "away": 15
       }
-    ],
-    "teamStats": {
-      "lanus": {
-        "fieldGoals": {
-          "made": 24,
-          "attempted": 71,
-          "percentage": 33
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 41,
-          "percentage": 41
-        },
-        "threePointers": {
-          "made": 7,
-          "attempted": 30,
-          "percentage": 23
-        },
-        "freeThrows": {
-          "made": 12,
-          "attempted": 20,
-          "percentage": 60
-        },
-        "rebounds": 40,
-        "assists": 10,
-        "steals": 15,
-        "blocks": 4,
-        "turnovers": 13,
-        "fouls": 17
-      },
-      "obera": {
-        "fieldGoals": {
-          "made": 21,
-          "attempted": 58,
-          "percentage": 36
-        },
-        "twoPointers": {
-          "made": 18,
-          "attempted": 35,
-          "percentage": 51
-        },
-        "threePointers": {
-          "made": 3,
-          "attempted": 23,
-          "percentage": 13
-        },
-        "freeThrows": {
-          "made": 13,
-          "attempted": 16,
-          "percentage": 81
-        },
-        "rebounds": 38,
-        "assists": 10,
-        "steals": 8,
-        "blocks": 2,
-        "turnovers": 20,
-        "fouls": 21
-      }
-    }
+    ]
   },
   "2026-10-10-instituto-ferro": {
     "source": "Liga Nacional",
@@ -20250,6 +20250,64 @@ export const matchPlayerStats = {
     "awayTeam": "ferro",
     "homeScore": 97,
     "awayScore": 94,
+    "teamStats": {
+      "instituto": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 68,
+          "percentage": 44
+        },
+        "twoPointers": {
+          "made": 20,
+          "attempted": 35,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 33,
+          "percentage": 30
+        },
+        "freeThrows": {
+          "made": 27,
+          "attempted": 41,
+          "percentage": 66
+        },
+        "rebounds": 46,
+        "assists": 15,
+        "steals": 14,
+        "blocks": 1,
+        "turnovers": 29,
+        "fouls": 30
+      },
+      "ferro": {
+        "fieldGoals": {
+          "made": 32,
+          "attempted": 82,
+          "percentage": 39
+        },
+        "twoPointers": {
+          "made": 25,
+          "attempted": 48,
+          "percentage": 52
+        },
+        "threePointers": {
+          "made": 7,
+          "attempted": 34,
+          "percentage": 21
+        },
+        "freeThrows": {
+          "made": 23,
+          "attempted": 30,
+          "percentage": 77
+        },
+        "rebounds": 38,
+        "assists": 25,
+        "steals": 22,
+        "blocks": 3,
+        "turnovers": 20,
+        "fouls": 35
+      }
+    },
     "instituto": [
       {
         "id": "kadir-pomare",
@@ -21456,65 +21514,7 @@ export const matchPlayerStats = {
         "home": 24,
         "away": 21
       }
-    ],
-    "teamStats": {
-      "instituto": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 68,
-          "percentage": 44
-        },
-        "twoPointers": {
-          "made": 20,
-          "attempted": 35,
-          "percentage": 57
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 33,
-          "percentage": 30
-        },
-        "freeThrows": {
-          "made": 27,
-          "attempted": 41,
-          "percentage": 66
-        },
-        "rebounds": 46,
-        "assists": 15,
-        "steals": 14,
-        "blocks": 1,
-        "turnovers": 29,
-        "fouls": 30
-      },
-      "ferro": {
-        "fieldGoals": {
-          "made": 32,
-          "attempted": 82,
-          "percentage": 39
-        },
-        "twoPointers": {
-          "made": 25,
-          "attempted": 48,
-          "percentage": 52
-        },
-        "threePointers": {
-          "made": 7,
-          "attempted": 34,
-          "percentage": 21
-        },
-        "freeThrows": {
-          "made": 23,
-          "attempted": 30,
-          "percentage": 77
-        },
-        "rebounds": 38,
-        "assists": 25,
-        "steals": 22,
-        "blocks": 3,
-        "turnovers": 20,
-        "fouls": 35
-      }
-    }
+    ]
   },
   "2026-10-10-argentino-san-martin": {
     "source": "Liga Nacional",
@@ -21523,6 +21523,64 @@ export const matchPlayerStats = {
     "awayTeam": "san-martin",
     "homeScore": 82,
     "awayScore": 79,
+    "teamStats": {
+      "argentino": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 65,
+          "percentage": 46
+        },
+        "twoPointers": {
+          "made": 24,
+          "attempted": 45,
+          "percentage": 53
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 20,
+          "percentage": 30
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 23,
+          "percentage": 70
+        },
+        "rebounds": 43,
+        "assists": 4,
+        "steals": 7,
+        "blocks": 5,
+        "turnovers": 12,
+        "fouls": 19
+      },
+      "san-martin": {
+        "fieldGoals": {
+          "made": 33,
+          "attempted": 66,
+          "percentage": 50
+        },
+        "twoPointers": {
+          "made": 23,
+          "attempted": 38,
+          "percentage": 61
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 28,
+          "percentage": 36
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 43
+        },
+        "rebounds": 31,
+        "assists": 8,
+        "steals": 10,
+        "blocks": 1,
+        "turnovers": 12,
+        "fouls": 20
+      }
+    },
     "argentino": [
       {
         "id": "joaquin-fernandez",
@@ -22724,65 +22782,7 @@ export const matchPlayerStats = {
         "home": 22,
         "away": 23
       }
-    ],
-    "teamStats": {
-      "argentino": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 65,
-          "percentage": 46
-        },
-        "twoPointers": {
-          "made": 24,
-          "attempted": 45,
-          "percentage": 53
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 20,
-          "percentage": 30
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 23,
-          "percentage": 70
-        },
-        "rebounds": 43,
-        "assists": 4,
-        "steals": 7,
-        "blocks": 5,
-        "turnovers": 12,
-        "fouls": 19
-      },
-      "san-martin": {
-        "fieldGoals": {
-          "made": 33,
-          "attempted": 66,
-          "percentage": 50
-        },
-        "twoPointers": {
-          "made": 23,
-          "attempted": 38,
-          "percentage": 61
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 28,
-          "percentage": 36
-        },
-        "freeThrows": {
-          "made": 3,
-          "attempted": 7,
-          "percentage": 43
-        },
-        "rebounds": 31,
-        "assists": 8,
-        "steals": 10,
-        "blocks": 1,
-        "turnovers": 12,
-        "fouls": 20
-      }
-    }
+    ]
   },
   "2026-10-10-quimsa-boca": {
     "source": "Liga Nacional",
@@ -22791,6 +22791,64 @@ export const matchPlayerStats = {
     "awayTeam": "boca",
     "homeScore": 105,
     "awayScore": 96,
+    "teamStats": {
+      "quimsa": {
+        "fieldGoals": {
+          "made": 36,
+          "attempted": 67,
+          "percentage": 53
+        },
+        "twoPointers": {
+          "made": 19,
+          "attempted": 34,
+          "percentage": 56
+        },
+        "threePointers": {
+          "made": 17,
+          "attempted": 33,
+          "percentage": 52
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 19,
+          "percentage": 84
+        },
+        "rebounds": 25,
+        "assists": 20,
+        "steals": 13,
+        "blocks": 1,
+        "turnovers": 6,
+        "fouls": 22
+      },
+      "boca": {
+        "fieldGoals": {
+          "made": 31,
+          "attempted": 59,
+          "percentage": 52
+        },
+        "twoPointers": {
+          "made": 18,
+          "attempted": 33,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 13,
+          "attempted": 26,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 21,
+          "attempted": 23,
+          "percentage": 91
+        },
+        "rebounds": 33,
+        "assists": 17,
+        "steals": 4,
+        "blocks": 1,
+        "turnovers": 15,
+        "fouls": 22
+      }
+    },
     "quimsa": [
       {
         "id": "lucio-mantovani",
@@ -23992,65 +24050,7 @@ export const matchPlayerStats = {
         "home": 25,
         "away": 21
       }
-    ],
-    "teamStats": {
-      "quimsa": {
-        "fieldGoals": {
-          "made": 36,
-          "attempted": 67,
-          "percentage": 53
-        },
-        "twoPointers": {
-          "made": 19,
-          "attempted": 34,
-          "percentage": 56
-        },
-        "threePointers": {
-          "made": 17,
-          "attempted": 33,
-          "percentage": 52
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 19,
-          "percentage": 84
-        },
-        "rebounds": 25,
-        "assists": 20,
-        "steals": 13,
-        "blocks": 1,
-        "turnovers": 6,
-        "fouls": 22
-      },
-      "boca": {
-        "fieldGoals": {
-          "made": 31,
-          "attempted": 59,
-          "percentage": 52
-        },
-        "twoPointers": {
-          "made": 18,
-          "attempted": 33,
-          "percentage": 55
-        },
-        "threePointers": {
-          "made": 13,
-          "attempted": 26,
-          "percentage": 50
-        },
-        "freeThrows": {
-          "made": 21,
-          "attempted": 23,
-          "percentage": 91
-        },
-        "rebounds": 33,
-        "assists": 17,
-        "steals": 4,
-        "blocks": 1,
-        "turnovers": 15,
-        "fouls": 22
-      }
-    }
+    ]
   },
   "2026-10-10-racing-chivilcoy-gimnasia": {
     "source": "Liga Nacional",
@@ -24059,6 +24059,64 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 72,
     "awayScore": 78,
+    "teamStats": {
+      "racing-chivilcoy": {
+        "fieldGoals": {
+          "made": 24,
+          "attempted": 53,
+          "percentage": 45
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 33,
+          "percentage": 64
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 20,
+          "percentage": 15
+        },
+        "freeThrows": {
+          "made": 21,
+          "attempted": 31,
+          "percentage": 68
+        },
+        "rebounds": 33,
+        "assists": 9,
+        "steals": 2,
+        "blocks": 0,
+        "turnovers": 9,
+        "fouls": 20
+      },
+      "gimnasia": {
+        "fieldGoals": {
+          "made": 26,
+          "attempted": 62,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 16,
+          "attempted": 27,
+          "percentage": 59
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 35,
+          "percentage": 29
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 19,
+          "percentage": 84
+        },
+        "rebounds": 29,
+        "assists": 15,
+        "steals": 8,
+        "blocks": 4,
+        "turnovers": 6,
+        "fouls": 27
+      }
+    },
     "racing-chivilcoy": [
       {
         "id": "mateo-chiarini",
@@ -25260,65 +25318,7 @@ export const matchPlayerStats = {
         "home": 19,
         "away": 25
       }
-    ],
-    "teamStats": {
-      "racing-chivilcoy": {
-        "fieldGoals": {
-          "made": 24,
-          "attempted": 53,
-          "percentage": 45
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 33,
-          "percentage": 64
-        },
-        "threePointers": {
-          "made": 3,
-          "attempted": 20,
-          "percentage": 15
-        },
-        "freeThrows": {
-          "made": 21,
-          "attempted": 31,
-          "percentage": 68
-        },
-        "rebounds": 33,
-        "assists": 9,
-        "steals": 2,
-        "blocks": 0,
-        "turnovers": 9,
-        "fouls": 20
-      },
-      "gimnasia": {
-        "fieldGoals": {
-          "made": 26,
-          "attempted": 62,
-          "percentage": 41
-        },
-        "twoPointers": {
-          "made": 16,
-          "attempted": 27,
-          "percentage": 59
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 35,
-          "percentage": 29
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 19,
-          "percentage": 84
-        },
-        "rebounds": 29,
-        "assists": 15,
-        "steals": 8,
-        "blocks": 4,
-        "turnovers": 6,
-        "fouls": 27
-      }
-    }
+    ]
   },
   "2026-10-12-argentino-gimnasia": {
     "source": "Liga Nacional",
@@ -25327,6 +25327,64 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 82,
     "awayScore": 87,
+    "teamStats": {
+      "argentino": {
+        "fieldGoals": {
+          "made": 27,
+          "attempted": 69,
+          "percentage": 39
+        },
+        "twoPointers": {
+          "made": 19,
+          "attempted": 48,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 8,
+          "attempted": 21,
+          "percentage": 38
+        },
+        "freeThrows": {
+          "made": 20,
+          "attempted": 27,
+          "percentage": 74
+        },
+        "rebounds": 42,
+        "assists": 6,
+        "steals": 8,
+        "blocks": 5,
+        "turnovers": 10,
+        "fouls": 17
+      },
+      "gimnasia": {
+        "fieldGoals": {
+          "made": 33,
+          "attempted": 66,
+          "percentage": 50
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 38,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 12,
+          "attempted": 28,
+          "percentage": 43
+        },
+        "freeThrows": {
+          "made": 9,
+          "attempted": 13,
+          "percentage": 69
+        },
+        "rebounds": 41,
+        "assists": 7,
+        "steals": 9,
+        "blocks": 6,
+        "turnovers": 12,
+        "fouls": 25
+      }
+    },
     "argentino": [
       {
         "id": "joaquin-fernandez",
@@ -26479,65 +26537,7 @@ export const matchPlayerStats = {
         "home": 14,
         "away": 21
       }
-    ],
-    "teamStats": {
-      "argentino": {
-        "fieldGoals": {
-          "made": 27,
-          "attempted": 69,
-          "percentage": 39
-        },
-        "twoPointers": {
-          "made": 19,
-          "attempted": 48,
-          "percentage": 40
-        },
-        "threePointers": {
-          "made": 8,
-          "attempted": 21,
-          "percentage": 38
-        },
-        "freeThrows": {
-          "made": 20,
-          "attempted": 27,
-          "percentage": 74
-        },
-        "rebounds": 42,
-        "assists": 6,
-        "steals": 8,
-        "blocks": 5,
-        "turnovers": 10,
-        "fouls": 17
-      },
-      "gimnasia": {
-        "fieldGoals": {
-          "made": 33,
-          "attempted": 66,
-          "percentage": 50
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 38,
-          "percentage": 55
-        },
-        "threePointers": {
-          "made": 12,
-          "attempted": 28,
-          "percentage": 43
-        },
-        "freeThrows": {
-          "made": 9,
-          "attempted": 13,
-          "percentage": 69
-        },
-        "rebounds": 41,
-        "assists": 7,
-        "steals": 9,
-        "blocks": 6,
-        "turnovers": 12,
-        "fouls": 25
-      }
-    }
+    ]
   },
   "2026-10-12-atenas-ferro": {
     "source": "Liga Nacional",
@@ -26546,6 +26546,64 @@ export const matchPlayerStats = {
     "awayTeam": "ferro",
     "homeScore": 91,
     "awayScore": 86,
+    "teamStats": {
+      "atenas": {
+        "fieldGoals": {
+          "made": 35,
+          "attempted": 61,
+          "percentage": 57
+        },
+        "twoPointers": {
+          "made": 29,
+          "attempted": 41,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 20,
+          "percentage": 30
+        },
+        "freeThrows": {
+          "made": 15,
+          "attempted": 17,
+          "percentage": 88
+        },
+        "rebounds": 30,
+        "assists": 15,
+        "steals": 8,
+        "blocks": 1,
+        "turnovers": 9,
+        "fouls": 22
+      },
+      "ferro": {
+        "fieldGoals": {
+          "made": 33,
+          "attempted": 64,
+          "percentage": 51
+        },
+        "twoPointers": {
+          "made": 24,
+          "attempted": 34,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 30,
+          "percentage": 30
+        },
+        "freeThrows": {
+          "made": 11,
+          "attempted": 18,
+          "percentage": 61
+        },
+        "rebounds": 28,
+        "assists": 19,
+        "steals": 5,
+        "blocks": 1,
+        "turnovers": 11,
+        "fouls": 24
+      }
+    },
     "atenas": [
       {
         "id": "benjamin-imaz",
@@ -27747,65 +27805,7 @@ export const matchPlayerStats = {
         "home": 27,
         "away": 20
       }
-    ],
-    "teamStats": {
-      "atenas": {
-        "fieldGoals": {
-          "made": 35,
-          "attempted": 61,
-          "percentage": 57
-        },
-        "twoPointers": {
-          "made": 29,
-          "attempted": 41,
-          "percentage": 71
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 20,
-          "percentage": 30
-        },
-        "freeThrows": {
-          "made": 15,
-          "attempted": 17,
-          "percentage": 88
-        },
-        "rebounds": 30,
-        "assists": 15,
-        "steals": 8,
-        "blocks": 1,
-        "turnovers": 9,
-        "fouls": 22
-      },
-      "ferro": {
-        "fieldGoals": {
-          "made": 33,
-          "attempted": 64,
-          "percentage": 51
-        },
-        "twoPointers": {
-          "made": 24,
-          "attempted": 34,
-          "percentage": 71
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 30,
-          "percentage": 30
-        },
-        "freeThrows": {
-          "made": 11,
-          "attempted": 18,
-          "percentage": 61
-        },
-        "rebounds": 28,
-        "assists": 19,
-        "steals": 5,
-        "blocks": 1,
-        "turnovers": 11,
-        "fouls": 24
-      }
-    }
+    ]
   },
   "2026-10-12-olimpico-boca": {
     "source": "Liga Nacional",
@@ -27814,6 +27814,64 @@ export const matchPlayerStats = {
     "awayTeam": "boca",
     "homeScore": 93,
     "awayScore": 80,
+    "teamStats": {
+      "olimpico": {
+        "fieldGoals": {
+          "made": 33,
+          "attempted": 61,
+          "percentage": 54
+        },
+        "twoPointers": {
+          "made": 19,
+          "attempted": 30,
+          "percentage": 63
+        },
+        "threePointers": {
+          "made": 14,
+          "attempted": 31,
+          "percentage": 45
+        },
+        "freeThrows": {
+          "made": 13,
+          "attempted": 16,
+          "percentage": 81
+        },
+        "rebounds": 23,
+        "assists": 20,
+        "steals": 8,
+        "blocks": 0,
+        "turnovers": 8,
+        "fouls": 22
+      },
+      "boca": {
+        "fieldGoals": {
+          "made": 29,
+          "attempted": 62,
+          "percentage": 46
+        },
+        "twoPointers": {
+          "made": 23,
+          "attempted": 34,
+          "percentage": 68
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 28,
+          "percentage": 21
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 19,
+          "percentage": 84
+        },
+        "rebounds": 33,
+        "assists": 14,
+        "steals": 3,
+        "blocks": 0,
+        "turnovers": 13,
+        "fouls": 19
+      }
+    },
     "olimpico": [
       {
         "id": "austin-wtighten",
@@ -29015,65 +29073,7 @@ export const matchPlayerStats = {
         "home": 19,
         "away": 17
       }
-    ],
-    "teamStats": {
-      "olimpico": {
-        "fieldGoals": {
-          "made": 33,
-          "attempted": 61,
-          "percentage": 54
-        },
-        "twoPointers": {
-          "made": 19,
-          "attempted": 30,
-          "percentage": 63
-        },
-        "threePointers": {
-          "made": 14,
-          "attempted": 31,
-          "percentage": 45
-        },
-        "freeThrows": {
-          "made": 13,
-          "attempted": 16,
-          "percentage": 81
-        },
-        "rebounds": 23,
-        "assists": 20,
-        "steals": 8,
-        "blocks": 0,
-        "turnovers": 8,
-        "fouls": 22
-      },
-      "boca": {
-        "fieldGoals": {
-          "made": 29,
-          "attempted": 62,
-          "percentage": 46
-        },
-        "twoPointers": {
-          "made": 23,
-          "attempted": 34,
-          "percentage": 68
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 28,
-          "percentage": 21
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 19,
-          "percentage": 84
-        },
-        "rebounds": 33,
-        "assists": 14,
-        "steals": 3,
-        "blocks": 0,
-        "turnovers": 13,
-        "fouls": 19
-      }
-    }
+    ]
   },
   "2026-10-13-obera-racing-chivilcoy": {
     "source": "Liga Nacional",
@@ -29082,6 +29082,64 @@ export const matchPlayerStats = {
     "awayTeam": "racing-chivilcoy",
     "homeScore": 78,
     "awayScore": 84,
+    "teamStats": {
+      "obera": {
+        "fieldGoals": {
+          "made": 25,
+          "attempted": 70,
+          "percentage": 35
+        },
+        "twoPointers": {
+          "made": 19,
+          "attempted": 43,
+          "percentage": 44
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 27,
+          "percentage": 22
+        },
+        "freeThrows": {
+          "made": 22,
+          "attempted": 30,
+          "percentage": 73
+        },
+        "rebounds": 41,
+        "assists": 17,
+        "steals": 4,
+        "blocks": 0,
+        "turnovers": 10,
+        "fouls": 23
+      },
+      "racing-chivilcoy": {
+        "fieldGoals": {
+          "made": 28,
+          "attempted": 59,
+          "percentage": 47
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 33,
+          "percentage": 52
+        },
+        "threePointers": {
+          "made": 11,
+          "attempted": 26,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 17,
+          "attempted": 26,
+          "percentage": 65
+        },
+        "rebounds": 31,
+        "assists": 15,
+        "steals": 6,
+        "blocks": 0,
+        "turnovers": 6,
+        "fouls": 23
+      }
+    },
     "obera": [
       {
         "id": "matheus-santos",
@@ -30283,65 +30341,7 @@ export const matchPlayerStats = {
         "home": 15,
         "away": 21
       }
-    ],
-    "teamStats": {
-      "obera": {
-        "fieldGoals": {
-          "made": 25,
-          "attempted": 70,
-          "percentage": 35
-        },
-        "twoPointers": {
-          "made": 19,
-          "attempted": 43,
-          "percentage": 44
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 27,
-          "percentage": 22
-        },
-        "freeThrows": {
-          "made": 22,
-          "attempted": 30,
-          "percentage": 73
-        },
-        "rebounds": 41,
-        "assists": 17,
-        "steals": 4,
-        "blocks": 0,
-        "turnovers": 10,
-        "fouls": 23
-      },
-      "racing-chivilcoy": {
-        "fieldGoals": {
-          "made": 28,
-          "attempted": 59,
-          "percentage": 47
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 33,
-          "percentage": 52
-        },
-        "threePointers": {
-          "made": 11,
-          "attempted": 26,
-          "percentage": 42
-        },
-        "freeThrows": {
-          "made": 17,
-          "attempted": 26,
-          "percentage": 65
-        },
-        "rebounds": 31,
-        "assists": 15,
-        "steals": 6,
-        "blocks": 0,
-        "turnovers": 6,
-        "fouls": 23
-      }
-    }
+    ]
   },
   "2026-10-14-lanus-penarol": {
     "source": "Liga Nacional",
@@ -30350,6 +30350,64 @@ export const matchPlayerStats = {
     "awayTeam": "penarol",
     "homeScore": 77,
     "awayScore": 84,
+    "teamStats": {
+      "lanus": {
+        "fieldGoals": {
+          "made": 27,
+          "attempted": 63,
+          "percentage": 42
+        },
+        "twoPointers": {
+          "made": 13,
+          "attempted": 30,
+          "percentage": 43
+        },
+        "threePointers": {
+          "made": 14,
+          "attempted": 33,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 9,
+          "attempted": 20,
+          "percentage": 45
+        },
+        "rebounds": 35,
+        "assists": 14,
+        "steals": 8,
+        "blocks": 0,
+        "turnovers": 12,
+        "fouls": 23
+      },
+      "penarol": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 67,
+          "percentage": 44
+        },
+        "twoPointers": {
+          "made": 20,
+          "attempted": 36,
+          "percentage": 56
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 31,
+          "percentage": 32
+        },
+        "freeThrows": {
+          "made": 14,
+          "attempted": 18,
+          "percentage": 78
+        },
+        "rebounds": 40,
+        "assists": 13,
+        "steals": 7,
+        "blocks": 2,
+        "turnovers": 12,
+        "fouls": 19
+      }
+    },
     "lanus": [
       {
         "id": "robert-whitfield",
@@ -31551,65 +31609,7 @@ export const matchPlayerStats = {
         "home": 11,
         "away": 13
       }
-    ],
-    "teamStats": {
-      "lanus": {
-        "fieldGoals": {
-          "made": 27,
-          "attempted": 63,
-          "percentage": 42
-        },
-        "twoPointers": {
-          "made": 13,
-          "attempted": 30,
-          "percentage": 43
-        },
-        "threePointers": {
-          "made": 14,
-          "attempted": 33,
-          "percentage": 42
-        },
-        "freeThrows": {
-          "made": 9,
-          "attempted": 20,
-          "percentage": 45
-        },
-        "rebounds": 35,
-        "assists": 14,
-        "steals": 8,
-        "blocks": 0,
-        "turnovers": 12,
-        "fouls": 23
-      },
-      "penarol": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 67,
-          "percentage": 44
-        },
-        "twoPointers": {
-          "made": 20,
-          "attempted": 36,
-          "percentage": 56
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 31,
-          "percentage": 32
-        },
-        "freeThrows": {
-          "made": 14,
-          "attempted": 18,
-          "percentage": 78
-        },
-        "rebounds": 40,
-        "assists": 13,
-        "steals": 7,
-        "blocks": 2,
-        "turnovers": 12,
-        "fouls": 19
-      }
-    }
+    ]
   },
   "2026-10-15-la-union-racing-chivilcoy": {
     "source": "Liga Nacional",
@@ -31618,6 +31618,64 @@ export const matchPlayerStats = {
     "awayTeam": "racing-chivilcoy",
     "homeScore": 68,
     "awayScore": 74,
+    "teamStats": {
+      "la-union": {
+        "fieldGoals": {
+          "made": 25,
+          "attempted": 69,
+          "percentage": 36
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 35,
+          "percentage": 49
+        },
+        "threePointers": {
+          "made": 8,
+          "attempted": 34,
+          "percentage": 24
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 18,
+          "percentage": 56
+        },
+        "rebounds": 43,
+        "assists": 11,
+        "steals": 11,
+        "blocks": 4,
+        "turnovers": 11,
+        "fouls": 27
+      },
+      "racing-chivilcoy": {
+        "fieldGoals": {
+          "made": 26,
+          "attempted": 60,
+          "percentage": 43
+        },
+        "twoPointers": {
+          "made": 18,
+          "attempted": 31,
+          "percentage": 58
+        },
+        "threePointers": {
+          "made": 8,
+          "attempted": 29,
+          "percentage": 28
+        },
+        "freeThrows": {
+          "made": 14,
+          "attempted": 19,
+          "percentage": 74
+        },
+        "rebounds": 40,
+        "assists": 7,
+        "steals": 9,
+        "blocks": 1,
+        "turnovers": 16,
+        "fouls": 24
+      }
+    },
     "la-union": [
       {
         "id": "brandon-beavers",
@@ -32775,65 +32833,7 @@ export const matchPlayerStats = {
         "home": 3,
         "away": 9
       }
-    ],
-    "teamStats": {
-      "la-union": {
-        "fieldGoals": {
-          "made": 25,
-          "attempted": 69,
-          "percentage": 36
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 35,
-          "percentage": 49
-        },
-        "threePointers": {
-          "made": 8,
-          "attempted": 34,
-          "percentage": 24
-        },
-        "freeThrows": {
-          "made": 10,
-          "attempted": 18,
-          "percentage": 56
-        },
-        "rebounds": 43,
-        "assists": 11,
-        "steals": 11,
-        "blocks": 4,
-        "turnovers": 11,
-        "fouls": 27
-      },
-      "racing-chivilcoy": {
-        "fieldGoals": {
-          "made": 26,
-          "attempted": 60,
-          "percentage": 43
-        },
-        "twoPointers": {
-          "made": 18,
-          "attempted": 31,
-          "percentage": 58
-        },
-        "threePointers": {
-          "made": 8,
-          "attempted": 29,
-          "percentage": 28
-        },
-        "freeThrows": {
-          "made": 14,
-          "attempted": 19,
-          "percentage": 74
-        },
-        "rebounds": 40,
-        "assists": 7,
-        "steals": 9,
-        "blocks": 1,
-        "turnovers": 16,
-        "fouls": 24
-      }
-    }
+    ]
   },
   "2026-10-16-platense-obera": {
     "source": "Liga Nacional",
@@ -32842,6 +32842,64 @@ export const matchPlayerStats = {
     "awayTeam": "obera",
     "homeScore": 86,
     "awayScore": 80,
+    "teamStats": {
+      "platense": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 64,
+          "percentage": 46
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 27,
+          "percentage": 63
+        },
+        "threePointers": {
+          "made": 13,
+          "attempted": 37,
+          "percentage": 35
+        },
+        "freeThrows": {
+          "made": 13,
+          "attempted": 17,
+          "percentage": 76
+        },
+        "rebounds": 32,
+        "assists": 20,
+        "steals": 7,
+        "blocks": 0,
+        "turnovers": 8,
+        "fouls": 19
+      },
+      "obera": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 67,
+          "percentage": 44
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 38,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 29,
+          "percentage": 31
+        },
+        "freeThrows": {
+          "made": 11,
+          "attempted": 13,
+          "percentage": 85
+        },
+        "rebounds": 38,
+        "assists": 9,
+        "steals": 5,
+        "blocks": 3,
+        "turnovers": 9,
+        "fouls": 17
+      }
+    },
     "platense": [
       {
         "id": "vicente-blazica",
@@ -34043,65 +34101,7 @@ export const matchPlayerStats = {
         "home": 21,
         "away": 14
       }
-    ],
-    "teamStats": {
-      "platense": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 64,
-          "percentage": 46
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 27,
-          "percentage": 63
-        },
-        "threePointers": {
-          "made": 13,
-          "attempted": 37,
-          "percentage": 35
-        },
-        "freeThrows": {
-          "made": 13,
-          "attempted": 17,
-          "percentage": 76
-        },
-        "rebounds": 32,
-        "assists": 20,
-        "steals": 7,
-        "blocks": 0,
-        "turnovers": 8,
-        "fouls": 19
-      },
-      "obera": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 67,
-          "percentage": 44
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 38,
-          "percentage": 55
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 29,
-          "percentage": 31
-        },
-        "freeThrows": {
-          "made": 11,
-          "attempted": 13,
-          "percentage": 85
-        },
-        "rebounds": 38,
-        "assists": 9,
-        "steals": 5,
-        "blocks": 3,
-        "turnovers": 9,
-        "fouls": 17
-      }
-    }
+    ]
   },
   "2026-10-16-san-lorenzo-penarol": {
     "source": "Liga Nacional",
@@ -34110,6 +34110,64 @@ export const matchPlayerStats = {
     "awayTeam": "penarol",
     "homeScore": 85,
     "awayScore": 92,
+    "teamStats": {
+      "san-lorenzo": {
+        "fieldGoals": {
+          "made": 26,
+          "attempted": 62,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 35,
+          "percentage": 49
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 27,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 24,
+          "attempted": 28,
+          "percentage": 86
+        },
+        "rebounds": 26,
+        "assists": 10,
+        "steals": 7,
+        "blocks": 2,
+        "turnovers": 9,
+        "fouls": 29
+      },
+      "penarol": {
+        "fieldGoals": {
+          "made": 31,
+          "attempted": 65,
+          "percentage": 47
+        },
+        "twoPointers": {
+          "made": 22,
+          "attempted": 36,
+          "percentage": 61
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 29,
+          "percentage": 31
+        },
+        "freeThrows": {
+          "made": 21,
+          "attempted": 26,
+          "percentage": 81
+        },
+        "rebounds": 35,
+        "assists": 18,
+        "steals": 5,
+        "blocks": 4,
+        "turnovers": 12,
+        "fouls": 28
+      }
+    },
     "san-lorenzo": [
       {
         "id": "lucas-gargallo",
@@ -35311,65 +35369,7 @@ export const matchPlayerStats = {
         "home": 23,
         "away": 21
       }
-    ],
-    "teamStats": {
-      "san-lorenzo": {
-        "fieldGoals": {
-          "made": 26,
-          "attempted": 62,
-          "percentage": 41
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 35,
-          "percentage": 49
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 27,
-          "percentage": 33
-        },
-        "freeThrows": {
-          "made": 24,
-          "attempted": 28,
-          "percentage": 86
-        },
-        "rebounds": 26,
-        "assists": 10,
-        "steals": 7,
-        "blocks": 2,
-        "turnovers": 9,
-        "fouls": 29
-      },
-      "penarol": {
-        "fieldGoals": {
-          "made": 31,
-          "attempted": 65,
-          "percentage": 47
-        },
-        "twoPointers": {
-          "made": 22,
-          "attempted": 36,
-          "percentage": 61
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 29,
-          "percentage": 31
-        },
-        "freeThrows": {
-          "made": 21,
-          "attempted": 26,
-          "percentage": 81
-        },
-        "rebounds": 35,
-        "assists": 18,
-        "steals": 5,
-        "blocks": 4,
-        "turnovers": 12,
-        "fouls": 28
-      }
-    }
+    ]
   },
   "2026-10-18-san-lorenzo-obera": {
     "source": "Liga Nacional",
@@ -35378,6 +35378,64 @@ export const matchPlayerStats = {
     "awayTeam": "obera",
     "homeScore": 73,
     "awayScore": 78,
+    "teamStats": {
+      "san-lorenzo": {
+        "fieldGoals": {
+          "made": 24,
+          "attempted": 62,
+          "percentage": 38
+        },
+        "twoPointers": {
+          "made": 14,
+          "attempted": 33,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 29,
+          "percentage": 34
+        },
+        "freeThrows": {
+          "made": 15,
+          "attempted": 21,
+          "percentage": 71
+        },
+        "rebounds": 36,
+        "assists": 8,
+        "steals": 8,
+        "blocks": 0,
+        "turnovers": 16,
+        "fouls": 19
+      },
+      "obera": {
+        "fieldGoals": {
+          "made": 26,
+          "attempted": 63,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 20,
+          "attempted": 44,
+          "percentage": 45
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 19,
+          "percentage": 32
+        },
+        "freeThrows": {
+          "made": 20,
+          "attempted": 23,
+          "percentage": 87
+        },
+        "rebounds": 31,
+        "assists": 20,
+        "steals": 9,
+        "blocks": 1,
+        "turnovers": 13,
+        "fouls": 19
+      }
+    },
     "san-lorenzo": [
       {
         "id": "lucas-gargallo",
@@ -36579,65 +36637,7 @@ export const matchPlayerStats = {
         "home": 15,
         "away": 15
       }
-    ],
-    "teamStats": {
-      "san-lorenzo": {
-        "fieldGoals": {
-          "made": 24,
-          "attempted": 62,
-          "percentage": 38
-        },
-        "twoPointers": {
-          "made": 14,
-          "attempted": 33,
-          "percentage": 42
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 29,
-          "percentage": 34
-        },
-        "freeThrows": {
-          "made": 15,
-          "attempted": 21,
-          "percentage": 71
-        },
-        "rebounds": 36,
-        "assists": 8,
-        "steals": 8,
-        "blocks": 0,
-        "turnovers": 16,
-        "fouls": 19
-      },
-      "obera": {
-        "fieldGoals": {
-          "made": 26,
-          "attempted": 63,
-          "percentage": 41
-        },
-        "twoPointers": {
-          "made": 20,
-          "attempted": 44,
-          "percentage": 45
-        },
-        "threePointers": {
-          "made": 6,
-          "attempted": 19,
-          "percentage": 32
-        },
-        "freeThrows": {
-          "made": 20,
-          "attempted": 23,
-          "percentage": 87
-        },
-        "rebounds": 31,
-        "assists": 20,
-        "steals": 9,
-        "blocks": 1,
-        "turnovers": 13,
-        "fouls": 19
-      }
-    }
+    ]
   },
   "2026-10-18-regatas-olimpico": {
     "source": "Liga Nacional",
@@ -36646,6 +36646,64 @@ export const matchPlayerStats = {
     "awayTeam": "olimpico",
     "homeScore": 80,
     "awayScore": 83,
+    "teamStats": {
+      "regatas": {
+        "fieldGoals": {
+          "made": 27,
+          "attempted": 65,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 17,
+          "attempted": 38,
+          "percentage": 45
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 27,
+          "percentage": 37
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 21,
+          "percentage": 76
+        },
+        "rebounds": 31,
+        "assists": 10,
+        "steals": 10,
+        "blocks": 2,
+        "turnovers": 15,
+        "fouls": 18
+      },
+      "olimpico": {
+        "fieldGoals": {
+          "made": 31,
+          "attempted": 52,
+          "percentage": 59
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 28,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 10,
+          "attempted": 24,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 11,
+          "attempted": 15,
+          "percentage": 73
+        },
+        "rebounds": 24,
+        "assists": 10,
+        "steals": 9,
+        "blocks": 0,
+        "turnovers": 16,
+        "fouls": 22
+      }
+    },
     "regatas": [
       {
         "id": "keith-stone",
@@ -37847,65 +37905,7 @@ export const matchPlayerStats = {
         "home": 23,
         "away": 22
       }
-    ],
-    "teamStats": {
-      "regatas": {
-        "fieldGoals": {
-          "made": 27,
-          "attempted": 65,
-          "percentage": 41
-        },
-        "twoPointers": {
-          "made": 17,
-          "attempted": 38,
-          "percentage": 45
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 27,
-          "percentage": 37
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 21,
-          "percentage": 76
-        },
-        "rebounds": 31,
-        "assists": 10,
-        "steals": 10,
-        "blocks": 2,
-        "turnovers": 15,
-        "fouls": 18
-      },
-      "olimpico": {
-        "fieldGoals": {
-          "made": 31,
-          "attempted": 52,
-          "percentage": 59
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 28,
-          "percentage": 75
-        },
-        "threePointers": {
-          "made": 10,
-          "attempted": 24,
-          "percentage": 42
-        },
-        "freeThrows": {
-          "made": 11,
-          "attempted": 15,
-          "percentage": 73
-        },
-        "rebounds": 24,
-        "assists": 10,
-        "steals": 9,
-        "blocks": 0,
-        "turnovers": 16,
-        "fouls": 22
-      }
-    }
+    ]
   },
   "2026-10-19-independiente-oliva-lanus": {
     "source": "Liga Nacional",
@@ -37914,6 +37914,64 @@ export const matchPlayerStats = {
     "awayTeam": "lanus",
     "homeScore": 108,
     "awayScore": 93,
+    "teamStats": {
+      "independiente-oliva": {
+        "fieldGoals": {
+          "made": 39,
+          "attempted": 70,
+          "percentage": 55
+        },
+        "twoPointers": {
+          "made": 26,
+          "attempted": 38,
+          "percentage": 68
+        },
+        "threePointers": {
+          "made": 13,
+          "attempted": 32,
+          "percentage": 41
+        },
+        "freeThrows": {
+          "made": 17,
+          "attempted": 21,
+          "percentage": 81
+        },
+        "rebounds": 36,
+        "assists": 21,
+        "steals": 6,
+        "blocks": 4,
+        "turnovers": 11,
+        "fouls": 27
+      },
+      "lanus": {
+        "fieldGoals": {
+          "made": 30,
+          "attempted": 64,
+          "percentage": 46
+        },
+        "twoPointers": {
+          "made": 21,
+          "attempted": 33,
+          "percentage": 64
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 31,
+          "percentage": 29
+        },
+        "freeThrows": {
+          "made": 24,
+          "attempted": 29,
+          "percentage": 83
+        },
+        "rebounds": 37,
+        "assists": 18,
+        "steals": 10,
+        "blocks": 0,
+        "turnovers": 13,
+        "fouls": 19
+      }
+    },
     "independiente-oliva": [
       {
         "id": "agustin-caffaro",
@@ -39115,65 +39173,7 @@ export const matchPlayerStats = {
         "home": 23,
         "away": 28
       }
-    ],
-    "teamStats": {
-      "independiente-oliva": {
-        "fieldGoals": {
-          "made": 39,
-          "attempted": 70,
-          "percentage": 55
-        },
-        "twoPointers": {
-          "made": 26,
-          "attempted": 38,
-          "percentage": 68
-        },
-        "threePointers": {
-          "made": 13,
-          "attempted": 32,
-          "percentage": 41
-        },
-        "freeThrows": {
-          "made": 17,
-          "attempted": 21,
-          "percentage": 81
-        },
-        "rebounds": 36,
-        "assists": 21,
-        "steals": 6,
-        "blocks": 4,
-        "turnovers": 11,
-        "fouls": 27
-      },
-      "lanus": {
-        "fieldGoals": {
-          "made": 30,
-          "attempted": 64,
-          "percentage": 46
-        },
-        "twoPointers": {
-          "made": 21,
-          "attempted": 33,
-          "percentage": 64
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 31,
-          "percentage": 29
-        },
-        "freeThrows": {
-          "made": 24,
-          "attempted": 29,
-          "percentage": 83
-        },
-        "rebounds": 37,
-        "assists": 18,
-        "steals": 10,
-        "blocks": 0,
-        "turnovers": 13,
-        "fouls": 19
-      }
-    }
+    ]
   },
   "2026-10-20-san-martin-olimpico": {
     "source": "Liga Nacional",
@@ -39182,6 +39182,64 @@ export const matchPlayerStats = {
     "awayTeam": "olimpico",
     "homeScore": 86,
     "awayScore": 106,
+    "teamStats": {
+      "san-martin": {
+        "fieldGoals": {
+          "made": 31,
+          "attempted": 63,
+          "percentage": 49
+        },
+        "twoPointers": {
+          "made": 23,
+          "attempted": 38,
+          "percentage": 61
+        },
+        "threePointers": {
+          "made": 8,
+          "attempted": 25,
+          "percentage": 32
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 28,
+          "percentage": 57
+        },
+        "rebounds": 30,
+        "assists": 19,
+        "steals": 6,
+        "blocks": 1,
+        "turnovers": 13,
+        "fouls": 21
+      },
+      "olimpico": {
+        "fieldGoals": {
+          "made": 39,
+          "attempted": 75,
+          "percentage": 52
+        },
+        "twoPointers": {
+          "made": 26,
+          "attempted": 46,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 13,
+          "attempted": 29,
+          "percentage": 45
+        },
+        "freeThrows": {
+          "made": 15,
+          "attempted": 17,
+          "percentage": 88
+        },
+        "rebounds": 34,
+        "assists": 10,
+        "steals": 9,
+        "blocks": 1,
+        "turnovers": 9,
+        "fouls": 27
+      }
+    },
     "san-martin": [
       {
         "id": "diego-collomb",
@@ -40361,65 +40419,7 @@ export const matchPlayerStats = {
         "number": "34",
         "starter": true
       }
-    ],
-    "teamStats": {
-      "san-martin": {
-        "fieldGoals": {
-          "made": 31,
-          "attempted": 63,
-          "percentage": 49
-        },
-        "twoPointers": {
-          "made": 23,
-          "attempted": 38,
-          "percentage": 61
-        },
-        "threePointers": {
-          "made": 8,
-          "attempted": 25,
-          "percentage": 32
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 28,
-          "percentage": 57
-        },
-        "rebounds": 30,
-        "assists": 19,
-        "steals": 6,
-        "blocks": 1,
-        "turnovers": 13,
-        "fouls": 21
-      },
-      "olimpico": {
-        "fieldGoals": {
-          "made": 39,
-          "attempted": 75,
-          "percentage": 52
-        },
-        "twoPointers": {
-          "made": 26,
-          "attempted": 46,
-          "percentage": 57
-        },
-        "threePointers": {
-          "made": 13,
-          "attempted": 29,
-          "percentage": 45
-        },
-        "freeThrows": {
-          "made": 15,
-          "attempted": 17,
-          "percentage": 88
-        },
-        "rebounds": 34,
-        "assists": 10,
-        "steals": 9,
-        "blocks": 1,
-        "turnovers": 9,
-        "fouls": 27
-      }
-    }
+    ]
   },
   "2026-10-20-ferro-platense": {
     "source": "Liga Nacional",
@@ -40428,6 +40428,64 @@ export const matchPlayerStats = {
     "awayTeam": "platense",
     "homeScore": 86,
     "awayScore": 81,
+    "teamStats": {
+      "ferro": {
+        "fieldGoals": {
+          "made": 27,
+          "attempted": 59,
+          "percentage": 45
+        },
+        "twoPointers": {
+          "made": 20,
+          "attempted": 31,
+          "percentage": 65
+        },
+        "threePointers": {
+          "made": 7,
+          "attempted": 28,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 25,
+          "attempted": 33,
+          "percentage": 76
+        },
+        "rebounds": 37,
+        "assists": 15,
+        "steals": 8,
+        "blocks": 3,
+        "turnovers": 12,
+        "fouls": 29
+      },
+      "platense": {
+        "fieldGoals": {
+          "made": 28,
+          "attempted": 68,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 19,
+          "attempted": 41,
+          "percentage": 46
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 27,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 25,
+          "percentage": 64
+        },
+        "rebounds": 33,
+        "assists": 13,
+        "steals": 8,
+        "blocks": 1,
+        "turnovers": 12,
+        "fouls": 29
+      }
+    },
     "ferro": [
       {
         "id": "tobias-tamagusuku",
@@ -41607,64 +41665,6 @@ export const matchPlayerStats = {
         "number": "30",
         "starter": true
       }
-    ],
-    "teamStats": {
-      "ferro": {
-        "fieldGoals": {
-          "made": 27,
-          "attempted": 59,
-          "percentage": 45
-        },
-        "twoPointers": {
-          "made": 20,
-          "attempted": 31,
-          "percentage": 65
-        },
-        "threePointers": {
-          "made": 7,
-          "attempted": 28,
-          "percentage": 25
-        },
-        "freeThrows": {
-          "made": 25,
-          "attempted": 33,
-          "percentage": 76
-        },
-        "rebounds": 37,
-        "assists": 15,
-        "steals": 8,
-        "blocks": 3,
-        "turnovers": 12,
-        "fouls": 29
-      },
-      "platense": {
-        "fieldGoals": {
-          "made": 28,
-          "attempted": 68,
-          "percentage": 41
-        },
-        "twoPointers": {
-          "made": 19,
-          "attempted": 41,
-          "percentage": 46
-        },
-        "threePointers": {
-          "made": 9,
-          "attempted": 27,
-          "percentage": 33
-        },
-        "freeThrows": {
-          "made": 16,
-          "attempted": 25,
-          "percentage": 64
-        },
-        "rebounds": 33,
-        "assists": 13,
-        "steals": 8,
-        "blocks": 1,
-        "turnovers": 12,
-        "fouls": 29
-      }
-    }
+    ]
   }
 };
