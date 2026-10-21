@@ -2207,7 +2207,7 @@ const awayTeam = getTeam(match.awayTeam);
 
     </div>
   </div>
-)}
+, document.body)}
 
     </main>
   );
