@@ -39,10 +39,14 @@ async function main() {
       legacyStatsRemoved++;
     }
 
-    if (!officialStatsKeys.has(key) && Object.prototype.hasOwnProperty.call(matchStats, key)) {
-      delete matchStats[key];
-      unverifiedStatsRemoved++;
-    }
+   if (
+  !officialStatsKeys.has(key) &&
+  Object.prototype.hasOwnProperty.call(matchStats, key) &&
+  matchStats[key]?.source !== "Liga Nacional"
+) {
+  delete matchStats[key];
+  unverifiedStatsRemoved++;
+}
   }
 
   let statsAdded = 0;

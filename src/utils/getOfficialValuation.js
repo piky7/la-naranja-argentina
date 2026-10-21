@@ -24,6 +24,11 @@ export function getOfficialValuation(match, teamId, playerId) {
   }
 
   // Respaldo para partidos históricos.
+  // No reutilizar valoraciones históricas en partidos posteriores
+// a la migración oficial.
+if (!match.date || match.date > "2026-10-19") {
+  return null;
+}
   const legacyMatchKey = `${match.homeTeam}-${match.awayTeam}`;
 
   const legacyValue =
