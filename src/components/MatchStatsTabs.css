@@ -75,3 +75,67 @@
     font-variant-numeric: tabular-nums;
   }
 }
+/* LNA - Selector de equipo integrado al titulo de la tabla en movil. */
+.match-stats-tabs .match-player-team-title { display: none; }
+@media (max-width: 767px) {
+  .match-stats-tabs .match-player-team-title {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 24px);
+    margin: 8px 12px 0;
+    padding: 7px 10px;
+    gap: 9px;
+    min-height: 42px;
+    border: 1px solid #e76c16;
+    border-radius: 9px 9px 0 0;
+    background: #0b1b29;
+    color: #f5f7fa;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  .match-stats-tabs .match-player-team-title > img {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    object-fit: contain;
+  }
+  .match-stats-tabs .match-player-team-title-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+  }
+  .match-stats-tabs .match-player-team-title-text small {
+    font-size: 9px;
+    color: #aebbc9;
+    letter-spacing: .4px;
+    line-height: 1.1;
+  }
+  .match-stats-tabs .match-player-team-title-text strong {
+    font-size: 13px;
+    line-height: 1.1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .match-stats-tabs .match-player-team-title-change {
+    color: #ff981f;
+    font-size: 21px;
+    line-height: 1;
+    padding: 0 3px;
+  }
+  .match-stats-tabs .match-player-team-title:focus-visible {
+    outline: 2px solid #ffb44d;
+    outline-offset: 2px;
+  }
+  .match-stats-tabs .match-player-tables .match-stats-team-header {
+    display: none;
+  }
+  .match-stats-tabs .match-player-tables .match-stats-team {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
