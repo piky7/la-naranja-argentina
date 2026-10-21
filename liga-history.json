@@ -614,7 +614,35 @@
               "plusMinus": -9
             }
           ],
-          "totalPlayerPoints": 74
+          "totalPlayerPoints": 74,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 53,
+              "percentage": 45
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 30,
+              "percentage": 57
+            },
+            "threePointers": {
+              "made": 7,
+              "attempted": 23,
+              "percentage": 30
+            },
+            "freeThrows": {
+              "made": 19,
+              "attempted": 27,
+              "percentage": 70
+            },
+            "rebounds": 27,
+            "assists": 14,
+            "steals": 10,
+            "blocks": 3,
+            "turnovers": 17,
+            "fouls": 14
+          }
         },
         {
           "name": "GIMNASIA (CR)",
@@ -1222,7 +1250,35 @@
               "plusMinus": 3
             }
           ],
-          "totalPlayerPoints": 92
+          "totalPlayerPoints": 92,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 37,
+              "attempted": 67,
+              "percentage": 55
+            },
+            "twoPointers": {
+              "made": 23,
+              "attempted": 38,
+              "percentage": 61
+            },
+            "threePointers": {
+              "made": 14,
+              "attempted": 29,
+              "percentage": 48
+            },
+            "freeThrows": {
+              "made": 4,
+              "attempted": 9,
+              "percentage": 44
+            },
+            "rebounds": 29,
+            "assists": 26,
+            "steals": 11,
+            "blocks": 0,
+            "turnovers": 15,
+            "fouls": 26
+          }
         }
       ]
     },
@@ -1839,7 +1895,35 @@
               "plusMinus": 1
             }
           ],
-          "totalPlayerPoints": 62
+          "totalPlayerPoints": 62,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 22,
+              "attempted": 60,
+              "percentage": 36
+            },
+            "twoPointers": {
+              "made": 20,
+              "attempted": 38,
+              "percentage": 53
+            },
+            "threePointers": {
+              "made": 2,
+              "attempted": 22,
+              "percentage": 9
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 21,
+              "percentage": 76
+            },
+            "rebounds": 42,
+            "assists": 9,
+            "steals": 6,
+            "blocks": 4,
+            "turnovers": 10,
+            "fouls": 17
+          }
         },
         {
           "name": "GIMNASIA (CR)",
@@ -2447,7 +2531,35 @@
               "plusMinus": -7
             }
           ],
-          "totalPlayerPoints": 57
+          "totalPlayerPoints": 57,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 22,
+              "attempted": 61,
+              "percentage": 36
+            },
+            "twoPointers": {
+              "made": 18,
+              "attempted": 37,
+              "percentage": 49
+            },
+            "threePointers": {
+              "made": 4,
+              "attempted": 24,
+              "percentage": 17
+            },
+            "freeThrows": {
+              "made": 9,
+              "attempted": 14,
+              "percentage": 64
+            },
+            "rebounds": 38,
+            "assists": 13,
+            "steals": 6,
+            "blocks": 4,
+            "turnovers": 10,
+            "fouls": 25
+          }
         }
       ]
     },
@@ -3064,7 +3176,35 @@
               "plusMinus": 21
             }
           ],
-          "totalPlayerPoints": 79
+          "totalPlayerPoints": 79,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 29,
+              "attempted": 59,
+              "percentage": 49
+            },
+            "twoPointers": {
+              "made": 23,
+              "attempted": 38,
+              "percentage": 61
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 21,
+              "percentage": 29
+            },
+            "freeThrows": {
+              "made": 15,
+              "attempted": 23,
+              "percentage": 65
+            },
+            "rebounds": 45,
+            "assists": 6,
+            "steals": 6,
+            "blocks": 2,
+            "turnovers": 14,
+            "fouls": 20
+          }
         },
         {
           "name": "FERRO",
@@ -3672,7 +3812,35 @@
               "plusMinus": -1
             }
           ],
-          "totalPlayerPoints": 68
+          "totalPlayerPoints": 68,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 68,
+              "percentage": 35
+            },
+            "twoPointers": {
+              "made": 16,
+              "attempted": 30,
+              "percentage": 53
+            },
+            "threePointers": {
+              "made": 8,
+              "attempted": 38,
+              "percentage": 21
+            },
+            "freeThrows": {
+              "made": 12,
+              "attempted": 16,
+              "percentage": 75
+            },
+            "rebounds": 36,
+            "assists": 10,
+            "steals": 10,
+            "blocks": 2,
+            "turnovers": 8,
+            "fouls": 24
+          }
         }
       ]
     },
@@ -4289,7 +4457,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 73
+          "totalPlayerPoints": 73,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 25,
+              "attempted": 59,
+              "percentage": 42
+            },
+            "twoPointers": {
+              "made": 14,
+              "attempted": 26,
+              "percentage": 54
+            },
+            "threePointers": {
+              "made": 11,
+              "attempted": 33,
+              "percentage": 33
+            },
+            "freeThrows": {
+              "made": 12,
+              "attempted": 19,
+              "percentage": 63
+            },
+            "rebounds": 35,
+            "assists": 14,
+            "steals": 7,
+            "blocks": 1,
+            "turnovers": 12,
+            "fouls": 19
+          }
         },
         {
           "name": "INSTITUTO",
@@ -4897,7 +5093,35 @@
               "plusMinus": 12
             }
           ],
-          "totalPlayerPoints": 81
+          "totalPlayerPoints": 81,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 62,
+              "percentage": 48
+            },
+            "twoPointers": {
+              "made": 19,
+              "attempted": 32,
+              "percentage": 59
+            },
+            "threePointers": {
+              "made": 11,
+              "attempted": 30,
+              "percentage": 37
+            },
+            "freeThrows": {
+              "made": 10,
+              "attempted": 14,
+              "percentage": 71
+            },
+            "rebounds": 32,
+            "assists": 15,
+            "steals": 8,
+            "blocks": 2,
+            "turnovers": 13,
+            "fouls": 18
+          }
         }
       ]
     },
@@ -5514,7 +5738,35 @@
               "plusMinus": 3
             }
           ],
-          "totalPlayerPoints": 74
+          "totalPlayerPoints": 74,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 22,
+              "attempted": 60,
+              "percentage": 36
+            },
+            "twoPointers": {
+              "made": 14,
+              "attempted": 33,
+              "percentage": 42
+            },
+            "threePointers": {
+              "made": 8,
+              "attempted": 27,
+              "percentage": 30
+            },
+            "freeThrows": {
+              "made": 22,
+              "attempted": 30,
+              "percentage": 73
+            },
+            "rebounds": 43,
+            "assists": 9,
+            "steals": 7,
+            "blocks": 2,
+            "turnovers": 18,
+            "fouls": 20
+          }
         },
         {
           "name": "PLATENSE",
@@ -6122,7 +6374,35 @@
               "plusMinus": 5
             }
           ],
-          "totalPlayerPoints": 82
+          "totalPlayerPoints": 82,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 71,
+              "percentage": 42
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 42,
+              "percentage": 50
+            },
+            "threePointers": {
+              "made": 9,
+              "attempted": 29,
+              "percentage": 31
+            },
+            "freeThrows": {
+              "made": 13,
+              "attempted": 19,
+              "percentage": 68
+            },
+            "rebounds": 36,
+            "assists": 8,
+            "steals": 12,
+            "blocks": 7,
+            "turnovers": 11,
+            "fouls": 23
+          }
         }
       ]
     },
@@ -6739,7 +7019,35 @@
               "plusMinus": 20
             }
           ],
-          "totalPlayerPoints": 73
+          "totalPlayerPoints": 73,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 63,
+              "percentage": 38
+            },
+            "twoPointers": {
+              "made": 16,
+              "attempted": 33,
+              "percentage": 48
+            },
+            "threePointers": {
+              "made": 8,
+              "attempted": 30,
+              "percentage": 27
+            },
+            "freeThrows": {
+              "made": 17,
+              "attempted": 21,
+              "percentage": 81
+            },
+            "rebounds": 32,
+            "assists": 12,
+            "steals": 6,
+            "blocks": 1,
+            "turnovers": 5,
+            "fouls": 21
+          }
         },
         {
           "name": "INSTITUTO",
@@ -7347,7 +7655,35 @@
               "plusMinus": -23
             }
           ],
-          "totalPlayerPoints": 63
+          "totalPlayerPoints": 63,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 25,
+              "attempted": 60,
+              "percentage": 41
+            },
+            "twoPointers": {
+              "made": 22,
+              "attempted": 41,
+              "percentage": 54
+            },
+            "threePointers": {
+              "made": 3,
+              "attempted": 19,
+              "percentage": 16
+            },
+            "freeThrows": {
+              "made": 10,
+              "attempted": 13,
+              "percentage": 77
+            },
+            "rebounds": 33,
+            "assists": 12,
+            "steals": 4,
+            "blocks": 0,
+            "turnovers": 7,
+            "fouls": 20
+          }
         }
       ]
     },
@@ -7964,7 +8300,35 @@
               "plusMinus": 14
             }
           ],
-          "totalPlayerPoints": 94
+          "totalPlayerPoints": 94,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 29,
+              "attempted": 58,
+              "percentage": 50
+            },
+            "twoPointers": {
+              "made": 16,
+              "attempted": 28,
+              "percentage": 57
+            },
+            "threePointers": {
+              "made": 13,
+              "attempted": 30,
+              "percentage": 43
+            },
+            "freeThrows": {
+              "made": 23,
+              "attempted": 28,
+              "percentage": 82
+            },
+            "rebounds": 31,
+            "assists": 15,
+            "steals": 14,
+            "blocks": 3,
+            "turnovers": 14,
+            "fouls": 17
+          }
         },
         {
           "name": "PLATENSE",
@@ -8572,7 +8936,35 @@
               "plusMinus": -23
             }
           ],
-          "totalPlayerPoints": 67
+          "totalPlayerPoints": 67,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 22,
+              "attempted": 61,
+              "percentage": 36
+            },
+            "twoPointers": {
+              "made": 13,
+              "attempted": 33,
+              "percentage": 39
+            },
+            "threePointers": {
+              "made": 9,
+              "attempted": 28,
+              "percentage": 32
+            },
+            "freeThrows": {
+              "made": 14,
+              "attempted": 16,
+              "percentage": 88
+            },
+            "rebounds": 35,
+            "assists": 11,
+            "steals": 6,
+            "blocks": 2,
+            "turnovers": 17,
+            "fouls": 29
+          }
         }
       ]
     },
@@ -9189,7 +9581,35 @@
               "plusMinus": 8
             }
           ],
-          "totalPlayerPoints": 92
+          "totalPlayerPoints": 92,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 33,
+              "attempted": 72,
+              "percentage": 45
+            },
+            "twoPointers": {
+              "made": 18,
+              "attempted": 33,
+              "percentage": 55
+            },
+            "threePointers": {
+              "made": 15,
+              "attempted": 39,
+              "percentage": 38
+            },
+            "freeThrows": {
+              "made": 11,
+              "attempted": 18,
+              "percentage": 61
+            },
+            "rebounds": 33,
+            "assists": 13,
+            "steals": 8,
+            "blocks": 3,
+            "turnovers": 8,
+            "fouls": 23
+          }
         },
         {
           "name": "LA UNION FSA",
@@ -9797,7 +10217,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 86
+          "totalPlayerPoints": 86,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 31,
+              "attempted": 59,
+              "percentage": 52
+            },
+            "twoPointers": {
+              "made": 27,
+              "attempted": 41,
+              "percentage": 66
+            },
+            "threePointers": {
+              "made": 4,
+              "attempted": 18,
+              "percentage": 22
+            },
+            "freeThrows": {
+              "made": 20,
+              "attempted": 29,
+              "percentage": 69
+            },
+            "rebounds": 34,
+            "assists": 8,
+            "steals": 3,
+            "blocks": 1,
+            "turnovers": 13,
+            "fouls": 22
+          }
         }
       ]
     },
@@ -10414,7 +10862,35 @@
               "plusMinus": -7
             }
           ],
-          "totalPlayerPoints": 83
+          "totalPlayerPoints": 83,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 28,
+              "attempted": 57,
+              "percentage": 49
+            },
+            "twoPointers": {
+              "made": 13,
+              "attempted": 25,
+              "percentage": 52
+            },
+            "threePointers": {
+              "made": 15,
+              "attempted": 32,
+              "percentage": 47
+            },
+            "freeThrows": {
+              "made": 12,
+              "attempted": 15,
+              "percentage": 80
+            },
+            "rebounds": 30,
+            "assists": 16,
+            "steals": 6,
+            "blocks": 3,
+            "turnovers": 16,
+            "fouls": 21
+          }
         },
         {
           "name": "ATENAS (C)",
@@ -11022,7 +11498,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 77
+          "totalPlayerPoints": 77,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 27,
+              "attempted": 62,
+              "percentage": 43
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 35,
+              "percentage": 60
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 27,
+              "percentage": 22
+            },
+            "freeThrows": {
+              "made": 17,
+              "attempted": 22,
+              "percentage": 77
+            },
+            "rebounds": 31,
+            "assists": 14,
+            "steals": 14,
+            "blocks": 2,
+            "turnovers": 12,
+            "fouls": 20
+          }
         }
       ]
     },
@@ -11639,7 +12143,35 @@
               "plusMinus": -5
             }
           ],
-          "totalPlayerPoints": 86
+          "totalPlayerPoints": 86,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 29,
+              "attempted": 62,
+              "percentage": 46
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 32,
+              "percentage": 53
+            },
+            "threePointers": {
+              "made": 12,
+              "attempted": 30,
+              "percentage": 40
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 28,
+              "percentage": 57
+            },
+            "rebounds": 28,
+            "assists": 19,
+            "steals": 13,
+            "blocks": 1,
+            "turnovers": 13,
+            "fouls": 22
+          }
         },
         {
           "name": "LA UNION FSA",
@@ -12247,7 +12779,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 90
+          "totalPlayerPoints": 90,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 32,
+              "attempted": 54,
+              "percentage": 59
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 32,
+              "percentage": 66
+            },
+            "threePointers": {
+              "made": 11,
+              "attempted": 22,
+              "percentage": 50
+            },
+            "freeThrows": {
+              "made": 15,
+              "attempted": 18,
+              "percentage": 83
+            },
+            "rebounds": 24,
+            "assists": 22,
+            "steals": 12,
+            "blocks": 1,
+            "turnovers": 16,
+            "fouls": 25
+          }
         }
       ]
     },
@@ -12864,7 +13424,35 @@
               "plusMinus": 6
             }
           ],
-          "totalPlayerPoints": 96
+          "totalPlayerPoints": 96,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 69,
+              "percentage": 43
+            },
+            "twoPointers": {
+              "made": 18,
+              "attempted": 33,
+              "percentage": 55
+            },
+            "threePointers": {
+              "made": 12,
+              "attempted": 36,
+              "percentage": 33
+            },
+            "freeThrows": {
+              "made": 24,
+              "attempted": 28,
+              "percentage": 86
+            },
+            "rebounds": 41,
+            "assists": 18,
+            "steals": 4,
+            "blocks": 0,
+            "turnovers": 10,
+            "fouls": 19
+          }
         },
         {
           "name": "OBERÁ",
@@ -13472,7 +14060,35 @@
               "plusMinus": -21
             }
           ],
-          "totalPlayerPoints": 73
+          "totalPlayerPoints": 73,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 29,
+              "attempted": 69,
+              "percentage": 42
+            },
+            "twoPointers": {
+              "made": 23,
+              "attempted": 40,
+              "percentage": 57
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 29,
+              "percentage": 21
+            },
+            "freeThrows": {
+              "made": 9,
+              "attempted": 13,
+              "percentage": 69
+            },
+            "rebounds": 29,
+            "assists": 18,
+            "steals": 7,
+            "blocks": 0,
+            "turnovers": 10,
+            "fouls": 25
+          }
         }
       ]
     },
@@ -14039,7 +14655,35 @@
               "plusMinus": 6
             }
           ],
-          "totalPlayerPoints": 87
+          "totalPlayerPoints": 87,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 29,
+              "attempted": 70,
+              "percentage": 41
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 39,
+              "percentage": 44
+            },
+            "threePointers": {
+              "made": 12,
+              "attempted": 31,
+              "percentage": 39
+            },
+            "freeThrows": {
+              "made": 17,
+              "attempted": 22,
+              "percentage": 77
+            },
+            "rebounds": 37,
+            "assists": 19,
+            "steals": 6,
+            "blocks": 0,
+            "turnovers": 9,
+            "fouls": 26
+          }
         },
         {
           "name": "ATENAS (C)",
@@ -14647,7 +15291,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 91
+          "totalPlayerPoints": 91,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 33,
+              "attempted": 65,
+              "percentage": 50
+            },
+            "twoPointers": {
+              "made": 23,
+              "attempted": 38,
+              "percentage": 61
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 27,
+              "percentage": 37
+            },
+            "freeThrows": {
+              "made": 15,
+              "attempted": 22,
+              "percentage": 68
+            },
+            "rebounds": 37,
+            "assists": 18,
+            "steals": 4,
+            "blocks": 4,
+            "turnovers": 11,
+            "fouls": 18
+          }
         }
       ]
     },
@@ -15264,7 +15936,35 @@
               "plusMinus": 12
             }
           ],
-          "totalPlayerPoints": 126
+          "totalPlayerPoints": 126,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 40,
+              "attempted": 83,
+              "percentage": 48
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 38,
+              "percentage": 55
+            },
+            "threePointers": {
+              "made": 19,
+              "attempted": 45,
+              "percentage": 42
+            },
+            "freeThrows": {
+              "made": 27,
+              "attempted": 38,
+              "percentage": 71
+            },
+            "rebounds": 35,
+            "assists": 25,
+            "steals": 9,
+            "blocks": 4,
+            "turnovers": 6,
+            "fouls": 32
+          }
         },
         {
           "name": "SAN MARTÍN (C)",
@@ -15872,7 +16572,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 123
+          "totalPlayerPoints": 123,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 40,
+              "attempted": 78,
+              "percentage": 51
+            },
+            "twoPointers": {
+              "made": 26,
+              "attempted": 44,
+              "percentage": 59
+            },
+            "threePointers": {
+              "made": 14,
+              "attempted": 34,
+              "percentage": 41
+            },
+            "freeThrows": {
+              "made": 29,
+              "attempted": 37,
+              "percentage": 78
+            },
+            "rebounds": 51,
+            "assists": 13,
+            "steals": 5,
+            "blocks": 2,
+            "turnovers": 14,
+            "fouls": 29
+          }
         }
       ]
     },
@@ -16489,7 +17217,35 @@
               "plusMinus": -9
             }
           ],
-          "totalPlayerPoints": 92
+          "totalPlayerPoints": 92,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 31,
+              "attempted": 64,
+              "percentage": 48
+            },
+            "twoPointers": {
+              "made": 18,
+              "attempted": 28,
+              "percentage": 64
+            },
+            "threePointers": {
+              "made": 13,
+              "attempted": 36,
+              "percentage": 36
+            },
+            "freeThrows": {
+              "made": 17,
+              "attempted": 28,
+              "percentage": 61
+            },
+            "rebounds": 38,
+            "assists": 17,
+            "steals": 5,
+            "blocks": 0,
+            "turnovers": 13,
+            "fouls": 30
+          }
         },
         {
           "name": "FERRO",
@@ -17097,7 +17853,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 97
+          "totalPlayerPoints": 97,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 62,
+              "percentage": 48
+            },
+            "twoPointers": {
+              "made": 20,
+              "attempted": 31,
+              "percentage": 65
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 31,
+              "percentage": 32
+            },
+            "freeThrows": {
+              "made": 27,
+              "attempted": 33,
+              "percentage": 82
+            },
+            "rebounds": 30,
+            "assists": 14,
+            "steals": 8,
+            "blocks": 2,
+            "turnovers": 11,
+            "fouls": 25
+          }
         }
       ]
     },
@@ -17714,7 +18498,35 @@
               "plusMinus": 6
             }
           ],
-          "totalPlayerPoints": 89
+          "totalPlayerPoints": 89,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 32,
+              "attempted": 58,
+              "percentage": 55
+            },
+            "twoPointers": {
+              "made": 22,
+              "attempted": 41,
+              "percentage": 54
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 17,
+              "percentage": 59
+            },
+            "freeThrows": {
+              "made": 15,
+              "attempted": 19,
+              "percentage": 79
+            },
+            "rebounds": 25,
+            "assists": 17,
+            "steals": 7,
+            "blocks": 1,
+            "turnovers": 13,
+            "fouls": 14
+          }
         },
         {
           "name": "GIMNASIA (CR)",
@@ -18322,7 +19134,35 @@
               "plusMinus": 4
             }
           ],
-          "totalPlayerPoints": 73
+          "totalPlayerPoints": 73,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 28,
+              "attempted": 64,
+              "percentage": 43
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 39,
+              "percentage": 54
+            },
+            "threePointers": {
+              "made": 7,
+              "attempted": 25,
+              "percentage": 28
+            },
+            "freeThrows": {
+              "made": 10,
+              "attempted": 15,
+              "percentage": 67
+            },
+            "rebounds": 28,
+            "assists": 10,
+            "steals": 9,
+            "blocks": 1,
+            "turnovers": 12,
+            "fouls": 18
+          }
         }
       ]
     },
@@ -18939,7 +19779,35 @@
               "plusMinus": -4
             }
           ],
-          "totalPlayerPoints": 67
+          "totalPlayerPoints": 67,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 71,
+              "percentage": 33
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 41,
+              "percentage": 41
+            },
+            "threePointers": {
+              "made": 7,
+              "attempted": 30,
+              "percentage": 23
+            },
+            "freeThrows": {
+              "made": 12,
+              "attempted": 20,
+              "percentage": 60
+            },
+            "rebounds": 40,
+            "assists": 10,
+            "steals": 15,
+            "blocks": 4,
+            "turnovers": 13,
+            "fouls": 17
+          }
         },
         {
           "name": "OBERÁ",
@@ -19547,7 +20415,35 @@
               "plusMinus": -8
             }
           ],
-          "totalPlayerPoints": 58
+          "totalPlayerPoints": 58,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 21,
+              "attempted": 58,
+              "percentage": 36
+            },
+            "twoPointers": {
+              "made": 18,
+              "attempted": 35,
+              "percentage": 51
+            },
+            "threePointers": {
+              "made": 3,
+              "attempted": 23,
+              "percentage": 13
+            },
+            "freeThrows": {
+              "made": 13,
+              "attempted": 16,
+              "percentage": 81
+            },
+            "rebounds": 38,
+            "assists": 10,
+            "steals": 8,
+            "blocks": 2,
+            "turnovers": 20,
+            "fouls": 21
+          }
         }
       ]
     },
@@ -20164,7 +21060,35 @@
               "plusMinus": 4
             }
           ],
-          "totalPlayerPoints": 97
+          "totalPlayerPoints": 97,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 68,
+              "percentage": 44
+            },
+            "twoPointers": {
+              "made": 20,
+              "attempted": 35,
+              "percentage": 57
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 33,
+              "percentage": 30
+            },
+            "freeThrows": {
+              "made": 27,
+              "attempted": 41,
+              "percentage": 66
+            },
+            "rebounds": 46,
+            "assists": 15,
+            "steals": 14,
+            "blocks": 1,
+            "turnovers": 29,
+            "fouls": 30
+          }
         },
         {
           "name": "FERRO",
@@ -20772,7 +21696,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 94
+          "totalPlayerPoints": 94,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 32,
+              "attempted": 82,
+              "percentage": 39
+            },
+            "twoPointers": {
+              "made": 25,
+              "attempted": 48,
+              "percentage": 52
+            },
+            "threePointers": {
+              "made": 7,
+              "attempted": 34,
+              "percentage": 21
+            },
+            "freeThrows": {
+              "made": 23,
+              "attempted": 30,
+              "percentage": 77
+            },
+            "rebounds": 38,
+            "assists": 25,
+            "steals": 22,
+            "blocks": 3,
+            "turnovers": 20,
+            "fouls": 35
+          }
         }
       ]
     },
@@ -21389,7 +22341,35 @@
               "plusMinus": 1
             }
           ],
-          "totalPlayerPoints": 82
+          "totalPlayerPoints": 82,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 65,
+              "percentage": 46
+            },
+            "twoPointers": {
+              "made": 24,
+              "attempted": 45,
+              "percentage": 53
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 20,
+              "percentage": 30
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 23,
+              "percentage": 70
+            },
+            "rebounds": 43,
+            "assists": 4,
+            "steals": 7,
+            "blocks": 5,
+            "turnovers": 12,
+            "fouls": 19
+          }
         },
         {
           "name": "SAN MARTÍN (C)",
@@ -21997,7 +22977,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 79
+          "totalPlayerPoints": 79,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 33,
+              "attempted": 66,
+              "percentage": 50
+            },
+            "twoPointers": {
+              "made": 23,
+              "attempted": 38,
+              "percentage": 61
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 28,
+              "percentage": 36
+            },
+            "freeThrows": {
+              "made": 3,
+              "attempted": 7,
+              "percentage": 43
+            },
+            "rebounds": 31,
+            "assists": 8,
+            "steals": 10,
+            "blocks": 1,
+            "turnovers": 12,
+            "fouls": 20
+          }
         }
       ]
     },
@@ -22614,7 +23622,35 @@
               "plusMinus": 12
             }
           ],
-          "totalPlayerPoints": 105
+          "totalPlayerPoints": 105,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 36,
+              "attempted": 67,
+              "percentage": 53
+            },
+            "twoPointers": {
+              "made": 19,
+              "attempted": 34,
+              "percentage": 56
+            },
+            "threePointers": {
+              "made": 17,
+              "attempted": 33,
+              "percentage": 52
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 19,
+              "percentage": 84
+            },
+            "rebounds": 25,
+            "assists": 20,
+            "steals": 13,
+            "blocks": 1,
+            "turnovers": 6,
+            "fouls": 22
+          }
         },
         {
           "name": "BOCA",
@@ -23222,7 +24258,35 @@
               "plusMinus": -11
             }
           ],
-          "totalPlayerPoints": 96
+          "totalPlayerPoints": 96,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 31,
+              "attempted": 59,
+              "percentage": 52
+            },
+            "twoPointers": {
+              "made": 18,
+              "attempted": 33,
+              "percentage": 55
+            },
+            "threePointers": {
+              "made": 13,
+              "attempted": 26,
+              "percentage": 50
+            },
+            "freeThrows": {
+              "made": 21,
+              "attempted": 23,
+              "percentage": 91
+            },
+            "rebounds": 33,
+            "assists": 17,
+            "steals": 4,
+            "blocks": 1,
+            "turnovers": 15,
+            "fouls": 22
+          }
         }
       ]
     },
@@ -23839,7 +24903,35 @@
               "plusMinus": -5
             }
           ],
-          "totalPlayerPoints": 72
+          "totalPlayerPoints": 72,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 53,
+              "percentage": 45
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 33,
+              "percentage": 64
+            },
+            "threePointers": {
+              "made": 3,
+              "attempted": 20,
+              "percentage": 15
+            },
+            "freeThrows": {
+              "made": 21,
+              "attempted": 31,
+              "percentage": 68
+            },
+            "rebounds": 33,
+            "assists": 9,
+            "steals": 2,
+            "blocks": 0,
+            "turnovers": 9,
+            "fouls": 20
+          }
         },
         {
           "name": "GIMNASIA (CR)",
@@ -24447,7 +25539,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 78
+          "totalPlayerPoints": 78,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 26,
+              "attempted": 62,
+              "percentage": 41
+            },
+            "twoPointers": {
+              "made": 16,
+              "attempted": 27,
+              "percentage": 59
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 35,
+              "percentage": 29
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 19,
+              "percentage": 84
+            },
+            "rebounds": 29,
+            "assists": 15,
+            "steals": 8,
+            "blocks": 4,
+            "turnovers": 6,
+            "fouls": 27
+          }
         }
       ]
     },
@@ -25064,7 +26184,35 @@
               "plusMinus": 4
             }
           ],
-          "totalPlayerPoints": 82
+          "totalPlayerPoints": 82,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 27,
+              "attempted": 69,
+              "percentage": 39
+            },
+            "twoPointers": {
+              "made": 19,
+              "attempted": 48,
+              "percentage": 40
+            },
+            "threePointers": {
+              "made": 8,
+              "attempted": 21,
+              "percentage": 38
+            },
+            "freeThrows": {
+              "made": 20,
+              "attempted": 27,
+              "percentage": 74
+            },
+            "rebounds": 42,
+            "assists": 6,
+            "steals": 8,
+            "blocks": 5,
+            "turnovers": 10,
+            "fouls": 17
+          }
         },
         {
           "name": "GIMNASIA (CR)",
@@ -25622,7 +26770,35 @@
               "plusMinus": 9
             }
           ],
-          "totalPlayerPoints": 87
+          "totalPlayerPoints": 87,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 33,
+              "attempted": 66,
+              "percentage": 50
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 38,
+              "percentage": 55
+            },
+            "threePointers": {
+              "made": 12,
+              "attempted": 28,
+              "percentage": 43
+            },
+            "freeThrows": {
+              "made": 9,
+              "attempted": 13,
+              "percentage": 69
+            },
+            "rebounds": 41,
+            "assists": 7,
+            "steals": 9,
+            "blocks": 6,
+            "turnovers": 12,
+            "fouls": 25
+          }
         }
       ]
     },
@@ -26239,7 +27415,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 91
+          "totalPlayerPoints": 91,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 35,
+              "attempted": 61,
+              "percentage": 57
+            },
+            "twoPointers": {
+              "made": 29,
+              "attempted": 41,
+              "percentage": 71
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 20,
+              "percentage": 30
+            },
+            "freeThrows": {
+              "made": 15,
+              "attempted": 17,
+              "percentage": 88
+            },
+            "rebounds": 30,
+            "assists": 15,
+            "steals": 8,
+            "blocks": 1,
+            "turnovers": 9,
+            "fouls": 22
+          }
         },
         {
           "name": "FERRO",
@@ -26847,7 +28051,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 86
+          "totalPlayerPoints": 86,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 33,
+              "attempted": 64,
+              "percentage": 51
+            },
+            "twoPointers": {
+              "made": 24,
+              "attempted": 34,
+              "percentage": 71
+            },
+            "threePointers": {
+              "made": 9,
+              "attempted": 30,
+              "percentage": 30
+            },
+            "freeThrows": {
+              "made": 11,
+              "attempted": 18,
+              "percentage": 61
+            },
+            "rebounds": 28,
+            "assists": 19,
+            "steals": 5,
+            "blocks": 1,
+            "turnovers": 11,
+            "fouls": 24
+          }
         }
       ]
     },
@@ -27464,7 +28696,35 @@
               "plusMinus": 13
             }
           ],
-          "totalPlayerPoints": 93
+          "totalPlayerPoints": 93,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 33,
+              "attempted": 61,
+              "percentage": 54
+            },
+            "twoPointers": {
+              "made": 19,
+              "attempted": 30,
+              "percentage": 63
+            },
+            "threePointers": {
+              "made": 14,
+              "attempted": 31,
+              "percentage": 45
+            },
+            "freeThrows": {
+              "made": 13,
+              "attempted": 16,
+              "percentage": 81
+            },
+            "rebounds": 23,
+            "assists": 20,
+            "steals": 8,
+            "blocks": 0,
+            "turnovers": 8,
+            "fouls": 22
+          }
         },
         {
           "name": "BOCA",
@@ -28072,7 +29332,35 @@
               "plusMinus": -14
             }
           ],
-          "totalPlayerPoints": 80
+          "totalPlayerPoints": 80,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 29,
+              "attempted": 62,
+              "percentage": 46
+            },
+            "twoPointers": {
+              "made": 23,
+              "attempted": 34,
+              "percentage": 68
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 28,
+              "percentage": 21
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 19,
+              "percentage": 84
+            },
+            "rebounds": 33,
+            "assists": 14,
+            "steals": 3,
+            "blocks": 0,
+            "turnovers": 13,
+            "fouls": 19
+          }
         }
       ]
     },
@@ -28689,7 +29977,35 @@
               "plusMinus": -5
             }
           ],
-          "totalPlayerPoints": 78
+          "totalPlayerPoints": 78,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 25,
+              "attempted": 70,
+              "percentage": 35
+            },
+            "twoPointers": {
+              "made": 19,
+              "attempted": 43,
+              "percentage": 44
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 27,
+              "percentage": 22
+            },
+            "freeThrows": {
+              "made": 22,
+              "attempted": 30,
+              "percentage": 73
+            },
+            "rebounds": 41,
+            "assists": 17,
+            "steals": 4,
+            "blocks": 0,
+            "turnovers": 10,
+            "fouls": 23
+          }
         },
         {
           "name": "RACING (CH)",
@@ -29297,7 +30613,35 @@
               "plusMinus": -13
             }
           ],
-          "totalPlayerPoints": 84
+          "totalPlayerPoints": 84,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 28,
+              "attempted": 59,
+              "percentage": 47
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 33,
+              "percentage": 52
+            },
+            "threePointers": {
+              "made": 11,
+              "attempted": 26,
+              "percentage": 42
+            },
+            "freeThrows": {
+              "made": 17,
+              "attempted": 26,
+              "percentage": 65
+            },
+            "rebounds": 31,
+            "assists": 15,
+            "steals": 6,
+            "blocks": 0,
+            "turnovers": 6,
+            "fouls": 23
+          }
         }
       ]
     },
@@ -29914,7 +31258,35 @@
               "plusMinus": -7
             }
           ],
-          "totalPlayerPoints": 77
+          "totalPlayerPoints": 77,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 27,
+              "attempted": 63,
+              "percentage": 42
+            },
+            "twoPointers": {
+              "made": 13,
+              "attempted": 30,
+              "percentage": 43
+            },
+            "threePointers": {
+              "made": 14,
+              "attempted": 33,
+              "percentage": 42
+            },
+            "freeThrows": {
+              "made": 9,
+              "attempted": 20,
+              "percentage": 45
+            },
+            "rebounds": 35,
+            "assists": 14,
+            "steals": 8,
+            "blocks": 0,
+            "turnovers": 12,
+            "fouls": 23
+          }
         },
         {
           "name": "PEÑAROL (MDP)",
@@ -30522,7 +31894,35 @@
               "plusMinus": -1
             }
           ],
-          "totalPlayerPoints": 84
+          "totalPlayerPoints": 84,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 67,
+              "percentage": 44
+            },
+            "twoPointers": {
+              "made": 20,
+              "attempted": 36,
+              "percentage": 56
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 31,
+              "percentage": 32
+            },
+            "freeThrows": {
+              "made": 14,
+              "attempted": 18,
+              "percentage": 78
+            },
+            "rebounds": 40,
+            "assists": 13,
+            "steals": 7,
+            "blocks": 2,
+            "turnovers": 12,
+            "fouls": 19
+          }
         }
       ]
     },
@@ -31139,7 +32539,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 68
+          "totalPlayerPoints": 68,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 25,
+              "attempted": 69,
+              "percentage": 36
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 35,
+              "percentage": 49
+            },
+            "threePointers": {
+              "made": 8,
+              "attempted": 34,
+              "percentage": 24
+            },
+            "freeThrows": {
+              "made": 10,
+              "attempted": 18,
+              "percentage": 56
+            },
+            "rebounds": 43,
+            "assists": 11,
+            "steals": 11,
+            "blocks": 4,
+            "turnovers": 11,
+            "fouls": 27
+          }
         },
         {
           "name": "RACING (CH)",
@@ -31697,7 +33125,35 @@
               "plusMinus": 2
             }
           ],
-          "totalPlayerPoints": 74
+          "totalPlayerPoints": 74,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 26,
+              "attempted": 60,
+              "percentage": 43
+            },
+            "twoPointers": {
+              "made": 18,
+              "attempted": 31,
+              "percentage": 58
+            },
+            "threePointers": {
+              "made": 8,
+              "attempted": 29,
+              "percentage": 28
+            },
+            "freeThrows": {
+              "made": 14,
+              "attempted": 19,
+              "percentage": 74
+            },
+            "rebounds": 40,
+            "assists": 7,
+            "steals": 9,
+            "blocks": 1,
+            "turnovers": 16,
+            "fouls": 24
+          }
         }
       ]
     },
@@ -32314,7 +33770,35 @@
               "plusMinus": 13
             }
           ],
-          "totalPlayerPoints": 86
+          "totalPlayerPoints": 86,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 64,
+              "percentage": 46
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 27,
+              "percentage": 63
+            },
+            "threePointers": {
+              "made": 13,
+              "attempted": 37,
+              "percentage": 35
+            },
+            "freeThrows": {
+              "made": 13,
+              "attempted": 17,
+              "percentage": 76
+            },
+            "rebounds": 32,
+            "assists": 20,
+            "steals": 7,
+            "blocks": 0,
+            "turnovers": 8,
+            "fouls": 19
+          }
         },
         {
           "name": "OBERÁ",
@@ -32922,7 +34406,35 @@
               "plusMinus": 3
             }
           ],
-          "totalPlayerPoints": 80
+          "totalPlayerPoints": 80,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 67,
+              "percentage": 44
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 38,
+              "percentage": 55
+            },
+            "threePointers": {
+              "made": 9,
+              "attempted": 29,
+              "percentage": 31
+            },
+            "freeThrows": {
+              "made": 11,
+              "attempted": 13,
+              "percentage": 85
+            },
+            "rebounds": 38,
+            "assists": 9,
+            "steals": 5,
+            "blocks": 3,
+            "turnovers": 9,
+            "fouls": 17
+          }
         }
       ]
     },
@@ -33539,7 +35051,35 @@
               "plusMinus": 2
             }
           ],
-          "totalPlayerPoints": 85
+          "totalPlayerPoints": 85,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 26,
+              "attempted": 62,
+              "percentage": 41
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 35,
+              "percentage": 49
+            },
+            "threePointers": {
+              "made": 9,
+              "attempted": 27,
+              "percentage": 33
+            },
+            "freeThrows": {
+              "made": 24,
+              "attempted": 28,
+              "percentage": 86
+            },
+            "rebounds": 26,
+            "assists": 10,
+            "steals": 7,
+            "blocks": 2,
+            "turnovers": 9,
+            "fouls": 29
+          }
         },
         {
           "name": "PEÑAROL (MDP)",
@@ -34147,7 +35687,35 @@
               "plusMinus": 9
             }
           ],
-          "totalPlayerPoints": 92
+          "totalPlayerPoints": 92,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 31,
+              "attempted": 65,
+              "percentage": 47
+            },
+            "twoPointers": {
+              "made": 22,
+              "attempted": 36,
+              "percentage": 61
+            },
+            "threePointers": {
+              "made": 9,
+              "attempted": 29,
+              "percentage": 31
+            },
+            "freeThrows": {
+              "made": 21,
+              "attempted": 26,
+              "percentage": 81
+            },
+            "rebounds": 35,
+            "assists": 18,
+            "steals": 5,
+            "blocks": 4,
+            "turnovers": 12,
+            "fouls": 28
+          }
         }
       ]
     },
@@ -34764,7 +36332,35 @@
               "plusMinus": 5
             }
           ],
-          "totalPlayerPoints": 73
+          "totalPlayerPoints": 73,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 62,
+              "percentage": 38
+            },
+            "twoPointers": {
+              "made": 14,
+              "attempted": 33,
+              "percentage": 42
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 29,
+              "percentage": 34
+            },
+            "freeThrows": {
+              "made": 15,
+              "attempted": 21,
+              "percentage": 71
+            },
+            "rebounds": 36,
+            "assists": 8,
+            "steals": 8,
+            "blocks": 0,
+            "turnovers": 16,
+            "fouls": 19
+          }
         },
         {
           "name": "OBERÁ",
@@ -35372,7 +36968,35 @@
               "plusMinus": -5
             }
           ],
-          "totalPlayerPoints": 78
+          "totalPlayerPoints": 78,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 26,
+              "attempted": 63,
+              "percentage": 41
+            },
+            "twoPointers": {
+              "made": 20,
+              "attempted": 44,
+              "percentage": 45
+            },
+            "threePointers": {
+              "made": 6,
+              "attempted": 19,
+              "percentage": 32
+            },
+            "freeThrows": {
+              "made": 20,
+              "attempted": 23,
+              "percentage": 87
+            },
+            "rebounds": 31,
+            "assists": 20,
+            "steals": 9,
+            "blocks": 1,
+            "turnovers": 13,
+            "fouls": 19
+          }
         }
       ]
     },
@@ -35989,7 +37613,35 @@
               "plusMinus": -4
             }
           ],
-          "totalPlayerPoints": 80
+          "totalPlayerPoints": 80,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 27,
+              "attempted": 65,
+              "percentage": 41
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 38,
+              "percentage": 45
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 27,
+              "percentage": 37
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 21,
+              "percentage": 76
+            },
+            "rebounds": 31,
+            "assists": 10,
+            "steals": 10,
+            "blocks": 2,
+            "turnovers": 15,
+            "fouls": 18
+          }
         },
         {
           "name": "OLIMPICO (LB)",
@@ -36597,7 +38249,35 @@
               "plusMinus": 4
             }
           ],
-          "totalPlayerPoints": 83
+          "totalPlayerPoints": 83,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 31,
+              "attempted": 52,
+              "percentage": 59
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 28,
+              "percentage": 75
+            },
+            "threePointers": {
+              "made": 10,
+              "attempted": 24,
+              "percentage": 42
+            },
+            "freeThrows": {
+              "made": 11,
+              "attempted": 15,
+              "percentage": 73
+            },
+            "rebounds": 24,
+            "assists": 10,
+            "steals": 9,
+            "blocks": 0,
+            "turnovers": 16,
+            "fouls": 22
+          }
         }
       ]
     },
@@ -37214,7 +38894,35 @@
               "plusMinus": 1
             }
           ],
-          "totalPlayerPoints": 108
+          "totalPlayerPoints": 108,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 39,
+              "attempted": 70,
+              "percentage": 55
+            },
+            "twoPointers": {
+              "made": 26,
+              "attempted": 38,
+              "percentage": 68
+            },
+            "threePointers": {
+              "made": 13,
+              "attempted": 32,
+              "percentage": 41
+            },
+            "freeThrows": {
+              "made": 17,
+              "attempted": 21,
+              "percentage": 81
+            },
+            "rebounds": 36,
+            "assists": 21,
+            "steals": 6,
+            "blocks": 4,
+            "turnovers": 11,
+            "fouls": 27
+          }
         },
         {
           "name": "LANÚS",
@@ -37822,7 +39530,35 @@
               "plusMinus": -12
             }
           ],
-          "totalPlayerPoints": 93
+          "totalPlayerPoints": 93,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 30,
+              "attempted": 64,
+              "percentage": 46
+            },
+            "twoPointers": {
+              "made": 21,
+              "attempted": 33,
+              "percentage": 64
+            },
+            "threePointers": {
+              "made": 9,
+              "attempted": 31,
+              "percentage": 29
+            },
+            "freeThrows": {
+              "made": 24,
+              "attempted": 29,
+              "percentage": 83
+            },
+            "rebounds": 37,
+            "assists": 18,
+            "steals": 10,
+            "blocks": 0,
+            "turnovers": 13,
+            "fouls": 19
+          }
         }
       ]
     },
@@ -38444,7 +40180,35 @@
               "plusMinus": 0
             }
           ],
-          "totalPlayerPoints": 86
+          "totalPlayerPoints": 86,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 31,
+              "attempted": 63,
+              "percentage": 49
+            },
+            "twoPointers": {
+              "made": 23,
+              "attempted": 38,
+              "percentage": 61
+            },
+            "threePointers": {
+              "made": 8,
+              "attempted": 25,
+              "percentage": 32
+            },
+            "freeThrows": {
+              "made": 16,
+              "attempted": 28,
+              "percentage": 57
+            },
+            "rebounds": 30,
+            "assists": 19,
+            "steals": 6,
+            "blocks": 1,
+            "turnovers": 13,
+            "fouls": 21
+          }
         },
         {
           "name": "OLIMPICO (LB)",
@@ -39052,7 +40816,35 @@
               "plusMinus": 4
             }
           ],
-          "totalPlayerPoints": 106
+          "totalPlayerPoints": 106,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 39,
+              "attempted": 75,
+              "percentage": 52
+            },
+            "twoPointers": {
+              "made": 26,
+              "attempted": 46,
+              "percentage": 57
+            },
+            "threePointers": {
+              "made": 13,
+              "attempted": 29,
+              "percentage": 45
+            },
+            "freeThrows": {
+              "made": 15,
+              "attempted": 17,
+              "percentage": 88
+            },
+            "rebounds": 34,
+            "assists": 10,
+            "steals": 9,
+            "blocks": 1,
+            "turnovers": 9,
+            "fouls": 27
+          }
         }
       ]
     },

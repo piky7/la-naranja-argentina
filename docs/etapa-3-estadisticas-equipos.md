@@ -51,15 +51,21 @@ de la comparativa queda en `tests/fixtures` para reproducir las pruebas offline.
 ## Verificación y límites
 
 - Build de producción correcto; permanece la advertencia de tamaño del bundle.
-- 13 pruebas correctas: regresiones de finalización/publicación y nuevas pruebas
+- 15 pruebas correctas: regresiones de finalización/publicación y nuevas pruebas
   de los diez indicadores, orden de equipos, identidad errónea, datos faltantes,
   ceros reales, porcentajes imposibles y puntos inconsistentes.
 - ESLint del nuevo componente correcto. Comprobación local del popup de Inicio:
   comparativa real y regreso a jugadores. No se verificaron dispositivos físicos.
-- Los partidos nuevos pasan por el extractor ampliado. Los históricos ya
-  procesados no se descargan otra vez automáticamente; salvo Ferro–Platense,
-  mostrarán datos ausentes hasta una reextracción oficial controlada.
+- Carga histórica completada el 21/10/2026: 33/33 partidos, 66 equipos y 660 indicadores válidos. No hubo partidos parciales, omitidos ni indicadores ausentes. Se conservaron íntegros jugadores, resultados, evidencia histórica y cuartos. El informe por partido está en `docs/official-team-stats-coverage.json`. Los partidos nuevos pasan por el extractor ampliado.
 - Si cambia el HTML oficial o falta una fila, no se usa otra fuente ni valores
   de ejemplo. Los valores inválidos se descartan; las otras métricas válidas
   permanecen visibles. No se incorporan gráficos ni parciales nuevos.
 - Este cambio se prepara en rama y PR; no se ejecuta merge ni despliegue.
+
+## Repetir la carga histórica
+
+`node scripts/backfill-official-team-stats.cjs --report work/coverage.json` consulta las páginas oficiales y genera una vista previa sin cambiar datos. Agregar `--apply` incorpora únicamente las comparativas al historial y a los datos de la web. Cada página debe confirmar finalización explícita, marcador, IDs local/visitante y puntos históricos. Las métricas vuelven a pasar por el normalizador compartido.
+
+Para capturas HTML locales puede usarse `--html-dir work/history-html`; su `manifest.json` debe contener `source: "Liga Nacional"` y `pages: [{ officialUrl, file }]`. Las capturas deben incluir el marcador, el estado y la tabla de comparativa ya cargada. En esta ejecución se consultaron las 33 páginas con el navegador y se guardaron esos fragmentos, pues la página carga la comparativa al seleccionarla. Las capturas intermedias quedan fuera del PR.
+
+Las 15 pruebas incluyen rechazo de partidos en vivo, cambios de marcador, columnas invertidas y puntos históricos inconsistentes. La comparación estructural contra el commit anterior confirmó que los únicos cambios en los dos archivos de datos fueron los campos `teamStats`. La compilación final fue correcta, con la advertencia previa de tamaño del bundle.
