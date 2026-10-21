@@ -9738,3 +9738,40 @@
     line-height: 1.1;
   }
 }
+/* Próximo partido: navegación entre comparativa y figuras */
+.match-modal-upcoming .upcoming-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 12px 16px 0;
+  background: #0b141e;
+}
+.match-modal-upcoming .upcoming-tabs button {
+  min-width: 0;
+  padding: 12px 6px;
+  border: 1px solid #364455;
+  border-bottom: 3px solid transparent;
+  border-radius: 8px 8px 0 0;
+  background: #101b28;
+  color: #b8c4d0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.match-modal-upcoming .upcoming-tabs button.is-active {
+  color: #ff8a20;
+  border-color: #e98020;
+  border-bottom-color: #ff8a20;
+  background: #1b2026;
+}
+.match-modal-upcoming .upcoming-tabs button:focus-visible {
+  outline: 2px solid #ff8a20;
+  outline-offset: 2px;
+}
+.match-modal-upcoming .upcoming-tab-panel { min-width: 0; }
+.match-modal-upcoming .match-highlighted-section { padding-top: 12px; }
+@media (max-width: 600px) {
+  .match-modal-upcoming .upcoming-tabs { padding: 10px 10px 0; gap: 4px; }
+  .match-modal-upcoming .upcoming-tabs button { font-size: 11px; padding: 11px 3px; }
+}
