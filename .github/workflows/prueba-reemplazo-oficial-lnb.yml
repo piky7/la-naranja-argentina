@@ -8,6 +8,11 @@ on:
     paths:
       - ".github/workflows/prueba-reemplazo-oficial-lnb.yml"
       - "sync-official-stats-preview.cjs"
+      - "publish-official-stats.cjs"
+      - "extractor-liga.cjs"
+      - "src/data/players.js"
+      - "src/data/matchStats.js"
+      - "src/data/matchResults.js"
 
 permissions:
   contents: read
