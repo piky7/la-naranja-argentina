@@ -11,6 +11,19 @@ const metrics = [
 const display = value => value == null ? "Sin dato" : typeof value === "object"
   ? `${value.made} / ${value.attempted} · ${value.percentage}%` : value;
 
+// Los porcentajes de tiro se comparan sobre 100; los conteos contra el mayor de ambos equipos.
+const metricNumber = value => {
+  if (value == null) return null;
+  const number = typeof value === "object" ? Number(value.percentage) : Number(value);
+  return Number.isFinite(number) ? Math.max(0, number) : null;
+};
+const metricWidth = (value, other, isShooting) => {
+  const current = metricNumber(value);
+  if (current == null) return 0;
+  const maximum = isShooting ? 100 : Math.max(current, metricNumber(other) ?? 0, 1);
+  return Math.min(100, (current / maximum) * 100);
+};
+
 export default function MatchStatsTabs({ match, stats, home, away, children }) {
   const [tab, setTab] = useState("players");
   const [team, setTeam] = useState("home");
@@ -47,15 +60,38 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
       <div className={`match-player-tables match-player-team-${team}`}>{children}</div>
     </div>
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
-      <p className="match-team-source">Liga Nacional · Comparativa colectiva oficial</p>
-      {!collective && <p>Estadísticas colectivas oficiales no disponibles para este partido.</p>}
-      <table className="match-team-comparison">
-        <thead><tr><th scope="col">{home?.shortName || home?.name || "Local"}</th><th scope="col">Indicador</th><th scope="col">{away?.shortName || away?.name || "Visitante"}</th></tr></thead>
-        <tbody>{metrics.map(([key, label]) => <tr key={key}>
-          <td>{display(collective?.[match.homeTeam]?.[key])}</td><th scope="row">{label}</th><td>{display(collective?.[match.awayTeam]?.[key])}</td>
-        </tr>)}</tbody>
-      </table>
+      <div className="match-team-comparison-intro">
+        <strong>Comparativa colectiva</strong>
+        <span>LIGA NACIONAL · DATOS OFICIALES</span>
+      </div>
+      {!collective && <p className="match-team-unavailable">Estadísticas colectivas oficiales no disponibles para este partido.</p>}
+      {collective && <div className="match-team-comparison-card">
+        <div className="match-team-comparison-header">
+          <div className="match-team-comparison-name">{home?.logo && <img src={home.logo} alt="" />}<span>{home?.shortName || home?.name || "Local"}</span></div>
+          <span>INDICADOR</span>
+          <div className="match-team-comparison-name match-team-comparison-name-away"><span>{away?.shortName || away?.name || "Visitante"}</span>{away?.logo && <img src={away.logo} alt="" />}</div>
+        </div>
+        <div className="match-team-comparison-rows">
+          {metrics.map(([key, label]) => {
+            const local = collective?.[match.homeTeam]?.[key];
+            const visitor = collective?.[match.awayTeam]?.[key];
+            const shooting = ["fieldGoals", "twoPointers", "threePointers", "freeThrows"].includes(key);
+            return <div className="match-team-comparison-row" key={key}>
+              <div className="match-team-comparison-metric">{label}</div>
+              <div className="match-team-comparison-side match-team-comparison-side-home">
+                <span className="match-team-comparison-value">{display(local)}</span>
+                <div className="match-team-comparison-track"><span style={{ width: `${metricWidth(local, visitor, shooting)}%` }} /></div>
+              </div>
+              <div className="match-team-comparison-side match-team-comparison-side-away">
+                <span className="match-team-comparison-value">{display(visitor)}</span>
+                <div className="match-team-comparison-track"><span style={{ width: `${metricWidth(visitor, local, shooting)}%` }} /></div>
+              </div>
+            </div>;
+          })}
+        </div>
+      </div>}
       <p className="match-team-source">Sin dato: valor ausente o no validado en la fuente oficial.</p>
+
     </div>
   </div>;
 }
