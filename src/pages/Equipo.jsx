@@ -809,49 +809,6 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
             <p className="team-season-stats-note">Solo temporada 2026/27 · Partidos finalizados con estadísticas oficiales validadas. Los porcentajes se calculan sobre el total de lanzamientos.</p>
           </section>
 
-                    <div className="team-info-grid">
-
-            <article className="team-info-card">
-
-              <span>
-                CIUDAD
-              </span>
-
-              <strong>
-                {team.city}
-              </strong>
-
-            </article>
-
-
-            <article className="team-info-card">
-
-              <span>
-                PROVINCIA
-              </span>
-
-              <strong>
-                {team.province}
-              </strong>
-
-            </article>
-
-
-            <article className="team-info-card">
-
-              <span>
-                PLANTEL
-              </span>
-
-              <strong>
-                {teamPlayers.length} jugadores
-              </strong>
-
-            </article>
-
-          </div>
-
-
           {/* =========================================
               TRES COLUMNAS
               ========================================= */}
