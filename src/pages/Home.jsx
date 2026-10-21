@@ -39,8 +39,8 @@ function Home() {
   const [selectedTeam, setSelectedTeam] = useState(null);
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
-const [liveMatches, setLiveMatches] = useState([]);
-const [liveDate, setLiveDate] = useState(null);
+const [liveMatches] = useState([]);
+const [liveDate] = useState(null);
 
   useEffect(() => {
     setMobileMatchTeam("home");
@@ -80,7 +80,7 @@ const [liveDate, setLiveDate] = useState(null);
       return true;
     }
 
-    if (match.status === "live") {
+    if (false /* LIVE de Flashscore desactivado */) {
       return false;
     }
 
@@ -481,56 +481,8 @@ const getPlayerLastMatches = (player) => {
     };
   }, []);
 
-  useEffect(() => {
-  let active = true;
-
-  const fetchLiveMatches = async () => {
-    try {
-      const response = await fetch(
-        "https://lna-live.lnab.workers.dev/api/live",
-        {
-          cache: "no-store",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Error HTTP ${response.status}`
-        );
-      }
-
-      const data = await response.json();
-
-      if (!active) {
-        return;
-      }
-
-      setLiveDate(data.date ?? null);
-       setLiveMatches(
-        Array.isArray(data.liveMatches)
-          ? data.liveMatches
-          : []
-      );
-    } catch (error) {
-      console.error(
-        "Error obteniendo partidos LIVE:",
-        error
-      );
-    }
-  };
-
-  fetchLiveMatches();
-
-  const interval = setInterval(
-    fetchLiveMatches,
-    10000
-  );
-
-  return () => {
-    active = false;
-    clearInterval(interval);
-  };
-}, []);
+  // LIVE de Flashscore desactivado temporalmente.
+  // Los resultados oficiales y el fixture siguen disponibles.
 
   // El panel LIVE solo retira partidos finalizados cuando el resultado
   // y la planilla de ambos equipos ya están disponibles en el Home.
@@ -817,7 +769,7 @@ const standingsMatches = matches.map((match) => {
             return 0;
           }
 
-          if (match.status === "live") {
+          if (false /* LIVE de Flashscore desactivado */) {
             return 1;
           }
 
@@ -1181,7 +1133,7 @@ const isFinished =
   (liveMatch?.status === "finished" && !liveMatch?.isHalftime);
 const isLive =
   !isFinished &&
-  (liveMatch?.status === "live" || match.status === "live");
+  (liveMatch?.status === "live" || false /* LIVE de Flashscore desactivado */);
 const finalHomeScore = isMatchFinished(match)
   ? match.homeScore
   : liveMatch?.homeScore ?? match.homeScore;
