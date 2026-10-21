@@ -9895,3 +9895,22 @@
   .match-modal-upcoming .upcoming-player-entry > strong { font-size: 12px; }
   .match-modal-upcoming .upcoming-player-leader { font-size: 8px; }
 }
+
+
+/* Versión compacta de destacados: conservar legibilidad y reducir scroll. */
+.match-modal-upcoming .upcoming-players-comparison { padding: 0 0 4px; }
+.match-modal-upcoming .upcoming-players-comparison .match-highlighted-title { margin-bottom: 7px; }
+.match-modal-upcoming .upcoming-player-category { margin-bottom: 5px; padding: 19px 6px 5px; border-radius: 10px; }
+.match-modal-upcoming .upcoming-player-category-title { padding: 2px 12px 3px; font-size: 11px; }
+.match-modal-upcoming .upcoming-player-side { gap: 3px; }
+.match-modal-upcoming .upcoming-player-entry { padding: 4px 5px; gap: 5px; border-radius: 6px; }
+.match-modal-upcoming .upcoming-player-name { margin-bottom: 3px; }
+.match-modal-upcoming .upcoming-player-meter { height: 5px; }
+.match-modal-upcoming .upcoming-player-crest { width: 22px; height: 22px; flex-basis: 22px; }
+@media (max-width: 600px) {
+  .match-modal-upcoming .upcoming-player-category { padding: 19px 4px 5px; }
+  .match-modal-upcoming .upcoming-player-entry { padding: 4px 3px; gap: 4px; }
+  .match-modal-upcoming .upcoming-player-crest { width: 19px; height: 19px; flex-basis: 19px; }
+  .match-modal-upcoming .upcoming-player-name { font-size: 9px; margin-bottom: 3px; }
+  .match-modal-upcoming .upcoming-player-entry > strong { font-size: 12px; }
+}
