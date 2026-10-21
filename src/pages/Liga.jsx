@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import PlayerModal from "../components/PlayerModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useMemo, useState } from "react";
@@ -1077,7 +1078,7 @@ onClick={() => {
 
 {/* POPUP PRÓXIMO PARTIDO */}
 
-{selectedUpcomingMatch && !selectedMatch && (
+{selectedUpcomingMatch && !selectedMatch && createPortal(
   <div
     className="match-modal-overlay"
     onClick={() => setSelectedUpcomingMatch(null)}
@@ -1324,12 +1325,12 @@ onClick={() => {
       </section>
     </div>
   </div>
-)}
+ , document.body)}
       {/* =========================
           MODAL EQUIPO
       ========================= */}
 
-      {selectedTeam && !selectedMatch && (
+      {selectedTeam && !selectedMatch && createPortal(
   <div
     className="home-modal-overlay"
     onClick={() => setSelectedTeam(null)}
@@ -1518,13 +1519,13 @@ onClick={() => {
       </div>
     </div>
   </div>
-)}
+ , document.body)}
 
       {/* =========================
           MODAL PARTIDO
       ========================= */}
 
-      {selectedMatch && (() => {
+      {selectedMatch && createPortal((() => {
 
         const homeTeam =
           getTeam(selectedMatch.homeTeam);
@@ -1917,7 +1918,7 @@ console.table(quarterScores);
           </div>
         </div>
   );
-})()}
+})(), document.body)}
 {/* POPUP DEL JUGADOR */}
 
 {selectedPlayer && (
