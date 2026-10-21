@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - main
       - feature/reemplazo-oficial-lnb
     paths:
       - ".github/workflows/actualizar-lnb-oficial.yml"
