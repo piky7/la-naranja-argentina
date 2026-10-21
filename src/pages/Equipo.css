@@ -2670,3 +2670,52 @@
   .team-page .team-season-stats-sport .team-season-shooting-grid .team-season-stat-info strong { font-size: 15px; }
   .team-page .team-season-stats-sport .team-season-stats-note { margin-top: 10px; }
 }
+
+
+/* Ficha de equipo compacta: métricas legibles sin tarjetas altas. */
+.team-season-stats-sport {
+  padding: 13px 14px;
+  margin-bottom: 14px;
+}
+.team-season-stats-sport .team-season-stats-heading {
+  margin-bottom: 10px;
+  gap: 6px 12px;
+}
+.team-season-stats-sport .team-season-stats-eyebrow { font-size: 10px; letter-spacing: 1px; }
+.team-season-stats-sport .team-season-stats-heading h2 {
+  margin-top: 2px;
+  font-size: clamp(16px, 2.5vw, 20px);
+}
+.team-season-stats-sport .team-season-stats-games { padding: 4px 7px; font-size: 10px; }
+.team-season-stats-sport .team-season-stats-grid { gap: 6px; }
+.team-season-stats-sport .team-season-stat {
+  min-height: 0;
+  padding: 7px 5px;
+  gap: 5px;
+  border-radius: 8px;
+}
+.team-season-stats-sport .team-season-stat-icon { font-size: 16px; }
+.team-season-stats-sport .team-season-stat-info { gap: 3px; }
+.team-season-stats-sport .team-season-stat-info strong { font-size: 19px; }
+.team-season-stats-sport .team-season-stat-info span { font-size: 10px; line-height: 1.2; }
+.team-season-stats-sport .team-season-shooting-heading { margin: 11px 0 7px; }
+.team-season-stats-sport .team-season-stats-note { margin-top: 9px; font-size: 10px; line-height: 1.35; }
+@media (max-width: 600px) {
+  .team-season-stats-sport { padding: 10px; margin-bottom: 12px; }
+  .team-season-stats-sport .team-season-stats-heading { margin-bottom: 8px; }
+  .team-season-stats-sport .team-season-stats-grid { gap: 4px; }
+  .team-season-stats-sport .team-season-stat {
+    min-height: 0; padding: 5px 3px; gap: 2px;
+    flex-direction: column; align-items: center;
+  }
+  .team-season-stats-sport .team-season-stat-icon { font-size: 12px; }
+  .team-season-stats-sport .team-season-stat-info {
+    gap: 2px; align-items: center; text-align: center;
+  }
+  .team-season-stats-sport .team-season-stat-info strong { font-size: 16px; }
+  .team-season-stats-sport .team-season-stat-info span { font-size: 9px; line-height: 1.1; }
+  .team-season-stats-sport .team-season-shooting-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .team-season-stats-sport .team-season-shooting-grid .team-season-stat-info strong { font-size: 15px; }
+  .team-season-stats-sport .team-season-shooting-heading { margin: 9px 0 6px; }
+  .team-season-stats-sport .team-season-stats-note { margin-top: 7px; }
+}
