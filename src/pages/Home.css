@@ -9638,3 +9638,39 @@
     font-size: 13px;
   }
 }
+
+/* Desktop match summary: keep the mobile flow and interactions intact. */
+@media (min-width: 768px) {
+  .match-modal-finished-scroll .match-modal-finished {
+    width: min(1200px, 100%);
+    max-width: 1200px;
+  }
+  .match-modal-finished .match-desktop-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 16px 12px 0;
+    align-items: stretch;
+  }
+  .match-modal-finished .match-desktop-summary > .match-quarters,
+  .match-modal-finished .match-desktop-summary > .match-mvp-card {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .match-modal-finished .match-desktop-summary > :only-child {
+    grid-column: 1 / -1;
+  }
+  .match-modal-finished .match-desktop-summary .match-mvp-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .match-modal-finished .match-desktop-summary .match-mvp-numbers {
+    width: 100%;
+  }
+  .match-modal-finished .match-stats-tabs > .match-stats-switch {
+    margin: 16px 12px;
+  }
+}

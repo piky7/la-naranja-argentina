@@ -1675,6 +1675,7 @@ const finishedMatch = {
                   </div>
                 </div>
               </div>
+              <div className="match-desktop-summary">
               {selectedMatchStats?.quarterScores?.length > 0 && (
   <section className="match-quarters">
     <div className="match-quarters-title">
@@ -1766,6 +1767,8 @@ const finishedMatch = {
                   </span>
                 </button>
               )}
+
+              </div>
 
               {selectedMatchStats ? (
                 <>

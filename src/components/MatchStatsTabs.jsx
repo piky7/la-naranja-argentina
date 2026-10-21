@@ -31,7 +31,7 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
           }} onClick={() => setTab(key)}>{label}</button>)}
     </div>
     <div role="tabpanel" id={`${id}-players`} aria-labelledby={`${id}-players-tab`} hidden={tab !== "players"}>
-      <div className="match-stats-switch" role="group" aria-label="Estadísticas por equipo">
+      <div className="match-stats-switch match-player-team-switch" role="group" aria-label="Estadísticas por equipo">
         {[["home", home], ["away", away]].map(([side, item]) => <button key={side} type="button" aria-pressed={team === side} onClick={() => setTeam(side)}>{item?.logo && <img src={item.logo} alt="" />}{item?.shortName || item?.name || (side === "home" ? "Local" : "Visitante")}</button>)}
       </div>
       <div className={`match-player-team-${team}`}>{children}</div>
