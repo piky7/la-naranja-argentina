@@ -314,12 +314,37 @@ const getPlayerLastMatches = (player) => {
         id: match.id,
         date: match.date,
         rival: getTeam(rivalId)?.shortName || rivalId,
+        rivalLogo: getTeam(rivalId)?.logo || null,
+        minutes: stats.minutes ?? null,
+        valuation: getOfficialValuation(match, teamId, player.id),
         points: stats.points,
         rebounds: stats.rebounds,
         assists: stats.assists,
       };
     });
 };
+  const getPlayerSeasonValuation = (player) => {
+    if (!player?.id || !player?.teamId) return null;
+    let total = 0;
+    let count = 0;
+    const seen = new Set();
+    for (const match of matches) {
+      if (!isMatchFinished(match)) continue;
+      if (match.homeTeam !== player.teamId && match.awayTeam !== player.teamId) continue;
+      if (!/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
+      const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+      if (seen.has(key)) continue;
+      const record = matchPlayerStats[key] || matchPlayerStats[match.id];
+      if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+      const value = getOfficialValuation(match, player.teamId, player.id);
+      if (typeof value !== "number" || !Number.isFinite(value)) continue;
+      seen.add(key);
+      total += value;
+      count++;
+    }
+    return count ? (total / count).toFixed(1) : null;
+  };
+
   const getMatchPlayerInfo = (matchPlayer) => {
     if (!matchPlayer) {
       return null;
@@ -2591,6 +2616,10 @@ const finishedMatch = {
 
                   <span>AST</span>
                 </div>
+                <div>
+                  <strong>{getPlayerSeasonValuation(selectedPlayer) ?? "—"}</strong>
+                  <span>VAL</span>
+                </div>
               </div>
             </div>
 {/* ÚLTIMOS 2 PARTIDOS */}
@@ -2608,7 +2637,10 @@ const finishedMatch = {
           key={match.id}
         >
           <div className="home-player-modal-recent-header">
-            <strong>vs. {match.rival}</strong>
+            <div className="home-player-modal-rival">
+              {match.rivalLogo && <img src={match.rivalLogo} alt="" loading="lazy" />}
+              <strong>vs. {match.rival}</strong>
+            </div>
             <span>
               {match.date.split("-").reverse().join("/")}
             </span>
@@ -2628,6 +2660,14 @@ const finishedMatch = {
             <div>
               <strong>{match.assists}</strong>
               <span>AST</span>
+            </div>
+            <div>
+              <strong>{match.minutes == null || match.minutes === "" ? "—" : match.minutes}</strong>
+              <span>MIN</span>
+            </div>
+            <div>
+              <strong>{match.valuation ?? "—"}</strong>
+              <span>VAL</span>
             </div>
           </div>
         </div>
