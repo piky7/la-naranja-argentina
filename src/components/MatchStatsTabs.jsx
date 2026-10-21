@@ -31,9 +31,19 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
           }} onClick={() => setTab(key)}>{label}</button>)}
     </div>
     <div role="tabpanel" id={`${id}-players`} aria-labelledby={`${id}-players-tab`} hidden={tab !== "players"}>
-      <div className="match-stats-switch match-player-team-switch" role="group" aria-label="Estadísticas por equipo">
-        {[["home", home], ["away", away]].map(([side, item]) => <button key={side} type="button" aria-pressed={team === side} onClick={() => setTeam(side)}>{item?.logo && <img src={item.logo} alt="" />}{item?.shortName || item?.name || (side === "home" ? "Local" : "Visitante")}</button>)}
-      </div>
+      <button
+        className="match-player-team-title"
+        type="button"
+        onClick={() => setTeam(current => current === "home" ? "away" : "home")}
+        aria-label={`Mostrando estadísticas de ${(team === "home" ? home : away)?.name || (team === "home" ? "Local" : "Visitante")}. Tocar para ver ${(team === "home" ? away : home)?.name || (team === "home" ? "Visitante" : "Local")}.`}
+      >
+        {(team === "home" ? home : away)?.logo && <img src={(team === "home" ? home : away).logo} alt="" />}
+        <span className="match-player-team-title-text">
+          <small>{team === "home" ? "LOCAL" : "VISITANTE"} · TOCÁ PARA CAMBIAR EQUIPO</small>
+          <strong>{(team === "home" ? home : away)?.shortName || (team === "home" ? home : away)?.name || (team === "home" ? "Local" : "Visitante")}</strong>
+        </span>
+        <span className="match-player-team-title-change" aria-hidden="true">⇄</span>
+      </button>
       <div className={`match-player-tables match-player-team-${team}`}>{children}</div>
     </div>
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
