@@ -133,7 +133,16 @@ async function main() {
       if (found && found.teamId !== internalTeamId) found = null;
 
       if (!found) {
-        const candidates = playersByTeamAndName.get(`${internalTeamId}| ${normalizeName(player.name)}`) || [];
+        // La Liga suele publicar "APELLIDO, NOMBRE(S)" y el roster LNA
+        // suele usar "Nombre Apellido". Solo aceptamos una coincidencia
+        // única dentro del mismo equipo, con todos los tokens del roster
+        // presentes en el nombre oficial.
+        const officialTokens = new Set(normalizeName(player.name).split(" ").filter(Boolean));
+        const candidates = players.filter((candidate) => {
+          if (candidate.teamId !== internalTeamId) return false;
+          const rosterTokens = normalizeName(candidate.name).split(" ").filter(Boolean);
+          return rosterTokens.length >= 2 && rosterTokens.every((token) => officialTokens.has(token));
+        });
         if (candidates.length === 1) found = candidates[0];
       }
 
