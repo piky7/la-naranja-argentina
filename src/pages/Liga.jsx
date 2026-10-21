@@ -19,6 +19,45 @@ const matches = baseMatches.map((match) => {
 
   return result ? { ...match, ...result } : match;
 });
+function getUpcomingOfficialCollective(teamId) {
+  const keys = ["rebounds", "assists", "steals", "blocks", "turnovers", "fouls"];
+  const shooting = ["fieldGoals", "twoPointers", "threePointers", "freeThrows"];
+  const totals = Object.fromEntries(keys.map(key => [key, 0]));
+  const shots = Object.fromEntries(shooting.map(key => [key, { made: 0, attempted: 0 }]));
+  const seen = new Set();
+  let games = 0, points = 0, pointsAgainst = 0;
+  for (const match of matches) {
+    if (match.status !== "finished" || !/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
+    if (match.homeTeam !== teamId && match.awayTeam !== teamId) continue;
+    const matchKey = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+    if (seen.has(matchKey)) continue;
+    const record = matchPlayerStats[match.id] || matchPlayerStats[matchKey];
+    if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+    const collective = record.teamStats?.[teamId];
+    if (!collective || !keys.every(key => Number.isFinite(Number(collective[key]))) ||
+      !shooting.every(key => Number.isFinite(Number(collective[key]?.made)) &&
+        Number.isFinite(Number(collective[key]?.attempted)) &&
+        Number(collective[key].attempted) >= Number(collective[key].made))) continue;
+    const score = match.homeTeam === teamId ? match.homeScore : match.awayScore;
+    const conceded = match.homeTeam === teamId ? match.awayScore : match.homeScore;
+    if (score == null || conceded == null || !Number.isFinite(Number(score)) || !Number.isFinite(Number(conceded))) continue;
+    seen.add(matchKey);
+    games++;
+    points += Number(score);
+    pointsAgainst += Number(conceded);
+    keys.forEach(key => { totals[key] += Number(collective[key]); });
+    shooting.forEach(key => {
+      shots[key].made += Number(collective[key].made);
+      shots[key].attempted += Number(collective[key].attempted);
+    });
+  }
+  if (!games) return { games: 0, values: {} };
+  const values = { points: points / games, pointsAgainst: pointsAgainst / games };
+  keys.forEach(key => { values[key] = totals[key] / games; });
+  shooting.forEach(key => { values[key] = shots[key].attempted ? 100 * shots[key].made / shots[key].attempted : null; });
+  return { games, values };
+}
+
 function Liga() {
   const getLocalDate = () => {
     const date = new Date();
@@ -1330,196 +1369,126 @@ onClick={() => {
           MODAL EQUIPO
       ========================= */}
 
+      {/* POPUP DEL EQUIPO - FICHA COMPACTA LNA */}
       {selectedTeam && !selectedMatch && createPortal(
-  <div
-    className="home-modal-overlay"
-    onClick={() => setSelectedTeam(null)}
-  >
-    <div
-      className="home-team-modal"
-      onClick={(event) => event.stopPropagation()}
-    >
-      <div className="home-team-modal-header">
-        <div className="home-team-modal-heading">
-          <span>EQUIPO</span>
-          <h2>{selectedTeam.name}</h2>
-          <p>
-            {[selectedTeam.city, selectedTeam.province]
-              .filter(Boolean)
-              .join(", ")}
-          </p>
-        </div>
-
-        <button
-          type="button"
-          className="home-modal-close"
-          onClick={() => setSelectedTeam(null)}
-          aria-label="Cerrar"
-        >
-          ×
-        </button>
-      </div>
-
-      <div className="home-team-modal-main">
-        <div className="home-team-modal-identity">
-          <div className="home-team-modal-logo">
-            <Link
-              to={`/equipos/${selectedTeam.id}`}
-              className="home-modal-team-logo-button"
-              onClick={() => setSelectedTeam(null)}
-            >
-              <img
-                src={selectedTeam.logo}
-                alt={`Escudo de ${selectedTeam.name}`}
-              />
-            </Link>
-          </div>
-
-          <div>
-            <span>LIGA NACIONAL 2026/27</span>
-            <strong>{selectedTeam.shortName}</strong>
-            <p>
-              {[selectedTeam.city, selectedTeam.province]
-                .filter(Boolean)
-                .join(", ")}
-            </p>
-          </div>
-        </div>
-
-        <div className="home-team-modal-record">
-          <div>
-            <span>PJ</span>
-            <strong>{selectedTeam.gamesPlayed}</strong>
-          </div>
-          <div>
-            <span>PG</span>
-            <strong className="home-team-win">
-              {selectedTeam.wins}
-            </strong>
-          </div>
-          <div>
-            <span>PP</span>
-            <strong className="home-team-loss">
-              {selectedTeam.losses}
-            </strong>
-          </div>
-          <div>
-            <span>DIF</span>
-            <strong>
-              {selectedTeam.difference > 0
-                ? `+${selectedTeam.difference}`
-                : selectedTeam.difference}
-            </strong>
-          </div>
-          <div>
-            <span>PTS/P</span>
-            <strong>
-              {selectedTeam.gamesPlayed > 0
-                ? (
-                    selectedTeam.pointsFor /
-                    selectedTeam.gamesPlayed
-                  ).toFixed(1)
-                : "—"}
-            </strong>
-          </div>
-          <div>
-            <span>REC/P</span>
-            <strong>
-              {selectedTeam.gamesPlayed > 0
-                ? (
-                    selectedTeam.pointsAgainst /
-                    selectedTeam.gamesPlayed
-                  ).toFixed(1)
-                : "—"}
-            </strong>
-          </div>
-        </div>
-
-        <div className="home-team-last-matches">
-          <h3>ÚLTIMOS 2 PARTIDOS</h3>
-
-          {getTeamLastTwoMatches(selectedTeam.id).length > 0 ? (
-            getTeamLastTwoMatches(selectedTeam.id).map((match) => (
-              <button
-                type="button"
-                className="home-team-last-match"
-                key={match.id}
-                disabled={!getMatchStats(match)}
-                onClick={() => {
-                  if (getMatchStats(match)) {
-                    setSelectedMatch(match);
-                  }
-                }}
-                title={
-                  getMatchStats(match)
-                    ? "Ver estadísticas del partido"
-                    : "Estadísticas no disponibles"
-                }
-              >
-                <span className="home-team-last-match-date">
-                  {new Date(`${match.date}T12:00:00`)
-                    .toLocaleDateString("es-AR", {
-                      day: "2-digit",
-                      month: "2-digit",
-                    })}
-                </span>
-
-                <div className="home-team-last-match-score">
-                  <div>
-                    {match.home?.logo && (
-                      <img src={match.home.logo} alt="" />
-                    )}
-                    <span>
-                      {match.home?.shortName || match.homeTeam}
-                    </span>
-                  </div>
-
-                  <strong>
-                    {match.homeScore} - {match.awayScore}
-                  </strong>
-
-                  <div>
-                    {match.away?.logo && (
-                      <img src={match.away.logo} alt="" />
-                    )}
-                    <span>
-                      {match.away?.shortName || match.awayTeam}
-                    </span>
-                  </div>
+        <div className="home-modal-overlay" onClick={() => setSelectedTeam(null)}>
+          <div className="home-team-modal home-team-modal-v2" role="dialog" aria-modal="true" aria-label={selectedTeam.name} onClick={(event) => event.stopPropagation()}>
+            <header className="team-v2-hero">
+              <img className="team-v2-watermark" src={selectedTeam.logo} alt="" aria-hidden="true" />
+              <button type="button" className="home-modal-close team-v2-close" onClick={() => setSelectedTeam(null)} aria-label="Cerrar">×</button>
+              <div className="team-v2-identity">
+                <button type="button" className="team-v2-crest" onClick={() => setSelectedTeam(null)} aria-label={"Ver " + selectedTeam.name}>
+                  <img src={selectedTeam.logo} alt="" />
+                </button>
+                <div>
+                  <span>LIGA NACIONAL 2026/27</span>
+                  <h2>{selectedTeam.name} <span className="team-v2-record">({selectedTeam.wins}-{selectedTeam.losses})</span></h2>
+                  <p>{[selectedTeam.city, selectedTeam.province].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).join(", ")}</p>
                 </div>
-
-                <span
-                  className={`home-team-last-match-result ${
-                    match.result === "G" ? "is-win" : "is-loss"
-                  }`}
-                >
-                  {match.result === "G" ? "VICTORIA" : "DERROTA"}
-                </span>
-              </button>
-            ))
-          ) : (
-            <p className="home-team-last-matches-empty">
-              Todavía no hay partidos finalizados.
-            </p>
-          )}
+              </div>
+            </header>
+            <div className="team-v2-body">
+              {(() => {
+                const official = getUpcomingOfficialCollective(selectedTeam.id);
+                const metrics = [
+                  ["PTS/P", "points"], ["REC/P", "pointsAgainst"],
+                  ["REB/P", "rebounds"], ["AST/P", "assists"],
+                  ["RECUP/P", "steals"], ["TAP/P", "blocks"],
+                  ["PÉRD/P", "turnovers"], ["FALTAS/P", "fouls"],
+                ];
+                const shooting = [
+                  ["TC", "fieldGoals"], ["T2", "twoPointers"],
+                  ["T3", "threePointers"], ["TL", "freeThrows"],
+                ];
+                const display = (key, percentage = false) => {
+                  const value = official.values[key];
+                  return Number.isFinite(value) ? value.toFixed(1) + (percentage ? "%" : "") : "—";
+                };
+                return (
+                  <section className="team-v2-section team-v2-collective-section">
+                    <div className="team-v2-section-head">
+                      <h3>ESTADÍSTICAS COLECTIVAS</h3>
+                      <span className="team-v2-official-count">{official.games} PJ con datos</span>
+                    </div>
+                    <div className="team-v2-collective-grid">
+                      {metrics.map(([label, key]) => (
+                        <div className="team-v2-collective-item" key={key}>
+                          <span>{label}</span><strong>{display(key)}</strong>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="team-v2-collective-shooting">
+                      {shooting.map(([label, key]) => (
+                        <div className="team-v2-collective-item" key={key}>
+                          <span>{label}</span><strong>{display(key, true)}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })()}
+              {(() => {
+                const nextMatch = matches
+                  .filter((match) => !isMatchFinished(match) && (match.homeTeam === selectedTeam.id || match.awayTeam === selectedTeam.id) && match.date >= today)
+                  .sort((a, b) => (a.date + " " + (a.time || "")).localeCompare(b.date + " " + (b.time || "")))[0];
+                if (!nextMatch) return null;
+                const homeTeam = getTeam(nextMatch.homeTeam);
+                const awayTeam = getTeam(nextMatch.awayTeam);
+                return (
+                  <section className="team-v2-section">
+                    <div className="team-v2-section-head"><h3>PRÓXIMO PARTIDO</h3><Link to={"/equipos/" + selectedTeam.id} onClick={() => setSelectedTeam(null)}>Ver fixture completo →</Link></div>
+                    <button type="button" className="team-v2-next" onClick={() => { setSelectedTeam(null); setSelectedUpcomingMatch(nextMatch); }}>
+                      <div><img src={homeTeam?.logo} alt="" /><strong>{homeTeam?.shortName || homeTeam?.name}</strong></div>
+                      <div className="team-v2-next-center"><span>{formatDate(nextMatch.date)}</span><strong>{nextMatch.time || "A confirmar"}</strong><span>{nextMatch.tv || "Transmisión a confirmar"}</span></div>
+                      <div><img src={awayTeam?.logo} alt="" /><strong>{awayTeam?.shortName || awayTeam?.name}</strong></div>
+                    </button>
+                  </section>
+                );
+              })()}
+              <section className="team-v2-section">
+                <div className="team-v2-section-head"><h3>ÚLTIMOS 2 PARTIDOS</h3><Link to={"/equipos/" + selectedTeam.id} onClick={() => setSelectedTeam(null)}>Ver todos →</Link></div>
+                <div className="team-v2-recent">
+                  {getTeamLastTwoMatches(selectedTeam.id).map((match) => (
+                    <button key={match.id} type="button" disabled={!getMatchStats(match)} onClick={() => { if (getMatchStats(match)) { setSelectedTeam(null); setSelectedMatch(match); } }}>
+                      <span className="team-v2-date">{formatDate(match.date)}</span>
+                      <div className="team-v2-result">
+                        <img src={match.home?.logo} alt="" />
+                        <strong>{match.homeScore} - {match.awayScore}</strong>
+                        <img src={match.away?.logo} alt="" />
+                      </div>
+                      <span className={match.result === "G" ? "team-v2-win" : "team-v2-loss"}>{match.result === "G" ? "VICTORIA" : "DERROTA"}</span>
+                    </button>
+                  ))}
+                  {getTeamLastTwoMatches(selectedTeam.id).length === 0 && <p>Sin resultados recientes</p>}
+                </div>
+              </section>
+              <section className="team-v2-section">
+                <div className="team-v2-section-head"><h3>JUGADORES DESTACADOS</h3><Link to={"/equipos/" + selectedTeam.id} onClick={() => setSelectedTeam(null)}>Ver plantel →</Link></div>
+                <div className="team-v2-players">
+                  {[
+                    ["PUNTOS", "points", "PTS"],
+                    ["REBOTES", "rebounds", "REB"],
+                    ["ASISTENCIAS", "assists", "AST"],
+                  ].map(([label, stat, unit]) => (
+                    <div className="team-v2-player-category" key={stat}>
+                      <h4>{label}</h4>
+                      {getHighlightedPlayers(selectedTeam.id, stat).map((player) => (
+                        <button type="button" key={player.id} onClick={() => { setSelectedTeam(null); setSelectedPlayer(player); }}>
+                          <span>{player.name}</span>
+                          <strong>{Number(player.stats[stat]).toFixed(1)} {unit}</strong>
+                        </button>
+                      ))}
+                      {getHighlightedPlayers(selectedTeam.id, stat).length === 0 && <p>Sin estadísticas</p>}
+                    </div>
+                  ))}
+                </div>
+              </section>
+              <Link className="team-v2-full-link" to={"/equipos/" + selectedTeam.id} onClick={() => setSelectedTeam(null)}>Ver equipo completo →</Link>
+            </div>
+            <div className="home-team-modal-footer"><span>LNA</span><strong>{selectedTeam.abbreviation}</strong></div>
+          </div>
         </div>
-
-        <Link
-          to={`/equipos/${selectedTeam.id}`}
-          className="home-team-modal-link"
-          onClick={() => setSelectedTeam(null)}
-        >
-          Ver equipo completo →
-        </Link>
-      </div>
-
-      <div className="home-team-modal-footer">
-        <span>LNA</span>
-        <strong>{selectedTeam.abbreviation}</strong>
-      </div>
-    </div>
-  </div>
- , document.body)}
+      , document.body)}
 
       {/* =========================
           MODAL PARTIDO
