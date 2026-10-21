@@ -99,6 +99,8 @@ async function main() {
       homeScore: official.homeScore,
       awayScore: official.awayScore,
       time: official.time || null,
+      homeTeam,
+      awayTeam,
       venue: null,
       tv: [],
       source: "Liga Nacional",
