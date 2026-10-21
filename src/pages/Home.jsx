@@ -22,6 +22,55 @@ const matches = baseMatches.map((match) => {
 });
 
 
+
+const UPCOMING_COLLECTIVE_STATS = [
+  ["Puntos", "points", false], ["Recibidos", "pointsAgainst", true],
+  ["Rebotes", "rebounds", false], ["Asistencias", "assists", false],
+  ["Recuperaciones", "steals", false], ["Tapones", "blocks", false],
+  ["Pérdidas", "turnovers", true], ["Faltas", "fouls", true],
+  ["Tiros de campo", "fieldGoals", false], ["Dobles", "twoPointers", false],
+  ["Triples", "threePointers", false], ["Libres", "freeThrows", false],
+];
+
+function getUpcomingOfficialCollective(teamId) {
+  const keys = ["rebounds", "assists", "steals", "blocks", "turnovers", "fouls"];
+  const shooting = ["fieldGoals", "twoPointers", "threePointers", "freeThrows"];
+  const totals = Object.fromEntries(keys.map(key => [key, 0]));
+  const shots = Object.fromEntries(shooting.map(key => [key, { made: 0, attempted: 0 }]));
+  const seen = new Set();
+  let games = 0, points = 0, pointsAgainst = 0;
+  for (const match of matches) {
+    if (match.status !== "finished" || !/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
+    if (match.homeTeam !== teamId && match.awayTeam !== teamId) continue;
+    const matchKey = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+    if (seen.has(matchKey)) continue;
+    const record = matchPlayerStats[match.id] || matchPlayerStats[matchKey];
+    if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+    const collective = record.teamStats?.[teamId];
+    if (!collective || !keys.every(key => Number.isFinite(Number(collective[key]))) ||
+      !shooting.every(key => Number.isFinite(Number(collective[key]?.made)) &&
+        Number.isFinite(Number(collective[key]?.attempted)) &&
+        Number(collective[key].attempted) >= Number(collective[key].made))) continue;
+    const score = match.homeTeam === teamId ? match.homeScore : match.awayScore;
+    const conceded = match.homeTeam === teamId ? match.awayScore : match.homeScore;
+    if (score == null || conceded == null || !Number.isFinite(Number(score)) || !Number.isFinite(Number(conceded))) continue;
+    seen.add(matchKey);
+    games++;
+    points += Number(score);
+    pointsAgainst += Number(conceded);
+    keys.forEach(key => { totals[key] += Number(collective[key]); });
+    shooting.forEach(key => {
+      shots[key].made += Number(collective[key].made);
+      shots[key].attempted += Number(collective[key].attempted);
+    });
+  }
+  if (!games) return { games: 0, values: {} };
+  const values = { points: points / games, pointsAgainst: pointsAgainst / games };
+  keys.forEach(key => { values[key] = totals[key] / games; });
+  shooting.forEach(key => { values[key] = shots[key].attempted ? 100 * shots[key].made / shots[key].attempted : null; });
+  return { games, values };
+}
+
 function Home() {
   const navigate = useNavigate();
 
@@ -2179,32 +2228,31 @@ const finishedMatch = {
               {upcomingTab === "comparativa" && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
-<div className="upcoming-team-comparison">
-  <span className="upcoming-comparison-label">
-    COMPARATIVA DE EQUIPOS
-  </span>
-
-  {[
-    ["PTS/P", "pointsFor"],
-    ["REC/P", "pointsAgainst"],
-  ].map(([label, key]) => {
-    const homeValue = getTeamAverages(selectedUpcomingMatch.homeTeam)[key];
-    const awayValue = getTeamAverages(selectedUpcomingMatch.awayTeam)[key];
-    const maxValue = Math.max(Number(homeValue) || 0, Number(awayValue) || 0, 1);
-    return (
-      <div className="upcoming-comparison-row upcoming-comparison-stat" key={key}>
-        <strong>{homeValue ?? "—"}</strong>
-        <div className="upcoming-comparison-track" aria-hidden="true">
-          <span style={{ width: `${(Math.max(0, Number(homeValue) || 0) / maxValue) * 100}%` }} />
-        </div>
-        <span>{label}</span>
-        <div className="upcoming-comparison-track" aria-hidden="true">
-          <span style={{ width: `${(Math.max(0, Number(awayValue) || 0) / maxValue) * 100}%` }} />
-        </div>
-        <strong>{awayValue ?? "—"}</strong>
-      </div>
-    );
-  })}
+<div className="upcoming-team-comparison upcoming-official-comparison">
+  <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA OFICIAL · 2026/27</span>
+  {(() => {
+    const home = getUpcomingOfficialCollective(selectedUpcomingMatch.homeTeam);
+    const away = getUpcomingOfficialCollective(selectedUpcomingMatch.awayTeam);
+    return <>
+      <p className="upcoming-collective-source">Partidos con datos oficiales: {home.games} / {away.games} · Naranja = mejor registro</p>
+      {UPCOMING_COLLECTIVE_STATS.map(([label, key, lowerIsBetter], index) => {
+        const hv = home.values[key], av = away.values[key];
+        const both = Number.isFinite(hv) && Number.isFinite(av);
+        const homeBetter = both && hv !== av && (lowerIsBetter ? hv < av : hv > av);
+        const awayBetter = both && hv !== av && (lowerIsBetter ? av < hv : av > hv);
+        const percentage = index >= 8;
+        const fmt = value => Number.isFinite(value) ? `${value.toFixed(1)}${percentage ? "%" : ""}` : "—";
+        const max = Math.max(hv || 0, av || 0, 1);
+        return <div className="upcoming-comparison-row upcoming-comparison-stat" key={key}>
+          <strong className={homeBetter ? "collective-better" : ""}>{fmt(hv)}</strong>
+          <div className="upcoming-comparison-track" aria-hidden="true"><span className={homeBetter ? "collective-better-bar" : ""} style={{ width: `${(Math.max(0, hv || 0) / max) * 100}%` }} /></div>
+          <span>{label}</span>
+          <div className="upcoming-comparison-track" aria-hidden="true"><span className={awayBetter ? "collective-better-bar" : ""} style={{ width: `${(Math.max(0, av || 0) / max) * 100}%` }} /></div>
+          <strong className={awayBetter ? "collective-better" : ""}>{fmt(av)}</strong>
+        </div>;
+      })}
+    </>;
+  })()}
 </div>
 <div className="upcoming-last-matches">
   <h3>ÚLTIMOS 2 PARTIDOS</h3>
