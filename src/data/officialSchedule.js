@@ -654,5 +654,13 @@ export const officialSchedule = [
     "homeTeam": "atenas",
     "awayTeam": "instituto",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2a3rzGONK9rElcviFTj2BCYNJQVw8goI7MrWsrUiBHqCVxLUjQWV6vA==/atenas-c-vs-instituto"
+  },
+  {
+    "id": "2026-11-21-quimsa-ferro",
+    "date": "2026-11-21",
+    "time": null,
+    "homeTeam": "quimsa",
+    "awayTeam": "ferro",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro"
   }
 ];
