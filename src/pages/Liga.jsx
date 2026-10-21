@@ -1,3 +1,4 @@
+import PlayerModal from "../components/PlayerModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
@@ -1920,132 +1921,16 @@ console.table(quarterScores);
 {/* POPUP DEL JUGADOR */}
 
 {selectedPlayer && (
-  <div
-    className="home-modal-overlay"
-    style={{ zIndex: 9999 }}
-    onClick={() => setSelectedPlayer(null)}
-  >
-    <div
-      className="home-player-modal"
-      onClick={(event) => event.stopPropagation()}
-    >
-      <div className="home-player-modal-header">
-        {selectedPlayer.team && (
-          <div className="home-player-modal-logo">
-            <img
-              src={selectedPlayer.team.logo}
-              alt={selectedPlayer.team.name}
-            />
-          </div>
-        )}
-
-        <div className="home-player-modal-info">
-          <span>{selectedPlayer.position}</span>
-          <h2>{selectedPlayer.name}</h2>
-          <p>{selectedPlayer.team?.name || "Equipo no disponible"}</p>
-          <small>{selectedPlayer.nationality}</small>
-        </div>
-
-        <button
-          type="button"
-          className="home-modal-close"
-          onClick={() => setSelectedPlayer(null)}
-          aria-label="Cerrar"
-        >
-          ×
-        </button>
-      </div>
-
-      <div className="home-player-modal-details">
-        <div>
-          <span>POSICIÓN</span>
-          <strong>{selectedPlayer.position || "—"}</strong>
-        </div>
-        <div>
-          <span>NACIONALIDAD</span>
-          <strong>{selectedPlayer.nationality || "—"}</strong>
-        </div>
-        <div>
-          <span>NÚMERO</span>
-          <strong>{selectedPlayer.number ?? "—"}</strong>
-        </div>
-      </div>
-
-      <div className="home-player-modal-season">
-        <span className="home-player-modal-label">
-          ESTADÍSTICAS DE LA TEMPORADA
-        </span>
-
-        <div className="home-player-modal-stats">
-          {[
-            ["PJ", selectedPlayer.stats?.gamesPlayed ?? 0],
-            ["PTS", selectedPlayer.stats?.points],
-            ["REB", selectedPlayer.stats?.rebounds],
-            ["AST", selectedPlayer.stats?.assists],
-          ].map(([label, value]) => (
-            <div key={label}>
-              <strong>
-                {value == null
-                  ? "—"
-                  : label === "PJ"
-                    ? value
-                    : Number(value).toFixed(1)}
-              </strong>
-              <span>{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="home-player-modal-recent-section">
-        <span className="home-player-modal-label">
-          ÚLTIMOS 2 PARTIDOS
-        </span>
-
-        {getPlayerLastMatches(selectedPlayer).length > 0 ? (
-          <div className="home-player-modal-recent-list">
-            {getPlayerLastMatches(selectedPlayer).map((match) => (
-              <div
-                className="home-player-modal-recent-match"
-                key={match.id}
-              >
-                <div className="home-player-modal-recent-header">
-                  <strong>vs. {match.rival}</strong>
-                  <span>
-                    {match.date.split("-").reverse().join("/")}
-                  </span>
-                </div>
-
-                <div className="home-player-modal-recent-stats">
-                  <div>
-                    <strong>{match.points}</strong>
-                    <span>PTS</span>
-                  </div>
-                  <div>
-                    <strong>{match.rebounds}</strong>
-                    <span>REB</span>
-                  </div>
-                  <div>
-                    <strong>{match.assists}</strong>
-                    <span>AST</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="home-player-modal-recent-empty">
-            Todavía no hay estadísticas de partidos disponibles.
-          </p>
-        )}
-      </div>
-
-      <div className="home-player-modal-footer">
-        <span>LIGA NACIONAL 2026/27</span>
-        <strong>{selectedPlayer.team?.shortName || ""}</strong>
-      </div>
-    </div>
-  </div>
+  <PlayerModal
+    player={selectedPlayer}
+    team={selectedPlayer.team || getTeam(selectedPlayer.teamId)}
+    stats={selectedPlayer.stats || playerStats.find((entry) => entry.playerId === selectedPlayer.id)}
+    onClose={() => setSelectedPlayer(null)}
+    onTeamClick={(id) => {
+      setSelectedPlayer(null);
+      window.location.assign(`/equipos/${id}`);
+    }}
+  />
 )}
     </main>
   );
