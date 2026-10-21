@@ -214,6 +214,15 @@ async function main() {
     }
 
     const key = `${record.date}-${homeTeamId}-${awayTeamId}`;
+    if (Object.prototype.hasOwnProperty.call(statsByMatch, key)) {
+      skipped.push({
+        date: record.date,
+        reason: `Clave duplicada (${key}); se conserva el primer registro para evitar sobrescribir estadísticas.`,
+      });
+      console.warn(`OMITIDO POR CLAVE DUPLICADA: ${key}`);
+      continue;
+    }
+
     statsByMatch[key] = {
       source: "Liga Nacional",
       officialUrl: record.officialUrl,
@@ -254,6 +263,10 @@ async function main() {
   console.log(`Partidos oficiales validados y listos para publicar: ${verified}`);
   console.log(`Partidos omitidos por validación/mapeo: ${skipped.length}`);
   console.log(`Vista previa generada: ${OUTPUT_FILE}`);
+
+  if (Object.keys(statsByMatch).length !== verified || Object.keys(resultsByMatch).length !== verified) {
+    throw new Error("La cantidad de partidos verificados no coincide con los registros únicos generados.");
+  }
 
   if (verified === 0) {
     throw new Error("No se validó ningún partido oficial. No se debe publicar ninguna actualización.");
