@@ -39,6 +39,7 @@ function Home() {
   const [selectedTeam, setSelectedTeam] = useState(null);
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+const [upcomingTab, setUpcomingTab] = useState("comparativa");
 const [liveMatches] = useState([]);
 const [liveDate] = useState(null);
 
@@ -2170,7 +2171,12 @@ const finishedMatch = {
               </div>
             </div>
 
+            <div className="upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
+              <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
+              <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores destacados</button>
+            </div>
             <section className="match-highlighted-section">
+              {upcomingTab === "comparativa" && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
 <div className="upcoming-team-comparison">
@@ -2267,6 +2273,8 @@ const finishedMatch = {
     ))}
   </div>
 </div>
+              </div>)}
+              {upcomingTab === "jugadores" && (<div className="upcoming-tab-panel" role="tabpanel">
               <div className="match-highlighted-title">
                 <h3>JUGADORES DESTACADOS</h3>
                 <span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA</span>
@@ -2556,6 +2564,7 @@ const finishedMatch = {
                   </div>
                 </div>
               </div>
+              </div>)}
             </section>
 
             <div className="match-modal-footer">
