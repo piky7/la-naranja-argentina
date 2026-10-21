@@ -2604,3 +2604,50 @@
   .team-season-stat strong { font-size: 18px; }
   .team-season-stat span { font-size: 9px; }
 }
+
+/* Ficha deportiva: promedios colectivos de temporada */
+.team-season-stats-sport {
+  padding: 20px;
+  background: linear-gradient(145deg, #0c1723 0%, #07111c 100%);
+  border-color: #f58220;
+}
+.team-season-stats-sport .team-season-stats-heading { margin-bottom: 20px; }
+.team-season-stats-sport .team-season-stats-eyebrow { display: inline-block; color: #f58220; font-size: 12px; font-weight: 800; letter-spacing: 1.5px; }
+.team-season-stats-sport .team-season-stats-heading h2 { font-size: clamp(18px, 3.8vw, 25px); font-weight: 800; line-height: 1.2; }
+.team-season-stats-sport .team-season-stats-games { white-space: nowrap; }
+.team-season-stats-sport .team-season-stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.team-season-stats-sport .team-season-stat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 85px;
+  padding: 13px 9px;
+  background: #0d1a28;
+  border: 1px solid #344454;
+  border-radius: 12px;
+}
+.team-season-stats-sport .team-season-stat-icon { flex: 0 0 auto; color: #899aac; font-size: 23px; line-height: 1; }
+.team-season-stats-sport .team-season-stat-info { display: flex; min-width: 0; flex-direction: column; gap: 5px; align-items: flex-start; text-align: left; }
+.team-season-stats-sport .team-season-stat-info strong { color: #f58220; font-size: clamp(19px, 3.5vw, 27px); font-weight: 800; line-height: 1.05; }
+.team-season-stats-sport .team-season-stat-info span { color: #b8c5d4; font-size: 11px; line-height: 1.25; }
+.team-season-stats-sport .team-season-shooting-heading {
+  display: flex; align-items: center; gap: 12px; margin: 20px 0 11px;
+  color: #f58220; font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+}
+.team-season-stats-sport .team-season-shooting-heading::after { content: ""; height: 1px; flex: 1; background: #364351; }
+.team-season-stats-sport .team-season-shooting-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.team-season-stats-sport .team-season-shooting-grid .team-season-stat-info { align-items: center; text-align: center; }
+.team-season-stats-sport .team-season-stats-note { margin-top: 17px; }
+@media (max-width: 600px) {
+  .team-season-stats-sport { padding: 13px; }
+  .team-season-stats-sport .team-season-stats-grid { gap: 7px; }
+  .team-season-stats-sport .team-season-stat { flex-direction: column; gap: 5px; min-height: 82px; padding: 10px 4px; }
+  .team-season-stats-sport .team-season-stat-icon { font-size: 15px; }
+  .team-season-stats-sport .team-season-stat-info { align-items: center; text-align: center; }
+  .team-season-stats-sport .team-season-stat-info strong { font-size: clamp(16px, 4vw, 21px); }
+  .team-season-stats-sport .team-season-stat-info span { font-size: 10px; }
+  .team-season-stats-sport .team-season-shooting-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
