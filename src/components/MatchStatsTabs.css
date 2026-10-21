@@ -256,3 +256,11 @@
     font-size: 9px;
   }
 }
+
+/* Naranja solo en la barra del equipo que lidera cada indicador. */
+.match-stats-tabs .match-team-comparison-side-away .match-team-comparison-track span {
+  background: #aab8c7;
+}
+.match-stats-tabs .match-team-comparison-track.match-team-comparison-track-winner span {
+  background: #f58220;
+}
