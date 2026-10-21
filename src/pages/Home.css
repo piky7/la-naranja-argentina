@@ -9775,3 +9775,43 @@
   .match-modal-upcoming .upcoming-tabs { padding: 10px 10px 0; gap: 4px; }
   .match-modal-upcoming .upcoming-tabs button { font-size: 11px; padding: 11px 3px; }
 }
+
+
+/* Mantener solapas deportivas horizontales aun con estilos globales de botones. */
+.match-modal.match-modal-upcoming .upcoming-tabs {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  align-items: stretch;
+  gap: 6px;
+  padding: 10px 12px 0;
+  background: #0b141e;
+}
+.match-modal.match-modal-upcoming .upcoming-tabs > button {
+  display: flex !important;
+  width: 100% !important;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 5px !important;
+  border: 1px solid #364455 !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 9px 9px 0 0 !important;
+  background: #101b28 !important;
+  color: #b8c4d0 !important;
+  font-size: 12px !important;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+  cursor: pointer;
+}
+.match-modal.match-modal-upcoming .upcoming-tabs > button.is-active {
+  color: #ff8a20 !important;
+  background: #1b2026 !important;
+  border-color: #e98020 !important;
+  border-bottom-color: #ff8a20 !important;
+}
+@media (max-width: 600px) {
+  .match-modal.match-modal-upcoming .upcoming-tabs { gap: 5px; padding: 9px 9px 0; }
+  .match-modal.match-modal-upcoming .upcoming-tabs > button { font-size: 11px !important; padding: 10px 3px !important; }
+}
