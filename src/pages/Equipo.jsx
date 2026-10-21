@@ -393,29 +393,17 @@ function getHighlightedPlayers(teamId, stat) {
    ========================================= */
 
 function getMatchStats(match) {
-  if (!match) {
-    return null;
-  }
+  if (!match) return null;
 
-  if (matchPlayerStats[match.id]) {
-    return matchPlayerStats[match.id];
-  }
+  const matchKey = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  const directStats = matchPlayerStats[match.id] || matchPlayerStats[matchKey];
+  if (directStats) return directStats;
 
-  const matchKey =
-    `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  // Los partidos enlazados a la Liga Nacional no usan fallback legado.
+  if (match.officialUrl) return null;
 
-  if (matchPlayerStats[matchKey]) {
-    return matchPlayerStats[matchKey];
-  }
-
-  const legacyKey =
-    `${match.homeTeam}-${match.awayTeam}`;
-
-  if (matchPlayerStats[legacyKey]) {
-    return matchPlayerStats[legacyKey];
-  }
-
-  return null;
+  const legacyKey = `${match.homeTeam}-${match.awayTeam}`;
+  return matchPlayerStats[legacyKey] || null;
 }
 
 
