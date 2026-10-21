@@ -60,7 +60,26 @@ async function main() {
     if (homePoints !== record.homeScore || awayPoints !== record.awayScore) {
       throw new Error("La suma de puntos no coincide con el marcador: " + key);
     }
-    matchStats[key] = record;
+    const legacyKey = `${record.homeTeam}-${record.awayTeam}`;
+
+const HISTORICAL_QUARTERS_CUTOFF = "2026-10-19";
+
+const previousStats =
+  currentStats[key] ??
+  (
+    key.slice(0, 10) <= HISTORICAL_QUARTERS_CUTOFF
+      ? currentStats[legacyKey]
+      : null
+  );
+
+const quarterScores = previousStats?.quarterScores;
+
+matchStats[key] = {
+  ...record,
+  ...(Array.isArray(quarterScores) && quarterScores.length > 0
+    ? { quarterScores: structuredClone(quarterScores) }
+    : {}),
+};
     statsAdded++;
   }
 
