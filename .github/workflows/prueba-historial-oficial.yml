@@ -1,0 +1,62 @@
+name: Probar historial de estadísticas oficiales LNA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/prueba-historial-oficial.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probar-historial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Extraer y validar partidos históricos oficiales
+        run: node sync-liga-history.cjs
+
+      - name: Comprobar historial generado
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const path = "liga-history.json";
+          if (!fs.existsSync(path)) throw new Error("No se generó liga-history.json");
+          const data = JSON.parse(fs.readFileSync(path, "utf8"));
+          if (!Array.isArray(data.matches)) throw new Error("El historial no contiene una lista de partidos.");
+          const invalid = data.matches.filter(match => {
+            if (!Array.isArray(match.teams) || match.teams.length !== 2) return true;
+            const home = match.teams.find(team => team.officialTeamId === match.teams[0].officialTeamId);
+            return !home || match.teams.some(team => !Array.isArray(team.players) || !team.players.length);
+          });
+          if (invalid.length) throw new Error("Hay partidos con estructura incompleta: " + invalid.length);
+          console.log("Partidos históricos validados:", data.matches.length);
+          console.log("Archivo generado:", path);
+          '
+
+      - name: Publicar artefactos de diagnóstico
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historial-oficial-lna-prueba
+          path: |
+            liga-history.json
+            liga-match-temp.json
+          if-no-files-found: ignore
+          retention-days: 7
