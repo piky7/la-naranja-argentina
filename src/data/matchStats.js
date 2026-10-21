@@ -5801,4 +5801,367 @@ export const matchPlayerStats = {
       "away": 28
     }
   ]
-},};
+},
+
+"ferro-platense": {
+  "ferro": [
+    {
+      "id": "emiliano-lezcano",
+      "name": "Emiliano Lezcano",
+      "points": 14,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "27:00"
+    },
+    {
+      "id": "jano-martinez",
+      "name": "Jano Martínez",
+      "points": 7,
+      "rebounds": 8,
+      "assists": 3,
+      "minutes": "19:21"
+    },
+    {
+      "id": "facundo-pinero",
+      "name": "Facundo Piñero",
+      "points": 11,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "21:37"
+    },
+    {
+      "id": "felipe-rodriguez",
+      "name": "Felipe Rodríguez",
+      "points": 4,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "15:01"
+    },
+    {
+      "id": "valentin-bettiga",
+      "name": "Valentín Bettiga",
+      "points": 8,
+      "rebounds": 7,
+      "assists": 2,
+      "minutes": "27:33"
+    },
+    {
+      "id": "jose-defelippo",
+      "name": "José Defelippo",
+      "points": 12,
+      "rebounds": 3,
+      "assists": 4,
+      "minutes": "21:43"
+    },
+    {
+      "id": "federico-zezular",
+      "name": "Federico Zezular",
+      "points": 10,
+      "rebounds": 3,
+      "assists": 1,
+      "minutes": "17:10"
+    },
+    {
+      "id": "kevin-hernandez",
+      "name": "Kevin Hernández",
+      "points": 17,
+      "rebounds": 5,
+      "assists": 0,
+      "minutes": "17:30"
+    },
+    {
+      "id": "rodrigo-gallegos",
+      "name": "Rodrigo Gallegos",
+      "points": 1,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "20:39"
+    },
+    {
+      "id": "camilo-rodriguez",
+      "name": "Camilo Rodríguez",
+      "points": 2,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "12:27"
+    }
+  ],
+  "platense": [
+    {
+      "id": "federico-grun",
+      "name": "Federico Grun",
+      "points": 12,
+      "rebounds": 5,
+      "assists": 3,
+      "minutes": "24:03"
+    },
+    {
+      "id": "gaston-cordoba",
+      "name": "Gastón Córdoba",
+      "points": 5,
+      "rebounds": 4,
+      "assists": 1,
+      "minutes": "19:36"
+    },
+    {
+      "id": "facundo-terra",
+      "name": "Facundo Terra",
+      "points": 5,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "20:01"
+    },
+    {
+      "id": "nicolas-burgos",
+      "name": "Nicolás Burgos",
+      "points": 14,
+      "rebounds": 7,
+      "assists": 1,
+      "minutes": "25:35"
+    },
+    {
+      "id": "mauro-cosolito",
+      "name": "Mauro Cosolito",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "11:23"
+    },
+    {
+      "id": "mariano-goicoechea",
+      "name": "Mariano Goicoechea",
+      "points": 3,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "16:15"
+    },
+    {
+      "id": "ramiro-santiago",
+      "name": "Ramiro Santiago",
+      "points": 19,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "27:60"
+    },
+    {
+      "id": "franco-smaniotti",
+      "name": "Franco Smaniotti",
+      "points": 6,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "28:46"
+    },
+    {
+      "id": "julian-morales",
+      "name": "Julián Morales",
+      "points": 17,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "24:43"
+    },
+    {
+      "id": "giovanni-pappalardi",
+      "name": "Giovanni Pappalardi",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "01:39"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 30,
+      "away": 20
+    },
+    {
+      "period": "2",
+      "home": 20,
+      "away": 17
+    },
+    {
+      "period": "3",
+      "home": 19,
+      "away": 14
+    },
+    {
+      "period": "4",
+      "home": 17,
+      "away": 30
+    }
+  ]
+},
+
+"san-martin-olimpico": {
+  "san-martin": [
+    {
+      "id": "diego-collomb",
+      "name": "Diego Collomb",
+      "points": 23,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "29:40"
+    },
+    {
+      "id": "juanse-gorosito",
+      "name": "Juanse Gorosito",
+      "points": 12,
+      "rebounds": 2,
+      "assists": 6,
+      "minutes": "29:32"
+    },
+    {
+      "id": "salvador-giletto",
+      "name": "Salvador Giletto",
+      "points": 13,
+      "rebounds": 9,
+      "assists": 1,
+      "minutes": "37:54"
+    },
+    {
+      "id": "lautaro-berra",
+      "name": "Lautaro Berra",
+      "points": 9,
+      "rebounds": 0,
+      "assists": 3,
+      "minutes": "25:05"
+    },
+    {
+      "id": "sebastian-lugo",
+      "name": "Sebastián Lugo",
+      "points": 15,
+      "rebounds": 8,
+      "assists": 4,
+      "minutes": "30:56"
+    },
+    {
+      "id": "daniel-moreira",
+      "name": "Daniel Moreira",
+      "points": 9,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "14:55"
+    },
+    {
+      "id": "mateo-rearte",
+      "name": "Mateo Rearte",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "10:28"
+    },
+    {
+      "id": "geronimo-ramallo",
+      "name": "Gerónimo Ramallo",
+      "points": 5,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "21:29"
+    }
+  ],
+  "olimpico": [
+    {
+      "id": "austin-wtighten",
+      "name": "Austin Wtighten",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "18:28"
+    },
+    {
+      "id": "lucas-perez",
+      "name": "Lucas Pérez",
+      "points": 17,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "26:15"
+    },
+    {
+      "id": "santino-romegialli",
+      "name": "Santino Romegialli",
+      "points": 9,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "26:54"
+    },
+    {
+      "id": "ezequiel-paz",
+      "name": "Ezequiel Paz",
+      "points": 11,
+      "rebounds": 4,
+      "assists": 3,
+      "minutes": "20:45"
+    },
+    {
+      "id": "elisias-hall",
+      "name": "Elisias Hall",
+      "points": 6,
+      "rebounds": 9,
+      "assists": 1,
+      "minutes": "14:59"
+    },
+    {
+      "id": "lucas-lorenzen",
+      "name": "Lucas Lorenzen",
+      "points": 2,
+      "rebounds": 2,
+      "assists": 0,
+      "minutes": "13:41"
+    },
+    {
+      "id": "jeremias-frontera",
+      "name": "Jeremías Frontera",
+      "points": 30,
+      "rebounds": 3,
+      "assists": 3,
+      "minutes": "22:04"
+    },
+    {
+      "id": "agustin-vergara",
+      "name": "Agustín Vergara",
+      "points": 9,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "20:05"
+    },
+    {
+      "id": "guido-mariani",
+      "name": "Guido Mariani",
+      "points": 5,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "17:22"
+    },
+    {
+      "id": "joaquin-lopez-lorenz",
+      "name": "Joaquín López Lorenz",
+      "points": 11,
+      "rebounds": 7,
+      "assists": 0,
+      "minutes": "19:27"
+    }
+  ],
+  "quarterScores": [
+    {
+      "period": "1",
+      "home": 23,
+      "away": 30
+    },
+    {
+      "period": "2",
+      "home": 20,
+      "away": 19
+    },
+    {
+      "period": "3",
+      "home": 20,
+      "away": 34
+    },
+    {
+      "period": "4",
+      "home": 23,
+      "away": 23
+    }
+  ]
+},
+};

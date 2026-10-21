@@ -247,4 +247,20 @@ export const matchResults = {
     venue: null,
     tv: [],
   },
+  "2026-10-20-ferro-platense": {
+    status: "finished",
+    homeScore: 86,
+    awayScore: 81,
+    time: null,
+    venue: null,
+    tv: [],
+  },
+  "2026-10-20-san-martin-olimpico": {
+    status: "finished",
+    homeScore: 86,
+    awayScore: 106,
+    time: null,
+    venue: null,
+    tv: [],
+  },
 };
