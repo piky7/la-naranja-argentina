@@ -29,61 +29,77 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      # Solo modifica la copia efímera del runner de GitHub Actions.
-      # Quitamos una entrada histórica ya validada para forzar que el
-      # extractor vuelva a descargarla y comprobar los puntos del boxscore.
-      - name: Preparar repetición controlada de un partido histórico
+      # Esta modificación ocurre solo en el runner temporal de Actions.
+      # Retiramos tres partidos del historial para forzar una reextracción real.
+      - name: Preparar tres partidos históricos para volver a extraer
         run: |
           node --input-type=module -e '
           import fs from "node:fs";
-          const path = "liga-history.json";
-          const targetUrl = "https://www.laliganacional.com.ar/laliga/partido/v2kxKmD-zO6hYv1dnwEnZPcrVUQ920f68VEGsE0kMlWVfdSg6wMtD1-A==/lanus-vs-gimnasia-cr";
-          if (!fs.existsSync(path)) throw new Error("No existe liga-history.json en el repositorio.");
-          const data = JSON.parse(fs.readFileSync(path, "utf8"));
-          const before = data.matches.length;
-          const index = data.matches.findIndex(match => match.officialUrl === targetUrl);
-          if (index < 0) throw new Error("El partido de prueba no está en el historial; no se puede forzar una repetición segura.");
-          data.matches.splice(index, 1);
-          fs.writeFileSync(path, JSON.stringify(data, null, 2) + "\n");
-          console.log("Entrada retirada solo en el runner temporal:", targetUrl);
+          const historyPath = "liga-history.json";
+          const fixturePath = "liga-events.json";
+          const targets = [
+            "https://www.laliganacional.com.ar/laliga/partido/v2kxKmD-zO6hYv1dnwEnZPcrVUQ920f68VEGsE0kMlWVfdSg6wMtD1-A==/lanus-vs-gimnasia-cr",
+            "https://www.laliganacional.com.ar/laliga/partido/v2RzrtxkxttV1HrT9AByAlS3T5Wo8LPxLJ4r6yO9bT7VYNIK06re0FnQ==/penarol-mdp-vs-gimnasia-cr",
+            "https://www.laliganacional.com.ar/laliga/partido/v22kWqnCuyvPwoV-8fPOlP0m6CBVczJUAPAa4jXBiOhEhjfVpDvlywoQ==/argentino-j-vs-ferro"
+          ];
+          if (!fs.existsSync(historyPath)) throw new Error("No existe liga-history.json");
+          const history = JSON.parse(fs.readFileSync(historyPath, "utf8"));
+          const fixture = JSON.parse(fs.readFileSync(fixturePath, "utf8"));
+          if (!Array.isArray(history.matches) || !Array.isArray(fixture.matches)) throw new Error("Estructura de historial o fixture inválida");
+          for (const url of targets) {
+            if (!fixture.matches.some(match => match.officialUrl === url)) throw new Error("El partido de prueba no está en liga-events.json: " + url);
+            if (!history.matches.some(match => match.officialUrl === url)) throw new Error("El partido no estaba en el historial inicial; no se puede probar una reextracción controlada: " + url);
+          }
+          const before = history.matches.length;
+          history.matches = history.matches.filter(match => !targets.includes(match.officialUrl));
+          fs.writeFileSync(historyPath, JSON.stringify(history, null, 2) + "\n");
           console.log("Partidos en historial antes de la prueba:", before);
-          console.log("Partidos en historial para iniciar la prueba:", data.matches.length);
+          console.log("Partidos retirados solo en el runner temporal:", targets.length);
+          console.log("Partidos en historial antes de reextraer:", history.matches.length);
           '
 
-      - name: Extraer y validar partidos históricos oficiales
+      - name: Extraer nuevamente los tres partidos históricos
         run: node sync-liga-history.cjs
 
-      - name: Comprobar que el partido fue reextraído y validado
+      - name: Validar marcador y puntos individuales de los tres partidos
         run: |
           node --input-type=module -e '
           import fs from "node:fs";
-          const path = "liga-history.json";
-          const targetUrl = "https://www.laliganacional.com.ar/laliga/partido/v2kxKmD-zO6hYv1dnwEnZPcrVUQ920f68VEGsE0kMlWVfdSg6wMtD1-A==/lanus-vs-gimnasia-cr";
-          if (!fs.existsSync(path)) throw new Error("No se generó liga-history.json");
-          const data = JSON.parse(fs.readFileSync(path, "utf8"));
-          if (!Array.isArray(data.matches)) throw new Error("El historial no contiene una lista de partidos.");
-          const match = data.matches.find(item => item.officialUrl === targetUrl);
-          if (!match) throw new Error("La extracción no volvió a incorporar el partido de prueba.");
-          if (match.homeScore !== 74 || match.awayScore !== 92) throw new Error("El marcador del partido no coincide con el esperado 74-92.");
-          if (!Array.isArray(match.teams) || match.teams.length !== 2) throw new Error("El partido no contiene los dos equipos.");
-          const expected = [{id:112600,score:74,name:"LANÚS"},{id:112553,score:92,name:"GIMNASIA (CR)"}];
-          for (const team of expected) {
-            const found = match.teams.find(item => item.officialTeamId === team.id);
-            if (!found) throw new Error("No se encontró el equipo " + team.name);
-            if (!Array.isArray(found.players) || found.players.length === 0) throw new Error("No hay jugadores extraídos para " + team.name);
-            const points = found.players.reduce((sum, player) => sum + Number(player.points || 0), 0);
-            console.log(found.name + ": " + found.players.length + " jugadores; puntos individuales " + points + "; marcador " + team.score);
-            if (points !== team.score) throw new Error("Los puntos individuales no coinciden para " + team.name);
+          const history = JSON.parse(fs.readFileSync("liga-history.json", "utf8"));
+          const fixture = JSON.parse(fs.readFileSync("liga-events.json", "utf8"));
+          const targets = [
+            "https://www.laliganacional.com.ar/laliga/partido/v2kxKmD-zO6hYv1dnwEnZPcrVUQ920f68VEGsE0kMlWVfdSg6wMtD1-A==/lanus-vs-gimnasia-cr",
+            "https://www.laliganacional.com.ar/laliga/partido/v2RzrtxkxttV1HrT9AByAlS3T5Wo8LPxLJ4r6yO9bT7VYNIK06re0FnQ==/penarol-mdp-vs-gimnasia-cr",
+            "https://www.laliganacional.com.ar/laliga/partido/v22kWqnCuyvPwoV-8fPOlP0m6CBVczJUAPAa4jXBiOhEhjfVpDvlywoQ==/argentino-j-vs-ferro"
+          ];
+          for (const url of targets) {
+            const expected = fixture.matches.find(match => match.officialUrl === url);
+            const found = history.matches.filter(match => match.officialUrl === url);
+            if (found.length !== 1) throw new Error("Se esperaba exactamente un registro reextraído para " + url + "; encontrados: " + found.length);
+            const match = found[0];
+            if (match.homeScore !== expected.homeScore || match.awayScore !== expected.awayScore) throw new Error("El marcador extraído no coincide con el fixture oficial: " + url);
+            for (const teamExpected of [
+              { data: expected.home, score: expected.homeScore },
+              { data: expected.away, score: expected.awayScore }
+            ]) {
+              const team = match.teams?.find(item => item.officialTeamId === teamExpected.data.officialTeamId);
+              if (!team) throw new Error("Falta un equipo oficial en " + url);
+              if (!Array.isArray(team.players) || team.players.length === 0) throw new Error("No hay jugadores para " + team.data?.name);
+              const points = team.players.reduce((sum, player) => sum + Number(player.points || 0), 0);
+              console.log(expected.date + " | " + teamExpected.data.name + ": " + team.players.length + " jugadores; puntos " + points + "/" + teamExpected.score);
+              if (points !== teamExpected.score) throw new Error("La suma de puntos individuales no coincide para " + teamExpected.data.name + " en " + url);
+            }
+            console.log("Partido validado:", expected.home.name, expected.homeScore, "-", expected.awayScore, expected.away.name);
           }
-          console.log("PRUEBA COMPLETA CORRECTA: el extractor volvió a descargar y validar un partido histórico oficial.");
-          console.log("Total de partidos en el historial de prueba:", data.matches.length);
+          console.log("PRUEBA MULTIPARTIDO SUPERADA: los tres partidos se reextrajeron, sin duplicados, y los puntos individuales coinciden.");
+          console.log("Total de partidos en el historial temporal:", history.matches.length);
           '
 
       - name: Publicar artefactos de diagnóstico
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: historial-oficial-lna-prueba
+          name: historial-oficial-lna-prueba-multipartido
           path: |
             liga-history.json
             liga-match-temp.json
