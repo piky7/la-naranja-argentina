@@ -9677,3 +9677,64 @@
     margin: 16px 12px;
   }
 }
+
+/* LNA - Popup compacto para escritorio */
+@media (min-width: 768px) {
+  .match-modal-finished .match-desktop-summary {
+    gap: 10px;
+    padding: 8px 12px 0;
+  }
+
+  .match-modal-finished .match-mvp-card {
+    padding: 7px 10px;
+  }
+
+  .match-modal-finished .match-mvp-heading {
+    margin-bottom: 4px;
+    font-size: 10px;
+  }
+
+  .match-modal-finished .match-desktop-summary .match-mvp-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .match-modal-finished .match-mvp-identity > img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .match-modal-finished .match-mvp-numbers > span {
+    padding: 3px;
+  }
+
+  .match-modal-finished .match-mvp-numbers strong {
+    font-size: 13px;
+  }
+
+  .match-modal-finished .match-stats-tabs > .match-stats-switch {
+    margin: 8px 12px;
+  }
+
+  .match-modal-finished .match-stats-team-header {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .match-modal-finished .match-stats-head {
+    min-height: 25px;
+  }
+
+  .match-modal-finished .match-stat-player {
+    min-height: 23px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .match-modal-finished .match-stat-player strong,
+  .match-modal-finished .match-stat-player span {
+    font-size: 10px;
+    line-height: 1.1;
+  }
+}

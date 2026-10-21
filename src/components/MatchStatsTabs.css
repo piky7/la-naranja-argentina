@@ -36,3 +36,42 @@
 .match-team-comparison tbody th { font-weight: 500; }
 .match-team-source { color: #bbb; font-size: 12px; margin: 12px 0; }
 @media (max-width: 480px) { .match-team-comparison { font-size: 12px; } .match-stats-switch { font-size: 13px; } }
+/* LNA - Comparativa colectiva compacta en escritorio */
+@media (min-width: 768px) {
+  .match-stats-tabs .match-team-source {
+    margin: 4px 12px 6px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .match-stats-tabs .match-team-comparison {
+    width: calc(100% - 24px);
+    margin: 0 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .match-stats-tabs .match-team-comparison th,
+  .match-stats-tabs .match-team-comparison td {
+    padding: 5px 8px;
+    line-height: 1.15;
+    height: 27px;
+    box-sizing: border-box;
+  }
+
+  .match-stats-tabs .match-team-comparison thead th {
+    height: 30px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .match-stats-tabs .match-team-comparison tbody th {
+    font-weight: 600;
+  }
+
+  .match-stats-tabs .match-team-comparison tbody td {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+}
