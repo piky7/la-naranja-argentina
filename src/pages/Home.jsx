@@ -1516,7 +1516,7 @@ const finishedMatch = {
                 </button>
                 <div>
                   <span>LIGA NACIONAL 2026/27</span>
-                  <h2>{selectedTeam.name}</h2>
+                  <h2>{selectedTeam.name} <span className="team-v2-record">({selectedTeam.wins}-{selectedTeam.losses})</span></h2>
                   <p>{[selectedTeam.city, selectedTeam.province].filter(Boolean).filter((v, i, a) => a.indexOf(v) === i).join(", ")}</p>
                 </div>
               </div>
@@ -1532,13 +1532,49 @@ const finishedMatch = {
                     ["DIF", selectedTeam.difference > 0 ? "+" + selectedTeam.difference : selectedTeam.difference],
                     ["PTS/P", selectedTeam.gamesPlayed ? (selectedTeam.pointsFor / selectedTeam.gamesPlayed).toFixed(1) : "—"],
                     ["REC/P", selectedTeam.gamesPlayed ? (selectedTeam.pointsAgainst / selectedTeam.gamesPlayed).toFixed(1) : "—"],
-                    ["PTS TOTALES", selectedTeam.pointsFor],
-                    ["REC TOTALES", selectedTeam.pointsAgainst],
                   ].map(([label, value]) => (
                     <div key={label}><span>{label}</span><strong>{value}</strong></div>
                   ))}
                 </div>
               </section>
+              {(() => {
+                const official = getUpcomingOfficialCollective(selectedTeam.id);
+                const metrics = [
+                  ["REB/P", "rebounds"], ["AST/P", "assists"],
+                  ["RECUP/P", "steals"], ["TAP/P", "blocks"],
+                  ["PÉRD/P", "turnovers"], ["FALTAS/P", "fouls"],
+                ];
+                const shooting = [
+                  ["TC", "fieldGoals"], ["T2", "twoPointers"],
+                  ["T3", "threePointers"], ["TL", "freeThrows"],
+                ];
+                const display = (key, percentage = false) => {
+                  const value = official.values[key];
+                  return Number.isFinite(value) ? value.toFixed(1) + (percentage ? "%" : "") : "—";
+                };
+                return (
+                  <section className="team-v2-section team-v2-collective-section">
+                    <div className="team-v2-section-head">
+                      <h3>ESTADÍSTICAS COLECTIVAS</h3>
+                      <span className="team-v2-official-count">{official.games} PJ con datos</span>
+                    </div>
+                    <div className="team-v2-collective-grid">
+                      {metrics.map(([label, key]) => (
+                        <div className="team-v2-collective-item" key={key}>
+                          <span>{label}</span><strong>{display(key)}</strong>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="team-v2-collective-shooting">
+                      {shooting.map(([label, key]) => (
+                        <div className="team-v2-collective-item" key={key}>
+                          <span>{label}</span><strong>{display(key, true)}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })()}
               {(() => {
                 const nextMatch = standingsMatches
                   .filter((match) => !isMatchFinished(match) && (match.homeTeam === selectedTeam.id || match.awayTeam === selectedTeam.id) && match.date >= today)
