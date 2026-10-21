@@ -9991,3 +9991,25 @@
   .home-player-modal .home-player-modal-recent-stats span { font-size: 9px; }
   .home-player-modal .home-player-modal-rival img { width: 22px; height: 22px; flex-basis: 22px; }
 }
+
+
+/* Minutos discretos junto a la fecha; cuatro estadísticas por partido. */
+.home-player-modal .home-player-modal-recent-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.home-player-modal .home-player-modal-recent-meta {
+  display: block;
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+.home-player-modal .home-player-modal-recent-minutes {
+  color: #a8b5c5;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+@media (max-width: 600px) {
+  .home-player-modal .home-player-modal-recent-meta { font-size: 10px; }
+  .home-player-modal .home-player-modal-recent-minutes { font-size: 10px; }
+}
