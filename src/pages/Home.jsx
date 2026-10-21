@@ -295,33 +295,18 @@ const getPlayerLastMatches = (player) => {
   };
 
   const getMatchStats = (match) => {
-    if (!match) {
-      return null;
-    }
-
-    const directStats = matchPlayerStats[match.id];
-
-    if (directStats) {
-      return directStats;
-    }
+    if (!match) return null;
 
     const normalizedId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+    const directStats = matchPlayerStats[match.id] || matchPlayerStats[normalizedId];
+    if (directStats) return directStats;
 
-    const normalizedStats = matchPlayerStats[normalizedId];
-
-    if (normalizedStats) {
-      return normalizedStats;
-    }
+    // Si el calendario identifica el partido como oficial, nunca recurrimos
+    // a estadísticas antiguas de Flashscore u otra clave ambigua.
+    if (match.officialUrl) return null;
 
     const simpleId = `${match.homeTeam}-${match.awayTeam}`;
-
-    const simpleStats = matchPlayerStats[simpleId];
-
-    if (simpleStats) {
-      return simpleStats;
-    }
-
-    return null;
+    return matchPlayerStats[simpleId] || null;
   };
 
   const getHighlightedPlayers = (teamId, stat) => {
