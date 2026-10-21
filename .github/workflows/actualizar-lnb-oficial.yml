@@ -4,68 +4,91 @@ on:
   schedule:
     # 03:30 en Argentina; permite que terminen los partidos nocturnos.
     - cron: "30 6 * * *"
+    # 11:00–14:45 y 18:00–01:45 ART (UTC = ART + 3).
+    - cron: "*/15 0-4,14-17,21-23 * * *"
   workflow_dispatch:
   push:
     branches:
       - main
-      - feature/reemplazo-oficial-lnb
     paths:
       - ".github/workflows/actualizar-lnb-oficial.yml"
       - "sync-official-stats-preview.cjs"
       - "publish-official-stats.cjs"
       - "sync-liga-history.cjs"
       - "extractor-liga.cjs"
+      - "scripts/official-*.cjs"
+      - "scripts/parse-official-final.cjs"
+      - "scripts/audited-official-finals.json"
 
 permissions:
   contents: write
 
 concurrency:
-  group: actualizar-lnb-oficial
+  group: actualizar-lnb-oficial-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   actualizar-oficial:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: ${{ github.event_name == 'schedule' && github.event.schedule != '30 6 * * *' && 12 || 30 }}
+    env:
+      OFFICIAL_SCHEDULE: ${{ github.event.schedule }}
 
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
+
+      - name: Comprobar partidos pendientes antes de instalar dependencias
+        id: window
+        run: node scripts/official-poll-window.cjs
 
       - name: Configurar Node.js
+        if: steps.window.outputs.run == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
 
       - name: Instalar dependencias
+        if: steps.window.outputs.run == 'true'
         run: npm ci
 
       - name: Consultar fixture oficial de la Liga Nacional
+        if: steps.window.outputs.run == 'true'
+        env:
+          OFFICIAL_SYNC_MODE: ${{ steps.window.outputs.mode }}
         run: node discover-liga.cjs
 
       - name: Incorporar partidos oficiales nuevos
+        if: steps.window.outputs.run == 'true'
         run: node merge-liga-events.cjs
 
       - name: Regenerar calendario oficial de LNA
+        if: steps.window.outputs.run == 'true'
         run: node generate-official-schedule.cjs
 
       - name: Extraer estadísticas desde las páginas oficiales
+        if: steps.window.outputs.run == 'true'
+        env:
+          OFFICIAL_SYNC_MODE: ${{ steps.window.outputs.mode }}
         run: node sync-liga-history.cjs
 
       - name: Validar resultados y estadísticas oficiales
+        if: steps.window.outputs.run == 'true'
         run: node sync-official-stats-preview.cjs
 
       - name: Preparar archivos de la web con datos oficiales validados
+        if: steps.window.outputs.run == 'true'
         run: node publish-official-stats.cjs
 
       - name: Compilar la web
+        if: steps.window.outputs.run == 'true'
         run: npm run build
 
       - name: Publicar actualización únicamente desde main
-        if: github.ref == 'refs/heads/main'
+        if: steps.window.outputs.run == 'true' && github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -76,12 +99,14 @@ jobs:
             echo "No hay cambios oficiales nuevos para publicar."
           else
             git commit -m "Actualizar resultados y estadísticas oficiales LNB"
-            git -c rebase.autoStash=true pull --rebase origin main
+            # Fail closed if main advanced: the next run regenerates from fresh data.
+            git fetch origin main
+            test "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)"
             git push origin HEAD:main
           fi
 
       - name: Guardar vista previa y diagnóstico
-        if: always()
+        if: always() && steps.window.outputs.run == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: lna-datos-oficiales
@@ -90,4 +115,4 @@ jobs:
             liga-history.json
             liga-events-preview.json
           if-no-files-found: ignore
-          retention-days: 7
+          retention-days: ${{ steps.window.outputs.mode == 'recent' && 1 || 7 }}

@@ -112,6 +112,17 @@ test("fixture merge refreshes stale scores and preserves rotating historical URL
   assert.equal(updated.officialUrl, originalUrl);
 });
 
+test("recent fixture refresh preserves season coverage and historical matches", t => {
+  const box = sandbox(t);
+  const fixture = box.read("liga-events.json");
+  const match = fixture.matches.find(m => m.date === "2026-10-20");
+  box.write("liga-events-preview.json", { matches: [match], dateTo: "2026-10-20" });
+  assert.equal(box.run("merge-liga-events.cjs").status, 0);
+  const updated = box.read("liga-events.json");
+  assert.equal(updated.dateTo, fixture.dateTo);
+  assert.deepEqual(updated.matches, fixture.matches);
+});
+
 test("published manifest excludes the two original partials even with matching live stats", t => {
   const box = sandbox(t);
   const readModule = file => {

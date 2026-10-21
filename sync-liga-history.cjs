@@ -1,4 +1,5 @@
 const { isConfirmedFinal } = require("./scripts/official-final.cjs");
+const { isCandidate } = require("./scripts/official-poll-window.cjs");
 
 const fs = require("node:fs");
 const { spawnSync } = require("node:child_process");
@@ -31,6 +32,8 @@ async function main() {
 
   const fixture = leerJSON(INPUT);
   const partidos = fixture.matches || [];
+  const now = new Date();
+  const recent = process.env.OFFICIAL_SYNC_MODE === "recent";
 
   const historial = fs.existsSync(OUTPUT)
     ? leerJSON(OUTPUT)
@@ -52,16 +55,9 @@ async function main() {
       continue;
     }
 
-    // Primera prueba: solo fechas pasadas, nunca hoy ni futuras.
-    const hoyArgentina = new Intl.DateTimeFormat("en-CA", {
-      timeZone: "America/Argentina/Buenos_Aires",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).format(new Date());
-
-    if (partido.date >= hoyArgentina) {
-      console.log(`Fecha no histórica: ${partido.date}`);
+    // Today's games are candidates too; only official final evidence admits them.
+    if (!isCandidate(partido, now, recent)) {
+      console.log(`Fuera de la ventana de consulta: ${partido.date}`);
       omitidos++;
       continue;
     }
