@@ -3,11 +3,21 @@ const fs = require("node:fs");
 const cheerio = require("cheerio");
 
 const BASE_URL = "https://www.laliganacional.com.ar";
-const OUTPUT = "liga-events.json";
+const OUTPUT = "liga-events-preview.json";
 
 // Primera prueba: cinco días de partidos históricos.
+// Inicio de la temporada 2026/27.
 const FECHA_INICIO = "2026-09-01";
-const FECHA_FIN = "2026-10-19";
+
+// Consultar hasta 30 días después de la fecha actual.
+const fechaFin = new Date();
+fechaFin.setDate(fechaFin.getDate() + 30);
+
+const FECHA_FIN = [
+  fechaFin.getFullYear(),
+  String(fechaFin.getMonth() + 1).padStart(2, "0"),
+  String(fechaFin.getDate()).padStart(2, "0"),
+].join("-");
 
 function leerEquipo($, celda) {
   const enlace = $(celda).find("a.equipo").first();
@@ -122,6 +132,7 @@ async function main() {
 
   const partidos = [];
   const urlsVistas = new Set();
+ 
 
   $("table.tabla-calendarios tbody tr.fila-tabla-calendarios")
     .each((_, fila) => {

@@ -1,0 +1,57 @@
+
+name: Actualizar calendario oficial LNA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-calendario-oficial
+  cancel-in-progress: false
+
+jobs:
+  actualizar-calendario:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Consultar calendario oficial
+        run: node discover-liga.cjs
+
+      - name: Sincronizar partidos
+        run: node merge-liga-events.cjs
+
+      - name: Generar calendario de LNA
+        run: node generate-official-schedule.cjs
+
+      - name: Guardar cambios del calendario
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            liga-events.json \
+            src/data/officialSchedule.js
+
+          if git diff --cached --quiet; then
+            echo "No hay cambios en el calendario."
+          else
+            git commit -m "Actualizar calendario oficial LNA"
+            git -c rebase.autoStash=true pull --rebase origin main
+            git push origin HEAD:main
+          fi

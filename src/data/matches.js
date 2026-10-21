@@ -1,6 +1,7 @@
 import { matchResults } from "./matchResults";
-import { flashscoreSchedule } from "./flashscoreSchedule";
+
 import { broadcasts } from "./broadcasts";
+import { officialSchedule } from "./officialSchedule";
 
 const fixture = [
   // SEPTIEMBRE 2026
@@ -663,174 +664,92 @@ const fixture = [
   ]],
 ];
 
-export const matches = fixture.flatMap(
-  ([date, games]) =>
-    games
-  .filter(([homeTeam, awayTeam]) => {
-    const matchKey = `${homeTeam}-${awayTeam}`;
-    const hasFlashscore = Boolean(flashscoreSchedule[matchKey]);
+// Calendario oficial de la Liga Nacional.
+// Los partidos oficiales tienen prioridad sobre el fixture manual.
+// Calendario oficial de la Liga Nacional.
+// Los partidos históricos conservan sus resultados registrados.
 
-    const hasResult = Object.keys(matchResults).some(
-      (key) => key.includes(`-${matchKey}`)
-    );
-
-    return hasFlashscore || hasResult;
-  })
-  .map(
-      ([homeTeam, awayTeam], index) => {
-        const isExampleMatch =
-          date === "2026-09-28" &&
-          homeTeam === "lanus" &&
-          awayTeam === "gimnasia";
-
-        const matchKey =
-          `${homeTeam}-${awayTeam}`;
-
-        const flashscoreMatch =
-          flashscoreSchedule[matchKey];
-
-        /*
-         * Si Flashscore tiene una fecha,
-         * tiene prioridad sobre el fixture.
-         *
-         * Si el partido está aplazado,
-         * conservamos la fecha del fixture.
-         */
-
-        const effectiveDate =
-          flashscoreMatch?.status === "postponed"
-            ? date
-            : flashscoreMatch?.date ?? date;
-
-        /*
-         * ======================================
-         * RESULTADO AUTOMÁTICO
-         * ======================================
-         */
-
-        const resultKey =
-          `${effectiveDate}-${homeTeam}-${awayTeam}`;
-
-        const automaticResult =
-          matchResults[resultKey];
-
-        /*
-         * ======================================
-         * TELEVISACIÓN
-         * ======================================
-         */
-
-        const broadcastKey =
-          `${effectiveDate}-${homeTeam}-${awayTeam}`;
-
-        const broadcast =
-          broadcasts[broadcastKey];
-
-        /*
-         * ======================================
-         * ESTADO
-         * ======================================
-         */
-
-        const status =
-          flashscoreMatch?.status === "postponed"
-            ? "postponed"
-            : automaticResult?.status ??
-              (
-                isExampleMatch
-                  ? "finished"
-                  : "scheduled"
-              );
-
-        /*
-         * ======================================
-         * HORA
-         * ======================================
-         *
-         * Si está aplazado:
-         *
-         * NO mostrar la hora vieja.
-         */
-
-        const time =
-          status === "postponed"
-            ? null
-            : automaticResult?.time ??
-              flashscoreMatch?.time ??
-              (
-                isExampleMatch
-                  ? "22:05"
-                  : null
-              );
-
-        /*
-         * ======================================
-         * TV
-         * ======================================
-         *
-         * Un partido aplazado no debe mostrar
-         * Básquet Pass automáticamente.
-         */
-
-        const tv =
-          status === "postponed"
-            ? []
-    : broadcast?.channel
-  ? [broadcast.channel]
-  : automaticResult?.tv?.length
-    ? automaticResult.tv
-                : (
-                    !automaticResult ||
-                    automaticResult.status === "scheduled"
-                  )
-                    ? ["Básquet Pass"]
-                    : (
-                        isExampleMatch
-                          ? ["TyC Sports"]
-                          : []
-                      );
-
-        return {
-          id:
-            `${effectiveDate}-${homeTeam}-${awayTeam}-${index + 1}`,
-
-          date:
-            effectiveDate,
-
-          homeTeam,
-
-          awayTeam,
-
-          time,
-
-          venue:
-            automaticResult?.venue ??
-            (
-              isExampleMatch
-                ? "Comodoro"
-                : null
-            ),
-
-          tv,
-
-          status,
-
-          homeScore:
-            automaticResult?.homeScore ??
-            (
-              isExampleMatch
-                ? 74
-                : null
-            ),
-
-          awayScore:
-            automaticResult?.awayScore ??
-            (
-              isExampleMatch
-                ? 92
-                : null
-            ),
-        };
-      }
-    )
+const officialKeys = new Set(
+  officialSchedule.map(
+    (match) =>
+      `${match.date}-${match.homeTeam}-${match.awayTeam}`
+  )
 );
+
+const manualMatches = fixture.flatMap(([date, games]) =>
+  games
+    .filter(([homeTeam, awayTeam]) => {
+      const key = `${date}-${homeTeam}-${awayTeam}`;
+
+      return (
+        !officialKeys.has(key) &&
+        Boolean(matchResults[key])
+      );
+    })
+    .map(([homeTeam, awayTeam]) => ({
+      date,
+      homeTeam,
+      awayTeam,
+    }))
+);
+
+const combinedMatches = [
+  ...officialSchedule,
+  ...manualMatches,
+];
+
+const groupedMatches = combinedMatches.reduce(
+  (groups, match) => {
+    if (!groups[match.date]) {
+      groups[match.date] = [];
+    }
+
+    groups[match.date].push(match);
+    return groups;
+  },
+  {}
+);
+
+export const matches = Object.entries(groupedMatches)
+  .flatMap(([date, games]) =>
+    games.map((match, index) => {
+      const { homeTeam, awayTeam } = match;
+
+      const resultKey =
+        `${date}-${homeTeam}-${awayTeam}`;
+
+      const automaticResult = matchResults[resultKey];
+      const broadcast = broadcasts[resultKey];
+
+      const status =
+        automaticResult?.status === "finished"
+          ? "finished"
+          : "scheduled";
+
+      const time =
+        match.time ??
+        automaticResult?.time ??
+        null;
+
+      const tv = broadcast?.channel
+        ? [broadcast.channel]
+        : automaticResult?.tv?.length
+          ? automaticResult.tv
+          : status === "scheduled"
+            ? ["Básquet Pass"]
+            : [];
+
+      return {
+        id: `${date}-${homeTeam}-${awayTeam}-${index + 1}`,
+        date,
+        homeTeam,
+        awayTeam,
+        time,
+        venue: automaticResult?.venue ?? null,
+        tv,
+        status,
+        homeScore: automaticResult?.homeScore ?? null,
+        awayScore: automaticResult?.awayScore ?? null,
+      };
+    })
+  );
