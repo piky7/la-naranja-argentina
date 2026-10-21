@@ -77,6 +77,35 @@ async function main() {
   const skipped = [];
   let verified = 0;
 
+  // Los resultados se toman directamente del fixture oficial, incluso si
+  // una estadística individual debe quedar retenida por falta de mapeo.
+  const todayArgentina = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Argentina/Buenos_Aires",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+
+  for (const official of fixture.matches) {
+    const homeTeam = teamMap[official.home.officialTeamId];
+    const awayTeam = teamMap[official.away.officialTeamId];
+    if (!homeTeam || !awayTeam) continue;
+    if (official.date >= todayArgentina) continue;
+    if (!Number.isInteger(official.homeScore) || !Number.isInteger(official.awayScore)) continue;
+    if (official.homeScore === 0 && official.awayScore === 0) continue;
+    const key = `${official.date}-${homeTeam}-${awayTeam}`;
+    resultsByMatch[key] = {
+      status: "finished",
+      homeScore: official.homeScore,
+      awayScore: official.awayScore,
+      time: official.time || null,
+      venue: null,
+      tv: [],
+      source: "Liga Nacional",
+      officialUrl: official.officialUrl,
+    };
+  }
+
   for (const record of history.matches) {
     const official = fixtureByUrl.get(record.officialUrl);
     if (!official) {
