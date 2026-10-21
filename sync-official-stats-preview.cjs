@@ -234,16 +234,6 @@ async function main() {
       [awayTeamId]: awayPlayers,
     };
 
-    resultsByMatch[key] = {
-      status: "finished",
-      homeScore: official.homeScore,
-      awayScore: official.awayScore,
-      time: null,
-      venue: null,
-      tv: [],
-      source: "Liga Nacional",
-      officialUrl: record.officialUrl,
-    };
     verified++;
     console.log(`VERIFICADO LNB: ${record.date} ${official.home.name} ${official.homeScore}-${official.awayScore} ${official.away.name}; puntos individuales coinciden y jugadores identificados.`);
   }
@@ -264,8 +254,8 @@ async function main() {
   console.log(`Partidos omitidos por validación/mapeo: ${skipped.length}`);
   console.log(`Vista previa generada: ${OUTPUT_FILE}`);
 
-  if (Object.keys(statsByMatch).length !== verified || Object.keys(resultsByMatch).length !== verified) {
-    throw new Error("La cantidad de partidos verificados no coincide con los registros únicos generados.");
+  if (Object.keys(statsByMatch).length !== verified || Object.keys(resultsByMatch).length < verified) {
+    throw new Error("La cantidad de estadísticas verificadas no coincide con sus claves únicas o faltan resultados oficiales.");
   }
 
   if (verified === 0) {
