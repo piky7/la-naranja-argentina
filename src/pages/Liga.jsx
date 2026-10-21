@@ -39,18 +39,14 @@ const [resultsPage, setResultsPage] = useState(null);
   const getMatchStats = (match) => {
   if (!match) return null;
 
-  const dateKey =
-    `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  const dateKey = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+  const directStats = matchPlayerStats[match.id] || matchPlayerStats[dateKey];
+  if (directStats) return directStats;
 
-  const teamsKey =
-    `${match.homeTeam}-${match.awayTeam}`;
+  if (match.officialUrl) return null;
 
-  return (
-    matchPlayerStats[dateKey] ||
-    matchPlayerStats[teamsKey] ||
-    matchPlayerStats[match.id] ||
-    null
-  );
+  const teamsKey = `${match.homeTeam}-${match.awayTeam}`;
+  return matchPlayerStats[teamsKey] || null;
 };
   const getTeamLastTwoMatches = (teamId) => {
   return matches
@@ -122,14 +118,7 @@ const getPlayerLastMatches = (player) => {
         return false;
       }
 
-      const stats =
-        matchPlayerStats[match.id] ||
-        matchPlayerStats[
-          `${match.date}-${match.homeTeam}-${match.awayTeam}`
-        ] ||
-        matchPlayerStats[
-          `${match.homeTeam}-${match.awayTeam}`
-        ];
+      const stats = getMatchStats(match);
 
       return stats?.[teamId]?.some(
         (item) => item.id === player.id
@@ -138,14 +127,7 @@ const getPlayerLastMatches = (player) => {
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 2)
     .map((match) => {
-      const stats =
-        matchPlayerStats[match.id] ||
-        matchPlayerStats[
-          `${match.date}-${match.homeTeam}-${match.awayTeam}`
-        ] ||
-        matchPlayerStats[
-          `${match.homeTeam}-${match.awayTeam}`
-        ];
+      const stats = getMatchStats(match);
 
       const playerMatch = stats[player.teamId].find(
         (item) => item.id === player.id
@@ -1211,15 +1193,7 @@ onClick={() => {
                 <strong>{getTeam(teamId)?.shortName}</strong>
 
                 {getTeamLastTwoMatches(teamId).map((match) => {
-                  const hasStats = Boolean(
-                    matchPlayerStats[match.id] ||
-                    matchPlayerStats[
-                      `${match.date}-${match.homeTeam}-${match.awayTeam}`
-                    ] ||
-                    matchPlayerStats[
-                      `${match.homeTeam}-${match.awayTeam}`
-                    ]
-                  );
+                  const hasStats = Boolean(getMatchStats(match));
 
                   return (
                     <button
