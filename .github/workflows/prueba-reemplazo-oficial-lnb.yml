@@ -46,6 +46,12 @@ jobs:
       - name: Generar vista previa validada de estadísticas oficiales
         run: node sync-official-stats-preview.cjs
 
+      - name: Preparar archivos de resultados y estadísticas oficiales
+        run: node publish-official-stats.cjs
+
+      - name: Verificar compilación de la web con los datos oficiales
+        run: npm run build
+
       - name: Validar que los datos publicados tengan origen oficial
         run: |
           node --input-type=module -e '
@@ -79,5 +85,8 @@ jobs:
             official-sync-preview.json
             liga-history.json
             liga-events-preview.json
+            src/data/matchStats.js
+            src/data/matchResults.js
+            dist/
           if-no-files-found: ignore
           retention-days: 7
