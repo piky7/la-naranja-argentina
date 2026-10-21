@@ -1,3 +1,9 @@
+import { teams } from "../data/teams";
+import { matches } from "../data/matches";
+import { playerStats } from "../data/stats";
+import { matchPlayerStats } from "../data/matchStats";
+import { getOfficialValuation } from "../utils/getOfficialValuation";
+
 
 export default function PlayerModal({
   player,
@@ -9,8 +15,46 @@ export default function PlayerModal({
 }) {
   if (!player) return null;
 
-  const average = (value) =>
-    value == null ? "—" : Number(value).toFixed(1);
+  const average = (value) => value == null ? "—" : Number(value).toFixed(1);
+  const saved = playerStats.find((entry) => entry.playerId === player.id);
+  const seen = new Set();
+  const games = matches.filter((match) => {
+    if (match.status !== "finished" && (match.homeScore == null || match.awayScore == null)) return false;
+    if (!/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) return false;
+    if (match.homeTeam !== player.teamId && match.awayTeam !== player.teamId) return false;
+    const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+    if (seen.has(key)) return false;
+    const record = matchPlayerStats[match.id] || matchPlayerStats[key];
+    if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) return false;
+    if (!record[player.teamId]?.some((entry) => entry.id === player.id)) return false;
+    seen.add(key);
+    return true;
+  }).sort((a, b) => b.date.localeCompare(a.date)).map((match) => {
+    const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+    const record = matchPlayerStats[match.id] || matchPlayerStats[key];
+    const entry = record[player.teamId].find((item) => item.id === player.id);
+    const rivalId = match.homeTeam === player.teamId ? match.awayTeam : match.homeTeam;
+    return {
+      id: match.id || key, date: match.date,
+      rival: teams.find((item) => item.id === rivalId),
+      points: Number(entry.points) || 0,
+      rebounds: Number(entry.rebounds) || 0,
+      assists: Number(entry.assists) || 0,
+      minutes: entry.minutes,
+      valuation: getOfficialValuation(match, player.teamId, player.id),
+    };
+  });
+  const mean = (field) => games.length
+    ? average(games.reduce((sum, game) => sum + game[field], 0) / games.length)
+    : average(stats?.[field] ?? saved?.[field]);
+  const valued = games.filter((game) => typeof game.valuation === "number" && Number.isFinite(game.valuation));
+  const valuation = valued.length
+    ? average(valued.reduce((sum, game) => sum + game.valuation, 0) / valued.length)
+    : "—";
+  const latest = games.length ? games.slice(0, 2) : recentMatches.map((game) => ({
+    ...game,
+    rival: teams.find((item) => item.shortName === game.rival) || { shortName: game.rival },
+  }));
 
   return (
     <div className="home-modal-overlay" onClick={onClose}>
@@ -19,6 +63,7 @@ export default function PlayerModal({
         onClick={(event) => event.stopPropagation()}
       >
         <div className="home-player-modal-header">
+          {team?.logo && <img className="home-player-modal-watermark" src={team.logo} alt="" aria-hidden="true" />}
           {team?.logo && (
             <div className="home-player-modal-logo">
               <button
@@ -71,21 +116,22 @@ export default function PlayerModal({
 
           <div className="home-player-modal-stats">
             <div>
-              <strong>{stats?.gamesPlayed ?? 0}</strong>
+              <strong>{games.length || stats?.gamesPlayed || saved?.gamesPlayed || 0}</strong>
               <span>PJ</span>
             </div>
             <div>
-              <strong>{average(stats?.points)}</strong>
+              <strong>{mean("points")}</strong>
               <span>PTS</span>
             </div>
             <div>
-              <strong>{average(stats?.rebounds)}</strong>
+              <strong>{mean("rebounds")}</strong>
               <span>REB</span>
             </div>
             <div>
-              <strong>{average(stats?.assists)}</strong>
+              <strong>{mean("assists")}</strong>
               <span>AST</span>
             </div>
+            <div><strong>{valuation}</strong><span>VAL</span></div>
           </div>
         </div>
 
@@ -94,17 +140,21 @@ export default function PlayerModal({
             ÚLTIMOS 2 PARTIDOS
           </span>
 
-          {recentMatches.length > 0 ? (
+          {latest.length > 0 ? (
             <div className="home-player-modal-recent-list">
-              {recentMatches.map((match) => (
+              {latest.map((match) => (
                 <div
                   className="home-player-modal-recent-match"
                   key={match.id}
                 >
                   <div className="home-player-modal-recent-header">
-                    <strong>vs. {match.rival}</strong>
-                    <span>
+                    <div className="home-player-modal-rival">
+                      {match.rival?.logo && <img src={match.rival.logo} alt="" loading="lazy" />}
+                      <strong>vs. {match.rival?.shortName || "Rival"}</strong>
+                    </div>
+                    <span className="home-player-modal-recent-meta">
                       {match.date.split("-").reverse().join("/")}
+                      {match.minutes != null && match.minutes !== "" && <span className="home-player-modal-recent-minutes"> · {match.minutes} min</span>}
                     </span>
                   </div>
 
@@ -121,6 +171,7 @@ export default function PlayerModal({
                       <strong>{match.assists}</strong>
                       <span>AST</span>
                     </div>
+                    <div><strong>{match.valuation ?? "—"}</strong><span>VAL</span></div>
                   </div>
                 </div>
               ))}
