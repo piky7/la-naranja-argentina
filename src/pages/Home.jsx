@@ -2641,8 +2641,11 @@ const finishedMatch = {
               {match.rivalLogo && <img src={match.rivalLogo} alt="" loading="lazy" />}
               <strong>vs. {match.rival}</strong>
             </div>
-            <span>
+            <span className="home-player-modal-recent-meta">
               {match.date.split("-").reverse().join("/")}
+              <span className="home-player-modal-recent-minutes">
+                {match.minutes == null || match.minutes === "" ? "" : ` · ${match.minutes} min`}
+              </span>
             </span>
           </div>
 
@@ -2660,10 +2663,6 @@ const finishedMatch = {
             <div>
               <strong>{match.assists}</strong>
               <span>AST</span>
-            </div>
-            <div>
-              <strong>{match.minutes == null || match.minutes === "" ? "—" : match.minutes}</strong>
-              <span>MIN</span>
             </div>
             <div>
               <strong>{match.valuation ?? "—"}</strong>
