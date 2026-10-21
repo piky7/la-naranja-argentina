@@ -254,6 +254,9 @@ async function main() {
   console.log(`Partidos omitidos por validación/mapeo: ${skipped.length}`);
   console.log(`Vista previa generada: ${OUTPUT_FILE}`);
 
+  // Puede haber más resultados oficiales que estadísticas individuales verificadas:
+  // los resultados salen del fixture oficial; las estadísticas exigen además
+  // que todos los jugadores estén identificados y sus puntos sumen el marcador.
   if (Object.keys(statsByMatch).length !== verified || Object.keys(resultsByMatch).length < verified) {
     throw new Error("La cantidad de estadísticas verificadas no coincide con sus claves únicas o faltan resultados oficiales.");
   }
