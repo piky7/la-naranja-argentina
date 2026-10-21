@@ -1,3 +1,4 @@
+const { assertPublishableResult } = require("./scripts/official-final.cjs");
 const fs = require("node:fs");
 
 const PREVIEW = "official-sync-preview.json";
@@ -10,6 +11,14 @@ async function main() {
   if (preview.source !== "Liga Nacional") throw new Error("Fuente inválida: se esperaba Liga Nacional.");
   if (!Number.isInteger(preview.verifiedMatches) || preview.verifiedMatches < 1) {
     throw new Error("No hay estadísticas oficiales validadas. Se cancela la publicación.");
+  }
+
+  // Validate the entire preview before any cleanup or writes, including stale previews.
+  for (const [key, result] of Object.entries(preview.matchResults || {})) {
+    assertPublishableResult(key, result, preview.matchStats?.[key]);
+  }
+  for (const key of Object.keys(preview.matchStats || {})) {
+    if (!preview.matchResults?.[key]) throw new Error("Estadísticas sin resultado validado: " + key);
   }
 
   const currentStats = (await import("./src/data/matchStats.js?official-sync")).matchPlayerStats;
@@ -95,7 +104,11 @@ matchStats[key] = {
     if (record.status !== "finished" || !Number.isInteger(record.homeScore) || !Number.isInteger(record.awayScore)) {
       throw new Error("Resultado oficial incompleto: " + key);
     }
-    matchResults[key] = record;
+    const previous = currentResults[key];
+    const preserveHistorical = record.finalEvidence?.type === "audited-history-through-2026-10-19" &&
+      previous?.status === "finished" && previous.homeScore === record.homeScore &&
+      previous.awayScore === record.awayScore && previous.officialUrl === record.officialUrl;
+    matchResults[key] = preserveHistorical ? previous : record;
     resultsAdded++;
   }
 

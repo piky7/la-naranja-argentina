@@ -100,7 +100,8 @@ function leerPartido($, fila) {
     awayScore: /^\d+$/.test(marcadorVisitante)
       ? Number(marcadorVisitante)
       : null,
-    // No inferimos "finished" solo a partir del marcador.
+    // El fixture puede contener parciales, incluso de fechas pasadas.
+    // Solo la página del partido aporta evidencia explícita de finalización.
     status: "unverified",
     officialUrl: new URL(enlacePartido, BASE_URL).href,
   };

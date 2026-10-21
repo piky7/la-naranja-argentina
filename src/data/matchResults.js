@@ -373,26 +373,34 @@ export const matchResults = {
   },
   "2026-10-20-san-martin-olimpico": {
     "status": "finished",
-    "homeScore": 60,
-    "awayScore": 79,
+    "homeScore": 86,
+    "awayScore": 106,
     "time": "21:00",
     "homeTeam": "san-martin",
     "awayTeam": "olimpico",
     "venue": null,
     "tv": [],
     "source": "Liga Nacional",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2cbOIgIMJ9fBOqd_1nI0Ww0dOBynP-vTL7i7Zi9vDYB_AhAXScbWXdw==/san-martin-c-vs-olimpico-lb"
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2cbOIgIMJ9fBOqd_1nI0Ww0dOBynP-vTL7i7Zi9vDYB_AhAXScbWXdw==/san-martin-c-vs-olimpico-lb",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2cbOIgIMJ9fBOqd_1nI0Ww0dOBynP-vTL7i7Zi9vDYB_AhAXScbWXdw==/san-martin-c-vs-olimpico-lb"
+    }
   },
   "2026-10-20-ferro-platense": {
     "status": "finished",
-    "homeScore": 46,
-    "awayScore": 30,
+    "homeScore": 86,
+    "awayScore": 81,
     "time": "21:30",
     "homeTeam": "ferro",
     "awayTeam": "platense",
     "venue": null,
     "tv": [],
     "source": "Liga Nacional",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Nrnvymk4tDnFWtZE04svv7sjer6W9p4hfS2NAFKBOJn-NNZkci-rpw==/ferro-vs-platense"
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Nrnvymk4tDnFWtZE04svv7sjer6W9p4hfS2NAFKBOJn-NNZkci-rpw==/ferro-vs-platense",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Nrnvymk4tDnFWtZE04svv7sjer6W9p4hfS2NAFKBOJn-NNZkci-rpw==/ferro-vs-platense"
+    }
   }
 };

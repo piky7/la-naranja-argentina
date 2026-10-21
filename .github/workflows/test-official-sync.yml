@@ -1,0 +1,19 @@
+name: Test official results publication
+on:
+  pull_request:
+  push:
+    branches: [codex/prevent-partial-finals]
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/official-sync.test.cjs
+      - run: npm run build
