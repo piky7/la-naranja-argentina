@@ -742,6 +742,7 @@ export const matches = Object.entries(groupedMatches)
       return {
         id: `${date}-${homeTeam}-${awayTeam}-${index + 1}`,
         date,
+        officialUrl: match.officialUrl ?? null,
         homeTeam,
         awayTeam,
         time,
