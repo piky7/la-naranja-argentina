@@ -232,10 +232,36 @@ function main() {
     );
   }
 
+  // Los partidos con VAL oficial son la fuente de verdad y no deben
+  // ser reemplazados por el extractor de Flashscore.
+  const officialFile = "src/data/officialValuations.js";
+  if (!fs.existsSync(officialFile)) {
+    throw new Error("Falta officialValuations.js: se cancela la actualización por seguridad.");
+  }
+  const officialSource = fs.readFileSync(officialFile, "utf8");
+  const officialData = JSON.parse(
+    officialSource
+      .replace(/^\s*export\s+const\s+officialValuations\s*=\s*/, "")
+      .replace(/;\s*$/, "")
+  );
+  const protectedMatches = new Set(Object.keys(officialData));
+
   let added = 0;
   let updated = 0;
+  let protectedCount = 0;
 
   for (const matchId of generatedIds) {
+    const existingMatchId = getMatchIds(matchStats).find(
+      (id) => normalizeMatchId(id) === normalizeMatchId(matchId)
+    );
+    if (
+      protectedMatches.has(matchId) ||
+      (existingMatchId && protectedMatches.has(existingMatchId))
+    ) {
+      protectedCount++;
+      console.log(`PROTEGIDO (VAL oficial): ${matchId}`);
+      continue;
+    }
     const generatedBlock = extractMatchBlock(
       generated,
       matchId
@@ -384,6 +410,7 @@ for (const [matchId, matchData] of Object.entries(allMatches)) {
   console.log("========================================");
   console.log(`Partidos agregados: ${added}`);
   console.log(`Partidos actualizados: ${updated}`);
+  console.log(`Partidos oficiales protegidos: ${protectedCount}`);
   console.log("");
 }
 
