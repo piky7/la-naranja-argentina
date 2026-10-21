@@ -369,6 +369,7 @@ function getOfficialTeamSeasonStats(teamId) {
   const shots = Object.fromEntries(shooting.map(key => [key, { made: 0, attempted: 0 }]));
   let games = 0;
   let points = 0;
+  let pointsAgainst = 0;
   const seen = new Set();
 
   for (const match of matches) {
@@ -384,10 +385,12 @@ function getOfficialTeamSeasonStats(teamId) {
           Number.isFinite(Number(collective[k]?.attempted)) &&
           Number(collective[k].attempted) >= Number(collective[k].made))) continue;
     const score = match.homeTeam === teamId ? match.homeScore : match.awayScore;
-    if (!Number.isFinite(Number(score))) continue;
+    const opponentScore = match.homeTeam === teamId ? match.awayScore : match.homeScore;
+    if (score == null || opponentScore == null || !Number.isFinite(Number(score)) || !Number.isFinite(Number(opponentScore))) continue;
     seen.add(key);
     games += 1;
     points += Number(score);
+    pointsAgainst += Number(opponentScore);
     keys.forEach(k => { totals[k] += Number(collective[k]); });
     shooting.forEach(k => {
       shots[k].made += Number(collective[k].made);
@@ -396,7 +399,7 @@ function getOfficialTeamSeasonStats(teamId) {
   }
 
   if (!games) return { games: 0, values: {} };
-  const values = { points: (points / games).toFixed(1) };
+  const values = { points: (points / games).toFixed(1), pointsAgainst: (pointsAgainst / games).toFixed(1) };
   keys.forEach(k => { values[k] = (totals[k] / games).toFixed(1); });
   shooting.forEach(k => {
     values[k] = shots[k].attempted ? (100 * shots[k].made / shots[k].attempted).toFixed(1) + "%" : "—";
@@ -753,42 +756,60 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
               INFORMACIÓN
               ========================================= */}
 
-          <section className="team-season-stats" style={{margin:"0 0 24px",padding:"16px",border:"1px solid #df7a1c",borderRadius:"14px",background:"#101b28",color:"#f3f6fa"}} aria-label="Promedios colectivos oficiales 2026/27">
-            <div className="team-season-stats-heading" style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"12px",flexWrap:"wrap",marginBottom:"16px"}}>
+          <section className="team-season-stats team-season-stats-sport" aria-label="Promedios colectivos oficiales 2026/27">
+            <div className="team-season-stats-heading">
               <div>
-                <span style={{fontSize:"10px",color:"#f58a21",fontWeight:800,letterSpacing:"1px"}}>ESTADÍSTICAS OFICIALES</span>
-                <h2 style={{margin:"5px 0 0",fontSize:"clamp(17px, 4vw, 22px)",lineHeight:1.2}}>Promedios del equipo <em style={{color:"#f58a21",fontStyle:"normal"}}>2026/27</em></h2>
+                <span className="team-season-stats-eyebrow">ESTADÍSTICAS OFICIALES</span>
+                <h2>Promedios del equipo <em>2026/27</em></h2>
               </div>
-              <strong style={{fontSize:"11px",color:"#c2cedb",padding:"7px 10px",border:"1px solid #354456",borderRadius:"8px"}}>{seasonCollective.games} PJ con datos</strong>
+              <strong className="team-season-stats-games">{seasonCollective.games} PJ con datos</strong>
             </div>
             {seasonCollective.games === 0 ? (
               <p className="team-season-stats-empty">Todavía no hay partidos finalizados con estadísticas colectivas oficiales completas para este equipo.</p>
             ) : (
-              <div className="team-season-stats-grid" style={{display:"grid",gridTemplateColumns:"repeat(3, minmax(0, 1fr))",gap:"8px"}}>
-                {[
-                  ["points", "Puntos / partido"],
-                  ["rebounds", "Rebotes / partido"],
-                  ["assists", "Asistencias / partido"],
-                  ["steals", "Recuperaciones / partido"],
-                  ["blocks", "Tapones / partido"],
-                  ["turnovers", "Pérdidas / partido"],
-                  ["fouls", "Faltas / partido"],
-                  ["fieldGoals", "Tiros de campo"],
-                  ["twoPointers", "Tiros de 2"],
-                  ["threePointers", "Triples"],
-                  ["freeThrows", "Tiros libres"],
-                ].map(([key, label]) => (
-                  <div className="team-season-stat" key={key} style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:"6px",padding:"12px 5px",minHeight:"78px",border:"1px solid #304152",borderRadius:"10px",background:"#182a3a",textAlign:"center",minWidth:0}}>
-                    <strong style={{fontSize:"clamp(17px, 4vw, 24px)",lineHeight:1.1,color:"#f58a21",fontVariantNumeric:"tabular-nums"}}>{seasonCollective.values[key]}</strong>
-                    <span style={{fontSize:"clamp(9px, 2.5vw, 12px)",lineHeight:1.25,color:"#c7d1db"}}>{label}</span>
-                  </div>
-                ))}
-              </div>
+              <>
+                <div className="team-season-stats-grid">
+                  {[
+                    ["points", "Puntos / partido", "🏀"],
+                    ["pointsAgainst", "Pts recibidos / partido", "🛡️"],
+                    ["rebounds", "Rebotes / partido", "▥"],
+                    ["assists", "Asistencias / partido", "↗"],
+                    ["steals", "Recuperaciones / partido", "⚡"],
+                    ["blocks", "Tapones / partido", "✋"],
+                    ["turnovers", "Pérdidas / partido", "↻"],
+                    ["fouls", "Faltas / partido", "●"],
+                  ].map(([key, label, symbol]) => (
+                    <div className="team-season-stat" key={key}>
+                      <span className="team-season-stat-icon" aria-hidden="true">{symbol}</span>
+                      <div className="team-season-stat-info">
+                        <strong>{seasonCollective.values[key]}</strong>
+                        <span>{label}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <h3 className="team-season-shooting-heading">PORCENTAJES DE TIRO</h3>
+                <div className="team-season-stats-grid team-season-shooting-grid">
+                  {[
+                    ["fieldGoals", "Tiros de campo"],
+                    ["twoPointers", "Tiros de 2"],
+                    ["threePointers", "Triples"],
+                    ["freeThrows", "Tiros libres"],
+                  ].map(([key, label]) => (
+                    <div className="team-season-stat" key={key}>
+                      <div className="team-season-stat-info">
+                        <strong>{seasonCollective.values[key]}</strong>
+                        <span>{label}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
-            <p className="team-season-stats-note" style={{margin:"13px 0 0",fontSize:"11px",lineHeight:1.5,color:"#aebdca"}}>Solo temporada 2026/27 · Partidos finalizados con estadísticas oficiales validadas. Los porcentajes se calculan sobre el total de lanzamientos.</p>
+            <p className="team-season-stats-note">Solo temporada 2026/27 · Partidos finalizados con estadísticas oficiales validadas. Los porcentajes se calculan sobre el total de lanzamientos.</p>
           </section>
 
-          <div className="team-info-grid">
+                    <div className="team-info-grid">
 
             <article className="team-info-card">
 
