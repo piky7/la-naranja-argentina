@@ -1,3 +1,4 @@
+const { normalizeTeamStats } = require("./scripts/official-team-stats.cjs");
 const { assertPublishableResult } = require("./scripts/official-final.cjs");
 const fs = require("node:fs");
 
@@ -89,6 +90,10 @@ const quarterScores = previousStats?.quarterScores;
 
 matchStats[key] = {
   ...record,
+  teamStats: {
+    [record.homeTeam]: normalizeTeamStats(record.teamStats?.[record.homeTeam], record.homeScore),
+    [record.awayTeam]: normalizeTeamStats(record.teamStats?.[record.awayTeam], record.awayScore),
+  },
   ...(Array.isArray(quarterScores) && quarterScores.length > 0
     ? { quarterScores: structuredClone(quarterScores) }
     : {}),

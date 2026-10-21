@@ -1,3 +1,4 @@
+import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -1838,6 +1839,13 @@ console.table(quarterScores);
   </h3>
 </div>
 
+                <MatchStatsTabs
+                  key={selectedMatch.date + selectedMatch.homeTeam + selectedMatch.awayTeam}
+                  match={selectedMatch}
+                  stats={matchStats}
+                  home={homeTeam}
+                  away={awayTeam}
+                >
 <div className="match-modal-content">    
                  <section className="match-stats-team">
 
@@ -1900,6 +1908,7 @@ console.table(quarterScores);
 
                   
                 </div>
+                </MatchStatsTabs>
               </div>
               )}
 

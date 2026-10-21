@@ -30,7 +30,7 @@ function sandbox(t) {
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
   for (const file of ["package.json", "liga-events.json", "liga-history.json",
     "sync-official-stats-preview.cjs", "publish-official-stats.cjs", "merge-liga-events.cjs",
-    "scripts/official-final.cjs", "scripts/audited-official-finals.json", "scripts/generate-published-matches.cjs",
+    "scripts/official-team-stats.cjs", "scripts/official-final.cjs", "scripts/audited-official-finals.json", "scripts/generate-published-matches.cjs",
     "src/data/players.js", "src/data/matchStats.js", "src/data/matchResults.js"]) {
     fs.mkdirSync(path.dirname(path.join(dir, file)), { recursive: true });
     fs.copyFileSync(path.join(root, file), path.join(dir, file));
@@ -91,6 +91,8 @@ test("confirmed finals pass the full preview and publishing pipeline", t => {
   assert.equal(box.run("sync-official-stats-preview.cjs").status, 0);
   const preview = box.read("official-sync-preview.json");
   assert.equal(preview.verifiedMatches, 33);
+  assert.equal(preview.matchStats["2026-10-20-ferro-platense"].teamStats.ferro.rebounds, 37);
+  assert.equal(preview.matchStats["2026-10-20-ferro-platense"].teamStats.platense.fieldGoals.made, 28);
   for (const [key, result] of Object.entries(preview.matchResults)) {
     assertPublishableResult(key, result, preview.matchStats[key]);
   }

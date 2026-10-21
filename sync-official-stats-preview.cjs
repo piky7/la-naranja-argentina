@@ -1,3 +1,4 @@
+const { normalizeTeamStats } = require("./scripts/official-team-stats.cjs");
 const auditedFinals = require("./scripts/audited-official-finals.json");
 const { isConfirmedFinal } = require("./scripts/official-final.cjs");
 const fs = require("node:fs");
@@ -215,6 +216,7 @@ async function main() {
       awayTeam: awayTeamId,
       homeScore: official.homeScore,
       awayScore: official.awayScore,
+      teamStats: { [homeTeamId]: normalizeTeamStats(homeOfficial.teamStats, official.homeScore), [awayTeamId]: normalizeTeamStats(awayOfficial.teamStats, official.awayScore) },
       [homeTeamId]: homePlayers,
       [awayTeamId]: awayPlayers,
     };
