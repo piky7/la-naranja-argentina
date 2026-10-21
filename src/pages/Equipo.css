@@ -2578,3 +2578,29 @@
     column-gap: 2px;
   }
 }
+/* Promedios colectivos oficiales de temporada */
+.team-season-stats {
+  margin: 0 0 24px;
+  padding: 18px;
+  border: 1px solid #d97706;
+  border-radius: 14px;
+  background: #0b1723;
+  color: #f3f6fa;
+}
+.team-season-stats-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.team-season-stats-heading span { font-size: 10px; color: #f58a21; font-weight: 800; letter-spacing: 1px; }
+.team-season-stats-heading h2 { margin: 4px 0 0; font-size: clamp(16px, 2vw, 21px); }
+.team-season-stats-heading h2 em { color: #f58a21; font-style: normal; }
+.team-season-stats-heading > strong { font-size: 11px; color: #c2cedb; padding: 7px 10px; border: 1px solid #354456; border-radius: 8px; }
+.team-season-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 9px; }
+.team-season-stat { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 13px 7px; min-height: 75px; border: 1px solid #283b4d; border-radius: 10px; background: #122435; text-align: center; }
+.team-season-stat strong { font-size: 23px; color: #f58a21; font-variant-numeric: tabular-nums; }
+.team-season-stat span { font-size: 11px; color: #c7d1db; }
+.team-season-stats-note, .team-season-stats-empty { margin: 12px 0 0; font-size: 11px; color: #aebdca; line-height: 1.5; }
+@media (max-width: 600px) {
+  .team-season-stats { padding: 12px; margin-bottom: 16px; }
+  .team-season-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .team-season-stat { padding: 9px 4px; min-height: 63px; }
+  .team-season-stat strong { font-size: 18px; }
+  .team-season-stat span { font-size: 9px; }
+}
