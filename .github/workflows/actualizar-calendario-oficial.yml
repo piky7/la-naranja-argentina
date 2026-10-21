@@ -2,6 +2,9 @@
 name: Actualizar calendario oficial LNA
 
 on:
+  schedule:
+    - cron: "17 10 * * *"
+
   workflow_dispatch:
 
 permissions:
