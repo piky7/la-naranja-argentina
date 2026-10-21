@@ -2651,3 +2651,22 @@
   .team-season-stats-sport .team-season-stat-info span { font-size: 10px; }
   .team-season-stats-sport .team-season-shooting-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+
+/* Ajuste móvil: tarjetas estadísticas compactas, sin altura desperdiciada. */
+@media (max-width: 600px) {
+  .team-page .team-season-stats-sport { padding: 12px; }
+  .team-page .team-season-stats-sport .team-season-stats-heading { margin-bottom: 10px; gap: 7px; }
+  .team-page .team-season-stats-sport .team-season-stats-grid { gap: 5px; }
+  .team-page .team-season-stats-sport .team-season-stat {
+    min-height: 0; padding: 7px 3px; gap: 3px; border-radius: 9px;
+  }
+  .team-page .team-season-stats-sport .team-season-stat-icon { font-size: 13px; }
+  .team-page .team-season-stats-sport .team-season-stat-info { gap: 2px; }
+  .team-page .team-season-stats-sport .team-season-stat-info strong { font-size: 17px; }
+  .team-page .team-season-stats-sport .team-season-stat-info span { font-size: 9px; line-height: 1.15; }
+  .team-page .team-season-stats-sport .team-season-shooting-heading { margin: 12px 0 7px; }
+  .team-page .team-season-stats-sport .team-season-shooting-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .team-page .team-season-stats-sport .team-season-shooting-grid .team-season-stat-info strong { font-size: 15px; }
+  .team-page .team-season-stats-sport .team-season-stats-note { margin-top: 10px; }
+}
