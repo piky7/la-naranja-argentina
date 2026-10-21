@@ -361,6 +361,49 @@ function getTeamAverages(teamId) {
   };
 }
 
+// Promedios colectivos oficiales: únicamente partidos finalizados de 2026/27.
+function getOfficialTeamSeasonStats(teamId) {
+  const keys = ["rebounds", "assists", "steals", "blocks", "turnovers", "fouls"];
+  const shooting = ["fieldGoals", "twoPointers", "threePointers", "freeThrows"];
+  const totals = Object.fromEntries(keys.map(key => [key, 0]));
+  const shots = Object.fromEntries(shooting.map(key => [key, { made: 0, attempted: 0 }]));
+  let games = 0;
+  let points = 0;
+  const seen = new Set();
+
+  for (const match of matches) {
+    if (match.status !== "finished" || !/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
+    if (match.homeTeam !== teamId && match.awayTeam !== teamId) continue;
+    const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+    if (seen.has(key)) continue;
+    const record = getMatchStats(match);
+    if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+    const collective = record.teamStats?.[teamId];
+    if (!collective || !keys.every(k => Number.isFinite(Number(collective[k]))) ||
+        !shooting.every(k => Number.isFinite(Number(collective[k]?.made)) &&
+          Number.isFinite(Number(collective[k]?.attempted)) &&
+          Number(collective[k].attempted) >= Number(collective[k].made))) continue;
+    const score = match.homeTeam === teamId ? match.homeScore : match.awayScore;
+    if (!Number.isFinite(Number(score))) continue;
+    seen.add(key);
+    games += 1;
+    points += Number(score);
+    keys.forEach(k => { totals[k] += Number(collective[k]); });
+    shooting.forEach(k => {
+      shots[k].made += Number(collective[k].made);
+      shots[k].attempted += Number(collective[k].attempted);
+    });
+  }
+
+  if (!games) return { games: 0, values: {} };
+  const values = { points: (points / games).toFixed(1) };
+  keys.forEach(k => { values[k] = (totals[k] / games).toFixed(1); });
+  shooting.forEach(k => {
+    values[k] = shots[k].attempted ? (100 * shots[k].made / shots[k].attempted).toFixed(1) + "%" : "—";
+  });
+  return { games, values };
+}
+
 function getHighlightedPlayers(teamId, stat) {
   return players
     .filter((player) => player.teamId === teamId)
@@ -515,6 +558,8 @@ const goToTeam = (targetTeamId) => {
 
   const teamRecord =
     getTeamRecord(teamId);
+
+  const seasonCollective = getOfficialTeamSeasonStats(teamId);
 
 
   /* =========================================
@@ -707,6 +752,41 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
           {/* =========================================
               INFORMACIÓN
               ========================================= */}
+
+          <section className="team-season-stats" aria-label="Promedios colectivos oficiales 2026/27">
+            <div className="team-season-stats-heading">
+              <div>
+                <span>ESTADÍSTICAS OFICIALES</span>
+                <h2>Promedios del equipo <em>2026/27</em></h2>
+              </div>
+              <strong>{seasonCollective.games} PJ con datos</strong>
+            </div>
+            {seasonCollective.games === 0 ? (
+              <p className="team-season-stats-empty">Todavía no hay partidos finalizados con estadísticas colectivas oficiales completas para este equipo.</p>
+            ) : (
+              <div className="team-season-stats-grid">
+                {[
+                  ["points", "Puntos / partido"],
+                  ["rebounds", "Rebotes / partido"],
+                  ["assists", "Asistencias / partido"],
+                  ["steals", "Recuperaciones / partido"],
+                  ["blocks", "Tapones / partido"],
+                  ["turnovers", "Pérdidas / partido"],
+                  ["fouls", "Faltas / partido"],
+                  ["fieldGoals", "Tiros de campo"],
+                  ["twoPointers", "Tiros de 2"],
+                  ["threePointers", "Triples"],
+                  ["freeThrows", "Tiros libres"],
+                ].map(([key, label]) => (
+                  <div className="team-season-stat" key={key}>
+                    <strong>{seasonCollective.values[key]}</strong>
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p className="team-season-stats-note">Solo temporada 2026/27 · Partidos finalizados con estadísticas oficiales validadas. Los porcentajes se calculan sobre el total de lanzamientos.</p>
+          </section>
 
           <div className="team-info-grid">
 
