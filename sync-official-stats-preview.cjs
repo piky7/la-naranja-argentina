@@ -80,14 +80,18 @@ async function main() {
   for (const record of history.matches) {
     const official = fixtureByUrl.get(record.officialUrl);
     if (!official) {
-      skipped.push({ date: record.date, reason: "La URL no figura en el fixture oficial actual." });
+      const reason = "La URL no figura en el fixture oficial actual.";
+      skipped.push({ date: record.date, reason });
+      console.log("OMITIDO", record.date, reason, record.officialUrl);
       continue;
     }
 
     const homeTeamId = teamMap[official.home.officialTeamId];
     const awayTeamId = teamMap[official.away.officialTeamId];
     if (!homeTeamId || !awayTeamId) {
-      skipped.push({ date: record.date, reason: "Equipo oficial sin correspondencia interna." });
+      const reason = "Equipo oficial sin correspondencia interna.";
+      skipped.push({ date: record.date, reason });
+      console.log("OMITIDO", record.date, reason, official.home.officialTeamId, official.away.officialTeamId);
       continue;
     }
 
@@ -98,19 +102,25 @@ async function main() {
       record.homeScore !== official.homeScore ||
       record.awayScore !== official.awayScore
     ) {
-      skipped.push({ date: record.date, reason: "El marcador del historial no coincide con el marcador oficial del fixture." });
+      const reason = "El marcador del historial no coincide con el marcador oficial del fixture.";
+      skipped.push({ date: record.date, reason, historyScore: [record.homeScore, record.awayScore], fixtureScore: [official.homeScore, official.awayScore] });
+      console.log("OMITIDO", record.date, reason, [record.homeScore, record.awayScore], [official.homeScore, official.awayScore]);
       continue;
     }
 
     const homeOfficial = record.teams?.find((team) => team.officialTeamId === official.home.officialTeamId);
     const awayOfficial = record.teams?.find((team) => team.officialTeamId === official.away.officialTeamId);
     if (!homeOfficial || !awayOfficial || !homeOfficial.players?.length || !awayOfficial.players?.length) {
-      skipped.push({ date: record.date, reason: "Faltan equipos o jugadores extraídos de la página oficial." });
+      const reason = "Faltan equipos o jugadores extraídos de la página oficial.";
+      skipped.push({ date: record.date, reason });
+      console.log("OMITIDO", record.date, reason, record.officialUrl);
       continue;
     }
 
     if (sumPoints(homeOfficial) !== official.homeScore || sumPoints(awayOfficial) !== official.awayScore) {
-      skipped.push({ date: record.date, reason: "La suma de puntos individuales no coincide con el marcador oficial." });
+      const reason = "La suma de puntos individuales no coincide con el marcador oficial.";
+      skipped.push({ date: record.date, reason, playerPoints: [sumPoints(homeOfficial), sumPoints(awayOfficial)], fixtureScore: [official.homeScore, official.awayScore] });
+      console.log("OMITIDO", record.date, reason, [sumPoints(homeOfficial), sumPoints(awayOfficial)], [official.homeScore, official.awayScore]);
       continue;
     }
 
@@ -161,6 +171,7 @@ async function main() {
         reason: "No se publicará el partido porque hay jugadores oficiales sin correspondencia inequívoca en players.js.",
         unresolved,
       });
+      console.log("OMITIDO", record.date, "Jugadores sin correspondencia:", unresolved.join(", "));
       continue;
     }
 
