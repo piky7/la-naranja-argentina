@@ -87,11 +87,11 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
               <div className="match-team-comparison-metric">{label}</div>
               <div className="match-team-comparison-side match-team-comparison-side-home">
                 <span className={`match-team-comparison-value${localWins ? " match-team-comparison-winner" : ""}`}>{display(local)}</span>
-                <div className="match-team-comparison-track"><span style={{ width: `${metricWidth(local, visitor, shooting)}%` }} /></div>
+                <div className={`match-team-comparison-track${localWins ? " match-team-comparison-track-winner" : ""}`}><span style={{ width: `${metricWidth(local, visitor, shooting)}%` }} /></div>
               </div>
               <div className="match-team-comparison-side match-team-comparison-side-away">
                 <span className={`match-team-comparison-value${visitorWins ? " match-team-comparison-winner" : ""}`}>{display(visitor)}</span>
-                <div className="match-team-comparison-track"><span style={{ width: `${metricWidth(visitor, local, shooting)}%` }} /></div>
+                <div className={`match-team-comparison-track${visitorWins ? " match-team-comparison-track-winner" : ""}`}><span style={{ width: `${metricWidth(visitor, local, shooting)}%` }} /></div>
               </div>
             </div>;
           })}
