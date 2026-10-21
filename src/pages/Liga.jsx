@@ -1429,7 +1429,7 @@ onClick={() => {
               })()}
               {(() => {
                 const nextMatch = matches
-                  .filter((match) => !isMatchFinished(match) && (match.homeTeam === selectedTeam.id || match.awayTeam === selectedTeam.id) && match.date >= today)
+                  .filter((match) => match.status !== "finished" && (match.homeTeam === selectedTeam.id || match.awayTeam === selectedTeam.id) && match.date >= today)
                   .sort((a, b) => (a.date + " " + (a.time || "")).localeCompare(b.date + " " + (b.time || "")))[0];
                 if (!nextMatch) return null;
                 const homeTeam = getTeam(nextMatch.homeTeam);
