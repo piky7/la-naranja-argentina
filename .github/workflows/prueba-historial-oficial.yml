@@ -23,31 +23,60 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Extraer y validar partidos históricos oficiales
-        run: node sync-liga-history.cjs
-
-      - name: Comprobar historial generado
+      # Solo modifica la copia efímera del runner de GitHub Actions.
+      # Quitamos una entrada histórica ya validada para forzar que el
+      # extractor vuelva a descargarla y comprobar los puntos del boxscore.
+      - name: Preparar repetición controlada de un partido histórico
         run: |
           node --input-type=module -e '
           import fs from "node:fs";
           const path = "liga-history.json";
+          const targetUrl = "https://www.laliganacional.com.ar/laliga/partido/v2kxKmD-zO6hYv1dnwEnZPcrVUQ920f68VEGsE0kMlWVfdSg6wMtD1-A==/lanus-vs-gimnasia-cr";
+          if (!fs.existsSync(path)) throw new Error("No existe liga-history.json en el repositorio.");
+          const data = JSON.parse(fs.readFileSync(path, "utf8"));
+          const before = data.matches.length;
+          const index = data.matches.findIndex(match => match.officialUrl === targetUrl);
+          if (index < 0) throw new Error("El partido de prueba no está en el historial; no se puede forzar una repetición segura.");
+          data.matches.splice(index, 1);
+          fs.writeFileSync(path, JSON.stringify(data, null, 2) + "\n");
+          console.log("Entrada retirada solo en el runner temporal:", targetUrl);
+          console.log("Partidos en historial antes de la prueba:", before);
+          console.log("Partidos en historial para iniciar la prueba:", data.matches.length);
+          '
+
+      - name: Extraer y validar partidos históricos oficiales
+        run: node sync-liga-history.cjs
+
+      - name: Comprobar que el partido fue reextraído y validado
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const path = "liga-history.json";
+          const targetUrl = "https://www.laliganacional.com.ar/laliga/partido/v2kxKmD-zO6hYv1dnwEnZPcrVUQ920f68VEGsE0kMlWVfdSg6wMtD1-A==/lanus-vs-gimnasia-cr";
           if (!fs.existsSync(path)) throw new Error("No se generó liga-history.json");
           const data = JSON.parse(fs.readFileSync(path, "utf8"));
           if (!Array.isArray(data.matches)) throw new Error("El historial no contiene una lista de partidos.");
-          const invalid = data.matches.filter(match => {
-            if (!Array.isArray(match.teams) || match.teams.length !== 2) return true;
-            const home = match.teams.find(team => team.officialTeamId === match.teams[0].officialTeamId);
-            return !home || match.teams.some(team => !Array.isArray(team.players) || !team.players.length);
-          });
-          if (invalid.length) throw new Error("Hay partidos con estructura incompleta: " + invalid.length);
-          console.log("Partidos históricos validados:", data.matches.length);
-          console.log("Archivo generado:", path);
+          const match = data.matches.find(item => item.officialUrl === targetUrl);
+          if (!match) throw new Error("La extracción no volvió a incorporar el partido de prueba.");
+          if (match.homeScore !== 74 || match.awayScore !== 92) throw new Error("El marcador del partido no coincide con el esperado 74-92.");
+          if (!Array.isArray(match.teams) || match.teams.length !== 2) throw new Error("El partido no contiene los dos equipos.");
+          const expected = [{id:112600,score:74,name:"LANÚS"},{id:112553,score:92,name:"GIMNASIA (CR)"}];
+          for (const team of expected) {
+            const found = match.teams.find(item => item.officialTeamId === team.id);
+            if (!found) throw new Error("No se encontró el equipo " + team.name);
+            if (!Array.isArray(found.players) || found.players.length === 0) throw new Error("No hay jugadores extraídos para " + team.name);
+            const points = found.players.reduce((sum, player) => sum + Number(player.points || 0), 0);
+            console.log(found.name + ": " + found.players.length + " jugadores; puntos individuales " + points + "; marcador " + team.score);
+            if (points !== team.score) throw new Error("Los puntos individuales no coinciden para " + team.name);
+          }
+          console.log("PRUEBA COMPLETA CORRECTA: el extractor volvió a descargar y validar un partido histórico oficial.");
+          console.log("Total de partidos en el historial de prueba:", data.matches.length);
           '
 
       - name: Publicar artefactos de diagnóstico
