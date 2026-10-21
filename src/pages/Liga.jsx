@@ -90,20 +90,6 @@ const [resultsPage, setResultsPage] = useState(null);
   const getTeamRecord = (id) => { const t = standings.find(t => t.id === id); return { wins: t?.wins ?? 0, losses: t?.losses ?? 0 }; };
   const getPlayerStats = (id) => playerStats.find(s => s.playerId === id);
   const openTeamFromUpcoming = (id) => { setSelectedUpcomingMatch(null); setSelectedTeam(teams.find(t => t.id === id) || null); };
-  const selectedMatchStats = selectedMatch ? getMatchStats(selectedMatch) : null;
-  const selectedMatchHomeTeam = selectedMatch ? getTeam(selectedMatch.homeTeam) : null;
-  const selectedMatchAwayTeam = selectedMatch ? getTeam(selectedMatch.awayTeam) : null;
-  const selectedMatchMvp = selectedMatch && selectedMatchStats
-    ? [selectedMatch.homeTeam, selectedMatch.awayTeam]
-        .flatMap(teamId => (selectedMatchStats[teamId] || []).map(player => ({
-          player, teamId, team: getTeam(teamId),
-          valuation: getOfficialValuation(selectedMatch, teamId, player.id),
-        })))
-        .filter(item => item.valuation != null && Number.isFinite(Number(item.valuation)))
-        .sort((a, b) => Number(b.valuation) - Number(a.valuation) || (Number(b.player.points) || 0) - (Number(a.player.points) || 0))[0] || null
-    : null;
-  const formatStat = value => value == null ? "0" : value;
-  const openTeamFromFinished = id => { setSelectedMatch(null); setSelectedTeam(getTeam(id) || null); };
   const getTeam = (teamId) =>
     teams.find((team) => team.id === teamId);
   const getMatchStats = (match) => {
@@ -118,6 +104,20 @@ const [resultsPage, setResultsPage] = useState(null);
   const teamsKey = `${match.homeTeam}-${match.awayTeam}`;
   return matchPlayerStats[teamsKey] || null;
 };
+  const selectedMatchStats = selectedMatch ? getMatchStats(selectedMatch) : null;
+  const selectedMatchHomeTeam = selectedMatch ? getTeam(selectedMatch.homeTeam) : null;
+  const selectedMatchAwayTeam = selectedMatch ? getTeam(selectedMatch.awayTeam) : null;
+  const selectedMatchMvp = selectedMatch && selectedMatchStats
+    ? [selectedMatch.homeTeam, selectedMatch.awayTeam]
+        .flatMap(teamId => (selectedMatchStats[teamId] || []).map(player => ({
+          player, teamId, team: getTeam(teamId),
+          valuation: getOfficialValuation(selectedMatch, teamId, player.id),
+        })))
+        .filter(item => item.valuation != null && Number.isFinite(Number(item.valuation)))
+        .sort((a, b) => Number(b.valuation) - Number(a.valuation) || (Number(b.player.points) || 0) - (Number(a.player.points) || 0))[0] || null
+    : null;
+  const formatStat = value => value == null ? "0" : value;
+  const openTeamFromFinished = id => { setSelectedMatch(null); setSelectedTeam(getTeam(id) || null); };
   const getTeamLastTwoMatches = (teamId) => {
   return matches
     .filter(
