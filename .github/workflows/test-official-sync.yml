@@ -15,5 +15,5 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node --test tests/official-sync.test.cjs
+      - run: node --test tests/*.test.cjs
       - run: npm run build

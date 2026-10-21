@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: actualizar-calendario-oficial
+  group: actualizar-lnb-oficial-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:

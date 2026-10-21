@@ -35,7 +35,8 @@ for (const partido of nuevo.matches) {
 
 const resultado = {
   ...actual,
-  dateTo: nuevo.dateTo,
+  // A recent-only refresh must not shrink the stored season coverage.
+  dateTo: [actual.dateTo, nuevo.dateTo].filter(Boolean).sort().at(-1),
   matches: [...partidos.values()].sort((a, b) =>
     `${a.date} ${a.time ?? ""}`.localeCompare(
       `${b.date} ${b.time ?? ""}`
