@@ -1353,7 +1353,7 @@ const awayTeam = getTeam(match.awayTeam);
       {selectedPlayer && (
         <PlayerModal
           player={selectedPlayer}
-          team={team}
+          team={getTeam(selectedPlayer.teamId) || team}
           stats={selectedPlayerStats}
           onClose={() => setSelectedPlayer(null)}
           onTeamClick={goToTeam}
