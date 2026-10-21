@@ -770,17 +770,16 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
               <>
                 <div className="team-season-stats-grid">
                   {[
-                    ["points", "Puntos / partido", "🏀"],
-                    ["pointsAgainst", "Pts recibidos / partido", "🛡️"],
-                    ["rebounds", "Rebotes / partido", "▥"],
-                    ["assists", "Asistencias / partido", "↗"],
-                    ["steals", "Recuperaciones / partido", "⚡"],
-                    ["blocks", "Tapones / partido", "✋"],
-                    ["turnovers", "Pérdidas / partido", "↻"],
-                    ["fouls", "Faltas / partido", "●"],
-                  ].map(([key, label, symbol]) => (
+                    ["points", "Puntos / partido"],
+                    ["pointsAgainst", "Pts recibidos / partido"],
+                    ["rebounds", "Rebotes / partido"],
+                    ["assists", "Asistencias / partido"],
+                    ["steals", "Recuperaciones / partido"],
+                    ["blocks", "Tapones / partido"],
+                    ["turnovers", "Pérdidas / partido"],
+                    ["fouls", "Faltas / partido"],
+                  ].map(([key, label]) => (
                     <div className="team-season-stat" key={key}>
-                      <span className="team-season-stat-icon" aria-hidden="true">{symbol}</span>
                       <div className="team-season-stat-info">
                         <strong>{seasonCollective.values[key]}</strong>
                         <span>{label}</span>
