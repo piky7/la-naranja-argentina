@@ -90,6 +90,20 @@ const [resultsPage, setResultsPage] = useState(null);
   const getTeamRecord = (id) => { const t = standings.find(t => t.id === id); return { wins: t?.wins ?? 0, losses: t?.losses ?? 0 }; };
   const getPlayerStats = (id) => playerStats.find(s => s.playerId === id);
   const openTeamFromUpcoming = (id) => { setSelectedUpcomingMatch(null); setSelectedTeam(teams.find(t => t.id === id) || null); };
+  const selectedMatchStats = selectedMatch ? getMatchStats(selectedMatch) : null;
+  const selectedMatchHomeTeam = selectedMatch ? getTeam(selectedMatch.homeTeam) : null;
+  const selectedMatchAwayTeam = selectedMatch ? getTeam(selectedMatch.awayTeam) : null;
+  const selectedMatchMvp = selectedMatch && selectedMatchStats
+    ? [selectedMatch.homeTeam, selectedMatch.awayTeam]
+        .flatMap(teamId => (selectedMatchStats[teamId] || []).map(player => ({
+          player, teamId, team: getTeam(teamId),
+          valuation: getOfficialValuation(selectedMatch, teamId, player.id),
+        })))
+        .filter(item => item.valuation != null && Number.isFinite(Number(item.valuation)))
+        .sort((a, b) => Number(b.valuation) - Number(a.valuation) || (Number(b.player.points) || 0) - (Number(a.player.points) || 0))[0] || null
+    : null;
+  const formatStat = value => value == null ? "0" : value;
+  const openTeamFromFinished = id => { setSelectedMatch(null); setSelectedTeam(getTeam(id) || null); };
   const getTeam = (teamId) =>
     teams.find((team) => team.id === teamId);
   const getMatchStats = (match) => {
@@ -1607,244 +1621,164 @@ onClick={() => {
           MODAL PARTIDO
       ========================= */}
 
-      {selectedMatch && createPortal((() => {
+      {/* POPUP PARTIDO TERMINADO */}
 
-        const homeTeam =
-          getTeam(selectedMatch.homeTeam);
-
-        const awayTeam =
-          getTeam(selectedMatch.awayTeam);
-
-        const isFinished =
-          selectedMatch.status === "finished";
-
-        const homeScore =
-          selectedMatch.homeScore;
-
-        const awayScore =
-          selectedMatch.awayScore;
-
-        const difference =
-          isFinished &&
-          homeScore !== null &&
-          awayScore !== null
-            ? Math.abs(
-                homeScore - awayScore
-              )
-            : null;
-
-        /*
-          =========================
-          ESTADÍSTICAS DEL PARTIDO
-          =========================
-        */
-
-        const matchStats = getMatchStats(selectedMatch);
-
-const quarterScores = matchStats?.quarterScores || null;
-
-console.table(quarterScores);
-        const homePlayerStats =
-          matchStats?.[selectedMatch.homeTeam] || [];
-
-        const awayPlayerStats =
-          matchStats?.[selectedMatch.awayTeam] || [];
-
-        const sortPlayersByPoints = (players) =>
-          [...players].sort(
-            (a, b) =>
-              (Number(b.points) || 0) -
-              (Number(a.points) || 0)
-          );
-
-        const sortedHomePlayers =
-          sortPlayersByPoints(homePlayerStats);
-
-        const sortedAwayPlayers =
-          sortPlayersByPoints(awayPlayerStats);
-
-        const renderPlayerStats = (team, stats) => {
-  return (
-    <>
-      <div className="match-stats-head">
-        <span>JUGADOR</span>
-        <span>PTS</span>
-        <span>REB</span>
-        <span>AST</span>
-        <span>MIN</span>
-        <span>VAL</span>
-      </div>
-
-      <div className="match-stats-list">
-        {stats.length > 0 ? (
-          stats.map((player, index) => (
-            <button
-              type="button"
-              className="match-stat-player"
-              key={`${player.id}-${index}`}
-              onClick={(event) => {
-                event.stopPropagation();
-
-                const playerInfo =
-                  getMatchPlayerInfo(player);
-
-                if (!playerInfo) return;
-
-                setSelectedPlayer(playerInfo);
-              }}
+      {selectedMatch && createPortal(
+        <div
+          className="match-modal-overlay match-modal-finished-overlay"
+          onClick={() => setSelectedMatch(null)}
+        >
+          <div className="match-modal-finished-scroll">
+            <div
+              className="match-modal match-modal-finished"
+              onClick={(event) =>
+                event.stopPropagation()
+              }
             >
-              <strong>{player.name}</strong>
-
-              <span>{player.points ?? "—"}</span>
-
-              <span>{player.rebounds ?? "—"}</span>
-
-              <span>{player.assists ?? "—"}</span>
-
-              <span>{player.minutes || "—"}</span>
-              <span>
-  {getOfficialValuation(
-    selectedMatch,
-    team.id,
-    player.id
-) ?? "—"}
-</span>
-            </button>
-          ))
-        ) : (
-          <div className="match-player-empty">
-            No hay estadísticas disponibles.
-          </div>
-        )}
-      </div>
-    </>
-  );
-};
-
-        return (
-          <div
-  className="match-modal-overlay match-modal-finished-overlay"
-  onClick={() => setSelectedMatch(null)}
->
-  <div className="match-modal-finished-scroll">
-    <div
-      className="match-modal match-modal-finished"
-      onClick={(event) => event.stopPropagation()}
-    >
-
               <button
-                type="button"
                 className="match-modal-close"
+                type="button"
                 onClick={() =>
                   setSelectedMatch(null)
                 }
+                aria-label="Cerrar"
               >
                 ×
               </button>
 
-
-             <div className="match-modal-header">
-  <span className="match-modal-label">
-    LIGA NACIONAL 2026/27
-  </span>
-
-  <strong className="match-modal-date">
-    {formatDate(selectedMatch.date)}
-  </strong>
-
-  <span className="match-modal-status">
-    {isFinished ? "FINAL" : "PRÓXIMO PARTIDO"}
-  </span>
-
-  <div className="match-modal-teams">
-    <div className="match-modal-team">
-      {homeTeam && (
-        <Link
-          to={`/equipos/${homeTeam.id}`}
-          className="home-modal-team-logo-button"
-        >
-          <img src={homeTeam.logo} alt={homeTeam.name} />
-        </Link>
-      )}
-
-      <strong>
-        {homeTeam?.shortName || homeTeam?.name}
-        <small>
-          {getTeamStats(selectedMatch.homeTeam).wins}-
-          {getTeamStats(selectedMatch.homeTeam).losses}
-        </small>
-      </strong>
-    </div>
-
-    <div className="match-modal-score">
-      <strong>
-        {isFinished
-          ? `${homeScore} - ${awayScore}`
-          : selectedMatch.time || "VS"}
-      </strong>
-    </div>
-
-    <div className="match-modal-team">
-      {awayTeam && (
-        <Link
-          to={`/equipos/${awayTeam.id}`}
-          className="home-modal-team-logo-button"
-        >
-          <img src={awayTeam.logo} alt={awayTeam.name} />
-        </Link>
-      )}
-
-      <strong>
-        {awayTeam?.shortName || awayTeam?.name}
-        <small>
-          {getTeamStats(selectedMatch.awayTeam).wins}-
-          {getTeamStats(selectedMatch.awayTeam).losses}
-        </small>
-      </strong>
-    </div>
-  </div>
-</div>
-
-
-              {/* INFORMACIÓN COMPLEMENTARIA */}
-
-              {(selectedMatch.venue ||
-                (selectedMatch.tv &&
-                  selectedMatch.tv.length > 0)) && (
-
-                <div className="match-modal-info">
-
-                  {selectedMatch.venue && (
-                    <div>
-                      <span>ESTADIO</span>
-
-                      <strong>
-                        {selectedMatch.venue}
-                      </strong>
-                    </div>
+              <div className="match-modal-header">
+                <div className="match-finished-watermarks" aria-hidden="true">
+                  {selectedMatchHomeTeam?.logo && (
+                    <img src={selectedMatchHomeTeam.logo} alt="" />
                   )}
+                  {selectedMatchAwayTeam?.logo && (
+                    <img src={selectedMatchAwayTeam.logo} alt="" />
+                  )}
+                </div>
+                <span className="match-modal-label">
+                  LIGA NACIONAL 2026/27
+                </span>
 
-                  {selectedMatch.tv &&
-                    selectedMatch.tv.length > 0 && (
-                      <div>
-                        <span>TV</span>
+                <strong className="match-modal-date">
+                  {formatDate(
+                    selectedMatch.date
+                  )}
+                </strong>
 
-                        <strong>
-                          {selectedMatch.tv.join(
-                            " · "
-                          )}
-                        </strong>
-                      </div>
+                <span className="match-modal-status">
+                  FINAL
+                </span>
+
+                <div className="match-modal-teams">
+                  <div className="match-modal-team">
+                    {selectedMatchHomeTeam && (
+                      <button
+                        type="button"
+                        className="home-modal-team-logo-button"
+                        onClick={() =>
+                          openTeamFromFinished(
+                            selectedMatchHomeTeam.id
+                          )
+                        }
+                        aria-label={`Ir al equipo ${selectedMatchHomeTeam.name}`}
+                      >
+                        <img
+                          src={
+                            selectedMatchHomeTeam.logo
+                          }
+                          alt={`Escudo de ${selectedMatchHomeTeam.name}`}
+                        />
+                      </button>
                     )}
 
+                    <strong>
+                      {selectedMatchHomeTeam?.shortName ||
+                        selectedMatchHomeTeam?.name}
+
+                      {selectedMatchHomeTeam && (
+                        <small>
+                          {getTeamPosition(
+                            selectedMatchHomeTeam.id
+                          )}
+                          ° •{" "}
+                          {
+                            getTeamRecord(
+                              selectedMatchHomeTeam.id
+                            ).wins
+                          }
+                          -
+                          {
+                            getTeamRecord(
+                              selectedMatchHomeTeam.id
+                            ).losses
+                          }
+                        </small>
+                      )}
+                    </strong>
+                  </div>
+
+                  <div className="match-modal-score">
+                    <strong>
+                      <span className={Number(selectedMatch.homeScore) > Number(selectedMatch.awayScore) ? "match-score-winner" : "match-score-loser"}>
+                        {selectedMatch.homeScore}
+                      </span>
+                      <span className="match-score-dash"> - </span>
+                      <span className={Number(selectedMatch.awayScore) > Number(selectedMatch.homeScore) ? "match-score-winner" : "match-score-loser"}>
+                        {selectedMatch.awayScore}
+                      </span>
+                    </strong>
+                  </div>
+
+                  <div className="match-modal-team">
+                    {selectedMatchAwayTeam && (
+                      <button
+                        type="button"
+                        className="home-modal-team-logo-button"
+                        onClick={() =>
+                          openTeamFromFinished(
+                            selectedMatchAwayTeam.id
+                          )
+                        }
+                        aria-label={`Ir al equipo ${selectedMatchAwayTeam.name}`}
+                      >
+                        <img
+                          src={
+                            selectedMatchAwayTeam.logo
+                          }
+                          alt={`Escudo de ${selectedMatchAwayTeam.name}`}
+                        />
+                      </button>
+                    )}
+
+                    <strong>
+                      {selectedMatchAwayTeam?.shortName ||
+                        selectedMatchAwayTeam?.name}
+
+                      {selectedMatchAwayTeam && (
+                        <small>
+                          {getTeamPosition(
+                            selectedMatchAwayTeam.id
+                          )}
+                          ° •{" "}
+                          {
+                            getTeamRecord(
+                              selectedMatchAwayTeam.id
+                            ).wins
+                          }
+                          -
+                          {
+                            getTeamRecord(
+                              selectedMatchAwayTeam.id
+                            ).losses
+                          }
+                        </small>
+                      )}
+                    </strong>
+                  </div>
                 </div>
-              )}
-
-{/* =========================
-    PUNTOS POR CUARTO
-========================= */}
-
-{isFinished && quarterScores?.length > 0 && (
+              </div>
+              <div className="match-desktop-summary">
+              {selectedMatchStats?.quarterScores?.length > 0 && (
   <section className="match-quarters">
     <div className="match-quarters-title">
       <span>DESGLOSE DEL MARCADOR</span>
@@ -1857,14 +1791,11 @@ console.table(quarterScores);
           <tr>
             <th>Equipo</th>
 
-            {quarterScores.map((quarter, index) => (
-              <th key={index}>
-                {quarter.period === "OT" ||
-                quarter.period === "PR"
+            {selectedMatchStats.quarterScores.map((quarter) => (
+              <th key={quarter.period}>
+                {quarter.period === "OT" || quarter.period === "PR"
                   ? "PR"
-                  : quarter.period
-                    ? `${quarter.period}C`
-                    : `${index + 1}C`}
+                  : `${quarter.period}C`}
               </th>
             ))}
 
@@ -1875,31 +1806,29 @@ console.table(quarterScores);
         <tbody>
           <tr>
             <th>
-              {homeTeam?.shortName ||
-                selectedMatch.homeTeam}
-            </th>
+  {selectedMatchHomeTeam?.shortName || selectedMatch.homeTeam}
+</th>
 
-            {quarterScores.map((quarter, index) => (
-              <td key={index}>{quarter.home}</td>
+            {selectedMatchStats.quarterScores.map((quarter) => (
+              <td key={quarter.period}>{quarter.home}</td>
             ))}
 
             <td className="match-quarters-total">
-              {homeScore}
+              {selectedMatch.homeScore}
             </td>
           </tr>
 
           <tr>
-            <th>
-              {awayTeam?.shortName ||
-                selectedMatch.awayTeam}
-            </th>
+           <th>
+  {selectedMatchAwayTeam?.shortName || selectedMatch.awayTeam}
+</th>
 
-            {quarterScores.map((quarter, index) => (
-              <td key={index}>{quarter.away}</td>
+            {selectedMatchStats.quarterScores.map((quarter) => (
+              <td key={quarter.period}>{quarter.away}</td>
             ))}
 
             <td className="match-quarters-total">
-              {awayScore}
+              {selectedMatch.awayScore}
             </td>
           </tr>
         </tbody>
@@ -1907,101 +1836,288 @@ console.table(quarterScores);
     </div>
   </section>
 )}
-              {/* =========================
-                  ESTADÍSTICAS INDIVIDUALES
-              ========================= */}
 
-              {isFinished && matchStats && (
-                <div className="match-player-stats">
-<div className="match-player-stats-title">
-  <span className="section-label">
-    ESTADÍSTICAS
-  </span>
+              {selectedMatchMvp && (
+                <button
+                  type="button"
+                  className="match-mvp-card"
+                  aria-label={`Abrir ficha de ${selectedMatchMvp.player.name}, jugador del partido`}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    const playerInfo = getMatchPlayerInfo(selectedMatchMvp.player);
+                    if (playerInfo) setSelectedPlayer(playerInfo);
+                  }}
+                >
+                  <span className="match-mvp-heading">♛ JUGADOR DEL PARTIDO</span>
+                  <span className="match-mvp-body">
+                    <span className="match-mvp-identity">
+                      {selectedMatchMvp.team?.logo && (
+                        <img src={selectedMatchMvp.team.logo} alt="" />
+                      )}
+                      <span className="match-mvp-name">
+                        <strong>{selectedMatchMvp.player.name}</strong>
+                        <small>{selectedMatchMvp.team?.name || selectedMatchMvp.teamId}</small>
+                      </span>
+                    </span>
+                    <span className="match-mvp-numbers">
+                      <span><strong>{formatStat(selectedMatchMvp.player.points)}</strong><small>PTS</small></span>
+                      <span><strong>{formatStat(selectedMatchMvp.player.rebounds)}</strong><small>REB</small></span>
+                      <span><strong>{formatStat(selectedMatchMvp.player.assists)}</strong><small>AST</small></span>
+                      <span><strong>{selectedMatchMvp.player.minutes || "—"}</strong><small>MIN</small></span>
+                      <span className="match-mvp-valuation"><strong>{selectedMatchMvp.valuation}</strong><small>VAL</small></span>
+                    </span>
+                  </span>
+                </button>
+              )}
 
-  <h3>
-    Rendimiento de los jugadores
-  </h3>
-</div>
+              </div>
 
+              {selectedMatchStats ? (
+                <>
                 <MatchStatsTabs
                   key={selectedMatch.date + selectedMatch.homeTeam + selectedMatch.awayTeam}
                   match={selectedMatch}
-                  stats={matchStats}
-                  home={homeTeam}
-                  away={awayTeam}
+                  stats={selectedMatchStats}
+                  home={selectedMatchHomeTeam}
+                  away={selectedMatchAwayTeam}
                 >
-<div className="match-modal-content">    
-                 <section className="match-stats-team">
+                  <div className="match-modal-content">
+                  <section className="match-stats-team">
+                    <div className="match-stats-team-header">
+                      <div>
+                        {selectedMatchHomeTeam && (
+                          <img
+                            src={
+                              selectedMatchHomeTeam.logo
+                            }
+                            alt=""
+                          />
+                        )}
 
-                     <div className="match-stats-team-header">
-  <div>
-    <Link
-      to={`/equipos/${homeTeam.id}`}
-      className="team-logo-link"
-      onClick={(event) => event.stopPropagation()}
-    >
-      <img
-        src={homeTeam.logo}
-        alt={`Escudo de ${homeTeam.name}`}
-      />
-    </Link>
+                        <div>
+                          <span>LOCAL</span>
 
-    <div>
-      <span>LOCAL</span>
-      <h3>{homeTeam.name}</h3>
-    </div>
-  </div>
+                          <h3>
+                            {selectedMatchHomeTeam?.name}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="match-stats-head">
+  <span>JUGADOR</span>
+  <span>PTS</span>
+  <span>REB</span>
+  <span>AST</span>
+  <span>MIN</span>
+  <span>VAL</span>
 </div>
 
-                      {renderPlayerStats(
-                        homeTeam,
-                        sortedHomePlayers
-                      )}
+                    <div className="match-stats-list">
+                      {(
+                        selectedMatchStats[
+                          selectedMatch.homeTeam
+                        ] || []
+                      )
+                        .slice()
+                        .sort(
+                          (a, b) =>
+                            (Number(b.points) || 0) -
+                            (Number(a.points) || 0)
+                        )
+                        .map((player) => (
+                          <button
+                            type="button"
+                            className="match-stat-player"
+                            key={player.id}
+                            onClick={(event) => {
+                              event.stopPropagation();
 
-                    </section>
+                              const playerInfo =
+                                getMatchPlayerInfo(
+                                  player
+                                );
 
+                              if (!playerInfo) {
+                                return;
+                              }
 
-                    <section className="match-stats-team">
+                              setSelectedPlayer(
+                                playerInfo
+                              );
+                            }}
+                          >
+                            <strong>
+                              {player.name}
+                            </strong>
 
-                     <div className="match-stats-team-header">
-  <div>
-    <Link
-      to={`/equipos/${awayTeam.id}`}
-      className="team-logo-link"
-      onClick={(event) => event.stopPropagation()}
-    >
-      <img
-        src={awayTeam.logo}
-        alt={`Escudo de ${awayTeam.name}`}
-      />
-    </Link>
+                            <span>
+                              {formatStat(
+                                player.points
+                              )}
+                            </span>
 
-    <div>
-      <span>VISITANTE</span>
-      <h3>{awayTeam.name}</h3>
-    </div>
-  </div>
+                            <span>
+                              {formatStat(
+                                player.rebounds
+                              )}
+                            </span>
+
+                            <span>
+                              {formatStat(
+                                player.assists
+                              )}
+                            </span>
+
+                            <span>
+  {player.minutes || "—"}
+</span>
+
+<span>
+  {getOfficialValuation(
+    selectedMatch,
+    selectedMatch.homeTeam,
+    player.id
+  ) ?? "—"}
+</span>
+                          </button>
+                        ))}
+                    </div>
+                  </section>
+
+                  <section className="match-stats-team">
+                    <div className="match-stats-team-header">
+                      <div>
+                        {selectedMatchAwayTeam && (
+                          <img
+                            src={
+                              selectedMatchAwayTeam.logo
+                            }
+                            alt=""
+                          />
+                        )}
+
+                        <div>
+                          <span>VISITANTE</span>
+
+                          <h3>
+                            {selectedMatchAwayTeam?.name}
+                          </h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="match-stats-head">
+  <span>JUGADOR</span>
+  <span>PTS</span>
+  <span>REB</span>
+  <span>AST</span>
+  <span>MIN</span>
+  <span>VAL</span>
 </div>
 
-                      {renderPlayerStats(
-                        awayTeam,
-                        sortedAwayPlayers
-                      )}
+                    <div className="match-stats-list">
+                      {(
+                        selectedMatchStats[
+                          selectedMatch.awayTeam
+                        ] || []
+                      )
+                        .slice()
+                        .sort(
+                          (a, b) =>
+                            (Number(b.points) || 0) -
+                            (Number(a.points) || 0)
+                        )
+                        .map((player) => (
+                          <button
+                            type="button"
+                            className="match-stat-player"
+                            key={player.id}
+                            onClick={(event) => {
+                              event.stopPropagation();
 
-                                       </section>
+                              const playerInfo =
+                                getMatchPlayerInfo(
+                                  player
+                                );
 
-                  
+                              if (!playerInfo) {
+                                return;
+                              }
+
+                              setSelectedPlayer(
+                                playerInfo
+                              );
+                            }}
+                          >
+                            <strong>
+                              {player.name}
+                            </strong>
+
+                            <span>
+                              {formatStat(
+                                player.points
+                              )}
+                            </span>
+
+                            <span>
+                              {formatStat(
+                                player.rebounds
+                              )}
+                            </span>
+
+                            <span>
+                              {formatStat(
+                                player.assists
+                              )}
+                            </span>
+
+                            <span>
+  {player.minutes || "—"}
+</span>
+
+<span>
+  {getOfficialValuation(
+    selectedMatch,
+    selectedMatch.awayTeam,
+    player.id
+  ) ?? "—"}
+</span>
+                          </button>
+                        ))}
+                    </div>
+                  </section>
                 </div>
                 </MatchStatsTabs>
-              </div>
+                </>
+              ) : (
+                <div className="match-modal-no-stats">
+                  <span>📊</span>
+
+                  <h3>
+                    Estadísticas no disponibles
+                  </h3>
+
+                  <p>
+                    La planilla detallada de este
+                    partido todavía no fue cargada.
+                  </p>
+                </div>
               )}
 
+              <div className="match-modal-footer">
+                <span>LNA</span>
+
+                <strong>
+                  ESTADÍSTICAS DEL PARTIDO
+                </strong>
+              </div>
             </div>
           </div>
         </div>
-  );
-})(), document.body)}
-{/* POPUP DEL JUGADOR */}
+      , document.body)}
+
+      {/* POPUP DEL JUGADOR */}
 
 {selectedPlayer && (
   <PlayerModal
