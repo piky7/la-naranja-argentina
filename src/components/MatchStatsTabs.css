@@ -1,0 +1,15 @@
+.match-stats-tabs { width: 100%; min-width: 0; }
+.match-stats-switch { display: flex; gap: 8px; margin: 16px 0; }
+.match-stats-switch button { flex: 1; border: 1px solid #754021; background: #191919; color: #eee; border-radius: 10px; padding: 12px 6px; cursor: pointer; font: inherit; }
+.match-stats-switch button[aria-selected="true"], .match-stats-switch button[aria-pressed="true"] { background: #e76c16; color: #111; font-weight: 800; }
+.match-player-team-home .match-stats-team:nth-child(2), .match-player-team-away .match-stats-team:first-child { display: none; }
+.match-player-team-home .match-modal-content, .match-player-team-away .match-modal-content { grid-template-columns: minmax(0, 1fr); }
+.match-stats-switch button:focus-visible { outline: 2px solid #ff9b47; outline-offset: 3px; }
+.match-stats-switch button img { width: 24px; height: 24px; object-fit: contain; vertical-align: middle; margin-right: 6px; }
+.match-stats-tabs [hidden] { display: none !important; }
+.match-team-comparison { width: 100%; border-collapse: collapse; table-layout: fixed; color: #eee; background: #171717; }
+.match-team-comparison th, .match-team-comparison td { padding: 12px 6px; text-align: center; border-bottom: 1px solid #39302a; overflow-wrap: anywhere; }
+.match-team-comparison thead th { color: #ff913c; }
+.match-team-comparison tbody th { font-weight: 500; }
+.match-team-source { color: #bbb; font-size: 12px; margin: 12px 0; }
+@media (max-width: 480px) { .match-team-comparison { font-size: 12px; } .match-stats-switch { font-size: 13px; } }

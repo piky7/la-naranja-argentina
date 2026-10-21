@@ -1,3 +1,4 @@
+import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useState } from "react";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -1756,6 +1757,13 @@ const awayTeam = getTeam(match.awayTeam);
 )}
 
               {selectedMatchStats ? (
+                <MatchStatsTabs
+                  key={selectedMatch.date + selectedMatch.homeTeam + selectedMatch.awayTeam}
+                  match={selectedMatch}
+                  stats={selectedMatchStats}
+                  home={selectedMatchHomeTeam}
+                  away={selectedMatchAwayTeam}
+                >
                 <div className="match-modal-content">
                   <section className="match-stats-team">
                     <div className="match-stats-team-header">
@@ -1955,6 +1963,7 @@ const awayTeam = getTeam(match.awayTeam);
                     </div>
                   </section>
                 </div>
+                </MatchStatsTabs>
               ) : (
                 <div className="match-modal-no-stats">
                   <span>📊</span>

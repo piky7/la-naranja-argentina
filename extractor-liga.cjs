@@ -1,3 +1,4 @@
+const { extractTeamStats } = require("./scripts/official-team-stats.cjs");
 const { parseOfficialFinal } = require("./scripts/parse-official-final.cjs");
 
 const fs = require("node:fs");
@@ -132,6 +133,8 @@ const encabezado = contenedor
       throw new Error(`No se encontraron jugadores de ${equipo.name}`);
     }
   }
+
+  extractTeamStats($, equipos);
 
   const resultado = {
     source: "Liga Nacional",

@@ -39751,6 +39751,64 @@ export const matchPlayerStats = {
         "number": "30",
         "starter": true
       }
-    ]
+    ],
+    "teamStats": {
+      "ferro": {
+        "fieldGoals": {
+          "made": 27,
+          "attempted": 59,
+          "percentage": 45
+        },
+        "twoPointers": {
+          "made": 20,
+          "attempted": 31,
+          "percentage": 65
+        },
+        "threePointers": {
+          "made": 7,
+          "attempted": 28,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 25,
+          "attempted": 33,
+          "percentage": 76
+        },
+        "rebounds": 37,
+        "assists": 15,
+        "steals": 8,
+        "blocks": 3,
+        "turnovers": 12,
+        "fouls": 29
+      },
+      "platense": {
+        "fieldGoals": {
+          "made": 28,
+          "attempted": 68,
+          "percentage": 41
+        },
+        "twoPointers": {
+          "made": 19,
+          "attempted": 41,
+          "percentage": 46
+        },
+        "threePointers": {
+          "made": 9,
+          "attempted": 27,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 16,
+          "attempted": 25,
+          "percentage": 64
+        },
+        "rebounds": 33,
+        "assists": 13,
+        "steals": 8,
+        "blocks": 1,
+        "turnovers": 12,
+        "fouls": 29
+      }
+    }
   }
 };
