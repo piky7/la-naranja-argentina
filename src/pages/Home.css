@@ -9823,3 +9823,28 @@
 .match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-track span.collective-better-bar { background: #ff8a20 !important; }
 .match-modal-upcoming .upcoming-collective-source { margin: 5px 0 12px; color: #9cabb9; font-size: 10px; text-align: center; }
 .match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-stat > span:not(.upcoming-comparison-track) { font-size: 10px; text-align: center; }
+
+
+/* Cinco columnas reales: cifra, barra, etiqueta, barra, cifra.
+   La etiqueta nunca invade el espacio de las barras. */
+.match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-row.upcoming-comparison-stat {
+  display: grid;
+  grid-template-columns: minmax(42px, auto) minmax(0, 1fr) minmax(86px, 104px) minmax(0, 1fr) minmax(42px, auto);
+  column-gap: 7px;
+  align-items: center;
+}
+.match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-stat > span:not(.upcoming-comparison-track) {
+  display: block;
+  min-width: 0;
+  overflow-wrap: break-word;
+  line-height: 1.15;
+}
+.match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-track { min-width: 0; }
+@media (max-width: 600px) {
+  .match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-row.upcoming-comparison-stat {
+    grid-template-columns: minmax(38px, auto) minmax(0, 1fr) minmax(75px, 88px) minmax(0, 1fr) minmax(38px, auto);
+    column-gap: 5px;
+  }
+  .match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-stat > strong { font-size: 12px; }
+  .match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-stat > span:not(.upcoming-comparison-track) { font-size: 9px; }
+}
