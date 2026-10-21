@@ -379,6 +379,40 @@ const getPlayerLastMatches = (player) => {
       .slice(0, 2);
   };
 
+  // Promedios de valoración y recuperaciones: solo registros oficiales de la temporada.
+  const getOfficialPlayerLeaders = (teamId, field) => {
+    const totals = new Map();
+    const seen = new Set();
+    for (const match of matches) {
+      if (match.status !== "finished" || !/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
+      if (match.homeTeam !== teamId && match.awayTeam !== teamId) continue;
+      const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+      if (seen.has(key)) continue;
+      const record = matchPlayerStats[key] || matchPlayerStats[match.id];
+      if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+      const roster = record[teamId];
+      if (!Array.isArray(roster)) continue;
+      seen.add(key);
+      roster.forEach(entry => {
+        const value = Number(entry[field]);
+        if (!entry.id || entry[field] == null || !Number.isFinite(value)) return;
+        const old = totals.get(entry.id) || { sum: 0, games: 0 };
+        totals.set(entry.id, { sum: old.sum + value, games: old.games + 1 });
+      });
+    }
+    return players.filter(player => player.teamId === teamId && totals.has(player.id))
+      .map(player => ({ ...player, team: getTeam(teamId), stats: { [field]: totals.get(player.id).sum / totals.get(player.id).games } }))
+      .sort((a, b) => b.stats[field] - a.stats[field]).slice(0, 2);
+  };
+
+  const upcomingLeaderCategories = [
+    { title: "PUNTOS", icon: "🏀", key: "points" },
+    { title: "VALORACIÓN", icon: "★", key: "valuation" },
+    { title: "REBOTES", icon: "↟", key: "rebounds" },
+    { title: "ASISTENCIAS", icon: "↗", key: "assists" },
+    { title: "RECUPERACIONES", icon: "⬡", key: "steals" },
+  ];
+
   const formatStat = (value) => {
     if (value === null || value === undefined) {
       return "0";
@@ -2322,297 +2356,49 @@ const finishedMatch = {
   </div>
 </div>
               </div>)}
-              {upcomingTab === "jugadores" && (<div className="upcoming-tab-panel" role="tabpanel">
-              <div className="match-highlighted-title">
-                <h3>JUGADORES DESTACADOS</h3>
-                <span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA</span>
-              </div>
-
-              <div className="match-highlighted-teams">
-                <div className="match-highlighted-team">
-                  <div className="match-highlighted-team-header">
-                    {selectedUpcomingHomeTeam && (
-                      <img
-                        src={
-                          selectedUpcomingHomeTeam.logo
-                        }
-                        alt=""
-                      />
-                    )}
-
-                    <div className="match-highlighted-team-title">
-                      <strong>
-                        {selectedUpcomingHomeTeam?.shortName ||
-                          selectedUpcomingHomeTeam?.name}
-                      </strong>
-
-                      <div className="team-form">
-                        {selectedUpcomingHomeTeam &&
-                          getRecentForm(
-                            selectedUpcomingHomeTeam.id
-                          ).map(
-                            (result, index) => (
-                              <span
-                                key={`${selectedUpcomingHomeTeam.id}-form-${index}`}
-                                className={`team-form-result ${
-                                  result === "G"
-                                    ? "team-form-win"
-                                    : "team-form-loss"
-                                }`}
-                              >
-                                {result}
-                              </span>
-                            )
-                          )}
+              {upcomingTab === "jugadores" && (
+                <div className="upcoming-tab-panel upcoming-players-comparison" role="tabpanel">
+                  <div className="match-highlighted-title">
+                    <h3>JUGADORES DESTACADOS</h3>
+                    <span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA 2026/27</span>
+                  </div>
+                  {upcomingLeaderCategories.map(category => {
+                    const getLeaders = teamId => ["valuation", "steals"].includes(category.key)
+                      ? getOfficialPlayerLeaders(teamId, category.key)
+                      : getHighlightedPlayers(teamId, category.key);
+                    const homeLeaders = getLeaders(selectedUpcomingMatch.homeTeam);
+                    const awayLeaders = getLeaders(selectedUpcomingMatch.awayTeam);
+                    const allValues = [...homeLeaders, ...awayLeaders].map(player => Number(player.stats[category.key]));
+                    const max = Math.max(...allValues, 0);
+                    const renderSide = (leaders, team, side) => (
+                      <div className={`upcoming-player-side upcoming-player-side-${side}`}>
+                        {leaders.length ? leaders.map(player => {
+                          const value = Number(player.stats[category.key]);
+                          const isLeader = max > 0 && Math.abs(value - max) < 0.00001;
+                          return <button key={player.id} type="button" className="upcoming-player-entry"
+                            onClick={() => setSelectedPlayer(player)}>
+                            {team?.logo && <img src={team.logo} alt="" className="upcoming-player-crest" />}
+                            <div className="upcoming-player-info">
+                              <span className="upcoming-player-name">{player.name}</span>
+                              <div className="upcoming-player-meter"><span style={{ width: `${max > 0 ? Math.max(0, value / max * 100) : 0}%` }} /></div>
+                            </div>
+                            <strong className={isLeader ? "upcoming-player-best" : ""}>{value.toFixed(1)}</strong>
+                            {isLeader && <span className="upcoming-player-leader" aria-label="Mejor promedio">★</span>}
+                          </button>;
+                        }) : <span className="upcoming-player-empty">Sin datos oficiales</span>}
                       </div>
-                    </div>
-                  </div>
-
-
-                  <div className="match-highlighted-grid">
-                    <div className="match-highlighted-category">
-                      <span>PUNTOS</span>
-
-                      {getHighlightedPlayers(
-                        selectedUpcomingMatch.homeTeam,
-                        "points"
-                      ).map((player) => (
-                        <button
-                          type="button"
-                          key={player.id}
-                          className="match-highlighted-player"
-                          onClick={() =>
-                            setSelectedPlayer(
-                              player
-                            )
-                          }
-                        >
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              Number(
-                                player.stats.points
-                              ).toFixed(1)
-                            )}{" "}
-                            PTS
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="match-highlighted-category">
-                      <span>REBOTES</span>
-
-                      {getHighlightedPlayers(
-                        selectedUpcomingMatch.homeTeam,
-                        "rebounds"
-                      ).map((player) => (
-                        <button
-                          type="button"
-                          key={player.id}
-                          className="match-highlighted-player"
-                          onClick={() =>
-                            setSelectedPlayer(
-                              player
-                            )
-                          }
-                        >
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              Number(
-                                player.stats.rebounds
-                              ).toFixed(1)
-                            )}{" "}
-                            REB
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="match-highlighted-category">
-                      <span>ASISTENCIAS</span>
-
-                      {getHighlightedPlayers(
-                        selectedUpcomingMatch.homeTeam,
-                        "assists"
-                      ).map((player) => (
-                        <button
-                          type="button"
-                          key={player.id}
-                          className="match-highlighted-player"
-                          onClick={() =>
-                            setSelectedPlayer(
-                              player
-                            )
-                          }
-                        >
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              Number(
-                                player.stats.assists
-                              ).toFixed(1)
-                            )}{" "}
-                            AST
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="match-highlighted-team">
-                  <div className="match-highlighted-team-header">
-                    {selectedUpcomingAwayTeam && (
-                      <img
-                        src={
-                          selectedUpcomingAwayTeam.logo
-                        }
-                        alt=""
-                      />
-                    )}
-
-                    <div className="match-highlighted-team-title">
-                      <strong>
-                        {selectedUpcomingAwayTeam?.shortName ||
-                          selectedUpcomingAwayTeam?.name}
-                      </strong>
-
-                      <div className="team-form">
-                        {selectedUpcomingAwayTeam &&
-                          getRecentForm(
-                            selectedUpcomingAwayTeam.id
-                          ).map(
-                            (result, index) => (
-                              <span
-                                key={`${selectedUpcomingAwayTeam.id}-form-${index}`}
-                                className={`team-form-result ${
-                                  result === "G"
-                                    ? "team-form-win"
-                                    : "team-form-loss"
-                                }`}
-                              >
-                                {result}
-                              </span>
-                            )
-                          )}
+                    );
+                    return <div className="upcoming-player-category" key={category.key}>
+                      <div className="upcoming-player-category-title">{category.title}</div>
+                      <div className="upcoming-player-versus">
+                        {renderSide(homeLeaders, selectedUpcomingHomeTeam, "home")}
+                        <div className="upcoming-player-center-icon" aria-hidden="true">{category.icon}</div>
+                        {renderSide(awayLeaders, selectedUpcomingAwayTeam, "away")}
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="match-highlighted-grid">
-                    <div className="match-highlighted-category">
-                      <span>PUNTOS</span>
-
-                      {getHighlightedPlayers(
-                        selectedUpcomingMatch.awayTeam,
-                        "points"
-                      ).map((player) => (
-                        <button
-                          type="button"
-                          key={player.id}
-                          className="match-highlighted-player"
-                          onClick={() =>
-                            setSelectedPlayer(
-                              player
-                            )
-                          }
-                        >
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              Number(
-                                player.stats.points
-                              ).toFixed(1)
-                            )}{" "}
-                            PTS
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="match-highlighted-category">
-                      <span>REBOTES</span>
-
-                      {getHighlightedPlayers(
-                        selectedUpcomingMatch.awayTeam,
-                        "rebounds"
-                      ).map((player) => (
-                        <button
-                          type="button"
-                          key={player.id}
-                          className="match-highlighted-player"
-                          onClick={() =>
-                            setSelectedPlayer(
-                              player
-                            )
-                          }
-                        >
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              Number(
-                                player.stats.rebounds
-                              ).toFixed(1)
-                            )}{" "}
-                            REB
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="match-highlighted-category">
-                      <span>ASISTENCIAS</span>
-
-                      {getHighlightedPlayers(
-                        selectedUpcomingMatch.awayTeam,
-                        "assists"
-                      ).map((player) => (
-                        <button
-                          type="button"
-                          key={player.id}
-                          className="match-highlighted-player"
-                          onClick={() =>
-                            setSelectedPlayer(
-                              player
-                            )
-                          }
-                        >
-                          <strong>
-                            {player.name}
-                          </strong>
-
-                          <span>
-                            {formatStat(
-                              Number(
-                                player.stats.assists
-                              ).toFixed(1)
-                            )}{" "}
-                            AST
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                    </div>;
+                  })}
                 </div>
-              </div>
-              </div>)}
+              )}
             </section>
 
             <div className="match-modal-footer">
