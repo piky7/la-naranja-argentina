@@ -267,9 +267,41 @@ const [liveDate] = useState(null);
   };
 
   const getPlayerStats = (playerId) => {
-    return playerStats.find(
-      (stats) => stats.playerId === playerId
-    );
+    const saved = playerStats.find((stats) => stats.playerId === playerId);
+    const player = players.find((item) => item.id === playerId);
+    if (!player?.teamId) return saved;
+
+    // Calcular los promedios con los mismos partidos oficiales que alimentan
+    // la ficha de los últimos encuentros. Evita PJ 0 con partidos disponibles.
+    const totals = { points: 0, rebounds: 0, assists: 0 };
+    let gamesPlayed = 0;
+    const seen = new Set();
+    for (const match of matches) {
+      if (!isMatchFinished(match)) continue;
+      if (match.homeTeam !== player.teamId && match.awayTeam !== player.teamId) continue;
+      if (!/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
+      const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+      if (seen.has(key)) continue;
+      const record = matchPlayerStats[match.id] || matchPlayerStats[key];
+      if (record?.source !== "Liga Nacional" ||
+          !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+      const stat = record[player.teamId]?.find((item) => item.id === playerId);
+      if (!stat) continue;
+      seen.add(key);
+      gamesPlayed++;
+      for (const field of Object.keys(totals)) {
+        totals[field] += Number(stat[field]) || 0;
+      }
+    }
+    if (!gamesPlayed) return saved;
+    return {
+      ...saved,
+      playerId,
+      gamesPlayed,
+      points: totals.points / gamesPlayed,
+      rebounds: totals.rebounds / gamesPlayed,
+      assists: totals.assists / gamesPlayed,
+    };
   };
 const getPlayerLastMatches = (player) => {
   if (!player) return [];
