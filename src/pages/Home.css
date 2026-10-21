@@ -9941,3 +9941,53 @@
   .home-team-modal-v2 .team-v2-collective-item strong { font-size: 15px; }
   .home-team-modal-v2 .team-v2-collective-section .team-v2-section-head h3 { font-size: 12px; }
 }
+
+
+/* Popup de jugador: cinco promedios y fichas recientes con rival, minutos y VAL. */
+.home-player-modal .home-player-modal-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.home-player-modal .home-player-modal-stats > div {
+  min-width: 0;
+  min-height: 0;
+  padding: 10px 3px;
+  gap: 5px;
+}
+.home-player-modal .home-player-modal-stats strong { font-size: 20px; }
+.home-player-modal .home-player-modal-recent-header .home-player-modal-rival {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 7px;
+}
+.home-player-modal .home-player-modal-rival img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex: 0 0 26px;
+}
+.home-player-modal .home-player-modal-rival strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.home-player-modal .home-player-modal-recent-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+}
+.home-player-modal .home-player-modal-recent-stats > div { min-width: 0; }
+.home-player-modal .home-player-modal-recent-stats strong {
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .home-player-modal .home-player-modal-stats > div { padding: 9px 2px; gap: 4px; }
+  .home-player-modal .home-player-modal-stats strong { font-size: 17px; }
+  .home-player-modal .home-player-modal-stats span { font-size: 9px; }
+  .home-player-modal .home-player-modal-recent-stats strong { font-size: 14px; }
+  .home-player-modal .home-player-modal-recent-stats span { font-size: 9px; }
+  .home-player-modal .home-player-modal-rival img { width: 22px; height: 22px; flex-basis: 22px; }
+}
