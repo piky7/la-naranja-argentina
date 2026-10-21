@@ -6,7 +6,7 @@ const BASE_URL = "https://www.laliganacional.com.ar";
 const OUTPUT = "liga-events.json";
 
 // Primera prueba: cinco días de partidos históricos.
-const FECHA_INICIO = "2026-10-15";
+const FECHA_INICIO = "2026-09-01";
 const FECHA_FIN = "2026-10-19";
 
 function leerEquipo($, celda) {

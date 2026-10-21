@@ -7,7 +7,29 @@ export const matchPlayerStats = {
         "points": 23,
         "rebounds": 10,
         "assists": 1,
-        "minutes": "33:41"
+        "minutes": "33:41",
+        "valuation": 35,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 7,
+          "attempted": 9,
+          "percentage": 77
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 9,
+          "percentage": 66
+        },
+        "plusMinus": -8
       },
       {
         "id": "christian-james",
@@ -15,7 +37,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "20:32"
+        "minutes": "20:32",
+        "valuation": 15,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": -11
       },
       {
         "id": "lucas-andujar",
@@ -23,7 +67,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 2,
         "assists": 7,
-        "minutes": "34:58"
+        "minutes": "34:58",
+        "valuation": 15,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 5,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -13
       },
       {
         "id": "melvin-johnson",
@@ -31,7 +97,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "28:20"
+        "minutes": "28:20",
+        "valuation": 7,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": -27
       },
       {
         "id": "fabian-ramirez-barrios",
@@ -39,7 +127,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "27:27"
+        "minutes": "27:27",
+        "valuation": -2,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -9
       },
       {
         "id": "robert-whitfield",
@@ -47,7 +157,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "16:02"
+        "minutes": "16:02",
+        "valuation": -2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -5
       },
       {
         "id": "junior-merchant",
@@ -55,7 +187,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "18:59"
+        "minutes": "18:59",
+        "valuation": 11,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "plusMinus": -20
       },
       {
         "id": "alejo-sacchi",
@@ -63,7 +217,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "14:59"
+        "minutes": "14:59",
+        "valuation": 9,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 8
       },
       {
         "id": "joaquin-celiz",
@@ -71,7 +247,119 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "05:02"
+        "minutes": "05:02",
+        "valuation": -2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -5
+      },
+      {
+        "id": "juan-brussino",
+        "name": "Juan Brussino",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "joaquin-coria",
+        "name": "Joaquín Coria Fa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "agustin-moraga",
+        "name": "Agustin Moraga",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "gimnasia": [
@@ -81,7 +369,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "14:52"
+        "minutes": "14:52",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 11
       },
       {
         "id": "felipe-inyaco",
@@ -89,7 +399,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "18:48"
+        "minutes": "18:48",
+        "valuation": -1,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 17
       },
       {
         "id": "martiniano-dato",
@@ -97,7 +429,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 0,
         "assists": 3,
-        "minutes": "22:28"
+        "minutes": "22:28",
+        "valuation": 9,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 19
       },
       {
         "id": "emiliano-toretta",
@@ -105,7 +459,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 1,
         "assists": 10,
-        "minutes": "25:48"
+        "minutes": "25:48",
+        "valuation": 15,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "carlos-rivero",
@@ -113,7 +489,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "19:30"
+        "minutes": "19:30",
+        "valuation": 17,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 7,
+          "percentage": 85
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "plusMinus": 21
       },
       {
         "id": "natalio-santacroce",
@@ -121,7 +519,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "01:51"
+        "minutes": "01:51",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "marcos-chacon",
@@ -129,7 +549,29 @@ export const matchPlayerStats = {
         "points": 28,
         "rebounds": 4,
         "assists": 5,
-        "minutes": "29:23"
+        "minutes": "29:23",
+        "valuation": 30,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 14
       },
       {
         "id": "sebastian-carrasco",
@@ -137,7 +579,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "14:12"
+        "minutes": "14:12",
+        "valuation": -7,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 12
       },
       {
         "id": "valentin-forestier",
@@ -145,7 +609,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "15:06"
+        "minutes": "15:06",
+        "valuation": -2,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -8
       },
       {
         "id": "ciro-melo",
@@ -153,7 +639,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "02:57"
+        "minutes": "02:57",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -6
       },
       {
         "id": "ben-stevens",
@@ -161,7 +669,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 8,
         "assists": 0,
-        "minutes": "17:32"
+        "minutes": "17:32",
+        "valuation": 9,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "gino-balbo",
@@ -169,7 +699,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "17:31"
+        "minutes": "17:31",
+        "valuation": 15,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       }
     ],
     "quarterScores": [
@@ -203,7 +755,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "22:06"
+        "minutes": "22:06",
+        "valuation": 12,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -2
       },
       {
         "id": "andres-jaime",
@@ -211,7 +785,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 8,
         "assists": 2,
-        "minutes": "27:38"
+        "minutes": "27:38",
+        "valuation": 18,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": 0
       },
       {
         "id": "sebastian-vega",
@@ -219,7 +815,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "22:45"
+        "minutes": "22:45",
+        "valuation": 5,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 1
       },
       {
         "id": "agustin-perez-tapia",
@@ -227,7 +845,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "26:39"
+        "minutes": "26:39",
+        "valuation": 16,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 7,
+          "attempted": 10,
+          "percentage": 70
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 2
       },
       {
         "id": "franco-giorgetti",
@@ -235,7 +875,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "22:57"
+        "minutes": "22:57",
+        "valuation": -3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "al-thornton",
@@ -243,7 +905,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "17:03"
+        "minutes": "17:03",
+        "valuation": 12,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 4
       },
       {
         "id": "luciano-guerra",
@@ -251,7 +935,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "19:25"
+        "minutes": "19:25",
+        "valuation": 10,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 7
       },
       {
         "id": "ignacio-bednarek",
@@ -259,7 +965,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "17:54"
+        "minutes": "17:54",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": 7
       },
       {
         "id": "selem-safar",
@@ -267,7 +995,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "07:30"
+        "minutes": "07:30",
+        "valuation": 0,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "gonzalo-aman",
@@ -275,7 +1025,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:58"
+        "minutes": "03:58",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "nicolas-chiaraviglio",
@@ -283,7 +1055,59 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "12:05"
+        "minutes": "12:05",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 7
+      },
+      {
+        "id": "martin-chapero",
+        "name": "Martín Chapero",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "gimnasia": [
@@ -293,7 +1117,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "13:16"
+        "minutes": "13:16",
+        "valuation": 2,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -5
       },
       {
         "id": "felipe-inyaco",
@@ -301,7 +1147,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "17:53"
+        "minutes": "17:53",
+        "valuation": 5,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "martiniano-dato",
@@ -309,7 +1177,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 4,
         "assists": 4,
-        "minutes": "32:50"
+        "minutes": "32:50",
+        "valuation": 17,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 8,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 2
       },
       {
         "id": "emiliano-toretta",
@@ -317,7 +1207,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "23:52"
+        "minutes": "23:52",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "carlos-rivero",
@@ -325,7 +1237,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "29:02"
+        "minutes": "29:02",
+        "valuation": 12,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "marcos-chacon",
@@ -333,7 +1267,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 5,
         "assists": 3,
-        "minutes": "28:24"
+        "minutes": "28:24",
+        "valuation": 4,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 8,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -7
       },
       {
         "id": "sebastian-carrasco",
@@ -341,7 +1297,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "22:57"
+        "minutes": "22:57",
+        "valuation": 6,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -4
       },
       {
         "id": "valentin-forestier",
@@ -349,7 +1327,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "13:39"
+        "minutes": "13:39",
+        "valuation": -1,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -3
       },
       {
         "id": "ben-stevens",
@@ -357,7 +1357,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "10:58"
+        "minutes": "10:58",
+        "valuation": 5,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -11
       },
       {
         "id": "gino-balbo",
@@ -365,7 +1387,89 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "07:10"
+        "minutes": "07:10",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -7
+      },
+      {
+        "id": "ciro-melo",
+        "name": "Ciro Melo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "segundo-lasarte",
+        "name": "Segundo Lasarte",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -399,7 +1503,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "26:03"
+        "minutes": "26:03",
+        "valuation": 11,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 1
       },
       {
         "id": "zyon-patterson",
@@ -407,7 +1533,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "21:34"
+        "minutes": "21:34",
+        "valuation": 5,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -7
       },
       {
         "id": "leandro-cerminato",
@@ -415,7 +1563,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "26:54"
+        "minutes": "26:54",
+        "valuation": 12,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "plusMinus": 3
       },
       {
         "id": "romulo-gusmao",
@@ -423,7 +1593,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "11:56"
+        "minutes": "11:56",
+        "valuation": 3,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -4
       },
       {
         "id": "jeremias-sandrini",
@@ -431,7 +1623,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "21:42"
+        "minutes": "21:42",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "martino-caporaletti",
@@ -439,7 +1653,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:37"
+        "minutes": "00:37",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "piero-di-prinzio",
@@ -447,7 +1683,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:28"
+        "minutes": "00:28",
+        "valuation": 1,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "santiago-perez-douthat",
@@ -455,7 +1713,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "23:55"
+        "minutes": "23:55",
+        "valuation": 16,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 14
       },
       {
         "id": "cristian-cardo",
@@ -463,7 +1743,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "23:08"
+        "minutes": "23:08",
+        "valuation": 7,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 10
       },
       {
         "id": "santiago-bilbao",
@@ -471,7 +1773,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "02:27"
+        "minutes": "02:27",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "josh-ferguson",
@@ -479,7 +1803,59 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 10,
         "assists": 0,
-        "minutes": "23:28"
+        "minutes": "23:28",
+        "valuation": 13,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 21
+      },
+      {
+        "id": "joaquin-fernandez",
+        "name": "Joaquín Fernández",
+        "points": 16,
+        "rebounds": 7,
+        "assists": 0,
+        "minutes": "17:50",
+        "valuation": 14,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": 10
       }
     ],
     "ferro": [
@@ -489,7 +1865,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 0,
         "assists": 3,
-        "minutes": "28:24"
+        "minutes": "28:24",
+        "valuation": 5,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": -6
       },
       {
         "id": "jano-martinez",
@@ -497,7 +1895,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "28:43"
+        "minutes": "28:43",
+        "valuation": 5,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 6,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "federico-zezular",
@@ -505,7 +1925,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "22:19"
+        "minutes": "22:19",
+        "valuation": 6,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -17
       },
       {
         "id": "kevin-hernandez",
@@ -513,7 +1955,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "21:46"
+        "minutes": "21:46",
+        "valuation": 14,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -17
       },
       {
         "id": "valentin-bettiga",
@@ -521,7 +1985,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 9,
         "assists": 1,
-        "minutes": "27:33"
+        "minutes": "27:33",
+        "valuation": 8,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 6,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": 1
       },
       {
         "id": "jose-defelippo",
@@ -529,7 +2015,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "17:11"
+        "minutes": "17:11",
+        "valuation": 6,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "facundo-pinero",
@@ -537,7 +2045,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "18:14"
+        "minutes": "18:14",
+        "valuation": 7,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 7,
+          "percentage": 28
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "felipe-rodriguez",
@@ -545,7 +2075,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "11:25"
+        "minutes": "11:25",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": -10
       },
       {
         "id": "rodrigo-gallegos",
@@ -553,7 +2105,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "16:48"
+        "minutes": "16:48",
+        "valuation": 9,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": -13
       },
       {
         "id": "camilo-rodriguez",
@@ -561,7 +2135,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "06:26"
+        "minutes": "06:26",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -6
       },
       {
         "id": "alejandro-diez",
@@ -569,7 +2165,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "00:36"
+        "minutes": "00:36",
+        "valuation": 3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "camilo-jara",
@@ -577,7 +2195,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:37"
+        "minutes": "00:37",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       }
     ],
     "quarterScores": [
@@ -611,7 +2251,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "19:37"
+        "minutes": "19:37",
+        "valuation": 3,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 7,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "juanse-gorosito",
@@ -619,7 +2281,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 0,
         "assists": 2,
-        "minutes": "18:40"
+        "minutes": "18:40",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -9
       },
       {
         "id": "salvador-giletto",
@@ -627,7 +2311,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "34:23"
+        "minutes": "34:23",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -6
       },
       {
         "id": "gaston-garcia",
@@ -635,7 +2341,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "21:07"
+        "minutes": "21:07",
+        "valuation": 11,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 3
       },
       {
         "id": "daniel-moreira",
@@ -643,7 +2371,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "13:53"
+        "minutes": "13:53",
+        "valuation": 7,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": -8
       },
       {
         "id": "mateo-rearte",
@@ -651,7 +2401,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 4,
         "assists": 3,
-        "minutes": "20:34"
+        "minutes": "20:34",
+        "valuation": 11,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": -5
       },
       {
         "id": "geronimo-ramallo",
@@ -659,7 +2431,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "15:28"
+        "minutes": "15:28",
+        "valuation": 4,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -13
       },
       {
         "id": "lautaro-berra",
@@ -667,7 +2461,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "26:07"
+        "minutes": "26:07",
+        "valuation": 18,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 8,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "plusMinus": 0
       },
       {
         "id": "sebastian-lugo",
@@ -675,7 +2491,119 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 10,
         "assists": 1,
-        "minutes": "30:10"
+        "minutes": "30:10",
+        "valuation": 9,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 10,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 6,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
+      },
+      {
+        "id": "matias-joaquin-fernandez",
+        "name": "Matias Joaquin Fernandez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "valentino-maxilimiliano-saucedo",
+        "name": "Valentino Maxilimiliano Saucedo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "dante-saettone",
+        "name": "Dante Saettone",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "instituto": [
@@ -685,7 +2613,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "06:31"
+        "minutes": "06:31",
+        "valuation": -2,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "leandro-vildoza",
@@ -693,7 +2643,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 4,
-        "minutes": "11:51"
+        "minutes": "11:51",
+        "valuation": 1,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "gaston-whelan",
@@ -701,7 +2673,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 7,
         "assists": 4,
-        "minutes": "28:09"
+        "minutes": "28:09",
+        "valuation": 11,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 5,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 4
       },
       {
         "id": "torren-jones",
@@ -709,7 +2703,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "27:38"
+        "minutes": "27:38",
+        "valuation": 14,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "lucas-andersson",
@@ -717,7 +2733,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "08:60"
+        "minutes": "08:60",
+        "valuation": 12,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "bautista-lugarini",
@@ -725,7 +2763,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "28:16"
+        "minutes": "28:16",
+        "valuation": 7,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": 1
       },
       {
         "id": "juan-pablo-corbalan",
@@ -733,7 +2793,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 5,
         "assists": 3,
-        "minutes": "31:48"
+        "minutes": "31:48",
+        "valuation": 16,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 7,
+          "percentage": 28
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 7
       },
       {
         "id": "federico-aguerre",
@@ -741,7 +2823,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "24:05"
+        "minutes": "24:05",
+        "valuation": 16,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": 9
       },
       {
         "id": "xavier-carreras",
@@ -749,7 +2853,119 @@ export const matchPlayerStats = {
         "points": 19,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "32:41"
+        "minutes": "32:41",
+        "valuation": 14,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 12
+      },
+      {
+        "id": "federico-bustos",
+        "name": "Federico Bustos",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "julian-costa",
+        "name": "Julian Costa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "santiago-guasco-pasquini",
+        "name": "Santiago Guasco Pasquini",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -783,7 +2999,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "23:43"
+        "minutes": "23:43",
+        "valuation": 0,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 6,
+          "percentage": 100
+        },
+        "plusMinus": 2
       },
       {
         "id": "andrew-corum",
@@ -791,7 +3029,29 @@ export const matchPlayerStats = {
         "points": 22,
         "rebounds": 17,
         "assists": 0,
-        "minutes": "34:03"
+        "minutes": "34:03",
+        "valuation": 34,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 15,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": -11
       },
       {
         "id": "lucas-perez",
@@ -799,7 +3059,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 7,
         "assists": 4,
-        "minutes": "31:40"
+        "minutes": "31:40",
+        "valuation": 4,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 4,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 9,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -8
       },
       {
         "id": "guido-mariani",
@@ -807,7 +3089,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "27:15"
+        "minutes": "27:15",
+        "valuation": 4,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 4,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -4
       },
       {
         "id": "elisias-hall",
@@ -815,7 +3119,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "24:53"
+        "minutes": "24:53",
+        "valuation": 8,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": 3
       },
       {
         "id": "santino-romegialli",
@@ -823,7 +3149,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:03"
+        "minutes": "03:03",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 2
       },
       {
         "id": "ezequiel-paz",
@@ -831,7 +3179,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "19:30"
+        "minutes": "19:30",
+        "valuation": 9,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": -7
       },
       {
         "id": "jeremias-frontera",
@@ -839,7 +3209,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "10:15"
+        "minutes": "10:15",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "plusMinus": -2
       },
       {
         "id": "agustin-vergara",
@@ -847,7 +3239,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "10:32"
+        "minutes": "10:32",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -4
       },
       {
         "id": "joaquin-lopez-lorenz",
@@ -855,7 +3269,89 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "15:07"
+        "minutes": "15:07",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -11
+      },
+      {
+        "id": "mariano-caceres",
+        "name": "Mariano Cáceres Comelli",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "francisco-pereyra",
+        "name": "Francisco Pereyra",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "platense": [
@@ -865,7 +3361,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "08:30"
+        "minutes": "08:30",
+        "valuation": 3,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 9
       },
       {
         "id": "franco-smaniotti",
@@ -873,7 +3391,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "24:12"
+        "minutes": "24:12",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 7
       },
       {
         "id": "facundo-terra",
@@ -881,7 +3421,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "26:56"
+        "minutes": "26:56",
+        "valuation": 12,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": 1
       },
       {
         "id": "erik-copes",
@@ -889,7 +3451,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "23:17"
+        "minutes": "23:17",
+        "valuation": 17,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 11,
+          "percentage": 54
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "mauro-cosolito",
@@ -897,7 +3481,29 @@ export const matchPlayerStats = {
         "points": 1,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "22:19"
+        "minutes": "22:19",
+        "valuation": -5,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 5
       },
       {
         "id": "federico-grun",
@@ -905,7 +3511,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 4,
         "assists": 3,
-        "minutes": "21:56"
+        "minutes": "21:56",
+        "valuation": 14,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "ramiro-santiago",
@@ -913,7 +3541,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "19:35"
+        "minutes": "19:35",
+        "valuation": 4,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "julian-morales",
@@ -921,7 +3571,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "20:14"
+        "minutes": "20:14",
+        "valuation": 18,
+        "starter": false,
+        "steals": 3,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "gaston-cordoba",
@@ -929,7 +3601,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "16:18"
+        "minutes": "16:18",
+        "valuation": 3,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "nicolas-burgos",
@@ -937,7 +3631,89 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 7,
         "assists": 0,
-        "minutes": "16:43"
+        "minutes": "16:43",
+        "valuation": 5,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "plusMinus": 3
+      },
+      {
+        "id": "anthoan-urbina",
+        "name": "Anthoan Urbina",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "giovanni-pappalardi",
+        "name": "Giovanni Pappalardi",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -971,7 +3747,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "29:55"
+        "minutes": "29:55",
+        "valuation": 2,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 10,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -6
       },
       {
         "id": "sebastian-orresta",
@@ -979,7 +3777,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "26:58"
+        "minutes": "26:58",
+        "valuation": 6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 21
       },
       {
         "id": "jose-montero",
@@ -987,7 +3807,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "33:09"
+        "minutes": "33:09",
+        "valuation": -1,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 20
       },
       {
         "id": "fausto-ruesga",
@@ -995,7 +3837,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 15,
         "assists": 1,
-        "minutes": "31:19"
+        "minutes": "31:19",
+        "valuation": 28,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 13,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 9,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "plusMinus": 23
       },
       {
         "id": "roberto-acuna",
@@ -1003,7 +3867,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 6,
         "assists": 2,
-        "minutes": "28:47"
+        "minutes": "28:47",
+        "valuation": 24,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 6,
+          "percentage": 100
+        },
+        "plusMinus": 20
       },
       {
         "id": "keith-stone",
@@ -1011,7 +3897,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "11:22"
+        "minutes": "11:22",
+        "valuation": 2,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -10
       },
       {
         "id": "francisco-farabello",
@@ -1019,7 +3927,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "20:28"
+        "minutes": "20:28",
+        "valuation": 14,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 8,
+          "percentage": 37
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 2
       },
       {
         "id": "exequiel-lezcano",
@@ -1027,7 +3957,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "4:46"
+        "minutes": "04:46",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -10
       },
       {
         "id": "elian-centeno",
@@ -1035,7 +3987,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "8:31"
+        "minutes": "08:31",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -13
       },
       {
         "id": "francisco-ferraro",
@@ -1043,7 +4017,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "3:46"
+        "minutes": "03:46",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "alan-ledesma",
@@ -1051,7 +4047,59 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "0:58"
+        "minutes": "00:58",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "viktor-bender",
+        "name": "Viktor Bender",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "instituto": [
@@ -1061,7 +4109,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "33:37"
+        "minutes": "33:37",
+        "valuation": 14,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -7
       },
       {
         "id": "torren-jones",
@@ -1069,7 +4139,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 9,
         "assists": 0,
-        "minutes": "32:57"
+        "minutes": "32:57",
+        "valuation": 17,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 8,
+        "twoPointers": {
+          "made": 8,
+          "attempted": 16,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "plusMinus": -8
       },
       {
         "id": "bautista-lugarini",
@@ -1077,7 +4169,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 6,
         "assists": 2,
-        "minutes": "27:15"
+        "minutes": "27:15",
+        "valuation": 17,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": -18
       },
       {
         "id": "juan-pablo-corbalan",
@@ -1085,7 +4199,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 3,
         "assists": 4,
-        "minutes": "28:47"
+        "minutes": "28:47",
+        "valuation": 9,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 4,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -10
       },
       {
         "id": "xavier-carreras",
@@ -1093,7 +4229,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "26:10"
+        "minutes": "26:10",
+        "valuation": 1,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -23
       },
       {
         "id": "kadir-pomare",
@@ -1101,7 +4259,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "8:45"
+        "minutes": "08:45",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "leandro-vildoza",
@@ -1109,7 +4289,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "21:27"
+        "minutes": "21:27",
+        "valuation": 3,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "lucas-andersson",
@@ -1117,7 +4319,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "1:23"
+        "minutes": "01:23",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "federico-aguerre",
@@ -1125,7 +4349,119 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "19:38"
+        "minutes": "19:38",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
+      },
+      {
+        "id": "federico-bustos",
+        "name": "Federico Bustos",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "julian-costa",
+        "name": "Julian Costa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "santiago-guasco-pasquini",
+        "name": "Santiago Guasco Pasquini",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -1159,7 +4495,29 @@ export const matchPlayerStats = {
         "points": 1,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "02:41"
+        "minutes": "02:41",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -4
       },
       {
         "id": "francisco-conrradi",
@@ -1167,7 +4525,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "21:05"
+        "minutes": "21:05",
+        "valuation": 12,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 5,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 17
       },
       {
         "id": "nicolas-copello",
@@ -1175,7 +4555,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "18:47"
+        "minutes": "18:47",
+        "valuation": 13,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 22
       },
       {
         "id": "tayavek-gallizzi",
@@ -1183,7 +4585,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "17:25"
+        "minutes": "17:25",
+        "valuation": 1,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 14
       },
       {
         "id": "tyren-johnson",
@@ -1191,7 +4615,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "20:48"
+        "minutes": "20:48",
+        "valuation": 17,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 11
       },
       {
         "id": "ignacio-laterza",
@@ -1199,7 +4645,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "06:04"
+        "minutes": "06:04",
+        "valuation": -2,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "nicolas-martinez",
@@ -1207,7 +4675,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "19:12"
+        "minutes": "19:12",
+        "valuation": 27,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 11,
+          "attempted": 13,
+          "percentage": 84
+        },
+        "plusMinus": 16
       },
       {
         "id": "franco-mendez",
@@ -1215,7 +4705,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 6,
         "assists": 4,
-        "minutes": "21:56"
+        "minutes": "21:56",
+        "valuation": 16,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": 21
       },
       {
         "id": "enzo-roth",
@@ -1223,7 +4735,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "07:14"
+        "minutes": "07:14",
+        "valuation": -3,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "facundo-rutenberg",
@@ -1231,7 +4765,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "17:01"
+        "minutes": "17:01",
+        "valuation": 10,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 9
       },
       {
         "id": "javier-saiz",
@@ -1239,7 +4795,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "19:13"
+        "minutes": "19:13",
+        "valuation": 14,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 15
       },
       {
         "id": "matias-solanas",
@@ -1247,7 +4825,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "28:35"
+        "minutes": "28:35",
+        "valuation": 12,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 11
       }
     ],
     "platense": [
@@ -1257,7 +4857,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 7,
         "assists": 1,
-        "minutes": "20:59"
+        "minutes": "20:59",
+        "valuation": 16,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 4,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 8,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -8
       },
       {
         "id": "erik-copes",
@@ -1265,7 +4887,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "19:01"
+        "minutes": "19:01",
+        "valuation": 2,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -19
       },
       {
         "id": "gaston-cordoba",
@@ -1273,7 +4917,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "12:16"
+        "minutes": "12:16",
+        "valuation": -7,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -20
       },
       {
         "id": "mauro-cosolito",
@@ -1281,7 +4947,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "18:23"
+        "minutes": "18:23",
+        "valuation": 6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -23
       },
       {
         "id": "mariano-goicoechea",
@@ -1289,7 +4977,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "21:25"
+        "minutes": "21:25",
+        "valuation": 18,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 6,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "federico-grun",
@@ -1297,7 +5007,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "15:07"
+        "minutes": "15:07",
+        "valuation": -1,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -26
       },
       {
         "id": "julian-morales",
@@ -1305,7 +5037,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "14:12"
+        "minutes": "14:12",
+        "valuation": -3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -12
       },
       {
         "id": "giovanni-pappalardi",
@@ -1313,7 +5067,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "04:49"
+        "minutes": "04:49",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "ramiro-santiago",
@@ -1321,7 +5097,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "24:19"
+        "minutes": "24:19",
+        "valuation": 15,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": -11
       },
       {
         "id": "franco-smaniotti",
@@ -1329,7 +5127,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "22:14"
+        "minutes": "22:14",
+        "valuation": -2,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -9
       },
       {
         "id": "facundo-terra",
@@ -1337,7 +5157,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "17:17"
+        "minutes": "17:17",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -19
       },
       {
         "id": "anthoan-urbina",
@@ -1345,7 +5187,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "09:57"
+        "minutes": "09:57",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 2
       }
     ],
     "quarterScores": [
@@ -1379,7 +5243,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "17:07"
+        "minutes": "17:07",
+        "valuation": 4,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "felipe-inyaco",
@@ -1387,7 +5273,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "25:27"
+        "minutes": "25:27",
+        "valuation": 15,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 10,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "martiniano-dato",
@@ -1395,7 +5303,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "27:07"
+        "minutes": "27:07",
+        "valuation": 11,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "plusMinus": 0
       },
       {
         "id": "emiliano-toretta",
@@ -1403,7 +5333,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "13:49"
+        "minutes": "13:49",
+        "valuation": 8,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -3
       },
       {
         "id": "carlos-rivero",
@@ -1411,7 +5363,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 9,
         "assists": 0,
-        "minutes": "24:25"
+        "minutes": "24:25",
+        "valuation": 11,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -2
       },
       {
         "id": "marcos-chacon",
@@ -1419,7 +5393,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "23:33"
+        "minutes": "23:33",
+        "valuation": 21,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 7
       },
       {
         "id": "sebastian-carrasco",
@@ -1427,7 +5423,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 5,
         "assists": 3,
-        "minutes": "26:11"
+        "minutes": "26:11",
+        "valuation": 13,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 9,
+          "percentage": 44
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 9,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "plusMinus": 9
       },
       {
         "id": "valentin-forestier",
@@ -1435,7 +5453,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "12:16"
+        "minutes": "12:16",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "segundo-lasarte",
@@ -1443,7 +5483,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:00"
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "ben-stevens",
@@ -1451,7 +5513,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 5,
         "assists": 3,
-        "minutes": "15:35"
+        "minutes": "15:35",
+        "valuation": 2,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": 8
       },
       {
         "id": "gino-balbo",
@@ -1459,7 +5543,59 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "14:30"
+        "minutes": "14:30",
+        "valuation": 6,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 8
+      },
+      {
+        "id": "ciro-melo",
+        "name": "Ciro Melo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "la-union": [
@@ -1469,7 +5605,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "31:17"
+        "minutes": "31:17",
+        "valuation": 12,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 4
       },
       {
         "id": "mariano-marina",
@@ -1477,7 +5635,29 @@ export const matchPlayerStats = {
         "points": 21,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "27:21"
+        "minutes": "27:21",
+        "valuation": 20,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 4,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 8,
+          "attempted": 11,
+          "percentage": 72
+        },
+        "plusMinus": 2
       },
       {
         "id": "sebastian-acevedo",
@@ -1485,7 +5665,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "23:20"
+        "minutes": "23:20",
+        "valuation": 2,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "alexis-elsener",
@@ -1493,7 +5695,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "25:36"
+        "minutes": "25:36",
+        "valuation": 3,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 7,
+          "percentage": 14
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": -16
       },
       {
         "id": "windi-graterol",
@@ -1501,7 +5725,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "32:53"
+        "minutes": "32:53",
+        "valuation": 26,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 7,
+          "attempted": 7,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 3
       },
       {
         "id": "tomas-nuno",
@@ -1509,7 +5755,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "34:09"
+        "minutes": "34:09",
+        "valuation": 15,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 8,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "plusMinus": -1
       },
       {
         "id": "agustin-facello",
@@ -1517,7 +5785,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "17:58"
+        "minutes": "17:58",
+        "valuation": 1,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -13
       },
       {
         "id": "enzo-maglietti",
@@ -1525,7 +5815,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:19"
+        "minutes": "00:19",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "franco-alorda",
@@ -1533,7 +5845,119 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "07:07"
+        "minutes": "07:07",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -9
+      },
+      {
+        "id": "alejandro-talavera",
+        "name": "Alejandro Talavera Espínola",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "hugo-paez",
+        "name": "Hugo Páez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "facundo-mariano",
+        "name": "Facundo Mariano",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -1567,7 +5991,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "13:01"
+        "minutes": "13:01",
+        "valuation": -2,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -10
       },
       {
         "id": "francisco-conrradi",
@@ -1575,7 +6021,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 2,
         "assists": 4,
-        "minutes": "18:44"
+        "minutes": "18:44",
+        "valuation": 9,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 4,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -3
       },
       {
         "id": "matias-solanas",
@@ -1583,7 +6051,29 @@ export const matchPlayerStats = {
         "points": 24,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "30:43"
+        "minutes": "30:43",
+        "valuation": 21,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 8,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 4
       },
       {
         "id": "franco-mendez",
@@ -1591,7 +6081,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "27:17"
+        "minutes": "27:17",
+        "valuation": 5,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -6
       },
       {
         "id": "javier-saiz",
@@ -1599,7 +6111,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "24:37"
+        "minutes": "24:37",
+        "valuation": 8,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 4,
+        "offensiveRebounds": 4,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 11
       },
       {
         "id": "nicolas-copello",
@@ -1607,7 +6141,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 7,
         "assists": 2,
-        "minutes": "22:38"
+        "minutes": "22:38",
+        "valuation": 13,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 14
       },
       {
         "id": "facundo-rutenberg",
@@ -1615,7 +6171,29 @@ export const matchPlayerStats = {
         "points": 18,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "25:21"
+        "minutes": "25:21",
+        "valuation": 24,
+        "starter": false,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 5,
+          "percentage": 100
+        },
+        "plusMinus": 12
       },
       {
         "id": "nicolas-martinez",
@@ -1623,7 +6201,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "22:36"
+        "minutes": "22:36",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 15
       },
       {
         "id": "tayavek-gallizzi",
@@ -1631,7 +6231,119 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "15:04"
+        "minutes": "15:04",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -7
+      },
+      {
+        "id": "lucio-mantovani",
+        "name": "Lucio Mantovani",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "sebastian-bogado",
+        "name": "Sebastián Bogado",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "enzo-roth",
+        "name": "Enzo Roth",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "atenas": [
@@ -1641,7 +6353,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 3,
         "assists": 4,
-        "minutes": "29:19"
+        "minutes": "29:19",
+        "valuation": 7,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 5,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 7,
+          "percentage": 28
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 11
       },
       {
         "id": "adonys-henriquez",
@@ -1649,7 +6383,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "28:57"
+        "minutes": "28:57",
+        "valuation": 6,
+        "starter": true,
+        "steals": 5,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -13
       },
       {
         "id": "juan-arengo",
@@ -1657,7 +6413,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "33:26"
+        "minutes": "33:26",
+        "valuation": 14,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 9,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 6,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -4
       },
       {
         "id": "daniel-laster",
@@ -1665,7 +6443,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "24:34"
+        "minutes": "24:34",
+        "valuation": 18,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": -12
       },
       {
         "id": "bryan-carabali",
@@ -1673,7 +6473,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "22:38"
+        "minutes": "22:38",
+        "valuation": 14,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": 2
       },
       {
         "id": "benjamin-imaz",
@@ -1681,7 +6503,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:58"
+        "minutes": "03:58",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -11
       },
       {
         "id": "facundo-vazquez",
@@ -1689,7 +6533,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "27:26"
+        "minutes": "27:26",
+        "valuation": 4,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 7,
+          "percentage": 14
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -4
       },
       {
         "id": "gonzalo-bressan",
@@ -1697,7 +6563,149 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 10,
         "assists": 3,
-        "minutes": "29:42"
+        "minutes": "29:42",
+        "valuation": 21,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 4,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 7,
+          "attempted": 8,
+          "percentage": 87
+        },
+        "plusMinus": 1
+      },
+      {
+        "id": "matias-nicolas-gonzalez",
+        "name": "Matias Nicolas Gonzalez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "facundo-valfre",
+        "name": "Facundo Valfre",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "german-misetich",
+        "name": "Germán Misetich",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "francisco-eduardo-gallo",
+        "name": "Francisco Eduardo Gallo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -1731,7 +6739,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 4,
         "assists": 3,
-        "minutes": "23:40"
+        "minutes": "23:40",
+        "valuation": 8,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 2
       },
       {
         "id": "franco-smaniotti",
@@ -1739,7 +6769,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "20:43"
+        "minutes": "20:43",
+        "valuation": 17,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 6
       },
       {
         "id": "facundo-terra",
@@ -1747,7 +6799,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 1,
         "assists": 4,
-        "minutes": "21:16"
+        "minutes": "21:16",
+        "valuation": 9,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -19
       },
       {
         "id": "erik-copes",
@@ -1755,7 +6829,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 7,
         "assists": 0,
-        "minutes": "32:28"
+        "minutes": "32:28",
+        "valuation": 29,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 1,
+        "offensiveRebounds": 5,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 7,
+          "attempted": 9,
+          "percentage": 77
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 9,
+          "percentage": 66
+        },
+        "plusMinus": 1
       },
       {
         "id": "mauro-cosolito",
@@ -1763,7 +6859,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 4,
         "assists": 3,
-        "minutes": "27:06"
+        "minutes": "27:06",
+        "valuation": 9,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 4,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -5
       },
       {
         "id": "mariano-goicoechea",
@@ -1771,7 +6889,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "08:17"
+        "minutes": "08:17",
+        "valuation": -3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -8
       },
       {
         "id": "ramiro-santiago",
@@ -1779,7 +6919,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "19:25"
+        "minutes": "19:25",
+        "valuation": 9,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 12
       },
       {
         "id": "julian-morales",
@@ -1787,7 +6949,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 1,
         "assists": 5,
-        "minutes": "20:57"
+        "minutes": "20:57",
+        "valuation": 12,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 9,
+          "percentage": 33
+        },
+        "plusMinus": 3
       },
       {
         "id": "gaston-cordoba",
@@ -1795,7 +6979,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "18:36"
+        "minutes": "18:36",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -7
       },
       {
         "id": "nicolas-burgos",
@@ -1803,7 +7009,89 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "07:32"
+        "minutes": "07:32",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -5
+      },
+      {
+        "id": "anthoan-urbina",
+        "name": "Anthoan Urbina",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "giovanni-pappalardi",
+        "name": "Giovanni Pappalardi",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "la-union": [
@@ -1813,7 +7101,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 3,
         "assists": 6,
-        "minutes": "33:28"
+        "minutes": "33:28",
+        "valuation": 13,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 3
       },
       {
         "id": "mariano-marina",
@@ -1821,7 +7131,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 1,
         "assists": 4,
-        "minutes": "25:25"
+        "minutes": "25:25",
+        "valuation": 9,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 4,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 5
       },
       {
         "id": "sebastian-acevedo",
@@ -1829,7 +7161,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "32:05"
+        "minutes": "32:05",
+        "valuation": 19,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": 13
       },
       {
         "id": "alexis-elsener",
@@ -1837,7 +7191,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 6,
         "assists": 4,
-        "minutes": "28:17"
+        "minutes": "28:17",
+        "valuation": 19,
+        "starter": true,
+        "steals": 5,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -3
       },
       {
         "id": "windi-graterol",
@@ -1845,7 +7221,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "26:04"
+        "minutes": "26:04",
+        "valuation": 21,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "tomas-nuno",
@@ -1853,7 +7251,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "20:28"
+        "minutes": "20:28",
+        "valuation": 1,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -7
       },
       {
         "id": "agustin-facello",
@@ -1861,7 +7281,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 0,
         "assists": 4,
-        "minutes": "20:18"
+        "minutes": "20:18",
+        "valuation": 18,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": 5
       },
       {
         "id": "franco-alorda",
@@ -1869,7 +7311,149 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "13:56"
+        "minutes": "13:56",
+        "valuation": 3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
+      },
+      {
+        "id": "alejandro-talavera",
+        "name": "Alejandro Talavera Espínola",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "hugo-paez",
+        "name": "Hugo Páez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "enzo-maglietti",
+        "name": "Enzo Maglietti",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "facundo-mariano",
+        "name": "Facundo Mariano",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -1903,7 +7487,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "21:11"
+        "minutes": "21:11",
+        "valuation": 14,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 13
       },
       {
         "id": "jose-vildoza",
@@ -1911,7 +7517,29 @@ export const matchPlayerStats = {
         "points": 22,
         "rebounds": 4,
         "assists": 4,
-        "minutes": "21:53"
+        "minutes": "21:53",
+        "valuation": 28,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 8,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 8,
+          "attempted": 9,
+          "percentage": 88
+        },
+        "plusMinus": 19
       },
       {
         "id": "tomas-monacchi",
@@ -1919,7 +7547,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "19:33"
+        "minutes": "19:33",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 24
       },
       {
         "id": "leonardo-lema",
@@ -1927,7 +7577,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 8,
         "assists": 1,
-        "minutes": "23:20"
+        "minutes": "23:20",
+        "valuation": 16,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 4,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 6,
+          "percentage": 100
+        },
+        "plusMinus": 15
       },
       {
         "id": "francisco-caffaro",
@@ -1935,7 +7607,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "19:09"
+        "minutes": "19:09",
+        "valuation": 11,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "plusMinus": 16
       },
       {
         "id": "lucas-faggiano",
@@ -1943,7 +7637,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "18:07"
+        "minutes": "18:07",
+        "valuation": 4,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "nicolas-stenta",
@@ -1951,7 +7667,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "16:59"
+        "minutes": "16:59",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "kriss-helmanis",
@@ -1959,7 +7697,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 8,
         "assists": 5,
-        "minutes": "19:05"
+        "minutes": "19:05",
+        "valuation": 17,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 8,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "valentino-finetti",
@@ -1967,7 +7727,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "02:44"
+        "minutes": "02:44",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "agustin-barreiro",
@@ -1975,7 +7757,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "16:31"
+        "minutes": "16:31",
+        "valuation": 10,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 8
       },
       {
         "id": "martin-cuello",
@@ -1983,7 +7787,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "19:33"
+        "minutes": "19:33",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "elias-torrens",
@@ -1991,7 +7817,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "01:56"
+        "minutes": "01:56",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       }
     ],
     "obera": [
@@ -2001,7 +7849,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 3,
         "assists": 5,
-        "minutes": "23:57"
+        "minutes": "23:57",
+        "valuation": 15,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": -10
       },
       {
         "id": "agustin-brocal",
@@ -2009,7 +7879,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "28:51"
+        "minutes": "28:51",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -9
       },
       {
         "id": "will-vorhees",
@@ -2017,7 +7909,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 6,
         "assists": 2,
-        "minutes": "22:08"
+        "minutes": "22:08",
+        "valuation": 14,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "plusMinus": -4
       },
       {
         "id": "ty-prince",
@@ -2025,7 +7939,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "22:12"
+        "minutes": "22:12",
+        "valuation": 1,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -10
       },
       {
         "id": "jonatan-torresi",
@@ -2033,7 +7969,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "19:14"
+        "minutes": "19:14",
+        "valuation": 7,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -11
       },
       {
         "id": "victor-fernandez",
@@ -2041,7 +7999,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "16:03"
+        "minutes": "16:03",
+        "valuation": 12,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": -13
       },
       {
         "id": "alejo-azpilicueta",
@@ -2049,7 +8029,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "19:07"
+        "minutes": "19:07",
+        "valuation": -2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -14
       },
       {
         "id": "santiago-barrales",
@@ -2057,7 +8059,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "23:26"
+        "minutes": "23:26",
+        "valuation": 3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -21
       },
       {
         "id": "albano-costa",
@@ -2065,7 +8089,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "06:25"
+        "minutes": "06:25",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "juan-cruz-oberto",
@@ -2073,7 +8119,89 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "18:37"
+        "minutes": "18:37",
+        "valuation": 4,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -21
+      },
+      {
+        "id": "milton-mousquere",
+        "name": "Milton Mousquere",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "manuel-caratino",
+        "name": "Manuel Caratino",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -2107,7 +8235,29 @@ export const matchPlayerStats = {
         "points": 25,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "34:23"
+        "minutes": "34:23",
+        "valuation": 22,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 6,
+          "attempted": 11,
+          "percentage": 54
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": 4
       },
       {
         "id": "andrew-corum",
@@ -2115,7 +8265,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 10,
         "assists": 3,
-        "minutes": "25:56"
+        "minutes": "25:56",
+        "valuation": 18,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 4,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 2
       },
       {
         "id": "lucas-perez",
@@ -2123,7 +8295,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 7,
-        "minutes": "30:46"
+        "minutes": "30:46",
+        "valuation": 13,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 16
       },
       {
         "id": "guido-mariani",
@@ -2131,7 +8325,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "23:25"
+        "minutes": "23:25",
+        "valuation": 0,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 7
       },
       {
         "id": "elisias-hall",
@@ -2139,7 +8355,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "21:10"
+        "minutes": "21:10",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": 6
       },
       {
         "id": "santino-romegialli",
@@ -2147,7 +8385,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "23:13"
+        "minutes": "23:13",
+        "valuation": 15,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 10,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -15
       },
       {
         "id": "ezequiel-paz",
@@ -2155,7 +8415,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "20:25"
+        "minutes": "20:25",
+        "valuation": -2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 9,
+          "percentage": 22
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -15
       },
       {
         "id": "jeremias-frontera",
@@ -2163,7 +8445,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "11:27"
+        "minutes": "11:27",
+        "valuation": 9,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": -19
       },
       {
         "id": "joaquin-lopez-lorenz",
@@ -2171,7 +8475,89 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "09:16"
+        "minutes": "09:16",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": -6
+      },
+      {
+        "id": "mariano-caceres",
+        "name": "Mariano Cáceres Comelli",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "francisco-pereyra",
+        "name": "Francisco Pereyra",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "atenas": [
@@ -2181,7 +8567,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 2,
         "assists": 3,
-        "minutes": "28:04"
+        "minutes": "28:04",
+        "valuation": 6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -19
       },
       {
         "id": "adonys-henriquez",
@@ -2189,7 +8597,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 4,
         "assists": 4,
-        "minutes": "36:22"
+        "minutes": "36:22",
+        "valuation": 19,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 8,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "plusMinus": -1
       },
       {
         "id": "juan-arengo",
@@ -2197,7 +8627,29 @@ export const matchPlayerStats = {
         "points": 23,
         "rebounds": 3,
         "assists": 4,
-        "minutes": "34:13"
+        "minutes": "34:13",
+        "valuation": 23,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 9,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": 13
       },
       {
         "id": "daniel-laster",
@@ -2205,7 +8657,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "29:24"
+        "minutes": "29:24",
+        "valuation": 10,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -18
       },
       {
         "id": "bryan-carabali",
@@ -2213,7 +8687,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 15,
         "assists": 2,
-        "minutes": "21:08"
+        "minutes": "21:08",
+        "valuation": 24,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 5,
+        "defensiveRebounds": 10,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 15
       },
       {
         "id": "facundo-vazquez",
@@ -2221,7 +8717,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "21:08"
+        "minutes": "21:08",
+        "valuation": 5,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "plusMinus": 16
       },
       {
         "id": "gonzalo-bressan",
@@ -2229,7 +8747,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "26:19"
+        "minutes": "26:19",
+        "valuation": 23,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 7,
+          "percentage": 85
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 7
       },
       {
         "id": "german-misetich",
@@ -2237,7 +8777,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:16"
+        "minutes": "03:16",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "benjamin-imaz",
@@ -2245,7 +8807,119 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:05"
+        "minutes": "00:05",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
+      },
+      {
+        "id": "matias-nicolas-gonzalez",
+        "name": "Matias Nicolas Gonzalez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "facundo-valfre",
+        "name": "Facundo Valfre",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "francisco-eduardo-gallo",
+        "name": "Francisco Eduardo Gallo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -2279,7 +8953,29 @@ export const matchPlayerStats = {
         "points": 21,
         "rebounds": 9,
         "assists": 0,
-        "minutes": "25:05"
+        "minutes": "25:05",
+        "valuation": 26,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 7,
+          "percentage": 85
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 8,
+          "percentage": 75
+        },
+        "plusMinus": 11
       },
       {
         "id": "juan-martin-guerrero",
@@ -2287,7 +8983,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 2,
         "assists": 3,
-        "minutes": "18:13"
+        "minutes": "18:13",
+        "valuation": 8,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 9
       },
       {
         "id": "patricio-tabarez",
@@ -2295,7 +9013,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "23:13"
+        "minutes": "23:13",
+        "valuation": 5,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": 4
       },
       {
         "id": "fortuna-rolfi",
@@ -2303,7 +9043,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 5,
         "assists": 6,
-        "minutes": "31:17"
+        "minutes": "31:17",
+        "valuation": 25,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 4,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 0
       },
       {
         "id": "rolando-vallejos",
@@ -2311,7 +9073,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "22:42"
+        "minutes": "22:42",
+        "valuation": 2,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "nicolas-marcucci",
@@ -2319,7 +9103,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "14:23"
+        "minutes": "14:23",
+        "valuation": -4,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -9
       },
       {
         "id": "felipe-barrionuevo",
@@ -2327,7 +9133,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "21:47"
+        "minutes": "21:47",
+        "valuation": 10,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 5,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 8,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -14
       },
       {
         "id": "agustin-pautasso",
@@ -2335,7 +9163,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "19:11"
+        "minutes": "19:11",
+        "valuation": 9,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -10
       },
       {
         "id": "andriy-grytsak",
@@ -2343,7 +9193,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "14:29"
+        "minutes": "14:29",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": -5
       },
       {
         "id": "enzo-filippetti",
@@ -2351,7 +9223,89 @@ export const matchPlayerStats = {
         "points": 1,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "09:39"
+        "minutes": "09:39",
+        "valuation": -1,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -9
+      },
+      {
+        "id": "ezequiel-horen",
+        "name": "Ezequiel Horen",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "rocco-guareschi-perez",
+        "name": "Rocco Guareschi Perez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "ferro": [
@@ -2361,7 +9315,29 @@ export const matchPlayerStats = {
         "points": 25,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "29:58"
+        "minutes": "29:58",
+        "valuation": 32,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 7,
+          "percentage": 28
+        },
+        "freeThrows": {
+          "made": 9,
+          "attempted": 9,
+          "percentage": 100
+        },
+        "plusMinus": 0
       },
       {
         "id": "jano-martinez",
@@ -2369,7 +9345,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "25:47"
+        "minutes": "25:47",
+        "valuation": 11,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -5
       },
       {
         "id": "federico-zezular",
@@ -2377,7 +9375,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "29:58"
+        "minutes": "29:58",
+        "valuation": 9,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "plusMinus": -8
       },
       {
         "id": "facundo-pinero",
@@ -2385,7 +9405,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "20:03"
+        "minutes": "20:03",
+        "valuation": 7,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -6
       },
       {
         "id": "valentin-bettiga",
@@ -2393,7 +9435,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 7,
         "assists": 1,
-        "minutes": "32:21"
+        "minutes": "32:21",
+        "valuation": 13,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -6
       },
       {
         "id": "jose-defelippo",
@@ -2401,7 +9465,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "15:49"
+        "minutes": "15:49",
+        "valuation": 3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 17
       },
       {
         "id": "kevin-hernandez",
@@ -2409,7 +9495,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "11:03"
+        "minutes": "11:03",
+        "valuation": 21,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 11,
+          "percentage": 90
+        },
+        "plusMinus": 13
       },
       {
         "id": "felipe-rodriguez",
@@ -2417,7 +9525,29 @@ export const matchPlayerStats = {
         "points": 1,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "16:32"
+        "minutes": "16:32",
+        "valuation": -3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 9
       },
       {
         "id": "rodrigo-gallegos",
@@ -2425,7 +9555,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 2,
         "assists": 5,
-        "minutes": "15:18"
+        "minutes": "15:18",
+        "valuation": 13,
+        "starter": false,
+        "steals": 3,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "camilo-rodriguez",
@@ -2433,7 +9585,89 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:11"
+        "minutes": "03:11",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "plusMinus": 5
+      },
+      {
+        "id": "tobias-tamagusuku",
+        "name": "Tobias Tamagusuku",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "camilo-jara",
+        "name": "Camilo Jara",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -2467,7 +9701,29 @@ export const matchPlayerStats = {
         "points": 32,
         "rebounds": 4,
         "assists": 5,
-        "minutes": "40:02"
+        "minutes": "40:02",
+        "valuation": 30,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 12,
+          "percentage": 41
+        },
+        "freeThrows": {
+          "made": 7,
+          "attempted": 9,
+          "percentage": 77
+        },
+        "plusMinus": 11
       },
       {
         "id": "pedro-barral",
@@ -2475,7 +9731,29 @@ export const matchPlayerStats = {
         "points": 22,
         "rebounds": 3,
         "assists": 11,
-        "minutes": "36:25"
+        "minutes": "36:25",
+        "valuation": 26,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 8,
+          "percentage": 37
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": 6
       },
       {
         "id": "marcos-delia",
@@ -2483,7 +9761,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "27:10"
+        "minutes": "27:10",
+        "valuation": 11,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -6
       },
       {
         "id": "juan-bocca",
@@ -2491,7 +9791,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 2,
         "assists": 3,
-        "minutes": "30:16"
+        "minutes": "30:16",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 11,
+          "percentage": 45
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": 0
       },
       {
         "id": "nicolas-romano",
@@ -2499,7 +9821,29 @@ export const matchPlayerStats = {
         "points": 23,
         "rebounds": 6,
         "assists": 2,
-        "minutes": "31:46"
+        "minutes": "31:46",
+        "valuation": 26,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 13,
+          "percentage": 76
+        },
+        "plusMinus": 12
       },
       {
         "id": "manuel-rodriguez",
@@ -2507,7 +9851,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 7,
         "assists": 0,
-        "minutes": "18:32"
+        "minutes": "18:32",
+        "valuation": 11,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "santiago-assum",
@@ -2515,7 +9881,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "13:47"
+        "minutes": "13:47",
+        "valuation": -6,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -13
       },
       {
         "id": "ignacio-respaud",
@@ -2523,7 +9911,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 0,
         "assists": 3,
-        "minutes": "13:35"
+        "minutes": "13:35",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "emilio-stucky",
@@ -2531,7 +9941,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "25:16"
+        "minutes": "25:16",
+        "valuation": 18,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 11
       },
       {
         "id": "abraham-barahona",
@@ -2539,7 +9971,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "09:30"
+        "minutes": "09:30",
+        "valuation": 4,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -7
       },
       {
         "id": "matias-morera",
@@ -2547,7 +10001,59 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:42"
+        "minutes": "03:42",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
+      },
+      {
+        "id": "tomas-delia",
+        "name": "Tomás Delía",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "san-martin": [
@@ -2557,7 +10063,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 6,
         "assists": 2,
-        "minutes": "37:48"
+        "minutes": "37:48",
+        "valuation": 17,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -7
       },
       {
         "id": "gaston-garcia",
@@ -2565,7 +10093,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "19:03"
+        "minutes": "19:03",
+        "valuation": 5,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -11
       },
       {
         "id": "mateo-rearte",
@@ -2573,7 +10123,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "11:39"
+        "minutes": "11:39",
+        "valuation": -4,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -12
       },
       {
         "id": "lautaro-berra",
@@ -2581,7 +10153,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "11:23"
+        "minutes": "11:23",
+        "valuation": 6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -9
       },
       {
         "id": "sebastian-lugo",
@@ -2589,7 +10183,29 @@ export const matchPlayerStats = {
         "points": 26,
         "rebounds": 12,
         "assists": 1,
-        "minutes": "43:56"
+        "minutes": "43:56",
+        "valuation": 30,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 10,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 8,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "plusMinus": -7
       },
       {
         "id": "diego-collomb",
@@ -2597,7 +10213,29 @@ export const matchPlayerStats = {
         "points": 30,
         "rebounds": 5,
         "assists": 3,
-        "minutes": "38:20"
+        "minutes": "38:20",
+        "valuation": 36,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 5,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 8,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 8,
+          "attempted": 8,
+          "percentage": 100
+        },
+        "plusMinus": 9
       },
       {
         "id": "juanse-gorosito",
@@ -2605,7 +10243,29 @@ export const matchPlayerStats = {
         "points": 18,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "37:50"
+        "minutes": "37:50",
+        "valuation": 15,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 8,
+          "percentage": 37
+        },
+        "freeThrows": {
+          "made": 7,
+          "attempted": 8,
+          "percentage": 87
+        },
+        "plusMinus": 10
       },
       {
         "id": "daniel-moreira",
@@ -2613,7 +10273,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 15,
         "assists": 3,
-        "minutes": "38:37"
+        "minutes": "38:37",
+        "valuation": 28,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 6,
+        "defensiveRebounds": 9,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 11,
+          "percentage": 54
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 8,
+          "attempted": 14,
+          "percentage": 57
+        },
+        "plusMinus": 6
       },
       {
         "id": "geronimo-ramallo",
@@ -2621,7 +10303,119 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "11:25"
+        "minutes": "11:25",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
+      },
+      {
+        "id": "valentino-maxilimiliano-saucedo",
+        "name": "Valentino Maxilimiliano Saucedo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "matias-joaquin-fernandez",
+        "name": "Matias Joaquin Fernandez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "dante-saettone",
+        "name": "Dante Saettone",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -2660,7 +10454,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "33:17"
+        "minutes": "33:17",
+        "valuation": 13,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 10,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": 17
       },
       {
         "id": "marcos-mata",
@@ -2668,7 +10484,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 7,
         "assists": 2,
-        "minutes": "22:10"
+        "minutes": "22:10",
+        "valuation": 16,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 9
       },
       {
         "id": "nicolas-aguirre",
@@ -2676,7 +10514,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "21:12"
+        "minutes": "21:12",
+        "valuation": 11,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 9
       },
       {
         "id": "cliron-hornbeak",
@@ -2684,7 +10544,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "19:04"
+        "minutes": "19:04",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "plusMinus": 10
       },
       {
         "id": "eric-flor",
@@ -2692,7 +10574,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "21:40"
+        "minutes": "21:40",
+        "valuation": 4,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 13
       },
       {
         "id": "lucas-gargallo",
@@ -2700,7 +10604,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "17:43"
+        "minutes": "17:43",
+        "valuation": 6,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 7
       },
       {
         "id": "thiago-roca",
@@ -2708,7 +10634,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "04:20"
+        "minutes": "04:20",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "joaquin-actis",
@@ -2716,7 +10664,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:40"
+        "minutes": "00:40",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "santiago-calderon",
@@ -2724,7 +10694,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "18:48"
+        "minutes": "18:48",
+        "valuation": 14,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": 7
       },
       {
         "id": "valentino-nesci",
@@ -2732,7 +10724,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:27"
+        "minutes": "00:27",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "leonel-schattmann",
@@ -2740,7 +10754,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 2,
         "assists": 3,
-        "minutes": "20:09"
+        "minutes": "20:09",
+        "valuation": 12,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 4
       },
       {
         "id": "antun-maricevic",
@@ -2748,7 +10784,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "20:30"
+        "minutes": "20:30",
+        "valuation": 14,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 6
       }
     ],
     "gimnasia": [
@@ -2758,7 +10816,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "14:41"
+        "minutes": "14:41",
+        "valuation": 0,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -12
       },
       {
         "id": "felipe-inyaco",
@@ -2766,7 +10846,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "22:27"
+        "minutes": "22:27",
+        "valuation": 3,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": -11
       },
       {
         "id": "martiniano-dato",
@@ -2774,7 +10876,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "31:50"
+        "minutes": "31:50",
+        "valuation": 10,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": -12
       },
       {
         "id": "emiliano-toretta",
@@ -2782,7 +10906,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "29:46"
+        "minutes": "29:46",
+        "valuation": 11,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -17
       },
       {
         "id": "carlos-rivero",
@@ -2790,7 +10936,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 9,
         "assists": 0,
-        "minutes": "20:34"
+        "minutes": "20:34",
+        "valuation": 7,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -5
       },
       {
         "id": "marcos-chacon",
@@ -2798,7 +10966,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "25:36"
+        "minutes": "25:36",
+        "valuation": 11,
+        "starter": false,
+        "steals": 3,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 9,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -6
       },
       {
         "id": "sebastian-carrasco",
@@ -2806,7 +10996,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "21:12"
+        "minutes": "21:12",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -7
       },
       {
         "id": "valentin-forestier",
@@ -2814,7 +11026,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "09:54"
+        "minutes": "09:54",
+        "valuation": 0,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "ben-stevens",
@@ -2822,7 +11056,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 7,
         "assists": 1,
-        "minutes": "19:26"
+        "minutes": "19:26",
+        "valuation": 12,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -11
       },
       {
         "id": "gino-balbo",
@@ -2830,7 +11086,89 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "04:34"
+        "minutes": "04:34",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
+      },
+      {
+        "id": "jesus-centeno",
+        "name": "Jesús Centeno",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "segundo-lasarte",
+        "name": "Segundo Lasarte",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -2864,7 +11202,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "21:28"
+        "minutes": "21:28",
+        "valuation": 10,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 0
       },
       {
         "id": "christian-james",
@@ -2872,7 +11232,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "20:48"
+        "minutes": "20:48",
+        "valuation": 4,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 2
       },
       {
         "id": "melvin-johnson",
@@ -2880,7 +11262,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "27:13"
+        "minutes": "27:13",
+        "valuation": -6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 7,
+          "percentage": 14
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -7
       },
       {
         "id": "fabian-ramirez-barrios",
@@ -2888,7 +11292,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "12:28"
+        "minutes": "12:28",
+        "valuation": 0,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "pedro-bombino",
@@ -2896,7 +11322,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 10,
         "assists": 2,
-        "minutes": "24:27"
+        "minutes": "24:27",
+        "valuation": 27,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 6,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 12,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": -4
       },
       {
         "id": "robert-whitfield",
@@ -2904,7 +11352,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "26:37"
+        "minutes": "26:37",
+        "valuation": 6,
+        "starter": false,
+        "steals": 5,
+        "turnovers": 4,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 8,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "plusMinus": 18
       },
       {
         "id": "martin-franchino",
@@ -2912,7 +11382,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "26:42"
+        "minutes": "26:42",
+        "valuation": 9,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "junior-merchant",
@@ -2920,7 +11412,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "17:54"
+        "minutes": "17:54",
+        "valuation": 6,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "plusMinus": 15
       },
       {
         "id": "lucas-andujar",
@@ -2928,7 +11442,119 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 7,
         "assists": 4,
-        "minutes": "22:24"
+        "minutes": "22:24",
+        "valuation": 13,
+        "starter": false,
+        "steals": 4,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 13
+      },
+      {
+        "id": "alejo-sacchi",
+        "name": "Alejo Sacchi",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "joaquin-celiz",
+        "name": "Joaquín Celiz",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "joaquin-coria",
+        "name": "Joaquín Coria Fa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "obera": [
@@ -2938,7 +11564,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 6,
         "assists": 2,
-        "minutes": "24:41"
+        "minutes": "24:41",
+        "valuation": 20,
+        "starter": true,
+        "steals": 4,
+        "turnovers": 4,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 5,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -2
       },
       {
         "id": "jonatan-torresi",
@@ -2946,7 +11594,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "27:34"
+        "minutes": "27:34",
+        "valuation": 0,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "bruno-sansimoni",
@@ -2954,7 +11624,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "25:37"
+        "minutes": "25:37",
+        "valuation": 4,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 0
       },
       {
         "id": "agustin-brocal",
@@ -2962,7 +11654,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 3,
         "assists": 4,
-        "minutes": "29:20"
+        "minutes": "29:20",
+        "valuation": -4,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -4
       },
       {
         "id": "will-vorhees",
@@ -2970,7 +11684,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "12:44"
+        "minutes": "12:44",
+        "valuation": 5,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -1
       },
       {
         "id": "victor-fernandez",
@@ -2978,7 +11714,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "16:54"
+        "minutes": "16:54",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 5,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -12
       },
       {
         "id": "alejo-azpilicueta",
@@ -2986,7 +11744,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "12:56"
+        "minutes": "12:56",
+        "valuation": 4,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -7
       },
       {
         "id": "santiago-barrales",
@@ -2994,7 +11774,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "19:49"
+        "minutes": "19:49",
+        "valuation": 5,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -6
       },
       {
         "id": "albano-costa",
@@ -3002,7 +11804,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "03:09"
+        "minutes": "03:09",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -4
       },
       {
         "id": "juan-cruz-oberto",
@@ -3010,7 +11834,89 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 8,
         "assists": 1,
-        "minutes": "27:16"
+        "minutes": "27:16",
+        "valuation": 11,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 12,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -8
+      },
+      {
+        "id": "matheus-santos",
+        "name": "Matheus Santos Simão Costa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "manuel-caratino",
+        "name": "Manuel Caratino",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -3044,7 +11950,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 5,
         "assists": 4,
-        "minutes": "33:41"
+        "minutes": "33:41",
+        "valuation": 3,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 6,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -5
       },
       {
         "id": "torren-jones",
@@ -3052,7 +11980,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 9,
         "assists": 2,
-        "minutes": "26:47"
+        "minutes": "26:47",
+        "valuation": 11,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 4,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 6
       },
       {
         "id": "bautista-lugarini",
@@ -3060,7 +12010,29 @@ export const matchPlayerStats = {
         "points": 22,
         "rebounds": 12,
         "assists": 1,
-        "minutes": "43:45"
+        "minutes": "43:45",
+        "valuation": 26,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 5,
+        "offensiveRebounds": 4,
+        "defensiveRebounds": 8,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 9,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "plusMinus": -1
       },
       {
         "id": "juan-pablo-corbalan",
@@ -3068,7 +12040,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "42:28"
+        "minutes": "42:28",
+        "valuation": 13,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 4,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 10,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 15,
+          "percentage": 66
+        },
+        "plusMinus": 10
       },
       {
         "id": "xavier-carreras",
@@ -3076,7 +12070,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 7,
         "assists": 1,
-        "minutes": "30:36"
+        "minutes": "30:36",
+        "valuation": 6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": 4
       },
       {
         "id": "kadir-pomare",
@@ -3084,7 +12100,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:12"
+        "minutes": "03:12",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -4
       },
       {
         "id": "gaston-whelan",
@@ -3092,7 +12130,29 @@ export const matchPlayerStats = {
         "points": 21,
         "rebounds": 5,
         "assists": 3,
-        "minutes": "31:28"
+        "minutes": "31:28",
+        "valuation": 22,
+        "starter": false,
+        "steals": 3,
+        "turnovers": 5,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 8,
+          "attempted": 10,
+          "percentage": 80
+        },
+        "plusMinus": -1
       },
       {
         "id": "lucas-andersson",
@@ -3100,7 +12160,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "12:52"
+        "minutes": "12:52",
+        "valuation": 2,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "federico-aguerre",
@@ -3108,7 +12190,119 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "25:10"
+        "minutes": "25:10",
+        "valuation": 7,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 8
+      },
+      {
+        "id": "federico-bustos",
+        "name": "Federico Bustos",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "julian-costa",
+        "name": "Julian Costa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "lucca-lorenzo-giuliani",
+        "name": "Lucca Lorenzo Giuliani",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "ferro": [
@@ -3118,7 +12312,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 4,
         "assists": 7,
-        "minutes": "42:32"
+        "minutes": "42:32",
+        "valuation": 17,
+        "starter": true,
+        "steals": 5,
+        "turnovers": 5,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 10,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 7,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": -2
       },
       {
         "id": "jano-martinez",
@@ -3126,7 +12342,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 3,
         "assists": 9,
-        "minutes": "35:11"
+        "minutes": "35:11",
+        "valuation": 16,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -4
       },
       {
         "id": "facundo-pinero",
@@ -3134,7 +12372,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "20:55"
+        "minutes": "20:55",
+        "valuation": 0,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -20
       },
       {
         "id": "valentin-bettiga",
@@ -3142,7 +12402,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "21:18"
+        "minutes": "21:18",
+        "valuation": 9,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "plusMinus": 7
       },
       {
         "id": "federico-zezular",
@@ -3150,7 +12432,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "22:57"
+        "minutes": "22:57",
+        "valuation": 8,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 9,
+          "percentage": 55
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -15
       },
       {
         "id": "jose-defelippo",
@@ -3158,7 +12462,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 7,
         "assists": 2,
-        "minutes": "27:50"
+        "minutes": "27:50",
+        "valuation": 8,
+        "starter": false,
+        "steals": 5,
+        "turnovers": 5,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 0
       },
       {
         "id": "kevin-hernandez",
@@ -3166,7 +12492,29 @@ export const matchPlayerStats = {
         "points": 24,
         "rebounds": 9,
         "assists": 1,
-        "minutes": "35:40"
+        "minutes": "35:40",
+        "valuation": 31,
+        "starter": false,
+        "steals": 4,
+        "turnovers": 2,
+        "offensiveRebounds": 5,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 8,
+          "attempted": 13,
+          "percentage": 61
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": 3
       },
       {
         "id": "felipe-rodriguez",
@@ -3174,7 +12522,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "17:49"
+        "minutes": "17:49",
+        "valuation": 6,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 12
       },
       {
         "id": "rodrigo-gallegos",
@@ -3182,7 +12552,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 0,
         "assists": 2,
-        "minutes": "18:20"
+        "minutes": "18:20",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 1
       },
       {
         "id": "camilo-rodriguez",
@@ -3190,7 +12582,89 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "07:28"
+        "minutes": "07:28",
+        "valuation": 3,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 3
+      },
+      {
+        "id": "tobias-tamagusuku",
+        "name": "Tobias Tamagusuku",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "camilo-jara",
+        "name": "Camilo Jara",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -3229,7 +12703,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "22:27"
+        "minutes": "22:27",
+        "valuation": 16,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": -4
       },
       {
         "id": "zyon-patterson",
@@ -3237,7 +12733,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "18:29"
+        "minutes": "18:29",
+        "valuation": 12,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 8,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -4
       },
       {
         "id": "leandro-cerminato",
@@ -3245,7 +12763,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 7,
         "assists": 0,
-        "minutes": "30:60"
+        "minutes": "30:60",
+        "valuation": 9,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 5,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -1
       },
       {
         "id": "romulo-gusmao",
@@ -3253,7 +12793,29 @@ export const matchPlayerStats = {
         "points": 1,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "09:03"
+        "minutes": "09:03",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 4
       },
       {
         "id": "jeremias-sandrini",
@@ -3261,7 +12823,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "21:56"
+        "minutes": "21:56",
+        "valuation": 6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 8,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "plusMinus": -10
       },
       {
         "id": "joaquin-fernandez",
@@ -3269,7 +12853,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "18:04"
+        "minutes": "18:04",
+        "valuation": 10,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 13
       },
       {
         "id": "santiago-perez-douthat",
@@ -3277,7 +12883,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "23:17"
+        "minutes": "23:17",
+        "valuation": 13,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 10,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 13
       },
       {
         "id": "cristian-cardo",
@@ -3285,7 +12913,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "23:22"
+        "minutes": "23:22",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "santiago-bilbao",
@@ -3293,7 +12943,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "07:43"
+        "minutes": "07:43",
+        "valuation": 4,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 4
       },
       {
         "id": "josh-ferguson",
@@ -3301,7 +12973,89 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "24:39"
+        "minutes": "24:39",
+        "valuation": 12,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "plusMinus": 1
+      },
+      {
+        "id": "martino-caporaletti",
+        "name": "Martino Caporaletti",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "piero-di-prinzio",
+        "name": "Piero Di Prinzio",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "san-martin": [
@@ -3311,7 +13065,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "27:59"
+        "minutes": "27:59",
+        "valuation": -4,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 7,
+          "percentage": 28
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "gaston-garcia",
@@ -3319,7 +13095,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 4,
         "assists": 3,
-        "minutes": "26:11"
+        "minutes": "26:11",
+        "valuation": 17,
+        "starter": true,
+        "steals": 4,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 2
       },
       {
         "id": "mateo-rearte",
@@ -3327,7 +13125,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "23:50"
+        "minutes": "23:50",
+        "valuation": 14,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "lautaro-berra",
@@ -3335,7 +13155,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "18:08"
+        "minutes": "18:08",
+        "valuation": 9,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "plusMinus": -10
       },
       {
         "id": "sebastian-lugo",
@@ -3343,7 +13185,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 6,
         "assists": 4,
-        "minutes": "32:01"
+        "minutes": "32:01",
+        "valuation": 13,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 3,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "diego-collomb",
@@ -3351,7 +13215,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "25:18"
+        "minutes": "25:18",
+        "valuation": 6,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -4
       },
       {
         "id": "juanse-gorosito",
@@ -3359,7 +13245,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "13:45"
+        "minutes": "13:45",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -6
       },
       {
         "id": "daniel-moreira",
@@ -3367,7 +13275,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 10,
         "assists": 1,
-        "minutes": "22:24"
+        "minutes": "22:24",
+        "valuation": 19,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 4,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "geronimo-ramallo",
@@ -3375,7 +13305,119 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "10:24"
+        "minutes": "10:24",
+        "valuation": -3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
+      },
+      {
+        "id": "juan-ignacio-mascaro-ganora",
+        "name": "Juan Ignacio Mascaro Ganora",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "valentino-maxilimiliano-saucedo",
+        "name": "Valentino Maxilimiliano Saucedo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "giovano-gabriel-pertile-damilano",
+        "name": "Giovano Gabriel Pertile Damilano",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -3409,7 +13451,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "25:49"
+        "minutes": "25:49",
+        "valuation": 2,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 0
       },
       {
         "id": "pedro-barral",
@@ -3417,7 +13481,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "32:01"
+        "minutes": "32:01",
+        "valuation": 8,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 5,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "plusMinus": -8
       },
       {
         "id": "marcos-delia",
@@ -3425,7 +13511,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 7,
         "assists": 0,
-        "minutes": "26:31"
+        "minutes": "26:31",
+        "valuation": 14,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -10
       },
       {
         "id": "juan-bocca",
@@ -3433,7 +13541,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "22:10"
+        "minutes": "22:10",
+        "valuation": 1,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -11
       },
       {
         "id": "nicolas-romano",
@@ -3441,7 +13571,29 @@ export const matchPlayerStats = {
         "points": 25,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "27:17"
+        "minutes": "27:17",
+        "valuation": 29,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 13,
+          "attempted": 13,
+          "percentage": 100
+        },
+        "plusMinus": -5
       },
       {
         "id": "manuel-rodriguez",
@@ -3449,7 +13601,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "20:13"
+        "minutes": "20:13",
+        "valuation": 8,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 5
       },
       {
         "id": "santiago-assum",
@@ -3457,7 +13631,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "16:48"
+        "minutes": "16:48",
+        "valuation": 6,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -8
       },
       {
         "id": "ignacio-respaud",
@@ -3465,7 +13661,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "04:27"
+        "minutes": "04:27",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "emilio-stucky",
@@ -3473,7 +13691,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "13:54"
+        "minutes": "13:54",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "tomas-delia",
@@ -3481,7 +13721,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:37"
+        "minutes": "00:37",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "abraham-barahona",
@@ -3489,7 +13751,29 @@ export const matchPlayerStats = {
         "points": 1,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "05:04"
+        "minutes": "05:04",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -4
       },
       {
         "id": "matias-morera",
@@ -3497,7 +13781,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "05:09"
+        "minutes": "05:09",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       }
     ],
     "gimnasia": [
@@ -3507,7 +13813,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "17:27"
+        "minutes": "17:27",
+        "valuation": -3,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 8,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -5
       },
       {
         "id": "martiniano-dato",
@@ -3515,7 +13843,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "28:38"
+        "minutes": "28:38",
+        "valuation": 12,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "valentin-forestier",
@@ -3523,7 +13873,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "18:60"
+        "minutes": "18:60",
+        "valuation": 3,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 2
       },
       {
         "id": "emiliano-toretta",
@@ -3531,7 +13903,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "26:10"
+        "minutes": "26:10",
+        "valuation": 8,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "carlos-rivero",
@@ -3539,7 +13933,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 9,
         "assists": 3,
-        "minutes": "29:04"
+        "minutes": "29:04",
+        "valuation": 25,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 5,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 8
       },
       {
         "id": "obi-okafor",
@@ -3547,7 +13963,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "13:54"
+        "minutes": "13:54",
+        "valuation": 12,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 0
       },
       {
         "id": "marcos-chacon",
@@ -3555,7 +13993,29 @@ export const matchPlayerStats = {
         "points": 19,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "24:14"
+        "minutes": "24:14",
+        "valuation": 18,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 6,
+          "percentage": 100
+        },
+        "plusMinus": 6
       },
       {
         "id": "sebastian-carrasco",
@@ -3563,7 +14023,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 4,
-        "minutes": "19:22"
+        "minutes": "19:22",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 13
       },
       {
         "id": "ben-stevens",
@@ -3571,7 +14053,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "13:11"
+        "minutes": "13:11",
+        "valuation": 3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "gino-balbo",
@@ -3579,7 +14083,89 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "08:59"
+        "minutes": "08:59",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "jesus-centeno",
+        "name": "Jesús Centeno",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "ciro-melo",
+        "name": "Ciro Melo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -3613,7 +14199,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "19:48"
+        "minutes": "19:48",
+        "valuation": 15,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": 5
       },
       {
         "id": "francisco-conrradi",
@@ -3621,7 +14229,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "28:03"
+        "minutes": "28:03",
+        "valuation": 11,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 3
       },
       {
         "id": "matias-solanas",
@@ -3629,7 +14259,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "27:38"
+        "minutes": "27:38",
+        "valuation": 17,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": -5
       },
       {
         "id": "franco-mendez",
@@ -3637,7 +14289,29 @@ export const matchPlayerStats = {
         "points": 23,
         "rebounds": 6,
         "assists": 10,
-        "minutes": "28:42"
+        "minutes": "28:42",
+        "valuation": 34,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 9,
+          "percentage": 55
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 14
       },
       {
         "id": "javier-saiz",
@@ -3645,7 +14319,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "17:24"
+        "minutes": "17:24",
+        "valuation": 7,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -5
       },
       {
         "id": "nicolas-copello",
@@ -3653,7 +14349,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "14:58"
+        "minutes": "14:58",
+        "valuation": 3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "facundo-rutenberg",
@@ -3661,7 +14379,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 2,
         "assists": 3,
-        "minutes": "20:19"
+        "minutes": "20:19",
+        "valuation": 9,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 11
       },
       {
         "id": "tayavek-gallizzi",
@@ -3669,7 +14409,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "22:24"
+        "minutes": "22:24",
+        "valuation": 15,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 12
       },
       {
         "id": "nicolas-martinez",
@@ -3677,7 +14439,119 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "20:44"
+        "minutes": "20:44",
+        "valuation": 12,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 6
+      },
+      {
+        "id": "lucio-mantovani",
+        "name": "Lucio Mantovani",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "sebastian-bogado",
+        "name": "Sebastián Bogado",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "enzo-roth",
+        "name": "Enzo Roth",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "boca": [
@@ -3687,7 +14561,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "22:48"
+        "minutes": "22:48",
+        "valuation": 10,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "plusMinus": 7
       },
       {
         "id": "jose-vildoza",
@@ -3695,7 +14591,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 5,
         "assists": 8,
-        "minutes": "25:38"
+        "minutes": "25:38",
+        "valuation": 10,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 4,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 6,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -1
       },
       {
         "id": "tomas-monacchi",
@@ -3703,7 +14621,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "29:38"
+        "minutes": "29:38",
+        "valuation": 6,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -8
       },
       {
         "id": "leonardo-lema",
@@ -3711,7 +14651,29 @@ export const matchPlayerStats = {
         "points": 27,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "28:21"
+        "minutes": "28:21",
+        "valuation": 29,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 5,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": -1
       },
       {
         "id": "francisco-caffaro",
@@ -3719,7 +14681,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 10,
         "assists": 0,
-        "minutes": "27:20"
+        "minutes": "27:20",
+        "valuation": 33,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 5,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 10,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 12,
+          "percentage": 83
+        },
+        "plusMinus": -8
       },
       {
         "id": "lucas-faggiano",
@@ -3727,7 +14711,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "14:22"
+        "minutes": "14:22",
+        "valuation": -3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -8
       },
       {
         "id": "nicolas-stenta",
@@ -3735,7 +14741,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "11:06"
+        "minutes": "11:06",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -6
       },
       {
         "id": "kriss-helmanis",
@@ -3743,7 +14771,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "12:28"
+        "minutes": "12:28",
+        "valuation": -2,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "agustin-barreiro",
@@ -3751,7 +14801,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "11:51"
+        "minutes": "11:51",
+        "valuation": 15,
+        "starter": false,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": -10
       },
       {
         "id": "martin-cuello",
@@ -3759,7 +14831,89 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 2,
         "assists": 4,
-        "minutes": "16:28"
+        "minutes": "16:28",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -11
+      },
+      {
+        "id": "valentino-finetti",
+        "name": "Valentino Finetti",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "elias-torrens",
+        "name": "Elías Torrens",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -3793,7 +14947,29 @@ export const matchPlayerStats = {
         "points": 22,
         "rebounds": 5,
         "assists": 5,
-        "minutes": "30:39"
+        "minutes": "30:39",
+        "valuation": 27,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 9,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 7,
+          "attempted": 7,
+          "percentage": 100
+        },
+        "plusMinus": -6
       },
       {
         "id": "adonys-henriquez",
@@ -3801,7 +14977,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "34:14"
+        "minutes": "34:14",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 9
       },
       {
         "id": "juan-arengo",
@@ -3809,7 +15007,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 3,
         "assists": 6,
-        "minutes": "29:54"
+        "minutes": "29:54",
+        "valuation": 20,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "daniel-laster",
@@ -3817,7 +15037,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "29:43"
+        "minutes": "29:43",
+        "valuation": 12,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -5
       },
       {
         "id": "bryan-carabali",
@@ -3825,7 +15067,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 8,
         "assists": 0,
-        "minutes": "22:16"
+        "minutes": "22:16",
+        "valuation": 18,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 6,
+          "attempted": 7,
+          "percentage": 85
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": -2
       },
       {
         "id": "benjamin-imaz",
@@ -3833,7 +15097,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "07:26"
+        "minutes": "07:26",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "facundo-vazquez",
@@ -3841,7 +15127,29 @@ export const matchPlayerStats = {
         "points": 17,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "26:32"
+        "minutes": "26:32",
+        "valuation": 21,
+        "starter": false,
+        "steals": 4,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 15
       },
       {
         "id": "gonzalo-bressan",
@@ -3849,7 +15157,149 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "19:15"
+        "minutes": "19:15",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "plusMinus": 9
+      },
+      {
+        "id": "matias-nicolas-gonzalez",
+        "name": "Matias Nicolas Gonzalez",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "facundo-valfre",
+        "name": "Facundo Valfre",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "german-misetich",
+        "name": "Germán Misetich",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "francisco-eduardo-gallo",
+        "name": "Francisco Eduardo Gallo",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "ferro": [
@@ -3859,7 +15309,29 @@ export const matchPlayerStats = {
         "points": 26,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "32:10"
+        "minutes": "32:10",
+        "valuation": 24,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 9,
+          "attempted": 11,
+          "percentage": 81
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -6
       },
       {
         "id": "jano-martinez",
@@ -3867,7 +15339,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 1,
         "assists": 6,
-        "minutes": "36:20"
+        "minutes": "36:20",
+        "valuation": 8,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "facundo-pinero",
@@ -3875,7 +15369,29 @@ export const matchPlayerStats = {
         "points": 20,
         "rebounds": 2,
         "assists": 4,
-        "minutes": "28:30"
+        "minutes": "28:30",
+        "valuation": 16,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 7,
+          "attempted": 9,
+          "percentage": 77
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -7
       },
       {
         "id": "felipe-rodriguez",
@@ -3883,7 +15399,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "22:20"
+        "minutes": "22:20",
+        "valuation": 8,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "valentin-bettiga",
@@ -3891,7 +15429,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "26:04"
+        "minutes": "26:04",
+        "valuation": 16,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "plusMinus": 9
       },
       {
         "id": "federico-zezular",
@@ -3899,7 +15459,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "00:50"
+        "minutes": "00:50",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "jose-defelippo",
@@ -3907,7 +15489,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 8,
         "assists": 3,
-        "minutes": "24:15"
+        "minutes": "24:15",
+        "valuation": 16,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -12
       },
       {
         "id": "rodrigo-gallegos",
@@ -3915,7 +15519,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "16:06"
+        "minutes": "16:06",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 1
       },
       {
         "id": "camilo-rodriguez",
@@ -3923,7 +15549,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "04:59"
+        "minutes": "04:59",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "kevin-hernandez",
@@ -3931,7 +15579,89 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "08:26"
+        "minutes": "08:26",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -11
+      },
+      {
+        "id": "tobias-tamagusuku",
+        "name": "Tobias Tamagusuku",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "camilo-jara",
+        "name": "Camilo Jara",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -3965,7 +15695,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "20:54"
+        "minutes": "20:54",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": -10
       },
       {
         "id": "zyon-patterson",
@@ -3973,7 +15725,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "23:07"
+        "minutes": "23:07",
+        "valuation": -3,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 9,
+          "percentage": 22
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 3
       },
       {
         "id": "leandro-cerminato",
@@ -3981,7 +15755,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 5,
         "assists": 0,
-        "minutes": "22:41"
+        "minutes": "22:41",
+        "valuation": 11,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -13
       },
       {
         "id": "romulo-gusmao",
@@ -3989,7 +15785,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "10:44"
+        "minutes": "10:44",
+        "valuation": 7,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "plusMinus": -4
       },
       {
         "id": "jeremias-sandrini",
@@ -3997,7 +15815,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 5,
         "assists": 2,
-        "minutes": "23:44"
+        "minutes": "23:44",
+        "valuation": 9,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 4
       },
       {
         "id": "joaquin-fernandez",
@@ -4005,7 +15845,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "16:37"
+        "minutes": "16:37",
+        "valuation": 6,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -9
       },
       {
         "id": "santiago-perez-douthat",
@@ -4013,7 +15875,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "26:46"
+        "minutes": "26:46",
+        "valuation": 14,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 6,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -1
       },
       {
         "id": "cristian-cardo",
@@ -4021,7 +15905,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 9,
         "assists": 0,
-        "minutes": "24:50"
+        "minutes": "24:50",
+        "valuation": 18,
+        "starter": false,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 2
       },
       {
         "id": "santiago-bilbao",
@@ -4029,7 +15935,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "03:28"
+        "minutes": "03:28",
+        "valuation": -2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "josh-ferguson",
@@ -4037,7 +15965,89 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 11,
         "assists": 1,
-        "minutes": "27:09"
+        "minutes": "27:09",
+        "valuation": 23,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 7,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "plusMinus": 4
+      },
+      {
+        "id": "martino-caporaletti",
+        "name": "Martino Caporaletti",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "piero-di-prinzio",
+        "name": "Piero Di Prinzio",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "gimnasia": [
@@ -4047,7 +16057,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "17:57"
+        "minutes": "17:57",
+        "valuation": 8,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "martiniano-dato",
@@ -4055,7 +16087,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "02:02"
+        "minutes": "02:02",
+        "valuation": -1,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "valentin-forestier",
@@ -4063,7 +16117,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "14:07"
+        "minutes": "14:07",
+        "valuation": -1,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "emiliano-toretta",
@@ -4071,7 +16147,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 4,
         "assists": 1,
-        "minutes": "21:26"
+        "minutes": "21:26",
+        "valuation": 4,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 4,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -9
       },
       {
         "id": "carlos-rivero",
@@ -4079,7 +16177,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 11,
         "assists": 1,
-        "minutes": "24:28"
+        "minutes": "24:28",
+        "valuation": 24,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 6,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": 3
       },
       {
         "id": "obi-okafor",
@@ -4087,7 +16207,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 9,
         "assists": 0,
-        "minutes": "23:19"
+        "minutes": "23:19",
+        "valuation": 19,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 8,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 5
       },
       {
         "id": "marcos-chacon",
@@ -4095,7 +16237,29 @@ export const matchPlayerStats = {
         "points": 22,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "35:34"
+        "minutes": "35:34",
+        "valuation": 17,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 10,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 8,
+          "percentage": 37
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "plusMinus": 9
       },
       {
         "id": "sebastian-carrasco",
@@ -4103,7 +16267,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 3,
         "assists": 4,
-        "minutes": "26:31"
+        "minutes": "26:31",
+        "valuation": 4,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 8,
+          "percentage": 37
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 6,
+          "percentage": 16
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 5
       },
       {
         "id": "ben-stevens",
@@ -4111,7 +16297,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 4,
         "assists": 0,
-        "minutes": "15:32"
+        "minutes": "15:32",
+        "valuation": 5,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 2
       },
       {
         "id": "gino-balbo",
@@ -4119,7 +16327,59 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "19:03"
+        "minutes": "19:03",
+        "valuation": 9,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 9
+      },
+      {
+        "id": "jesus-centeno",
+        "name": "Jesús Centeno",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -4153,7 +16413,29 @@ export const matchPlayerStats = {
         "points": 27,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "36:23"
+        "minutes": "36:23",
+        "valuation": 25,
+        "starter": true,
+        "steals": 5,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 5,
+          "attempted": 9,
+          "percentage": 55
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 9
       },
       {
         "id": "lucas-perez",
@@ -4161,7 +16443,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 2,
         "assists": 9,
-        "minutes": "35:58"
+        "minutes": "35:58",
+        "valuation": 21,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 8
       },
       {
         "id": "santino-romegialli",
@@ -4169,7 +16473,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 11,
         "assists": 1,
-        "minutes": "36:47"
+        "minutes": "36:47",
+        "valuation": 17,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 10,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 9
       },
       {
         "id": "ezequiel-paz",
@@ -4177,7 +16503,29 @@ export const matchPlayerStats = {
         "points": 18,
         "rebounds": 3,
         "assists": 4,
-        "minutes": "25:21"
+        "minutes": "25:21",
+        "valuation": 20,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 12
       },
       {
         "id": "elisias-hall",
@@ -4185,7 +16533,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 0,
-        "minutes": "09:43"
+        "minutes": "09:43",
+        "valuation": 2,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 13
       },
       {
         "id": "jeremias-frontera",
@@ -4193,7 +16563,29 @@ export const matchPlayerStats = {
         "points": 14,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "21:54"
+        "minutes": "21:54",
+        "valuation": 15,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 6,
+          "attempted": 8,
+          "percentage": 75
+        },
+        "plusMinus": -2
       },
       {
         "id": "guido-mariani",
@@ -4201,7 +16593,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "25:54"
+        "minutes": "25:54",
+        "valuation": 2,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 8
       },
       {
         "id": "joaquin-lopez-lorenz",
@@ -4209,7 +16623,149 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "08:01"
+        "minutes": "08:01",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "plusMinus": 8
+      },
+      {
+        "id": "andrew-corum",
+        "name": "Andrew Corum",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "mariano-caceres",
+        "name": "Mariano Cáceres Comelli",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "agustin-vergara",
+        "name": "Agustín Vergara",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "francisco-pereyra",
+        "name": "Francisco Pereyra",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "boca": [
@@ -4219,7 +16775,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 0,
         "assists": 3,
-        "minutes": "32:49"
+        "minutes": "32:49",
+        "valuation": 0,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 7,
+          "percentage": 28
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": -9
       },
       {
         "id": "tomas-monacchi",
@@ -4227,7 +16805,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "28:41"
+        "minutes": "28:41",
+        "valuation": 8,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 7,
+          "percentage": 57
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 6,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -5
       },
       {
         "id": "leonardo-lema",
@@ -4235,7 +16835,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "23:58"
+        "minutes": "23:58",
+        "valuation": 4,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": -5
       },
       {
         "id": "francisco-caffaro",
@@ -4243,7 +16865,29 @@ export const matchPlayerStats = {
         "points": 26,
         "rebounds": 10,
         "assists": 3,
-        "minutes": "27:51"
+        "minutes": "27:51",
+        "valuation": 45,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 8,
+          "attempted": 9,
+          "percentage": 88
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 10,
+          "attempted": 10,
+          "percentage": 100
+        },
+        "plusMinus": -4
       },
       {
         "id": "martin-cuello",
@@ -4251,7 +16895,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "18:11"
+        "minutes": "18:11",
+        "valuation": 3,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 7,
+          "percentage": 14
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -14
       },
       {
         "id": "mike-warren",
@@ -4259,7 +16925,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "20:32"
+        "minutes": "20:32",
+        "valuation": 5,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 3,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       },
       {
         "id": "lucas-faggiano",
@@ -4267,7 +16955,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "04:25"
+        "minutes": "04:25",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "nicolas-stenta",
@@ -4275,7 +16985,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "13:45"
+        "minutes": "13:45",
+        "valuation": 4,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -11
       },
       {
         "id": "kriss-helmanis",
@@ -4283,7 +17015,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "11:12"
+        "minutes": "11:12",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -12
       },
       {
         "id": "agustin-barreiro",
@@ -4291,7 +17045,89 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 6,
         "assists": 1,
-        "minutes": "18:37"
+        "minutes": "18:37",
+        "valuation": 13,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
+      },
+      {
+        "id": "valentino-finetti",
+        "name": "Valentino Finetti",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "mateo-fessia",
+        "name": "Mateo Fessia",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -4325,7 +17161,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 4,
         "assists": 2,
-        "minutes": "15:27"
+        "minutes": "15:27",
+        "valuation": 6,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "plusMinus": 9
       },
       {
         "id": "jonatan-torresi",
@@ -4333,7 +17191,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 7,
         "assists": 0,
-        "minutes": "20:49"
+        "minutes": "20:49",
+        "valuation": 7,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -8
       },
       {
         "id": "bruno-sansimoni",
@@ -4341,7 +17221,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 3,
         "assists": 3,
-        "minutes": "23:36"
+        "minutes": "23:36",
+        "valuation": 5,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 4,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": 8
       },
       {
         "id": "agustin-brocal",
@@ -4349,7 +17251,29 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "31:31"
+        "minutes": "31:31",
+        "valuation": 12,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 5,
+          "percentage": 20
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "plusMinus": 6
       },
       {
         "id": "will-vorhees",
@@ -4357,7 +17281,29 @@ export const matchPlayerStats = {
         "points": 12,
         "rebounds": 10,
         "assists": 1,
-        "minutes": "24:17"
+        "minutes": "24:17",
+        "valuation": 12,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 6,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 12,
+          "percentage": 41
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "plusMinus": -1
       },
       {
         "id": "victor-fernandez",
@@ -4365,7 +17311,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 1,
         "assists": 4,
-        "minutes": "16:24"
+        "minutes": "16:24",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 4,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -14
       },
       {
         "id": "alejo-azpilicueta",
@@ -4373,7 +17341,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 7,
         "assists": 1,
-        "minutes": "23:25"
+        "minutes": "23:25",
+        "valuation": 13,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 5,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 3,
+          "percentage": 100
+        },
+        "plusMinus": -5
       },
       {
         "id": "santiago-barrales",
@@ -4381,7 +17371,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 2,
         "assists": 3,
-        "minutes": "23:49"
+        "minutes": "23:49",
+        "valuation": 3,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 4,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -16
       },
       {
         "id": "albano-costa",
@@ -4389,7 +17401,29 @@ export const matchPlayerStats = {
         "points": 1,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "04:59"
+        "minutes": "04:59",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -4
       },
       {
         "id": "juan-cruz-oberto",
@@ -4397,7 +17431,89 @@ export const matchPlayerStats = {
         "points": 13,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "15:43"
+        "minutes": "15:43",
+        "valuation": 18,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 6,
+          "percentage": 83
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": -5
+      },
+      {
+        "id": "matheus-santos",
+        "name": "Matheus Santos Simão Costa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "milton-mousquere",
+        "name": "Milton Mousquere",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "racing-chivilcoy": [
@@ -4407,7 +17523,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 1,
         "assists": 2,
-        "minutes": "10:32"
+        "minutes": "10:32",
+        "valuation": 11,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -1
       },
       {
         "id": "pedro-barral",
@@ -4415,7 +17553,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 2,
         "assists": 2,
-        "minutes": "31:52"
+        "minutes": "31:52",
+        "valuation": 13,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 7,
+          "percentage": 42
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -1
       },
       {
         "id": "marcos-delia",
@@ -4423,7 +17583,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 6,
         "assists": 3,
-        "minutes": "29:55"
+        "minutes": "29:55",
+        "valuation": 14,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "plusMinus": 6
       },
       {
         "id": "juan-bocca",
@@ -4431,7 +17613,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "24:11"
+        "minutes": "24:11",
+        "valuation": 8,
+        "starter": true,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "plusMinus": -5
       },
       {
         "id": "nicolas-romano",
@@ -4439,7 +17643,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "23:49"
+        "minutes": "23:49",
+        "valuation": 12,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 9,
+          "percentage": 44
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 5,
+          "percentage": 80
+        },
+        "plusMinus": -13
       },
       {
         "id": "manuel-rodriguez",
@@ -4447,7 +17673,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 10,
         "assists": 4,
-        "minutes": "25:02"
+        "minutes": "25:02",
+        "valuation": 20,
+        "starter": false,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 10,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 1,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "plusMinus": 15
       },
       {
         "id": "santiago-assum",
@@ -4455,7 +17703,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 2,
         "assists": 0,
-        "minutes": "11:35"
+        "minutes": "11:35",
+        "valuation": 4,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 6
       },
       {
         "id": "ignacio-respaud",
@@ -4463,7 +17733,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "21:30"
+        "minutes": "21:30",
+        "valuation": 5,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 14
       },
       {
         "id": "emilio-stucky",
@@ -4471,7 +17763,29 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 0,
         "assists": 1,
-        "minutes": "13:12"
+        "minutes": "13:12",
+        "valuation": 1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 3
       },
       {
         "id": "tomas-delia",
@@ -4479,7 +17793,29 @@ export const matchPlayerStats = {
         "points": 0,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "01:52"
+        "minutes": "01:52",
+        "valuation": -1,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -2
       },
       {
         "id": "abraham-barahona",
@@ -4487,7 +17823,59 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "06:29"
+        "minutes": "06:29",
+        "valuation": 2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 8
+      },
+      {
+        "id": "joaquin-diaz",
+        "name": "Joaquín Díaz",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [
@@ -4521,7 +17909,29 @@ export const matchPlayerStats = {
         "points": 15,
         "rebounds": 1,
         "assists": 3,
-        "minutes": "23:56"
+        "minutes": "23:56",
+        "valuation": 17,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 4,
+          "percentage": 75
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "plusMinus": 6
       },
       {
         "id": "christian-james",
@@ -4529,7 +17939,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "25:28"
+        "minutes": "25:28",
+        "valuation": 10,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -5
       },
       {
         "id": "melvin-johnson",
@@ -4537,7 +17969,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 2,
         "assists": 3,
-        "minutes": "23:49"
+        "minutes": "23:49",
+        "valuation": 4,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "plusMinus": 2
       },
       {
         "id": "fabian-ramirez-barrios",
@@ -4545,7 +17999,29 @@ export const matchPlayerStats = {
         "points": 4,
         "rebounds": 3,
         "assists": 1,
-        "minutes": "21:06"
+        "minutes": "21:06",
+        "valuation": 0,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "plusMinus": 0
       },
       {
         "id": "pedro-bombino",
@@ -4553,7 +18029,29 @@ export const matchPlayerStats = {
         "points": 10,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "26:07"
+        "minutes": "26:07",
+        "valuation": 10,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 4,
+          "attempted": 6,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 4,
+          "percentage": 50
+        },
+        "plusMinus": -7
       },
       {
         "id": "robert-whitfield",
@@ -4561,7 +18059,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 0,
         "assists": 3,
-        "minutes": "14:38"
+        "minutes": "14:38",
+        "valuation": 7,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 5,
+          "percentage": 60
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -10
       },
       {
         "id": "junior-merchant",
@@ -4569,7 +18089,29 @@ export const matchPlayerStats = {
         "points": 8,
         "rebounds": 6,
         "assists": 0,
-        "minutes": "18:57"
+        "minutes": "18:57",
+        "valuation": 10,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 3,
+        "defensiveRebounds": 3,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "alejo-sacchi",
@@ -4577,7 +18119,29 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 2,
         "assists": 1,
-        "minutes": "11:46"
+        "minutes": "11:46",
+        "valuation": 3,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 2,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": -2
       },
       {
         "id": "lucas-andujar",
@@ -4585,7 +18149,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 3,
         "assists": 2,
-        "minutes": "18:08"
+        "minutes": "18:08",
+        "valuation": 0,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 2,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -13
       },
       {
         "id": "martin-franchino",
@@ -4593,7 +18179,89 @@ export const matchPlayerStats = {
         "points": 6,
         "rebounds": 9,
         "assists": 0,
-        "minutes": "16:05"
+        "minutes": "16:05",
+        "valuation": 8,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 8,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 3,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": -3
+      },
+      {
+        "id": "joaquin-celiz",
+        "name": "Joaquín Celiz",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "joaquin-coria",
+        "name": "Joaquín Coria Fa",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "penarol": [
@@ -4603,7 +18271,29 @@ export const matchPlayerStats = {
         "points": 5,
         "rebounds": 1,
         "assists": 4,
-        "minutes": "21:08"
+        "minutes": "21:08",
+        "valuation": 5,
+        "starter": true,
+        "steals": 2,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "ivan-basualdo",
@@ -4611,7 +18301,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 11,
         "assists": 2,
-        "minutes": "20:58"
+        "minutes": "20:58",
+        "valuation": 16,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 3,
+        "offensiveRebounds": 6,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 7,
+          "percentage": 71
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "plusMinus": 5
       },
       {
         "id": "agustin-perez-tapia",
@@ -4619,7 +18331,29 @@ export const matchPlayerStats = {
         "points": 18,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "27:57"
+        "minutes": "27:57",
+        "valuation": 22,
+        "starter": true,
+        "steals": 3,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 5,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 3,
+          "attempted": 8,
+          "percentage": 37
+        },
+        "freeThrows": {
+          "made": 7,
+          "attempted": 10,
+          "percentage": 70
+        },
+        "plusMinus": 7
       },
       {
         "id": "nicolas-chiaraviglio",
@@ -4627,7 +18361,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "12:02"
+        "minutes": "12:02",
+        "valuation": 0,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 2,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "franco-giorgetti",
@@ -4635,7 +18391,29 @@ export const matchPlayerStats = {
         "points": 3,
         "rebounds": 7,
         "assists": 1,
-        "minutes": "20:18"
+        "minutes": "20:18",
+        "valuation": 7,
+        "starter": true,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 6,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 4,
+          "percentage": 25
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -1
       },
       {
         "id": "al-thornton",
@@ -4643,7 +18421,29 @@ export const matchPlayerStats = {
         "points": 11,
         "rebounds": 5,
         "assists": 1,
-        "minutes": "25:54"
+        "minutes": "25:54",
+        "valuation": 10,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 4,
+        "twoPointers": {
+          "made": 3,
+          "attempted": 8,
+          "percentage": 37
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 2,
+          "attempted": 2,
+          "percentage": 100
+        },
+        "plusMinus": 11
       },
       {
         "id": "luciano-guerra",
@@ -4651,7 +18451,29 @@ export const matchPlayerStats = {
         "points": 16,
         "rebounds": 1,
         "assists": 1,
-        "minutes": "22:26"
+        "minutes": "22:26",
+        "valuation": 10,
+        "starter": false,
+        "steals": 1,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 5,
+          "attempted": 8,
+          "percentage": 62
+        },
+        "threePointers": {
+          "made": 2,
+          "attempted": 5,
+          "percentage": 40
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 10
       },
       {
         "id": "ignacio-bednarek",
@@ -4659,7 +18481,29 @@ export const matchPlayerStats = {
         "points": 2,
         "rebounds": 1,
         "assists": 0,
-        "minutes": "12:35"
+        "minutes": "12:35",
+        "valuation": -2,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 1,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 1,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 2,
+          "percentage": 50
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": -3
       },
       {
         "id": "selem-safar",
@@ -4667,7 +18511,29 @@ export const matchPlayerStats = {
         "points": 9,
         "rebounds": 0,
         "assists": 0,
-        "minutes": "12:03"
+        "minutes": "12:03",
+        "valuation": 10,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 1,
+          "attempted": 1,
+          "percentage": 100
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 4,
+          "attempted": 4,
+          "percentage": 100
+        },
+        "plusMinus": 0
       },
       {
         "id": "sebastian-vega",
@@ -4675,7 +18541,89 @@ export const matchPlayerStats = {
         "points": 7,
         "rebounds": 8,
         "assists": 3,
-        "minutes": "24:39"
+        "minutes": "24:39",
+        "valuation": 18,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 2,
+        "offensiveRebounds": 1,
+        "defensiveRebounds": 7,
+        "twoPointers": {
+          "made": 2,
+          "attempted": 3,
+          "percentage": 66
+        },
+        "threePointers": {
+          "made": 1,
+          "attempted": 3,
+          "percentage": 33
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 10
+      },
+      {
+        "id": "martin-chapero",
+        "name": "Martín Chapero",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
+      },
+      {
+        "id": "gonzalo-aman",
+        "name": "Gonzalo Aman",
+        "points": 0,
+        "rebounds": 0,
+        "assists": 0,
+        "minutes": "00:00",
+        "valuation": 0,
+        "starter": false,
+        "steals": 0,
+        "turnovers": 0,
+        "offensiveRebounds": 0,
+        "defensiveRebounds": 0,
+        "twoPointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "threePointers": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "freeThrows": {
+          "made": 0,
+          "attempted": 0,
+          "percentage": 0
+        },
+        "plusMinus": 0
       }
     ],
     "quarterScores": [

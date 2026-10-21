@@ -12,16 +12,24 @@ const playersSource = fs.readFileSync(
 
 // IDs oficiales de los equipos ya identificados.
 const teamMap = {
-  114763: "la-union",
-  114607: "racing-chivilcoy",
-  112549: "platense",
-  113652: "obera",
-  113373: "san-lorenzo",
-  114902: "penarol",
-  114561: "regatas",
-  113870: "olimpico",
-  114628: "independiente-oliva",
   112600: "lanus",
+  112553: "gimnasia",
+  114902: "penarol",
+  115240: "argentino",
+  112566: "ferro",
+  113546: "san-martin",
+  112809: "instituto",
+  113870: "olimpico",
+  112549: "platense",
+  114561: "regatas",
+  112657: "quimsa",
+  114763: "la-union",
+  112793: "atenas",
+  114735: "boca",
+  113652: "obera",
+  114607: "racing-chivilcoy",
+  114628: "independiente-oliva",
+  113373: "san-lorenzo",
 };
 
 function normalize(value) {

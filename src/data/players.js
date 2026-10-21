@@ -11,6 +11,7 @@ export const players = [
 },
 {
   id: "josh-ferguson",
+  officialPlayerId: 431571,
   name: "Josh Ferguson",
   teamId: "argentino",
   position: "Pívot",
@@ -261,6 +262,7 @@ export const players = [
 
 {
   id: "mike-warren",
+  officialPlayerId: 422621,
   name: "Mike Warren",
   teamId: "boca",
   position: "Escolta",
@@ -300,6 +302,7 @@ export const players = [
 
 {
   id: "leonardo-lema",
+  officialPlayerId: 422964,
   name: "Leo Lema",
   teamId: "boca",
   position: "Alero",
@@ -552,6 +555,7 @@ export const players = [
 },
 {
   id: "ben-stevens",
+  officialPlayerId: 431187,
   name: "Ben Stevens",
   teamId: "gimnasia",
   position: "Interno",
@@ -572,6 +576,7 @@ export const players = [
 
 {
   id: "obi-okafor",
+  officialPlayerId: 429335,
   name: "Obi Okafor",
   teamId: "gimnasia",
   position: "Alero",
@@ -1939,6 +1944,7 @@ export const players = [
 
 {
   id: "juanse-gorosito",
+  officialPlayerId: 430608,
   name: "Juanse Gorosito",
   teamId: "san-martin",
   position: "Base",
@@ -1958,6 +1964,7 @@ export const players = [
 
 {
   id: "diego-collomb",
+  officialPlayerId: 429485,
   name: "Diego Collomb",
   teamId: "san-martin",
   position: "Escolta",
@@ -2034,4 +2041,140 @@ export const players = [
   { id: "raniero-mainoldi", name: "Raniero Mainoldi", teamId: "independiente-oliva", position: null, number: 25, nationality: null, officialPlayerId: 385605 },
   { id: "joaquin-coria", name: "Joaquín Coria Fa", teamId: "lanus", position: null, number: 13, nationality: null, officialPlayerId: 431355 },
 
+// JUGADORES INCORPORADOS DESDE LA LIGA OFICIAL
+{
+  id: "agustin-moraga",
+  officialPlayerId: 388284,
+  name: "Agustin Moraga",
+  teamId: "lanus",
+  position: null,
+  number: 27,
+  nationality: null,
+},
+{
+  id: "matias-joaquin-fernandez",
+  officialPlayerId: 78864,
+  name: "Matias Joaquin Fernandez",
+  teamId: "san-martin",
+  position: null,
+  number: 18,
+  nationality: null,
+},
+{
+  id: "valentino-maxilimiliano-saucedo",
+  officialPlayerId: 328920,
+  name: "Valentino Maxilimiliano Saucedo",
+  teamId: "san-martin",
+  position: null,
+  number: 27,
+  nationality: null,
+},
+{
+  id: "dante-saettone",
+  officialPlayerId: 78910,
+  name: "Dante Saettone",
+  teamId: "san-martin",
+  position: null,
+  number: 44,
+  nationality: null,
+},
+{
+  id: "julian-costa",
+  officialPlayerId: 425460,
+  name: "Julian Costa",
+  teamId: "instituto",
+  position: null,
+  number: 3,
+  nationality: null,
+},
+{
+  id: "santiago-guasco-pasquini",
+  officialPlayerId: 332428,
+  name: "Santiago Guasco Pasquini",
+  teamId: "instituto",
+  position: null,
+  number: 17,
+  nationality: null,
+},
+{
+  id: "lucio-mantovani",
+  officialPlayerId: 384707,
+  name: "Lucio Mantovani",
+  teamId: "quimsa",
+  position: null,
+  number: 1,
+  nationality: null,
+},
+{
+  id: "matias-nicolas-gonzalez",
+  officialPlayerId: 79206,
+  name: "Matias Nicolas Gonzalez",
+  teamId: "atenas",
+  position: null,
+  number: 2,
+  nationality: null,
+},
+{
+  id: "francisco-eduardo-gallo",
+  officialPlayerId: 278226,
+  name: "Francisco Eduardo Gallo",
+  teamId: "atenas",
+  position: null,
+  number: 24,
+  nationality: null,
+},
+{
+  id: "rocco-guareschi-perez",
+  officialPlayerId: 376344,
+  name: "Rocco Guareschi Perez",
+  teamId: "independiente-oliva",
+  position: null,
+  number: 20,
+  nationality: null,
+},
+{
+  id: "tobias-tamagusuku",
+  officialPlayerId: 225815,
+  name: "Tobias Tamagusuku",
+  teamId: "ferro",
+  position: null,
+  number: 0,
+  nationality: null,
+},
+{
+  id: "lucca-lorenzo-giuliani",
+  officialPlayerId: 322247,
+  name: "Lucca Lorenzo Giuliani",
+  teamId: "instituto",
+  position: null,
+  number: 11,
+  nationality: null,
+},
+{
+  id: "juan-ignacio-mascaro-ganora",
+  officialPlayerId: 277071,
+  name: "Juan Ignacio Mascaro Ganora",
+  teamId: "san-martin",
+  position: null,
+  number: 1,
+  nationality: null,
+},
+{
+  id: "giovano-gabriel-pertile-damilano",
+  officialPlayerId: 285493,
+  name: "Giovano Gabriel Pertile Damilano",
+  teamId: "san-martin",
+  position: null,
+  number: 33,
+  nationality: null,
+},
+{
+  id: "mateo-fessia",
+  officialPlayerId: 278405,
+  name: "Mateo Fessia",
+  teamId: "boca",
+  position: null,
+  number: 15,
+  nationality: null,
+}
 ];

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T12:03:00.081Z",
+  "generatedAt": "2026-10-21T00:05:16.683Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -191,6 +191,62 @@
       "awayScore": 84,
       "homeTeam": "obera",
       "awayTeam": "racing-chivilcoy",
+      "hasStats": true
+    },
+    "2026-10-14-lanus-penarol": {
+      "status": "published",
+      "homeScore": 77,
+      "awayScore": 84,
+      "homeTeam": "lanus",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-10-15-la-union-racing-chivilcoy": {
+      "status": "published",
+      "homeScore": 68,
+      "awayScore": 74,
+      "homeTeam": "la-union",
+      "awayTeam": "racing-chivilcoy",
+      "hasStats": true
+    },
+    "2026-10-16-platense-obera": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 80,
+      "homeTeam": "platense",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-10-16-san-lorenzo-penarol": {
+      "status": "published",
+      "homeScore": 85,
+      "awayScore": 92,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-10-18-san-lorenzo-obera": {
+      "status": "published",
+      "homeScore": 73,
+      "awayScore": 78,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-10-18-regatas-olimpico": {
+      "status": "published",
+      "homeScore": 80,
+      "awayScore": 83,
+      "homeTeam": "regatas",
+      "awayTeam": "olimpico",
+      "hasStats": true
+    },
+    "2026-10-19-independiente-oliva-lanus": {
+      "status": "published",
+      "homeScore": 108,
+      "awayScore": 93,
+      "homeTeam": "independiente-oliva",
+      "awayTeam": "lanus",
       "hasStats": true
     }
   }
