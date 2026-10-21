@@ -410,7 +410,6 @@ const getPlayerLastMatches = (player) => {
     { title: "VALORACIÓN", icon: "★", key: "valuation" },
     { title: "REBOTES", icon: "↟", key: "rebounds" },
     { title: "ASISTENCIAS", icon: "↗", key: "assists" },
-    { title: "RECUPERACIONES", icon: "⬡", key: "steals" },
   ];
 
   const formatStat = (value) => {
