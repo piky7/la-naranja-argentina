@@ -1,0 +1,83 @@
+name: Prueba de reemplazo oficial LNB
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/reemplazo-oficial-lnb
+    paths:
+      - ".github/workflows/prueba-reemplazo-oficial-lnb.yml"
+      - "sync-official-stats-preview.cjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prueba-reemplazo-oficial-lnb
+  cancel-in-progress: false
+
+jobs:
+  prueba-oficial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Consultar calendario oficial de la Liga Nacional
+        run: node discover-liga.cjs
+
+      - name: Incorporar nuevos partidos al fixture temporal
+        run: node merge-liga-events.cjs
+
+      - name: Extraer historial desde las páginas oficiales
+        run: node sync-liga-history.cjs
+
+      - name: Generar vista previa validada de estadísticas oficiales
+        run: node sync-official-stats-preview.cjs
+
+      - name: Validar que los datos publicados tengan origen oficial
+        run: |
+          node --input-type=module -e '
+          import fs from "node:fs";
+          const data = JSON.parse(fs.readFileSync("official-sync-preview.json", "utf8"));
+          if (data.source !== "Liga Nacional") throw new Error("La fuente no es oficial.");
+          if (!Number.isInteger(data.verifiedMatches) || data.verifiedMatches < 1) throw new Error("No hay partidos oficiales validados.");
+          if (!data.matchStats || !data.matchResults) throw new Error("Faltan estadísticas o resultados.");
+          for (const [key, match] of Object.entries(data.matchStats)) {
+            if (match.source !== "Liga Nacional" || !match.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) throw new Error("Partido sin procedencia oficial: " + key);
+            const home = match[match.homeTeam];
+            const away = match[match.awayTeam];
+            if (!Array.isArray(home) || !Array.isArray(away) || !home.length || !away.length) throw new Error("Estadísticas incompletas: " + key);
+            const hp = home.reduce((s,p) => s + p.points, 0);
+            const ap = away.reduce((s,p) => s + p.points, 0);
+            if (hp !== match.homeScore || ap !== match.awayScore) throw new Error("Puntos individuales no coinciden con marcador: " + key);
+          }
+          console.log("VALIDACIÓN FINAL CORRECTA");
+          console.log("Partidos oficiales validados:", data.verifiedMatches);
+          console.log("Partidos no publicados por falta de validación o correspondencia:", data.skippedMatches);
+          console.log("Cada resultado incluye URL oficial y puntos individuales coincidentes.");
+          console.log("Este workflow solo genera una vista previa; no modifica main ni publica datos.");
+          '
+
+      - name: Guardar vista previa y diagnóstico
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vista-previa-reemplazo-oficial-lnb
+          path: |
+            official-sync-preview.json
+            liga-history.json
+            liga-events-preview.json
+          if-no-files-found: ignore
+          retention-days: 7
