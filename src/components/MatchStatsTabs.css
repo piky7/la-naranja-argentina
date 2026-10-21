@@ -2,18 +2,30 @@
 .match-stats-switch { display: flex; gap: 8px; margin: 16px 0; }
 .match-stats-switch button { flex: 1; border: 1px solid #754021; background: #191919; color: #eee; border-radius: 10px; padding: 12px 6px; cursor: pointer; font: inherit; }
 .match-stats-switch button[aria-selected="true"], .match-stats-switch button[aria-pressed="true"] { background: #e76c16; color: #111; font-weight: 800; }
-@media (max-width: 767px) {
-  .match-player-team-home .match-stats-team:nth-child(2), .match-player-team-away .match-stats-team:first-child { display: none; }
-  .match-player-team-home .match-modal-content, .match-player-team-away .match-modal-content { grid-template-columns: minmax(0, 1fr); }
+.match-stats-tabs .match-player-team-switch { display: none; }
+.match-stats-tabs .match-player-tables > .match-modal-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+@media (width < 768px) {
+  .match-stats-tabs .match-player-team-switch { display: flex; }
+  .match-stats-tabs .match-player-team-home .match-stats-team:nth-child(2),
+  .match-stats-tabs .match-player-team-away .match-stats-team:first-child { display: none; }
 }
 @media (min-width: 768px) {
-  .match-player-team-switch { display: none; }
-  .match-modal-finished .match-stats-tabs .match-modal-content {
-    display: grid;
+  /* Scope the boxscore so global modal rules cannot split its wrappers. */
+  .match-stats-tabs .match-player-tables > .match-modal-content {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
-  .match-modal-finished .match-stats-tabs .match-stats-team { display: block; min-width: 0; }
+  .match-stats-tabs .match-player-tables > .match-modal-content > .match-stats-team {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
 }
 .match-stats-switch button:focus-visible { outline: 2px solid #ff9b47; outline-offset: 3px; }
 .match-stats-switch button img { width: 24px; height: 24px; object-fit: contain; vertical-align: middle; margin-right: 6px; }

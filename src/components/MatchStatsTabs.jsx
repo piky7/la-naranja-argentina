@@ -34,7 +34,7 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
       <div className="match-stats-switch match-player-team-switch" role="group" aria-label="Estadísticas por equipo">
         {[["home", home], ["away", away]].map(([side, item]) => <button key={side} type="button" aria-pressed={team === side} onClick={() => setTeam(side)}>{item?.logo && <img src={item.logo} alt="" />}{item?.shortName || item?.name || (side === "home" ? "Local" : "Visitante")}</button>)}
       </div>
-      <div className={`match-player-team-${team}`}>{children}</div>
+      <div className={`match-player-tables match-player-team-${team}`}>{children}</div>
     </div>
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
       <p className="match-team-source">Liga Nacional · Comparativa colectiva oficial</p>

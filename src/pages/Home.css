@@ -9662,6 +9662,9 @@
   .match-modal-finished .match-desktop-summary > :only-child {
     grid-column: 1 / -1;
   }
+  .match-modal-finished .match-desktop-summary:empty {
+    display: none;
+  }
   .match-modal-finished .match-desktop-summary .match-mvp-body {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
