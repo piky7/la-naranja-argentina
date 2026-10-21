@@ -245,22 +245,6 @@
       "awayId": "2qroXLyp"
     },
     {
-      "eventId": "I1BwOW7k",
-      "homeTeam": "ferro",
-      "homeName": "Ferro",
-      "awayTeam": "platense",
-      "awayName": "Platense",
-      "homeScore": null,
-      "awayScore": null,
-      "status": "scheduled",
-      "statusCode": "1",
-      "timestamp": 1792542600,
-      "homeSlug": "ferro-carril-oeste",
-      "awaySlug": "ca-platense",
-      "homeId": "2qroXLyp",
-      "awayId": "SIolf8Y3"
-    },
-    {
       "eventId": "QREoMAx2",
       "homeTeam": "argentino",
       "homeName": "Argentino",
@@ -2195,6 +2179,22 @@
       "awaySlug": "penarol",
       "homeId": "bX27OjMs",
       "awayId": "0OnqJxtR"
+    },
+    {
+      "eventId": "I1BwOW7k",
+      "homeTeam": "ferro",
+      "homeName": "Ferro",
+      "awayTeam": "platense",
+      "awayName": "Platense",
+      "homeScore": null,
+      "awayScore": null,
+      "status": "scheduled",
+      "statusCode": "1",
+      "timestamp": 1792542600,
+      "homeSlug": "ferro-carril-oeste",
+      "awaySlug": "ca-platense",
+      "homeId": "2qroXLyp",
+      "awayId": "SIolf8Y3"
     },
     {
       "eventId": "MVP7ThpS",
