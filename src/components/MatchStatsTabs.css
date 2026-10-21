@@ -211,3 +211,48 @@
   .match-team-comparison-metric { font-size: 10px; }
   .match-team-comparison-name img { width: 20px; height: 20px; }
 }
+
+/* LNA - Comparativa movil compacta y lideres resaltados. */
+.match-stats-tabs .match-team-comparison-winner {
+  color: #ff9329;
+  font-weight: 850;
+}
+@media (max-width: 767px) {
+  .match-stats-tabs .match-stats-switch {
+    margin-top: 9px;
+    margin-bottom: 7px;
+  }
+  .match-stats-tabs .match-stats-switch button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .match-stats-tabs .match-team-comparison-intro {
+    margin: 4px 12px 6px;
+    gap: 2px 8px;
+    align-items: center;
+  }
+  .match-stats-tabs .match-team-comparison-intro strong { font-size: 12px; }
+  .match-stats-tabs .match-team-comparison-intro span { font-size: 8px; }
+  .match-stats-tabs .match-team-comparison-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .match-stats-tabs .match-team-comparison-name img {
+    width: 20px;
+    height: 20px;
+  }
+  .match-stats-tabs .match-team-comparison-row {
+    min-height: 34px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  .match-stats-tabs .match-team-comparison-side { gap: 3px; }
+  .match-stats-tabs .match-team-comparison-track { height: 3px; }
+  .match-stats-tabs .match-team-comparison-value { font-size: 11px; line-height: 1.15; }
+  .match-stats-tabs .match-team-comparison-metric { font-size: 10px; }
+  .match-stats-tabs .match-team-source {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 9px;
+  }
+}
