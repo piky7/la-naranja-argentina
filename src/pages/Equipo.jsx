@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import PlayerModal from "../components/PlayerModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useState } from "react";
@@ -662,6 +663,17 @@ const finishedMatches = allFinishedMatches.slice(
           selectedMatch.awayTeam
         )
       : null;
+
+// MVP: valoración oficial máxima entre los dos equipos del partido.
+const selectedMatchMvp = selectedMatch && selectedMatchStats
+  ? [selectedMatch.homeTeam, selectedMatch.awayTeam]
+      .flatMap(teamId => (selectedMatchStats[teamId] || []).map(player => ({
+        player, teamId, team: getTeam(teamId),
+        valuation: getOfficialValuation(selectedMatch, teamId, player.id),
+      })))
+      .filter(item => item.valuation != null && Number.isFinite(Number(item.valuation)))
+      .sort((a, b) => Number(b.valuation) - Number(a.valuation) || (Number(b.player.points) || 0) - (Number(a.player.points) || 0))[0] || null
+  : null;
 
 const selectedUpcomingHomeTeam = selectedUpcomingMatch
   ? getTeam(selectedUpcomingMatch.homeTeam)
@@ -1352,7 +1364,7 @@ const awayTeam = getTeam(match.awayTeam);
           POP-UP DEL PARTIDO
           ========================================= */}
 
-      {selectedMatch && (
+      {selectedMatch && createPortal(
         <div
           className="match-modal-overlay match-modal-finished-overlay"
           onClick={() => setSelectedMatch(null)}
@@ -1780,6 +1792,34 @@ const awayTeam = getTeam(match.awayTeam);
                 </div>
               )}
 
+              {selectedMatchMvp && (
+                <button type="button" className="match-mvp-card"
+                  aria-label={`Abrir ficha de ${selectedMatchMvp.player.name}, jugador del partido`}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    const playerInfo = players.find(p => p.id === selectedMatchMvp.player.id);
+                    if (playerInfo) setSelectedPlayer(playerInfo);
+                  }}>
+                  <span className="match-mvp-heading">♛ JUGADOR DEL PARTIDO</span>
+                  <span className="match-mvp-body">
+                    <span className="match-mvp-identity">
+                      {selectedMatchMvp.team?.logo && <img src={selectedMatchMvp.team.logo} alt="" />}
+                      <span className="match-mvp-name">
+                        <strong>{selectedMatchMvp.player.name}</strong>
+                        <small>{selectedMatchMvp.team?.name || selectedMatchMvp.teamId}</small>
+                      </span>
+                    </span>
+                    <span className="match-mvp-numbers">
+                      <span><strong>{selectedMatchMvp.player.points ?? "—"}</strong><small>PTS</small></span>
+                      <span><strong>{selectedMatchMvp.player.rebounds ?? "—"}</strong><small>REB</small></span>
+                      <span><strong>{selectedMatchMvp.player.assists ?? "—"}</strong><small>AST</small></span>
+                      <span><strong>{selectedMatchMvp.player.minutes || "—"}</strong><small>MIN</small></span>
+                      <span className="match-mvp-valuation"><strong>{selectedMatchMvp.valuation}</strong><small>VAL</small></span>
+                    </span>
+                  </span>
+                </button>
+              )}
+
               <div className="match-modal-footer">
                 <span>LNA</span>
 
@@ -1790,11 +1830,10 @@ const awayTeam = getTeam(match.awayTeam);
             </div>
           </div>
         </div>
-      )}
+      , document.body)}
+{/* POPUP PRÓXIMO PARTIDO */}
 
-      {/* POPUP PRÓXIMO PARTIDO */}
-
-      {selectedUpcomingMatch && !selectedMatch && (
+      {selectedUpcomingMatch && !selectedMatch && createPortal(
   <div
     className="match-modal-overlay"
     onClick={() => setSelectedUpcomingMatch(null)}
