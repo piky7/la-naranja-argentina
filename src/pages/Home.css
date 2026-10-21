@@ -9815,3 +9815,11 @@
   .match-modal.match-modal-upcoming .upcoming-tabs { gap: 5px; padding: 9px 9px 0; }
   .match-modal.match-modal-upcoming .upcoming-tabs > button { font-size: 11px !important; padding: 10px 3px !important; }
 }
+
+
+/* Comparativa oficial: el mejor registro en naranja; el otro, gris. */
+.match-modal-upcoming .upcoming-official-comparison .collective-better { color: #ff8a20 !important; }
+.match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-track span { background: #647181; }
+.match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-track span.collective-better-bar { background: #ff8a20 !important; }
+.match-modal-upcoming .upcoming-collective-source { margin: 5px 0 12px; color: #9cabb9; font-size: 10px; text-align: center; }
+.match-modal-upcoming .upcoming-official-comparison .upcoming-comparison-stat > span:not(.upcoming-comparison-track) { font-size: 10px; text-align: center; }
