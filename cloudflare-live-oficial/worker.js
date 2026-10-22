@@ -388,20 +388,26 @@ async function generarLive(fecha, anteriores = null, env) {
     if (
       !evento.eventId ||
       !Number.isFinite(timestamp) ||
-      timestamp <= 0 ||
-      fechaHoraArgentina(new Date(timestamp)).fecha !== fecha
+      timestamp <= 0
     ) {
       return false;
     }
 
-    const tiempoDesdeInicio = ahora - timestamp;
-    const dentroDeVentana =
-      tiempoDesdeInicio >= -margenAntes &&
-      tiempoDesdeInicio <= margenDespues;
+    // Un partido ya marcado como LIVE debe seguirse incluso si cruza
+    // la medianoche argentina y su fecha de inicio ya es la anterior.
+    if (partidosEnSeguimiento.has(String(evento.eventId))) {
+      return true;
+    }
 
+    // Para nuevos candidatos, solo consideramos partidos de la fecha actual.
+    if (fechaHoraArgentina(new Date(timestamp)).fecha !== fecha) {
+      return false;
+    }
+
+    const tiempoDesdeInicio = ahora - timestamp;
     return (
-      dentroDeVentana ||
-      partidosEnSeguimiento.has(String(evento.eventId))
+      tiempoDesdeInicio >= -margenAntes &&
+      tiempoDesdeInicio <= margenDespues
     );
   });
 
