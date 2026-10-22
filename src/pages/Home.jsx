@@ -2048,7 +2048,7 @@ const finishedMatch = {
                             }}
                           >
                             <strong>
-                              {(() => { const roster = players.find(item => item.id === player.id); const dorsal = player.number ?? roster?.number; return dorsal != null && /^\\d{1,3}$/.test(String(dorsal).trim()) ? `#${dorsal} · ` : ""; })()}{player.name}
+                              {(() => { const roster = players.find(item => item.id === player.id); const dorsal = player.number ?? roster?.number; return dorsal != null && /^\d{1,3}$/.test(String(dorsal).trim()) ? `#${dorsal} · ` : ""; })()}{player.name}
                             </strong>
 
                             <span>
@@ -2151,7 +2151,7 @@ const finishedMatch = {
                             }}
                           >
                             <strong>
-                              {(() => { const roster = players.find(item => item.id === player.id); const dorsal = player.number ?? roster?.number; return dorsal != null && /^\\d{1,3}$/.test(String(dorsal).trim()) ? `#${dorsal} · ` : ""; })()}{player.name}
+                              {(() => { const roster = players.find(item => item.id === player.id); const dorsal = player.number ?? roster?.number; return dorsal != null && /^\d{1,3}$/.test(String(dorsal).trim()) ? `#${dorsal} · ` : ""; })()}{player.name}
                             </strong>
 
                             <span>
