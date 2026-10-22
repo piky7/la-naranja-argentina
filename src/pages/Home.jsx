@@ -2048,7 +2048,7 @@ const finishedMatch = {
                             }}
                           >
                             <strong>
-                              {player.name}
+                              {player.number != null && /^\\d{1,3}$/.test(String(player.number).trim()) ? `#${player.number} · ` : ""}{player.name}
                             </strong>
 
                             <span>
@@ -2151,7 +2151,7 @@ const finishedMatch = {
                             }}
                           >
                             <strong>
-                              {player.name}
+                              {player.number != null && /^\\d{1,3}$/.test(String(player.number).trim()) ? `#${player.number} · ` : ""}{player.name}
                             </strong>
 
                             <span>
