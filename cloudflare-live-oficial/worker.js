@@ -433,7 +433,6 @@ async function generarLive(fecha, anteriores = null, env) {
   );
 
   const resultados = [];
-  const ahora = Date.now();
 
   for (const oficial of oficiales) {
     if (!oficial.localLNA || !oficial.visitanteLNA) {
