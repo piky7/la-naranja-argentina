@@ -402,5 +402,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Nrnvymk4tDnFWtZE04svv7sjer6W9p4hfS2NAFKBOJn-NNZkci-rpw==/ferro-vs-platense"
     }
+  },
+  "2026-10-21-argentino-boca": {
+    "status": "finished",
+    "homeScore": 84,
+    "awayScore": 82,
+    "time": "21:00",
+    "homeTeam": "argentino",
+    "awayTeam": "boca",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2cQAhAFtz397hB6QcXtdUcT22vhOYLDk7M8Gl4ILR46nLhUMMTlXRzw==/argentino-j-vs-boca",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2cQAhAFtz397hB6QcXtdUcT22vhOYLDk7M8Gl4ILR46nLhUMMTlXRzw==/argentino-j-vs-boca"
+    }
   }
 };

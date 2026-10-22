@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T13:21:12.863Z",
+  "generatedAt": "2026-10-22T02:03:01.080Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -263,6 +263,14 @@
       "awayScore": 81,
       "homeTeam": "ferro",
       "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-10-21-argentino-boca": {
+      "status": "published",
+      "homeScore": 84,
+      "awayScore": 82,
+      "homeTeam": "argentino",
+      "awayTeam": "boca",
       "hasStats": true
     }
   }
