@@ -54,8 +54,9 @@ test("past partials with matching player totals are never published; legacy hist
   box.write("liga-history.json", history);
   assert.equal(box.run("sync-official-stats-preview.cjs").status, 0);
   const preview = box.read("official-sync-preview.json");
-  // Match totals can grow as additional official finals are added to the season.
-  assert.equal(preview.verifiedMatches, Object.keys(preview.matchResults).length);
+  // Two additional official finals are now included in the season baseline.
+  assert.equal(preview.verifiedMatches, 33);
+  assert.equal(Object.keys(preview.matchResults).length, 33);
   assert.equal(preview.skippedMatches, 2);
   for (const [key, old] of Object.entries(baseline)) {
     const result = preview.matchResults[key];
@@ -90,9 +91,9 @@ test("confirmed finals pass the full preview and publishing pipeline", t => {
   const box = sandbox(t);
   assert.equal(box.run("sync-official-stats-preview.cjs").status, 0);
   const preview = box.read("official-sync-preview.json");
-  // Match totals can grow as additional official finals are added to the season.
-  assert.equal(preview.verifiedMatches, Object.keys(preview.matchResults).length);
-  assert.equal(Object.keys(preview.matchStats).length, preview.verifiedMatches);
+  // Two additional official finals are now included in the season baseline.
+  assert.equal(preview.verifiedMatches, 35);
+  assert.equal(Object.keys(preview.matchStats).length, 35);
   assert.equal(preview.matchStats["2026-10-20-ferro-platense"].teamStats.ferro.rebounds, 37);
   assert.equal(preview.matchStats["2026-10-20-ferro-platense"].teamStats.platense.fieldGoals.made, 28);
   for (const [key, result] of Object.entries(preview.matchResults)) {
@@ -153,7 +154,7 @@ test("published manifest excludes the two original partials even with matching l
   ]) fs.writeFileSync(path.join(box.dir, file), `export const ${name} = ${JSON.stringify(data)};`);
   assert.equal(box.run("scripts/generate-published-matches.cjs").status, 0);
   const published = box.read("public/published-matches.json").matches;
+  assert.equal(Object.keys(published).length, 33);
   assert.equal(Object.hasOwn(published, "2026-10-20-san-martin-olimpico"), false);
   assert.equal(Object.hasOwn(published, "2026-10-20-ferro-platense"), false);
-  assert.ok(Object.keys(published).length > 0);
 });
