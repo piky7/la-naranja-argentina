@@ -9,6 +9,8 @@ export default defineConfig({
 
     VitePWA({
       registerType: "autoUpdate",
+      // El registro se gestiona desde main.jsx para comprobar actualizaciones al reanudar.
+      injectRegister: null,
 
       manifest: {
         id: "/",
