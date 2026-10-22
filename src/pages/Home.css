@@ -10169,3 +10169,19 @@
     padding-right: 7px !important;
   }
 }
+
+/* Filas de boxscore más compactas sin perder el ancho de los nombres. */
+.match-modal-finished .match-stat-player {
+  height: 32px !important;
+  min-height: 32px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+@media (max-width: 600px) {
+  .match-modal-finished .match-stat-player {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+}
