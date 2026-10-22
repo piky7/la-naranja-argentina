@@ -19,6 +19,7 @@ on:
       - "scripts/official-*.cjs"
       - "scripts/parse-official-final.cjs"
       - "scripts/audited-official-finals.json"
+      - "scripts/update-player-numbers.cjs"
 
 permissions:
   contents: write
@@ -83,6 +84,10 @@ jobs:
         if: steps.window.outputs.run == 'true'
         run: node publish-official-stats.cjs
 
+      - name: Actualizar dorsales del plantel desde partidos verificados
+        if: steps.window.outputs.run == 'true'
+        run: node scripts/update-player-numbers.cjs
+
       - name: Compilar la web
         if: steps.window.outputs.run == 'true'
         run: npm run build
@@ -93,7 +98,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add             liga-events.json             liga-history.json             src/data/officialSchedule.js             src/data/matchStats.js             src/data/matchResults.js             public/published-matches.json
+          git add             liga-events.json             liga-history.json             src/data/officialSchedule.js             src/data/matchStats.js             src/data/matchResults.js             src/data/players.js             public/published-matches.json
 
           if git diff --cached --quiet; then
             echo "No hay cambios oficiales nuevos para publicar."
