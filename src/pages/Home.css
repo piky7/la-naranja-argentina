@@ -10185,3 +10185,19 @@
     padding-bottom: 2px !important;
   }
 }
+
+/* Home: unificar los fondos del fixture con el azul apagado de los paneles.
+   Solo colores: no modificar tamaño, distribución ni interacciones. */
+.home-page .fixture-panel .home-fixture {
+  background-color: #101d2a;
+  border-bottom-color: rgba(142, 163, 184, .18);
+}
+.home-page .fixture-panel .home-fixture:nth-child(even) {
+  background-color: #142231;
+}
+.home-page .fixture-panel .home-fixture-clickable:hover {
+  background-color: #1a2b3b;
+}
+.home-page .fixture-panel .home-fixture-clickable:active {
+  background-color: #203247;
+}
