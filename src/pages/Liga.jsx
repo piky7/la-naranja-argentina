@@ -1326,12 +1326,12 @@ onClick={() => {
               {/* COMPARATIVA DE EQUIPOS */}
 
 <div className="upcoming-team-comparison upcoming-official-comparison">
-  <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA OFICIAL · 2026/27</span>
+  <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
   {(() => {
     const home = getUpcomingOfficialCollective(selectedUpcomingMatch.homeTeam);
     const away = getUpcomingOfficialCollective(selectedUpcomingMatch.awayTeam);
     return <>
-      <p className="upcoming-collective-source">Partidos con datos oficiales: {home.games} / {away.games} · Naranja = mejor registro</p>
+      <p className="upcoming-collective-source">Partidos con datos: {home.games} / {away.games} · Naranja = mejor registro</p>
       {UPCOMING_COLLECTIVE_STATS.map(([label, key, lowerIsBetter], index) => {
         const hv = home.values[key], av = away.values[key];
         const both = Number.isFinite(hv) && Number.isFinite(av);
@@ -1452,7 +1452,7 @@ onClick={() => {
                             <strong className={isLeader ? "upcoming-player-best" : ""}>{value.toFixed(1)}</strong>
                             {isLeader && <span className="upcoming-player-leader" aria-label="Mejor promedio">★</span>}
                           </button>;
-                        }) : <span className="upcoming-player-empty">Sin datos oficiales</span>}
+                        }) : <span className="upcoming-player-empty">Sin datos disponibles</span>}
                       </div>
                     );
                     return <div className="upcoming-player-category" key={category.key}>
