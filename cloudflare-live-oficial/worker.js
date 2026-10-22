@@ -355,23 +355,75 @@ async function obtenerMarcadorConRecuperacion(
 
 
 async function generarLive(fecha, anteriores = null, env) {
+  // Primero consultamos únicamente los eventos, usando su caché de 30 minutos.
+  // Así podemos evitar descargar el fixture oficial cuando no hay partidos
+  // dentro de la ventana de seguimiento.
+  const eventos = await obtenerConCache(
+    env,
+    "eventos-lnb",
+    1800,
+    () => obtenerEventos()
+  );
 
-const [eventos, oficiales] = await Promise.all([
-  obtenerConCache(
-  env,
-  "eventos-lnb",
-  1800,
-  () => obtenerEventos()
-),
-obtenerConCache(
-  env,
-  `fixture-oficial:${fecha}`,
-  600,
-  () => obtenerFixture(fecha)
-),
-]);
+  const ahora = Date.now();
+  const anterioresDelDia =
+    anteriores?.date === fecha
+      ? anteriores.liveMatches || []
+      : [];
 
+  const partidosEnSeguimiento = new Set(
+    anterioresDelDia
+      .filter((partido) =>
+        partido.status === "live" || partido.isLive === true
+      )
+      .map((partido) => String(partido.eventId))
+  );
 
+  const margenAntes = 30 * 60 * 1000;
+  const margenDespues = 240 * 60 * 1000;
+
+  const hayCandidatos = eventos.some((evento) => {
+    const timestamp = Number(evento.timestamp) * 1000;
+
+    if (
+      !evento.eventId ||
+      !Number.isFinite(timestamp) ||
+      timestamp <= 0 ||
+      fechaHoraArgentina(new Date(timestamp)).fecha !== fecha
+    ) {
+      return false;
+    }
+
+    const tiempoDesdeInicio = ahora - timestamp;
+    const dentroDeVentana =
+      tiempoDesdeInicio >= -margenAntes &&
+      tiempoDesdeInicio <= margenDespues;
+
+    return (
+      dentroDeVentana ||
+      partidosEnSeguimiento.has(String(evento.eventId))
+    );
+  });
+
+  if (!hayCandidatos) {
+    console.log(
+      "Sin partidos en ventana LIVE; se omite la consulta del fixture oficial:",
+      fecha
+    );
+
+    return {
+      updatedAt: new Date().toISOString(),
+      date: fecha,
+      liveMatches: anterioresDelDia,
+    };
+  }
+
+  const oficiales = await obtenerConCache(
+    env,
+    `fixture-oficial:${fecha}`,
+    600,
+    () => obtenerFixture(fecha)
+  );
 
   const anterioresPorId = new Map(
     (anteriores?.date === fecha
@@ -431,10 +483,14 @@ if (anterior?.status === "finished") {
 
     const inicio = Number(evento.timestamp) * 1000;
 
-    // No consultar partidos que comienzan dentro de más de 30 minutos.
+    // Seguir partidos desde 30 minutos antes hasta 4 horas después
+    // del inicio. Un partido que ya estaba en vivo continúa en seguimiento.
     if (
       !anterior?.isLive &&
-      ahora < inicio - 30 * 60 * 1000
+      (
+        ahora < inicio - 30 * 60 * 1000 ||
+        ahora > inicio + 240 * 60 * 1000
+      )
     ) {
       if (anterior) {
         resultados.push(anterior);
