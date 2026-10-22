@@ -1,3 +1,4 @@
+
 const { isConfirmedFinal } = require("./scripts/official-final.cjs");
 const { isCandidate } = require("./scripts/official-poll-window.cjs");
 
@@ -19,6 +20,10 @@ function leerJSON(ruta) {
 }
 
 function puntosEquipo(equipo) {
+  if (!Array.isArray(equipo?.players)) {
+    return NaN;
+  }
+
   return equipo.players.reduce(
     (total, jugador) => total + jugador.points,
     0
@@ -50,25 +55,17 @@ async function main() {
 
   for (const partido of partidos) {
     if (urlsProcesadas.has(partido.officialUrl)) {
-      console.log(`Ya procesado: ${partido.home.name} - ${partido.away.name}`);
+      console.log(
+        `Ya procesado: ${partido.home.name} - ${partido.away.name}`
+      );
       omitidos++;
       continue;
     }
 
-    // Today's games are candidates too; only official final evidence admits them.
     if (!isCandidate(partido, now, recent)) {
-      console.log(`Fuera de la ventana de consulta: ${partido.date}`);
-      omitidos++;
-      continue;
-    }
-
-    // No aceptamos marcadores vacíos ni 0-0.
-    if (
-      !Number.isInteger(partido.homeScore) ||
-      !Number.isInteger(partido.awayScore) ||
-      (partido.homeScore === 0 && partido.awayScore === 0)
-    ) {
-      console.log(`Marcador no válido: ${partido.officialUrl}`);
+      console.log(
+        `Fuera de la ventana de consulta: ${partido.date}`
+      );
       omitidos++;
       continue;
     }
@@ -76,6 +73,11 @@ async function main() {
     console.log(
       `Procesando: ${partido.home.name} vs ${partido.away.name}`
     );
+
+    // Eliminamos cualquier archivo temporal anterior.
+    if (fs.existsSync(TEMP)) {
+      fs.unlinkSync(TEMP);
+    }
 
     const ejecucion = spawnSync(
       process.execPath,
@@ -90,9 +92,14 @@ async function main() {
       }
     );
 
-    if (ejecucion.status !== 0) {
+    if (ejecucion.error || ejecucion.status !== 0) {
       console.error(
-        `Error de extracción: ${ejecucion.stderr || ejecucion.stdout}`
+        `Error de extracción: ${
+          ejecucion.error?.message ||
+          ejecucion.stderr ||
+          ejecucion.stdout ||
+          "Error desconocido"
+        }`
       );
       omitidos++;
       continue;
@@ -104,36 +111,91 @@ async function main() {
       continue;
     }
 
-    const datos = leerJSON(TEMP);
+    let datos;
 
-    if (!isConfirmedFinal({ ...datos, officialUrl: partido.officialUrl }) ||
-        datos.homeScore !== partido.homeScore || datos.awayScore !== partido.awayScore) {
-      console.log("Sin finalización oficial o marcador del fixture desactualizado.");
+    try {
+      datos = leerJSON(TEMP);
+    } catch (error) {
+      console.log(`JSON extraído inválido: ${error.message}`);
+      omitidos++;
+      continue;
+    }
+
+    // Solo aceptamos finales confirmados oficialmente.
+    if (
+      !isConfirmedFinal({
+        ...datos,
+        officialUrl: partido.officialUrl,
+      })
+    ) {
+      console.log("Partido sin finalización oficial confirmada.");
+      omitidos++;
+      continue;
+    }
+
+    const homeScore = datos.homeScore;
+    const awayScore = datos.awayScore;
+
+    if (
+      !Number.isInteger(homeScore) ||
+      !Number.isInteger(awayScore) ||
+      homeScore < 0 ||
+      awayScore < 0 ||
+      (homeScore === 0 && awayScore === 0)
+    ) {
+      console.log("Marcador oficial inválido.");
+      omitidos++;
+      continue;
+    }
+
+    if (!Array.isArray(datos.teams)) {
+      console.log("No se encontraron equipos oficiales.");
       omitidos++;
       continue;
     }
 
     const local = datos.teams.find(
-      (e) => e.officialTeamId === partido.home.officialTeamId
+      (equipo) =>
+        equipo.officialTeamId === partido.home.officialTeamId
     );
 
     const visitante = datos.teams.find(
-      (e) => e.officialTeamId === partido.away.officialTeamId
+      (equipo) =>
+        equipo.officialTeamId === partido.away.officialTeamId
     );
 
-    if (!local || !visitante) {
+    if (
+      !local ||
+      !visitante ||
+      local === visitante
+    ) {
       console.log("No coinciden los equipos oficiales.");
       omitidos++;
       continue;
     }
 
+    // Las estadísticas deben justificar el marcador final.
     if (
-      puntosEquipo(local) !== partido.homeScore ||
-      puntosEquipo(visitante) !== partido.awayScore
+      puntosEquipo(local) !== homeScore ||
+      puntosEquipo(visitante) !== awayScore
     ) {
-      console.log("Los puntos no coinciden con el resultado.");
+      console.log(
+        "Los puntos de los jugadores no coinciden con el resultado oficial."
+      );
       omitidos++;
       continue;
+    }
+
+    // El fixture puede tener un marcador provisional.
+    if (
+      partido.homeScore !== homeScore ||
+      partido.awayScore !== awayScore
+    ) {
+      console.log(
+        `Marcador del fixture desactualizado: ` +
+        `${partido.homeScore}-${partido.awayScore} -> ` +
+        `${homeScore}-${awayScore}`
+      );
     }
 
     const registro = {
@@ -142,8 +204,8 @@ async function main() {
       date: partido.date,
       time: partido.time,
       officialUrl: partido.officialUrl,
-      homeScore: partido.homeScore,
-      awayScore: partido.awayScore,
+      homeScore,
+      awayScore,
       teams: [local, visitante],
     };
 
@@ -151,14 +213,15 @@ async function main() {
     urlsProcesadas.add(partido.officialUrl);
     agregados++;
 
-    // Guardamos después de cada partido validado.
     fs.writeFileSync(
       OUTPUT,
       JSON.stringify(historial, null, 2),
       "utf8"
     );
 
-    console.log("Partido validado y guardado.");
+    console.log(
+      `Partido validado y guardado: ${homeScore}-${awayScore}`
+    );
 
     await esperar(ESPERA_MS);
   }

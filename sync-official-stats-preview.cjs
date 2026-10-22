@@ -109,19 +109,33 @@ async function main() {
       continue;
     }
 
+
+    // Para partidos nuevos, el historial debe tener evidencia
+    // de finalización oficial. El fixture puede conservar
+    // un marcador provisional o desactualizado.
     if (
       record.date !== official.date ||
-      !Number.isInteger(official.homeScore) ||
-      !Number.isInteger(official.awayScore) ||
-      official.homeScore === 0 && official.awayScore === 0 ||
+      !Number.isInteger(record.homeScore) ||
+      !Number.isInteger(record.awayScore) ||
+      record.homeScore < 0 ||
+      record.awayScore < 0 ||
+      (record.homeScore === 0 && record.awayScore === 0)
+    ) {
+      const reason = "Fecha o marcador oficial del historial inválido.";
+      skipped.push({ date: record.date, reason });
+      console.log("OMITIDO", record.date, reason);
+      continue;
+    }
+
+    if (
       record.homeScore !== official.homeScore ||
       record.awayScore !== official.awayScore
     ) {
-      const reason = "El marcador del historial no coincide con el marcador oficial del fixture.";
-      skipped.push({ date: record.date, reason, historyScore: [record.homeScore, record.awayScore], fixtureScore: [official.homeScore, official.awayScore] });
-      console.log("OMITIDO", record.date, reason, [record.homeScore, record.awayScore], [official.homeScore, official.awayScore]);
-      continue;
+      console.log(
+        `Fixture desactualizado: ${official.homeScore}-${official.awayScore} -> ${record.homeScore}-${record.awayScore}`
+      );
     }
+
 
     const homeOfficial = record.teams?.find((team) => team.officialTeamId === official.home.officialTeamId);
     const awayOfficial = record.teams?.find((team) => team.officialTeamId === official.away.officialTeamId);
@@ -132,12 +146,25 @@ async function main() {
       continue;
     }
 
-    if (sumPoints(homeOfficial) !== official.homeScore || sumPoints(awayOfficial) !== official.awayScore) {
-      const reason = "La suma de puntos individuales no coincide con el marcador oficial.";
-      skipped.push({ date: record.date, reason, playerPoints: [sumPoints(homeOfficial), sumPoints(awayOfficial)], fixtureScore: [official.homeScore, official.awayScore] });
-      console.log("OMITIDO", record.date, reason, [sumPoints(homeOfficial), sumPoints(awayOfficial)], [official.homeScore, official.awayScore]);
+
+    if (
+      sumPoints(homeOfficial) !== record.homeScore ||
+      sumPoints(awayOfficial) !== record.awayScore
+    ) {
+      const reason = "La suma de puntos individuales no coincide con el resultado oficial extraído.";
+      skipped.push({
+        date: record.date,
+        reason,
+        playerPoints: [
+          sumPoints(homeOfficial),
+          sumPoints(awayOfficial),
+        ],
+        historyScore: [record.homeScore, record.awayScore],
+      });
+      console.log("OMITIDO", record.date, reason);
       continue;
     }
+
 
     const unresolved = [];
     const convertTeam = (sourceTeam, internalTeamId) => sourceTeam.players.map((player) => {
@@ -214,15 +241,27 @@ async function main() {
       officialUrl: record.officialUrl,
       homeTeam: homeTeamId,
       awayTeam: awayTeamId,
-      homeScore: official.homeScore,
-      awayScore: official.awayScore,
-      teamStats: { [homeTeamId]: normalizeTeamStats(homeOfficial.teamStats, official.homeScore), [awayTeamId]: normalizeTeamStats(awayOfficial.teamStats, official.awayScore) },
+      homeScore: record.homeScore,
+
+      awayScore: record.awayScore,
+      teamStats: {
+  [homeTeamId]: normalizeTeamStats(
+    homeOfficial.teamStats,
+    record.homeScore
+  ),
+  [awayTeamId]: normalizeTeamStats(
+    awayOfficial.teamStats,
+    record.awayScore
+  ),
+},
       [homeTeamId]: homePlayers,
       [awayTeamId]: awayPlayers,
     };
 
     resultsByMatch[key] = {
-      status: "finished", homeScore: official.homeScore, awayScore: official.awayScore,
+      status: "finished",
+homeScore: record.homeScore,
+awayScore: record.awayScore,
       time: official.time || null, homeTeam: homeTeamId, awayTeam: awayTeamId,
       venue: null, tv: [], source: "Liga Nacional", officialUrl: official.officialUrl,
       finalEvidence: historical
@@ -230,7 +269,7 @@ async function main() {
         : record.finalEvidence,
     };
     verified++;
-    console.log(`VERIFICADO LNB: ${record.date} ${official.home.name} ${official.homeScore}-${official.awayScore} ${official.away.name}; puntos individuales coinciden y jugadores identificados.`);
+    console.log(`VERIFICADO LNB: ${record.date} ${official.home.name} ${record.homeScore}-${record.awayScore} ${official.away.name}; puntos individuales coinciden y jugadores identificados.`);
   }
 
   const output = {
