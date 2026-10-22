@@ -10084,3 +10084,29 @@
   .home-page .home-stats-tabs { gap: 4px; padding: 5px; }
   .home-page .home-stats-tab { border-radius: 7px; }
 }
+
+
+/* Estadísticas de partido: dorsales y apellidos completos en pantallas pequeñas. */
+.match-stat-player strong {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+.match-stat-player {
+  height: auto;
+  min-height: 43px;
+  grid-template-columns: minmax(0, 1fr) 32px 32px 32px 45px;
+  column-gap: 2px;
+}
+@media (max-width: 600px) {
+  .match-stat-player {
+    grid-template-columns: minmax(0, 1fr) 28px 28px 28px 43px;
+    padding: 7px 6px;
+    min-height: 44px;
+  }
+  .match-stat-player strong {
+    font-size: 10px;
+  }
+}
