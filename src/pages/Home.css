@@ -10135,3 +10135,37 @@
     padding-bottom: 6px !important;
   }
 }
+
+/* Boxscore compacto: priorizar ancho de nombre, sin aumentar altura de filas. */
+.match-modal-finished .match-stats-head,
+.match-modal-finished .match-stat-player {
+  grid-template-columns: minmax(0, 1fr) 28px 28px 28px 44px 29px !important;
+  column-gap: 2px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+.match-modal-finished .match-stat-player {
+  min-height: 36px !important;
+  height: 36px !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+.match-modal-finished .match-stat-player strong,
+.match-modal-finished .match-stat-player .match-stat-player-name {
+  display: block !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  overflow-wrap: normal !important;
+  line-height: 1.15 !important;
+}
+@media (max-width: 480px) {
+  .match-modal-finished .match-stats-head,
+  .match-modal-finished .match-stat-player {
+    grid-template-columns: minmax(0, 1fr) 26px 26px 26px 42px 27px !important;
+    column-gap: 2px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+}
