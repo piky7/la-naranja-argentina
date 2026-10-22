@@ -62,9 +62,9 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
       <div className="match-team-comparison-intro">
         <strong>Comparativa colectiva</strong>
-        <span>LIGA NACIONAL · DATOS OFICIALES</span>
+        <span>LIGA NACIONAL · TEMPORADA 2026/27</span>
       </div>
-      {!collective && <p className="match-team-unavailable">Estadísticas colectivas oficiales no disponibles para este partido.</p>}
+      {!collective && <p className="match-team-unavailable">Estadísticas colectivas no disponibles para este partido.</p>}
       {collective && <div className="match-team-comparison-card">
         <div className="match-team-comparison-header">
           <div className="match-team-comparison-name">{home?.logo && <img src={home.logo} alt="" />}<span>{home?.shortName || home?.name || "Local"}</span></div>
@@ -97,7 +97,7 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
           })}
         </div>
       </div>}
-      <p className="match-team-source">Sin dato: valor ausente o no validado en la fuente oficial.</p>
+      <p className="match-team-source">Sin dato: valor no disponible para este partido.</p>
 
     </div>
   </div>;
