@@ -16,6 +16,24 @@ export default function PlayerModal({
 }) {
   if (!player) return null;
 
+  // Priorizar el dorsal extraído del partido más reciente de la temporada.
+  // Evitar mostrar un número desactualizado del roster cuando hay uno comprobado.
+  const latestDorsal = matches
+    .filter((match) => match.homeTeam === player.teamId || match.awayTeam === player.teamId)
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+    .map((match) => {
+      const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+      const record = matchPlayerStats[key] || matchPlayerStats[match.id];
+      if (record?.source !== "Liga Nacional") return null;
+      const entry = record[player.teamId]?.find((item) => item.id === player.id);
+      const value = entry?.number;
+      return value != null && /^\\d{1,3}$/.test(String(value).trim())
+        ? String(value).trim()
+        : null;
+    })
+    .find((value) => value !== null);
+  const displayNumber = latestDorsal ?? player.number ?? "—";
+
   const average = (value) => value == null ? "—" : Number(value).toFixed(1);
   const saved = playerStats.find((entry) => entry.playerId === player.id);
   const seen = new Set();
@@ -106,7 +124,7 @@ export default function PlayerModal({
           </div>
           <div>
             <span>NÚMERO</span>
-            <strong>{player.number ?? "—"}</strong>
+            <strong>{displayNumber}</strong>
           </div>
         </div>
 
