@@ -418,5 +418,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2cQAhAFtz397hB6QcXtdUcT22vhOYLDk7M8Gl4ILR46nLhUMMTlXRzw==/argentino-j-vs-boca"
     }
+  },
+  "2026-10-21-instituto-lanus": {
+    "status": "finished",
+    "homeScore": 75,
+    "awayScore": 73,
+    "time": "21:35",
+    "homeTeam": "instituto",
+    "awayTeam": "lanus",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J3SsEsx8aYvjQUCVpXCd9xq6QRSas7_AoFKU_Jo4VCXEyGhVVRKx8Q==/instituto-vs-lanus",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J3SsEsx8aYvjQUCVpXCd9xq6QRSas7_AoFKU_Jo4VCXEyGhVVRKx8Q==/instituto-vs-lanus"
+    }
   }
 };

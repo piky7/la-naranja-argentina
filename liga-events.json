@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-11-20",
+  "dateTo": "2026-11-21",
   "matches": [
     {
       "date": "2026-09-28",
@@ -628,8 +628,8 @@
         "officialClubId": 63,
         "officialTeamId": 112600
       },
-      "homeScore": 61,
-      "awayScore": 55,
+      "homeScore": 75,
+      "awayScore": 73,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J3SsEsx8aYvjQUCVpXCd9xq6QRSas7_AoFKU_Jo4VCXEyGhVVRKx8Q==/instituto-vs-lanus"
     },
@@ -815,7 +815,7 @@
     },
     {
       "date": "2026-10-31",
-      "time": "22:00",
+      "time": "11:30",
       "home": {
         "name": "OLIMPICO (LB)",
         "officialClubId": 1882,

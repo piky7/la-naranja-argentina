@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T02:03:01.080Z",
+  "generatedAt": "2026-10-22T04:01:02.639Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -271,6 +271,14 @@
       "awayScore": 82,
       "homeTeam": "argentino",
       "awayTeam": "boca",
+      "hasStats": true
+    },
+    "2026-10-21-instituto-lanus": {
+      "status": "published",
+      "homeScore": 75,
+      "awayScore": 73,
+      "homeTeam": "instituto",
+      "awayTeam": "lanus",
       "hasStats": true
     }
   }

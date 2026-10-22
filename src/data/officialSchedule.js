@@ -362,7 +362,7 @@ export const officialSchedule = [
   {
     "id": "2026-10-31-olimpico-penarol",
     "date": "2026-10-31",
-    "time": "22:00",
+    "time": "11:30",
     "homeTeam": "olimpico",
     "awayTeam": "penarol",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2k8iKyk1at0fM1fGuPsWNQeu3Cpyilquj5sjSBMdDoAD0iNiqdzR56Q==/olimpico-lb-vs-penarol-mdp"
