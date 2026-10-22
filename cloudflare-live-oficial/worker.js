@@ -56,6 +56,49 @@ async function descargar(url, opciones = {}) {
   return respuesta.text();
 }
 
+async function obtenerConCache(
+  env,
+  clave,
+  duracionSegundos,
+  obtenerDatos
+) {
+  const ahora = Date.now();
+
+  const guardado = await env.LNA_LIVE_OFICIAL.get(
+    clave,
+    "json"
+  );
+
+  if (
+    guardado &&
+    Array.isArray(guardado.datos) &&
+    Number.isFinite(guardado.guardadoEn) &&
+    ahora - guardado.guardadoEn < duracionSegundos * 1000
+  ) {
+    console.log("Caché utilizada:", clave);
+    return guardado.datos;
+  }
+
+  const datos = await obtenerDatos();
+
+  // No reemplazar una caché válida con datos incorrectos.
+  if (!Array.isArray(datos)) {
+    throw new Error("Datos inválidos para caché: " + clave);
+  }
+
+  await env.LNA_LIVE_OFICIAL.put(
+    clave,
+    JSON.stringify({
+      guardadoEn: ahora,
+      datos,
+    })
+  );
+
+  console.log("Caché actualizada:", clave);
+
+  return datos;
+}
+
 async function obtenerEventos() {
   const url =
     "https://raw.githubusercontent.com/" +
@@ -210,8 +253,17 @@ function obtenerPeriodo(html, status) {
   };
 }
 
+
 async function obtenerMarcador(partido) {
+  console.log(
+    "Consultando marcador oficial:",
+    partido.localLNA,
+    partido.visitanteLNA,
+    partido.url
+  );
+
   const html = await descargar(partido.url);
+
 
   const idEnc = html.match(
     /var\s+idEnc\s*=\s*['"]([^'"]+)['"]/
@@ -242,13 +294,94 @@ async function obtenerMarcador(partido) {
   return { ...marcador, ...periodo };
 }
 
-async function generarLive(fecha) {
-  const [eventos, oficiales] = await Promise.all([
-    obtenerEventos(),
-    obtenerFixture(fecha),
-  ]);
+
+async function obtenerMarcadorConRecuperacion(
+  partido,
+  fecha,
+  env
+) {
+  try {
+   return await obtenerMarcador(partido);
+  } catch (error) {
+    console.warn(
+      "Falló URL oficial, buscando nuevamente:",
+      partido.localLNA,
+      partido.visitanteLNA,
+      error.message
+    );
+
+    // Descargar un fixture nuevo, sin utilizar la caché.
+    const fixtureNuevo = await obtenerFixture(fecha);
+
+    // Buscar exactamente el mismo encuentro.
+    const coincidencias = fixtureNuevo.filter(
+      (candidato) =>
+        candidato.localLNA === partido.localLNA &&
+        candidato.visitanteLNA === partido.visitanteLNA &&
+        candidato.fecha === partido.fecha &&
+        candidato.hora === partido.hora
+    );
+
+    if (coincidencias.length !== 1) {
+      throw new Error(
+        "No se pudo recuperar una URL oficial única"
+      );
+    }
+
+    const partidoActualizado = coincidencias[0];
+
+    // Reintentar una sola vez con la URL nueva.
+    const marcador = await obtenerMarcador(partidoActualizado);
+
+    // Actualizar el fixture almacenado solo después
+    // de comprobar que la URL nueva funciona.
+    await env.LNA_LIVE_OFICIAL.put(
+      `fixture-oficial:${fecha}`,
+      JSON.stringify({
+        guardadoEn: Date.now(),
+        datos: fixtureNuevo,
+      })
+    );
+
+    console.log(
+      "URL oficial recuperada:",
+      partido.localLNA,
+      partido.visitanteLNA
+    );
+
+    return marcador;
+  }
+}
+
+
+async function generarLive(fecha, anteriores = null, env) {
+
+const [eventos, oficiales] = await Promise.all([
+  obtenerConCache(
+  env,
+  "eventos-lnb",
+  1800,
+  () => obtenerEventos()
+),
+obtenerConCache(
+  env,
+  `fixture-oficial:${fecha}`,
+  600,
+  () => obtenerFixture(fecha)
+),
+]);
+
+
+
+  const anterioresPorId = new Map(
+    (anteriores?.date === fecha
+      ? anteriores.liveMatches || []
+      : []
+    ).map((partido) => [partido.eventId, partido])
+  );
 
   const resultados = [];
+  const ahora = Date.now();
 
   for (const oficial of oficiales) {
     if (!oficial.localLNA || !oficial.visitanteLNA) {
@@ -279,9 +412,46 @@ async function generarLive(fecha) {
     }
 
     const evento = coincidencias[0];
+    const anterior = anterioresPorId.get(evento.eventId);
+
+    // Un partido finalizado ya no necesita consultas.
+
+if (anterior?.status === "finished") {
+  console.log(
+    "Marcador finalizado reutilizado desde KV:",
+    evento.eventId,
+    anterior.homeScore,
+    anterior.awayScore
+  );
+
+  resultados.push(anterior);
+  continue;
+}
+
+
+    const inicio = Number(evento.timestamp) * 1000;
+
+    // No consultar partidos que comienzan dentro de más de 30 minutos.
+    if (
+      !anterior?.isLive &&
+      ahora < inicio - 30 * 60 * 1000
+    ) {
+      if (anterior) {
+        resultados.push(anterior);
+      }
+      continue;
+    }
 
     try {
-      const marcador = await obtenerMarcador(oficial);
+      const marcador = await obtenerMarcadorConRecuperacion(
+  oficial,
+  fecha,
+  env
+);
+
+
+
+
 
       if (marcador.status === "unknown") {
         console.warn("Estado desconocido:", evento.eventId);
@@ -321,22 +491,28 @@ async function generarLive(fecha) {
 }
 
 
+
 const CLAVE_KV = "live-matches";
+
 
 
 async function actualizarMarcadores(env) {
   const fecha = fechaHoraArgentina(new Date()).fecha;
 
-  const datos = await generarLive(fecha);
+  // Leer primero los marcadores guardados.
+  const anteriores = await env.LNA_LIVE_OFICIAL.get(
+    CLAVE_KV,
+    "json"
+  );
+
+  // Pasarlos al extractor para evitar consultas innecesarias.
+  const datos = await generarLive(fecha, anteriores, env);
+
 
   if (!Array.isArray(datos.liveMatches)) {
     throw new Error("Respuesta inválida del extractor");
   }
 
-  const anteriores = await env.LNA_LIVE_OFICIAL.get(
-    CLAVE_KV,
-    "json"
-  );
 
   // Si no hay partidos, no reemplazar los datos anteriores.
   if (datos.liveMatches.length === 0) {
@@ -352,25 +528,37 @@ async function actualizarMarcadores(env) {
     ).map((partido) => [partido.eventId, partido])
   );
 
- 
+
 const ahora = Date.now();
 
+
 const nuevosPorId = new Map(
-  datos.liveMatches.map((partido) => [
-    partido.eventId,
-    {
-      ...partido,
-      lastSuccessfulUpdate: new Date(ahora).toISOString(),
-      isStale: false,
-    },
-  ])
+  datos.liveMatches.map((partido) => {
+    const anterior = anterioresPorId.get(partido.eventId);
+
+    // Si el extractor reutilizó el objeto anterior,
+    // no hubo una nueva consulta al sitio oficial.
+    const reutilizado = partido === anterior;
+
+    return [
+      partido.eventId,
+      reutilizado
+        ? { ...anterior }
+        : {
+            ...partido,
+            lastSuccessfulUpdate: new Date(ahora).toISOString(),
+            isStale: false,
+          },
+    ];
+  })
 );
+
 
   for (const [eventId, anterior] of anterioresPorId) {
     const nuevo = nuevosPorId.get(eventId);
 
     // No perder un partido por un fallo temporal.
-   
+
 if (!nuevo) {
   const ultimaActualizacion = Date.parse(
     anterior.lastSuccessfulUpdate || anteriores.updatedAt || ""
@@ -380,10 +568,13 @@ if (!nuevo) {
     !Number.isFinite(ultimaActualizacion) ||
     ahora - ultimaActualizacion > 3 * 60 * 1000;
 
-  nuevosPorId.set(eventId, {
-    ...anterior,
-    isStale: desactualizado,
-  });
+ nuevosPorId.set(eventId, {
+  ...anterior,
+  isStale:
+    anterior.status === "finished"
+      ? false
+      : desactualizado,
+});
 
   continue;
 }
@@ -399,20 +590,65 @@ if (!nuevo) {
     }
 
     // Evitar reemplazar un marcador válido por uno sin puntos.
+
+    // Evitar reemplazar un marcador válido por datos incompletos
+    // o por un 0-0 inesperado.
+    const marcadorAnteriorValido =
+      Number.isFinite(anterior.homeScore) &&
+      Number.isFinite(anterior.awayScore);
+
+    const marcadorNuevoIncompleto =
+      !Number.isFinite(nuevo.homeScore) ||
+      !Number.isFinite(nuevo.awayScore);
+
+    const ceroCeroInesperado =
+      marcadorAnteriorValido &&
+      anterior.homeScore + anterior.awayScore > 0 &&
+      nuevo.homeScore === 0 &&
+      nuevo.awayScore === 0;
+
     if (
-      anterior.homeScore !== null &&
-      anterior.awayScore !== null &&
-      (nuevo.homeScore === null ||
-        nuevo.awayScore === null)
+      marcadorAnteriorValido &&
+      (marcadorNuevoIncompleto || ceroCeroInesperado)
     ) {
-      nuevosPorId.set(eventId, anterior);
+      console.warn(
+        "Marcador sospechoso, conservando anterior:",
+        eventId
+      );
+
+      nuevosPorId.set(eventId, {
+        ...anterior,
+        isStale: anterior.status === "finished"
+          ? false
+          : true,
+      });
     }
+
   }
 
   const resultado = {
     ...datos,
     liveMatches: [...nuevosPorId.values()],
   };
+
+  // Comparar los datos de los partidos sin incluir updatedAt.
+  const partidosAnteriores =
+    anteriores?.date === fecha
+      ? anteriores.liveMatches || []
+      : [];
+
+  const partidosNuevos = resultado.liveMatches;
+
+  const sinCambios =
+    JSON.stringify(partidosAnteriores) ===
+    JSON.stringify(partidosNuevos);
+
+  if (sinCambios) {
+    console.log(
+      "Sin cambios en marcadores: escritura KV evitada"
+    );
+    return anteriores;
+  }
 
   await env.LNA_LIVE_OFICIAL.put(
     CLAVE_KV,
@@ -428,17 +664,48 @@ if (!nuevo) {
 }
 
 
+const ORIGENES_PERMITIDOS = [
+  "https://lanaranjaargentina.com.ar",
+  "http://localhost:5173",
+  "http://localhost:5174",
+];
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Methods": "GET",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+function obtenerCorsHeaders(request) {
+  const origen = request.headers.get("Origin");
+
+  return {
+    ...CORS_HEADERS,
+    ...(ORIGENES_PERMITIDOS.includes(origen)
+      ? { "Access-Control-Allow-Origin": origen }
+      : {}),
+    "Vary": "Origin",
+  };
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    if (url.pathname !== "/api/live") {
-      return new Response("Not found", { status: 404 });
-    }
 
-    if (request.method !== "GET") {
-      return new Response("Method not allowed", { status: 405 });
-    }
+if (url.pathname !== "/api/live") {
+  return new Response("Not found", {
+    status: 404,
+    headers: obtenerCorsHeaders(request),
+  });
+}
+
+if (request.method !== "GET") {
+  return new Response("Method not allowed", {
+    status: 405,
+    headers: obtenerCorsHeaders(request),
+  });
+}
+
 
     try {
       const guardado = await env.LNA_LIVE_OFICIAL.get(
@@ -446,18 +713,30 @@ export default {
         "json"
       );
 
-      const hoy = fechaHoraArgentina(new Date()).fecha;
+     // PRUEBA LOCAL: usar la fecha de los marcadores guardados.
+// RESTAURAR ANTES DEL DESPLIEGUE.
+const hoy = fechaHoraArgentina(new Date()).fecha;
 
-      if (!guardado || guardado.date !== hoy) {
-        return Response.json({
-          updatedAt: null,
-          date: hoy,
-          liveMatches: [],
-          message: "Todavía no hay marcadores oficiales actualizados",
-        });
-      }
 
-     
+if (!guardado || guardado.date !== hoy) {
+  return Response.json(
+    {
+      updatedAt: null,
+      date: hoy,
+      liveMatches: [],
+      message: "Todavía no hay marcadores oficiales actualizados",
+    },
+    {
+      headers: {
+        ...obtenerCorsHeaders(request),
+"Cache-Control": "no-store",
+      },
+    }
+  );
+}
+
+
+
 const ahora = Date.now();
 const LIMITE_ANTIGUEDAD = 3 * 60 * 1000;
 
@@ -468,9 +747,17 @@ const datosActualizados = {
       partido.lastSuccessfulUpdate || guardado.updatedAt || ""
     );
 
-    const desactualizado =
-      !Number.isFinite(ultimaActualizacion) ||
-      ahora - ultimaActualizacion > LIMITE_ANTIGUEDAD;
+
+
+const desactualizado =
+  partido.status !== "finished" &&
+  (
+    partido.isStale === true ||
+    !Number.isFinite(ultimaActualizacion) ||
+    ahora - ultimaActualizacion > LIMITE_ANTIGUEDAD
+  );
+
+
 
     return {
       ...partido,
@@ -479,30 +766,53 @@ const datosActualizados = {
   }),
 };
 
+
 return Response.json(datosActualizados, {
   headers: {
-    "Cache-Control": "no-store",
+    ...obtenerCorsHeaders(request),
+"Cache-Control": "no-store",
   },
 });
+
 
     } catch (error) {
       console.error("Error leyendo KV:", error.message);
 
-      return Response.json(
-        { error: "No se pudieron leer los marcadores" },
-        { status: 502 }
-      );
+
+return Response.json(
+  { error: "No se pudieron leer los marcadores" },
+  {
+    status: 502,
+    headers: {
+     ...obtenerCorsHeaders(request),
+"Cache-Control": "no-store",
+    },
+  }
+);
+
     }
   },
 
-  async scheduled(event, env, ctx) {
-    ctx.waitUntil(
-      actualizarMarcadores(env).catch((error) => {
+ async scheduled(event, env, ctx) {
+  ctx.waitUntil(
+    (async () => {
+      const inicio = Date.now();
+
+      try {
+        await actualizarMarcadores(env);
+      } catch (error) {
         console.error(
           "Error actualizando LIVE oficial:",
           error.message
         );
-      })
-    );
-  },
+      } finally {
+        console.log(
+          "Duración actualización LIVE oficial:",
+          ((Date.now() - inicio) / 1000).toFixed(2),
+          "segundos"
+        );
+      }
+      })()
+  );
+},
 };

@@ -90,8 +90,10 @@ function Home() {
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 const [upcomingTab, setUpcomingTab] = useState("comparativa");
-const [liveMatches] = useState([]);
-const [liveDate] = useState(null);
+const [liveMatches, setLiveMatches] = useState([]);
+const [liveDate, setLiveDate] = useState(null);
+const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
+
 
   // DI representa minutos jugados dentro del cuarto (sin segundos).
   const getRemainingMinutes = (minutesPlayed) => {
@@ -618,6 +620,43 @@ const getPlayerLastMatches = (player) => {
     };
   }, []);
 
+  useEffect(() => {
+  if (!LIVE_API_URL) return;
+
+  let activo = true;
+
+  const actualizarLive = async () => {
+    try {
+      const response = await fetch(LIVE_API_URL, {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error HTTP ${response.status}`);
+      }
+
+      const datos = await response.json();
+
+      if (!activo) return;
+
+      if (Array.isArray(datos.liveMatches)) {
+        setLiveMatches(datos.liveMatches);
+        setLiveDate(datos.date ?? null);
+      }
+    } catch (error) {
+      console.warn("Error consultando LIVE oficial:", error);
+    }
+  };
+
+  actualizarLive();
+
+  const intervalo = setInterval(actualizarLive, 60_000);
+
+  return () => {
+    activo = false;
+    clearInterval(intervalo);
+  };
+}, [LIVE_API_URL]);
   // LIVE de Flashscore desactivado temporalmente.
   // Los resultados oficiales y el fixture siguen disponibles.
 
