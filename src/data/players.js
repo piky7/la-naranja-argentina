@@ -2329,13 +2329,6 @@ export const players = [
   
   
   
-  {
-    id: "oficial-274342",
-    officialPlayerId: 274342,
-    name: "Martin Chapero",
-    teamId: "penarol",
-    number: 11,
-  },
   
   
   
@@ -2363,21 +2356,7 @@ export const players = [
   
   
   
-  {
-    id: "oficial-430621",
-    officialPlayerId: 430621,
-    name: "Mariano Valentin Caceres Comelli",
-    teamId: "olimpico",
-    number: 8,
-  },
   
-  {
-    id: "oficial-431734",
-    officialPlayerId: 431734,
-    name: "Francisco Pereyra",
-    teamId: "olimpico",
-    number: 20,
-  },
   
   
   
@@ -2413,13 +2392,6 @@ export const players = [
   
   
   
-  {
-    id: "oficial-429468",
-    officialPlayerId: 429468,
-    name: "Facundo Mariano",
-    teamId: "la-union",
-    number: 20,
-  },
   
   
   
@@ -2431,95 +2403,25 @@ export const players = [
   
   
   
-  {
-    id: "oficial-130590",
-    officialPlayerId: 130590,
-    name: "Milton Nadir Mousquere",
-    teamId: "obera",
-    number: 5,
-  },
-  
-  
-  
-  {
-    id: "oficial-429447",
-    officialPlayerId: 429447,
-    name: "Manuel Caratino",
-    teamId: "obera",
-    number: 15,
-  },
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  {
-    id: "oficial-276420",
-    officialPlayerId: 276420,
-    name: "Ezequiel Joel Horen",
-    teamId: "independiente-oliva",
-    number: 11,
-  },
-  
-  
-  
-  
-  
-  
-  {
-    id: "oficial-430497",
-    officialPlayerId: 430497,
-    name: "Matheus Santos Simao Costa",
-    teamId: "obera",
-    number: 0,
-  },
-  {
-    id: "oficial-428118",
-    officialPlayerId: 428118,
-    name: "Joaquin Roman Diaz",
-    teamId: "racing-chivilcoy",
-    number: 5,
-  },
-  {
-    id: "oficial-184197",
-    officialPlayerId: 184197,
-    name: "Vicente Blazica Cristobal",
-    teamId: "platense",
-    number: 1,
-  },
-  {
-    id: "oficial-273373",
-    officialPlayerId: 273373,
-    name: "Joaquin Goncalves",
-    teamId: "platense",
-    number: 3,
-  },
-  {
-    id: "oficial-188845",
-    officialPlayerId: 188845,
-    name: "Santiago Tallade",
-    teamId: "san-lorenzo",
-    number: 21,
-  },
-  {
-    id: "oficial-432336",
-    officialPlayerId: 432336,
-    name: "Lucas Vernon Lorenzen",
-    teamId: "olimpico",
-    number: 3,
-  },
-  {
-    id: "oficial-385605",
-    officialPlayerId: 385605,
-    name: "Raniero Mainoldi",
-    teamId: "independiente-oliva",
-    number: 25,
-  },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 ];
