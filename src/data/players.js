@@ -2317,20 +2317,8 @@ export const players = [
   
   
   
-  {
-    id: "oficial-431355",
-    officialPlayerId: 431355,
-    name: "Joaquin Coria Fa",
-    teamId: "lanus",
-    number: 13,
-  },
-  {
-    id: "oficial-388284",
-    officialPlayerId: 388284,
-    name: "Agustin Moraga",
-    teamId: "lanus",
-    number: 27,
-  },
+  
+  
   
   
   
