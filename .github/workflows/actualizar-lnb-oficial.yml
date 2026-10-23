@@ -81,6 +81,10 @@ jobs:
         if: steps.window.outputs.run == 'true'
         run: node scripts/sync-official-roster.cjs
 
+      - name: Verificar sintaxis del plantel actualizado
+        if: steps.window.outputs.run == 'true'
+        run: node --check src/data/players.js
+
       - name: Validar resultados y estadísticas oficiales
         if: steps.window.outputs.run == 'true'
         run: node sync-official-stats-preview.cjs
