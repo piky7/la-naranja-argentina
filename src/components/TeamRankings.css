@@ -113,3 +113,41 @@
   .team-ranking-controls { width:108px; }
   .team-ranking-metrics button { padding:7px 8px; font-size:10px; }
 }
+
+/* LNA 2026/27 — filas de equipos compactas y profesionales */
+.team-ranking-list { border-color:#293d52; border-radius:11px; }
+.team-ranking-listhead { padding:10px 13px; font-size:10px; }
+.team-ranking-row {
+  grid-template-columns:22px 30px minmax(0,1.25fr) minmax(48px,.68fr) 55px 9px;
+  min-height:53px;
+  gap:8px;
+  padding:6px 11px;
+  border-top-color:#233649;
+}
+.team-ranking-position { font-size:12px; }
+.team-ranking-logo { width:28px; height:28px; }
+.team-ranking-name { font-size:12px; font-weight:750; }
+.team-ranking-name small { margin-top:2px; font-size:9px; }
+.team-ranking-track { height:5px; }
+.team-ranking-value { font-size:15px; }
+.team-ranking-chevron { font-size:20px; }
+@media(max-width:600px){
+  .team-ranking-row {
+    grid-template-columns:18px 27px minmax(0,1.3fr) minmax(32px,.55fr) 49px 8px;
+    min-height:51px; gap:6px; padding:6px 7px;
+  }
+  .team-ranking-logo { width:26px; height:26px; }
+  .team-ranking-name { font-size:11.5px; }
+  .team-ranking-name small { font-size:9px; }
+  .team-ranking-value { font-size:14px; }
+  .team-ranking-listhead { padding:10px 9px; }
+}
+@media(max-width:375px){
+  .team-ranking-row {
+    grid-template-columns:16px 23px minmax(0,1.3fr) minmax(25px,.45fr) 44px 7px;
+    min-height:49px; gap:4px; padding:5px 6px;
+  }
+  .team-ranking-logo { width:23px; height:23px; }
+  .team-ranking-name { font-size:11px; }
+  .team-ranking-value { font-size:13px; }
+}
