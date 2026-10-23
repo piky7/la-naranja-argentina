@@ -6,7 +6,7 @@ import "./TripleRankings.css";
 
 const positions = ["Todas", "Base", "Escolta", "Alero", "Ala-pívot", "Pívot"];
 const validMade = (shot) => {
-  const value = shot?.made;
+  const value = shot?.made ?? shot?.Aciertos;
   return value !== null && value !== undefined && value !== "" && Number.isInteger(Number(value)) && Number(value) >= 0 ? Number(value) : null;
 };
 
