@@ -538,7 +538,7 @@ export const players = [
   teamId: "gimnasia",
   position: "Escolta",
   number: 5,
-  nationality: null,
+  nationality: "Cuba",
   category: "U21",
 },
 
@@ -595,7 +595,7 @@ export const players = [
   teamId: "gimnasia",
   position: "Alero",
   number: null,
-  nationality: null,
+  nationality: "Venezuela",
   category: "E",
 },
 
@@ -1467,7 +1467,7 @@ export const players = [
   teamId: "platense",
   position: "Base",
   number: 15,
-  nationality: null,
+  nationality: "Uruguay",
   category: "E",
 },
 
@@ -1478,7 +1478,7 @@ export const players = [
   teamId: "platense",
   position: "Base",
   number: 2,
-  nationality: null,
+  nationality: "Venezuela",
   category: "U21",
 },
 
@@ -1650,7 +1650,7 @@ export const players = [
   teamId: "quimsa",
   position: "Alero",
   number: 30,
-  nationality: null,
+  nationality: "Uruguay",
   category: "E",
 },
 
@@ -2128,7 +2128,7 @@ export const players = [
   teamId: "san-martin",
   position: "Ala-pívot",
   number: 7,
-  nationality: null,
+  nationality: "Brasil",
   category: "E",
 },
 
