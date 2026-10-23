@@ -79,8 +79,8 @@ export default function TripleRankings({ onPlayerClick }) {
     </div>
     <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div>
     <div className="triple-list">
-      {filtered.map((player, index) => <button type="button" className="triple-row" key={player.id} onClick={() => onPlayerClick(player)}>
-        <span className="triple-position">{index + 1}</span>
+      {filtered.slice(3).map((player, index) => <button type="button" className="triple-row" key={player.id} onClick={() => onPlayerClick(player)}>
+        <span className="triple-position">{index + 4}</span>
         <span className="triple-player-name">{player.name}<small>{player.position}</small></span>
         {player.team?.logo && <img src={player.team.logo} alt={player.team.name} />}
         <strong>{player.made}</strong>
