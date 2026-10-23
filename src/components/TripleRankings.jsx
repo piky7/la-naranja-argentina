@@ -1,8 +1,6 @@
 import { useMemo, useState } from "react";
 import { players } from "../data/players";
 import { teams } from "../data/teams";
-import { matches } from "../data/matches";
-import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
 import "./TripleRankings.css";
 
@@ -14,17 +12,17 @@ const validMade = (shot) => {
 
 function calculateTriples() {
   const totals = new Map();
+  // Los registros publicados por el sincronizador oficial ya fueron validados
+  // contra resultados finales. No depender del estado del fixture, que puede
+  // conservar un estado anterior, ni de IDs diferentes para un mismo partido.
   const seen = new Set();
-  for (const match of matches) {
-    if (!/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
-    const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
-    const result = matchResults[key] ?? matchResults[match.id];
-    if ((result?.status ?? match.status) !== "finished") continue;
-    const record = matchPlayerStats[match.id] || matchPlayerStats[key];
+  for (const [recordKey, record] of Object.entries(matchPlayerStats)) {
+    if (!/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(recordKey)) continue;
     if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
-    for (const teamId of [match.homeTeam, match.awayTeam]) {
+    const uniqueMatch = record.officialUrl;
+    if (seen.has(uniqueMatch)) continue;
+    seen.add(uniqueMatch);
+    for (const teamId of [record.homeTeam, record.awayTeam]) {
       if (!Array.isArray(record[teamId])) continue;
       for (const entry of record[teamId]) {
         if (!entry.id) continue;
