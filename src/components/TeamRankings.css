@@ -50,3 +50,66 @@
  .team-ranking-name { font-size:11px; }
  .team-ranking-value { font-size:14px; }
 }
+
+/* Ajuste móvil compacto: menos altura en filtros, etiquetas más cortas y sin buscador. */
+.team-ranking-scopes {
+  margin: 8px 0 9px;
+  padding: 3px;
+  gap: 3px;
+  border-radius: 11px;
+}
+.team-ranking-scopes button {
+  padding: 8px 3px;
+  min-height: 34px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.team-ranking-metrics {
+  gap: 5px;
+  padding: 0 0 6px;
+}
+.team-ranking-metrics button {
+  padding: 8px 9px;
+  min-height: 34px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 1.1;
+}
+.team-ranking-tools {
+  margin: 7px 0 12px;
+  gap: 10px;
+}
+.team-ranking-heading h2 {
+  margin: 3px 0 2px;
+}
+.team-ranking-controls label {
+  gap: 4px;
+}
+.team-ranking-controls select {
+  padding: 8px 10px;
+}
+.stats-mode-switch {
+  margin: 10px 0 6px;
+  padding: 3px;
+  border-radius: 11px;
+  gap: 3px;
+}
+.stats-mode-switch button {
+  padding: 9px 7px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+@media(max-width:600px) {
+  .team-ranking-tools { display:flex; align-items:center; justify-content:space-between; gap:9px; }
+  .team-ranking-heading { flex:1; min-width:0; }
+  .team-ranking-heading h2 { font-size:17px; }
+  .team-ranking-heading p { font-size:11px; }
+  .team-ranking-eyebrow { font-size:9px; }
+  .team-ranking-controls { display:block; margin:0; flex:none; width:128px; }
+  .team-ranking-controls label { font-size:9px; }
+  .team-ranking-controls select { width:100%; min-width:0; font-size:11px; }
+}
+@media(max-width:375px) {
+  .team-ranking-controls { width:108px; }
+  .team-ranking-metrics button { padding:7px 8px; font-size:10px; }
+}
