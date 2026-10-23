@@ -8,11 +8,11 @@ import "./TeamRankings.css";
 
 const metrics = [
   { key: "points", label: "Puntos por partido", short: "PTS", unit: "PTS / PJ", average: true },
-  { key: "pointsAgainst", label: "Puntos recibidos", short: "REC", unit: "REC / PJ", average: true, lowerBetter: true },
+  { key: "pointsAgainst", label: "Puntos recibidos", short: "PTS REC", unit: "PTS REC / PJ", average: true, lowerBetter: true },
   { key: "rebounds", label: "Rebotes", short: "REB", unit: "REB / PJ", average: true, collective: true },
   { key: "assists", label: "Asistencias", short: "AST", unit: "AST / PJ", average: true, collective: true },
-  { key: "winsHome", label: "Ganados de local", short: "G. LOCAL", unit: "VICTORIAS", fixedScope: true },
-  { key: "winsAway", label: "Ganados de visitante", short: "G. VISITA", unit: "VICTORIAS", fixedScope: true },
+  { key: "winsHome", label: "Ganados de local", short: "G. LOC", unit: "VICTORIAS", fixedScope: true },
+  { key: "winsAway", label: "Ganados de visitante", short: "G. VIS", unit: "VICTORIAS", fixedScope: true },
   { key: "difference", label: "Diferencia de puntos", short: "DIF", unit: "DIF / PJ", average: true },
   { key: "winPct", label: "Efectividad", short: "EF %", unit: "VICTORIAS %", percent: true },
 ];
@@ -88,14 +88,11 @@ export default function TeamRankings() {
   const [scope, setScope] = useState("overall");
   const [metricKey, setMetricKey] = useState("points");
   const [direction, setDirection] = useState("best");
-  const [search, setSearch] = useState("");
   const metric = metrics.find((item) => item.key === metricKey) || metrics[0];
 
   const sorted = useMemo(() => {
-    const term = search.trim().toLocaleLowerCase("es");
     return rankingData
       .map((record) => ({ ...record, value: metricValue(record, metricKey, scope) }))
-      .filter((record) => !term || record.team.name.toLocaleLowerCase("es").includes(term) || record.team.shortName?.toLocaleLowerCase("es").includes(term))
       .sort((a, b) => {
         if (a.value == null && b.value == null) return a.team.name.localeCompare(b.team.name, "es");
         if (a.value == null) return 1;
@@ -103,7 +100,7 @@ export default function TeamRankings() {
         const ascending = metric.lowerBetter ? direction === "best" : direction !== "best";
         return (ascending ? a.value - b.value : b.value - a.value) || a.team.name.localeCompare(b.team.name, "es");
       });
-  }, [scope, metricKey, direction, search, metric.lowerBetter]);
+  }, [scope, metricKey, direction, metric.lowerBetter]);
 
   const maximum = Math.max(1, ...sorted.map((row) => Math.max(0, row.value ?? 0)));
   const sample = rankingData.reduce((acc, record) => Math.max(acc, record[scope].collectiveGames), 0);
@@ -132,10 +129,6 @@ export default function TeamRankings() {
           <p>{metric.fixedScope ? "Victorias acumuladas en la condición indicada, independientemente del filtro General/Local/Visitante." : scope === "overall" ? "Todos los partidos" : scope === "home" ? "Solo partidos como local" : "Solo partidos como visitante"}</p>
         </div>
         <div className="team-ranking-controls">
-          <label>
-            <span>BUSCAR EQUIPO</span>
-            <input type="search" placeholder="Buscar equipo..." value={search} onChange={(event) => setSearch(event.target.value)} />
-          </label>
           <label>
             <span>ORDENAR</span>
             <select value={direction} onChange={(event) => setDirection(event.target.value)}>
