@@ -9,6 +9,7 @@ import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
 import PlayerModal from "../components/PlayerModal";
 import TeamRankings from "../components/TeamRankings";
+import TripleRankings from "../components/TripleRankings";
 import "../pages/Home.css";
 import { useNavigate } from "react-router-dom";
 
@@ -317,8 +318,10 @@ return matchesSearch && matchesTeam && matchesMinGames;
         <div className="stats-mode-switch" role="group" aria-label="Seleccionar tipo de estadísticas">
           <button type="button" className={mode === "players" ? "active" : ""} aria-pressed={mode === "players"} onClick={() => setMode("players")}>Jugadores</button>
           <button type="button" className={mode === "teams" ? "active" : ""} aria-pressed={mode === "teams"} onClick={() => setMode("teams")}>Equipos</button>
+          <button type="button" className={mode === "triples" ? "active" : ""} aria-pressed={mode === "triples"} onClick={() => setMode("triples")}>Triples</button>
         </div>
         {mode === "teams" && <TeamRankings />}
+        {mode === "triples" && <TripleRankings onPlayerClick={setSelectedPlayer} />}
         {mode === "players" && (<>
 
 {/* =========================================
