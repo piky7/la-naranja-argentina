@@ -21,6 +21,7 @@ export const players = [
 
 {
   id: "joaquin-fernandez",
+  officialPlayerId: 427474,
   name: "Joaquín Fernández",
   teamId: "argentino",
   position: "Base",
@@ -40,6 +41,7 @@ export const players = [
 
 {
   id: "dylan-smith",
+  officialPlayerId: 384168,
   name: "Dylan Smith",
   teamId: "argentino",
   position: "Escolta",
@@ -50,6 +52,7 @@ export const players = [
 
 {
   id: "santiago-bilbao",
+  officialPlayerId: 174821,
   name: "Santiago Bilbao",
   teamId: "argentino",
   position: "Escolta",
@@ -88,6 +91,7 @@ export const players = [
 
 {
   id: "zyon-patterson",
+  officialPlayerId: 429231,
   name: "Zyon Patterson",
   teamId: "argentino",
   position: "Alero",
@@ -98,6 +102,7 @@ export const players = [
 
 {
   id: "romulo-gusmao",
+  officialPlayerId: 209418,
   name: "Rómulo Gusmao",
   teamId: "argentino",
   position: "Pívot",
@@ -108,6 +113,7 @@ export const players = [
 
 {
   id: "leandro-cerminato",
+  officialPlayerId: 427465,
   name: "Leandro Cerminato",
   teamId: "argentino",
   position: "Ala-pívot",
@@ -119,6 +125,7 @@ export const players = [
 
 {
   id: "franco-balbi",
+  officialPlayerId: 430445,
   name: "Franco Balbi",
   teamId: "atenas",
   position: "Base",
@@ -137,6 +144,7 @@ export const players = [
 
 {
   id: "benjamin-imaz",
+  officialPlayerId: 332193,
   name: "Benjamín Imaz",
   teamId: "atenas",
   position: "Base",
@@ -156,6 +164,7 @@ export const players = [
 
 {
   id: "juan-arengo",
+  officialPlayerId: 430626,
   name: "Juan Arengo",
   teamId: "atenas",
   position: "Escolta",
@@ -194,6 +203,7 @@ export const players = [
 
 {
   id: "facundo-valfre",
+  officialPlayerId: 235314,
   name: "Facundo Valfre",
   teamId: "atenas",
   position: "Alero",
@@ -213,6 +223,7 @@ export const players = [
 
 {
   id: "daniel-laster",
+  officialPlayerId: 430772,
   name: "Daniel Laster",
   teamId: "atenas",
   position: "Ala-pívot",
@@ -223,6 +234,7 @@ export const players = [
 
 {
   id: "bryan-carabali",
+  officialPlayerId: 430618,
   name: "Bryan Carabalí",
   teamId: "atenas",
   position: "Pívot",
@@ -235,6 +247,7 @@ export const players = [
 
 {
   id: "jose-vildoza",
+  officialPlayerId: 266354,
   name: "José Vildoza",
   teamId: "boca",
   position: "Base",
@@ -253,6 +266,7 @@ export const players = [
 
 {
   id: "martin-cuello",
+  officialPlayerId: 323167,
   name: "Martín Cuello",
   teamId: "boca",
   position: "Escolta",
@@ -273,6 +287,7 @@ export const players = [
 
 {
   id: "valentino-finetti",
+  officialPlayerId: 428469,
   name: "Valentino Finetti",
   teamId: "boca",
   position: "Escolta",
@@ -361,6 +376,7 @@ export const players = [
 
 {
   id: "jano-martinez",
+  officialPlayerId: 324409,
   name: "Jano Martínez",
   teamId: "ferro",
   position: "Base",
@@ -371,6 +387,7 @@ export const players = [
 
 {
   id: "camilo-jara",
+  officialPlayerId: 41208,
   name: "Camilo Jara",
   teamId: "ferro",
   position: "Alero",
@@ -381,6 +398,7 @@ export const players = [
 
 {
   id: "rodrigo-gallegos",
+  officialPlayerId: 278259,
   name: "Rodrigo Gallegos",
   teamId: "ferro",
   position: "Base",
@@ -418,6 +436,7 @@ export const players = [
 
 {
   id: "valentin-bettiga",
+  officialPlayerId: 150972,
   name: "Valentín Bettiga",
   teamId: "ferro",
   position: "Alero",
@@ -436,6 +455,7 @@ export const players = [
 
 {
   id: "felipe-rodriguez",
+  officialPlayerId: 74902,
   name: "Felipe Rodríguez",
   teamId: "ferro",
   position: "Alero",
@@ -473,6 +493,7 @@ export const players = [
 
 {
   id: "alejandro-diez",
+  officialPlayerId: 325771,
   name: "Alejandro Diez",
   teamId: "ferro",
   position: "Pívot",
@@ -492,6 +513,7 @@ export const players = [
 
 {
   id: "sebastian-carrasco",
+  officialPlayerId: 375104,
   name: "Sebastián Carrasco",
   teamId: "gimnasia",
   position: "Base",
@@ -511,6 +533,7 @@ export const players = [
 
 {
   id: "marcos-chacon",
+  officialPlayerId: 219864,
   name: "Marcos Chacón",
   teamId: "gimnasia",
   position: "Escolta",
@@ -521,6 +544,7 @@ export const players = [
 
 {
   id: "felipe-inyaco",
+  officialPlayerId: 429327,
   name: "Felipe Inyaco",
   teamId: "gimnasia",
   position: "Escolta",
@@ -607,6 +631,7 @@ export const players = [
 
 {
   id: "carlos-rivero",
+  officialPlayerId: 319448,
   name: "Carlos Rivero",
   teamId: "gimnasia",
   position: "Pívot",
@@ -617,6 +642,7 @@ export const players = [
 
 {
   id: "jesus-centeno",
+  officialPlayerId: 375103,
   name: "Jesús Centeno",
   teamId: "gimnasia",
   position: "Pívot",
@@ -638,6 +664,7 @@ export const players = [
 
 {
   id: "juan-martin-guerrero",
+  officialPlayerId: 430925,
   name: "Juan Martín Guerrero",
   teamId: "independiente-oliva",
   position: "Base",
@@ -657,6 +684,7 @@ export const players = [
 
 {
   id: "nicolas-marcucci",
+  officialPlayerId: 171833,
   name: "Nicolás Marcucci",
   teamId: "independiente-oliva",
   position: "Escolta",
@@ -666,6 +694,7 @@ export const players = [
 
 {
   id: "fortuna-rolfi",
+  officialPlayerId: 379152,
   name: "Fortunato Rolfi",
   teamId: "independiente-oliva",
   position: "Escolta",
@@ -684,6 +713,7 @@ export const players = [
 
 {
   id: "patricio-tabarez",
+  officialPlayerId: 329317,
   name: "Patricio Tabárez",
   teamId: "independiente-oliva",
   position: "Alero",
@@ -712,6 +742,7 @@ export const players = [
 
 {
   id: "rolando-vallejos",
+  officialPlayerId: 324888,
   name: "Rolando Vallejos",
   teamId: "independiente-oliva",
   position: "Ala-pívot",
@@ -769,6 +800,7 @@ export const players = [
 
 {
   id: "xavier-carreras",
+  officialPlayerId: 425462,
   name: "Xavier Carreras",
   teamId: "instituto",
   position: "Alero",
@@ -779,6 +811,7 @@ export const players = [
 
 {
   id: "kadir-pomare",
+  officialPlayerId: 176374,
   name: "Kadir Pomare",
   teamId: "instituto",
   position: "Alero",
@@ -789,6 +822,7 @@ export const players = [
 
 {
   id: "federico-bustos",
+  officialPlayerId: 426072,
   name: "Federico Bustos",
   teamId: "instituto",
   position: "Alero",
@@ -817,6 +851,7 @@ export const players = [
 
 {
   id: "federico-aguerre",
+  officialPlayerId: 429185,
   name: "Federico Aguerre",
   teamId: "instituto",
   position: "Ala-pívot",
@@ -826,6 +861,7 @@ export const players = [
 
 {
   id: "torren-jones",
+  officialPlayerId: 431284,
   name: "Torren Jones",
   teamId: "instituto",
   position: "Pívot",
@@ -838,6 +874,7 @@ export const players = [
 
 {
   id: "hugo-paez",
+  officialPlayerId: 382160,
   name: "Hugo Páez",
   teamId: "la-union",
   position: "Pívot",
@@ -849,6 +886,7 @@ export const players = [
 
 {
   id: "agustin-facello",
+  officialPlayerId: 429463,
   name: "Agustín Facello",
   teamId: "la-union",
   position: "Base",
@@ -867,6 +905,7 @@ export const players = [
 
 {
   id: "brandon-beavers",
+  officialPlayerId: 382372,
   name: "Brandon Beavers",
   teamId: "la-union",
   position: "Escolta",
@@ -877,6 +916,7 @@ export const players = [
 
 {
   id: "alexis-elsener",
+  officialPlayerId: 209577,
   name: "Alexis Elsener",
   teamId: "la-union",
   position: "Alero",
@@ -886,6 +926,7 @@ export const players = [
 
 {
   id: "sebastian-acevedo",
+  officialPlayerId: 380839,
   name: "Sebastián Acevedo",
   teamId: "la-union",
   position: "Alero",
@@ -895,6 +936,7 @@ export const players = [
 
 {
   id: "tomas-nuno",
+  officialPlayerId: 382371,
   name: "Tomás Nuno",
   teamId: "la-union",
   position: "Alero",
@@ -913,6 +955,7 @@ export const players = [
 
 {
   id: "windi-graterol",
+  officialPlayerId: 382370,
   name: "Windi Graterol",
   teamId: "la-union",
   position: "Pívot",
@@ -923,6 +966,7 @@ export const players = [
 
 {
   id: "enzo-maglietti",
+  officialPlayerId: 212758,
   name: "Enzo Maglietti",
   teamId: "la-union",
   position: "Base",
@@ -935,6 +979,7 @@ export const players = [
 
 {
   id: "juan-brussino",
+  officialPlayerId: 428243,
   name: "Juan Brussino",
   teamId: "lanus",
   position: "Base",
@@ -961,6 +1006,7 @@ export const players = [
 
 {
   id: "robert-whitfield",
+  officialPlayerId: 385838,
   name: "Robert Whitfield",
   teamId: "lanus",
   position: "Escolta",
@@ -971,6 +1017,7 @@ export const players = [
 
 {
   id: "melvin-johnson",
+  officialPlayerId: 430339,
   name: "Melvin Johnson",
   teamId: "lanus",
   position: "Escolta",
@@ -981,6 +1028,7 @@ export const players = [
 
 {
   id: "alejo-sacchi",
+  officialPlayerId: 33793,
   name: "Alejo Sacchi",
   teamId: "lanus",
   position: "Alero",
@@ -991,6 +1039,7 @@ export const players = [
 
 {
   id: "christian-james",
+  officialPlayerId: 429711,
   name: "Christian James",
   teamId: "lanus",
   position: "Alero",
@@ -1030,6 +1079,7 @@ export const players = [
 
 {
   id: "fabian-ramirez-barrios",
+  officialPlayerId: 424846,
   name: "Fabián Ramírez Barrios",
   teamId: "lanus",
   position: "Ala-pívot",
@@ -1039,6 +1089,7 @@ export const players = [
 
 {
   id: "pedro-bombino",
+  officialPlayerId: 431601,
   name: "Pedro Bombino",
   teamId: "lanus",
   position: "Pívot",
@@ -1059,6 +1110,7 @@ export const players = [
 
 {
   id: "albano-costa",
+  officialPlayerId: 328770,
   name: "Albano Costa",
   teamId: "obera",
   position: "Base",
@@ -1069,6 +1121,7 @@ export const players = [
 
 {
   id: "victor-fernandez",
+  officialPlayerId: 427601,
   name: "Víctor Fernández",
   teamId: "obera",
   position: "Base",
@@ -1078,6 +1131,7 @@ export const players = [
 
 {
   id: "agustin-brocal",
+  officialPlayerId: 150723,
   name: "Agustín Brocal",
   teamId: "obera",
   position: "Escolta",
@@ -1087,6 +1141,7 @@ export const players = [
 
 {
   id: "jonatan-torresi",
+  officialPlayerId: 218487,
   name: "Jonatan Torresi",
   teamId: "obera",
   position: "Escolta",
@@ -1105,6 +1160,7 @@ export const players = [
 
 {
   id: "alejo-azpilicueta",
+  officialPlayerId: 189265,
   name: "Alejo Azpilicueta",
   teamId: "obera",
   position: "Alero",
@@ -1137,6 +1193,7 @@ export const players = [
 
 {
   id: "juan-cruz-oberto",
+  officialPlayerId: 427602,
   name: "Juan Cruz Oberto",
   teamId: "obera",
   position: "Ala-pívot",
@@ -1148,6 +1205,7 @@ export const players = [
 
 {
   id: "lucas-perez",
+  officialPlayerId: 429634,
   name: "Lucas Pérez",
   teamId: "olimpico",
   position: "Base",
@@ -1157,6 +1215,7 @@ export const players = [
 
 {
   id: "jeremias-frontera",
+  officialPlayerId: 429633,
   name: "Jeremías Frontera",
   teamId: "olimpico",
   position: "Base",
@@ -1204,6 +1263,7 @@ export const players = [
 
 {
   id: "santino-romegialli",
+  officialPlayerId: 326739,
   name: "Santino Romegialli",
   teamId: "olimpico",
   position: "Alero",
@@ -1224,6 +1284,7 @@ export const players = [
 
 {
   id: "elisias-hall",
+  officialPlayerId: 429642,
   name: "Elisias Hall",
   teamId: "olimpico",
   position: "Pívot",
@@ -1234,6 +1295,7 @@ export const players = [
 
 {
   id: "andrew-corum",
+  officialPlayerId: 429639,
   name: "Andrew Corum",
   teamId: "olimpico",
   position: "Ala-pívot",
@@ -1244,6 +1306,7 @@ export const players = [
 
 {
   id: "joaquin-lopez-lorenz",
+  officialPlayerId: 429638,
   name: "Joaquín López Lorenz",
   teamId: "olimpico",
   position: "Pívot",
@@ -1256,6 +1319,7 @@ export const players = [
 
 {
   id: "luciano-guerra",
+  officialPlayerId: 377841,
   name: "Luciano Guerra",
   teamId: "penarol",
   position: "Base",
@@ -1265,6 +1329,7 @@ export const players = [
 
 {
   id: "andres-jaime",
+  officialPlayerId: 425399,
   name: "Andrés Jaime",
   teamId: "penarol",
   position: "Base",
@@ -1303,6 +1368,7 @@ export const players = [
 
 {
   id: "sebastian-vega",
+  officialPlayerId: 425403,
   name: "Sebastián Vega",
   teamId: "penarol",
   position: "Alero",
@@ -1332,6 +1398,7 @@ export const players = [
 
 {
   id: "ivan-basualdo",
+  officialPlayerId: 377837,
   name: "Iván Basualdo",
   teamId: "penarol",
   position: "Pívot",
@@ -1341,6 +1408,7 @@ export const players = [
 
 {
   id: "franco-giorgetti",
+  officialPlayerId: 425401,
   name: "Franco Giorgetti",
   teamId: "penarol",
   position: "Ala-pívot",
@@ -1350,6 +1418,7 @@ export const players = [
 
 {
   id: "ignacio-bednarek",
+  officialPlayerId: 93423,
   name: "Ignacio Bednarek",
   teamId: "penarol",
   position: "Ala-pívot",
@@ -1383,6 +1452,7 @@ export const players = [
 
 {
   id: "ramiro-santiago",
+  officialPlayerId: 431012,
   name: "Ramiro Santiago",
   teamId: "platense",
   position: "Base",
@@ -1392,6 +1462,7 @@ export const players = [
 
 {
   id: "facundo-terra",
+  officialPlayerId: 431028,
   name: "Facundo Terra",
   teamId: "platense",
   position: "Base",
@@ -1402,6 +1473,7 @@ export const players = [
 
 {
   id: "anthoan-urbina",
+  officialPlayerId: 273290,
   name: "Anthoan Urbina",
   teamId: "platense",
   position: "Base",
@@ -1412,6 +1484,7 @@ export const players = [
 
 {
   id: "federico-grun",
+  officialPlayerId: 431010,
   name: "Federico Grun",
   teamId: "platense",
   position: "Escolta",
@@ -1421,6 +1494,7 @@ export const players = [
 
 {
   id: "franco-smaniotti",
+  officialPlayerId: 328509,
   name: "Franco Smaniotti",
   teamId: "platense",
   position: "Escolta",
@@ -1430,6 +1504,7 @@ export const players = [
 
 {
   id: "mariano-goicoechea",
+  officialPlayerId: 202340,
   name: "Mariano Goicoechea",
   teamId: "platense",
   position: "Escolta",
@@ -1449,6 +1524,7 @@ export const players = [
 
 {
   id: "mauro-cosolito",
+  officialPlayerId: 431014,
   name: "Mauro Cosolito",
   teamId: "platense",
   position: "Alero",
@@ -1458,6 +1534,7 @@ export const players = [
 
 {
   id: "gaston-cordoba",
+  officialPlayerId: 430997,
   name: "Gastón Córdoba",
   teamId: "platense",
   position: "Ala-pívot",
@@ -1476,6 +1553,7 @@ export const players = [
 
 {
   id: "erik-copes",
+  officialPlayerId: 430922,
   name: "Erik Copes",
   teamId: "platense",
   position: "Ala-pívot",
@@ -1498,6 +1576,7 @@ export const players = [
 
 {
   id: "sebastian-bogado",
+  officialPlayerId: 331567,
   name: "Sebastián Bogado",
   teamId: "quimsa",
   position: "Alero",
@@ -1518,6 +1597,7 @@ export const players = [
 
  {
   id: "facundo-rutenberg",
+  officialPlayerId: 429671,
   name: "Facundo Rutenberg",
   teamId: "quimsa",
   position:  "Escolta",
@@ -1536,6 +1616,7 @@ export const players = [
 
 {
   id: "matias-solanas",
+  officialPlayerId: 378019,
   name: "Matías Solanas",
   teamId: "quimsa",
   position: "Escolta",
@@ -1554,6 +1635,7 @@ export const players = [
 
 {
   id: "franco-mendez",
+  officialPlayerId: 429317,
   name: "Franco Méndez",
   teamId: "quimsa",
   position: "Escolta",
@@ -1563,6 +1645,7 @@ export const players = [
 
 {
   id: "nicolas-martinez",
+  officialPlayerId: 426284,
   name: "Nicolás Martínez",
   teamId: "quimsa",
   position: "Alero",
@@ -1573,6 +1656,7 @@ export const players = [
 
 {
   id: "tyren-johnson",
+  officialPlayerId: 385839,
   name: "Tyren Johnson",
   teamId: "quimsa",
   position: "Alero",
@@ -1583,6 +1667,7 @@ export const players = [
 
 {
   id: "tayavek-gallizzi",
+  officialPlayerId: 271900,
   name: "Tayavek Gallizzi",
   teamId: "quimsa",
   position: "Pívot",
@@ -1592,6 +1677,7 @@ export const players = [
 
 {
   id: "javier-saiz",
+  officialPlayerId: 425395,
   name: "Javier Saiz",
   teamId: "quimsa",
   position: "Pívot",
@@ -1612,6 +1698,7 @@ export const players = [
 
 {
   id: "ignacio-respaud",
+  officialPlayerId: 421109,
   name: "Ignacio Respaud",
   teamId: "racing-chivilcoy",
   position: "Base",
@@ -1640,6 +1727,7 @@ export const players = [
 
 {
   id: "juan-bocca",
+  officialPlayerId: 425016,
   name: "Juan Bocca",
   teamId: "racing-chivilcoy",
   position: "Escolta",
@@ -1667,6 +1755,7 @@ export const players = [
 
 {
   id: "manuel-rodriguez",
+  officialPlayerId: 378915,
   name: "Manuel Rodríguez",
   teamId: "racing-chivilcoy",
   position: "Alero",
@@ -1676,6 +1765,7 @@ export const players = [
 
 {
   id: "abraham-barahona",
+  officialPlayerId: 325396,
   name: "Abraham Barahona",
   teamId: "racing-chivilcoy",
   position: "Ala-pívot",
@@ -1686,6 +1776,7 @@ export const players = [
 
 {
   id: "tomas-delia",
+  officialPlayerId: 378286,
   name: "Tomás Delía",
   teamId: "racing-chivilcoy",
   position: "Ala-pívot",
@@ -1696,6 +1787,7 @@ export const players = [
 
 {
   id: "emilio-stucky",
+  officialPlayerId: 218334,
   name: "Emilio Stucky",
   teamId: "racing-chivilcoy",
   position: "Ala-pívot",
@@ -1705,6 +1797,7 @@ export const players = [
 
 {
   id: "marcos-delia",
+  officialPlayerId: 426774,
   name: "Marcos Delía",
   teamId: "racing-chivilcoy",
   position: "Pívot",
@@ -1716,6 +1809,7 @@ export const players = [
 
 {
   id: "alan-ledesma",
+  officialPlayerId: 154780,
   name: "Alan Ledesma",
   teamId: "regatas",
   position: "Escolta",
@@ -1727,6 +1821,7 @@ export const players = [
 
 {
   id: "sebastian-orresta",
+  officialPlayerId: 426339,
   name: "Sebastián Orresta",
   teamId: "regatas",
   position: "Base",
@@ -1765,6 +1860,7 @@ export const players = [
 
 {
   id: "viktor-bender",
+  officialPlayerId: 77832,
   name: "Viktor Bender",
   teamId: "regatas",
   position: "Escolta",
@@ -1775,6 +1871,7 @@ export const players = [
 
 {
   id: "ivan-gramajo",
+  officialPlayerId: 325111,
   name: "Iván Gramajo",
   teamId: "regatas",
   position: "Alero",
@@ -1793,6 +1890,7 @@ export const players = [
 
 {
   id: "jose-montero",
+  officialPlayerId: 428080,
   name: "José Montero",
   teamId: "regatas",
   position: "Alero",
@@ -1802,6 +1900,7 @@ export const players = [
 
 {
   id: "roberto-acuna",
+  officialPlayerId: 426272,
   name: "Roberto Acuña",
   teamId: "regatas",
   position: "Pívot",
@@ -1811,6 +1910,7 @@ export const players = [
 
 {
   id: "elian-centeno",
+  officialPlayerId: 428705,
   name: "Elian Centeno",
   teamId: "regatas",
   position: "Ala-pívot",
@@ -1821,6 +1921,7 @@ export const players = [
 
 {
   id: "keith-stone",
+  officialPlayerId: 430266,
   name: "Keith Stone",
   teamId: "regatas",
   position: "Pívot",
@@ -1833,6 +1934,7 @@ export const players = [
 
 {
   id: "joaquin-actis",
+  officialPlayerId: 225273,
   name: "Joaquín Actis",
   teamId: "san-lorenzo",
   position: "Base",
@@ -1843,6 +1945,7 @@ export const players = [
 
 {
   id: "nicolas-aguirre",
+  officialPlayerId: 172012,
   name: "Nicolás Aguirre",
   teamId: "san-lorenzo",
   position: "Base",
@@ -1888,6 +1991,7 @@ export const players = [
 
 {
   id: "thiago-roca",
+  officialPlayerId: 172005,
   name: "Thiago Roca",
   teamId: "san-lorenzo",
   position: "Alero",
@@ -1948,6 +2052,7 @@ export const players = [
 
 {
   id: "gaston-garcia",
+  officialPlayerId: 209964,
   name: "Gastón García",
   teamId: "san-martin",
   position: "Base",
@@ -1987,6 +2092,7 @@ export const players = [
 
 {
   id: "geronimo-ramallo",
+  officialPlayerId: 276149,
   name: "Gerónimo Ramallo",
   teamId: "san-martin",
   position: "Alero",
@@ -1997,6 +2103,7 @@ export const players = [
 
 {
   id: "sebastian-lugo",
+  officialPlayerId: 429483,
   name: "Sebastián Lugo",
   teamId: "san-martin",
   position: "Alero",
@@ -2006,6 +2113,7 @@ export const players = [
 
 {
   id: "lautaro-berra",
+  officialPlayerId: 379523,
   name: "Lautaro Berra",
   teamId: "san-martin",
   position: "Pívot",
@@ -2015,6 +2123,7 @@ export const players = [
 
 {
   id: "daniel-moreira",
+  officialPlayerId: 386499,
   name: "Daniel Moreira",
   teamId: "san-martin",
   position: "Ala-pívot",
@@ -2204,878 +2313,224 @@ export const players = [
   nationality: null,
 },
   // Incorporaciones detectadas en planillas oficiales
-  {
-    id: "oficial-385838",
-    officialPlayerId: 385838,
-    name: "ROBERT JAMARCUS WHITFIELD III",
-    teamId: "lanus",
-    number: 3,
-  },
-  {
-    id: "oficial-428243",
-    officialPlayerId: 428243,
-    name: "JUAN IGNACIO BRUSSINO",
-    teamId: "lanus",
-    number: 5,
-  },
-  {
-    id: "oficial-33793",
-    officialPlayerId: 33793,
-    name: "ALEJO VALENTIN SACCHI",
-    teamId: "lanus",
-    number: 10,
-  },
-  {
-    id: "oficial-429711",
-    officialPlayerId: 429711,
-    name: "CHRISTIAN TYLER JAMES",
-    teamId: "lanus",
-    number: 12,
-  },
+  
+  
+  
+  
   {
     id: "oficial-431355",
     officialPlayerId: 431355,
-    name: "JOAQUIN CORIA FA",
+    name: "Joaquin Coria Fa",
     teamId: "lanus",
     number: 13,
   },
   {
     id: "oficial-388284",
     officialPlayerId: 388284,
-    name: "AGUSTIN MORAGA",
+    name: "Agustin Moraga",
     teamId: "lanus",
     number: 27,
   },
-  {
-    id: "oficial-430339",
-    officialPlayerId: 430339,
-    name: "MELVIN TYRIEK JOHNSON JR",
-    teamId: "lanus",
-    number: 32,
-  },
-  {
-    id: "oficial-424846",
-    officialPlayerId: 424846,
-    name: "CLAUDIO FABIAN RAMIREZ BARRIOS",
-    teamId: "lanus",
-    number: 33,
-  },
-  {
-    id: "oficial-429327",
-    officialPlayerId: 429327,
-    name: "FELIPE ANTONIO INYACO TOLEDO",
-    teamId: "gimnasia",
-    number: 2,
-  },
-  {
-    id: "oficial-219864",
-    officialPlayerId: 219864,
-    name: "MARCOS CHACON TIRADO",
-    teamId: "gimnasia",
-    number: 5,
-  },
-  {
-    id: "oficial-375104",
-    officialPlayerId: 375104,
-    name: "SEBASTIAN ANDRES CARRASCO BARRIA",
-    teamId: "gimnasia",
-    number: 10,
-  },
-  {
-    id: "oficial-319448",
-    officialPlayerId: 319448,
-    name: "CARLOS EZEQUIEL RIVERO",
-    teamId: "gimnasia",
-    number: 14,
-  },
-  {
-    id: "oficial-377837",
-    officialPlayerId: 377837,
-    name: "IVAN NICOLAS BASUALDO",
-    teamId: "penarol",
-    number: 3,
-  },
-  {
-    id: "oficial-377841",
-    officialPlayerId: 377841,
-    name: "LUCIANO MARTIN GUERRA",
-    teamId: "penarol",
-    number: 4,
-  },
-  {
-    id: "oficial-93423",
-    officialPlayerId: 93423,
-    name: "IGNACIO NICOLAS BEDNAREK",
-    teamId: "penarol",
-    number: 6,
-  },
-  {
-    id: "oficial-425399",
-    officialPlayerId: 425399,
-    name: "ANDRES JOAQUIN JAIME",
-    teamId: "penarol",
-    number: 10,
-  },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   {
     id: "oficial-274342",
     officialPlayerId: 274342,
-    name: "MARTIN CHAPERO",
+    name: "Martin Chapero",
     teamId: "penarol",
     number: 11,
   },
-  {
-    id: "oficial-425403",
-    officialPlayerId: 425403,
-    name: "SEBASTIAN ERNESTO VEGA",
-    teamId: "penarol",
-    number: 17,
-  },
-  {
-    id: "oficial-425401",
-    officialPlayerId: 425401,
-    name: "FRANCO NAHUEL GIORGETTI",
-    teamId: "penarol",
-    number: 99,
-  },
-  {
-    id: "oficial-427474",
-    officialPlayerId: 427474,
-    name: "JOAQUIN FERNANDEZ ALVAREZ",
-    teamId: "argentino",
-    number: 2,
-  },
-  {
-    id: "oficial-384168",
-    officialPlayerId: 384168,
-    name: "DYLAN JUROD SMITH",
-    teamId: "argentino",
-    number: 3,
-  },
-  {
-    id: "oficial-429231",
-    officialPlayerId: 429231,
-    name: "ZYON EZEKIEL PATTERSON",
-    teamId: "argentino",
-    number: 5,
-  },
-  {
-    id: "oficial-427465",
-    officialPlayerId: 427465,
-    name: "LEANDRO GABRIEL CERMINATO",
-    teamId: "argentino",
-    number: 13,
-  },
-  {
-    id: "oficial-209418",
-    officialPlayerId: 209418,
-    name: "ROMULO GUSMAO COSTA",
-    teamId: "argentino",
-    number: 16,
-  },
-  {
-    id: "oficial-174821",
-    officialPlayerId: 174821,
-    name: "SANTIAGO MANUEL BILBAO",
-    teamId: "argentino",
-    number: 20,
-  },
-  {
-    id: "oficial-324409",
-    officialPlayerId: 324409,
-    name: "JANO DAVID MARTINEZ",
-    teamId: "ferro",
-    number: 6,
-  },
-  {
-    id: "oficial-74902",
-    officialPlayerId: 74902,
-    name: "FELIPE SALVADOR RODRIGUEZ",
-    teamId: "ferro",
-    number: 11,
-  },
-  {
-    id: "oficial-278259",
-    officialPlayerId: 278259,
-    name: "RODRIGO AGUSTIN GALLEGOS",
-    teamId: "ferro",
-    number: 12,
-  },
-  {
-    id: "oficial-325771",
-    officialPlayerId: 325771,
-    name: "ALEJANDRO GABRIEL DIEZ",
-    teamId: "ferro",
-    number: 14,
-  },
-  {
-    id: "oficial-150972",
-    officialPlayerId: 150972,
-    name: "LEONEL VALENTIN BETTIGA",
-    teamId: "ferro",
-    number: 25,
-  },
-  {
-    id: "oficial-41208",
-    officialPlayerId: 41208,
-    name: "CAMILO BAUTISTA JARA DELGADO",
-    teamId: "ferro",
-    number: 26,
-  },
-  {
-    id: "oficial-209964",
-    officialPlayerId: 209964,
-    name: "GASTON LEONEL GARCIA",
-    teamId: "san-martin",
-    number: 5,
-  },
-  {
-    id: "oficial-386499",
-    officialPlayerId: 386499,
-    name: "DANIEL MOREIRA DE OLIVEIRA SANTOS DE LIMA",
-    teamId: "san-martin",
-    number: 7,
-  },
-  {
-    id: "oficial-276149",
-    officialPlayerId: 276149,
-    name: "GERONIMO GASTON RAMALLO",
-    teamId: "san-martin",
-    number: 13,
-  },
-  {
-    id: "oficial-379523",
-    officialPlayerId: 379523,
-    name: "LAUTARO BERRA FERNANDEZ",
-    teamId: "san-martin",
-    number: 15,
-  },
-  {
-    id: "oficial-429483",
-    officialPlayerId: 429483,
-    name: "SEBASTIAN EZEQUIEL LUGO",
-    teamId: "san-martin",
-    number: 16,
-  },
-  {
-    id: "oficial-176374",
-    officialPlayerId: 176374,
-    name: "KADIR EDUARDO POMARE SUAREZ",
-    teamId: "instituto",
-    number: 0,
-  },
-  {
-    id: "oficial-426072",
-    officialPlayerId: 426072,
-    name: "FEDERICO JESUS BUSTOS SAYEGH",
-    teamId: "instituto",
-    number: 2,
-  },
-  {
-    id: "oficial-431284",
-    officialPlayerId: 431284,
-    name: "TORREN LORENZO JONES",
-    teamId: "instituto",
-    number: 6,
-  },
-  {
-    id: "oficial-429185",
-    officialPlayerId: 429185,
-    name: "FEDERICO MATÍAS AGUERRE",
-    teamId: "instituto",
-    number: 12,
-  },
-  {
-    id: "oficial-425462",
-    officialPlayerId: 425462,
-    name: "XAVIER MANUEL CARRERAS PEGUERO",
-    teamId: "instituto",
-    number: 72,
-  },
-  {
-    id: "oficial-429639",
-    officialPlayerId: 429639,
-    name: "ANDREW DESHAWN CORUM",
-    teamId: "olimpico",
-    number: 1,
-  },
-  {
-    id: "oficial-429634",
-    officialPlayerId: 429634,
-    name: "LUCAS NAIM PEREZ BAZAN",
-    teamId: "olimpico",
-    number: 4,
-  },
-  {
-    id: "oficial-326739",
-    officialPlayerId: 326739,
-    name: "SANTINO ALBERTO ROMEGIALLI",
-    teamId: "olimpico",
-    number: 6,
-  },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   {
     id: "oficial-430621",
     officialPlayerId: 430621,
-    name: "MARIANO VALENTIN CACERES COMELLI",
+    name: "Mariano Valentin Caceres Comelli",
     teamId: "olimpico",
     number: 8,
   },
-  {
-    id: "oficial-429633",
-    officialPlayerId: 429633,
-    name: "RAMIRO JEREMIAS FRONTERA",
-    teamId: "olimpico",
-    number: 11,
-  },
+  
   {
     id: "oficial-431734",
     officialPlayerId: 431734,
-    name: "FRANCISCO PEREYRA",
+    name: "Francisco Pereyra",
     teamId: "olimpico",
     number: 20,
   },
-  {
-    id: "oficial-429638",
-    officialPlayerId: 429638,
-    name: "JOAQUIN BAUTISTA LOPEZ LORENZ",
-    teamId: "olimpico",
-    number: 26,
-  },
-  {
-    id: "oficial-429642",
-    officialPlayerId: 429642,
-    name: "HALL B ELISIAS",
-    teamId: "olimpico",
-    number: 34,
-  },
-  {
-    id: "oficial-273290",
-    officialPlayerId: 273290,
-    name: "ANTHOAN MAURICE URBINA SERRANO",
-    teamId: "platense",
-    number: 2,
-  },
-  {
-    id: "oficial-202340",
-    officialPlayerId: 202340,
-    name: "MARIANO EZEQUIEL GOICOECHEA",
-    teamId: "platense",
-    number: 4,
-  },
-  {
-    id: "oficial-431010",
-    officialPlayerId: 431010,
-    name: "FEDERICO JOSE GRUN",
-    teamId: "platense",
-    number: 7,
-  },
-  {
-    id: "oficial-431012",
-    officialPlayerId: 431012,
-    name: "RAMIRO SEBASTIAN SANTIAGO",
-    teamId: "platense",
-    number: 9,
-  },
-  {
-    id: "oficial-328509",
-    officialPlayerId: 328509,
-    name: "FRANCO NAHUEL SMANIOTTI",
-    teamId: "platense",
-    number: 10,
-  },
-  {
-    id: "oficial-430997",
-    officialPlayerId: 430997,
-    name: "GASTON EZEQUIEL CORDOBA",
-    teamId: "platense",
-    number: 13,
-  },
-  {
-    id: "oficial-431028",
-    officialPlayerId: 431028,
-    name: "FACUNDO TERRA AGOSTINI",
-    teamId: "platense",
-    number: 15,
-  },
-  {
-    id: "oficial-430922",
-    officialPlayerId: 430922,
-    name: "ERIK JEROME COPES",
-    teamId: "platense",
-    number: 22,
-  },
-  {
-    id: "oficial-431014",
-    officialPlayerId: 431014,
-    name: "MAURO NICOLAS COSOLITO",
-    teamId: "platense",
-    number: 30,
-  },
-  {
-    id: "oficial-430266",
-    officialPlayerId: 430266,
-    name: "KEITH MARTIN STONE",
-    teamId: "regatas",
-    number: 1,
-  },
-  {
-    id: "oficial-325111",
-    officialPlayerId: 325111,
-    name: "PABLO IVAN GRAMAJO",
-    teamId: "regatas",
-    number: 5,
-  },
-  {
-    id: "oficial-426339",
-    officialPlayerId: 426339,
-    name: "SEBASTIAN ALEJANDRO ORRESTA",
-    teamId: "regatas",
-    number: 6,
-  },
-  {
-    id: "oficial-77832",
-    officialPlayerId: 77832,
-    name: "VIKTOR DANIEL BENDER",
-    teamId: "regatas",
-    number: 7,
-  },
-  {
-    id: "oficial-428705",
-    officialPlayerId: 428705,
-    name: "ELIAN JOSE CENTENO GARCIA",
-    teamId: "regatas",
-    number: 8,
-  },
-  {
-    id: "oficial-428080",
-    officialPlayerId: 428080,
-    name: "JOSE IGNACIO MONTERO",
-    teamId: "regatas",
-    number: 10,
-  },
-  {
-    id: "oficial-154780",
-    officialPlayerId: 154780,
-    name: "ALAN TADEO LEDESMA",
-    teamId: "regatas",
-    number: 20,
-  },
-  {
-    id: "oficial-426272",
-    officialPlayerId: 426272,
-    name: "ROBERTO SANTIAGO ACUÑA",
-    teamId: "regatas",
-    number: 35,
-  },
-  {
-    id: "oficial-385839",
-    officialPlayerId: 385839,
-    name: "TYREN MILTON JOHNSON",
-    teamId: "quimsa",
-    number: 2,
-  },
-  {
-    id: "oficial-331567",
-    officialPlayerId: 331567,
-    name: "SEBASTIAN ARIEL BOGADO KEGLER",
-    teamId: "quimsa",
-    number: 3,
-  },
-  {
-    id: "oficial-378019",
-    officialPlayerId: 378019,
-    name: "MATIAS JAVIER SOLANAS",
-    teamId: "quimsa",
-    number: 10,
-  },
-  {
-    id: "oficial-429317",
-    officialPlayerId: 429317,
-    name: "FRANCO JAVIER MENDEZ",
-    teamId: "quimsa",
-    number: 12,
-  },
-  {
-    id: "oficial-429671",
-    officialPlayerId: 429671,
-    name: "FACUNDO OSVALDO RUTENBERG",
-    teamId: "quimsa",
-    number: 22,
-  },
-  {
-    id: "oficial-426284",
-    officialPlayerId: 426284,
-    name: "NICOLAS DHARMA MARTINEZ VARELA",
-    teamId: "quimsa",
-    number: 30,
-  },
-  {
-    id: "oficial-425395",
-    officialPlayerId: 425395,
-    name: "JAVIER ALEJANDRO SAIZ",
-    teamId: "quimsa",
-    number: 41,
-  },
-  {
-    id: "oficial-271900",
-    officialPlayerId: 271900,
-    name: "TAYAVEK ISMAEL GALLIZZI",
-    teamId: "quimsa",
-    number: 83,
-  },
-  {
-    id: "oficial-382372",
-    officialPlayerId: 382372,
-    name: "BRANDON JAMES BEAVERS",
-    teamId: "la-union",
-    number: 0,
-  },
-  {
-    id: "oficial-382371",
-    officialPlayerId: 382371,
-    name: "TOMAS DAVIN LARSEN NUNO",
-    teamId: "la-union",
-    number: 2,
-  },
-  {
-    id: "oficial-380839",
-    officialPlayerId: 380839,
-    name: "SEBASTIAN IGNACIO ACEVEDO",
-    teamId: "la-union",
-    number: 6,
-  },
-  {
-    id: "oficial-209577",
-    officialPlayerId: 209577,
-    name: "ANDRES ALEXIS ELSENER",
-    teamId: "la-union",
-    number: 7,
-  },
-  {
-    id: "oficial-429463",
-    officialPlayerId: 429463,
-    name: "AGUSTIN PEDRO FACELLO",
-    teamId: "la-union",
-    number: 9,
-  },
-  {
-    id: "oficial-382160",
-    officialPlayerId: 382160,
-    name: "HUGO LUIS JUNIOR PAEZ SANCHEZ",
-    teamId: "la-union",
-    number: 12,
-  },
-  {
-    id: "oficial-212758",
-    officialPlayerId: 212758,
-    name: "ENZO GUSTAVO MAGLIETTI",
-    teamId: "la-union",
-    number: 14,
-  },
-  {
-    id: "oficial-382370",
-    officialPlayerId: 382370,
-    name: "WINDI MANUEL GRATEROL CLEMENTE",
-    teamId: "la-union",
-    number: 15,
-  },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   {
     id: "oficial-429468",
     officialPlayerId: 429468,
-    name: "FACUNDO MARIANO",
+    name: "Facundo Mariano",
     teamId: "la-union",
     number: 20,
   },
-  {
-    id: "oficial-332193",
-    officialPlayerId: 332193,
-    name: "BENJAMIN IMAZ URIARTE",
-    teamId: "atenas",
-    number: 1,
-  },
-  {
-    id: "oficial-430445",
-    officialPlayerId: 430445,
-    name: "FRANCO NICOLAS BALBI",
-    teamId: "atenas",
-    number: 6,
-  },
-  {
-    id: "oficial-235314",
-    officialPlayerId: 235314,
-    name: "FACUNDO NICOLAS VALFRE",
-    teamId: "atenas",
-    number: 13,
-  },
-  {
-    id: "oficial-430626",
-    officialPlayerId: 430626,
-    name: "JUAN PABLO ARENGO",
-    teamId: "atenas",
-    number: 20,
-  },
-  {
-    id: "oficial-430772",
-    officialPlayerId: 430772,
-    name: "DANIEL RAY LASTER JR",
-    teamId: "atenas",
-    number: 21,
-  },
-  {
-    id: "oficial-430618",
-    officialPlayerId: 430618,
-    name: "BRYAN JOSE CARABALI POROZO",
-    teamId: "atenas",
-    number: 22,
-  },
-  {
-    id: "oficial-266354",
-    officialPlayerId: 266354,
-    name: "JOSE IGNACIO VILDOZA",
-    teamId: "boca",
-    number: 11,
-  },
-  {
-    id: "oficial-428469",
-    officialPlayerId: 428469,
-    name: "VALENTINO FINETTI LOPEZ",
-    teamId: "boca",
-    number: 14,
-  },
-  {
-    id: "oficial-323167",
-    officialPlayerId: 323167,
-    name: "MARTIN NICOLAS CUELLO",
-    teamId: "boca",
-    number: 44,
-  },
-  {
-    id: "oficial-218487",
-    officialPlayerId: 218487,
-    name: "JONATAN FABIAN TORRESI",
-    teamId: "obera",
-    number: 2,
-  },
-  {
-    id: "oficial-427601",
-    officialPlayerId: 427601,
-    name: "VICTOR LUIS FERNANDEZ",
-    teamId: "obera",
-    number: 4,
-  },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   {
     id: "oficial-130590",
     officialPlayerId: 130590,
-    name: "MILTON NADIR MOUSQUERE",
+    name: "Milton Nadir Mousquere",
     teamId: "obera",
     number: 5,
   },
-  {
-    id: "oficial-189265",
-    officialPlayerId: 189265,
-    name: "ALEJO AZPILICUETA PASQUALINI",
-    teamId: "obera",
-    number: 7,
-  },
-  {
-    id: "oficial-150723",
-    officialPlayerId: 150723,
-    name: "AGUSTIN ANDRES BROCAL",
-    teamId: "obera",
-    number: 11,
-  },
-  {
-    id: "oficial-328770",
-    officialPlayerId: 328770,
-    name: "ALBANO NAHUEL COSTA",
-    teamId: "obera",
-    number: 13,
-  },
+  
+  
+  
   {
     id: "oficial-429447",
     officialPlayerId: 429447,
-    name: "MANUEL CARATINO",
+    name: "Manuel Caratino",
     teamId: "obera",
     number: 15,
   },
-  {
-    id: "oficial-427602",
-    officialPlayerId: 427602,
-    name: "JUAN CRUZ MATEO OBERTO",
-    teamId: "obera",
-    number: 77,
-  },
-  {
-    id: "oficial-378915",
-    officialPlayerId: 378915,
-    name: "MANUEL RODRIGUEZ ORTEGA",
-    teamId: "racing-chivilcoy",
-    number: 6,
-  },
-  {
-    id: "oficial-426774",
-    officialPlayerId: 426774,
-    name: "MARCOS NICOLAS DELIA",
-    teamId: "racing-chivilcoy",
-    number: 12,
-  },
-  {
-    id: "oficial-421109",
-    officialPlayerId: 421109,
-    name: "JUAN IGNACIO RESPAUD",
-    teamId: "racing-chivilcoy",
-    number: 13,
-  },
-  {
-    id: "oficial-218334",
-    officialPlayerId: 218334,
-    name: "NORBERTO EMILIO STUCKY",
-    teamId: "racing-chivilcoy",
-    number: 14,
-  },
-  {
-    id: "oficial-378286",
-    officialPlayerId: 378286,
-    name: "TOMAS FRANCISCO DELIA",
-    teamId: "racing-chivilcoy",
-    number: 18,
-  },
-  {
-    id: "oficial-425016",
-    officialPlayerId: 425016,
-    name: "JUAN MANUEL BOCCA",
-    teamId: "racing-chivilcoy",
-    number: 20,
-  },
-  {
-    id: "oficial-325396",
-    officialPlayerId: 325396,
-    name: "ABRAHAM ELEAZAR BARAHONA ARROYO",
-    teamId: "racing-chivilcoy",
-    number: 21,
-  },
-  {
-    id: "oficial-430925",
-    officialPlayerId: 430925,
-    name: "JUAN MARTIN GUERRERO MARGARIT",
-    teamId: "independiente-oliva",
-    number: 4,
-  },
-  {
-    id: "oficial-171833",
-    officialPlayerId: 171833,
-    name: "NICOLAS JAVIER MARCUCCI",
-    teamId: "independiente-oliva",
-    number: 6,
-  },
-  {
-    id: "oficial-329317",
-    officialPlayerId: 329317,
-    name: "PATRICIO CARLOS TABAREZ",
-    teamId: "independiente-oliva",
-    number: 8,
-  },
-  {
-    id: "oficial-379152",
-    officialPlayerId: 379152,
-    name: "FORTUNATO JOSE ROLFI",
-    teamId: "independiente-oliva",
-    number: 9,
-  },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   {
     id: "oficial-276420",
     officialPlayerId: 276420,
-    name: "EZEQUIEL JOEL HOREN",
+    name: "Ezequiel Joel Horen",
     teamId: "independiente-oliva",
     number: 11,
   },
-  {
-    id: "oficial-324888",
-    officialPlayerId: 324888,
-    name: "ROLANDO EXEQUIEL VALLEJOS",
-    teamId: "independiente-oliva",
-    number: 19,
-  },
-  {
-    id: "oficial-172005",
-    officialPlayerId: 172005,
-    name: "THIAGO EMMANUEL ROCA",
-    teamId: "san-lorenzo",
-    number: 2,
-  },
-  {
-    id: "oficial-225273",
-    officialPlayerId: 225273,
-    name: "JOAQUIN MATIAS ACTIS",
-    teamId: "san-lorenzo",
-    number: 5,
-  },
-  {
-    id: "oficial-172012",
-    officialPlayerId: 172012,
-    name: "NICOLAS GUSTAVO AGUIRRE",
-    teamId: "san-lorenzo",
-    number: 7,
-  },
-  {
-    id: "oficial-375103",
-    officialPlayerId: 375103,
-    name: "JESUS ARTURO CENTENO MORALES",
-    teamId: "gimnasia",
-    number: 3,
-  },
-  {
-    id: "oficial-431601",
-    officialPlayerId: 431601,
-    name: "PEDRO ANTONIO BOMBINO PARADA",
-    teamId: "lanus",
-    number: 99,
-  },
+  
+  
+  
+  
+  
+  
   {
     id: "oficial-430497",
     officialPlayerId: 430497,
-    name: "MATHEUS SANTOS SIMAO COSTA",
+    name: "Matheus Santos Simao Costa",
     teamId: "obera",
     number: 0,
   },
   {
     id: "oficial-428118",
     officialPlayerId: 428118,
-    name: "JOAQUIN ROMAN DIAZ",
+    name: "Joaquin Roman Diaz",
     teamId: "racing-chivilcoy",
     number: 5,
   },
   {
     id: "oficial-184197",
     officialPlayerId: 184197,
-    name: "VICENTE BLAZICA CRISTOBAL",
+    name: "Vicente Blazica Cristobal",
     teamId: "platense",
     number: 1,
   },
   {
     id: "oficial-273373",
     officialPlayerId: 273373,
-    name: "JOAQUIN GONCALVES",
+    name: "Joaquin Goncalves",
     teamId: "platense",
     number: 3,
   },
   {
     id: "oficial-188845",
     officialPlayerId: 188845,
-    name: "SANTIAGO TALLADE",
+    name: "Santiago Tallade",
     teamId: "san-lorenzo",
     number: 21,
   },
   {
     id: "oficial-432336",
     officialPlayerId: 432336,
-    name: "LUCAS VERNON LORENZEN",
+    name: "Lucas Vernon Lorenzen",
     teamId: "olimpico",
     number: 3,
   },
   {
     id: "oficial-385605",
     officialPlayerId: 385605,
-    name: "RANIERO MAINOLDI",
+    name: "Raniero Mainoldi",
     teamId: "independiente-oliva",
     number: 25,
   },
