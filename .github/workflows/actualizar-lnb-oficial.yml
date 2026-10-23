@@ -20,6 +20,7 @@ on:
       - "scripts/parse-official-final.cjs"
       - "scripts/audited-official-finals.json"
       - "scripts/update-player-numbers.cjs"
+      - "scripts/sync-official-roster.cjs"
 
 permissions:
   contents: write
@@ -76,6 +77,10 @@ jobs:
           OFFICIAL_SYNC_MODE: ${{ steps.window.outputs.mode }}
         run: node sync-liga-history.cjs
 
+      - name: Incorporar nuevos jugadores identificados en planillas oficiales
+        if: steps.window.outputs.run == 'true'
+        run: node scripts/sync-official-roster.cjs
+
       - name: Validar resultados y estadísticas oficiales
         if: steps.window.outputs.run == 'true'
         run: node sync-official-stats-preview.cjs
@@ -117,6 +122,7 @@ jobs:
           name: lna-datos-oficiales
           path: |
             official-sync-preview.json
+            official-roster-review.json
             liga-history.json
             liga-events-preview.json
           if-no-files-found: ignore
