@@ -151,3 +151,7 @@
   .team-ranking-name { font-size:11px; }
   .team-ranking-value { font-size:13px; }
 }
+
+/* Tres solapas en Estadísticas: Jugadores, Equipos y Triples. */
+.stats-mode-switch { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.stats-mode-switch button { min-width:0; }
