@@ -525,7 +525,7 @@ return matchesSearch && matchesTeam && matchesMinGames;
 
             <tbody>
 
-              {filteredPlayers.map((player, index) => {
+              {filteredPlayers.slice(0, 20).map((player, index) => {
                 const team = getTeam(player.teamId);
                 const stats = getPlayerStats(player.id);
 
