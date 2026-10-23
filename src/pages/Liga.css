@@ -2684,3 +2684,58 @@
   .league-page .results-card .result-score strong { font-size:16px; }
   .league-page .upcoming-match { min-height:52px; }
 }
+
+/* ==========================================
+   LNA - PARTIDOS DE HOY COMPACTOS EN PC
+   Mobile sin modificaciones
+   ========================================== */
+
+@media (min-width: 1024px) {
+
+  .league-page .today-section {
+    margin-bottom: 24px;
+  }
+
+  .league-page .today-matches {
+    gap: 10px;
+  }
+
+  .league-page .today-match-card .match-date {
+    padding: 6px 12px;
+    font-size: 9px;
+  }
+
+  .league-page .today-match-card .match-teams {
+    padding: 12px 14px;
+    gap: 8px;
+    grid-template-columns:
+      minmax(0, 1fr)
+      65px
+      minmax(0, 1fr);
+  }
+
+  .league-page .today-match-card .match-team {
+    flex-direction: row;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .league-page .today-match-card .match-team:last-child {
+    flex-direction: row-reverse;
+  }
+
+  .league-page .today-match-card .match-team-logo {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+  }
+
+  .league-page .today-match-card .match-vs {
+    font-size: 11px;
+  }
+
+  .league-page .today-match-card .match-details {
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+}

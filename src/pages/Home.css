@@ -10306,3 +10306,70 @@
   .match-modal-upcoming .upcoming-ranked-row > strong { font-size:10px; }
   .match-modal-upcoming .upcoming-ranked-row > .upcoming-ranked-label { font-size:8px; }
 }
+
+/* LNA - HEADER COMPACTO PRÓXIMOS PARTIDOS / SOLO PC */
+@media (min-width: 1024px) {
+
+  .match-modal-upcoming .match-modal-header {
+    padding: 7px 18px 9px;
+    min-height: 0;
+    gap: 2px;
+  }
+
+  .match-modal-upcoming .match-modal-label {
+    font-size: 9px;
+    margin: 0;
+  }
+
+  .match-modal-upcoming .match-modal-date {
+    font-size: 11px;
+    line-height: 1.1;
+  }
+
+  .match-modal-upcoming .match-modal-status {
+    font-size: 9px;
+    margin: 2px 0 0;
+    line-height: 1.1;
+  }
+
+  .match-modal-upcoming .match-modal-teams {
+    margin: 5px 0 0;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .match-modal-upcoming .match-modal-team {
+    gap: 3px;
+  }
+
+  .match-modal-upcoming .match-modal-team img,
+  .match-modal-upcoming .home-modal-team-logo-button img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
+  .match-modal-upcoming .match-modal-team > strong {
+    font-size: 12px;
+    line-height: 1.1;
+    gap: 2px;
+  }
+
+  .match-modal-upcoming .match-modal-team small {
+    font-size: 9px;
+  }
+
+  .match-modal-upcoming .match-modal-score {
+    gap: 3px;
+  }
+
+  .match-modal-upcoming .match-modal-score strong {
+    font-size: 38px;
+    line-height: 1;
+  }
+
+  .match-modal-upcoming .match-modal-score span {
+    font-size: 11px;
+    line-height: 1.1;
+  }
+}
