@@ -78,7 +78,10 @@ for (const candidate of candidates.values()) {
 if (additions.length) {
   if(!/\];\s*$/.test(source)) throw new Error("Formato de players.js inesperado; no se modificó.");
   const lines=additions.map(p=>"  {\n    id: "+JSON.stringify("oficial-"+p.id)+",\n    officialPlayerId: "+Number(p.id)+",\n    name: "+JSON.stringify(p.name)+",\n    teamId: "+JSON.stringify(p.team)+",\n    number: "+(p.number??"null")+",\n  },").join("\n");
-  fs.writeFileSync(path,source.replace(/\];\s*$/, "\n  // Incorporaciones detectadas en planillas oficiales\n"+lines+"\n];\n"));
+  const beforeClosing = source.replace(/\];\s*$/, "").trimEnd();
+  const separator = beforeClosing.endsWith(",") ? "\n" : ",\n";
+  const updated = beforeClosing + separator + "  // Incorporaciones detectadas en planillas oficiales\n" + lines + "\n];\n";
+  fs.writeFileSync(path, updated);
 }
 fs.writeFileSync("official-roster-review.json",JSON.stringify({added:additions,requiresReview:review},null,2)+"\n");
 console.log("Jugadores oficiales nuevos incorporados:",additions.length,"; casos a revisar:",review.length);
