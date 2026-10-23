@@ -188,7 +188,7 @@ export const players = [
   teamId: "atenas",
   position: "Alero",
   number: 10,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -228,7 +228,7 @@ export const players = [
   teamId: "atenas",
   position: "Ala-pívot",
   number: 21,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -239,7 +239,7 @@ export const players = [
   teamId: "atenas",
   position: "Pívot",
   number: 22,
-  nationality: null,
+  nationality: "Ecuador",
   category: "E",
 },
 
@@ -281,7 +281,7 @@ export const players = [
   teamId: "boca",
   position: "Escolta",
   number: 0,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -349,7 +349,7 @@ export const players = [
   teamId: "boca",
   position: "Pívot",
   number: 7,
-  nationality: null,
+  nationality: "Letonia",
   category: "E",
 },
 
@@ -585,7 +585,7 @@ export const players = [
   teamId: "gimnasia",
   position: "Pívot",
   number: 33,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -606,7 +606,7 @@ export const players = [
   teamId: "gimnasia",
   position: "Alero",
   number: 0,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -647,7 +647,7 @@ export const players = [
   teamId: "gimnasia",
   position: "Pívot",
   number: 3,
-  nationality: null,
+  nationality: "Venezuela",
   category: "U21",
 },
 
@@ -657,7 +657,7 @@ export const players = [
   teamId: "gimnasia",
   position: "Pívot",
   number: null,
-  nationality: null,
+  nationality: "Senegal",
   category: "E",
 },
   // INDEPENDIENTE DE OLIVA
@@ -678,7 +678,7 @@ export const players = [
   teamId: "independiente-oliva",
   position: "Base",
   number: 7,
-  nationality: null,
+  nationality: "Argentina",
   category: "U21",
 },
 
@@ -756,7 +756,7 @@ export const players = [
   teamId: "independiente-oliva",
   position: "Ala-pívot",
   number: 23,
-  nationality: null,
+  nationality: "Ucrania",
   category: "E",
 },
 
@@ -816,7 +816,7 @@ export const players = [
   teamId: "instituto",
   position: "Alero",
   number: 0,
-  nationality: null,
+  nationality: "Colombia",
   category: "U21",
 },
 
@@ -866,7 +866,7 @@ export const players = [
   teamId: "instituto",
   position: "Pívot",
   number: 6,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -880,7 +880,7 @@ export const players = [
   position: "Pívot",
   position: null,
   number: 12,
-  nationality: null,
+  nationality: "Argentina",
   category: "U21",
 },
 
@@ -910,7 +910,7 @@ export const players = [
   teamId: "la-union",
   position: "Escolta",
   number: 0,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -960,7 +960,7 @@ export const players = [
   teamId: "la-union",
   position: "Pívot",
   number: 15,
-  nationality: null,
+  nationality: "Venezuela",
   category: "E",
 },
 
@@ -984,7 +984,7 @@ export const players = [
   teamId: "lanus",
   position: "Base",
   number: 5,
-  nationality: null,
+  nationality: "Argentina",
 },
 
 {
@@ -993,7 +993,7 @@ export const players = [
   teamId: "lanus",
   position: "Base",
   number: 22,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "joaquin-celiz",
@@ -1011,7 +1011,7 @@ export const players = [
   teamId: "lanus",
   position: "Escolta",
   number: 3,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1022,7 +1022,7 @@ export const players = [
   teamId: "lanus",
   position: "Escolta",
   number: 32,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1033,7 +1033,7 @@ export const players = [
   teamId: "lanus",
   position: "Alero",
   number: 10,
-  nationality: null,
+  nationality: "Argentina",
   category: "U21",
 },
 
@@ -1044,7 +1044,7 @@ export const players = [
   teamId: "lanus",
   position: "Alero",
   number: 12,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1054,7 +1054,7 @@ export const players = [
   teamId: "lanus",
   position: "Pívot",
   number: null,
-  nationality: null,
+  nationality: "Serbia",
   category: "E",
 },
 
@@ -1065,7 +1065,7 @@ export const players = [
   teamId: "lanus",
   position: "Alero",
   number: 9,
-  nationality: null,
+  nationality: "Argentina",
 },
 
 {
@@ -1084,7 +1084,7 @@ export const players = [
   teamId: "lanus",
   position: "Ala-pívot",
   number: 33,
-  nationality: null,
+  nationality: "Argentina",
 },
 
 {
@@ -1176,7 +1176,7 @@ export const players = [
   teamId: "obera",
   position: "Alero",
   number: 1,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1187,7 +1187,7 @@ export const players = [
   teamId: "obera",
   position: "Pívot",
   number: 41,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1230,7 +1230,7 @@ export const players = [
   teamId: "olimpico",
   position: "Escolta",
   number: 0,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1278,7 +1278,7 @@ export const players = [
   teamId: "olimpico",
   position: "Alero",
   number: null,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1289,7 +1289,7 @@ export const players = [
   teamId: "olimpico",
   position: "Pívot",
   number: 34,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1300,7 +1300,7 @@ export const players = [
   teamId: "olimpico",
   position: "Ala-pívot",
   number: 1,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1392,7 +1392,7 @@ export const players = [
   teamId: "penarol",
   position: "Alero",
   number: null,
-  nationality: null,
+  nationality: "Argentina",
   category: "J",
 },
 
@@ -1433,7 +1433,7 @@ export const players = [
   teamId: "penarol",
   position: "Pívot",
   number: 1,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1446,7 +1446,7 @@ export const players = [
   position: "Pívot",
   position: null,
   number: 21,
-  nationality: null,
+  nationality: "Argentina",
   category: "Juvenil",
 },
 
@@ -1558,7 +1558,7 @@ export const players = [
   teamId: "platense",
   position: "Ala-pívot",
   number: 22,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
  // QUIMSA
@@ -1570,7 +1570,7 @@ export const players = [
   position: "Escolta",
   position: null,
   number: 77,
-  nationality: null,
+  nationality: "Argentina",
   category: "Juvenil",
 },
 
@@ -1582,7 +1582,7 @@ export const players = [
   position: "Alero",
   position: null,
   number: 3,
-  nationality: null,
+  nationality: "Argentina",
   category: "Juvenil",
 },
 
@@ -1661,7 +1661,7 @@ export const players = [
   teamId: "quimsa",
   position: "Alero",
   number: 2,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1815,7 +1815,7 @@ export const players = [
   position: "Escolta",
   position: null,
   number: 20,
-  nationality: null,
+  nationality: "Argentina",
   category: "Juvenil",
 },
 
@@ -1865,7 +1865,7 @@ export const players = [
   teamId: "regatas",
   position: "Escolta",
   number: 7,
-  nationality: null,
+  nationality: "Argentina",
   category: "U21",
 },
 
@@ -1926,7 +1926,7 @@ export const players = [
   teamId: "regatas",
   position: "Pívot",
   number: 1,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -1939,7 +1939,7 @@ export const players = [
   teamId: "san-lorenzo",
   position: "Base",
   number: 5,
-  nationality: null,
+  nationality: "Argentina",
   category: "U21",
 },
 
@@ -2025,7 +2025,7 @@ export const players = [
   teamId: "san-lorenzo",
   position: "Pívot",
   number: 10,
-  nationality: null,
+  nationality: "Estados Unidos",
 },
 
 {
@@ -2034,7 +2034,7 @@ export const players = [
   teamId: "san-lorenzo",
   position: "Alero",
   number: 3,
-  nationality: null,
+  nationality: "Estados Unidos",
   category: "E",
 },
 
@@ -2044,7 +2044,7 @@ export const players = [
   teamId: "san-lorenzo",
   position: "Ala-pívot",
   number: 33,
-  nationality: null,
+  nationality: "Croacia",
   category: "E",
 },
 
@@ -2147,9 +2147,9 @@ export const players = [
   // Jugadores incorporados desde el registro oficial LNB
 
   { id: "alejandro-talavera", name: "Alejandro Talavera Espínola", teamId: "la-union",
-  position: "Base", position: null, number: 1, nationality: null, officialPlayerId: 430816 },
+  position: "Base", position: null, number: 1, nationality: "Argentina", officialPlayerId: 430816 },
   { id: "facundo-mariano", name: "Facundo Mariano", teamId: "la-union", position: "Ala-pívot", number: 20, nationality: "Argentina", officialPlayerId: 429468 },
-  { id: "joaquin-diaz", name: "Joaquín Díaz", teamId: "racing-chivilcoy", position: null, number: 5, nationality: null, officialPlayerId: 428118 },
+  { id: "joaquin-diaz", name: "Joaquín Díaz", teamId: "racing-chivilcoy", position: null, number: 5, nationality: "Argentina", officialPlayerId: 428118 },
   { id: "vicente-blazica", name: "Vicente Blazica Cristóbal", teamId: "platense", position: "Pívot", number: 1, nationality: "Argentina", officialPlayerId: 184197 },
   { id: "joaquin-goncalves", name: "Joaquín Gonçalves", teamId: "platense", position: "Alero", number: 3, nationality: "Argentina", officialPlayerId: 273373 },
   { id: "milton-mousquere", name: "Milton Mousquere", teamId: "obera", position: "Base", number: 5, nationality: "Argentina", officialPlayerId: 130590 },
@@ -2161,7 +2161,7 @@ export const players = [
   { id: "mariano-caceres", name: "Mariano Cáceres Comelli", teamId: "olimpico", position: "Base", number: 8, nationality: "Argentina", officialPlayerId: 430621 },
   { id: "francisco-pereyra", name: "Francisco Pereyra", teamId: "olimpico", position: "Escolta", number: 20, nationality: "Argentina", officialPlayerId: 431734 },
   { id: "ezequiel-horen", name: "Ezequiel Horen", teamId: "independiente-oliva", position: null, number: 11, nationality: "Argentina", officialPlayerId: 276420 },
-  { id: "raniero-mainoldi", name: "Raniero Mainoldi", teamId: "independiente-oliva", position: null, number: 25, nationality: null, officialPlayerId: 385605 },
+  { id: "raniero-mainoldi", name: "Raniero Mainoldi", teamId: "independiente-oliva", position: null, number: 25, nationality: "Argentina", officialPlayerId: 385605 },
   { id: "joaquin-coria", name: "Joaquín Coria Fa", teamId: "lanus", position: "Alero", number: 13, nationality: "Argentina", officialPlayerId: 431355 },
 
 // JUGADORES INCORPORADOS DESDE LA LIGA OFICIAL
@@ -2183,7 +2183,7 @@ export const players = [
   position: "Alero",
   position: null,
   number: 18,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "valentino-maxilimiliano-saucedo",
@@ -2193,7 +2193,7 @@ export const players = [
   position: "Escolta",
   position: null,
   number: 27,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "dante-saettone",
@@ -2203,7 +2203,7 @@ export const players = [
   position: "Base",
   position: null,
   number: 44,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "julian-costa",
@@ -2213,7 +2213,7 @@ export const players = [
   position: "Alero",
   position: null,
   number: 3,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "santiago-guasco-pasquini",
@@ -2223,7 +2223,7 @@ export const players = [
   position: "Pívot",
   position: null,
   number: 17,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "lucio-mantovani",
@@ -2233,7 +2233,7 @@ export const players = [
   position: "Base",
   position: null,
   number: 1,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "matias-nicolas-gonzalez",
@@ -2243,7 +2243,7 @@ export const players = [
   position: "Base",
   position: null,
   number: 2,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "francisco-eduardo-gallo",
@@ -2252,7 +2252,7 @@ export const players = [
   teamId: "atenas",
   position: null,
   number: 24,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "rocco-guareschi-perez",
@@ -2261,7 +2261,7 @@ export const players = [
   teamId: "independiente-oliva",
   position: null,
   number: 20,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "tobias-tamagusuku",
@@ -2271,7 +2271,7 @@ export const players = [
   position: "Base",
   position: null,
   number: 0,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "lucca-lorenzo-giuliani",
@@ -2281,7 +2281,7 @@ export const players = [
   position: "Alero",
   position: null,
   number: 11,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "juan-ignacio-mascaro-ganora",
@@ -2291,7 +2291,7 @@ export const players = [
   position: "Base",
   position: null,
   number: 1,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "giovano-gabriel-pertile-damilano",
@@ -2300,7 +2300,7 @@ export const players = [
   teamId: "san-martin",
   position: null,
   number: 33,
-  nationality: null,
+  nationality: "Argentina",
 },
 {
   id: "mateo-fessia",
@@ -2310,7 +2310,7 @@ export const players = [
   position: "Base",
   position: null,
   number: 15,
-  nationality: null,
+  nationality: "Argentina",
 },
   // Incorporaciones detectadas en planillas oficiales
   
