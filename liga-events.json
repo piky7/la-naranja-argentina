@@ -832,6 +832,24 @@
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2k8iKyk1at0fM1fGuPsWNQeu3Cpyilquj5sjSBMdDoAD0iNiqdzR56Q==/olimpico-lb-vs-penarol-mdp"
     },
     {
+      "date": "2026-10-31",
+      "time": "11:30",
+      "home": {
+        "name": "QUIMSA",
+        "officialClubId": 1869,
+        "officialTeamId": 112657
+      },
+      "away": {
+        "name": "PEÑAROL (MDP)",
+        "officialClubId": 2376,
+        "officialTeamId": 114902
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2O67XWrxPflljZgEEJD-3bdWyQM7ra8eg0veLomDzQMvL8LIzy_tEag==/quimsa-vs-penarol-mdp"
+    },
+    {
       "date": "2026-11-01",
       "time": "00:00",
       "home": {
@@ -884,6 +902,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NOTLeu4kyiIXc1FyLn-Zx1o8pLRgrRAF4yXkH5_HiG5lW-PJRSTYrw==/quimsa-vs-penarol-mdp"
+    },
+    {
+      "date": "2026-11-02",
+      "time": "22:00",
+      "home": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "away": {
+        "name": "PEÑAROL (MDP)",
+        "officialClubId": 2376,
+        "officialTeamId": 114902
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jsTnp8j_eJAUcCza8OwZrDNjIoIb9LQyG50cydNiScGDqFDOT64DLQ==/olimpico-lb-vs-penarol-mdp"
     },
     {
       "date": "2026-11-03",
