@@ -805,7 +805,7 @@ export const players = [
   teamId: "instituto",
   position: "Alero",
   number: 72,
-  nationality: null,
+  nationality: "República Dominicana",
   category: "E",
 },
 
@@ -880,7 +880,7 @@ export const players = [
   position: "Pívot",
   position: null,
   number: 12,
-  nationality: "Argentina",
+  nationality: "Paraguay",
   category: "U21",
 },
 
@@ -1392,7 +1392,7 @@ export const players = [
   teamId: "penarol",
   position: "Alero",
   number: null,
-  nationality: "Argentina",
+  nationality: "Chile",
   category: "J",
 },
 
@@ -1915,7 +1915,7 @@ export const players = [
   teamId: "regatas",
   position: "Ala-pívot",
   number: 8,
-  nationality: null,
+  nationality: "Venezuela",
   category: "E",
 },
 
