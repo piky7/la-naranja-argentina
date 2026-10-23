@@ -8,3 +8,12 @@
 .triple-row>strong{font-size:18px}
 .triple-table-head{padding:9px 12px}
 @media(max-width:390px){.triple-row{min-height:44px;padding:6px 8px;gap:6px;grid-template-columns:25px minmax(0,1fr) 25px 40px}}
+
+/* Ranking realmente compacto: una sola línea para nombre y posición. */
+.triple-ranking .triple-list .triple-row{height:38px;min-height:38px;max-height:38px;padding:3px 9px;gap:7px;grid-template-columns:23px minmax(0,1fr) 22px 36px;align-items:center;box-sizing:border-box}
+.triple-ranking .triple-list .triple-position{padding:4px 0;font-size:10px;line-height:1;border-radius:5px}
+.triple-ranking .triple-list .triple-player-name{display:flex;align-items:baseline;gap:5px;min-width:0;font-size:12px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.triple-ranking .triple-list .triple-player-name small{display:inline;font-size:9px;line-height:1.1;margin:0;color:#91a7ba;font-weight:500;flex-shrink:0}
+.triple-ranking .triple-list .triple-row img{width:21px;height:21px}
+.triple-ranking .triple-list .triple-row>strong{font-size:16px;line-height:1}
+@media(max-width:390px){.triple-ranking .triple-list .triple-row{height:37px;min-height:37px;max-height:37px;padding:3px 7px;gap:5px;grid-template-columns:22px minmax(0,1fr) 21px 32px}}
