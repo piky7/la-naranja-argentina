@@ -2625,3 +2625,62 @@
 .match-modal-stats strong {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
 }
+
+/* LNA 2026/27 — identidad visual unificada de Liga (tarjetas y tablas). */
+.league-page { background:#0d1117; color:#edf3fa; }
+.league-page .league-content { padding-top:19px; padding-bottom:62px; }
+.league-page .league-section { margin-bottom:23px; }
+.league-page .section-heading { margin-bottom:10px; }
+.league-page .section-heading h2 { color:#f4f7fb; }
+.league-page .section-label { color:#ff911c; }
+.league-page .today-matches { gap:10px; }
+.league-page .today-match-card,
+.league-page .standings-card,
+.league-page .results-card,
+.league-page .upcoming-card {
+  background:#101e2e; border:1px solid #2b4156;
+  border-radius:12px; box-shadow:none; overflow:hidden;
+}
+.league-page .today-match-card:hover,
+.league-page .result-match:hover,
+.league-page .upcoming-match:hover,
+.league-page .standing-row:hover {
+  background:#1b3148; border-color:#ff901a;
+}
+.league-page .today-match-card { border-radius:11px; }
+.league-page .match-date,
+.league-page .result-date,
+.league-page .upcoming-date { color:#aebfd0; }
+.league-page .match-details,
+.league-page .match-tv { color:#aebdce; }
+.league-page .standing-row,
+.league-page .result-match,
+.league-page .upcoming-match {
+  background:#101d2c; border-color:#283d50;
+  color:#edf4fb; transition:background .16s ease,border-color .16s ease;
+}
+.league-page .standing-row:nth-child(even),
+.league-page .result-match:nth-child(even),
+.league-page .upcoming-match:nth-child(even) { background:#15263a; }
+.league-page .standings-header { background:#1a2c40; color:#b8c7d7; border-color:#2c4357; }
+.league-page .standing-team span,
+.league-page .result-team span,
+.league-page .upcoming-teams span:not(.upcoming-vs) { color:#eff4fa; }
+.league-page .standing-value { color:#dce6f0; font-variant-numeric:tabular-nums; }
+.league-page .result-score strong { color:#f2f6fc; font-variant-numeric:tabular-nums; }
+.league-page .column-empty,
+.league-page .no-today-matches { background:#101e2e; color:#aabacc; border-color:#294057; }
+@media(max-width:768px){
+  .league-page .league-content { padding-top:15px; }
+  .league-page .league-section { margin-bottom:18px; }
+  .league-page .section-heading .league-hero-title { font-size:25px; }
+  .league-page .today-matches { grid-template-columns:minmax(0,1fr); gap:8px; }
+  .league-page .today-match-card { border-radius:10px; }
+  .league-page .standing-row { min-height:42px; }
+  .league-page .standings-header { min-height:34px; }
+  .league-page .results-card .result-match { min-height:53px; padding-left:52px; }
+  .league-page .results-card .result-teams { min-height:53px; padding:5px 6px; }
+  .league-page .results-card .result-logo { width:23px; height:23px; }
+  .league-page .results-card .result-score strong { font-size:16px; }
+  .league-page .upcoming-match { min-height:52px; }
+}
