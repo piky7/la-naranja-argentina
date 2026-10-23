@@ -1,0 +1,52 @@
+/* Rankings colectivos — mobile first, sin modificar las estadísticas de jugadores. */
+.team-ranking { width:100%; min-width:0; color:#edf3fa; padding-bottom:28px; }
+.team-ranking-scopes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; padding:4px; margin:15px 0 17px; border:1px solid #273a4d; border-radius:13px; background:#0b1724; }
+.team-ranking-scopes button { cursor:pointer; background:transparent; color:#c7d2df; border:0; border-radius:10px; padding:12px 4px; font-weight:700; font-size:13px; }
+.team-ranking-scopes button.active { background:#ff8c16; color:#08121d; box-shadow:0 2px 10px #ff8c1640; }
+.team-ranking-metrics { display:flex; gap:8px; overflow-x:auto; padding:2px 0 13px; scrollbar-width:thin; scrollbar-color:#ff8c16 #122235; -webkit-overflow-scrolling:touch; }
+.team-ranking-metrics button { flex:none; cursor:pointer; white-space:nowrap; border:1px solid #30445a; border-radius:10px; color:#dbe2eb; padding:11px 13px; background:#101f30; font-weight:700; font-size:12px; }
+.team-ranking-metrics button.active { background:#ff8915; border-color:#ff9b32; color:#07111c; }
+.team-ranking-tools { display:flex; justify-content:space-between; align-items:end; gap:15px; margin:9px 0 18px; flex-wrap:wrap; }
+.team-ranking-eyebrow { font-size:10px; font-weight:800; color:#ff9929; letter-spacing:1.1px; }
+.team-ranking-heading h2 { margin:5px 0 3px; font-size:21px; font-weight:850; color:#f4f7fc; }
+.team-ranking-heading p { color:#9eafc1; font-size:12px; margin:0; }
+.team-ranking-controls { display:flex; flex-wrap:wrap; gap:9px; }
+.team-ranking-controls label { display:flex; flex-direction:column; gap:5px; color:#b0bed0; font-size:10px; letter-spacing:.6px; font-weight:800; }
+.team-ranking-controls input, .team-ranking-controls select { min-width:140px; max-width:100%; border-radius:8px; border:1px solid #374b60; background:#102033; color:#f2f6fa; padding:10px 11px; font-size:13px; outline-offset:3px; }
+.team-ranking-list { border:1px solid #2b3d51; border-radius:14px; overflow:hidden; background:#0b1725; }
+.team-ranking-listhead { display:flex; justify-content:space-between; padding:14px 18px; background:#17273a; font-size:11px; letter-spacing:.5px; color:#b6c3d3; font-weight:800; }
+.team-ranking-row { width:100%; display:grid; grid-template-columns:23px 34px minmax(0,1.1fr) minmax(65px,1fr) 60px 12px; gap:10px; align-items:center; min-height:65px; padding:9px 13px; border:0; border-top:1px solid #23384b; cursor:pointer; text-align:left; color:#f2f5fa; background:#0c1928; }
+.team-ranking-row:nth-child(odd) { background:#122235; }
+.team-ranking-row:hover, .team-ranking-row:focus-visible { background:#1a3048; }
+.team-ranking-position { font-size:14px; font-weight:800; color:#adbacb; font-variant-numeric:tabular-nums; }
+.team-ranking-logo { width:32px; height:32px; object-fit:contain; }
+.team-ranking-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; font-weight:750; }
+.team-ranking-name small { display:block; margin-top:4px; font-size:10px; color:#8fa2b6; font-weight:500; }
+.team-ranking-track { height:7px; display:block; border-radius:20px; background:#25364a; overflow:hidden; }
+.team-ranking-track > span { height:100%; display:block; background:linear-gradient(90deg,#f37509,#ffa025); border-radius:20px; }
+.team-ranking-value { text-align:right; font-size:17px; font-weight:850; font-variant-numeric:tabular-nums; }
+.team-ranking-chevron { text-align:right; font-size:24px; color:#8194a8; font-weight:300; }
+.team-ranking-empty { padding:30px 15px; text-align:center; color:#a9bbca; }
+.team-ranking-note { color:#9caec0; font-size:12px; line-height:1.55; margin:13px 2px; }
+.stats-mode-switch { margin:17px 0 11px; padding:4px; display:grid; grid-template-columns:1fr 1fr; background:#091523; border:1px solid #293c50; border-radius:13px; gap:5px; }
+.stats-mode-switch button { cursor:pointer; color:#d4dfeb; background:transparent; border:0; border-radius:10px; padding:13px 8px; font-weight:800; font-size:14px; }
+.stats-mode-switch button.active { background:#ff8c16; color:#081421; }
+@media(max-width:600px) {
+ .team-ranking-tools { display:block; }
+ .team-ranking-controls { margin-top:13px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+ .team-ranking-controls input,.team-ranking-controls select { width:100%; min-width:0; }
+ .team-ranking-row { grid-template-columns:19px 29px minmax(0,1.2fr) minmax(34px,.55fr) 47px 8px; gap:6px; min-height:61px; padding:8px 7px; }
+ .team-ranking-logo { width:28px; height:28px; }
+ .team-ranking-name { font-size:12px; }
+ .team-ranking-value { font-size:15px; }
+ .team-ranking-position { font-size:12px; }
+ .team-ranking-chevron { font-size:20px; }
+ .team-ranking-listhead { padding:12px; }
+ .team-ranking-heading h2 { font-size:19px; }
+}
+@media(max-width:375px) {
+ .team-ranking-row { grid-template-columns:16px 25px minmax(0,1.2fr) minmax(25px,.45fr) 45px 7px; gap:4px; padding:8px 5px; }
+ .team-ranking-logo { width:24px; height:24px; }
+ .team-ranking-name { font-size:11px; }
+ .team-ranking-value { font-size:14px; }
+}
