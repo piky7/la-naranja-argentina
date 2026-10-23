@@ -66,8 +66,8 @@ export const matchPlayerStats = {
     },
     "lanus": [
       {
-        "id": "oficial-385838",
-        "name": "ROBERT JAMARCUS WHITFIELD III",
+        "id": "robert-whitfield",
+        "name": "Robert Whitfield",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -115,8 +115,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428243",
-        "name": "JUAN IGNACIO BRUSSINO",
+        "id": "juan-brussino",
+        "name": "Juan Brussino",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -262,8 +262,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-33793",
-        "name": "ALEJO VALENTIN SACCHI",
+        "id": "alejo-sacchi",
+        "name": "Alejo Sacchi",
         "points": 7,
         "rebounds": 1,
         "assists": 1,
@@ -360,8 +360,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429711",
-        "name": "CHRISTIAN TYLER JAMES",
+        "id": "christian-james",
+        "name": "Christian James",
         "points": 17,
         "rebounds": 3,
         "assists": 2,
@@ -410,7 +410,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "JOAQUIN CORIA FA",
+        "name": "Joaquin Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -508,7 +508,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-388284",
-        "name": "AGUSTIN MORAGA",
+        "name": "Agustin Moraga",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -556,8 +556,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430339",
-        "name": "MELVIN TYRIEK JOHNSON JR",
+        "id": "melvin-johnson",
+        "name": "Melvin Johnson",
         "points": 10,
         "rebounds": 1,
         "assists": 1,
@@ -605,8 +605,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-424846",
-        "name": "CLAUDIO FABIAN RAMIREZ BARRIOS",
+        "id": "fabian-ramirez-barrios",
+        "name": "Fabián Ramírez Barrios",
         "points": 0,
         "rebounds": 5,
         "assists": 2,
@@ -705,8 +705,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429327",
-        "name": "FELIPE ANTONIO INYACO TOLEDO",
+        "id": "felipe-inyaco",
+        "name": "Felipe Inyaco",
         "points": 3,
         "rebounds": 2,
         "assists": 1,
@@ -803,8 +803,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-219864",
-        "name": "MARCOS CHACON TIRADO",
+        "id": "marcos-chacon",
+        "name": "Marcos Chacón",
         "points": 28,
         "rebounds": 4,
         "assists": 5,
@@ -901,8 +901,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375104",
-        "name": "SEBASTIAN ANDRES CARRASCO BARRIA",
+        "id": "sebastian-carrasco",
+        "name": "Sebastián Carrasco",
         "points": 0,
         "rebounds": 1,
         "assists": 1,
@@ -1097,8 +1097,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-319448",
-        "name": "CARLOS EZEQUIEL RIVERO",
+        "id": "carlos-rivero",
+        "name": "Carlos Rivero",
         "points": 13,
         "rebounds": 5,
         "assists": 2,
@@ -1383,8 +1383,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-377837",
-        "name": "IVAN NICOLAS BASUALDO",
+        "id": "ivan-basualdo",
+        "name": "Iván Basualdo",
         "points": 6,
         "rebounds": 6,
         "assists": 0,
@@ -1432,8 +1432,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-377841",
-        "name": "LUCIANO MARTIN GUERRA",
+        "id": "luciano-guerra",
+        "name": "Luciano Guerra",
         "points": 7,
         "rebounds": 4,
         "assists": 2,
@@ -1481,8 +1481,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-93423",
-        "name": "IGNACIO NICOLAS BEDNAREK",
+        "id": "ignacio-bednarek",
+        "name": "Ignacio Bednarek",
         "points": 4,
         "rebounds": 5,
         "assists": 0,
@@ -1530,8 +1530,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425399",
-        "name": "ANDRES JOAQUIN JAIME",
+        "id": "andres-jaime",
+        "name": "Andrés Jaime",
         "points": 12,
         "rebounds": 8,
         "assists": 2,
@@ -1580,7 +1580,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "MARTIN CHAPERO",
+        "name": "Martin Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -1677,8 +1677,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425403",
-        "name": "SEBASTIAN ERNESTO VEGA",
+        "id": "sebastian-vega",
+        "name": "Sebastián Vega",
         "points": 5,
         "rebounds": 4,
         "assists": 1,
@@ -1873,8 +1873,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425401",
-        "name": "FRANCO NAHUEL GIORGETTI",
+        "id": "franco-giorgetti",
+        "name": "Franco Giorgetti",
         "points": 2,
         "rebounds": 3,
         "assists": 1,
@@ -1973,8 +1973,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429327",
-        "name": "FELIPE ANTONIO INYACO TOLEDO",
+        "id": "felipe-inyaco",
+        "name": "Felipe Inyaco",
         "points": 6,
         "rebounds": 4,
         "assists": 1,
@@ -2022,8 +2022,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-219864",
-        "name": "MARCOS CHACON TIRADO",
+        "id": "marcos-chacon",
+        "name": "Marcos Chacón",
         "points": 6,
         "rebounds": 5,
         "assists": 3,
@@ -2120,8 +2120,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375104",
-        "name": "SEBASTIAN ANDRES CARRASCO BARRIA",
+        "id": "sebastian-carrasco",
+        "name": "Sebastián Carrasco",
         "points": 9,
         "rebounds": 3,
         "assists": 2,
@@ -2316,8 +2316,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-319448",
-        "name": "CARLOS EZEQUIEL RIVERO",
+        "id": "carlos-rivero",
+        "name": "Carlos Rivero",
         "points": 8,
         "rebounds": 6,
         "assists": 1,
@@ -2602,8 +2602,8 @@ export const matchPlayerStats = {
     },
     "argentino": [
       {
-        "id": "oficial-427474",
-        "name": "JOAQUIN FERNANDEZ ALVAREZ",
+        "id": "joaquin-fernandez",
+        "name": "Joaquín Fernández",
         "points": 16,
         "rebounds": 7,
         "assists": 0,
@@ -2651,8 +2651,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-384168",
-        "name": "DYLAN JUROD SMITH",
+        "id": "dylan-smith",
+        "name": "Dylan Smith",
         "points": 11,
         "rebounds": 4,
         "assists": 2,
@@ -2700,8 +2700,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429231",
-        "name": "ZYON EZEKIEL PATTERSON",
+        "id": "zyon-patterson",
+        "name": "Zyon Patterson",
         "points": 5,
         "rebounds": 3,
         "assists": 0,
@@ -2896,8 +2896,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-427465",
-        "name": "LEANDRO GABRIEL CERMINATO",
+        "id": "leandro-cerminato",
+        "name": "Leandro Cerminato",
         "points": 9,
         "rebounds": 4,
         "assists": 0,
@@ -2945,8 +2945,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209418",
-        "name": "ROMULO GUSMAO COSTA",
+        "id": "romulo-gusmao",
+        "name": "Rómulo Gusmao",
         "points": 4,
         "rebounds": 4,
         "assists": 1,
@@ -3043,8 +3043,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-174821",
-        "name": "SANTIAGO MANUEL BILBAO",
+        "id": "santiago-bilbao",
+        "name": "Santiago Bilbao",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -3290,8 +3290,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-324409",
-        "name": "JANO DAVID MARTINEZ",
+        "id": "jano-martinez",
+        "name": "Jano Martínez",
         "points": 2,
         "rebounds": 6,
         "assists": 3,
@@ -3486,8 +3486,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-74902",
-        "name": "FELIPE SALVADOR RODRIGUEZ",
+        "id": "felipe-rodriguez",
+        "name": "Felipe Rodríguez",
         "points": 2,
         "rebounds": 4,
         "assists": 1,
@@ -3535,8 +3535,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-278259",
-        "name": "RODRIGO AGUSTIN GALLEGOS",
+        "id": "rodrigo-gallegos",
+        "name": "Rodrigo Gallegos",
         "points": 7,
         "rebounds": 4,
         "assists": 0,
@@ -3633,8 +3633,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-325771",
-        "name": "ALEJANDRO GABRIEL DIEZ",
+        "id": "alejandro-diez",
+        "name": "Alejandro Diez",
         "points": 2,
         "rebounds": 1,
         "assists": 0,
@@ -3682,8 +3682,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-150972",
-        "name": "LEONEL VALENTIN BETTIGA",
+        "id": "valentin-bettiga",
+        "name": "Valentín Bettiga",
         "points": 4,
         "rebounds": 9,
         "assists": 1,
@@ -3731,8 +3731,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-41208",
-        "name": "CAMILO BAUTISTA JARA DELGADO",
+        "id": "camilo-jara",
+        "name": "Camilo Jara",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -4017,8 +4017,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209964",
-        "name": "GASTON LEONEL GARCIA",
+        "id": "gaston-garcia",
+        "name": "Gastón García",
         "points": 11,
         "rebounds": 2,
         "assists": 1,
@@ -4066,8 +4066,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-386499",
-        "name": "DANIEL MOREIRA DE OLIVEIRA SANTOS DE LIMA",
+        "id": "daniel-moreira",
+        "name": "Daniel Moreira",
         "points": 6,
         "rebounds": 4,
         "assists": 0,
@@ -4164,8 +4164,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-276149",
-        "name": "GERONIMO GASTON RAMALLO",
+        "id": "geronimo-ramallo",
+        "name": "Gerónimo Ramallo",
         "points": 2,
         "rebounds": 3,
         "assists": 1,
@@ -4213,8 +4213,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-379523",
-        "name": "LAUTARO BERRA FERNANDEZ",
+        "id": "lautaro-berra",
+        "name": "Lautaro Berra",
         "points": 16,
         "rebounds": 4,
         "assists": 2,
@@ -4262,8 +4262,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429483",
-        "name": "SEBASTIAN EZEQUIEL LUGO",
+        "id": "sebastian-lugo",
+        "name": "Sebastián Lugo",
         "points": 4,
         "rebounds": 10,
         "assists": 1,
@@ -4460,8 +4460,8 @@ export const matchPlayerStats = {
     ],
     "instituto": [
       {
-        "id": "oficial-176374",
-        "name": "KADIR EDUARDO POMARE SUAREZ",
+        "id": "kadir-pomare",
+        "name": "Kadir Pomare",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -4558,8 +4558,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426072",
-        "name": "FEDERICO JESUS BUSTOS SAYEGH",
+        "id": "federico-bustos",
+        "name": "Federico Bustos",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -4705,8 +4705,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431284",
-        "name": "TORREN LORENZO JONES",
+        "id": "torren-jones",
+        "name": "Torren Jones",
         "points": 9,
         "rebounds": 5,
         "assists": 2,
@@ -4901,8 +4901,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429185",
-        "name": "FEDERICO MATÍAS AGUERRE",
+        "id": "federico-aguerre",
+        "name": "Federico Aguerre",
         "points": 12,
         "rebounds": 6,
         "assists": 1,
@@ -4999,8 +4999,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425462",
-        "name": "XAVIER MANUEL CARRERAS PEGUERO",
+        "id": "xavier-carreras",
+        "name": "Xavier Carreras",
         "points": 19,
         "rebounds": 3,
         "assists": 0,
@@ -5187,8 +5187,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429639",
-        "name": "ANDREW DESHAWN CORUM",
+        "id": "andrew-corum",
+        "name": "Andrew Corum",
         "points": 22,
         "rebounds": 17,
         "assists": 0,
@@ -5236,8 +5236,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429634",
-        "name": "LUCAS NAIM PEREZ BAZAN",
+        "id": "lucas-perez",
+        "name": "Lucas Pérez",
         "points": 12,
         "rebounds": 7,
         "assists": 4,
@@ -5285,8 +5285,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-326739",
-        "name": "SANTINO ALBERTO ROMEGIALLI",
+        "id": "santino-romegialli",
+        "name": "Santino Romegialli",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -5335,7 +5335,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-430621",
-        "name": "MARIANO VALENTIN CACERES COMELLI",
+        "name": "Mariano Valentin Caceres Comelli",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -5432,8 +5432,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429633",
-        "name": "RAMIRO JEREMIAS FRONTERA",
+        "id": "jeremias-frontera",
+        "name": "Jeremías Frontera",
         "points": 5,
         "rebounds": 3,
         "assists": 2,
@@ -5580,7 +5580,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431734",
-        "name": "FRANCISCO PEREYRA",
+        "name": "Francisco Pereyra",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -5628,8 +5628,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429638",
-        "name": "JOAQUIN BAUTISTA LOPEZ LORENZ",
+        "id": "joaquin-lopez-lorenz",
+        "name": "Joaquín López Lorenz",
         "points": 5,
         "rebounds": 2,
         "assists": 1,
@@ -5677,8 +5677,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429642",
-        "name": "HALL B ELISIAS",
+        "id": "elisias-hall",
+        "name": "Elisias Hall",
         "points": 10,
         "rebounds": 3,
         "assists": 0,
@@ -5728,8 +5728,8 @@ export const matchPlayerStats = {
     ],
     "platense": [
       {
-        "id": "oficial-273290",
-        "name": "ANTHOAN MAURICE URBINA SERRANO",
+        "id": "anthoan-urbina",
+        "name": "Anthoan Urbina",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -5777,8 +5777,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-202340",
-        "name": "MARIANO EZEQUIEL GOICOECHEA",
+        "id": "mariano-goicoechea",
+        "name": "Mariano Goicoechea",
         "points": 0,
         "rebounds": 0,
         "assists": 1,
@@ -5826,8 +5826,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431010",
-        "name": "FEDERICO JOSE GRUN",
+        "id": "federico-grun",
+        "name": "Federico Grun",
         "points": 13,
         "rebounds": 4,
         "assists": 3,
@@ -5875,8 +5875,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431012",
-        "name": "RAMIRO SEBASTIAN SANTIAGO",
+        "id": "ramiro-santiago",
+        "name": "Ramiro Santiago",
         "points": 7,
         "rebounds": 1,
         "assists": 1,
@@ -5924,8 +5924,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-328509",
-        "name": "FRANCO NAHUEL SMANIOTTI",
+        "id": "franco-smaniotti",
+        "name": "Franco Smaniotti",
         "points": 10,
         "rebounds": 5,
         "assists": 0,
@@ -6022,8 +6022,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430997",
-        "name": "GASTON EZEQUIEL CORDOBA",
+        "id": "gaston-cordoba",
+        "name": "Gastón Córdoba",
         "points": 5,
         "rebounds": 0,
         "assists": 1,
@@ -6071,8 +6071,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431028",
-        "name": "FACUNDO TERRA AGOSTINI",
+        "id": "facundo-terra",
+        "name": "Facundo Terra",
         "points": 12,
         "rebounds": 5,
         "assists": 1,
@@ -6169,8 +6169,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430922",
-        "name": "ERIK JEROME COPES",
+        "id": "erik-copes",
+        "name": "Erik Copes",
         "points": 12,
         "rebounds": 6,
         "assists": 0,
@@ -6267,8 +6267,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431014",
-        "name": "MAURO NICOLAS COSOLITO",
+        "id": "mauro-cosolito",
+        "name": "Mauro Cosolito",
         "points": 1,
         "rebounds": 3,
         "assists": 0,
@@ -6406,8 +6406,8 @@ export const matchPlayerStats = {
     },
     "regatas": [
       {
-        "id": "oficial-430266",
-        "name": "KEITH MARTIN STONE",
+        "id": "keith-stone",
+        "name": "Keith Stone",
         "points": 2,
         "rebounds": 1,
         "assists": 1,
@@ -6553,8 +6553,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-325111",
-        "name": "PABLO IVAN GRAMAJO",
+        "id": "ivan-gramajo",
+        "name": "Iván Gramajo",
         "points": 11,
         "rebounds": 1,
         "assists": 2,
@@ -6602,8 +6602,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-426339",
-        "name": "SEBASTIAN ALEJANDRO ORRESTA",
+        "id": "sebastian-orresta",
+        "name": "Sebastián Orresta",
         "points": 7,
         "rebounds": 4,
         "assists": 1,
@@ -6651,8 +6651,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-77832",
-        "name": "VIKTOR DANIEL BENDER",
+        "id": "viktor-bender",
+        "name": "Viktor Bender",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -6700,8 +6700,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428705",
-        "name": "ELIAN JOSE CENTENO GARCIA",
+        "id": "elian-centeno",
+        "name": "Elian Centeno",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -6749,8 +6749,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428080",
-        "name": "JOSE IGNACIO MONTERO",
+        "id": "jose-montero",
+        "name": "José Montero",
         "points": 5,
         "rebounds": 1,
         "assists": 3,
@@ -6847,8 +6847,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-154780",
-        "name": "ALAN TADEO LEDESMA",
+        "id": "alan-ledesma",
+        "name": "Alan Ledesma",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -6945,8 +6945,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-426272",
-        "name": "ROBERTO SANTIAGO ACUÑA",
+        "id": "roberto-acuna",
+        "name": "Roberto Acuña",
         "points": 16,
         "rebounds": 6,
         "assists": 2,
@@ -6996,8 +6996,8 @@ export const matchPlayerStats = {
     ],
     "instituto": [
       {
-        "id": "oficial-176374",
-        "name": "KADIR EDUARDO POMARE SUAREZ",
+        "id": "kadir-pomare",
+        "name": "Kadir Pomare",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -7094,8 +7094,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426072",
-        "name": "FEDERICO JESUS BUSTOS SAYEGH",
+        "id": "federico-bustos",
+        "name": "Federico Bustos",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -7241,8 +7241,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431284",
-        "name": "TORREN LORENZO JONES",
+        "id": "torren-jones",
+        "name": "Torren Jones",
         "points": 17,
         "rebounds": 9,
         "assists": 0,
@@ -7437,8 +7437,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429185",
-        "name": "FEDERICO MATÍAS AGUERRE",
+        "id": "federico-aguerre",
+        "name": "Federico Aguerre",
         "points": 9,
         "rebounds": 4,
         "assists": 1,
@@ -7535,8 +7535,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425462",
-        "name": "XAVIER MANUEL CARRERAS PEGUERO",
+        "id": "xavier-carreras",
+        "name": "Xavier Carreras",
         "points": 4,
         "rebounds": 3,
         "assists": 1,
@@ -7674,8 +7674,8 @@ export const matchPlayerStats = {
     },
     "quimsa": [
       {
-        "id": "oficial-385839",
-        "name": "TYREN MILTON JOHNSON",
+        "id": "tyren-johnson",
+        "name": "Tyren Johnson",
         "points": 15,
         "rebounds": 2,
         "assists": 2,
@@ -7723,8 +7723,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-331567",
-        "name": "SEBASTIAN ARIEL BOGADO KEGLER",
+        "id": "sebastian-bogado",
+        "name": "Sebastián Bogado",
         "points": 1,
         "rebounds": 0,
         "assists": 0,
@@ -7919,8 +7919,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-378019",
-        "name": "MATIAS JAVIER SOLANAS",
+        "id": "matias-solanas",
+        "name": "Matías Solanas",
         "points": 12,
         "rebounds": 4,
         "assists": 1,
@@ -7968,8 +7968,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429317",
-        "name": "FRANCO JAVIER MENDEZ",
+        "id": "franco-mendez",
+        "name": "Franco Méndez",
         "points": 9,
         "rebounds": 6,
         "assists": 4,
@@ -8017,8 +8017,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429671",
-        "name": "FACUNDO OSVALDO RUTENBERG",
+        "id": "facundo-rutenberg",
+        "name": "Facundo Rutenberg",
         "points": 9,
         "rebounds": 0,
         "assists": 1,
@@ -8066,8 +8066,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426284",
-        "name": "NICOLAS DHARMA MARTINEZ VARELA",
+        "id": "nicolas-martinez",
+        "name": "Nicolás Martínez",
         "points": 17,
         "rebounds": 6,
         "assists": 1,
@@ -8115,8 +8115,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425395",
-        "name": "JAVIER ALEJANDRO SAIZ",
+        "id": "javier-saiz",
+        "name": "Javier Saiz",
         "points": 7,
         "rebounds": 4,
         "assists": 1,
@@ -8213,8 +8213,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-271900",
-        "name": "TAYAVEK ISMAEL GALLIZZI",
+        "id": "tayavek-gallizzi",
+        "name": "Tayavek Gallizzi",
         "points": 2,
         "rebounds": 2,
         "assists": 0,
@@ -8264,8 +8264,8 @@ export const matchPlayerStats = {
     ],
     "platense": [
       {
-        "id": "oficial-273290",
-        "name": "ANTHOAN MAURICE URBINA SERRANO",
+        "id": "anthoan-urbina",
+        "name": "Anthoan Urbina",
         "points": 4,
         "rebounds": 0,
         "assists": 1,
@@ -8313,8 +8313,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-202340",
-        "name": "MARIANO EZEQUIEL GOICOECHEA",
+        "id": "mariano-goicoechea",
+        "name": "Mariano Goicoechea",
         "points": 13,
         "rebounds": 2,
         "assists": 2,
@@ -8362,8 +8362,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431010",
-        "name": "FEDERICO JOSE GRUN",
+        "id": "federico-grun",
+        "name": "Federico Grun",
         "points": 0,
         "rebounds": 2,
         "assists": 0,
@@ -8411,8 +8411,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431012",
-        "name": "RAMIRO SEBASTIAN SANTIAGO",
+        "id": "ramiro-santiago",
+        "name": "Ramiro Santiago",
         "points": 13,
         "rebounds": 4,
         "assists": 2,
@@ -8460,8 +8460,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-328509",
-        "name": "FRANCO NAHUEL SMANIOTTI",
+        "id": "franco-smaniotti",
+        "name": "Franco Smaniotti",
         "points": 2,
         "rebounds": 3,
         "assists": 2,
@@ -8558,8 +8558,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430997",
-        "name": "GASTON EZEQUIEL CORDOBA",
+        "id": "gaston-cordoba",
+        "name": "Gastón Córdoba",
         "points": 0,
         "rebounds": 1,
         "assists": 1,
@@ -8607,8 +8607,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431028",
-        "name": "FACUNDO TERRA AGOSTINI",
+        "id": "facundo-terra",
+        "name": "Facundo Terra",
         "points": 8,
         "rebounds": 3,
         "assists": 0,
@@ -8705,8 +8705,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430922",
-        "name": "ERIK JEROME COPES",
+        "id": "erik-copes",
+        "name": "Erik Copes",
         "points": 2,
         "rebounds": 6,
         "assists": 0,
@@ -8803,8 +8803,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431014",
-        "name": "MAURO NICOLAS COSOLITO",
+        "id": "mauro-cosolito",
+        "name": "Mauro Cosolito",
         "points": 10,
         "rebounds": 2,
         "assists": 2,
@@ -8991,8 +8991,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429327",
-        "name": "FELIPE ANTONIO INYACO TOLEDO",
+        "id": "felipe-inyaco",
+        "name": "Felipe Inyaco",
         "points": 20,
         "rebounds": 0,
         "assists": 1,
@@ -9040,8 +9040,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-219864",
-        "name": "MARCOS CHACON TIRADO",
+        "id": "marcos-chacon",
+        "name": "Marcos Chacón",
         "points": 17,
         "rebounds": 4,
         "assists": 2,
@@ -9138,8 +9138,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375104",
-        "name": "SEBASTIAN ANDRES CARRASCO BARRIA",
+        "id": "sebastian-carrasco",
+        "name": "Sebastián Carrasco",
         "points": 17,
         "rebounds": 5,
         "assists": 3,
@@ -9334,8 +9334,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-319448",
-        "name": "CARLOS EZEQUIEL RIVERO",
+        "id": "carlos-rivero",
+        "name": "Carlos Rivero",
         "points": 6,
         "rebounds": 9,
         "assists": 0,
@@ -9532,8 +9532,8 @@ export const matchPlayerStats = {
     ],
     "la-union": [
       {
-        "id": "oficial-382372",
-        "name": "BRANDON JAMES BEAVERS",
+        "id": "brandon-beavers",
+        "name": "Brandon Beavers",
         "points": 14,
         "rebounds": 5,
         "assists": 1,
@@ -9630,8 +9630,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382371",
-        "name": "TOMAS DAVIN LARSEN NUNO",
+        "id": "tomas-nuno",
+        "name": "Tomás Nuno",
         "points": 17,
         "rebounds": 6,
         "assists": 1,
@@ -9728,8 +9728,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-380839",
-        "name": "SEBASTIAN IGNACIO ACEVEDO",
+        "id": "sebastian-acevedo",
+        "name": "Sebastián Acevedo",
         "points": 4,
         "rebounds": 3,
         "assists": 1,
@@ -9777,8 +9777,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209577",
-        "name": "ANDRES ALEXIS ELSENER",
+        "id": "alexis-elsener",
+        "name": "Alexis Elsener",
         "points": 7,
         "rebounds": 5,
         "assists": 2,
@@ -9826,8 +9826,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429463",
-        "name": "AGUSTIN PEDRO FACELLO",
+        "id": "agustin-facello",
+        "name": "Agustín Facello",
         "points": 0,
         "rebounds": 4,
         "assists": 0,
@@ -9875,8 +9875,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382160",
-        "name": "HUGO LUIS JUNIOR PAEZ SANCHEZ",
+        "id": "hugo-paez",
+        "name": "Hugo Páez",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -9924,8 +9924,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-212758",
-        "name": "ENZO GUSTAVO MAGLIETTI",
+        "id": "enzo-maglietti",
+        "name": "Enzo Maglietti",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -9973,8 +9973,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382370",
-        "name": "WINDI MANUEL GRATEROL CLEMENTE",
+        "id": "windi-graterol",
+        "name": "Windi Graterol",
         "points": 20,
         "rebounds": 5,
         "assists": 2,
@@ -10072,7 +10072,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-429468",
-        "name": "FACUNDO MARIANO",
+        "name": "Facundo Mariano",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -10259,8 +10259,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-385839",
-        "name": "TYREN MILTON JOHNSON",
+        "id": "tyren-johnson",
+        "name": "Tyren Johnson",
         "points": 0,
         "rebounds": 2,
         "assists": 1,
@@ -10308,8 +10308,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-331567",
-        "name": "SEBASTIAN ARIEL BOGADO KEGLER",
+        "id": "sebastian-bogado",
+        "name": "Sebastián Bogado",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -10455,8 +10455,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-378019",
-        "name": "MATIAS JAVIER SOLANAS",
+        "id": "matias-solanas",
+        "name": "Matías Solanas",
         "points": 24,
         "rebounds": 3,
         "assists": 2,
@@ -10504,8 +10504,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429317",
-        "name": "FRANCO JAVIER MENDEZ",
+        "id": "franco-mendez",
+        "name": "Franco Méndez",
         "points": 6,
         "rebounds": 4,
         "assists": 2,
@@ -10553,8 +10553,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429671",
-        "name": "FACUNDO OSVALDO RUTENBERG",
+        "id": "facundo-rutenberg",
+        "name": "Facundo Rutenberg",
         "points": 18,
         "rebounds": 2,
         "assists": 1,
@@ -10602,8 +10602,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426284",
-        "name": "NICOLAS DHARMA MARTINEZ VARELA",
+        "id": "nicolas-martinez",
+        "name": "Nicolás Martínez",
         "points": 7,
         "rebounds": 4,
         "assists": 2,
@@ -10651,8 +10651,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425395",
-        "name": "JAVIER ALEJANDRO SAIZ",
+        "id": "javier-saiz",
+        "name": "Javier Saiz",
         "points": 5,
         "rebounds": 5,
         "assists": 1,
@@ -10749,8 +10749,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-271900",
-        "name": "TAYAVEK ISMAEL GALLIZZI",
+        "id": "tayavek-gallizzi",
+        "name": "Tayavek Gallizzi",
         "points": 2,
         "rebounds": 1,
         "assists": 1,
@@ -10800,8 +10800,8 @@ export const matchPlayerStats = {
     ],
     "atenas": [
       {
-        "id": "oficial-332193",
-        "name": "BENJAMIN IMAZ URIARTE",
+        "id": "benjamin-imaz",
+        "name": "Benjamín Imaz",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -10898,8 +10898,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430445",
-        "name": "FRANCO NICOLAS BALBI",
+        "id": "franco-balbi",
+        "name": "Franco Balbi",
         "points": 10,
         "rebounds": 3,
         "assists": 4,
@@ -11094,8 +11094,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-235314",
-        "name": "FACUNDO NICOLAS VALFRE",
+        "id": "facundo-valfre",
+        "name": "Facundo Valfre",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -11192,8 +11192,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430626",
-        "name": "JUAN PABLO ARENGO",
+        "id": "juan-arengo",
+        "name": "Juan Arengo",
         "points": 15,
         "rebounds": 3,
         "assists": 2,
@@ -11241,8 +11241,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430772",
-        "name": "DANIEL RAY LASTER JR",
+        "id": "daniel-laster",
+        "name": "Daniel Laster",
         "points": 17,
         "rebounds": 3,
         "assists": 0,
@@ -11290,8 +11290,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430618",
-        "name": "BRYAN JOSE CARABALI POROZO",
+        "id": "bryan-carabali",
+        "name": "Bryan Carabalí",
         "points": 12,
         "rebounds": 5,
         "assists": 0,
@@ -11478,8 +11478,8 @@ export const matchPlayerStats = {
     },
     "platense": [
       {
-        "id": "oficial-273290",
-        "name": "ANTHOAN MAURICE URBINA SERRANO",
+        "id": "anthoan-urbina",
+        "name": "Anthoan Urbina",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -11527,8 +11527,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-202340",
-        "name": "MARIANO EZEQUIEL GOICOECHEA",
+        "id": "mariano-goicoechea",
+        "name": "Mariano Goicoechea",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -11576,8 +11576,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431010",
-        "name": "FEDERICO JOSE GRUN",
+        "id": "federico-grun",
+        "name": "Federico Grun",
         "points": 9,
         "rebounds": 4,
         "assists": 3,
@@ -11625,8 +11625,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431012",
-        "name": "RAMIRO SEBASTIAN SANTIAGO",
+        "id": "ramiro-santiago",
+        "name": "Ramiro Santiago",
         "points": 13,
         "rebounds": 1,
         "assists": 2,
@@ -11674,8 +11674,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-328509",
-        "name": "FRANCO NAHUEL SMANIOTTI",
+        "id": "franco-smaniotti",
+        "name": "Franco Smaniotti",
         "points": 14,
         "rebounds": 6,
         "assists": 1,
@@ -11772,8 +11772,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430997",
-        "name": "GASTON EZEQUIEL CORDOBA",
+        "id": "gaston-cordoba",
+        "name": "Gastón Córdoba",
         "points": 2,
         "rebounds": 1,
         "assists": 1,
@@ -11821,8 +11821,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431028",
-        "name": "FACUNDO TERRA AGOSTINI",
+        "id": "facundo-terra",
+        "name": "Facundo Terra",
         "points": 5,
         "rebounds": 1,
         "assists": 4,
@@ -11919,8 +11919,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430922",
-        "name": "ERIK JEROME COPES",
+        "id": "erik-copes",
+        "name": "Erik Copes",
         "points": 20,
         "rebounds": 7,
         "assists": 0,
@@ -12017,8 +12017,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431014",
-        "name": "MAURO NICOLAS COSOLITO",
+        "id": "mauro-cosolito",
+        "name": "Mauro Cosolito",
         "points": 10,
         "rebounds": 4,
         "assists": 3,
@@ -12068,8 +12068,8 @@ export const matchPlayerStats = {
     ],
     "la-union": [
       {
-        "id": "oficial-382372",
-        "name": "BRANDON JAMES BEAVERS",
+        "id": "brandon-beavers",
+        "name": "Brandon Beavers",
         "points": 12,
         "rebounds": 3,
         "assists": 6,
@@ -12166,8 +12166,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382371",
-        "name": "TOMAS DAVIN LARSEN NUNO",
+        "id": "tomas-nuno",
+        "name": "Tomás Nuno",
         "points": 4,
         "rebounds": 2,
         "assists": 0,
@@ -12264,8 +12264,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-380839",
-        "name": "SEBASTIAN IGNACIO ACEVEDO",
+        "id": "sebastian-acevedo",
+        "name": "Sebastián Acevedo",
         "points": 17,
         "rebounds": 6,
         "assists": 3,
@@ -12313,8 +12313,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209577",
-        "name": "ANDRES ALEXIS ELSENER",
+        "id": "alexis-elsener",
+        "name": "Alexis Elsener",
         "points": 10,
         "rebounds": 6,
         "assists": 4,
@@ -12362,8 +12362,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429463",
-        "name": "AGUSTIN PEDRO FACELLO",
+        "id": "agustin-facello",
+        "name": "Agustín Facello",
         "points": 13,
         "rebounds": 0,
         "assists": 4,
@@ -12411,8 +12411,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382160",
-        "name": "HUGO LUIS JUNIOR PAEZ SANCHEZ",
+        "id": "hugo-paez",
+        "name": "Hugo Páez",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -12460,8 +12460,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-212758",
-        "name": "ENZO GUSTAVO MAGLIETTI",
+        "id": "enzo-maglietti",
+        "name": "Enzo Maglietti",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -12509,8 +12509,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382370",
-        "name": "WINDI MANUEL GRATEROL CLEMENTE",
+        "id": "windi-graterol",
+        "name": "Windi Graterol",
         "points": 16,
         "rebounds": 6,
         "assists": 1,
@@ -12608,7 +12608,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-429468",
-        "name": "FACUNDO MARIANO",
+        "name": "Facundo Mariano",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -12942,8 +12942,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-266354",
-        "name": "JOSE IGNACIO VILDOZA",
+        "id": "jose-vildoza",
+        "name": "José Vildoza",
         "points": 22,
         "rebounds": 4,
         "assists": 4,
@@ -13040,8 +13040,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-428469",
-        "name": "VALENTINO FINETTI LOPEZ",
+        "id": "valentino-finetti",
+        "name": "Valentino Finetti",
         "points": 0,
         "rebounds": 2,
         "assists": 0,
@@ -13285,8 +13285,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-323167",
-        "name": "MARTIN NICOLAS CUELLO",
+        "id": "martin-cuello",
+        "name": "Martín Cuello",
         "points": 7,
         "rebounds": 3,
         "assists": 1,
@@ -13385,8 +13385,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-218487",
-        "name": "JONATAN FABIAN TORRESI",
+        "id": "jonatan-torresi",
+        "name": "Jonatan Torresi",
         "points": 9,
         "rebounds": 3,
         "assists": 1,
@@ -13434,8 +13434,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427601",
-        "name": "VICTOR LUIS FERNANDEZ",
+        "id": "victor-fernandez",
+        "name": "Víctor Fernández",
         "points": 9,
         "rebounds": 1,
         "assists": 3,
@@ -13484,7 +13484,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-130590",
-        "name": "MILTON NADIR MOUSQUERE",
+        "name": "Milton Nadir Mousquere",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -13532,8 +13532,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-189265",
-        "name": "ALEJO AZPILICUETA PASQUALINI",
+        "id": "alejo-azpilicueta",
+        "name": "Alejo Azpilicueta",
         "points": 2,
         "rebounds": 4,
         "assists": 1,
@@ -13679,8 +13679,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-150723",
-        "name": "AGUSTIN ANDRES BROCAL",
+        "id": "agustin-brocal",
+        "name": "Agustín Brocal",
         "points": 9,
         "rebounds": 2,
         "assists": 2,
@@ -13728,8 +13728,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-328770",
-        "name": "ALBANO NAHUEL COSTA",
+        "id": "albano-costa",
+        "name": "Albano Costa",
         "points": 2,
         "rebounds": 1,
         "assists": 0,
@@ -13778,7 +13778,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-429447",
-        "name": "MANUEL CARATINO",
+        "name": "Manuel Caratino",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -13875,8 +13875,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427602",
-        "name": "JUAN CRUZ MATEO OBERTO",
+        "id": "juan-cruz-oberto",
+        "name": "Juan Cruz Oberto",
         "points": 7,
         "rebounds": 2,
         "assists": 1,
@@ -14063,8 +14063,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429639",
-        "name": "ANDREW DESHAWN CORUM",
+        "id": "andrew-corum",
+        "name": "Andrew Corum",
         "points": 14,
         "rebounds": 10,
         "assists": 3,
@@ -14112,8 +14112,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429634",
-        "name": "LUCAS NAIM PEREZ BAZAN",
+        "id": "lucas-perez",
+        "name": "Lucas Pérez",
         "points": 9,
         "rebounds": 3,
         "assists": 7,
@@ -14161,8 +14161,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-326739",
-        "name": "SANTINO ALBERTO ROMEGIALLI",
+        "id": "santino-romegialli",
+        "name": "Santino Romegialli",
         "points": 15,
         "rebounds": 6,
         "assists": 1,
@@ -14211,7 +14211,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-430621",
-        "name": "MARIANO VALENTIN CACERES COMELLI",
+        "name": "Mariano Valentin Caceres Comelli",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -14308,8 +14308,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429633",
-        "name": "RAMIRO JEREMIAS FRONTERA",
+        "id": "jeremias-frontera",
+        "name": "Jeremías Frontera",
         "points": 3,
         "rebounds": 3,
         "assists": 3,
@@ -14407,7 +14407,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431734",
-        "name": "FRANCISCO PEREYRA",
+        "name": "Francisco Pereyra",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -14455,8 +14455,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429638",
-        "name": "JOAQUIN BAUTISTA LOPEZ LORENZ",
+        "id": "joaquin-lopez-lorenz",
+        "name": "Joaquín López Lorenz",
         "points": 4,
         "rebounds": 2,
         "assists": 0,
@@ -14504,8 +14504,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429642",
-        "name": "HALL B ELISIAS",
+        "id": "elisias-hall",
+        "name": "Elisias Hall",
         "points": 10,
         "rebounds": 3,
         "assists": 1,
@@ -14555,8 +14555,8 @@ export const matchPlayerStats = {
     ],
     "atenas": [
       {
-        "id": "oficial-332193",
-        "name": "BENJAMIN IMAZ URIARTE",
+        "id": "benjamin-imaz",
+        "name": "Benjamín Imaz",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -14653,8 +14653,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430445",
-        "name": "FRANCO NICOLAS BALBI",
+        "id": "franco-balbi",
+        "name": "Franco Balbi",
         "points": 11,
         "rebounds": 2,
         "assists": 3,
@@ -14849,8 +14849,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-235314",
-        "name": "FACUNDO NICOLAS VALFRE",
+        "id": "facundo-valfre",
+        "name": "Facundo Valfre",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -14947,8 +14947,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430626",
-        "name": "JUAN PABLO ARENGO",
+        "id": "juan-arengo",
+        "name": "Juan Arengo",
         "points": 23,
         "rebounds": 3,
         "assists": 4,
@@ -14996,8 +14996,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430772",
-        "name": "DANIEL RAY LASTER JR",
+        "id": "daniel-laster",
+        "name": "Daniel Laster",
         "points": 11,
         "rebounds": 4,
         "assists": 1,
@@ -15045,8 +15045,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430618",
-        "name": "BRYAN JOSE CARABALI POROZO",
+        "id": "bryan-carabali",
+        "name": "Bryan Carabalí",
         "points": 7,
         "rebounds": 15,
         "assists": 2,
@@ -15331,8 +15331,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-378915",
-        "name": "MANUEL RODRIGUEZ ORTEGA",
+        "id": "manuel-rodriguez",
+        "name": "Manuel Rodríguez",
         "points": 5,
         "rebounds": 7,
         "assists": 0,
@@ -15429,8 +15429,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426774",
-        "name": "MARCOS NICOLAS DELIA",
+        "id": "marcos-delia",
+        "name": "Marcos Delía",
         "points": 7,
         "rebounds": 3,
         "assists": 0,
@@ -15478,8 +15478,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-421109",
-        "name": "JUAN IGNACIO RESPAUD",
+        "id": "ignacio-respaud",
+        "name": "Ignacio Respaud",
         "points": 2,
         "rebounds": 0,
         "assists": 3,
@@ -15527,8 +15527,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-218334",
-        "name": "NORBERTO EMILIO STUCKY",
+        "id": "emilio-stucky",
+        "name": "Emilio Stucky",
         "points": 14,
         "rebounds": 6,
         "assists": 1,
@@ -15576,8 +15576,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-378286",
-        "name": "TOMAS FRANCISCO DELIA",
+        "id": "tomas-delia",
+        "name": "Tomás Delía",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -15625,8 +15625,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425016",
-        "name": "JUAN MANUEL BOCCA",
+        "id": "juan-bocca",
+        "name": "Juan Bocca",
         "points": 17,
         "rebounds": 2,
         "assists": 3,
@@ -15674,8 +15674,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-325396",
-        "name": "ABRAHAM ELEAZAR BARAHONA ARROYO",
+        "id": "abraham-barahona",
+        "name": "Abraham Barahona",
         "points": 2,
         "rebounds": 4,
         "assists": 0,
@@ -16019,8 +16019,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209964",
-        "name": "GASTON LEONEL GARCIA",
+        "id": "gaston-garcia",
+        "name": "Gastón García",
         "points": 11,
         "rebounds": 1,
         "assists": 2,
@@ -16068,8 +16068,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-386499",
-        "name": "DANIEL MOREIRA DE OLIVEIRA SANTOS DE LIMA",
+        "id": "daniel-moreira",
+        "name": "Daniel Moreira",
         "points": 20,
         "rebounds": 15,
         "assists": 3,
@@ -16166,8 +16166,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-276149",
-        "name": "GERONIMO GASTON RAMALLO",
+        "id": "geronimo-ramallo",
+        "name": "Gerónimo Ramallo",
         "points": 2,
         "rebounds": 5,
         "assists": 0,
@@ -16215,8 +16215,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-379523",
-        "name": "LAUTARO BERRA FERNANDEZ",
+        "id": "lautaro-berra",
+        "name": "Lautaro Berra",
         "points": 4,
         "rebounds": 3,
         "assists": 0,
@@ -16264,8 +16264,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429483",
-        "name": "SEBASTIAN EZEQUIEL LUGO",
+        "id": "sebastian-lugo",
+        "name": "Sebastián Lugo",
         "points": 26,
         "rebounds": 12,
         "assists": 1,
@@ -16555,8 +16555,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430925",
-        "name": "JUAN MARTIN GUERRERO MARGARIT",
+        "id": "juan-martin-guerrero",
+        "name": "Juan Martín Guerrero",
         "points": 8,
         "rebounds": 2,
         "assists": 3,
@@ -16604,8 +16604,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-171833",
-        "name": "NICOLAS JAVIER MARCUCCI",
+        "id": "nicolas-marcucci",
+        "name": "Nicolás Marcucci",
         "points": 2,
         "rebounds": 3,
         "assists": 0,
@@ -16702,8 +16702,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-329317",
-        "name": "PATRICIO CARLOS TABAREZ",
+        "id": "patricio-tabarez",
+        "name": "Patricio Tabárez",
         "points": 5,
         "rebounds": 3,
         "assists": 2,
@@ -16751,8 +16751,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-379152",
-        "name": "FORTUNATO JOSE ROLFI",
+        "id": "fortuna-rolfi",
+        "name": "Fortunato Rolfi",
         "points": 20,
         "rebounds": 5,
         "assists": 6,
@@ -16850,7 +16850,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-276420",
-        "name": "EZEQUIEL JOEL HOREN",
+        "name": "Ezequiel Joel Horen",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -16898,8 +16898,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-324888",
-        "name": "ROLANDO EXEQUIEL VALLEJOS",
+        "id": "rolando-vallejos",
+        "name": "Rolando Vallejos",
         "points": 5,
         "rebounds": 3,
         "assists": 1,
@@ -17243,8 +17243,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-324409",
-        "name": "JANO DAVID MARTINEZ",
+        "id": "jano-martinez",
+        "name": "Jano Martínez",
         "points": 5,
         "rebounds": 6,
         "assists": 3,
@@ -17439,8 +17439,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-74902",
-        "name": "FELIPE SALVADOR RODRIGUEZ",
+        "id": "felipe-rodriguez",
+        "name": "Felipe Rodríguez",
         "points": 1,
         "rebounds": 0,
         "assists": 0,
@@ -17488,8 +17488,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-278259",
-        "name": "RODRIGO AGUSTIN GALLEGOS",
+        "id": "rodrigo-gallegos",
+        "name": "Rodrigo Gallegos",
         "points": 7,
         "rebounds": 2,
         "assists": 5,
@@ -17586,8 +17586,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-150972",
-        "name": "LEONEL VALENTIN BETTIGA",
+        "id": "valentin-bettiga",
+        "name": "Valentín Bettiga",
         "points": 13,
         "rebounds": 7,
         "assists": 1,
@@ -17635,8 +17635,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-41208",
-        "name": "CAMILO BAUTISTA JARA DELGADO",
+        "id": "camilo-jara",
+        "name": "Camilo Jara",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -17823,8 +17823,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-172005",
-        "name": "THIAGO EMMANUEL ROCA",
+        "id": "thiago-roca",
+        "name": "Thiago Roca",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -17921,8 +17921,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-225273",
-        "name": "JOAQUIN MATIAS ACTIS",
+        "id": "joaquin-actis",
+        "name": "Joaquín Actis",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -18019,8 +18019,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-172012",
-        "name": "NICOLAS GUSTAVO AGUIRRE",
+        "id": "nicolas-aguirre",
+        "name": "Nicolás Aguirre",
         "points": 12,
         "rebounds": 1,
         "assists": 3,
@@ -18413,8 +18413,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429327",
-        "name": "FELIPE ANTONIO INYACO TOLEDO",
+        "id": "felipe-inyaco",
+        "name": "Felipe Inyaco",
         "points": 6,
         "rebounds": 1,
         "assists": 1,
@@ -18462,8 +18462,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375103",
-        "name": "JESUS ARTURO CENTENO MORALES",
+        "id": "jesus-centeno",
+        "name": "Jesús Centeno",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -18511,8 +18511,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-219864",
-        "name": "MARCOS CHACON TIRADO",
+        "id": "marcos-chacon",
+        "name": "Marcos Chacón",
         "points": 13,
         "rebounds": 5,
         "assists": 1,
@@ -18609,8 +18609,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375104",
-        "name": "SEBASTIAN ANDRES CARRASCO BARRIA",
+        "id": "sebastian-carrasco",
+        "name": "Sebastián Carrasco",
         "points": 15,
         "rebounds": 1,
         "assists": 1,
@@ -18756,8 +18756,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-319448",
-        "name": "CARLOS EZEQUIEL RIVERO",
+        "id": "carlos-rivero",
+        "name": "Carlos Rivero",
         "points": 5,
         "rebounds": 9,
         "assists": 0,
@@ -19042,8 +19042,8 @@ export const matchPlayerStats = {
     },
     "lanus": [
       {
-        "id": "oficial-385838",
-        "name": "ROBERT JAMARCUS WHITFIELD III",
+        "id": "robert-whitfield",
+        "name": "Robert Whitfield",
         "points": 12,
         "rebounds": 2,
         "assists": 0,
@@ -19091,8 +19091,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428243",
-        "name": "JUAN IGNACIO BRUSSINO",
+        "id": "juan-brussino",
+        "name": "Juan Brussino",
         "points": 9,
         "rebounds": 4,
         "assists": 2,
@@ -19238,8 +19238,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-33793",
-        "name": "ALEJO VALENTIN SACCHI",
+        "id": "alejo-sacchi",
+        "name": "Alejo Sacchi",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -19336,8 +19336,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429711",
-        "name": "CHRISTIAN TYLER JAMES",
+        "id": "christian-james",
+        "name": "Christian James",
         "points": 4,
         "rebounds": 6,
         "assists": 0,
@@ -19386,7 +19386,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "JOAQUIN CORIA FA",
+        "name": "Joaquin Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -19483,8 +19483,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430339",
-        "name": "MELVIN TYRIEK JOHNSON JR",
+        "id": "melvin-johnson",
+        "name": "Melvin Johnson",
         "points": 5,
         "rebounds": 0,
         "assists": 1,
@@ -19532,8 +19532,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-424846",
-        "name": "CLAUDIO FABIAN RAMIREZ BARRIOS",
+        "id": "fabian-ramirez-barrios",
+        "name": "Fabián Ramírez Barrios",
         "points": 5,
         "rebounds": 2,
         "assists": 0,
@@ -19581,8 +19581,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431601",
-        "name": "PEDRO ANTONIO BOMBINO PARADA",
+        "id": "pedro-bombino",
+        "name": "Pedro Bombino",
         "points": 16,
         "rebounds": 10,
         "assists": 2,
@@ -19633,7 +19633,7 @@ export const matchPlayerStats = {
     "obera": [
       {
         "id": "oficial-430497",
-        "name": "MATHEUS SANTOS SIMAO COSTA",
+        "name": "Matheus Santos Simao Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -19730,8 +19730,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-218487",
-        "name": "JONATAN FABIAN TORRESI",
+        "id": "jonatan-torresi",
+        "name": "Jonatan Torresi",
         "points": 6,
         "rebounds": 3,
         "assists": 1,
@@ -19779,8 +19779,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427601",
-        "name": "VICTOR LUIS FERNANDEZ",
+        "id": "victor-fernandez",
+        "name": "Víctor Fernández",
         "points": 4,
         "rebounds": 2,
         "assists": 0,
@@ -19828,8 +19828,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-189265",
-        "name": "ALEJO AZPILICUETA PASQUALINI",
+        "id": "alejo-azpilicueta",
+        "name": "Alejo Azpilicueta",
         "points": 2,
         "rebounds": 3,
         "assists": 0,
@@ -19975,8 +19975,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-150723",
-        "name": "AGUSTIN ANDRES BROCAL",
+        "id": "agustin-brocal",
+        "name": "Agustín Brocal",
         "points": 3,
         "rebounds": 3,
         "assists": 4,
@@ -20024,8 +20024,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-328770",
-        "name": "ALBANO NAHUEL COSTA",
+        "id": "albano-costa",
+        "name": "Albano Costa",
         "points": 2,
         "rebounds": 1,
         "assists": 0,
@@ -20074,7 +20074,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-429447",
-        "name": "MANUEL CARATINO",
+        "name": "Manuel Caratino",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -20171,8 +20171,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427602",
-        "name": "JUAN CRUZ MATEO OBERTO",
+        "id": "juan-cruz-oberto",
+        "name": "Juan Cruz Oberto",
         "points": 10,
         "rebounds": 8,
         "assists": 1,
@@ -20310,8 +20310,8 @@ export const matchPlayerStats = {
     },
     "instituto": [
       {
-        "id": "oficial-176374",
-        "name": "KADIR EDUARDO POMARE SUAREZ",
+        "id": "kadir-pomare",
+        "name": "Kadir Pomare",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -20408,8 +20408,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-426072",
-        "name": "FEDERICO JESUS BUSTOS SAYEGH",
+        "id": "federico-bustos",
+        "name": "Federico Bustos",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -20555,8 +20555,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431284",
-        "name": "TORREN LORENZO JONES",
+        "id": "torren-jones",
+        "name": "Torren Jones",
         "points": 7,
         "rebounds": 9,
         "assists": 2,
@@ -20800,8 +20800,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429185",
-        "name": "FEDERICO MATÍAS AGUERRE",
+        "id": "federico-aguerre",
+        "name": "Federico Aguerre",
         "points": 12,
         "rebounds": 2,
         "assists": 1,
@@ -20849,8 +20849,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425462",
-        "name": "XAVIER MANUEL CARRERAS PEGUERO",
+        "id": "xavier-carreras",
+        "name": "Xavier Carreras",
         "points": 9,
         "rebounds": 7,
         "assists": 1,
@@ -21047,8 +21047,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-324409",
-        "name": "JANO DAVID MARTINEZ",
+        "id": "jano-martinez",
+        "name": "Jano Martínez",
         "points": 12,
         "rebounds": 3,
         "assists": 9,
@@ -21243,8 +21243,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-74902",
-        "name": "FELIPE SALVADOR RODRIGUEZ",
+        "id": "felipe-rodriguez",
+        "name": "Felipe Rodríguez",
         "points": 7,
         "rebounds": 1,
         "assists": 0,
@@ -21292,8 +21292,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-278259",
-        "name": "RODRIGO AGUSTIN GALLEGOS",
+        "id": "rodrigo-gallegos",
+        "name": "Rodrigo Gallegos",
         "points": 4,
         "rebounds": 0,
         "assists": 2,
@@ -21390,8 +21390,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-150972",
-        "name": "LEONEL VALENTIN BETTIGA",
+        "id": "valentin-bettiga",
+        "name": "Valentín Bettiga",
         "points": 5,
         "rebounds": 6,
         "assists": 3,
@@ -21439,8 +21439,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-41208",
-        "name": "CAMILO BAUTISTA JARA DELGADO",
+        "id": "camilo-jara",
+        "name": "Camilo Jara",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -21583,8 +21583,8 @@ export const matchPlayerStats = {
     },
     "argentino": [
       {
-        "id": "oficial-427474",
-        "name": "JOAQUIN FERNANDEZ ALVAREZ",
+        "id": "joaquin-fernandez",
+        "name": "Joaquín Fernández",
         "points": 6,
         "rebounds": 4,
         "assists": 1,
@@ -21632,8 +21632,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-384168",
-        "name": "DYLAN JUROD SMITH",
+        "id": "dylan-smith",
+        "name": "Dylan Smith",
         "points": 14,
         "rebounds": 3,
         "assists": 0,
@@ -21681,8 +21681,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429231",
-        "name": "ZYON EZEKIEL PATTERSON",
+        "id": "zyon-patterson",
+        "name": "Zyon Patterson",
         "points": 10,
         "rebounds": 6,
         "assists": 1,
@@ -21877,8 +21877,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-427465",
-        "name": "LEANDRO GABRIEL CERMINATO",
+        "id": "leandro-cerminato",
+        "name": "Leandro Cerminato",
         "points": 11,
         "rebounds": 7,
         "assists": 0,
@@ -21926,8 +21926,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209418",
-        "name": "ROMULO GUSMAO COSTA",
+        "id": "romulo-gusmao",
+        "name": "Rómulo Gusmao",
         "points": 1,
         "rebounds": 5,
         "assists": 0,
@@ -22024,8 +22024,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-174821",
-        "name": "SANTIAGO MANUEL BILBAO",
+        "id": "santiago-bilbao",
+        "name": "Santiago Bilbao",
         "points": 3,
         "rebounds": 1,
         "assists": 0,
@@ -22369,8 +22369,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209964",
-        "name": "GASTON LEONEL GARCIA",
+        "id": "gaston-garcia",
+        "name": "Gastón García",
         "points": 12,
         "rebounds": 4,
         "assists": 3,
@@ -22418,8 +22418,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-386499",
-        "name": "DANIEL MOREIRA DE OLIVEIRA SANTOS DE LIMA",
+        "id": "daniel-moreira",
+        "name": "Daniel Moreira",
         "points": 12,
         "rebounds": 10,
         "assists": 1,
@@ -22516,8 +22516,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-276149",
-        "name": "GERONIMO GASTON RAMALLO",
+        "id": "geronimo-ramallo",
+        "name": "Gerónimo Ramallo",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -22565,8 +22565,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-379523",
-        "name": "LAUTARO BERRA FERNANDEZ",
+        "id": "lautaro-berra",
+        "name": "Lautaro Berra",
         "points": 7,
         "rebounds": 5,
         "assists": 0,
@@ -22614,8 +22614,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429483",
-        "name": "SEBASTIAN EZEQUIEL LUGO",
+        "id": "sebastian-lugo",
+        "name": "Sebastián Lugo",
         "points": 9,
         "rebounds": 6,
         "assists": 4,
@@ -22900,8 +22900,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-385839",
-        "name": "TYREN MILTON JOHNSON",
+        "id": "tyren-johnson",
+        "name": "Tyren Johnson",
         "points": 16,
         "rebounds": 2,
         "assists": 1,
@@ -22949,8 +22949,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-331567",
-        "name": "SEBASTIAN ARIEL BOGADO KEGLER",
+        "id": "sebastian-bogado",
+        "name": "Sebastián Bogado",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -23096,8 +23096,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-378019",
-        "name": "MATIAS JAVIER SOLANAS",
+        "id": "matias-solanas",
+        "name": "Matías Solanas",
         "points": 12,
         "rebounds": 1,
         "assists": 3,
@@ -23145,8 +23145,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429317",
-        "name": "FRANCO JAVIER MENDEZ",
+        "id": "franco-mendez",
+        "name": "Franco Méndez",
         "points": 23,
         "rebounds": 6,
         "assists": 10,
@@ -23194,8 +23194,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429671",
-        "name": "FACUNDO OSVALDO RUTENBERG",
+        "id": "facundo-rutenberg",
+        "name": "Facundo Rutenberg",
         "points": 9,
         "rebounds": 2,
         "assists": 3,
@@ -23243,8 +23243,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426284",
-        "name": "NICOLAS DHARMA MARTINEZ VARELA",
+        "id": "nicolas-martinez",
+        "name": "Nicolás Martínez",
         "points": 12,
         "rebounds": 3,
         "assists": 0,
@@ -23292,8 +23292,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425395",
-        "name": "JAVIER ALEJANDRO SAIZ",
+        "id": "javier-saiz",
+        "name": "Javier Saiz",
         "points": 5,
         "rebounds": 4,
         "assists": 1,
@@ -23390,8 +23390,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-271900",
-        "name": "TAYAVEK ISMAEL GALLIZZI",
+        "id": "tayavek-gallizzi",
+        "name": "Tayavek Gallizzi",
         "points": 11,
         "rebounds": 4,
         "assists": 1,
@@ -23637,8 +23637,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-266354",
-        "name": "JOSE IGNACIO VILDOZA",
+        "id": "jose-vildoza",
+        "name": "José Vildoza",
         "points": 4,
         "rebounds": 5,
         "assists": 8,
@@ -23735,8 +23735,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-428469",
-        "name": "VALENTINO FINETTI LOPEZ",
+        "id": "valentino-finetti",
+        "name": "Valentino Finetti",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -23980,8 +23980,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-323167",
-        "name": "MARTIN NICOLAS CUELLO",
+        "id": "martin-cuello",
+        "name": "Martín Cuello",
         "points": 9,
         "rebounds": 2,
         "assists": 4,
@@ -24217,8 +24217,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-378915",
-        "name": "MANUEL RODRIGUEZ ORTEGA",
+        "id": "manuel-rodriguez",
+        "name": "Manuel Rodríguez",
         "points": 9,
         "rebounds": 3,
         "assists": 1,
@@ -24315,8 +24315,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426774",
-        "name": "MARCOS NICOLAS DELIA",
+        "id": "marcos-delia",
+        "name": "Marcos Delía",
         "points": 10,
         "rebounds": 7,
         "assists": 0,
@@ -24364,8 +24364,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-421109",
-        "name": "JUAN IGNACIO RESPAUD",
+        "id": "ignacio-respaud",
+        "name": "Ignacio Respaud",
         "points": 0,
         "rebounds": 1,
         "assists": 1,
@@ -24413,8 +24413,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-218334",
-        "name": "NORBERTO EMILIO STUCKY",
+        "id": "emilio-stucky",
+        "name": "Emilio Stucky",
         "points": 6,
         "rebounds": 3,
         "assists": 1,
@@ -24462,8 +24462,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-378286",
-        "name": "TOMAS FRANCISCO DELIA",
+        "id": "tomas-delia",
+        "name": "Tomás Delía",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -24511,8 +24511,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425016",
-        "name": "JUAN MANUEL BOCCA",
+        "id": "juan-bocca",
+        "name": "Juan Bocca",
         "points": 4,
         "rebounds": 3,
         "assists": 1,
@@ -24560,8 +24560,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-325396",
-        "name": "ABRAHAM ELEAZAR BARAHONA ARROYO",
+        "id": "abraham-barahona",
+        "name": "Abraham Barahona",
         "points": 1,
         "rebounds": 0,
         "assists": 0,
@@ -24758,8 +24758,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429327",
-        "name": "FELIPE ANTONIO INYACO TOLEDO",
+        "id": "felipe-inyaco",
+        "name": "Felipe Inyaco",
         "points": 4,
         "rebounds": 1,
         "assists": 1,
@@ -24807,8 +24807,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375103",
-        "name": "JESUS ARTURO CENTENO MORALES",
+        "id": "jesus-centeno",
+        "name": "Jesús Centeno",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -24856,8 +24856,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-219864",
-        "name": "MARCOS CHACON TIRADO",
+        "id": "marcos-chacon",
+        "name": "Marcos Chacón",
         "points": 19,
         "rebounds": 2,
         "assists": 1,
@@ -24954,8 +24954,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375104",
-        "name": "SEBASTIAN ANDRES CARRASCO BARRIA",
+        "id": "sebastian-carrasco",
+        "name": "Sebastián Carrasco",
         "points": 4,
         "rebounds": 1,
         "assists": 4,
@@ -25150,8 +25150,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-319448",
-        "name": "CARLOS EZEQUIEL RIVERO",
+        "id": "carlos-rivero",
+        "name": "Carlos Rivero",
         "points": 13,
         "rebounds": 9,
         "assists": 3,
@@ -25387,8 +25387,8 @@ export const matchPlayerStats = {
     },
     "argentino": [
       {
-        "id": "oficial-427474",
-        "name": "JOAQUIN FERNANDEZ ALVAREZ",
+        "id": "joaquin-fernandez",
+        "name": "Joaquín Fernández",
         "points": 9,
         "rebounds": 3,
         "assists": 0,
@@ -25436,8 +25436,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-384168",
-        "name": "DYLAN JUROD SMITH",
+        "id": "dylan-smith",
+        "name": "Dylan Smith",
         "points": 5,
         "rebounds": 3,
         "assists": 0,
@@ -25485,8 +25485,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429231",
-        "name": "ZYON EZEKIEL PATTERSON",
+        "id": "zyon-patterson",
+        "name": "Zyon Patterson",
         "points": 4,
         "rebounds": 1,
         "assists": 2,
@@ -25681,8 +25681,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-427465",
-        "name": "LEANDRO GABRIEL CERMINATO",
+        "id": "leandro-cerminato",
+        "name": "Leandro Cerminato",
         "points": 10,
         "rebounds": 5,
         "assists": 0,
@@ -25730,8 +25730,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209418",
-        "name": "ROMULO GUSMAO COSTA",
+        "id": "romulo-gusmao",
+        "name": "Rómulo Gusmao",
         "points": 6,
         "rebounds": 4,
         "assists": 0,
@@ -25828,8 +25828,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-174821",
-        "name": "SANTIAGO MANUEL BILBAO",
+        "id": "santiago-bilbao",
+        "name": "Santiago Bilbao",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -26026,8 +26026,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429327",
-        "name": "FELIPE ANTONIO INYACO TOLEDO",
+        "id": "felipe-inyaco",
+        "name": "Felipe Inyaco",
         "points": 12,
         "rebounds": 3,
         "assists": 0,
@@ -26075,8 +26075,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375103",
-        "name": "JESUS ARTURO CENTENO MORALES",
+        "id": "jesus-centeno",
+        "name": "Jesús Centeno",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -26124,8 +26124,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-219864",
-        "name": "MARCOS CHACON TIRADO",
+        "id": "marcos-chacon",
+        "name": "Marcos Chacón",
         "points": 22,
         "rebounds": 3,
         "assists": 1,
@@ -26222,8 +26222,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-375104",
-        "name": "SEBASTIAN ANDRES CARRASCO BARRIA",
+        "id": "sebastian-carrasco",
+        "name": "Sebastián Carrasco",
         "points": 9,
         "rebounds": 3,
         "assists": 4,
@@ -26369,8 +26369,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-319448",
-        "name": "CARLOS EZEQUIEL RIVERO",
+        "id": "carlos-rivero",
+        "name": "Carlos Rivero",
         "points": 10,
         "rebounds": 11,
         "assists": 1,
@@ -26606,8 +26606,8 @@ export const matchPlayerStats = {
     },
     "atenas": [
       {
-        "id": "oficial-332193",
-        "name": "BENJAMIN IMAZ URIARTE",
+        "id": "benjamin-imaz",
+        "name": "Benjamín Imaz",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -26704,8 +26704,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430445",
-        "name": "FRANCO NICOLAS BALBI",
+        "id": "franco-balbi",
+        "name": "Franco Balbi",
         "points": 22,
         "rebounds": 5,
         "assists": 5,
@@ -26900,8 +26900,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-235314",
-        "name": "FACUNDO NICOLAS VALFRE",
+        "id": "facundo-valfre",
+        "name": "Facundo Valfre",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -26998,8 +26998,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430626",
-        "name": "JUAN PABLO ARENGO",
+        "id": "juan-arengo",
+        "name": "Juan Arengo",
         "points": 15,
         "rebounds": 3,
         "assists": 6,
@@ -27047,8 +27047,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430772",
-        "name": "DANIEL RAY LASTER JR",
+        "id": "daniel-laster",
+        "name": "Daniel Laster",
         "points": 10,
         "rebounds": 3,
         "assists": 0,
@@ -27096,8 +27096,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430618",
-        "name": "BRYAN JOSE CARABALI POROZO",
+        "id": "bryan-carabali",
+        "name": "Bryan Carabalí",
         "points": 15,
         "rebounds": 8,
         "assists": 0,
@@ -27343,8 +27343,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-324409",
-        "name": "JANO DAVID MARTINEZ",
+        "id": "jano-martinez",
+        "name": "Jano Martínez",
         "points": 7,
         "rebounds": 1,
         "assists": 6,
@@ -27539,8 +27539,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-74902",
-        "name": "FELIPE SALVADOR RODRIGUEZ",
+        "id": "felipe-rodriguez",
+        "name": "Felipe Rodríguez",
         "points": 3,
         "rebounds": 6,
         "assists": 0,
@@ -27588,8 +27588,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-278259",
-        "name": "RODRIGO AGUSTIN GALLEGOS",
+        "id": "rodrigo-gallegos",
+        "name": "Rodrigo Gallegos",
         "points": 6,
         "rebounds": 2,
         "assists": 1,
@@ -27686,8 +27686,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-150972",
-        "name": "LEONEL VALENTIN BETTIGA",
+        "id": "valentin-bettiga",
+        "name": "Valentín Bettiga",
         "points": 14,
         "rebounds": 5,
         "assists": 2,
@@ -27735,8 +27735,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-41208",
-        "name": "CAMILO BAUTISTA JARA DELGADO",
+        "id": "camilo-jara",
+        "name": "Camilo Jara",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -27923,8 +27923,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429639",
-        "name": "ANDREW DESHAWN CORUM",
+        "id": "andrew-corum",
+        "name": "Andrew Corum",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -27972,8 +27972,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429634",
-        "name": "LUCAS NAIM PEREZ BAZAN",
+        "id": "lucas-perez",
+        "name": "Lucas Pérez",
         "points": 14,
         "rebounds": 2,
         "assists": 9,
@@ -28021,8 +28021,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-326739",
-        "name": "SANTINO ALBERTO ROMEGIALLI",
+        "id": "santino-romegialli",
+        "name": "Santino Romegialli",
         "points": 6,
         "rebounds": 11,
         "assists": 1,
@@ -28071,7 +28071,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-430621",
-        "name": "MARIANO VALENTIN CACERES COMELLI",
+        "name": "Mariano Valentin Caceres Comelli",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -28168,8 +28168,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429633",
-        "name": "RAMIRO JEREMIAS FRONTERA",
+        "id": "jeremias-frontera",
+        "name": "Jeremías Frontera",
         "points": 14,
         "rebounds": 3,
         "assists": 3,
@@ -28316,7 +28316,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431734",
-        "name": "FRANCISCO PEREYRA",
+        "name": "Francisco Pereyra",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -28364,8 +28364,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429638",
-        "name": "JOAQUIN BAUTISTA LOPEZ LORENZ",
+        "id": "joaquin-lopez-lorenz",
+        "name": "Joaquín López Lorenz",
         "points": 4,
         "rebounds": 0,
         "assists": 1,
@@ -28413,8 +28413,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429642",
-        "name": "HALL B ELISIAS",
+        "id": "elisias-hall",
+        "name": "Elisias Hall",
         "points": 4,
         "rebounds": 3,
         "assists": 0,
@@ -28660,8 +28660,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-266354",
-        "name": "JOSE IGNACIO VILDOZA",
+        "id": "jose-vildoza",
+        "name": "José Vildoza",
         "points": 9,
         "rebounds": 0,
         "assists": 3,
@@ -28758,8 +28758,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-428469",
-        "name": "VALENTINO FINETTI LOPEZ",
+        "id": "valentino-finetti",
+        "name": "Valentino Finetti",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -29003,8 +29003,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-323167",
-        "name": "MARTIN NICOLAS CUELLO",
+        "id": "martin-cuello",
+        "name": "Martín Cuello",
         "points": 7,
         "rebounds": 2,
         "assists": 1,
@@ -29143,7 +29143,7 @@ export const matchPlayerStats = {
     "obera": [
       {
         "id": "oficial-430497",
-        "name": "MATHEUS SANTOS SIMAO COSTA",
+        "name": "Matheus Santos Simao Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -29240,8 +29240,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-218487",
-        "name": "JONATAN FABIAN TORRESI",
+        "id": "jonatan-torresi",
+        "name": "Jonatan Torresi",
         "points": 6,
         "rebounds": 7,
         "assists": 0,
@@ -29289,8 +29289,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427601",
-        "name": "VICTOR LUIS FERNANDEZ",
+        "id": "victor-fernandez",
+        "name": "Víctor Fernández",
         "points": 5,
         "rebounds": 1,
         "assists": 4,
@@ -29339,7 +29339,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-130590",
-        "name": "MILTON NADIR MOUSQUERE",
+        "name": "Milton Nadir Mousquere",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -29387,8 +29387,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-189265",
-        "name": "ALEJO AZPILICUETA PASQUALINI",
+        "id": "alejo-azpilicueta",
+        "name": "Alejo Azpilicueta",
         "points": 9,
         "rebounds": 7,
         "assists": 1,
@@ -29534,8 +29534,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-150723",
-        "name": "AGUSTIN ANDRES BROCAL",
+        "id": "agustin-brocal",
+        "name": "Agustín Brocal",
         "points": 13,
         "rebounds": 1,
         "assists": 3,
@@ -29583,8 +29583,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-328770",
-        "name": "ALBANO NAHUEL COSTA",
+        "id": "albano-costa",
+        "name": "Albano Costa",
         "points": 1,
         "rebounds": 0,
         "assists": 0,
@@ -29681,8 +29681,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427602",
-        "name": "JUAN CRUZ MATEO OBERTO",
+        "id": "juan-cruz-oberto",
+        "name": "Juan Cruz Oberto",
         "points": 13,
         "rebounds": 6,
         "assists": 0,
@@ -29831,7 +29831,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-428118",
-        "name": "JOAQUIN ROMAN DIAZ",
+        "name": "Joaquin Roman Diaz",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -29879,8 +29879,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-378915",
-        "name": "MANUEL RODRIGUEZ ORTEGA",
+        "id": "manuel-rodriguez",
+        "name": "Manuel Rodríguez",
         "points": 7,
         "rebounds": 10,
         "assists": 4,
@@ -29977,8 +29977,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-426774",
-        "name": "MARCOS NICOLAS DELIA",
+        "id": "marcos-delia",
+        "name": "Marcos Delía",
         "points": 7,
         "rebounds": 6,
         "assists": 3,
@@ -30026,8 +30026,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-421109",
-        "name": "JUAN IGNACIO RESPAUD",
+        "id": "ignacio-respaud",
+        "name": "Ignacio Respaud",
         "points": 5,
         "rebounds": 1,
         "assists": 3,
@@ -30075,8 +30075,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-218334",
-        "name": "NORBERTO EMILIO STUCKY",
+        "id": "emilio-stucky",
+        "name": "Emilio Stucky",
         "points": 7,
         "rebounds": 0,
         "assists": 1,
@@ -30124,8 +30124,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-378286",
-        "name": "TOMAS FRANCISCO DELIA",
+        "id": "tomas-delia",
+        "name": "Tomás Delía",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -30173,8 +30173,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425016",
-        "name": "JUAN MANUEL BOCCA",
+        "id": "juan-bocca",
+        "name": "Juan Bocca",
         "points": 10,
         "rebounds": 2,
         "assists": 0,
@@ -30222,8 +30222,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-325396",
-        "name": "ABRAHAM ELEAZAR BARAHONA ARROYO",
+        "id": "abraham-barahona",
+        "name": "Abraham Barahona",
         "points": 4,
         "rebounds": 1,
         "assists": 0,
@@ -30410,8 +30410,8 @@ export const matchPlayerStats = {
     },
     "lanus": [
       {
-        "id": "oficial-385838",
-        "name": "ROBERT JAMARCUS WHITFIELD III",
+        "id": "robert-whitfield",
+        "name": "Robert Whitfield",
         "points": 9,
         "rebounds": 0,
         "assists": 3,
@@ -30459,8 +30459,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428243",
-        "name": "JUAN IGNACIO BRUSSINO",
+        "id": "juan-brussino",
+        "name": "Juan Brussino",
         "points": 15,
         "rebounds": 1,
         "assists": 3,
@@ -30606,8 +30606,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-33793",
-        "name": "ALEJO VALENTIN SACCHI",
+        "id": "alejo-sacchi",
+        "name": "Alejo Sacchi",
         "points": 6,
         "rebounds": 2,
         "assists": 1,
@@ -30704,8 +30704,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429711",
-        "name": "CHRISTIAN TYLER JAMES",
+        "id": "christian-james",
+        "name": "Christian James",
         "points": 11,
         "rebounds": 3,
         "assists": 1,
@@ -30754,7 +30754,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "JOAQUIN CORIA FA",
+        "name": "Joaquin Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -30851,8 +30851,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430339",
-        "name": "MELVIN TYRIEK JOHNSON JR",
+        "id": "melvin-johnson",
+        "name": "Melvin Johnson",
         "points": 6,
         "rebounds": 2,
         "assists": 3,
@@ -30900,8 +30900,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-424846",
-        "name": "CLAUDIO FABIAN RAMIREZ BARRIOS",
+        "id": "fabian-ramirez-barrios",
+        "name": "Fabián Ramírez Barrios",
         "points": 4,
         "rebounds": 3,
         "assists": 1,
@@ -30949,8 +30949,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431601",
-        "name": "PEDRO ANTONIO BOMBINO PARADA",
+        "id": "pedro-bombino",
+        "name": "Pedro Bombino",
         "points": 10,
         "rebounds": 6,
         "assists": 0,
@@ -31049,8 +31049,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-377837",
-        "name": "IVAN NICOLAS BASUALDO",
+        "id": "ivan-basualdo",
+        "name": "Iván Basualdo",
         "points": 11,
         "rebounds": 11,
         "assists": 2,
@@ -31098,8 +31098,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-377841",
-        "name": "LUCIANO MARTIN GUERRA",
+        "id": "luciano-guerra",
+        "name": "Luciano Guerra",
         "points": 16,
         "rebounds": 1,
         "assists": 1,
@@ -31147,8 +31147,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-93423",
-        "name": "IGNACIO NICOLAS BEDNAREK",
+        "id": "ignacio-bednarek",
+        "name": "Ignacio Bednarek",
         "points": 2,
         "rebounds": 1,
         "assists": 0,
@@ -31196,8 +31196,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425399",
-        "name": "ANDRES JOAQUIN JAIME",
+        "id": "andres-jaime",
+        "name": "Andrés Jaime",
         "points": 5,
         "rebounds": 1,
         "assists": 4,
@@ -31246,7 +31246,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "MARTIN CHAPERO",
+        "name": "Martin Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -31343,8 +31343,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425403",
-        "name": "SEBASTIAN ERNESTO VEGA",
+        "id": "sebastian-vega",
+        "name": "Sebastián Vega",
         "points": 7,
         "rebounds": 8,
         "assists": 3,
@@ -31539,8 +31539,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-425401",
-        "name": "FRANCO NAHUEL GIORGETTI",
+        "id": "franco-giorgetti",
+        "name": "Franco Giorgetti",
         "points": 3,
         "rebounds": 7,
         "assists": 1,
@@ -31678,8 +31678,8 @@ export const matchPlayerStats = {
     },
     "la-union": [
       {
-        "id": "oficial-382372",
-        "name": "BRANDON JAMES BEAVERS",
+        "id": "brandon-beavers",
+        "name": "Brandon Beavers",
         "points": 5,
         "rebounds": 5,
         "assists": 3,
@@ -31776,8 +31776,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382371",
-        "name": "TOMAS DAVIN LARSEN NUNO",
+        "id": "tomas-nuno",
+        "name": "Tomás Nuno",
         "points": 12,
         "rebounds": 7,
         "assists": 1,
@@ -31874,8 +31874,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-380839",
-        "name": "SEBASTIAN IGNACIO ACEVEDO",
+        "id": "sebastian-acevedo",
+        "name": "Sebastián Acevedo",
         "points": 8,
         "rebounds": 5,
         "assists": 1,
@@ -31923,8 +31923,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209577",
-        "name": "ANDRES ALEXIS ELSENER",
+        "id": "alexis-elsener",
+        "name": "Alexis Elsener",
         "points": 14,
         "rebounds": 11,
         "assists": 1,
@@ -31972,8 +31972,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429463",
-        "name": "AGUSTIN PEDRO FACELLO",
+        "id": "agustin-facello",
+        "name": "Agustín Facello",
         "points": 6,
         "rebounds": 2,
         "assists": 3,
@@ -32021,8 +32021,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382160",
-        "name": "HUGO LUIS JUNIOR PAEZ SANCHEZ",
+        "id": "hugo-paez",
+        "name": "Hugo Páez",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -32070,8 +32070,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-212758",
-        "name": "ENZO GUSTAVO MAGLIETTI",
+        "id": "enzo-maglietti",
+        "name": "Enzo Maglietti",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -32119,8 +32119,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-382370",
-        "name": "WINDI MANUEL GRATEROL CLEMENTE",
+        "id": "windi-graterol",
+        "name": "Windi Graterol",
         "points": 5,
         "rebounds": 7,
         "assists": 1,
@@ -32218,7 +32218,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-429468",
-        "name": "FACUNDO MARIANO",
+        "name": "Facundo Mariano",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -32318,7 +32318,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-428118",
-        "name": "JOAQUIN ROMAN DIAZ",
+        "name": "Joaquin Roman Diaz",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -32366,8 +32366,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-378915",
-        "name": "MANUEL RODRIGUEZ ORTEGA",
+        "id": "manuel-rodriguez",
+        "name": "Manuel Rodríguez",
         "points": 11,
         "rebounds": 11,
         "assists": 0,
@@ -32415,8 +32415,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-426774",
-        "name": "MARCOS NICOLAS DELIA",
+        "id": "marcos-delia",
+        "name": "Marcos Delía",
         "points": 4,
         "rebounds": 3,
         "assists": 1,
@@ -32464,8 +32464,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-421109",
-        "name": "JUAN IGNACIO RESPAUD",
+        "id": "ignacio-respaud",
+        "name": "Ignacio Respaud",
         "points": 7,
         "rebounds": 3,
         "assists": 1,
@@ -32513,8 +32513,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-218334",
-        "name": "NORBERTO EMILIO STUCKY",
+        "id": "emilio-stucky",
+        "name": "Emilio Stucky",
         "points": 14,
         "rebounds": 5,
         "assists": 1,
@@ -32562,8 +32562,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-378286",
-        "name": "TOMAS FRANCISCO DELIA",
+        "id": "tomas-delia",
+        "name": "Tomás Delía",
         "points": 2,
         "rebounds": 1,
         "assists": 0,
@@ -32611,8 +32611,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425016",
-        "name": "JUAN MANUEL BOCCA",
+        "id": "juan-bocca",
+        "name": "Juan Bocca",
         "points": 3,
         "rebounds": 1,
         "assists": 0,
@@ -32660,8 +32660,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-325396",
-        "name": "ABRAHAM ELEAZAR BARAHONA ARROYO",
+        "id": "abraham-barahona",
+        "name": "Abraham Barahona",
         "points": 2,
         "rebounds": 2,
         "assists": 2,
@@ -32903,7 +32903,7 @@ export const matchPlayerStats = {
     "platense": [
       {
         "id": "oficial-184197",
-        "name": "VICENTE BLAZICA CRISTOBAL",
+        "name": "Vicente Blazica Cristobal",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -32952,7 +32952,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-273373",
-        "name": "JOAQUIN GONCALVES",
+        "name": "Joaquin Goncalves",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -33000,8 +33000,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-202340",
-        "name": "MARIANO EZEQUIEL GOICOECHEA",
+        "id": "mariano-goicoechea",
+        "name": "Mariano Goicoechea",
         "points": 3,
         "rebounds": 0,
         "assists": 0,
@@ -33049,8 +33049,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431010",
-        "name": "FEDERICO JOSE GRUN",
+        "id": "federico-grun",
+        "name": "Federico Grun",
         "points": 8,
         "rebounds": 4,
         "assists": 5,
@@ -33098,8 +33098,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431012",
-        "name": "RAMIRO SEBASTIAN SANTIAGO",
+        "id": "ramiro-santiago",
+        "name": "Ramiro Santiago",
         "points": 8,
         "rebounds": 1,
         "assists": 2,
@@ -33147,8 +33147,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-328509",
-        "name": "FRANCO NAHUEL SMANIOTTI",
+        "id": "franco-smaniotti",
+        "name": "Franco Smaniotti",
         "points": 4,
         "rebounds": 6,
         "assists": 1,
@@ -33245,8 +33245,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430997",
-        "name": "GASTON EZEQUIEL CORDOBA",
+        "id": "gaston-cordoba",
+        "name": "Gastón Córdoba",
         "points": 17,
         "rebounds": 3,
         "assists": 2,
@@ -33294,8 +33294,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431028",
-        "name": "FACUNDO TERRA AGOSTINI",
+        "id": "facundo-terra",
+        "name": "Facundo Terra",
         "points": 6,
         "rebounds": 4,
         "assists": 6,
@@ -33441,8 +33441,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431014",
-        "name": "MAURO NICOLAS COSOLITO",
+        "id": "mauro-cosolito",
+        "name": "Mauro Cosolito",
         "points": 17,
         "rebounds": 9,
         "assists": 1,
@@ -33541,8 +33541,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-218487",
-        "name": "JONATAN FABIAN TORRESI",
+        "id": "jonatan-torresi",
+        "name": "Jonatan Torresi",
         "points": 8,
         "rebounds": 3,
         "assists": 1,
@@ -33590,8 +33590,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427601",
-        "name": "VICTOR LUIS FERNANDEZ",
+        "id": "victor-fernandez",
+        "name": "Víctor Fernández",
         "points": 10,
         "rebounds": 2,
         "assists": 0,
@@ -33640,7 +33640,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-130590",
-        "name": "MILTON NADIR MOUSQUERE",
+        "name": "Milton Nadir Mousquere",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -33688,8 +33688,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-189265",
-        "name": "ALEJO AZPILICUETA PASQUALINI",
+        "id": "alejo-azpilicueta",
+        "name": "Alejo Azpilicueta",
         "points": 0,
         "rebounds": 1,
         "assists": 1,
@@ -33835,8 +33835,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-150723",
-        "name": "AGUSTIN ANDRES BROCAL",
+        "id": "agustin-brocal",
+        "name": "Agustín Brocal",
         "points": 17,
         "rebounds": 3,
         "assists": 1,
@@ -33884,8 +33884,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-328770",
-        "name": "ALBANO NAHUEL COSTA",
+        "id": "albano-costa",
+        "name": "Albano Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -33934,7 +33934,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-429447",
-        "name": "MANUEL CARATINO",
+        "name": "Manuel Caratino",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -34031,8 +34031,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427602",
-        "name": "JUAN CRUZ MATEO OBERTO",
+        "id": "juan-cruz-oberto",
+        "name": "Juan Cruz Oberto",
         "points": 0,
         "rebounds": 5,
         "assists": 1,
@@ -34219,8 +34219,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-172005",
-        "name": "THIAGO EMMANUEL ROCA",
+        "id": "thiago-roca",
+        "name": "Thiago Roca",
         "points": 6,
         "rebounds": 3,
         "assists": 2,
@@ -34317,8 +34317,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-225273",
-        "name": "JOAQUIN MATIAS ACTIS",
+        "id": "joaquin-actis",
+        "name": "Joaquín Actis",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -34415,8 +34415,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-172012",
-        "name": "NICOLAS GUSTAVO AGUIRRE",
+        "id": "nicolas-aguirre",
+        "name": "Nicolás Aguirre",
         "points": 15,
         "rebounds": 2,
         "assists": 0,
@@ -34661,7 +34661,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-188845",
-        "name": "SANTIAGO TALLADE",
+        "name": "Santiago Tallade",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -34809,8 +34809,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-377837",
-        "name": "IVAN NICOLAS BASUALDO",
+        "id": "ivan-basualdo",
+        "name": "Iván Basualdo",
         "points": 14,
         "rebounds": 8,
         "assists": 1,
@@ -34858,8 +34858,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-377841",
-        "name": "LUCIANO MARTIN GUERRA",
+        "id": "luciano-guerra",
+        "name": "Luciano Guerra",
         "points": 13,
         "rebounds": 3,
         "assists": 2,
@@ -34907,8 +34907,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-93423",
-        "name": "IGNACIO NICOLAS BEDNAREK",
+        "id": "ignacio-bednarek",
+        "name": "Ignacio Bednarek",
         "points": 3,
         "rebounds": 1,
         "assists": 1,
@@ -34956,8 +34956,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425399",
-        "name": "ANDRES JOAQUIN JAIME",
+        "id": "andres-jaime",
+        "name": "Andrés Jaime",
         "points": 16,
         "rebounds": 3,
         "assists": 7,
@@ -35006,7 +35006,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "MARTIN CHAPERO",
+        "name": "Martin Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -35103,8 +35103,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425403",
-        "name": "SEBASTIAN ERNESTO VEGA",
+        "id": "sebastian-vega",
+        "name": "Sebastián Vega",
         "points": 2,
         "rebounds": 5,
         "assists": 2,
@@ -35299,8 +35299,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425401",
-        "name": "FRANCO NAHUEL GIORGETTI",
+        "id": "franco-giorgetti",
+        "name": "Franco Giorgetti",
         "points": 10,
         "rebounds": 3,
         "assists": 1,
@@ -35487,8 +35487,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-172005",
-        "name": "THIAGO EMMANUEL ROCA",
+        "id": "thiago-roca",
+        "name": "Thiago Roca",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -35585,8 +35585,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-225273",
-        "name": "JOAQUIN MATIAS ACTIS",
+        "id": "joaquin-actis",
+        "name": "Joaquín Actis",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -35683,8 +35683,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-172012",
-        "name": "NICOLAS GUSTAVO AGUIRRE",
+        "id": "nicolas-aguirre",
+        "name": "Nicolás Aguirre",
         "points": 11,
         "rebounds": 2,
         "assists": 1,
@@ -35929,7 +35929,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-188845",
-        "name": "SANTIAGO TALLADE",
+        "name": "Santiago Tallade",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -36029,7 +36029,7 @@ export const matchPlayerStats = {
     "obera": [
       {
         "id": "oficial-430497",
-        "name": "MATHEUS SANTOS SIMAO COSTA",
+        "name": "Matheus Santos Simao Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -36126,8 +36126,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-218487",
-        "name": "JONATAN FABIAN TORRESI",
+        "id": "jonatan-torresi",
+        "name": "Jonatan Torresi",
         "points": 6,
         "rebounds": 4,
         "assists": 2,
@@ -36175,8 +36175,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-427601",
-        "name": "VICTOR LUIS FERNANDEZ",
+        "id": "victor-fernandez",
+        "name": "Víctor Fernández",
         "points": 7,
         "rebounds": 2,
         "assists": 3,
@@ -36225,7 +36225,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-130590",
-        "name": "MILTON NADIR MOUSQUERE",
+        "name": "Milton Nadir Mousquere",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -36273,8 +36273,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-189265",
-        "name": "ALEJO AZPILICUETA PASQUALINI",
+        "id": "alejo-azpilicueta",
+        "name": "Alejo Azpilicueta",
         "points": 8,
         "rebounds": 3,
         "assists": 2,
@@ -36420,8 +36420,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-150723",
-        "name": "AGUSTIN ANDRES BROCAL",
+        "id": "agustin-brocal",
+        "name": "Agustín Brocal",
         "points": 7,
         "rebounds": 5,
         "assists": 3,
@@ -36469,8 +36469,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-328770",
-        "name": "ALBANO NAHUEL COSTA",
+        "id": "albano-costa",
+        "name": "Albano Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -36567,8 +36567,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-427602",
-        "name": "JUAN CRUZ MATEO OBERTO",
+        "id": "juan-cruz-oberto",
+        "name": "Juan Cruz Oberto",
         "points": 8,
         "rebounds": 4,
         "assists": 1,
@@ -36706,8 +36706,8 @@ export const matchPlayerStats = {
     },
     "regatas": [
       {
-        "id": "oficial-430266",
-        "name": "KEITH MARTIN STONE",
+        "id": "keith-stone",
+        "name": "Keith Stone",
         "points": 8,
         "rebounds": 2,
         "assists": 0,
@@ -36853,8 +36853,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-325111",
-        "name": "PABLO IVAN GRAMAJO",
+        "id": "ivan-gramajo",
+        "name": "Iván Gramajo",
         "points": 25,
         "rebounds": 3,
         "assists": 1,
@@ -36902,8 +36902,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-426339",
-        "name": "SEBASTIAN ALEJANDRO ORRESTA",
+        "id": "sebastian-orresta",
+        "name": "Sebastián Orresta",
         "points": 2,
         "rebounds": 3,
         "assists": 4,
@@ -36951,8 +36951,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-77832",
-        "name": "VIKTOR DANIEL BENDER",
+        "id": "viktor-bender",
+        "name": "Viktor Bender",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -37000,8 +37000,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428705",
-        "name": "ELIAN JOSE CENTENO GARCIA",
+        "id": "elian-centeno",
+        "name": "Elian Centeno",
         "points": 2,
         "rebounds": 11,
         "assists": 0,
@@ -37049,8 +37049,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428080",
-        "name": "JOSE IGNACIO MONTERO",
+        "id": "jose-montero",
+        "name": "José Montero",
         "points": 16,
         "rebounds": 1,
         "assists": 0,
@@ -37147,8 +37147,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-154780",
-        "name": "ALAN TADEO LEDESMA",
+        "id": "alan-ledesma",
+        "name": "Alan Ledesma",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -37245,8 +37245,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-426272",
-        "name": "ROBERTO SANTIAGO ACUÑA",
+        "id": "roberto-acuna",
+        "name": "Roberto Acuña",
         "points": 10,
         "rebounds": 6,
         "assists": 1,
@@ -37346,7 +37346,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-432336",
-        "name": "LUCAS VERNON LORENZEN",
+        "name": "Lucas Vernon Lorenzen",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -37394,8 +37394,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429634",
-        "name": "LUCAS NAIM PEREZ BAZAN",
+        "id": "lucas-perez",
+        "name": "Lucas Pérez",
         "points": 8,
         "rebounds": 6,
         "assists": 8,
@@ -37443,8 +37443,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-326739",
-        "name": "SANTINO ALBERTO ROMEGIALLI",
+        "id": "santino-romegialli",
+        "name": "Santino Romegialli",
         "points": 12,
         "rebounds": 4,
         "assists": 0,
@@ -37493,7 +37493,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-430621",
-        "name": "MARIANO VALENTIN CACERES COMELLI",
+        "name": "Mariano Valentin Caceres Comelli",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -37590,8 +37590,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429633",
-        "name": "RAMIRO JEREMIAS FRONTERA",
+        "id": "jeremias-frontera",
+        "name": "Jeremías Frontera",
         "points": 17,
         "rebounds": 4,
         "assists": 1,
@@ -37738,7 +37738,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431734",
-        "name": "FRANCISCO PEREYRA",
+        "name": "Francisco Pereyra",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -37786,8 +37786,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429638",
-        "name": "JOAQUIN BAUTISTA LOPEZ LORENZ",
+        "id": "joaquin-lopez-lorenz",
+        "name": "Joaquín López Lorenz",
         "points": 2,
         "rebounds": 0,
         "assists": 0,
@@ -37835,8 +37835,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429642",
-        "name": "HALL B ELISIAS",
+        "id": "elisias-hall",
+        "name": "Elisias Hall",
         "points": 16,
         "rebounds": 5,
         "assists": 0,
@@ -38023,8 +38023,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-430925",
-        "name": "JUAN MARTIN GUERRERO MARGARIT",
+        "id": "juan-martin-guerrero",
+        "name": "Juan Martín Guerrero",
         "points": 11,
         "rebounds": 2,
         "assists": 3,
@@ -38072,8 +38072,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-171833",
-        "name": "NICOLAS JAVIER MARCUCCI",
+        "id": "nicolas-marcucci",
+        "name": "Nicolás Marcucci",
         "points": 14,
         "rebounds": 4,
         "assists": 1,
@@ -38170,8 +38170,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-329317",
-        "name": "PATRICIO CARLOS TABAREZ",
+        "id": "patricio-tabarez",
+        "name": "Patricio Tabárez",
         "points": 13,
         "rebounds": 3,
         "assists": 1,
@@ -38219,8 +38219,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-379152",
-        "name": "FORTUNATO JOSE ROLFI",
+        "id": "fortuna-rolfi",
+        "name": "Fortunato Rolfi",
         "points": 13,
         "rebounds": 2,
         "assists": 7,
@@ -38318,7 +38318,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-276420",
-        "name": "EZEQUIEL JOEL HOREN",
+        "name": "Ezequiel Joel Horen",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -38366,8 +38366,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-324888",
-        "name": "ROLANDO EXEQUIEL VALLEJOS",
+        "id": "rolando-vallejos",
+        "name": "Rolando Vallejos",
         "points": 14,
         "rebounds": 6,
         "assists": 2,
@@ -38465,7 +38465,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-385605",
-        "name": "RANIERO MAINOLDI",
+        "name": "Raniero Mainoldi",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -38564,8 +38564,8 @@ export const matchPlayerStats = {
     ],
     "lanus": [
       {
-        "id": "oficial-385838",
-        "name": "ROBERT JAMARCUS WHITFIELD III",
+        "id": "robert-whitfield",
+        "name": "Robert Whitfield",
         "points": 12,
         "rebounds": 2,
         "assists": 0,
@@ -38613,8 +38613,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-428243",
-        "name": "JUAN IGNACIO BRUSSINO",
+        "id": "juan-brussino",
+        "name": "Juan Brussino",
         "points": 3,
         "rebounds": 2,
         "assists": 7,
@@ -38760,8 +38760,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-33793",
-        "name": "ALEJO VALENTIN SACCHI",
+        "id": "alejo-sacchi",
+        "name": "Alejo Sacchi",
         "points": 3,
         "rebounds": 5,
         "assists": 1,
@@ -38858,8 +38858,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429711",
-        "name": "CHRISTIAN TYLER JAMES",
+        "id": "christian-james",
+        "name": "Christian James",
         "points": 8,
         "rebounds": 4,
         "assists": 1,
@@ -38908,7 +38908,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "JOAQUIN CORIA FA",
+        "name": "Joaquin Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -39005,8 +39005,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430339",
-        "name": "MELVIN TYRIEK JOHNSON JR",
+        "id": "melvin-johnson",
+        "name": "Melvin Johnson",
         "points": 5,
         "rebounds": 0,
         "assists": 1,
@@ -39054,8 +39054,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-424846",
-        "name": "CLAUDIO FABIAN RAMIREZ BARRIOS",
+        "id": "fabian-ramirez-barrios",
+        "name": "Fabián Ramírez Barrios",
         "points": 19,
         "rebounds": 4,
         "assists": 0,
@@ -39103,8 +39103,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431601",
-        "name": "PEDRO ANTONIO BOMBINO PARADA",
+        "id": "pedro-bombino",
+        "name": "Pedro Bombino",
         "points": 17,
         "rebounds": 8,
         "assists": 1,
@@ -39438,8 +39438,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-386499",
-        "name": "DANIEL MOREIRA DE OLIVEIRA SANTOS DE LIMA",
+        "id": "daniel-moreira",
+        "name": "Daniel Moreira",
         "points": 9,
         "rebounds": 3,
         "assists": 0,
@@ -39536,8 +39536,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-276149",
-        "name": "GERONIMO GASTON RAMALLO",
+        "id": "geronimo-ramallo",
+        "name": "Gerónimo Ramallo",
         "points": 5,
         "rebounds": 4,
         "assists": 0,
@@ -39585,8 +39585,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-379523",
-        "name": "LAUTARO BERRA FERNANDEZ",
+        "id": "lautaro-berra",
+        "name": "Lautaro Berra",
         "points": 9,
         "rebounds": 0,
         "assists": 3,
@@ -39634,8 +39634,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429483",
-        "name": "SEBASTIAN EZEQUIEL LUGO",
+        "id": "sebastian-lugo",
+        "name": "Sebastián Lugo",
         "points": 15,
         "rebounds": 8,
         "assists": 4,
@@ -39882,7 +39882,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-432336",
-        "name": "LUCAS VERNON LORENZEN",
+        "name": "Lucas Vernon Lorenzen",
         "points": 2,
         "rebounds": 2,
         "assists": 0,
@@ -39930,8 +39930,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429634",
-        "name": "LUCAS NAIM PEREZ BAZAN",
+        "id": "lucas-perez",
+        "name": "Lucas Pérez",
         "points": 17,
         "rebounds": 2,
         "assists": 1,
@@ -39979,8 +39979,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-326739",
-        "name": "SANTINO ALBERTO ROMEGIALLI",
+        "id": "santino-romegialli",
+        "name": "Santino Romegialli",
         "points": 9,
         "rebounds": 1,
         "assists": 0,
@@ -40029,7 +40029,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-430621",
-        "name": "MARIANO VALENTIN CACERES COMELLI",
+        "name": "Mariano Valentin Caceres Comelli",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -40126,8 +40126,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429633",
-        "name": "RAMIRO JEREMIAS FRONTERA",
+        "id": "jeremias-frontera",
+        "name": "Jeremías Frontera",
         "points": 30,
         "rebounds": 3,
         "assists": 3,
@@ -40274,7 +40274,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431734",
-        "name": "FRANCISCO PEREYRA",
+        "name": "Francisco Pereyra",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -40322,8 +40322,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429638",
-        "name": "JOAQUIN BAUTISTA LOPEZ LORENZ",
+        "id": "joaquin-lopez-lorenz",
+        "name": "Joaquín López Lorenz",
         "points": 11,
         "rebounds": 7,
         "assists": 0,
@@ -40371,8 +40371,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429642",
-        "name": "HALL B ELISIAS",
+        "id": "elisias-hall",
+        "name": "Elisias Hall",
         "points": 6,
         "rebounds": 9,
         "assists": 1,
@@ -40635,8 +40635,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-324409",
-        "name": "JANO DAVID MARTINEZ",
+        "id": "jano-martinez",
+        "name": "Jano Martínez",
         "points": 7,
         "rebounds": 8,
         "assists": 3,
@@ -40831,8 +40831,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-74902",
-        "name": "FELIPE SALVADOR RODRIGUEZ",
+        "id": "felipe-rodriguez",
+        "name": "Felipe Rodríguez",
         "points": 4,
         "rebounds": 2,
         "assists": 0,
@@ -40880,8 +40880,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-278259",
-        "name": "RODRIGO AGUSTIN GALLEGOS",
+        "id": "rodrigo-gallegos",
+        "name": "Rodrigo Gallegos",
         "points": 1,
         "rebounds": 3,
         "assists": 2,
@@ -40978,8 +40978,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-325771",
-        "name": "ALEJANDRO GABRIEL DIEZ",
+        "id": "alejandro-diez",
+        "name": "Alejandro Diez",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -41027,8 +41027,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-150972",
-        "name": "LEONEL VALENTIN BETTIGA",
+        "id": "valentin-bettiga",
+        "name": "Valentín Bettiga",
         "points": 8,
         "rebounds": 7,
         "assists": 2,
@@ -41079,7 +41079,7 @@ export const matchPlayerStats = {
     "platense": [
       {
         "id": "oficial-184197",
-        "name": "VICENTE BLAZICA CRISTOBAL",
+        "name": "Vicente Blazica Cristobal",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -41128,7 +41128,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-273373",
-        "name": "JOAQUIN GONCALVES",
+        "name": "Joaquin Goncalves",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -41176,8 +41176,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-202340",
-        "name": "MARIANO EZEQUIEL GOICOECHEA",
+        "id": "mariano-goicoechea",
+        "name": "Mariano Goicoechea",
         "points": 3,
         "rebounds": 2,
         "assists": 1,
@@ -41225,8 +41225,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431010",
-        "name": "FEDERICO JOSE GRUN",
+        "id": "federico-grun",
+        "name": "Federico Grun",
         "points": 12,
         "rebounds": 5,
         "assists": 3,
@@ -41274,8 +41274,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431012",
-        "name": "RAMIRO SEBASTIAN SANTIAGO",
+        "id": "ramiro-santiago",
+        "name": "Ramiro Santiago",
         "points": 19,
         "rebounds": 2,
         "assists": 1,
@@ -41323,8 +41323,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-328509",
-        "name": "FRANCO NAHUEL SMANIOTTI",
+        "id": "franco-smaniotti",
+        "name": "Franco Smaniotti",
         "points": 6,
         "rebounds": 5,
         "assists": 2,
@@ -41421,8 +41421,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430997",
-        "name": "GASTON EZEQUIEL CORDOBA",
+        "id": "gaston-cordoba",
+        "name": "Gastón Córdoba",
         "points": 5,
         "rebounds": 4,
         "assists": 1,
@@ -41470,8 +41470,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431028",
-        "name": "FACUNDO TERRA AGOSTINI",
+        "id": "facundo-terra",
+        "name": "Facundo Terra",
         "points": 5,
         "rebounds": 3,
         "assists": 2,
@@ -41617,8 +41617,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431014",
-        "name": "MAURO NICOLAS COSOLITO",
+        "id": "mauro-cosolito",
+        "name": "Mauro Cosolito",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -41734,8 +41734,8 @@ export const matchPlayerStats = {
     },
     "argentino": [
       {
-        "id": "oficial-427474",
-        "name": "JOAQUIN FERNANDEZ ALVAREZ",
+        "id": "joaquin-fernandez",
+        "name": "Joaquín Fernández",
         "points": 14,
         "rebounds": 2,
         "assists": 5,
@@ -41783,8 +41783,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-384168",
-        "name": "DYLAN JUROD SMITH",
+        "id": "dylan-smith",
+        "name": "Dylan Smith",
         "points": 21,
         "rebounds": 6,
         "assists": 3,
@@ -41832,8 +41832,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429231",
-        "name": "ZYON EZEKIEL PATTERSON",
+        "id": "zyon-patterson",
+        "name": "Zyon Patterson",
         "points": 5,
         "rebounds": 6,
         "assists": 1,
@@ -42028,8 +42028,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-427465",
-        "name": "LEANDRO GABRIEL CERMINATO",
+        "id": "leandro-cerminato",
+        "name": "Leandro Cerminato",
         "points": 10,
         "rebounds": 6,
         "assists": 4,
@@ -42077,8 +42077,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-209418",
-        "name": "ROMULO GUSMAO COSTA",
+        "id": "romulo-gusmao",
+        "name": "Rómulo Gusmao",
         "points": 0,
         "rebounds": 2,
         "assists": 0,
@@ -42175,8 +42175,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-174821",
-        "name": "SANTIAGO MANUEL BILBAO",
+        "id": "santiago-bilbao",
+        "name": "Santiago Bilbao",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -42520,8 +42520,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-266354",
-        "name": "JOSE IGNACIO VILDOZA",
+        "id": "jose-vildoza",
+        "name": "José Vildoza",
         "points": 12,
         "rebounds": 8,
         "assists": 4,
@@ -42618,8 +42618,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-428469",
-        "name": "VALENTINO FINETTI LOPEZ",
+        "id": "valentino-finetti",
+        "name": "Valentino Finetti",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -42863,8 +42863,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-323167",
-        "name": "MARTIN NICOLAS CUELLO",
+        "id": "martin-cuello",
+        "name": "Martín Cuello",
         "points": 6,
         "rebounds": 2,
         "assists": 3,
@@ -43029,8 +43029,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-426072",
-        "name": "FEDERICO JESUS BUSTOS SAYEGH",
+        "id": "federico-bustos",
+        "name": "Federico Bustos",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -43176,8 +43176,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-431284",
-        "name": "TORREN LORENZO JONES",
+        "id": "torren-jones",
+        "name": "Torren Jones",
         "points": 4,
         "rebounds": 7,
         "assists": 0,
@@ -43372,8 +43372,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-429185",
-        "name": "FEDERICO MATÍAS AGUERRE",
+        "id": "federico-aguerre",
+        "name": "Federico Aguerre",
         "points": 9,
         "rebounds": 5,
         "assists": 1,
@@ -43519,8 +43519,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-425462",
-        "name": "XAVIER MANUEL CARRERAS PEGUERO",
+        "id": "xavier-carreras",
+        "name": "Xavier Carreras",
         "points": 3,
         "rebounds": 3,
         "assists": 2,
@@ -43570,8 +43570,8 @@ export const matchPlayerStats = {
     ],
     "lanus": [
       {
-        "id": "oficial-385838",
-        "name": "ROBERT JAMARCUS WHITFIELD III",
+        "id": "robert-whitfield",
+        "name": "Robert Whitfield",
         "points": 2,
         "rebounds": 0,
         "assists": 1,
@@ -43619,8 +43619,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-428243",
-        "name": "JUAN IGNACIO BRUSSINO",
+        "id": "juan-brussino",
+        "name": "Juan Brussino",
         "points": 25,
         "rebounds": 3,
         "assists": 1,
@@ -43766,8 +43766,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-33793",
-        "name": "ALEJO VALENTIN SACCHI",
+        "id": "alejo-sacchi",
+        "name": "Alejo Sacchi",
         "points": 0,
         "rebounds": 1,
         "assists": 0,
@@ -43864,8 +43864,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-429711",
-        "name": "CHRISTIAN TYLER JAMES",
+        "id": "christian-james",
+        "name": "Christian James",
         "points": 0,
         "rebounds": 6,
         "assists": 1,
@@ -43914,7 +43914,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "JOAQUIN CORIA FA",
+        "name": "Joaquin Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -44011,8 +44011,8 @@ export const matchPlayerStats = {
         "starter": false
       },
       {
-        "id": "oficial-430339",
-        "name": "MELVIN TYRIEK JOHNSON JR",
+        "id": "melvin-johnson",
+        "name": "Melvin Johnson",
         "points": 17,
         "rebounds": 1,
         "assists": 0,
@@ -44060,8 +44060,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-424846",
-        "name": "CLAUDIO FABIAN RAMIREZ BARRIOS",
+        "id": "fabian-ramirez-barrios",
+        "name": "Fabián Ramírez Barrios",
         "points": 10,
         "rebounds": 4,
         "assists": 0,
@@ -44109,8 +44109,8 @@ export const matchPlayerStats = {
         "starter": true
       },
       {
-        "id": "oficial-431601",
-        "name": "PEDRO ANTONIO BOMBINO PARADA",
+        "id": "pedro-bombino",
+        "name": "Pedro Bombino",
         "points": 8,
         "rebounds": 8,
         "assists": 0,
