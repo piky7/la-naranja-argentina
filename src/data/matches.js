@@ -3,6 +3,11 @@ import { matchResults } from "./matchResults";
 import { broadcasts } from "./broadcasts";
 import { officialSchedule } from "./officialSchedule";
 
+// Correcciones manuales de TV: tienen prioridad sobre el archivo generado automáticamente.
+const manualBroadcasts = {
+  "2026-10-23-racing-chivilcoy-boca": "TyC Sports",
+};
+
 const fixture = [
   // SEPTIEMBRE 2026
 
@@ -731,8 +736,10 @@ export const matches = Object.entries(groupedMatches)
         automaticResult?.time ??
         null;
 
-      const tv = broadcast?.channel
-        ? [broadcast.channel]
+      const tv = manualBroadcasts[resultKey]
+        ? [manualBroadcasts[resultKey]]
+        : broadcast?.channel
+          ? [broadcast.channel]
         : automaticResult?.tv?.length
           ? automaticResult.tv
           : status === "scheduled"
