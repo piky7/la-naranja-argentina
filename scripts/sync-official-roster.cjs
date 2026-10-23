@@ -7,11 +7,17 @@ const fixture = JSON.parse(fs.readFileSync("liga-events.json", "utf8"));
 const teamMap = {112600:"lanus",112553:"gimnasia",114902:"penarol",115240:"argentino",112566:"ferro",113546:"san-martin",112809:"instituto",113870:"olimpico",112549:"platense",114561:"regatas",112657:"quimsa",114763:"la-union",112793:"atenas",114735:"boca",113652:"obera",114607:"racing-chivilcoy",114628:"independiente-oliva",113373:"san-lorenzo"};
 const normalize = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim().replace(/\s+/g," ");
 const nameTokens = name => normalize(name).split(" ").filter(Boolean).sort().join(" ");
+const isKnownPlayerName = (shortName, fullName) => {
+  const short = normalize(shortName).split(" ").filter(Boolean);
+  const full = new Set(normalize(fullName).split(" ").filter(Boolean));
+  return short.length >= 2 && short.every(token => full.has(token));
+};
 const displayName = raw => {
   const name = String(raw || "").trim().replace(/\s+/g," ");
-  if (!name.includes(",")) return name;
+  if (!name.includes(",")) return name.toLocaleLowerCase("es-AR").replace(/(^|[\s-])\p{L}/gu, c => c.toLocaleUpperCase("es-AR"));
   const [last,...rest] = name.split(",");
-  return rest.length === 1 && last.trim() && rest[0].trim() ? rest[0].trim()+" "+last.trim() : name;
+  const arranged = rest.length === 1 && last.trim() && rest[0].trim() ? rest[0].trim()+" "+last.trim() : name;
+  return arranged.toLocaleLowerCase("es-AR").replace(/(^|[\s-])\p{L}/gu, c => c.toLocaleUpperCase("es-AR"));
 };
 const source = fs.readFileSync(path,"utf8");
 const roster = [...source.matchAll(/\{\s*id:\s*"([^"]+)"[\s\S]*?\n\s*\}/g)].map(m => ({
@@ -45,7 +51,7 @@ for (const match of history.matches||[]) {
         if(existing.team!==teamId) review.push({name,team:teamId,reason:"Posible transferencia; requiere verificar equipo actual",existingTeam:existing.team});
         continue;
       }
-      const sameName=roster.filter(p=>p.team===teamId && nameTokens(p.name)===nameTokens(name));
+      const sameName=roster.filter(p=>p.team===teamId && (nameTokens(p.name)===nameTokens(name) || isKnownPlayerName(p.name,name)));
       if(sameName.length) {
         // El jugador ya está registrado sin ID: no duplicarlo ni modificarlo.
         continue;
