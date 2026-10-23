@@ -865,3 +865,50 @@
 .team-card-number {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.65), 0 0 8px rgba(255, 255, 255, 0.08);
 }
+
+/* LNA 2026/27 — Equipos: tarjetas modernas, livianas y compactas. */
+.teams-page { background:#0d1117; color:#edf3fa; }
+.teams-page .teams-content { background:#0d1117; padding-top:20px; padding-bottom:62px; }
+.teams-page .teams-toolbar { gap:12px; margin-bottom:14px; }
+.teams-page .teams-search input {
+  background:#122235; border:1px solid #30465c; border-radius:9px;
+  color:#eff5fb; height:38px; box-sizing:border-box;
+}
+.teams-page .teams-search input:focus {
+  background:#192e44; border-color:#ff901b; box-shadow:0 0 0 2px #ff901b25;
+}
+.teams-page .teams-grid { gap:10px; }
+.teams-page .team-card {
+  background:linear-gradient(165deg,#15283c,#0f1d2c);
+  border:1px solid #2c4155; border-radius:11px;
+  box-shadow:none; transition:background .17s ease,border-color .17s ease;
+}
+.teams-page .team-card:hover,
+.teams-page .team-card:focus-visible { background:#1a3148; border-color:#ff911c; }
+.teams-page .team-card-number,
+.teams-page .team-card-location { color:#94abc0; }
+.teams-page .team-card-info h2 { color:#eff5fc; font-weight:800; }
+.teams-page .team-card-info p { color:#a8bbce; }
+.teams-page .team-card-arrow,
+.teams-page .team-card-footer-arrow { color:#ff941f; }
+.teams-page .team-card-footer { border-color:#2a4155; }
+.teams-page .team-card-footer span:first-child { color:#c4d0dd; }
+.teams-page .team-logo-container { background:transparent; }
+@media(max-width:768px){
+  .teams-page .teams-content { padding-top:15px; }
+  .teams-page .teams-grid { gap:7px; }
+  .teams-page .teams-toolbar { margin-bottom:11px; }
+  .teams-page .teams-page-title { font-size:25px; }
+  .teams-page .team-card { min-height:55px; padding:6px 9px; gap:8px; border-radius:9px; }
+  .teams-page .team-logo-container { width:38px; height:38px; }
+  .teams-page .team-logo { width:35px; height:35px; }
+  .teams-page .team-card-info h2 { font-size:12px; margin-bottom:2px; }
+  .teams-page .team-card-info p { font-size:9px; }
+  .teams-page .team-card-location { font-size:9px; }
+  .teams-page .team-card-footer { padding-top:3px; }
+  .teams-page .team-card-footer span:first-child { font-size:9px; }
+}
+@media(max-width:420px){
+  .teams-page .teams-search { width:min(46%,190px); }
+  .teams-page .teams-search input { width:100%; height:35px; font-size:11px; }
+}
