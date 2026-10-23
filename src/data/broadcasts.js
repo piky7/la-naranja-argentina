@@ -170,5 +170,82 @@ export const broadcasts = {
     "homeTeam": "argentino",
     "awayTeam": "boca",
     "channel": "Básquet Pass"
+  },
+  "2026-10-23-argentino-quimsa": {
+    "date": "2026-10-23",
+    "time": "21:00",
+    "homeTeam": "argentino",
+    "awayTeam": "quimsa",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-23-atenas-lanus": {
+    "date": "2026-10-23",
+    "time": "21:30",
+    "homeTeam": "atenas",
+    "awayTeam": "lanus",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-23-racing-chivilcoy-boca": {
+    "date": "2026-10-23",
+    "time": "22:05",
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "boca",
+    "channel": "TyC Sports"
+  },
+  "2026-10-25-racing-chivilcoy-quimsa": {
+    "date": "2026-10-25",
+    "time": "20:30",
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "quimsa",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-26-lanus-regatas": {
+    "date": "2026-10-26",
+    "time": "20:30",
+    "homeTeam": "lanus",
+    "awayTeam": "regatas",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-27-penarol-san-martin": {
+    "date": "2026-10-27",
+    "time": "21:00",
+    "homeTeam": "penarol",
+    "awayTeam": "san-martin",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-28-san-lorenzo-platense": {
+    "date": "2026-10-28",
+    "time": "20:30",
+    "homeTeam": "san-lorenzo",
+    "awayTeam": "platense",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-28-boca-regatas": {
+    "date": "2026-10-28",
+    "time": "20:35",
+    "homeTeam": "boca",
+    "awayTeam": "regatas",
+    "channel": "DSports"
+  },
+  "2026-10-28-gimnasia-ferro": {
+    "date": "2026-10-28",
+    "time": "21:00",
+    "homeTeam": "gimnasia",
+    "awayTeam": "ferro",
+    "channel": "Básquet Pass"
+  },
+  "2026-10-29-lanus-san-martin": {
+    "date": "2026-10-29",
+    "time": "22:05",
+    "homeTeam": "lanus",
+    "awayTeam": "san-martin",
+    "channel": "TyC Sports"
+  },
+  "2026-10-31-olimpico-penarol": {
+    "date": "2026-10-31",
+    "time": "11:30",
+    "homeTeam": "olimpico",
+    "awayTeam": "penarol",
+    "channel": "TyC Sports"
   }
 };
