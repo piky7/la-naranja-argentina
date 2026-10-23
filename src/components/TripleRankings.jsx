@@ -52,7 +52,7 @@ export default function TripleRankings({ onPlayerClick }) {
   return <section className="triple-ranking">
     <div className="triple-heading">
       <span>LIGA NACIONAL · 2026/27</span>
-      <h2>Ranking de triplistas</h2>
+      <h2>Ranking de triples</h2>
       <p>Triples convertidos acumulados en partidos con planilla individual oficial.</p>
     </div>
     <div className="triple-filters">
