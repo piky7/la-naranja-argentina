@@ -17,3 +17,8 @@
 .triple-ranking .triple-list .triple-row img{width:21px;height:21px}
 .triple-ranking .triple-list .triple-row>strong{font-size:16px;line-height:1}
 @media(max-width:390px){.triple-ranking .triple-list .triple-row{height:37px;min-height:37px;max-height:37px;padding:3px 7px;gap:5px;grid-template-columns:22px minmax(0,1fr) 21px 32px}}
+
+/* El podio ocupa los puestos 1-3: la lista comienza en el cuarto. */
+.triple-ranking .triple-list .triple-row:nth-child(1) .triple-position,
+.triple-ranking .triple-list .triple-row:nth-child(2) .triple-position,
+.triple-ranking .triple-list .triple-row:nth-child(3) .triple-position{background:#25384b;color:#bdcad8}
