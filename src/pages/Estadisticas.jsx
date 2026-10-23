@@ -8,6 +8,7 @@ import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
 import PlayerModal from "../components/PlayerModal";
+import TeamRankings from "../components/TeamRankings";
 import "../pages/Home.css";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +20,7 @@ const matches = baseMatches.map((match) => {
 });
 function Estadisticas() {
   const navigate = useNavigate();
+  const [mode, setMode] = useState("players");
   const [search, setSearch] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("todos");
   const [minGames, setMinGames] = useState(0);
@@ -312,6 +314,12 @@ return matchesSearch && matchesTeam && matchesMinGames;
           ========================================= */}
 
       <section className="stats-container">
+        <div className="stats-mode-switch" role="group" aria-label="Seleccionar tipo de estadísticas">
+          <button type="button" className={mode === "players" ? "active" : ""} aria-pressed={mode === "players"} onClick={() => setMode("players")}>Jugadores</button>
+          <button type="button" className={mode === "teams" ? "active" : ""} aria-pressed={mode === "teams"} onClick={() => setMode("teams")}>Equipos</button>
+        </div>
+        {mode === "teams" && <TeamRankings />}
+        {mode === "players" && (<>
 
 {/* =========================================
     LÍDERES DE LA TEMPORADA
@@ -625,6 +633,7 @@ return matchesSearch && matchesTeam && matchesMinGames;
           )}
 
         </div>
+        </>)}
 
       </section>
 
