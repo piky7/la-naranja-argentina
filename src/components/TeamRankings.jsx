@@ -13,8 +13,6 @@ const metrics = [
   { key: "assists", label: "Asistencias", short: "AST", unit: "AST / PJ", average: true, collective: true },
   { key: "winsHome", label: "Ganados de local", short: "G. LOC", unit: "VICTORIAS", fixedScope: true },
   { key: "winsAway", label: "Ganados de visitante", short: "G. VIS", unit: "VICTORIAS", fixedScope: true },
-  { key: "difference", label: "Diferencia de puntos", short: "DIF", unit: "DIF / PJ", average: true },
-  { key: "winPct", label: "Efectividad", short: "EF %", unit: "VICTORIAS %", percent: true },
 ];
 
 const gameKey = (game) => `${game.date}-${game.homeTeam}-${game.awayTeam}`;
@@ -73,8 +71,6 @@ function metricValue(record, key, scope) {
   const bucket = record[scope];
   if (key === "winsHome") return record.home.wins;
   if (key === "winsAway") return record.away.wins;
-  if (key === "winPct") return bucket.games ? 100 * bucket.wins / bucket.games : null;
-  if (key === "difference") return bucket.games ? (bucket.points - bucket.pointsAgainst) / bucket.games : null;
   if (key === "rebounds" || key === "assists") return bucket.collectiveGames ? bucket[key] / bucket.collectiveGames : null;
   return bucket.games ? bucket[key] / bucket.games : null;
 }
