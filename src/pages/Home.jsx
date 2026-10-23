@@ -73,6 +73,26 @@ function getUpcomingOfficialCollective(teamId) {
   return { games, values };
 }
 
+
+// Puestos oficiales comparables entre los 18 equipos (solo planillas válidas).
+// Los empates comparten posición; equipos sin dato no reciben puesto.
+const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
+  UPCOMING_COLLECTIVE_STATS.map(([, key, lowerIsBetter]) => {
+    const entries = teams.map(team => ({
+      id: team.id,
+      value: getUpcomingOfficialCollective(team.id).values[key],
+    })).filter(item => Number.isFinite(item.value));
+    entries.sort((a, b) => (lowerIsBetter ? a.value - b.value : b.value - a.value));
+    const ranks = {};
+    entries.forEach((item, index) => {
+      const previous = entries[index - 1];
+      ranks[item.id] = previous && previous.value === item.value
+        ? ranks[previous.id] : index + 1;
+    });
+    return [key, ranks];
+  })
+);
+
 function Home() {
   const navigate = useNavigate();
 
@@ -1917,12 +1937,16 @@ const finishedMatch = {
         const percentage = index >= 8;
         const fmt = value => Number.isFinite(value) ? `${value.toFixed(1)}${percentage ? "%" : ""}` : "—";
         const max = Math.max(hv || 0, av || 0, 1);
-        return <div className="upcoming-comparison-row upcoming-comparison-stat" key={key}>
+        const homeRank = UPCOMING_COLLECTIVE_RANKS[key]?.[selectedUpcomingMatch.homeTeam];
+        const awayRank = UPCOMING_COLLECTIVE_RANKS[key]?.[selectedUpcomingMatch.awayTeam];
+        return <div className="upcoming-comparison-row upcoming-comparison-stat upcoming-ranked-row" key={key}>
+          <span className={`upcoming-rank-badge rank-${homeRank || "none"}`} aria-label={homeRank ? `Puesto ${homeRank}` : "Sin posición"}>{homeRank ? `#${homeRank}` : "—"}</span>
           <strong className={homeBetter ? "collective-better" : ""}>{fmt(hv)}</strong>
           <div className="upcoming-comparison-track" aria-hidden="true"><span className={homeBetter ? "collective-better-bar" : ""} style={{ width: `${(Math.max(0, hv || 0) / max) * 100}%` }} /></div>
-          <span>{label}</span>
+          <span className="upcoming-ranked-label">{label === "Recibidos" ? "Pts recibidos" : label}</span>
           <div className="upcoming-comparison-track" aria-hidden="true"><span className={awayBetter ? "collective-better-bar" : ""} style={{ width: `${(Math.max(0, av || 0) / max) * 100}%` }} /></div>
           <strong className={awayBetter ? "collective-better" : ""}>{fmt(av)}</strong>
+          <span className={`upcoming-rank-badge rank-${awayRank || "none"}`} aria-label={awayRank ? `Puesto ${awayRank}` : "Sin posición"}>{awayRank ? `#${awayRank}` : "—"}</span>
         </div>;
       })}
     </>;
