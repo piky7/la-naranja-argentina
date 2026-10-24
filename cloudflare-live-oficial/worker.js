@@ -1,4 +1,4 @@
-
+// Activar despliegue del Worker oficial
 const BASE = "https://www.laliganacional.com.ar";
 const ZONA = "America/Argentina/Buenos_Aires";
 
