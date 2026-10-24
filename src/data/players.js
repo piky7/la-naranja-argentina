@@ -158,7 +158,7 @@ export const players = [
   name: "Santiago Ferreyra",
   teamId: "atenas",
   position: "Escolta",
-  number: null,
+  number: 3,
   nationality: "Argentina",
 },
 
@@ -197,7 +197,7 @@ export const players = [
   name: "Tomás Cavallero",
   teamId: "atenas",
   position: "Alero",
-  number: null,
+  number: 18,
   nationality: "Argentina",
 },
 

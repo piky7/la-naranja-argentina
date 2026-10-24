@@ -434,5 +434,37 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J3SsEsx8aYvjQUCVpXCd9xq6QRSas7_AoFKU_Jo4VCXEyGhVVRKx8Q==/instituto-vs-lanus"
     }
+  },
+  "2026-10-23-argentino-quimsa": {
+    "status": "finished",
+    "homeScore": 76,
+    "awayScore": 78,
+    "time": "21:00",
+    "homeTeam": "argentino",
+    "awayTeam": "quimsa",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23oyqlTkIDgfwt1cZqRO5xbmdGj-VqmDFnBjg4bMztva4-3JKAsWT3Q==/argentino-j-vs-quimsa",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23oyqlTkIDgfwt1cZqRO5xbmdGj-VqmDFnBjg4bMztva4-3JKAsWT3Q==/argentino-j-vs-quimsa"
+    }
+  },
+  "2026-10-23-atenas-lanus": {
+    "status": "finished",
+    "homeScore": 80,
+    "awayScore": 69,
+    "time": "21:30",
+    "homeTeam": "atenas",
+    "awayTeam": "lanus",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2EoX0BSAAGptIMGLOOBdsEONiIyrgKLX_TdFCmNYpAdkn65kkV_ghkQ==/atenas-c-vs-lanus",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2EoX0BSAAGptIMGLOOBdsEONiIyrgKLX_TdFCmNYpAdkn65kkV_ghkQ==/atenas-c-vs-lanus"
+    }
   }
 };

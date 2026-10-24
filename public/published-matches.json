@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T01:57:25.989Z",
+  "generatedAt": "2026-10-24T02:33:32.674Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -278,6 +278,22 @@
       "homeScore": 75,
       "awayScore": 73,
       "homeTeam": "instituto",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-10-23-argentino-quimsa": {
+      "status": "published",
+      "homeScore": 76,
+      "awayScore": 78,
+      "homeTeam": "argentino",
+      "awayTeam": "quimsa",
+      "hasStats": true
+    },
+    "2026-10-23-atenas-lanus": {
+      "status": "published",
+      "homeScore": 80,
+      "awayScore": 69,
+      "homeTeam": "atenas",
       "awayTeam": "lanus",
       "hasStats": true
     }
