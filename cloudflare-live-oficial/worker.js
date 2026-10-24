@@ -250,9 +250,21 @@ function obtenerPeriodo(html, status) {
     (cuartoAccion == null || cuartoAccion <= 2) &&
     ultimoCambio.posicion < (ultimaAccion?.index ?? Infinity);
 
+  // La web oficial indica el tiempo transcurrido en la última acción
+  // (HH:MM:SS). Home convierte minutos jugados en minutos restantes.
+  // No interpolar el reloj: es el último dato disponible, no tiempo real.
+  let minutesPlayed = null;
+  if (ultimaAccion && !isHalftime) {
+    const [hours, minutes, seconds] = ultimaAccion[2].split(":").map(Number);
+    const elapsed = hours * 3600 + minutes * 60 + seconds;
+    if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed <= 600) {
+      minutesPlayed = Math.floor(elapsed / 60);
+    }
+  }
+
   return {
     quarter,
-    minutesRemaining: null,
+    minutesRemaining: minutesPlayed,
     isHalftime,
     lastActionTime: ultimaAccion?.[2] || null,
   };
