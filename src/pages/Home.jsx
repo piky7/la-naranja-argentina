@@ -116,12 +116,13 @@ const [liveDate, setLiveDate] = useState(null);
 const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
 
 
-  // DI representa minutos jugados dentro del cuarto (sin segundos).
-  const getRemainingMinutes = (minutesPlayed) => {
-    if (minutesPlayed == null) return null;
-    const minutes = Number(minutesPlayed);
+  // El reloj oficial indica los minutos restantes del cuarto.
+  // No invertir el valor: hacerlo mostraba 2' cuando faltaban 8'.
+  const getRemainingMinutes = (officialMinutesRemaining) => {
+    if (officialMinutesRemaining == null) return null;
+    const minutes = Number(officialMinutesRemaining);
     if (!Number.isFinite(minutes)) return null;
-    return Math.max(0, Math.min(10, 10 - minutes));
+    return Math.max(0, Math.min(10, minutes));
   };
 
   const getTeam = (teamId) => {
