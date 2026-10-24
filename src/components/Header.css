@@ -660,3 +660,41 @@
     padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* Barra inferior dinámica: se compacta al bajar y se expande al subir o detenerse. */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    transition: min-height 230ms ease, padding 230ms ease, left 230ms ease,
+      right 230ms ease, background 230ms ease;
+  }
+  .bottom-nav-link {
+    transition: min-height 230ms ease, padding 230ms ease, gap 230ms ease,
+      color 200ms ease, background 200ms ease, font-size 230ms ease;
+  }
+  .bottom-nav-link svg {
+    transition: width 230ms ease, height 230ms ease;
+  }
+  .bottom-navigation.is-compact {
+    min-height: 40px;
+    padding: 2px 6px;
+    left: 22px;
+    right: 22px;
+  }
+  .bottom-navigation.is-compact .bottom-nav-link {
+    min-height: 36px;
+    padding: 3px 2px 5px;
+    gap: 1px;
+    font-size: 9px;
+  }
+  .bottom-navigation.is-compact .bottom-nav-link svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bottom-navigation,
+  .bottom-nav-link,
+  .bottom-nav-link svg {
+    transition: none !important;
+  }
+}
