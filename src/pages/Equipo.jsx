@@ -77,6 +77,21 @@ function getPlayerStats(playerId) {
   );
 }
 
+function getPlayerValuationAverage(player) {
+  const seen = new Set();
+  let total = 0, games = 0;
+  for (const match of matches) {
+    if (match.status !== "finished" || (match.homeTeam !== player.teamId && match.awayTeam !== player.teamId)) continue;
+    const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const valuation = getOfficialValuation(match, player.teamId, player.id);
+    if (valuation == null || !Number.isFinite(Number(valuation))) continue;
+    total += Number(valuation); games++;
+  }
+  return games ? (total / games).toFixed(1) : "—";
+}
+
 function getPlayerLastMatches(player) {
   if (!player) return [];
 
@@ -969,6 +984,7 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
     <span>PTS</span>
     <span>REB</span>
     <span>AST</span>
+    <span>VAL</span>
   </div>
 
   {teamPlayers.map((player) => {
@@ -981,9 +997,7 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
         className="team-roster-row"
         onClick={() => setSelectedPlayer(player)}
       >
-        <span className="team-roster-name">
-          {player.name}
-        </span>
+        <span className="team-roster-name"><img className="team-roster-crest" src={team.logo} alt="" aria-hidden="true" /><span>{player.name}</span></span>
 
         <span className="team-roster-pos">
           {player.position}
@@ -993,6 +1007,7 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
         <span>{stats?.points?.toFixed(1) ?? "—"}</span>
         <span>{stats?.rebounds?.toFixed(1) ?? "—"}</span>
         <span>{stats?.assists?.toFixed(1) ?? "—"}</span>
+        <span className="team-roster-val">{getPlayerValuationAverage(player)}</span>
       </button>
     );
   })}
@@ -1076,14 +1091,14 @@ const home = isHome(match, teamId);
                        
 <button
   type="button"
-  className="team-match-row team-match-clickable"
+  className="team-match-row team-match-clickable team-match-modern"
   key={match.id}
   onClick={() => setSelectedUpcomingMatch(match)}
   title="Ver información del partido"
 >
 
 
-                          <div className="team-match-date">
+                          <div className="team-match-date team-match-date-modern">
 
                             <strong>
                               {formatDate(
@@ -1143,7 +1158,7 @@ const home = isHome(match, teamId);
 
 
 
-                          <div className="team-match-time">
+                          <div className="team-match-time team-match-time-modern">
 
                             {match.time ||
                               "A confirmar"}
@@ -1332,7 +1347,7 @@ const awayTeam = getTeam(match.awayTeam);
 
                         <button
                           type="button"
-                          className="team-match-row team-match-clickable"
+                          className="team-match-row team-match-clickable team-match-modern team-match-modern-result"
                           key={match.id}
                           onClick={() =>
                             setSelectedMatch(
@@ -1346,7 +1361,7 @@ const awayTeam = getTeam(match.awayTeam);
                           }
                         >
 
-                          <div className="team-match-date">
+                          <div className="team-match-date team-match-date-modern">
 
                             <strong>
                               {formatDate(
