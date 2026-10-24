@@ -2426,4 +2426,12 @@ export const players = [
     teamId: "independiente-oliva",
     number: 25,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-391587",
+    officialPlayerId: 391587,
+    name: "Gino Jesus Gramaglia",
+    teamId: "racing-chivilcoy",
+    number: 15,
+  },
 ];

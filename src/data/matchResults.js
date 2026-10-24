@@ -466,5 +466,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2EoX0BSAAGptIMGLOOBdsEONiIyrgKLX_TdFCmNYpAdkn65kkV_ghkQ==/atenas-c-vs-lanus"
     }
+  },
+  "2026-10-23-racing-chivilcoy-boca": {
+    "status": "finished",
+    "homeScore": 72,
+    "awayScore": 80,
+    "time": "22:05",
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "boca",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2YioL7wlPLPbzpKxEMOsp5Li1egxgWcRLsBZnwdcxUVBsdY10C5Ey2Q==/racing-ch-vs-boca",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2YioL7wlPLPbzpKxEMOsp5Li1egxgWcRLsBZnwdcxUVBsdY10C5Ey2Q==/racing-ch-vs-boca"
+    }
   }
 };
