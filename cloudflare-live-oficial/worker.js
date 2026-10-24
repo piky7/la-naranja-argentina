@@ -239,16 +239,21 @@ function obtenerPeriodo(html, status) {
   );
 
   const ultimoCambio = cambios[0] || null;
+  const cuartoAccion = ultimaAccion ? Number(ultimaAccion[1]) : null;
+  const cuartoCambio = ultimoCambio?.periodo || null;
+  // Un evento viejo de FINAL-PERIODO no puede devolver el partido
+  // a entretiempo cuando ya existen acciones de un cuarto posterior.
+  const quarter = Math.max(cuartoAccion || 0, cuartoCambio || 0) || null;
+  const isHalftime =
+    ultimoCambio?.tipo === "FINAL" &&
+    cuartoCambio === 2 &&
+    (cuartoAccion == null || cuartoAccion <= 2) &&
+    ultimoCambio.posicion < (ultimaAccion?.index ?? Infinity);
 
   return {
-    quarter:
-      ultimoCambio?.periodo ||
-      (ultimaAccion ? Number(ultimaAccion[1]) : null),
+    quarter,
     minutesRemaining: null,
-    isHalftime:
-      ultimoCambio?.tipo === "FINAL" &&
-      ultimoCambio.posicion <
-        (ultimaAccion?.index ?? Infinity),
+    isHalftime,
     lastActionTime: ultimaAccion?.[2] || null,
   };
 }
@@ -640,6 +645,22 @@ if (!nuevo) {
   continue;
 }
 
+
+    // No retroceder de cuarto por lecturas desactualizadas del sitio oficial.
+    if (
+      anterior.status === "live" &&
+      nuevo.status === "live" &&
+      Number(anterior.quarter) > Number(nuevo.quarter)
+    ) {
+      nuevo.quarter = anterior.quarter;
+      nuevo.isHalftime = false;
+    }
+    if (
+      nuevo.status === "live" &&
+      Number(nuevo.quarter) >= 3
+    ) {
+      nuevo.isHalftime = false;
+    }
 
     // Evitar retroceder de finalizado a en vivo.
     if (
