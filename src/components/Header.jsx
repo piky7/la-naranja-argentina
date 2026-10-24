@@ -1,11 +1,38 @@
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import { House, Trophy, Shield, ChartNoAxesColumn } from "lucide-react";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navCompact, setNavCompact] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+    let idleTimer;
+    let frame = null;
+    const handleScroll = () => {
+      if (frame !== null) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = null;
+        const currentY = window.scrollY;
+        const delta = currentY - lastScrollY.current;
+        lastScrollY.current = currentY;
+        if (currentY < 40 || delta < -5) setNavCompact(false);
+        else if (delta > 5) setNavCompact(true);
+        window.clearTimeout(idleTimer);
+        idleTimer = window.setTimeout(() => setNavCompact(false), 850);
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.clearTimeout(idleTimer);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -97,7 +124,7 @@ function Header() {
 
      {/* NAVEGACIÓN INFERIOR MOBILE */}
 <nav
-  className="bottom-navigation"
+  className={navCompact ? "bottom-navigation is-compact" : "bottom-navigation"}
   aria-label="Navegación inferior"
 >
   <NavLink
