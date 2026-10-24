@@ -75,18 +75,25 @@
     font-variant-numeric: tabular-nums;
   }
 }
-/* LNA - Selector de equipo integrado al titulo de la tabla en movil. */
-.match-stats-tabs .match-player-team-title { display: none; }
+/* Selector compacto de dos equipos, sin flechas. */
+.match-stats-tabs .match-player-team-selector { display: none; }
 @media (max-width: 767px) {
-  .match-stats-tabs .match-player-team-title {
+  .match-stats-tabs .match-player-team-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin: 8px 12px 0;
+    width: calc(100% - 24px);
+  }
+  .match-stats-tabs .match-player-team-option {
     display: flex;
     align-items: center;
-    width: calc(100% - 24px);
-    margin: 8px 12px 0;
-    padding: 7px 10px;
-    gap: 9px;
-    min-height: 42px;
-    border: 1px solid #e76c16;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 7px 8px;
+    border: 1px solid #526477;
     border-radius: 9px 9px 0 0;
     background: #0b1b29;
     color: #f5f7fa;
@@ -95,51 +102,48 @@
     cursor: pointer;
     box-sizing: border-box;
   }
-  .match-stats-tabs .match-player-team-title > img {
-    width: 28px;
-    height: 28px;
-    flex: 0 0 28px;
+  .match-stats-tabs .match-player-team-option.is-active {
+    background: #f47a1b;
+    border-color: #ff9a40;
+    color: #111820;
+    font-weight: 800;
+  }
+  .match-stats-tabs .match-player-team-option img {
+    width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
     object-fit: contain;
   }
-  .match-stats-tabs .match-player-team-title-text {
+  .match-stats-tabs .match-player-team-option-text {
     display: flex;
     flex-direction: column;
     gap: 2px;
     min-width: 0;
-    flex: 1;
   }
-  .match-stats-tabs .match-player-team-title-text small {
-    font-size: 9px;
-    color: #aebbc9;
-    letter-spacing: .4px;
-    line-height: 1.1;
-  }
-  .match-stats-tabs .match-player-team-title-text strong {
-    font-size: 13px;
-    line-height: 1.1;
+  .match-stats-tabs .match-player-team-option-text strong {
+    font-size: 12px;
+    line-height: 1.15;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .match-stats-tabs .match-player-team-title-change {
-    color: #ff981f;
-    font-size: 21px;
-    line-height: 1;
-    padding: 0 3px;
+  .match-stats-tabs .match-player-team-option-text small {
+    font-size: 9px;
+    line-height: 1.1;
+    letter-spacing: .3px;
+    color: #aebbc9;
   }
-  .match-stats-tabs .match-player-team-title:focus-visible {
+  .match-stats-tabs .match-player-team-option.is-active small { color: #342316; }
+  .match-stats-tabs .match-player-team-option:focus-visible {
     outline: 2px solid #ffb44d;
     outline-offset: 2px;
   }
-  .match-stats-tabs .match-player-tables .match-stats-team-header {
-    display: none;
-  }
+  .match-stats-tabs .match-player-tables .match-stats-team-header { display: none; }
   .match-stats-tabs .match-player-tables .match-stats-team {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 }
-
 /* LNA - Comparativa colectiva oficial, barras enfrentadas. */
 .match-stats-tabs .match-team-comparison-intro {
   display: flex;
