@@ -44,19 +44,23 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
           }} onClick={() => setTab(key)}>{label}</button>)}
     </div>
     <div role="tabpanel" id={`${id}-players`} aria-labelledby={`${id}-players-tab`} hidden={tab !== "players"}>
-      <button
-        className="match-player-team-title"
-        type="button"
-        onClick={() => setTeam(current => current === "home" ? "away" : "home")}
-        aria-label={`Mostrando estadísticas de ${(team === "home" ? home : away)?.name || (team === "home" ? "Local" : "Visitante")}. Tocar para ver ${(team === "home" ? away : home)?.name || (team === "home" ? "Visitante" : "Local")}.`}
-      >
-        {(team === "home" ? home : away)?.logo && <img src={(team === "home" ? home : away).logo} alt="" />}
-        <span className="match-player-team-title-text">
-          <small>{team === "home" ? "LOCAL" : "VISITANTE"} · TOCÁ PARA CAMBIAR EQUIPO</small>
-          <strong>{(team === "home" ? home : away)?.shortName || (team === "home" ? home : away)?.name || (team === "home" ? "Local" : "Visitante")}</strong>
-        </span>
-        <span className="match-player-team-title-change" aria-hidden="true">⇄</span>
-      </button>
+      <div className="match-player-team-selector" role="group" aria-label="Elegir equipo para ver estadísticas">
+        {[[ "home", home, "LOCAL" ], [ "away", away, "VISITANTE" ]].map(([side, selected, label]) => (
+          <button
+            key={side}
+            type="button"
+            className={`match-player-team-option${team === side ? " is-active" : ""}`}
+            aria-pressed={team === side}
+            onClick={() => setTeam(side)}
+          >
+            {selected?.logo && <img src={selected.logo} alt="" />}
+            <span className="match-player-team-option-text">
+              <strong>{selected?.shortName || selected?.name || (side === "home" ? "Local" : "Visitante")}</strong>
+              <small>{label}</small>
+            </span>
+          </button>
+        ))}
+      </div>
       <div className={`match-player-tables match-player-team-${team}`}>{children}</div>
     </div>
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
