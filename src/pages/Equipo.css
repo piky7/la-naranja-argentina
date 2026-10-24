@@ -2748,3 +2748,57 @@
   .team-page .team-season-stats-sport .team-season-stat-info span { font-size: 9px; line-height: 1.1; }
   .team-page .team-season-stats-sport .team-season-shooting-grid .team-season-stat-info strong { font-size: 15px; }
 }
+
+
+/* LNA 2026/27 · Agenda, resultados y plantel renovados */
+.team-page .team-matches { display:flex; flex-direction:column; gap:7px; }
+.team-page .team-match-modern {
+  background:linear-gradient(115deg,#102234,#0b1521);
+  border:1px solid #2c4155;
+  border-radius:11px;
+  min-height:70px;
+  padding:10px 12px;
+  transition:background .18s ease,border-color .18s ease;
+}
+.team-page .team-match-modern:hover { background:#152b3d; border-color:#f58a21; }
+.team-page .team-match-date-modern {
+  border-right:1px solid #304052;
+  padding-right:8px;
+}
+.team-page .team-match-date-modern strong { color:#f1f4f8; font-weight:900; }
+.team-page .team-match-date-modern span { color:#9eafc0; }
+.team-page .team-match-modern .team-match-logo { width:32px; height:32px; object-fit:contain; filter:drop-shadow(0 2px 4px #0008); }
+.team-page .team-match-modern .team-match-vs { color:#ff8c22; font-weight:900; }
+.team-page .team-match-modern .team-result-center { padding:6px 5px; border-radius:7px; background:#101d2a; }
+.team-page .team-match-modern .team-result-win { border:1px solid #176f50; background:#09271e; }
+.team-page .team-match-modern .team-result-loss { border:1px solid #7d323a; background:#30171d; }
+.team-page .team-roster-table {
+  background:linear-gradient(135deg,#0c1a29,#0b1520);
+  border-color:#ed7e1a;
+  border-radius:12px;
+}
+.team-page .team-roster-head { background:#201b1a; border-bottom-color:#ef851f; }
+.team-page .team-roster-row { min-height:54px; border-bottom-color:#2b3c4c; }
+.team-page .team-roster-row:nth-child(even) { background:#ffffff05; }
+.team-page .team-roster-name { display:flex; align-items:center; gap:8px; min-width:0; }
+.team-page .team-roster-name > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.team-page .team-roster-crest { flex:none; width:25px; height:25px; object-fit:contain; filter:drop-shadow(0 1px 3px #0009); }
+.team-page .team-roster-val { color:#ff9a32; font-weight:800; font-variant-numeric:tabular-nums; }
+.team-page .team-roster-head,.team-page .team-roster-row {
+  grid-template-columns:minmax(0,2.7fr) minmax(0,.85fr) 25px 34px 34px 34px 34px;
+  gap:5px;
+}
+@media(max-width:600px) {
+  .team-page .team-match-modern { min-height:65px; padding:8px 7px; }
+  .team-page .team-match-modern .team-match-logo { width:27px; height:27px; }
+  .team-page .team-roster-head,.team-page .team-roster-row {
+    grid-template-columns:minmax(0,2.6fr) minmax(0,.7fr) 20px 29px 29px 29px 29px;
+    gap:2px;
+    padding:9px 5px;
+  }
+  .team-page .team-roster-name { gap:4px; }
+  .team-page .team-roster-crest { width:19px; height:19px; }
+  .team-page .team-roster-row { min-height:46px; font-size:9px; }
+  .team-page .team-roster-head { font-size:8px; }
+  .team-page .team-roster-pos { font-size:8px; }
+}
