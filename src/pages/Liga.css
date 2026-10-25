@@ -2921,3 +2921,26 @@
     transition: transform 110ms ease, background 110ms ease !important;
   }
 }
+
+/* iOS Safari: neutralizar hover emulado y foco retenido después del scroll.
+   Se aplica por tipo de puntero, independientemente del reporte de hover. */
+@media (pointer: coarse) {
+  .league-page .result-match:is(:hover, :focus, :focus-visible),
+  .league-page .upcoming-match:is(:hover, :focus, :focus-visible),
+  .league-page .today-match-card:is(:hover, :focus, :focus-visible),
+  .league-page .standing-row:is(:hover, :focus, :focus-visible) {
+    background: #102234 !important;
+    border-color: #30445b !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .league-page .result-match:active,
+  .league-page .upcoming-match:active,
+  .league-page .today-match-card:active,
+  .league-page .standing-row:active {
+    background: #20374b !important;
+    border-color: #f58a21 !important;
+    transform: scale(.985) !important;
+  }
+}
