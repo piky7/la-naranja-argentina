@@ -1,3 +1,4 @@
+import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
 import { createPortal } from "react-dom";
@@ -1639,6 +1640,7 @@ const awayTeam = getTeam(match.awayTeam);
     const home = getUpcomingOfficialCollective(selectedUpcomingMatch.homeTeam);
     const away = getUpcomingOfficialCollective(selectedUpcomingMatch.awayTeam);
     return <>
+      <CategoryBalance home={home} away={away} homeId={selectedUpcomingMatch.homeTeam} awayId={selectedUpcomingMatch.awayTeam} stats={UPCOMING_COLLECTIVE_STATS} />
       <p className="upcoming-collective-source">Partidos con datos: {home.games} / {away.games} · Naranja = mejor registro</p>
       {UPCOMING_COLLECTIVE_STATS.map(([label, key, lowerIsBetter], index) => {
         const hv = home.values[key], av = away.values[key];
