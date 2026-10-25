@@ -3,8 +3,8 @@
   position:relative;isolation:isolate;box-sizing:border-box;
   padding:0 0 12px!important;min-height:0!important;
   background:
-    radial-gradient(ellipse 44% 55% at 3% 115%,rgba(245,105,18,.30),transparent 80%),
-    radial-gradient(ellipse 44% 55% at 97% 115%,rgba(245,105,18,.30),transparent 80%),
+    radial-gradient(ellipse 62% 90% at -6% 120%,rgba(255,120,22,.58) 0%,rgba(235,92,17,.27) 42%,transparent 78%),
+    radial-gradient(ellipse 62% 90% at 106% 120%,rgba(255,120,22,.58) 0%,rgba(235,92,17,.27) 42%,transparent 78%),
     linear-gradient(145deg,#0b1d2b 0%,#101923 49%,#181d27 100%)!important;
   border-bottom:1px solid #f28b30;
   overflow:hidden;
@@ -87,4 +87,18 @@
   .match-modal-upcoming .match-modal-teams{grid-template-columns:minmax(0,1fr) 91px minmax(0,1fr);padding-left:5px!important;padding-right:5px!important;}
   .match-modal-upcoming .match-modal-team img,.match-modal-upcoming .home-modal-team-logo-button img{width:35px!important;height:35px!important;}
   .match-modal-upcoming .match-modal-team > strong{font-size:11px!important;}
+}
+
+/* Quitar por completo las marcas de cancha heredadas del encabezado anterior. */
+.match-modal-upcoming .match-modal-header::before,
+.match-modal-upcoming .match-modal-header::after,
+.match-modal-upcoming .match-modal-teams::before,
+.match-modal-upcoming .match-modal-teams::after{
+  content:none!important;display:none!important;background:none!important;
+}
+.match-modal-upcoming .match-modal-header .match-modal-team::before,
+.match-modal-upcoming .match-modal-header .match-modal-team::after,
+.match-modal-upcoming .match-modal-header .match-modal-score::before,
+.match-modal-upcoming .match-modal-header .match-modal-score::after{
+  content:none!important;display:none!important;
 }
