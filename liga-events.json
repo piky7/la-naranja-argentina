@@ -817,24 +817,6 @@
       "date": "2026-10-31",
       "time": "11:30",
       "home": {
-        "name": "OLIMPICO (LB)",
-        "officialClubId": 1882,
-        "officialTeamId": 113870
-      },
-      "away": {
-        "name": "PEÑAROL (MDP)",
-        "officialClubId": 2376,
-        "officialTeamId": 114902
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2k8iKyk1at0fM1fGuPsWNQeu3Cpyilquj5sjSBMdDoAD0iNiqdzR56Q==/olimpico-lb-vs-penarol-mdp"
-    },
-    {
-      "date": "2026-10-31",
-      "time": "11:30",
-      "home": {
         "name": "QUIMSA",
         "officialClubId": 1869,
         "officialTeamId": 112657
@@ -884,24 +866,6 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Obdrjn5r6pTZmtULitLdtQ-MeWIMYAvE2nQDyXWwK5Di9S7MMRE3Fg==/atenas-c-vs-racing-ch"
-    },
-    {
-      "date": "2026-11-02",
-      "time": "00:00",
-      "home": {
-        "name": "QUIMSA",
-        "officialClubId": 1869,
-        "officialTeamId": 112657
-      },
-      "away": {
-        "name": "PEÑAROL (MDP)",
-        "officialClubId": 2376,
-        "officialTeamId": 114902
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NOTLeu4kyiIXc1FyLn-Zx1o8pLRgrRAF4yXkH5_HiG5lW-PJRSTYrw==/quimsa-vs-penarol-mdp"
     },
     {
       "date": "2026-11-02",
@@ -997,24 +961,6 @@
       "date": "2026-11-05",
       "time": "00:00",
       "home": {
-        "name": "OBERÁ",
-        "officialClubId": 2305,
-        "officialTeamId": 113652
-      },
-      "away": {
-        "name": "ARGENTINO (J)",
-        "officialClubId": 1932,
-        "officialTeamId": 115240
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
-    },
-    {
-      "date": "2026-11-05",
-      "time": "00:00",
-      "home": {
         "name": "INDEPENDIENTE (O)",
         "officialClubId": 2025,
         "officialTeamId": 114628
@@ -1028,6 +974,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DdxcQfe5DOMIjm3PSVXfUup54JdRNPHs3xu4b0oQn7vVwz2Tbn_tZQ==/independiente-o-vs-gimnasia-cr"
+    },
+    {
+      "date": "2026-11-05",
+      "time": "00:00",
+      "home": {
+        "name": "OBERÁ",
+        "officialClubId": 2305,
+        "officialTeamId": 113652
+      },
+      "away": {
+        "name": "ARGENTINO (J)",
+        "officialClubId": 1932,
+        "officialTeamId": 115240
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
     },
     {
       "date": "2026-11-06",
@@ -1105,24 +1069,6 @@
       "date": "2026-11-08",
       "time": "00:00",
       "home": {
-        "name": "RACING (CH)",
-        "officialClubId": 1992,
-        "officialTeamId": 114607
-      },
-      "away": {
-        "name": "REGATAS (C)",
-        "officialClubId": 1424,
-        "officialTeamId": 114561
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
-    },
-    {
-      "date": "2026-11-08",
-      "time": "00:00",
-      "home": {
         "name": "SAN LORENZO",
         "officialClubId": 88,
         "officialTeamId": 113373
@@ -1136,6 +1082,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BC4yg1A_AQP5LCuOTtxu1GMW8kVihViJDas2jqehqvumUvNyVAObTw==/san-lorenzo-vs-san-martin-c"
+    },
+    {
+      "date": "2026-11-08",
+      "time": "00:00",
+      "home": {
+        "name": "RACING (CH)",
+        "officialClubId": 1992,
+        "officialTeamId": 114607
+      },
+      "away": {
+        "name": "REGATAS (C)",
+        "officialClubId": 1424,
+        "officialTeamId": 114561
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
     },
     {
       "date": "2026-11-08",
@@ -1159,24 +1123,6 @@
       "date": "2026-11-09",
       "time": "00:00",
       "home": {
-        "name": "LANÚS",
-        "officialClubId": 63,
-        "officialTeamId": 112600
-      },
-      "away": {
-        "name": "LA UNION FSA",
-        "officialClubId": 1541,
-        "officialTeamId": 114763
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2oELAP18um2ZIwLpadc-qmahYipv1W8V1_i36OTjDSIQa8nvNs6J-Sw==/lanus-vs-la-union-fsa"
-    },
-    {
-      "date": "2026-11-09",
-      "time": "00:00",
-      "home": {
         "name": "GIMNASIA (CR)",
         "officialClubId": 1474,
         "officialTeamId": 112553
@@ -1190,6 +1136,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
+    },
+    {
+      "date": "2026-11-09",
+      "time": "00:00",
+      "home": {
+        "name": "LANÚS",
+        "officialClubId": 63,
+        "officialTeamId": 112600
+      },
+      "away": {
+        "name": "LA UNION FSA",
+        "officialClubId": 1541,
+        "officialTeamId": 114763
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2oELAP18um2ZIwLpadc-qmahYipv1W8V1_i36OTjDSIQa8nvNs6J-Sw==/lanus-vs-la-union-fsa"
     },
     {
       "date": "2026-11-10",
