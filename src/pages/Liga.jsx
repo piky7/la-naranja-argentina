@@ -1,3 +1,4 @@
+import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
 import { createPortal } from "react-dom";
 import PlayerModal from "../components/PlayerModal";
@@ -1220,20 +1221,10 @@ onClick={() => {
             </button>
 
             <div className="match-modal-header">
-              <span className="match-modal-label">
-                LIGA NACIONAL 2026/27
-              </span>
-
-              <strong className="match-modal-date">
-                {formatDate(
-                  selectedUpcomingMatch.date
-                )}
-              </strong>
-
-              <span className="match-modal-status">
-                PRÓXIMO PARTIDO
-              </span>
-
+              <div className="upcoming-header-meta">
+                <span className="match-modal-label">LIGA NACIONAL 2026/27</span>
+                <strong className="match-modal-date">{formatDate(selectedUpcomingMatch.date)}</strong>
+              </div>
               <div className="match-modal-teams">
                 <div className="match-modal-team">
                   {getTeam(selectedUpcomingMatch.homeTeam) && (
@@ -1283,6 +1274,7 @@ onClick={() => {
                 </div>
 
                 <div className="match-modal-score">
+                  <span className="match-modal-status">PRÓXIMO PARTIDO</span>
                   <strong>
                     {selectedUpcomingMatch.time ||
                       "VS"}
