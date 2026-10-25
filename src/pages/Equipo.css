@@ -2802,3 +2802,71 @@
   .team-page .team-roster-head { font-size:8px; }
   .team-page .team-roster-pos { font-size:8px; }
 }
+
+
+/* Tarjetas de agenda/resultados: fecha deportiva y densidad del boceto */
+.team-page .team-matches { gap: 6px; }
+.team-page .team-match-row.team-match-clickable.team-match-modern {
+  grid-template-columns: 82px minmax(0,1fr);
+  min-height: 59px;
+  padding: 6px 10px;
+  column-gap: 10px;
+  border-radius: 9px;
+}
+.team-page .team-match-modern .team-match-date-modern {
+  gap: 2px;
+  justify-content: center;
+  padding-right: 9px;
+  align-self: stretch;
+}
+.team-page .team-match-modern .team-match-date-modern strong {
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: -.45px;
+  color: #f3f5f7;
+  white-space: nowrap;
+}
+.team-page .team-match-modern .team-match-date-modern span {
+  font-size: 8px;
+  line-height: 1.15;
+  letter-spacing: .3px;
+}
+.team-page .team-match-modern .team-match-versus {
+  gap: 5px;
+  justify-content: space-between;
+}
+.team-page .team-match-modern .team-match-side {
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 3px;
+}
+.team-page .team-match-modern .team-match-side strong {
+  font-size: 10px;
+  line-height: 1.1;
+}
+.team-page .team-match-modern .team-match-logo,
+.team-page .team-match-modern .team-match-side .team-match-logo {
+  width: 26px;
+  height: 26px;
+}
+.team-page .team-match-modern .team-match-vs { font-size: 11px; }
+.team-page .team-match-modern .team-result-center {
+  min-width: 57px;
+  font-size: 13px;
+  padding: 5px 4px;
+}
+@media (max-width:600px) {
+  .team-page .team-match-row.team-match-clickable.team-match-modern {
+    grid-template-columns: 71px minmax(0,1fr);
+    min-height: 56px;
+    padding: 5px 7px;
+    column-gap: 7px;
+  }
+  .team-page .team-match-modern .team-match-date-modern { padding-right: 6px; }
+  .team-page .team-match-modern .team-match-date-modern strong { font-size: 15px; }
+  .team-page .team-match-modern .team-match-date-modern span { font-size: 7px; }
+  .team-page .team-match-modern .team-match-side strong { font-size: 9px; }
+  .team-page .team-match-modern .team-match-logo,
+  .team-page .team-match-modern .team-match-side .team-match-logo { width: 23px; height: 23px; }
+  .team-page .team-match-modern .team-result-center { min-width: 52px; font-size: 12px; }
+}
