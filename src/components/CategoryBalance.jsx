@@ -21,7 +21,7 @@ export default function CategoryBalance({ home, away, homeId, awayId, stats }) {
         <span>{homeTeam?.shortName || homeId}<small>{homeWins} {homeWins === 1 ? "categoría" : "categorías"}</small></span>
       </div>
       <div className="lna-category-middle">
-        <div className="lna-category-count"><b>{homeWins}</b><span>CATEGORÍAS FAVORABLES</span><b>{awayWins}</b></div>
+        <div className="lna-category-count"><b>{homeWins}</b><span>VENTAJA ESTADÍSTICA</span><b>{awayWins}</b></div>
         <div className="lna-category-track">
           <span style={{ width: `${total ? homeWins / total * 100 : 50}%` }} />
         </div>
