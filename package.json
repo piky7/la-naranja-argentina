@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-published-matches.cjs && vite build",
+    "build": "node scripts/generate-published-matches.cjs && node scripts/generate-voting-fixture.mjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
