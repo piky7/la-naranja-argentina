@@ -912,3 +912,25 @@
   .teams-page .teams-search { width:min(46%,190px); }
   .teams-page .teams-search input { width:100%; height:35px; font-size:11px; }
 }
+
+/* Listado de equipos: Safari móvil no debe retener hover ni foco tras scroll */
+@media (pointer: coarse) {
+  .teams-page .team-card:is(:hover, :focus, :focus-visible) {
+    background: linear-gradient(135deg, #102234, #101d2c) !important;
+    border-color: #2c4155 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .teams-page .team-card:is(:hover, :focus, :focus-visible) .team-logo,
+  .teams-page .team-card:is(:hover, :focus, :focus-visible) .team-card-arrow,
+  .teams-page .team-card:is(:hover, :focus, :focus-visible) .team-card-footer-arrow {
+    transform: none !important;
+  }
+  .teams-page .team-card:active {
+    background: #20374b !important;
+    border-color: #f58a21 !important;
+    transform: scale(.985) !important;
+    transition: transform 110ms ease, background 110ms ease !important;
+  }
+}
