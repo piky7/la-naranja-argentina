@@ -10373,3 +10373,15 @@
     line-height: 1.1;
   }
 }
+/* Feedback táctil temporal, sin selección pegada después de scrollear */
+@media (hover: none) and (pointer: coarse) {
+  .home-page .fixture-panel .home-fixture-clickable:hover {
+    background-color: transparent !important;
+    transform: none !important;
+  }
+  .home-page .fixture-panel .home-fixture-clickable:active {
+    background-color: #203247 !important;
+    transform: scale(.985) !important;
+    transition: transform 110ms ease, background-color 110ms ease !important;
+  }
+}
