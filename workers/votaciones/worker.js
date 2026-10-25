@@ -20,9 +20,9 @@ async function fixtureGame(id) {
   if (!response.ok) throw new Error("Fixture no disponible");
   const data = await response.json();
   if (!Array.isArray(data.games) || typeof data.generatedAt !== "string") throw new Error("Fixture inválido");
-  // No aceptar un calendario desactualizado más de 48 horas.
+  // No aceptar un calendario desactualizado más de 14 días.
   const age = Date.now() - Date.parse(data.generatedAt);
-  if (!Number.isFinite(age) || age < -300000 || age > 48 * 3600000) throw new Error("Fixture desactualizado");
+  if (!Number.isFinite(age) || age < -300000 || age > 14 * 24 * 3600000) throw new Error("Fixture desactualizado");
   return data.games.find(g => g.id === id) || null;
 }
 
