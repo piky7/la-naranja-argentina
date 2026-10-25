@@ -360,14 +360,6 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fZXaA0m6_wu0vYJ2tCgvU_cY--zYZxCeeij5E1FFFS43xltXuiCeWw==/lanus-vs-san-martin-c"
   },
   {
-    "id": "2026-10-31-olimpico-penarol",
-    "date": "2026-10-31",
-    "time": "11:30",
-    "homeTeam": "olimpico",
-    "awayTeam": "penarol",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2k8iKyk1at0fM1fGuPsWNQeu3Cpyilquj5sjSBMdDoAD0iNiqdzR56Q==/olimpico-lb-vs-penarol-mdp"
-  },
-  {
     "id": "2026-10-31-quimsa-penarol",
     "date": "2026-10-31",
     "time": "11:30",
@@ -390,14 +382,6 @@ export const officialSchedule = [
     "homeTeam": "atenas",
     "awayTeam": "racing-chivilcoy",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Obdrjn5r6pTZmtULitLdtQ-MeWIMYAvE2nQDyXWwK5Di9S7MMRE3Fg==/atenas-c-vs-racing-ch"
-  },
-  {
-    "id": "2026-11-02-quimsa-penarol",
-    "date": "2026-11-02",
-    "time": null,
-    "homeTeam": "quimsa",
-    "awayTeam": "penarol",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NOTLeu4kyiIXc1FyLn-Zx1o8pLRgrRAF4yXkH5_HiG5lW-PJRSTYrw==/quimsa-vs-penarol-mdp"
   },
   {
     "id": "2026-11-02-olimpico-penarol",
