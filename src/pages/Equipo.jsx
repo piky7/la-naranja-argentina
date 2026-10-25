@@ -148,20 +148,20 @@ function getPlayer(playerId, playerName) {
 
 
 function formatDate(date) {
-  const dateObject = new Date(
-    `${date}T12:00:00`
-  );
-
-  return new Intl.DateTimeFormat(
-    "es-AR",
-    {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    }
-  ).format(dateObject);
+  const dateObject = new Date(`${date}T12:00:00`);
+  return new Intl.DateTimeFormat("es-AR", {
+    day: "2-digit", month: "2-digit", year: "numeric",
+  }).format(dateObject);
 }
 
+// Fecha deportiva abreviada solo para las tarjetas del equipo.
+function formatMatchCardDate(date) {
+  const dateObject = new Date(`${date}T12:00:00`);
+  const day = new Intl.DateTimeFormat("es-AR", { day: "2-digit" }).format(dateObject);
+  const month = new Intl.DateTimeFormat("es-AR", { month: "short" })
+    .format(dateObject).replace(".", "").toUpperCase();
+  return `${day} ${month}`;
+}
 
 function formatDay(date) {
   const dateObject = new Date(
@@ -1101,7 +1101,7 @@ const home = isHome(match, teamId);
                           <div className="team-match-date team-match-date-modern">
 
                             <strong>
-                              {formatDate(
+                              {formatMatchCardDate(
                                 match.date
                               )}
                             </strong>
@@ -1364,7 +1364,7 @@ const awayTeam = getTeam(match.awayTeam);
                           <div className="team-match-date team-match-date-modern">
 
                             <strong>
-                              {formatDate(
+                              {formatMatchCardDate(
                                 match.date
                               )}
                             </strong>
