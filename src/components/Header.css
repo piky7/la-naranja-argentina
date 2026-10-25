@@ -698,3 +698,10 @@
     transition: none !important;
   }
 }
+
+/* iPhone: mantener la cápsula por encima del indicador de inicio de iOS. */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  }
+}
