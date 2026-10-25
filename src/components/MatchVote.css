@@ -8,4 +8,8 @@
 .lna-vote-option strong{position:relative;z-index:1;white-space:nowrap}
 .lna-vote-bar{position:absolute;inset:0 auto 0 0;background:rgba(255,145,44,.22);pointer-events:none}
 .lna-vote small{display:block;margin-top:3px;font-size:10px;color:#b7c5d4}
-\n.lna-vote-team{display:flex;align-items:center;gap:6px}.lna-vote-logo{width:20px;height:20px;object-fit:contain;flex:none}\n
+
+.lna-vote-team{display:inline-flex;flex-direction:row;align-items:center;gap:6px;min-width:0;white-space:nowrap;line-height:1.1}
+.lna-vote-logo{display:inline-block;width:20px;height:20px;object-fit:contain;flex:0 0 20px;vertical-align:middle}
+.lna-vote-option{min-height:30px;flex-direction:row;align-items:center}
+
