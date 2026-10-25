@@ -2,5 +2,7 @@ name = "lna-votaciones-api"
 main = "worker.js"
 compatibility_date = "2026-10-25"
 
-# La base D1 ya existe en Cloudflare. Confirmar su database_id antes
-# de desplegar desde CI para evitar reemplazar el binding actual.
+[[d1_databases]]
+binding = "DB"
+database_name = "lna-votaciones"
+database_id = "1e46898e-99a0-46db-b8e5-bba4eaaef216"
