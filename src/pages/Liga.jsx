@@ -14,6 +14,9 @@ import { playerStats } from "../data/stats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 import "./Liga.css";
 import "./Home.css";
+const formatLeagueCardWeekday = (date) => new Intl.DateTimeFormat("es-AR", { weekday: "short" })
+  .format(new Date(`${date}T12:00:00`)).replace(".", "").toUpperCase();
+
 const formatLeagueCardDate = (date) => {
   const value = new Date(`${date}T12:00:00`);
   const day = new Intl.DateTimeFormat("es-AR", { day: "2-digit" }).format(value);
@@ -958,7 +961,8 @@ onClick={() => {
                       >
 
                         <div className="result-date">
-                          {formatLeagueCardDate(match.date)}
+                          <span className="league-card-weekday">{formatLeagueCardWeekday(match.date)}</span>
+                          <span>{formatLeagueCardDate(match.date)}</span>
                         </div>
 
 
@@ -989,7 +993,7 @@ onClick={() => {
 
                           <div className="result-score">
 
-                            <strong>
+                            <strong className={Number(match.homeScore) > Number(match.awayScore) ? "league-score-winner" : ""}>
                               {match.homeScore}
                             </strong>
 
@@ -997,7 +1001,7 @@ onClick={() => {
                               -
                             </span>
 
-                            <strong>
+                            <strong className={Number(match.awayScore) > Number(match.homeScore) ? "league-score-winner" : ""}>
                               {match.awayScore}
                             </strong>
 
@@ -1098,6 +1102,7 @@ onClick={() => {
 
                           <div className="upcoming-date">
 
+                            <small className="league-card-weekday">{formatLeagueCardWeekday(match.date)}</small>
                             <span>
                               {formatLeagueCardDate(match.date)}
                             </span>
