@@ -2739,3 +2739,92 @@
     font-size: 9px;
   }
 }
+
+/* Liga: tarjetas individuales compactas como en la ficha de Equipo. */
+.league-page .results-card,
+.league-page .upcoming-card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+}
+.league-page .results-card .result-match,
+.league-page .upcoming-card .upcoming-match,
+.league-page .results-card .result-match:nth-child(even),
+.league-page .upcoming-card .upcoming-match:nth-child(even) {
+  background: linear-gradient(115deg,#102234,#0b1521);
+  border: 1px solid #2c4155;
+  border-radius: 10px;
+  min-height: 62px;
+  overflow: hidden;
+  transition: background .18s ease, border-color .18s ease;
+}
+.league-page .results-card .result-match:hover,
+.league-page .upcoming-card .upcoming-match:hover {
+  background: #152b3d;
+  border-color: #f58a21;
+}
+.league-page .results-card .result-date,
+.league-page .upcoming-card .upcoming-date {
+  color: #f1f4f8;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -.3px;
+  white-space: nowrap;
+}
+.league-page .upcoming-card .upcoming-date {
+  background: transparent;
+  border-right: 1px solid #304052;
+}
+.league-page .upcoming-card .upcoming-date span {
+  color: #f1f4f8;
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.league-page .upcoming-card .upcoming-date strong {
+  color: #ff9a32;
+  font-size: 11px;
+}
+.league-page .result-team span,
+.league-page .upcoming-teams span:not(.upcoming-vs) { font-weight: 700; }
+.league-page .result-logo,
+.league-page .upcoming-logo { filter: drop-shadow(0 2px 4px #0008); }
+.league-page .result-score { font-variant-numeric: tabular-nums; }
+@media (max-width: 768px) {
+  .league-page .results-card,
+  .league-page .upcoming-card { gap: 7px; }
+  .league-page .results-card .result-match,
+  .league-page .upcoming-card .upcoming-match,
+  .league-page .results-card .result-match:nth-child(even),
+  .league-page .upcoming-card .upcoming-match:nth-child(even) {
+    min-height: 58px;
+  }
+  .league-page .results-card .result-match {
+    padding-left: 76px;
+  }
+  .league-page .results-card .result-date {
+    left: 7px;
+    width: 62px;
+    font-size: 13px;
+    line-height: 1.1;
+    border-right: 1px solid #304052;
+    padding-right: 6px;
+  }
+  .league-page .results-card .result-teams {
+    min-height: 56px;
+    padding: 5px 7px;
+  }
+  .league-page .upcoming-card .upcoming-date {
+    width: 76px;
+    min-width: 76px;
+    padding: 6px 5px;
+  }
+  .league-page .upcoming-card .upcoming-date span { font-size: 13px; }
+  .league-page .upcoming-card .upcoming-date strong { font-size: 10px; }
+  .league-page .upcoming-card .upcoming-match { min-height: 58px; }
+  .league-page .upcoming-card .upcoming-teams { min-width: 0; }
+}
