@@ -2888,3 +2888,20 @@
 @media (max-width: 600px) {
   .team-page .team-match-modern .team-match-date-modern .team-card-weekday { font-size: 8px; }
 }
+
+/* En móvil, sin hover persistente al desplazar; respuesta al pulsar */
+@media (hover: none) and (pointer: coarse) {
+  .team-page .team-match-row.team-match-clickable:hover,
+  .team-page .team-match-modern:hover {
+    background: #102234 !important;
+    border-color: #30445b !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  .team-page .team-match-row.team-match-clickable:active {
+    background: #20374b !important;
+    border-color: #f58a21 !important;
+    transform: scale(.985) !important;
+    transition: transform 110ms ease, background 110ms ease !important;
+  }
+}
