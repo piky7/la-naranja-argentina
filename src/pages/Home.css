@@ -10385,3 +10385,18 @@
     transition: transform 110ms ease, background-color 110ms ease !important;
   }
 }
+
+/* iOS: hover y foco no deben persistir al scrollear */
+@media (pointer: coarse) {
+  .home-page .home-fixture-clickable:is(:hover, :focus, :focus-visible),
+  .home-page .home-standing-row:is(:hover, :focus, :focus-visible) {
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  .home-page .home-fixture-clickable:active {
+    background-color: #203247 !important;
+    transform: scale(.985) !important;
+  }
+}
