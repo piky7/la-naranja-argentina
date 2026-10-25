@@ -1,3 +1,4 @@
+import MatchVote from "../components/MatchVote";
 import { createPortal } from "react-dom";
 import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
@@ -1347,6 +1348,7 @@ onClick={() => {
               </div>
             </div>
 
+            <MatchVote match={selectedUpcomingMatch} />
             <div className="upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
               <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
               <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores destacados</button>
