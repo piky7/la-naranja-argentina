@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-11-23",
+  "dateTo": "2026-11-24",
   "matches": [
     {
       "date": "2026-09-28",
@@ -1172,6 +1172,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2oELAP18um2ZIwLpadc-qmahYipv1W8V1_i36OTjDSIQa8nvNs6J-Sw==/lanus-vs-la-union-fsa"
+    },
+    {
+      "date": "2026-11-09",
+      "time": "00:00",
+      "home": {
+        "name": "GIMNASIA (CR)",
+        "officialClubId": 1474,
+        "officialTeamId": 112553
+      },
+      "away": {
+        "name": "OBERÁ",
+        "officialClubId": 2305,
+        "officialTeamId": 113652
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
     },
     {
       "date": "2026-11-10",

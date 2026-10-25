@@ -520,6 +520,14 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2oELAP18um2ZIwLpadc-qmahYipv1W8V1_i36OTjDSIQa8nvNs6J-Sw==/lanus-vs-la-union-fsa"
   },
   {
+    "id": "2026-11-09-gimnasia-obera",
+    "date": "2026-11-09",
+    "time": null,
+    "homeTeam": "gimnasia",
+    "awayTeam": "obera",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
+  },
+  {
     "id": "2026-11-10-olimpico-instituto",
     "date": "2026-11-10",
     "time": null,
