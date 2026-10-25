@@ -2870,3 +2870,21 @@
   .team-page .team-match-modern .team-match-side .team-match-logo { width: 23px; height: 23px; }
   .team-page .team-match-modern .team-result-center { min-width: 52px; font-size: 12px; }
 }
+
+/* Día de semana en fecha y derrota gris neutra */
+.team-page .team-match-modern .team-match-date-modern .team-card-weekday {
+  display: block;
+  color: #9eafc0;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  line-height: 1;
+}
+.team-page .team-match-modern .team-result-center.team-result-loss {
+  border: 1px solid #485565;
+  background: #242d38;
+  color: #d1d8e1;
+}
+@media (max-width: 600px) {
+  .team-page .team-match-modern .team-match-date-modern .team-card-weekday { font-size: 8px; }
+}
