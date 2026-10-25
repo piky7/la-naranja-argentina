@@ -1,3 +1,4 @@
+import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
 import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
@@ -1788,20 +1789,10 @@ const finishedMatch = {
             </button>
 
             <div className="match-modal-header">
-              <span className="match-modal-label">
-                LIGA NACIONAL 2026/27
-              </span>
-
-              <strong className="match-modal-date">
-                {formatDate(
-                  selectedUpcomingMatch.date
-                )}
-              </strong>
-
-              <span className="match-modal-status">
-                PRÓXIMO PARTIDO
-              </span>
-
+              <div className="upcoming-header-meta">
+                <span className="match-modal-label">LIGA NACIONAL 2026/27</span>
+                <strong className="match-modal-date">{formatDate(selectedUpcomingMatch.date)}</strong>
+              </div>
               <div className="match-modal-teams">
                 <div className="match-modal-team">
                   {selectedUpcomingHomeTeam && (
@@ -1851,6 +1842,7 @@ const finishedMatch = {
                 </div>
 
                 <div className="match-modal-score">
+                  <span className="match-modal-status">PRÓXIMO PARTIDO</span>
                   <strong>
                     {selectedUpcomingMatch.time ||
                       "VS"}
