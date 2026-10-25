@@ -1,0 +1,47 @@
+name: Publicar API de votaciones
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "workers/votaciones/**"
+      - ".github/workflows/deploy-votaciones.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-lna-votaciones
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Comprobar credenciales
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Falta CLOUDFLARE_API_TOKEN o CLOUDFLARE_ACCOUNT_ID en Secrets."
+            exit 1
+          fi
+
+      - name: Publicar solamente lna-votaciones-api
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: workers/votaciones
+          command: deploy
+          wranglerVersion: "4.47.0"
