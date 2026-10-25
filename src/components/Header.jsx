@@ -5,7 +5,6 @@ import "./Header.css";
 import { House, Trophy, Shield, ChartNoAxesColumn } from "lucide-react";
 
 function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [navCompact, setNavCompact] = useState(false);
   const lastScrollY = useRef(0);
 
@@ -34,10 +33,6 @@ function Header() {
     };
   }, []);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
   return (
     <>
       <header className="header">
@@ -47,7 +42,6 @@ function Header() {
           <Link
             to="/"
             className="logo"
-            onClick={closeMenu}
           >
             <img
               src="/logo-lna.png"
@@ -84,42 +78,8 @@ function Header() {
             <Link to="/estadisticas">Estadísticas</Link>
           </nav>
 
-          {/* BOTÓN MOBILE */}
-          <button
-            className="menu-button"
-            type="button"
-            onClick={() => setMenuOpen((current) => !current)}
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? "×" : "☰"}
-          </button>
         </div>
 
-        {/* MENÚ MOBILE */}
-        {menuOpen && (
-          <nav className="mobile-navigation">
-            <Link to="/" onClick={closeMenu}>
-              Inicio
-            </Link>
-
-            <Link to="/liga" onClick={closeMenu}>
-              Liga
-            </Link>
-
-            <Link to="/equipos" onClick={closeMenu}>
-              Equipos
-            </Link>
-
-            <Link to="/jugadores" onClick={closeMenu}>
-              Jugadores
-            </Link>
-
-            <Link to="/estadisticas" onClick={closeMenu}>
-              Estadísticas
-            </Link>
-          </nav>
-        )}
       </header>
 
      {/* NAVEGACIÓN INFERIOR MOBILE */}
