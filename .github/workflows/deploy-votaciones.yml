@@ -43,5 +43,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: workers/votaciones
-          command: deploy --config workers/votaciones/wrangler.toml
+          command: deploy --config wrangler.toml
           wranglerVersion: "4.47.0"
