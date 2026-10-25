@@ -1,3 +1,4 @@
+import { teams } from "../data/teams";
 import { useEffect, useState } from "react";
 import "./MatchVote.css";
 
@@ -63,17 +64,18 @@ export default function MatchVote({ match }) {
     finally { setBusy(false); }
   }
 
+  const teamInfo = teamId => teams.find(team => team.id === teamId);
   const total = (data.home?.votes || 0) + (data.away?.votes || 0);
   const percent = votes => total ? Math.round(votes * 100 / total) : 0;
   return (
     <section className="lna-vote" aria-label="Pronóstico de hinchas">
-      <div className="lna-vote-title"><strong>¿QUIÉN GANA?</strong><span>{data.voted ? `${total} votos` : "Votá tu favorito"}</span></div>
+      <div className="lna-vote-title"><strong>¿QUIÉN GANA?</strong><span>{data.voted ? `${total} ${total === 1 ? "voto" : "votos"}` : "Votá tu favorito"}</span></div>
       <div className="lna-vote-options">
         {[{ team: home, result: data.home }, { team: away, result: data.away }].map(({ team, result }) => (
           <button key={team} type="button" disabled={busy || data.voted || !data.open}
             className={`lna-vote-option ${data.selected === team ? "is-selected" : ""}`}
             onClick={() => vote(team)}>
-            <span className="lna-vote-team">{team.replace(/-/g, " ")}</span>
+            <span className="lna-vote-team">{teamInfo(team)?.logo && <img className="lna-vote-logo" src={teamInfo(team).logo} alt="" />}{teamInfo(team)?.shortName || team.replace(/-/g, " ")}</span>
             {data.voted && <strong>{percent(result?.votes || 0)}%</strong>}
             {data.voted && <span className="lna-vote-bar" style={{ width: `${percent(result?.votes || 0)}%` }} />}
           </button>
