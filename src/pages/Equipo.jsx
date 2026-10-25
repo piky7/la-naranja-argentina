@@ -1100,21 +1100,11 @@ const home = isHome(match, teamId);
 
                           <div className="team-match-date team-match-date-modern">
 
+                            <small className="team-card-weekday">{formatDay(match.date).toUpperCase()}</small>
                             <strong>
-                              {formatMatchCardDate(
-                                match.date
-                              )}
+                              {formatMatchCardDate(match.date)}
                             </strong>
-
-                            <span>
-                              {formatDay(
-                                match.date
-                              )}{" "}
-                              ·{" "}
-                              {home
-                                ? "LOCAL"
-                                : "VISITANTE"}
-                            </span>
+                            <span>{home ? "LOCAL" : "VISITANTE"}</span>
 
                           </div>
 
@@ -1363,21 +1353,11 @@ const awayTeam = getTeam(match.awayTeam);
 
                           <div className="team-match-date team-match-date-modern">
 
+                            <small className="team-card-weekday">{formatDay(match.date).toUpperCase()}</small>
                             <strong>
-                              {formatMatchCardDate(
-                                match.date
-                              )}
+                              {formatMatchCardDate(match.date)}
                             </strong>
-
-                            <span>
-                              {formatDay(
-                                match.date
-                              )}{" "}
-                              ·{" "}
-                              {home
-                                ? "LOCAL"
-                                : "VISITANTE"}
-                            </span>
+                            <span>{home ? "LOCAL" : "VISITANTE"}</span>
 
                           </div>
 
