@@ -14,6 +14,14 @@ import { playerStats } from "../data/stats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 import "./Liga.css";
 import "./Home.css";
+const formatLeagueCardDate = (date) => {
+  const value = new Date(`${date}T12:00:00`);
+  const day = new Intl.DateTimeFormat("es-AR", { day: "2-digit" }).format(value);
+  const month = new Intl.DateTimeFormat("es-AR", { month: "short" })
+    .format(value).replace(".", "").toUpperCase();
+  return `${day} ${month}`;
+};
+
 const matches = baseMatches.map((match) => {
   const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
   const result = matchResults[key] ?? matchResults[match.id];
@@ -950,9 +958,7 @@ onClick={() => {
                       >
 
                         <div className="result-date">
-                          {formatDate(
-                            match.date
-                          )}
+                          {formatLeagueCardDate(match.date)}
                         </div>
 
 
@@ -1093,9 +1099,7 @@ onClick={() => {
                           <div className="upcoming-date">
 
                             <span>
-                              {formatDate(
-                                match.date
-                              )}
+                              {formatLeagueCardDate(match.date)}
                             </span>
 
                             <strong>
