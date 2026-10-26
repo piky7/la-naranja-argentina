@@ -482,5 +482,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2YioL7wlPLPbzpKxEMOsp5Li1egxgWcRLsBZnwdcxUVBsdY10C5Ey2Q==/racing-ch-vs-boca"
     }
+  },
+  "2026-10-25-racing-chivilcoy-quimsa": {
+    "status": "finished",
+    "homeScore": 54,
+    "awayScore": 68,
+    "time": "20:30",
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "quimsa",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LMN1NkpNIo9N3d8rQKUh2pRO_oUZD7cExi_2UtSmsdP1W68mCw7Eqg==/racing-ch-vs-quimsa",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LMN1NkpNIo9N3d8rQKUh2pRO_oUZD7cExi_2UtSmsdP1W68mCw7Eqg==/racing-ch-vs-quimsa"
+    }
   }
 };
