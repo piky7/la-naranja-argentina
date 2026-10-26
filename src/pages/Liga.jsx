@@ -10,7 +10,7 @@ import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { teams } from "../data/teams";
+import { teams, getMatchColorStyle } from "../data/teams";
 import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
@@ -653,6 +653,7 @@ const results = allResults.slice(
                       key={match.id}
                       type="button"
                       className="today-match-card"
+                          style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
 onClick={() => {
   setSelectedMatch(null);
   setSelectedUpcomingMatch(match);
@@ -961,6 +962,7 @@ onClick={() => {
                         key={match.id}
                         type="button"
                         className="result-match"
+                          style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
                         onClick={() =>
                           setSelectedMatch(match)
                         }
@@ -1101,6 +1103,7 @@ onClick={() => {
                           key={match.id}
                           type="button"
                           className="upcoming-match"
+                          style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
                           onClick={() =>
   setSelectedUpcomingMatch(match)
 }
