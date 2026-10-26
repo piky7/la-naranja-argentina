@@ -32842,6 +32842,28 @@ export const matchPlayerStats = {
     "awayTeam": "obera",
     "homeScore": 86,
     "awayScore": 80,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 21,
+        "away": 17
+      },
+      {
+        "period": "2",
+        "home": 20,
+        "away": 24
+      },
+      {
+        "period": "3",
+        "home": 24,
+        "away": 25
+      },
+      {
+        "period": "4",
+        "home": 21,
+        "away": 14
+      }
+    ],
     "teamStats": {
       "platense": {
         "fieldGoals": {
@@ -34078,28 +34100,6 @@ export const matchPlayerStats = {
         "plusMinus": 3,
         "number": "77",
         "starter": false
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 21,
-        "away": 17
-      },
-      {
-        "period": "2",
-        "home": 20,
-        "away": 24
-      },
-      {
-        "period": "3",
-        "home": 24,
-        "away": 25
-      },
-      {
-        "period": "4",
-        "home": 21,
-        "away": 14
       }
     ]
   },
@@ -35378,6 +35378,28 @@ export const matchPlayerStats = {
     "awayTeam": "obera",
     "homeScore": 73,
     "awayScore": 78,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 18,
+        "away": 21
+      },
+      {
+        "period": "2",
+        "home": 26,
+        "away": 25
+      },
+      {
+        "period": "3",
+        "home": 14,
+        "away": 17
+      },
+      {
+        "period": "4",
+        "home": 15,
+        "away": 15
+      }
+    ],
     "teamStats": {
       "san-lorenzo": {
         "fieldGoals": {
@@ -36615,28 +36637,6 @@ export const matchPlayerStats = {
         "number": "77",
         "starter": false
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 18,
-        "away": 21
-      },
-      {
-        "period": "2",
-        "home": 26,
-        "away": 25
-      },
-      {
-        "period": "3",
-        "home": 14,
-        "away": 17
-      },
-      {
-        "period": "4",
-        "home": 15,
-        "away": 15
-      }
     ]
   },
   "2026-10-18-regatas-olimpico": {
@@ -36646,6 +36646,28 @@ export const matchPlayerStats = {
     "awayTeam": "olimpico",
     "homeScore": 80,
     "awayScore": 83,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 16,
+        "away": 25
+      },
+      {
+        "period": "2",
+        "home": 23,
+        "away": 17
+      },
+      {
+        "period": "3",
+        "home": 18,
+        "away": 19
+      },
+      {
+        "period": "4",
+        "home": 23,
+        "away": 22
+      }
+    ],
     "teamStats": {
       "regatas": {
         "fieldGoals": {
@@ -37883,28 +37905,6 @@ export const matchPlayerStats = {
         "number": "34",
         "starter": true
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 16,
-        "away": 25
-      },
-      {
-        "period": "2",
-        "home": 23,
-        "away": 17
-      },
-      {
-        "period": "3",
-        "home": 18,
-        "away": 19
-      },
-      {
-        "period": "4",
-        "home": 23,
-        "away": 22
-      }
     ]
   },
   "2026-10-19-independiente-oliva-lanus": {
@@ -37914,6 +37914,28 @@ export const matchPlayerStats = {
     "awayTeam": "lanus",
     "homeScore": 108,
     "awayScore": 93,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 26,
+        "away": 18
+      },
+      {
+        "period": "2",
+        "home": 34,
+        "away": 22
+      },
+      {
+        "period": "3",
+        "home": 25,
+        "away": 25
+      },
+      {
+        "period": "4",
+        "home": 23,
+        "away": 28
+      }
+    ],
     "teamStats": {
       "independiente-oliva": {
         "fieldGoals": {
@@ -39151,28 +39173,6 @@ export const matchPlayerStats = {
         "number": "99",
         "starter": true
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 26,
-        "away": 18
-      },
-      {
-        "period": "2",
-        "home": 34,
-        "away": 22
-      },
-      {
-        "period": "3",
-        "home": 25,
-        "away": 25
-      },
-      {
-        "period": "4",
-        "home": 23,
-        "away": 28
-      }
     ]
   },
   "2026-10-20-san-martin-olimpico": {
@@ -39182,6 +39182,28 @@ export const matchPlayerStats = {
     "awayTeam": "olimpico",
     "homeScore": 86,
     "awayScore": 106,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 23,
+        "away": 30
+      },
+      {
+        "period": "2",
+        "home": 20,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 20,
+        "away": 34
+      },
+      {
+        "period": "4",
+        "home": 23,
+        "away": 23
+      }
+    ],
     "teamStats": {
       "san-martin": {
         "fieldGoals": {
@@ -40428,6 +40450,28 @@ export const matchPlayerStats = {
     "awayTeam": "platense",
     "homeScore": 86,
     "awayScore": 81,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 30,
+        "away": 20
+      },
+      {
+        "period": "2",
+        "home": 20,
+        "away": 17
+      },
+      {
+        "period": "3",
+        "home": 19,
+        "away": 14
+      },
+      {
+        "period": "4",
+        "home": 17,
+        "away": 30
+      }
+    ],
     "teamStats": {
       "ferro": {
         "fieldGoals": {
