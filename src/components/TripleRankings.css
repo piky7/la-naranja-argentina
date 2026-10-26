@@ -22,3 +22,29 @@
 .triple-ranking .triple-list .triple-row:nth-child(1) .triple-position,
 .triple-ranking .triple-list .triple-row:nth-child(2) .triple-position,
 .triple-ranking .triple-list .triple-row:nth-child(3) .triple-position{background:#25384b;color:#bdcad8}
+
+
+/* Ranking de triples — acabado LNA premium, sin fotografías. */
+.triple-heading{position:relative;overflow:hidden;padding:10px 0 5px}
+.triple-heading::after{content:"";position:absolute;right:-45px;top:-85px;width:185px;height:185px;border:1px solid rgba(238,154,45,.13);border-radius:50%;box-shadow:0 0 0 24px rgba(238,154,45,.025),0 0 0 54px rgba(238,154,45,.02);pointer-events:none}
+.triple-heading h2{font-family:"Anton",Impact,sans-serif;font-size:clamp(27px,4.3vw,38px);font-weight:400;line-height:1.1;text-transform:uppercase;letter-spacing:.35px;color:#f3f6fb}
+.triple-heading h2::after{content:"";display:block;width:42px;height:2px;background:#ff921d;margin-top:9px;border-radius:2px}
+.triple-filters select,.triple-filters input{background:linear-gradient(155deg,#152a40,#0d2033);border-color:#395570;transition:border-color .2s ease,box-shadow .2s ease}
+.triple-filters select:focus-visible,.triple-filters input:focus-visible{outline:1px solid #ff921d;border-color:#ff921d}
+.triple-podium-card{position:relative;isolation:isolate;overflow:hidden;border-width:1px;background:radial-gradient(ellipse at 100% 100%,var(--podium-glow),transparent 58%),repeating-linear-gradient(145deg,transparent 0 29px,rgba(255,255,255,.012) 30px 31px),linear-gradient(155deg,#182d43,#0a192a 80%);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 3px 12px rgba(0,0,0,.2);transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.triple-podium-card::before{content:"";position:absolute;right:-40%;bottom:-37%;width:95%;aspect-ratio:1;border:1px solid var(--podium-line);border-radius:50%;box-shadow:0 0 0 15px rgba(255,255,255,.015),0 0 0 37px rgba(255,255,255,.012);pointer-events:none;z-index:-1}
+.triple-podium-card::after{content:"";position:absolute;top:0;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,var(--podium-accent),transparent);pointer-events:none}
+.triple-podium-1{--podium-accent:#f2c56e;--podium-glow:rgba(220,163,60,.18);--podium-line:rgba(239,187,88,.22);border-color:#d5a64c;box-shadow:inset 0 1px 0 rgba(255,224,156,.35),0 3px 15px rgba(188,127,39,.14)}
+.triple-podium-2{--podium-accent:#d6e0e8;--podium-glow:rgba(176,196,212,.12);--podium-line:rgba(199,214,228,.2);border-color:#9eafbf}
+.triple-podium-3{--podium-accent:#df9c6c;--podium-glow:rgba(190,105,58,.14);--podium-line:rgba(212,133,79,.22);border-color:#b77a53}
+.triple-podium-card:not(:disabled):hover,.triple-podium-card:not(:disabled):focus-visible{transform:translateY(-2px);border-color:var(--podium-accent);box-shadow:0 0 14px var(--podium-glow),inset 0 1px 0 rgba(255,255,255,.2)}
+.triple-podium-card:focus-visible{outline:2px solid #ff921d;outline-offset:2px}
+.triple-podium-value{font-family:"Anton",Impact,sans-serif;font-weight:400;font-size:clamp(32px,5vw,44px);letter-spacing:.3px;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.triple-podium-name{font-weight:900;font-size:clamp(12px,1.65vw,16px);line-height:1.2;text-shadow:0 2px 5px rgba(0,0,0,.5)}
+.triple-podium-card img{position:relative;z-index:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.triple-table-head{background:linear-gradient(135deg,#1b334b,#10263b);border-color:#38536c}
+.triple-list{border-color:#38536c}
+.triple-ranking .triple-list .triple-row:nth-child(odd){background:#0c1c2d}
+.triple-ranking .triple-list .triple-row:nth-child(even){background:#142a40}
+.triple-ranking .triple-list .triple-row:hover,.triple-ranking .triple-list .triple-row:focus-visible{background:#203b54;outline:none;box-shadow:inset 3px 0 0 #ff921d}
+@media(max-width:600px){.triple-heading h2{font-size:28px}.triple-podium-card{padding:11px 4px}.triple-podium-name{font-size:clamp(11px,3vw,14px)}.triple-podium-value{font-size:clamp(29px,8vw,38px)}.triple-podium-card::before{right:-55%;bottom:-20%}}
