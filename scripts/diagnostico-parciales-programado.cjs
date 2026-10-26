@@ -2,7 +2,9 @@
 // Solo lectura. No modifica KV, Worker, estadísticas ni archivos del repositorio.
 const { spawnSync } = require("node:child_process");
 const BASE = "https://www.laliganacional.com.ar";
-const fecha = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Argentina/Buenos_Aires", year:"numeric",month:"2-digit",day:"2-digit" }).format(new Date());
+const partes = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", year:"numeric",month:"2-digit",day:"2-digit" }).formatToParts(new Date());
+const campo = tipo => partes.find(p => p.type === tipo)?.value;
+const fecha = `${campo("year")}-${campo("month")}-${campo("day")}`;
 const horaObjetivo = process.env.LNA_HORA_PARTIDO || "20:30";
 const url = new URL("/laliga/fixture", BASE);
 url.searchParams.set("handler","ProximosPartidos");
