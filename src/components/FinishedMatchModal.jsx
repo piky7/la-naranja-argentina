@@ -211,7 +211,7 @@ export default function FinishedMatchModal({
                           : `${quarter.period}C`}
                       </span>
                       <strong>
-                        {quarter.home}<span className="match-quarter-inline-dash">-</span><span className="match-quarter-inline-away">{quarter.away}</span>
+                        <span className={Number(quarter.home) > Number(quarter.away) ? "match-quarter-inline-winner" : "match-quarter-inline-loser"}>{quarter.home}</span><span className="match-quarter-inline-dash">-</span><span className={Number(quarter.away) > Number(quarter.home) ? "match-quarter-inline-winner" : "match-quarter-inline-loser"}>{quarter.away}</span>
                       </strong>
                     </span>
                   ))}
