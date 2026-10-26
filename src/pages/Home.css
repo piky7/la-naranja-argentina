@@ -10442,3 +10442,18 @@
   .match-modal-finished .match-quarter-inline-label { font-size: 11px; }
   .match-modal-finished .match-quarter-inline-item strong { font-size: 12px; }
 }
+
+
+/* En cada parcial, solo los puntos del ganador se destacan en naranja. */
+.match-modal-finished .match-quarter-inline-item .match-quarter-inline-winner {
+  color: #f58220;
+}
+.match-modal-finished .match-quarter-inline-item .match-quarter-inline-loser {
+  color: #e8edf3;
+}
+.match-modal-finished .match-quarter-inline-item .match-quarter-inline-dash {
+  color: #a9b7c6;
+}
+.match-modal-finished .match-quarter-inline-item .match-quarter-inline-away.match-quarter-inline-loser {
+  color: #e8edf3;
+}
