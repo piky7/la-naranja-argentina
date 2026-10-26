@@ -1,0 +1,47 @@
+name: Diagnóstico parciales LIVE (prueba 26 oct)
+
+on:
+  schedule:
+    # 20:20 Argentina (UTC-3), 26 de octubre. GitHub puede retrasar el inicio.
+    - cron: "20 23 26 10 *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: diagnostico-parciales-live
+  cancel-in-progress: false
+
+jobs:
+  diagnostico:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '20 23 26 10 *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 220
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Comprobar fecha argentina
+        id: fecha
+        shell: bash
+        run: |
+          HOY=$(TZ=America/Argentina/Buenos_Aires date +%F)
+          echo "hoy=$HOY" >> "$GITHUB_OUTPUT"
+          echo "Fecha local: $HOY"
+      - name: Registrar partido oficial
+        if: steps.fecha.outputs.hoy == '2026-10-26'
+        env:
+          LNA_HORA_PARTIDO: "20:30"
+        run: node scripts/diagnostico-parciales-programado.cjs
+      - name: Guardar diagnóstico descargable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-parciales-2026-10-26
+          path: diagnostico-parciales-live.jsonl
+          if-no-files-found: warn
+          retention-days: 14
