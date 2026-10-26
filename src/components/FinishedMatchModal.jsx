@@ -201,66 +201,23 @@ export default function FinishedMatchModal({
                   </div>
                 </div>
               </div>
-              <div className="match-desktop-summary">
               {selectedMatchStats?.quarterScores?.length > 0 && (
-  <section className="match-quarters">
-    <div className="match-quarters-title">
-      <span>DESGLOSE DEL MARCADOR</span>
-      <h3>Puntos por cuarto</h3>
-    </div>
-
-    <div className="match-quarters-scroll">
-      <table className="match-quarters-table">
-        <thead>
-          <tr>
-            <th>Equipo</th>
-
-            {selectedMatchStats.quarterScores.map((quarter) => (
-              <th key={quarter.period}>
-                {String(quarter.period).startsWith("OT") || quarter.period === "PR"
-                  ? String(quarter.period).replace("OT", "PR")
-                  : `${quarter.period}C`}
-              </th>
-            ))}
-
-            <th>Total</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <th>
-  {selectedMatchHomeTeam?.shortName || selectedMatch.homeTeam}
-</th>
-
-            {selectedMatchStats.quarterScores.map((quarter) => (
-              <td key={quarter.period}>{quarter.home}</td>
-            ))}
-
-            <td className="match-quarters-total">
-              {selectedMatch.homeScore}
-            </td>
-          </tr>
-
-          <tr>
-           <th>
-  {selectedMatchAwayTeam?.shortName || selectedMatch.awayTeam}
-</th>
-
-            {selectedMatchStats.quarterScores.map((quarter) => (
-              <td key={quarter.period}>{quarter.away}</td>
-            ))}
-
-            <td className="match-quarters-total">
-              {selectedMatch.awayScore}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-)}
-
+                <div className="match-quarters-inline" aria-label="Puntos por cuarto">
+                  {selectedMatchStats.quarterScores.map((quarter) => (
+                    <span className="match-quarter-inline-item" key={quarter.period}>
+                      <span className="match-quarter-inline-label">
+                        {String(quarter.period).startsWith("OT") || quarter.period === "PR"
+                          ? String(quarter.period).replace("OT", "PR")
+                          : `${quarter.period}C`}
+                      </span>
+                      <strong>
+                        {quarter.home}<span className="match-quarter-inline-dash">-</span><span className="match-quarter-inline-away">{quarter.away}</span>
+                      </strong>
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div className="match-desktop-summary">
               {selectedMatchMvp && (
                 <button
                   type="button"
