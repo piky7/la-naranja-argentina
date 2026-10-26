@@ -1,3 +1,4 @@
+import { isPlayerAppearance } from "../utils/playerAppearance";
 import useLiveMatch from "../hooks/useLiveMatch";
 import LiveMatchInfo from "../components/LiveMatchInfo";
 import LiveRosters from "../components/LiveRosters";
@@ -335,7 +336,7 @@ const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
       if (record?.source !== "Liga Nacional" ||
           !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
       const stat = record[player.teamId]?.find((item) => item.id === playerId);
-      if (!stat) continue;
+      if (!stat || !isPlayerAppearance(stat)) continue;
       seen.add(key);
       gamesPlayed++;
       for (const field of Object.keys(totals)) {
