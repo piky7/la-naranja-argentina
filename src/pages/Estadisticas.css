@@ -2139,3 +2139,17 @@
   .stats-table th { padding:2px 1px; font-size:8px; }
   .stats-table th button { padding:0; font-size:8px; }
 }
+
+
+/* Títulos de líderes: identidad LNA, sin medallas. */
+.stats-leader-top { min-height:34px; align-items:center; justify-content:center; }
+.stats-leader-title {
+  width:100%; text-align:center; color:#f2f5fa;
+  font-family:inherit; font-size:12px; font-weight:900;
+  letter-spacing:.65px; line-height:1.15; text-transform:uppercase;
+  text-shadow:0 2px 5px rgba(0,0,0,.6);
+}
+@media(max-width:600px) {
+  .stats-leader-top { min-height:36px; }
+  .stats-leader-title { font-size:9px; letter-spacing:.15px; line-height:1.15; }
+}
