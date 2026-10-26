@@ -364,7 +364,20 @@ return matchesSearch && matchesTeam && matchesMinGames;
       : null;
 
     return (
-      <div className="stats-leader-card" key={key}>
+      <div
+        className={`stats-leader-card${leader ? " stats-leader-card-clickable" : ""}`}
+        key={key}
+        role={leader ? "button" : undefined}
+        tabIndex={leader ? 0 : undefined}
+        aria-label={leader ? `Ver estadísticas de ${leader.player.name}` : undefined}
+        onClick={leader ? () => setSelectedPlayer(leader.player) : undefined}
+        onKeyDown={leader ? (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            setSelectedPlayer(leader.player);
+          }
+        } : undefined}
+      >
         <div className="stats-leader-top">
           <span className="stats-leader-title">
             {title}
