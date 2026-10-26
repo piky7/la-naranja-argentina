@@ -2973,6 +2973,24 @@
   }
 }
 
+/* Evita que los fondos alternados (pares/impares) tapen los colores institucionales. */
+.league-page .today-match-card,
+.league-page .today-match-card:nth-child(even),
+.league-page .today-match-card:nth-child(odd),
+.league-page .results-card .result-match,
+.league-page .results-card .result-match:nth-child(even),
+.league-page .results-card .result-match:nth-child(odd),
+.league-page .upcoming-card .upcoming-match,
+.league-page .upcoming-card .upcoming-match:nth-child(even),
+.league-page .upcoming-card .upcoming-match:nth-child(odd) {
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--match-home-color,#18334b) 48%,transparent) 0%,
+      transparent 38%,transparent 62%,
+      color-mix(in srgb,var(--match-away-color,#18334b) 48%,transparent) 100%),
+    linear-gradient(180deg,#112338,#0c1a2b) !important;
+}
+
 /* Escudos grandes y transparentes detrás de cada equipo en Liga. */
 .league-page .today-match-card,.league-page .upcoming-card .upcoming-match,.league-page .results-card .result-match{position:relative;isolation:isolate;overflow:hidden}
 .league-page .today-match-card::before,.league-page .today-match-card::after,
