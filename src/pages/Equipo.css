@@ -2924,3 +2924,8 @@
     transform: scale(.985) !important;
   }
 }
+
+/* Minutos promedio en el plantel, sin perder la columna de valoración. */
+.team-page .team-roster-head,.team-page .team-roster-row{grid-template-columns:minmax(0,2.7fr) minmax(0,.85fr) 25px 34px 34px 34px 44px 34px}
+.team-page .team-roster-min{color:#ff9a32;font-weight:700;font-variant-numeric:tabular-nums}
+@media(max-width:600px){.team-page .team-roster-head,.team-page .team-roster-row{grid-template-columns:minmax(0,2.6fr) minmax(0,.7fr) 19px 26px 26px 26px 36px 27px;gap:2px;padding:9px 4px}.team-page .team-roster-min{font-size:8px}}
