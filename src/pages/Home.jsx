@@ -1445,9 +1445,7 @@ const finishedMatch = {
 
                             {homeTeam && (
                               <small>
-                                {homePosition}° •{" "}
-                                {homeRecord.wins}-
-                                {homeRecord.losses}
+                                <b className="fixture-rank">{homePosition}°</b> <span className="fixture-record-separator">•</span>{" "}<b className="fixture-record">{homeRecord.wins}-{homeRecord.losses}</b>
                               </small>
                             )}
                           </div>
@@ -1551,9 +1549,7 @@ const finishedMatch = {
 
                             {awayTeam && (
                               <small>
-                                {awayPosition}° •{" "}
-                                {awayRecord.wins}-
-                                {awayRecord.losses}
+                                <b className="fixture-rank">{awayPosition}°</b> <span className="fixture-record-separator">•</span>{" "}<b className="fixture-record">{awayRecord.wins}-{awayRecord.losses}</b>
                               </small>
                             )}
                           </div>
