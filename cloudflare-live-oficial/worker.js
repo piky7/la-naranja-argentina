@@ -594,7 +594,7 @@ if (anterior?.status === "finished") {
         minutesRemaining: marcador.minutesRemaining,
         isHalftime: marcador.isHalftime,
         lastActionTime: marcador.lastActionTime,
-        quarterScores: marcador.quarterScores || anterior?.quarterScores || null,
+        quarterScores: marcador.quarterScores || null,
         timestamp: evento.timestamp,
         status: marcador.status,
         isLive: marcador.status === "live",
