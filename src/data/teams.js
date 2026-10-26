@@ -181,3 +181,18 @@ export const teams = [
     logo: sanMartinLogo,
   },
 ];
+
+// Colores institucionales para degradados sutiles en tarjetas de partidos.
+export const teamMatchColors = {
+  argentino: "#1764ae", atenas: "#23824a", boca: "#1654b8",
+  ferro: "#237d55", gimnasia: "#167344", "independiente-oliva": "#3279bc",
+  instituto: "#ce3036", "la-union": "#1878b5", lanus: "#922e4c",
+  obera: "#148bc4", olimpico: "#252a34", penarol: "#8999b0",
+  platense: "#a76b32", quimsa: "#be293c", "racing-chivilcoy": "#157bb9",
+  regatas: "#247eb7", "san-lorenzo": "#a52b48", "san-martin": "#b52e39",
+};
+
+export const getMatchColorStyle = (homeId, awayId) => ({
+  "--match-home-color": teamMatchColors[homeId] ?? "#18334b",
+  "--match-away-color": teamMatchColors[awayId] ?? "#18334b",
+});
