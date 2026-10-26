@@ -1,0 +1,21 @@
+.match-modal-is-live .match-modal-header{background:radial-gradient(ellipse 58% 95% at 0% 110%,rgba(255,115,18,.56),transparent 75%),radial-gradient(ellipse 58% 95% at 100% 110%,rgba(255,115,18,.56),transparent 75%),linear-gradient(145deg,#081827,#0c1722 65%,#191d24)!important}
+.match-modal-is-live .match-modal-score .match-modal-status{color:#ff6669!important;font-size:10px!important}
+.match-modal-is-live .match-modal-score>strong{font-size:clamp(25px,6vw,38px)!important;color:#f4f7fb!important;letter-spacing:-.055em}
+.lna-live-info{padding:8px 15px 6px;background:#081724}
+.lna-live-progress{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:7px}
+.lna-live-progress>div{display:flex;flex-direction:column;align-items:center;gap:2px}
+.lna-live-progress span{width:100%;height:6px;background:#273746;border-radius:8px}
+.lna-live-progress .is-done span{background:#198bc6}
+.lna-live-progress .is-current span{background:#ff9135}
+.lna-live-progress small{font-size:9px;color:#a8b9cc}
+.lna-live-progress .is-current small{color:#ff9135;font-weight:800}
+.lna-live-periods{border:1px solid #33485b;border-radius:7px;overflow:hidden;font-size:11px}
+.lna-live-periods-heading,.lna-live-periods-row{display:flex;align-items:center;gap:0}
+.lna-live-periods-heading{background:#102438;color:#a9bbcf}
+.lna-live-periods-heading b{color:#ff963c;font-size:10px}
+.lna-live-periods-heading b,.lna-live-periods-row strong{flex:1;min-width:0;text-align:left;padding:5px 9px}
+.lna-live-periods-heading span,.lna-live-periods-row span{width:37px;flex:none;text-align:center;padding:5px 2px}
+.lna-live-periods-row{border-top:1px solid #253a4d}
+.lna-live-periods-row strong{font-weight:700;color:#eef4fb}
+.lna-live-periods-row span{font-weight:700;color:#eef4fb;border-left:1px solid #253a4d}
+@media(max-width:600px){.lna-live-info{padding:6px 10px 5px}.lna-live-progress span{height:5px}.lna-live-periods-heading b,.lna-live-periods-row strong{padding:4px 7px}.lna-live-periods-heading span,.lna-live-periods-row span{width:30px;padding:4px 1px}}
