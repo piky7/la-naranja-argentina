@@ -3019,3 +3019,31 @@
  .league-page .results-card .result-score,
  .league-page .upcoming-card .upcoming-vs{border-color:rgba(204,217,231,.18)}
 }
+
+/* Últimos resultados: columna de fecha legible y separada de los equipos. */
+@media (max-width:768px) {
+  .league-page .results-card .result-match {
+    padding-left: 83px;
+  }
+  .league-page .results-card .result-date {
+    position:absolute;
+    left:8px;
+    top:50%;
+    transform:translateY(-50%);
+    box-sizing:border-box;
+    width:67px;
+    min-width:67px;
+    padding:0 9px 0 2px;
+    border-right:1px solid rgba(191,208,226,.32);
+    border-bottom:0;
+    background:transparent;
+    text-align:center;
+    z-index:2;
+    text-shadow:0 1px 4px rgba(0,0,0,.85);
+  }
+  .league-page .results-card .result-teams {
+    min-width:0;
+    width:100%;
+    padding:5px 4px;
+  }
+}
