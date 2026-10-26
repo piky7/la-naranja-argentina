@@ -206,6 +206,7 @@ async function main() {
       officialUrl: partido.officialUrl,
       homeScore,
       awayScore,
+      ...(Array.isArray(datos.quarterScores) ? { quarterScores: datos.quarterScores } : {}),
       teams: [local, visitante],
     };
 
