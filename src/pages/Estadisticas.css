@@ -2172,3 +2172,31 @@
     letter-spacing:0;
   }
 }
+
+
+/* Ajuste fino de las cuatro tarjetas líderes: títulos y valores alineados. */
+.stats-leader-card {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+}
+.stats-leader-top {
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.stats-leader-title {
+  display:block;
+  text-align:center;
+  line-height:1.12;
+}
+.stats-leader-value { margin-top:0; }
+.stats-leader-value strong { font-size:clamp(20px,2.7vw,29px); }
+.stats-leader-player { margin-top:auto; gap:7px; }
+.stats-leader-team { margin-bottom:2px; }
+@media(max-width:600px) {
+  .stats-leader-top { min-height:46px; }
+  .stats-leader-value strong { font-size:clamp(21px,5.7vw,25px); }
+  .stats-leader-player { gap:8px; }
+}
