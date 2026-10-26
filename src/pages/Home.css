@@ -10457,3 +10457,44 @@
 .match-modal-finished .match-quarter-inline-item .match-quarter-inline-away.match-quarter-inline-loser {
   color: #e8edf3;
 }
+
+
+/* Cabecera compacta exclusiva del popup de partido finalizado. */
+.match-modal-finished .match-finished-compact-heading {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 1px 36px 2px;
+  text-align: center;
+}
+.match-modal-finished .match-finished-compact-heading .match-modal-label,
+.match-modal-finished .match-finished-compact-heading .match-modal-date,
+.match-modal-finished .match-finished-compact-heading .match-modal-status {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  line-height: 1.15;
+}
+.match-modal-finished .match-finished-date-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.match-modal-finished .match-finished-heading-dot { color: #8d9bac; }
+.match-modal-finished .match-modal-header {
+  padding-top: 7px;
+}
+.match-modal-finished .match-modal-teams {
+  margin-top: 3px;
+}
+@media (max-width: 600px) {
+  .match-modal-finished .match-modal-header { padding-top: 5px; }
+  .match-modal-finished .match-finished-compact-heading { gap: 2px; padding-top: 0; padding-bottom: 0; }
+  .match-modal-finished .match-finished-date-status { gap: 6px; }
+  .match-modal-finished .match-modal-teams { margin-top: 2px; }
+}
