@@ -1943,7 +1943,7 @@ const finishedMatch = {
               <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores destacados</button>
             </div>
             </>}
-            {(upcomingLive ? upcomingTab === "comparativa" : upcomingTab !== "jugadores") && <section className="match-highlighted-section">
+            {(!upcomingLive || upcomingTab === "comparativa") && <section className="match-highlighted-section">
               {(upcomingLive || upcomingTab !== "jugadores") && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
