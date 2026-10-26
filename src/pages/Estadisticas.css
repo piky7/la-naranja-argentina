@@ -2105,3 +2105,37 @@
   .stats-table th:nth-child(n+3), .stats-table td:nth-child(n+3) { width: 8.4%; }
   .stats-table th:nth-child(7), .stats-table td:nth-child(7) { font-size: 9px; }
 }
+
+
+/* Líderes en una fila en todas las pantallas, sin medallas. */
+.stats-leaders { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:7px; }
+.stats-leader-card { min-width:0; padding:10px 6px; }
+.stats-leader-top { justify-content:center; }
+.stats-leader-title { text-align:center; font-size:10px; line-height:1.15; }
+.stats-leader-value strong { font-size:clamp(17px,2.4vw,25px); }
+.stats-leader-player > strong { font-size:11px; overflow-wrap:anywhere; }
+.stats-leader-team { justify-content:center; }
+@media(max-width:600px) {
+  .stats-leaders { grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; }
+  .stats-leader-card { padding:8px 3px; gap:5px; }
+  .stats-leader-title { font-size:8px; letter-spacing:0; }
+  .stats-leader-value strong { font-size:20px; }
+  .stats-leader-value span { font-size:7px; letter-spacing:0; white-space:nowrap; }
+  .stats-leader-player > strong { font-size:9px; line-height:1.2; }
+  .stats-leader-team { gap:3px; }
+  .stats-leader-team img { width:15px; height:15px; }
+  .stats-leader-team span { display:none; }
+}
+/* Evitar que REB, AST o VAL se partan en dos líneas. */
+.stats-table thead th { white-space:nowrap; }
+.stats-table thead th button {
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:1px; white-space:nowrap; font-size:inherit; letter-spacing:0;
+}
+@media(max-width:600px) {
+  .stats-table th:first-child,.stats-table td:first-child { width:35%; }
+  .stats-table th:nth-child(2),.stats-table td:nth-child(2) { width:20%; }
+  .stats-table th:nth-child(n+3),.stats-table td:nth-child(n+3) { width:9%; }
+  .stats-table th { padding:2px 1px; font-size:8px; }
+  .stats-table th button { padding:0; font-size:8px; }
+}
