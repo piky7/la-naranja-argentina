@@ -244,6 +244,7 @@ async function main() {
       homeScore: record.homeScore,
 
       awayScore: record.awayScore,
+      ...(Array.isArray(record.quarterScores) ? { quarterScores: record.quarterScores } : {}),
       teamStats: {
   [homeTeamId]: normalizeTeamStats(
     homeOfficial.teamStats,
