@@ -79,19 +79,14 @@ export default function FinishedMatchModal({
                     <img src={selectedMatchAwayTeam.logo} alt="" />
                   )}
                 </div>
-                <span className="match-modal-label">
-                  LIGA NACIONAL 2026/27
-                </span>
-
-                <strong className="match-modal-date">
-                  {formatDate(
-                    selectedMatch.date
-                  )}
-                </strong>
-
-                <span className="match-modal-status">
-                  FINAL
-                </span>
+                <div className="match-finished-compact-heading">
+                  <span className="match-modal-label">LIGA NACIONAL 2026/27</span>
+                  <div className="match-finished-date-status">
+                    <strong className="match-modal-date">{formatDate(selectedMatch.date)}</strong>
+                    <span aria-hidden="true" className="match-finished-heading-dot">•</span>
+                    <span className="match-modal-status">FINAL</span>
+                  </div>
+                </div>
 
                 <div className="match-modal-teams">
                   <div className="match-modal-team">
