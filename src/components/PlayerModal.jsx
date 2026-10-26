@@ -66,15 +66,14 @@ export default function PlayerModal({
   });
   const mean = (field) => games.length
     ? average(games.reduce((sum, game) => sum + game[field], 0) / games.length)
-    : average(stats?.[field] ?? saved?.[field]);
+    : "—";
   const minuteValues = games.map(game => {
     const parts = typeof game.minutes === "string" ? game.minutes.match(/^(\d+):(\d{2})$/) : null;
     return parts && Number(parts[2]) < 60 ? Number(parts[1]) * 60 + Number(parts[2]) : null;
   }).filter(value => value !== null);
-  const fallbackMinutes = stats?.minutes ?? saved?.minutes;
   const avgMinuteSeconds = minuteValues.length
     ? minuteValues.reduce((sum, value) => sum + value, 0) / minuteValues.length
-    : Number.isFinite(fallbackMinutes) ? fallbackMinutes * 60 : null;
+    : null;
   const formattedMinutes = avgMinuteSeconds == null ? "—"
     : `${String(Math.floor(Math.round(avgMinuteSeconds) / 60)).padStart(2, "0")}:${String(Math.round(avgMinuteSeconds) % 60).padStart(2, "0")}`;
   const valued = games.filter((game) => typeof game.valuation === "number" && Number.isFinite(game.valuation));
@@ -146,7 +145,7 @@ export default function PlayerModal({
 
           <div className="home-player-modal-stats">
             <div>
-              <strong>{games.length || stats?.gamesPlayed || saved?.gamesPlayed || 0}</strong>
+              <strong>{games.length}</strong>
               <span>PJ</span>
             </div>
             <div>
