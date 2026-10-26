@@ -131,6 +131,22 @@ const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
     return Math.max(0, Math.min(10, minutes));
   };
 
+  // Última jugada oficial: segundos precisos, sin cuenta regresiva ficticia.
+  const formatLiveRemaining = (live) => {
+    const parts = typeof live?.lastActionTime === "string"
+      ? live.lastActionTime.match(/^(\d{2}):(\d{2}):(\d{2})$/)
+      : null;
+    if (parts) {
+      const elapsed = Number(parts[1]) * 3600 + Number(parts[2]) * 60 + Number(parts[3]);
+      if (elapsed >= 0 && elapsed <= 600) {
+        const remaining = 600 - elapsed;
+        return `${String(Math.floor(remaining / 60)).padStart(2, "0")}:${String(remaining % 60).padStart(2, "0")}`;
+      }
+    }
+    const minutes = getRemainingMinutes(live?.minutesRemaining);
+    return minutes == null ? null : `${String(minutes).padStart(2, "0")}:00`;
+  };
+
   const getTeam = (teamId) => {
     return teams.find((team) => team.id === teamId);
   };
@@ -1487,10 +1503,8 @@ const finishedMatch = {
         ? "ENTRETIEMPO"
         : liveMatch?.quarter
           ? `${liveMatch.quarter}.º CUARTO${
-              liveMatch.minutesRemaining != null
-                ? ` · ${getRemainingMinutes(
-                    liveMatch.minutesRemaining
-                  )}' RESTANTES`
+              formatLiveRemaining(liveMatch) != null
+                ? ` · ${formatLiveRemaining(liveMatch)} RESTANTES`
                 : ""
             }`
           : "PARTIDO EN JUEGO"}
