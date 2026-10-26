@@ -1,3 +1,4 @@
+import { isPlayerAppearance } from "../utils/playerAppearance";
 import useLiveMatch from "../hooks/useLiveMatch";
 import LiveMatchInfo from "../components/LiveMatchInfo";
 import CategoryBalance from "../components/CategoryBalance";
@@ -91,7 +92,9 @@ function getPlayerValuationAverage(player) {
     if (seen.has(key)) continue;
     seen.add(key);
     const valuation = getOfficialValuation(match, player.teamId, player.id);
-    if (valuation == null || !Number.isFinite(Number(valuation))) continue;
+    const record = matchPlayerStats[match.id] || matchPlayerStats[key];
+    const entry = record?.[player.teamId]?.find((item) => item.id === player.id);
+    if (!entry || !isPlayerAppearance(entry) || valuation == null || !Number.isFinite(Number(valuation))) continue;
     total += Number(valuation); games++;
   }
   return games ? (total / games).toFixed(1) : "—";
@@ -117,7 +120,7 @@ function getPlayerLastMatches(player) {
 
       return (
         Array.isArray(teamStats) &&
-        teamStats.some((item) => item.id === player.id)
+        teamStats.some((item) => item.id === player.id && isPlayerAppearance(item))
       );
     })
     .sort((a, b) => b.date.localeCompare(a.date))
