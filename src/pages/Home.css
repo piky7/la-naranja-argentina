@@ -10570,7 +10570,7 @@
 /* Escudos institucionales como marcas de agua a ambos extremos. */
 .home-page .home-fixture{position:relative;isolation:isolate;overflow:hidden}
 .home-page .home-fixture::before,.home-page .home-fixture::after{
- content:"";position:absolute;top:50%;width:clamp(105px,27%,220px);height:135%;background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.105;pointer-events:none;z-index:0;filter:grayscale(1) brightness(1.7);
+ content:"";position:absolute;top:50%;transform:translateY(-50%);width:clamp(105px,27%,220px);height:135%;background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.105;pointer-events:none;z-index:0;filter:grayscale(1) brightness(1.7);
 }
 .home-page .home-fixture::before{left:-5%;background-image:var(--match-home-logo)}
 .home-page .home-fixture::after{right:-5%;background-image:var(--match-away-logo)}
