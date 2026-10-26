@@ -2983,3 +2983,21 @@
 .league-page .today-match-card::before,.league-page .upcoming-card .upcoming-match::before,.league-page .results-card .result-match::before{left:4%;background-image:var(--match-home-logo)}
 .league-page .today-match-card::after,.league-page .upcoming-card .upcoming-match::after,.league-page .results-card .result-match::after{right:-3%;background-image:var(--match-away-logo)}
 .league-page .today-match-card > *,.league-page .upcoming-card .upcoming-match > *,.league-page .results-card .result-match > *{position:relative;z-index:1}
+
+/* Jerarquía visual y separadores del boceto en tarjetas compactas de Liga. */
+.league-page .today-match-card .match-team > span,
+.league-page .results-card .result-team > span,
+.league-page .upcoming-card .upcoming-teams > div > span{
+ color:#fff;font-weight:900;text-shadow:0 2px 5px rgba(0,0,0,.65);
+}
+.league-page .today-match-card .match-vs,
+.league-page .results-card .result-score,
+.league-page .upcoming-card .upcoming-vs{
+ border-left:1px solid rgba(204,217,231,.25);
+ border-right:1px solid rgba(204,217,231,.25);
+}
+@media(max-width:600px){
+ .league-page .today-match-card .match-vs,
+ .league-page .results-card .result-score,
+ .league-page .upcoming-card .upcoming-vs{border-color:rgba(204,217,231,.18)}
+}
