@@ -1,3 +1,4 @@
+import { isPlayerAppearance } from "../utils/playerAppearance";
 import { useMemo } from "react";
 import { players } from "../data/players";
 import { matchPlayerStats } from "../data/matchStats";
@@ -26,7 +27,7 @@ function getRoster(teamId, matches) {
     if (!Array.isArray(record[teamId])) continue;
     seen.add(key);
     for (const stat of record[teamId]) {
-      if (!stat.id) continue;
+      if (!stat.id || !isPlayerAppearance(stat)) continue;
       const current = totals.get(stat.id) || { games: 0, points: 0, rebounds: 0, assists: 0, seconds: 0, minutesGames: 0 };
       current.games += 1;
       current.points += Number(stat.points) || 0;
