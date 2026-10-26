@@ -1,3 +1,4 @@
+import { isPlayerAppearance } from "../utils/playerAppearance";
 import { createPortal } from "react-dom";
 import { teams } from "../data/teams";
 import { matches } from "../data/matches";
@@ -45,7 +46,7 @@ export default function PlayerModal({
     if (seen.has(key)) return false;
     const record = matchPlayerStats[match.id] || matchPlayerStats[key];
     if (record?.source !== "Liga Nacional" || !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) return false;
-    if (!record[player.teamId]?.some((entry) => entry.id === player.id)) return false;
+    if (!record[player.teamId]?.some((entry) => entry.id === player.id && isPlayerAppearance(entry))) return false;
     seen.add(key);
     return true;
   }).sort((a, b) => b.date.localeCompare(a.date)).map((match) => {
