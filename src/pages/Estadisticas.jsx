@@ -293,25 +293,25 @@ return matchesSearch && matchesTeam && matchesMinGames;
     return [
       {
         key: "points",
-        title: "MÁXIMO ANOTADOR",
+        title: "ANOTADORES",
         abbreviation: "PTS",
         leader: findLeader("points"),
       },
       {
         key: "rebounds",
-        title: "MÁXIMO REBOTEADOR",
+        title: "REBOTES",
         abbreviation: "REB",
         leader: findLeader("rebounds"),
       },
       {
         key: "assists",
-        title: "MÁXIMO ASISTIDOR",
+        title: "ASISTENCIAS",
         abbreviation: "AST",
         leader: findLeader("assists"),
       },
       {
         key: "valuation",
-        title: "MEJOR VALORACIÓN",
+        title: "VALORACIÓN",
         abbreviation: "VAL",
         leader: findLeader("valuation"),
       },
