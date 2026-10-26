@@ -653,7 +653,7 @@ const results = allResults.slice(
                       key={match.id}
                       type="button"
                       className="today-match-card"
-                          style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
+                          style={{...getMatchColorStyle(match.homeTeam, match.awayTeam), "--match-home-logo": `url("${homeTeam?.logo ?? ""}")`, "--match-away-logo": `url("${awayTeam?.logo ?? ""}")`}}
 onClick={() => {
   setSelectedMatch(null);
   setSelectedUpcomingMatch(match);
@@ -962,7 +962,7 @@ onClick={() => {
                         key={match.id}
                         type="button"
                         className="result-match"
-                          style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
+                          style={{...getMatchColorStyle(match.homeTeam, match.awayTeam), "--match-home-logo": `url("${homeTeam?.logo ?? ""}")`, "--match-away-logo": `url("${awayTeam?.logo ?? ""}")`}}
                         onClick={() =>
                           setSelectedMatch(match)
                         }
@@ -1103,7 +1103,7 @@ onClick={() => {
                           key={match.id}
                           type="button"
                           className="upcoming-match"
-                          style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
+                          style={{...getMatchColorStyle(match.homeTeam, match.awayTeam), "--match-home-logo": `url("${homeTeam?.logo ?? ""}")`, "--match-away-logo": `url("${awayTeam?.logo ?? ""}")`}}
                           onClick={() =>
   setSelectedUpcomingMatch(match)
 }
