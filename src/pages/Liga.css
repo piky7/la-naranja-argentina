@@ -2972,3 +2972,14 @@
     background-image:linear-gradient(90deg,color-mix(in srgb,var(--match-home-color,#18334b) 48%,transparent),transparent 38%,transparent 62%,color-mix(in srgb,var(--match-away-color,#18334b) 48%,transparent)),linear-gradient(180deg,#112338,#0c1a2b);
   }
 }
+
+/* Escudos grandes y transparentes detrás de cada equipo en Liga. */
+.league-page .today-match-card,.league-page .upcoming-card .upcoming-match,.league-page .results-card .result-match{position:relative;isolation:isolate;overflow:hidden}
+.league-page .today-match-card::before,.league-page .today-match-card::after,
+.league-page .upcoming-card .upcoming-match::before,.league-page .upcoming-card .upcoming-match::after,
+.league-page .results-card .result-match::before,.league-page .results-card .result-match::after{
+ content:"";position:absolute;top:50%;width:30%;height:150%;background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.10;pointer-events:none;z-index:0;filter:grayscale(1) brightness(1.7);
+}
+.league-page .today-match-card::before,.league-page .upcoming-card .upcoming-match::before,.league-page .results-card .result-match::before{left:4%;background-image:var(--match-home-logo)}
+.league-page .today-match-card::after,.league-page .upcoming-card .upcoming-match::after,.league-page .results-card .result-match::after{right:-3%;background-image:var(--match-away-logo)}
+.league-page .today-match-card > *,.league-page .upcoming-card .upcoming-match > *,.league-page .results-card .result-match > *{position:relative;z-index:1}
