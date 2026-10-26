@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const URL = "https://lna-live.lnab.workers.dev/api/live";
+const URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL || "https://lna-live-oficial.lnab.workers.dev/api/live";
 
 /** Uses the existing read-only LIVE API; never guesses scores or quarter data. */
 export default function useLiveMatch(match) {
