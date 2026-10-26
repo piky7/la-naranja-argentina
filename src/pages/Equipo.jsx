@@ -990,6 +990,7 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
     <span>PTS</span>
     <span>REB</span>
     <span>AST</span>
+    <span>MIN</span>
     <span>VAL</span>
   </div>
 
@@ -1013,6 +1014,7 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
         <span>{stats?.points?.toFixed(1) ?? "—"}</span>
         <span>{stats?.rebounds?.toFixed(1) ?? "—"}</span>
         <span>{stats?.assists?.toFixed(1) ?? "—"}</span>
+        <span className="team-roster-min">{Number.isFinite(stats?.minutes) ? `${String(Math.floor(Math.round(stats.minutes * 60) / 60)).padStart(2, "0")}:${String(Math.round(stats.minutes * 60) % 60).padStart(2, "0")}` : "—"}</span>
         <span className="team-roster-val">{getPlayerValuationAverage(player)}</span>
       </button>
     );
