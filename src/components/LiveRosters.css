@@ -1,0 +1,17 @@
+.live-rosters{margin:12px 16px 16px;padding:12px 14px;border:1px solid #f28a23;border-radius:12px;background:#06131f;color:#edf4ff}
+.live-rosters h3{text-align:center;color:#ff902e;font-size:clamp(15px,1.8vw,21px);letter-spacing:.05em;margin:0 0 10px}
+.live-rosters-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.live-roster-team{min-width:0}
+.live-roster-team+.live-roster-team{border-left:1px solid #20384b;padding-left:14px}
+.live-roster-team-head{display:flex;align-items:center;gap:9px;min-height:44px;margin-bottom:6px;font-size:17px}
+.live-roster-team-head img{width:40px;height:40px;object-fit:contain}
+.live-roster-row{display:grid;grid-template-columns:30px minmax(0,1.9fr) repeat(3,minmax(0,.58fr)) minmax(42px,.85fr);gap:4px;align-items:center;text-align:right;min-width:0}
+.live-roster-row>span:nth-child(2){text-align:left;min-width:0}
+.live-roster-labels{font-size:10px;color:#b4c5d9;font-weight:700;padding:5px 0}
+.live-roster-player{width:100%;border:0;border-top:1px solid #203141;border-radius:0;background:transparent;color:#edf4ff;padding:5px 0;font-size:12px;font-family:inherit;cursor:pointer}
+.live-roster-player:hover,.live-roster-player:focus-visible{background:#15283a;outline:none}
+.live-roster-number{border:1px solid #31516b;border-radius:5px;text-align:center;background:#0c2940;padding:3px 0}
+.live-roster-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live-roster-player strong{color:#ff912f;font-variant-numeric:tabular-nums}
+.live-roster-empty{color:#aab9cb;font-size:12px}
+@media(max-width:650px){.live-rosters{margin:8px 6px;padding:9px 6px}.live-rosters-grid{gap:5px}.live-roster-team+.live-roster-team{padding-left:5px}.live-roster-team-head{font-size:13px;gap:4px}.live-roster-team-head img{width:27px;height:27px}.live-roster-row{grid-template-columns:19px minmax(0,1.5fr) repeat(3,minmax(0,.48fr)) minmax(30px,.8fr);gap:2px}.live-roster-player{font-size:9px;padding:4px 0}.live-roster-labels{font-size:8px}.live-roster-number{padding:2px 0}.live-rosters h3{font-size:14px}}
