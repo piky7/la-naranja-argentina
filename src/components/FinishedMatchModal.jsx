@@ -217,8 +217,8 @@ export default function FinishedMatchModal({
 
             {selectedMatchStats.quarterScores.map((quarter) => (
               <th key={quarter.period}>
-                {quarter.period === "OT" || quarter.period === "PR"
-                  ? "PR"
+                {String(quarter.period).startsWith("OT") || quarter.period === "PR"
+                  ? String(quarter.period).replace("OT", "PR")
                   : `${quarter.period}C`}
               </th>
             ))}
