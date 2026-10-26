@@ -41674,6 +41674,28 @@ export const matchPlayerStats = {
     "awayTeam": "boca",
     "homeScore": 84,
     "awayScore": 82,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 25,
+        "away": 24
+      },
+      {
+        "period": "2",
+        "home": 21,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 12,
+        "away": 17
+      },
+      {
+        "period": "4",
+        "home": 26,
+        "away": 22
+      }
+    ],
     "teamStats": {
       "argentino": {
         "fieldGoals": {
@@ -42920,6 +42942,28 @@ export const matchPlayerStats = {
     "awayTeam": "lanus",
     "homeScore": 75,
     "awayScore": 73,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 18,
+        "away": 22
+      },
+      {
+        "period": "2",
+        "home": 20,
+        "away": 18
+      },
+      {
+        "period": "3",
+        "home": 21,
+        "away": 13
+      },
+      {
+        "period": "4",
+        "home": 16,
+        "away": 20
+      }
+    ],
     "teamStats": {
       "instituto": {
         "fieldGoals": {
@@ -44166,6 +44210,28 @@ export const matchPlayerStats = {
     "awayTeam": "quimsa",
     "homeScore": 76,
     "awayScore": 78,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 23,
+        "away": 20
+      },
+      {
+        "period": "2",
+        "home": 15,
+        "away": 26
+      },
+      {
+        "period": "3",
+        "home": 20,
+        "away": 14
+      },
+      {
+        "period": "4",
+        "home": 18,
+        "away": 18
+      }
+    ],
     "teamStats": {
       "argentino": {
         "fieldGoals": {
@@ -45412,6 +45478,28 @@ export const matchPlayerStats = {
     "awayTeam": "lanus",
     "homeScore": 80,
     "awayScore": 69,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 25,
+        "away": 20
+      },
+      {
+        "period": "2",
+        "home": 8,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 27,
+        "away": 16
+      },
+      {
+        "period": "4",
+        "home": 20,
+        "away": 14
+      }
+    ],
     "teamStats": {
       "atenas": {
         "fieldGoals": {
@@ -46658,6 +46746,28 @@ export const matchPlayerStats = {
     "awayTeam": "boca",
     "homeScore": 72,
     "awayScore": 80,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 15,
+        "away": 21
+      },
+      {
+        "period": "2",
+        "home": 28,
+        "away": 23
+      },
+      {
+        "period": "3",
+        "home": 12,
+        "away": 21
+      },
+      {
+        "period": "4",
+        "home": 17,
+        "away": 15
+      }
+    ],
     "teamStats": {
       "racing-chivilcoy": {
         "fieldGoals": {
@@ -47904,6 +48014,28 @@ export const matchPlayerStats = {
     "awayTeam": "quimsa",
     "homeScore": 54,
     "awayScore": 68,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 16,
+        "away": 17
+      },
+      {
+        "period": "2",
+        "home": 8,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 16,
+        "away": 14
+      },
+      {
+        "period": "4",
+        "home": 14,
+        "away": 18
+      }
+    ],
     "teamStats": {
       "racing-chivilcoy": {
         "fieldGoals": {
@@ -49140,28 +49272,6 @@ export const matchPlayerStats = {
         "plusMinus": 4,
         "number": "83",
         "starter": false
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 16,
-        "away": 17
-      },
-      {
-        "period": "2",
-        "home": 8,
-        "away": 19
-      },
-      {
-        "period": "3",
-        "home": 16,
-        "away": 14
-      },
-      {
-        "period": "4",
-        "home": 14,
-        "away": 18
       }
     ]
   }

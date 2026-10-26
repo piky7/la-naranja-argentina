@@ -424,20 +424,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Dwl_xkHPmU-Y45ThMvKQCNI1D4aJt4H7o0hYzHLMG3gxRN3uS685ZQ==/olimpico-lb-vs-lanus"
   },
   {
-    "id": "2026-11-05-obera-argentino",
-    "date": "2026-11-05",
-    "time": null,
-    "homeTeam": "obera",
-    "awayTeam": "argentino",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
-  },
-  {
     "id": "2026-11-05-independiente-oliva-gimnasia",
     "date": "2026-11-05",
     "time": null,
     "homeTeam": "independiente-oliva",
     "awayTeam": "gimnasia",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DdxcQfe5DOMIjm3PSVXfUup54JdRNPHs3xu4b0oQn7vVwz2Tbn_tZQ==/independiente-o-vs-gimnasia-cr"
+  },
+  {
+    "id": "2026-11-05-obera-argentino",
+    "date": "2026-11-05",
+    "time": null,
+    "homeTeam": "obera",
+    "awayTeam": "argentino",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
   },
   {
     "id": "2026-11-06-ferro-san-martin",
@@ -576,20 +576,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NiT2DNBpmRwkAzX5foy4IFEaYOZ-LMcsvGdP50-aiaiESRS21cC8bA==/gimnasia-cr-vs-platense"
   },
   {
-    "id": "2026-11-15-la-union-atenas",
-    "date": "2026-11-15",
-    "time": null,
-    "homeTeam": "la-union",
-    "awayTeam": "atenas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-  },
-  {
     "id": "2026-11-15-san-martin-quimsa",
     "date": "2026-11-15",
     "time": null,
     "homeTeam": "san-martin",
     "awayTeam": "quimsa",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+  },
+  {
+    "id": "2026-11-15-la-union-atenas",
+    "date": "2026-11-15",
+    "time": null,
+    "homeTeam": "la-union",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
   },
   {
     "id": "2026-11-15-argentino-lanus",
