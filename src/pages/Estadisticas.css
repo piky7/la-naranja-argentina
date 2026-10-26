@@ -2153,3 +2153,22 @@
   .stats-leader-top { min-height:36px; }
   .stats-leader-title { font-size:9px; letter-spacing:.15px; line-height:1.15; }
 }
+
+
+/* Misma tipografía de los encabezados "PARTIDOS DE HOY" de LNA. */
+.stats-leader-title {
+  font-family:"Anton", Impact, sans-serif;
+  font-weight:400;
+  font-size:clamp(12px,1.55vw,20px);
+  letter-spacing:.15px;
+  line-height:1.13;
+  color:#f1f2f3;
+}
+@media(max-width:600px) {
+  .stats-leader-title {
+    font-family:"Anton", Impact, sans-serif;
+    font-size:clamp(11px,2.9vw,14px);
+    font-weight:400;
+    letter-spacing:0;
+  }
+}
