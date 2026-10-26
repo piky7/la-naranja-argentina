@@ -2955,3 +2955,20 @@
 .league-page .standings-card .standing-row:has(.standing-position-descenso){
   background:linear-gradient(90deg,rgba(165,36,56,.30) 0%,rgba(165,36,56,.11) 42%,rgba(165,36,56,0) 83%),#101c2a !important;
 }
+
+/* Fondos por equipo: partidos de hoy, próximos y resultados de Liga. */
+.league-page .today-match-card,
+.league-page .upcoming-card .upcoming-match,
+.league-page .results-card .result-match {
+  background-image:
+    linear-gradient(90deg,color-mix(in srgb,var(--match-home-color,#18334b) 48%,transparent) 0%,transparent 38%,transparent 62%,color-mix(in srgb,var(--match-away-color,#18334b) 48%,transparent) 100%),
+    linear-gradient(180deg,#112338,#0c1a2b);
+  background-color:#0c1a2b;
+}
+@media(pointer:coarse){
+  .league-page .today-match-card:is(:hover,:focus,:focus-visible),
+  .league-page .upcoming-card .upcoming-match:is(:hover,:focus,:focus-visible),
+  .league-page .results-card .result-match:is(:hover,:focus,:focus-visible){
+    background-image:linear-gradient(90deg,color-mix(in srgb,var(--match-home-color,#18334b) 48%,transparent),transparent 38%,transparent 62%,color-mix(in srgb,var(--match-away-color,#18334b) 48%,transparent)),linear-gradient(180deg,#112338,#0c1a2b);
+  }
+}
