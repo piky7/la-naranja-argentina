@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { players } from "../data/players";
 import { teams } from "../data/teams";
 import { playerStats } from "../data/stats";
+import { isPlayerAppearance } from "../utils/playerAppearance";
 import "./Estadisticas.css";
 import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
@@ -34,10 +35,34 @@ function Estadisticas() {
     return teams.find((team) => team.id === teamId);
   };
 
+  const valuationAverages = useMemo(() => {
+    const totals = new Map();
+    const seen = new Set();
+    for (const [key, record] of Object.entries(matchPlayerStats)) {
+      if (!/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(key)) continue;
+      if (record?.source !== "Liga Nacional" ||
+          !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+      if (seen.has(record.officialUrl)) continue;
+      seen.add(record.officialUrl);
+      for (const teamId of [record.homeTeam, record.awayTeam]) {
+        if (!Array.isArray(record[teamId])) continue;
+        for (const entry of record[teamId]) {
+          if (!entry.id || !isPlayerAppearance(entry)) continue;
+          const valuation = Number(entry.valuation);
+          if (entry.valuation == null || !Number.isFinite(valuation)) continue;
+          const current = totals.get(entry.id) || { sum: 0, games: 0 };
+          current.sum += valuation;
+          current.games += 1;
+          totals.set(entry.id, current);
+        }
+      }
+    }
+    return new Map([...totals].map(([id, value]) => [id, value.sum / value.games]));
+  }, []);
+
   const getPlayerStats = (playerId) => {
-    return playerStats.find(
-      (stats) => stats.playerId === playerId
-    );
+    const stats = playerStats.find((entry) => entry.playerId === playerId);
+    return stats ? { ...stats, valuation: valuationAverages.get(playerId) ?? null } : null;
   };
 
 const getMatchStats = (match) => {
@@ -249,16 +274,14 @@ return matchesSearch && matchesTeam && matchesMinGames;
     const eligiblePlayers = players
       .map((player) => ({
         player,
-        stats: playerStats.find(
-          (stats) => stats.playerId === player.id
-        ),
+        stats: getPlayerStats(player.id),
       }))
       .filter(
         ({ stats }) => stats && stats.gamesPlayed > 0
       );
 
     const findLeader = (stat) => {
-      const sorted = [...eligiblePlayers].sort(
+      const sorted = eligiblePlayers.filter(({ stats }) => stats[stat] != null).sort(
         (a, b) =>
           (Number(b.stats[stat]) || 0) -
           (Number(a.stats[stat]) || 0)
@@ -286,8 +309,14 @@ return matchesSearch && matchesTeam && matchesMinGames;
         abbreviation: "AST",
         leader: findLeader("assists"),
       },
+      {
+        key: "valuation",
+        title: "MEJOR VALORACIÓN",
+        abbreviation: "VAL",
+        leader: findLeader("valuation"),
+      },
     ];
-  }, []);
+  }, [valuationAverages]);
 
 
   /*
@@ -518,6 +547,7 @@ return matchesSearch && matchesTeam && matchesMinGames;
                     AST {getSortArrow("assists")}
                   </button>
                 </th>
+                <th><button type="button" onClick={() => handleSort("valuation")}>VAL {getSortArrow("valuation")}</button></th>
 
               </tr>
             </thead>
@@ -619,6 +649,7 @@ return matchesSearch && matchesTeam && matchesMinGames;
     stats?.gamesPlayed
   )}
 </td>
+<td className={sortBy === "valuation" ? "stats-active-column" : ""}>{formatAverage(stats?.valuation, stats?.gamesPlayed)}</td>
 
                   </tr>
                 );
