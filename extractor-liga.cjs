@@ -68,6 +68,37 @@ function obtenerJugador($, fila) {
   };
 }
 
+async function comprobarFinalMarcadorOficial(html, urlPartido) {
+  const idEnc = html.match(/var\s+idEnc\s*=\s*['"]([^'"]+)['"]/)?.[1];
+  if (!idEnc) {
+    console.log("Diagnóstico final: no se encontró idEnc para consultar el marcador oficial.");
+    return null;
+  }
+  try {
+    const url = new URL("/laliga/partido/Marcador/" + encodeURIComponent(idEnc), urlPartido);
+    url.searchParams.set("handler", "Recargar");
+    url.searchParams.set("key", "");
+    const respuesta = await fetch(url, {
+      headers: { "User-Agent": "Mozilla/5.0", Accept: "*/*", Referer: urlPartido },
+    });
+    if (!respuesta.ok) {
+      console.log("Diagnóstico final: marcador oficial HTTP " + respuesta.status);
+      return null;
+    }
+    const marcador = await respuesta.text();
+    const estado = marcador.match(/data-estado="([^"]*)"/)?.[1] || null;
+    const finalizada = marcador.match(/data-finalizada="([^"]*)"/)?.[1] === "true";
+    const puntos = [...marcador.matchAll(/class="marcador-box[^"]*">\s*(\d+)\s*</g)]
+      .map(m => Number(m[1]));
+    console.log("Diagnóstico marcador oficial:", JSON.stringify({ estado, finalizada, puntos }));
+    if (!(finalizada || estado === "FINALIZADO") || puntos.length !== 2) return null;
+    return { homeScore: puntos[0], awayScore: puntos[1] };
+  } catch (error) {
+    console.log("Diagnóstico final: marcador oficial no disponible:", error.message);
+    return null;
+  }
+}
+
 async function main() {
   console.log("Descargando partido oficial...");
 
