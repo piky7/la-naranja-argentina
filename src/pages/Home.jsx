@@ -1395,7 +1395,7 @@ const finishedMatch = {
 
                     return (
                       <article
-                        style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
+                        style={{...getMatchColorStyle(match.homeTeam, match.awayTeam), "--match-home-logo": `url("${homeTeam?.logo ?? ""}")`, "--match-away-logo": `url("${awayTeam?.logo ?? ""}")`}}
                          className={`home-fixture ${
                           isFinished
                             ? "home-fixture-finished"
