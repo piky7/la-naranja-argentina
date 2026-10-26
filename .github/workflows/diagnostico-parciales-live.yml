@@ -1,9 +1,6 @@
 name: Diagnóstico parciales LIVE (prueba 26 oct)
 
 on:
-  schedule:
-    # 20:20 Argentina (UTC-3), 26 de octubre. GitHub puede retrasar el inicio.
-    - cron: "20 23 26 10 *"
   workflow_dispatch:
 
 permissions:
@@ -15,7 +12,7 @@ concurrency:
 
 jobs:
   diagnostico:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '20 23 26 10 *'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 220
     steps:
