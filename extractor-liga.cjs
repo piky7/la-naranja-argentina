@@ -1,5 +1,6 @@
 const { extractTeamStats } = require("./scripts/official-team-stats.cjs");
 const { parseOfficialFinal } = require("./scripts/parse-official-final.cjs");
+const { extraerParcialesDesdeAcciones } = require("./scripts/extraer-parciales-acciones.cjs");
 
 const fs = require("node:fs");
 const cheerio = require("cheerio");
@@ -192,8 +193,22 @@ const encabezado = contenedor
     }
   }
 
+  const parcialesExtraidos = extraerParcialesDesdeAcciones(html);
+  const ultimoParcial = parcialesExtraidos.parciales.at(-1);
+  const quarterScores = finalPagina.status === "finished" && parcialesExtraidos.validos &&
+    ultimoParcial?.acumuladoLocal === finalPagina.homeScore &&
+    ultimoParcial?.acumuladoVisitante === finalPagina.awayScore
+    ? parcialesExtraidos.parciales.map(({ periodo, local, visitante }) => ({
+        period: periodo <= 4 ? String(periodo) : `OT${periodo - 4}`,
+        home: local,
+        away: visitante,
+      }))
+    : null;
+  console.log("Parciales oficiales:", quarterScores ? JSON.stringify(quarterScores) : "no verificables");
+
   const resultado = {
     source: "Liga Nacional",
+    ...(quarterScores ? { quarterScores } : {}),
     ...finalPagina,
     matchUrl: URL_PARTIDO,
     teams: equipos,
