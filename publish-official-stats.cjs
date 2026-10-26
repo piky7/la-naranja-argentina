@@ -86,7 +86,13 @@ const previousStats =
       : null
   );
 
-const quarterScores = previousStats?.quarterScores;
+const candidateQuarters = record.quarterScores;
+const quartersValid = (quarters) => Array.isArray(quarters) && quarters.length >= 4 &&
+  quarters.every(q => Number.isInteger(q.home) && Number.isInteger(q.away) && q.home >= 0 && q.away >= 0) &&
+  quarters.reduce((sum, q) => sum + q.home, 0) === record.homeScore &&
+  quarters.reduce((sum, q) => sum + q.away, 0) === record.awayScore;
+const quarterScores = quartersValid(candidateQuarters) ? candidateQuarters :
+  quartersValid(previousStats?.quarterScores) ? previousStats.quarterScores : null;
 
 matchStats[key] = {
   ...record,
