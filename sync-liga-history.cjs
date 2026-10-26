@@ -1,6 +1,7 @@
 
 const { isConfirmedFinal } = require("./scripts/official-final.cjs");
 const { isCandidate } = require("./scripts/official-poll-window.cjs");
+const { extraerParcialesDesdeAcciones } = require("./scripts/extraer-parciales-acciones.cjs");
 
 const fs = require("node:fs");
 const { spawnSync } = require("node:child_process");
@@ -226,6 +227,49 @@ async function main() {
 
     await esperar(ESPERA_MS);
   }
+
+  // Completar los cuartos de partidos ya guardados sin volver a publicar
+  // ni modificar sus estadísticas de jugadores o marcadores oficiales.
+  // Límite por ejecución para no saturar la Liga ni alargar el workflow.
+  let parcialesCompletados = 0;
+  let parcialesPendientes = 0;
+  const pendientes = historial.matches
+    .filter((p) => !Array.isArray(p.quarterScores) || p.quarterScores.length < 4)
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+
+  for (const registro of pendientes.slice(0, 6)) {
+    if (!registro.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+    try {
+      const respuesta = await fetch(registro.officialUrl, {
+        signal: AbortSignal.timeout(12000),
+        headers: { "User-Agent": "Mozilla/5.0" },
+      });
+      if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+      const html = await respuesta.text();
+      const extraidos = extraerParcialesDesdeAcciones(html);
+      const ultimo = extraidos.parciales.at(-1);
+      if (!extraidos.validos ||
+          ultimo?.acumuladoLocal !== registro.homeScore ||
+          ultimo?.acumuladoVisitante !== registro.awayScore) {
+        console.log("Parciales no verificables:", registro.date, registro.officialUrl);
+        parcialesPendientes++;
+        continue;
+      }
+      registro.quarterScores = extraidos.parciales.map(({ periodo, local, visitante }) => ({
+        period: periodo <= 4 ? String(periodo) : `OT${periodo - 4}`,
+        home: local,
+        away: visitante,
+      }));
+      fs.writeFileSync(OUTPUT, JSON.stringify(historial, null, 2), "utf8");
+      parcialesCompletados++;
+      console.log("Parciales oficiales completados:", registro.date, registro.homeScore, registro.awayScore);
+    } catch (error) {
+      console.warn("Sin parciales oficiales verificables:", registro.date, error.message);
+      parcialesPendientes++;
+    }
+    await esperar(ESPERA_MS);
+  }
+  console.log(`Parciales completados: ${parcialesCompletados}; pendientes revisados sin validación: ${parcialesPendientes}; restantes sin parciales: ${historial.matches.filter(p => !Array.isArray(p.quarterScores) || p.quarterScores.length < 4).length}`);
 
   if (fs.existsSync(TEMP)) {
     fs.unlinkSync(TEMP);
