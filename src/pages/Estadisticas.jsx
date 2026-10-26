@@ -370,9 +370,7 @@ return matchesSearch && matchesTeam && matchesMinGames;
             {title}
           </span>
 
-          <div className="stats-leader-medal">
-            <span>1</span>
-          </div>
+
         </div>
 
         {leader ? (
