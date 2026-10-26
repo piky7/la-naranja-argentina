@@ -6,6 +6,8 @@ import { officialSchedule } from "./officialSchedule";
 // Correcciones manuales de TV: tienen prioridad sobre el archivo generado automáticamente.
 const manualBroadcasts = {
   "2026-10-23-racing-chivilcoy-boca": "TyC Sports",
+  "2026-10-28-boca-regatas": "DSports",
+  "2026-10-29-lanus-san-martin": "TyC Sports",
 };
 
 const fixture = [
