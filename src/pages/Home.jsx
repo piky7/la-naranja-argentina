@@ -11,7 +11,7 @@ import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { teams } from "../data/teams";
+import { teams, getMatchColorStyle } from "../data/teams";
 import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { players } from "../data/players";
@@ -1395,7 +1395,8 @@ const finishedMatch = {
 
                     return (
                       <article
-                        className={`home-fixture ${
+                        style={getMatchColorStyle(match.homeTeam, match.awayTeam)}
+                         className={`home-fixture ${
                           isFinished
                             ? "home-fixture-finished"
                             : ""
