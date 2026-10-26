@@ -130,6 +130,32 @@ matchStats[key] = {
     throw new Error("Hay más partidos con estadísticas que resultados oficiales.");
   }
 
+  // Recuperación puntual y auditada: Racing de Chivilcoy 54–68 Quimsa (25/10).
+  // No modifica jugadores, resultados ni estadísticas colectivas.
+  const racingKey = "2026-10-25-racing-chivilcoy-quimsa";
+  const racingResult = matchResults[racingKey];
+  const racingStats = matchStats[racingKey];
+  if (
+    racingResult?.source === "Liga Nacional" &&
+    racingStats?.source === "Liga Nacional" &&
+    racingResult.homeScore === 54 && racingResult.awayScore === 68 &&
+    racingStats.homeScore === 54 && racingStats.awayScore === 68 &&
+    racingResult.officialUrl?.includes("/racing-ch-vs-quimsa") &&
+    racingStats.officialUrl?.includes("/racing-ch-vs-quimsa")
+  ) {
+    const verifiedQuarters = [
+      { period: "1", home: 16, away: 17 },
+      { period: "2", home: 8, away: 19 },
+      { period: "3", home: 16, away: 14 },
+      { period: "4", home: 14, away: 18 },
+    ];
+    if (verifiedQuarters.reduce((n, q) => n + q.home, 0) === 54 &&
+        verifiedQuarters.reduce((n, q) => n + q.away, 0) === 68) {
+      matchStats[racingKey] = { ...racingStats, quarterScores: verifiedQuarters };
+      console.log("Parciales oficiales Racing–Quimsa 25/10 incorporados sin alterar otras estadísticas.");
+    }
+  }
+
   fs.writeFileSync(MATCH_STATS, "export const matchPlayerStats = " + JSON.stringify(matchStats, null, 2) + ";\n", "utf8");
   fs.writeFileSync(MATCH_RESULTS, "export const matchResults = " + JSON.stringify(matchResults, null, 2) + ";\n", "utf8");
 
