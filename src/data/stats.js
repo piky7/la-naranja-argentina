@@ -1,3 +1,4 @@
+import { isPlayerAppearance } from "../utils/playerAppearance";
 import { players } from "./players";
 import { matchPlayerStats } from "./matchStats";
 
@@ -12,7 +13,7 @@ Object.values(matchPlayerStats).forEach((match) => {
     teamPlayers.forEach((player) => {
       const playerId = player.id;
 
-      if (!playerId) {
+      if (!playerId || !isPlayerAppearance(player)) {
         return;
       }
 
