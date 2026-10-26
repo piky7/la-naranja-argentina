@@ -1,3 +1,5 @@
+import useLiveMatch from "../hooks/useLiveMatch";
+import LiveMatchInfo from "../components/LiveMatchInfo";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
@@ -118,6 +120,7 @@ function Liga() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+  const upcomingLive = useLiveMatch(selectedUpcomingMatch);
   const [upcomingTab, setUpcomingTab] = useState("comparativa");
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 const [resultsPage, setResultsPage] = useState(null);
@@ -1205,7 +1208,7 @@ onClick={() => {
           }
         >
           <div
-          className="match-modal match-modal-upcoming"
+          className={`match-modal match-modal-upcoming${upcomingLive ? " match-modal-is-live" : ""}`}
             onClick={(event) =>
               event.stopPropagation()
             }
@@ -1275,10 +1278,9 @@ onClick={() => {
                 </div>
 
                 <div className="match-modal-score">
-                  <span className="match-modal-status">PRÓXIMO PARTIDO</span>
+                  <span className="match-modal-status">{upcomingLive ? `● EN VIVO · ${upcomingLive.isHalftime ? "ENTRETIEMPO" : upcomingLive.quarter ? `${upcomingLive.quarter}° CUARTO` : "PARTIDO EN JUEGO"}` : "PRÓXIMO PARTIDO"}</span>
                   <strong>
-                    {selectedUpcomingMatch.time ||
-                      "VS"}
+                    {upcomingLive && Number.isFinite(Number(upcomingLive.homeScore)) && Number.isFinite(Number(upcomingLive.awayScore)) ? `${upcomingLive.homeScore} - ${upcomingLive.awayScore}` : selectedUpcomingMatch.time || "VS"}
                   </strong>
 
                   {selectedUpcomingMatch.tv &&
@@ -1341,6 +1343,7 @@ onClick={() => {
               </div>
             </div>
 
+            <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
             <MatchVote match={selectedUpcomingMatch} />
             <div className="upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
               <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
@@ -1381,7 +1384,7 @@ onClick={() => {
     </>;
   })()}
 </div>
-<div className="upcoming-last-matches">
+{!upcomingLive && (<div className="upcoming-last-matches">
   <h3>ÚLTIMOS 2 PARTIDOS</h3>
 
   <div className="upcoming-last-matches-grid">
@@ -1447,7 +1450,7 @@ onClick={() => {
       </div>
     ))}
   </div>
-</div>
+</div>)}
               </div>)}
               {upcomingTab === "jugadores" && (
                 <div className="upcoming-tab-panel upcoming-players-comparison" role="tabpanel">
