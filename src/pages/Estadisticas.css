@@ -2200,3 +2200,31 @@
   .stats-leader-value strong { font-size:clamp(21px,5.7vw,25px); }
   .stats-leader-player { gap:8px; }
 }
+
+
+/* Dar protagonismo al nombre del líder y hacer evidente la interacción. */
+.stats-leader-card-clickable { cursor:pointer; transition:border-color .18s ease,background .18s ease; }
+.stats-leader-card-clickable:hover,
+.stats-leader-card-clickable:focus-visible {
+  border-color:#ff921d;
+  background:linear-gradient(160deg,#1b3147,#102237);
+}
+.stats-leader-card-clickable:focus-visible { outline:2px solid #ff921d; outline-offset:2px; }
+.stats-leader-player > strong {
+  display:block;
+  width:100%;
+  text-align:center;
+  color:#fff;
+  font-weight:900;
+  font-size:clamp(13px,1.5vw,18px);
+  line-height:1.18;
+  text-shadow:0 2px 5px rgba(0,0,0,.7);
+}
+@media(max-width:600px) {
+  .stats-leader-player > strong {
+    font-size:clamp(11px,2.85vw,14px);
+    letter-spacing:-.2px;
+    line-height:1.15;
+    overflow-wrap:break-word;
+  }
+}
