@@ -271,6 +271,51 @@ function obtenerPeriodo(html, status) {
 }
 
 
+// Parciales en vivo reconstruidos desde las jugadas oficiales.
+ // Cada acción incluye el cuarto y el marcador acumulado. La lista llega
+ // en orden inverso, por lo que el primer marcador de cada cuarto es el último.
+function obtenerParcialesOficiales(html, marcador, periodo) {
+  if (marcador.status !== "live" && marcador.status !== "finished") return null;
+  const home = marcador.homeScore;
+  const away = marcador.awayScore;
+  if (!Number.isInteger(home) || !Number.isInteger(away) || home < 0 || away < 0) return null;
+
+  const acciones = [...html.matchAll(/<li\b[^>]*class="[^"]*\baccion\b[^"]*"[^>]*>[\s\S]*?<\/li>/gi)];
+  const acumulados = new Map();
+  for (const [fragmento] of acciones) {
+    const cuarto = fragmento.match(/Cuarto\s+(\d+)\s*-\s*\d{2}:\d{2}:\d{2}/i);
+    const marcadorAccion = fragmento.match(/class="[^"]*informacionAdicional[^"]*"[^>]*>\s*(\d+)\s*-\s*(\d+)\s*<\/strong>/i);
+    if (!cuarto || !marcadorAccion) continue;
+    const n = Number(cuarto[1]);
+    if (n >= 1 && n <= 10 && !acumulados.has(n)) {
+      acumulados.set(n, [Number(marcadorAccion[1]), Number(marcadorAccion[2])]);
+    }
+  }
+
+  // El cuarto actual se toma del marcador oficial, no de una acción que
+  // podría estar retrasada respecto al último tanteador publicado.
+  const actual = Number(periodo.quarter);
+  if (!Number.isInteger(actual) || actual < 1 || actual > 10) return null;
+  const parciales = [];
+  let previoLocal = 0;
+  let previoVisitante = 0;
+  for (let n = 1; n <= actual; n++) {
+    const acumulado = n === actual ? [home, away] : acumulados.get(n);
+    if (!acumulado) return null;
+    const [local, visitante] = acumulado;
+    if (local < previoLocal || visitante < previoVisitante ||
+        local > home || visitante > away) return null;
+    parciales.push({
+      period: n <= 4 ? String(n) : `OT${n - 4}`,
+      home: local - previoLocal,
+      away: visitante - previoVisitante,
+    });
+    previoLocal = local;
+    previoVisitante = visitante;
+  }
+  return previoLocal === home && previoVisitante === away ? parciales : null;
+}
+
 async function obtenerMarcador(partido) {
   console.log(
     "Consultando marcador oficial:",
@@ -308,7 +353,8 @@ async function obtenerMarcador(partido) {
   const marcador = interpretarMarcador(marcadorHTML);
   const periodo = obtenerPeriodo(html, marcador.status);
 
-  return { ...marcador, ...periodo };
+  const quarterScores = obtenerParcialesOficiales(html, marcador, periodo);
+  return { ...marcador, ...periodo, ...(quarterScores ? { quarterScores } : {}) };
 }
 
 
@@ -548,6 +594,7 @@ if (anterior?.status === "finished") {
         minutesRemaining: marcador.minutesRemaining,
         isHalftime: marcador.isHalftime,
         lastActionTime: marcador.lastActionTime,
+        quarterScores: marcador.quarterScores || anterior?.quarterScores || null,
         timestamp: evento.timestamp,
         status: marcador.status,
         isLive: marcador.status === "live",
