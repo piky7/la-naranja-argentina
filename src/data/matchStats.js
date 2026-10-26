@@ -49141,6 +49141,28 @@ export const matchPlayerStats = {
         "number": "83",
         "starter": false
       }
+    ],
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 16,
+        "away": 17
+      },
+      {
+        "period": "2",
+        "home": 8,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 16,
+        "away": 14
+      },
+      {
+        "period": "4",
+        "home": 14,
+        "away": 18
+      }
     ]
   }
 };
