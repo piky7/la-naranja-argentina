@@ -2091,3 +2091,17 @@
   .stats-team img { width:22px; height:22px; flex-basis:22px; }
   .stats-table td.stats-active-column { color:#ff921d; }
 }
+
+
+/* Cuatro líderes y nueva columna de valoración, sin scroll horizontal. */
+.stats-leaders { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stats-table th:first-child, .stats-table td:first-child { width: 34%; }
+.stats-table th:nth-child(2), .stats-table td:nth-child(2) { width: 24%; }
+.stats-table th:nth-child(n+3), .stats-table td:nth-child(n+3) { width: 8.4%; }
+@media (max-width: 600px) {
+  .stats-leaders { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats-table th:first-child, .stats-table td:first-child { width: 35%; }
+  .stats-table th:nth-child(2), .stats-table td:nth-child(2) { width: 23%; }
+  .stats-table th:nth-child(n+3), .stats-table td:nth-child(n+3) { width: 8.4%; }
+  .stats-table th:nth-child(7), .stats-table td:nth-child(7) { font-size: 9px; }
+}
