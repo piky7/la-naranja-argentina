@@ -167,9 +167,34 @@ const encabezado = contenedor
 
   extractTeamStats($, equipos);
 
+  const finalPagina = parseOfficialFinal($, URL_PARTIDO);
+  const elemento = $("#status-partido");
+  console.log("Diagnóstico estado página:", JSON.stringify({
+    cantidad: elemento.length,
+    clase: elemento.attr("class") || null,
+    texto: elemento.text().trim().slice(0, 100),
+    marcador: [finalPagina.homeScore, finalPagina.awayScore],
+  }));
+  if (finalPagina.status !== "finished") {
+    const marcadorOficial = await comprobarFinalMarcadorOficial(html, URL_PARTIDO);
+    if (marcadorOficial &&
+        marcadorOficial.homeScore === finalPagina.homeScore &&
+        marcadorOficial.awayScore === finalPagina.awayScore) {
+      finalPagina.status = "finished";
+      finalPagina.finalEvidence = {
+        type: "official-final-status",
+        officialUrl: URL_PARTIDO,
+        method: "official-scoreboard-confirmed",
+      };
+      console.log("Final confirmado por marcador oficial y planilla coincidentes.");
+    } else {
+      console.log("Final no confirmado: estadísticas bloqueadas.");
+    }
+  }
+
   const resultado = {
     source: "Liga Nacional",
-    ...parseOfficialFinal($, URL_PARTIDO),
+    ...finalPagina,
     matchUrl: URL_PARTIDO,
     teams: equipos,
   };
