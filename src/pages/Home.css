@@ -10553,3 +10553,16 @@
 .standings-panel .home-standing-row:has(.standing-position-descenso){
   background:linear-gradient(90deg,rgba(165,36,56,.30) 0%,rgba(165,36,56,.11) 42%,rgba(165,36,56,0) 83%),#101c2a !important;
 }
+
+/* Fondo institucional de cada equipo en el fixture del Home. */
+.home-page .home-fixture {
+  background-image:
+    linear-gradient(90deg,color-mix(in srgb,var(--match-home-color,#18334b) 48%,transparent) 0%,transparent 38%,transparent 62%,color-mix(in srgb,var(--match-away-color,#18334b) 48%,transparent) 100%),
+    linear-gradient(180deg,#112338,#0c1a2b);
+  background-color:#0c1a2b;
+}
+@media (pointer:coarse) {
+  .home-page .home-fixture-clickable:is(:hover,:focus,:focus-visible) {
+    background-image:linear-gradient(90deg,color-mix(in srgb,var(--match-home-color,#18334b) 48%,transparent),transparent 38%,transparent 62%,color-mix(in srgb,var(--match-away-color,#18334b) 48%,transparent)),linear-gradient(180deg,#112338,#0c1a2b);
+  }
+}
