@@ -1,5 +1,6 @@
 import useLiveMatch from "../hooks/useLiveMatch";
 import LiveMatchInfo from "../components/LiveMatchInfo";
+import LiveRosters from "../components/LiveRosters";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
@@ -116,7 +117,8 @@ function Home() {
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
-const [upcomingTab, setUpcomingTab] = useState("comparativa");
+const [upcomingTab, setUpcomingTab] = useState("planteles");
+useEffect(() => { setUpcomingTab("planteles"); }, [selectedUpcomingMatch?.id]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
 const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
@@ -1927,12 +1929,22 @@ const finishedMatch = {
 
             <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
             <MatchVote match={selectedUpcomingMatch} />
+            {upcomingLive && <>
+              <div className="upcoming-tabs" role="tablist" aria-label="Información del partido en vivo">
+                <button type="button" role="tab" aria-selected={upcomingTab !== "comparativa"} className={upcomingTab !== "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("planteles")}>♟ Planteles</button>
+                <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
+              </div>
+              {upcomingTab !== "comparativa" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
+                <LiveRosters homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} matches={matches} onPlayerClick={setSelectedPlayer} />}
+            </>}
+            {!upcomingLive && <>
             <div className="upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
               <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
               <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores destacados</button>
             </div>
-            <section className="match-highlighted-section">
-              {upcomingTab === "comparativa" && (<div className="upcoming-tab-panel" role="tabpanel">
+            </>}
+            {(upcomingLive ? upcomingTab === "comparativa" : upcomingTab !== "jugadores") && <section className="match-highlighted-section">
+              {(upcomingLive || upcomingTab !== "jugadores") && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
 <div className="upcoming-team-comparison upcoming-official-comparison">
@@ -2034,7 +2046,7 @@ const finishedMatch = {
   </div>
 </div>)}
               </div>)}
-              {upcomingTab === "jugadores" && (
+              {!upcomingLive && upcomingTab === "jugadores" && (
                 <div className="upcoming-tab-panel upcoming-players-comparison" role="tabpanel">
                   <div className="match-highlighted-title">
                     <h3>JUGADORES DESTACADOS</h3>
@@ -2081,7 +2093,7 @@ const finishedMatch = {
                   })}
                 </div>
               )}
-            </section>
+            </section>}
 
             <div className="match-modal-footer">
               <span>LNA</span>
