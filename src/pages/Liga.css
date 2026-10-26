@@ -2944,3 +2944,14 @@
     transform: scale(.985) !important;
   }
 }
+
+/* Zonas de clasificación: mismos degradados que Home en la tabla de Liga. */
+.league-page .standings-card .standing-row:has(.standing-position-direct){
+  background:linear-gradient(90deg,rgba(8,119,68,.30) 0%,rgba(8,119,68,.12) 42%,rgba(8,119,68,0) 83%),#101c2a;
+}
+.league-page .standings-card .standing-row:has(.standing-position-reclasificacion){
+  background:linear-gradient(90deg,rgba(183,133,25,.28) 0%,rgba(183,133,25,.11) 42%,rgba(183,133,25,0) 83%),#101c2a;
+}
+.league-page .standings-card .standing-row:has(.standing-position-descenso){
+  background:linear-gradient(90deg,rgba(165,36,56,.30) 0%,rgba(165,36,56,.11) 42%,rgba(165,36,56,0) 83%),#101c2a;
+}
