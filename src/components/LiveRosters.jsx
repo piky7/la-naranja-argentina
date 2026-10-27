@@ -57,7 +57,8 @@ function getRoster(teamId, matches) {
       points: t.points / t.games, rebounds: t.rebounds / t.games, assists: t.assists / t.games,
       minutes: t.minutesGames ? t.seconds / t.minutesGames : null,
     } : null };
-  }).sort((a, b) => (b.averages?.minutes ?? -1) - (a.averages?.minutes ?? -1) || a.name.localeCompare(b.name, "es"));
+  }).filter(player => Number.isFinite(player.averages?.minutes) && player.averages.minutes > 0)
+    .sort((a, b) => (b.averages?.minutes ?? -1) - (a.averages?.minutes ?? -1) || a.name.localeCompare(b.name, "es"));
 }
 
 const formatNumber = value => Number.isFinite(value) ? value.toFixed(1) : "—";
