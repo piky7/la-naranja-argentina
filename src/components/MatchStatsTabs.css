@@ -268,3 +268,54 @@
 .match-stats-tabs .match-team-comparison-track.match-team-comparison-track-winner span {
   background: #f58220;
 }
+
+
+/* LNA: selector móvil compacto y mayor prioridad para nombres del boxscore. */
+@media (max-width: 767px) {
+  .match-modal-finished .match-stats-tabs .match-player-team-selector {
+    margin-top: 5px;
+    gap: 5px;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option {
+    min-height: 35px;
+    padding: 4px 7px;
+    gap: 7px;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option img {
+    width: 25px;
+    height: 25px;
+    flex-basis: 25px;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option-text strong {
+    font-size: 13px;
+    font-weight: 850;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option-text small {
+    display: none;
+  }
+  .match-modal-finished .match-stats-tabs .match-stats-head,
+  .match-modal-finished .match-stats-tabs .match-stat-player {
+    grid-template-columns: minmax(0, 1fr) 25px 25px 25px 39px 27px !important;
+    column-gap: 1px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+  .match-modal-finished .match-stats-tabs .match-stat-player strong {
+    font-size: 10px;
+    font-weight: 800;
+  }
+}
+
+/* Degradado institucional sutil: concentrado detrás del nombre, sin teñir cifras. */
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player,
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player:nth-child(even) {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--boxscore-team-color, #18334b) 38%, #101d2a) 0%,
+    color-mix(in srgb, var(--boxscore-team-color, #18334b) 14%, #101d2a) 43%,
+    #101d2a 78%) !important;
+}
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player:hover {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--boxscore-team-color, #18334b) 50%, #172a3b) 0%,
+    #172a3b 80%) !important;
+}
