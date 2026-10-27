@@ -6,6 +6,8 @@ on:
     - cron: "30 6 * * *"
     # Cada 10 minutos, las 24 horas (UTC).
     - cron: "*/10 * * * *"
+    # Sincronización completa del fixture cada 6 horas (UTC: 00, 06, 12, 18).
+    - cron: "0 */6 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -32,7 +34,7 @@ concurrency:
 jobs:
   actualizar-oficial:
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ github.event_name == 'schedule' && github.event.schedule != '30 6 * * *' && 12 || 30 }}
+    timeout-minutes: ${{ github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *' && 12 || 30 }}
     env:
       OFFICIAL_SCHEDULE: ${{ github.event.schedule }}
 
