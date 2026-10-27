@@ -304,7 +304,7 @@ export default function FinishedMatchModal({
                         .map((player) => (
                           <button
                             type="button"
-                            className="match-stat-player"
+                            className={`match-stat-player${selectedMatchMvp?.teamId === selectedMatch.homeTeam && selectedMatchMvp?.player.id === player.id ? " match-stat-player-mvp" : ""}`}
                             key={player.id}
                             onClick={(event) => {
                               event.stopPropagation();
@@ -405,7 +405,7 @@ export default function FinishedMatchModal({
                         .map((player) => (
                           <button
                             type="button"
-                            className="match-stat-player"
+                            className={`match-stat-player${selectedMatchMvp?.teamId === selectedMatch.awayTeam && selectedMatchMvp?.player.id === player.id ? " match-stat-player-mvp" : ""}`}
                             key={player.id}
                             onClick={(event) => {
                               event.stopPropagation();
