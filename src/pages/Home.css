@@ -10628,3 +10628,21 @@
     line-height: 1.1;
   }
 }
+
+/* MVP: identidad del equipo con detalles dorados en la tarjeta superior solamente. */
+.match-modal-finished .match-mvp-card {
+  background:
+    radial-gradient(ellipse at 10% 50%, rgba(237, 187, 83, .13), transparent 58%),
+    linear-gradient(105deg,
+      color-mix(in srgb, var(--mvp-team-color, #18334b) 37%, #101d2a) 0%,
+      color-mix(in srgb, var(--mvp-team-color, #18334b) 17%, #101d2a) 48%,
+      #101d2a 100%) !important;
+  border-color: rgba(232, 182, 86, .75) !important;
+  box-shadow: inset 3px 0 rgba(241, 193, 96, .85), 0 0 16px rgba(215, 160, 58, .08);
+}
+.match-modal-finished .match-mvp-heading {
+  color: #f0bd65 !important;
+}
+.match-modal-finished .match-mvp-name strong {
+  color: #ffe2aa;
+}
