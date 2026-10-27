@@ -4,8 +4,8 @@ on:
   schedule:
     # 03:30 en Argentina; permite que terminen los partidos nocturnos.
     - cron: "30 6 * * *"
-    # 11:00–14:55 y 18:00–01:55 ART (UTC = ART + 3).
-    - cron: "*/5 0-4,14-17,21-23 * * *"
+    # Cada 10 minutos, las 24 horas (UTC).
+    - cron: "*/10 * * * *"
   workflow_dispatch:
   push:
     branches:
