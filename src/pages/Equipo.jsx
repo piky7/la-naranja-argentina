@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
 
@@ -669,27 +669,17 @@ const goToTeam = (targetTeamId) => {
      MÁS CERCANO → MÁS LEJANO
      ========================================= */
 
-  // Filtrar ambos grupos en una sola pasada y conservar el orden original.
-  const { upcomingMatches, allFinishedMatches } = useMemo(() => {
-    const scheduled = [];
-    const finished = [];
-    for (const match of teamMatches) {
-      if (match.status === "scheduled") scheduled.push(match);
-      else if (match.status === "finished") finished.push(match);
-    }
-    scheduled.sort((a, b) => {
-      if (a.date !== b.date) return a.date.localeCompare(b.date);
-      return (a.time || "").localeCompare(b.time || "");
-    });
-    finished.sort((a, b) => {
-      if (a.date !== b.date) return b.date.localeCompare(a.date);
-      return (b.time || "").localeCompare(a.time || "");
-    });
-    return {
-      upcomingMatches: scheduled.slice(0, 6),
-      allFinishedMatches: finished,
-    };
-  }, [teamId]);
+  // Una sola pasada para separar próximos partidos y resultados.
+  const scheduled = [];
+  const allFinishedMatches = [];
+  for (const match of teamMatches) {
+    if (match.status === "scheduled") scheduled.push(match);
+    else if (match.status === "finished") allFinishedMatches.push(match);
+  }
+  const upcomingMatches = scheduled
+    .sort((a, b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || ""))
+    .slice(0, 6);
+  allFinishedMatches.sort((a, b) => b.date.localeCompare(a.date) || (b.time || "").localeCompare(a.time || ""));
 
 const resultsPerPage = 10;
 const totalResultsPages = Math.ceil(
