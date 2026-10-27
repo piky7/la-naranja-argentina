@@ -552,13 +552,18 @@ function getUpcomingOfficialCollective(teamId) {
 }
 
 
+// Calcular cada promedio colectivo una vez por equipo para rankings y comparativas.
+const UPCOMING_COLLECTIVE_BY_TEAM = new Map(
+  teams.map(team => [team.id, getUpcomingOfficialCollective(team.id)])
+);
+
 // Puestos oficiales comparables entre los 18 equipos (solo planillas válidas).
 // Los empates comparten posición; equipos sin dato no reciben puesto.
 const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
   UPCOMING_COLLECTIVE_STATS.map(([, key, lowerIsBetter]) => {
     const entries = teams.map(team => ({
       id: team.id,
-      value: getUpcomingOfficialCollective(team.id).values[key],
+      value: UPCOMING_COLLECTIVE_BY_TEAM.get(team.id).values[key],
     })).filter(item => Number.isFinite(item.value));
     entries.sort((a, b) => (lowerIsBetter ? a.value - b.value : b.value - a.value));
     const ranks = {};
@@ -1622,8 +1627,8 @@ const awayTeam = getTeam(match.awayTeam);
 <div className="upcoming-team-comparison upcoming-official-comparison">
   <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
   {(() => {
-    const home = getUpcomingOfficialCollective(selectedUpcomingMatch.homeTeam);
-    const away = getUpcomingOfficialCollective(selectedUpcomingMatch.awayTeam);
+    const home = UPCOMING_COLLECTIVE_BY_TEAM.get(selectedUpcomingMatch.homeTeam);
+    const away = UPCOMING_COLLECTIVE_BY_TEAM.get(selectedUpcomingMatch.awayTeam);
     return <>
       <CategoryBalance home={home} away={away} homeId={selectedUpcomingMatch.homeTeam} awayId={selectedUpcomingMatch.awayTeam} stats={UPCOMING_COLLECTIVE_STATS} />
       <p className="upcoming-collective-source">Partidos con datos: {home.games} / {away.games} · Naranja = mejor registro</p>
