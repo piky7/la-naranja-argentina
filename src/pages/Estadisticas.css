@@ -2290,3 +2290,17 @@
   .stats-leader-card { border-color:#a98042; box-shadow:inset 0 1px 0 rgba(255,226,160,.2); }
   .stats-leader-card::after { right:-60%; bottom:-15%; }
 }
+
+/* Estadísticas: degradado sutil del equipo de cada jugador, sin alterar medallas ni columnas. */
+.stats-page .stats-table tbody tr,
+.stats-page .stats-table tbody tr:nth-child(even) {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--stats-team-color, #18334b) 32%, #122235) 0%,
+    color-mix(in srgb, var(--stats-team-color, #18334b) 12%, #122235) 35%,
+    #122235 76%) !important;
+}
+.stats-page .stats-table tbody tr:hover {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--stats-team-color, #18334b) 43%, #1b3146) 0%,
+    #1b3146 75%) !important;
+}
