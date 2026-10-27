@@ -6,6 +6,28 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 74,
     "awayScore": 92,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 12,
+        "away": 26
+      },
+      {
+        "period": "2",
+        "home": 15,
+        "away": 26
+      },
+      {
+        "period": "3",
+        "home": 18,
+        "away": 21
+      },
+      {
+        "period": "4",
+        "home": 29,
+        "away": 19
+      }
+    ],
     "teamStats": {
       "lanus": {
         "fieldGoals": {
@@ -1266,28 +1288,6 @@ export const matchPlayerStats = {
         "plusMinus": 3,
         "number": "88",
         "starter": false
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 12,
-        "away": 26
-      },
-      {
-        "period": "2",
-        "home": 15,
-        "away": 26
-      },
-      {
-        "period": "3",
-        "home": 18,
-        "away": 21
-      },
-      {
-        "period": "4",
-        "home": 29,
-        "away": 19
       }
     ]
   },
@@ -2590,6 +2590,28 @@ export const matchPlayerStats = {
     "awayTeam": "ferro",
     "homeScore": 79,
     "awayScore": 68,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 21,
+        "away": 17
+      },
+      {
+        "period": "2",
+        "home": 23,
+        "away": 20
+      },
+      {
+        "period": "3",
+        "home": 14,
+        "away": 22
+      },
+      {
+        "period": "4",
+        "home": 21,
+        "away": 9
+      }
+    ],
     "teamStats": {
       "argentino": {
         "fieldGoals": {
@@ -3851,28 +3873,6 @@ export const matchPlayerStats = {
         "number": "26",
         "starter": false
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 21,
-        "away": 17
-      },
-      {
-        "period": "2",
-        "home": 23,
-        "away": 20
-      },
-      {
-        "period": "3",
-        "home": 14,
-        "away": 22
-      },
-      {
-        "period": "4",
-        "home": 21,
-        "away": 9
-      }
     ]
   },
   "2026-09-30-san-martin-instituto": {
@@ -3882,6 +3882,28 @@ export const matchPlayerStats = {
     "awayTeam": "instituto",
     "homeScore": 73,
     "awayScore": 81,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 19,
+        "away": 22
+      },
+      {
+        "period": "2",
+        "home": 23,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 12,
+        "away": 17
+      },
+      {
+        "period": "4",
+        "home": 19,
+        "away": 23
+      }
+    ],
     "teamStats": {
       "san-martin": {
         "fieldGoals": {
@@ -5142,28 +5164,6 @@ export const matchPlayerStats = {
         "plusMinus": 12,
         "number": "72",
         "starter": true
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 19,
-        "away": 22
-      },
-      {
-        "period": "2",
-        "home": 23,
-        "away": 19
-      },
-      {
-        "period": "3",
-        "home": 12,
-        "away": 17
-      },
-      {
-        "period": "4",
-        "home": 19,
-        "away": 23
       }
     ]
   },

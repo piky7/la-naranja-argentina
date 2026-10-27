@@ -472,20 +472,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2gyPj462Rm3Y3P6xTXhQXqjpsw6uW8HyviGsonyuvW0pAioqZEF6ILQ==/boca-vs-la-union-fsa"
   },
   {
-    "id": "2026-11-08-racing-chivilcoy-regatas",
-    "date": "2026-11-08",
-    "time": null,
-    "homeTeam": "racing-chivilcoy",
-    "awayTeam": "regatas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
-  },
-  {
     "id": "2026-11-08-san-lorenzo-san-martin",
     "date": "2026-11-08",
     "time": null,
     "homeTeam": "san-lorenzo",
     "awayTeam": "san-martin",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BC4yg1A_AQP5LCuOTtxu1GMW8kVihViJDas2jqehqvumUvNyVAObTw==/san-lorenzo-vs-san-martin-c"
+  },
+  {
+    "id": "2026-11-08-racing-chivilcoy-regatas",
+    "date": "2026-11-08",
+    "time": null,
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "regatas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
   },
   {
     "id": "2026-11-08-quimsa-instituto",
@@ -576,20 +576,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NiT2DNBpmRwkAzX5foy4IFEaYOZ-LMcsvGdP50-aiaiESRS21cC8bA==/gimnasia-cr-vs-platense"
   },
   {
-    "id": "2026-11-15-san-martin-quimsa",
-    "date": "2026-11-15",
-    "time": null,
-    "homeTeam": "san-martin",
-    "awayTeam": "quimsa",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
-  },
-  {
     "id": "2026-11-15-la-union-atenas",
     "date": "2026-11-15",
     "time": null,
     "homeTeam": "la-union",
     "awayTeam": "atenas",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
+  },
+  {
+    "id": "2026-11-15-san-martin-quimsa",
+    "date": "2026-11-15",
+    "time": null,
+    "homeTeam": "san-martin",
+    "awayTeam": "quimsa",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
   },
   {
     "id": "2026-11-15-argentino-lanus",
