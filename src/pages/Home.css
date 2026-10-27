@@ -10597,3 +10597,22 @@
  .home-page .fixture-panel .fixture-team-name small{font-size:clamp(9px,2.6vw,12px)}
  .home-page .fixture-panel .fixture-center{border-color:rgba(204,217,231,.2)}
 }
+
+/* LIVE: reloj en segunda línea dentro de la columna central, sin invadir escudos. */
+.match-modal-upcoming.match-modal-is-live .match-modal-status {
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  text-align:center;
+  white-space:normal;
+  line-height:1.2;
+}
+.match-modal-upcoming.match-modal-is-live .match-modal-live-remaining {
+  display:block;
+  margin-top:2px;
+  color:#ffac65;
+  font-size:inherit;
+  font-weight:800;
+  white-space:nowrap;
+}
