@@ -384,7 +384,12 @@ const getHighlightedPlayers = (teamId, stat) => {
     .slice(0, 2);
 };
 
-const getOfficialPlayerLeaders = (teamId, field) => {
+// Conservar resultados por equipo/categoría mientras no cambien los partidos.
+  // Abrir o cerrar un popup no vuelve a procesar todas las planillas oficiales.
+  const officialLeadersCache = useMemo(() => new Map(), [matches]);
+  const getOfficialPlayerLeaders = (teamId, field) => {
+    const cacheKey = `${teamId}|${field}`;
+    if (officialLeadersCache.has(cacheKey)) return officialLeadersCache.get(cacheKey);
     const totals = new Map();
     const seen = new Set();
     for (const match of matches) {
@@ -404,9 +409,11 @@ const getOfficialPlayerLeaders = (teamId, field) => {
         totals.set(entry.id, { sum: old.sum + value, games: old.games + 1 });
       });
     }
-    return players.filter(player => player.teamId === teamId && totals.has(player.id))
+    const leaders = players.filter(player => player.teamId === teamId && totals.has(player.id))
       .map(player => ({ ...player, team: getTeam(teamId), stats: { [field]: totals.get(player.id).sum / totals.get(player.id).games } }))
       .sort((a, b) => b.stats[field] - a.stats[field]).slice(0, 2);
+    officialLeadersCache.set(cacheKey, leaders);
+    return leaders;
   };
 
   const upcomingLeaderCategories = [
