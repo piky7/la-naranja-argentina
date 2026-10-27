@@ -1015,32 +1015,66 @@ const standingsMatches = matches.map((match) => {
   }, [selectedDate]);
 
   const topScorers = useMemo(() => {
-    return players
-      .map((player) => {
-        const stats = getPlayerStats(player.id);
-        const team = getTeam(player.teamId);
+    // Un único recorrido de planillas oficiales para todos los jugadores.
+    // Mantener los mismos filtros y el mismo criterio de partidos únicos
+    // que getPlayerStats, usado por las fichas de jugadores.
+    const totalsByPlayer = new Map();
+    const seenByPlayer = new Map();
+    const playersByTeam = new Map();
+    for (const player of players) {
+      if (!player.teamId) continue;
+      if (!playersByTeam.has(player.teamId)) playersByTeam.set(player.teamId, new Set());
+      playersByTeam.get(player.teamId).add(player.id);
+    }
 
-        return {
-          ...player,
-          team,
-          stats,
-          points: stats?.points ?? null,
-        };
-      })
-      .filter(
-        (player) => player.stats?.gamesPlayed > 0
-      )
-      .sort((a, b) => {
-        if (b.points !== a.points) {
-          return b.points - a.points;
+    for (const match of matches) {
+      if (!isMatchFinished(match)) continue;
+      if (!/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
+      const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+      const record = matchPlayerStats[match.id] || matchPlayerStats[key];
+      if (record?.source !== "Liga Nacional" ||
+          !record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
+      for (const teamId of new Set([match.homeTeam, match.awayTeam])) {
+        const eligible = playersByTeam.get(teamId);
+        if (!eligible) continue;
+        for (const stat of record[teamId] || []) {
+          if (!eligible.has(stat.id) || !isPlayerAppearance(stat)) continue;
+          if (!seenByPlayer.has(stat.id)) seenByPlayer.set(stat.id, new Set());
+          const seen = seenByPlayer.get(stat.id);
+          if (seen.has(key)) continue;
+          seen.add(key);
+          const totals = totalsByPlayer.get(stat.id) || { gamesPlayed: 0, points: 0, rebounds: 0, assists: 0 };
+          totals.gamesPlayed++;
+          for (const field of ["points", "rebounds", "assists"]) {
+            totals[field] += Number(stat[field]) || 0;
+          }
+          totalsByPlayer.set(stat.id, totals);
         }
+      }
+    }
 
-        return a.name.localeCompare(b.name, "es");
+    const savedByPlayer = new Map(playerStats.map(stats => [stats.playerId, stats]));
+    const teamById = new Map(teams.map(team => [team.id, team]));
+    return players
+      .map(player => {
+        const saved = savedByPlayer.get(player.id);
+        const totals = totalsByPlayer.get(player.id);
+        const stats = totals?.gamesPlayed
+          ? {
+              ...saved,
+              playerId: player.id,
+              gamesPlayed: totals.gamesPlayed,
+              points: totals.points / totals.gamesPlayed,
+              rebounds: totals.rebounds / totals.gamesPlayed,
+              assists: totals.assists / totals.gamesPlayed,
+            }
+          : saved;
+        return { ...player, team: teamById.get(player.teamId), stats, points: stats?.points ?? null };
       })
+      .filter(player => player.stats?.gamesPlayed > 0)
+      .sort((a, b) => b.points - a.points || a.name.localeCompare(b.name, "es"))
       .slice(0, 10);
   }, []);
-
-    
 
   // Módulos editoriales exclusivos de escritorio, derivados de los datos existentes.
   const upcomingDesktop = matches
