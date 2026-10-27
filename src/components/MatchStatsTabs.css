@@ -319,3 +319,25 @@
     color-mix(in srgb, var(--boxscore-team-color, #18334b) 50%, #172a3b) 0%,
     #172a3b 80%) !important;
 }
+
+/* Jugador del partido: degradado institucional con acento dorado discreto. */
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player.match-stat-player-mvp,
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player.match-stat-player-mvp:nth-child(even) {
+  background:
+    linear-gradient(90deg, rgba(231, 180, 69, .19) 0%, rgba(231, 180, 69, .07) 38%, transparent 74%),
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--boxscore-team-color, #18334b) 45%, #101d2a) 0%,
+      color-mix(in srgb, var(--boxscore-team-color, #18334b) 14%, #101d2a) 43%,
+      #101d2a 78%) !important;
+  box-shadow: inset 3px 0 #e5b65b;
+}
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player.match-stat-player-mvp:hover {
+  background:
+    linear-gradient(90deg, rgba(231, 180, 69, .25), transparent 75%),
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--boxscore-team-color, #18334b) 50%, #172a3b),
+      #172a3b 80%) !important;
+}
+.match-modal-finished .match-stats-tabs .match-stat-player-mvp strong {
+  color: #ffe1a0 !important;
+}
