@@ -109,6 +109,14 @@ const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
   })
 );
 
+// Índices de consulta rápida: mantienen la primera coincidencia de cada lista.
+const TEAMS_BY_ID = new Map();
+for (const team of teams) if (!TEAMS_BY_ID.has(team.id)) TEAMS_BY_ID.set(team.id, team);
+const PLAYERS_BY_ID = new Map();
+for (const player of players) if (!PLAYERS_BY_ID.has(player.id)) PLAYERS_BY_ID.set(player.id, player);
+const PLAYER_STATS_BY_ID = new Map();
+for (const stats of playerStats) if (!PLAYER_STATS_BY_ID.has(stats.playerId)) PLAYER_STATS_BY_ID.set(stats.playerId, stats);
+
 function Liga() {
   const getLocalDate = () => {
     const date = new Date();
@@ -160,17 +168,17 @@ function Liga() {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
-  const selectedUpcomingHomeTeam = selectedUpcomingMatch ? teams.find(team => team.id === selectedUpcomingMatch.homeTeam) : null;
-  const selectedUpcomingAwayTeam = selectedUpcomingMatch ? teams.find(team => team.id === selectedUpcomingMatch.awayTeam) : null;
+  const selectedUpcomingHomeTeam = selectedUpcomingMatch ? TEAMS_BY_ID.get(selectedUpcomingMatch.homeTeam) : null;
+  const selectedUpcomingAwayTeam = selectedUpcomingMatch ? TEAMS_BY_ID.get(selectedUpcomingMatch.awayTeam) : null;
   const [upcomingTab, setUpcomingTab] = useState("comparativa");
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 const [resultsPage, setResultsPage] = useState(null);
   const getTeamPosition = (id) => standings.findIndex(t => t.id === id) + 1;
   const getTeamRecord = (id) => { const t = standings.find(t => t.id === id); return { wins: t?.wins ?? 0, losses: t?.losses ?? 0 }; };
-  const getPlayerStats = (id) => playerStats.find(s => s.playerId === id);
-  const openTeamFromUpcoming = (id) => { setSelectedUpcomingMatch(null); setSelectedTeam(teams.find(t => t.id === id) || null); };
+  const getPlayerStats = (id) => PLAYER_STATS_BY_ID.get(id);
+  const openTeamFromUpcoming = (id) => { setSelectedUpcomingMatch(null); setSelectedTeam(TEAMS_BY_ID.get(id) || null); };
   const getTeam = (teamId) =>
-    teams.find((team) => team.id === teamId);
+    TEAMS_BY_ID.get(teamId);
   const getMatchStats = (match) => {
   if (!match) return null;
 
@@ -222,18 +230,14 @@ const [resultsPage, setResultsPage] = useState(null);
   const getMatchPlayerInfo = (matchPlayer) => {
   if (!matchPlayer) return null;
 
-  const playerInfo = players.find(
-    (player) => player.id === matchPlayer.id
-  );
+  const playerInfo = PLAYERS_BY_ID.get(matchPlayer.id);
 
   if (!playerInfo) return null;
 
   return {
     ...playerInfo,
     team: getTeam(playerInfo.teamId),
-    stats: playerStats.find(
-      (stats) => stats.playerId === playerInfo.id
-    ),
+    stats: PLAYER_STATS_BY_ID.get(playerInfo.id),
   };
 };
 
@@ -368,9 +372,7 @@ const getHighlightedPlayers = (teamId, stat) => {
     .map((player) => ({
       ...player,
       team: getTeam(player.teamId),
-      stats: playerStats.find(
-        (item) => item.playerId === player.id
-      ),
+      stats: PLAYER_STATS_BY_ID.get(player.id),
     }))
     .filter(
       (player) =>
