@@ -1,0 +1,50 @@
+name: Desplegar Worker LNA Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "worker/lna-sync/**"
+      - ".github/workflows/deploy-lna-sync.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-lna-sync
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Comprobar credenciales de Cloudflare
+        id: credentials
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CF_TOKEN" ] && [ -n "$CF_ACCOUNT" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Configurar CLOUDFLARE_API_TOKEN y CLOUDFLARE_ACCOUNT_ID en GitHub para activar el despliegue."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configurar Node.js
+        if: steps.credentials.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Desplegar lna-sync en Cloudflare
+        if: steps.credentials.outputs.ready == 'true'
+        run: npx --yes wrangler@4 deploy --config worker/lna-sync/wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
