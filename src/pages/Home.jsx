@@ -81,13 +81,19 @@ function getUpcomingOfficialCollective(teamId) {
 }
 
 
+// Calcular una sola vez los promedios colectivos por equipo; antes se
+// recorrían todos los partidos por cada estadística y cada equipo.
+const UPCOMING_COLLECTIVE_BY_TEAM = Object.fromEntries(
+  teams.map(team => [team.id, getUpcomingOfficialCollective(team.id)])
+);
+
 // Puestos oficiales comparables entre los 18 equipos (solo planillas válidas).
 // Los empates comparten posición; equipos sin dato no reciben puesto.
 const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
   UPCOMING_COLLECTIVE_STATS.map(([, key, lowerIsBetter]) => {
     const entries = teams.map(team => ({
       id: team.id,
-      value: getUpcomingOfficialCollective(team.id).values[key],
+      value: UPCOMING_COLLECTIVE_BY_TEAM[team.id].values[key],
     })).filter(item => Number.isFinite(item.value));
     entries.sort((a, b) => (lowerIsBetter ? a.value - b.value : b.value - a.value));
     const ranks = {};
