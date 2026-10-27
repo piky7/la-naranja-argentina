@@ -426,7 +426,7 @@ export const officialSchedule = [
   {
     "id": "2026-11-05-obera-argentino",
     "date": "2026-11-05",
-    "time": null,
+    "time": "21:00",
     "homeTeam": "obera",
     "awayTeam": "argentino",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
