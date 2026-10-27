@@ -853,14 +853,21 @@ const standingsMatches = matches.map((match) => {
   };
 });
   const standings = useMemo(() => {
+    const finished = standingsMatches.filter(match => isMatchFinished(match));
+    const byTeam = new Map(teams.map(team => [team.id, []]));
+    const byPair = new Map();
+    for (const match of finished) {
+      byTeam.get(match.homeTeam)?.push(match);
+      if (match.awayTeam !== match.homeTeam) byTeam.get(match.awayTeam)?.push(match);
+      if (match.homeScore != null && match.awayScore != null) {
+        const pair = [match.homeTeam, match.awayTeam].sort().join('|');
+        if (!byPair.has(pair)) byPair.set(pair, []);
+        byPair.get(pair).push(match);
+      }
+    }
     return teams
       .map((team) => {
-        const teamMatches = standingsMatches.filter(
-          (match) =>
-            isMatchFinished(match) &&
-            (match.homeTeam === team.id ||
-              match.awayTeam === team.id)
-        );
+        const teamMatches = byTeam.get(team.id) || [];
 
         let wins = 0;
         let losses = 0;
@@ -924,16 +931,7 @@ const standingsMatches = matches.map((match) => {
   }
 
   // 2. Enfrentamientos directos
-  const directMatches = standingsMatches.filter(
-    (match) =>
-      isMatchFinished(match) &&
-      (
-        (match.homeTeam === a.id && match.awayTeam === b.id) ||
-        (match.homeTeam === b.id && match.awayTeam === a.id)
-      ) &&
-      match.homeScore != null &&
-      match.awayScore != null
-  );
+  const directMatches = byPair.get([a.id, b.id].sort().join('|')) || [];
 
   let directWinsA = 0;
   let directWinsB = 0;
