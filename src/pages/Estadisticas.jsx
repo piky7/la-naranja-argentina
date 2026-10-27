@@ -183,80 +183,32 @@ if (!finished) return false;
    */
 
   const filteredPlayers = useMemo(() => {
-    const normalizedSearch =
-      search.trim().toLowerCase();
+    const normalizedSearch = search.trim().toLowerCase();
+    const statKey = sortBy || "points";
 
-    const result = players.filter((player) => {
-      const matchesSearch =
-        normalizedSearch === "" ||
-        player.name
-          .toLowerCase()
-          .includes(normalizedSearch);
-
-      const matchesTeam =
-        selectedTeam === "todos" ||
-        player.teamId === selectedTeam;
-
+    // Preparar el valor de orden una sola vez por jugador, no en cada
+    // comparación del sort. El desempate alfabético permanece igual.
+    const eligible = players.flatMap((player) => {
+      if (normalizedSearch && !player.name.toLowerCase().includes(normalizedSearch)) return [];
+      if (selectedTeam !== "todos" && player.teamId !== selectedTeam) return [];
       const stats = getPlayerStats(player.id);
-
-const matchesMinGames =
-  (stats?.gamesPlayed || 0) >= minGames;
-
-return matchesSearch && matchesTeam && matchesMinGames;
+      if ((stats?.gamesPlayed || 0) < minGames) return [];
+      return [{
+        player,
+        value: stats?.gamesPlayed > 0 ? stats[statKey] ?? 0 : 0,
+      }];
     });
 
-   if (!sortBy) {
-  return result.sort((a, b) => {
-    const statsA = getPlayerStats(a.id);
-    const statsB = getPlayerStats(b.id);
-
-    const pointsA =
-      statsA?.gamesPlayed > 0
-        ? statsA.points ?? 0
-        : 0;
-
-    const pointsB =
-      statsB?.gamesPlayed > 0
-        ? statsB.points ?? 0
-        : 0;
-
-    if (pointsA === pointsB) {
-      return a.name.localeCompare(b.name, "es");
-    }
-
-    return pointsB - pointsA;
-  });
-}
-
-    return result.sort((a, b) => {
-      const statsA = getPlayerStats(a.id);
-      const statsB = getPlayerStats(b.id);
-
-      const valueA =
-        statsA?.gamesPlayed > 0
-          ? statsA[sortBy] ?? 0
-          : 0;
-
-      const valueB =
-        statsB?.gamesPlayed > 0
-          ? statsB[sortBy] ?? 0
-          : 0;
-
-      if (valueA === valueB) {
-        return a.name.localeCompare(b.name, "es");
+    eligible.sort((a, b) => {
+      if (a.value === b.value) {
+        return a.player.name.localeCompare(b.player.name, "es");
       }
-
-      return sortDirection === "desc"
-        ? valueB - valueA
-        : valueA - valueB;
+      return !sortBy || sortDirection === "desc"
+        ? b.value - a.value
+        : a.value - b.value;
     });
-  }, [
-    search,
-    selectedTeam,
-    minGames,
-    sortBy,
-    sortDirection,
-  ]);
+    return eligible.map(({ player }) => player);
+  }, [search, selectedTeam, minGames, sortBy, sortDirection]);
 
   /*
    * =========================================
