@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { players } from "../data/players";
-import { teams } from "../data/teams";
+import { teams, teamMatchColors } from "../data/teams";
 import { playerStats } from "../data/stats";
 import { isPlayerAppearance } from "../utils/playerAppearance";
 import "./Estadisticas.css";
@@ -540,6 +540,7 @@ if (!finished) return false;
                 return (
                   <tr
                     key={player.id}
+                    style={{ "--stats-team-color": teamMatchColors[player.teamId] || "#18334b" }}
                     onClick={() =>
                       setSelectedPlayer(player)
                     }
