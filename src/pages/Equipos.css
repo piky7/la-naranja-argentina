@@ -934,3 +934,24 @@
     transition: transform 110ms ease, background 110ms ease !important;
   }
 }
+
+/* Equipos: identidad institucional concentrada junto al escudo. */
+.teams-page .team-card {
+  background: linear-gradient(100deg,
+    color-mix(in srgb, var(--team-card-color, #18334b) 33%, #122437) 0%,
+    color-mix(in srgb, var(--team-card-color, #18334b) 12%, #122437) 42%,
+    #0f1d2c 100%);
+}
+.teams-page .team-card:hover,
+.teams-page .team-card:focus-visible {
+  background: linear-gradient(100deg,
+    color-mix(in srgb, var(--team-card-color, #18334b) 43%, #1a3148) 0%,
+    #1a3148 85%);
+}
+@media (pointer: coarse) {
+  .teams-page .team-card:is(:hover, :focus, :focus-visible) {
+    background: linear-gradient(100deg,
+      color-mix(in srgb, var(--team-card-color, #18334b) 33%, #122437) 0%,
+      #0f1d2c 100%) !important;
+  }
+}
