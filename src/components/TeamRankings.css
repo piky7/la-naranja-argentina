@@ -155,3 +155,19 @@
 /* Tres solapas en Estadísticas: Jugadores, Equipos y Triples. */
 .stats-mode-switch { grid-template-columns:repeat(3,minmax(0,1fr)); }
 .stats-mode-switch button { min-width:0; }
+
+/* Degradado institucional por equipo: identidad a la izquierda, cifras legibles. */
+.team-ranking .team-ranking-list .team-ranking-row,
+.team-ranking .team-ranking-list .team-ranking-row:nth-child(odd),
+.team-ranking .team-ranking-list .team-ranking-row:nth-child(even) {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ranking-team-color, #18334b) 34%, #102236) 0%,
+    color-mix(in srgb, var(--ranking-team-color, #18334b) 13%, #102236) 38%,
+    #102236 80%);
+}
+.team-ranking .team-ranking-list .team-ranking-row:hover,
+.team-ranking .team-ranking-list .team-ranking-row:focus-visible {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ranking-team-color, #18334b) 45%, #1a3048) 0%,
+    #1a3048 82%);
+}
