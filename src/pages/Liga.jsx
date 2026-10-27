@@ -85,13 +85,18 @@ const UPCOMING_COLLECTIVE_STATS = [
 ];
 
 
+// Calcular una vez los promedios de cada equipo para rankings y popups.
+const UPCOMING_COLLECTIVE_BY_TEAM = Object.fromEntries(
+  teams.map(team => [team.id, getUpcomingOfficialCollective(team.id)])
+);
+
 // Puestos oficiales comparables entre los 18 equipos (solo planillas válidas).
 // Los empates comparten posición; equipos sin dato no reciben puesto.
 const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
   UPCOMING_COLLECTIVE_STATS.map(([, key, lowerIsBetter]) => {
     const entries = teams.map(team => ({
       id: team.id,
-      value: getUpcomingOfficialCollective(team.id).values[key],
+      value: UPCOMING_COLLECTIVE_BY_TEAM[team.id].values[key],
     })).filter(item => Number.isFinite(item.value));
     entries.sort((a, b) => (lowerIsBetter ? a.value - b.value : b.value - a.value));
     const ranks = {};
@@ -1358,8 +1363,8 @@ onClick={() => {
 <div className="upcoming-team-comparison upcoming-official-comparison">
   <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
   {(() => {
-    const home = getUpcomingOfficialCollective(selectedUpcomingMatch.homeTeam);
-    const away = getUpcomingOfficialCollective(selectedUpcomingMatch.awayTeam);
+    const home = UPCOMING_COLLECTIVE_BY_TEAM[selectedUpcomingMatch.homeTeam];
+    const away = UPCOMING_COLLECTIVE_BY_TEAM[selectedUpcomingMatch.awayTeam];
     return <>
       <CategoryBalance home={home} away={away} homeId={selectedUpcomingMatch.homeTeam} awayId={selectedUpcomingMatch.awayTeam} stats={UPCOMING_COLLECTIVE_STATS} />
       <p className="upcoming-collective-source">Partidos con datos: {home.games} / {away.games} · Naranja = mejor registro</p>
@@ -1537,7 +1542,7 @@ onClick={() => {
             </header>
             <div className="team-v2-body">
               {(() => {
-                const official = getUpcomingOfficialCollective(selectedTeam.id);
+                const official = UPCOMING_COLLECTIVE_BY_TEAM[selectedTeam.id];
                 const metrics = [
                   ["PTS/P", "points"], ["REC/P", "pointsAgainst"],
                   ["REB/P", "rebounds"], ["AST/P", "assists"],
