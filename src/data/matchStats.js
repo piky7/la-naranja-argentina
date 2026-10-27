@@ -19341,6 +19341,28 @@ export const matchPlayerStats = {
     "awayTeam": "obera",
     "homeScore": 67,
     "awayScore": 58,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 12,
+        "away": 14
+      },
+      {
+        "period": "2",
+        "home": 25,
+        "away": 15
+      },
+      {
+        "period": "3",
+        "home": 12,
+        "away": 14
+      },
+      {
+        "period": "4",
+        "home": 18,
+        "away": 15
+      }
+    ],
     "teamStats": {
       "lanus": {
         "fieldGoals": {
@@ -20602,28 +20624,6 @@ export const matchPlayerStats = {
         "number": "77",
         "starter": false
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 12,
-        "away": 14
-      },
-      {
-        "period": "2",
-        "home": 25,
-        "away": 15
-      },
-      {
-        "period": "3",
-        "home": 12,
-        "away": 14
-      },
-      {
-        "period": "4",
-        "home": 18,
-        "away": 15
-      }
     ]
   },
   "2026-10-10-instituto-ferro": {
@@ -20633,6 +20633,38 @@ export const matchPlayerStats = {
     "awayTeam": "ferro",
     "homeScore": 97,
     "awayScore": 94,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 12,
+        "away": 17
+      },
+      {
+        "period": "2",
+        "home": 20,
+        "away": 22
+      },
+      {
+        "period": "3",
+        "home": 22,
+        "away": 12
+      },
+      {
+        "period": "4",
+        "home": 19,
+        "away": 22
+      },
+      {
+        "period": "OT1",
+        "home": 10,
+        "away": 10
+      },
+      {
+        "period": "OT2",
+        "home": 14,
+        "away": 11
+      }
+    ],
     "teamStats": {
       "instituto": {
         "fieldGoals": {
@@ -21894,33 +21926,6 @@ export const matchPlayerStats = {
         "number": "26",
         "starter": false
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 12,
-        "away": 17
-      },
-      {
-        "period": "2",
-        "home": 20,
-        "away": 22
-      },
-      {
-        "period": "3",
-        "home": 22,
-        "away": 12
-      },
-      {
-        "period": "4",
-        "home": 19,
-        "away": 22
-      },
-      {
-        "period": "PR",
-        "home": 24,
-        "away": 21
-      }
     ]
   },
   "2026-10-10-argentino-san-martin": {
@@ -21930,6 +21935,28 @@ export const matchPlayerStats = {
     "awayTeam": "san-martin",
     "homeScore": 82,
     "awayScore": 79,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 28,
+        "away": 24
+      },
+      {
+        "period": "2",
+        "home": 17,
+        "away": 16
+      },
+      {
+        "period": "3",
+        "home": 15,
+        "away": 16
+      },
+      {
+        "period": "4",
+        "home": 22,
+        "away": 23
+      }
+    ],
     "teamStats": {
       "argentino": {
         "fieldGoals": {
@@ -23191,28 +23218,6 @@ export const matchPlayerStats = {
         "number": "33",
         "starter": false
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 28,
-        "away": 24
-      },
-      {
-        "period": "2",
-        "home": 17,
-        "away": 16
-      },
-      {
-        "period": "3",
-        "home": 15,
-        "away": 16
-      },
-      {
-        "period": "4",
-        "home": 22,
-        "away": 23
-      }
     ]
   },
   "2026-10-10-quimsa-boca": {
@@ -23222,6 +23227,28 @@ export const matchPlayerStats = {
     "awayTeam": "boca",
     "homeScore": 105,
     "awayScore": 96,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 23,
+        "away": 33
+      },
+      {
+        "period": "2",
+        "home": 26,
+        "away": 21
+      },
+      {
+        "period": "3",
+        "home": 31,
+        "away": 21
+      },
+      {
+        "period": "4",
+        "home": 25,
+        "away": 21
+      }
+    ],
     "teamStats": {
       "quimsa": {
         "fieldGoals": {
@@ -24483,28 +24510,6 @@ export const matchPlayerStats = {
         "number": "44",
         "starter": false
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 23,
-        "away": 33
-      },
-      {
-        "period": "2",
-        "home": 26,
-        "away": 21
-      },
-      {
-        "period": "3",
-        "home": 31,
-        "away": 21
-      },
-      {
-        "period": "4",
-        "home": 25,
-        "away": 21
-      }
     ]
   },
   "2026-10-10-racing-chivilcoy-gimnasia": {
@@ -24514,6 +24519,28 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 72,
     "awayScore": 78,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 18,
+        "away": 20
+      },
+      {
+        "period": "2",
+        "home": 19,
+        "away": 17
+      },
+      {
+        "period": "3",
+        "home": 16,
+        "away": 16
+      },
+      {
+        "period": "4",
+        "home": 19,
+        "away": 25
+      }
+    ],
     "teamStats": {
       "racing-chivilcoy": {
         "fieldGoals": {
@@ -25774,28 +25801,6 @@ export const matchPlayerStats = {
         "plusMinus": 0,
         "number": "88",
         "starter": false
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 18,
-        "away": 20
-      },
-      {
-        "period": "2",
-        "home": 19,
-        "away": 17
-      },
-      {
-        "period": "3",
-        "home": 16,
-        "away": 16
-      },
-      {
-        "period": "4",
-        "home": 19,
-        "away": 25
       }
     ]
   },
@@ -28340,6 +28345,28 @@ export const matchPlayerStats = {
     "awayTeam": "boca",
     "homeScore": 93,
     "awayScore": 80,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 35,
+        "away": 17
+      },
+      {
+        "period": "2",
+        "home": 20,
+        "away": 17
+      },
+      {
+        "period": "3",
+        "home": 19,
+        "away": 29
+      },
+      {
+        "period": "4",
+        "home": 19,
+        "away": 17
+      }
+    ],
     "teamStats": {
       "olimpico": {
         "fieldGoals": {
@@ -29600,28 +29627,6 @@ export const matchPlayerStats = {
         "plusMinus": -14,
         "number": "44",
         "starter": true
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 35,
-        "away": 17
-      },
-      {
-        "period": "2",
-        "home": 20,
-        "away": 17
-      },
-      {
-        "period": "3",
-        "home": 19,
-        "away": 29
-      },
-      {
-        "period": "4",
-        "home": 19,
-        "away": 17
       }
     ]
   },
