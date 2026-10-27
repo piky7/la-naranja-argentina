@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import MatchStatsTabs from "./MatchStatsTabs";
-import { teams } from "../data/teams";
+import { teams, teamMatchColors } from "../data/teams";
 import { players } from "../data/players";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 
@@ -217,6 +217,7 @@ export default function FinishedMatchModal({
                 <button
                   type="button"
                   className="match-mvp-card"
+                  style={{ "--mvp-team-color": teamMatchColors[selectedMatchMvp.teamId] || "#18334b" }}
                   aria-label={`Abrir ficha de ${selectedMatchMvp.player.name}, jugador del partido`}
                   onClick={(event) => {
                     event.stopPropagation();
@@ -304,7 +305,7 @@ export default function FinishedMatchModal({
                         .map((player) => (
                           <button
                             type="button"
-                            className={`match-stat-player${selectedMatchMvp?.teamId === selectedMatch.homeTeam && selectedMatchMvp?.player.id === player.id ? " match-stat-player-mvp" : ""}`}
+                            className="match-stat-player"
                             key={player.id}
                             onClick={(event) => {
                               event.stopPropagation();
@@ -405,7 +406,7 @@ export default function FinishedMatchModal({
                         .map((player) => (
                           <button
                             type="button"
-                            className={`match-stat-player${selectedMatchMvp?.teamId === selectedMatch.awayTeam && selectedMatchMvp?.player.id === player.id ? " match-stat-player-mvp" : ""}`}
+                            className="match-stat-player"
                             key={player.id}
                             onClick={(event) => {
                               event.stopPropagation();
