@@ -38,7 +38,20 @@ function getRoster(teamId, matches) {
       totals.set(stat.id, current);
     }
   }
-  return players.filter(player => player.teamId === teamId).map(player => {
+  // Evitar duplicados del mismo jugador entre el plantel base y las altas oficiales.
+  // Priorizar el registro original y conservar los IDs usados por las estadísticas.
+  const rosterPlayers = [];
+  const seenPlayers = new Set();
+  for (const player of players) {
+    if (player.teamId !== teamId) continue;
+    const identity = player.officialPlayerId != null
+      ? `official:${player.officialPlayerId}`
+      : `id:${player.id}`;
+    if (seenPlayers.has(identity)) continue;
+    seenPlayers.add(identity);
+    rosterPlayers.push(player);
+  }
+  return rosterPlayers.map(player => {
     const t = totals.get(player.id);
     return { ...player, averages: t?.games ? {
       points: t.points / t.games, rebounds: t.rebounds / t.games, assists: t.assists / t.games,
