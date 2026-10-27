@@ -43,7 +43,7 @@ function getUpcomingOfficialCollective(teamId) {
   const shots = Object.fromEntries(shooting.map(key => [key, { made: 0, attempted: 0 }]));
   const seen = new Set();
   let games = 0, points = 0, pointsAgainst = 0;
-  for (const match of matches) {
+  for (const match of publishedMatches) {
     if (match.status !== "finished" || !/^2026-(09|10|11|12)-|^2027-(0[1-6])-/.test(match.date || "")) continue;
     if (match.homeTeam !== teamId && match.awayTeam !== teamId) continue;
     const matchKey = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
