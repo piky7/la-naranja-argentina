@@ -6,3 +6,7 @@ workers_dev = true
 # Cada 5 minutos. El Worker filtra las franjas en hora UTC.
 [triggers]
 crons = ["*/5 * * * *"]
+
+[observability.logs]
+enabled = true
+invocation_logs = true
