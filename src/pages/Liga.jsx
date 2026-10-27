@@ -155,6 +155,8 @@ function Liga() {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
+  const selectedUpcomingHomeTeam = selectedUpcomingMatch ? teams.find(team => team.id === selectedUpcomingMatch.homeTeam) : null;
+  const selectedUpcomingAwayTeam = selectedUpcomingMatch ? teams.find(team => team.id === selectedUpcomingMatch.awayTeam) : null;
   const [upcomingTab, setUpcomingTab] = useState("comparativa");
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 const [resultsPage, setResultsPage] = useState(null);
