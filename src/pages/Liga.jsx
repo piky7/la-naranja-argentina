@@ -1676,7 +1676,7 @@ onClick={() => {
   <PlayerModal
     player={selectedPlayer}
     team={selectedPlayer.team || getTeam(selectedPlayer.teamId)}
-    stats={selectedPlayer.stats || playerStats.find((entry) => entry.playerId === selectedPlayer.id)}
+    stats={selectedPlayer.stats || PLAYER_STATS_BY_ID.get(selectedPlayer.id)}
     onClose={() => setSelectedPlayer(null)}
     onTeamClick={(id) => {
       setSelectedPlayer(null);
