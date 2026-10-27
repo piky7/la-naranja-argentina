@@ -2929,3 +2929,17 @@
 .team-page .team-roster-head,.team-page .team-roster-row{grid-template-columns:minmax(0,2.7fr) minmax(0,.85fr) 25px 34px 34px 34px 44px 34px}
 .team-page .team-roster-min{color:#ff9a32;font-weight:700;font-variant-numeric:tabular-nums}
 @media(max-width:600px){.team-page .team-roster-head,.team-page .team-roster-row{grid-template-columns:minmax(0,2.6fr) minmax(0,.7fr) 19px 26px 26px 26px 36px 27px;gap:2px;padding:9px 4px}.team-page .team-roster-min{font-size:8px}}
+
+/* Escritorio: priorizar nombres y apellidos completos en el plantel. */
+@media (min-width: 1024px) {
+  .team-page .team-roster-head,
+  .team-page .team-roster-row {
+    grid-template-columns: minmax(0, 1fr) 36px 18px 27px 27px 27px 39px 27px;
+    gap: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .team-page .team-roster-name { gap: 5px; min-width: 0; }
+  .team-page .team-roster-crest { width: 20px; height: 20px; }
+  .team-page .team-roster-name > span { min-width: 0; font-size: 11px; }
+}
