@@ -16,8 +16,9 @@ function isCandidate(match, now = new Date(), recent = false) {
   return Number.isFinite(start) && start <= now.getTime();
 }
 
-function pollDecision(fixture, history, event, schedule, now = new Date()) {
-  const recent = event === "schedule" && schedule === "*/10 * * * *";
+function pollDecision(fixture, history, event, schedule, now = new Date(), requestedMode = "") {
+  const recent = event === "schedule" && schedule === "*/10 * * * *" ||
+    event === "workflow_dispatch" && requestedMode === "recent";
   if (!recent) return { run: true, mode: "full" };
   if (fixture.source !== "Liga Nacional" || history.source !== "Liga Nacional" ||
       !Array.isArray(fixture.matches) || !Array.isArray(history.matches)) {
@@ -31,7 +32,8 @@ if (require.main === module) {
   const decision = pollDecision(
     JSON.parse(fs.readFileSync("liga-events.json", "utf8")),
     JSON.parse(fs.readFileSync("liga-history.json", "utf8")),
-    process.env.GITHUB_EVENT_NAME, process.env.OFFICIAL_SCHEDULE
+    process.env.GITHUB_EVENT_NAME, process.env.OFFICIAL_SCHEDULE,
+    new Date(), process.env.OFFICIAL_REQUESTED_MODE
   );
   const output = `run=${decision.run}\nmode=${decision.mode}\n`;
   console.log(output);
