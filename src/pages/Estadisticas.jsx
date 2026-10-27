@@ -241,14 +241,20 @@ if (!finished) return false;
         ({ stats }) => stats && stats.gamesPlayed > 0
       );
 
+    // El primer jugador con el mayor valor conserva el liderazgo en empates,
+    // igual que el ordenamiento estable anterior, pero sin ordenar toda la lista.
     const findLeader = (stat) => {
-      const sorted = eligiblePlayers.filter(({ stats }) => stats[stat] != null).sort(
-        (a, b) =>
-          (Number(b.stats[stat]) || 0) -
-          (Number(a.stats[stat]) || 0)
-      );
-
-      return sorted[0] || null;
+      let leader = null;
+      let bestValue = -Infinity;
+      for (const candidate of eligiblePlayers) {
+        if (candidate.stats[stat] == null) continue;
+        const value = Number(candidate.stats[stat]) || 0;
+        if (leader === null || value > bestValue) {
+          leader = candidate;
+          bestValue = value;
+        }
+      }
+      return leader;
     };
 
     return [
