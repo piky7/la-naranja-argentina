@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import "./MatchStatsTabs.css";
+import { teamMatchColors } from "../data/teams";
 
 const metrics = [
   ["fieldGoals", "Tiros de campo"], ["twoPointers", "Tiros 2P"],
@@ -61,7 +62,7 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
           </button>
         ))}
       </div>
-      <div className={`match-player-tables match-player-team-${team}`}>{children}</div>
+      <div className={`match-player-tables match-player-team-${team}`} style={{ "--boxscore-team-color": teamMatchColors[team === "home" ? match.homeTeam : match.awayTeam] || "#18334b" }}>{children}</div>
     </div>
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
       <div className="match-team-comparison-intro">
