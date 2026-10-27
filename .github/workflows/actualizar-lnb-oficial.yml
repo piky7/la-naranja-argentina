@@ -43,7 +43,7 @@ concurrency:
 jobs:
   actualizar-oficial:
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ github.event_name == 'schedule' && (github.event.schedule == '*/10 * * * *' || inputs.mode == 'recent') && 12 || 30 }}
+    timeout-minutes: ${{ ((github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'recent')) && 12 || 30 }}
     env:
       OFFICIAL_SCHEDULE: ${{ github.event.schedule }}
       OFFICIAL_REQUESTED_MODE: ${{ inputs.mode }}
@@ -130,6 +130,23 @@ jobs:
             test "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)"
             git push origin HEAD:main
           fi
+
+      - name: Resumir sincronización en GitHub Actions
+        if: always()
+        env:
+          SYNC_MODE: ${{ steps.window.outputs.mode }}
+          SYNC_RUN: ${{ steps.window.outputs.run }}
+          SYNC_RESULT: ${{ job.status }}
+        run: |
+          {
+            echo "## Sincronización oficial de LNA"
+            echo ""
+            echo "- Origen: ${{ github.event_name }}"
+            echo "- Modo: ${SYNC_MODE:-no determinado}"
+            echo "- Partidos pendientes: ${SYNC_RUN:-no evaluado}"
+            echo "- Estado del trabajo: ${SYNC_RESULT}"
+            echo "- Commit de partida: ${GITHUB_SHA}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Guardar vista previa y diagnóstico
         if: always() && steps.window.outputs.run == 'true'
