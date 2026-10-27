@@ -32,13 +32,27 @@ try {
     useMemo: fn => fn(),
   });
   const oldCode = source.slice(oldStart, oldEnd).replace("const getPlayerStats =", "globalThis.getPlayerStats =");
-  const newCode = source.slice(newStart, newEnd).replace("const topScorers =", "globalThis.topScorers =");
+  const newCode = source.slice(newStart, newEnd)
+    .replace("const topScorers =", "globalThis.topScorers =")
+    .replace("    return players\\n      .map(player => {", "    const allPlayers = players\\n      .map(player => {")
+    .replace("      .filter(player => player.stats?.gamesPlayed > 0)", "    globalThis.allOptimizedPlayers = allPlayers;\\n    return allPlayers\\n      .filter(player => player.stats?.gamesPlayed > 0)");
+  assert.ok(newCode.includes("globalThis.allOptimizedPlayers = allPlayers"), "No se pudo instrumentar el cálculo optimizado");
   vm.runInContext(oldCode + "\n" + newCode, context, { timeout: 30000 });
   const oldRanking = players.map(player => {
     const stats = context.getPlayerStats(player.id);
     return { ...player, stats, points: stats?.points ?? null };
   }).filter(player => player.stats?.gamesPlayed > 0)
     .sort((a,b) => b.points - a.points || a.name.localeCompare(b.name,"es")).slice(0,10);
+  const optimizedById = new Map(context.allOptimizedPlayers.map(player => [player.id, player.stats]));
+  assert.equal(optimizedById.size, players.length, "Cantidad de jugadores comparados");
+  for (const player of players) {
+    const before = context.getPlayerStats(player.id);
+    const after = optimizedById.get(player.id);
+    for (const field of ["gamesPlayed", "points", "rebounds", "assists"]) {
+      assert.equal(after?.[field], before?.[field], `${player.id}: ${field}`);
+    }
+  }
+  console.log(`OK: ${players.length} jugadores comparados individualmente (PJ/PTS/REB/AST).`);
   const actual = context.topScorers;
   assert.equal(actual.length, oldRanking.length, "Cantidad de jugadores del ranking");
   for (let i=0; i<actual.length; i++) {
@@ -47,7 +61,7 @@ try {
       assert.equal(actual[i].stats[field], oldRanking[i].stats[field], `${actual[i].id}: ${field}`);
     }
   }
-  console.log(`OK: ${players.length} jugadores evaluados; top ${actual.length} idéntico (PJ/PTS/REB/AST).`);
+  console.log(`OK: ${players.length} jugadores disponibles; top ${actual.length} idéntico (PJ/PTS/REB/AST).`);
 } finally {
   await vite.close();
 }
