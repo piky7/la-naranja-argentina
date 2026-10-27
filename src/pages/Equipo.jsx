@@ -503,6 +503,8 @@ function formatStat(value) {
    COMPONENTE PRINCIPAL
    ========================================= */
 
+const OFFICIAL_PLAYER_LEADERS_CACHE = new Map();
+
 const UPCOMING_COLLECTIVE_STATS = [
   ["Puntos", "points", false], ["Recibidos", "pointsAgainst", true],
   ["Rebotes", "rebounds", false], ["Asistencias", "assists", false],
@@ -703,7 +705,14 @@ const finishedMatches = allFinishedMatches.slice(
 
 
 
-const getOfficialPlayerLeaders = (teamId, field) => {
+// Caché de resultados por equipo y categoría, calculados desde datos importados estáticos.
+  const officialPlayerLeadersCache = OFFICIAL_PLAYER_LEADERS_CACHE;
+
+  const getOfficialPlayerLeaders = (teamId, field) => {
+    const cacheKey = `${teamId}|${field}`;
+    if (officialPlayerLeadersCache.has(cacheKey)) {
+      return officialPlayerLeadersCache.get(cacheKey);
+    }
     const totals = new Map();
     const seen = new Set();
     for (const match of matches) {
@@ -723,9 +732,11 @@ const getOfficialPlayerLeaders = (teamId, field) => {
         totals.set(entry.id, { sum: old.sum + value, games: old.games + 1 });
       });
     }
-    return players.filter(player => player.teamId === teamId && totals.has(player.id))
+    const leaders = players.filter(player => player.teamId === teamId && totals.has(player.id))
       .map(player => ({ ...player, team: getTeam(teamId), stats: { [field]: totals.get(player.id).sum / totals.get(player.id).games } }))
       .sort((a, b) => b.stats[field] - a.stats[field]).slice(0, 2);
+    officialPlayerLeadersCache.set(cacheKey, leaders);
+    return leaders;
   };
 
   const upcomingLeaderCategories = [
