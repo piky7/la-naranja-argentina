@@ -49,12 +49,34 @@ async function main() {
     historial.matches.map((p) => p.officialUrl)
   );
 
+  // En modo recent se consultan primero los partidos con mayor probabilidad
+  // de haber terminado. No se excluyen encuentros en juego ni prorrogas:
+  // el extractor sigue siendo quien confirma el final oficial.
+  const pendientesRecientes = recent
+    ? partidos
+        .filter((p) => !urlsProcesadas.has(p.officialUrl) && isCandidate(p, now, true))
+        .sort((a, b) => {
+          const inicio = (p) => /^\d{2}:\d{2}$/.test(p.time || "")
+            ? Date.parse(`${p.date}T${p.time}:00-03:00`)
+            : NaN;
+          const aInicio = inicio(a);
+          const bInicio = inicio(b);
+          const aFinalProbable = Number.isFinite(aInicio) && now.getTime() - aInicio >= 110 * 60000;
+          const bFinalProbable = Number.isFinite(bInicio) && now.getTime() - bInicio >= 110 * 60000;
+          if (aFinalProbable !== bFinalProbable) return aFinalProbable ? -1 : 1;
+          return (Number.isFinite(bInicio) ? bInicio : 0) - (Number.isFinite(aInicio) ? aInicio : 0);
+        })
+    : null;
+  const partidosAConsultar = recent ? pendientesRecientes : partidos;
+
   let agregados = 0;
   let omitidos = 0;
 
   console.log(`Partidos del fixture: ${partidos.length}`);
 
-  for (const partido of partidos) {
+  console.log(`Candidatos para extracción: ${partidosAConsultar.length} (modo ${recent ? "recent" : "full"})`);
+
+  for (const partido of partidosAConsultar) {
     if (urlsProcesadas.has(partido.officialUrl)) {
       console.log(
         `Ya procesado: ${partido.home.name} - ${partido.away.name}`
