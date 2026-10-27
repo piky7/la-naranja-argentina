@@ -510,72 +510,35 @@ const getOfficialPlayerLeaders = (teamId, field) => {
     =========================
   */
 
-  const todayMatches = matches
-    .filter(
-      (match) =>
-        match.date === today &&
-        match.status === "scheduled"
-    )
-    .sort((a, b) =>
-      (a.time || "").localeCompare(b.time || "")
-    );
+  // Los listados solo dependen de los partidos publicados/LIVE y del día.
+  // Abrir o cerrar popups no vuelve a filtrar ni ordenar todo el fixture.
+  const { todayMatches, allResults, upcomingMatches } = useMemo(() => ({
+    todayMatches: matches
+      .filter(match => match.date === today && match.status === "scheduled")
+      .sort((a, b) => (a.time || "").localeCompare(b.time || "")),
+    allResults: matches
+      .filter(match => match.status === "finished")
+      .sort((a, b) => a.date !== b.date
+        ? b.date.localeCompare(a.date)
+        : (b.time || "").localeCompare(a.time || "")),
+    upcomingMatches: matches
+      .filter(match => match.status === "scheduled" && match.date >= today)
+      .sort((a, b) => a.date !== b.date
+        ? a.date.localeCompare(b.date)
+        : (a.time || "").localeCompare(b.time || ""))
+      .slice(0, 10),
+  }), [matches, today]);
 
-  /*
-    =========================
-    ÚLTIMOS 10 RESULTADOS
-    =========================
-  */
-
-  const allResults = matches
-  .filter((match) => match.status === "finished")
-  .sort((a, b) => {
-    if (a.date !== b.date) {
-      return b.date.localeCompare(a.date);
-    }
-
-    return (b.time || "").localeCompare(
-      a.time || ""
-    );
-  });
-
-const resultsPerPage = 10;
-
-const totalResultsPages = Math.ceil(
-  allResults.length / resultsPerPage
-);
-
-const currentResultsPage = Math.min(
-  Math.max(resultsPage ?? totalResultsPages - 1, 0),
-  Math.max(totalResultsPages - 1, 0)
-);
-
-const results = allResults.slice(
-  (totalResultsPages - 1 - currentResultsPage) * resultsPerPage,
-  (totalResultsPages - currentResultsPage) * resultsPerPage
-);
-
-  /*
-    =========================
-    PRÓXIMOS 10 PARTIDOS
-    =========================
-  */
-
-  const upcomingMatches = matches
-    .filter(
-      (match) =>
-        match.status === "scheduled" &&
-        match.date >= today
-    )
-    .sort((a, b) => {
-      if (a.date !== b.date) {
-        return a.date.localeCompare(b.date);
-      }
-
-      return (a.time || "").localeCompare(
-        b.time || ""
-      );
-    })
-    .slice(0, 10);
+  const resultsPerPage = 10;
+  const totalResultsPages = Math.ceil(allResults.length / resultsPerPage);
+  const currentResultsPage = Math.min(
+    Math.max(resultsPage ?? totalResultsPages - 1, 0),
+    Math.max(totalResultsPages - 1, 0)
+  );
+  const results = allResults.slice(
+    (totalResultsPages - 1 - currentResultsPage) * resultsPerPage,
+    (totalResultsPages - currentResultsPage) * resultsPerPage
+  );
 
   /*
     =========================
