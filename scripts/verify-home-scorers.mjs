@@ -34,8 +34,8 @@ try {
   const oldCode = source.slice(oldStart, oldEnd).replace("const getPlayerStats =", "globalThis.getPlayerStats =");
   const newCode = source.slice(newStart, newEnd)
     .replace("const topScorers =", "globalThis.topScorers =")
-    .replace("    return players\\n      .map(player => {", "    const allPlayers = players\\n      .map(player => {")
-    .replace("      .filter(player => player.stats?.gamesPlayed > 0)", "    globalThis.allOptimizedPlayers = allPlayers;\\n    return allPlayers\\n      .filter(player => player.stats?.gamesPlayed > 0)");
+    .replace("    return players\n      .map(player => {", "    const allPlayers = players\n      .map(player => {")
+    .replace("      .filter(player => player.stats?.gamesPlayed > 0)", "    globalThis.allOptimizedPlayers = allPlayers;\n    return allPlayers\n      .filter(player => player.stats?.gamesPlayed > 0)");
   assert.ok(newCode.includes("globalThis.allOptimizedPlayers = allPlayers"), "No se pudo instrumentar el cálculo optimizado");
   vm.runInContext(oldCode + "\n" + newCode, context, { timeout: 30000 });
   const oldRanking = players.map(player => {
