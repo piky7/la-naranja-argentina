@@ -88,7 +88,7 @@ const UPCOMING_COLLECTIVE_STATS = [
 // Compartir los promedios oficiales entre rankings y popups: no recalcular
 // los mismos partidos 12 veces por equipo al cargar Liga.
 const UPCOMING_COLLECTIVE_BY_TEAM = Object.fromEntries(
-  teams.map(team => [team.id, UPCOMING_COLLECTIVE_BY_TEAM[team.id]])
+  teams.map(team => [team.id, getUpcomingOfficialCollective(team.id)])
 );
 
 // Puestos oficiales comparables entre los 18 equipos (solo planillas válidas).
