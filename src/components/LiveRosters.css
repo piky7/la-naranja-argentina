@@ -15,3 +15,16 @@
 .live-roster-player strong{color:#ff912f;font-variant-numeric:tabular-nums}
 .live-roster-empty{color:#aab9cb;font-size:12px}
 @media(max-width:650px){.live-rosters{margin:8px 6px;padding:9px 6px}.live-rosters-grid{gap:5px}.live-roster-team+.live-roster-team{padding-left:5px}.live-roster-team-head{font-size:13px;gap:4px}.live-roster-team-head img{width:27px;height:27px}.live-roster-row{grid-template-columns:19px minmax(0,1.5fr) repeat(3,minmax(0,.48fr)) minmax(30px,.8fr);gap:2px}.live-roster-player{font-size:9px;padding:4px 0}.live-roster-labels{font-size:8px}.live-roster-number{padding:2px 0}.live-rosters h3{font-size:14px}}
+
+/* Compact mobile live roster while preserving both team columns. */
+@media (max-width:650px) {
+  .match-modal-is-live .live-rosters { margin:3px 5px 4px; padding:5px; }
+  .match-modal-is-live .live-rosters h3 { font-size:12px; line-height:1.1; margin-bottom:3px; }
+  .match-modal-is-live .live-rosters-grid { gap:4px; }
+  .match-modal-is-live .live-roster-team + .live-roster-team { padding-left:4px; }
+  .match-modal-is-live .live-roster-team-head { min-height:25px; margin-bottom:2px; gap:4px; font-size:12px; }
+  .match-modal-is-live .live-roster-team-head img { width:23px; height:23px; }
+  .match-modal-is-live .live-roster-labels { padding:2px 0; font-size:7px; line-height:1; }
+  .match-modal-is-live .live-roster-player { min-height:22px; padding:2px 0; font-size:9px; line-height:1; }
+  .match-modal-is-live .live-roster-number { padding:2px 0; }
+}
