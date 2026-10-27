@@ -10646,3 +10646,19 @@
 .match-modal-finished .match-mvp-name strong {
   color: #ffe2aa;
 }
+
+/* Próximo partido: degradado de ambos equipos en comparativa, con indicadores neutrales. */
+.match-modal-upcoming .upcoming-team-comparison.upcoming-official-comparison {
+  background-image: linear-gradient(90deg,
+    color-mix(in srgb, var(--match-home-color, #18334b) 25%, #0c1928) 0%,
+    color-mix(in srgb, var(--match-home-color, #18334b) 9%, #0c1928) 31%,
+    #0c1928 46%, #0c1928 54%,
+    color-mix(in srgb, var(--match-away-color, #18334b) 9%, #0c1928) 69%,
+    color-mix(in srgb, var(--match-away-color, #18334b) 25%, #0c1928) 100%);
+}
+.match-modal-upcoming .upcoming-team-comparison.upcoming-official-comparison .upcoming-comparison-stat {
+  background-image: linear-gradient(90deg,
+    color-mix(in srgb, var(--match-home-color, #18334b) 25%, #0e1a29) 0%,
+    transparent 42%, transparent 58%,
+    color-mix(in srgb, var(--match-away-color, #18334b) 25%, #0e1a29) 100%);
+}
