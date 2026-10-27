@@ -9,6 +9,8 @@ on:
       - "eslint.config.js"
       - "src/components/LiveMatchInfo.jsx"
       - "src/components/CategoryBalance.jsx"
+      - "src/components/TripleRankings.jsx"
+      - "src/components/TeamRankings.jsx"
       - "src/components/MatchVote.jsx"
       - "scripts/verify-liga-popups.mjs"
       - "scripts/verify-liga-collective.mjs"
