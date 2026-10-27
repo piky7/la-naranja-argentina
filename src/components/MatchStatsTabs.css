@@ -319,3 +319,20 @@
     color-mix(in srgb, var(--boxscore-team-color, #18334b) 50%, #172a3b) 0%,
     #172a3b 80%) !important;
 }
+
+/* Comparativa colectiva: identidad institucional en extremos, centro neutro. */
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-header,
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-row,
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-row:nth-child(even) {
+  background-image: linear-gradient(90deg,
+    color-mix(in srgb, var(--comparison-home-color, #18334b) 31%, #0b1a28) 0%,
+    color-mix(in srgb, var(--comparison-home-color, #18334b) 12%, #0b1a28) 27%,
+    #0b1a28 44%,
+    #0b1a28 56%,
+    color-mix(in srgb, var(--comparison-away-color, #18334b) 12%, #0b1a28) 73%,
+    color-mix(in srgb, var(--comparison-away-color, #18334b) 31%, #0b1a28) 100%);
+}
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-row:nth-child(even) {
+  background-color: rgba(255,255,255,.025);
+  background-blend-mode: screen;
+}
