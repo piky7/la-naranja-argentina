@@ -48,3 +48,19 @@
 .triple-ranking .triple-list .triple-row:nth-child(even){background:#142a40}
 .triple-ranking .triple-list .triple-row:hover,.triple-ranking .triple-list .triple-row:focus-visible{background:#203b54;outline:none;box-shadow:inset 3px 0 0 #ff921d}
 @media(max-width:600px){.triple-heading h2{font-size:28px}.triple-podium-card{padding:11px 4px}.triple-podium-name{font-size:clamp(11px,3vw,14px)}.triple-podium-value{font-size:clamp(29px,8vw,38px)}.triple-podium-card::before{right:-55%;bottom:-20%}}
+
+/* Degradado institucional por equipo: identidad a la izquierda, cifras legibles. */
+.triple-ranking .triple-list .triple-row,
+.triple-ranking .triple-list .triple-row:nth-child(odd),
+.triple-ranking .triple-list .triple-row:nth-child(even) {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ranking-team-color, #18334b) 34%, #102236) 0%,
+    color-mix(in srgb, var(--ranking-team-color, #18334b) 13%, #102236) 38%,
+    #102236 80%);
+}
+.triple-ranking .triple-list .triple-row:hover,
+.triple-ranking .triple-list .triple-row:focus-visible {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--ranking-team-color, #18334b) 45%, #1a3048) 0%,
+    #1a3048 82%);
+}
