@@ -22,6 +22,14 @@ import { matches } from "../data/matches";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
 
+// Índice de estadísticas: conserva la primera coincidencia de la búsqueda original.
+const PLAYER_STATS_BY_ID = new Map();
+for (const stats of playerStats) {
+  if (!PLAYER_STATS_BY_ID.has(stats.playerId)) {
+    PLAYER_STATS_BY_ID.set(stats.playerId, stats);
+  }
+}
+
 
 function getTeam(teamId) {
   return teams.find(
@@ -77,10 +85,7 @@ function getMatches(teamId) {
 
 
 function getPlayerStats(playerId) {
-  return playerStats.find(
-    (stats) =>
-      stats.playerId === playerId
-  );
+  return PLAYER_STATS_BY_ID.get(playerId);
 }
 
 function getPlayerValuationAverage(player) {
@@ -437,9 +442,7 @@ function getHighlightedPlayers(teamId, stat) {
   return players
     .filter((player) => player.teamId === teamId)
     .map((player) => {
-      const stats = playerStats.find(
-        (item) => item.playerId === player.id
-      );
+      const stats = getPlayerStats(player.id);
 
       return {
         ...player,
