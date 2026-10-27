@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { teams, getMatchColorStyle } from "../data/teams";
@@ -30,7 +30,7 @@ const formatLeagueCardDate = (date) => {
   return `${day} ${month}`;
 };
 
-const matches = baseMatches.map((match) => {
+const publishedMatches = baseMatches.map((match) => {
   const key = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
   const result = matchResults[key] ?? matchResults[match.id];
 
@@ -116,6 +116,40 @@ function Liga() {
   };
 
   const today = getLocalDate();
+  const [liveSnapshot, setLiveSnapshot] = useState({ date: null, liveMatches: [] });
+  useEffect(() => {
+    let active = true;
+    const url = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL || "https://lna-live-oficial.lnab.workers.dev/api/live";
+    const refresh = async () => {
+      try {
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (active && Array.isArray(data.liveMatches)) {
+          setLiveSnapshot({ date: data.date, liveMatches: data.liveMatches });
+        }
+      } catch { /* Conservar los resultados publicados si el LIVE no responde. */ }
+    };
+    refresh();
+    const timer = setInterval(refresh, 60000);
+    const onVisible = () => { if (!document.hidden) refresh(); };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => { active = false; clearInterval(timer); document.removeEventListener("visibilitychange", onVisible); };
+  }, []);
+
+  // Igual que Home: mostrar el resultado final confirmado por el Worker
+  // hasta que se publique en matchResults.js, sin inventar estadísticas.
+  const matches = useMemo(() => publishedMatches.map(match => {
+    if (match.status === "finished" || liveSnapshot.date !== match.date) return match;
+    const live = liveSnapshot.liveMatches.find(item =>
+      item.homeTeam === match.homeTeam && item.awayTeam === match.awayTeam &&
+      item.status === "finished" && !item.isHalftime &&
+      item.homeScore != null && item.awayScore != null
+    );
+    return live ? { ...match, status: "finished",
+      homeScore: Number(live.homeScore), awayScore: Number(live.awayScore) } : match;
+  }), [liveSnapshot]);
+
 
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
@@ -466,7 +500,7 @@ const getOfficialPlayerLeaders = (teamId, field) => {
 });
 
 
-  }, []);
+  }, [matches]);
 
   /*
     =========================
@@ -963,9 +997,9 @@ onClick={() => {
                         type="button"
                         className="result-match"
                           style={{...getMatchColorStyle(match.homeTeam, match.awayTeam), "--match-home-logo": `url("${homeTeam?.logo ?? ""}")`, "--match-away-logo": `url("${awayTeam?.logo ?? ""}")`}}
-                        onClick={() =>
-                          setSelectedMatch(match)
-                        }
+                        onClick={() => {
+                          if (getMatchStats(match)) setSelectedMatch(match);
+                        }}
                       >
 
                         <div className="result-date">
