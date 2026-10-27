@@ -98,8 +98,17 @@ export default function TeamRankings() {
       });
   }, [scope, metricKey, direction, metric.lowerBetter]);
 
-  const maximum = Math.max(1, ...sorted.map((row) => Math.max(0, row.value ?? 0)));
-  const sample = rankingData.reduce((acc, record) => Math.max(acc, record[scope].collectiveGames), 0);
+  // Los máximos de barras y planillas dependen del filtro, no del render.
+  const maximum = useMemo(
+    () => Math.max(1, ...sorted.map((row) => Math.max(0, row.value ?? 0))),
+    [sorted]
+  );
+  const collectiveSampleByScope = useMemo(() => ({
+    overall: Math.max(0, ...rankingData.map((record) => record.overall.collectiveGames)),
+    home: Math.max(0, ...rankingData.map((record) => record.home.collectiveGames)),
+    away: Math.max(0, ...rankingData.map((record) => record.away.collectiveGames)),
+  }), []);
+  const sample = collectiveSampleByScope[scope];
   const isCollective = Boolean(metric.collective);
 
   return (
