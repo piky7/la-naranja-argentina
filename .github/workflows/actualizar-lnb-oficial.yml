@@ -113,23 +113,57 @@ jobs:
         if: steps.window.outputs.run == 'true'
         run: npm run build
 
-      - name: Publicar actualización únicamente desde main
+      - name: Publicar actualización con reintentos seguros desde main
         if: steps.window.outputs.run == 'true' && github.ref == 'refs/heads/main'
+        env:
+          OFFICIAL_SYNC_MODE: ${{ steps.window.outputs.mode }}
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add             liga-events.json             liga-history.json             src/data/officialSchedule.js             src/data/matchStats.js             src/data/matchResults.js             src/data/players.js             public/published-matches.json
+          for intento in 1 2 3; do
+            echo "Intento de publicación ${intento}/3"
+            git add liga-events.json liga-history.json src/data/officialSchedule.js src/data/matchStats.js src/data/matchResults.js src/data/players.js public/published-matches.json
 
-          if git diff --cached --quiet; then
-            echo "No hay cambios oficiales nuevos para publicar."
-          else
+            if git diff --cached --quiet; then
+              echo "No hay cambios oficiales nuevos para publicar."
+              exit 0
+            fi
+
             git commit -m "Actualizar resultados y estadísticas oficiales LNB"
-            # Fail closed if main advanced: the next run regenerates from fresh data.
             git fetch origin main
-            test "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)"
-            git push origin HEAD:main
-          fi
+
+            if [ "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)" ]; then
+              if git push origin HEAD:main; then
+                echo "Datos oficiales publicados correctamente."
+                exit 0
+              fi
+              echo "El push no se completó; se verificará el estado remoto."
+            else
+              echo "main avanzó durante la sincronización; regenerando desde la versión más reciente."
+            fi
+
+            if [ "$intento" -eq 3 ]; then
+              echo "::error::No se pudo publicar tras tres intentos; se conserva main sin sobrescribir."
+              exit 1
+            fi
+
+            # No mezclar datos generados desde bases diferentes. Descartar el
+            # commit local y regenerar TODO desde el main remoto actualizado.
+            git fetch origin main
+            git reset --hard origin/main
+            node discover-liga.cjs
+            node merge-liga-events.cjs
+            node generate-official-schedule.cjs
+            node sync-liga-history.cjs
+            node scripts/sync-official-roster.cjs
+            node --check src/data/players.js
+            node sync-official-stats-preview.cjs
+            node publish-official-stats.cjs
+            node scripts/update-player-numbers.cjs
+            npm run build
+          done
 
       - name: Resumir sincronización en GitHub Actions
         if: always()
