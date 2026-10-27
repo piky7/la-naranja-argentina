@@ -70,7 +70,7 @@ export default function MatchStatsTabs({ match, stats, home, away, children }) {
         <span>LIGA NACIONAL · TEMPORADA 2026/27</span>
       </div>
       {!collective && <p className="match-team-unavailable">Estadísticas colectivas no disponibles para este partido.</p>}
-      {collective && <div className="match-team-comparison-card">
+      {collective && <div className="match-team-comparison-card" style={{ "--comparison-home-color": teamMatchColors[match.homeTeam] || "#18334b", "--comparison-away-color": teamMatchColors[match.awayTeam] || "#18334b" }}>
         <div className="match-team-comparison-header">
           <div className="match-team-comparison-name">{home?.logo && <img src={home.logo} alt="" />}<span>{home?.shortName || home?.name || "Local"}</span></div>
           <span>INDICADOR</span>
