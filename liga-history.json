@@ -2561,6 +2561,28 @@
             "fouls": 25
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 17,
+          "away": 14
+        },
+        {
+          "period": "2",
+          "home": 13,
+          "away": 15
+        },
+        {
+          "period": "3",
+          "home": 14,
+          "away": 6
+        },
+        {
+          "period": "4",
+          "home": 18,
+          "away": 22
+        }
       ]
     },
     {
@@ -6404,6 +6426,28 @@
             "fouls": 23
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 8,
+          "away": 18
+        },
+        {
+          "period": "2",
+          "home": 26,
+          "away": 21
+        },
+        {
+          "period": "3",
+          "home": 16,
+          "away": 12
+        },
+        {
+          "period": "4",
+          "home": 24,
+          "away": 31
+        }
       ]
     },
     {
@@ -7684,6 +7728,28 @@
             "turnovers": 7,
             "fouls": 20
           }
+        }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 17,
+          "away": 12
+        },
+        {
+          "period": "2",
+          "home": 12,
+          "away": 19
+        },
+        {
+          "period": "3",
+          "home": 18,
+          "away": 16
+        },
+        {
+          "period": "4",
+          "home": 26,
+          "away": 16
         }
       ]
     },
@@ -8966,6 +9032,28 @@
             "fouls": 29
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 22,
+          "away": 14
+        },
+        {
+          "period": "2",
+          "home": 25,
+          "away": 14
+        },
+        {
+          "period": "3",
+          "home": 31,
+          "away": 13
+        },
+        {
+          "period": "4",
+          "home": 16,
+          "away": 26
+        }
       ]
     },
     {
@@ -10247,6 +10335,28 @@
             "fouls": 22
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 21,
+          "away": 16
+        },
+        {
+          "period": "2",
+          "home": 30,
+          "away": 19
+        },
+        {
+          "period": "3",
+          "home": 17,
+          "away": 28
+        },
+        {
+          "period": "4",
+          "home": 24,
+          "away": 23
+        }
       ]
     },
     {
@@ -11527,6 +11637,28 @@
             "turnovers": 12,
             "fouls": 20
           }
+        }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 16,
+          "away": 21
+        },
+        {
+          "period": "2",
+          "home": 27,
+          "away": 23
+        },
+        {
+          "period": "3",
+          "home": 23,
+          "away": 13
+        },
+        {
+          "period": "4",
+          "home": 17,
+          "away": 20
         }
       ]
     },

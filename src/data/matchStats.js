@@ -1298,6 +1298,28 @@ export const matchPlayerStats = {
     "awayTeam": "gimnasia",
     "homeScore": 62,
     "awayScore": 57,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 17,
+        "away": 14
+      },
+      {
+        "period": "2",
+        "home": 13,
+        "away": 15
+      },
+      {
+        "period": "3",
+        "home": 14,
+        "away": 6
+      },
+      {
+        "period": "4",
+        "home": 18,
+        "away": 22
+      }
+    ],
     "teamStats": {
       "penarol": {
         "fieldGoals": {
@@ -2558,28 +2580,6 @@ export const matchPlayerStats = {
         "plusMinus": -7,
         "number": "88",
         "starter": false
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 17,
-        "away": 14
-      },
-      {
-        "period": "2",
-        "home": 13,
-        "away": 15
-      },
-      {
-        "period": "3",
-        "home": 14,
-        "away": 6
-      },
-      {
-        "period": "4",
-        "home": 18,
-        "away": 22
       }
     ]
   },
@@ -5174,6 +5174,28 @@ export const matchPlayerStats = {
     "awayTeam": "platense",
     "homeScore": 74,
     "awayScore": 82,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 8,
+        "away": 18
+      },
+      {
+        "period": "2",
+        "home": 26,
+        "away": 21
+      },
+      {
+        "period": "3",
+        "home": 16,
+        "away": 12
+      },
+      {
+        "period": "4",
+        "home": 24,
+        "away": 31
+      }
+    ],
     "teamStats": {
       "olimpico": {
         "fieldGoals": {
@@ -6435,28 +6457,6 @@ export const matchPlayerStats = {
         "number": "30",
         "starter": true
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 8,
-        "away": 18
-      },
-      {
-        "period": "2",
-        "home": 26,
-        "away": 21
-      },
-      {
-        "period": "3",
-        "home": 16,
-        "away": 12
-      },
-      {
-        "period": "4",
-        "home": 24,
-        "away": 31
-      }
     ]
   },
   "2026-10-02-regatas-instituto": {
@@ -6466,6 +6466,28 @@ export const matchPlayerStats = {
     "awayTeam": "instituto",
     "homeScore": 73,
     "awayScore": 63,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 17,
+        "away": 12
+      },
+      {
+        "period": "2",
+        "home": 12,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 18,
+        "away": 16
+      },
+      {
+        "period": "4",
+        "home": 26,
+        "away": 16
+      }
+    ],
     "teamStats": {
       "regatas": {
         "fieldGoals": {
@@ -7727,28 +7749,6 @@ export const matchPlayerStats = {
         "number": "72",
         "starter": true
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 17,
-        "away": 12
-      },
-      {
-        "period": "2",
-        "home": 12,
-        "away": 19
-      },
-      {
-        "period": "3",
-        "home": 18,
-        "away": 16
-      },
-      {
-        "period": "4",
-        "home": 26,
-        "away": 16
-      }
     ]
   },
   "2026-10-03-quimsa-platense": {
@@ -7758,6 +7758,28 @@ export const matchPlayerStats = {
     "awayTeam": "platense",
     "homeScore": 94,
     "awayScore": 67,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 22,
+        "away": 14
+      },
+      {
+        "period": "2",
+        "home": 25,
+        "away": 14
+      },
+      {
+        "period": "3",
+        "home": 31,
+        "away": 13
+      },
+      {
+        "period": "4",
+        "home": 16,
+        "away": 26
+      }
+    ],
     "teamStats": {
       "quimsa": {
         "fieldGoals": {
@@ -9019,28 +9041,6 @@ export const matchPlayerStats = {
         "number": "30",
         "starter": true
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 22,
-        "away": 14
-      },
-      {
-        "period": "2",
-        "home": 25,
-        "away": 14
-      },
-      {
-        "period": "3",
-        "home": 31,
-        "away": 13
-      },
-      {
-        "period": "4",
-        "home": 16,
-        "away": 26
-      }
     ]
   },
   "2026-10-04-gimnasia-la-union": {
@@ -9050,6 +9050,28 @@ export const matchPlayerStats = {
     "awayTeam": "la-union",
     "homeScore": 92,
     "awayScore": 86,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 21,
+        "away": 16
+      },
+      {
+        "period": "2",
+        "home": 30,
+        "away": 19
+      },
+      {
+        "period": "3",
+        "home": 17,
+        "away": 28
+      },
+      {
+        "period": "4",
+        "home": 24,
+        "away": 23
+      }
+    ],
     "teamStats": {
       "gimnasia": {
         "fieldGoals": {
@@ -10311,28 +10333,6 @@ export const matchPlayerStats = {
         "number": "20",
         "starter": false
       }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 21,
-        "away": 16
-      },
-      {
-        "period": "2",
-        "home": 30,
-        "away": 19
-      },
-      {
-        "period": "3",
-        "home": 17,
-        "away": 28
-      },
-      {
-        "period": "4",
-        "home": 24,
-        "away": 23
-      }
     ]
   },
   "2026-10-05-quimsa-atenas": {
@@ -10342,6 +10342,28 @@ export const matchPlayerStats = {
     "awayTeam": "atenas",
     "homeScore": 83,
     "awayScore": 77,
+    "quarterScores": [
+      {
+        "period": "1",
+        "home": 16,
+        "away": 21
+      },
+      {
+        "period": "2",
+        "home": 27,
+        "away": 23
+      },
+      {
+        "period": "3",
+        "home": 23,
+        "away": 13
+      },
+      {
+        "period": "4",
+        "home": 17,
+        "away": 20
+      }
+    ],
     "teamStats": {
       "quimsa": {
         "fieldGoals": {
@@ -11602,28 +11624,6 @@ export const matchPlayerStats = {
         "plusMinus": 0,
         "number": "24",
         "starter": false
-      }
-    ],
-    "quarterScores": [
-      {
-        "period": "1",
-        "home": 16,
-        "away": 21
-      },
-      {
-        "period": "2",
-        "home": 27,
-        "away": 23
-      },
-      {
-        "period": "3",
-        "home": 23,
-        "away": 13
-      },
-      {
-        "period": "4",
-        "home": 17,
-        "away": 20
       }
     ]
   },
