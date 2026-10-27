@@ -546,7 +546,7 @@ export const officialSchedule = [
   {
     "id": "2026-11-12-atenas-san-lorenzo",
     "date": "2026-11-12",
-    "time": null,
+    "time": "21:00",
     "homeTeam": "atenas",
     "awayTeam": "san-lorenzo",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2K9HadYpUmbm5kmWR0wipUYdsjjhkKy0NhdRD7aaIERgeidfNRp8cfg==/atenas-c-vs-san-lorenzo"
@@ -554,31 +554,39 @@ export const officialSchedule = [
   {
     "id": "2026-11-13-ferro-penarol",
     "date": "2026-11-13",
-    "time": null,
+    "time": "20:00",
     "homeTeam": "ferro",
     "awayTeam": "penarol",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2zcZ6Qk6p3w7_0S_F_6n0bNBN_cVeOUUGz6i6EUfWQtud11zBuG9nwg==/ferro-vs-penarol-mdp"
   },
   {
-    "id": "2026-11-14-independiente-oliva-san-lorenzo",
-    "date": "2026-11-14",
-    "time": null,
-    "homeTeam": "independiente-oliva",
-    "awayTeam": "san-lorenzo",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo"
-  },
-  {
     "id": "2026-11-14-gimnasia-platense",
     "date": "2026-11-14",
-    "time": null,
+    "time": "21:00",
     "homeTeam": "gimnasia",
     "awayTeam": "platense",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NiT2DNBpmRwkAzX5foy4IFEaYOZ-LMcsvGdP50-aiaiESRS21cC8bA==/gimnasia-cr-vs-platense"
   },
   {
+    "id": "2026-11-14-independiente-oliva-san-lorenzo",
+    "date": "2026-11-14",
+    "time": "21:30",
+    "homeTeam": "independiente-oliva",
+    "awayTeam": "san-lorenzo",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo"
+  },
+  {
+    "id": "2026-11-15-argentino-lanus",
+    "date": "2026-11-15",
+    "time": "20:30",
+    "homeTeam": "argentino",
+    "awayTeam": "lanus",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2SpXae8GOMLSjBTeLsFd_IFcVthcB6qxPyJFN7sCOnW95cOi8sPMkmA==/argentino-j-vs-lanus"
+  },
+  {
     "id": "2026-11-15-san-martin-quimsa",
     "date": "2026-11-15",
-    "time": null,
+    "time": "21:00",
     "homeTeam": "san-martin",
     "awayTeam": "quimsa",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
@@ -586,18 +594,10 @@ export const officialSchedule = [
   {
     "id": "2026-11-15-la-union-atenas",
     "date": "2026-11-15",
-    "time": null,
+    "time": "21:00",
     "homeTeam": "la-union",
     "awayTeam": "atenas",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-  },
-  {
-    "id": "2026-11-15-argentino-lanus",
-    "date": "2026-11-15",
-    "time": null,
-    "homeTeam": "argentino",
-    "awayTeam": "lanus",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2SpXae8GOMLSjBTeLsFd_IFcVthcB6qxPyJFN7sCOnW95cOi8sPMkmA==/argentino-j-vs-lanus"
   },
   {
     "id": "2026-11-16-instituto-san-lorenzo",
