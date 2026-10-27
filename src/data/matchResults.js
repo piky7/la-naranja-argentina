@@ -498,5 +498,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LMN1NkpNIo9N3d8rQKUh2pRO_oUZD7cExi_2UtSmsdP1W68mCw7Eqg==/racing-ch-vs-quimsa"
     }
+  },
+  "2026-10-26-lanus-regatas": {
+    "status": "finished",
+    "homeScore": 72,
+    "awayScore": 63,
+    "time": "20:30",
+    "homeTeam": "lanus",
+    "awayTeam": "regatas",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2AxugGUnxOe-9SUIV0uFfFEt5Di_M_ioYZL_nI82HE0ccQRIv7U5Zqg==/lanus-vs-regatas-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2AxugGUnxOe-9SUIV0uFfFEt5Di_M_ioYZL_nI82HE0ccQRIv7U5Zqg==/lanus-vs-regatas-c"
+    }
   }
 };

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T00:16:49.491Z",
+  "generatedAt": "2026-10-27T05:17:23.728Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -311,6 +311,14 @@
       "awayScore": 68,
       "homeTeam": "racing-chivilcoy",
       "awayTeam": "quimsa",
+      "hasStats": true
+    },
+    "2026-10-26-lanus-regatas": {
+      "status": "published",
+      "homeScore": 72,
+      "awayScore": 63,
+      "homeTeam": "lanus",
+      "awayTeam": "regatas",
       "hasStats": true
     }
   }

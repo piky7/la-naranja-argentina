@@ -12809,6 +12809,28 @@
             "fouls": 25
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 19,
+          "away": 28
+        },
+        {
+          "period": "2",
+          "home": 19,
+          "away": 29
+        },
+        {
+          "period": "3",
+          "home": 22,
+          "away": 20
+        },
+        {
+          "period": "4",
+          "home": 26,
+          "away": 13
+        }
       ]
     },
     {
@@ -14090,6 +14112,28 @@
             "fouls": 25
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 26,
+          "away": 21
+        },
+        {
+          "period": "2",
+          "home": 30,
+          "away": 11
+        },
+        {
+          "period": "3",
+          "home": 21,
+          "away": 21
+        },
+        {
+          "period": "4",
+          "home": 19,
+          "away": 20
+        }
       ]
     },
     {
@@ -15320,6 +15364,28 @@
             "turnovers": 11,
             "fouls": 18
           }
+        }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 17,
+          "away": 21
+        },
+        {
+          "period": "2",
+          "home": 24,
+          "away": 17
+        },
+        {
+          "period": "3",
+          "home": 25,
+          "away": 29
+        },
+        {
+          "period": "4",
+          "home": 21,
+          "away": 24
         }
       ]
     },
@@ -16602,6 +16668,38 @@
             "fouls": 29
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 30,
+          "away": 18
+        },
+        {
+          "period": "2",
+          "home": 16,
+          "away": 23
+        },
+        {
+          "period": "3",
+          "home": 19,
+          "away": 23
+        },
+        {
+          "period": "4",
+          "home": 25,
+          "away": 26
+        },
+        {
+          "period": "OT1",
+          "home": 16,
+          "away": 16
+        },
+        {
+          "period": "OT2",
+          "home": 20,
+          "away": 17
+        }
       ]
     },
     {
@@ -17883,6 +17981,28 @@
             "fouls": 25
           }
         }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 28,
+          "away": 33
+        },
+        {
+          "period": "2",
+          "home": 23,
+          "away": 14
+        },
+        {
+          "period": "3",
+          "home": 23,
+          "away": 27
+        },
+        {
+          "period": "4",
+          "home": 18,
+          "away": 23
+        }
       ]
     },
     {
@@ -19163,6 +19283,28 @@
             "turnovers": 12,
             "fouls": 18
           }
+        }
+      ],
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 20,
+          "away": 22
+        },
+        {
+          "period": "2",
+          "home": 18,
+          "away": 18
+        },
+        {
+          "period": "3",
+          "home": 29,
+          "away": 14
+        },
+        {
+          "period": "4",
+          "home": 22,
+          "away": 19
         }
       ]
     },
@@ -50390,6 +50532,1314 @@
           "period": "4",
           "home": 14,
           "away": 18
+        }
+      ]
+    },
+    {
+      "status": "finished",
+      "finalEvidence": {
+        "type": "official-final-status",
+        "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2AxugGUnxOe-9SUIV0uFfFEt5Di_M_ioYZL_nI82HE0ccQRIv7U5Zqg==/lanus-vs-regatas-c"
+      },
+      "date": "2026-10-26",
+      "time": "20:30",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2AxugGUnxOe-9SUIV0uFfFEt5Di_M_ioYZL_nI82HE0ccQRIv7U5Zqg==/lanus-vs-regatas-c",
+      "homeScore": 72,
+      "awayScore": 63,
+      "quarterScores": [
+        {
+          "period": "1",
+          "home": 18,
+          "away": 22
+        },
+        {
+          "period": "2",
+          "home": 19,
+          "away": 21
+        },
+        {
+          "period": "3",
+          "home": 12,
+          "away": 8
+        },
+        {
+          "period": "4",
+          "home": 23,
+          "away": 12
+        }
+      ],
+      "teams": [
+        {
+          "name": "LANÚS",
+          "officialClubId": 63,
+          "officialTeamId": 112600,
+          "players": [
+            {
+              "officialPlayerId": 385838,
+              "officialTeamId": 112600,
+              "name": "WHITFIELD III, ROBERT JAMARCUS",
+              "number": "3",
+              "points": 2,
+              "rebounds": 2,
+              "assists": 2,
+              "minutes": "16:28",
+              "valuation": 5,
+              "starter": false,
+              "steals": 3,
+              "turnovers": 1,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 2,
+              "twoPointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 1,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 100,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "100"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 2,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 4
+            },
+            {
+              "officialPlayerId": 428243,
+              "officialTeamId": 112600,
+              "name": "BRUSSINO, JUAN IGNACIO",
+              "number": "5",
+              "points": 8,
+              "rebounds": 2,
+              "assists": 6,
+              "minutes": "31:23",
+              "valuation": 11,
+              "starter": true,
+              "steals": 0,
+              "turnovers": 2,
+              "offensiveRebounds": 1,
+              "defensiveRebounds": 1,
+              "twoPointers": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 66,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "66"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 3,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 4,
+                "AciertosPorPartido": 0,
+                "Fallados": 3,
+                "Totales": 7,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 57,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "57"
+              },
+              "plusMinus": 11
+            },
+            {
+              "officialPlayerId": 219791,
+              "officialTeamId": 112600,
+              "name": "FRANCHINO, MARTIN",
+              "number": "7",
+              "points": 10,
+              "rebounds": 10,
+              "assists": 0,
+              "minutes": "28:09",
+              "valuation": 13,
+              "starter": false,
+              "steals": 1,
+              "turnovers": 1,
+              "offensiveRebounds": 3,
+              "defensiveRebounds": 7,
+              "twoPointers": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 4,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 50,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "50"
+              },
+              "threePointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 3,
+                "Totales": 4,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 25,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "25"
+              },
+              "freeThrows": {
+                "Aciertos": 3,
+                "AciertosPorPartido": 0,
+                "Fallados": 3,
+                "Totales": 6,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 50,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "50"
+              },
+              "plusMinus": 12
+            },
+            {
+              "officialPlayerId": 33793,
+              "officialTeamId": 112600,
+              "name": "SACCHI, ALEJO VALENTIN",
+              "number": "10",
+              "points": 0,
+              "rebounds": 2,
+              "assists": 0,
+              "minutes": "08:52",
+              "valuation": -1,
+              "starter": true,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 2,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 1,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 2,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": -8
+            },
+            {
+              "officialPlayerId": 431326,
+              "officialTeamId": 112600,
+              "name": "CELIZ, JOAQUIN",
+              "number": "11",
+              "points": 0,
+              "rebounds": 0,
+              "assists": 0,
+              "minutes": "00:00",
+              "valuation": 0,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 0,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 0
+            },
+            {
+              "officialPlayerId": 429711,
+              "officialTeamId": 112600,
+              "name": "JAMES, CHRISTIAN TYLER",
+              "number": "12",
+              "points": 4,
+              "rebounds": 5,
+              "assists": 2,
+              "minutes": "15:55",
+              "valuation": 8,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 1,
+              "defensiveRebounds": 4,
+              "twoPointers": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 66,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "66"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 2,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 1
+            },
+            {
+              "officialPlayerId": 431355,
+              "officialTeamId": 112600,
+              "name": "CORIA FA, JOAQUIN",
+              "number": "13",
+              "points": 0,
+              "rebounds": 0,
+              "assists": 0,
+              "minutes": "00:00",
+              "valuation": 0,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 0,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 0
+            },
+            {
+              "officialPlayerId": 427695,
+              "officialTeamId": 112600,
+              "name": "ANDUJAR, LUCAS",
+              "number": "22",
+              "points": 7,
+              "rebounds": 6,
+              "assists": 2,
+              "minutes": "25:02",
+              "valuation": 11,
+              "starter": false,
+              "steals": 4,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 6,
+              "twoPointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 4,
+                "Totales": 5,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 20,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "20"
+              },
+              "threePointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 6,
+                "Totales": 7,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 14,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "14"
+              },
+              "freeThrows": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 2,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 100,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "100"
+              },
+              "plusMinus": 17
+            },
+            {
+              "officialPlayerId": 388284,
+              "officialTeamId": 112600,
+              "name": "MORAGA, AGUSTIN ",
+              "number": "27",
+              "points": 0,
+              "rebounds": 0,
+              "assists": 0,
+              "minutes": "00:00",
+              "valuation": 0,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 0,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 0
+            },
+            {
+              "officialPlayerId": 430339,
+              "officialTeamId": 112600,
+              "name": "JOHNSON JR, MELVIN TYRIEK",
+              "number": "32",
+              "points": 7,
+              "rebounds": 1,
+              "assists": 2,
+              "minutes": "22:46",
+              "valuation": 0,
+              "starter": true,
+              "steals": 0,
+              "turnovers": 1,
+              "offensiveRebounds": 1,
+              "defensiveRebounds": 0,
+              "twoPointers": {
+                "Aciertos": 3,
+                "AciertosPorPartido": 0,
+                "Fallados": 5,
+                "Totales": 8,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 37,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "37"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 1,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 1,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 100,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "100"
+              },
+              "plusMinus": 4
+            },
+            {
+              "officialPlayerId": 424846,
+              "officialTeamId": 112600,
+              "name": "RAMIREZ BARRIOS, CLAUDIO FABIAN",
+              "number": "33",
+              "points": 6,
+              "rebounds": 5,
+              "assists": 0,
+              "minutes": "18:48",
+              "valuation": 4,
+              "starter": true,
+              "steals": 0,
+              "turnovers": 2,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 5,
+              "twoPointers": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 66,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "66"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 5,
+                "Totales": 5,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 66,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "66"
+              },
+              "plusMinus": -8
+            },
+            {
+              "officialPlayerId": 431601,
+              "officialTeamId": 112600,
+              "name": "BOMBINO PARADA, PEDRO ANTONIO",
+              "number": "99",
+              "points": 28,
+              "rebounds": 9,
+              "assists": 1,
+              "minutes": "32:37",
+              "valuation": 33,
+              "starter": true,
+              "steals": 1,
+              "turnovers": 3,
+              "offensiveRebounds": 2,
+              "defensiveRebounds": 7,
+              "twoPointers": {
+                "Aciertos": 6,
+                "AciertosPorPartido": 0,
+                "Fallados": 4,
+                "Totales": 10,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 60,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "60"
+              },
+              "threePointers": {
+                "Aciertos": 3,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 4,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 75,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "75"
+              },
+              "freeThrows": {
+                "Aciertos": 7,
+                "AciertosPorPartido": 0,
+                "Fallados": 4,
+                "Totales": 11,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 63,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "63"
+              },
+              "plusMinus": 12
+            }
+          ],
+          "totalPlayerPoints": 72,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 68,
+              "percentage": 35
+            },
+            "twoPointers": {
+              "made": 19,
+              "attempted": 38,
+              "percentage": 50
+            },
+            "threePointers": {
+              "made": 5,
+              "attempted": 30,
+              "percentage": 17
+            },
+            "freeThrows": {
+              "made": 19,
+              "attempted": 30,
+              "percentage": 63
+            },
+            "rebounds": 42,
+            "assists": 15,
+            "steals": 9,
+            "blocks": 3,
+            "turnovers": 10,
+            "fouls": 17
+          }
+        },
+        {
+          "name": "REGATAS (C)",
+          "officialClubId": 1424,
+          "officialTeamId": 114561,
+          "players": [
+            {
+              "officialPlayerId": 430266,
+              "officialTeamId": 114561,
+              "name": "STONE, KEITH MARTIN",
+              "number": "1",
+              "points": 5,
+              "rebounds": 7,
+              "assists": 1,
+              "minutes": "18:55",
+              "valuation": 4,
+              "starter": false,
+              "steals": 1,
+              "turnovers": 3,
+              "offensiveRebounds": 2,
+              "defensiveRebounds": 5,
+              "twoPointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 4,
+                "Totales": 5,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 20,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "20"
+              },
+              "threePointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 33,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "33"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": -15
+            },
+            {
+              "officialPlayerId": 426275,
+              "officialTeamId": 114561,
+              "name": "FARABELLO, FRANCISCO",
+              "number": "3",
+              "points": 5,
+              "rebounds": 5,
+              "assists": 4,
+              "minutes": "23:55",
+              "valuation": 5,
+              "starter": true,
+              "steals": 0,
+              "turnovers": 1,
+              "offensiveRebounds": 1,
+              "defensiveRebounds": 4,
+              "twoPointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 33,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "33"
+              },
+              "threePointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 4,
+                "Totales": 5,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 20,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "20"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": -10
+            },
+            {
+              "officialPlayerId": 323779,
+              "officialTeamId": 114561,
+              "name": "LEZCANO, EXEQUIEL",
+              "number": "4",
+              "points": 0,
+              "rebounds": 0,
+              "assists": 1,
+              "minutes": "05:55",
+              "valuation": -1,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 2,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 0,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 1,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": -14
+            },
+            {
+              "officialPlayerId": 325111,
+              "officialTeamId": 114561,
+              "name": "GRAMAJO, PABLO IVAN",
+              "number": "5",
+              "points": 10,
+              "rebounds": 6,
+              "assists": 0,
+              "minutes": "33:02",
+              "valuation": 10,
+              "starter": true,
+              "steals": 2,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 6,
+              "twoPointers": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 2,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 100,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "100"
+              },
+              "threePointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 5,
+                "Totales": 6,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 16,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "16"
+              },
+              "freeThrows": {
+                "Aciertos": 3,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 100,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "100"
+              },
+              "plusMinus": 7
+            },
+            {
+              "officialPlayerId": 426339,
+              "officialTeamId": 114561,
+              "name": "ORRESTA, SEBASTIAN ALEJANDRO",
+              "number": "6",
+              "points": 7,
+              "rebounds": 2,
+              "assists": 7,
+              "minutes": "29:47",
+              "valuation": 6,
+              "starter": true,
+              "steals": 0,
+              "turnovers": 1,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 2,
+              "twoPointers": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 3,
+                "Totales": 5,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 40,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "40"
+              },
+              "threePointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 33,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "33"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 5
+            },
+            {
+              "officialPlayerId": 77832,
+              "officialTeamId": 114561,
+              "name": "BENDER, VIKTOR DANIEL",
+              "number": "7",
+              "points": 0,
+              "rebounds": 0,
+              "assists": 0,
+              "minutes": "00:00",
+              "valuation": 0,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 0,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 0
+            },
+            {
+              "officialPlayerId": 428705,
+              "officialTeamId": 114561,
+              "name": "CENTENO GARCIA, ELIAN JOSE",
+              "number": "8",
+              "points": 2,
+              "rebounds": 6,
+              "assists": 0,
+              "minutes": "11:59",
+              "valuation": 5,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 2,
+              "defensiveRebounds": 4,
+              "twoPointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 2,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 50,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "50"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 1,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": -18
+            },
+            {
+              "officialPlayerId": 428080,
+              "officialTeamId": 114561,
+              "name": "MONTERO, JOSE IGNACIO",
+              "number": "10",
+              "points": 7,
+              "rebounds": 3,
+              "assists": 2,
+              "minutes": "26:07",
+              "valuation": 0,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 3,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 3,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 1,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 2,
+                "AciertosPorPartido": 0,
+                "Fallados": 5,
+                "Totales": 7,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 28,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "28"
+              },
+              "freeThrows": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 2,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 50,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "50"
+              },
+              "plusMinus": -12
+            },
+            {
+              "officialPlayerId": 217404,
+              "officialTeamId": 114561,
+              "name": "FERRARO, FRANCISCO",
+              "number": "11",
+              "points": 0,
+              "rebounds": 1,
+              "assists": 0,
+              "minutes": "02:56",
+              "valuation": 1,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 1,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": -10
+            },
+            {
+              "officialPlayerId": 154780,
+              "officialTeamId": 114561,
+              "name": "LEDESMA, ALAN TADEO",
+              "number": "20",
+              "points": 0,
+              "rebounds": 0,
+              "assists": 0,
+              "minutes": "00:00",
+              "valuation": 0,
+              "starter": false,
+              "steals": 0,
+              "turnovers": 0,
+              "offensiveRebounds": 0,
+              "defensiveRebounds": 0,
+              "twoPointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "plusMinus": 0
+            },
+            {
+              "officialPlayerId": 426516,
+              "officialTeamId": 114561,
+              "name": "RUESGA, FAUSTO",
+              "number": "22",
+              "points": 16,
+              "rebounds": 5,
+              "assists": 0,
+              "minutes": "24:38",
+              "valuation": 9,
+              "starter": true,
+              "steals": 1,
+              "turnovers": 2,
+              "offensiveRebounds": 1,
+              "defensiveRebounds": 4,
+              "twoPointers": {
+                "Aciertos": 6,
+                "AciertosPorPartido": 0,
+                "Fallados": 5,
+                "Totales": 11,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 54,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "54"
+              },
+              "threePointers": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 3,
+                "Totales": 4,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 25,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "25"
+              },
+              "freeThrows": {
+                "Aciertos": 1,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 3,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 33,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "33"
+              },
+              "plusMinus": 14
+            },
+            {
+              "officialPlayerId": 426272,
+              "officialTeamId": 114561,
+              "name": "ACUÑA, ROBERTO SANTIAGO",
+              "number": "35",
+              "points": 11,
+              "rebounds": 5,
+              "assists": 0,
+              "minutes": "22:47",
+              "valuation": 12,
+              "starter": true,
+              "steals": 0,
+              "turnovers": 1,
+              "offensiveRebounds": 1,
+              "defensiveRebounds": 4,
+              "twoPointers": {
+                "Aciertos": 4,
+                "AciertosPorPartido": 0,
+                "Fallados": 2,
+                "Totales": 6,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 66,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "66"
+              },
+              "threePointers": {
+                "Aciertos": 0,
+                "AciertosPorPartido": 0,
+                "Fallados": 0,
+                "Totales": 0,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 0,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "0"
+              },
+              "freeThrows": {
+                "Aciertos": 3,
+                "AciertosPorPartido": 0,
+                "Fallados": 1,
+                "Totales": 4,
+                "TotalesPorPartido": 0,
+                "Porcentaje": 75,
+                "AciertosPorPartidoTabla": "0",
+                "TotalesPorPartidoTabla": "0",
+                "PorcentajeTabla": "75"
+              },
+              "plusMinus": 8
+            }
+          ],
+          "totalPlayerPoints": 63,
+          "teamStats": {
+            "fieldGoals": {
+              "made": 24,
+              "attempted": 64,
+              "percentage": 37
+            },
+            "twoPointers": {
+              "made": 17,
+              "attempted": 35,
+              "percentage": 49
+            },
+            "threePointers": {
+              "made": 7,
+              "attempted": 29,
+              "percentage": 24
+            },
+            "freeThrows": {
+              "made": 8,
+              "attempted": 13,
+              "percentage": 62
+            },
+            "rebounds": 40,
+            "assists": 15,
+            "steals": 4,
+            "blocks": 2,
+            "turnovers": 13,
+            "fouls": 28
+          }
         }
       ]
     }
