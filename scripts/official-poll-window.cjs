@@ -17,7 +17,7 @@ function isCandidate(match, now = new Date(), recent = false) {
 }
 
 function pollDecision(fixture, history, event, schedule, now = new Date()) {
-  const recent = event === "schedule" && schedule !== "30 6 * * *";
+  const recent = event === "schedule" && schedule === "*/10 * * * *";
   if (!recent) return { run: true, mode: "full" };
   if (fixture.source !== "Liga Nacional" || history.source !== "Liga Nacional" ||
       !Array.isArray(fixture.matches) || !Array.isArray(history.matches)) {
