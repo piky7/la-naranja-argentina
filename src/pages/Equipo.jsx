@@ -31,10 +31,14 @@ for (const stats of playerStats) {
 }
 
 
+// Índice de equipos: conserva la primera coincidencia, igual que Array.find.
+const TEAMS_BY_ID = new Map();
+for (const team of teams) {
+  if (!TEAMS_BY_ID.has(team.id)) TEAMS_BY_ID.set(team.id, team);
+}
+
 function getTeam(teamId) {
-  return teams.find(
-    (team) => team.id === teamId
-  );
+  return TEAMS_BY_ID.get(teamId);
 }
 
 
