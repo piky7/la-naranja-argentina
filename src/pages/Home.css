@@ -10616,3 +10616,15 @@
   font-weight:800;
   white-space:nowrap;
 }
+
+/* Escritorio: nombres completos en el fixture central sin invadir el marcador. */
+@media (min-width: 1024px) {
+  .home-page .fixture-panel .fixture-team { min-width: 0; gap: 5px; }
+  .home-page .fixture-panel .fixture-team-name { min-width: 0; flex: 1 1 auto; }
+  .home-page .fixture-panel .fixture-team-name > span {
+    font-size: clamp(12px, 1.15vw, 16px);
+    white-space: normal;
+    overflow-wrap: normal;
+    line-height: 1.1;
+  }
+}
