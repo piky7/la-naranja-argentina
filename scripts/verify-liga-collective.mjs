@@ -25,7 +25,12 @@ try {
   const original = Object.fromEntries(teams.map(team => [team.id, JSON.parse(JSON.stringify(context.calculate(team.id)))]));
   // Los valores usados por popups y rankings deben coincidir exactamente
   // con la implementación original para cada equipo y cada estadística.
-  const cached = Object.fromEntries(teams.map(team => [team.id, JSON.parse(JSON.stringify(context.calculate(team.id)))]));
+  const cacheStart = source.indexOf("const UPCOMING_COLLECTIVE_BY_TEAM =");
+  assert(cacheStart >= 0, "Falta el cache colectivo que se quiere verificar");
+  const cacheEnd = source.indexOf(";", cacheStart);
+  assert(cacheEnd > cacheStart, "No se encontró el final del cache");
+  vm.runInContext(source.slice(cacheStart, cacheEnd + 1).replace("const UPCOMING_COLLECTIVE_BY_TEAM =", "globalThis.cached ="), context, { timeout: 30000 });
+  const cached = JSON.parse(JSON.stringify(context.cached));
   for (const team of teams) assert.deepEqual(cached[team.id], original[team.id], `Promedios de ${team.id}`);
   const fields = [
     ["points", false], ["pointsAgainst", true], ["rebounds", false],
