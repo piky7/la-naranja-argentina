@@ -1668,7 +1668,7 @@ const finishedMatch = {
             </header>
             <div className="team-v2-body">
               {(() => {
-                const official = getUpcomingOfficialCollective(selectedTeam.id);
+                const official = UPCOMING_COLLECTIVE_BY_TEAM[selectedTeam.id];
                 const metrics = [
                   ["PTS/P", "points"], ["REC/P", "pointsAgainst"],
                   ["REB/P", "rebounds"], ["AST/P", "assists"],
@@ -1954,8 +1954,8 @@ const finishedMatch = {
 <div className="upcoming-team-comparison upcoming-official-comparison">
   <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
   {(() => {
-    const home = getUpcomingOfficialCollective(selectedUpcomingMatch.homeTeam);
-    const away = getUpcomingOfficialCollective(selectedUpcomingMatch.awayTeam);
+    const home = UPCOMING_COLLECTIVE_BY_TEAM[selectedUpcomingMatch.homeTeam];
+    const away = UPCOMING_COLLECTIVE_BY_TEAM[selectedUpcomingMatch.awayTeam];
     return <>
       <CategoryBalance home={home} away={away} homeId={selectedUpcomingMatch.homeTeam} awayId={selectedUpcomingMatch.awayTeam} stats={UPCOMING_COLLECTIVE_STATS} />
       <p className="upcoming-collective-source">Partidos con datos: {home.games} / {away.games} · Naranja = mejor registro</p>
