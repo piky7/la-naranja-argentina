@@ -833,7 +833,7 @@
     },
     {
       "date": "2026-11-01",
-      "time": "00:00",
+      "time": "20:30",
       "home": {
         "name": "INSTITUTO",
         "officialClubId": 1790,
@@ -851,7 +851,7 @@
     },
     {
       "date": "2026-11-01",
-      "time": "00:00",
+      "time": "21:00",
       "home": {
         "name": "ATENAS (C)",
         "officialClubId": 1498,
@@ -887,25 +887,7 @@
     },
     {
       "date": "2026-11-03",
-      "time": "00:00",
-      "home": {
-        "name": "ATENAS (C)",
-        "officialClubId": 1498,
-        "officialTeamId": 112793
-      },
-      "away": {
-        "name": "GIMNASIA (CR)",
-        "officialClubId": 1474,
-        "officialTeamId": 112553
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Yv1N5bawwPYgHrqmJaLwvyzN_lBQq4ii0ncy7-AhsCN4QxanuvGXJw==/atenas-c-vs-gimnasia-cr"
-    },
-    {
-      "date": "2026-11-03",
-      "time": "00:00",
+      "time": "21:00",
       "home": {
         "name": "INSTITUTO",
         "officialClubId": 1790,
@@ -923,7 +905,25 @@
     },
     {
       "date": "2026-11-03",
-      "time": "00:00",
+      "time": "21:30",
+      "home": {
+        "name": "ATENAS (C)",
+        "officialClubId": 1498,
+        "officialTeamId": 112793
+      },
+      "away": {
+        "name": "GIMNASIA (CR)",
+        "officialClubId": 1474,
+        "officialTeamId": 112553
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Yv1N5bawwPYgHrqmJaLwvyzN_lBQq4ii0ncy7-AhsCN4QxanuvGXJw==/atenas-c-vs-gimnasia-cr"
+    },
+    {
+      "date": "2026-11-03",
+      "time": "21:30",
       "home": {
         "name": "LA UNION FSA",
         "officialClubId": 1541,
@@ -941,7 +941,7 @@
     },
     {
       "date": "2026-11-04",
-      "time": "00:00",
+      "time": "22:00",
       "home": {
         "name": "OLIMPICO (LB)",
         "officialClubId": 1882,
@@ -977,7 +977,7 @@
     },
     {
       "date": "2026-11-05",
-      "time": "00:00",
+      "time": "21:30",
       "home": {
         "name": "INDEPENDIENTE (O)",
         "officialClubId": 2025,
@@ -995,25 +995,25 @@
     },
     {
       "date": "2026-11-06",
-      "time": "00:00",
+      "time": "20:30",
       "home": {
-        "name": "FERRO",
-        "officialClubId": 46,
-        "officialTeamId": 112566
+        "name": "SAN LORENZO",
+        "officialClubId": 88,
+        "officialTeamId": 113373
       },
       "away": {
-        "name": "SAN MARTÍN (C)",
-        "officialClubId": 1426,
-        "officialTeamId": 113546
+        "name": "REGATAS (C)",
+        "officialClubId": 1424,
+        "officialTeamId": 114561
       },
       "homeScore": 0,
       "awayScore": 0,
       "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I0Wb0Q-B-KPjDRf_AK_ECGV3bw7HZJsO1d-uLRHJuB5mllHPHp42OQ==/ferro-vs-san-martin-c"
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2ZN2RgIDH1tzuPUWeHTZIKA94xBmqX_JtuPI7DlNUv9dRPH2PJXYUPQ==/san-lorenzo-vs-regatas-c"
     },
     {
       "date": "2026-11-06",
-      "time": "00:00",
+      "time": "21:00",
       "home": {
         "name": "QUIMSA",
         "officialClubId": 1869,
@@ -1031,25 +1031,25 @@
     },
     {
       "date": "2026-11-06",
-      "time": "00:00",
+      "time": "21:35",
       "home": {
-        "name": "SAN LORENZO",
-        "officialClubId": 88,
-        "officialTeamId": 113373
+        "name": "FERRO",
+        "officialClubId": 46,
+        "officialTeamId": 112566
       },
       "away": {
-        "name": "REGATAS (C)",
-        "officialClubId": 1424,
-        "officialTeamId": 114561
+        "name": "SAN MARTÍN (C)",
+        "officialClubId": 1426,
+        "officialTeamId": 113546
       },
       "homeScore": 0,
       "awayScore": 0,
       "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2ZN2RgIDH1tzuPUWeHTZIKA94xBmqX_JtuPI7DlNUv9dRPH2PJXYUPQ==/san-lorenzo-vs-regatas-c"
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I0Wb0Q-B-KPjDRf_AK_ECGV3bw7HZJsO1d-uLRHJuB5mllHPHp42OQ==/ferro-vs-san-martin-c"
     },
     {
       "date": "2026-11-07",
-      "time": "00:00",
+      "time": "20:00",
       "home": {
         "name": "BOCA",
         "officialClubId": 19,
@@ -1085,7 +1085,7 @@
     },
     {
       "date": "2026-11-08",
-      "time": "00:00",
+      "time": "20:00",
       "home": {
         "name": "SAN LORENZO",
         "officialClubId": 88,
@@ -1103,7 +1103,7 @@
     },
     {
       "date": "2026-11-08",
-      "time": "00:00",
+      "time": "20:30",
       "home": {
         "name": "QUIMSA",
         "officialClubId": 1869,
@@ -1121,25 +1121,7 @@
     },
     {
       "date": "2026-11-09",
-      "time": "00:00",
-      "home": {
-        "name": "GIMNASIA (CR)",
-        "officialClubId": 1474,
-        "officialTeamId": 112553
-      },
-      "away": {
-        "name": "OBERÁ",
-        "officialClubId": 2305,
-        "officialTeamId": 113652
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
-    },
-    {
-      "date": "2026-11-09",
-      "time": "00:00",
+      "time": "20:30",
       "home": {
         "name": "LANÚS",
         "officialClubId": 63,
@@ -1154,6 +1136,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2oELAP18um2ZIwLpadc-qmahYipv1W8V1_i36OTjDSIQa8nvNs6J-Sw==/lanus-vs-la-union-fsa"
+    },
+    {
+      "date": "2026-11-09",
+      "time": "21:00",
+      "home": {
+        "name": "GIMNASIA (CR)",
+        "officialClubId": 1474,
+        "officialTeamId": 112553
+      },
+      "away": {
+        "name": "OBERÁ",
+        "officialClubId": 2305,
+        "officialTeamId": 113652
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
     },
     {
       "date": "2026-11-10",
