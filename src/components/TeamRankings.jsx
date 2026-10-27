@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { teams } from "../data/teams";
+import { teams, teamMatchColors } from "../data/teams";
 import { matches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
@@ -149,7 +149,7 @@ export default function TeamRankings() {
         {sorted.map((row, index) => {
           const games = metric.collective ? row[scope].collectiveGames : row[scope].games;
           return (
-            <button className="team-ranking-row" type="button" key={row.team.id} onClick={() => navigate(`/equipos/${row.team.id}`)} aria-label={`Ver ${row.team.name}, posición ${index + 1}, ${formatValue(row.value, metric)}`}>
+            <button className="team-ranking-row" style={{ "--ranking-team-color": teamMatchColors[row.team.id] || "#18334b" }} type="button" key={row.team.id} onClick={() => navigate(`/equipos/${row.team.id}`)} aria-label={`Ver ${row.team.name}, posición ${index + 1}, ${formatValue(row.value, metric)}`}>
               <span className="team-ranking-position">{index + 1}.</span>
               <img src={row.team.logo} alt="" loading="lazy" className="team-ranking-logo" />
               <span className="team-ranking-name">{row.team.shortName || row.team.name}<small>{games ? `${games} PJ` : "Sin partidos con datos"}</small></span>
