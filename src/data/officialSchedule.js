@@ -424,20 +424,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Dwl_xkHPmU-Y45ThMvKQCNI1D4aJt4H7o0hYzHLMG3gxRN3uS685ZQ==/olimpico-lb-vs-lanus"
   },
   {
-    "id": "2026-11-05-obera-argentino",
-    "date": "2026-11-05",
-    "time": null,
-    "homeTeam": "obera",
-    "awayTeam": "argentino",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
-  },
-  {
     "id": "2026-11-05-independiente-oliva-gimnasia",
     "date": "2026-11-05",
     "time": null,
     "homeTeam": "independiente-oliva",
     "awayTeam": "gimnasia",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DdxcQfe5DOMIjm3PSVXfUup54JdRNPHs3xu4b0oQn7vVwz2Tbn_tZQ==/independiente-o-vs-gimnasia-cr"
+  },
+  {
+    "id": "2026-11-05-obera-argentino",
+    "date": "2026-11-05",
+    "time": null,
+    "homeTeam": "obera",
+    "awayTeam": "argentino",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
   },
   {
     "id": "2026-11-06-ferro-san-martin",
@@ -472,20 +472,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2gyPj462Rm3Y3P6xTXhQXqjpsw6uW8HyviGsonyuvW0pAioqZEF6ILQ==/boca-vs-la-union-fsa"
   },
   {
-    "id": "2026-11-08-racing-chivilcoy-regatas",
-    "date": "2026-11-08",
-    "time": null,
-    "homeTeam": "racing-chivilcoy",
-    "awayTeam": "regatas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
-  },
-  {
     "id": "2026-11-08-san-lorenzo-san-martin",
     "date": "2026-11-08",
     "time": null,
     "homeTeam": "san-lorenzo",
     "awayTeam": "san-martin",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BC4yg1A_AQP5LCuOTtxu1GMW8kVihViJDas2jqehqvumUvNyVAObTw==/san-lorenzo-vs-san-martin-c"
+  },
+  {
+    "id": "2026-11-08-racing-chivilcoy-regatas",
+    "date": "2026-11-08",
+    "time": null,
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "regatas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
   },
   {
     "id": "2026-11-08-quimsa-instituto",
