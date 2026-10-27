@@ -27,7 +27,7 @@ function AnimatedRoutes() {
 
   return (
     <div key={location.key} className={animation}>
-      <Suspense fallback={<div className="page-loading" role="status">Cargando sección…</div>}>
+      <Suspense fallback={<div role="status" style={{ minHeight: "calc(100dvh - 120px)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-soft)" }}>Cargando sección…</div>}>
       <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/liga" element={<Liga />} />
