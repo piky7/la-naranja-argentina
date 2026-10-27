@@ -71,6 +71,8 @@ async function main() {
 
   let agregados = 0;
   let omitidos = 0;
+  let consultasOficiales = 0;
+  let sinFinalConfirmado = 0;
 
   console.log(`Partidos del fixture: ${partidos.length}`);
 
@@ -93,8 +95,9 @@ async function main() {
       continue;
     }
 
+    consultasOficiales++;
     console.log(
-      `Procesando: ${partido.home.name} vs ${partido.away.name}`
+      `Consulta ${consultasOficiales}: ${partido.home.name} vs ${partido.away.name} (${partido.date} ${partido.time || ''})`
     );
 
     // Eliminamos cualquier archivo temporal anterior.
@@ -151,6 +154,7 @@ async function main() {
         officialUrl: partido.officialUrl,
       })
     ) {
+      sinFinalConfirmado++;
       console.log("Partido sin finalización oficial confirmada.");
       omitidos++;
       continue;
@@ -259,7 +263,13 @@ async function main() {
     .filter((p) => !Array.isArray(p.quarterScores) || p.quarterScores.length < 4)
     .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
-  for (const registro of pendientes.slice(0, 6)) {
+  // Evitar que los parciales históricos retrasen la publicación rápida.
+  // Se completan en sincronizaciones full.
+  const parcialesAConsultar = recent ? [] : pendientes.slice(0, 6);
+  if (recent && pendientes.length) {
+    console.log(`Modo recent: revisión de ${pendientes.length} partidos sin parciales completos pospuesta.`);
+  }
+  for (const registro of parcialesAConsultar) {
     if (!registro.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")) continue;
     try {
       const respuesta = await fetch(registro.officialUrl, {
@@ -298,6 +308,8 @@ async function main() {
   }
 
   console.log("\nProceso terminado.");
+  console.log(`Consultas oficiales: ${consultasOficiales}`);
+  console.log(`Sin final confirmado: ${sinFinalConfirmado}`);
   console.log(`Partidos agregados: ${agregados}`);
   console.log(`Partidos omitidos: ${omitidos}`);
   console.log(`Total en historial: ${historial.matches.length}`);
