@@ -20,6 +20,15 @@ const matches = baseMatches.map((match) => {
 
   return result ? { ...match, ...result } : match;
 });
+// Mantener la primera coincidencia, igual que Array.find, sin recorrer
+// todas las estadísticas en cada filtro, ordenamiento o tarjeta.
+const PLAYER_STATS_BY_ID = new Map();
+for (const entry of playerStats) {
+  if (!PLAYER_STATS_BY_ID.has(entry.playerId)) {
+    PLAYER_STATS_BY_ID.set(entry.playerId, entry);
+  }
+}
+
 function Estadisticas() {
   const navigate = useNavigate();
   const [mode, setMode] = useState("players");
@@ -61,7 +70,7 @@ function Estadisticas() {
   }, []);
 
   const getPlayerStats = (playerId) => {
-    const stats = playerStats.find((entry) => entry.playerId === playerId);
+    const stats = PLAYER_STATS_BY_ID.get(playerId);
     return stats ? { ...stats, valuation: valuationAverages.get(playerId) ?? null } : null;
   };
 
