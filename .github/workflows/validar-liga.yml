@@ -1,0 +1,28 @@
+name: Validar Liga y popups
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/pages/Liga.jsx"
+      - "src/components/LiveMatchInfo.jsx"
+      - "src/components/CategoryBalance.jsx"
+      - "src/components/MatchVote.jsx"
+      - "scripts/verify-liga-popups.mjs"
+      - ".github/workflows/validar-liga.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validar referencias del popup de Liga
+        run: node scripts/verify-liga-popups.mjs
+      - name: Compilar LNA
+        run: npm run build
