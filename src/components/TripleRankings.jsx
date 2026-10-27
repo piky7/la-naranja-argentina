@@ -45,10 +45,13 @@ const ranking = calculateTriples();
 export default function TripleRankings({ onPlayerClick }) {
   const [position, setPosition] = useState("Todas");
   const [search, setSearch] = useState("");
-  const filtered = useMemo(() => ranking.filter(player =>
-    (position === "Todas" || player.position === position) &&
-    player.name.toLocaleLowerCase("es").includes(search.trim().toLocaleLowerCase("es"))
-  ), [position, search]);
+  const filtered = useMemo(() => {
+    const normalizedSearch = search.trim().toLocaleLowerCase("es");
+    return ranking.filter(player =>
+      (position === "Todas" || player.position === position) &&
+      player.name.toLocaleLowerCase("es").includes(normalizedSearch)
+    );
+  }, [position, search]);
   return <section className="triple-ranking">
     <div className="triple-heading">
       <span>LIGA NACIONAL · 2026/27</span>
