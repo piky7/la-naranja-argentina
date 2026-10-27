@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { players } from "../data/players";
-import { teams } from "../data/teams";
+import { teams, teamMatchColors } from "../data/teams";
 import { matchPlayerStats } from "../data/matchStats";
 import "./TripleRankings.css";
 
@@ -82,7 +82,7 @@ export default function TripleRankings({ onPlayerClick }) {
     </div>
     <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div>
     <div className="triple-list">
-      {filtered.slice(3).map((player, index) => <button type="button" className="triple-row" key={player.id} onClick={() => onPlayerClick(player)}>
+      {filtered.slice(3).map((player, index) => <button type="button" className="triple-row" style={{ "--ranking-team-color": teamMatchColors[player.teamId] || "#18334b" }} key={player.id} onClick={() => onPlayerClick(player)}>
         <span className="triple-position">{index + 4}</span>
         <span className="triple-player-name">{player.name}<small>{player.position}</small></span>
         {player.team?.logo && <img src={player.team.logo} alt={player.team.name} />}
