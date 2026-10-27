@@ -142,8 +142,8 @@ const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
     if (parts) {
       const elapsed = Number(parts[1]) * 3600 + Number(parts[2]) * 60 + Number(parts[3]);
       if (elapsed >= 0 && elapsed <= 600) {
-        const remaining = 600 - elapsed;
-        return `${String(Math.floor(remaining / 60)).padStart(2, "0")}:${String(remaining % 60).padStart(2, "0")}`;
+        // La fuente oficial entrega el tiempo restante, no el transcurrido.
+        return `${String(Math.floor(elapsed / 60)).padStart(2, "0")}:${String(elapsed % 60).padStart(2, "0")}`;
       }
     }
     const minutes = getRemainingMinutes(live?.minutesRemaining);
