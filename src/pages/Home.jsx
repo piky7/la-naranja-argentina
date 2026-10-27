@@ -1983,7 +1983,7 @@ const finishedMatch = {
               {(upcomingLive || upcomingTab !== "jugadores") && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
-<div className="upcoming-team-comparison upcoming-official-comparison">
+<div className="upcoming-team-comparison upcoming-official-comparison" style={getMatchColorStyle(selectedUpcomingMatch.homeTeam, selectedUpcomingMatch.awayTeam)}>
   <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
   {(() => {
     const home = UPCOMING_COLLECTIVE_BY_TEAM[selectedUpcomingMatch.homeTeam];
