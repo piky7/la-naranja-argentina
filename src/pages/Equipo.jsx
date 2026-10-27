@@ -16,7 +16,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import "./Equipo.css";
 import "./Home.css";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
-import { teams } from "../data/teams";
+import { teams, getMatchColorStyle } from "../data/teams";
 import { players } from "../data/players";
 import { matches } from "../data/matches";
 import { playerStats } from "../data/stats";
@@ -1639,7 +1639,7 @@ const awayTeam = getTeam(match.awayTeam);
               {upcomingTab === "comparativa" && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
-<div className="upcoming-team-comparison upcoming-official-comparison">
+<div className="upcoming-team-comparison upcoming-official-comparison" style={getMatchColorStyle(selectedUpcomingMatch.homeTeam, selectedUpcomingMatch.awayTeam)}>
   <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
   {(() => {
     const home = UPCOMING_COLLECTIVE_BY_TEAM.get(selectedUpcomingMatch.homeTeam);
