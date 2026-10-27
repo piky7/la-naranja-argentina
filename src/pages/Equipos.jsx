@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { teams } from "../data/teams";
+import { teams, teamMatchColors } from "../data/teams";
 
 import "./Equipos.css";
 
@@ -89,6 +89,7 @@ function Equipos() {
                   key={team.id}
                   to={`/equipos/${team.id}`}
                   className="team-card"
+                  style={{ "--team-card-color": teamMatchColors[team.id] || "#18334b" }}
                 >
 
                   {/* Parte superior */}
