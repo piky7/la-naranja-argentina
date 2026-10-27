@@ -413,6 +413,15 @@ const getOfficialPlayerLeaders = (teamId, field) => {
 
 
   const standings = useMemo(() => {
+    // Indexar enfrentamientos una sola vez para no recorrer todo el fixture
+    // en cada comparación del orden de la tabla.
+    const directMatchesByPair = new Map();
+    for (const match of matches) {
+      if (match.status !== "finished" || match.homeScore == null || match.awayScore == null) continue;
+      const pair = [match.homeTeam, match.awayTeam].sort().join("|");
+      if (!directMatchesByPair.has(pair)) directMatchesByPair.set(pair, []);
+      directMatchesByPair.get(pair).push(match);
+    }
     return teams
       .map((team) => {
         const stats = getTeamStats(team.id);
@@ -439,16 +448,7 @@ const getOfficialPlayerLeaders = (teamId, field) => {
   }
 
   // 2. Enfrentamientos directos
-  const directMatches = matches.filter(
-    (match) =>
-      match.status === "finished" &&
-      (
-        (match.homeTeam === a.id && match.awayTeam === b.id) ||
-        (match.homeTeam === b.id && match.awayTeam === a.id)
-      ) &&
-      match.homeScore != null &&
-      match.awayScore != null
-  );
+  const directMatches = directMatchesByPair.get([a.id, b.id].sort().join("|")) || [];
 
   let directWinsA = 0;
   let directWinsB = 0;
