@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -7,13 +7,13 @@ import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
 
 import Home from "./pages/Home";
-const Liga = lazy(() => import("./pages/Liga"));
-const Equipos = lazy(() => import("./pages/Equipos"));
-const Equipo = lazy(() => import("./pages/Equipo"));
-const Jugadores = lazy(() => import("./pages/Jugadores"));
-const Estadisticas = lazy(() => import("./pages/Estadisticas"));
-const Privacidad = lazy(() => import("./pages/Privacidad"));
-const Acerca = lazy(() => import("./pages/Acerca"));
+import Liga from "./pages/Liga";
+import Equipos from "./pages/Equipos";
+import Equipo from "./pages/Equipo";
+import Jugadores from "./pages/Jugadores";
+import Estadisticas from "./pages/Estadisticas";
+import Privacidad from "./pages/Privacidad";
+import Acerca from "./pages/Acerca";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -27,7 +27,6 @@ function AnimatedRoutes() {
 
   return (
     <div key={location.key} className={animation}>
-      <Suspense fallback={<div role="status" style={{ minHeight: "calc(100dvh - 120px)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-soft)" }}>Cargando sección…</div>}>
       <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/liga" element={<Liga />} />
@@ -38,7 +37,6 @@ function AnimatedRoutes() {
         <Route path="/privacidad" element={<Privacidad />} />
         <Route path="/acerca" element={<Acerca />} />
       </Routes>
-      </Suspense>
     </div>
   );
 }
