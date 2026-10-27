@@ -512,17 +512,9 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
   },
   {
-    "id": "2026-11-10-olimpico-instituto",
-    "date": "2026-11-10",
-    "time": null,
-    "homeTeam": "olimpico",
-    "awayTeam": "instituto",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto"
-  },
-  {
     "id": "2026-11-10-boca-san-martin",
     "date": "2026-11-10",
-    "time": null,
+    "time": "20:30",
     "homeTeam": "boca",
     "awayTeam": "san-martin",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2ond6sPnsB5wcF-w7jAvVWPzE-SQSAZAtQ6K-5uLb1bMXoH31O4hWog==/boca-vs-san-martin-c"
@@ -530,15 +522,23 @@ export const officialSchedule = [
   {
     "id": "2026-11-10-argentino-regatas",
     "date": "2026-11-10",
-    "time": null,
+    "time": "21:00",
     "homeTeam": "argentino",
     "awayTeam": "regatas",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2-SZ_1lbZNkaj4jzP8Z_ZdT8wEdaKKh2OJacur-Sn_arN5n2nJnuQYg==/argentino-j-vs-regatas-c"
   },
   {
+    "id": "2026-11-10-olimpico-instituto",
+    "date": "2026-11-10",
+    "time": "22:00",
+    "homeTeam": "olimpico",
+    "awayTeam": "instituto",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto"
+  },
+  {
     "id": "2026-11-11-platense-penarol",
     "date": "2026-11-11",
-    "time": null,
+    "time": "20:30",
     "homeTeam": "platense",
     "awayTeam": "penarol",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2V0RWcvNSEm77CRHI3UH_6nsBANtEzz4WJAQmXcPXCbTUmBMwr4O8Qw==/platense-vs-penarol-mdp"
@@ -576,20 +576,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NiT2DNBpmRwkAzX5foy4IFEaYOZ-LMcsvGdP50-aiaiESRS21cC8bA==/gimnasia-cr-vs-platense"
   },
   {
-    "id": "2026-11-15-la-union-atenas",
-    "date": "2026-11-15",
-    "time": null,
-    "homeTeam": "la-union",
-    "awayTeam": "atenas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-  },
-  {
     "id": "2026-11-15-san-martin-quimsa",
     "date": "2026-11-15",
     "time": null,
     "homeTeam": "san-martin",
     "awayTeam": "quimsa",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+  },
+  {
+    "id": "2026-11-15-la-union-atenas",
+    "date": "2026-11-15",
+    "time": null,
+    "homeTeam": "la-union",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
   },
   {
     "id": "2026-11-15-argentino-lanus",

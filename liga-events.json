@@ -1157,25 +1157,7 @@
     },
     {
       "date": "2026-11-10",
-      "time": "00:00",
-      "home": {
-        "name": "OLIMPICO (LB)",
-        "officialClubId": 1882,
-        "officialTeamId": 113870
-      },
-      "away": {
-        "name": "INSTITUTO",
-        "officialClubId": 1790,
-        "officialTeamId": 112809
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto"
-    },
-    {
-      "date": "2026-11-10",
-      "time": "00:00",
+      "time": "20:30",
       "home": {
         "name": "BOCA",
         "officialClubId": 19,
@@ -1193,7 +1175,7 @@
     },
     {
       "date": "2026-11-10",
-      "time": "00:00",
+      "time": "21:00",
       "home": {
         "name": "ARGENTINO (J)",
         "officialClubId": 1932,
@@ -1210,8 +1192,26 @@
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2-SZ_1lbZNkaj4jzP8Z_ZdT8wEdaKKh2OJacur-Sn_arN5n2nJnuQYg==/argentino-j-vs-regatas-c"
     },
     {
+      "date": "2026-11-10",
+      "time": "22:00",
+      "home": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "away": {
+        "name": "INSTITUTO",
+        "officialClubId": 1790,
+        "officialTeamId": 112809
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto"
+    },
+    {
       "date": "2026-11-11",
-      "time": "00:00",
+      "time": "20:30",
       "home": {
         "name": "PLATENSE",
         "officialClubId": 80,
@@ -1303,24 +1303,6 @@
       "date": "2026-11-15",
       "time": "00:00",
       "home": {
-        "name": "LA UNION FSA",
-        "officialClubId": 1541,
-        "officialTeamId": 114763
-      },
-      "away": {
-        "name": "ATENAS (C)",
-        "officialClubId": 1498,
-        "officialTeamId": 112793
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-    },
-    {
-      "date": "2026-11-15",
-      "time": "00:00",
-      "home": {
         "name": "SAN MARTÍN (C)",
         "officialClubId": 1426,
         "officialTeamId": 113546
@@ -1334,6 +1316,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+    },
+    {
+      "date": "2026-11-15",
+      "time": "00:00",
+      "home": {
+        "name": "LA UNION FSA",
+        "officialClubId": 1541,
+        "officialTeamId": 114763
+      },
+      "away": {
+        "name": "ATENAS (C)",
+        "officialClubId": 1498,
+        "officialTeamId": 112793
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
     },
     {
       "date": "2026-11-15",
