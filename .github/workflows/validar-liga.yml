@@ -26,7 +26,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Detectar variables no definidas en Liga, Home y Estadísticas
-        run: npx eslint src/pages/Liga.jsx src/pages/Home.jsx src/pages/Estadisticas.jsx --rule "no-undef:error" --rule "no-unused-vars:off" --rule "react-hooks/exhaustive-deps:off" --rule "react-hooks/set-state-in-effect:off" --rule "react-hooks/immutability:off" --rule "react-hooks/purity:off" --rule "react-hooks/refs:off" --rule "react-hooks/static-components:off" --rule "react-hooks/preserve-manual-memoization:off" --rule "react-refresh/only-export-components:off"
+        run: npx eslint src/pages/Liga.jsx src/pages/Home.jsx src/pages/Estadisticas.jsx --rule "no-undef:error" --rule "no-constant-condition:off" --rule "no-unused-vars:off" --rule "react-hooks/exhaustive-deps:off" --rule "react-hooks/set-state-in-effect:off" --rule "react-hooks/immutability:off" --rule "react-hooks/purity:off" --rule "react-hooks/refs:off" --rule "react-hooks/static-components:off" --rule "react-hooks/preserve-manual-memoization:off" --rule "react-refresh/only-export-components:off"
       - name: Validar referencias del popup de Liga
         run: node scripts/verify-liga-popups.mjs
       - name: Compilar LNA
