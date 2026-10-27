@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Link, useParams, useNavigate } from "react-router-dom";
 
@@ -669,43 +669,27 @@ const goToTeam = (targetTeamId) => {
      MÁS CERCANO → MÁS LEJANO
      ========================================= */
 
-  const upcomingMatches =
-    teamMatches
-      .filter(
-        (match) =>
-          match.status === "scheduled"
-      )
-      .sort((a, b) => {
-        if (a.date !== b.date) {
-          return a.date.localeCompare(
-            b.date
-          );
-        }
-
-        return (
-          (a.time || "").localeCompare(
-            b.time || ""
-          )
-        );
-      })
-      .slice(0, 6);
-
-
-  /* =========================================
-     RESULTADOS
-     MÁS RECIENTE → MÁS ANTIGUO
-     ========================================= */
-
-  
-const allFinishedMatches = teamMatches
-  .filter((match) => match.status === "finished")
-  .sort((a, b) => {
-    if (a.date !== b.date) {
-      return b.date.localeCompare(a.date);
+  // Filtrar ambos grupos en una sola pasada y conservar el orden original.
+  const { upcomingMatches, allFinishedMatches } = useMemo(() => {
+    const scheduled = [];
+    const finished = [];
+    for (const match of teamMatches) {
+      if (match.status === "scheduled") scheduled.push(match);
+      else if (match.status === "finished") finished.push(match);
     }
-
-    return (b.time || "").localeCompare(a.time || "");
-  });
+    scheduled.sort((a, b) => {
+      if (a.date !== b.date) return a.date.localeCompare(b.date);
+      return (a.time || "").localeCompare(b.time || "");
+    });
+    finished.sort((a, b) => {
+      if (a.date !== b.date) return b.date.localeCompare(a.date);
+      return (b.time || "").localeCompare(a.time || "");
+    });
+    return {
+      upcomingMatches: scheduled.slice(0, 6),
+      allFinishedMatches: finished,
+    };
+  }, [teamId]);
 
 const resultsPerPage = 10;
 const totalResultsPages = Math.ceil(
