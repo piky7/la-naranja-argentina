@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Trophy, X, ChevronRight, Flame, LockKeyhole } from "lucide-react";
+import { Trophy, X, ChevronRight, Flame, LockKeyhole, Medal, Target, Crown } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 
@@ -181,17 +181,18 @@ export default function FanLevel() {
             <small>{streaks.lossStreak > 0 && descentLimit ? `Te ${errorsLeft === 1 ? "falta 1 error consecutivo" : `faltan ${errorsLeft} errores consecutivos`} para descender.` : streakGoal ? `Te ${streakGoal-categoryStreak === 1 ? "falta 1 acierto consecutivo" : `faltan ${streakGoal-categoryStreak} aciertos consecutivos`} para ascender por racha.` : descentLimit ? `Descendés con ${descentLimit} errores consecutivos.` : "En esta categoría no hay descensos."}</small>
           </div>}
           {activeView === "palmares" ? <div className="lna-fan-palmares">
+            <div className="lna-fan-section-title"><Crown size={17} aria-hidden="true" /><span>MI PALMARÉS</span></div>
             <div className="lna-fan-palmares-totals"><div><Trophy size={22}/><strong>{career?.cups ?? "—"}</strong><small>Copas ganadas</small></div><div><span aria-hidden="true">↓</span><strong>{career?.descents ?? "—"}</strong><small>Descensos</small></div></div>
-            <h3>VITRINA DE COPAS</h3>
+            <h3><Trophy size={15} aria-hidden="true" /> VITRINA DE COPAS</h3>
             <div className="lna-fan-cup-grid">{LEVELS.map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><Trophy size={20}/><strong>{item.name}</strong><small>{(career?.cupCounts?.[i] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
             <p className="lna-fan-palmares-hint">Cada ascenso suma la copa de la liga disputada. En Leyenda LNA ganás otra copa cada 10 partidos consecutivos de permanencia. Las copas nunca se pierden.</p>
           </div> : activeView === "mvp" ? <div className="lna-fan-mvp">
             <div className="lna-fan-streak-panel">
-              <strong>RACHA MVP · TODAS LAS CATEGORÍAS</strong>
+              <Flame className="lna-fan-streak-flame" size={27} aria-hidden="true" /><strong>RACHA MVP · TODAS LAS CATEGORÍAS</strong>
               <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} ${streaks.lossStreak === 1 ? "error seguido" : "errores seguidos"}` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} ${streaks.missedStreak === 1 ? "partido sin votar" : "partidos sin votar"}` : "Sin racha activa"}</span>
               <small>{`Te faltan ${mvpLeft} ${mvpLeft === 1 ? "acierto consecutivo" : "aciertos consecutivos"} para ${mvps > 0 ? "otro MVP" : "conseguir el MVP"}.`}</small>
             </div>
-                        <Trophy size={38} aria-hidden="true" />
+            <span className="lna-fan-mvp-emblem"><Medal size={34} aria-hidden="true" /></span>
             <strong>MVP DE PRONÓSTICOS</strong>
             <span className="lna-fan-mvp-count">{mvps}</span>
             <p>{mvps === 1 ? "Distintivo conseguido" : "Distintivos conseguidos"}</p>
@@ -202,6 +203,7 @@ export default function FanLevel() {
             </div>)}
 
           </div> : <div className="lna-fan-history">
+            <div className="lna-fan-section-title"><Target size={17} aria-hidden="true" /><span>MIS PRONÓSTICOS</span></div>
             {historyLoading ? <p className="lna-fan-history-message">Cargando tus votaciones…</p> : historyError ? <div className="lna-fan-history-message">No se pudo cargar el historial. <button type="button" onClick={refreshHistory}>Reintentar</button></div> : predictions.length === 0 ? <p className="lna-fan-history-message">Todavía no tenés pronósticos registrados.</p> : <>
               <div className="lna-fan-stats">
                 <span><b className="correct">{predictions.filter(p => p.status === "correct").length}</b> Acertados</span>
