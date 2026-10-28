@@ -65,8 +65,8 @@ async function calculateRewards(db, fixture, visitorId) {
       perGame.set(g.id,{earned:wins === 3 ? 30 : wins === 5 ? 45 : 15,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
     } else {
       wins=0; losses++; points+=5;
-      if (losses % 3 === 0) points-=5;
-      perGame.set(g.id,{earned:losses % 3 === 0 ? 0 : 5,medal:null,streak:losses});
+      if (losses % 3 === 0) points-=15;
+      perGame.set(g.id,{earned:losses % 3 === 0 ? -10 : 5,medal:null,streak:losses});
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
