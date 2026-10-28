@@ -93,10 +93,14 @@ export default {
       }
 
       const existing = await env.DB.prepare("SELECT equipo_votado FROM votos WHERE partido_id=? AND visitante_id=?").bind(id, visitorId).first();
-      if (!existing) return json({ ok: true, voted: false, open }, 200, cors);
+      // Los puntos se calculan desde votos realmente guardados en D1.
+      // No se confía en puntos enviados por el navegador ni se duplica el saldo.
+      const totalVotes = await env.DB.prepare("SELECT COUNT(*) AS total FROM votos WHERE visitante_id=?").bind(visitorId).first();
+      const points = Number(totalVotes?.total || 0) * 10;
+      if (!existing) return json({ ok: true, voted: false, open, points }, 200, cors);
       const counts = await voteCounts(env.DB, id);
       return json({
-        ok: true, voted: true, open, selected: existing.equipo_votado,
+        ok: true, voted: true, open, points, selected: existing.equipo_votado,
         home: { id: game.homeTeam, votes: counts[game.homeTeam] || 0 },
         away: { id: game.awayTeam, votes: counts[game.awayTeam] || 0 },
       }, 200, cors);
