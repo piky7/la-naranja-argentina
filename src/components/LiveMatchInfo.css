@@ -59,3 +59,12 @@
   .match-modal-is-live .match-modal-score .match-modal-status::before,
   .lna-live-progress .is-current span::after { animation: none; }
 }
+
+/* Progreso real del período: el reloj oficial determina el ancho, sin simular segundos. */
+.lna-live-progress .lna-live-progress-track{display:block;width:100%;height:6px;background:#273746;border-radius:8px;overflow:hidden}
+.lna-live-progress .lna-live-progress-fill{display:block;height:100%;background:#ff9135;border-radius:inherit;transition:width .45s ease}
+.lna-live-progress .is-done .lna-live-progress-fill{background:#ff9135}
+.lna-live-progress .is-current .lna-live-progress-track{box-shadow:0 0 8px rgba(255,145,53,.28)}
+.lna-live-progress .is-current .lna-live-progress-track::after{display:none}
+.match-modal-is-live .match-modal-score>strong{text-shadow:0 3px 18px rgba(255,145,53,.17)}
+@media(prefers-reduced-motion:reduce){.lna-live-progress .lna-live-progress-fill{transition:none}}
