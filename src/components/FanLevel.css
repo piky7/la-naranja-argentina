@@ -151,3 +151,10 @@
 .lna-fan-intro-actions .secondary{background:#243145;color:#eee}
 .lna-fan-intro-dismiss{margin-top:13px;padding:6px;border:0;background:transparent;color:#bdb2c3;font-size:11px;cursor:pointer}
 .lna-fan-help{vertical-align:middle;margin-left:5px;width:21px;height:21px;border:1px solid #b56c9b;border-radius:50%;background:#4a2c4b;color:#ffb2d9;font-size:12px;font-weight:900;cursor:pointer}
+
+/* Categoría completa en el encabezado sin agrandar la tarjeta */
+.lna-fan-bar .lna-fan-line{align-items:center;gap:4px}
+.lna-fan-bar .lna-fan-bar-category{display:block;flex:1;min-width:0;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.13;font-size:10px;letter-spacing:-.18px}
+.lna-fan-bar .lna-fan-line b{flex-shrink:0}
+@media(max-width:768px){.lna-fan-bar .lna-fan-bar-category{font-size:9px}.lna-fan-bar .lna-fan-line b{font-size:8px}}
+@media(max-width:390px){.lna-fan-bar .lna-fan-bar-category{font-size:8px}.lna-fan-bar .lna-fan-line b{font-size:8px}}
