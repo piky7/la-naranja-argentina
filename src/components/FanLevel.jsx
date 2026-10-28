@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Check } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
@@ -58,6 +59,11 @@ export default function FanLevel() {
   const [editingProfile, setEditingProfile] = useState(false);
   const [profileError, setProfileError] = useState("");
   const startEditProfile = () => { setNameDraft(playerName); setNumberDraft(playerNumber); setProfileError(""); setEditingProfile(true); };
+  const closeProfileEditor = () => {
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    setEditingProfile(false);
+    setProfileError("");
+  };
   const saveProfile = (event) => {
     event.preventDefault();
     const name = nameDraft.trim().replace(/\s+/g, " ");
@@ -67,7 +73,7 @@ export default function FanLevel() {
       localStorage.setItem(PLAYER_NAME_KEY, name);
       localStorage.setItem(PLAYER_NUMBER_KEY, numberDraft);
     } catch { setProfileError("No se pudo guardar el perfil en este navegador."); return; }
-    setPlayerName(name); setPlayerNumber(numberDraft); setEditingProfile(false); setProfileError("");
+    setPlayerName(name); setPlayerNumber(numberDraft); closeProfileEditor();
   };
   const [points, setPoints] = useState(null);
   const [mvps, setMvps] = useState(0);
@@ -210,17 +216,17 @@ export default function FanLevel() {
               <small className="lna-fan-player-display-league">{level.name}</small>
             </div>
           </div>
-          {editingProfile && <div className="lna-fan-profile-edit-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) setEditingProfile(false); }}>
+          {editingProfile && createPortal(<div className="lna-fan-profile-edit-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) closeProfileEditor(); }}>
             <form className="lna-fan-profile-edit-dialog" onSubmit={saveProfile} role="dialog" aria-modal="true" aria-labelledby="lna-fan-edit-title">
-              <div className="lna-fan-profile-edit-heading"><h3 id="lna-fan-edit-title">EDITAR MI JUGADOR</h3><button type="button" aria-label="Cerrar edición" onClick={() => setEditingProfile(false)}><X size={18}/></button></div>
+              <div className="lna-fan-profile-edit-heading"><h3 id="lna-fan-edit-title">EDITAR MI JUGADOR</h3><button type="button" aria-label="Cerrar edición" onClick={closeProfileEditor}><X size={18}/></button></div>
               <label htmlFor="lna-player-name">Nombre o apodo</label>
-              <input id="lna-player-name" autoFocus maxLength={24} value={nameDraft} onChange={e => { setNameDraft(e.target.value); setProfileError(""); }} placeholder="Tu nombre" />
+              <input id="lna-player-name" maxLength={24} value={nameDraft} onChange={e => { setNameDraft(e.target.value); setProfileError(""); }} placeholder="Tu nombre" />
               <label htmlFor="lna-player-number">Número de camiseta (0 a 99)</label>
               <input id="lna-player-number" inputMode="numeric" maxLength={2} pattern="[0-9]{1,2}" value={numberDraft} onChange={e => { setNumberDraft(e.target.value.replace(/\D/g, "").slice(0,2)); setProfileError(""); }} placeholder="Ej. 7" />
               {profileError && <small role="alert" className="lna-fan-profile-edit-error">{profileError}</small>}
               <div className="lna-fan-profile-edit-actions"><button type="button" onClick={() => setEditingProfile(false)}>Cancelar</button><button type="submit"><Check size={15}/> Guardar perfil</button></div>
             </form>
-          </div>}
+          </div>, document.body)}
           <div className="lna-fan-gamer-hero">
             <div className="lna-fan-gamer-score">
               <p className="lna-fan-total">{seasonPoints === null ? "—" : seasonScore} <span>/ {level.goal ?? "∞"} PTS</span></p>
