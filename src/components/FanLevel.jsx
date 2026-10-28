@@ -134,7 +134,7 @@ export default function FanLevel() {
           <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
           <strong className="lna-fan-current">Categoría {index + 1} · {level.name}</strong>
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
-          <p className="lna-fan-next">{next ? `${career?.lockPromotion ? "Necesitás 3 aciertos seguidos para recuperar el ascenso" : `Te faltan ${Math.max(0,next.points - score)} puntos para ascender a ${next.name}`}` : "¡Llegaste a la máxima categoría!"}</p>
+          <p className="lna-fan-next">{next ? (career?.lockPromotion ? "Necesitás 3 aciertos seguidos para recuperar el ascenso" : `Te faltan ${Math.max(0,next.points - score)} puntos para ascender a ${next.name}`) : "¡Llegaste a la máxima categoría!"}</p>
             <div className="lna-fan-streak-panel">
               <strong>MI RACHA ACTUAL</strong>
               <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} ${streaks.lossStreak === 1 ? "error seguido" : "errores seguidos"}` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} ${streaks.missedStreak === 1 ? "partido sin votar" : "partidos sin votar"}` : "Sin racha activa"}</span>
