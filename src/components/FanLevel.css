@@ -329,3 +329,27 @@
 .lna-fan-modal .lna-fan-player-field .lna-fan-player-edit input{height:26px}
 .lna-fan-modal .lna-fan-player-field .lna-fan-player-edit button{width:25px;height:25px;flex-basis:25px}
 @media(max-height:740px){.lna-fan-modal .lna-fan-player-profile-with-jersey{grid-template-columns:65px minmax(0,1fr);min-height:79px;padding:4px 7px;gap:7px}.lna-fan-player-jersey{width:62px;height:78px}.lna-fan-player-fields{gap:4px}.lna-fan-modal .lna-fan-player-field{min-height:26px}}
+
+/* Perfil de jugador: vista de videojuego con edición secundaria */
+.lna-fan-modal .lna-fan-player-profile-with-jersey{grid-template-columns:74px minmax(0,1fr);min-height:91px}
+.lna-fan-modal .lna-fan-player-display{gap:4px;justify-content:center}
+.lna-fan-player-display-top{display:flex;align-items:center;justify-content:space-between;gap:7px;min-width:0}
+.lna-fan-modal .lna-fan-edit-profile-button{display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;padding:3px 5px;border:0;border-radius:6px;background:transparent;color:#bd9ab5;font-size:9px;font-weight:650}
+.lna-fan-modal .lna-fan-edit-profile-button:focus-visible{outline:2px solid #ff94ce;outline-offset:2px}
+.lna-fan-player-display-name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(17px,5vw,23px);font-weight:950;letter-spacing:.5px;line-height:1.1;text-transform:uppercase;color:#fff}
+.lna-fan-player-display-number{display:flex;align-items:baseline;gap:6px;color:#d2b1ce;font-size:10px;font-weight:850;letter-spacing:.8px}
+.lna-fan-player-display-number b{font-size:16px;color:#ff94c9;letter-spacing:0}
+.lna-fan-player-display-league{font-size:10px;color:#aeb8d0}
+.lna-fan-profile-edit-backdrop{position:fixed;inset:0;z-index:10010;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(3,7,17,.78);backdrop-filter:blur(5px)}
+.lna-fan-profile-edit-dialog{display:flex;flex-direction:column;gap:9px;box-sizing:border-box;width:min(100%,340px);padding:17px;border:1px solid #f07bbd;border-radius:15px;background:linear-gradient(155deg,#22213b,#101b2d);box-shadow:0 20px 60px #000a,0 0 20px #d94c9722;color:#fff}
+.lna-fan-profile-edit-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+.lna-fan-profile-edit-heading h3{margin:0;font-size:15px;letter-spacing:1px;color:#ff96ce}
+.lna-fan-profile-edit-heading button{display:grid;place-items:center;padding:4px;border:0;background:transparent;color:#d5c5db}
+.lna-fan-profile-edit-dialog label{font-size:11px;font-weight:800;color:#d7c2d7}
+.lna-fan-profile-edit-dialog input{box-sizing:border-box;width:100%;height:38px;padding:8px 10px;border:1px solid #785577;border-radius:8px;background:#111b2f;color:#fff;font-size:14px;outline-offset:2px}
+.lna-fan-profile-edit-dialog input:focus{border-color:#f88ec7}
+.lna-fan-profile-edit-error{font-size:11px;color:#ffb3ca}
+.lna-fan-profile-edit-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:7px}
+.lna-fan-profile-edit-actions button{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 12px;border:1px solid #694b70;border-radius:8px;background:#273049;color:#f3d7e9;font-size:12px;font-weight:800}
+.lna-fan-profile-edit-actions button[type=submit]{border-color:#f6a2d1;background:linear-gradient(120deg,#ef66ac,#f79bcb);color:#211429}
+@media(max-height:740px){.lna-fan-modal .lna-fan-player-profile-with-jersey{grid-template-columns:65px minmax(0,1fr);min-height:79px}.lna-fan-player-display-name{font-size:17px}.lna-fan-player-display-league{font-size:9px}}
