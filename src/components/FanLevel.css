@@ -158,3 +158,21 @@
 .lna-fan-bar .lna-fan-line b{flex-shrink:0}
 @media(max-width:768px){.lna-fan-bar .lna-fan-bar-category{font-size:9px}.lna-fan-bar .lna-fan-line b{font-size:8px}}
 @media(max-width:390px){.lna-fan-bar .lna-fan-bar-category{font-size:8px}.lna-fan-bar .lna-fan-line b{font-size:8px}}
+
+/* Cuarta solapa: Palmarés y récords */
+.lna-fan-modal .lna-fan-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.lna-fan-modal .lna-fan-tabs button{font-size:10px;padding:8px 1px}
+.lna-fan-record{display:block;font-size:10px;font-weight:400;font-style:normal;color:#aebacc;margin-top:2px}
+.lna-fan-palmares{text-align:center}
+.lna-fan-palmares-totals{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.lna-fan-palmares-totals>div{display:flex;align-items:center;flex-direction:column;gap:4px;padding:12px 5px;border:1px solid #815477;border-radius:10px;background:linear-gradient(130deg,#36243c,#1a2a3d);color:#ffb0d6}
+.lna-fan-palmares-totals strong{font-size:26px;color:#fff}
+.lna-fan-palmares-totals small{font-size:11px;color:#cbd2dd}
+.lna-fan-palmares-totals>div>span{font-size:24px;line-height:1}
+.lna-fan-palmares h3{font-size:12px;letter-spacing:1.3px;color:#ff9fce;margin:0 0 9px}
+.lna-fan-cup-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.lna-fan-cup{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:82px;padding:8px 3px;border:1px solid #3d5065;border-radius:9px;background:#1b2b3c;color:#728299}
+.lna-fan-cup strong{font-size:10px;line-height:1.2}
+.lna-fan-cup small{font-size:12px}
+.lna-fan-cup.earned{color:#f5c77a;border-color:#ba8a55;background:linear-gradient(130deg,#40312d,#1b2b3c)}
+.lna-fan-palmares-hint{font-size:10px;color:#aebaca;line-height:1.5;margin:11px 0 0}
