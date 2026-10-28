@@ -201,3 +201,5 @@
  .lna-fan-intro-leagues>small{font-size:9px}
  .lna-fan-intro h2{margin:5px 0}
 }
+
+.lna-fan-change-vote{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px}.lna-fan-change-vote small{font-size:11px;color:#c8c5d4}.lna-fan-change-vote button{border:1px solid #dd81b2;background:rgba(232,113,176,.12);color:#f5a9d0;border-radius:8px;padding:5px 8px;font-size:11px;font-weight:700}.lna-fan-change-vote button:disabled{opacity:.4}
