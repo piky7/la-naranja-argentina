@@ -1898,7 +1898,7 @@ const finishedMatch = {
                 </div>
 
                 <div className="match-modal-score">
-                  <span className="match-modal-status">{upcomingLive ? <>● EN VIVO · {upcomingLive.isHalftime ? "ENTRETIEMPO" : upcomingLive.quarter ? `${upcomingLive.quarter}° CUARTO` : "PARTIDO EN JUEGO"}{!upcomingLive.isHalftime && upcomingLive.quarter && formatLiveRemaining(upcomingLive) != null && <span className="match-modal-live-remaining">{formatLiveRemaining(upcomingLive)} RESTANTES</span>}</> : "PRÓXIMO PARTIDO"}</span>
+                  <span className="match-modal-status">{upcomingLive ? <>EN VIVO · {upcomingLive.isHalftime ? "ENTRETIEMPO" : upcomingLive.quarter ? `${upcomingLive.quarter}° CUARTO` : "PARTIDO EN JUEGO"}{!upcomingLive.isHalftime && upcomingLive.quarter && formatLiveRemaining(upcomingLive) != null && <span className="match-modal-live-remaining">{formatLiveRemaining(upcomingLive)} RESTANTES</span>}</> : "PRÓXIMO PARTIDO"}</span>
                   <strong>
                     {upcomingLive && upcomingLive.homeScore != null && upcomingLive.awayScore != null && Number.isFinite(Number(upcomingLive.homeScore)) && Number.isFinite(Number(upcomingLive.awayScore)) ? `${upcomingLive.homeScore} - ${upcomingLive.awayScore}` : selectedUpcomingMatch.time || "VS"}
                   </strong>
