@@ -302,3 +302,15 @@
 .lna-fan-modal .lna-fan-mvp-emblem{width:74px;height:92px;border:0;border-radius:0;background:none;box-shadow:none}
 .lna-fan-modal .lna-fan-mvp-trophy-image{display:block;width:74px;height:92px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,121,190,.3))}
 @media(max-height:740px){.lna-fan-modal .lna-fan-trophy-image{height:47px;width:40px}.lna-fan-modal .lna-fan-mvp-emblem,.lna-fan-modal .lna-fan-mvp-trophy-image{height:72px;width:64px}}
+
+/* Perfil local de jugador: compacto, editable y rosa gamer */
+.lna-fan-modal .lna-fan-player-profile{display:flex;align-items:center;gap:9px;min-height:41px;margin:3px 0 7px;padding:5px 9px;border:1px solid rgba(239,112,183,.43);border-radius:10px;background:linear-gradient(105deg,rgba(220,70,152,.13),rgba(18,31,51,.88));text-align:left}
+.lna-fan-player-avatar{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:9px;border:1px solid #ee85be;background:#37243f;color:#ff9ad0}
+.lna-fan-player-identity{display:flex;flex:1;flex-direction:column;gap:1px;min-width:0}
+.lna-fan-player-identity>span{font-size:9px;font-weight:800;letter-spacing:.8px;color:#f38cc4}
+.lna-fan-player-identity>strong{font-size:13px;line-height:1.25;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lna-fan-modal .lna-fan-player-pencil,.lna-fan-modal .lna-fan-player-edit button{display:grid;place-items:center;flex:0 0 29px;width:29px;height:29px;padding:0;border:1px solid rgba(242,125,194,.46);border-radius:8px;background:#2e2945;color:#ff9ccc}
+.lna-fan-modal .lna-fan-player-edit{display:flex;flex:1;align-items:center;gap:5px;flex-wrap:wrap;min-width:0}
+.lna-fan-modal .lna-fan-player-edit input{flex:1 1 95px;min-width:0;height:29px;box-sizing:border-box;padding:4px 7px;border:1px solid #e97eb8;border-radius:7px;background:#111e32;color:#fff;font-size:12px;outline-offset:2px}
+.lna-fan-modal .lna-fan-player-edit small{flex-basis:100%;font-size:10px;color:#ffb5c9}
+@media(max-height:740px){.lna-fan-modal .lna-fan-player-profile{min-height:34px;margin:2px 0 5px;padding:3px 7px}}
