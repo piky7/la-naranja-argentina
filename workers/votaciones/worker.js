@@ -32,21 +32,18 @@ async function fixtureGame(id) {
 // Se conserva el resultado confirmado; una versión futura sin resultado no puede borrarlo.
 async function archiveFixture(db, fixture) {
   await db.prepare("CREATE TABLE IF NOT EXISTS carrera_partidos (partido_id TEXT PRIMARY KEY, datos TEXT NOT NULL, confirmado INTEGER NOT NULL DEFAULT 0)").run();
-  const games = (fixture.games || []).filter(g => typeof g?.id === "string" && g.id.length <= 120);
-  for (let i=0; i<games.length; i+=50) {
-    const statements=games.slice(i,i+50).map(g=>{
-      const confirmed=Number(g.finished === true && Number.isFinite(g.homeScore) && Number.isFinite(g.awayScore) && g.homeScore !== g.awayScore);
-      return db.prepare("INSERT INTO carrera_partidos(partido_id,datos,confirmado) VALUES (?,?,?) ON CONFLICT(partido_id) DO UPDATE SET datos=excluded.datos, confirmado=excluded.confirmado WHERE excluded.confirmado>=carrera_partidos.confirmado")
-        .bind(g.id,JSON.stringify(g),confirmed);
-    });
-    if(statements.length) await db.batch(statements);
+  const saved = await db.prepare("SELECT partido_id, datos, confirmado FROM carrera_partidos").all();
+  const existing = new Map((saved.results || []).map(row => [row.partido_id, row]));
+  const updates = [];
+  for (const game of fixture.games || []) {
+    if (typeof game?.id !== "string" || game.id.length > 120) continue;
+    const confirmed = Number(game.finished === true && Number.isFinite(game.homeScore) && Number.isFinite(game.awayScore) && game.homeScore !== game.awayScore);
+    const previous = existing.get(game.id);
+    if (previous && (Number(previous.confirmado) > confirmed || previous.datos === JSON.stringify(game))) continue;
+    updates.push(db.prepare("INSERT INTO carrera_partidos(partido_id,datos,confirmado) VALUES (?,?,?) ON CONFLICT(partido_id) DO UPDATE SET datos=excluded.datos, confirmado=excluded.confirmado WHERE excluded.confirmado>=carrera_partidos.confirmado")
+      .bind(game.id, JSON.stringify(game), confirmed));
   }
-  const saved=await db.prepare("SELECT datos FROM carrera_partidos").all();
-  const byId=new Map();
-  for(const row of saved.results||[]) {
-    try {const game=JSON.parse(row.datos);if(game?.id)byId.set(game.id,game);}catch{}
-  }
-  return { ...fixture, games:[...byId.values()] };
+  for (let i = 0; i < updates.length; i += 50) await db.batch(updates.slice(i, i + 50));
 }
 
 // Lectura sin escrituras: el cron archiva y las consultas solo combinan datos.
