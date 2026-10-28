@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, UserRound, Pencil, Check, Ban } from "lucide-react";
+import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Check, Ban } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 
@@ -7,6 +7,8 @@ const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
 const INTRO_KEY = "lna-career-intro-seen-v1";
 const PLAYER_NAME_KEY = "lna-career-player-name-v1";
+const PLAYER_NUMBER_KEY = "lna-career-player-number-v1";
+const readPlayerNumber = () => { try { return localStorage.getItem(PLAYER_NUMBER_KEY) ?? ""; } catch { return ""; } };
 const readPlayerName = () => { try { return localStorage.getItem(PLAYER_NAME_KEY) || ""; } catch { return ""; } };
 const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
 const LEVELS = [
@@ -29,8 +31,39 @@ function getVisitorId() {
   } catch { return null; }
 }
 
+function PlayerJersey({ name, number }) {
+  const displayName = (name || "TU NOMBRE").toLocaleUpperCase("es-AR");
+  const fontSize = displayName.length > 18 ? 8 : displayName.length > 12 ? 10 : displayName.length > 8 ? 12 : 15;
+  return <svg className="lna-fan-player-jersey" viewBox="0 0 116 134" role="img" aria-label={`Camiseta de básquet de ${name || "jugador"} con número ${number || "sin asignar"}`}>
+    <defs>
+      <linearGradient id="lnaJersey" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#20253b"/><stop offset=".5" stopColor="#090f1f"/><stop offset="1" stopColor="#2c1733"/></linearGradient>
+      <linearGradient id="lnaJerseyTrim" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#ffa4da"/><stop offset=".5" stopColor="#e83c9e"/><stop offset="1" stopColor="#ffb1df"/></linearGradient>
+    </defs>
+    <path d="M36 9 43 5h30l7 4 24 11-9 33-13-5v73H34V48l-13 5-9-33z" fill="url(#lnaJersey)" stroke="#f86cb5" strokeWidth="2.4" strokeLinejoin="round"/>
+    <path d="M36 9 43 5Q43 23 58 23T73 5l7 4M12 20l9 33 13-5M104 20 95 53 82 48" fill="none" stroke="url(#lnaJerseyTrim)" strokeWidth="5"/>
+    <path d="M34 117h48M38 42v70M78 42v70" fill="none" stroke="#ed4b9f" strokeWidth="1.5" opacity=".65"/>
+    <path d="M39 10q19 24 38 0" fill="none" stroke="#ffb1df" strokeWidth="1.5"/>
+    <circle cx="58" cy="39" r="7" fill="none" stroke="#ff83c4" strokeWidth="1.5"/>
+    <path d="M51 39h14M58 32v14M53 34q9 6 10 10" fill="none" stroke="#ff83c4" strokeWidth="1"/>
+    <text x="58" y="60" textAnchor="middle" fontFamily="Arial,sans-serif" fontWeight="900" fontSize={fontSize} textLength={displayName.length > 9 ? 72 : undefined} lengthAdjust="spacingAndGlyphs" fill="#fff">{displayName}</text>
+    <text x="58" y="102" textAnchor="middle" fontFamily="Arial,sans-serif" fontWeight="950" fontSize={number?.length === 2 ? 45 : 50} fill="#f15aa9" stroke="#fff0fa" strokeWidth="1.3" paintOrder="stroke">{number || "—"}</text>
+  </svg>;
+}
+
 export default function FanLevel() {
   const [playerName, setPlayerName] = useState(readPlayerName);
+  const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
+  const [numberDraft, setNumberDraft] = useState("");
+  const [editingNumber, setEditingNumber] = useState(false);
+  const [numberError, setNumberError] = useState("");
+  const savePlayerNumber = (event) => {
+    event.preventDefault();
+    if (!/^(?:[0-9]|[1-9][0-9])$/.test(numberDraft)) { setNumberError("Elegí un dorsal del 0 al 99."); return; }
+    try { localStorage.setItem(PLAYER_NUMBER_KEY, numberDraft); } catch { setNumberError("No se pudo guardar en este navegador."); return; }
+    setPlayerNumber(numberDraft);
+    setEditingNumber(false);
+    setNumberError("");
+  };
   const [nameDraft, setNameDraft] = useState("");
   const [editingName, setEditingName] = useState(false);
   const [nameError, setNameError] = useState("");
@@ -172,18 +205,34 @@ export default function FanLevel() {
             <span className="lna-fan-gamer-trophy"><Trophy size={23} aria-hidden="true" /></span>
             <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
           </div>
-          <div className="lna-fan-player-profile">
-            <span className="lna-fan-player-avatar"><UserRound size={17} aria-hidden="true" /></span>
-            {editingName ? <form className="lna-fan-player-edit" onSubmit={savePlayerName}>
-              <input aria-label="Nombre de jugador" autoFocus maxLength={24} value={nameDraft} placeholder="Tu nombre o apodo" onChange={e => { setNameDraft(e.target.value); setNameError(""); }} />
-              <button type="submit" aria-label="Guardar nombre" title="Guardar"><Check size={16}/></button>
-              <button type="button" aria-label="Cancelar edición" title="Cancelar" onClick={() => { setEditingName(false); setNameError(""); }}><Ban size={15}/></button>
-              {nameError && <small role="alert">{nameError}</small>}
-            </form> : <div className="lna-fan-player-identity">
-              <span>MI PERFIL DE JUGADOR</span>
-              <strong>{playerName || "Elegí tu nombre"}</strong>
-            </div>}
-            {!editingName && <button type="button" className="lna-fan-player-pencil" aria-label={playerName ? "Editar nombre de jugador" : "Agregar nombre de jugador"} title="Editar nombre" onClick={() => { setNameDraft(playerName); setNameError(""); setEditingName(true); }}><Pencil size={15} /></button>}
+          <div className="lna-fan-player-profile lna-fan-player-profile-with-jersey">
+            <div className="lna-fan-jersey-panel"><PlayerJersey name={playerName} number={playerNumber}/></div>
+            <div className="lna-fan-player-fields">
+              <span className="lna-fan-player-caption">MI JUGADOR</span>
+              <div className="lna-fan-player-field">
+                {editingName ? <form className="lna-fan-player-edit" onSubmit={savePlayerName}>
+                  <input aria-label="Nombre de jugador" autoFocus maxLength={24} value={nameDraft} placeholder="Nombre o apodo" onChange={e => { setNameDraft(e.target.value); setNameError(""); }} />
+                  <button type="submit" aria-label="Guardar nombre"><Check size={15}/></button>
+                  <button type="button" aria-label="Cancelar edición de nombre" onClick={() => { setEditingName(false); setNameError(""); }}><Ban size={14}/></button>
+                  {nameError && <small role="alert">{nameError}</small>}
+                </form> : <>
+                  <strong className="lna-fan-player-field-value">{playerName || "Elegí tu nombre"}</strong>
+                  <button type="button" className="lna-fan-player-pencil" aria-label="Editar nombre de jugador" onClick={() => { setNameDraft(playerName); setNameError(""); setEditingName(true); }}><Pencil size={14}/></button>
+                </>}
+              </div>
+              <div className="lna-fan-player-field">
+                {editingNumber ? <form className="lna-fan-player-edit" onSubmit={savePlayerNumber}>
+                  <input aria-label="Número de camiseta" autoFocus inputMode="numeric" pattern="[0-9]{1,2}" maxLength={2} value={numberDraft} placeholder="0 a 99" onChange={e => { setNumberDraft(e.target.value.replace(/\\D/g, "").slice(0,2)); setNumberError(""); }} />
+                  <button type="submit" aria-label="Guardar número"><Check size={15}/></button>
+                  <button type="button" aria-label="Cancelar edición de número" onClick={() => { setEditingNumber(false); setNumberError(""); }}><Ban size={14}/></button>
+                  {numberError && <small role="alert">{numberError}</small>}
+                </form> : <>
+                  <span className="lna-fan-player-number-label">N°</span>
+                  <strong className="lna-fan-player-field-value">{playerNumber || "Elegí tu número"}</strong>
+                  <button type="button" className="lna-fan-player-pencil" aria-label="Editar número de camiseta" onClick={() => { setNumberDraft(playerNumber); setNumberError(""); setEditingNumber(true); }}><Pencil size={14}/></button>
+                </>}
+              </div>
+            </div>
           </div>
           <div className="lna-fan-gamer-hero">
             <div className="lna-fan-gamer-score">
