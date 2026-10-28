@@ -135,14 +135,14 @@ export default function FanLevel() {
             <span>5 aciertos consecutivos <b>+45 PTS en el quinto</b></span>
             <span>MVP <b>1 distintivo cada 10 aciertos consecutivos</b></span>
             <small>Los puntos se acreditan al finalizar el partido. No votar no suma puntos y corta las rachas. La racha MVP continúa aunque cambies de liga.</small>
-          </div> : <div className="lna-fan-intro-rules">
-            <span>Liga de Desarrollo <b>Ascenso: 50 PTS · Sin descenso</b></span>
-            <span>Liga Federal <b>Ascenso: 100 PTS · Sin descenso</b></span>
-            <span>Liga Argentina <b>Ascenso: 150 PTS · Descenso: 5 errores seguidos</b></span>
-            <span>Liga Nacional <b>Ascenso: 200 PTS o 4 aciertos seguidos · Descenso: 4 errores seguidos</b></span>
-            <span>Estrella LNB <b>Ascenso: 300 PTS o 5 aciertos seguidos · Descenso: 3 errores seguidos</b></span>
-            <span>Leyenda LNA <b>Copa cada 10 partidos de permanencia · Descenso: 2 errores seguidos</b></span>
-            <small>Los ascensos ganan la copa de la liga superada. Al ascender o descender, los puntos y la racha de categoría vuelven a cero; el histórico, las copas y la racha MVP se conservan.</small>
+          </div> : <div className="lna-fan-intro-rules lna-fan-intro-leagues">
+            <span><strong>Desarrollo</strong><small>↑ 50 PTS</small><small>↓ Sin descenso</small></span>
+            <span><strong>Federal</strong><small>↑ 100 PTS</small><small>↓ Sin descenso</small></span>
+            <span><strong>Argentina</strong><small>↑ 150 PTS</small><small>↓ 5 errores seguidos</small></span>
+            <span><strong>Nacional</strong><small>↑ 200 PTS o 4 aciertos seguidos</small><small>↓ 4 errores seguidos</small></span>
+            <span><strong>Estrella LNB</strong><small>↑ 300 PTS o 5 aciertos seguidos</small><small>↓ 3 errores seguidos</small></span>
+            <span><strong>Leyenda LNA</strong><small>🏆 Cada 10 partidos</small><small>↓ 2 errores seguidos</small></span>
+            <small>Al ascender ganás la copa. Los puntos y la racha de categoría se reinician al cambiar de liga; el histórico, las copas y la racha MVP se conservan.</small>
           </div>}
           <div className="lna-fan-intro-dots">{[0,1,2].map(i => <span key={i} className={introStep === i ? "active" : ""} />)}</div>
           <div className="lna-fan-intro-actions">{introStep > 0 && <button type="button" className="secondary" onClick={() => setIntroStep(v => v - 1)}>Atrás</button>}<button type="button" className="primary" onClick={() => { if (introStep < 2) setIntroStep(v => v + 1); else { finishIntro(); } }}>{introStep === 2 ? "¡Entendido!" : "Siguiente"}</button></div>
