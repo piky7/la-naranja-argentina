@@ -314,3 +314,18 @@
 .lna-fan-modal .lna-fan-player-edit input{flex:1 1 95px;min-width:0;height:29px;box-sizing:border-box;padding:4px 7px;border:1px solid #e97eb8;border-radius:7px;background:#111e32;color:#fff;font-size:12px;outline-offset:2px}
 .lna-fan-modal .lna-fan-player-edit small{flex-basis:100%;font-size:10px;color:#ffb5c9}
 @media(max-height:740px){.lna-fan-modal .lna-fan-player-profile{min-height:34px;margin:2px 0 5px;padding:3px 7px}}
+
+/* Camiseta SVG personalizada y dorsal editable; perfil compacto para móvil */
+.lna-fan-modal .lna-fan-player-profile-with-jersey{display:grid;grid-template-columns:76px minmax(0,1fr);align-items:center;gap:9px;padding:6px 9px;margin:4px 0 8px;min-height:100px}
+.lna-fan-jersey-panel{display:grid;place-items:center;min-width:0;align-self:stretch;border:1px solid rgba(240,99,179,.35);border-radius:10px;background:radial-gradient(ellipse at center,rgba(235,62,155,.15),transparent 75%)}
+.lna-fan-player-jersey{display:block;width:73px;height:93px;overflow:visible;filter:drop-shadow(0 0 6px rgba(245,72,164,.23))}
+.lna-fan-player-fields{display:flex;flex-direction:column;gap:6px;min-width:0}
+.lna-fan-player-caption{font-size:9px;font-weight:900;letter-spacing:1px;color:#ff95cb}
+.lna-fan-modal .lna-fan-player-field{display:flex;align-items:center;gap:6px;min-height:29px;min-width:0;padding:2px 6px;border:1px solid rgba(240,112,183,.45);border-radius:8px;background:rgba(13,22,39,.65)}
+.lna-fan-player-field-value{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:850;color:#fff}
+.lna-fan-player-number-label{font-size:10px;color:#f8a3d1;font-weight:800}
+.lna-fan-modal .lna-fan-player-field .lna-fan-player-pencil{width:24px;height:24px;flex-basis:24px;border:0;background:transparent}
+.lna-fan-modal .lna-fan-player-field .lna-fan-player-edit{width:100%}
+.lna-fan-modal .lna-fan-player-field .lna-fan-player-edit input{height:26px}
+.lna-fan-modal .lna-fan-player-field .lna-fan-player-edit button{width:25px;height:25px;flex-basis:25px}
+@media(max-height:740px){.lna-fan-modal .lna-fan-player-profile-with-jersey{grid-template-columns:65px minmax(0,1fr);min-height:79px;padding:4px 7px;gap:7px}.lna-fan-player-jersey{width:62px;height:78px}.lna-fan-player-fields{gap:4px}.lna-fan-modal .lna-fan-player-field{min-height:26px}}
