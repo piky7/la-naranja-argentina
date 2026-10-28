@@ -21,6 +21,8 @@ const games = officialSchedule
       // Hora argentina. El Worker debe interpretar esta zona en el servidor.
       startsAt: `${date}T${time}:00-03:00`,
       finished: matchResults[resultKey]?.status === "finished",
+      homeScore: Number.isFinite(Number(matchResults[resultKey]?.homeScore)) && matchResults[resultKey]?.homeScore != null ? Number(matchResults[resultKey].homeScore) : null,
+      awayScore: Number.isFinite(Number(matchResults[resultKey]?.awayScore)) && matchResults[resultKey]?.awayScore != null ? Number(matchResults[resultKey].awayScore) : null,
     };
   });
 
