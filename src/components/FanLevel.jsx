@@ -111,15 +111,21 @@ export default function FanLevel() {
           <h2 id="lna-fan-title">MI NIVEL LNA</h2>
           <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
           <strong className="lna-fan-current">Nivel {index + 1} · {level.name}</strong>
-          {mvps > 0 && <p className="lna-fan-next">🏆 MVP de Pronósticos ×{mvps}</p>}
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
           <p className="lna-fan-next">{next ? `Te faltan ${next.points - score} puntos para ${next.name}` : "¡Alcanzaste el nivel máximo!"}</p>
-          <p className="lna-fan-how">Desde el 29/10: <strong>+5 por votar</strong>, <strong>+10 por acertar</strong>. Bonus por 3 y 5 aciertos seguidos; MVP por 10. No votar corta las rachas.</p>
+          <p className="lna-fan-how"><strong>+5 por votar</strong> y <strong>+10 por acertar</strong>. Bonus por 3 y 5 aciertos seguidos.</p>
           <div className="lna-fan-tabs" role="tablist" aria-label="Información de hincha">
             <button type="button" role="tab" aria-selected={activeView === "levels"} className={activeView === "levels" ? "active" : ""} onClick={() => setActiveView("levels")}>Mis niveles</button>
-            <button type="button" role="tab" aria-selected={activeView === "predictions"} className={activeView === "predictions" ? "active" : ""} onClick={() => setActiveView("predictions")}>Mis pronósticos</button>
+            <button type="button" role="tab" aria-selected={activeView === "predictions"} className={activeView === "predictions" ? "active" : ""} onClick={() => setActiveView("predictions")}>Pronósticos</button>
+            <button type="button" role="tab" aria-selected={activeView === "mvp"} className={activeView === "mvp" ? "active" : ""} onClick={() => setActiveView("mvp")}>MVP</button>
           </div>
-          {activeView === "levels" ? <div className="lna-fan-levels">
+          {activeView === "mvp" ? <div className="lna-fan-mvp">
+            <Trophy size={38} aria-hidden="true" />
+            <strong>MVP DE PRONÓSTICOS</strong>
+            <span className="lna-fan-mvp-count">{mvps}</span>
+            <p>{mvps === 1 ? "Distintivo conseguido" : "Distintivos conseguidos"}</p>
+            <small>Acertá <b>10 partidos consecutivos</b> para conseguir un MVP. No suma puntos y queda como recuerdo permanente. Si errás o no votás un partido, se corta la racha. Cada 10 aciertos consecutivos ganás otro MVP.</small>
+          </div> : activeView === "levels" ? <div className="lna-fan-levels">
             {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
               <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}</strong><small>{item.points} PTS</small>
             </div>)}
