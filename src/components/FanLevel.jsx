@@ -31,7 +31,7 @@ export default function FanLevel() {
   const [predictions, setPredictions] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState(false);
-  const [showAllLevels, setShowAllLevels] = useState(false);
+  const [activeView, setActiveView] = useState("levels");
   const refresh = useCallback(async () => {
     const id = getVisitorId();
     if (!id) return;
@@ -92,7 +92,7 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className="lna-fan-bar" type="button" onClick={() => { refresh(); setOpen(true); }} aria-label="Ver mis puntos y nivel de hincha">
+      <button className="lna-fan-bar" type="button" onClick={() => { refresh(); setActiveView("levels"); setOpen(true); }} aria-label="Ver mis puntos y nivel de hincha">
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong>{level.name}</strong><b>{points === null ? "—" : score} PTS</b></span>
@@ -103,17 +103,22 @@ export default function FanLevel() {
       {open && <div className="lna-fan-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
         <section className="lna-fan-modal" role="dialog" aria-modal="true" aria-labelledby="lna-fan-title">
           <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>
-          <div className="lna-fan-hero">
-            <Trophy className="lna-fan-trophy" size={34} aria-hidden="true" />
-            <span className="lna-fan-eyebrow">TU NIVEL ACTUAL</span>
-            <h2 id="lna-fan-title">Nivel {index + 1} · {level.name}</h2>
-            <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
-            <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
-            <p className="lna-fan-next">{next ? `Te faltan ${next.points - score} puntos para ${next.name}` : "¡Alcanzaste el nivel máximo!"}</p>
-          </div>
+          <Trophy className="lna-fan-trophy" size={30} aria-hidden="true" />
+          <h2 id="lna-fan-title">MI NIVEL LNA</h2>
+          <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
+          <strong className="lna-fan-current">Nivel {index + 1} · {level.name}</strong>
+          <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
+          <p className="lna-fan-next">{next ? `Te faltan ${next.points - score} puntos para ${next.name}` : "¡Alcanzaste el nivel máximo!"}</p>
           <p className="lna-fan-how">Sumás <strong>10 puntos</strong> por cada pronóstico válido, aciertes o no.</p>
-          <div className="lna-fan-history">
-            <h3>MIS PRONÓSTICOS</h3>
+          <div className="lna-fan-tabs" role="tablist" aria-label="Información de hincha">
+            <button type="button" role="tab" aria-selected={activeView === "levels"} className={activeView === "levels" ? "active" : ""} onClick={() => setActiveView("levels")}>Mis niveles</button>
+            <button type="button" role="tab" aria-selected={activeView === "predictions"} className={activeView === "predictions" ? "active" : ""} onClick={() => setActiveView("predictions")}>Mis pronósticos</button>
+          </div>
+          {activeView === "levels" ? <div className="lna-fan-levels">
+            {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
+              <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}</strong><small>{item.points} PTS</small>
+            </div>)}
+          </div> : <div className="lna-fan-history">
             {historyLoading ? <p className="lna-fan-history-message">Cargando tus votaciones…</p> : historyError ? <div className="lna-fan-history-message">No se pudo cargar el historial. <button type="button" onClick={refreshHistory}>Reintentar</button></div> : predictions.length === 0 ? <p className="lna-fan-history-message">Todavía no tenés pronósticos registrados.</p> : <>
               <div className="lna-fan-stats">
                 <span><b className="correct">{predictions.filter(p => p.status === "correct").length}</b> Acertados</span>
@@ -125,25 +130,20 @@ export default function FanLevel() {
                   const home = teams.find(t => t.id === p.homeTeam);
                   const away = teams.find(t => t.id === p.awayTeam);
                   const chosen = teams.find(t => t.id === p.selected);
-                  const statusText = p.status === "correct" ? "Acertaste" : p.status === "incorrect" ? "Erraste" : "Pendiente";
+                  const statusText = p.status === "correct" ? "✓" : p.status === "incorrect" ? "✕" : "·";
                   return <div className={`lna-fan-prediction ${p.status}`} key={p.partidoId}>
-                    <div className="lna-fan-prediction-top"><span>{p.partidoId.slice(0, 10).split("-").reverse().join("/")}</span><strong>{statusText}</strong></div>
+                    <span className="lna-fan-prediction-status" aria-label={p.status === "correct" ? "Acertaste" : p.status === "incorrect" ? "Erraste" : "Pendiente"}>{statusText}</span>
+                    <span className="lna-fan-prediction-date">{p.partidoId.slice(5, 10).replace("-", "/")}</span>
                     <div className="lna-fan-prediction-match">
                       <span>{home?.logo && <img src={home.logo} alt="" />}{home?.shortName || p.homeTeam || "Local"}</span>
-                      <b>{p.homeScore != null && p.awayScore != null ? `${p.homeScore} - ${p.awayScore}` : "VS"}</b>
+                      <b>{p.homeScore != null && p.awayScore != null ? `${p.homeScore}-${p.awayScore}` : "VS"}</b>
                       <span>{away?.logo && <img src={away.logo} alt="" />}{away?.shortName || p.awayTeam || "Visitante"}</span>
                     </div>
-                    <small>Tu voto: <strong>{chosen?.shortName || p.selected.replace(/-/g, " ")}</strong></small>
+                    <small>Votaste: <strong>{chosen?.shortName || p.selected.replace(/-/g, " ")}</strong></small>
                   </div>;
                 })}
               </div>
             </>}
-          </div>
-          <button type="button" className="lna-fan-levels-toggle" onClick={() => setShowAllLevels(v => !v)} aria-expanded={showAllLevels}>{showAllLevels ? "Ocultar niveles" : "Ver todos los niveles"} <ChevronRight size={16} /></button>
-          {showAllLevels && <div className="lna-fan-levels">
-            {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
-              <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}</strong><small>{item.points} PTS</small>
-            </div>)}
           </div>}
           <p className="lna-fan-note">Los puntos están vinculados a este navegador. Si borrás sus datos o cambiás de dispositivo, podrías perder el acceso a tu progreso.</p>
         </section>
