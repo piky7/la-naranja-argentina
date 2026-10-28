@@ -130,3 +130,24 @@
 .lna-fan-modal .lna-fan-earned{color:#ffa5d0}
 .lna-fan-modal .lna-fan-pages button{border-color:#815579;background:linear-gradient(110deg,#4b2b4e,#253247)}
 .lna-fan-modal .lna-fan-mvp{background:linear-gradient(135deg,#38283f,#172636);box-shadow:inset 0 0 20px rgba(207,89,154,.08)}
+
+/* Presentación de Mi carrera: bienvenida compacta en tres pasos */
+.lna-fan-intro{position:relative;box-sizing:border-box;width:min(100%,400px);max-height:calc(100dvh - 32px);overflow:auto;padding:28px 22px 20px;border:1px solid #b26b9d;border-radius:18px;background:radial-gradient(ellipse at 12% 0%,rgba(216,77,151,.27),transparent 58%),linear-gradient(145deg,#252038,#111e2d 72%);box-shadow:0 22px 65px #000b;color:#f7f2f8;text-align:center}
+.lna-fan-intro-icon{color:#ff9dcb;margin-bottom:7px}
+.lna-fan-intro-kicker{display:block;color:#ff9dcb;font-size:10px;letter-spacing:1.6px;font-weight:800}
+.lna-fan-intro h2{font-size:20px;line-height:1.2;margin:12px 0}
+.lna-fan-intro p{font-size:14px;line-height:1.65;color:#d5cddd;margin:12px 0 20px}
+.lna-fan-intro p strong{color:#ffadd5}
+.lna-fan-intro-rules{display:grid;gap:7px;text-align:left;margin:15px 0}
+.lna-fan-intro-rules span{display:flex;justify-content:space-between;gap:8px;padding:8px 10px;background:rgba(231,113,175,.09);border:1px solid rgba(240,145,197,.2);border-radius:8px;font-size:12px}
+.lna-fan-intro-rules b{color:#ffacd4;white-space:nowrap}
+.lna-fan-intro-rules small{color:#c8baca;font-size:11px;line-height:1.5;text-align:center}
+.lna-fan-intro-dots{display:flex;justify-content:center;gap:7px;margin:18px 0}
+.lna-fan-intro-dots span{width:7px;height:7px;border-radius:50%;background:#5c4b63}
+.lna-fan-intro-dots span.active{width:21px;border-radius:6px;background:#ef80bb}
+.lna-fan-intro-actions{display:flex;gap:8px}
+.lna-fan-intro-actions button{border:1px solid #9d608d;border-radius:9px;padding:11px 13px;font-size:13px;font-weight:800;cursor:pointer}
+.lna-fan-intro-actions .primary{flex:1;background:linear-gradient(115deg,#d954a1,#f18dc4);color:#24182b;border-color:#f18dc4}
+.lna-fan-intro-actions .secondary{background:#243145;color:#eee}
+.lna-fan-intro-dismiss{margin-top:13px;padding:6px;border:0;background:transparent;color:#bdb2c3;font-size:11px;cursor:pointer}
+.lna-fan-help{vertical-align:middle;margin-left:5px;width:21px;height:21px;border:1px solid #b56c9b;border-radius:50%;background:#4a2c4b;color:#ffb2d9;font-size:12px;font-weight:900;cursor:pointer}
