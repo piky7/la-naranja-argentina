@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Check, Ban } from "lucide-react";
+import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Check } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 
@@ -53,28 +53,21 @@ function PlayerJersey({ name, number }) {
 export default function FanLevel() {
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
-  const [numberDraft, setNumberDraft] = useState("");
-  const [editingNumber, setEditingNumber] = useState(false);
-  const [numberError, setNumberError] = useState("");
-  const savePlayerNumber = (event) => {
-    event.preventDefault();
-    if (!/^(?:[0-9]|[1-9][0-9])$/.test(numberDraft)) { setNumberError("Elegí un dorsal del 0 al 99."); return; }
-    try { localStorage.setItem(PLAYER_NUMBER_KEY, numberDraft); } catch { setNumberError("No se pudo guardar en este navegador."); return; }
-    setPlayerNumber(numberDraft);
-    setEditingNumber(false);
-    setNumberError("");
-  };
   const [nameDraft, setNameDraft] = useState("");
-  const [editingName, setEditingName] = useState(false);
-  const [nameError, setNameError] = useState("");
-  const savePlayerName = (event) => {
+  const [numberDraft, setNumberDraft] = useState("");
+  const [editingProfile, setEditingProfile] = useState(false);
+  const [profileError, setProfileError] = useState("");
+  const startEditProfile = () => { setNameDraft(playerName); setNumberDraft(playerNumber); setProfileError(""); setEditingProfile(true); };
+  const saveProfile = (event) => {
     event.preventDefault();
-    const nextName = nameDraft.trim().replace(/\\s+/g, " ");
-    if (!nextName || nextName.length > 24) { setNameError("Ingresá un nombre de hasta 24 caracteres."); return; }
-    try { localStorage.setItem(PLAYER_NAME_KEY, nextName); } catch { setNameError("No se pudo guardar en este navegador."); return; }
-    setPlayerName(nextName);
-    setEditingName(false);
-    setNameError("");
+    const name = nameDraft.trim().replace(/\s+/g, " ");
+    if (!name || name.length > 24) { setProfileError("Ingresá un nombre de hasta 24 caracteres."); return; }
+    if (!/^(?:[0-9]|[1-9][0-9])$/.test(numberDraft)) { setProfileError("Elegí un dorsal del 0 al 99."); return; }
+    try {
+      localStorage.setItem(PLAYER_NAME_KEY, name);
+      localStorage.setItem(PLAYER_NUMBER_KEY, numberDraft);
+    } catch { setProfileError("No se pudo guardar el perfil en este navegador."); return; }
+    setPlayerName(name); setPlayerNumber(numberDraft); setEditingProfile(false); setProfileError("");
   };
   const [points, setPoints] = useState(null);
   const [mvps, setMvps] = useState(0);
@@ -207,33 +200,27 @@ export default function FanLevel() {
           </div>
           <div className="lna-fan-player-profile lna-fan-player-profile-with-jersey">
             <div className="lna-fan-jersey-panel"><PlayerJersey name={playerName} number={playerNumber}/></div>
-            <div className="lna-fan-player-fields">
-              <span className="lna-fan-player-caption">MI JUGADOR</span>
-              <div className="lna-fan-player-field">
-                {editingName ? <form className="lna-fan-player-edit" onSubmit={savePlayerName}>
-                  <input aria-label="Nombre de jugador" autoFocus maxLength={24} value={nameDraft} placeholder="Nombre o apodo" onChange={e => { setNameDraft(e.target.value); setNameError(""); }} />
-                  <button type="submit" aria-label="Guardar nombre"><Check size={15}/></button>
-                  <button type="button" aria-label="Cancelar edición de nombre" onClick={() => { setEditingName(false); setNameError(""); }}><Ban size={14}/></button>
-                  {nameError && <small role="alert">{nameError}</small>}
-                </form> : <>
-                  <strong className="lna-fan-player-field-value">{playerName || "Elegí tu nombre"}</strong>
-                  <button type="button" className="lna-fan-player-pencil" aria-label="Editar nombre de jugador" onClick={() => { setNameDraft(playerName); setNameError(""); setEditingName(true); }}><Pencil size={14}/></button>
-                </>}
+            <div className="lna-fan-player-fields lna-fan-player-display">
+              <div className="lna-fan-player-display-top">
+                <span className="lna-fan-player-caption">MI JUGADOR</span>
+                <button type="button" className="lna-fan-edit-profile-button" onClick={startEditProfile} aria-label="Editar perfil de jugador"><Pencil size={13} aria-hidden="true" /> <span>Editar perfil</span></button>
               </div>
-              <div className="lna-fan-player-field">
-                {editingNumber ? <form className="lna-fan-player-edit" onSubmit={savePlayerNumber}>
-                  <input aria-label="Número de camiseta" autoFocus inputMode="numeric" pattern="[0-9]{1,2}" maxLength={2} value={numberDraft} placeholder="0 a 99" onChange={e => { setNumberDraft(e.target.value.replace(/\\D/g, "").slice(0,2)); setNumberError(""); }} />
-                  <button type="submit" aria-label="Guardar número"><Check size={15}/></button>
-                  <button type="button" aria-label="Cancelar edición de número" onClick={() => { setEditingNumber(false); setNumberError(""); }}><Ban size={14}/></button>
-                  {numberError && <small role="alert">{numberError}</small>}
-                </form> : <>
-                  <span className="lna-fan-player-number-label">N°</span>
-                  <strong className="lna-fan-player-field-value">{playerNumber || "Elegí tu número"}</strong>
-                  <button type="button" className="lna-fan-player-pencil" aria-label="Editar número de camiseta" onClick={() => { setNumberDraft(playerNumber); setNumberError(""); setEditingNumber(true); }}><Pencil size={14}/></button>
-                </>}
-              </div>
+              <strong className="lna-fan-player-display-name">{playerName || "TU NOMBRE"}</strong>
+              <span className="lna-fan-player-display-number">DORSAL <b>#{playerNumber || "—"}</b></span>
+              <small className="lna-fan-player-display-league">{level.name}</small>
             </div>
           </div>
+          {editingProfile && <div className="lna-fan-profile-edit-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) setEditingProfile(false); }}>
+            <form className="lna-fan-profile-edit-dialog" onSubmit={saveProfile} role="dialog" aria-modal="true" aria-labelledby="lna-fan-edit-title">
+              <div className="lna-fan-profile-edit-heading"><h3 id="lna-fan-edit-title">EDITAR MI JUGADOR</h3><button type="button" aria-label="Cerrar edición" onClick={() => setEditingProfile(false)}><X size={18}/></button></div>
+              <label htmlFor="lna-player-name">Nombre o apodo</label>
+              <input id="lna-player-name" autoFocus maxLength={24} value={nameDraft} onChange={e => { setNameDraft(e.target.value); setProfileError(""); }} placeholder="Tu nombre" />
+              <label htmlFor="lna-player-number">Número de camiseta (0 a 99)</label>
+              <input id="lna-player-number" inputMode="numeric" maxLength={2} pattern="[0-9]{1,2}" value={numberDraft} onChange={e => { setNumberDraft(e.target.value.replace(/\D/g, "").slice(0,2)); setProfileError(""); }} placeholder="Ej. 7" />
+              {profileError && <small role="alert" className="lna-fan-profile-edit-error">{profileError}</small>}
+              <div className="lna-fan-profile-edit-actions"><button type="button" onClick={() => setEditingProfile(false)}>Cancelar</button><button type="submit"><Check size={15}/> Guardar perfil</button></div>
+            </form>
+          </div>}
           <div className="lna-fan-gamer-hero">
             <div className="lna-fan-gamer-score">
               <p className="lna-fan-total">{seasonPoints === null ? "—" : seasonScore} <span>/ {level.goal ?? "∞"} PTS</span></p>
