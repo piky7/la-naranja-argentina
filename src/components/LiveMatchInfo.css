@@ -102,3 +102,9 @@
  .match-modal-is-live .match-modal-live-remaining{font-size:10px!important}
  .match-modal-is-live .match-modal-team img,.match-modal-is-live .home-modal-team-logo-button img{width:46px!important;height:46px!important}
 }
+
+/* Colores del tanteador en vivo: líder naranja, rival blanco; empate neutro. */
+.match-modal-is-live .match-modal-score>strong .lna-live-score-numbers{display:inline-flex;align-items:baseline;justify-content:center;gap:.12em;color:#f4f7fb}
+.match-modal-is-live .match-modal-score>strong .lna-live-score-numbers .is-leading{color:#ff9133}
+.match-modal-is-live .match-modal-score>strong .lna-live-score-numbers .is-trailing{color:#f4f7fb}
+.match-modal-is-live .match-modal-score>strong .lna-live-score-dash{color:#f4f7fb}
