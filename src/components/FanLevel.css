@@ -77,3 +77,17 @@
 .lna-fan-mvp p{font-size:11px;color:#f5d7a1;margin:0}
 .lna-fan-mvp small{font-size:11px;line-height:1.5;color:#c4d0dc;max-width:310px}
 .lna-fan-mvp small b{color:#fff}
+
+/* Mi carrera: rachas, recompensas y navegación compacta */
+.lna-fan-streak-panel{display:flex;flex-direction:column;gap:5px;margin-top:7px;padding:10px;border:1px solid #43566b;border-radius:9px;background:#1c3044;text-align:center}
+.lna-fan-streak-panel strong{font-size:11px;letter-spacing:1px;color:#ffad65}
+.lna-fan-streak-panel span{font-size:13px;font-weight:800;color:#fff}
+.lna-fan-streak-panel small{font-size:11px;color:#c1d0df;line-height:1.4}
+.lna-fan-prediction.medal-bronze{border-color:#b77a4e;border-left-color:#cd8753;background:linear-gradient(100deg,#352c2b,#192b3d 55%)}
+.lna-fan-prediction.medal-silver{border-color:#9eacbc;border-left-color:#d0d8e1;background:linear-gradient(100deg,#303d4b,#192b3d 55%)}
+.lna-fan-prediction.medal-gold{border-color:#d6ad55;border-left-color:#ffd36b;background:linear-gradient(100deg,#403722,#192b3d 55%)}
+.lna-fan-prediction small{display:flex;align-items:center;gap:4px;min-width:0}
+.lna-fan-earned{margin-left:auto;white-space:nowrap;font-size:10px;color:#ffb15d}
+.lna-fan-pages{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:9px;font-size:11px;color:#b7c5d4}
+.lna-fan-pages button{padding:7px 9px;border:1px solid #465b71;border-radius:7px;background:#203348;color:#fff;font-size:11px;cursor:pointer}
+.lna-fan-pages button:disabled{opacity:.3;cursor:default}
