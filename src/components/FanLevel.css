@@ -112,3 +112,21 @@
 .lna-fan-modal .lna-fan-level small{font-size:10px}
 .lna-fan-modal .lna-fan-tabs{margin-bottom:7px}
 @media(max-width:768px){.lna-fan-modal{padding-top:12px;padding-bottom:12px}}
+
+/* Identidad visual rosa de Mi carrera: aislada de las demás secciones LNA */
+.lna-fan-bar{border-color:rgba(236,91,168,.65);background:linear-gradient(125deg,#2a1d37 0%,#192538 65%,#38213d 100%);box-shadow:inset 0 0 18px rgba(236,91,168,.09)}
+.lna-fan-bar:hover{border-color:#f18bc4}
+.lna-fan-bar>svg:first-child,.lna-fan-bar>svg:last-child{color:#f49acb}
+.lna-fan-line b{color:#ffabd5}
+.lna-fan-bar .lna-fan-track>span,.lna-fan-modal .lna-fan-track-large>span{background:linear-gradient(90deg,#dc4c9c,#ffa5d4)}
+.lna-fan-modal{border-color:#795075;background:radial-gradient(ellipse at 15% 0%,rgba(183,52,130,.22),transparent 47%),radial-gradient(ellipse at 95% 95%,rgba(152,57,127,.13),transparent 47%),#111e2d;box-shadow:0 20px 60px #0009,inset 0 0 30px rgba(201,64,140,.035)}
+.lna-fan-modal .lna-fan-trophy,.lna-fan-modal .lna-fan-total{color:#ff9dcb}
+.lna-fan-modal .lna-fan-streak-panel{border-color:#785072;background:linear-gradient(115deg,rgba(150,53,115,.3),rgba(30,47,68,.92));box-shadow:inset 0 0 20px rgba(219,73,150,.06)}
+.lna-fan-modal .lna-fan-streak-panel strong{color:#ff9dcb}
+.lna-fan-modal .lna-fan-tabs button.active{border-color:#f38bc2;background:linear-gradient(120deg,#db5ba4,#f18ac2);color:#24182b}
+.lna-fan-modal .lna-fan-level.is-current{border-color:#ed78b5;background:linear-gradient(110deg,rgba(195,72,139,.19),#192a3c)}
+.lna-fan-modal .lna-fan-level.is-current>span{background:#f08abd;color:#24182b}
+.lna-fan-modal .lna-fan-level.is-earned>span{color:#ff9dcb}
+.lna-fan-modal .lna-fan-earned{color:#ffa5d0}
+.lna-fan-modal .lna-fan-pages button{border-color:#815579;background:linear-gradient(110deg,#4b2b4e,#253247)}
+.lna-fan-modal .lna-fan-mvp{background:linear-gradient(135deg,#38283f,#172636);box-shadow:inset 0 0 20px rgba(207,89,154,.08)}
