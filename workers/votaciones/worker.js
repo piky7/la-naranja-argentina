@@ -152,6 +152,15 @@ async function voteCounts(db, id) {
 }
 
 export default {
+  async scheduled(_event, env, ctx) {
+    ctx.waitUntil((async () => {
+      const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
+      if(!response.ok) throw new Error("No se pudo archivar el fixture");
+      const fixture=await response.json();
+      if(!Array.isArray(fixture.games)) throw new Error("Fixture inválido");
+      await archiveFixture(env.DB,fixture);
+    })());
+  },
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     const url = new URL(request.url);
