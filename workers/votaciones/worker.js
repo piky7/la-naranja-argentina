@@ -42,6 +42,42 @@ export default {
         return json({ ok: true, servicio: "LNA Votaciones", database: "conectada" }, 200, cors);
       } catch { return fail("Base de datos no disponible", 503); }
     }
+    if (url.pathname === "/api/mis-pronosticos" && request.method === "GET") {
+      const visitorId = url.searchParams.get("visitanteId");
+      if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
+      if (!env.DB) return fail("Base de datos no configurada", 503);
+      try {
+        const [votes, fixtureResponse] = await Promise.all([
+          env.DB.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=? ORDER BY partido_id DESC LIMIT 200").bind(visitorId).all(),
+          fetch(FIXTURE, { headers: { accept: "application/json" }, cf: { cacheTtl: 60, cacheEverything: true } }),
+        ]);
+        if (!fixtureResponse.ok) throw new Error("Fixture no disponible");
+        const fixture = await fixtureResponse.json();
+        if (!Array.isArray(fixture.games)) throw new Error("Fixture inválido");
+        const byId = new Map(fixture.games.map(game => [game.id, game]));
+        const predictions = (votes.results || []).map(row => {
+          const game = byId.get(row.partido_id);
+          const homeTeam = game?.homeTeam || null;
+          const awayTeam = game?.awayTeam || null;
+          const homeScore = game?.homeScore;
+          const awayScore = game?.awayScore;
+          const confirmed = game?.finished === true && Number.isFinite(homeScore) && Number.isFinite(awayScore) && homeScore !== awayScore;
+          const winner = confirmed ? (homeScore > awayScore ? homeTeam : awayTeam) : null;
+          return {
+            partidoId: row.partido_id,
+            selected: row.equipo_votado,
+            homeTeam, awayTeam,
+            homeScore: confirmed ? homeScore : null,
+            awayScore: confirmed ? awayScore : null,
+            status: !winner ? "pending" : winner === row.equipo_votado ? "correct" : "incorrect",
+          };
+        });
+        return json({ ok: true, predictions }, 200, cors);
+      } catch (error) {
+        console.error("LNA mis pronósticos:", error);
+        return fail("No se pudo consultar el historial", 503);
+      }
+    }
     if (url.pathname === "/api/puntos" && request.method === "GET") {
       const visitorId = url.searchParams.get("visitanteId");
       if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
