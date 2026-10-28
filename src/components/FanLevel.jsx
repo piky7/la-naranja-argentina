@@ -53,7 +53,6 @@ function PlayerJersey({ name, number }) {
 
 export default function FanLevel() {
   const modalRef = useRef(null);
-  useEffect(() => { if (modalRef.current) modalRef.current.scrollTop = 0; }, [editingProfile, activeView]);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
   const [nameDraft, setNameDraft] = useState("");
@@ -91,6 +90,7 @@ export default function FanLevel() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState(false);
   const [activeView, setActiveView] = useState("levels");
+  useEffect(() => { if (modalRef.current) modalRef.current.scrollTop = 0; }, [editingProfile, activeView]);
   const refresh = useCallback(async () => {
     const id = getVisitorId();
     if (!id) return;
