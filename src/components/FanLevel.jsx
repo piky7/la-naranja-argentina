@@ -29,6 +29,7 @@ function getVisitorId() {
 export default function FanLevel() {
   const [points, setPoints] = useState(null);
   const [mvps, setMvps] = useState(0);
+  const [seasonPoints, setSeasonPoints] = useState(null);
   const [career, setCareer] = useState(null);
   const [streaks, setStreaks] = useState({winStreak:0,lossStreak:0,missedStreak:0});
   const [page, setPage] = useState(0);
@@ -49,6 +50,7 @@ export default function FanLevel() {
       const result = await response.json();
       if (result.ok && Number.isFinite(result.points)) {
         setPoints(result.points);
+        setSeasonPoints(Number.isFinite(result.seasonPoints) ? result.seasonPoints : result.points);
         setMvps(Number(result.mvps) || 0);
         setCareer(result.career || null);
         setStreaks({winStreak:result.winStreak || 0,lossStreak:result.lossStreak || 0,missedStreak:result.missedStreak || 0});
@@ -99,17 +101,18 @@ export default function FanLevel() {
   }, [open]);
 
   const score = points ?? 0;
-  const index = career && Number.isInteger(career.categoryIndex) ? career.categoryIndex : LEVELS.reduce((current, item, i) => score >= item.points ? i : current, 0);
+  const seasonScore = seasonPoints ?? score;
+  const index = career && Number.isInteger(career.categoryIndex) ? career.categoryIndex : LEVELS.reduce((current, item, i) => seasonScore >= item.points ? i : current, 0);
   const level = LEVELS[index];
   const next = LEVELS[index + 1];
-  const percent = next ? Math.max(0,Math.min(100, (score - level.points) * 100 / (next.points - level.points))) : 100;
+  const percent = next ? Math.max(0,Math.min(100, (seasonScore - level.points) * 100 / (next.points - level.points))) : 100;
 
   return (
     <>
       <button className="lna-fan-bar" type="button" onClick={openCareer} aria-label="Ver mi carrera LNA">
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
-          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{points === null ? "—" : score} PTS</b></span>
+          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : seasonScore} PTS</b></span>
           <span className="lna-fan-track"><span style={{ width: `${percent}%` }} /></span>
         </span>
         <ChevronRight size={16} aria-hidden="true" />
@@ -120,7 +123,7 @@ export default function FanLevel() {
           <Trophy size={36} className="lna-fan-intro-icon" aria-hidden="true" />
           <span className="lna-fan-intro-kicker">MI CARRERA · {introStep + 1} DE 3</span>
           <h2 id="lna-career-intro-title">{["TU PASIÓN TAMBIÉN JUEGA","CADA PRONÓSTICO CUENTA","¿DÓNDE VOTAR?"][introStep]}</h2>
-          {introStep === 0 ? <p>Elegí quién gana los partidos de la Liga Nacional, sumá puntos, ascendé de categoría y conseguí el distintivo MVP.</p> : introStep === 1 ? <div className="lna-fan-intro-rules"><span>✓ Acierto <b>+15 PTS</b></span><span>✕ Error <b>+5 PTS</b></span><span>🥉 3 aciertos seguidos <b>+30 PTS</b></span><span>🥈 5 aciertos seguidos <b>+45 PTS</b></span><span>3 errores seguidos <b>−15 PTS de penalización</b></span><span>🏆 10 aciertos seguidos <b>MVP</b></span><small>Se acredita al finalizar el partido. No votar corta la racha, pero no resta puntos.</small></div> : <p>En <strong>Inicio → Partidos de hoy</strong>, tocá el partido que quieras pronosticar y elegí el ganador en <strong>¿QUIÉN GANA?</strong> antes de que empiece.</p>}
+          {introStep === 0 ? <p>Elegí quién gana los partidos de la Liga Nacional, sumá puntos, ascendé de categoría y conseguí el distintivo MVP.</p> : introStep === 1 ? <div className="lna-fan-intro-rules"><span>✓ Acierto <b>+15 PTS</b></span><span>✕ Error <b>+5 PTS</b></span><span>🥉 3 aciertos seguidos <b>+30 PTS</b></span><span>🥈 5 aciertos seguidos <b>+45 PTS</b></span><span>Descenso directo <b>según tu categoría</b></span><span>🏆 10 aciertos seguidos <b>MVP</b></span><small>Se acredita al finalizar el partido. No votar corta la racha, pero no resta puntos.</small></div> : <p>En <strong>Inicio → Partidos de hoy</strong>, tocá el partido que quieras pronosticar y elegí el ganador en <strong>¿QUIÉN GANA?</strong> antes de que empiece.</p>}
           <div className="lna-fan-intro-dots">{[0,1,2].map(i => <span key={i} className={introStep === i ? "active" : ""} />)}</div>
           <div className="lna-fan-intro-actions">{introStep > 0 && <button type="button" className="secondary" onClick={() => setIntroStep(v => v - 1)}>Atrás</button>}<button type="button" className="primary" onClick={() => { if (introStep < 2) setIntroStep(v => v + 1); else { finishIntro(); setOpen(false); window.location.assign("/"); } }}>{introStep === 2 ? "¡Empezar a jugar!" : "Siguiente"}</button></div>
           <button className="lna-fan-intro-dismiss" type="button" onClick={finishIntro}>Entendido · Ver mi carrera</button>
@@ -131,16 +134,17 @@ export default function FanLevel() {
           <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>
           <Trophy className="lna-fan-trophy" size={30} aria-hidden="true" />
           <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
-          <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
+          <p className="lna-fan-total">{seasonPoints === null ? "—" : seasonScore} <span>PTS DE TEMPORADA</span></p>
+          <p className="lna-fan-historical">Histórico: <b>{points === null ? "—" : score} PTS</b></p>
           <strong className="lna-fan-current">Categoría {index + 1} · {level.name}</strong>
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
-          <p className="lna-fan-next">{next ? (career?.lockPromotion ? "Necesitás 3 aciertos seguidos para recuperar el ascenso" : `Te faltan ${Math.max(0,next.points - score)} puntos para ascender a ${next.name}`) : "¡Llegaste a la máxima categoría!"}</p>
+          <p className="lna-fan-next">{next ? (`Te faltan ${Math.max(0,next.points - seasonScore)} puntos para ascender a ${next.name}`) : "¡Llegaste a la máxima categoría!"}</p>
             <div className="lna-fan-streak-panel">
               <strong>MI RACHA ACTUAL</strong>
               <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} ${streaks.lossStreak === 1 ? "error seguido" : "errores seguidos"}` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} ${streaks.missedStreak === 1 ? "partido sin votar" : "partidos sin votar"}` : "Sin racha activa"}</span>
-              <small>{streaks.winStreak === 2 ? "¡Estás a un acierto de sumar 30 PTS!" : streaks.winStreak === 4 ? "¡Estás a un acierto de sumar 45 PTS!" : streaks.winStreak === 9 ? "¡Estás a un acierto del MVP!" : streaks.lossStreak === 2 ? "Cuidado: otro error activa la penalización de −15 PTS." : streaks.missedStreak === 4 ? "No votar corta las rachas, pero no descuenta puntos." : streaks.winStreak > 0 && streaks.winStreak < 3 ? `Te faltan ${3-streaks.winStreak} aciertos para los 30 PTS.` : streaks.winStreak >= 3 && streaks.winStreak < 5 ? `Te faltan ${5-streaks.winStreak} aciertos para los 45 PTS.` : streaks.winStreak >= 5 ? `Te faltan ${10-streaks.winStreak%10} aciertos para otro MVP.` : streaks.lossStreak > 0 ? `Otro error te acerca a la penalización de −15 PTS.` : streaks.missedStreak > 0 ? `Llevás ${streaks.missedStreak} partidos sin votar.` : "Acertá partidos consecutivos para conseguir premios."}</small>
+              <small>{streaks.winStreak === 2 ? "¡Estás a un acierto de sumar 30 PTS!" : streaks.winStreak === 4 ? "¡Estás a un acierto de sumar 45 PTS!" : streaks.winStreak === 9 ? "¡Estás a un acierto del MVP!" : streaks.lossStreak === 2 ? "Cuidado: una mala racha puede provocar un descenso." : streaks.missedStreak === 4 ? "No votar corta las rachas, pero no descuenta puntos." : streaks.winStreak > 0 && streaks.winStreak < 3 ? `Te faltan ${3-streaks.winStreak} aciertos para los 30 PTS.` : streaks.winStreak >= 3 && streaks.winStreak < 5 ? `Te faltan ${5-streaks.winStreak} aciertos para los 45 PTS.` : streaks.winStreak >= 5 ? `Te faltan ${10-streaks.winStreak%10} aciertos para otro MVP.` : streaks.lossStreak > 0 ? `Cuidado con los descensos por errores consecutivos.` : streaks.missedStreak > 0 ? `Llevás ${streaks.missedStreak} partidos sin votar.` : "Acertá partidos consecutivos para conseguir premios."}</small>
             </div>
-          <p className="lna-fan-how"><strong>Errado +5</strong> · <strong>Acertado +15</strong> · <strong>3 seguidos +30</strong> · <strong>5 seguidos +45</strong>. <strong>3 errores seguidos: −15 PTS</strong>. Los puntos se suman al terminar el partido.</p>
+          <p className="lna-fan-how"><strong>Errado +5</strong> · <strong>Acertado +15</strong> · <strong>3 seguidos +30</strong> · <strong>5 seguidos +45</strong>. <strong>Los errores consecutivos pueden provocar descensos</strong>. Los puntos se suman al terminar el partido.</p>
           <div className="lna-fan-tabs" role="tablist" aria-label="Categorías y pronósticos de Mi carrera">
             <button type="button" role="tab" aria-selected={activeView === "levels"} className={activeView === "levels" ? "active" : ""} onClick={() => setActiveView("levels")}>Categorías</button>
             <button type="button" role="tab" aria-selected={activeView === "predictions"} className={activeView === "predictions" ? "active" : ""} onClick={() => setActiveView("predictions")}>Pronósticos</button>
@@ -150,8 +154,8 @@ export default function FanLevel() {
           {activeView === "palmares" ? <div className="lna-fan-palmares">
             <div className="lna-fan-palmares-totals"><div><Trophy size={22}/><strong>{career?.cups ?? "—"}</strong><small>Copas ganadas</small></div><div><span aria-hidden="true">↓</span><strong>{career?.descents ?? "—"}</strong><small>Descensos</small></div></div>
             <h3>VITRINA DE COPAS</h3>
-            <div className="lna-fan-cup-grid">{LEVELS.slice(1).map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i+1] || 0)>0 ? "earned" : ""}`} key={item.name}><Trophy size={20}/><strong>{item.name}</strong><small>{(career?.cupCounts?.[i+1] || 0)>0 ? `×${career.cupCounts[i+1]}` : "—"}</small></div>)}</div>
-            <p className="lna-fan-palmares-hint">Cada ascenso suma una copa. Las copas y los récords se conservan aunque desciendas.</p>
+            <div className="lna-fan-cup-grid">{LEVELS.slice(0,-1).map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><Trophy size={20}/><strong>{item.name}</strong><small>{(career?.cupCounts?.[i+1] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
+            <p className="lna-fan-palmares-hint">Cada ascenso suma la copa de la liga que acabás de disputar. Las copas y los récords se conservan aunque desciendas.</p>
           </div> : activeView === "mvp" ? <div className="lna-fan-mvp">
             <Trophy size={38} aria-hidden="true" />
             <strong>MVP DE PRONÓSTICOS</strong>
