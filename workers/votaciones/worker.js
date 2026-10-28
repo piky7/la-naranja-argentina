@@ -199,6 +199,7 @@ export default {
             homeScore: confirmed ? homeScore : null,
             awayScore: confirmed ? awayScore : null,
             status: !winner ? "pending" : winner === row.equipo_votado ? "correct" : "incorrect",
+            open: Boolean(game && !game.finished && Number.isFinite(Date.parse(game.startsAt)) && Date.now() < Date.parse(game.startsAt)),
           };
         });
         const rewards = await calculateRewards(env.DB, archivedFixture, visitorId);
@@ -269,11 +270,8 @@ export default {
           const limit = await env.DB.prepare("INSERT INTO voto_limites(hash,cantidad) VALUES (?,1) ON CONFLICT(hash) DO UPDATE SET cantidad=cantidad+1 WHERE cantidad<30 RETURNING cantidad").bind(hash).first();
           if (!limit) return fail("Demasiadas solicitudes", 429);
         }
-        try {
-          await env.DB.prepare("INSERT INTO votos (partido_id,equipo_votado,visitante_id) VALUES (?,?,?)").bind(id, team, visitorId).run();
-        } catch (error) {
-          if (!String(error).includes("UNIQUE")) throw error;
-        }
+        // Un único pronóstico por usuario y partido; se permite reemplazarlo antes del inicio.
+        await env.DB.prepare("INSERT INTO votos (partido_id,equipo_votado,visitante_id) VALUES (?,?,?) ON CONFLICT DO UPDATE SET equipo_votado=excluded.equipo_votado").bind(id, team, visitorId).run();
       }
 
       const existing = await env.DB.prepare("SELECT equipo_votado FROM votos WHERE partido_id=? AND visitante_id=?").bind(id, visitorId).first();
