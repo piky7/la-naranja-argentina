@@ -68,3 +68,37 @@
 .lna-live-progress .is-current .lna-live-progress-track::after{display:none}
 .match-modal-is-live .match-modal-score>strong{text-shadow:0 3px 18px rgba(255,145,53,.17)}
 @media(prefers-reduced-motion:reduce){.lna-live-progress .lna-live-progress-fill{transition:none}}
+
+/* Cabecera deportiva LNA: compacta, con marcador protagonista. Ambos tanteadores naranjas. */
+.match-modal-is-live .match-modal-header{
+ background:radial-gradient(ellipse 48% 80% at 0% 115%,rgba(255,115,18,.32),transparent 85%),radial-gradient(ellipse 48% 80% at 100% 115%,rgba(255,115,18,.32),transparent 85%),linear-gradient(145deg,#081827,#0b1825 65%,#141d29)!important;
+}
+.match-modal-is-live .match-modal-teams{
+ grid-template-columns:minmax(0,1fr) minmax(116px,1.16fr) minmax(0,1fr)!important;
+ padding-top:10px!important;gap:2px!important;
+}
+.match-modal-is-live .match-modal-score{gap:5px!important}
+.match-modal-is-live .match-modal-score>strong{
+ color:#ff9133!important;font-size:clamp(36px,7.5vw,49px)!important;
+ font-weight:900!important;letter-spacing:-.045em!important;
+ text-shadow:0 2px 18px rgba(255,132,30,.24)!important;
+}
+.match-modal-is-live .match-modal-score .match-modal-status{
+ font-size:11px!important;font-weight:900!important;letter-spacing:.035em!important;
+}
+.match-modal-is-live .match-modal-live-remaining{
+ display:block!important;color:#e2eaf3!important;font-size:11px!important;
+ font-weight:800!important;margin-top:5px!important;letter-spacing:.03em!important;
+}
+.match-modal-is-live .match-modal-team>strong{font-weight:800!important}
+.match-modal-is-live .match-modal-team img,
+.match-modal-is-live .home-modal-team-logo-button img{filter:drop-shadow(0 3px 7px rgba(0,0,0,.45))}
+.lna-live-progress .lna-live-progress-track{background:#273746!important}
+.lna-live-progress .lna-live-progress-fill{background:#ff9135!important}
+@media(max-width:600px){
+ .match-modal-is-live .match-modal-teams{grid-template-columns:minmax(0,1fr) minmax(108px,1.15fr) minmax(0,1fr)!important;padding:9px 6px 0!important}
+ .match-modal-is-live .match-modal-score>strong{font-size:clamp(33px,8vw,43px)!important}
+ .match-modal-is-live .match-modal-score .match-modal-status{font-size:9px!important}
+ .match-modal-is-live .match-modal-live-remaining{font-size:10px!important}
+ .match-modal-is-live .match-modal-team img,.match-modal-is-live .home-modal-team-logo-button img{width:46px!important;height:46px!important}
+}
