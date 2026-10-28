@@ -82,11 +82,6 @@ export default function MatchVote({ match }) {
           </button>
         ))}
       </div>
-      {false && <div className="lna-vote-rewards" aria-label="Tus puntos y nivel de hincha">
-        <div className="lna-vote-rewards-heading"><strong>🏀 {level.name}</strong><span>{points} PTS</span></div>
-        <div className="lna-vote-rewards-track" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} aria-label="Progreso al próximo nivel"><span style={{ width: `${progress}%` }} /></div>
-        <small>{nextLevel ? `${nextLevel.points - points} pts para ${nextLevel.name}` : "¡Alcanzaste el nivel máximo!"} · +10 pts por pronóstico</small>
-      </div>}
       {error && <small role="status">{error}</small>}
       {data.voted && <small>{data.open ? "Tu voto quedó registrado" : "Votación cerrada"}</small>}
     </section>
