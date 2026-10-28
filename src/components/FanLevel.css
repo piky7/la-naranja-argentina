@@ -203,3 +203,47 @@
 }
 
 .lna-fan-change-vote{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px}.lna-fan-change-vote small{font-size:11px;color:#c8c5d4}.lna-fan-change-vote button{border:1px solid #dd81b2;background:rgba(232,113,176,.12);color:#f5a9d0;border-radius:8px;padding:5px 8px;font-size:11px;font-weight:700}.lna-fan-change-vote button:disabled{opacity:.4}
+
+/* Mi Carrera gamer · pink edition, 2026-10 */
+.lna-fan-modal{width:min(100%,460px);padding:13px 15px 14px;border:1px solid rgba(255,111,192,.85);border-radius:20px;background:radial-gradient(ellipse at 100% 0%,rgba(227,66,145,.16),transparent 36%),radial-gradient(ellipse at 0% 0%,rgba(111,57,120,.22),transparent 40%),linear-gradient(160deg,#12192a,#101a2a 65%,#151627);box-shadow:0 25px 65px #000b,0 0 22px rgba(243,83,164,.12);overflow-x:hidden}
+.lna-fan-modal .lna-fan-close{z-index:2;right:12px;top:10px}
+.lna-fan-gamer-heading{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;margin-bottom:9px}
+.lna-fan-gamer-trophy{display:grid;place-items:center;width:35px;height:35px;border:1px solid #f078bb;border-radius:9px;color:#ff94cc;background:rgba(229,70,157,.12);box-shadow:0 0 15px rgba(240,88,174,.15)}
+.lna-fan-modal .lna-fan-gamer-heading h2{font-size:19px;font-weight:950;letter-spacing:1.1px;margin:2px 0 0}
+.lna-fan-gamer-hero{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;text-align:left;margin:7px 0 9px}
+.lna-fan-gamer-score{min-width:0}
+.lna-fan-modal .lna-fan-gamer-score .lna-fan-total{display:flex;align-items:baseline;gap:6px;white-space:nowrap;font-size:clamp(34px,9vw,46px);font-weight:950;line-height:1.15;margin:0;color:#ff82c3}
+.lna-fan-modal .lna-fan-gamer-score .lna-fan-total span{font-size:clamp(13px,3.7vw,17px);font-weight:850;color:#f0e6f3}
+.lna-fan-gamer-score .lna-fan-historical{display:inline-block;margin:4px 0 0;padding:4px 9px;border:1px solid rgba(236,132,193,.3);border-radius:20px;background:rgba(237,100,171,.07);font-size:10px;font-weight:800;letter-spacing:.3px;color:#d5b1d0}
+.lna-fan-gamer-rank{display:flex;flex-direction:column;gap:4px;min-width:0;border-left:1px solid rgba(235,151,205,.2);padding-left:11px}
+.lna-fan-gamer-rank>span{font-size:10px;letter-spacing:1px;font-weight:800;color:#ff8bc5}
+.lna-fan-gamer-rank strong{font-size:13px;line-height:1.15;text-transform:uppercase;color:#fff}
+.lna-fan-gamer-rank small{font-size:10px;font-weight:750;color:#b7b4d4}
+.lna-fan-gamer-progress{display:flex;align-items:center;gap:10px;margin:6px 0 7px}
+.lna-fan-modal .lna-fan-gamer-progress .lna-fan-track-large{flex:1;min-width:0;height:10px;margin:0;background:#2a364a;box-shadow:inset 0 1px 4px #0008}
+.lna-fan-modal .lna-fan-gamer-progress .lna-fan-track-large>span{box-shadow:0 0 11px rgba(255,96,182,.45)}
+.lna-fan-gamer-progress>strong{flex:0 0 auto;font-size:12px;line-height:1.15;text-align:left;color:#fff}
+.lna-fan-gamer-progress>strong small{display:block;font-size:9px;color:#b9afd2;font-weight:750}
+.lna-fan-modal .lna-fan-next{display:flex;align-items:center;gap:9px;text-align:left;padding:7px 9px;border:1px solid rgba(132,103,151,.45);border-radius:9px;background:rgba(16,30,48,.78);font-size:10px;line-height:1.3;color:#c8c5db}
+.lna-fan-next>span{display:grid;place-items:center;flex:0 0 25px;width:25px;height:25px;border:1px solid #e967ae;border-radius:50%;font-size:17px;color:#ff84c3}
+.lna-fan-modal .lna-fan-tabs{margin:9px 0 8px;gap:5px}
+.lna-fan-modal .lna-fan-tabs button{padding:8px 2px;border-radius:9px;border-color:#43516b;background:linear-gradient(130deg,#18283e,#111b2e);font-size:10px;color:#c6c3df}
+.lna-fan-modal .lna-fan-tabs button.active{border-color:#ff8aca;background:linear-gradient(110deg,#ff6db8,#f79ed2);box-shadow:0 0 13px rgba(245,87,167,.2);color:#211526}
+.lna-fan-modal .lna-fan-streak-panel{position:relative;margin:0 0 7px;padding:8px 9px 8px 43px;min-height:53px;justify-content:center;gap:2px;border:1px solid rgba(238,94,169,.7);border-radius:10px;background:radial-gradient(ellipse at 90% 10%,rgba(221,52,147,.18),transparent 50%),linear-gradient(110deg,#271a35,#152136);text-align:left}
+.lna-fan-modal .lna-fan-streak-panel strong{font-size:9px;letter-spacing:1.1px;color:#ff8dc5}
+.lna-fan-modal .lna-fan-streak-panel span{font-size:13px;color:#fff}
+.lna-fan-modal .lna-fan-streak-panel small{font-size:10px;color:#c8c3d8}
+.lna-fan-streak-flame{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#ff75b8;filter:drop-shadow(0 0 7px rgba(244,89,174,.4))}
+.lna-fan-modal .lna-fan-levels{gap:5px}
+.lna-fan-modal .lna-fan-level{gap:8px;min-height:44px;padding:6px 9px;border-radius:9px;border-color:#34465f;background:linear-gradient(115deg,#17243a,#111e30);color:#b8bfd4}
+.lna-fan-modal .lna-fan-level>span{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:#293a55;color:#e0e5f1;font-size:12px}
+.lna-fan-modal .lna-fan-level strong{min-width:0;font-size:12px;line-height:1.2;color:#f4f2f8}
+.lna-fan-modal .lna-fan-record{font-size:10px;margin-top:3px;color:#aeb5ca}
+.lna-fan-modal .lna-fan-level small{flex:0 1 auto;max-width:48%;font-size:10px;line-height:1.25;text-align:right}
+.lna-fan-modal .lna-fan-level.is-current{border-color:#ff7ec2;background:linear-gradient(105deg,rgba(194,49,127,.24),rgba(32,27,49,.9));box-shadow:inset 0 0 13px rgba(255,94,179,.07),0 0 8px rgba(255,94,179,.12)}
+.lna-fan-modal .lna-fan-level.is-current>span{background:linear-gradient(140deg,#ff79bd,#e954a5);color:#1e1428}
+.lna-fan-modal .lna-fan-level.is-current small{color:#ff92c9;font-weight:850}
+.lna-fan-level-lock{flex:0 0 13px;color:#8f95bc}
+.lna-fan-modal .lna-fan-note{margin:9px 0 0;padding:8px 9px;border:1px solid rgba(113,103,150,.35);border-radius:9px;background:rgba(15,29,46,.85);font-size:9px;line-height:1.35;color:#aab4cc}
+@media(max-width:390px){.lna-fan-modal{padding:11px 11px 12px}.lna-fan-gamer-hero{gap:7px}.lna-fan-gamer-rank{padding-left:8px}.lna-fan-gamer-rank strong{font-size:11px}.lna-fan-modal .lna-fan-level{min-height:40px;padding:5px 7px}.lna-fan-modal .lna-fan-level strong{font-size:11px}.lna-fan-modal .lna-fan-level small{font-size:9px}.lna-fan-modal .lna-fan-streak-panel{min-height:48px}}
+@media(max-height:740px){.lna-fan-gamer-heading{margin-bottom:4px}.lna-fan-gamer-trophy{width:29px;height:29px}.lna-fan-modal .lna-fan-gamer-heading h2{font-size:17px}.lna-fan-gamer-hero{margin:4px 0 5px}.lna-fan-modal .lna-fan-level{min-height:37px;padding-top:4px;padding-bottom:4px}}
