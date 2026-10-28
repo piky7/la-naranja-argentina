@@ -19,3 +19,43 @@
 .lna-live-periods-row strong{font-weight:700;color:#eef4fb}
 .lna-live-periods-row span{font-weight:700;color:#eef4fb;border-left:1px solid #253a4d}
 @media(max-width:600px){.lna-live-info{padding:6px 10px 5px}.lna-live-progress span{height:5px}.lna-live-periods-heading b,.lna-live-periods-row strong{padding:4px 7px}.lna-live-periods-heading span,.lna-live-periods-row span{width:30px;padding:4px 1px}}
+
+/* Indicadores de actividad: solo se muestran en el popup de un partido en vivo. */
+.match-modal-is-live .match-modal-score .match-modal-status::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 5px;
+  vertical-align: 1px;
+  border-radius: 50%;
+  background: #ff555e;
+  box-shadow: 0 0 0 0 rgba(255,85,94,.55);
+  animation: lna-live-dot-pulse 2s ease-out infinite;
+}
+.lna-live-progress .is-current span {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(255,145,53,.28);
+}
+.lna-live-progress .is-current span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);
+  transform: translateX(-100%);
+  animation: lna-quarter-shimmer 2.6s ease-in-out infinite;
+}
+@keyframes lna-live-dot-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,85,94,.55); opacity: 1; }
+  65% { box-shadow: 0 0 0 5px rgba(255,85,94,0); opacity: .8; }
+  100% { box-shadow: 0 0 0 0 rgba(255,85,94,0); opacity: 1; }
+}
+@keyframes lna-quarter-shimmer {
+  0%, 25% { transform: translateX(-100%); }
+  70%, 100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .match-modal-is-live .match-modal-score .match-modal-status::before,
+  .lna-live-progress .is-current span::after { animation: none; }
+}
