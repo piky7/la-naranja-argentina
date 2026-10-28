@@ -722,3 +722,10 @@
   .header-tagline span { font-size: 9px; letter-spacing: .1px; }
   .header-tagline strong { font-size: 10px; }
 }
+
+/* Logo: conservar proporción y evitar interpolación por medidas dispares */
+@media (max-width:768px){
+  .logo{width:68px;height:68px;align-items:center;justify-content:center}
+  .logo-image{width:68px;height:68px;max-width:100%;object-fit:contain;transform:none}
+  .logo:hover .logo-image{transform:none}
+}
