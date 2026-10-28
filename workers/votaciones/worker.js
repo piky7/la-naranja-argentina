@@ -41,9 +41,11 @@ async function calculateRewards(db, fixture, visitorId) {
   let seasonPoints=0, categoryIndex=0, cups=0, descents=0, bestCategory=0;
   const cupCounts=Array(categories.length).fill(0);
   const records=Array(categories.length).fill(0);
+  const gamesPlayed=Array(categories.length).fill(0);
   let currentStay=0, categoryWinStreak=0;
   const moves=[];
-  const updateCareer=(g,wasWrong,wasCorrect=false)=>{
+  const updateCareer=(g,wasWrong,wasCorrect=false,hasVote=false)=>{
+    if(hasVote) gamesPlayed[categoryIndex]++;
     categoryWinStreak=wasCorrect ? categoryWinStreak+1 : 0;
     const before=categoryIndex;
     const directLimit=categoryIndex===5?2:categoryIndex===4?3:categoryIndex===3?4:categoryIndex===2?5:Infinity;
@@ -103,15 +105,15 @@ async function calculateRewards(db, fixture, visitorId) {
       if (wins === 5) {points+=30;seasonPoints+=30;}
       if (wins % 10 === 0) mvps++;
       perGame.set(g.id,{earned:wins === 3 ? 30 : wins === 5 ? 45 : 15,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
-      updateCareer(g,false,true);
+      updateCareer(g,false,true,true);
     } else {
       wins=0; losses++; points+=5; seasonPoints+=5;
       perGame.set(g.id,{earned:5,medal:null,streak:losses});
-      updateCareer(g,true);
+      updateCareer(g,true,false,true);
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
-  return {points:Math.max(0,points),seasonPoints,mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
+  return {points:Math.max(0,points),seasonPoints,mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,gamesPlayed,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
 }
 async function getRewards(db, visitorId) {
   const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
