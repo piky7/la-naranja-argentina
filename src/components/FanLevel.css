@@ -393,3 +393,27 @@
  .lna-fan-modal-palmares .lna-fan-cup small{font-size:9px}
  .lna-fan-modal-palmares .lna-fan-palmares-hint{margin:6px 0 0;padding:5px 7px;font-size:9px;line-height:1.2}
 }
+
+/* Celebraciones de Mi carrera: trofeo animado y aviso de descenso */
+.lna-fan-achievement-backdrop{position:fixed;inset:0;z-index:2147483001;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,6,17,.87);backdrop-filter:blur(9px)}
+.lna-fan-achievement{position:relative;isolation:isolate;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:11px;width:min(100%,370px);max-height:calc(100dvh - 32px);overflow:hidden;padding:28px 20px 22px;border:1px solid #f77fc2;border-radius:22px;background:radial-gradient(ellipse at 50% 35%,rgba(242,86,170,.19),transparent 65%),linear-gradient(160deg,#242039,#101b2d);box-shadow:0 25px 75px #000b,0 0 40px #f65baf22;text-align:center;color:#fff;animation:lna-achievement-enter .45s cubic-bezier(.2,.8,.2,1) both}
+.lna-fan-achievement-rays{position:absolute;inset:-40%;z-index:-1;pointer-events:none;background:repeating-conic-gradient(from 0deg,transparent 0deg 23deg,rgba(245,111,189,.07) 24deg 29deg,transparent 30deg 45deg);animation:lna-achievement-rotate 18s linear infinite}
+.lna-fan-achievement-close{position:absolute;right:12px;top:12px;display:grid;place-items:center;padding:6px;border:0;background:transparent;color:#d8c7d9}
+.lna-fan-achievement-kicker{font-size:10px;font-weight:900;letter-spacing:2px;color:#ffa0d3}
+.lna-fan-achievement h2{margin:0;font-size:clamp(27px,8vw,38px);line-height:1;font-weight:950;letter-spacing:1.5px;color:#fff;text-shadow:0 0 18px #ed60a75c}
+.lna-fan-achievement-trophy{width:132px;height:168px;object-fit:contain;filter:drop-shadow(0 0 18px #f76fbf88);animation:lna-achievement-trophy .8s cubic-bezier(.2,.8,.3,1) both}
+.lna-fan-achievement-category{font-size:17px;text-transform:uppercase;letter-spacing:.8px;color:#ffadd9}
+.lna-fan-achievement p{max-width:285px;margin:0;color:#d5c7dc;font-size:13px;line-height:1.5}
+.lna-fan-achievement-continue{width:100%;max-width:270px;margin-top:8px;padding:12px 16px;border:1px solid #ffc1e0;border-radius:11px;background:linear-gradient(110deg,#f46db5,#f9a4d1);color:#241329;font-size:13px;font-weight:900;box-shadow:0 6px 22px #ec4a9a35}
+.lna-fan-achievement.is-descent{border-color:#c98ca8;background:radial-gradient(ellipse at 50% 35%,rgba(165,75,120,.14),transparent 65%),linear-gradient(160deg,#252237,#101b2d)}
+.lna-fan-achievement.is-descent .lna-fan-achievement-rays{opacity:.35}
+.lna-fan-achievement-fall{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:128px;height:125px;border:1px solid #9c6c89;border-radius:50%;background:radial-gradient(circle,#5a2c48,#202039 70%);color:#ffb3d0}
+.lna-fan-achievement-fall span{font-size:58px;line-height:1;animation:lna-achievement-fall .7s ease both}
+.lna-fan-achievement-fall strong{font-size:10px}
+.lna-fan-achievement.is-descent .lna-fan-achievement-continue{background:linear-gradient(110deg,#ad789d,#e1a3c6)}
+@keyframes lna-achievement-enter{from{opacity:0;transform:translateY(24px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes lna-achievement-trophy{from{opacity:0;transform:translateY(30px) scale(.65) rotate(-10deg)}to{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes lna-achievement-fall{from{opacity:0;transform:translateY(-22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes lna-achievement-rotate{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.lna-fan-achievement,.lna-fan-achievement-trophy,.lna-fan-achievement-fall span,.lna-fan-achievement-rays{animation:none}}
+@media(max-height:620px){.lna-fan-achievement{gap:6px;padding:19px 15px 15px}.lna-fan-achievement-trophy{width:92px;height:115px}.lna-fan-achievement-fall{height:85px;width:85px}.lna-fan-achievement-fall span{font-size:38px}}
