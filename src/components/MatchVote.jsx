@@ -23,6 +23,7 @@ export default function MatchVote({ match }) {
   const id = date && home && away ? `${date}-${home}-${away}` : null;
   const [data, setData] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function MatchVote({ match }) {
     const controller = new AbortController();
     const visitorId = getVisitorId();
     setData(null);
+    setEditing(false);
     setError("");
     if (!visitorId) return;
     fetch(`${API}?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`, { signal: controller.signal })
@@ -47,7 +49,7 @@ export default function MatchVote({ match }) {
   if (!data.open && !data.voted) return null;
 
   async function vote(team) {
-    if (busy || data.voted || !data.open) return;
+    if (busy || !data.open || (data.voted && !editing) || (data.voted && data.selected === team)) return;
     const visitorId = getVisitorId();
     if (!visitorId) return;
     setBusy(true);
@@ -60,6 +62,7 @@ export default function MatchVote({ match }) {
       const body = await res.json();
       if (!res.ok) throw new Error(body.error || "No se pudo votar");
       setData(body);
+      setEditing(false);
       window.dispatchEvent(new Event("lna-vote-updated"));
     } catch { setError("No se pudo registrar el voto. Reintentá."); }
     finally { setBusy(false); }
@@ -73,7 +76,7 @@ export default function MatchVote({ match }) {
       <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA?</strong><span className="lna-vote-career-label">🏆 MI CARRERA</span></div><span>{data.voted ? `${total} ${total === 1 ? "voto" : "votos"}` : "Votá tu favorito"}</span></div>
       <div className="lna-vote-options">
         {[{ team: home, result: data.home }, { team: away, result: data.away }].map(({ team, result }) => (
-          <button key={team} type="button" disabled={busy || data.voted || !data.open}
+          <button key={team} type="button" disabled={busy || !data.open || (data.voted && !editing) || (data.voted && data.selected === team)}
             className={`lna-vote-option ${data.selected === team ? "is-selected" : ""}`}
             onClick={() => vote(team)}>
             <span className="lna-vote-team">{teamInfo(team)?.logo && <img className="lna-vote-logo" src={teamInfo(team).logo} alt="" />}{teamInfo(team)?.shortName || team.replace(/-/g, " ")}</span>
@@ -83,7 +86,7 @@ export default function MatchVote({ match }) {
         ))}
       </div>
       {error && <small role="status">{error}</small>}
-      {data.voted && <small>{data.open ? "Tu voto quedó registrado" : "Votación cerrada"}</small>}
+      {data.voted && <div className="lna-vote-change"><small>{data.open ? (editing ? "Elegí el nuevo ganador para confirmar el cambio." : "Podés cambiar tu pronóstico hasta que empiece el partido.") : "Votación cerrada"}</small>{data.open && <button type="button" disabled={busy} onClick={() => setEditing(value => !value)}>{editing ? "Cancelar" : "Cambiar pronóstico"}</button>}</div>}
     </section>
   );
 }
