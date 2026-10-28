@@ -26,6 +26,61 @@ async function fixtureGame(id) {
   return data.games.find(g => g.id === id) || null;
 }
 
+
+const NEW_RULES_FROM = "2026-10-29";
+async function calculateRewards(db, fixture, visitorId) {
+  const votes = await db.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all();
+  const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
+  const games = [...fixture.games].filter(g => g?.id && Number.isFinite(Date.parse(g.startsAt)))
+    .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id));
+  let points = 0, wins = 0, losses = 0, missed = 0, mvps = 0, bestStreak = 0;
+  const now = Date.now();
+  for (const g of games) {
+    const vote = voteMap.get(g.id);
+    const legacy = g.id.slice(0,10) < NEW_RULES_FROM;
+    if (legacy) {
+      if (vote) points += 10;
+      continue;
+    }
+    if (vote) points += 5;
+    // No evaluar rachas ni ausencias antes del inicio del partido.
+    if (Date.parse(g.startsAt) > now) continue;
+    const completed = g.finished === true && Number.isFinite(g.homeScore) && Number.isFinite(g.awayScore);
+    if (!completed) {
+      // Un partido sin resultado confirmado no puede alterar rachas todavía.
+      break;
+    }
+    if (g.homeScore === g.awayScore) { wins=0; losses=0; missed=0; continue; }
+    if (!vote) {
+      wins=0; losses=0; missed++;
+      if (missed % 5 === 0) points -= 10;
+      continue;
+    }
+    missed=0;
+    const winner = g.homeScore > g.awayScore ? g.homeTeam : g.awayTeam;
+    if (vote === winner) {
+      wins++; losses=0; points+=10;
+      bestStreak=Math.max(bestStreak,wins);
+      if (wins === 3) points+=15;
+      if (wins === 5) points+=30;
+      if (wins % 10 === 0) mvps++;
+    } else {
+      wins=0; losses++;
+      if (losses % 3 === 0) points-=5;
+    }
+  }
+  // Votos de partidos que ya no aparecen en el fixture: preservar su valor anterior.
+  for (const id of voteMap.keys()) if (!games.some(g => g.id === id)) points+=10;
+  return {points:Math.max(0,points),mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed};
+}
+async function getRewards(db, visitorId) {
+  const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
+  if(!response.ok) throw new Error("Fixture no disponible");
+  const fixture=await response.json();
+  if(!Array.isArray(fixture.games)) throw new Error("Fixture inválido");
+  return calculateRewards(db,fixture,visitorId);
+}
+
 async function voteCounts(db, id) {
   const rows = await db.prepare("SELECT equipo_votado, COUNT(*) AS total FROM votos WHERE partido_id = ? GROUP BY equipo_votado")
     .bind(id).all();
@@ -83,8 +138,8 @@ export default {
       if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
       if (!env.DB) return fail("Base de datos no configurada", 503);
       try {
-        const row = await env.DB.prepare("SELECT COUNT(*) AS total FROM votos WHERE visitante_id=?").bind(visitorId).first();
-        return json({ ok: true, points: Number(row?.total || 0) * 10 }, 200, cors);
+        const rewards = await getRewards(env.DB, visitorId);
+        return json({ ok: true, ...rewards }, 200, cors);
       } catch (error) {
         console.error("LNA puntos:", error);
         return fail("No se pudieron consultar los puntos", 503);
@@ -143,12 +198,12 @@ export default {
       const existing = await env.DB.prepare("SELECT equipo_votado FROM votos WHERE partido_id=? AND visitante_id=?").bind(id, visitorId).first();
       // Los puntos se calculan desde votos realmente guardados en D1.
       // No se confía en puntos enviados por el navegador ni se duplica el saldo.
-      const totalVotes = await env.DB.prepare("SELECT COUNT(*) AS total FROM votos WHERE visitante_id=?").bind(visitorId).first();
-      const points = Number(totalVotes?.total || 0) * 10;
-      if (!existing) return json({ ok: true, voted: false, open, points }, 200, cors);
+      const rewards = await getRewards(env.DB, visitorId);
+      const points = rewards.points;
+      if (!existing) return json({ ok: true, voted: false, open, points, mvps: rewards.mvps }, 200, cors);
       const counts = await voteCounts(env.DB, id);
       return json({
-        ok: true, voted: true, open, points, selected: existing.equipo_votado,
+        ok: true, voted: true, open, points, mvps: rewards.mvps, selected: existing.equipo_votado,
         home: { id: game.homeTeam, votes: counts[game.homeTeam] || 0 },
         away: { id: game.awayTeam, votes: counts[game.awayTeam] || 0 },
       }, 200, cors);
