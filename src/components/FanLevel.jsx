@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { Trophy, X, ChevronRight, Flame, LockKeyhole, Medal, Target, Crown } from "lucide-react";
+import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
 const INTRO_KEY = "lna-career-intro-seen-v1";
+const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
 const LEVELS = [
   { name: "Liga de Desarrollo", goal: 50 },
   { name: "Liga Federal", goal: 100 },
@@ -184,7 +185,7 @@ export default function FanLevel() {
             <div className="lna-fan-section-title"><Crown size={17} aria-hidden="true" /><span>MI PALMARÉS</span></div>
             <div className="lna-fan-palmares-totals"><div><Trophy size={22}/><strong>{career?.cups ?? "—"}</strong><small>Copas ganadas</small></div><div><span aria-hidden="true">↓</span><strong>{career?.descents ?? "—"}</strong><small>Descensos</small></div></div>
             <h3><Trophy size={15} aria-hidden="true" /> VITRINA DE COPAS</h3>
-            <div className="lna-fan-cup-grid">{LEVELS.map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><Trophy size={20}/><strong>{item.name}</strong><small>{(career?.cupCounts?.[i] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
+            <div className="lna-fan-cup-grid">{LEVELS.map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><img className="lna-fan-trophy-image" src={TROPHY_IMAGES[i]} alt={`Trofeo ${item.name}`} loading="lazy" /><strong>{item.name}</strong><small>{(career?.cupCounts?.[i] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
             <p className="lna-fan-palmares-hint">Cada ascenso suma la copa de la liga disputada. En Leyenda LNA ganás otra copa cada 10 partidos consecutivos de permanencia. Las copas nunca se pierden.</p>
           </div> : activeView === "mvp" ? <div className="lna-fan-mvp">
             <div className="lna-fan-streak-panel">
@@ -192,7 +193,7 @@ export default function FanLevel() {
               <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} ${streaks.lossStreak === 1 ? "error seguido" : "errores seguidos"}` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} ${streaks.missedStreak === 1 ? "partido sin votar" : "partidos sin votar"}` : "Sin racha activa"}</span>
               <small>{`Te faltan ${mvpLeft} ${mvpLeft === 1 ? "acierto consecutivo" : "aciertos consecutivos"} para ${mvps > 0 ? "otro MVP" : "conseguir el MVP"}.`}</small>
             </div>
-            <span className="lna-fan-mvp-emblem"><Medal size={34} aria-hidden="true" /></span>
+            <span className="lna-fan-mvp-emblem"><img className="lna-fan-mvp-trophy-image" src="/trofeos/mvp.svg" alt="Trofeo MVP" loading="lazy" /></span>
             <strong>MVP DE PRONÓSTICOS</strong>
             <span className="lna-fan-mvp-count">{mvps}</span>
             <p>{mvps === 1 ? "Distintivo conseguido" : "Distintivos conseguidos"}</p>
