@@ -63,7 +63,13 @@ async function calculateRewards(db, fixture, visitorId) {
         for(let i=before-1;i>=categoryIndex;i--)moves.push({type:"descent",category:categories[i].name,gameId:g.id});
       }
     }
-    currentStay++;
+    // La permanencia comienza en el partido siguiente al ascenso.
+    if(categoryIndex===before) currentStay++;
+    if(categoryIndex===5 && currentStay>0 && currentStay%10===0){
+      cups++;
+      cupCounts[5]++;
+      moves.push({type:"legend-cup",category:"Leyenda LNA",gameId:g.id});
+    }
     records[categoryIndex]=Math.max(records[categoryIndex],currentStay);
     bestCategory=Math.max(bestCategory,categoryIndex);
   };
