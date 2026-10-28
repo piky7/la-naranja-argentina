@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
+import FanLevel from "./FanLevel";
 import { House, Trophy, Shield, ChartNoAxesColumn } from "lucide-react";
 
 function Header() {
@@ -68,6 +69,8 @@ function Header() {
             <div className="header-ball-line header-ball-line-2"></div>
             <div className="header-ball-line header-ball-line-3"></div>
           </div>
+
+          <FanLevel />
 
           {/* NAVEGACIÓN ESCRITORIO */}
           <nav className="navigation">
