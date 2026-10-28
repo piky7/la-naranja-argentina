@@ -705,3 +705,20 @@
     bottom: calc(22px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* Header móvil: texto nítido y contraste legible junto al nivel de hincha */
+@media (max-width: 768px) {
+  .header-container { gap: 10px; }
+  .header-brand { padding-left: 9px; z-index: 4; }
+  .header-ball { display: none; }
+  .header-tagline span { color: #ff963b; text-shadow: none; opacity: 1; }
+  .header-tagline strong { color: #ffffff; text-shadow: none; opacity: 1; }
+  .header-league { color: #c1c8d1; opacity: 1; }
+  .logo-image { image-rendering: auto; }
+}
+@media (max-width: 390px) {
+  .header-container { gap: 7px; }
+  .header-brand { padding-left: 7px; }
+  .header-tagline span { font-size: 9px; letter-spacing: .1px; }
+  .header-tagline strong { font-size: 10px; }
+}
