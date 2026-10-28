@@ -6,3 +6,6 @@ compatibility_date = "2026-10-25"
 binding = "DB"
 database_name = "lna-votaciones"
 database_id = "1e46898e-99a0-46db-b8e5-bba4eaaef216"
+
+[triggers]
+crons = ["0 */6 * * *"]
