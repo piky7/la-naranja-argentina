@@ -28,6 +28,8 @@ function getVisitorId() {
 export default function FanLevel() {
   const [points, setPoints] = useState(null);
   const [mvps, setMvps] = useState(0);
+  const [streaks, setStreaks] = useState({winStreak:0,lossStreak:0,missedStreak:0});
+  const [page, setPage] = useState(0);
   const [open, setOpen] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
@@ -43,6 +45,7 @@ export default function FanLevel() {
       if (result.ok && Number.isFinite(result.points)) {
         setPoints(result.points);
         setMvps(Number(result.mvps) || 0);
+        setStreaks({winStreak:result.winStreak || 0,lossStreak:result.lossStreak || 0,missedStreak:result.missedStreak || 0});
       }
     } catch { /* Conservar los últimos puntos conocidos si falla la conexión. */ }
   }, []);
@@ -70,6 +73,7 @@ export default function FanLevel() {
       const result = await response.json();
       if (!result.ok || !Array.isArray(result.predictions)) throw new Error("Historial inválido");
       setPredictions(result.predictions);
+      setPage(0);
     } catch {
       setHistoryError(true);
     } finally {
@@ -96,7 +100,7 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className="lna-fan-bar" type="button" onClick={() => { refresh(); setActiveView("levels"); setOpen(true); }} aria-label="Ver mis puntos y nivel de hincha">
+      <button className="lna-fan-bar" type="button" onClick={() => { refresh(); setActiveView("levels"); setOpen(true); }} aria-label="Ver mi carrera LNA">
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong>{level.name}</strong><b>{points === null ? "—" : score} PTS</b></span>
@@ -108,7 +112,7 @@ export default function FanLevel() {
         <section className="lna-fan-modal" role="dialog" aria-modal="true" aria-labelledby="lna-fan-title">
           <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>
           <Trophy className="lna-fan-trophy" size={30} aria-hidden="true" />
-          <h2 id="lna-fan-title">MI NIVEL LNA</h2>
+          <h2 id="lna-fan-title">MI CARRERA</h2>
           <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
           <strong className="lna-fan-current">Nivel {index + 1} · {level.name}</strong>
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
@@ -129,6 +133,11 @@ export default function FanLevel() {
             {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
               <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}</strong><small>{item.points} PTS</small>
             </div>)}
+            <div className="lna-fan-streak-panel">
+              <strong>MI RACHA ACTUAL</strong>
+              <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} errores seguidos` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} partidos sin votar` : "Sin racha activa"}</span>
+              <small>{streaks.winStreak === 2 ? "¡Estás a un acierto de sumar 30 PTS!" : streaks.winStreak === 4 ? "¡Estás a un acierto de sumar 45 PTS!" : streaks.winStreak === 9 ? "¡Estás a un acierto del MVP!" : streaks.lossStreak === 2 ? "Cuidado: otro error activa la penalización de −5 PTS." : streaks.missedStreak === 4 ? "Cuidado: si no votás el próximo, perdés 10 PTS." : streaks.winStreak > 0 && streaks.winStreak < 3 ? `Te faltan ${3-streaks.winStreak} aciertos para los 30 PTS.` : streaks.winStreak >= 3 && streaks.winStreak < 5 ? `Te faltan ${5-streaks.winStreak} aciertos para los 45 PTS.` : streaks.winStreak >= 5 ? `Te faltan ${10-streaks.winStreak%10} aciertos para otro MVP.` : streaks.lossStreak > 0 ? `Otro error te acerca a la penalización de −5 PTS.` : streaks.missedStreak > 0 ? `Llevás ${streaks.missedStreak} partidos sin votar.` : "Acertá partidos consecutivos para conseguir premios."}</small>
+            </div>
           </div> : <div className="lna-fan-history">
             {historyLoading ? <p className="lna-fan-history-message">Cargando tus votaciones…</p> : historyError ? <div className="lna-fan-history-message">No se pudo cargar el historial. <button type="button" onClick={refreshHistory}>Reintentar</button></div> : predictions.length === 0 ? <p className="lna-fan-history-message">Todavía no tenés pronósticos registrados.</p> : <>
               <div className="lna-fan-stats">
@@ -137,12 +146,12 @@ export default function FanLevel() {
                 <span><b>{predictions.filter(p => p.status === "pending").length}</b> Pendientes</span>
               </div>
               <div className="lna-fan-history-list">
-                {predictions.map(p => {
+                {predictions.slice(page * 6, page * 6 + 6).map(p => {
                   const home = teams.find(t => t.id === p.homeTeam);
                   const away = teams.find(t => t.id === p.awayTeam);
                   const chosen = teams.find(t => t.id === p.selected);
                   const statusText = p.status === "correct" ? "✓" : p.status === "incorrect" ? "✕" : "·";
-                  return <div className={`lna-fan-prediction ${p.status}`} key={p.partidoId}>
+                  return <div className={`lna-fan-prediction ${p.status} ${p.medal ? `medal-${p.medal}` : ""}`} key={p.partidoId}>
                     <span className="lna-fan-prediction-status" aria-label={p.status === "correct" ? "Acertaste" : p.status === "incorrect" ? "Erraste" : "Pendiente"}>{statusText}</span>
                     <span className="lna-fan-prediction-date">{p.partidoId.slice(5, 10).replace("-", "/")}</span>
                     <div className="lna-fan-prediction-match">
@@ -150,10 +159,11 @@ export default function FanLevel() {
                       <b>{p.homeScore != null && p.awayScore != null ? `${p.homeScore}-${p.awayScore}` : "VS"}</b>
                       <span>{away?.logo && <img src={away.logo} alt="" />}{away?.shortName || p.awayTeam || "Visitante"}</span>
                     </div>
-                    <small>Votaste: <strong>{chosen?.shortName || p.selected.replace(/-/g, " ")}</strong></small>
+                    <small>Votaste: <strong>{chosen?.shortName || p.selected.replace(/-/g, " ")}</strong> <b className="lna-fan-earned">{p.earned == null ? "Pendiente" : `${p.earned >= 0 ? "+" : ""}${p.earned} PTS`}{p.medal === "gold" ? " 🥇" : p.medal === "silver" ? " 🥈" : p.medal === "bronze" ? " 🥉" : ""}</b></small>
                   </div>;
                 })}
               </div>
+              {predictions.length > 6 && <div className="lna-fan-pages"><button type="button" disabled={page === 0} onClick={() => setPage(v => v - 1)}>‹ Recientes</button><span>{page + 1} / {Math.ceil(predictions.length / 6)}</span><button type="button" disabled={(page + 1) * 6 >= predictions.length} onClick={() => setPage(v => v + 1)}>Anteriores ›</button></div>}
             </>}
           </div>}
           <p className="lna-fan-note">Los puntos están vinculados a este navegador. Si borrás sus datos o cambiás de dispositivo, podrías perder el acceso a tu progreso.</p>
