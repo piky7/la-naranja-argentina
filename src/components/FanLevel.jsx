@@ -7,12 +7,12 @@ const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
 const INTRO_KEY = "lna-career-intro-seen-v1";
 const LEVELS = [
-  { name: "Liga de Desarrollo", points: 0 },
-  { name: "Liga Federal", points: 50 },
-  { name: "Liga Argentina", points: 150 },
-  { name: "Liga Nacional", points: 300 },
-  { name: "Estrella LNB", points: 500 },
-  { name: "Leyenda LNB", points: 1000 },
+  { name: "Liga de Desarrollo", goal: 50 },
+  { name: "Liga Federal", goal: 100 },
+  { name: "Liga Argentina", goal: 150 },
+  { name: "Liga Nacional", goal: 200 },
+  { name: "Estrella LNB", goal: 300 },
+  { name: "Leyenda LNA", goal: null },
 ];
 
 function getVisitorId() {
@@ -102,17 +102,17 @@ export default function FanLevel() {
 
   const score = points ?? 0;
   const seasonScore = seasonPoints ?? score;
-  const index = career && Number.isInteger(career.categoryIndex) ? career.categoryIndex : LEVELS.reduce((current, item, i) => seasonScore >= item.points ? i : current, 0);
+  const index = career && Number.isInteger(career.categoryIndex) ? career.categoryIndex : 0;
   const level = LEVELS[index];
   const next = LEVELS[index + 1];
-  const percent = next ? Math.max(0,Math.min(100, (seasonScore - level.points) * 100 / (next.points - level.points))) : 100;
+  const percent = level.goal ? Math.max(0,Math.min(100, seasonScore * 100 / level.goal)) : Math.min(100, ((career?.records?.[5] || 0) % 10) * 10);
 
   return (
     <>
       <button className="lna-fan-bar" type="button" onClick={openCareer} aria-label="Ver mi carrera LNA">
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
-          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : seasonScore} PTS</b></span>
+          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : `${seasonScore}/${level.goal ?? "∞"}`}</b></span>
           <span className="lna-fan-track"><span style={{ width: `${percent}%` }} /></span>
         </span>
         <ChevronRight size={16} aria-hidden="true" />
@@ -134,11 +134,11 @@ export default function FanLevel() {
           <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>
           <Trophy className="lna-fan-trophy" size={30} aria-hidden="true" />
           <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
-          <p className="lna-fan-total">{seasonPoints === null ? "—" : seasonScore} <span>PTS DE TEMPORADA</span></p>
+          <p className="lna-fan-total">{seasonPoints === null ? "—" : seasonScore} <span>{level.goal ? `/ ${level.goal} PTS DE CATEGORÍA` : "PTS DE CATEGORÍA"}</span></p>
           <p className="lna-fan-historical">Histórico: <b>{points === null ? "—" : score} PTS</b></p>
           <strong className="lna-fan-current">Categoría {index + 1} · {level.name}</strong>
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
-          <p className="lna-fan-next">{next ? (`Te faltan ${Math.max(0,next.points - seasonScore)} puntos para ascender a ${next.name}`) : "¡Llegaste a la máxima categoría!"}</p>
+          <p className="lna-fan-next">{next ? (`Te faltan ${Math.max(0,level.goal - seasonScore)} puntos para ganar la copa ${level.name} y ascender a ${next.name}`) : "En Leyenda LNA ganás una copa cada 10 partidos consecutivos de permanencia."}</p>
             <div className="lna-fan-streak-panel">
               <strong>MI RACHA ACTUAL</strong>
               <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} ${streaks.lossStreak === 1 ? "error seguido" : "errores seguidos"}` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} ${streaks.missedStreak === 1 ? "partido sin votar" : "partidos sin votar"}` : "Sin racha activa"}</span>
@@ -164,7 +164,7 @@ export default function FanLevel() {
             <small>Acertá <b>10 partidos consecutivos</b> para conseguir un MVP. No suma puntos y queda como recuerdo permanente. Si errás o no votás un partido, se corta la racha. Cada 10 aciertos consecutivos ganás otro MVP.</small>
           </div> : activeView === "levels" ? <div className="lna-fan-levels">
             {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
-              <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}<em className="lna-fan-record">Récord: {career?.records?.[i] ? `${career.records[i]} partidos` : "—"}</em></strong><small>{item.points} PTS</small>
+              <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}<em className="lna-fan-record">Récord: {career?.records?.[i] ? `${career.records[i]} partidos` : "—"}</em></strong><small>{item.goal === null ? "10 partidos" : `${item.goal} PTS`}</small>
             </div>)}
 
           </div> : <div className="lna-fan-history">
