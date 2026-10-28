@@ -105,7 +105,7 @@ export default function FanLevel() {
   const index = career && Number.isInteger(career.categoryIndex) ? career.categoryIndex : 0;
   const level = LEVELS[index];
   const next = LEVELS[index + 1];
-  const percent = level.goal ? Math.max(0,Math.min(100, seasonScore * 100 / level.goal)) : Math.min(100, ((career?.records?.[5] || 0) % 10) * 10);
+  const percent = level.goal ? Math.max(0,Math.min(100, seasonScore * 100 / level.goal)) : Math.min(100, ((career?.currentStay || 0) % 10) * 10);
 
   return (
     <>
