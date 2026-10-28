@@ -50,6 +50,7 @@ async function calculateRewards(db, fixture, visitorId) {
     if(wasWrong && losses===directLimit && categoryIndex>0){
       categoryIndex--;
       seasonPoints=categories[categoryIndex].points;
+      losses=0; // Nueva categoría: la racha de descenso comienza de cero.
     }else{
       categoryIndex=rankForPoints(seasonPoints);
     }
