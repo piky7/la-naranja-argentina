@@ -27,21 +27,18 @@ async function fixtureGame(id) {
 }
 
 
-const NEW_RULES_FROM = "2026-10-29";
 async function calculateRewards(db, fixture, visitorId) {
   const votes = await db.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all();
   const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
-  const games = [...fixture.games].filter(g => g?.id && Number.isFinite(Date.parse(g.startsAt)))
+  // Las reglas se aplican retroactivamente desde el primer partido con votos registrados.
+  const firstVote = await db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first();
+  const firstDate = firstVote?.first_id?.slice(0, 10) || "9999-12-31";
+  const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id));
   let points = 0, wins = 0, losses = 0, missed = 0, mvps = 0, bestStreak = 0;
   const now = Date.now();
   for (const g of games) {
     const vote = voteMap.get(g.id);
-    const legacy = g.id.slice(0,10) < NEW_RULES_FROM;
-    if (legacy) {
-      if (vote) points += 10;
-      continue;
-    }
     if (vote) points += 5;
     // No evaluar rachas ni ausencias antes del inicio del partido.
     if (Date.parse(g.startsAt) > now) continue;
@@ -70,9 +67,9 @@ async function calculateRewards(db, fixture, visitorId) {
       if (losses % 3 === 0) points-=5;
     }
   }
-  // Votos de partidos que ya no aparecen en el fixture: preservar su valor anterior.
+  // Preservar participación de votos que ya no aparecen en el fixture.
   const knownIds = new Set(games.map(g => g.id));
-  for (const id of voteMap.keys()) if (!knownIds.has(id)) points+=10;
+  for (const id of voteMap.keys()) if (!knownIds.has(id)) points+=5;
   return {points:Math.max(0,points),mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed};
 }
 async function getRewards(db, visitorId) {
