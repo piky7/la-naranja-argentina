@@ -48,7 +48,8 @@ async function calculateRewards(db, fixture, visitorId) {
     const completed = g.finished === true && Number.isFinite(g.homeScore) && Number.isFinite(g.awayScore);
     if (!completed) {
       // Un partido sin resultado confirmado no puede alterar rachas todavía.
-      break;
+      wins=0; losses=0; missed=0;
+      continue;
     }
     if (g.homeScore === g.awayScore) { wins=0; losses=0; missed=0; continue; }
     if (!vote) {
@@ -70,7 +71,8 @@ async function calculateRewards(db, fixture, visitorId) {
     }
   }
   // Votos de partidos que ya no aparecen en el fixture: preservar su valor anterior.
-  for (const id of voteMap.keys()) if (!games.some(g => g.id === id)) points+=10;
+  const knownIds = new Set(games.map(g => g.id));
+  for (const id of voteMap.keys()) if (!knownIds.has(id)) points+=10;
   return {points:Math.max(0,points),mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed};
 }
 async function getRewards(db, visitorId) {
