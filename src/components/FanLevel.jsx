@@ -40,8 +40,6 @@ export default function FanLevel() {
   const [predictions, setPredictions] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState(false);
-  const [changingVote, setChangingVote] = useState(null);
-  const [changeError, setChangeError] = useState("");
   const [activeView, setActiveView] = useState("levels");
   const refresh = useCallback(async () => {
     const id = getVisitorId();
@@ -90,23 +88,6 @@ export default function FanLevel() {
       setHistoryLoading(false);
     }
   }, []);
-
-  const changePrediction = async (prediction, team) => {
-    if (!prediction.open || changingVote || prediction.selected === team) return;
-    const visitorId = getVisitorId();
-    if (!visitorId) return;
-    setChangingVote(prediction.partidoId);
-    setChangeError("");
-    try {
-      const response = await fetch("https://lna-votaciones-api.lnab.workers.dev/api/votos", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({partidoId:prediction.partidoId,visitanteId:visitorId,equipoVotado:team})});
-      const result = await response.json();
-      if (!response.ok || !result.ok) throw new Error(result.error || "No se pudo cambiar");
-      await refreshHistory();
-      refresh();
-      window.dispatchEvent(new Event("lna-vote-updated"));
-    } catch {setChangeError("No se pudo cambiar el pronóstico. Probá de nuevo.");}
-    finally {setChangingVote(null);}
-  };
 
   useEffect(() => {
     if (open) refreshHistory();
@@ -218,7 +199,6 @@ export default function FanLevel() {
                 <span><b className="incorrect">{predictions.filter(p => p.status === "incorrect").length}</b> Errados</span>
                 <span><b>{predictions.filter(p => p.status === "pending").length}</b> Pendientes</span>
               </div>
-              {changeError && <small role="alert">{changeError}</small>}
               <div className="lna-fan-history-list">
                 {predictions.slice(page * 6, page * 6 + 6).map(p => {
                   const home = teams.find(t => t.id === p.homeTeam);
@@ -234,7 +214,6 @@ export default function FanLevel() {
                       <span>{away?.logo && <img src={away.logo} alt="" />}{away?.shortName || p.awayTeam || "Visitante"}</span>
                     </div>
                     <small>Votaste: <strong>{chosen?.shortName || p.selected.replace(/-/g, " ")}</strong> <b className="lna-fan-earned">{p.earned == null ? "Pendiente" : `${p.earned >= 0 ? "+" : ""}${p.earned} PTS`}{p.medal === "gold" ? " 🥇" : p.medal === "silver" ? " 🥈" : p.medal === "bronze" ? " 🥉" : ""}</b></small>
-                    {p.open && <div className="lna-fan-change-vote"><small>Cambiar antes del inicio:</small><button type="button" disabled={Boolean(changingVote) || p.selected === p.homeTeam} onClick={() => changePrediction(p,p.homeTeam)}>{home?.shortName || "Local"}</button><button type="button" disabled={Boolean(changingVote) || p.selected === p.awayTeam} onClick={() => changePrediction(p,p.awayTeam)}>{away?.shortName || "Visitante"}</button></div>}
                   </div>;
                 })}
               </div>
