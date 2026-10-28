@@ -91,3 +91,24 @@
 .lna-fan-pages{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-top:9px;font-size:11px;color:#b7c5d4}
 .lna-fan-pages button{padding:7px 9px;border:1px solid #465b71;border-radius:7px;background:#203348;color:#fff;font-size:11px;cursor:pointer}
 .lna-fan-pages button:disabled{opacity:.3;cursor:default}
+
+/* Ajuste de altura de Mi carrera */
+.lna-fan-modal{padding-top:13px;padding-bottom:13px}
+.lna-fan-modal .lna-fan-trophy{width:24px;height:24px}
+.lna-fan-modal h2{font-size:17px;margin:2px 0}
+.lna-fan-modal .lna-fan-total{font-size:33px;margin:2px 0 0}
+.lna-fan-modal .lna-fan-current{font-size:13px}
+.lna-fan-modal .lna-fan-track-large{margin:7px 0 4px;height:7px}
+.lna-fan-modal .lna-fan-next{font-size:11px}
+.lna-fan-modal .lna-fan-streak-panel{margin:9px 0 0;padding:7px 9px;gap:3px}
+.lna-fan-modal .lna-fan-streak-panel strong{font-size:10px}
+.lna-fan-modal .lna-fan-streak-panel span{font-size:12px}
+.lna-fan-modal .lna-fan-streak-panel small{font-size:10px}
+.lna-fan-modal .lna-fan-how{font-size:11px;line-height:1.35;margin:9px 0}
+.lna-fan-modal .lna-fan-levels{gap:4px}
+.lna-fan-modal .lna-fan-level{padding:5px 8px;min-height:30px;gap:8px}
+.lna-fan-modal .lna-fan-level>span{width:22px;height:22px;font-size:11px}
+.lna-fan-modal .lna-fan-level strong{font-size:11px}
+.lna-fan-modal .lna-fan-level small{font-size:10px}
+.lna-fan-modal .lna-fan-tabs{margin-bottom:7px}
+@media(max-width:768px){.lna-fan-modal{padding-top:12px;padding-bottom:12px}}
