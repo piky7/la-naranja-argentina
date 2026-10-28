@@ -1541,12 +1541,7 @@ const finishedMatch = {
     <small className="fixture-live-period">
       {liveMatch?.isHalftime ? "ENTRETIEMPO" : liveMatch?.quarter ? <><span>{liveMatch.quarter}.º CUARTO</span>{formatLiveRemaining(liveMatch) != null && <span className="fixture-live-clock"> · {formatLiveRemaining(liveMatch)} RESTANTES</span>}</> : "PARTIDO EN JUEGO"}
     </small>
-    {liveMatch?.quarter && !liveMatch?.isHalftime && (() => {
-      const clock = formatLiveRemaining(liveMatch);
-      const matchClock = typeof clock === "string" ? clock.match(/^(\d{2}):(\d{2})$/) : null;
-      const remaining = matchClock ? Number(matchClock[1]) * 60 + Number(matchClock[2]) : null;
-      return remaining != null && remaining >= 0 && remaining <= 600 ? <span className="fixture-live-progress" aria-hidden="true"><span style={{width: `${Math.max(0, Math.min(100, (600 - remaining) / 6))}%`}} /></span> : null;
-    })()}
+
   </>
 ) : (
                             <>
