@@ -259,11 +259,13 @@ export default {
       if (request.method === "POST") {
         if (!open) return fail("Votación cerrada", 409);
         if (team !== game.homeTeam && team !== game.awayTeam) return fail("Equipo inválido", 400);
-        // Protección adicional básica por IP: máximo 30 votos por día
+        const previousVote = await env.DB.prepare("SELECT equipo_votado FROM votos WHERE partido_id=? AND visitante_id=?").bind(id,visitorId).first();
+        if (previousVote?.equipo_votado === team) return fail("Ya elegiste ese equipo", 409);
+        // Protección adicional básica por IP: máximo 30 votos nuevos por día
         // en partidos distintos; no se almacena la dirección IP.
         const ip = request.headers.get("CF-Connecting-IP") || "";
         const day = new Date().toISOString().slice(0, 10);
-        if (ip) {
+        if (ip && !previousVote) {
           const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(day + ":" + ip));
           const hash = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, "0")).join("");
           await env.DB.prepare("CREATE TABLE IF NOT EXISTS voto_limites (hash TEXT PRIMARY KEY, cantidad INTEGER NOT NULL)").run();
@@ -271,7 +273,11 @@ export default {
           if (!limit) return fail("Demasiadas solicitudes", 429);
         }
         // Un único pronóstico por usuario y partido; se permite reemplazarlo antes del inicio.
-        await env.DB.prepare("INSERT INTO votos (partido_id,equipo_votado,visitante_id) VALUES (?,?,?) ON CONFLICT DO UPDATE SET equipo_votado=excluded.equipo_votado").bind(id, team, visitorId).run();
+        if (previousVote) {
+          await env.DB.prepare("UPDATE votos SET equipo_votado=? WHERE partido_id=? AND visitante_id=?").bind(team,id,visitorId).run();
+        } else {
+          await env.DB.prepare("INSERT INTO votos (partido_id,equipo_votado,visitante_id) VALUES (?,?,?)").bind(id,team,visitorId).run();
+        }
       }
 
       const existing = await env.DB.prepare("SELECT equipo_votado FROM votos WHERE partido_id=? AND visitante_id=?").bind(id, visitorId).first();
