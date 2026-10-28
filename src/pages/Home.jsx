@@ -1533,22 +1533,20 @@ const finishedMatch = {
     </span>
 
     <strong className="fixture-live-score">
-      {liveMatch?.homeScore ?? match.homeScore ?? 0}
-      {" - "}
-      {liveMatch?.awayScore ?? match.awayScore ?? 0}
+      <span key={`home-${liveMatch?.homeScore ?? match.homeScore ?? 0}`} className={Number(liveMatch?.homeScore ?? match.homeScore ?? 0) > Number(liveMatch?.awayScore ?? match.awayScore ?? 0) ? "fixture-live-leading fixture-live-score-changed" : "fixture-live-trailing fixture-live-score-changed"}>{liveMatch?.homeScore ?? match.homeScore ?? 0}</span>
+      <span className="fixture-live-score-separator"> - </span>
+      <span key={`away-${liveMatch?.awayScore ?? match.awayScore ?? 0}`} className={Number(liveMatch?.awayScore ?? match.awayScore ?? 0) > Number(liveMatch?.homeScore ?? match.homeScore ?? 0) ? "fixture-live-leading fixture-live-score-changed" : "fixture-live-trailing fixture-live-score-changed"}>{liveMatch?.awayScore ?? match.awayScore ?? 0}</span>
     </strong>
 
     <small className="fixture-live-period">
-      {liveMatch?.isHalftime
-        ? "ENTRETIEMPO"
-        : liveMatch?.quarter
-          ? `${liveMatch.quarter}.º CUARTO${
-              formatLiveRemaining(liveMatch) != null
-                ? ` · ${formatLiveRemaining(liveMatch)} RESTANTES`
-                : ""
-            }`
-          : "PARTIDO EN JUEGO"}
+      {liveMatch?.isHalftime ? "ENTRETIEMPO" : liveMatch?.quarter ? <><span>{liveMatch.quarter}.º CUARTO</span>{formatLiveRemaining(liveMatch) != null && <span className="fixture-live-clock"> · {formatLiveRemaining(liveMatch)} RESTANTES</span>}</> : "PARTIDO EN JUEGO"}
     </small>
+    {liveMatch?.quarter && !liveMatch?.isHalftime && (() => {
+      const clock = formatLiveRemaining(liveMatch);
+      const matchClock = typeof clock === "string" ? clock.match(/^(\d{2}):(\d{2})$/) : null;
+      const remaining = matchClock ? Number(matchClock[1]) * 60 + Number(matchClock[2]) : null;
+      return remaining != null && remaining >= 0 && remaining <= 600 ? <span className="fixture-live-progress" aria-hidden="true"><span style={{width: `${Math.max(0, Math.min(100, (600 - remaining) / 6))}%`}} /></span> : null;
+    })()}
   </>
 ) : (
                             <>
