@@ -27,6 +27,7 @@ function getVisitorId() {
 
 export default function FanLevel() {
   const [points, setPoints] = useState(null);
+  const [mvps, setMvps] = useState(0);
   const [open, setOpen] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
@@ -39,7 +40,10 @@ export default function FanLevel() {
       const response = await fetch(`${API}?visitanteId=${encodeURIComponent(id)}`, { cache: "no-store" });
       if (!response.ok) return;
       const result = await response.json();
-      if (result.ok && Number.isFinite(result.points)) setPoints(result.points);
+      if (result.ok && Number.isFinite(result.points)) {
+        setPoints(result.points);
+        setMvps(Number(result.mvps) || 0);
+      }
     } catch { /* Conservar los últimos puntos conocidos si falla la conexión. */ }
   }, []);
 
@@ -107,9 +111,10 @@ export default function FanLevel() {
           <h2 id="lna-fan-title">MI NIVEL LNA</h2>
           <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
           <strong className="lna-fan-current">Nivel {index + 1} · {level.name}</strong>
+          {mvps > 0 && <p className="lna-fan-next">🏆 MVP de Pronósticos ×{mvps}</p>}
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
           <p className="lna-fan-next">{next ? `Te faltan ${next.points - score} puntos para ${next.name}` : "¡Alcanzaste el nivel máximo!"}</p>
-          <p className="lna-fan-how">Sumás <strong>10 puntos</strong> por cada pronóstico válido, aciertes o no.</p>
+          <p className="lna-fan-how">Desde el 29/10: <strong>+5 por votar</strong>, <strong>+10 por acertar</strong>. Bonus por 3 y 5 aciertos seguidos; MVP por 10. No votar corta las rachas.</p>
           <div className="lna-fan-tabs" role="tablist" aria-label="Información de hincha">
             <button type="button" role="tab" aria-selected={activeView === "levels"} className={activeView === "levels" ? "active" : ""} onClick={() => setActiveView("levels")}>Mis niveles</button>
             <button type="button" role="tab" aria-selected={activeView === "predictions"} className={activeView === "predictions" ? "active" : ""} onClick={() => setActiveView("predictions")}>Mis pronósticos</button>
