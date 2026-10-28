@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown } from "lucide-react";
+import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, UserRound, Pencil, Check, Ban } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
 const INTRO_KEY = "lna-career-intro-seen-v1";
+const PLAYER_NAME_KEY = "lna-career-player-name-v1";
+const readPlayerName = () => { try { return localStorage.getItem(PLAYER_NAME_KEY) || ""; } catch { return ""; } };
 const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
 const LEVELS = [
   { name: "Liga de Desarrollo", goal: 50 },
@@ -28,6 +30,19 @@ function getVisitorId() {
 }
 
 export default function FanLevel() {
+  const [playerName, setPlayerName] = useState(readPlayerName);
+  const [nameDraft, setNameDraft] = useState("");
+  const [editingName, setEditingName] = useState(false);
+  const [nameError, setNameError] = useState("");
+  const savePlayerName = (event) => {
+    event.preventDefault();
+    const nextName = nameDraft.trim().replace(/\\s+/g, " ");
+    if (!nextName || nextName.length > 24) { setNameError("Ingresá un nombre de hasta 24 caracteres."); return; }
+    try { localStorage.setItem(PLAYER_NAME_KEY, nextName); } catch { setNameError("No se pudo guardar en este navegador."); return; }
+    setPlayerName(nextName);
+    setEditingName(false);
+    setNameError("");
+  };
   const [points, setPoints] = useState(null);
   const [mvps, setMvps] = useState(0);
   const [seasonPoints, setSeasonPoints] = useState(null);
@@ -156,6 +171,19 @@ export default function FanLevel() {
           <div className="lna-fan-gamer-heading">
             <span className="lna-fan-gamer-trophy"><Trophy size={23} aria-hidden="true" /></span>
             <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
+          </div>
+          <div className="lna-fan-player-profile">
+            <span className="lna-fan-player-avatar"><UserRound size={17} aria-hidden="true" /></span>
+            {editingName ? <form className="lna-fan-player-edit" onSubmit={savePlayerName}>
+              <input aria-label="Nombre de jugador" autoFocus maxLength={24} value={nameDraft} placeholder="Tu nombre o apodo" onChange={e => { setNameDraft(e.target.value); setNameError(""); }} />
+              <button type="submit" aria-label="Guardar nombre" title="Guardar"><Check size={16}/></button>
+              <button type="button" aria-label="Cancelar edición" title="Cancelar" onClick={() => { setEditingName(false); setNameError(""); }}><Ban size={15}/></button>
+              {nameError && <small role="alert">{nameError}</small>}
+            </form> : <div className="lna-fan-player-identity">
+              <span>MI PERFIL DE JUGADOR</span>
+              <strong>{playerName || "Elegí tu nombre"}</strong>
+            </div>}
+            {!editingName && <button type="button" className="lna-fan-player-pencil" aria-label={playerName ? "Editar nombre de jugador" : "Agregar nombre de jugador"} title="Editar nombre" onClick={() => { setNameDraft(playerName); setNameError(""); setEditingName(true); }}><Pencil size={15} /></button>}
           </div>
           <div className="lna-fan-gamer-hero">
             <div className="lna-fan-gamer-score">
