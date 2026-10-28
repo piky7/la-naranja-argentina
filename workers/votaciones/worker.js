@@ -103,7 +103,7 @@ async function calculateRewards(db, fixture, visitorId) {
       perGame.set(g.id,{earned:wins === 3 ? 30 : wins === 5 ? 45 : 15,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
       updateCareer(g,false);
     } else {
-      wins=0; losses++; points+=5;
+      wins=0; losses++; points+=5; seasonPoints+=5;
       perGame.set(g.id,{earned:5,medal:null,streak:losses});
       updateCareer(g,true);
     }
