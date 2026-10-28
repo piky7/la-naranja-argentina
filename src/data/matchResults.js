@@ -514,5 +514,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2AxugGUnxOe-9SUIV0uFfFEt5Di_M_ioYZL_nI82HE0ccQRIv7U5Zqg==/lanus-vs-regatas-c"
     }
+  },
+  "2026-10-27-penarol-san-martin": {
+    "status": "finished",
+    "homeScore": 95,
+    "awayScore": 76,
+    "time": "21:00",
+    "homeTeam": "penarol",
+    "awayTeam": "san-martin",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24ncCNpODLx926P7pV-HZhksJQwO5LKkWCHOS5BEFUpKMq7akT1BmLw==/penarol-mdp-vs-san-martin-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24ncCNpODLx926P7pV-HZhksJQwO5LKkWCHOS5BEFUpKMq7akT1BmLw==/penarol-mdp-vs-san-martin-c"
+    }
   }
 };

@@ -1381,7 +1381,7 @@ export const players = [
   name: "Nicolás Chiaraviglio",
   teamId: "penarol",
   position: "Alero",
-  number: 22,
+  number: 15,
   nationality: "Argentina",
   category: "U21",
 },
@@ -2433,5 +2433,13 @@ export const players = [
     name: "Gino Jesus Gramaglia",
     teamId: "racing-chivilcoy",
     number: 15,
+  },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-385981",
+    officialPlayerId: 385981,
+    name: "Joaquin Bulchi Alessandrini",
+    teamId: "penarol",
+    number: 9,
   },
 ];
