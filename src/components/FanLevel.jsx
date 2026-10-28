@@ -113,7 +113,7 @@ export default function FanLevel() {
           <strong className="lna-fan-current">Nivel {index + 1} · {level.name}</strong>
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
           <p className="lna-fan-next">{next ? `Te faltan ${next.points - score} puntos para ${next.name}` : "¡Alcanzaste el nivel máximo!"}</p>
-          <p className="lna-fan-how"><strong>+5 por votar</strong> y <strong>+10 por acertar</strong>. Bonus por 3 y 5 aciertos seguidos.</p>
+          <p className="lna-fan-how"><strong>Errado +5</strong> · <strong>Acertado +15</strong> · <strong>3 seguidos +30</strong> · <strong>5 seguidos +45</strong>. Los puntos se suman al terminar el partido.</p>
           <div className="lna-fan-tabs" role="tablist" aria-label="Información de hincha">
             <button type="button" role="tab" aria-selected={activeView === "levels"} className={activeView === "levels" ? "active" : ""} onClick={() => setActiveView("levels")}>Mis niveles</button>
             <button type="button" role="tab" aria-selected={activeView === "predictions"} className={activeView === "predictions" ? "active" : ""} onClick={() => setActiveView("predictions")}>Pronósticos</button>
