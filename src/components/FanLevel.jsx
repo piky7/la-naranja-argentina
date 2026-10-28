@@ -90,8 +90,8 @@ export default function FanLevel() {
   }, []);
 
   useEffect(() => {
-    if (open) refreshHistory();
-  }, [open, refreshHistory]);
+    if (open && activeView === "predictions") refreshHistory();
+  }, [open, activeView, refreshHistory]);
 
   useEffect(() => {
     if (!open) return;
