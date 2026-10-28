@@ -1564,7 +1564,7 @@ const awayTeam = getTeam(match.awayTeam);
                 </div>
 
                 <div className="match-modal-score">
-                  <span className="match-modal-status">{upcomingLive ? `● EN VIVO · ${upcomingLive.isHalftime ? "ENTRETIEMPO" : upcomingLive.quarter ? `${upcomingLive.quarter}° CUARTO` : "PARTIDO EN JUEGO"}` : "PRÓXIMO PARTIDO"}</span>
+                  <span className="match-modal-status">{upcomingLive ? `EN VIVO · ${upcomingLive.isHalftime ? "ENTRETIEMPO" : upcomingLive.quarter ? `${upcomingLive.quarter}° CUARTO` : "PARTIDO EN JUEGO"}` : "PRÓXIMO PARTIDO"}</span>
                   <strong>
                     {upcomingLive && upcomingLive.homeScore != null && upcomingLive.awayScore != null && Number.isFinite(Number(upcomingLive.homeScore)) && Number.isFinite(Number(upcomingLive.awayScore)) ? `${upcomingLive.homeScore} - ${upcomingLive.awayScore}` : selectedUpcomingMatch.time || "VS"}
                   </strong>
