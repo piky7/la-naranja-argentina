@@ -176,3 +176,6 @@
 .lna-fan-cup small{font-size:12px}
 .lna-fan-cup.earned{color:#f5c77a;border-color:#ba8a55;background:linear-gradient(130deg,#40312d,#1b2b3c)}
 .lna-fan-palmares-hint{font-size:10px;color:#aebaca;line-height:1.5;margin:11px 0 0}
+
+.lna-fan-historical{margin:0 0 7px;text-align:center;color:#d7b6d2;font-size:12px}
+.lna-fan-historical b{color:#f6c3df}
