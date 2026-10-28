@@ -224,7 +224,7 @@ export default function FanLevel() {
               <label htmlFor="lna-player-number">Número de camiseta (0 a 99)</label>
               <input id="lna-player-number" inputMode="numeric" maxLength={2} pattern="[0-9]{1,2}" value={numberDraft} onChange={e => { setNumberDraft(e.target.value.replace(/\D/g, "").slice(0,2)); setProfileError(""); }} placeholder="Ej. 7" />
               {profileError && <small role="alert" className="lna-fan-profile-edit-error">{profileError}</small>}
-              <div className="lna-fan-profile-edit-actions"><button type="button" onClick={() => setEditingProfile(false)}>Cancelar</button><button type="submit"><Check size={15}/> Guardar perfil</button></div>
+              <div className="lna-fan-profile-edit-actions"><button type="button" onClick={closeProfileEditor}>Cancelar</button><button type="submit"><Check size={15}/> Guardar perfil</button></div>
             </form>
           </div>, document.body)}
           <div className="lna-fan-gamer-hero">
