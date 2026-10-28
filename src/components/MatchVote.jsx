@@ -60,11 +60,11 @@ export default function MatchVote({ match }) {
         body: JSON.stringify({ partidoId: id, visitanteId: visitorId, equipoVotado: team }),
       });
       const body = await res.json();
-      if (!res.ok) throw new Error(body.error || "No se pudo votar");
+      if (!res.ok || !body.ok) throw new Error(body.error || "No se pudo votar");
       setData(body);
       setEditing(false);
       window.dispatchEvent(new Event("lna-vote-updated"));
-    } catch { setError("No se pudo registrar el voto. Reintentá."); }
+    } catch (err) { setError(err.message || "No se pudo registrar el voto. Reintentá."); }
     finally { setBusy(false); }
   }
 
