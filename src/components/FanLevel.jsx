@@ -5,6 +5,7 @@ import { teams } from "../data/teams";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
+const INTRO_KEY = "lna-career-intro-seen-v1";
 const LEVELS = [
   { name: "Rookie", points: 0 },
   { name: "Hincha", points: 50 },
@@ -31,6 +32,9 @@ export default function FanLevel() {
   const [streaks, setStreaks] = useState({winStreak:0,lossStreak:0,missedStreak:0});
   const [page, setPage] = useState(0);
   const [open, setOpen] = useState(false);
+  const [introStep, setIntroStep] = useState(null);
+  const finishIntro = () => { try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* Sin almacenamiento disponible. */ } setIntroStep(null); };
+  const openCareer = () => { refresh(); setActiveView("levels"); setOpen(true); try { if (localStorage.getItem(INTRO_KEY) !== "1") setIntroStep(0); } catch { setIntroStep(0); } };
   const [predictions, setPredictions] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState(false);
@@ -100,7 +104,7 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className="lna-fan-bar" type="button" onClick={() => { refresh(); setActiveView("levels"); setOpen(true); }} aria-label="Ver mi carrera LNA">
+      <button className="lna-fan-bar" type="button" onClick={openCareer} aria-label="Ver mi carrera LNA">
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong>{level.name}</strong><b>{points === null ? "—" : score} PTS</b></span>
@@ -108,11 +112,23 @@ export default function FanLevel() {
         </span>
         <ChevronRight size={16} aria-hidden="true" />
       </button>
-      {open && <div className="lna-fan-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
+      {open && introStep !== null && <div className="lna-fan-backdrop lna-fan-intro-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) finishIntro(); }}>
+        <section className="lna-fan-intro" role="dialog" aria-modal="true" aria-labelledby="lna-career-intro-title">
+          <button className="lna-fan-close" type="button" onClick={finishIntro} aria-label="Cerrar presentación"><X size={20}/></button>
+          <Trophy size={36} className="lna-fan-intro-icon" aria-hidden="true" />
+          <span className="lna-fan-intro-kicker">MI CARRERA · {introStep + 1} DE 3</span>
+          <h2 id="lna-career-intro-title">{["TU PASIÓN TAMBIÉN JUEGA","CADA PRONÓSTICO CUENTA","¿DÓNDE VOTAR?"][introStep]}</h2>
+          {introStep === 0 ? <p>Elegí quién gana los partidos de la Liga Nacional, sumá puntos, subí de nivel y conseguí el distintivo MVP.</p> : introStep === 1 ? <div className="lna-fan-intro-rules"><span>✓ Acierto <b>+15 PTS</b></span><span>✕ Error <b>+5 PTS</b></span><span>🥉 3 aciertos seguidos <b>+30 PTS</b></span><span>🥈 5 aciertos seguidos <b>+45 PTS</b></span><span>3 errores seguidos <b>−15 PTS de penalización</b></span><span>🏆 10 aciertos seguidos <b>MVP</b></span><small>Se acredita al finalizar el partido. No votar corta la racha, pero no resta puntos.</small></div> : <p>En <strong>Inicio → Partidos de hoy</strong>, tocá el partido que quieras pronosticar y elegí el ganador en <strong>¿QUIÉN GANA?</strong> antes de que empiece.</p>}
+          <div className="lna-fan-intro-dots">{[0,1,2].map(i => <span key={i} className={introStep === i ? "active" : ""} />)}</div>
+          <div className="lna-fan-intro-actions">{introStep > 0 && <button type="button" className="secondary" onClick={() => setIntroStep(v => v - 1)}>Atrás</button>}<button type="button" className="primary" onClick={() => { if (introStep < 2) setIntroStep(v => v + 1); else { finishIntro(); setOpen(false); window.location.assign("/"); } }}>{introStep === 2 ? "¡Empezar a jugar!" : "Siguiente"}</button></div>
+          <button className="lna-fan-intro-dismiss" type="button" onClick={finishIntro}>Entendido · Ver mi carrera</button>
+        </section>
+      </div>}
+      {open && introStep === null && <div className="lna-fan-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
         <section className="lna-fan-modal" role="dialog" aria-modal="true" aria-labelledby="lna-fan-title">
           <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>
           <Trophy className="lna-fan-trophy" size={30} aria-hidden="true" />
-          <h2 id="lna-fan-title">MI CARRERA</h2>
+          <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
           <p className="lna-fan-total">{points === null ? "—" : score} <span>PTS</span></p>
           <strong className="lna-fan-current">Nivel {index + 1} · {level.name}</strong>
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
