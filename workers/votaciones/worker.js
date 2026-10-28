@@ -27,6 +27,28 @@ async function fixtureGame(id) {
 }
 
 
+
+// Archivo permanente de partidos en D1: permite recalcular carreras aunque roten los fixtures.
+// Se conserva el resultado confirmado; una versión futura sin resultado no puede borrarlo.
+async function archiveFixture(db, fixture) {
+  await db.prepare("CREATE TABLE IF NOT EXISTS carrera_partidos (partido_id TEXT PRIMARY KEY, datos TEXT NOT NULL, confirmado INTEGER NOT NULL DEFAULT 0)").run();
+  const games = (fixture.games || []).filter(g => typeof g?.id === "string" && g.id.length <= 120);
+  for (let i=0; i<games.length; i+=50) {
+    const statements=games.slice(i,i+50).map(g=>{
+      const confirmed=Number(g.finished === true && Number.isFinite(g.homeScore) && Number.isFinite(g.awayScore) && g.homeScore !== g.awayScore);
+      return db.prepare("INSERT INTO carrera_partidos(partido_id,datos,confirmado) VALUES (?,?,?) ON CONFLICT(partido_id) DO UPDATE SET datos=excluded.datos, confirmado=excluded.confirmado WHERE excluded.confirmado>=carrera_partidos.confirmado")
+        .bind(g.id,JSON.stringify(g),confirmed);
+    });
+    if(statements.length) await db.batch(statements);
+  }
+  const saved=await db.prepare("SELECT datos FROM carrera_partidos").all();
+  const byId=new Map();
+  for(const row of saved.results||[]) {
+    try {const game=JSON.parse(row.datos);if(game?.id)byId.set(game.id,game);}catch{}
+  }
+  return { ...fixture, games:[...byId.values()] };
+}
+
 async function calculateRewards(db, fixture, visitorId) {
   const votes = await db.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all();
   const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
@@ -120,7 +142,7 @@ async function getRewards(db, visitorId) {
   if(!response.ok) throw new Error("Fixture no disponible");
   const fixture=await response.json();
   if(!Array.isArray(fixture.games)) throw new Error("Fixture inválido");
-  return calculateRewards(db,fixture,visitorId);
+  return calculateRewards(db,await archiveFixture(db,fixture),visitorId);
 }
 
 async function voteCounts(db, id) {
@@ -151,7 +173,8 @@ export default {
         if (!fixtureResponse.ok) throw new Error("Fixture no disponible");
         const fixture = await fixtureResponse.json();
         if (!Array.isArray(fixture.games)) throw new Error("Fixture inválido");
-        const byId = new Map(fixture.games.map(game => [game.id, game]));
+        const archivedFixture = await archiveFixture(env.DB, fixture);
+        const byId = new Map(archivedFixture.games.map(game => [game.id, game]));
         const predictions = (votes.results || []).map(row => {
           const game = byId.get(row.partido_id);
           const homeTeam = game?.homeTeam || null;
@@ -169,7 +192,7 @@ export default {
             status: !winner ? "pending" : winner === row.equipo_votado ? "correct" : "incorrect",
           };
         });
-        const rewards = await calculateRewards(env.DB, fixture, visitorId);
+        const rewards = await calculateRewards(env.DB, archivedFixture, visitorId);
         for (const p of predictions) {
           const detail = rewards.perGame[p.partidoId];
           p.earned = detail?.earned ?? (p.status === "pending" ? null : 0);
