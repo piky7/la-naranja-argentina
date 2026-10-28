@@ -36,6 +36,7 @@ async function calculateRewards(db, fixture, visitorId) {
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id));
   let points = 0, wins = 0, losses = 0, missed = 0, mvps = 0, bestStreak = 0;
+  const perGame = new Map();
   const now = Date.now();
   for (const g of games) {
     const vote = voteMap.get(g.id);
@@ -62,13 +63,15 @@ async function calculateRewards(db, fixture, visitorId) {
       if (wins === 3) points+=15;
       if (wins === 5) points+=30;
       if (wins % 10 === 0) mvps++;
+      perGame.set(g.id,{earned:wins === 3 ? 30 : wins === 5 ? 45 : 15,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
     } else {
       wins=0; losses++; points+=5;
       if (losses % 3 === 0) points-=5;
+      perGame.set(g.id,{earned:losses % 3 === 0 ? 0 : 5,medal:null,streak:losses});
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
-  return {points:Math.max(0,points),mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed};
+  return {points:Math.max(0,points),mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,perGame:Object.fromEntries(perGame)};
 }
 async function getRewards(db, visitorId) {
   const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
@@ -124,6 +127,12 @@ export default {
             status: !winner ? "pending" : winner === row.equipo_votado ? "correct" : "incorrect",
           };
         });
+        const rewards = await calculateRewards(env.DB, fixture, visitorId);
+        for (const p of predictions) {
+          const detail = rewards.perGame[p.partidoId];
+          p.earned = detail?.earned ?? (p.status === "pending" ? null : 0);
+          p.medal = detail?.medal ?? null;
+        }
         return json({ ok: true, predictions }, 200, cors);
       } catch (error) {
         console.error("LNA mis pronósticos:", error);
@@ -136,7 +145,8 @@ export default {
       if (!env.DB) return fail("Base de datos no configurada", 503);
       try {
         const rewards = await getRewards(env.DB, visitorId);
-        return json({ ok: true, ...rewards }, 200, cors);
+        const {perGame, ...summary} = rewards;
+        return json({ ok: true, ...summary }, 200, cors);
       } catch (error) {
         console.error("LNA puntos:", error);
         return fail("No se pudieron consultar los puntos", 503);
