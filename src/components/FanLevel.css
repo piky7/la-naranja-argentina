@@ -247,3 +247,49 @@
 .lna-fan-modal .lna-fan-note{margin:9px 0 0;padding:8px 9px;border:1px solid rgba(113,103,150,.35);border-radius:9px;background:rgba(15,29,46,.85);font-size:9px;line-height:1.35;color:#aab4cc}
 @media(max-width:390px){.lna-fan-modal{padding:11px 11px 12px}.lna-fan-gamer-hero{gap:7px}.lna-fan-gamer-rank{padding-left:8px}.lna-fan-gamer-rank strong{font-size:11px}.lna-fan-modal .lna-fan-level{min-height:40px;padding:5px 7px}.lna-fan-modal .lna-fan-level strong{font-size:11px}.lna-fan-modal .lna-fan-level small{font-size:9px}.lna-fan-modal .lna-fan-streak-panel{min-height:48px}}
 @media(max-height:740px){.lna-fan-gamer-heading{margin-bottom:4px}.lna-fan-gamer-trophy{width:29px;height:29px}.lna-fan-modal .lna-fan-gamer-heading h2{font-size:17px}.lna-fan-gamer-hero{margin:4px 0 5px}.lna-fan-modal .lna-fan-level{min-height:37px;padding-top:4px;padding-bottom:4px}}
+
+/* Gamer pink · Pronósticos, MVP y Palmarés */
+.lna-fan-modal .lna-fan-section-title{display:flex;align-items:center;justify-content:center;gap:7px;margin:5px 0 9px;color:#ff93cb;font-size:12px;font-weight:900;letter-spacing:1.15px;text-transform:uppercase}
+.lna-fan-modal .lna-fan-section-title svg{filter:drop-shadow(0 0 6px rgba(255,99,181,.35))}
+.lna-fan-modal .lna-fan-history{min-width:0}
+.lna-fan-modal .lna-fan-stats{gap:7px;margin-bottom:9px}
+.lna-fan-modal .lna-fan-stats span{border:1px solid rgba(115,92,143,.48);border-radius:10px;background:linear-gradient(145deg,#20233a,#132239);color:#c4bdd6;padding:9px 3px;font-size:10px;font-weight:700}
+.lna-fan-modal .lna-fan-stats b{font-size:23px;line-height:1.1;font-weight:900}
+.lna-fan-modal .lna-fan-stats b.correct{color:#f88cc8}
+.lna-fan-modal .lna-fan-stats b.incorrect{color:#e0a3c6}
+.lna-fan-modal .lna-fan-stats span:last-child b{color:#d6d0eb}
+.lna-fan-modal .lna-fan-history-list{gap:6px}
+.lna-fan-modal .lna-fan-prediction{border:1px solid #39445f;border-left:3px solid #9a719b;border-radius:10px;background:linear-gradient(115deg,#1c243a,#132238);padding:8px 9px;box-shadow:inset 0 0 10px rgba(255,101,181,.025)}
+.lna-fan-modal .lna-fan-prediction.correct{border-left-color:#f581bd}
+.lna-fan-modal .lna-fan-prediction.incorrect{border-left-color:#bf799e}
+.lna-fan-modal .lna-fan-prediction.pending{border-left-color:#8c8ab4}
+.lna-fan-modal .lna-fan-prediction-status,.lna-fan-modal .lna-fan-prediction.correct .lna-fan-prediction-status{color:#ff91ca}
+.lna-fan-modal .lna-fan-prediction.incorrect .lna-fan-prediction-status{color:#d79dbd}
+.lna-fan-modal .lna-fan-prediction-match b{color:#ff9fce}
+.lna-fan-modal .lna-fan-prediction small strong{color:#ffb1d7}
+.lna-fan-modal .lna-fan-prediction.medal-bronze{border-color:#ae795b;background:linear-gradient(110deg,#302734,#172339)}
+.lna-fan-modal .lna-fan-prediction.medal-silver{border-color:#a6a7c5;background:linear-gradient(110deg,#292c42,#172339)}
+.lna-fan-modal .lna-fan-prediction.medal-gold{border-color:#dfb66d;background:linear-gradient(110deg,#372c35,#172339)}
+.lna-fan-modal .lna-fan-pages{margin-top:8px;color:#c8bfd8}
+.lna-fan-modal .lna-fan-pages button{padding:6px 9px;border:1px solid #8c5484;border-radius:8px;background:linear-gradient(130deg,#422744,#222a40);color:#f5d8e9}
+.lna-fan-modal .lna-fan-history-message{padding:14px 10px;border:1px solid rgba(224,104,177,.25);border-radius:10px;background:rgba(26,34,54,.8);color:#cfc4d8}
+.lna-fan-modal .lna-fan-history-message button{color:#ff99cb}
+.lna-fan-modal .lna-fan-mvp{display:flex;flex-direction:column;gap:5px;padding:0 12px 13px;border:1px solid rgba(245,115,187,.64);border-radius:13px;background:radial-gradient(ellipse at 50% 65%,rgba(210,60,145,.17),transparent 67%),linear-gradient(145deg,#251e37,#142239);color:#ffaad6;box-shadow:inset 0 0 22px rgba(247,93,178,.05)}
+.lna-fan-modal .lna-fan-mvp .lna-fan-streak-panel{width:calc(100% + 24px);box-sizing:border-box;margin:0 0 5px}
+.lna-fan-modal .lna-fan-mvp-emblem{display:grid;place-items:center;width:52px;height:52px;margin:1px 0;border:1px solid rgba(255,133,201,.7);border-radius:50%;background:radial-gradient(circle,rgba(242,89,176,.25),rgba(226,83,164,.04));box-shadow:0 0 19px rgba(243,83,164,.17);color:#ff9bd0}
+.lna-fan-modal .lna-fan-mvp>strong{font-size:13px;letter-spacing:1.1px;color:#f9e8f3}
+.lna-fan-modal .lna-fan-mvp-count{font-size:44px;font-weight:950;color:#ff8bc8;text-shadow:0 0 18px rgba(241,89,170,.23)}
+.lna-fan-modal .lna-fan-mvp p{color:#e6c0d9}
+.lna-fan-modal .lna-fan-mvp>small{max-width:330px;color:#bdbbd2;font-size:10px;line-height:1.45}
+.lna-fan-modal .lna-fan-mvp>small b{color:#ffaad5}
+.lna-fan-modal .lna-fan-palmares-totals{gap:8px;margin-bottom:12px}
+.lna-fan-modal .lna-fan-palmares-totals>div{padding:11px 5px;border:1px solid rgba(237,107,180,.58);border-radius:11px;background:radial-gradient(ellipse at 50% 0%,rgba(226,69,156,.19),transparent 75%),linear-gradient(140deg,#292038,#17263b);box-shadow:inset 0 0 14px rgba(250,94,180,.05);color:#ff91c9}
+.lna-fan-modal .lna-fan-palmares-totals strong{font-size:28px;color:#fff}
+.lna-fan-modal .lna-fan-palmares-totals small{color:#d2c4d7}
+.lna-fan-modal .lna-fan-palmares h3{display:flex;align-items:center;justify-content:center;gap:7px;color:#ff9dce;letter-spacing:1.2px;margin:0 0 9px}
+.lna-fan-modal .lna-fan-cup-grid{gap:7px}
+.lna-fan-modal .lna-fan-cup{min-height:76px;padding:8px 4px;border:1px solid #3e4965;border-radius:10px;background:linear-gradient(145deg,#1c2940,#131e30);color:#7884a5}
+.lna-fan-modal .lna-fan-cup.earned{border-color:#ff88c7;background:radial-gradient(ellipse at 50% 0%,rgba(240,88,168,.2),transparent 80%),#211f35;color:#ffa4d2;box-shadow:0 0 12px rgba(242,87,170,.12)}
+.lna-fan-modal .lna-fan-cup.earned strong{color:#fff}
+.lna-fan-modal .lna-fan-palmares-hint{padding:9px;border:1px solid rgba(124,91,146,.32);border-radius:9px;background:rgba(16,28,45,.75);color:#bdb6ce}
+@media(max-width:390px){.lna-fan-modal .lna-fan-cup{min-height:70px}.lna-fan-modal .lna-fan-mvp{padding-left:9px;padding-right:9px}.lna-fan-modal .lna-fan-mvp .lna-fan-streak-panel{width:calc(100% + 18px)}}
