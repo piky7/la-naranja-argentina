@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Check } from "lucide-react";
 import "./FanLevel.css";
@@ -52,6 +52,8 @@ function PlayerJersey({ name, number }) {
 }
 
 export default function FanLevel() {
+  const modalRef = useRef(null);
+  useEffect(() => { if (modalRef.current) modalRef.current.scrollTop = 0; }, [editingProfile, activeView]);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
   const [nameDraft, setNameDraft] = useState("");
@@ -198,7 +200,7 @@ export default function FanLevel() {
         </section>
       </div>}
       {open && introStep === null && <div className="lna-fan-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-        <section className="lna-fan-modal" role="dialog" aria-modal="true" aria-labelledby="lna-fan-title">
+        <section ref={modalRef} className={`lna-fan-modal ${activeView === "palmares" ? "lna-fan-modal-palmares" : ""}`} role="dialog" aria-modal="true" aria-labelledby="lna-fan-title">
           <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>
           <div className="lna-fan-gamer-heading">
             <span className="lna-fan-gamer-trophy"><Trophy size={23} aria-hidden="true" /></span>
