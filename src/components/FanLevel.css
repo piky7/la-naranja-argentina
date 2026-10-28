@@ -293,3 +293,12 @@
 .lna-fan-modal .lna-fan-cup.earned strong{color:#fff}
 .lna-fan-modal .lna-fan-palmares-hint{padding:9px;border:1px solid rgba(124,91,146,.32);border-radius:9px;background:rgba(16,28,45,.75);color:#bdb6ce}
 @media(max-width:390px){.lna-fan-modal .lna-fan-cup{min-height:70px}.lna-fan-modal .lna-fan-mvp{padding-left:9px;padding-right:9px}.lna-fan-modal .lna-fan-mvp .lna-fan-streak-panel{width:calc(100% + 18px)}}
+
+/* Trofeos LNA: escalado nítido y diferenciación de premios bloqueados */
+.lna-fan-modal .lna-fan-cup{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.lna-fan-modal .lna-fan-trophy-image{display:block;width:46px;height:58px;object-fit:contain;opacity:.4;filter:grayscale(1) brightness(.7);transition:filter .2s,opacity .2s}
+.lna-fan-modal .lna-fan-cup.earned .lna-fan-trophy-image{opacity:1;filter:drop-shadow(0 0 7px rgba(255,125,196,.3))}
+.lna-fan-modal .lna-fan-cup strong{font-size:10px;line-height:1.2}
+.lna-fan-modal .lna-fan-mvp-emblem{width:74px;height:92px;border:0;border-radius:0;background:none;box-shadow:none}
+.lna-fan-modal .lna-fan-mvp-trophy-image{display:block;width:74px;height:92px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,121,190,.3))}
+@media(max-height:740px){.lna-fan-modal .lna-fan-trophy-image{height:47px;width:40px}.lna-fan-modal .lna-fan-mvp-emblem,.lna-fan-modal .lna-fan-mvp-trophy-image{height:72px;width:64px}}
