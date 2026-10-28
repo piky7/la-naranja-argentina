@@ -39,7 +39,7 @@ async function calculateRewards(db, fixture, visitorId) {
   const now = Date.now();
   for (const g of games) {
     const vote = voteMap.get(g.id);
-    if (vote) points += 5;
+    // Los puntos se acreditan solo al finalizar el partido.
     // No evaluar rachas ni ausencias antes del inicio del partido.
     if (Date.parse(g.startsAt) > now) continue;
     const completed = g.finished === true && Number.isFinite(g.homeScore) && Number.isFinite(g.awayScore);
@@ -57,19 +57,17 @@ async function calculateRewards(db, fixture, visitorId) {
     missed=0;
     const winner = g.homeScore > g.awayScore ? g.homeTeam : g.awayTeam;
     if (vote === winner) {
-      wins++; losses=0; points+=10;
+      wins++; losses=0; points+=15;
       bestStreak=Math.max(bestStreak,wins);
       if (wins === 3) points+=15;
       if (wins === 5) points+=30;
       if (wins % 10 === 0) mvps++;
     } else {
-      wins=0; losses++;
+      wins=0; losses++; points+=5;
       if (losses % 3 === 0) points-=5;
     }
   }
-  // Preservar participación de votos que ya no aparecen en el fixture.
-  const knownIds = new Set(games.map(g => g.id));
-  for (const id of voteMap.keys()) if (!knownIds.has(id)) points+=5;
+  // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
   return {points:Math.max(0,points),mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed};
 }
 async function getRewards(db, visitorId) {
