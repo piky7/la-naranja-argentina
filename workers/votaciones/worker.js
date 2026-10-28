@@ -41,21 +41,23 @@ async function calculateRewards(db, fixture, visitorId) {
   let seasonPoints=0, categoryIndex=0, cups=0, descents=0, bestCategory=0;
   const cupCounts=Array(categories.length).fill(0);
   const records=Array(categories.length).fill(0);
-  let currentStay=0;
+  let currentStay=0, categoryWinStreak=0;
   const moves=[];
-  const updateCareer=(g,wasWrong)=>{
+  const updateCareer=(g,wasWrong,wasCorrect=false)=>{
+    categoryWinStreak=wasCorrect ? categoryWinStreak+1 : 0;
     const before=categoryIndex;
     const directLimit=categoryIndex===5?2:categoryIndex===4?3:categoryIndex===3?4:categoryIndex===2?5:Infinity;
     if(wasWrong && losses===directLimit && categoryIndex>0){
       categoryIndex--;
       seasonPoints=0;
       losses=0; // Nueva categoría: la racha de descenso comienza de cero.
-    }else if(categoryIndex<categories.length-1 && seasonPoints>=categories[categoryIndex].goal){
+    }else if(categoryIndex<categories.length-1 && (seasonPoints>=categories[categoryIndex].goal || (categoryIndex===3 && categoryWinStreak>=4) || (categoryIndex===4 && categoryWinStreak>=5))){
       categoryIndex++;
       seasonPoints=0;
     }
     if(categoryIndex!==before){
       currentStay=0;
+      categoryWinStreak=0;
       if(categoryIndex>before){
         for(let i=before;i<categoryIndex;i++){cups++;cupCounts[i]++;moves.push({type:"promotion",category:categories[i].name,gameId:g.id});}
       }else{
@@ -101,7 +103,7 @@ async function calculateRewards(db, fixture, visitorId) {
       if (wins === 5) {points+=30;seasonPoints+=30;}
       if (wins % 10 === 0) mvps++;
       perGame.set(g.id,{earned:wins === 3 ? 30 : wins === 5 ? 45 : 15,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
-      updateCareer(g,false);
+      updateCareer(g,false,true);
     } else {
       wins=0; losses++; points+=5; seasonPoints+=5;
       perGame.set(g.id,{earned:5,medal:null,streak:losses});
@@ -109,7 +111,7 @@ async function calculateRewards(db, fixture, visitorId) {
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
-  return {points:Math.max(0,points),seasonPoints,mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,currentStay,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
+  return {points:Math.max(0,points),seasonPoints,mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
 }
 async function getRewards(db, visitorId) {
   const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
