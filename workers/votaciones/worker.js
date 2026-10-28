@@ -52,7 +52,6 @@ async function calculateRewards(db, fixture, visitorId) {
     if (g.homeScore === g.awayScore) { wins=0; losses=0; missed=0; continue; }
     if (!vote) {
       wins=0; losses=0; missed++;
-      if (missed % 5 === 0) points -= 10;
       continue;
     }
     missed=0;
