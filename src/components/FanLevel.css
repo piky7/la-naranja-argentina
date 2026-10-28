@@ -179,3 +179,25 @@
 
 .lna-fan-historical{margin:0 0 7px;text-align:center;color:#d7b6d2;font-size:12px}
 .lna-fan-historical b{color:#f6c3df}
+
+/* Tutorial de ligas: seis filas compactas, sin desborde horizontal */
+.lna-fan-intro{overflow-x:hidden}
+.lna-fan-intro-leagues{gap:5px;margin:9px 0}
+.lna-fan-intro-leagues span{display:grid;grid-template-columns:minmax(80px,.85fr) minmax(0,1.65fr) minmax(0,1.1fr);align-items:center;gap:7px;padding:7px 8px;min-width:0}
+.lna-fan-intro-leagues span strong{font-size:11px;color:#f6e5f0;line-height:1.2}
+.lna-fan-intro-leagues span small{font-size:10px;line-height:1.25;text-align:left;color:#f6a7d0;overflow-wrap:anywhere}
+.lna-fan-intro-leagues>small{font-size:10px;line-height:1.35;margin:2px 0}
+@media(max-width:480px){
+ .lna-fan-intro{padding:17px 13px 13px;width:min(100%,400px)}
+ .lna-fan-intro-icon{width:27px;height:27px;margin-bottom:2px}
+ .lna-fan-intro h2{font-size:17px;margin:7px 0}
+ .lna-fan-intro-leagues{gap:4px;margin:7px 0}
+ .lna-fan-intro-leagues span{grid-template-columns:minmax(65px,.8fr) minmax(0,1.55fr) minmax(0,1.1fr);gap:5px;padding:6px}
+ .lna-fan-intro-leagues span strong{font-size:10px}
+ .lna-fan-intro-leagues span small{font-size:9px}
+}
+@media(max-height:740px){
+ .lna-fan-intro-leagues span{padding-top:4px;padding-bottom:4px}
+ .lna-fan-intro-leagues>small{font-size:9px}
+ .lna-fan-intro h2{margin:5px 0}
+}
