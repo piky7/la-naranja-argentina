@@ -107,7 +107,7 @@ export default function FanLevel() {
       <button className="lna-fan-bar" type="button" onClick={openCareer} aria-label="Ver mi carrera LNA">
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
-          <span className="lna-fan-line"><strong>{level.name}</strong><b>{points === null ? "—" : score} PTS</b></span>
+          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{points === null ? "—" : score} PTS</b></span>
           <span className="lna-fan-track"><span style={{ width: `${percent}%` }} /></span>
         </span>
         <ChevronRight size={16} aria-hidden="true" />
