@@ -729,3 +729,10 @@
   .logo-image{width:68px;height:68px;max-width:100%;object-fit:contain;transform:none}
   .logo:hover .logo-image{transform:none}
 }
+
+/* iOS PWA: separar el contenido del header del degradado superior del sistema. */
+@media (max-width: 768px) and (display-mode: standalone) {
+  .header-container {
+    padding-top: 14px;
+  }
+}
