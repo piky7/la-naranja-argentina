@@ -48,7 +48,7 @@ async function calculateRewards(db, fixture, visitorId) {
     const pointRank=rankForPoints(Math.max(0,points));
     if(pointRank<categoryIndex){categoryIndex=pointRank;lockPromotion=false;recoveryWins=0;}
     const directLimit=categoryIndex===5?2:categoryIndex===4?3:categoryIndex===3?4:categoryIndex===2?5:Infinity;
-    if(wasWrong && losses>=directLimit && categoryIndex>0){
+    if(wasWrong && losses===directLimit && categoryIndex>0){
       categoryIndex--;
       lockPromotion=true;
       recoveryWins=0;
