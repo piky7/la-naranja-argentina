@@ -9,6 +9,9 @@ const KEY = "lna-vote-visitor-id";
 const INTRO_KEY = "lna-career-intro-seen-v1";
 const PLAYER_NAME_KEY = "lna-career-player-name-v1";
 const PLAYER_NUMBER_KEY = "lna-career-player-number-v1";
+const CAREER_EVENTS_KEY = "lna-career-events-seen-v1";
+const careerEventId = event => `${event.gameId}:${event.type}:${event.category}`;
+const readSeenEvents = () => { try { const value = JSON.parse(localStorage.getItem(CAREER_EVENTS_KEY) || "null"); return Array.isArray(value) ? value : null; } catch { return null; } };
 const readPlayerNumber = () => { try { return localStorage.getItem(PLAYER_NUMBER_KEY) ?? ""; } catch { return ""; } };
 const readPlayerName = () => { try { return localStorage.getItem(PLAYER_NAME_KEY) || ""; } catch { return ""; } };
 const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
@@ -53,6 +56,9 @@ function PlayerJersey({ name, number }) {
 
 export default function FanLevel() {
   const modalRef = useRef(null);
+  const seenEventsRef = useRef(readSeenEvents());
+  const [pendingEvents, setPendingEvents] = useState([]);
+  const [eventNotice, setEventNotice] = useState(null);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
   const [nameDraft, setNameDraft] = useState("");
@@ -86,6 +92,14 @@ export default function FanLevel() {
   const [introStep, setIntroStep] = useState(null);
   const finishIntro = () => { try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* Sin almacenamiento disponible. */ } setIntroStep(null); };
   const openCareer = () => { refresh(); setActiveView("levels"); setOpen(true); try { if (localStorage.getItem(INTRO_KEY) !== "1") setIntroStep(0); } catch { setIntroStep(0); } };
+  const dismissEvent = () => {
+    if (!eventNotice) return;
+    const seen = [...new Set([...(seenEventsRef.current || []), careerEventId(eventNotice)])].slice(-250);
+    seenEventsRef.current = seen;
+    try { localStorage.setItem(CAREER_EVENTS_KEY, JSON.stringify(seen)); } catch { /* El evento puede volver a mostrarse si no hay almacenamiento. */ }
+    setEventNotice(null);
+    setPendingEvents(previous => previous.filter(item => careerEventId(item) !== careerEventId(eventNotice)));
+  };
   const [predictions, setPredictions] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState(false);
@@ -103,6 +117,18 @@ export default function FanLevel() {
         setSeasonPoints(Number.isFinite(result.seasonPoints) ? result.seasonPoints : result.points);
         setMvps(Number(result.mvps) || 0);
         setCareer(result.career || null);
+        if (Array.isArray(result.career?.moves)) {
+          const moves = [...result.career.moves].reverse().filter(item => item?.gameId && item?.type && item?.category);
+          if (seenEventsRef.current === null) {
+            // Primera visita tras instalar la función: no reproducir logros antiguos.
+            const baseline = moves.map(careerEventId);
+            seenEventsRef.current = baseline;
+            try { localStorage.setItem(CAREER_EVENTS_KEY, JSON.stringify(baseline)); } catch {}
+          } else {
+            const seen = new Set(seenEventsRef.current);
+            setPendingEvents(moves.filter(item => !seen.has(careerEventId(item))));
+          }
+        }
         setStreaks({winStreak:result.winStreak || 0,lossStreak:result.lossStreak || 0,missedStreak:result.missedStreak || 0});
       }
     } catch { /* Conservar los últimos puntos conocidos si falla la conexión. */ }
@@ -144,6 +170,10 @@ export default function FanLevel() {
   }, [open, activeView, refreshHistory]);
 
   useEffect(() => {
+    if (open && introStep === null && !editingProfile && !eventNotice && pendingEvents.length) setEventNotice(pendingEvents[0]);
+  }, [open, introStep, editingProfile, eventNotice, pendingEvents]);
+
+  useEffect(() => {
     if (!open) return;
     const onKey = (event) => { if (event.key === "Escape") setOpen(false); };
     window.addEventListener("keydown", onKey);
@@ -172,6 +202,18 @@ export default function FanLevel() {
         </span>
         <ChevronRight size={16} aria-hidden="true" />
       </button>
+      {open && introStep === null && eventNotice && createPortal(<div className="lna-fan-achievement-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) dismissEvent(); }}>
+        <section className={`lna-fan-achievement ${eventNotice.type === "descent" ? "is-descent" : "is-promotion"}`} role="dialog" aria-modal="true" aria-labelledby="lna-fan-achievement-title">
+          <div className="lna-fan-achievement-rays" aria-hidden="true" />
+          <button type="button" className="lna-fan-achievement-close" onClick={dismissEvent} aria-label="Cerrar notificación"><X size={20}/></button>
+          <span className="lna-fan-achievement-kicker">{eventNotice.type === "descent" ? "CAMBIO DE CATEGORÍA" : "NUEVO LOGRO DESBLOQUEADO"}</span>
+          <h2 id="lna-fan-achievement-title">{eventNotice.type === "descent" ? "DESCENDISTE" : eventNotice.type === "legend-cup" ? "¡OTRA COPA!" : "¡CAMPEÓN!"}</h2>
+          {eventNotice.type === "descent" ? <div className="lna-fan-achievement-fall"><span aria-hidden="true">↓</span><strong>{eventNotice.category}</strong></div> : <img className="lna-fan-achievement-trophy" src={TROPHY_IMAGES[Math.max(0, LEVELS.findIndex(item => item.name === eventNotice.category))]} alt={`Copa ${eventNotice.category}`} />}
+          <strong className="lna-fan-achievement-category">{eventNotice.category}</strong>
+          <p>{eventNotice.type === "descent" ? "Una etapa difícil, pero tu carrera continúa. ¡Volvé más fuerte!" : eventNotice.type === "legend-cup" ? "¡Sumaste otra copa por tu permanencia en Leyenda LNA!" : `Ganaste la copa de ${eventNotice.category} y ascendiste a ${LEVELS[Math.min(LEVELS.length - 1, LEVELS.findIndex(item => item.name === eventNotice.category) + 1)]?.name}.`}</p>
+          <button type="button" className="lna-fan-achievement-continue" onClick={dismissEvent}>{pendingEvents.length > 1 ? "Siguiente logro" : "Continuar mi carrera"}</button>
+        </section>
+      </div>, document.body)}
       {open && introStep !== null && <div className="lna-fan-backdrop lna-fan-intro-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) finishIntro(); }}>
         <section className="lna-fan-intro" role="dialog" aria-modal="true" aria-labelledby="lna-career-intro-title">
           <button className="lna-fan-close" type="button" onClick={finishIntro} aria-label="Cerrar presentación"><X size={20}/></button>
