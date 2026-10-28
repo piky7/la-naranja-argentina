@@ -36,23 +36,23 @@ async function calculateRewards(db, fixture, visitorId) {
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id));
   let points = 0, wins = 0, losses = 0, missed = 0, mvps = 0, bestStreak = 0;
-  const categories = [{name:"Liga de Desarrollo",points:0},{name:"Liga Federal",points:50},{name:"Liga Argentina",points:150},{name:"Liga Nacional",points:300},{name:"Estrella LNB",points:500},{name:"Leyenda LNB",points:1000}];
-  // El histórico conserva todos los puntos ganados; la temporada define la categoría.
+  const categories = [{name:"Liga de Desarrollo",goal:50},{name:"Liga Federal",goal:100},{name:"Liga Argentina",goal:150},{name:"Liga Nacional",goal:200},{name:"Estrella LNB",goal:300},{name:"Leyenda LNA",goal:null}];
+  // Cada categoría tiene su propio puntaje desde cero; el histórico nunca se reinicia.
   let seasonPoints=0, categoryIndex=0, cups=0, descents=0, bestCategory=0;
   const cupCounts=Array(categories.length).fill(0);
   const records=Array(categories.length).fill(0);
   let currentStay=0;
   const moves=[];
-  const rankForPoints=score=>categories.reduce((rank,c,i)=>score>=c.points?i:rank,0);
   const updateCareer=(g,wasWrong)=>{
     const before=categoryIndex;
     const directLimit=categoryIndex===5?2:categoryIndex===4?3:categoryIndex===3?4:categoryIndex===2?5:Infinity;
     if(wasWrong && losses===directLimit && categoryIndex>0){
       categoryIndex--;
-      seasonPoints=categories[categoryIndex].points;
+      seasonPoints=0;
       losses=0; // Nueva categoría: la racha de descenso comienza de cero.
-    }else{
-      categoryIndex=rankForPoints(seasonPoints);
+    }else if(categoryIndex<categories.length-1 && seasonPoints>=categories[categoryIndex].goal){
+      categoryIndex++;
+      seasonPoints=0;
     }
     if(categoryIndex!==before){
       currentStay=0;
@@ -109,7 +109,7 @@ async function calculateRewards(db, fixture, visitorId) {
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
-  return {points:Math.max(0,points),seasonPoints,mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
+  return {points:Math.max(0,points),seasonPoints,mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
 }
 async function getRewards(db, visitorId) {
   const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
