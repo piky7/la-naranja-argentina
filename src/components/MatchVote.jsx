@@ -4,6 +4,14 @@ import "./MatchVote.css";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/votos";
 const KEY = "lna-vote-visitor-id";
+const LEVELS = [
+  { name: "Rookie", points: 0 },
+  { name: "Hincha", points: 50 },
+  { name: "Sexto hombre", points: 150 },
+  { name: "Titular", points: 300 },
+  { name: "All-Star", points: 500 },
+  { name: "Leyenda LNA", points: 1000 },
+];
 
 function getVisitorId() {
   try {
@@ -64,6 +72,11 @@ export default function MatchVote({ match }) {
     finally { setBusy(false); }
   }
 
+  const points = Number(data.points || 0);
+  const levelIndex = LEVELS.reduce((index, level, i) => points >= level.points ? i : index, 0);
+  const level = LEVELS[levelIndex];
+  const nextLevel = LEVELS[levelIndex + 1];
+  const progress = nextLevel ? Math.min(100, Math.max(0, (points - level.points) * 100 / (nextLevel.points - level.points))) : 100;
   const teamInfo = teamId => teams.find(team => team.id === teamId);
   const total = (data.home?.votes || 0) + (data.away?.votes || 0);
   const percent = votes => total ? Math.round(votes * 100 / total) : 0;
@@ -80,6 +93,11 @@ export default function MatchVote({ match }) {
             {data.voted && <span className="lna-vote-bar" style={{ width: `${percent(result?.votes || 0)}%` }} />}
           </button>
         ))}
+      </div>
+      <div className="lna-vote-rewards" aria-label="Tus puntos y nivel de hincha">
+        <div className="lna-vote-rewards-heading"><strong>🏀 {level.name}</strong><span>{points} PTS</span></div>
+        <div className="lna-vote-rewards-track" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} aria-label="Progreso al próximo nivel"><span style={{ width: `${progress}%` }} /></div>
+        <small>{nextLevel ? `${nextLevel.points - points} pts para ${nextLevel.name}` : "¡Alcanzaste el nivel máximo!"} · +10 pts por pronóstico</small>
       </div>
       {error && <small role="status">{error}</small>}
       {data.voted && <small>{data.open ? "Tu voto quedó registrado" : "Votación cerrada"}</small>}
