@@ -42,6 +42,18 @@ export default {
         return json({ ok: true, servicio: "LNA Votaciones", database: "conectada" }, 200, cors);
       } catch { return fail("Base de datos no disponible", 503); }
     }
+    if (url.pathname === "/api/puntos" && request.method === "GET") {
+      const visitorId = url.searchParams.get("visitanteId");
+      if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
+      if (!env.DB) return fail("Base de datos no configurada", 503);
+      try {
+        const row = await env.DB.prepare("SELECT COUNT(*) AS total FROM votos WHERE visitante_id=?").bind(visitorId).first();
+        return json({ ok: true, points: Number(row?.total || 0) * 10 }, 200, cors);
+      } catch (error) {
+        console.error("LNA puntos:", error);
+        return fail("No se pudieron consultar los puntos", 503);
+      }
+    }
     if (url.pathname !== "/api/votos") return fail("Ruta inexistente", 404);
     if (!["GET", "POST"].includes(request.method)) return fail("Método no permitido", 405);
     if (request.method === "POST" && request.headers.get("origin") !== SITE) return fail("Origen no permitido", 403);
