@@ -154,8 +154,8 @@ export default function FanLevel() {
           {activeView === "palmares" ? <div className="lna-fan-palmares">
             <div className="lna-fan-palmares-totals"><div><Trophy size={22}/><strong>{career?.cups ?? "—"}</strong><small>Copas ganadas</small></div><div><span aria-hidden="true">↓</span><strong>{career?.descents ?? "—"}</strong><small>Descensos</small></div></div>
             <h3>VITRINA DE COPAS</h3>
-            <div className="lna-fan-cup-grid">{LEVELS.slice(0,-1).map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><Trophy size={20}/><strong>{item.name}</strong><small>{(career?.cupCounts?.[i+1] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
-            <p className="lna-fan-palmares-hint">Cada ascenso suma la copa de la liga que acabás de disputar. Las copas y los récords se conservan aunque desciendas.</p>
+            <div className="lna-fan-cup-grid">{LEVELS.map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><Trophy size={20}/><strong>{item.name}</strong><small>{(career?.cupCounts?.[i+1] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
+            <p className="lna-fan-palmares-hint">Cada ascenso suma la copa de la liga disputada. En Leyenda LNA ganás otra copa cada 10 partidos consecutivos de permanencia. Las copas nunca se pierden.</p>
           </div> : activeView === "mvp" ? <div className="lna-fan-mvp">
             <Trophy size={38} aria-hidden="true" />
             <strong>MVP DE PRONÓSTICOS</strong>
