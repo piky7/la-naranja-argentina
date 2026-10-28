@@ -117,7 +117,12 @@ export default function FanLevel() {
           <strong className="lna-fan-current">Nivel {index + 1} · {level.name}</strong>
           <div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div>
           <p className="lna-fan-next">{next ? `Te faltan ${next.points - score} puntos para ${next.name}` : "¡Alcanzaste el nivel máximo!"}</p>
-          <p className="lna-fan-how"><strong>Errado +5</strong> · <strong>Acertado +15</strong> · <strong>3 seguidos +30</strong> · <strong>5 seguidos +45</strong>. Los puntos se suman al terminar el partido.</p>
+            <div className="lna-fan-streak-panel">
+              <strong>MI RACHA ACTUAL</strong>
+              <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} ${streaks.lossStreak === 1 ? "error seguido" : "errores seguidos"}` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} ${streaks.missedStreak === 1 ? "partido sin votar" : "partidos sin votar"}` : "Sin racha activa"}</span>
+              <small>{streaks.winStreak === 2 ? "¡Estás a un acierto de sumar 30 PTS!" : streaks.winStreak === 4 ? "¡Estás a un acierto de sumar 45 PTS!" : streaks.winStreak === 9 ? "¡Estás a un acierto del MVP!" : streaks.lossStreak === 2 ? "Cuidado: otro error activa la penalización de −5 PTS." : streaks.missedStreak === 4 ? "No votar corta las rachas, pero no descuenta puntos." : streaks.winStreak > 0 && streaks.winStreak < 3 ? `Te faltan ${3-streaks.winStreak} aciertos para los 30 PTS.` : streaks.winStreak >= 3 && streaks.winStreak < 5 ? `Te faltan ${5-streaks.winStreak} aciertos para los 45 PTS.` : streaks.winStreak >= 5 ? `Te faltan ${10-streaks.winStreak%10} aciertos para otro MVP.` : streaks.lossStreak > 0 ? `Otro error te acerca a la penalización de −5 PTS.` : streaks.missedStreak > 0 ? `Llevás ${streaks.missedStreak} partidos sin votar.` : "Acertá partidos consecutivos para conseguir premios."}</small>
+            </div>
+          <p className="lna-fan-how"><strong>Errado +5</strong> · <strong>Acertado +15</strong> · <strong>3 seguidos +30</strong> · <strong>5 seguidos +45</strong>. <strong>3 errores seguidos: −5 PTS</strong>. Los puntos se suman al terminar el partido.</p>
           <div className="lna-fan-tabs" role="tablist" aria-label="Información de hincha">
             <button type="button" role="tab" aria-selected={activeView === "levels"} className={activeView === "levels" ? "active" : ""} onClick={() => setActiveView("levels")}>Mis niveles</button>
             <button type="button" role="tab" aria-selected={activeView === "predictions"} className={activeView === "predictions" ? "active" : ""} onClick={() => setActiveView("predictions")}>Pronósticos</button>
@@ -133,11 +138,7 @@ export default function FanLevel() {
             {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
               <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}</strong><small>{item.points} PTS</small>
             </div>)}
-            <div className="lna-fan-streak-panel">
-              <strong>MI RACHA ACTUAL</strong>
-              <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} errores seguidos` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} partidos sin votar` : "Sin racha activa"}</span>
-              <small>{streaks.winStreak === 2 ? "¡Estás a un acierto de sumar 30 PTS!" : streaks.winStreak === 4 ? "¡Estás a un acierto de sumar 45 PTS!" : streaks.winStreak === 9 ? "¡Estás a un acierto del MVP!" : streaks.lossStreak === 2 ? "Cuidado: otro error activa la penalización de −5 PTS." : streaks.missedStreak === 4 ? "No votar corta las rachas, pero no descuenta puntos." : streaks.winStreak > 0 && streaks.winStreak < 3 ? `Te faltan ${3-streaks.winStreak} aciertos para los 30 PTS.` : streaks.winStreak >= 3 && streaks.winStreak < 5 ? `Te faltan ${5-streaks.winStreak} aciertos para los 45 PTS.` : streaks.winStreak >= 5 ? `Te faltan ${10-streaks.winStreak%10} aciertos para otro MVP.` : streaks.lossStreak > 0 ? `Otro error te acerca a la penalización de −5 PTS.` : streaks.missedStreak > 0 ? `Llevás ${streaks.missedStreak} partidos sin votar.` : "Acertá partidos consecutivos para conseguir premios."}</small>
-            </div>
+
           </div> : <div className="lna-fan-history">
             {historyLoading ? <p className="lna-fan-history-message">Cargando tus votaciones…</p> : historyError ? <div className="lna-fan-history-message">No se pudo cargar el historial. <button type="button" onClick={refreshHistory}>Reintentar</button></div> : predictions.length === 0 ? <p className="lna-fan-history-message">Todavía no tenés pronósticos registrados.</p> : <>
               <div className="lna-fan-stats">
