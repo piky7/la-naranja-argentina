@@ -126,6 +126,25 @@ const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selected
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
 const [upcomingTab, setUpcomingTab] = useState("planteles");
   const [upcomingVoteStatus, setUpcomingVoteStatus] = useState(null);
+  useEffect(() => {
+    if (!selectedUpcomingMatch || upcomingLive) return;
+    const id = `${selectedUpcomingMatch.date}-${selectedUpcomingMatch.homeTeam}-${selectedUpcomingMatch.awayTeam}`;
+    let cancelled = false;
+    const check = async () => {
+      try {
+        const visitorId = localStorage.getItem("lna-vote-visitor-id");
+        if (!visitorId) { if (!cancelled) setUpcomingVoteStatus({ voted: false, open: true }); return; }
+        const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/votos?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`);
+        if (!response.ok) throw new Error("No disponible");
+        const result = await response.json();
+        if (!cancelled) setUpcomingVoteStatus({ voted: result.voted, open: result.open });
+      } catch { if (!cancelled) setUpcomingVoteStatus({ error: true }); }
+    };
+    setUpcomingVoteStatus(null);
+    check();
+    window.addEventListener("lna-vote-updated", check);
+    return () => { cancelled = true; window.removeEventListener("lna-vote-updated", check); };
+  }, [selectedUpcomingMatch?.date, selectedUpcomingMatch?.homeTeam, selectedUpcomingMatch?.awayTeam, upcomingLive]);
 useEffect(() => { setUpcomingTab("planteles"); setUpcomingVoteStatus(null); }, [selectedUpcomingMatch?.id]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
@@ -1965,8 +1984,8 @@ const finishedMatch = {
 
             <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
             {!upcomingLive && <button type="button" className={`upcoming-career-status ${upcomingVoteStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
-              <span>{upcomingVoteStatus?.voted ? "✓ PARTIDO VOTADO" : upcomingVoteStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
-              <small>{upcomingVoteStatus?.voted ? "Ganador registrado" : "Entrá a Mi Carrera para pronosticar"}</small>
+              <span>{upcomingVoteStatus === null ? "◷ CONSULTANDO…" : upcomingVoteStatus?.error ? "◷ NO DISPONIBLE" : upcomingVoteStatus?.voted ? "✓ PARTIDO VOTADO" : upcomingVoteStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
+              <small>{upcomingVoteStatus === null ? "Cargando tu pronóstico" : upcomingVoteStatus?.error ? "Revisá tu conexión" : upcomingVoteStatus?.voted ? "Ganador registrado" : "Entrá a Mi Carrera para pronosticar"}</small>
               <span aria-hidden="true">›</span>
             </button>}
             {upcomingLive && <>
@@ -1978,9 +1997,9 @@ const finishedMatch = {
                 <LiveRosters homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} matches={matches} onPlayerClick={setSelectedPlayer} />}
             </>}
             {!upcomingLive && <>
-            <div className="upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
-              <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
-              <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores destacados</button>
+            <div className="upcoming-tabs upcoming-tabs-three" role="tablist" aria-label="Información del próximo partido">
+              <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa</button>
+              <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores</button>
               <button type="button" role="tab" aria-selected={upcomingTab === "carrera"} className={upcomingTab === "carrera" ? "is-active" : ""} onClick={() => setUpcomingTab("carrera")}>🏆 Mi Carrera</button>
             </div>
             </>}
@@ -1988,8 +2007,8 @@ const finishedMatch = {
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
               <div className="upcoming-career-mvp-note"><strong>★ ¿QUIÉN SERÁ EL MVP? · +20 PTS</strong><small>La selección de MVP estará disponible cuando se integre el registro de jugadores y puntos.</small></div>
             </div>}
-            {(!upcomingLive || upcomingTab === "comparativa") && <section className="match-highlighted-section">
-              {(upcomingLive || upcomingTab !== "jugadores") && (<div className="upcoming-tab-panel" role="tabpanel">
+            {(upcomingLive || upcomingTab === "comparativa") && <section className="match-highlighted-section">
+              {(upcomingLive || upcomingTab === "comparativa") && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
 <div className="upcoming-team-comparison upcoming-official-comparison" style={getMatchColorStyle(selectedUpcomingMatch.homeTeam, selectedUpcomingMatch.awayTeam)}>
