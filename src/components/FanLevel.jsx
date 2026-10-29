@@ -321,10 +321,14 @@ export default function FanLevel() {
           </div> : <div className="lna-fan-history">
             <div className="lna-fan-section-title"><Target size={17} aria-hidden="true" /><span>MIS PRONÓSTICOS</span></div>
             {historyLoading ? <p className="lna-fan-history-message">Cargando tus votaciones…</p> : historyError ? <div className="lna-fan-history-message">No se pudo cargar el historial. <button type="button" onClick={refreshHistory}>Reintentar</button></div> : predictions.length === 0 ? <p className="lna-fan-history-message">Todavía no tenés pronósticos registrados.</p> : <>
-              <div className="lna-fan-stats">
+              <div className="lna-fan-stats lna-fan-stats-performance">
                 <span><b className="correct">{predictions.filter(p => p.status === "correct").length}</b> Acertados</span>
                 <span><b className="incorrect">{predictions.filter(p => p.status === "incorrect").length}</b> Errados</span>
                 <span><b>{predictions.filter(p => p.status === "pending").length}</b> Pendientes</span>
+                <span><b className="correct">{(() => {
+                  const settled = predictions.filter(p => p.status === "correct" || p.status === "incorrect");
+                  return settled.length ? `${Math.round(predictions.filter(p => p.status === "correct").length * 100 / settled.length)}%` : "—";
+                })()}</b> Efectividad</span>
               </div>
               <div className="lna-fan-history-list">
                 {predictions.slice(page * 6, page * 6 + 6).map(p => {
