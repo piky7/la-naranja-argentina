@@ -430,24 +430,25 @@ export default function FanLevel() {
                 })()}</b> Efectividad</span>
               </div>
               <div className="lna-fan-history-list">
-                {predictions.slice(page * 6, page * 6 + 6).map(p => {
+                {predictions.filter(p => p.status === "correct" || p.status === "incorrect").slice(page * 15, page * 15 + 15).map(p => {
                   const home = teams.find(t => t.id === p.homeTeam);
                   const away = teams.find(t => t.id === p.awayTeam);
-                  const chosen = teams.find(t => t.id === p.selected);
-                  const statusText = p.status === "correct" ? "✓" : p.status === "incorrect" ? "✕" : "·";
-                  return <div className={`lna-fan-prediction ${p.status} ${p.medal ? `medal-${p.medal}` : ""}`} key={p.partidoId}>
-                    <span className="lna-fan-prediction-status" aria-label={p.status === "correct" ? "Acertaste" : p.status === "incorrect" ? "Erraste" : "Pendiente"}>{statusText}</span>
+                  const mvpHit = p.mvpStatus === "correct";
+                  const earned = Number(p.earned ?? 0);
+                  return <div className={`lna-fan-prediction ${p.status}`} key={p.partidoId} title={`${home?.shortName || p.homeTeam} vs ${away?.shortName || p.awayTeam} · ${p.status === "correct" ? "Ganador acertado" : "Ganador errado"} · ${earned >= 0 ? "+" : ""}${earned} puntos${mvpHit ? " · MVP acertado (+20)" : ""}`}>
                     <span className="lna-fan-prediction-date">{p.partidoId.slice(5, 10).replace("-", "/")}</span>
+                    <span className="lna-fan-prediction-status" aria-label={p.status === "correct" ? "Acertado" : "Errado"}>{p.status === "correct" ? "✓" : "✕"}</span>
                     <div className="lna-fan-prediction-match">
-                      <span>{home?.logo && <img src={home.logo} alt="" />}{home?.shortName || p.homeTeam || "Local"}</span>
+                      {home?.logo ? <img src={home.logo} alt={home?.shortName || "Local"} /> : <span>{home?.shortName || "LOC"}</span>}
                       <b>{p.homeScore != null && p.awayScore != null ? `${p.homeScore}-${p.awayScore}` : "VS"}</b>
-                      <span>{away?.logo && <img src={away.logo} alt="" />}{away?.shortName || p.awayTeam || "Visitante"}</span>
+                      {away?.logo ? <img src={away.logo} alt={away?.shortName || "Visitante"} /> : <span>{away?.shortName || "VIS"}</span>}
                     </div>
-                    <small>Votaste: <strong>{chosen?.shortName || p.selected.replace(/-/g, " ")}</strong> <b className="lna-fan-earned">{p.earned == null ? "Pendiente" : `${p.earned >= 0 ? "+" : ""}${p.earned} PTS`}{p.medal === "gold" ? " 🥇" : p.medal === "silver" ? " 🥈" : p.medal === "bronze" ? " 🥉" : ""}</b></small>
+                    <strong className="lna-fan-earned">{earned >= 0 ? "+" : ""}{earned} PTS</strong>
+                    {mvpHit && <span className="lna-fan-mvp-hit" title="Acertaste el MVP: +20 puntos">★ MVP +20</span>}
                   </div>;
                 })}
               </div>
-              {predictions.length > 6 && <div className="lna-fan-pages"><button type="button" disabled={page === 0} onClick={() => setPage(v => v - 1)}>‹ Recientes</button><span>{page + 1} / {Math.ceil(predictions.length / 6)}</span><button type="button" disabled={(page + 1) * 6 >= predictions.length} onClick={() => setPage(v => v + 1)}>Anteriores ›</button></div>}
+              {predictions.filter(p => p.status === "correct" || p.status === "incorrect").length > 15 && <div className="lna-fan-pages"><button type="button" disabled={page === 0} onClick={() => setPage(v => v - 1)}>‹ Recientes</button><span>{page + 1} / {Math.ceil(predictions.filter(p => p.status === "correct" || p.status === "incorrect").length / 15)}</span><button type="button" disabled={(page + 1) * 15 >= predictions.filter(p => p.status === "correct" || p.status === "incorrect").length} onClick={() => setPage(v => v + 1)}>Anteriores ›</button></div>}
             </>}
           </div>}
           <p className="lna-fan-note">Los puntos están vinculados a este navegador. Si borrás sus datos o cambiás de dispositivo, podrías perder el acceso a tu progreso.</p>
