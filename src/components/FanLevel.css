@@ -472,3 +472,36 @@
   .lna-fan-modal .lna-fan-gamer-hero{padding:5px 7px}
   .lna-fan-modal .lna-fan-player-display-league{padding:2px 6px}
 }
+
+/* Mi Carrera · compactación móvil: seis categorías visibles, sin scroll añadido */
+@media(max-width:768px){
+ .lna-fan-modal{padding:8px 11px 9px}
+ .lna-fan-modal .lna-fan-gamer-heading{margin-bottom:3px}
+ .lna-fan-modal .lna-fan-player-profile-with-jersey{grid-template-columns:49px minmax(0,1fr);gap:7px;padding:3px 7px;margin:2px 0 4px}
+ .lna-fan-modal .lna-fan-player-jersey{width:47px;height:57px}
+ .lna-fan-modal .lna-fan-player-display-name{font-size:16px;line-height:1.1}
+ .lna-fan-modal .lna-fan-player-display-league{padding:1px 6px}
+ .lna-fan-modal .lna-fan-gamer-hero{margin:2px 0 3px;padding:4px 7px}
+ .lna-fan-modal .lna-fan-gamer-score .lna-fan-total{font-size:30px;line-height:1.05}
+ .lna-fan-modal .lna-fan-gamer-score .lna-fan-total span{font-size:12px}
+ .lna-fan-modal .lna-fan-gamer-score .lna-fan-historical{margin-top:2px;padding:2px 6px}
+ .lna-fan-modal .lna-fan-gamer-progress{margin:3px 0 4px}
+ .lna-fan-modal .lna-fan-next{padding:4px 7px;font-size:10px;line-height:1.2}
+ .lna-fan-modal .lna-fan-next .lna-fan-next-icon{flex-basis:23px;width:23px;height:23px}
+ .lna-fan-modal .lna-fan-next .lna-fan-next-icon svg{width:23px;height:23px}
+ .lna-fan-modal .lna-fan-tabs{margin:5px 0;gap:4px}
+ .lna-fan-modal .lna-fan-tabs button{padding:6px 2px}
+ .lna-fan-modal .lna-fan-streak-panel{min-height:45px;padding-top:5px;padding-bottom:5px;margin-bottom:5px}
+ .lna-fan-modal .lna-fan-levels{gap:4px}
+ .lna-fan-modal .lna-fan-level{min-height:35px;padding:4px 7px;gap:6px}
+ .lna-fan-modal .lna-fan-level>span{flex-basis:23px;width:23px;height:23px;font-size:11px}
+ .lna-fan-modal .lna-fan-level strong{font-size:11px}
+ .lna-fan-modal .lna-fan-record{margin-top:1px;font-size:9px}
+ .lna-fan-modal .lna-fan-level small{font-size:9px}
+ .lna-fan-modal .lna-fan-note{margin-top:5px;padding:4px 6px}
+}
+@media(max-width:390px){
+ .lna-fan-modal .lna-fan-gamer-score .lna-fan-total{font-size:28px}
+ .lna-fan-modal .lna-fan-level{gap:4px}
+ .lna-fan-modal .lna-fan-level small{font-size:8px}
+}
