@@ -63,7 +63,6 @@ export default function FanLevel() {
   const [pendingEvents, setPendingEvents] = useState([]);
   const [eventNotice, setEventNotice] = useState(null);
   const [rewardNotice, setRewardNotice] = useState(null);
-  const [hasNewRewards, setHasNewRewards] = useState(false);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
   const [nameDraft, setNameDraft] = useState("");
@@ -110,12 +109,11 @@ export default function FanLevel() {
       const rewarded = data.predictions.filter(p => p.earned != null && Number(p.earned) > 0);
       const snapshot = Object.fromEntries(rewarded.map(p => [p.partidoId, Number(p.earned)]));
       const previousRaw = localStorage.getItem(REWARD_SEEN_KEY);
-      if (previousRaw === null) { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); setHasNewRewards(false); return; }
+      if (previousRaw === null) { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); return; }
       let previous = {};
       try { previous = JSON.parse(previousRaw) || {}; } catch { /* Reestablecer seguimiento. */ }
       const changes = rewarded.filter(p => Number(p.earned) > Number(previous[p.partidoId] || 0));
       localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot));
-      setHasNewRewards(false);
       if (changes.length) {
         const total = changes.reduce((sum,p) => sum + Number(p.earned) - Number(previous[p.partidoId] || 0), 0);
         const reasons = changes.flatMap(p => {
@@ -148,33 +146,6 @@ export default function FanLevel() {
   const [historyError, setHistoryError] = useState(false);
   const [activeView, setActiveView] = useState("levels");
   useEffect(() => { if (modalRef.current) modalRef.current.scrollTop = 0; }, [editingProfile, activeView]);
-  // Detectar recompensas sin marcarlas como vistas: el aviso se conserva para cuando el usuario entre.
-  useEffect(() => {
-    let active = true;
-    const checkNewRewards = async () => {
-      if (document.hidden) return;
-      const id = getVisitorId();
-      if (!id) return;
-      try {
-        const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId=${encodeURIComponent(id)}`, {cache:"no-store"});
-        if (!response.ok) return;
-        const data = await response.json();
-        if (!active || !data.ok || !Array.isArray(data.predictions)) return;
-        const saved = localStorage.getItem(REWARD_SEEN_KEY);
-        if (saved === null) return; // La primera apertura de Mi Carrera fija la referencia inicial.
-        let previous = {};
-        try { previous = JSON.parse(saved) || {}; } catch { return; }
-        setHasNewRewards(data.predictions.some(p => Number(p.earned) > Number(previous[p.partidoId] || 0)));
-      } catch { /* Sin conexión, conservar el estado anterior. */ }
-    };
-    checkNewRewards();
-    const onVisible = () => { if (!document.hidden) checkNewRewards(); };
-    const onVote = () => checkNewRewards();
-    document.addEventListener("visibilitychange",onVisible);
-    window.addEventListener("lna-vote-updated",onVote);
-    const interval = window.setInterval(checkNewRewards,120000);
-    return () => {active=false;document.removeEventListener("visibilitychange",onVisible);window.removeEventListener("lna-vote-updated",onVote);window.clearInterval(interval);};
-  }, []);
   const refresh = useCallback(async () => {
     const id = getVisitorId();
     if (!id) return;
@@ -299,9 +270,8 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}${hasNewRewards ? " has-new-rewards" : ""}`} type="button" onClick={openCareer} aria-label={hasNewRewards ? "Ver Mi Carrera: tenés puntos nuevos para descubrir" : pendingToday.length ? "Ver mi carrera LNA. Tenés un pronóstico pendiente de hoy" : "Ver mi carrera LNA"}>
+      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}`} type="button" onClick={openCareer} aria-label={pendingToday.length ? "Ver mi carrera LNA. Tenés un pronóstico pendiente de hoy" : "Ver mi carrera LNA"}>
         <Trophy size={19} aria-hidden="true" />
-        {hasNewRewards && <span className="lna-fan-reward-indicator" aria-hidden="true">+PTS</span>}
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : `${seasonScore}/${level.goal ?? "∞"}`}</b></span>
           <span className="lna-fan-track"><span style={{ width: `${percent}%` }} /></span>
