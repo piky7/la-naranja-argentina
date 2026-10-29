@@ -127,7 +127,9 @@ async function calculateRewards(db, fixture, visitorId) {
     }
     if (g.homeScore === g.awayScore) { continue; }
     if (!vote) {
-      wins=0; losses=0; missed++;
+      // No votar corta los aciertos, pero conserva la racha negativa sin incrementarla.
+      // Solo un acierto o un descenso reinicia los errores consecutivos.
+      wins=0; missed++;
       updateCareer(g,false);
       continue;
     }
