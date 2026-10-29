@@ -601,3 +601,8 @@
 .lna-fan-modal .lna-fan-prediction .lna-fan-earned{font-size:9px;padding:2px 1px}
 .lna-fan-modal .lna-fan-mvp-hit{font-size:7px}
 @media(max-width:390px){.lna-fan-modal .lna-fan-prediction{min-height:76px;gap:2px;padding:5px 1px 3px}.lna-fan-modal .lna-fan-prediction-match img{width:15px;height:15px}}
+
+/* Resplandor sutil del acceso a Mi Carrera únicamente cuando hay puntos nuevos */
+.lna-fan-bar.has-unseen-rewards{animation:lna-career-soft-glow 3.5s ease-in-out infinite;}
+@keyframes lna-career-soft-glow{0%,100%{box-shadow:0 0 0 1px rgba(245,111,186,.18),0 0 5px rgba(245,111,186,.08)}50%{box-shadow:0 0 0 2px rgba(245,111,186,.52),0 0 16px rgba(245,111,186,.35)}}
+@media(prefers-reduced-motion:reduce){.lna-fan-bar.has-unseen-rewards{animation:none;box-shadow:0 0 0 2px rgba(245,111,186,.35)}}
