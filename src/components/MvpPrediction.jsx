@@ -4,7 +4,7 @@ import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import "./MvpPrediction.css";
 
-export default function MvpPrediction({ match }) {
+export default function MvpPrediction({ match, onStatusChange }) {
   const [expanded, setExpanded] = useState(false);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(null);
@@ -44,6 +44,7 @@ export default function MvpPrediction({ match }) {
     } catch(err) { setError(err.message || "No se pudo guardar"); }
     finally { setBusy(false); }
   }
+  useEffect(() => { if (status === "ready" && onStatusChange) onStatusChange({voted:!!selected,open}); }, [status,selected,open,onStatusChange]);
   const statsById = useMemo(() => new Map(playerStats.map(stat => [stat.playerId, stat])), []);
   const rosters = useMemo(() => [match.homeTeam, match.awayTeam].map(teamId => {
     const team = teams.find(item => item.id === teamId);
