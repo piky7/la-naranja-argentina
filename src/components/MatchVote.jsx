@@ -16,7 +16,7 @@ function getVisitorId() {
   } catch { return null; }
 }
 
-export default function MatchVote({ match }) {
+export default function MatchVote({ match, onStatusChange }) {
   const date = match?.date;
   const home = match?.homeTeam;
   const away = match?.awayTeam;
@@ -43,6 +43,8 @@ export default function MatchVote({ match }) {
       .catch(err => { if (err.name !== "AbortError") setError("Votación no disponible"); });
     return () => controller.abort();
   }, [id]);
+
+  useEffect(() => { if (data && onStatusChange) onStatusChange({ voted: data.voted, open: data.open }); }, [data, onStatusChange]);
 
   if (!id || (!data && !error)) return null;
   if (!data) return null;
