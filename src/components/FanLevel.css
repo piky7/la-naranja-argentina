@@ -549,3 +549,10 @@
  .lna-fan-modal .lna-fan-mvp-count{font-size:39px;line-height:1}
  .lna-fan-modal .lna-fan-mvp p{margin:2px 0}
 }
+
+/* Aviso compacto: solo partidos de hoy con votación abierta y sin pronóstico. */
+.lna-fan-bar.has-pending-vote{border-color:#f6a24d;box-shadow:0 0 0 1px rgba(246,162,77,.22),inset 0 0 15px rgba(246,162,77,.08)}
+.lna-fan-vote-alert{display:flex;align-items:center;gap:4px;margin-top:3px;font-size:8px;font-weight:850;letter-spacing:.45px;line-height:1;color:#ffb15a;white-space:nowrap}
+.lna-fan-vote-dot{display:inline-block;width:6px;height:6px;flex-shrink:0;border-radius:50%;background:#ffb15a;box-shadow:0 0 0 2px rgba(255,177,90,.14);animation:lna-vote-pulse 2.4s ease-in-out infinite}
+@keyframes lna-vote-pulse{50%{opacity:.5;box-shadow:0 0 0 4px rgba(255,177,90,.06)}}
+@media(prefers-reduced-motion:reduce){.lna-fan-vote-dot{animation:none}}
