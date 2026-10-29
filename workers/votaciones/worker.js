@@ -242,6 +242,42 @@ export default {
         return fail("No se pudieron consultar los puntos", 503);
       }
     }
+    if (url.pathname === "/api/mvp") {
+      if (!["GET", "POST"].includes(request.method)) return fail("Método no permitido", 405);
+      if (request.method === "POST" && request.headers.get("origin") !== SITE) return fail("Origen no permitido", 403);
+      if (!env.DB) return fail("Base de datos no configurada", 503);
+      let id, visitorId, playerId;
+      if (request.method === "GET") {
+        id = url.searchParams.get("partidoId");
+        visitorId = url.searchParams.get("visitanteId");
+      } else {
+        if (!request.headers.get("content-type")?.toLowerCase().includes("application/json")) return fail("Se requiere JSON", 415);
+        const body = await request.text();
+        if (body.length > 2048) return fail("Solicitud demasiado grande", 413);
+        let payload;
+        try { payload = JSON.parse(body); } catch { return fail("JSON inválido", 400); }
+        id = payload.partidoId; visitorId = payload.visitanteId; playerId = payload.jugadorId;
+      }
+      if (typeof id !== "string" || id.length > 120 || !/^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/.test(id) || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
+      try {
+        const game = await fixtureGame(id);
+        if (!game) return fail("Partido no disponible", 404);
+        const start = Date.parse(game.startsAt);
+        if (!Number.isFinite(start)) return fail("Horario sin confirmar", 409);
+        const open = !game.finished && Date.now() < start;
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS votos_mvp (partido_id TEXT NOT NULL, visitante_id TEXT NOT NULL, jugador_id TEXT NOT NULL, creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(partido_id, visitante_id))").run();
+        if (request.method === "POST") {
+          if (!open) return fail("Votación cerrada", 409);
+          if (typeof playerId !== "string" || playerId.length > 120 || !Array.isArray(game.eligiblePlayers) || !game.eligiblePlayers.includes(playerId)) return fail("Jugador no habilitado para este partido", 400);
+          await env.DB.prepare("INSERT INTO votos_mvp(partido_id,visitante_id,jugador_id) VALUES (?,?,?) ON CONFLICT(partido_id,visitante_id) DO UPDATE SET jugador_id=excluded.jugador_id").bind(id,visitorId,playerId).run();
+        }
+        const existing = await env.DB.prepare("SELECT jugador_id FROM votos_mvp WHERE partido_id=? AND visitante_id=?").bind(id,visitorId).first();
+        return json({ok:true,open,voted:!!existing,selected:existing?.jugador_id || null},200,cors);
+      } catch (error) {
+        console.error("LNA MVP:",error);
+        return fail("No se pudo procesar el MVP",503);
+      }
+    }
     if (url.pathname !== "/api/votos") return fail("Ruta inexistente", 404);
     if (!["GET", "POST"].includes(request.method)) return fail("Método no permitido", 405);
     if (request.method === "POST" && request.headers.get("origin") !== SITE) return fail("Origen no permitido", 403);
