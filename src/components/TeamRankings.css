@@ -171,3 +171,8 @@
     color-mix(in srgb, var(--ranking-team-color, #18334b) 45%, #1a3048) 0%,
     #1a3048 82%);
 }
+
+/* Cuatro modos de estadísticas en una sola fila, también en móvil */
+.stats-mode-switch{grid-template-columns:repeat(4,minmax(0,1fr));}
+.stats-mode-switch button{min-width:0;padding-left:3px;padding-right:3px;}
+@media(max-width:420px){.stats-mode-switch button{font-size:12px;padding-top:11px;padding-bottom:11px;}}
