@@ -198,8 +198,9 @@ export default {
       if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
       if (!env.DB) return fail("Base de datos no configurada", 503);
       try {
-        const [votes, fixtureResponse] = await Promise.all([
+        const [votes, mvpVotes, fixtureResponse] = await Promise.all([
           env.DB.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=? ORDER BY partido_id DESC LIMIT 200").bind(visitorId).all(),
+          env.DB.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=? ORDER BY partido_id DESC LIMIT 200").bind(visitorId).all(),
           fetch(FIXTURE, { headers: { accept: "application/json" }, cf: { cacheTtl: 60, cacheEverything: true } }),
         ]);
         if (!fixtureResponse.ok) throw new Error("Fixture no disponible");
@@ -207,6 +208,7 @@ export default {
         if (!Array.isArray(fixture.games)) throw new Error("Fixture inválido");
         const archivedFixture = await loadCareerFixture(env.DB, fixture);
         const byId = new Map(archivedFixture.games.map(game => [game.id, game]));
+        const mvpById = new Map((mvpVotes.results || []).map(row => [row.partido_id,row.jugador_id]));
         const predictions = (votes.results || []).map(row => {
           const game = byId.get(row.partido_id);
           const homeTeam = game?.homeTeam || null;
@@ -230,6 +232,7 @@ export default {
           const detail = rewards.perGame[p.partidoId];
           p.earned = detail?.earned ?? (p.status === "pending" ? null : 0);
           p.medal = detail?.medal ?? null;
+          p.mvpEarned = detail?.mvpEarned ?? (p.mvpStatus === "pending" ? null : 0);
         }
         return json({ ok: true, predictions }, 200, cors);
       } catch (error) {
