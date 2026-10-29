@@ -127,6 +127,7 @@ const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selected
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
 const [upcomingTab, setUpcomingTab] = useState("comparativa");
   const [upcomingVoteStatus, setUpcomingVoteStatus] = useState(null);
+  const [upcomingMvpStatus, setUpcomingMvpStatus] = useState(null);
   useEffect(() => {
     if (!selectedUpcomingMatch || upcomingLive) return;
     const id = `${selectedUpcomingMatch.date}-${selectedUpcomingMatch.homeTeam}-${selectedUpcomingMatch.awayTeam}`;
@@ -134,19 +135,30 @@ const [upcomingTab, setUpcomingTab] = useState("comparativa");
     const check = async () => {
       try {
         const visitorId = localStorage.getItem("lna-vote-visitor-id");
-        if (!visitorId) { if (!cancelled) setUpcomingVoteStatus({ voted: false, open: true }); return; }
-        const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/votos?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`);
-        if (!response.ok) throw new Error("No disponible");
-        const result = await response.json();
-        if (!cancelled) setUpcomingVoteStatus({ voted: result.voted, open: result.open });
-      } catch { if (!cancelled) setUpcomingVoteStatus({ error: true }); }
+        if (!visitorId) {
+          if (!cancelled) { setUpcomingVoteStatus({voted:false,open:true}); setUpcomingMvpStatus({voted:false,open:true}); }
+          return;
+        }
+        const query = `?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`;
+        const [winnerResult, mvpResult] = await Promise.allSettled([
+          fetch(`https://lna-votaciones-api.lnab.workers.dev/api/votos${query}`).then(async response => {if (!response.ok) throw Error("No disponible"); return response.json();}),
+          fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mvp${query}`, {cache:"no-store"}).then(async response => {if (!response.ok) throw Error("No disponible"); return response.json();}),
+        ]);
+        if (!cancelled) {
+          setUpcomingVoteStatus(winnerResult.status === "fulfilled" ? {voted:winnerResult.value.voted,open:winnerResult.value.open} : {error:true});
+          setUpcomingMvpStatus(mvpResult.status === "fulfilled" ? {voted:mvpResult.value.voted,open:mvpResult.value.open} : {error:true});
+        }
+      } catch {
+        if (!cancelled) {setUpcomingVoteStatus({error:true});setUpcomingMvpStatus({error:true});}
+      }
     };
     setUpcomingVoteStatus(null);
+    setUpcomingMvpStatus(null);
     check();
     window.addEventListener("lna-vote-updated", check);
     return () => { cancelled = true; window.removeEventListener("lna-vote-updated", check); };
   }, [selectedUpcomingMatch?.date, selectedUpcomingMatch?.homeTeam, selectedUpcomingMatch?.awayTeam, upcomingLive]);
-useEffect(() => { setUpcomingTab("comparativa"); setUpcomingVoteStatus(null); }, [selectedUpcomingMatch?.id]);
+useEffect(() => { setUpcomingTab("comparativa"); setUpcomingVoteStatus(null); setUpcomingMvpStatus(null); }, [selectedUpcomingMatch?.id]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
 const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
@@ -1984,9 +1996,9 @@ const finishedMatch = {
             </div>
 
             <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
-            {!upcomingLive && <button type="button" className={`upcoming-career-status ${upcomingVoteStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
-              <span>{upcomingVoteStatus === null ? "◷ CONSULTANDO…" : upcomingVoteStatus?.error ? "◷ NO DISPONIBLE" : upcomingVoteStatus?.voted ? "✓ PARTIDO VOTADO" : upcomingVoteStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
-              <small>{upcomingVoteStatus === null ? "Cargando tu pronóstico" : upcomingVoteStatus?.error ? "Revisá tu conexión" : upcomingVoteStatus?.voted ? "Ganador registrado" : "Entrá a Mi Carrera para pronosticar"}</small>
+            {!upcomingLive && <button type="button" className={`upcoming-career-status ${upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
+              <span>{upcomingVoteStatus === null || upcomingMvpStatus === null ? "◷ CONSULTANDO…" : upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "✓ PRONÓSTICOS COMPLETOS" : upcomingVoteStatus?.voted || upcomingMvpStatus?.voted ? "◷ VOTO PENDIENTE" : upcomingVoteStatus?.error && upcomingMvpStatus?.error ? "◷ NO DISPONIBLE" : upcomingVoteStatus?.open === false && upcomingMvpStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
+              <small>{`Ganador: ${upcomingVoteStatus === null ? "consultando" : upcomingVoteStatus?.error ? "sin datos" : upcomingVoteStatus?.voted ? "✓ votado" : "pendiente"} · MVP: ${upcomingMvpStatus === null ? "consultando" : upcomingMvpStatus?.error ? "sin datos" : upcomingMvpStatus?.voted ? "✓ votado" : "pendiente"}`}</small>
               <span aria-hidden="true">›</span>
             </button>}
             {upcomingLive && <>
@@ -2006,7 +2018,7 @@ const finishedMatch = {
             </>}
             {!upcomingLive && upcomingTab === "carrera" && <div className="upcoming-tab-panel upcoming-career-panel" role="tabpanel">
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
-              <MvpPrediction match={selectedUpcomingMatch} />
+              <MvpPrediction match={selectedUpcomingMatch} onStatusChange={setUpcomingMvpStatus} />
             </div>}
             {(upcomingLive || upcomingTab === "comparativa" || upcomingTab === "jugadores") && <section className="match-highlighted-section">
               {(upcomingLive || upcomingTab === "comparativa") && (<div className="upcoming-tab-panel" role="tabpanel">
