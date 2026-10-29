@@ -118,10 +118,14 @@ export default function FanLevel() {
         const total = changes.reduce((sum,p) => sum + Number(p.earned) - Number(previous[p.partidoId] || 0), 0);
         const reasons = changes.flatMap(p => {
           const previousPoints = Number(previous[p.partidoId] || 0);
-          if (previousPoints > 0 && Number(p.mvpEarned) > 0) return [`MVP acertado (+${p.mvpEarned} pts)`];
-          const items = [`Pronóstico de ganador (${p.status === "correct" ? "acertado" : "participación"})`];
-          if (Number(p.mvpEarned) > 0) items.push(`MVP acertado (+${p.mvpEarned} pts)`);
-          if (p.medal) items.push("Bonificación por racha");
+          const mvpPoints = Number(p.mvpEarned) || 0;
+          const winnerPoints = p.status === "correct" ? 15 : p.status === "incorrect" ? 5 : 0;
+          const streakBonus = Math.max(0, Number(p.earned) - winnerPoints - mvpPoints);
+          const items = [];
+          // Si el ganador ya se acreditó antes, anunciar solo la recompensa nueva.
+          if (previousPoints === 0 && winnerPoints > 0) items.push(`${p.status === "correct" ? "Ganador acertado" : "Pronóstico de ganador errado"} (+${winnerPoints} pts)`);
+          if (previousPoints === 0 && streakBonus > 0) items.push(`Bonificación por racha (+${streakBonus} pts)`);
+          if (mvpPoints > 0 && (previousPoints === 0 || Number(p.earned) - previousPoints === mvpPoints)) items.push(`MVP acertado (+${mvpPoints} pts)`);
           return items;
         });
         setRewardNotice({total,reasons:[...new Set(reasons)]});
