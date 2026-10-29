@@ -421,3 +421,54 @@
 /* Ícono vectorial de progreso: sustituye el glifo nativo gris de iOS. */
 .lna-fan-next .lna-fan-next-icon{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;padding:0;border:0;border-radius:9px;background:transparent;box-shadow:0 0 12px rgba(241,67,158,.15)}
 .lna-fan-next .lna-fan-next-icon svg{display:block;width:28px;height:28px;filter:drop-shadow(0 0 3px rgba(250,101,184,.25))}
+
+/* Mi Carrera · refinamiento visual del perfil, sin modificar lógica ni almacenamiento */
+.lna-fan-modal .lna-fan-player-profile-with-jersey{
+  position:relative;
+  border-color:rgba(255,153,207,.55);
+  background:radial-gradient(ellipse at 5% 10%,rgba(255,113,187,.18),transparent 55%),linear-gradient(115deg,#292039,#17263a 78%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 5px 20px rgba(0,0,0,.12);
+}
+.lna-fan-modal .lna-fan-player-display-name{
+  color:#fff;
+  font-weight:950;
+  letter-spacing:.15px;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);
+  overflow-wrap:anywhere;
+}
+.lna-fan-modal .lna-fan-player-display-league{
+  display:inline-flex;
+  align-self:flex-start;
+  max-width:100%;
+  padding:3px 8px;
+  border:1px solid rgba(255,146,203,.4);
+  border-radius:999px;
+  background:rgba(236,93,164,.14);
+  color:#ffadd8;
+  font-weight:850;
+  letter-spacing:.25px;
+}
+.lna-fan-modal .lna-fan-gamer-hero{
+  padding:8px 10px;
+  border:1px solid rgba(160,112,158,.3);
+  border-radius:11px;
+  background:linear-gradient(120deg,rgba(35,34,57,.7),rgba(17,31,49,.72));
+}
+.lna-fan-modal .lna-fan-gamer-score .lna-fan-total{
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-1px;
+}
+.lna-fan-modal .lna-fan-gamer-progress .lna-fan-track-large{
+  overflow:hidden;
+  border:1px solid rgba(255,153,207,.18);
+}
+.lna-fan-modal .lna-fan-gamer-progress .lna-fan-track-large>span{
+  background:linear-gradient(90deg,#db4c9b,#ff9ed1);
+}
+.lna-fan-modal .lna-fan-cup.earned{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 14px rgba(245,112,187,.1);
+}
+@media(max-width:768px){
+  .lna-fan-modal .lna-fan-gamer-hero{padding:5px 7px}
+  .lna-fan-modal .lna-fan-player-display-league{padding:2px 6px}
+}
