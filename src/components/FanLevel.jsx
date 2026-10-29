@@ -63,6 +63,7 @@ export default function FanLevel() {
   const [pendingEvents, setPendingEvents] = useState([]);
   const [eventNotice, setEventNotice] = useState(null);
   const [rewardNotice, setRewardNotice] = useState(null);
+  const [unseenRewards, setUnseenRewards] = useState(false);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
   const [nameDraft, setNameDraft] = useState("");
@@ -109,11 +110,12 @@ export default function FanLevel() {
       const rewarded = data.predictions.filter(p => p.earned != null && Number(p.earned) > 0);
       const snapshot = Object.fromEntries(rewarded.map(p => [p.partidoId, Number(p.earned)]));
       const previousRaw = localStorage.getItem(REWARD_SEEN_KEY);
-      if (previousRaw === null) { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); return; }
+      if (previousRaw === null) { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); setUnseenRewards(false); return; }
       let previous = {};
       try { previous = JSON.parse(previousRaw) || {}; } catch { /* Reestablecer seguimiento. */ }
       const changes = rewarded.filter(p => Number(p.earned) > Number(previous[p.partidoId] || 0));
       localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot));
+      setUnseenRewards(false);
       if (changes.length) {
         const total = changes.reduce((sum,p) => sum + Number(p.earned) - Number(previous[p.partidoId] || 0), 0);
         const reasons = changes.flatMap(p => {
@@ -186,6 +188,33 @@ export default function FanLevel() {
       window.removeEventListener("lna-vote-updated", onVote);
     };
   }, [refresh]);
+
+  // El resplandor solo indica recompensas aún no vistas; esta consulta nunca las marca como vistas.
+  useEffect(() => {
+    let mounted = true;
+    const check = async () => {
+      if (document.hidden) return;
+      try {
+        const saved = localStorage.getItem(REWARD_SEEN_KEY);
+        if (saved === null) return;
+        const previous = JSON.parse(saved);
+        if (!previous || typeof previous !== "object") return;
+        const id = getVisitorId();
+        if (!id) return;
+        const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId=${encodeURIComponent(id)}`, {cache:"no-store"});
+        if (!response.ok) return;
+        const data = await response.json();
+        if (mounted && data.ok && Array.isArray(data.predictions)) {
+          setUnseenRewards(data.predictions.some(p => Number(p.earned) > Number(previous[p.partidoId] || 0)));
+        }
+      } catch { /* No alterar el indicador si no hay conexión. */ }
+    };
+    check();
+    const onVisible = () => { if (!document.hidden) check(); };
+    document.addEventListener("visibilitychange", onVisible);
+    const timer = window.setInterval(check, 120000);
+    return () => { mounted = false; document.removeEventListener("visibilitychange", onVisible); window.clearInterval(timer); };
+  }, []);
 
   // Consultar únicamente partidos de HOY (hora argentina). El Worker decide si la votación sigue abierta.
   useEffect(() => {
@@ -270,7 +299,7 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}`} type="button" onClick={openCareer} aria-label={pendingToday.length ? "Ver mi carrera LNA. Tenés un pronóstico pendiente de hoy" : "Ver mi carrera LNA"}>
+      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}${unseenRewards ? " has-unseen-rewards" : ""}`} type="button" onClick={openCareer} aria-label={pendingToday.length ? "Ver mi carrera LNA. Tenés un pronóstico pendiente de hoy" : "Ver mi carrera LNA"}>
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : `${seasonScore}/${level.goal ?? "∞"}`}</b></span>
