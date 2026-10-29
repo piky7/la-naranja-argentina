@@ -286,7 +286,8 @@ export default {
           await env.DB.prepare("INSERT INTO votos_mvp(partido_id,visitante_id,jugador_id) VALUES (?,?,?) ON CONFLICT(partido_id,visitante_id) DO UPDATE SET jugador_id=excluded.jugador_id").bind(id,visitorId,playerId).run();
         }
         const existing = await env.DB.prepare("SELECT jugador_id FROM votos_mvp WHERE partido_id=? AND visitante_id=?").bind(id,visitorId).first();
-        return json({ok:true,open,voted:!!existing,selected:existing?.jugador_id || null},200,cors);
+        const counts = await env.DB.prepare("SELECT jugador_id AS playerId, COUNT(*) AS votes FROM votos_mvp WHERE partido_id=? GROUP BY jugador_id ORDER BY votes DESC, jugador_id ASC").bind(id).all();
+        return json({ok:true,open,voted:!!existing,selected:existing?.jugador_id || null,ranking:counts.results || []},200,cors);
       } catch (error) {
         console.error("LNA MVP:",error);
         return fail("No se pudo procesar el MVP",503);
