@@ -12,6 +12,7 @@ export default function MvpPrediction({ match }) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [ranking, setRanking] = useState([]);
   const id = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
   const API = "https://lna-votaciones-api.lnab.workers.dev/api/mvp";
   const visitorId = (() => {
@@ -27,7 +28,7 @@ export default function MvpPrediction({ match }) {
     setStatus("loading");
     fetch(`${API}?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`, {cache:"no-store"})
       .then(async response => { const body = await response.json(); if (!response.ok) throw new Error(body.error || "No disponible"); return body; })
-      .then(body => { if (active) { setSelected(body.selected); setOpen(body.open); setStatus("ready"); } })
+      .then(body => { if (active) { setSelected(body.selected); setOpen(body.open); setRanking(Array.isArray(body.ranking) ? body.ranking : []); setStatus("ready"); } })
       .catch(err => { if (active) { setStatus("error"); setError(err.message); } });
     return () => { active = false; };
   }, [id, visitorId]);
@@ -38,7 +39,7 @@ export default function MvpPrediction({ match }) {
       const response = await fetch(API, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({partidoId:id,visitanteId:visitorId,jugadorId:playerId})});
       const body = await response.json();
       if (!response.ok || !body.ok) throw new Error(body.error || "No se pudo guardar");
-      setSelected(body.selected); setOpen(body.open); setExpanded(false);
+      setSelected(body.selected); setOpen(body.open); setRanking(Array.isArray(body.ranking) ? body.ranking : []); setExpanded(false);
       window.dispatchEvent(new Event("lna-vote-updated"));
     } catch(err) { setError(err.message || "No se pudo guardar"); }
     finally { setBusy(false); }
@@ -57,7 +58,10 @@ export default function MvpPrediction({ match }) {
       .sort((a,b) => (b.averageMinutes ?? -1) - (a.averageMinutes ?? -1) || a.name.localeCompare(b.name, "es"));
     return { teamId, team, roster };
   }), [match.homeTeam, match.awayTeam, statsById]);
-  const selectedPlayer = rosters.flatMap(group => group.roster).find(player => player.id === selected);
+  const allPlayers = rosters.flatMap(group => group.roster);
+  const selectedPlayer = allPlayers.find(player => player.id === selected);
+  const rankedPlayers = ranking.filter(item => Number(item.votes) > 0).map(item => ({...item,player:allPlayers.find(player => player.id === item.playerId)})).filter(item => item.player);
+  const totalVotes = rankedPlayers.reduce((sum,item) => sum + Number(item.votes),0);
   return <section className="lna-mvp-prediction">
     <div className="lna-mvp-prediction-heading"><strong>★ ¿QUIÉN SERÁ EL MVP?</strong><span>+20 PTS</span></div>
     <button type="button" className="lna-mvp-prediction-trigger" onClick={() => setExpanded(value => !value)} aria-expanded={expanded} disabled={status !== "ready" || !open}>
@@ -74,6 +78,14 @@ export default function MvpPrediction({ match }) {
           </button>)}
         </div>)}
       </div>
+    </div>}
+    {rankedPlayers.length > 0 && <div className="lna-mvp-vote-ranking" aria-label="Jugadores más votados para MVP">
+      <div className="lna-mvp-vote-ranking-heading"><strong>MÁS VOTADOS PARA MVP</strong><span>{totalVotes} {totalVotes === 1 ? "voto" : "votos"}</span></div>
+      {rankedPlayers.map(({playerId,player,votes}) => <div className="lna-mvp-vote-ranking-row" key={playerId}>
+        <span className="lna-mvp-vote-ranking-name">{player.name}</span>
+        <div className="lna-mvp-vote-ranking-track"><span style={{width:`${totalVotes ? Number(votes) / totalVotes * 100 : 0}%`}} /></div>
+        <strong>{votes} {Number(votes) === 1 ? "voto" : "votos"}</strong>
+      </div>)}
     </div>}
     <small className="lna-mvp-prediction-notice">{error || (status === "loading" ? "Consultando pronóstico…" : status === "error" ? "Votación no disponible" : !open ? "Votación cerrada" : selected ? "Pronóstico guardado. Podés cambiarlo hasta el inicio." : "Elegí tu MVP antes de que empiece el partido.")}</small>
   </section>;
