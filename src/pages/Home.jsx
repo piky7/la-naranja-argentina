@@ -125,7 +125,8 @@ const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selected
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
 const [upcomingTab, setUpcomingTab] = useState("planteles");
-useEffect(() => { setUpcomingTab("planteles"); }, [selectedUpcomingMatch?.id]);
+  const [upcomingVoteStatus, setUpcomingVoteStatus] = useState(null);
+useEffect(() => { setUpcomingTab("planteles"); setUpcomingVoteStatus(null); }, [selectedUpcomingMatch?.id]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
 const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
@@ -1963,7 +1964,11 @@ const finishedMatch = {
             </div>
 
             <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
-            <MatchVote match={selectedUpcomingMatch} />
+            {!upcomingLive && <button type="button" className={`upcoming-career-status ${upcomingVoteStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
+              <span>{upcomingVoteStatus?.voted ? "✓ PARTIDO VOTADO" : upcomingVoteStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
+              <small>{upcomingVoteStatus?.voted ? "Ganador registrado" : "Entrá a Mi Carrera para pronosticar"}</small>
+              <span aria-hidden="true">›</span>
+            </button>}
             {upcomingLive && <>
               <div className="upcoming-tabs" role="tablist" aria-label="Información del partido en vivo">
                 <button type="button" role="tab" aria-selected={upcomingTab !== "comparativa"} className={upcomingTab !== "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("planteles")}>♟ Planteles</button>
@@ -1976,8 +1981,13 @@ const finishedMatch = {
             <div className="upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
               <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
               <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores destacados</button>
+              <button type="button" role="tab" aria-selected={upcomingTab === "carrera"} className={upcomingTab === "carrera" ? "is-active" : ""} onClick={() => setUpcomingTab("carrera")}>🏆 Mi Carrera</button>
             </div>
             </>}
+            {!upcomingLive && upcomingTab === "carrera" && <div className="upcoming-tab-panel upcoming-career-panel" role="tabpanel">
+              <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
+              <div className="upcoming-career-mvp-note"><strong>★ ¿QUIÉN SERÁ EL MVP? · +20 PTS</strong><small>La selección de MVP estará disponible cuando se integre el registro de jugadores y puntos.</small></div>
+            </div>}
             {(!upcomingLive || upcomingTab === "comparativa") && <section className="match-highlighted-section">
               {(upcomingLive || upcomingTab !== "jugadores") && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
