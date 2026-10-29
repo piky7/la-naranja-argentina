@@ -198,6 +198,7 @@ export default {
       if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
       if (!env.DB) return fail("Base de datos no configurada", 503);
       try {
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS votos_mvp (partido_id TEXT NOT NULL, visitante_id TEXT NOT NULL, jugador_id TEXT NOT NULL, creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(partido_id, visitante_id))").run();
         const [votes, mvpVotes, fixtureResponse] = await Promise.all([
           env.DB.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=? ORDER BY partido_id DESC LIMIT 200").bind(visitorId).all(),
           env.DB.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=? ORDER BY partido_id DESC LIMIT 200").bind(visitorId).all(),
