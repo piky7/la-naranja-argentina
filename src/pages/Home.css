@@ -10685,3 +10685,8 @@
 .upcoming-career-mvp-note strong{font-size:12px}
 .upcoming-career-mvp-note small{font-size:10px;color:#aebcd0}
 @media(max-width:400px){.upcoming-career-status{gap:6px;padding:6px 8px}.upcoming-career-status small{font-size:9px}.upcoming-tabs button{min-width:0;font-size:10px;padding-left:3px;padding-right:3px}}
+
+/* Tres solapas en una sola fila, sin saltos en móvil */
+.match-modal.match-modal-upcoming .upcoming-tabs.upcoming-tabs-three{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important}
+.match-modal.match-modal-upcoming .upcoming-tabs.upcoming-tabs-three>button{width:100%!important;min-width:0!important;max-width:none!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis;font-size:11px!important;padding:9px 2px!important}
+@media(max-width:390px){.match-modal.match-modal-upcoming .upcoming-tabs.upcoming-tabs-three>button{font-size:10px!important;padding:8px 1px!important}}
