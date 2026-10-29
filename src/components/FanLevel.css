@@ -505,3 +505,9 @@
  .lna-fan-modal .lna-fan-level{gap:4px}
  .lna-fan-modal .lna-fan-level small{font-size:8px}
 }
+
+/* Pronósticos: resumen compacto con efectividad calculada solo sobre partidos resueltos */
+.lna-fan-modal .lna-fan-stats-performance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.lna-fan-modal .lna-fan-stats-performance span{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px;font-size:10px;text-align:center}
+.lna-fan-modal .lna-fan-stats-performance b{font-size:clamp(18px,4.5vw,23px);font-variant-numeric:tabular-nums}
+@media(max-width:390px){.lna-fan-modal .lna-fan-stats-performance{gap:4px}.lna-fan-modal .lna-fan-stats-performance span{font-size:9px;padding:7px 1px}}
