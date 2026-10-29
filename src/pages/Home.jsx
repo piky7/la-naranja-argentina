@@ -124,7 +124,7 @@ function Home() {
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
-const [upcomingTab, setUpcomingTab] = useState("planteles");
+const [upcomingTab, setUpcomingTab] = useState("comparativa");
   const [upcomingVoteStatus, setUpcomingVoteStatus] = useState(null);
   useEffect(() => {
     if (!selectedUpcomingMatch || upcomingLive) return;
@@ -145,7 +145,7 @@ const [upcomingTab, setUpcomingTab] = useState("planteles");
     window.addEventListener("lna-vote-updated", check);
     return () => { cancelled = true; window.removeEventListener("lna-vote-updated", check); };
   }, [selectedUpcomingMatch?.date, selectedUpcomingMatch?.homeTeam, selectedUpcomingMatch?.awayTeam, upcomingLive]);
-useEffect(() => { setUpcomingTab("planteles"); setUpcomingVoteStatus(null); }, [selectedUpcomingMatch?.id]);
+useEffect(() => { setUpcomingTab("comparativa"); setUpcomingVoteStatus(null); }, [selectedUpcomingMatch?.id]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
 const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
@@ -2007,7 +2007,7 @@ const finishedMatch = {
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
               <div className="upcoming-career-mvp-note"><strong>★ ¿QUIÉN SERÁ EL MVP? · +20 PTS</strong><small>La selección de MVP estará disponible cuando se integre el registro de jugadores y puntos.</small></div>
             </div>}
-            {(upcomingLive || upcomingTab === "comparativa") && <section className="match-highlighted-section">
+            {(upcomingLive || upcomingTab === "comparativa" || upcomingTab === "jugadores") && <section className="match-highlighted-section">
               {(upcomingLive || upcomingTab === "comparativa") && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
