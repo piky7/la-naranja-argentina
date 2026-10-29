@@ -532,3 +532,20 @@
  .lna-fan-journey-event{padding:3px 1px}
  .lna-fan-journey-symbol{flex-basis:20px;width:20px;height:20px}
 }
+
+/* MVP: progreso de racha, trofeo destacado y explicación compacta */
+.lna-fan-modal .lna-fan-mvp-progress{width:100%;margin:7px 0 2px;text-align:left}
+.lna-fan-mvp-progress-label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:5px}
+.lna-fan-mvp-progress-label strong{font-size:10px;letter-spacing:1px;color:#ff9ccc}
+.lna-fan-mvp-progress-label b{font-size:12px;color:#fff;font-variant-numeric:tabular-nums}
+.lna-fan-mvp-progress-track{height:9px;overflow:hidden;border:1px solid rgba(248,141,200,.27);border-radius:99px;background:#30374d}
+.lna-fan-mvp-progress-track span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#dc4c9c,#ff9fd0);box-shadow:0 0 9px rgba(248,112,188,.5);transition:width .25s ease}
+.lna-fan-modal .lna-fan-mvp-trophy-image{filter:drop-shadow(0 0 15px rgba(255,110,190,.48))}
+.lna-fan-modal .lna-fan-mvp>small{line-height:1.35}
+@media(max-width:768px){
+ .lna-fan-modal .lna-fan-mvp{gap:3px;padding-bottom:9px}
+ .lna-fan-modal .lna-fan-mvp-progress{margin:4px 0 1px}
+ .lna-fan-modal .lna-fan-mvp-emblem{margin:0}
+ .lna-fan-modal .lna-fan-mvp-count{font-size:39px;line-height:1}
+ .lna-fan-modal .lna-fan-mvp p{margin:2px 0}
+}
