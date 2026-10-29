@@ -556,3 +556,6 @@
 .lna-fan-vote-dot{display:inline-block;width:6px;height:6px;flex-shrink:0;border-radius:50%;background:#ffb15a;box-shadow:0 0 0 2px rgba(255,177,90,.14);animation:lna-vote-pulse 2.4s ease-in-out infinite}
 @keyframes lna-vote-pulse{50%{opacity:.5;box-shadow:0 0 0 4px rgba(255,177,90,.06)}}
 @media(prefers-reduced-motion:reduce){.lna-fan-vote-dot{animation:none}}
+
+.lna-fan-today-reminder{display:flex;align-items:center;justify-content:center;gap:7px;margin:5px 0 7px;padding:6px 8px;border:1px solid rgba(255,177,90,.38);border-radius:8px;background:rgba(255,177,90,.07);color:#ffd0a0;font-size:10px;font-weight:650;line-height:1.3;text-align:left}
+.lna-fan-today-reminder .lna-fan-vote-dot{animation:none}
