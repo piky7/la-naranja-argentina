@@ -417,3 +417,7 @@
 @keyframes lna-achievement-rotate{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.lna-fan-achievement,.lna-fan-achievement-trophy,.lna-fan-achievement-fall span,.lna-fan-achievement-rays{animation:none}}
 @media(max-height:620px){.lna-fan-achievement{gap:6px;padding:19px 15px 15px}.lna-fan-achievement-trophy{width:92px;height:115px}.lna-fan-achievement-fall{height:85px;width:85px}.lna-fan-achievement-fall span{font-size:38px}}
+
+/* Ícono vectorial de progreso: sustituye el glifo nativo gris de iOS. */
+.lna-fan-next .lna-fan-next-icon{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;padding:0;border:0;border-radius:9px;background:transparent;box-shadow:0 0 12px rgba(241,67,158,.15)}
+.lna-fan-next .lna-fan-next-icon svg{display:block;width:28px;height:28px;filter:drop-shadow(0 0 3px rgba(250,101,184,.25))}
