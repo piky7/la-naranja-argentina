@@ -83,7 +83,7 @@ export default function MvpPrediction({ match, onStatusChange }) {
     {rankedPlayers.length > 0 && <div className="lna-mvp-vote-ranking" aria-label="Jugadores más votados para MVP">
       <div className="lna-mvp-vote-ranking-heading"><strong>MÁS VOTADOS PARA MVP</strong><span>{totalVotes} {totalVotes === 1 ? "voto" : "votos"}</span></div>
       {rankedPlayers.map(({playerId,player,votes}) => <div className="lna-mvp-vote-ranking-row" key={playerId}>
-        <span className="lna-mvp-vote-ranking-name">{player.name}</span>
+        <span className="lna-mvp-vote-ranking-name">{player.name}<small className="lna-mvp-vote-ranking-team"> · {teams.find(team => team.id === player.teamId)?.shortName || player.teamId}</small></span>
         <div className="lna-mvp-vote-ranking-track"><span style={{width:`${totalVotes ? Number(votes) / totalVotes * 100 : 0}%`}} /></div>
         <strong>{votes} {Number(votes) === 1 ? "voto" : "votos"}</strong>
       </div>)}
