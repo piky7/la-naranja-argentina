@@ -562,5 +562,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2x_HnZ62G0OkWv8LxnPvwBcaHb7ifCd4mqLupJAwmwPpVKmkyiKYlqg==/boca-vs-regatas-c"
     }
+  },
+  "2026-10-28-gimnasia-ferro": {
+    "status": "finished",
+    "homeScore": 73,
+    "awayScore": 61,
+    "time": "21:00",
+    "homeTeam": "gimnasia",
+    "awayTeam": "ferro",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v29y879egNMhIrH_btZyNUIgxCk--UJTTs4YaBp_GOuFO45VFn-QQQ0w==/gimnasia-cr-vs-ferro",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v29y879egNMhIrH_btZyNUIgxCk--UJTTs4YaBp_GOuFO45VFn-QQQ0w==/gimnasia-cr-vs-ferro"
+    }
   }
 };
