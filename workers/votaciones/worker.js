@@ -66,9 +66,13 @@ async function loadCareerFixture(db, fixture) {
 async function calculateRewards(db, fixture, visitorId) {
   const votes = await db.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all();
   const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
+  await db.prepare("CREATE TABLE IF NOT EXISTS votos_mvp (partido_id TEXT NOT NULL, visitante_id TEXT NOT NULL, jugador_id TEXT NOT NULL, creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(partido_id, visitante_id))").run();
+  const mvpVotes = await db.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=?").bind(visitorId).all();
+  const mvpMap = new Map((mvpVotes.results || []).map(v => [v.partido_id, v.jugador_id]));
   // Las reglas se aplican retroactivamente desde el primer partido con votos registrados.
   const firstVote = await db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first();
-  const firstDate = firstVote?.first_id?.slice(0, 10) || "9999-12-31";
+  const firstMvp = await db.prepare("SELECT MIN(partido_id) AS first_id FROM votos_mvp").first();
+  const firstDate = [firstVote?.first_id, firstMvp?.first_id].filter(Boolean).sort()[0]?.slice(0,10) || "9999-12-31";
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id));
   let points = 0, wins = 0, losses = 0, missed = 0, mvps = 0, bestStreak = 0;
@@ -117,6 +121,7 @@ async function calculateRewards(db, fixture, visitorId) {
   const now = Date.now();
   for (const g of games) {
     const vote = voteMap.get(g.id);
+    const mvpChoice = mvpMap.get(g.id);
     // Los puntos se acreditan solo al finalizar el partido.
     // No evaluar rachas ni ausencias antes del inicio del partido.
     if (Date.parse(g.startsAt) > now) continue;
@@ -126,10 +131,13 @@ async function calculateRewards(db, fixture, visitorId) {
       continue;
     }
     if (g.homeScore === g.awayScore) { continue; }
+    const mvpEarned = mvpChoice && Array.isArray(g.mvpWinners) && g.mvpWinners.includes(mvpChoice) ? 20 : 0;
+    if (mvpEarned) { points += 20; seasonPoints += 20; }
     if (!vote) {
       // No votar corta los aciertos, pero conserva la racha negativa sin incrementarla.
       // Solo un acierto o un descenso reinicia los errores consecutivos.
       wins=0; missed++;
+      if (mvpEarned) perGame.set(g.id,{earned:20,mvpEarned:20,medal:null,streak:0});
       updateCareer(g,false);
       continue;
     }
@@ -141,11 +149,11 @@ async function calculateRewards(db, fixture, visitorId) {
       if (wins === 3) {points+=15;seasonPoints+=15;}
       if (wins === 5) {points+=30;seasonPoints+=30;}
       if (wins % 10 === 0) mvps++;
-      perGame.set(g.id,{earned:wins === 3 ? 30 : wins === 5 ? 45 : 15,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
+      perGame.set(g.id,{earned:(wins === 3 ? 30 : wins === 5 ? 45 : 15)+mvpEarned,mvpEarned,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
       updateCareer(g,false,true,true);
     } else {
       wins=0; losses++; points+=5; seasonPoints+=5;
-      perGame.set(g.id,{earned:5,medal:null,streak:losses});
+      perGame.set(g.id,{earned:5+mvpEarned,mvpEarned,medal:null,streak:losses});
       updateCareer(g,true,false,true);
     }
   }
