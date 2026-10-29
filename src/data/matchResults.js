@@ -530,5 +530,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24ncCNpODLx926P7pV-HZhksJQwO5LKkWCHOS5BEFUpKMq7akT1BmLw==/penarol-mdp-vs-san-martin-c"
     }
+  },
+  "2026-10-28-san-lorenzo-platense": {
+    "status": "finished",
+    "homeScore": 58,
+    "awayScore": 80,
+    "time": "20:30",
+    "homeTeam": "san-lorenzo",
+    "awayTeam": "platense",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2bOozY-vCMNo74w0--uOXO2asfZteXFh3PfYI6Wxw3R1LZx2YoVIhtA==/san-lorenzo-vs-platense",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2bOozY-vCMNo74w0--uOXO2asfZteXFh3PfYI6Wxw3R1LZx2YoVIhtA==/san-lorenzo-vs-platense"
+    }
   }
 };
