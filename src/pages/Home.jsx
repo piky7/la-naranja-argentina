@@ -9,7 +9,7 @@ import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import { teams, getMatchColorStyle } from "../data/teams";
 import { matches as baseMatches } from "../data/matches";
@@ -108,6 +108,7 @@ const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
 
 function Home() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getLocalDateString = (date = new Date()) => {
     const year = date.getFullYear();
@@ -123,6 +124,13 @@ function Home() {
   const [selectedTeam, setSelectedTeam] = useState(null);
 const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+  useEffect(() => {
+    const voteId = location.state?.voteMatchId;
+    if (!voteId) return;
+    const match = matches.find(item => `${item.date}-${item.homeTeam}-${item.awayTeam}` === voteId);
+    if (match && match.status !== "finished") setSelectedUpcomingMatch(match);
+    navigate(location.pathname, { replace: true, state: {} });
+  }, [location.state?.voteMatchId, location.pathname, navigate]);
   const upcomingLive = useLiveMatch(selectedUpcomingMatch);
 const [upcomingTab, setUpcomingTab] = useState("planteles");
 useEffect(() => { setUpcomingTab("planteles"); }, [selectedUpcomingMatch?.id]);
