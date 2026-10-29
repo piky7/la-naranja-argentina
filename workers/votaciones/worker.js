@@ -221,6 +221,8 @@ export default {
           return {
             partidoId: row.partido_id,
             selected: row.equipo_votado,
+            mvpSelected: mvpById.get(row.partido_id) || null,
+            mvpStatus: !mvpById.has(row.partido_id) ? "none" : !Array.isArray(game?.mvpWinners) ? "pending" : game.mvpWinners.includes(mvpById.get(row.partido_id)) ? "correct" : "incorrect",
             homeTeam, awayTeam,
             homeScore: confirmed ? homeScore : null,
             awayScore: confirmed ? awayScore : null,
