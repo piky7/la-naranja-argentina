@@ -4,6 +4,7 @@
 import fs from "node:fs";
 import { officialSchedule } from "../src/data/officialSchedule.js";
 import { matchResults } from "../src/data/matchResults.js";
+import { players } from "../src/data/players.js";
 
 const games = officialSchedule
   .filter(({ date, time, homeTeam, awayTeam }) =>
@@ -18,6 +19,7 @@ const games = officialSchedule
       id: resultKey,
       homeTeam,
       awayTeam,
+      eligiblePlayers: players.filter(player => (player.teamId === homeTeam || player.teamId === awayTeam) && typeof player.id === "string").map(player => player.id),
       // Hora argentina. El Worker debe interpretar esta zona en el servidor.
       startsAt: `${date}T${time}:00-03:00`,
       finished: matchResults[resultKey]?.status === "finished",
