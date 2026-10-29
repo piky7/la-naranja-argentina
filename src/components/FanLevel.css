@@ -578,3 +578,16 @@
 .lna-fan-modal .lna-fan-prediction .lna-fan-earned{font-size:10px;line-height:1.1;color:#fff;white-space:nowrap}
 .lna-fan-modal .lna-fan-mvp-hit{font-size:8px;line-height:1;color:#ffd46b;font-weight:900;white-space:nowrap}
 @media(max-width:390px){.lna-fan-modal .lna-fan-history-list{gap:3px}.lna-fan-modal .lna-fan-prediction{padding:5px 1px;min-height:75px}.lna-fan-modal .lna-fan-prediction-match img{width:14px;height:14px}.lna-fan-modal .lna-fan-prediction-match b{font-size:8px}}
+
+/* Ajuste visual: jerarquía clara y orden descendente */
+.lna-fan-modal .lna-fan-history-list{gap:6px 5px}
+.lna-fan-modal .lna-fan-prediction{min-height:104px;justify-content:flex-start;gap:5px;padding:8px 3px 7px;border-width:1px;background:linear-gradient(160deg,rgba(20,78,61,.82),rgba(16,39,49,.95));box-shadow:inset 0 1px rgba(255,255,255,.06)}
+.lna-fan-modal .lna-fan-prediction.incorrect{background:linear-gradient(160deg,rgba(104,57,27,.75),rgba(46,37,40,.95))}
+.lna-fan-modal .lna-fan-prediction-date{font-size:10px;font-weight:600}
+.lna-fan-modal .lna-fan-prediction-match{gap:4px;margin:4px 0 0}
+.lna-fan-modal .lna-fan-prediction-match img{width:20px;height:20px}
+.lna-fan-modal .lna-fan-versus{font-size:8px;color:#c5b6c5;font-weight:700}
+.lna-fan-modal .lna-fan-final-score{font-size:12px;line-height:1;color:#fff;white-space:nowrap}
+.lna-fan-modal .lna-fan-prediction .lna-fan-earned{display:block;width:100%;padding:4px 1px;border-radius:5px;background:rgba(0,0,0,.18);font-size:10px;color:#fff}
+.lna-fan-modal .lna-fan-mvp-hit{font-size:8px}
+@media(max-width:390px){.lna-fan-modal .lna-fan-prediction{min-height:99px;gap:4px;padding:7px 1px 5px}.lna-fan-modal .lna-fan-prediction-match img{width:17px;height:17px}.lna-fan-modal .lna-fan-final-score{font-size:11px}}
