@@ -6,6 +6,16 @@ import { officialSchedule } from "../src/data/officialSchedule.js";
 import { matchResults } from "../src/data/matchResults.js";
 import { players } from "../src/data/players.js";
 
+// Las valoraciones solo se publican si existe una planilla oficial completa.
+let officialStats = {};
+try {
+  const source = fs.readFileSync("src/data/matchStats.js", "utf8");
+  if (source.includes("export const matchPlayerStats")) {
+    const encoded = Buffer.from(source).toString("base64");
+    officialStats = (await import(`data:text/javascript;base64,${encoded}`)).matchPlayerStats || {};
+  }
+} catch { /* Sin planilla oficial, el MVP permanece pendiente. */ }
+
 const games = officialSchedule
   .filter(({ date, time, homeTeam, awayTeam }) =>
     /^\d{4}-\d{2}-\d{2}$/.test(date ?? "") &&
@@ -14,7 +24,15 @@ const games = officialSchedule
   )
   .map(({ date, time, homeTeam, awayTeam }) => {
     const resultKey = `${date}-${homeTeam}-${awayTeam}`;
+    const record = officialStats[resultKey];
+    const entries = record?.source === "Liga Nacional" && record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/")
+      ? [...(record[homeTeam] || []), ...(record[awayTeam] || [])] : [];
+    const rated = entries.filter(player => typeof player.id === "string" && Number.isFinite(player.valuation));
+    const maxValuation = rated.length ? Math.max(...rated.map(player => player.valuation)) : null;
+    const mvpWinners = matchResults[resultKey]?.status === "finished" && rated.length > 0 && entries.every(player => Number.isFinite(player.valuation))
+      ? [...new Set(rated.filter(player => player.valuation === maxValuation).map(player => player.id))] : null;
     return {
+      mvpWinners,
       // ID estable; el índice de la lista visual no debe usarse para votar.
       id: resultKey,
       homeTeam,
