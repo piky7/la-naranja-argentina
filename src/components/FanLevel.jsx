@@ -227,7 +227,7 @@ export default function FanLevel() {
       if (!response.ok) throw new Error("Historial no disponible");
       const result = await response.json();
       if (!result.ok || !Array.isArray(result.predictions)) throw new Error("Historial inválido");
-      setPredictions(result.predictions);
+      setPredictions([...result.predictions].sort((a, b) => String(b.partidoId || "").localeCompare(String(a.partidoId || ""))));
       setPage(0);
     } catch {
       setHistoryError(true);
@@ -440,9 +440,10 @@ export default function FanLevel() {
                     <span className="lna-fan-prediction-status" aria-label={p.status === "correct" ? "Acertado" : "Errado"}>{p.status === "correct" ? "✓" : "✕"}</span>
                     <div className="lna-fan-prediction-match">
                       {home?.logo ? <img src={home.logo} alt={home?.shortName || "Local"} /> : <span>{home?.shortName || "LOC"}</span>}
-                      <b>{p.homeScore != null && p.awayScore != null ? `${p.homeScore}-${p.awayScore}` : "VS"}</b>
+                      <span className="lna-fan-versus">VS</span>
                       {away?.logo ? <img src={away.logo} alt={away?.shortName || "Visitante"} /> : <span>{away?.shortName || "VIS"}</span>}
                     </div>
+                    <b className="lna-fan-final-score">{p.homeScore}-{p.awayScore}</b>
                     <strong className="lna-fan-earned">{earned >= 0 ? "+" : ""}{earned} PTS</strong>
                     {mvpHit && <span className="lna-fan-mvp-hit" title="Acertaste el MVP: +20 puntos">★ MVP +20</span>}
                   </div>;
