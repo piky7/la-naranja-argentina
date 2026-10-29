@@ -11,6 +11,7 @@ import { matchPlayerStats } from "../data/matchStats";
 import PlayerModal from "../components/PlayerModal";
 import TeamRankings from "../components/TeamRankings";
 import TripleRankings from "../components/TripleRankings";
+import MvpRankings from "../components/MvpRankings";
 import "../pages/Home.css";
 import { useNavigate } from "react-router-dom";
 
@@ -315,9 +316,11 @@ if (!finished) return false;
           <button type="button" className={mode === "players" ? "active" : ""} aria-pressed={mode === "players"} onClick={() => setMode("players")}>Jugadores</button>
           <button type="button" className={mode === "teams" ? "active" : ""} aria-pressed={mode === "teams"} onClick={() => setMode("teams")}>Equipos</button>
           <button type="button" className={mode === "triples" ? "active" : ""} aria-pressed={mode === "triples"} onClick={() => setMode("triples")}>Triples</button>
+          <button type="button" className={mode === "mvp" ? "active" : ""} aria-pressed={mode === "mvp"} onClick={() => setMode("mvp")}>MVP</button>
         </div>
         {mode === "teams" && <TeamRankings />}
         {mode === "triples" && <TripleRankings onPlayerClick={setSelectedPlayer} />}
+        {mode === "mvp" && <MvpRankings onPlayerClick={setSelectedPlayer} />}
         {mode === "players" && (<>
 
 {/* =========================================
