@@ -546,5 +546,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2bOozY-vCMNo74w0--uOXO2asfZteXFh3PfYI6Wxw3R1LZx2YoVIhtA==/san-lorenzo-vs-platense"
     }
+  },
+  "2026-10-28-boca-regatas": {
+    "status": "finished",
+    "homeScore": 95,
+    "awayScore": 83,
+    "time": "20:35",
+    "homeTeam": "boca",
+    "awayTeam": "regatas",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2x_HnZ62G0OkWv8LxnPvwBcaHb7ifCd4mqLupJAwmwPpVKmkyiKYlqg==/boca-vs-regatas-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2x_HnZ62G0OkWv8LxnPvwBcaHb7ifCd4mqLupJAwmwPpVKmkyiKYlqg==/boca-vs-regatas-c"
+    }
   }
 };
