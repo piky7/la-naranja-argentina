@@ -428,7 +428,7 @@ export default function FanLevel() {
               <div className="lna-fan-stats lna-fan-stats-performance">
                 <span><b className="correct">{predictions.filter(p => p.status === "correct").length}</b> Acertados</span>
                 <span><b className="incorrect">{predictions.filter(p => p.status === "incorrect").length}</b> Errados</span>
-                <span><b>{predictions.filter(p => p.status === "pending").length}</b> Pendientes</span>
+                <span><b>{predictions.filter(p => p.status === "correct" || p.status === "incorrect").length}</b> Jugados</span>
                 <span><b className="correct">{(() => {
                   const settled = predictions.filter(p => p.status === "correct" || p.status === "incorrect");
                   return settled.length ? `${Math.round(predictions.filter(p => p.status === "correct").length * 100 / settled.length)}%` : "—";
