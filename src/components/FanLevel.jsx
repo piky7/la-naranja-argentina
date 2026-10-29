@@ -88,6 +88,7 @@ export default function FanLevel() {
   const [career, setCareer] = useState(null);
   const [streaks, setStreaks] = useState({winStreak:0,lossStreak:0,missedStreak:0});
   const [page, setPage] = useState(0);
+  const [careerHistoryExpanded, setCareerHistoryExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [introStep, setIntroStep] = useState(null);
   const finishIntro = () => { try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* Sin almacenamiento disponible. */ } setIntroStep(null); };
@@ -301,7 +302,17 @@ export default function FanLevel() {
             <div className="lna-fan-palmares-totals"><div><Trophy size={22}/><strong>{career?.cups ?? "—"}</strong><small>Copas ganadas</small></div><div><span aria-hidden="true">↓</span><strong>{career?.descents ?? "—"}</strong><small>Descensos</small></div></div>
             <h3><Trophy size={15} aria-hidden="true" /> VITRINA DE COPAS</h3>
             <div className="lna-fan-cup-grid">{LEVELS.map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><img className="lna-fan-trophy-image" src={TROPHY_IMAGES[i]} alt={`Trofeo ${item.name}`} loading="lazy" /><strong>{item.name}</strong><small>{(career?.cupCounts?.[i] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
-            <p className="lna-fan-palmares-hint">Cada ascenso suma la copa de la liga disputada. En Leyenda LNA ganás otra copa cada 10 partidos consecutivos de permanencia. Las copas nunca se pierden.</p>
+            <div className="lna-fan-journey">
+              <div className="lna-fan-journey-heading"><span>MI TRAYECTORIA</span>{(career?.moves?.length || 0) > 3 && <button type="button" onClick={() => setCareerHistoryExpanded(value => !value)}>{careerHistoryExpanded ? "Ver menos" : "Ver todo"}</button>}</div>
+              {!career?.moves?.length ? <small className="lna-fan-journey-empty">Tus ascensos, descensos y copas aparecerán acá cuando se registren.</small> :
+                <div className="lna-fan-journey-list">{[...career.moves].reverse().slice(0, careerHistoryExpanded ? undefined : 3).map((event, i) =>
+                  <div className="lna-fan-journey-event" key={careerEventId(event) + ":" + i}>
+                    <span className="lna-fan-journey-symbol">{event.type === "descent" ? "↓" : "★"}</span>
+                    <span><strong>{event.type === "descent" ? "Descenso" : event.type === "legend-cup" ? "Copa de permanencia" : "Ascenso y copa"}</strong><small>{event.category || "Categoría no disponible"}</small></span>
+                  </div>
+                )}</div>}
+            </div>
+            <p className="lna-fan-palmares-hint">Las copas se conservan para siempre. Cada ascenso suma una; en Leyenda LNA, cada 10 partidos de permanencia.</p>
           </div> : activeView === "mvp" ? <div className="lna-fan-mvp">
             <div className="lna-fan-streak-panel">
               <Flame className="lna-fan-streak-flame" size={27} aria-hidden="true" /><strong>RACHA MVP · TODAS LAS CATEGORÍAS</strong>
