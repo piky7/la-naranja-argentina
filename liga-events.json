@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-11-27",
+  "dateTo": "2026-11-28",
   "matches": [
     {
       "date": "2026-09-28",
@@ -754,8 +754,8 @@
         "officialClubId": 80,
         "officialTeamId": 112549
       },
-      "homeScore": 20,
-      "awayScore": 19,
+      "homeScore": 27,
+      "awayScore": 27,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2bOozY-vCMNo74w0--uOXO2asfZteXFh3PfYI6Wxw3R1LZx2YoVIhtA==/san-lorenzo-vs-platense"
     },
@@ -772,8 +772,8 @@
         "officialClubId": 1424,
         "officialTeamId": 114561
       },
-      "homeScore": 16,
-      "awayScore": 9,
+      "homeScore": 26,
+      "awayScore": 14,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2x_HnZ62G0OkWv8LxnPvwBcaHb7ifCd4mqLupJAwmwPpVKmkyiKYlqg==/boca-vs-regatas-c"
     },
@@ -790,7 +790,7 @@
         "officialClubId": 46,
         "officialTeamId": 112566
       },
-      "homeScore": 0,
+      "homeScore": 3,
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v29y879egNMhIrH_btZyNUIgxCk--UJTTs4YaBp_GOuFO45VFn-QQQ0w==/gimnasia-cr-vs-ferro"
@@ -1321,24 +1321,6 @@
       "date": "2026-11-15",
       "time": "21:00",
       "home": {
-        "name": "SAN MARTÍN (C)",
-        "officialClubId": 1426,
-        "officialTeamId": 113546
-      },
-      "away": {
-        "name": "QUIMSA",
-        "officialClubId": 1869,
-        "officialTeamId": 112657
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
-    },
-    {
-      "date": "2026-11-15",
-      "time": "21:00",
-      "home": {
         "name": "LA UNION FSA",
         "officialClubId": 1541,
         "officialTeamId": 114763
@@ -1352,6 +1334,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
+    },
+    {
+      "date": "2026-11-15",
+      "time": "21:00",
+      "home": {
+        "name": "SAN MARTÍN (C)",
+        "officialClubId": 1426,
+        "officialTeamId": 113546
+      },
+      "away": {
+        "name": "QUIMSA",
+        "officialClubId": 1869,
+        "officialTeamId": 112657
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
     },
     {
       "date": "2026-11-16",
