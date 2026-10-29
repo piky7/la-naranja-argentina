@@ -3,6 +3,8 @@ import { createPortal } from "react-dom";
 import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Check } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
+import { matches } from "../data/matches";
+import { useNavigate } from "react-router-dom";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
@@ -55,7 +57,9 @@ function PlayerJersey({ name, number }) {
 }
 
 export default function FanLevel() {
+  const navigate = useNavigate();
   const modalRef = useRef(null);
+  const [pendingToday, setPendingToday] = useState([]);
   const seenEventsRef = useRef(readSeenEvents());
   const [pendingEvents, setPendingEvents] = useState([]);
   const [eventNotice, setEventNotice] = useState(null);
@@ -148,6 +152,35 @@ export default function FanLevel() {
     };
   }, [refresh]);
 
+  // Consultar únicamente partidos de HOY (hora argentina). El Worker decide si la votación sigue abierta.
+  useEffect(() => {
+    let active = true;
+    const checkTodayVotes = async () => {
+      const id = getVisitorId();
+      if (!id) return;
+      const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+      const games = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
+      if (!games.length) { if (active) setPendingToday([]); return; }
+      const checks = await Promise.all(games.map(async match => {
+        const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+        try {
+          const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/votos?partidoId=${encodeURIComponent(gameId)}&visitanteId=${encodeURIComponent(id)}`, { cache: "no-store" });
+          if (!response.ok) return null;
+          const data = await response.json();
+          return data.open && !data.voted ? gameId : null;
+        } catch { return null; }
+      }));
+      if (active) setPendingToday(checks.filter(Boolean));
+    };
+    checkTodayVotes();
+    const timer = window.setInterval(checkTodayVotes, 60000);
+    const onVote = () => checkTodayVotes();
+    const onVisible = () => { if (!document.hidden) checkTodayVotes(); };
+    window.addEventListener("lna-vote-updated", onVote);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => { active = false; window.clearInterval(timer); window.removeEventListener("lna-vote-updated", onVote); document.removeEventListener("visibilitychange", onVisible); };
+  }, []);
+
   const refreshHistory = useCallback(async () => {
     const id = getVisitorId();
     if (!id) return;
@@ -196,11 +229,12 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className="lna-fan-bar" type="button" onClick={openCareer} aria-label="Ver mi carrera LNA">
+      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}`} type="button" onClick={() => { if (pendingToday.length) navigate("/", { state: { voteMatchId: pendingToday[0] } }); else openCareer(); }} aria-label={pendingToday.length ? `${pendingToday.length} pronóstico pendiente de hoy. Ir a votar` : "Ver mi carrera LNA"}>
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : `${seasonScore}/${level.goal ?? "∞"}`}</b></span>
           <span className="lna-fan-track"><span style={{ width: `${percent}%` }} /></span>
+          {pendingToday.length > 0 && <span className="lna-fan-vote-alert"><span className="lna-fan-vote-dot" />SIN VOTAR</span>}
         </span>
         <ChevronRight size={16} aria-hidden="true" />
       </button>
