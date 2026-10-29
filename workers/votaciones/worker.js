@@ -220,6 +220,7 @@ export default {
           const winner = confirmed ? (homeScore > awayScore ? homeTeam : awayTeam) : null;
           return {
             partidoId: row.partido_id,
+            startsAt: game?.startsAt || null,
             selected: row.equipo_votado,
             mvpSelected: mvpById.get(row.partido_id) || null,
             mvpStatus: !mvpById.has(row.partido_id) ? "none" : !Array.isArray(game?.mvpWinners) ? "pending" : game.mvpWinners.includes(mvpById.get(row.partido_id)) ? "correct" : "incorrect",
