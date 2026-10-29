@@ -5,6 +5,7 @@ import LiveRosters from "../components/LiveRosters";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
+import MvpPrediction from "../components/MvpPrediction";
 import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
@@ -2005,7 +2006,7 @@ const finishedMatch = {
             </>}
             {!upcomingLive && upcomingTab === "carrera" && <div className="upcoming-tab-panel upcoming-career-panel" role="tabpanel">
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
-              <div className="upcoming-career-mvp-note"><strong>★ ¿QUIÉN SERÁ EL MVP? · +20 PTS</strong><small>La selección de MVP estará disponible cuando se integre el registro de jugadores y puntos.</small></div>
+              <MvpPrediction match={selectedUpcomingMatch} />
             </div>}
             {(upcomingLive || upcomingTab === "comparativa" || upcomingTab === "jugadores") && <section className="match-highlighted-section">
               {(upcomingLive || upcomingTab === "comparativa") && (<div className="upcoming-tab-panel" role="tabpanel">
