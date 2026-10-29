@@ -511,3 +511,24 @@
 .lna-fan-modal .lna-fan-stats-performance span{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px;font-size:10px;text-align:center}
 .lna-fan-modal .lna-fan-stats-performance b{font-size:clamp(18px,4.5vw,23px);font-variant-numeric:tabular-nums}
 @media(max-width:390px){.lna-fan-modal .lna-fan-stats-performance{gap:4px}.lna-fan-modal .lna-fan-stats-performance span{font-size:9px;padding:7px 1px}}
+
+/* Palmarés · vitrina y trayectoria de eventos oficiales de Mi Carrera */
+.lna-fan-modal-palmares .lna-fan-cup.earned .lna-fan-trophy-image{transform:scale(1.12);filter:drop-shadow(0 0 10px rgba(255,134,204,.45))}
+.lna-fan-journey{margin-top:8px;padding:7px 9px;border:1px solid rgba(244,119,188,.38);border-radius:10px;background:linear-gradient(120deg,rgba(57,33,63,.55),rgba(20,33,52,.85));text-align:left}
+.lna-fan-journey-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#ff9fce;font-size:10px;font-weight:900;letter-spacing:1px}
+.lna-fan-journey-heading button{padding:3px 5px;border:0;background:transparent;color:#ffafd7;font-size:10px;font-weight:800}
+.lna-fan-journey-list{display:grid;gap:4px;margin-top:5px}
+.lna-fan-journey-event{display:flex;align-items:center;gap:8px;padding:4px 2px;border-top:1px solid rgba(255,165,214,.13)}
+.lna-fan-journey-symbol{display:grid;place-items:center;flex:0 0 23px;width:23px;height:23px;border:1px solid #a96996;border-radius:7px;background:#382540;color:#ff9ed0;font-size:15px}
+.lna-fan-journey-event>span:last-child{display:flex;flex-direction:column;min-width:0;gap:1px}
+.lna-fan-journey-event strong{font-size:11px;color:#fff}
+.lna-fan-journey-event small,.lna-fan-journey-empty{font-size:10px;color:#c8bbd0}
+.lna-fan-journey-empty{display:block;margin-top:5px}
+.lna-fan-modal-palmares .lna-fan-palmares-hint{margin-top:6px}
+@media(max-width:768px){
+ .lna-fan-modal-palmares .lna-fan-cup.earned .lna-fan-trophy-image{transform:scale(1.08)}
+ .lna-fan-journey{margin-top:6px;padding:5px 7px}
+ .lna-fan-journey-list{gap:2px;margin-top:3px}
+ .lna-fan-journey-event{padding:3px 1px}
+ .lna-fan-journey-symbol{flex-basis:20px;width:20px;height:20px}
+}
