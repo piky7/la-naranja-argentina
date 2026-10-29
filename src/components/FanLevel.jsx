@@ -227,7 +227,12 @@ export default function FanLevel() {
       if (!response.ok) throw new Error("Historial no disponible");
       const result = await response.json();
       if (!result.ok || !Array.isArray(result.predictions)) throw new Error("Historial inválido");
-      setPredictions([...result.predictions].sort((a, b) => String(b.partidoId || "").localeCompare(String(a.partidoId || ""))));
+      setPredictions([...result.predictions].sort((a, b) => {
+        const aTime = Date.parse(a.startsAt || "");
+        const bTime = Date.parse(b.startsAt || "");
+        if (Number.isFinite(aTime) && Number.isFinite(bTime) && aTime !== bTime) return bTime - aTime;
+        return String(b.partidoId || "").localeCompare(String(a.partidoId || ""));
+      }));
       setPage(0);
     } catch {
       setHistoryError(true);
