@@ -4,7 +4,6 @@ import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Che
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 import { matches } from "../data/matches";
-import { useNavigate } from "react-router-dom";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
@@ -57,7 +56,6 @@ function PlayerJersey({ name, number }) {
 }
 
 export default function FanLevel() {
-  const navigate = useNavigate();
   const modalRef = useRef(null);
   const [pendingToday, setPendingToday] = useState([]);
   const seenEventsRef = useRef(readSeenEvents());
@@ -229,7 +227,7 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}`} type="button" onClick={() => { if (pendingToday.length) navigate("/", { state: { voteMatchId: pendingToday[0] } }); else openCareer(); }} aria-label={pendingToday.length ? `${pendingToday.length} pronóstico pendiente de hoy. Ir a votar` : "Ver mi carrera LNA"}>
+      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}`} type="button" onClick={openCareer} aria-label={pendingToday.length ? "Ver mi carrera LNA. Tenés un pronóstico pendiente de hoy" : "Ver mi carrera LNA"}>
         <Trophy size={19} aria-hidden="true" />
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : `${seasonScore}/${level.goal ?? "∞"}`}</b></span>
