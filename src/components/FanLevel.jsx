@@ -319,11 +319,15 @@ export default function FanLevel() {
               <span>{streaks.winStreak > 0 ? `✓ ${streaks.winStreak} aciertos seguidos` : streaks.lossStreak > 0 ? `✕ ${streaks.lossStreak} ${streaks.lossStreak === 1 ? "error seguido" : "errores seguidos"}` : streaks.missedStreak > 0 ? `— ${streaks.missedStreak} ${streaks.missedStreak === 1 ? "partido sin votar" : "partidos sin votar"}` : "Sin racha activa"}</span>
               <small>{`Te faltan ${mvpLeft} ${mvpLeft === 1 ? "acierto consecutivo" : "aciertos consecutivos"} para ${mvps > 0 ? "otro MVP" : "conseguir el MVP"}.`}</small>
             </div>
+            <div className="lna-fan-mvp-progress" aria-label={`Progreso MVP: ${streaks.winStreak % 10} de 10 aciertos`}>
+              <div className="lna-fan-mvp-progress-label"><strong>PROGRESO AL MVP</strong><b>{streaks.winStreak % 10} / 10</b></div>
+              <div className="lna-fan-mvp-progress-track"><span style={{ width: `${(streaks.winStreak % 10) * 10}%` }} /></div>
+            </div>
             <span className="lna-fan-mvp-emblem"><img className="lna-fan-mvp-trophy-image" src="/trofeos/mvp.svg" alt="Trofeo MVP" loading="lazy" /></span>
             <strong>MVP DE PRONÓSTICOS</strong>
             <span className="lna-fan-mvp-count">{mvps}</span>
             <p>{mvps === 1 ? "Distintivo conseguido" : "Distintivos conseguidos"}</p>
-            <small>Acertá <b>10 partidos consecutivos</b> para conseguir un MVP. No suma puntos y queda como recuerdo permanente. Si errás o no votás un partido, se corta la racha. Cada 10 aciertos consecutivos ganás otro MVP.</small>
+            <small>Cada <b>10 aciertos seguidos</b> ganás un MVP permanente, sin puntos extra. Si errás o no votás, la racha se reinicia.</small>
           </div> : activeView === "levels" ? <div className="lna-fan-levels">
             {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
               <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}<em className="lna-fan-record">Jugados: {Number.isFinite(career?.gamesPlayed?.[i]) ? `${career.gamesPlayed[i]} ${career.gamesPlayed[i] === 1 ? "partido" : "partidos"}` : "—"}</em></strong><small>{item.goal === null ? "10 partidos" : `${item.goal} PTS${i === 3 ? " / 4 aciertos consecutivos" : i === 4 ? " / 5 aciertos consecutivos" : ""}`}</small>{i > index && <LockKeyhole className="lna-fan-level-lock" size={13} aria-label="Categoría por alcanzar" /> }
