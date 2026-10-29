@@ -75,7 +75,7 @@ export default function MatchVote({ match, onStatusChange }) {
   const percent = votes => total ? Math.round(votes * 100 / total) : 0;
   return (
     <section className="lna-vote" aria-label="Pronóstico de hinchas">
-      <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA?</strong><span className="lna-vote-career-label">🏆 MI CARRERA</span></div><span>{data.voted ? `${total} ${total === 1 ? "voto" : "votos"}` : "Votá tu favorito"}</span></div>
+      <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA?</strong></div><span>{data.voted ? `${total} ${total === 1 ? "voto" : "votos"}` : "Votá tu favorito"}</span></div>
       <div className="lna-vote-options">
         {[{ team: home, result: data.home }, { team: away, result: data.away }].map(({ team, result }) => (
           <button key={team} type="button" disabled={busy || !data.open || (data.voted && !editing) || (data.voted && data.selected === team)}
