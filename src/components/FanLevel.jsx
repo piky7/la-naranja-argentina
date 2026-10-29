@@ -156,7 +156,8 @@ export default function FanLevel() {
     const checkTodayVotes = async () => {
       const id = getVisitorId();
       if (!id) return;
-      const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+      const dateParts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).map(part => [part.type, part.value]));
+      const today = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
       const games = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
       if (!games.length) { if (active) setPendingToday([]); return; }
       const checks = await Promise.all(games.map(async match => {
