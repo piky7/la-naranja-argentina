@@ -88,6 +88,7 @@ export default function MvpPrediction({ match, onStatusChange }) {
         <strong>{votes} {Number(votes) === 1 ? "voto" : "votos"}</strong>
       </div>)}
     </div>}
+    <small className="lna-mvp-valuation-rule">LNA considera MVP al jugador con mayor valoración oficial del partido. Si hay empate, ambos cuentan como MVP.</small>
     <small className="lna-mvp-prediction-notice">{error || (status === "loading" ? "Consultando pronóstico…" : status === "error" ? "Votación no disponible" : !open ? "Votación cerrada" : selected ? "Pronóstico guardado. Podés cambiarlo hasta el inicio." : "Elegí tu MVP antes de que empiece el partido.")}</small>
   </section>;
 }
