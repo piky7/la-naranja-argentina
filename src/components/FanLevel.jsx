@@ -11,6 +11,7 @@ const INTRO_KEY = "lna-career-intro-seen-v1";
 const PLAYER_NAME_KEY = "lna-career-player-name-v1";
 const PLAYER_NUMBER_KEY = "lna-career-player-number-v1";
 const CAREER_EVENTS_KEY = "lna-career-events-seen-v1";
+const REWARD_SEEN_KEY = "lna-career-rewards-seen-v1";
 const careerEventId = event => `${event.gameId}:${event.type}:${event.category}`;
 const readSeenEvents = () => { try { const value = JSON.parse(localStorage.getItem(CAREER_EVENTS_KEY) || "null"); return Array.isArray(value) ? value : null; } catch { return null; } };
 const readPlayerNumber = () => { try { return localStorage.getItem(PLAYER_NUMBER_KEY) ?? ""; } catch { return ""; } };
@@ -61,6 +62,7 @@ export default function FanLevel() {
   const seenEventsRef = useRef(readSeenEvents());
   const [pendingEvents, setPendingEvents] = useState([]);
   const [eventNotice, setEventNotice] = useState(null);
+  const [rewardNotice, setRewardNotice] = useState(null);
   const [playerName, setPlayerName] = useState(readPlayerName);
   const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
   const [nameDraft, setNameDraft] = useState("");
@@ -94,7 +96,38 @@ export default function FanLevel() {
   const [open, setOpen] = useState(false);
   const [introStep, setIntroStep] = useState(null);
   const finishIntro = () => { try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* Sin almacenamiento disponible. */ } setIntroStep(null); };
-  const openCareer = () => { refresh(); setActiveView("levels"); setOpen(true); try { if (localStorage.getItem(INTRO_KEY) !== "1") setIntroStep(0); } catch { setIntroStep(0); } };
+  const openCareer = async () => {
+    refresh(); setActiveView("levels"); setOpen(true);
+    try { if (localStorage.getItem(INTRO_KEY) !== "1") { setIntroStep(0); return; } } catch { setIntroStep(0); return; }
+    const id = getVisitorId();
+    if (!id) return;
+    try {
+      const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId=${encodeURIComponent(id)}`, { cache: "no-store" });
+      if (!response.ok) return;
+      const data = await response.json();
+      if (!data.ok || !Array.isArray(data.predictions)) return;
+      const rewarded = data.predictions.filter(p => p.earned != null && Number(p.earned) > 0);
+      const snapshot = Object.fromEntries(rewarded.map(p => [p.partidoId, Number(p.earned)]));
+      const previousRaw = localStorage.getItem(REWARD_SEEN_KEY);
+      if (previousRaw === null) { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); return; }
+      let previous = {};
+      try { previous = JSON.parse(previousRaw) || {}; } catch { /* Reestablecer seguimiento. */ }
+      const changes = rewarded.filter(p => Number(p.earned) > Number(previous[p.partidoId] || 0));
+      localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot));
+      if (changes.length) {
+        const total = changes.reduce((sum,p) => sum + Number(p.earned) - Number(previous[p.partidoId] || 0), 0);
+        const reasons = changes.flatMap(p => {
+          const previousPoints = Number(previous[p.partidoId] || 0);
+          if (previousPoints > 0 && Number(p.mvpEarned) > 0) return [`MVP acertado (+${p.mvpEarned} pts)`];
+          const items = [`Pronóstico de ganador (${p.status === "correct" ? "acertado" : "participación"})`];
+          if (Number(p.mvpEarned) > 0) items.push(`MVP acertado (+${p.mvpEarned} pts)`);
+          if (p.medal) items.push("Bonificación por racha");
+          return items;
+        });
+        setRewardNotice({total,reasons:[...new Set(reasons)]});
+      }
+    } catch { /* No anunciar premios sin confirmación del servidor. */ }
+  };
   const dismissEvent = (goToCareer = false) => {
     if (!eventNotice) return;
     const seen = [...new Set([...(seenEventsRef.current || []), careerEventId(eventNotice)])].slice(-250);
@@ -237,6 +270,18 @@ export default function FanLevel() {
         </span>
         <ChevronRight size={16} aria-hidden="true" />
       </button>
+      {rewardNotice && open && introStep === null && createPortal(<div className="lna-fan-achievement-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) setRewardNotice(null); }}>
+        <section className="lna-fan-achievement is-promotion" role="dialog" aria-modal="true" aria-labelledby="lna-fan-reward-title">
+          <div className="lna-fan-achievement-rays" aria-hidden="true" />
+          <button type="button" className="lna-fan-achievement-close" onClick={() => setRewardNotice(null)} aria-label="Cerrar felicitación"><X size={20}/></button>
+          <span className="lna-fan-achievement-kicker">MI CARRERA · RECOMPENSAS</span>
+          <h2 id="lna-fan-reward-title">¡FELICITACIONES!</h2>
+          <strong className="lna-fan-reward-points">+{rewardNotice.total} PTS</strong>
+          <p>Sumaste puntos en tus pronósticos:</p>
+          <div className="lna-fan-reward-reasons">{rewardNotice.reasons.map(reason => <span key={reason}>{reason}</span>)}</div>
+          <button type="button" className="lna-fan-achievement-continue" onClick={() => setRewardNotice(null)}>Continuar mi carrera</button>
+        </section>
+      </div>, document.body)}
       {eventNotice && createPortal(<div className="lna-fan-achievement-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) dismissEvent(false); }}>
         <section className={`lna-fan-achievement ${eventNotice.type === "descent" ? "is-descent" : "is-promotion"}`} role="dialog" aria-modal="true" aria-labelledby="lna-fan-achievement-title">
           <div className="lna-fan-achievement-rays" aria-hidden="true" />
@@ -258,10 +303,11 @@ export default function FanLevel() {
           {introStep === 0 ? <p>Elegí al ganador en <strong>Inicio → Partidos de hoy → ¿QUIÉN GANA?</strong> antes de que empiece el partido. Cuando termina, sumás puntos para tu liga y para tu histórico. En <strong>Mi carrera</strong> podés consultar tu progreso, pronósticos, MVP y copas.</p> : introStep === 1 ? <div className="lna-fan-intro-rules">
             <span>✓ Pronóstico acertado <b>+15 PTS</b></span>
             <span>✕ Pronóstico errado <b>+5 PTS</b></span>
+            <span>★ Acertar MVP del partido <b>+20 PTS</b></span>
             <span>3 aciertos consecutivos <b>+30 PTS en el tercero</b></span>
             <span>5 aciertos consecutivos <b>+45 PTS en el quinto</b></span>
             <span>MVP <b>1 distintivo cada 10 aciertos consecutivos</b></span>
-            <small>Los puntos se acreditan al finalizar el partido. No votar no suma puntos y corta las rachas. La racha MVP continúa aunque cambies de liga.</small>
+            <small>El ganador se puntúa al confirmar el resultado; el MVP, cuando se publican las valoraciones oficiales. No votar no suma puntos y corta las rachas de ganador.</small>
           </div> : <div className="lna-fan-intro-rules lna-fan-intro-leagues">
             <span><strong>Desarrollo</strong><small>↑ 50 PTS</small><small>↓ Sin descenso</small></span>
             <span><strong>Federal</strong><small>↑ 100 PTS</small><small>↓ Sin descenso</small></span>
