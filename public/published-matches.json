@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T02:59:04.137Z",
+  "generatedAt": "2026-10-30T03:00:52.164Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -351,6 +351,14 @@
       "awayScore": 61,
       "homeTeam": "gimnasia",
       "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-10-29-lanus-san-martin": {
+      "status": "published",
+      "homeScore": 81,
+      "awayScore": 72,
+      "homeTeam": "lanus",
+      "awayTeam": "san-martin",
       "hasStats": true
     }
   }

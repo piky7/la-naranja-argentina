@@ -578,5 +578,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v29y879egNMhIrH_btZyNUIgxCk--UJTTs4YaBp_GOuFO45VFn-QQQ0w==/gimnasia-cr-vs-ferro"
     }
+  },
+  "2026-10-29-lanus-san-martin": {
+    "status": "finished",
+    "homeScore": 81,
+    "awayScore": 72,
+    "time": "22:05",
+    "homeTeam": "lanus",
+    "awayTeam": "san-martin",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fZXaA0m6_wu0vYJ2tCgvU_cY--zYZxCeeij5E1FFFS43xltXuiCeWw==/lanus-vs-san-martin-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fZXaA0m6_wu0vYJ2tCgvU_cY--zYZxCeeij5E1FFFS43xltXuiCeWw==/lanus-vs-san-martin-c"
+    }
   }
 };
