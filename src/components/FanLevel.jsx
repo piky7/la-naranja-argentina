@@ -302,7 +302,7 @@ export default function FanLevel() {
     <>
       <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}${unseenRewards ? " has-unseen-rewards" : ""}`} type="button" onClick={openCareer} aria-label={pendingToday.length ? "Ver mi carrera LNA. Tenés un pronóstico pendiente de hoy" : "Ver mi carrera LNA"}>
         <Trophy size={19} aria-hidden="true" />
-        {unseenRewards && <span className="lna-fan-new-reward-mark" aria-hidden="true">NUEVO</span>}
+        {unseenRewards && <span className="lna-fan-new-reward-mark" aria-hidden="true">NUEVOS PTS</span>}
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : `${seasonScore}/${level.goal ?? "∞"}`}</b></span>
           <span className="lna-fan-track"><span style={{ width: `${percent}%` }} /></span>
