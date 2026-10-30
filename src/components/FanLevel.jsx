@@ -351,6 +351,10 @@ export default function FanLevel() {
               {game.bonus > 0 && <span><b>★ Racha</b><strong>+{game.bonus} pts</strong></span>}
             </div>
           </div>)}</div>
+          {rewardNotice.currentPoints !== null && <div className="lna-fan-reward-total">
+            <span>PUNTUACIÓN TOTAL</span>
+            <strong>{Math.max(0,rewardNotice.currentPoints - rewardNotice.total)} <span aria-hidden="true">→</span> <em>{rewardNotice.currentPoints} PTS</em></strong>
+          </div>}
           <button type="button" className="lna-fan-achievement-continue" onClick={() => setRewardNotice(null)}>Continuar mi carrera</button>
         </section>
       </div>, document.body)}
