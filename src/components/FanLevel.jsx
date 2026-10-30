@@ -343,7 +343,6 @@ export default function FanLevel() {
           <span className="lna-fan-achievement-kicker">MI CARRERA · RECOMPENSAS</span>
           <h2 id="lna-fan-reward-title">¡FELICITACIONES!</h2>
           <strong className="lna-fan-reward-points">+{rewardNotice.total} PTS</strong>
-          {rewardNotice.currentPoints !== null && <p>Tu puntuación pasó de <b>{Math.max(0,rewardNotice.currentPoints-rewardNotice.total)}</b> a <b>{rewardNotice.currentPoints} pts</b></p>}
           <div className="lna-fan-reward-games">{rewardNotice.games.map(game => <div className="lna-fan-reward-game" key={game.id}>
             <div className="lna-fan-reward-match"><small>{game.date}</small><strong>{game.home} {game.score} {game.away}</strong></div>
             <div className="lna-fan-reward-outcomes">
