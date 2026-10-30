@@ -139,7 +139,9 @@ export default function FanLevel() {
             id:p.partidoId,
             date:p.partidoId?.slice(5,10)?.replace("-","/") || "",
             home:home?.shortName || p.homeTeam || "Local",
+            homeLogo:home?.logo || null,
             away:away?.shortName || p.awayTeam || "Visitante",
+            awayLogo:away?.logo || null,
             score:Number.isFinite(p.homeScore) && Number.isFinite(p.awayScore) ? `${p.homeScore}–${p.awayScore}` : "Finalizado",
             winnerStatus:p.status,
             winnerPoints:newWinnerPoints,
@@ -348,7 +350,7 @@ export default function FanLevel() {
           <h2 id="lna-fan-reward-title">¡FELICITACIONES!</h2>
           <strong className="lna-fan-reward-points">+{rewardNotice.total} PTS</strong>
           <div className="lna-fan-reward-games">{rewardNotice.games.map(game => <div className="lna-fan-reward-game" key={game.id}>
-            <div className="lna-fan-reward-match"><small>{game.date}</small><strong>{game.home} {game.score} {game.away}</strong></div>
+            <div className="lna-fan-reward-match"><small>{game.date}</small><div className="lna-fan-reward-scoreline"><span className="lna-fan-reward-team">{game.homeLogo && <img src={game.homeLogo} alt="" />}<strong>{game.home}</strong></span><b className="lna-fan-reward-score">{game.score}</b><span className="lna-fan-reward-team">{game.awayLogo && <img src={game.awayLogo} alt="" />}<strong>{game.away}</strong></span></div></div>
             <div className="lna-fan-reward-outcomes">
               <span><b>{game.winnerStatus === "correct" ? "✓" : "✕"} Ganador</b><strong>+{game.winnerPoints} pts</strong></span>
               {game.mvpStatus !== "none" && <span><b>{game.mvpStatus === "correct" ? "✓" : game.mvpStatus === "incorrect" ? "✕" : "·"} MVP</b><small>{game.mvpName}</small><strong>{game.mvpStatus === "pending" ? "Pendiente" : `+${game.mvpPoints} pts`}</strong></span>}
