@@ -93,7 +93,7 @@ async function calculateRewards(db, fixture, visitorId) {
       categoryIndex--;
       seasonPoints=0;
       losses=0; // Nueva categoría: la racha de descenso comienza de cero.
-    }else if(categoryIndex<categories.length-1 && (seasonPoints>=categories[categoryIndex].goal || (categoryIndex===3 && categoryWinStreak>=4) || (categoryIndex===4 && categoryWinStreak>=5))){
+    }else if(categoryIndex<categories.length-1 && (seasonPoints>=categories[categoryIndex].goal || (categoryIndex===2 && categoryWinStreak>=3) || (categoryIndex===3 && categoryWinStreak>=4) || (categoryIndex===4 && categoryWinStreak>=5))){
       categoryIndex++;
       seasonPoints=0;
     }
