@@ -110,7 +110,7 @@ export default function FanLevel() {
       const rewarded = data.predictions.filter(p => p.earned != null && Number(p.earned) > 0);
       const snapshot = Object.fromEntries(rewarded.map(p => [p.partidoId, Number(p.earned)]));
       const previousRaw = localStorage.getItem(REWARD_SEEN_KEY);
-      if (previousRaw === null) { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); setUnseenRewards(false); return; }
+      // Sin referencia previa, las recompensas existentes también están pendientes de ver.
       let previous = {};
       try { previous = JSON.parse(previousRaw) || {}; } catch { /* Reestablecer seguimiento. */ }
       const changes = rewarded.filter(p => Number(p.earned) > Number(previous[p.partidoId] || 0));
@@ -196,9 +196,8 @@ export default function FanLevel() {
       if (document.hidden) return;
       try {
         const saved = localStorage.getItem(REWARD_SEEN_KEY);
-        if (saved === null) return;
-        const previous = JSON.parse(saved);
-        if (!previous || typeof previous !== "object") return;
+        const previous = saved === null ? {} : JSON.parse(saved);
+        if (!previous || typeof previous !== "object" || Array.isArray(previous)) return;
         const id = getVisitorId();
         if (!id) return;
         const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId=${encodeURIComponent(id)}`, {cache:"no-store"});
