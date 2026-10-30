@@ -332,8 +332,8 @@ export default function FanLevel() {
         <Trophy size={19} aria-hidden="true" />
         {unseenRewards && <span className="lna-fan-new-reward-mark" aria-hidden="true">NUEVOS PTS</span>}
         <span className="lna-fan-summary">
-          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name}</strong><b>{seasonPoints === null ? "—" : `${seasonScore}/${level.goal ?? "∞"}`}</b></span>
-          <span className="lna-fan-track"><span style={{ width: `${percent}%` }} /></span>
+          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{career && seasonPoints !== null ? (level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name) : "Cargando…"}</strong><b>{career && seasonPoints !== null ? `${seasonScore}/${level.goal ?? "∞"}` : ""}</b></span>
+          <span className="lna-fan-track"><span style={{ width: `${career && seasonPoints !== null ? percent : 0}%` }} /></span>
           {pendingToday.length > 0 && <span className="lna-fan-vote-alert"><span className="lna-fan-vote-dot" />SIN VOTAR</span>}
         </span>
         <ChevronRight size={16} aria-hidden="true" />
