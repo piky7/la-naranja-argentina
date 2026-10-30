@@ -643,3 +643,9 @@
 .lna-fan-reward-team strong{font-size:9px;line-height:1.15;overflow-wrap:anywhere;max-width:100%}
 .lna-fan-reward-score{font-size:11px;color:#fff;white-space:nowrap;flex-shrink:0}
 @media(max-width:380px){.lna-fan-reward-team img{width:22px;height:22px}.lna-fan-reward-team strong{font-size:8px}.lna-fan-reward-score{font-size:10px}}
+
+/* Trofeos SVG de Palmarés en las categorías de Mi Carrera. */
+.lna-fan-modal .lna-fan-level-trophy{display:block;flex:0 0 25px;width:25px;height:30px;object-fit:contain;opacity:.57;filter:grayscale(.75);pointer-events:none}
+.lna-fan-modal .lna-fan-level.is-current .lna-fan-level-trophy{opacity:1;filter:drop-shadow(0 0 5px rgba(255,125,196,.25))}
+.lna-fan-modal .lna-fan-level.is-earned .lna-fan-level-trophy{opacity:1;filter:drop-shadow(0 0 4px rgba(255,125,196,.18))}
+@media(max-width:390px){.lna-fan-modal .lna-fan-level-trophy{flex-basis:21px;width:21px;height:26px}}
