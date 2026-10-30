@@ -669,8 +669,8 @@
 @media(max-width:390px){.lna-fan-modal .lna-fan-level .lna-fan-level-requirement{flex-basis:40%;width:40%;max-width:40%;font-size:9px}.lna-fan-modal .lna-fan-level .lna-fan-level-alternative{font-size:8px}}
 
 /* Insignia histórica compacta junto al trofeo, sin modificar nivel ni progreso. */
-.lna-fan-bar .lna-fan-bar-medals{position:relative;display:flex;align-items:flex-start;justify-content:center;flex:0 0 25px;align-self:stretch;padding-top:1px;color:#f49acb}
-.lna-fan-bar .lna-fan-historic-star{position:absolute;left:0;bottom:0;width:25px;height:25px;display:grid;place-items:center;color:#1a1726}
+.lna-fan-bar .lna-fan-bar-medals{display:flex;align-items:center;justify-content:center;flex:0 0 19px;color:#f49acb}
+.lna-fan-bar .lna-fan-historic-star{position:absolute;top:-12px;left:-12px;width:27px;height:27px;display:grid;place-items:center;color:#1a1726;z-index:8;pointer-events:none}
 .lna-fan-historic-star svg{position:absolute;inset:0;width:100%;height:100%;fill:#f4a1d1;stroke:#ffcae5;stroke-width:1.2;filter:drop-shadow(0 0 3px rgba(239,104,174,.3))}
 .lna-fan-historic-star b{position:relative;z-index:1;font-size:9px;font-weight:900;line-height:1;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
 .lna-fan-bar .lna-fan-bar-medals>svg{flex-shrink:0}
