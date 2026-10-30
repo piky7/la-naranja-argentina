@@ -669,7 +669,7 @@
 @media(max-width:390px){.lna-fan-modal .lna-fan-level .lna-fan-level-requirement{flex-basis:40%;width:40%;max-width:40%;font-size:9px}.lna-fan-modal .lna-fan-level .lna-fan-level-alternative{font-size:8px}}
 
 /* Insignia histórica compacta junto al trofeo, sin modificar nivel ni progreso. */
-.lna-fan-bar .lna-fan-bar-medals{display:flex;align-items:flex-start;justify-content:center;flex:0 0 29px;align-self:stretch;color:#f49acb;padding-top:1px;transform:translateX(-5px)}.lna-fan-bar-trophy{display:block;width:29px;height:29px;object-fit:contain;flex-shrink:0}
+.lna-fan-bar .lna-fan-bar-medals{display:flex;align-items:flex-start;justify-content:center;flex:0 0 29px;align-self:stretch;color:#f49acb;padding-top:1px}.lna-fan-bar-trophy{display:block;width:29px;height:29px;object-fit:contain;flex-shrink:0;position:relative;left:-5px}
 /* Histórico en la esquina inferior derecha, dentro de la tarjeta y sin tapar el progreso. */
 .lna-fan-bar .lna-fan-historic-star{position:absolute;top:auto;bottom:5px;left:auto;right:19px;width:17px;height:17px;display:grid;place-items:center;color:#1a1726;z-index:8;pointer-events:none}
 .lna-fan-bar .lna-fan-track{margin-right:20px}
