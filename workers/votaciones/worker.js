@@ -75,7 +75,7 @@ async function calculateRewards(db, fixture, visitorId) {
   const firstDate = [firstVote?.first_id, firstMvp?.first_id].filter(Boolean).sort()[0]?.slice(0,10) || "9999-12-31";
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id));
-  let points = 0, wins = 0, losses = 0, missed = 0, mvps = 0, bestStreak = 0;
+  let points = 0, wins = 0, losses = 0, missed = 0, legacyMvps = 0, mvpHits = 0, bestStreak = 0;
   const categories = [{name:"Liga de Desarrollo",goal:50},{name:"Liga Federal",goal:100},{name:"Liga Argentina",goal:150},{name:"Liga Nacional",goal:200},{name:"Estrella LNB",goal:300},{name:"Leyenda LNA",goal:null}];
   // Cada categoría tiene su propio puntaje desde cero; el histórico nunca se reinicia.
   let seasonPoints=0, categoryIndex=0, cups=0, descents=0, bestCategory=0;
@@ -132,7 +132,7 @@ async function calculateRewards(db, fixture, visitorId) {
     }
     if (g.homeScore === g.awayScore) { continue; }
     const mvpEarned = mvpChoice && Array.isArray(g.mvpWinners) && g.mvpWinners.includes(mvpChoice) ? 20 : 0;
-    if (mvpEarned) { points += 20; seasonPoints += 20; }
+    if (mvpEarned) { points += 20; seasonPoints += 20; mvpHits++; }
     if (!vote) {
       // No votar corta los aciertos, pero conserva la racha negativa sin incrementarla.
       // Solo un acierto o un descenso reinicia los errores consecutivos.
@@ -148,7 +148,7 @@ async function calculateRewards(db, fixture, visitorId) {
       bestStreak=Math.max(bestStreak,wins);
       if (wins === 3) {points+=15;seasonPoints+=15;}
       if (wins === 5) {points+=30;seasonPoints+=30;}
-      if (wins % 10 === 0) mvps++;
+      if (wins % 10 === 0) legacyMvps++;
       perGame.set(g.id,{earned:(wins === 3 ? 30 : wins === 5 ? 45 : 15)+mvpEarned,mvpEarned,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
       updateCareer(g,false,true,true);
     } else {
@@ -158,7 +158,7 @@ async function calculateRewards(db, fixture, visitorId) {
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
-  return {points:Math.max(0,points),seasonPoints,mvps,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,gamesPlayed,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
+  return {points:Math.max(0,points),seasonPoints,mvps:legacyMvps+Math.floor(mvpHits/5),mvpHits,mvpProgress:mvpHits%5,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,gamesPlayed,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
 }
 async function getRewards(db, visitorId) {
   const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
