@@ -606,3 +606,16 @@
 /* Distintivo fijo de recompensas pendientes, sin animaciones */
 .lna-fan-bar.has-unseen-rewards{border-color:#f18bc4;box-shadow:0 0 0 1px rgba(241,139,196,.32)}
 .lna-fan-new-reward-mark{position:absolute;right:7px;top:-10px;z-index:2;padding:2px 6px;border-radius:8px;background:#f27bbd;color:#211429;border:1px solid #ffc1e2;font-size:9px;font-weight:800;letter-spacing:.35px;line-height:1.25;pointer-events:none}
+
+/* Detalle de recompensas: una fila compacta por partido. Conserva el fondo y rayos animados originales. */
+.lna-fan-reward-games{display:flex;flex-direction:column;gap:7px;width:100%;max-height:min(37dvh,245px);overflow-y:auto;margin:6px 0 10px;scrollbar-width:thin}
+.lna-fan-reward-game{display:flex;align-items:center;gap:8px;width:100%;padding:9px 10px;border:1px solid rgba(255,133,198,.35);border-radius:10px;background:rgba(18,26,43,.68);text-align:left}
+.lna-fan-reward-match{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.lna-fan-reward-match small{font-size:10px;color:#c8b7c8}
+.lna-fan-reward-match strong{font-size:11px;line-height:1.35;color:#fff;overflow-wrap:anywhere}
+.lna-fan-reward-outcomes{display:flex;gap:7px;flex:1.4;min-width:0;justify-content:flex-end}
+.lna-fan-reward-outcomes>span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;flex:1;min-width:0;border-left:1px solid rgba(255,133,198,.25);padding-left:5px;text-align:center}
+.lna-fan-reward-outcomes b{font-size:10px;white-space:nowrap;color:#f8c4df}
+.lna-fan-reward-outcomes strong{font-size:11px;color:#ff9dcb;white-space:nowrap}
+.lna-fan-reward-outcomes small{font-size:9px;line-height:1.2;color:#d8c7dc;overflow-wrap:anywhere}
+@media(max-width:380px){.lna-fan-reward-game{gap:5px;padding:7px}.lna-fan-reward-match strong{font-size:10px}.lna-fan-reward-outcomes{gap:3px}.lna-fan-reward-outcomes b,.lna-fan-reward-outcomes strong{font-size:9px}}
