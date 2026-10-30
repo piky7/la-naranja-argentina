@@ -27,6 +27,8 @@ const LEVELS = [
   { name: "Leyenda LNA", goal: null },
 ];
 
+const displayLevel = name => name === "Estrella LNB" ? "Copa Súper 4" : name === "Leyenda LNA" ? "Estrella LNA" : name;
+
 function getVisitorId() {
   try {
     let id = localStorage.getItem(KEY);
@@ -332,7 +334,7 @@ export default function FanLevel() {
         <Trophy size={19} aria-hidden="true" />
         {unseenRewards && <span className="lna-fan-new-reward-mark" aria-hidden="true">NUEVOS PTS</span>}
         <span className="lna-fan-summary">
-          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{career && seasonPoints !== null ? (level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : level.name) : "Cargando…"}</strong><b>{career && seasonPoints !== null ? `${seasonScore}/${level.goal ?? "∞"}` : ""}</b></span>
+          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{career && seasonPoints !== null ? (level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : displayLevel(level.name)) : "Cargando…"}</strong><b>{career && seasonPoints !== null ? `${seasonScore}/${level.goal ?? "∞"}` : ""}</b></span>
           <span className="lna-fan-track"><span style={{ width: `${career && seasonPoints !== null ? percent : 0}%` }} /></span>
           {pendingToday.length > 0 && <span className="lna-fan-vote-alert"><span className="lna-fan-vote-dot" />SIN VOTAR</span>}
         </span>
@@ -366,9 +368,9 @@ export default function FanLevel() {
           <button type="button" className="lna-fan-achievement-close" onClick={() => dismissEvent(false)} aria-label="Cerrar notificación"><X size={20}/></button>
           <span className="lna-fan-achievement-kicker">{eventNotice.type === "descent" ? "CAMBIO DE CATEGORÍA" : "NUEVO LOGRO DESBLOQUEADO"}</span>
           <h2 id="lna-fan-achievement-title">{eventNotice.type === "descent" ? "DESCENDISTE" : eventNotice.type === "legend-cup" ? "¡OTRA COPA!" : "¡CAMPEÓN!"}</h2>
-          {eventNotice.type === "descent" ? <div className="lna-fan-achievement-fall"><span aria-hidden="true">↓</span><strong>{eventNotice.category}</strong></div> : <img className="lna-fan-achievement-trophy" src={TROPHY_IMAGES[Math.max(0, LEVELS.findIndex(item => item.name === eventNotice.category))]} alt={`Copa ${eventNotice.category}`} />}
+          {eventNotice.type === "descent" ? <div className="lna-fan-achievement-fall"><span aria-hidden="true">↓</span><strong>{displayLevel(eventNotice.category)}</strong></div> : <img className="lna-fan-achievement-trophy" src={TROPHY_IMAGES[Math.max(0, LEVELS.findIndex(item => item.name === eventNotice.category))]} alt={`Copa ${displayLevel(eventNotice.category)}`} />}
           <strong className="lna-fan-achievement-category">{eventNotice.category}</strong>
-          <p>{eventNotice.type === "descent" ? "Una etapa difícil, pero tu carrera continúa. ¡Volvé más fuerte!" : eventNotice.type === "legend-cup" ? "¡Sumaste otra copa por tu permanencia en Leyenda LNA!" : `Ganaste la copa de ${eventNotice.category} y ascendiste a ${LEVELS[Math.min(LEVELS.length - 1, LEVELS.findIndex(item => item.name === eventNotice.category) + 1)]?.name}.`}</p>
+          <p>{eventNotice.type === "descent" ? "Una etapa difícil, pero tu carrera continúa. ¡Volvé más fuerte!" : eventNotice.type === "legend-cup" ? "¡Sumaste otra copa por tu permanencia en Estrella LNA!" : `Ganaste la copa de ${displayLevel(eventNotice.category)} y ascendiste a ${displayLevel(LEVELS[Math.min(LEVELS.length - 1, LEVELS.findIndex(item => item.name === eventNotice.category) + 1)]?.name)}.`}</p>
           <button type="button" className="lna-fan-achievement-continue" onClick={() => dismissEvent(pendingEvents.length <= 1)}>{pendingEvents.length > 1 ? "Siguiente logro" : "Continuar mi carrera"}</button>
         </section>
       </div>, document.body)}
@@ -391,8 +393,8 @@ export default function FanLevel() {
             <span><strong>Federal</strong><small>↑ 100 PTS</small><small>↓ Sin descenso</small></span>
             <span><strong>Argentina</strong><small>↑ 150 PTS</small><small>↓ 5 errores seguidos</small></span>
             <span><strong>Nacional</strong><small>↑ 200 PTS o 4 aciertos seguidos</small><small>↓ 4 errores seguidos</small></span>
-            <span><strong>Estrella LNB</strong><small>↑ 300 PTS o 5 aciertos seguidos</small><small>↓ 3 errores seguidos</small></span>
-            <span><strong>Leyenda LNA</strong><small>🏆 Cada 10 partidos</small><small>↓ 2 errores seguidos</small></span>
+            <span><strong>Copa Súper 4</strong><small>↑ 300 PTS o 5 aciertos seguidos</small><small>↓ 3 errores seguidos</small></span>
+            <span><strong>Estrella LNA</strong><small>🏆 Cada 10 partidos</small><small>↓ 2 errores seguidos</small></span>
             <small>Al ascender ganás la copa. Los puntos y la racha de categoría se reinician al cambiar de liga; el histórico, las copas y los trofeos MVP se conservan.</small>
           </div>}
           <div className="lna-fan-intro-dots">{[0,1,2].map(i => <span key={i} className={introStep === i ? "active" : ""} />)}</div>
@@ -416,7 +418,7 @@ export default function FanLevel() {
               </div>
               <strong className="lna-fan-player-display-name">{playerName || "TU NOMBRE"}</strong>
               <span className="lna-fan-player-display-number">DORSAL <b>#{playerNumber || "—"}</b></span>
-              <small className="lna-fan-player-display-league">{level.name}</small>
+              <small className="lna-fan-player-display-league">{displayLevel(level.name)}</small>
             </div>
           </div>
           {editingProfile && createPortal(<div className="lna-fan-profile-edit-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) closeProfileEditor(); }}>
@@ -437,12 +439,12 @@ export default function FanLevel() {
             </div>
             <div className="lna-fan-gamer-rank">
               <span>CATEGORÍA ACTUAL</span>
-              <strong>{level.name}</strong>
+              <strong>{displayLevel(level.name)}</strong>
               <small>POSICIÓN {index + 1} DE {LEVELS.length}</small>
             </div>
           </div>
           <div className="lna-fan-gamer-progress"><div className="lna-fan-track lna-fan-track-large"><span style={{ width: `${percent}%` }} /></div><strong>{next ? `${Math.max(0,(level.goal ?? 0)-seasonScore)} PTS` : `${10 - ((career?.currentStay || 0) % 10)} PARTIDOS`}<small>{next ? "PARA ASCENDER" : "PARA LA COPA"}</small></strong></div>
-          <p className="lna-fan-next"><span className="lna-fan-next-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="careerRise" x1="8" y1="40" x2="40" y2="8" gradientUnits="userSpaceOnUse"><stop stopColor="#f03b9e"/><stop offset="1" stopColor="#ffb8e1"/></linearGradient></defs><rect x="2" y="2" width="44" height="44" rx="12" fill="#271b3c" stroke="#f67bc2" strokeWidth="1.5"/><path d="M13 32L31 14M21 14H34V27" stroke="url(#careerRise)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/><path d="M13 32L31 14M21 14H34V27" stroke="#ffe1f2" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg></span>{next ? (`Próximo objetivo: ganar la copa ${level.name} y ascender a ${next.name}${streakGoal ? ` (también podés ascender por racha)` : ""}.`) : "En Leyenda LNA ganás una copa cada 10 partidos consecutivos de permanencia."}</p>
+          <p className="lna-fan-next"><span className="lna-fan-next-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="careerRise" x1="8" y1="40" x2="40" y2="8" gradientUnits="userSpaceOnUse"><stop stopColor="#f03b9e"/><stop offset="1" stopColor="#ffb8e1"/></linearGradient></defs><rect x="2" y="2" width="44" height="44" rx="12" fill="#271b3c" stroke="#f67bc2" strokeWidth="1.5"/><path d="M13 32L31 14M21 14H34V27" stroke="url(#careerRise)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/><path d="M13 32L31 14M21 14H34V27" stroke="#ffe1f2" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg></span>{next ? (`Próximo objetivo: ganar la copa ${displayLevel(level.name)} y ascender a ${displayLevel(next.name)}${streakGoal ? ` (también podés ascender por racha)` : ""}.`) : "En Estrella LNA ganás una copa cada 10 partidos consecutivos de permanencia."}</p>
           {pendingToday.length > 0 && <div className="lna-fan-today-reminder" role="status"><span className="lna-fan-vote-dot" /><span>{pendingToday.length === 1 ? "Tenés 1 partido de hoy sin votar." : `Tenés ${pendingToday.length} partidos de hoy sin votar.`} Entrá a Inicio para hacer tu pronóstico.</span></div>}
           <div className="lna-fan-tabs" role="tablist" aria-label="Categorías y pronósticos de Mi carrera">
             <button type="button" role="tab" aria-selected={activeView === "levels"} className={activeView === "levels" ? "active" : ""} onClick={() => setActiveView("levels")}>Categorías</button>
@@ -459,7 +461,7 @@ export default function FanLevel() {
             <div className="lna-fan-section-title"><Crown size={17} aria-hidden="true" /><span>MI PALMARÉS</span></div>
             <div className="lna-fan-palmares-totals"><div><Trophy size={22}/><strong>{career?.cups ?? "—"}</strong><small>Copas ganadas</small></div><div><span aria-hidden="true">↓</span><strong>{career?.descents ?? "—"}</strong><small>Descensos</small></div></div>
             <h3><Trophy size={15} aria-hidden="true" /> VITRINA DE COPAS</h3>
-            <div className="lna-fan-cup-grid">{LEVELS.map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={item.name}><img className="lna-fan-trophy-image" src={TROPHY_IMAGES[i]} alt={`Trofeo ${item.name}`} loading="lazy" /><strong>{item.name}</strong><small>{(career?.cupCounts?.[i] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
+            <div className="lna-fan-cup-grid">{LEVELS.map((item,i) => <div className={`lna-fan-cup ${(career?.cupCounts?.[i] || 0)>0 ? "earned" : ""}`} key={displayLevel(item.name)}><img className="lna-fan-trophy-image" src={TROPHY_IMAGES[i]} alt={`Trofeo ${displayLevel(item.name)}`} loading="lazy" /><strong>{displayLevel(item.name)}</strong><small>{(career?.cupCounts?.[i] || 0)>0 ? `×${career.cupCounts[i]}` : "—"}</small></div>)}</div>
             <div className="lna-fan-journey">
               <div className="lna-fan-journey-heading"><span>MI TRAYECTORIA</span>{(career?.moves?.length || 0) > 3 && <button type="button" onClick={() => setCareerHistoryExpanded(value => !value)}>{careerHistoryExpanded ? "Ver menos" : "Ver todo"}</button>}</div>
               {!career?.moves?.length ? <small className="lna-fan-journey-empty">Tus ascensos, descensos y copas aparecerán acá cuando se registren.</small> :
@@ -470,7 +472,7 @@ export default function FanLevel() {
                   </div>
                 )}</div>}
             </div>
-            <p className="lna-fan-palmares-hint">Las copas se conservan para siempre. Cada ascenso suma una; en Leyenda LNA, cada 10 partidos de permanencia.</p>
+            <p className="lna-fan-palmares-hint">Las copas se conservan para siempre. Cada ascenso suma una; en Estrella LNA, cada 10 partidos de permanencia.</p>
           </div> : activeView === "mvp" ? <div className="lna-fan-mvp">
             <div className="lna-fan-mvp-progress" aria-label={`Progreso al próximo trofeo MVP: ${mvpHits % 5} de 5 aciertos`}>
               <div className="lna-fan-mvp-progress-label"><strong>PROGRESO AL PRÓXIMO TROFEO</strong><b>{mvpHits % 5} / 5</b></div>
@@ -483,8 +485,8 @@ export default function FanLevel() {
             <p>{mvps === 1 ? "Distintivo conseguido" : "Distintivos conseguidos"}</p>
             <small>Cada <b>5 MVP de partido acertados</b> ganás un trofeo permanente, sin puntos extra. Si errás o no votás, conservás el progreso. Los trofeos anteriores también se mantienen.</small>
           </div> : activeView === "levels" ? <div className="lna-fan-levels">
-            {LEVELS.map((item, i) => <div key={item.name} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
-              <span>{i < index ? "✓" : i + 1}</span><strong>{item.name}<em className="lna-fan-record">Jugados: {Number.isFinite(career?.gamesPlayed?.[i]) ? `${career.gamesPlayed[i]} ${career.gamesPlayed[i] === 1 ? "partido" : "partidos"}` : "—"}</em></strong><small>{item.goal === null ? "10 partidos" : `${item.goal} PTS${i === 3 ? " / 4 aciertos consecutivos" : i === 4 ? " / 5 aciertos consecutivos" : ""}`}</small>{i > index && <LockKeyhole className="lna-fan-level-lock" size={13} aria-label="Categoría por alcanzar" /> }
+            {LEVELS.map((item, i) => <div key={displayLevel(item.name)} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
+              <span>{i < index ? "✓" : i + 1}</span><strong>{displayLevel(item.name)}<em className="lna-fan-record">Jugados: {Number.isFinite(career?.gamesPlayed?.[i]) ? `${career.gamesPlayed[i]} ${career.gamesPlayed[i] === 1 ? "partido" : "partidos"}` : "—"}</em></strong><small>{item.goal === null ? "10 partidos" : `${item.goal} PTS${i === 3 ? " / 4 aciertos consecutivos" : i === 4 ? " / 5 aciertos consecutivos" : ""}`}</small>{i > index && <LockKeyhole className="lna-fan-level-lock" size={13} aria-label="Categoría por alcanzar" /> }
             </div>)}
 
           </div> : <div className="lna-fan-history">
