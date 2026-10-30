@@ -479,6 +479,7 @@ export default function FanLevel() {
                     </div>
                     <b className="lna-fan-final-score">{p.homeScore}-{p.awayScore}</b>
                     <strong className="lna-fan-earned">{earned >= 0 ? "+" : ""}{earned} PTS</strong>
+                    {p.mvpStatus === "incorrect" && <span className="lna-fan-mvp-hit lna-fan-mvp-miss" title="Pronóstico de MVP errado: +0 puntos">MVP ✕</span>}
                     {mvpHit && <span className="lna-fan-mvp-hit" title="Acertaste el MVP: +20 puntos">★ MVP +20</span>}
                   </div>;
                 })}
