@@ -337,7 +337,7 @@ export default function FanLevel() {
         {unseenRewards && <span className="lna-fan-new-reward-mark" aria-hidden="true">NUEVOS PTS</span>}
         <span className="lna-fan-summary">
           <span className="lna-fan-line"><strong className="lna-fan-bar-category">{career && seasonPoints !== null ? (level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : displayLevel(level.name)) : "Cargando…"}</strong></span>
-          <span className="lna-fan-progress-row"><span className="lna-fan-track"><span style={{ width: `${career && seasonPoints !== null ? percent : 0}%` }} /></span><b className="lna-fan-progress-count">{career && seasonPoints !== null ? `${seasonScore}/${level.goal ?? "∞"}` : ""}</b></span>
+          <span className="lna-fan-progress-row"><b className="lna-fan-progress-count">{career && seasonPoints !== null ? `${seasonScore}/${level.goal ?? "∞"}` : ""}</b><span className="lna-fan-track"><span style={{ width: `${career && seasonPoints !== null ? percent : 0}%` }} /></span></span>
           {pendingToday.length > 0 && <span className="lna-fan-vote-alert"><span className="lna-fan-vote-dot" />SIN VOTAR</span>}
         </span>
         <span className="lna-fan-historic-badge" title={`${score} puntos históricos`} aria-label={`${score} puntos históricos`}><span className="lna-fan-historic-star"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 1.5 20.5 10.5 30.5 12 23.25 19 25 29 16 24.3 7 29 8.75 19 1.5 12 11.5 10.5Z" /></svg><b>{points === null ? "–" : score}</b></span></span>
