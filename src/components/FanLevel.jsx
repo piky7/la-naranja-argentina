@@ -321,7 +321,7 @@ export default function FanLevel() {
   const index = career && Number.isInteger(career.categoryIndex) ? career.categoryIndex : 0;
   const level = LEVELS[index];
   const next = LEVELS[index + 1];
-  const streakGoal = index === 3 ? 4 : index === 4 ? 5 : null;
+  const streakGoal = index === 2 ? 3 : index === 3 ? 4 : index === 4 ? 5 : null;
   const categoryStreak = career?.categoryWinStreak || 0;
   const descentLimit = index === 5 ? 2 : index === 4 ? 3 : index === 3 ? 4 : index === 2 ? 5 : null;
   const errorsLeft = descentLimit ? descentLimit - streaks.lossStreak : null;
@@ -391,7 +391,7 @@ export default function FanLevel() {
           </div> : <div className="lna-fan-intro-rules lna-fan-intro-leagues">
             <span><strong>Desarrollo</strong><small>↑ 50 PTS</small><small>↓ Sin descenso</small></span>
             <span><strong>Federal</strong><small>↑ 100 PTS</small><small>↓ Sin descenso</small></span>
-            <span><strong>Argentina</strong><small>↑ 150 PTS</small><small>↓ 5 errores seguidos</small></span>
+            <span><strong>Argentina</strong><small>↑ 150 PTS o 3 aciertos seguidos</small><small>↓ 5 errores seguidos</small></span>
             <span><strong>Nacional</strong><small>↑ 200 PTS o 4 aciertos seguidos</small><small>↓ 4 errores seguidos</small></span>
             <span><strong>Copa Súper 4</strong><small>↑ 300 PTS o 5 aciertos seguidos</small><small>↓ 3 errores seguidos</small></span>
             <span><strong>Estrella LNA</strong><small>🏆 Cada 10 partidos</small><small>↓ 2 errores seguidos</small></span>
@@ -486,7 +486,7 @@ export default function FanLevel() {
             <small>Cada <b>5 MVP de partido acertados</b> ganás un trofeo permanente, sin puntos extra. Si errás o no votás, conservás el progreso. Los trofeos anteriores también se mantienen.</small>
           </div> : activeView === "levels" ? <div className="lna-fan-levels">
             {LEVELS.map((item, i) => <div key={displayLevel(item.name)} className={`lna-fan-level ${i === index ? "is-current" : ""} ${i < index ? "is-earned" : ""}`}>
-              <span>{i < index ? "✓" : i + 1}</span><strong>{displayLevel(item.name)}<em className="lna-fan-record">Jugados: {Number.isFinite(career?.gamesPlayed?.[i]) ? `${career.gamesPlayed[i]} ${career.gamesPlayed[i] === 1 ? "partido" : "partidos"}` : "—"}</em></strong><small>{item.goal === null ? "10 partidos" : `${item.goal} PTS${i === 3 ? " / 4 aciertos consecutivos" : i === 4 ? " / 5 aciertos consecutivos" : ""}`}</small>{i > index && <LockKeyhole className="lna-fan-level-lock" size={13} aria-label="Categoría por alcanzar" /> }
+              <span>{i < index ? "✓" : i + 1}</span><strong>{displayLevel(item.name)}<em className="lna-fan-record">Jugados: {Number.isFinite(career?.gamesPlayed?.[i]) ? `${career.gamesPlayed[i]} ${career.gamesPlayed[i] === 1 ? "partido" : "partidos"}` : "—"}</em></strong><small>{item.goal === null ? "10 partidos" : `${item.goal} PTS${i === 2 ? " / 3 aciertos consecutivos" : i === 3 ? " / 4 aciertos consecutivos" : i === 4 ? " / 5 aciertos consecutivos" : ""}`}</small>{i > index && <LockKeyhole className="lna-fan-level-lock" size={13} aria-label="Categoría por alcanzar" /> }
             </div>)}
 
           </div> : <div className="lna-fan-history">
