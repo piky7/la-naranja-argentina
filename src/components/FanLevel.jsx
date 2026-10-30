@@ -212,8 +212,10 @@ export default function FanLevel() {
     check();
     const onVisible = () => { if (!document.hidden) check(); };
     document.addEventListener("visibilitychange", onVisible);
-    const timer = window.setInterval(check, 120000);
-    return () => { mounted = false; document.removeEventListener("visibilitychange", onVisible); window.clearInterval(timer); };
+    window.addEventListener("focus", check);
+    window.addEventListener("pageshow", check);
+    const timer = window.setInterval(check, 30000);
+    return () => { mounted = false; document.removeEventListener("visibilitychange", onVisible); window.removeEventListener("focus", check); window.removeEventListener("pageshow", check); window.clearInterval(timer); };
   }, []);
 
   // Consultar únicamente partidos de HOY (hora argentina). El Worker decide si la votación sigue abierta.
