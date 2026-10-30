@@ -384,8 +384,7 @@ export default function FanLevel() {
             <span>✓ Pronóstico acertado <b>+15 PTS</b></span>
             <span>✕ Pronóstico errado <b>+5 PTS</b></span>
             <span>★ Acertar MVP del partido <b>+20 PTS</b></span>
-            <span>3 aciertos consecutivos <b>+30 PTS en el tercero</b></span>
-            <span>5 aciertos consecutivos <b>+45 PTS en el quinto</b></span>
+            <span>5 aciertos consecutivos <b>+30 PTS extra en el quinto</b></span>
             <span>MVP <b>1 trofeo cada 5 MVP de jugadores acertados, sin necesidad de racha</b></span>
             <small>El ganador se puntúa al confirmar el resultado; el MVP, cuando se publican las valoraciones oficiales. No votar no suma puntos y corta las rachas de ganador.</small>
           </div> : <div className="lna-fan-intro-rules lna-fan-intro-leagues">
