@@ -619,3 +619,10 @@
 .lna-fan-reward-outcomes strong{font-size:11px;color:#ff9dcb;white-space:nowrap}
 .lna-fan-reward-outcomes small{font-size:9px;line-height:1.2;color:#d8c7dc;overflow-wrap:anywhere}
 @media(max-width:380px){.lna-fan-reward-game{gap:5px;padding:7px}.lna-fan-reward-match strong{font-size:10px}.lna-fan-reward-outcomes{gap:3px}.lna-fan-reward-outcomes b,.lna-fan-reward-outcomes strong{font-size:9px}}
+
+/* Resumen de progresión debajo de los partidos y encima de Continuar */
+.lna-fan-reward-total{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:100%;padding:11px 12px;border:1px solid rgba(255,133,198,.36);border-radius:10px;background:rgba(255,119,185,.07)}
+.lna-fan-reward-total>span{font-size:10px;font-weight:800;letter-spacing:1px;color:#d5b7cb}
+.lna-fan-reward-total>strong{font-size:22px;line-height:1.2;color:#fff}
+.lna-fan-reward-total>strong>span{margin:0 6px;color:#b9a4b8}
+.lna-fan-reward-total em{font-style:normal;color:#ff91c9}
