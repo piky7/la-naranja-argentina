@@ -693,3 +693,20 @@
 .lna-fan-bar .lna-fan-historic-badge small{font-size:7px;line-height:1;color:#d7acc7;font-weight:650}
 .lna-fan-bar>svg:last-child{flex-shrink:0;width:12px}
 @media(max-width:768px){.lna-fan-bar{gap:4px}.lna-fan-bar .lna-fan-bar-medals{flex-basis:25px}.lna-fan-bar .lna-fan-bar-trophy{width:25px;height:35px}.lna-fan-bar .lna-fan-historic-badge{flex-basis:30px}.lna-fan-bar .lna-fan-historic-star{width:26px;height:26px}.lna-fan-bar .lna-fan-historic-star b{font-size:9px}.lna-fan-bar .lna-fan-historic-badge small{font-size:6px}.lna-fan-bar .lna-fan-line b{font-size:8px}}
+
+
+/* Tarjeta compacta: categoría, progreso y estrella sin solapamientos. */
+.lna-fan-bar{gap:6px}
+.lna-fan-bar .lna-fan-bar-medals{flex:0 0 25px;min-width:25px}
+.lna-fan-bar .lna-fan-bar-trophy{width:25px;height:35px;object-fit:contain}
+.lna-fan-bar .lna-fan-summary{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.lna-fan-bar .lna-fan-line{display:block;min-width:0}
+.lna-fan-bar .lna-fan-bar-category{display:block;font-size:10px;line-height:1.12;overflow-wrap:normal}
+.lna-fan-bar .lna-fan-progress-row{display:flex;align-items:center;gap:5px;min-width:0;width:100%}
+.lna-fan-bar .lna-fan-progress-row .lna-fan-track{flex:1 1 0;min-width:0;width:auto;margin:0;height:6px}
+.lna-fan-bar .lna-fan-progress-count{flex:0 0 auto;font-size:8px;line-height:1;color:#f8a2d1;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.lna-fan-bar .lna-fan-historic-badge{flex:0 0 26px;width:26px;min-width:26px;align-self:center}
+.lna-fan-bar .lna-fan-historic-star{width:25px;height:25px}
+.lna-fan-bar .lna-fan-historic-star b{font-size:9px}
+.lna-fan-bar>svg:last-child{width:11px;flex:0 0 11px}
+@media(max-width:768px){.lna-fan-bar{gap:5px}.lna-fan-bar .lna-fan-historic-badge{flex-basis:26px;width:26px;min-width:26px}.lna-fan-bar .lna-fan-historic-star{width:25px;height:25px}.lna-fan-bar .lna-fan-progress-count{font-size:8px}}
