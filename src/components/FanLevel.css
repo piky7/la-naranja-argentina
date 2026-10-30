@@ -658,3 +658,12 @@
 .lna-fan-level-requirement b{font-size:8px;color:#ff92c9;font-weight:900}
 .lna-fan-modal .lna-fan-gamer-progress>strong{color:#ff9bd0;font-size:13px;font-weight:900}
 @media(max-width:390px){.lna-fan-modal .lna-fan-level .lna-fan-level-requirement{font-size:8px;max-width:48%}.lna-fan-current-tag{font-size:7px;padding:1px 3px}}
+
+/* Requisitos en dos renglones, sin superposiciones ni texto pegado. */
+.lna-fan-modal .lna-fan-level .lna-fan-level-requirement{display:flex;flex:0 0 40%;width:40%;max-width:40%;min-width:0;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px;text-align:right;font-size:10px;font-weight:750;line-height:1.2;color:#c5c7d9;white-space:normal}
+.lna-fan-modal .lna-fan-level .lna-fan-level-requirement>span{display:block;white-space:normal}
+.lna-fan-modal .lna-fan-level .lna-fan-level-alternative{font-size:9px;font-weight:550;color:#aeb5ca}
+.lna-fan-modal .lna-fan-level.is-current .lna-fan-level-requirement{color:#ff92c9}
+.lna-fan-modal .lna-fan-level>strong{flex:1 1 0;min-width:0}
+.lna-fan-modal .lna-fan-level-lock{flex-shrink:0}
+@media(max-width:390px){.lna-fan-modal .lna-fan-level .lna-fan-level-requirement{flex-basis:40%;width:40%;max-width:40%;font-size:9px}.lna-fan-modal .lna-fan-level .lna-fan-level-alternative{font-size:8px}}
