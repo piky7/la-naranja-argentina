@@ -626,3 +626,12 @@
 .lna-fan-reward-total>strong{font-size:22px;line-height:1.2;color:#fff}
 .lna-fan-reward-total>strong>span{margin:0 6px;color:#b9a4b8}
 .lna-fan-reward-total em{font-style:normal;color:#ff91c9}
+
+/* Tutorial Puntos y premios: evitar desborde horizontal con reglas largas */
+.lna-fan-intro-rules:not(.lna-fan-intro-leagues)>span{min-width:0;align-items:center;flex-wrap:wrap;column-gap:10px;row-gap:3px;overflow-wrap:anywhere}
+.lna-fan-intro-rules:not(.lna-fan-intro-leagues)>span>b{white-space:normal;min-width:0;max-width:100%;text-align:right;overflow-wrap:anywhere}
+.lna-fan-intro-rules:not(.lna-fan-intro-leagues)>small{min-width:0;overflow-wrap:anywhere}
+@media(max-width:480px){
+ .lna-fan-intro-rules:not(.lna-fan-intro-leagues)>span{font-size:11px;line-height:1.35}
+ .lna-fan-intro-rules:not(.lna-fan-intro-leagues)>span>b{font-size:11px}
+}
