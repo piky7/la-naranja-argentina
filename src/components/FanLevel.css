@@ -676,3 +676,20 @@
 .lna-fan-historic-star svg{position:absolute;inset:0;width:100%;height:100%;fill:#f4a1d1;stroke:#ffcae5;stroke-width:1.2;filter:drop-shadow(0 0 3px rgba(239,104,174,.3))}
 .lna-fan-historic-star b{position:relative;z-index:1;font-size:7px;font-weight:900;line-height:1;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
 .lna-fan-bar .lna-fan-bar-medals>svg{flex-shrink:0}
+
+
+/* Cabecera Mi Carrera: tres zonas independientes, sin superposiciones. */
+.lna-fan-bar{box-sizing:border-box;gap:5px}
+.lna-fan-bar .lna-fan-bar-medals{flex:0 0 27px;align-self:center;padding:0;transform:none}
+.lna-fan-bar .lna-fan-bar-trophy{position:static;left:auto;width:27px;height:38px}
+.lna-fan-bar .lna-fan-summary{min-width:0;flex:1 1 auto}
+.lna-fan-bar .lna-fan-kicker{display:block;color:#ed9ac8;font-size:7px;font-weight:900;letter-spacing:.7px;line-height:1.15;margin-bottom:3px;white-space:nowrap}
+.lna-fan-bar .lna-fan-line{align-items:center}
+.lna-fan-bar .lna-fan-line b{font-size:9px}
+.lna-fan-bar .lna-fan-track{height:5px;margin-right:0;margin-top:5px}
+.lna-fan-bar .lna-fan-historic-badge{display:flex;flex:0 0 34px;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0}
+.lna-fan-bar .lna-fan-historic-star{position:relative;top:auto;right:auto;bottom:auto;left:auto;width:29px;height:29px;display:grid;place-items:center;pointer-events:none;color:#1a1726}
+.lna-fan-bar .lna-fan-historic-star b{font-size:10px}
+.lna-fan-bar .lna-fan-historic-badge small{font-size:7px;line-height:1;color:#d7acc7;font-weight:650}
+.lna-fan-bar>svg:last-child{flex-shrink:0;width:12px}
+@media(max-width:768px){.lna-fan-bar{gap:4px}.lna-fan-bar .lna-fan-bar-medals{flex-basis:25px}.lna-fan-bar .lna-fan-bar-trophy{width:25px;height:35px}.lna-fan-bar .lna-fan-historic-badge{flex-basis:30px}.lna-fan-bar .lna-fan-historic-star{width:26px;height:26px}.lna-fan-bar .lna-fan-historic-star b{font-size:9px}.lna-fan-bar .lna-fan-historic-badge small{font-size:6px}.lna-fan-bar .lna-fan-line b{font-size:8px}}
