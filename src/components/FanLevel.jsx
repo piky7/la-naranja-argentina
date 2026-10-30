@@ -436,7 +436,7 @@ export default function FanLevel() {
           <div className="lna-fan-gamer-hero">
             <div className="lna-fan-gamer-score">
               <p className="lna-fan-total">{seasonPoints === null ? "—" : seasonScore} <span>/ {level.goal ?? "∞"} PTS</span></p>
-              <p className="lna-fan-historical">HISTÓRICO: <b>{points === null ? "—" : score} PTS</b></p>
+              <p className="lna-fan-historical">HISTÓRICO: <b><span aria-hidden="true" style={{color:"#f49acb",fontSize:"1.2em",marginRight:4}}>★</span>{points === null ? "—" : score} PTS</b></p>
             </div>
             <div className="lna-fan-gamer-rank">
               <span>CATEGORÍA ACTUAL</span>
