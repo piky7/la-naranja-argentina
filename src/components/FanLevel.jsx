@@ -4,6 +4,7 @@ import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Che
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 import { matches } from "../data/matches";
+import { players } from "../data/players";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
@@ -118,19 +119,44 @@ export default function FanLevel() {
       setUnseenRewards(false);
       if (changes.length) {
         const total = changes.reduce((sum,p) => sum + Number(p.earned) - Number(previous[p.partidoId] || 0), 0);
-        const reasons = changes.flatMap(p => {
+        const games = changes.map(p => {
           const previousPoints = Number(previous[p.partidoId] || 0);
+          const earned = Number(p.earned || 0);
+          const delta = earned - previousPoints;
           const mvpPoints = Number(p.mvpEarned) || 0;
           const winnerPoints = p.status === "correct" ? 15 : p.status === "incorrect" ? 5 : 0;
-          const streakBonus = Math.max(0, Number(p.earned) - winnerPoints - mvpPoints);
-          const items = [];
-          // Si el ganador ya se acreditó antes, anunciar solo la recompensa nueva.
-          if (previousPoints === 0 && winnerPoints > 0) items.push(`${p.status === "correct" ? "Ganador acertado" : "Pronóstico de ganador errado"} (+${winnerPoints} pts)`);
-          if (previousPoints === 0 && streakBonus > 0) items.push(`Bonificación por racha (+${streakBonus} pts)`);
-          if (mvpPoints > 0 && (previousPoints === 0 || Number(p.earned) - previousPoints === mvpPoints)) items.push(`MVP acertado (+${mvpPoints} pts)`);
-          return items;
+          const bonus = Math.max(0,earned - winnerPoints - mvpPoints);
+          const newMvpPoints = Math.min(mvpPoints,delta);
+          const newWinnerPoints = Math.min(winnerPoints,Math.max(0,delta - newMvpPoints));
+          const newBonusPoints = Math.max(0,delta - newMvpPoints - newWinnerPoints);
+          const home = teams.find(t => t.id === p.homeTeam);
+          const away = teams.find(t => t.id === p.awayTeam);
+          const mvpPlayer = players.find(player => player.id === p.mvpSelected);
+          return {
+            id:p.partidoId,
+            date:p.partidoId?.slice(5,10)?.replace("-","/") || "",
+            home:home?.shortName || p.homeTeam || "Local",
+            away:away?.shortName || p.awayTeam || "Visitante",
+            score:Number.isFinite(p.homeScore) && Number.isFinite(p.awayScore) ? `${p.homeScore}–${p.awayScore}` : "Finalizado",
+            winnerStatus:p.status,
+            winnerPoints:newWinnerPoints,
+            mvpStatus:p.mvpStatus,
+            mvpName:mvpPlayer?.name || (p.mvpSelected ? "Jugador elegido" : ""),
+            mvpPoints:newMvpPoints,
+            bonus:newBonusPoints,
+            delta,
+          };
         });
-        setRewardNotice({total,reasons:[...new Set(reasons)]});
+        let currentPoints = null;
+        try {
+          const pointsResponse = await fetch(`${API}?visitanteId=${encodeURIComponent(id)}`,{cache:"no-store"});
+          if (pointsResponse.ok) {
+            const pointsData = await pointsResponse.json();
+            if (pointsData.ok && Number.isFinite(Number(pointsData.points))) currentPoints = Number(pointsData.points);
+          }
+        } catch { /* El detalle se muestra aunque no se pueda consultar el total. */ }
+        setRewardNotice({total,games,currentPoints});
+
       }
     } catch { /* No anunciar premios sin confirmación del servidor. */ }
   };
@@ -317,8 +343,15 @@ export default function FanLevel() {
           <span className="lna-fan-achievement-kicker">MI CARRERA · RECOMPENSAS</span>
           <h2 id="lna-fan-reward-title">¡FELICITACIONES!</h2>
           <strong className="lna-fan-reward-points">+{rewardNotice.total} PTS</strong>
-          <p>Sumaste puntos en tus pronósticos:</p>
-          <div className="lna-fan-reward-reasons">{rewardNotice.reasons.map(reason => <span key={reason}>{reason}</span>)}</div>
+          {rewardNotice.currentPoints !== null && <p>Tu puntuación pasó de <b>{Math.max(0,rewardNotice.currentPoints-rewardNotice.total)}</b> a <b>{rewardNotice.currentPoints} pts</b></p>}
+          <div className="lna-fan-reward-games">{rewardNotice.games.map(game => <div className="lna-fan-reward-game" key={game.id}>
+            <div className="lna-fan-reward-match"><small>{game.date}</small><strong>{game.home} {game.score} {game.away}</strong></div>
+            <div className="lna-fan-reward-outcomes">
+              <span><b>{game.winnerStatus === "correct" ? "✓" : "✕"} Ganador</b><strong>+{game.winnerPoints} pts</strong></span>
+              {game.mvpStatus !== "none" && <span><b>{game.mvpStatus === "correct" ? "✓" : game.mvpStatus === "incorrect" ? "✕" : "·"} MVP</b><small>{game.mvpName}</small><strong>{game.mvpStatus === "pending" ? "Pendiente" : `+${game.mvpPoints} pts`}</strong></span>}
+              {game.bonus > 0 && <span><b>★ Racha</b><strong>+{game.bonus} pts</strong></span>}
+            </div>
+          </div>)}</div>
           <button type="button" className="lna-fan-achievement-continue" onClick={() => setRewardNotice(null)}>Continuar mi carrera</button>
         </section>
       </div>, document.body)}
