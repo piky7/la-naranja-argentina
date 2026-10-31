@@ -1,6 +1,7 @@
 import { Trophy, UsersRound, ChartNoAxesColumn, Flame, LockKeyhole, Medal, ChevronRight, Sparkles, UserRound, PlusCircle, Ticket, Globe2, ShieldCheck } from "lucide-react";
 import "./Prode.css";
 import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
+import ProdeGroups from "../components/ProdeGroups";
 
 const Section = ({ icon: Icon, title, children, extra }) => (
   <section className="prode-panel">
@@ -32,11 +33,7 @@ export default function Prode() {
             <span className="prode-onboarding-tag"><LockKeyhole size={12}/> En preparación</span>
           </div>
           <ProdeGoogleAccess />
-          <div className="prode-onboarding-actions">
-            <div className="prode-onboarding-action"><PlusCircle size={21}/><div><strong>Crear un Prode</strong><span>Armá tu grupo público o privado</span></div></div>
-            <div className="prode-onboarding-action"><Ticket size={21}/><div><strong>Unirme a un Prode</strong><span>Ingresá con una invitación</span></div></div>
-            <div className="prode-onboarding-action"><Globe2 size={21}/><div><strong>Ranking general</strong><span>Todos los participantes de LNA</span></div></div>
-          </div>
+          <ProdeGroups />
           <p className="prode-onboarding-foot"><ShieldCheck size={14}/> El acceso Google es independiente de Mi Carrera por ahora. Los grupos y puntos se conectarán después de verificar las cuentas en el servidor.</p>
         </section>
 
