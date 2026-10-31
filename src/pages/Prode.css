@@ -150,3 +150,11 @@
 .prode-group-detail .prode-group-pending{font-size:11px;color:#a6c2b3}
 .prode-group-back{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border:1px solid #456b4a;border-radius:9px;background:#19352f;color:#e7f7ec;font-weight:700;cursor:pointer}
 @media(max-width:480px){.prode-group-link{flex-wrap:wrap}.prode-group-link small{font-size:10px}}
+
+
+/* Invitaciones Prode */
+.prode-invite-panel{display:grid;gap:10px;margin-top:6px}
+.prode-invite-panel>p{margin:0;color:#b5c8c1;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+.prode-invite-link{display:flex;gap:6px;min-width:0}
+.prode-invite-link input{min-width:0;flex:1;font-size:12px!important;color:#eaf8ed;background:#081d22;border:1px solid #43674e;border-radius:8px;padding:10px}
+.prode-invite-link button{display:grid;place-items:center;flex:0 0 42px;border:1px solid #43674e;border-radius:8px;background:#1b3931;color:#7de83d;cursor:pointer}
