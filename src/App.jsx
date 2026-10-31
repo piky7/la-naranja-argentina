@@ -14,6 +14,7 @@ import Jugadores from "./pages/Jugadores";
 import Estadisticas from "./pages/Estadisticas";
 import Privacidad from "./pages/Privacidad";
 import Acerca from "./pages/Acerca";
+import Prode from "./pages/Prode";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function AnimatedRoutes() {
         <Route path="/equipos/:teamId" element={<Equipo />} />
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/estadisticas" element={<Estadisticas />} />
+        <Route path="/prode" element={<Prode />} />
         <Route path="/privacidad" element={<Privacidad />} />
         <Route path="/acerca" element={<Acerca />} />
       </Routes>
