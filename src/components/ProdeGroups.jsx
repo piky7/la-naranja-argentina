@@ -45,6 +45,7 @@ export default function ProdeGroups() {
     finally { setReady(true); }
   };
   useEffect(() => { setReady(false); load(user); }, [user]);
+  useEffect(() => { const refresh = () => { if (selected) openGroup(selected); }; window.addEventListener("prode-profile-updated", refresh); return () => window.removeEventListener("prode-profile-updated", refresh); }, [selected, user]);
   useEffect(() => { const code = new URLSearchParams(window.location.search).get("invite"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
 
   const openGroup = async (group) => {
@@ -152,13 +153,13 @@ export default function ProdeGroups() {
           <h3>{selected.name}</h3>
           <button type="button" aria-label="Cerrar" onClick={() => setSelected(null)}><X size={20}/></button>
         </div>
-        <div className="prode-group-meta"><span>{selected.visibility === "private" ? "🔒 Privada" : "🌐 Pública"}</span><span>Temporada {selected.season || "2026/27"}</span></div>
+        <div className="prode-group-meta"><span>{detail?.group?.visibility === "private" ? "🔒 Privada" : detail?.group?.visibility === "public" ? "🌐 Pública" : "Cargando privacidad…"}</span><span>Temporada {selected.season || "2026/27"}</span></div>
         {selected.description && <p>{selected.description}</p>}
         {detailBusy && <p>Cargando participantes…</p>}
         {detailError && <p className="prode-group-error" role="alert">{detailError}</p>}
         {detail && <>
           <h4 className="prode-group-subtitle"><UsersRound size={18}/> Participantes ({detail.members.length})</h4>
-          <div className="prode-group-members">{detail.members.map((member, index) => <div key={index} className="prode-group-member"><span className="prode-member-avatar">{member.display_name.slice(0,1).toUpperCase()}</span><strong>{member.display_name}</strong><small>{member.role === "owner" ? "Administrador" : "Miembro"}</small></div>)}</div>
+          <div className="prode-group-members">{detail.members.map((member, index) => <div key={index} className="prode-group-member"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong><small>{member.role === "owner" ? "Administrador" : "Miembro"}</small></div>)}</div>
           {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit" disabled={inviteBusy} onClick={generateInvite}>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
           <p className="prode-group-pending">El ranking de esta liga estará disponible cuando comiencen los pronósticos.</p>
         </>}
