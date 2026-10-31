@@ -15,6 +15,8 @@ export default function ProdeGroups() {
   const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState(null);
   const [detail, setDetail] = useState(null);
+  const [leagueRanking, setLeagueRanking] = useState(null);
+  const [rankingError, setRankingError] = useState("");
   const [groupTab, setGroupTab] = useState("ranking");
   const [detailBusy, setDetailBusy] = useState(false);
   const [detailError, setDetailError] = useState("");
@@ -54,6 +56,8 @@ export default function ProdeGroups() {
     setSelected(group);
     setGroupTab("ranking");
     setDetail(null);
+    setLeagueRanking(null);
+    setRankingError("");
     setDetailError("");
     setInvite(""); setInviteMessage("");
     setDetailBusy(true);
@@ -65,6 +69,12 @@ export default function ProdeGroups() {
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo abrir la liga");
       setDetail(data);
+      try {
+        const rankingRes = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/ranking", { headers: { Authorization: "Bearer " + token } });
+        const rankingData = await rankingRes.json();
+        if (!rankingRes.ok || !rankingData.ok) throw Error(rankingData.error || "Clasificación no disponible");
+        setLeagueRanking(rankingData.ranking || []);
+      } catch (rankingFailure) { setRankingError(rankingFailure.message || "Clasificación no disponible"); }
     } catch (e) {
       setDetailError(e.message || "Error de conexión");
     } finally {
@@ -146,7 +156,7 @@ export default function ProdeGroups() {
       <PlusCircle size={21}/><span><strong>Crear un Prode</strong><small>{user ? "Armá tu grupo público o privado" : "Iniciá sesión con Google"}</small></span>
     </button>
     <button className="prode-onboarding-action prode-action-button" type="button" disabled={!user} onClick={() => { setInviteMessage(""); setJoinOpen(true); }}><Ticket size={21}/><span><strong>Unirme a un Prode</strong><small>{user ? "Ingresá tu código de invitación" : "Iniciá sesión con Google"}</small></span></button>
-    <div className="prode-onboarding-action"><Globe2 size={21}/><div><strong>Ranking general</strong><span>Todos los participantes de LNA · Próximamente</span></div></div>
+    <div className="prode-onboarding-action"><Globe2 size={21}/><div><strong>Ranking general</strong><span>Todos los participantes de LNA · Histórico</span></div></div>
     {ready && groups.length > 0 && <div className="prode-my-groups"><strong>Mis ligas ({groups.length})</strong>{groups.map(group => <button type="button" key={group.id} className="prode-my-group prode-group-link" onClick={() => openGroup(group)}><span>{group.name}</span><small>{group.visibility === "private" ? "Privada" : "Pública"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small><ChevronRight size={16}/></button>)}</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
     {selected && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
@@ -166,8 +176,9 @@ export default function ProdeGroups() {
           </div>
           {groupTab === "ranking" && <div className="prode-group-ranking" role="tabpanel">
             <div className="prode-ranking-head"><span>Pos.</span><span>Jugador</span><span>PTS</span><span>AC</span><span>PJ</span></div>
-            {detail.members.map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">—</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>0</span><span>0</span><span>0</span></div>)}
-            <p className="prode-group-pending">Todos comienzan con 0 puntos. Las posiciones se definirán cuando estén habilitados los pronósticos.</p>
+            {(leagueRanking || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position ? member.position + "°" : "—"}</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.played ?? 0}</span></div>)}
+            {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
+            <p className="prode-group-pending">Cada liga empieza con 0 puntos. Los votos de ganador y MVP hechos desde los popups suman al finalizar cada partido. AC: aciertos · PJ: partidos pronosticados.</p>
           </div>}
           {groupTab === "members" && <div role="tabpanel">
           <h4 className="prode-group-subtitle"><UsersRound size={18}/> Participantes ({detail.members.length})</h4>
