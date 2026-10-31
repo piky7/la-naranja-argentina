@@ -160,6 +160,62 @@ export default {
         return reply({ ok: false, error: "Grupos no disponibles" }, 503);
       }
     }
+    // Invitaciones: token aleatorio de 256 bits; solo se guarda su SHA-256.
+    const inviteCreate = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/invite$/.exec(url.pathname);
+    if (inviteCreate && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
+      try {
+        const groupId = inviteCreate[1], userId = "firebase:" + identity.uid;
+        const owner = await env.DB.prepare("SELECT id FROM prode_groups WHERE id = ? AND owner_id = ?").bind(groupId, userId).first();
+        if (!owner) return reply({ ok: false, error: "Solo el administrador puede invitar" }, 403);
+        const tokenBytes = crypto.getRandomValues(new Uint8Array(32));
+        const token = Array.from(tokenBytes, b => b.toString(16).padStart(2, "0")).join("");
+        const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
+        const hash = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
+        const expires = new Date(Date.now() + 7 * 86400000).toISOString();
+        await env.DB.prepare("INSERT INTO prode_invitations (id, group_id, token_hash, created_by, expires_at, max_uses) VALUES (?, ?, ?, ?, ?, 100)")
+          .bind(crypto.randomUUID(), groupId, hash, userId, expires).run();
+        return reply({ ok: true, token, expiresAt: expires }, 201);
+      } catch {
+        return reply({ ok: false, error: "No se pudo generar la invitación" }, 503);
+      }
+    }
+    if (url.pathname === "/api/prode/invitations/join" && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      try {
+        const body = await request.json();
+        const token = typeof body.token === "string" ? body.token.trim().toLowerCase() : "";
+        if (!/^[0-9a-f]{64}$/.test(token)) return reply({ ok: false, error: "Código de invitación inválido" }, 400);
+        const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
+        const hash = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
+        const userId = "firebase:" + identity.uid;
+        const user = await env.DB.prepare("SELECT id FROM prode_users WHERE id = ?").bind(userId).first();
+        if (!user) return reply({ ok: false, error: "Primero registrá tu perfil Prode" }, 409);
+        const invite = await env.DB.prepare(
+          "SELECT i.id, i.group_id, g.name FROM prode_invitations i JOIN prode_groups g ON g.id = i.group_id WHERE i.token_hash = ? AND i.revoked_at IS NULL AND i.expires_at > ? AND i.used_count < i.max_uses"
+        ).bind(hash, new Date().toISOString()).first();
+        if (!invite) return reply({ ok: false, error: "Invitación vencida o inválida" }, 404);
+        const existing = await env.DB.prepare("SELECT 1 AS present FROM prode_memberships WHERE group_id = ? AND user_id = ?").bind(invite.group_id, userId).first();
+        if (existing) return reply({ ok: true, groupId: invite.group_id, name: invite.name, alreadyMember: true });
+        const updated = await env.DB.prepare(
+          "UPDATE prode_invitations SET used_count = used_count + 1 WHERE id = ? AND revoked_at IS NULL AND expires_at > ? AND used_count < max_uses RETURNING id"
+        ).bind(invite.id, new Date().toISOString()).first();
+        if (!updated) return reply({ ok: false, error: "Invitación agotada" }, 409);
+        try {
+          await env.DB.prepare("INSERT INTO prode_memberships (group_id, user_id, role) VALUES (?, ?, 'member')").bind(invite.group_id, userId).run();
+        } catch (error) {
+          await env.DB.prepare("UPDATE prode_invitations SET used_count = MAX(0, used_count - 1) WHERE id = ?").bind(invite.id).run();
+          throw error;
+        }
+        return reply({ ok: true, groupId: invite.group_id, name: invite.name });
+      } catch {
+        return reply({ ok: false, error: "No se pudo aceptar la invitación" }, 503);
+      }
+    }
     const groupDetail = /^\/api\/prode\/groups\/([0-9a-f-]{36})$/.exec(url.pathname);
     if (groupDetail && request.method === "GET") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
