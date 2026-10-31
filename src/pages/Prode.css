@@ -126,3 +126,6 @@
 .prode-create-submit{padding:12px;border:0;border-radius:9px;background:#7de83d;color:#102218;font-weight:900;cursor:pointer}
 .prode-create-submit:disabled{opacity:.5;cursor:wait}
 @media(max-width:768px){.prode-groups{grid-template-columns:1fr;gap:7px;margin-top:12px}.prode-dialog{padding:16px}.prode-action-button{padding:10px 12px}}
+
+/* iOS Safari: evita el zoom automático al enfocar campos del formulario. */
+.prode-dialog input,.prode-dialog textarea,.prode-dialog select{font-size:16px;line-height:1.4}
