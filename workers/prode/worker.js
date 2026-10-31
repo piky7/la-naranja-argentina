@@ -110,6 +110,45 @@ export default {
         return reply({ ok: false, error: "No se pudo consultar el perfil" }, 503);
       }
     }
+    if (url.pathname === "/api/prode/groups" && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión para crear una liga" }, 401);
+      try {
+        const body = await request.json();
+        const name = typeof body.name === "string" ? body.name.trim().replace(/\\s+/g, " ") : "";
+        const description = typeof body.description === "string" ? body.description.trim() : "";
+        const visibility = body.visibility;
+        if (name.length < 3 || name.length > 60 || description.length > 240 || !["public", "private"].includes(visibility))
+          return reply({ ok: false, error: "Revisá el nombre, la descripción y la privacidad" }, 400);
+        const ownerId = "firebase:" + identity.uid;
+        const owner = await env.DB.prepare("SELECT id FROM prode_users WHERE auth_subject = ?").bind(identity.uid).first();
+        if (!owner) return reply({ ok: false, error: "Primero registrá tu perfil Prode" }, 409);
+        const count = await env.DB.prepare("SELECT COUNT(*) AS total FROM prode_groups WHERE owner_id = ?").bind(ownerId).first();
+        if (Number(count?.total || 0) >= 5) return reply({ ok: false, error: "Podés crear hasta cinco ligas" }, 409);
+        const id = crypto.randomUUID();
+        await env.DB.batch([
+          env.DB.prepare("INSERT INTO prode_groups (id, name, description, visibility, owner_id) VALUES (?, ?, ?, ?, ?)").bind(id, name, description, visibility, ownerId),
+          env.DB.prepare("INSERT INTO prode_memberships (group_id, user_id, role) VALUES (?, ?, 'owner')").bind(id, ownerId),
+        ]);
+        return reply({ ok: true, group: { id, name, description, visibility, season: "2026/27", role: "owner" } }, 201);
+      } catch {
+        return reply({ ok: false, error: "No se pudo crear la liga. Intentá de nuevo" }, 503);
+      }
+    }
+    if (url.pathname === "/api/prode/groups/mine" && request.method === "GET") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
+      try {
+        const groups = await env.DB.prepare(
+          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE m.user_id = ? ORDER BY g.created_at DESC LIMIT 50"
+        ).bind("firebase:" + identity.uid).all();
+        return reply({ ok: true, groups: groups.results || [] });
+      } catch {
+        return reply({ ok: false, error: "No se pudieron cargar tus ligas" }, 503);
+      }
+    }
     if (url.pathname === "/api/prode/groups/public" && request.method === "GET") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       try {
