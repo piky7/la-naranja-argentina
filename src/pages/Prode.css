@@ -195,3 +195,12 @@
 .prode-prediction-options button{min-width:0;min-height:44px;padding:9px 6px;border:1px solid #3b6050;border-radius:8px;background:#18362f;color:#edf8ef;font-size:12px;font-weight:800;cursor:pointer}
 .prode-prediction-options button.selected{background:#315f31;border-color:#86ed46;color:#baff88}
 .prode-prediction-options button:disabled:not(.selected){opacity:.5;cursor:default}
+
+
+.prode-career-link{margin:10px 0;padding:13px;border:1px solid #345748;border-radius:12px;background:#0d2729;color:#eaf5ed}
+.prode-career-link>strong{display:block;font-size:14px;color:#8bf34b;margin-bottom:5px}
+.prode-career-link p{margin:4px 0 10px;font-size:12px;line-height:1.45;color:#b5cfc2}
+.prode-career-consent{display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.4;color:#d8e7df;margin-bottom:10px}
+.prode-career-consent input{width:17px;height:17px;flex-shrink:0;accent-color:#8bf34b}
+.prode-career-link button{width:100%;min-height:42px;border:1px solid #74b84c;border-radius:9px;background:#264c31;color:#b9ff8b;font-size:13px;font-weight:800}
+.prode-career-link button:disabled{opacity:.5}
