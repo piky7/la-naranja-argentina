@@ -2020,8 +2020,8 @@ const finishedMatch = {
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
               <MvpPrediction match={selectedUpcomingMatch} onStatusChange={setUpcomingMvpStatus} />
             </div>}
-            {(upcomingLive || upcomingTab === "comparativa" || upcomingTab === "jugadores") && <section className="match-highlighted-section">
-              {(upcomingLive || upcomingTab === "comparativa") && (<div className="upcoming-tab-panel" role="tabpanel">
+            {(upcomingTab === "comparativa" || (!upcomingLive && upcomingTab === "jugadores")) && <section className="match-highlighted-section">
+              {(upcomingTab === "comparativa") && (<div className="upcoming-tab-panel" role="tabpanel">
               {/* COMPARATIVA DE EQUIPOS */}
 
 <div className="upcoming-team-comparison upcoming-official-comparison" style={getMatchColorStyle(selectedUpcomingMatch.homeTeam, selectedUpcomingMatch.awayTeam)}>
