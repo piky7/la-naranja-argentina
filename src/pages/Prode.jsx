@@ -25,7 +25,7 @@ export default function Prode() {
         <div className="prode-coming"><Sparkles size={18} /><div><strong>PRÓXIMAMENTE</strong><span>Estamos preparando el Prode de LNA. Los rankings y las ligas se habilitarán cuando esté listo.</span></div></div>
 
         <div className="prode-grid">
-          <Section icon={Trophy} title="Ranking general" extra={<span className="prode-small-tag">Temporada 26/27</span>}>
+          <Section icon={Trophy} title={<>Ranking <em>general</em></>} extra={<span className="prode-small-tag">Temporada 26/27</span>}>
             <div className="prode-podium" aria-label="Ranking general próximamente">
               <div className="prode-podium-item second"><span className="prode-podium-medal">2</span><div className="prode-podium-avatar">?</div><span>2° puesto</span><strong>— pts</strong></div>
               <div className="prode-podium-item first"><span className="prode-podium-medal">1</span><div className="prode-podium-avatar"><Trophy size={23}/></div><span>1° puesto</span><strong>— pts</strong></div>
@@ -34,12 +34,12 @@ export default function Prode() {
             <div className="prode-panel-bottom"><span>La clasificación aparecerá al comenzar el Prode.</span><ChevronRight size={17}/></div>
           </Section>
 
-          <Section icon={UsersRound} title="Mis ligas">
+          <Section icon={UsersRound} title={<>Mis <em>ligas</em></>}>
             <div className="prode-league-placeholder"><div className="prode-league-symbol"><UsersRound size={26}/></div><div><strong>Competí con tus amigos</strong><p>Creá ligas privadas, invitá participantes y compará tus pronósticos.</p></div></div>
             <div className="prode-disabled-action"><LockKeyhole size={15}/> Crear o unirse a una liga · Próximamente</div>
           </Section>
 
-          <Section icon={ChartNoAxesColumn} title="Mis estadísticas">
+          <Section icon={ChartNoAxesColumn} title={<>Mis <em>estadísticas</em></>}>
             <div className="prode-stats-grid">
               <div><span>Pronósticos</span><strong>—</strong><small>Realizados</small></div>
               <div><span>Aciertos</span><strong>—</strong><small>Ganadores</small></div>
@@ -49,7 +49,7 @@ export default function Prode() {
             <p className="prode-muted-note">Tus estadísticas estarán disponibles cuando inicies sesión y comience el Prode.</p>
           </Section>
 
-          <Section icon={Flame} title="Líderes de la semana" extra={<span className="prode-small-tag">Lun – Dom</span>}>
+          <Section icon={Flame} title={<>Líderes <em>de la semana</em></>} extra={<span className="prode-small-tag">Lun – Dom</span>}>
             <div className="prode-weekly-empty"><div className="prode-weekly-icon"><Flame size={23}/></div><strong>La próxima semana puede ser tuya</strong><p>Acá aparecerán los mejores participantes de cada semana.</p></div>
             <div className="prode-panel-bottom"><span>Ranking semanal próximamente</span><ChevronRight size={17}/></div>
           </Section>
