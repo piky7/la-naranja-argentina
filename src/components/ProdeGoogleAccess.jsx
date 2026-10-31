@@ -15,6 +15,10 @@ export default function ProdeGoogleAccess() {
   const [username, setUsername] = useState("");
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
+  const [careerLink, setCareerLink] = useState(null);
+  const [linkBusy, setLinkBusy] = useState(false);
+  const [linkError, setLinkError] = useState("");
+  const [linkConfirm, setLinkConfirm] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -32,7 +36,7 @@ export default function ProdeGoogleAccess() {
 
   useEffect(() => {
     let active = true;
-    if (!user) { setProfile(null); setSyncing(false); return () => { active = false; }; }
+    if (!user) { setProfile(null); setCareerLink(null); setSyncing(false); return () => { active = false; }; }
     setSyncing(true);
     setError("");
     user.getIdToken().then(async (token) => {
@@ -43,6 +47,8 @@ export default function ProdeGoogleAccess() {
       const data = await response.json();
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
       if (active) { setProfile(data.user); setUsername(data.user.username || ""); }
+      const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
+      if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
     }).catch(() => {
       if (active) setError("Tu cuenta Google está conectada, pero no pudimos registrar tu perfil Prode. Intentá recargar la página.");
     }).finally(() => { if (active) setSyncing(false); });
@@ -69,6 +75,25 @@ export default function ProdeGoogleAccess() {
     finally { setSaving(false); }
   };
 
+  const linkCareer = async () => {
+    if (!user || linkBusy || !linkConfirm) return;
+    const visitorId = localStorage.getItem("lna-vote-visitor-id");
+    if (!visitorId) { setLinkError("Primero abrí Mi Carrera en este navegador. No podemos vincular votos de otro dispositivo automáticamente."); return; }
+    setLinkBusy(true); setLinkError("");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(PRODE_API + "/api/prode/career-link", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({ visitorId, confirm: true }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudo vincular");
+      setCareerLink(true); setLinkConfirm(false);
+    } catch (e) { setLinkError(e.message || "Error de conexión"); }
+    finally { setLinkBusy(false); }
+  };
+
   const login = async () => {
     setError("");
     setBusy(true);
@@ -93,6 +118,15 @@ export default function ProdeGoogleAccess() {
             <div><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
           </div>
           <button type="button" className="prode-profile-edit-button" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={16}/> Mi perfil</button>
+          <div className="prode-career-link">
+            <strong>{careerLink ? "✓ Mi Carrera vinculada" : "Vincular Mi Carrera"}</strong>
+            <p>{careerLink ? "Tu cuenta Google quedó asociada a esta carrera. Los pronósticos y puntos de Prode todavía no se sincronizan." : "Vinculá la carrera de este navegador con tu cuenta Prode. No cambia los votos ni puntos existentes."}</p>
+            {careerLink === false && <>
+              <label className="prode-career-consent"><input type="checkbox" checked={linkConfirm} onChange={e => setLinkConfirm(e.target.checked)}/> Confirmo que esta es mi carrera y quiero asociarla a mi cuenta Google.</label>
+              <button type="button" onClick={linkCareer} disabled={!linkConfirm || linkBusy}>{linkBusy ? "Vinculando…" : "Vincular Mi Carrera"}</button>
+            </>}
+            {linkError && <p role="alert" className="prode-group-error">{linkError}</p>}
+          </div>
           <button type="button" onClick={logout} disabled={busy}><LogOut size={16}/> Cerrar sesión</button>
         </>
       ) : (
