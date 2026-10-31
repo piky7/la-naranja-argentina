@@ -1,6 +1,38 @@
+import { players } from "../data/players";
+import { teamMatchColors } from "../data/teams";
 import "./LiveStartingFive.css";
 
-const shortName = name => String(name || "").trim().split(/\\s+/).slice(0, 2).join(" ");
+const shortName = name => String(name || "").trim().split(/\s+/).slice(0, 2).join(" ");
+const normalize = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const role = position => {
+  const p = normalize(position);
+  if (p.includes("ala pivot") || p.includes("ala pivote")) return "power";
+  if (p.includes("pivot") || p.includes("pivote")) return "center";
+  if (p.includes("base")) return "point";
+  if (p.includes("escolta")) return "shooting";
+  if (p.includes("alero")) return "small";
+  return null;
+};
+const roles = ["point", "shooting", "small", "power", "center"];
+
+function orderStartingFive(starters, teamId) {
+  const roster = players.filter(player => player.teamId === teamId);
+  const remaining = starters.map((starter, index) => {
+    const matched = roster.find(player => starter.officialPlayerId != null && player.officialPlayerId != null && String(player.officialPlayerId) === String(starter.officialPlayerId))
+      || roster.find(player => starter.number != null && String(player.number) === String(starter.number))
+      || roster.find(player => normalize(player.name) === normalize(starter.name));
+    return { ...starter, position: role(matched?.position), index };
+  });
+  // Primero ubicar posiciones verificadas. No asignar una posición ficticia
+  // cuando un jugador no tenga su puesto cargado en la base de LNA.
+  const arranged = Array(5).fill(null);
+  for (const position of roles) {
+    const index = remaining.findIndex(player => player.position === position);
+    if (index >= 0) arranged[roles.indexOf(position)] = remaining.splice(index, 1)[0];
+  }
+  remaining.forEach(player => { arranged[arranged.findIndex(slot => slot === null)] = player; });
+  return arranged;
+}
 
 export default function LiveStartingFive({ live, homeTeam, awayTeam }) {
   const quintetos = live?.quintetos;
@@ -18,9 +50,9 @@ export default function LiveStartingFive({ live, homeTeam, awayTeam }) {
           <circle cx="500" cy="220" r="66" fill="none" stroke="currentColor" strokeWidth="3" />
           <path d="M180 95A170 170 0 0 1 180 345 M820 95A170 170 0 0 0 820 345" fill="none" stroke="currentColor" strokeWidth="3" />
         </svg>
-        {sides.map(side => <div key={side.key} className={`live-five-side live-five-${side.key}`}>
+        {sides.map(side => <div key={side.key} className={`live-five-side live-five-${side.key}`} style={{ "--live-five-team-color": teamMatchColors[side.team?.id] || "#234768" }}>
           <div className="live-five-team">{side.team?.logo && <img src={side.team.logo} alt="" />}<strong>{side.team?.shortName || side.team?.name}</strong></div>
-          <div className="live-five-players">{side.players.map((player, index) => <div className={`live-five-player live-five-position-${index}`} key={player.officialPlayerId || index} title={player.name}>
+          <div className="live-five-players">{orderStartingFive(side.players, side.team?.id).map((player, index) => <div className={`live-five-player live-five-position-${index}`} key={player.officialPlayerId || index} title={player.name}>
             <span className="live-five-number">#{player.number ?? "—"}</span>
             <span className="live-five-name">{shortName(player.name)}</span>
           </div>)}</div>
