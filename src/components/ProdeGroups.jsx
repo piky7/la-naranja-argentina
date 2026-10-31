@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket } from "lucide-react";
+import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy } from "lucide-react";
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
@@ -15,6 +15,7 @@ export default function ProdeGroups() {
   const [ready, setReady] = useState(false);
   const [selected, setSelected] = useState(null);
   const [detail, setDetail] = useState(null);
+  const [groupTab, setGroupTab] = useState("ranking");
   const [detailBusy, setDetailBusy] = useState(false);
   const [detailError, setDetailError] = useState("");
   const [invite, setInvite] = useState("");
@@ -51,6 +52,7 @@ export default function ProdeGroups() {
   const openGroup = async (group) => {
     if (!user) return;
     setSelected(group);
+    setGroupTab("ranking");
     setDetail(null);
     setDetailError("");
     setInvite(""); setInviteMessage("");
@@ -158,10 +160,20 @@ export default function ProdeGroups() {
         {detailBusy && <p>Cargando participantes…</p>}
         {detailError && <p className="prode-group-error" role="alert">{detailError}</p>}
         {detail && <>
+          <div className="prode-group-tabs" role="tablist" aria-label="Secciones de la liga">
+            <button type="button" role="tab" aria-selected={groupTab === "ranking"} className={groupTab === "ranking" ? "active" : ""} onClick={() => setGroupTab("ranking")}><Trophy size={16}/> Clasificación</button>
+            <button type="button" role="tab" aria-selected={groupTab === "members"} className={groupTab === "members" ? "active" : ""} onClick={() => setGroupTab("members")}><UsersRound size={16}/> Participantes ({detail.members.length})</button>
+          </div>
+          {groupTab === "ranking" && <div className="prode-group-ranking" role="tabpanel">
+            <div className="prode-ranking-head"><span>Pos.</span><span>Jugador</span><span>PTS</span><span>AC</span><span>PJ</span></div>
+            {detail.members.map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">—</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>0</span><span>0</span><span>0</span></div>)}
+            <p className="prode-group-pending">Todos comienzan con 0 puntos. Las posiciones se definirán cuando estén habilitados los pronósticos.</p>
+          </div>}
+          {groupTab === "members" && <div role="tabpanel">
           <h4 className="prode-group-subtitle"><UsersRound size={18}/> Participantes ({detail.members.length})</h4>
           <div className="prode-group-members">{detail.members.map((member, index) => <div key={index} className="prode-group-member"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong><small>{member.role === "owner" ? "Administrador" : "Miembro"}</small></div>)}</div>
           {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit" disabled={inviteBusy} onClick={generateInvite}>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
-          <p className="prode-group-pending">El ranking de esta liga estará disponible cuando comiencen los pronósticos.</p>
+          </div>
         </>}
         <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
