@@ -146,10 +146,9 @@ async function calculateRewards(db, fixture, visitorId) {
     if (vote === winner) {
       wins++; losses=0; points+=15; seasonPoints+=15;
       bestStreak=Math.max(bestStreak,wins);
-      if (wins === 3) {points+=15;seasonPoints+=15;}
-      if (wins === 5) {points+=30;seasonPoints+=30;}
+      if (wins === 5) {points+=45;seasonPoints+=45;}
       if (wins % 10 === 0) legacyMvps++;
-      perGame.set(g.id,{earned:(wins === 5 ? 45 : 15)+mvpEarned,mvpEarned,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
+      perGame.set(g.id,{earned:(wins === 5 ? 60 : 15)+mvpEarned,mvpEarned,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
       updateCareer(g,false,true,true);
     } else {
       wins=0; losses++; points+=5; seasonPoints+=5;
