@@ -159,7 +159,7 @@ const [upcomingTab, setUpcomingTab] = useState("comparativa");
     window.addEventListener("lna-vote-updated", check);
     return () => { cancelled = true; window.removeEventListener("lna-vote-updated", check); };
   }, [selectedUpcomingMatch?.date, selectedUpcomingMatch?.homeTeam, selectedUpcomingMatch?.awayTeam, upcomingLive]);
-useEffect(() => { setUpcomingTab("quintetos"); setUpcomingVoteStatus(null); setUpcomingMvpStatus(null); }, [selectedUpcomingMatch?.id]);
+useEffect(() => { setUpcomingTab(upcomingLive ? "quintetos" : "comparativa"); setUpcomingVoteStatus(null); setUpcomingMvpStatus(null); }, [selectedUpcomingMatch?.id, Boolean(upcomingLive)]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
 const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
