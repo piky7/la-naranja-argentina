@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import FanLevel from "./FanLevel";
-import { House, Trophy, Shield, ChartNoAxesColumn, Download, Share2, PlusSquare, X } from "lucide-react";
+import { House, Trophy, Shield, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
 
 function Header() {
   const [navCompact, setNavCompact] = useState(false);
@@ -112,6 +112,7 @@ function Header() {
             <Link to="/equipos">Equipos</Link>
             <Link to="/jugadores">Jugadores</Link>
             <Link to="/estadisticas">Estadísticas</Link>
+            <Link to="/prode" className="prode-desktop-link">Prode</Link>
           </nav>
 
         </div>
@@ -187,6 +188,16 @@ function Header() {
   >
     <Shield size={22} strokeWidth={2} aria-hidden="true" />
     <span>Equipos</span>
+  </NavLink>
+
+  <NavLink
+    to="/prode"
+    className={({ isActive }) =>
+      `bottom-nav-link prode-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <Target size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Prode</span>
   </NavLink>
 
   <NavLink
