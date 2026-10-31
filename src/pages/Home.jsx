@@ -2,6 +2,7 @@ import { isPlayerAppearance } from "../utils/playerAppearance";
 import useLiveMatch from "../hooks/useLiveMatch";
 import LiveMatchInfo from "../components/LiveMatchInfo";
 import LiveRosters from "../components/LiveRosters";
+import LiveStartingFive from "../components/LiveStartingFive";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
@@ -158,7 +159,7 @@ const [upcomingTab, setUpcomingTab] = useState("comparativa");
     window.addEventListener("lna-vote-updated", check);
     return () => { cancelled = true; window.removeEventListener("lna-vote-updated", check); };
   }, [selectedUpcomingMatch?.date, selectedUpcomingMatch?.homeTeam, selectedUpcomingMatch?.awayTeam, upcomingLive]);
-useEffect(() => { setUpcomingTab("comparativa"); setUpcomingVoteStatus(null); setUpcomingMvpStatus(null); }, [selectedUpcomingMatch?.id]);
+useEffect(() => { setUpcomingTab("quintetos"); setUpcomingVoteStatus(null); setUpcomingMvpStatus(null); }, [selectedUpcomingMatch?.id]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
 const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
@@ -2003,10 +2004,13 @@ const finishedMatch = {
             </button>}
             {upcomingLive && <>
               <div className="upcoming-tabs" role="tablist" aria-label="Información del partido en vivo">
-                <button type="button" role="tab" aria-selected={upcomingTab !== "comparativa"} className={upcomingTab !== "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("planteles")}>♟ Planteles</button>
-                <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
+                <button type="button" role="tab" aria-selected={upcomingTab === "quintetos"} className={upcomingTab === "quintetos" ? "is-active" : ""} onClick={() => setUpcomingTab("quintetos")}>🏀 Quintetos</button>
+                <button type="button" role="tab" aria-selected={upcomingTab === "planteles"} className={upcomingTab === "planteles" ? "is-active" : ""} onClick={() => setUpcomingTab("planteles")}>♟ Planteles</button>
+                <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa</button>
               </div>
-              {upcomingTab !== "comparativa" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
+              {upcomingTab === "quintetos" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
+                <LiveStartingFive live={upcomingLive} homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} />}
+              {upcomingTab === "planteles" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
                 <LiveRosters homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} matches={matches} onPlayerClick={setSelectedPlayer} />}
             </>}
             {!upcomingLive && <>
