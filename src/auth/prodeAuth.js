@@ -1,30 +1,32 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "firebase/auth";
 import { prodeFirebaseConfig } from "../config/prodeFirebase";
 
-const app = getApps().length ? getApp() : initializeApp(prodeFirebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
+// SDK modular oficial servido desde Google; evita modificar el lockfile de LNA.
+let sdkPromise;
+async function sdk() {
+  if (!sdkPromise) sdkPromise = Promise.all([
+    import(/* @vite-ignore */ "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js"),
+    import(/* @vite-ignore */ "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js"),
+  ]).then(([appSdk, authSdk]) => {
+    const app = appSdk.getApps().length ? appSdk.getApp() : appSdk.initializeApp(prodeFirebaseConfig);
+    const auth = authSdk.getAuth(app);
+    const provider = new authSdk.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+    return { authSdk, auth, provider };
+  });
+  return sdkPromise;
+}
 
-export function watchProdeUser(callback) {
-  return onAuthStateChanged(auth, callback);
+export async function watchProdeUser(callback) {
+  const { authSdk, auth } = await sdk();
+  return authSdk.onAuthStateChanged(auth, callback);
 }
 
 export async function signInProdeWithGoogle() {
-  // En navegadores móviles / PWA, redirect puede ser más fiable que popups.
-  if (window.matchMedia?.("(display-mode: standalone)")?.matches) {
-    return signInWithRedirect(auth, provider);
-  }
-  try {
-    return await signInWithPopup(auth, provider);
-  } catch (error) {
-    if (error?.code === "auth/popup-blocked" || error?.code === "auth/operation-not-supported-in-this-environment") {
-      return signInWithRedirect(auth, provider);
-    }
-    throw error;
-  }
+  const { authSdk, auth, provider } = await sdk();
+  return authSdk.signInWithPopup(auth, provider);
 }
 
-export const completeProdeRedirect = () => getRedirectResult(auth);
-export const signOutProde = () => signOut(auth);
+export async function signOutProde() {
+  const { authSdk, auth } = await sdk();
+  return authSdk.signOut(auth);
+}
