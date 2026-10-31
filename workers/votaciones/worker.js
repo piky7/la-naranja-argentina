@@ -192,6 +192,40 @@ export default {
         return json({ ok: true, servicio: "LNA Votaciones", database: "conectada" }, 200, cors);
       } catch { return fail("Base de datos no disponible", 503); }
     }
+    // Historial de resultados para clasificaciones de Prode: solo lectura.
+    // Incluye partidos sin voto para cortar correctamente las rachas por liga.
+    if (url.pathname === "/api/prode-results" && request.method === "GET") {
+      const visitorId = url.searchParams.get("visitanteId");
+      if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
+      if (!env.DB) return fail("Base de datos no disponible", 503);
+      try {
+        const [votes, mvpVotes, fixtureResponse] = await Promise.all([
+          env.DB.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all(),
+          env.DB.prepare("SELECT partido_id, jugador_id FROM votos_mvp WHERE visitante_id=?").bind(visitorId).all(),
+          fetch(FIXTURE, { headers: { accept: "application/json" }, cf: { cacheTtl: 60, cacheEverything: true } }),
+        ]);
+        if (!fixtureResponse.ok) throw Error("Fixture no disponible");
+        const fixture = await loadCareerFixture(env.DB, await fixtureResponse.json());
+        const byVote = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
+        const byMvp = new Map((mvpVotes.results || []).map(v => [v.partido_id, v.jugador_id]));
+        const games = fixture.games.filter(g => g?.id && Number.isFinite(Date.parse(g.startsAt)))
+          .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id))
+          .map(g => {
+            const finished = g.finished === true && Number.isFinite(g.homeScore) && Number.isFinite(g.awayScore) && g.homeScore !== g.awayScore;
+            const winner = finished ? (g.homeScore > g.awayScore ? g.homeTeam : g.awayTeam) : null;
+            const vote = byVote.get(g.id);
+            const mvp = byMvp.get(g.id);
+            return { id: g.id, startsAt: g.startsAt, finished, voted: Boolean(vote),
+              correct: finished && Boolean(vote) && vote === winner,
+              mvpCorrect: finished && Boolean(mvp) && Array.isArray(g.mvpWinners) && g.mvpWinners.includes(mvp),
+              mvpVoted: Boolean(mvp), mvpResolved: finished && Array.isArray(g.mvpWinners) };
+          });
+        return json({ ok: true, games }, 200, cors);
+      } catch (error) {
+        console.error("LNA prode-results:", error);
+        return fail("No se pudo consultar el historial", 503);
+      }
+    }
     if (url.pathname === "/api/mis-pronosticos" && request.method === "GET") {
       const visitorId = url.searchParams.get("visitanteId");
       if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
