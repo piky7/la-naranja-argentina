@@ -16,6 +16,7 @@ export default function ProdeGoogleAccess() {
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
   const [careerLink, setCareerLink] = useState(null);
+  const [linkNotice, setLinkNotice] = useState(false);
   const [linkBusy, setLinkBusy] = useState(false);
   const [linkError, setLinkError] = useState("");
   const [linkConfirm, setLinkConfirm] = useState(false);
@@ -89,10 +90,16 @@ export default function ProdeGoogleAccess() {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo vincular");
-      setCareerLink(true); setLinkConfirm(false);
+      setCareerLink(true); setLinkConfirm(false); setLinkNotice(true);
     } catch (e) { setLinkError(e.message || "Error de conexión"); }
     finally { setLinkBusy(false); }
   };
+
+  useEffect(() => {
+    if (!linkNotice) return;
+    const timeout = setTimeout(() => setLinkNotice(false), 4500);
+    return () => clearTimeout(timeout);
+  }, [linkNotice]);
 
   const login = async () => {
     setError("");
@@ -118,7 +125,7 @@ export default function ProdeGoogleAccess() {
             <div><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
           </div>
           <button type="button" className="prode-profile-edit-button" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={16}/> Mi perfil</button>
-          <div className="prode-career-link">
+          {(careerLink !== true || linkNotice) && <div className="prode-career-link" role={linkNotice ? "status" : undefined}>
             <strong>{careerLink ? "✓ Mi Carrera vinculada" : "Vincular Mi Carrera"}</strong>
             <p>{careerLink ? "Tu cuenta Google quedó asociada a esta carrera. Los pronósticos y puntos de Prode todavía no se sincronizan." : "Vinculá la carrera de este navegador con tu cuenta Prode. No cambia los votos ni puntos existentes."}</p>
             {careerLink === false && <>
@@ -126,7 +133,7 @@ export default function ProdeGoogleAccess() {
               <button type="button" onClick={linkCareer} disabled={!linkConfirm || linkBusy}>{linkBusy ? "Vinculando…" : "Vincular Mi Carrera"}</button>
             </>}
             {linkError && <p role="alert" className="prode-group-error">{linkError}</p>}
-          </div>
+          </div>}
           <button type="button" onClick={logout} disabled={busy}><LogOut size={16}/> Cerrar sesión</button>
         </>
       ) : (
