@@ -66,7 +66,7 @@ export default function ProdeGoogleAccess() {
         <>
           <div className="prode-google-identity">
             {user.photoURL && <img src={user.photoURL} alt="" referrerPolicy="no-referrer" />}
-            <div><strong>{user.displayName || "Usuario LNA"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile ? "Perfil Prode registrado · Grupos próximamente" : "Cuenta Google conectada · Perfil pendiente"}</span></div>
+            <div><strong>{user.displayName || "Usuario LNA"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile ? "Perfil Prode registrado · Ligas disponibles" : "Cuenta Google conectada · Perfil pendiente"}</span></div>
           </div>
           <button type="button" onClick={logout} disabled={busy}><LogOut size={16}/> Cerrar sesión</button>
         </>
