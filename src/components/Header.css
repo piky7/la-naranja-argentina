@@ -761,3 +761,12 @@
 .lna-install-understood { width:100%; border:0; border-radius:11px; background:#f68a24; color:#101a27; padding:13px; font-weight:800; cursor:pointer; }
 @media(min-width:769px){.lna-install-tip,.lna-install-overlay{display:none}}
 @media(max-width:370px){.lna-install-tip{gap:6px;padding:8px}.lna-install-tip img{width:30px}.lna-install-tip-action{padding:8px 6px}.lna-install-tip span{font-size:10px}}
+
+/* PRODE: quinto acceso en la barra existente, identidad verde solo en esta sección */
+.navigation .prode-desktop-link{color:#8ee95b}
+.navigation .prode-desktop-link:hover{color:#b6ff85}
+@media(max-width:768px){
+.bottom-navigation{grid-template-columns:repeat(5,minmax(0,1fr))}
+.bottom-nav-link.prode-nav-link.active{color:#8ee95b;background:rgba(125,232,61,.12)}
+.bottom-nav-link.prode-nav-link.active::after{background:#8ee95b;box-shadow:0 0 7px rgba(125,232,61,.55)}
+}
