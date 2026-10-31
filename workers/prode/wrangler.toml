@@ -1,0 +1,11 @@
+# Prode LNA · Worker separado de lna-votaciones-api.
+# Antes de desplegar: crear D1, aplicar database/prode/001_initial.sql,
+# completar database_id y configurar autenticación segura.
+name = "lna-prode-api"
+main = "worker.js"
+compatibility_date = "2026-10-25"
+
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "lna-prode"
+# database_id = "REEMPLAZAR_CON_ID_REAL"
