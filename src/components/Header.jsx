@@ -190,15 +190,7 @@ function Header() {
     <span>Equipos</span>
   </NavLink>
 
-  <NavLink
-    to="/prode"
-    className={({ isActive }) =>
-      `bottom-nav-link prode-nav-link ${isActive ? "active" : ""}`
-    }
-  >
-    <Target size={22} strokeWidth={2} aria-hidden="true" />
-    <span>Prode</span>
-  </NavLink>
+
 
   <NavLink
     to="/estadisticas"
@@ -208,6 +200,16 @@ function Header() {
   >
     <ChartNoAxesColumn size={22} strokeWidth={2} aria-hidden="true" />
     <span>Estadísticas</span>
+  </NavLink>
+
+  <NavLink
+    to="/prode"
+    className={({ isActive }) =>
+      `bottom-nav-link prode-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <Target size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Prode</span>
   </NavLink>
 </nav>
     </>
