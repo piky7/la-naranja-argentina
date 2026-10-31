@@ -165,3 +165,20 @@
 .prode-google-identity{flex:1}
 .prode-google-identity strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:600px){.prode-google-access>.prode-profile-edit-button{width:100%}}
+
+
+/* Pestañas de cada liga Prode: clasificación y participantes */
+.prode-group-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border:1px solid #315344;border-radius:11px;background:#0b2025}
+.prode-group-tabs button{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:10px 5px;border:0;border-radius:8px;background:transparent;color:#a9c6b6;font-size:12px;font-weight:800;cursor:pointer}
+.prode-group-tabs button.active{background:#244d31;color:#8bf34b}
+.prode-group-ranking{display:grid;gap:0;min-width:0}
+.prode-ranking-head,.prode-ranking-row{display:grid;grid-template-columns:34px minmax(0,1fr) 38px 33px 33px;align-items:center;gap:5px}
+.prode-ranking-head{padding:8px 6px;color:#9bbcaf;font-size:10px;font-weight:800;text-transform:uppercase}
+.prode-ranking-head span:nth-child(n+3),.prode-ranking-row>span:nth-child(n+3){text-align:center}
+.prode-ranking-row{padding:9px 6px;border-top:1px solid #2d4b42;color:#eaf8f0;font-size:12px;font-variant-numeric:tabular-nums}
+.prode-ranking-position{text-align:center;color:#a6c2b3;font-weight:800}
+.prode-ranking-name{display:flex;align-items:center;gap:8px;min-width:0}
+.prode-ranking-name .prode-member-avatar{width:29px;height:29px;flex:0 0 29px;font-size:12px}
+.prode-ranking-name strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.prode-group-ranking .prode-group-pending{margin:10px 0 0;color:#a6c2b3;font-size:11px;line-height:1.5}
+@media(max-width:380px){.prode-group-tabs button{font-size:11px}.prode-ranking-head,.prode-ranking-row{grid-template-columns:26px minmax(0,1fr) 32px 28px 28px;gap:3px}}
