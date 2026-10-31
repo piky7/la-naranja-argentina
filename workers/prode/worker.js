@@ -103,11 +103,34 @@ export default {
           ).bind(id, identity.uid, name).run();
         }
         const user = await env.DB.prepare(
-          "SELECT id, display_name, created_at FROM prode_users WHERE auth_subject = ?"
+          "SELECT u.id, n.username, u.created_at FROM prode_users u LEFT JOIN prode_usernames n ON n.user_id = u.id WHERE u.auth_subject = ?"
         ).bind(identity.uid).first();
         return reply({ ok: true, user: user || null, linkedToMiCarrera: false });
       } catch {
         return reply({ ok: false, error: "No se pudo consultar el perfil" }, 503);
+      }
+    }
+    if (url.pathname === "/api/prode/profile/username" && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
+      try {
+        const body = await request.json();
+        const username = typeof body.username === "string" ? body.username.trim() : "";
+        if (!/^[a-zA-Z0-9_]{3,20}$/.test(username))
+          return reply({ ok: false, error: "Usá entre 3 y 20 letras, números o guiones bajos, sin espacios" }, 400);
+        const userId = "firebase:" + identity.uid;
+        const exists = await env.DB.prepare("SELECT id FROM prode_users WHERE id = ?").bind(userId).first();
+        if (!exists) return reply({ ok: false, error: "Primero registrá tu perfil Prode" }, 409);
+        const taken = await env.DB.prepare("SELECT user_id FROM prode_usernames WHERE username = ? COLLATE NOCASE AND user_id <> ?").bind(username, userId).first();
+        if (taken) return reply({ ok: false, error: "Ese nombre de usuario ya está en uso" }, 409);
+        await env.DB.prepare(
+          "INSERT INTO prode_usernames (user_id, username) VALUES (?, ?) ON CONFLICT(user_id) DO UPDATE SET username = excluded.username"
+        ).bind(userId, username).run();
+        return reply({ ok: true, username });
+      } catch (error) {
+        if (String(error).includes("UNIQUE")) return reply({ ok: false, error: "Ese nombre de usuario ya está en uso" }, 409);
+        return reply({ ok: false, error: "No se pudo guardar el nombre de usuario" }, 503);
       }
     }
     if (url.pathname === "/api/prode/groups" && request.method === "POST") {
@@ -228,7 +251,7 @@ export default {
         ).bind(groupId, userId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
         const members = await env.DB.prepare(
-          "SELECT u.display_name, m.role, m.joined_at FROM prode_memberships m JOIN prode_users u ON u.id = m.user_id WHERE m.group_id = ? ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
+          "SELECT COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id WHERE m.group_id = ? ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         return reply({ ok: true, group, members: members.results || [] });
       } catch {
