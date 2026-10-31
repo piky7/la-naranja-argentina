@@ -160,6 +160,25 @@ export default {
         return reply({ ok: false, error: "Grupos no disponibles" }, 503);
       }
     }
+    const groupDetail = /^\/api\/prode\/groups\/([0-9a-f-]{36})$/.exec(url.pathname);
+    if (groupDetail && request.method === "GET") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
+      try {
+        const groupId = groupDetail[1], userId = "firebase:" + identity.uid;
+        const group = await env.DB.prepare(
+          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE g.id = ? AND m.user_id = ?"
+        ).bind(groupId, userId).first();
+        if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
+        const members = await env.DB.prepare(
+          "SELECT u.display_name, m.role, m.joined_at FROM prode_memberships m JOIN prode_users u ON u.id = m.user_id WHERE m.group_id = ? ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
+        ).bind(groupId).all();
+        return reply({ ok: true, group, members: members.results || [] });
+      } catch {
+        return reply({ ok: false, error: "No se pudieron cargar los participantes" }, 503);
+      }
+    }
     return reply({ ok: false, error: "Ruta no encontrada" }, 404);
   },
 };
