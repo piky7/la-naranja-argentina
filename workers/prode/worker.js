@@ -381,7 +381,12 @@ export default {
           rows.push(...batch);
         }
         rows.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
-        const ranking = rows.map((row,index) => ({ ...row, position: row.played || row.mvpHits ? (index && rows[index-1].points===row.points ? rows.findIndex(item=>item.points===row.points)+1 : index+1) : null }));
+        let rank = 0, previousPoints = null;
+        const ranking = rows.map(row => {
+          if (!row.played && !row.mvpHits) return { ...row, position: null };
+          if (row.points !== previousPoints) { rank++; previousPoints = row.points; }
+          return { ...row, position: rank };
+        });
         return reply({ ok: true, ranking, startedAt: start.starts_at });
       } catch (error) {
         console.error("Prode league ranking:", error);
