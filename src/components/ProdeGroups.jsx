@@ -16,8 +16,9 @@ export default function ProdeGroups() {
   const [selected, setSelected] = useState(null);
   const [detail, setDetail] = useState(null);
   const [leagueRanking, setLeagueRanking] = useState(null);
+  const [weeklyRanking, setWeeklyRanking] = useState(null);
   const [rankingError, setRankingError] = useState("");
-  const [groupTab, setGroupTab] = useState("ranking");
+  const [groupTab, setGroupTab] = useState("weekly");
   const [detailBusy, setDetailBusy] = useState(false);
   const [detailError, setDetailError] = useState("");
   const [invite, setInvite] = useState("");
@@ -54,9 +55,10 @@ export default function ProdeGroups() {
   const openGroup = async (group) => {
     if (!user) return;
     setSelected(group);
-    setGroupTab("ranking");
+    setGroupTab("weekly");
     setDetail(null);
     setLeagueRanking(null);
+    setWeeklyRanking(null);
     setRankingError("");
     setDetailError("");
     setInvite(""); setInviteMessage("");
@@ -74,6 +76,7 @@ export default function ProdeGroups() {
         const rankingData = await rankingRes.json();
         if (!rankingRes.ok || !rankingData.ok) throw Error(rankingData.error || "Clasificación no disponible");
         setLeagueRanking(rankingData.ranking || []);
+        setWeeklyRanking(rankingData.weeklyRanking || []);
       } catch (rankingFailure) { setRankingError(rankingFailure.message || "Clasificación no disponible"); }
     } catch (e) {
       setDetailError(e.message || "Error de conexión");
@@ -170,21 +173,18 @@ export default function ProdeGroups() {
         {detailBusy && <p>Cargando participantes…</p>}
         {detailError && <p className="prode-group-error" role="alert">{detailError}</p>}
         {detail && <>
-          <div className="prode-group-tabs" role="tablist" aria-label="Secciones de la liga">
-            <button type="button" role="tab" aria-selected={groupTab === "ranking"} className={groupTab === "ranking" ? "active" : ""} onClick={() => setGroupTab("ranking")}><Trophy size={16}/> Clasificación</button>
-            <button type="button" role="tab" aria-selected={groupTab === "members"} className={groupTab === "members" ? "active" : ""} onClick={() => setGroupTab("members")}><UsersRound size={16}/> Participantes ({detail.members.length})</button>
+          <div className="prode-group-tabs" role="tablist" aria-label="Clasificaciones de la liga">
+            <button type="button" role="tab" aria-selected={groupTab === "weekly"} className={groupTab === "weekly" ? "active" : ""} onClick={() => setGroupTab("weekly")}><Trophy size={16}/> Ranking semanal</button>
+            <button type="button" role="tab" aria-selected={groupTab === "general"} className={groupTab === "general" ? "active" : ""} onClick={() => setGroupTab("general")}><Trophy size={16}/> Tabla general</button>
           </div>
-          {groupTab === "ranking" && <div className="prode-group-ranking" role="tabpanel">
-            <div className="prode-ranking-head"><span>Pos.</span><span>Jugador</span><span>PTS</span><span>AC</span><span>PJ</span></div>
-            {(leagueRanking || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position ? member.position + "°" : "—"}</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.played ?? 0}</span></div>)}
+          <div className="prode-group-ranking" role="tabpanel">
+            <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
+            {((groupTab === "weekly" ? weeklyRanking : leagueRanking) || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position ? member.position + "°" : "—"}</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span></div>)}
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
-            <p className="prode-group-pending">Cada liga empieza con 0 puntos. Los votos de ganador y MVP hechos desde los popups suman al finalizar cada partido. AC: aciertos · PJ: partidos pronosticados.</p>
-          </div>}
-          {groupTab === "members" && <div role="tabpanel">
-          <h4 className="prode-group-subtitle"><UsersRound size={18}/> Participantes ({detail.members.length})</h4>
-          <div className="prode-group-members">{detail.members.map((member, index) => <div key={index} className="prode-group-member"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong><small>{member.role === "owner" ? "Administrador" : "Miembro"}</small></div>)}</div>
+            <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de los partidos iniciados esta semana (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
+          </div>
+          {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
           {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit" disabled={inviteBusy} onClick={generateInvite}>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
-          </div>}
         </>}
         <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
