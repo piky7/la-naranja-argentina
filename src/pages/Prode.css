@@ -75,3 +75,19 @@
 .prode-panel:has(.prode-weekly-empty) .prode-panel-heading{margin-bottom:7px}
 .prode-panel:has(.prode-weekly-empty) .prode-panel-bottom{margin-top:7px;padding-top:8px}
 }
+
+
+/* Etapa 1: vista previa del acceso; sin acciones hasta habilitar autenticación. */
+.prode-onboarding{margin:0 0 18px;padding:16px;border:1px solid var(--prode-border);border-radius:15px;background:linear-gradient(130deg,#173328,#0b1d2d 70%)}
+.prode-onboarding-intro{display:flex;align-items:center;gap:12px}
+.prode-onboarding-icon{width:42px;height:42px;flex-shrink:0;display:grid;place-items:center;border-radius:12px;background:#264a31;color:var(--prode-green)}
+.prode-onboarding-intro>div{flex:1;min-width:0}.prode-onboarding-intro strong{font-family:var(--prode-gamer);font-size:15px;font-weight:400;color:#fff}
+.prode-onboarding-intro p{font-size:12px;color:#b5c8c1;line-height:1.45;margin-top:4px}
+.prode-onboarding-tag{display:flex;align-items:center;gap:5px;white-space:nowrap;color:#bdd7c2;font-size:10px;font-weight:700}
+.prode-onboarding-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:15px}
+.prode-onboarding-action{display:flex;align-items:center;gap:11px;padding:13px;border:1px solid #315344;border-radius:11px;background:#122c29;opacity:.83}
+.prode-onboarding-action>svg{color:var(--prode-green);flex-shrink:0}.prode-onboarding-action>div{min-width:0;display:flex;flex-direction:column;gap:3px}
+.prode-onboarding-action strong{font-size:12px;color:#eef7f0}.prode-onboarding-action span{font-size:10px;color:#a6c2b3;line-height:1.4}
+.prode-onboarding-foot{display:flex;align-items:center;gap:7px;margin-top:13px;color:#a2bdb1;font-size:10px;line-height:1.5}
+.prode-onboarding-foot svg{flex-shrink:0;color:var(--prode-green)}
+@media(max-width:768px){.prode-onboarding{padding:12px;margin-bottom:12px}.prode-onboarding-intro{flex-wrap:wrap;gap:9px}.prode-onboarding-icon{width:36px;height:36px}.prode-onboarding-intro strong{font-size:13px}.prode-onboarding-intro p{font-size:11px}.prode-onboarding-tag{margin-left:45px}.prode-onboarding-actions{grid-template-columns:1fr;gap:7px;margin-top:12px}.prode-onboarding-action{padding:10px 12px}.prode-onboarding-foot{align-items:flex-start}}
