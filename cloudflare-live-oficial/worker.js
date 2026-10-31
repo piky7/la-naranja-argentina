@@ -475,16 +475,10 @@ async function generarLive(fecha, anteriores = null, env) {
   });
 
   if (!hayCandidatos) {
-    console.log(
-      "Sin partidos en ventana LIVE; se omite la consulta del fixture oficial:",
-      fecha
-    );
-
-    return {
-      updatedAt: new Date().toISOString(),
-      date: fecha,
-      liveMatches: anterioresDelDia,
-    };
+    // El calendario histórico de eventos puede tener fechas reprogramadas.
+    // Consultar el fixture OFICIAL (cacheado 10 min) como respaldo para
+    // no perder partidos en vivo por timestamps obsoletos.
+    console.log("Sin candidatos en eventos-lnb; verificando fixture oficial:", fecha);
   }
 
   const oficiales = await obtenerConCache(
@@ -521,17 +515,22 @@ async function generarLive(fecha, anteriores = null, env) {
       );
     });
 
-    if (coincidencias.length !== 1) {
-      console.warn(
-        "Correspondencia insegura:",
-        oficial.localLNA,
-        oficial.visitanteLNA,
-        coincidencias.length
-      );
+    // Preferir la correspondencia exacta. Si hubo reprogramación,
+    // aceptar el par de equipos SOLO cuando sea único en el historial.
+    const porEquipos = eventos.filter((evento) =>
+      evento.homeTeam === oficial.localLNA &&
+      evento.awayTeam === oficial.visitanteLNA
+    );
+    const evento = coincidencias.length === 1
+      ? coincidencias[0]
+      : porEquipos.length === 1 ? porEquipos[0] : null;
+    if (!evento) {
+      console.warn("Correspondencia insegura:", oficial.localLNA, oficial.visitanteLNA, coincidencias.length, porEquipos.length);
       continue;
     }
-
-    const evento = coincidencias[0];
+    if (coincidencias.length !== 1) {
+      console.log("Partido reprogramado detectado en fixture oficial:", oficial.localLNA, oficial.visitanteLNA, oficial.fecha, oficial.hora);
+    }
     const anterior = anterioresPorId.get(evento.eventId);
 
     // Un partido finalizado ya no necesita consultas.
@@ -549,7 +548,9 @@ if (anterior?.status === "finished") {
 }
 
 
-    const inicio = Number(evento.timestamp) * 1000;
+    // La hora del fixture oficial prevalece sobre la del evento histórico.
+    // Argentina opera en UTC-03 durante la temporada LNB.
+    const inicio = Date.parse(`${oficial.fecha}T${oficial.hora}:00-03:00`);
 
     // Seguir partidos desde 30 minutos antes hasta 4 horas después
     // del inicio. Un partido que ya estaba en vivo continúa en seguimiento.
@@ -595,7 +596,7 @@ if (anterior?.status === "finished") {
         isHalftime: marcador.isHalftime,
         lastActionTime: marcador.lastActionTime,
         quarterScores: marcador.quarterScores || null,
-        timestamp: evento.timestamp,
+        timestamp: Math.floor(inicio / 1000),
         status: marcador.status,
         isLive: marcador.status === "live",
       });
