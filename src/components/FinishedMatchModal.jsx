@@ -5,6 +5,16 @@ import { players } from "../data/players";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 
 // Un único popup de partidos terminados para Home, Liga y Equipo.
+// Ocultar jugadores que no ingresaron; mantener los que sí jugaron aunque no anoten.
+const hasPlayed = (player) => {
+  const raw = String(player.minutes ?? "").trim();
+  if (!raw || raw === "—" || raw === "-") return false;
+  if (/^\d+:\d+(?::\d+)?$/.test(raw)) return raw.split(":").some(part => Number(part) > 0);
+  const minutes = Number(raw.replace(",", "."));
+  return Number.isFinite(minutes) && minutes > 0;
+};
+
+
 export default function FinishedMatchModal({
   selectedMatch,
   selectedMatchStats,
@@ -296,6 +306,7 @@ export default function FinishedMatchModal({
                           selectedMatch.homeTeam
                         ] || []
                       )
+                        .filter(hasPlayed)
                         .slice()
                         .sort(
                           (a, b) =>
@@ -397,6 +408,7 @@ export default function FinishedMatchModal({
                           selectedMatch.awayTeam
                         ] || []
                       )
+                        .filter(hasPlayed)
                         .slice()
                         .sort(
                           (a, b) =>
