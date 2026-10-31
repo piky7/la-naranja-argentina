@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { LogIn, LogOut, ShieldCheck } from "lucide-react";
-import { completeProdeRedirect, signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
+import { signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
 
 export default function ProdeGoogleAccess() {
   const [user, setUser] = useState(null);
@@ -9,9 +9,17 @@ export default function ProdeGoogleAccess() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const unsubscribe = watchProdeUser((next) => { setUser(next); setLoading(false); });
-    completeProdeRedirect().catch(() => setError("No se pudo completar el acceso con Google."));
-    return unsubscribe;
+    let active = true;
+    let unsubscribe;
+    watchProdeUser((next) => {
+      if (active) { setUser(next); setLoading(false); }
+    }).then((stop) => {
+      if (active) unsubscribe = stop;
+      else stop();
+    }).catch(() => {
+      if (active) { setLoading(false); setError("No se pudo cargar el acceso con Google."); }
+    });
+    return () => { active = false; unsubscribe?.(); };
   }, []);
 
   const login = async () => {
