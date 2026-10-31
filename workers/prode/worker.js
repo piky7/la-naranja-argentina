@@ -135,7 +135,8 @@ export default {
     }
     // Pronósticos de prueba: calendario generado desde los datos oficiales de LNA.
     // La validación se realiza en el servidor; nunca se confía en el fixture del cliente.
-    if (url.pathname === "/api/prode/votes" && ["GET", "POST"].includes(request.method)) {
+    if (url.pathname === "/api/prode/votes" && request.method === "POST") return reply({ ok: false, error: "Los pronósticos se realizan desde el popup de Mi Carrera; la vinculación con Prode está en preparación" }, 409);
+    if (url.pathname === "/api/prode/votes" && request.method === "GET") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       const identity = await verifiedFirebaseUser(request);
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
