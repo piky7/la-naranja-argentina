@@ -2,7 +2,6 @@ import { Trophy, UsersRound, ChartNoAxesColumn, Flame, LockKeyhole, Medal, Chevr
 import "./Prode.css";
 import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
 import ProdeGroups from "../components/ProdeGroups";
-import ProdePredictions from "../components/ProdePredictions";
 
 const Section = ({ icon: Icon, title, children, extra }) => (
   <section className="prode-panel">
@@ -25,7 +24,7 @@ export default function Prode() {
           <div className="prode-hero-ball" aria-hidden="true"><span /></div>
         </header>
 
-        <div className="prode-coming"><Sparkles size={18} /><div><strong>PRÓXIMAMENTE</strong><span>Ya podés crear ligas e invitar amigos. Ya podés probar los pronósticos de ganador. Los puntos y rankings se habilitarán próximamente.</span></div></div>
+        <div className="prode-coming"><Sparkles size={18} /><div><strong>PRÓXIMAMENTE</strong><span>Ya podés crear ligas e invitar amigos. Los votos de ganador y MVP se realizan desde los popups de los partidos. Estamos preparando la vinculación segura con Prode; los puntos y rankings se habilitarán después.</span></div></div>
 
         <section className="prode-onboarding" aria-label="Acceso al Prode">
           <div className="prode-onboarding-intro">
@@ -37,8 +36,6 @@ export default function Prode() {
           <ProdeGroups />
           <p className="prode-onboarding-foot"><ShieldCheck size={14}/> El acceso Google es independiente de Mi Carrera por ahora. Los grupos y puntos se conectarán después de verificar las cuentas en el servidor.</p>
         </section>
-
-        <ProdePredictions />
 
         <div className="prode-grid">
           <Section icon={Trophy} title={<>Ranking <em>general</em></>} extra={<span className="prode-small-tag">Temporada 26/27</span>}>
