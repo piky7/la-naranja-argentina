@@ -1,3 +1,4 @@
+import ProdeHistoricalRanking from "../components/ProdeHistoricalRanking";
 import { Trophy, UsersRound, ChartNoAxesColumn, Flame, LockKeyhole, Medal, ChevronRight, Sparkles, UserRound, PlusCircle, Ticket, Globe2, ShieldCheck } from "lucide-react";
 import "./Prode.css";
 import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
@@ -34,17 +35,12 @@ export default function Prode() {
           </div>
           <ProdeGoogleAccess />
           <ProdeGroups />
-          <p className="prode-onboarding-foot"><ShieldCheck size={14}/> El acceso Google es independiente de Mi Carrera por ahora. Los grupos y puntos se conectarán después de verificar las cuentas en el servidor.</p>
+          <p className="prode-onboarding-foot"><ShieldCheck size={14}/> Tu cuenta Google puede vincularse con Mi Carrera. El ranking general muestra sus puntos históricos; las ligas tendrán puntos independientes.</p>
         </section>
 
         <div className="prode-grid">
-          <Section icon={Trophy} title={<>Ranking <em>general</em></>} extra={<span className="prode-small-tag">Temporada 26/27</span>}>
-            <div className="prode-podium" aria-label="Ranking general próximamente">
-              <div className="prode-podium-item second"><span className="prode-podium-medal">2</span><div className="prode-podium-avatar">?</div><span>2° puesto</span><strong>— pts</strong></div>
-              <div className="prode-podium-item first"><span className="prode-podium-medal">1</span><div className="prode-podium-avatar"><Trophy size={23}/></div><span>1° puesto</span><strong>— pts</strong></div>
-              <div className="prode-podium-item third"><span className="prode-podium-medal">3</span><div className="prode-podium-avatar">?</div><span>3° puesto</span><strong>— pts</strong></div>
-            </div>
-            <div className="prode-panel-bottom"><span>La clasificación aparecerá al comenzar el Prode.</span><ChevronRight size={17}/></div>
+          <Section icon={Trophy} title={<>Ranking <em>general</em></>} extra={<span className="prode-small-tag">Histórico</span>}>
+            <ProdeHistoricalRanking />
           </Section>
 
           <Section icon={UsersRound} title={<>Mis <em>ligas</em></>}>
