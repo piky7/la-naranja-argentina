@@ -153,8 +153,8 @@ export default {
         if (body.confirm !== true) return reply({ ok: false, error: "Confirmá la vinculación" }, 400);
         if (linked) return reply({ ok: linked.visitor_id === visitorId, linked: true, error: linked.visitor_id === visitorId ? undefined : "Esta cuenta ya está vinculada a otra carrera" }, linked.visitor_id === visitorId ? 200 : 409);
         // Verificar que la carrera existe en el servicio oficial antes de guardar el enlace.
-        const careerRes = await fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId=" + encodeURIComponent(visitorId));
-        if (!careerRes.ok) return reply({ ok: false, error: "No se pudo verificar Mi Carrera" }, 503);
+        const careerRes = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId=" + encodeURIComponent(visitorId));
+        if (!careerRes.ok) return reply({ ok: false, error: "No se pudo verificar Mi Carrera (servicio de votaciones: " + careerRes.status + ")" }, 503);
         const career = await careerRes.json();
         if (!career.ok) return reply({ ok: false, error: "Mi Carrera no está disponible" }, 409);
         await env.DB.prepare("INSERT INTO prode_career_links (user_id, visitor_id) VALUES (?, ?)").bind(userId, visitorId).run();
