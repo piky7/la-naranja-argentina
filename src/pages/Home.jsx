@@ -2009,7 +2009,7 @@ const finishedMatch = {
                 <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa</button>
               </div>
               {upcomingTab === "quintetos" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
-                <LiveStartingFive live={upcomingLive} homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} />}
+                <LiveStartingFive live={upcomingLive} homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} onPlayerClick={setSelectedPlayer} />}
               {upcomingTab === "planteles" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
                 <LiveRosters homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} matches={matches} onPlayerClick={setSelectedPlayer} />}
             </>}
