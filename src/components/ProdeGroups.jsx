@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlusCircle, X, LockKeyhole, Globe2 } from "lucide-react";
+import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft } from "lucide-react";
 import { watchProdeUser } from "../auth/prodeAuth";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
@@ -13,6 +13,10 @@ export default function ProdeGroups() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [detail, setDetail] = useState(null);
+  const [detailBusy, setDetailBusy] = useState(false);
+  const [detailError, setDetailError] = useState("");
 
   useEffect(() => {
     let active = true, stop;
@@ -35,6 +39,27 @@ export default function ProdeGroups() {
     finally { setReady(true); }
   };
   useEffect(() => { setReady(false); load(user); }, [user]);
+
+  const openGroup = async (group) => {
+    if (!user) return;
+    setSelected(group);
+    setDetail(null);
+    setDetailError("");
+    setDetailBusy(true);
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id), {
+        headers: { Authorization: "Bearer " + token },
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudo abrir la liga");
+      setDetail(data);
+    } catch (e) {
+      setDetailError(e.message || "Error de conexión");
+    } finally {
+      setDetailBusy(false);
+    }
+  };
 
   const create = async (event) => {
     event.preventDefault();
@@ -61,8 +86,26 @@ export default function ProdeGroups() {
     </button>
     <div className="prode-onboarding-action"><LockKeyhole size={21}/><div><strong>Unirme a un Prode</strong><span>Invitaciones próximamente</span></div></div>
     <div className="prode-onboarding-action"><Globe2 size={21}/><div><strong>Ranking general</strong><span>Todos los participantes de LNA · Próximamente</span></div></div>
-    {ready && groups.length > 0 && <div className="prode-my-groups"><strong>Mis ligas ({groups.length})</strong>{groups.map(group => <div key={group.id} className="prode-my-group"><span>{group.name}</span><small>{group.visibility === "private" ? "Privada" : "Pública"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small></div>)}</div>}
+    {ready && groups.length > 0 && <div className="prode-my-groups"><strong>Mis ligas ({groups.length})</strong>{groups.map(group => <button type="button" key={group.id} className="prode-my-group prode-group-link" onClick={() => openGroup(group)}><span>{group.name}</span><small>{group.visibility === "private" ? "Privada" : "Pública"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small><ChevronRight size={16}/></button>)}</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
+    {selected && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
+      <section className="prode-dialog prode-group-detail" role="dialog" aria-modal="true" aria-label={"Liga " + selected.name} onClick={e => e.stopPropagation()}>
+        <div className="prode-dialog-heading">
+          <h3>{selected.name}</h3>
+          <button type="button" aria-label="Cerrar" onClick={() => setSelected(null)}><X size={20}/></button>
+        </div>
+        <div className="prode-group-meta"><span>{selected.visibility === "private" ? "🔒 Privada" : "🌐 Pública"}</span><span>Temporada {selected.season || "2026/27"}</span></div>
+        {selected.description && <p>{selected.description}</p>}
+        {detailBusy && <p>Cargando participantes…</p>}
+        {detailError && <p className="prode-group-error" role="alert">{detailError}</p>}
+        {detail && <>
+          <h4 className="prode-group-subtitle"><UsersRound size={18}/> Participantes ({detail.members.length})</h4>
+          <div className="prode-group-members">{detail.members.map((member, index) => <div key={index} className="prode-group-member"><span className="prode-member-avatar">{member.display_name.slice(0,1).toUpperCase()}</span><strong>{member.display_name}</strong><small>{member.role === "owner" ? "Administrador" : "Miembro"}</small></div>)}</div>
+          <p className="prode-group-pending">Las invitaciones y el ranking de esta liga se habilitarán en la próxima etapa.</p>
+        </>}
+        <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
+      </section>
+    </div>}
     {open && <div className="prode-dialog-backdrop" onClick={() => !busy && setOpen(false)}>
       <form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={create}>
         <div className="prode-dialog-heading"><h3>Crear un Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setOpen(false)}><X size={20}/></button></div>
