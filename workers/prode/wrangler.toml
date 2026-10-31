@@ -5,7 +5,7 @@ name = "lna-prode-api"
 main = "worker.js"
 compatibility_date = "2026-10-25"
 
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "lna-prode"
-# database_id = "REEMPLAZAR_CON_ID_REAL"
+[[d1_databases]]
+binding = "DB"
+database_name = "lna-prode"
+database_id = "b82576c0-4221-4f26-bff2-d068968fdb0e"
