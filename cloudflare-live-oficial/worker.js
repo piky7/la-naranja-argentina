@@ -316,6 +316,32 @@ function obtenerParcialesOficiales(html, marcador, periodo) {
   return previoLocal === home && previoVisitante === away ? parciales : null;
 }
 
+// Los cinco iniciales se identifican por CincoInicial en la planilla oficial.
+// No se infieren a partir de minutos ni promedios.
+function extraerQuintetos(html) {
+  const tablas = [...html.matchAll(/<table\\b[^>]*class=["'][^"']*tabla-estadisticas[^"']*["'][^>]*>[\\s\\S]*?<\\/table>/gi)];
+  if (tablas.length !== 2) return null;
+  const parsear = tabla => {
+    const titulares = [];
+    for (const fila of tabla.matchAll(/<tr\\b[^>]*\\bonclick=(["'])([\\s\\S]*?)\\1[^>]*>/gi)) {
+      const attr = fila[2].replace(/&quot;|&#34;|&#x22;/gi, '"').replace(/&#39;|&#x27;/gi, "'").replace(/&amp;/gi, '&');
+      const inicio = attr.indexOf('{');
+      const fin = attr.lastIndexOf('}');
+      if (inicio < 0 || fin < inicio) continue;
+      try {
+        const jugador = JSON.parse(attr.slice(inicio, fin + 1));
+        if (jugador.CincoInicial === true || jugador.CincoInicial === 1 || jugador.CincoInicial === 'True' || jugador.CincoInicial === 'true') {
+          titulares.push({ officialPlayerId: jugador.IdJugador, name: jugador.NombreCompleto || jugador.Nombre, number: jugador.Dorsal });
+        }
+      } catch (_) { /* Fila incompleta: no inventar titulares. */ }
+    }
+    return titulares.length === 5 ? titulares : null;
+  };
+  const home = parsear(tablas[0][0]);
+  const away = parsear(tablas[1][0]);
+  return home && away ? { home, away } : null;
+}
+
 async function obtenerMarcador(partido) {
   console.log(
     "Consultando marcador oficial:",
@@ -325,7 +351,7 @@ async function obtenerMarcador(partido) {
   );
 
   const html = await descargar(partido.url);
-
+  const quintetos = extraerQuintetos(html);
 
   const idEnc = html.match(
     /var\s+idEnc\s*=\s*['"]([^'"]+)['"]/
@@ -354,7 +380,7 @@ async function obtenerMarcador(partido) {
   const periodo = obtenerPeriodo(html, marcador.status);
 
   const quarterScores = obtenerParcialesOficiales(html, marcador, periodo);
-  return { ...marcador, ...periodo, ...(quarterScores ? { quarterScores } : {}) };
+  return { ...marcador, ...periodo, ...(quarterScores ? { quarterScores } : {}), ...(quintetos ? { quintetos } : {}) };
 }
 
 
@@ -596,6 +622,7 @@ if (anterior?.status === "finished") {
         isHalftime: marcador.isHalftime,
         lastActionTime: marcador.lastActionTime,
         quarterScores: marcador.quarterScores || null,
+        quintetos: marcador.quintetos || anterior?.quintetos || null,
         timestamp: Math.floor(inicio / 1000),
         status: marcador.status,
         isLive: marcador.status === "live",
