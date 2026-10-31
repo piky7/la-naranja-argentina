@@ -594,5 +594,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fZXaA0m6_wu0vYJ2tCgvU_cY--zYZxCeeij5E1FFFS43xltXuiCeWw==/lanus-vs-san-martin-c"
     }
+  },
+  "2026-10-31-quimsa-penarol": {
+    "status": "finished",
+    "homeScore": 78,
+    "awayScore": 73,
+    "time": "11:30",
+    "homeTeam": "quimsa",
+    "awayTeam": "penarol",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2O67XWrxPflljZgEEJD-3bdWyQM7ra8eg0veLomDzQMvL8LIzy_tEag==/quimsa-vs-penarol-mdp",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2O67XWrxPflljZgEEJD-3bdWyQM7ra8eg0veLomDzQMvL8LIzy_tEag==/quimsa-vs-penarol-mdp"
+    }
   }
 };
