@@ -133,6 +133,43 @@ export default {
         return reply({ ok: false, error: "No se pudo guardar el nombre de usuario" }, 503);
       }
     }
+    // Pronósticos de prueba: calendario generado desde los datos oficiales de LNA.
+    // La validación se realiza en el servidor; nunca se confía en el fixture del cliente.
+    if (url.pathname === "/api/prode/votes" && ["GET", "POST"].includes(request.method)) {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      const userId = "firebase:" + identity.uid;
+      try {
+        const profile = await env.DB.prepare("SELECT id FROM prode_users WHERE id = ?").bind(userId).first();
+        if (!profile) return reply({ ok: false, error: "Primero registrá tu perfil Prode" }, 409);
+        if (request.method === "GET") {
+          const votes = await env.DB.prepare("SELECT match_id, winner_team_id, submitted_at FROM prode_vote_links WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 300").bind(userId).all();
+          return reply({ ok: true, votes: votes.results || [] });
+        }
+        const body = await request.json();
+        const matchId = typeof body.matchId === "string" ? body.matchId : "";
+        const winner = typeof body.winnerTeamId === "string" ? body.winnerTeamId : "";
+        if (!matchId || matchId.length > 180 || !winner || winner.length > 80)
+          return reply({ ok: false, error: "Pronóstico inválido" }, 400);
+        const fixtureResponse = await fetch(SITE + "/voting-fixture.json", { cf: { cacheTtl: 0 } });
+        if (!fixtureResponse.ok) return reply({ ok: false, error: "Calendario temporalmente no disponible" }, 503);
+        const fixture = await fixtureResponse.json();
+        const game = Array.isArray(fixture.games) ? fixture.games.find(g => g.id === matchId) : null;
+        if (!game || ![game.homeTeam, game.awayTeam].includes(winner))
+          return reply({ ok: false, error: "Partido o equipo no válido" }, 400);
+        const kickoff = Date.parse(game.startsAt);
+        if (!Number.isFinite(kickoff) || game.finished || Date.now() >= kickoff)
+          return reply({ ok: false, error: "La votación de este partido está cerrada" }, 409);
+        const result = await env.DB.prepare(
+          "INSERT INTO prode_vote_links (user_id, match_id, winner_team_id) VALUES (?, ?, ?) ON CONFLICT(user_id, match_id) DO NOTHING"
+        ).bind(userId, matchId, winner).run();
+        if (!result.meta?.changes) return reply({ ok: false, error: "Ya registraste un pronóstico para este partido" }, 409);
+        return reply({ ok: true, matchId, winnerTeamId: winner }, 201);
+      } catch {
+        return reply({ ok: false, error: "No se pudo procesar el pronóstico" }, 503);
+      }
+    }
     if (url.pathname === "/api/prode/groups" && request.method === "POST") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       const identity = await verifiedFirebaseUser(request);
