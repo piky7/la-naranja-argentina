@@ -182,3 +182,16 @@
 .prode-ranking-name strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
 .prode-group-ranking .prode-group-pending{margin:10px 0 0;color:#a6c2b3;font-size:11px;line-height:1.5}
 @media(max-width:380px){.prode-group-tabs button{font-size:11px}.prode-ranking-head,.prode-ranking-row{grid-template-columns:26px minmax(0,1fr) 32px 28px 28px;gap:3px}}
+
+
+/* Pronósticos Prode: votación de ganador, independiente de Mi Carrera. */
+.prode-predictions{margin-bottom:16px}
+.prode-predictions-note{font-size:12px;line-height:1.5;color:#abc7b8;margin:0 0 14px}
+.prode-predictions-list{display:grid;gap:9px}
+.prode-prediction-game{padding:11px;border:1px solid #345748;border-radius:11px;background:#0c2227}
+.prode-prediction-time{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;font-size:11px;color:#b6d0c1}
+.prode-prediction-time span{display:flex;align-items:center;gap:4px;color:#8bf34b;font-weight:800}
+.prode-prediction-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.prode-prediction-options button{min-width:0;min-height:44px;padding:9px 6px;border:1px solid #3b6050;border-radius:8px;background:#18362f;color:#edf8ef;font-size:12px;font-weight:800;cursor:pointer}
+.prode-prediction-options button.selected{background:#315f31;border-color:#86ed46;color:#baff88}
+.prode-prediction-options button:disabled:not(.selected){opacity:.5;cursor:default}
