@@ -30,3 +30,9 @@ export async function signOutProde() {
   const { authSdk, auth } = await sdk();
   return authSdk.signOut(auth);
 }
+
+export async function getProdeIdToken() {
+  const { auth } = await sdk();
+  if (!auth.currentUser) throw new Error("Iniciá sesión para continuar");
+  return auth.currentUser.getIdToken();
+}
