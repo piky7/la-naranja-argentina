@@ -334,6 +334,60 @@ export default {
         return reply({ ok: false, error: "No se pudo aceptar la invitación" }, 503);
       }
     }
+    // Clasificación por liga. Los votos se leen de Mi Carrera; nunca se duplican.
+    // El primer acceso activa la liga para partidos futuros (no importa puntos anteriores).
+    const leagueRanking = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/ranking$/.exec(url.pathname);
+    if (leagueRanking && request.method === "GET") {
+      if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Clasificación no disponible" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      try {
+        const groupId = leagueRanking[1], userId = "firebase:" + identity.uid;
+        const membership = await env.DB.prepare("SELECT 1 AS present FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId,userId).first();
+        if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
+        await env.DB.prepare("INSERT OR IGNORE INTO prode_league_starts(group_id) VALUES (?)").bind(groupId).run();
+        const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
+        const members = await env.DB.prepare(
+          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id WHERE m.group_id=? ORDER BY m.joined_at ASC LIMIT 200"
+        ).bind(groupId).all();
+        const time = value => Date.parse(String(value).replace(" ", "T") + (String(value).includes("Z") ? "" : "Z"));
+        const leagueStart = time(start.starts_at);
+        const rows = [];
+        const allMembers = members.results || [];
+        for (let i=0; i<allMembers.length; i+=6) {
+          const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
+            const base = { username: member.username, userId: member.user_id, points: 0, correct: 0, played: 0, mvpHits: 0 };
+            if (!member.visitor_id) return base;
+            const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
+            if (!response.ok) throw Error("Servicio de votaciones no disponible");
+            const data = await response.json();
+            if (!data.ok || !Array.isArray(data.games)) throw Error("Historial de votaciones no disponible");
+            const since = Math.max(leagueStart, time(member.joined_at));
+            let streak = 0;
+            for (const game of data.games) {
+              const kickoff = Date.parse(game.startsAt);
+              if (!Number.isFinite(kickoff) || kickoff < since || !game.finished || kickoff > Date.now()) continue;
+              if (game.mvpCorrect) { base.points += 20; base.mvpHits++; }
+              if (!game.voted) { streak = 0; continue; }
+              base.played++;
+              if (game.correct) {
+                base.correct++; base.points += 15; streak++;
+                if (streak === 5) base.points += 45;
+              } else { base.points += 5; streak = 0; }
+            }
+            return base;
+          }));
+          rows.push(...batch);
+        }
+        rows.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
+        const ranking = rows.map((row,index) => ({ ...row, position: row.played || row.mvpHits ? (index && rows[index-1].points===row.points ? rows.findIndex(item=>item.points===row.points)+1 : index+1) : null }));
+        return reply({ ok: true, ranking, startedAt: start.starts_at });
+      } catch (error) {
+        console.error("Prode league ranking:", error);
+        return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
+      }
+    }
     const groupDetail = /^\/api\/prode\/groups\/([0-9a-f-]{36})$/.exec(url.pathname);
     if (groupDetail && request.method === "GET") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
