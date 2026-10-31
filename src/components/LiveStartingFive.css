@@ -17,3 +17,23 @@
 .live-five-number{background:var(--live-five-team-color,#102e48);border-color:#ffffffcc;box-shadow:0 2px 7px #0008}
 .live-five-away .live-five-number{border-color:#ffffffcc}
 @media(max-width:600px){.live-five-players{height:215px}.live-five-player{width:52%}}
+
+/* Cada jugador ocupa su propio carril dentro de la mitad de cancha. */
+.live-five-side{overflow:hidden}
+.live-five-players{height:245px}
+.live-five-player{box-sizing:border-box;width:43%;max-width:43%;padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;z-index:2}
+.live-five-player:disabled{cursor:default}
+.live-five-player:not(:disabled):focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:7px}
+.live-five-player:not(:disabled):hover .live-five-name{background:#193954}
+.live-five-name{box-sizing:border-box;width:100%;max-width:100%;font-size:9px;line-height:1.2;letter-spacing:-.02em}
+.live-five-home .live-five-position-0{left:76%;top:50%}
+.live-five-home .live-five-position-1{left:69%;top:16%}
+.live-five-home .live-five-position-2{left:69%;top:84%}
+.live-five-home .live-five-position-3{left:25%;top:29%}
+.live-five-home .live-five-position-4{left:25%;top:71%}
+.live-five-away .live-five-position-0{left:24%;top:50%}
+.live-five-away .live-five-position-1{left:31%;top:16%}
+.live-five-away .live-five-position-2{left:31%;top:84%}
+.live-five-away .live-five-position-3{left:75%;top:29%}
+.live-five-away .live-five-position-4{left:75%;top:71%}
+@media(max-width:600px){.live-five-player{width:45%;max-width:45%}.live-five-name{font-size:8px;padding:3px 1px}.live-five-number{width:26px;height:26px}}
