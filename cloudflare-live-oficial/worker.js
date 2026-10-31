@@ -319,11 +319,11 @@ function obtenerParcialesOficiales(html, marcador, periodo) {
 // Los cinco iniciales se identifican por CincoInicial en la planilla oficial.
 // No se infieren a partir de minutos ni promedios.
 function extraerQuintetos(html) {
-  const tablas = [...html.matchAll(/<table\\b[^>]*class=["'][^"']*tabla-estadisticas[^"']*["'][^>]*>[\\s\\S]*?<\\/table>/gi)];
+  const tablas = [...html.matchAll(/<table\b[^>]*class=["'][^"']*tabla-estadisticas[^"']*["'][^>]*>[\s\S]*?<\/table>/gi)];
   if (tablas.length !== 2) return null;
   const parsear = tabla => {
     const titulares = [];
-    for (const fila of tabla.matchAll(/<tr\\b[^>]*\\bonclick=(["'])([\\s\\S]*?)\\1[^>]*>/gi)) {
+    for (const fila of tabla.matchAll(/<tr\b[^>]*\bonclick=(["'])([\s\S]*?)\1[^>]*>/gi)) {
       const attr = fila[2].replace(/&quot;|&#34;|&#x22;/gi, '"').replace(/&#39;|&#x27;/gi, "'").replace(/&amp;/gi, '&');
       const inicio = attr.indexOf('{');
       const fin = attr.lastIndexOf('}');
