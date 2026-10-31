@@ -10,6 +10,7 @@ const pages = {
   "/liga": ["Liga Nacional 2026/27 | Fixture, Resultados y Posiciones", "Fixture, resultados, próximos partidos y tabla de posiciones de la Liga Nacional de Básquet 2026/27."],
   "/equipos": ["Equipos de la Liga Nacional de Básquet 2026/27", "Conocé los equipos de la Liga Nacional de Básquet 2026/27, sus planteles, partidos y estadísticas."],
   "/jugadores": ["Jugadores de la Liga Nacional de Básquet 2026/27", "Consultá jugadores, equipos y estadísticas de la Liga Nacional de Básquet argentino 2026/27."],
+  "/prode": ["Prode LNA | Próximamente", "Próximamente: Prode de La Naranja Argentina, rankings, ligas privadas y estadísticas de pronósticos de la Liga Nacional."],
   "/estadisticas": ["Estadísticas de la Liga Nacional de Básquet 2026/27", "Promedios, goleadores y estadísticas de jugadores de la Liga Nacional de Básquet 2026/27."],
   "/acerca": ["Acerca de La Naranja Argentina", "Conocé La Naranja Argentina, el sitio dedicado a la Liga Nacional de Básquet."],
   "/privacidad": ["Política de Privacidad | La Naranja Argentina", "Consultá la política de privacidad de La Naranja Argentina."],
