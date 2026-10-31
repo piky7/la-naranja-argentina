@@ -21,7 +21,7 @@ function orderStartingFive(starters, teamId) {
     const matched = roster.find(player => starter.officialPlayerId != null && player.officialPlayerId != null && String(player.officialPlayerId) === String(starter.officialPlayerId))
       || roster.find(player => starter.number != null && String(player.number) === String(starter.number))
       || roster.find(player => normalize(player.name) === normalize(starter.name));
-    return { ...starter, position: role(matched?.position), index };
+    return { ...starter, position: role(matched?.position), matchedPlayer: matched || null, index };
   });
   // Primero ubicar posiciones verificadas. No asignar una posición ficticia
   // cuando un jugador no tenga su puesto cargado en la base de LNA.
@@ -34,7 +34,7 @@ function orderStartingFive(starters, teamId) {
   return arranged;
 }
 
-export default function LiveStartingFive({ live, homeTeam, awayTeam }) {
+export default function LiveStartingFive({ live, homeTeam, awayTeam, onPlayerClick }) {
   const quintetos = live?.quintetos;
   const sides = [
     { key: "home", team: homeTeam, players: quintetos?.home },
@@ -52,10 +52,10 @@ export default function LiveStartingFive({ live, homeTeam, awayTeam }) {
         </svg>
         {sides.map(side => <div key={side.key} className={`live-five-side live-five-${side.key}`} style={{ "--live-five-team-color": teamMatchColors[side.team?.id] || "#234768" }}>
           <div className="live-five-team">{side.team?.logo && <img src={side.team.logo} alt="" />}<strong>{side.team?.shortName || side.team?.name}</strong></div>
-          <div className="live-five-players">{orderStartingFive(side.players, side.team?.id).map((player, index) => <div className={`live-five-player live-five-position-${index}`} key={player.officialPlayerId || index} title={player.name}>
+          <div className="live-five-players">{orderStartingFive(side.players, side.team?.id).map((player, index) => <button type="button" className={`live-five-player live-five-position-${index}`} key={player.officialPlayerId || index} title={`Ver jugador: ${player.name}`} disabled={!player.matchedPlayer} onClick={() => player.matchedPlayer && onPlayerClick?.({ ...player.matchedPlayer, team: side.team })}>
             <span className="live-five-number">#{player.number ?? "—"}</span>
             <span className="live-five-name">{shortName(player.name)}</span>
-          </div>)}</div>
+          </button>)}</div>
         </div>)}
       </div>
     ) : <p className="live-five-unavailable">Esperando la confirmación de los quintetos en la planilla oficial de la Liga Nacional.</p>}
