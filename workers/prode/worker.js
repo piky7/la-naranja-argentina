@@ -137,7 +137,7 @@ export default {
     if (url.pathname === "/api/prode/ranking/historical" && request.method === "GET") {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
-        const rows = await env.DB.prepare("SELECT l.visitor_id, u.username FROM prode_career_links l JOIN prode_users u ON u.id = l.user_id WHERE u.username IS NOT NULL AND u.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT l.visitor_id, n.username FROM prode_career_links l JOIN prode_usernames n ON n.user_id = l.user_id WHERE n.username IS NOT NULL AND n.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
