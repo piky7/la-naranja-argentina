@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket } from "lucide-react";
-import { watchProdeUser } from "../auth/prodeAuth";
+import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 export default function ProdeGroups() {
@@ -22,6 +22,7 @@ export default function ProdeGroups() {
   const [joinCode, setJoinCode] = useState("");
   const [inviteBusy, setInviteBusy] = useState(false);
   const [inviteMessage, setInviteMessage] = useState("");
+  const [loginBusy, setLoginBusy] = useState(false);
 
   useEffect(() => {
     let active = true, stop;
@@ -84,7 +85,8 @@ export default function ProdeGroups() {
 
   const joinGroup = async (event) => {
     event.preventDefault();
-    if (!user || inviteBusy) return;
+    if (!user) { setInviteMessage("Primero iniciá sesión con Google para unirte."); return; }
+    if (inviteBusy) return;
     setInviteBusy(true); setInviteMessage("");
     try {
       const token = await user.getIdToken();
@@ -101,6 +103,20 @@ export default function ProdeGroups() {
       await openGroup(group);
     } catch (e) { setInviteMessage(e.message || "Error de conexión"); }
     finally { setInviteBusy(false); }
+  };
+
+  const loginForInvite = async () => {
+    if (loginBusy) return;
+    setLoginBusy(true); setInviteMessage("");
+    try {
+      const result = await signInProdeWithGoogle();
+      const token = await result.user.getIdToken();
+      const res = await fetch(API + "/api/prode/me", { method: "POST", headers: { Authorization: "Bearer " + token } });
+      const data = await res.json();
+      if (!res.ok || !data.ok || !data.user) throw Error("No se pudo registrar el perfil Prode");
+      setInviteMessage("Sesión iniciada. Ya podés unirte a la liga.");
+    } catch (e) { setInviteMessage(e.message || "No se pudo iniciar sesión con Google"); }
+    finally { setLoginBusy(false); }
   };
 
   const create = async (event) => {
@@ -153,8 +169,9 @@ export default function ProdeGroups() {
       <div className="prode-dialog-heading"><h3>Unirme a un Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setJoinOpen(false)}><X size={20}/></button></div>
       <label>Código de invitación<input required autoCapitalize="none" autoCorrect="off" value={joinCode} onChange={e => setJoinCode((e.target.value.includes("invite=") ? e.target.value.split("invite=")[1].split("&")[0] : e.target.value).trim())} placeholder="Pegá el código o el enlace"/></label>
       <p>Pedile al administrador el enlace de invitación. Necesitás una cuenta Google para ingresar.</p>
+      {!user && <button className="prode-create-submit" type="button" disabled={loginBusy} onClick={loginForInvite}>{loginBusy ? "Conectando…" : "Continuar con Google para unirme"}</button>}
       {inviteMessage && <p className="prode-group-error" role="alert">{inviteMessage}</p>}
-      <button className="prode-create-submit" type="submit" disabled={inviteBusy || !joinCode.trim()}>{inviteBusy ? "Ingresando…" : "Unirme a la liga"}</button>
+      <button className="prode-create-submit" type="submit" disabled={inviteBusy || !user || !joinCode.trim()}>{inviteBusy ? "Ingresando…" : user ? "Unirme a la liga" : "Primero iniciá sesión"}</button>
     </form></div>}
     {open && <div className="prode-dialog-backdrop" onClick={() => !busy && setOpen(false)}>
       <form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={create}>
