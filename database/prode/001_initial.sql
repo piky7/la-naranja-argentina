@@ -47,3 +47,10 @@ CREATE TABLE IF NOT EXISTS prode_vote_links (
 CREATE INDEX IF NOT EXISTS idx_prode_groups_visibility ON prode_groups(visibility,season);
 CREATE INDEX IF NOT EXISTS idx_prode_memberships_user ON prode_memberships(user_id);
 CREATE INDEX IF NOT EXISTS idx_prode_invites_group ON prode_invitations(group_id);
+
+-- Alias público independiente del nombre real del proveedor Google.
+CREATE TABLE IF NOT EXISTS prode_usernames (
+  user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE,
+  username TEXT NOT NULL COLLATE NOCASE UNIQUE
+    CHECK(length(username) BETWEEN 3 AND 20)
+);
