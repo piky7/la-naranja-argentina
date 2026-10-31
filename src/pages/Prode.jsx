@@ -24,7 +24,7 @@ export default function Prode() {
           <div className="prode-hero-ball" aria-hidden="true"><span /></div>
         </header>
 
-        <div className="prode-coming"><Sparkles size={18} /><div><strong>PRÓXIMAMENTE</strong><span>Estamos preparando el Prode de LNA. Los rankings y las ligas se habilitarán cuando esté listo.</span></div></div>
+        <div className="prode-coming"><Sparkles size={18} /><div><strong>PRÓXIMAMENTE</strong><span>Ya podés crear ligas e invitar amigos. Los pronósticos y rankings se habilitarán próximamente.</span></div></div>
 
         <section className="prode-onboarding" aria-label="Acceso al Prode">
           <div className="prode-onboarding-intro">
@@ -48,8 +48,8 @@ export default function Prode() {
           </Section>
 
           <Section icon={UsersRound} title={<>Mis <em>ligas</em></>}>
-            <div className="prode-league-placeholder"><div className="prode-league-symbol"><UsersRound size={26}/></div><div><strong>Competí con tus amigos</strong><p>Creá ligas privadas, invitá participantes y compará tus pronósticos.</p></div></div>
-            <div className="prode-disabled-action"><LockKeyhole size={15}/> Crear o unirse a una liga · Próximamente</div>
+            <div className="prode-league-placeholder"><div className="prode-league-symbol"><UsersRound size={26}/></div><div><strong>Tus ligas ya están disponibles</strong><p>Creá grupos públicos o privados, compartí invitaciones y consultá sus participantes desde «Tu cuenta Prode».</p></div></div>
+            <div className="prode-panel-bottom"><span>Gestioná tus ligas en el panel superior. Los rankings llegarán pronto.</span></div>
           </Section>
 
           <Section icon={ChartNoAxesColumn} title={<>Mis <em>estadísticas</em></>}>
