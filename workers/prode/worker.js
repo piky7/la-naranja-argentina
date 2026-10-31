@@ -354,10 +354,13 @@ export default {
         const time = value => Date.parse(String(value).replace(" ", "T") + (String(value).includes("Z") ? "" : "Z"));
         const leagueStart = time(start.starts_at);
         const rows = [];
+        // Semana ISO: lunes 00:00 UTC a lunes siguiente; se calcula sobre la fecha de inicio del partido.
+        const today = new Date();
+        const weekStart = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - ((today.getUTCDay()+6)%7));
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, points: 0, correct: 0, played: 0, mvpHits: 0 };
+            const base = { username: member.username, userId: member.user_id, points: 0, correct: 0, wrong: 0, played: 0, mvpHits: 0, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -368,13 +371,18 @@ export default {
             for (const game of data.games) {
               const kickoff = Date.parse(game.startsAt);
               if (!Number.isFinite(kickoff) || kickoff < since || !game.finished || kickoff > Date.now()) continue;
-              if (game.mvpCorrect) { base.points += 20; base.mvpHits++; }
+              const weekly = kickoff >= weekStart && kickoff < weekStart + 7*86400000;
+              if (game.mvpCorrect) { base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
               if (!game.voted) { streak = 0; continue; }
-              base.played++;
+              base.played++; if (weekly) base.weekly.played++;
               if (game.correct) {
                 base.correct++; base.points += 15; streak++;
-                if (streak === 5) base.points += 45;
-              } else { base.points += 5; streak = 0; }
+                if (weekly) { base.weekly.correct++; base.weekly.points += 15; }
+                if (streak === 5) { base.points += 45; if (weekly) base.weekly.points += 45; }
+              } else {
+                base.wrong++; base.points += 5; streak = 0;
+                if (weekly) { base.weekly.wrong++; base.weekly.points += 5; }
+              }
             }
             return base;
           }));
@@ -387,7 +395,14 @@ export default {
           if (row.points !== previousPoints) { rank++; previousPoints = row.points; }
           return { ...row, position: rank };
         });
-        return reply({ ok: true, ranking, startedAt: start.starts_at });
+        let weeklyRank = 0, previousWeekly = null;
+        const weeklyRanking = [...rows].sort((a,b) => b.weekly.points-a.weekly.points || b.weekly.correct-a.weekly.correct || a.username.localeCompare(b.username,"es")).map(row => {
+          const pts = row.weekly.points;
+          if (!row.weekly.played && !row.weekly.mvpHits) return { ...row.weekly, username: row.username, position: null };
+          if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
+          return { ...row.weekly, username: row.username, position: weeklyRank };
+        });
+        return reply({ ok: true, ranking, weeklyRanking, weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
         console.error("Prode league ranking:", error);
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
