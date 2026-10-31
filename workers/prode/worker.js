@@ -133,6 +133,37 @@ export default {
         return reply({ ok: false, error: "No se pudo guardar el nombre de usuario" }, 503);
       }
     }
+    // Vinculación voluntaria desde el mismo navegador de Mi Carrera.
+    // No otorga puntos ni importa votos; se impide compartir un visitante entre cuentas.
+    if (url.pathname === "/api/prode/career-link" && ["GET", "POST"].includes(request.method)) {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      const userId = "firebase:" + identity.uid;
+      try {
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_career_links (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, visitor_id TEXT NOT NULL UNIQUE, linked_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
+        const profile = await env.DB.prepare("SELECT id FROM prode_users WHERE id = ?").bind(userId).first();
+        if (!profile) return reply({ ok: false, error: "Primero registrá tu perfil Prode" }, 409);
+        const linked = await env.DB.prepare("SELECT visitor_id, linked_at FROM prode_career_links WHERE user_id = ?").bind(userId).first();
+        if (request.method === "GET") return reply({ ok: true, linked: Boolean(linked), linkedAt: linked?.linked_at || null });
+        const body = await request.json();
+        const visitorId = typeof body.visitorId === "string" ? body.visitorId : "";
+        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(visitorId))
+          return reply({ ok: false, error: "No encontramos una identidad válida de Mi Carrera en este navegador" }, 400);
+        if (body.confirm !== true) return reply({ ok: false, error: "Confirmá la vinculación" }, 400);
+        if (linked) return reply({ ok: linked.visitor_id === visitorId, linked: true, error: linked.visitor_id === visitorId ? undefined : "Esta cuenta ya está vinculada a otra carrera" }, linked.visitor_id === visitorId ? 200 : 409);
+        // Verificar que la carrera existe en el servicio oficial antes de guardar el enlace.
+        const careerRes = await fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId=" + encodeURIComponent(visitorId));
+        if (!careerRes.ok) return reply({ ok: false, error: "No se pudo verificar Mi Carrera" }, 503);
+        const career = await careerRes.json();
+        if (!career.ok) return reply({ ok: false, error: "Mi Carrera no está disponible" }, 409);
+        await env.DB.prepare("INSERT INTO prode_career_links (user_id, visitor_id) VALUES (?, ?)").bind(userId, visitorId).run();
+        return reply({ ok: true, linked: true });
+      } catch (error) {
+        if (String(error).includes("UNIQUE")) return reply({ ok: false, error: "Esta carrera ya está vinculada a otra cuenta Prode" }, 409);
+        return reply({ ok: false, error: "No se pudo vincular Mi Carrera" }, 503);
+      }
+    }
     // Pronósticos de prueba: calendario generado desde los datos oficiales de LNA.
     // La validación se realiza en el servidor; nunca se confía en el fixture del cliente.
     if (url.pathname === "/api/prode/votes" && request.method === "POST") return reply({ ok: false, error: "Los pronósticos se realizan desde el popup de Mi Carrera; la vinculación con Prode está en preparación" }, 409);
