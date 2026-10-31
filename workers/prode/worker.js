@@ -133,6 +133,32 @@ export default {
         return reply({ ok: false, error: "No se pudo guardar el nombre de usuario" }, 503);
       }
     }
+    // Clasificación histórica: consulta en vivo los puntos de Mi Carrera de las cuentas vinculadas.
+    if (url.pathname === "/api/prode/ranking/historical" && request.method === "GET") {
+      if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
+      try {
+        const rows = await env.DB.prepare("SELECT l.visitor_id, u.username FROM prode_career_links l JOIN prode_users u ON u.id = l.user_id WHERE u.username IS NOT NULL AND u.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
+        const linked = rows.results || [];
+        const results = [];
+        for (let i = 0; i < linked.length; i += 8) {
+          const chunk = linked.slice(i, i + 8);
+          const batch = await Promise.all(chunk.map(async item => {
+            try {
+              const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId=" + encodeURIComponent(item.visitor_id));
+              if (!response.ok) return null;
+              const data = await response.json();
+              if (!data.ok || !Number.isFinite(data.points)) return null;
+              return { username: item.username, points: data.points };
+            } catch { return null; }
+          }));
+          results.push(...batch.filter(Boolean));
+        }
+        results.sort((a,b) => b.points-a.points || a.username.localeCompare(b.username, "es"));
+        return reply({ ok: true, total: results.length, ranking: results.slice(0, 20).map((entry,index) => ({ ...entry, position: index === 0 ? 1 : results[index-1].points === entry.points ? results.findIndex(x => x.points === entry.points)+1 : index+1 })) });
+      } catch (error) {
+        return reply({ ok: false, error: "No se pudo cargar el ranking histórico" }, 503);
+      }
+    }
     // Vinculación voluntaria desde el mismo navegador de Mi Carrera.
     // No otorga puntos ni importa votos; se impide compartir un visitante entre cuentas.
     if (url.pathname === "/api/prode/career-link" && ["GET", "POST"].includes(request.method)) {
