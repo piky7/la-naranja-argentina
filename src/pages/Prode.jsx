@@ -1,4 +1,4 @@
-import { Trophy, UsersRound, ChartNoAxesColumn, Flame, LockKeyhole, Medal, ChevronRight, Sparkles } from "lucide-react";
+import { Trophy, UsersRound, ChartNoAxesColumn, Flame, LockKeyhole, Medal, ChevronRight, Sparkles, UserRound, PlusCircle, Ticket, Globe2, ShieldCheck } from "lucide-react";
 import "./Prode.css";
 
 const Section = ({ icon: Icon, title, children, extra }) => (
@@ -23,6 +23,20 @@ export default function Prode() {
         </header>
 
         <div className="prode-coming"><Sparkles size={18} /><div><strong>PRÓXIMAMENTE</strong><span>Estamos preparando el Prode de LNA. Los rankings y las ligas se habilitarán cuando esté listo.</span></div></div>
+
+        <section className="prode-onboarding" aria-label="Acceso al Prode">
+          <div className="prode-onboarding-intro">
+            <span className="prode-onboarding-icon"><UserRound size={20}/></span>
+            <div><strong>TU CUENTA PRODE</strong><p>Un solo usuario, una votación por partido y tus puntos en todas las clasificaciones.</p></div>
+            <span className="prode-onboarding-tag"><LockKeyhole size={12}/> En preparación</span>
+          </div>
+          <div className="prode-onboarding-actions">
+            <div className="prode-onboarding-action"><PlusCircle size={21}/><div><strong>Crear un Prode</strong><span>Armá tu grupo público o privado</span></div></div>
+            <div className="prode-onboarding-action"><Ticket size={21}/><div><strong>Unirme a un Prode</strong><span>Ingresá con una invitación</span></div></div>
+            <div className="prode-onboarding-action"><Globe2 size={21}/><div><strong>Ranking general</strong><span>Todos los participantes de LNA</span></div></div>
+          </div>
+          <p className="prode-onboarding-foot"><ShieldCheck size={14}/> Las cuentas y los grupos se habilitarán cuando esté lista la conexión segura. Tus votos actuales no se modifican.</p>
+        </section>
 
         <div className="prode-grid">
           <Section icon={Trophy} title={<>Ranking <em>general</em></>} extra={<span className="prode-small-tag">Temporada 26/27</span>}>
