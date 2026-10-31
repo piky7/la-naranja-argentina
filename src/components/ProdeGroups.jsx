@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft } from "lucide-react";
+import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket } from "lucide-react";
 import { watchProdeUser } from "../auth/prodeAuth";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
@@ -17,6 +17,11 @@ export default function ProdeGroups() {
   const [detail, setDetail] = useState(null);
   const [detailBusy, setDetailBusy] = useState(false);
   const [detailError, setDetailError] = useState("");
+  const [invite, setInvite] = useState("");
+  const [joinOpen, setJoinOpen] = useState(false);
+  const [joinCode, setJoinCode] = useState("");
+  const [inviteBusy, setInviteBusy] = useState(false);
+  const [inviteMessage, setInviteMessage] = useState("");
 
   useEffect(() => {
     let active = true, stop;
@@ -39,12 +44,14 @@ export default function ProdeGroups() {
     finally { setReady(true); }
   };
   useEffect(() => { setReady(false); load(user); }, [user]);
+  useEffect(() => { const code = new URLSearchParams(window.location.search).get("invite"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
 
   const openGroup = async (group) => {
     if (!user) return;
     setSelected(group);
     setDetail(null);
     setDetailError("");
+    setInvite(""); setInviteMessage("");
     setDetailBusy(true);
     try {
       const token = await user.getIdToken();
@@ -59,6 +66,41 @@ export default function ProdeGroups() {
     } finally {
       setDetailBusy(false);
     }
+  };
+
+  const generateInvite = async () => {
+    if (!user || !selected || inviteBusy) return;
+    setInviteBusy(true); setInviteMessage("");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(API + "/api/prode/groups/" + selected.id + "/invite", { method: "POST", headers: { Authorization: "Bearer " + token } });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudo crear la invitación");
+      setInvite(data.token);
+      setInviteMessage("Enlace válido por 7 días. Compartilo con tus amigos.");
+    } catch (e) { setInviteMessage(e.message || "Error de conexión"); }
+    finally { setInviteBusy(false); }
+  };
+
+  const joinGroup = async (event) => {
+    event.preventDefault();
+    if (!user || inviteBusy) return;
+    setInviteBusy(true); setInviteMessage("");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(API + "/api/prode/invitations/join", {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+        body: JSON.stringify({ token: joinCode.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudo ingresar");
+      await load(user);
+      setJoinOpen(false); setJoinCode("");
+      setInviteMessage("");
+      const group = { id: data.groupId, name: data.name };
+      await openGroup(group);
+    } catch (e) { setInviteMessage(e.message || "Error de conexión"); }
+    finally { setInviteBusy(false); }
   };
 
   const create = async (event) => {
@@ -84,7 +126,7 @@ export default function ProdeGroups() {
     <button className="prode-onboarding-action prode-action-button" type="button" disabled={!user} onClick={() => { setError(""); setOpen(true); }}>
       <PlusCircle size={21}/><span><strong>Crear un Prode</strong><small>{user ? "Armá tu grupo público o privado" : "Iniciá sesión con Google"}</small></span>
     </button>
-    <div className="prode-onboarding-action"><LockKeyhole size={21}/><div><strong>Unirme a un Prode</strong><span>Invitaciones próximamente</span></div></div>
+    <button className="prode-onboarding-action prode-action-button" type="button" disabled={!user} onClick={() => { setInviteMessage(""); setJoinOpen(true); }}><Ticket size={21}/><span><strong>Unirme a un Prode</strong><small>{user ? "Ingresá tu código de invitación" : "Iniciá sesión con Google"}</small></span></button>
     <div className="prode-onboarding-action"><Globe2 size={21}/><div><strong>Ranking general</strong><span>Todos los participantes de LNA · Próximamente</span></div></div>
     {ready && groups.length > 0 && <div className="prode-my-groups"><strong>Mis ligas ({groups.length})</strong>{groups.map(group => <button type="button" key={group.id} className="prode-my-group prode-group-link" onClick={() => openGroup(group)}><span>{group.name}</span><small>{group.visibility === "private" ? "Privada" : "Pública"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small><ChevronRight size={16}/></button>)}</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
@@ -101,18 +143,26 @@ export default function ProdeGroups() {
         {detail && <>
           <h4 className="prode-group-subtitle"><UsersRound size={18}/> Participantes ({detail.members.length})</h4>
           <div className="prode-group-members">{detail.members.map((member, index) => <div key={index} className="prode-group-member"><span className="prode-member-avatar">{member.display_name.slice(0,1).toUpperCase()}</span><strong>{member.display_name}</strong><small>{member.role === "owner" ? "Administrador" : "Miembro"}</small></div>)}</div>
-          <p className="prode-group-pending">Las invitaciones y el ranking de esta liga se habilitarán en la próxima etapa.</p>
+          {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit" disabled={inviteBusy} onClick={generateInvite}>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
+          <p className="prode-group-pending">El ranking de esta liga estará disponible cuando comiencen los pronósticos.</p>
         </>}
         <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
     </div>}
+    {joinOpen && <div className="prode-dialog-backdrop" onClick={() => !inviteBusy && setJoinOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={joinGroup}>
+      <div className="prode-dialog-heading"><h3>Unirme a un Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setJoinOpen(false)}><X size={20}/></button></div>
+      <label>Código de invitación<input required autoCapitalize="none" autoCorrect="off" value={joinCode} onChange={e => setJoinCode((e.target.value.includes("invite=") ? e.target.value.split("invite=")[1].split("&")[0] : e.target.value).trim())} placeholder="Pegá el código o el enlace"/></label>
+      <p>Pedile al administrador el enlace de invitación. Necesitás una cuenta Google para ingresar.</p>
+      {inviteMessage && <p className="prode-group-error" role="alert">{inviteMessage}</p>}
+      <button className="prode-create-submit" type="submit" disabled={inviteBusy || !joinCode.trim()}>{inviteBusy ? "Ingresando…" : "Unirme a la liga"}</button>
+    </form></div>}
     {open && <div className="prode-dialog-backdrop" onClick={() => !busy && setOpen(false)}>
       <form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={create}>
         <div className="prode-dialog-heading"><h3>Crear un Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setOpen(false)}><X size={20}/></button></div>
         <label>Nombre de la liga<input autoFocus required minLength={3} maxLength={60} value={name} onChange={e => setName(e.target.value)} placeholder="Ej. Amigos del básquet"/></label>
         <label>Descripción (opcional)<textarea maxLength={240} rows={2} value={description} onChange={e => setDescription(e.target.value)} placeholder="Contanos de qué se trata"/></label>
         <label>Privacidad<select value={visibility} onChange={e => setVisibility(e.target.value)}><option value="private">Privada</option><option value="public">Pública</option></select></label>
-        <p>La liga se crea con tu cuenta Google. Las invitaciones y los rankings se habilitarán después.</p>
+        <p>La liga se crea con tu cuenta Google. Podrás invitar participantes al crearla; los rankings se habilitarán más adelante.</p>
         {error && <p className="prode-group-error" role="alert">{error}</p>}
         <button className="prode-create-submit" type="submit" disabled={busy || name.trim().length < 3}>{busy ? "Creando…" : "Crear liga"}</button>
       </form>
