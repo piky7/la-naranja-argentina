@@ -173,6 +173,7 @@ export default function ProdeGoogleAccess() {
           <div className="prode-crest-colors">
             <label>Color principal<input type="color" value={crestPrimary} onChange={e => setCrestPrimary(e.target.value)}/></label>
             <label>Color secundario<input type="color" value={crestSecondary} onChange={e => setCrestSecondary(e.target.value)}/></label>
+            <label>Color del texto<input type="color" value={crestText} onChange={e => setCrestText(e.target.value)}/></label>
           </div>
         </div>
         <button className="prode-crest-save" type="button" disabled={crestBusy} onClick={saveCrest}>{crestBusy ? "Guardando colores…" : "Guardar colores del escudo"}</button>
