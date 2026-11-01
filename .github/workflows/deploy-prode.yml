@@ -32,3 +32,14 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Configurar UID del administrador si está definido
+        run: |
+          if [ -n "$ADMIN_FIREBASE_UID" ]; then
+            printf '%s' "$ADMIN_FIREBASE_UID" | npx --yes wrangler@4 secret put ADMIN_FIREBASE_UID --config workers/prode/wrangler.toml
+          else
+            echo "ADMIN_FIREBASE_UID no está configurado; panel privado permanece cerrado."
+          fi
+        env:
+          ADMIN_FIREBASE_UID: ${{ secrets.ADMIN_FIREBASE_UID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
