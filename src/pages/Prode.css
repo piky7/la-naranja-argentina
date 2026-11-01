@@ -1207,3 +1207,52 @@
 }
 .prode-google-identity .prode-admin-entry:active{background:#39475b}
 .prode-google-identity .prode-admin-entry:focus-visible{outline:2px solid #ffb464;outline-offset:2px}
+
+
+/* Acciones de ligas compactas: crear es principal, unirse es secundaria. */
+.prode-home-redesign .prode-friends-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  gap:8px 14px;
+}
+.prode-home-redesign .prode-friends-actions button{
+  width:auto;
+  min-height:34px;
+  padding:6px 12px;
+  gap:6px;
+  border-radius:8px;
+  font-size:12px;
+  line-height:1.2;
+  font-weight:750;
+}
+.prode-home-redesign .prode-friends-actions button svg{
+  width:15px;
+  height:15px;
+  flex-shrink:0;
+}
+.prode-home-redesign .prode-friends-actions .prode-friends-create{
+  background:#e99235;
+  border:1px solid #f2a24b;
+  color:#112330;
+  box-shadow:none;
+}
+.prode-home-redesign .prode-friends-actions .prode-friends-join{
+  background:transparent;
+  border:1px solid transparent;
+  color:#a9becc;
+  padding-inline:4px;
+  font-weight:650;
+  box-shadow:none;
+}
+.prode-home-redesign .prode-friends-actions .prode-friends-join:hover,
+.prode-home-redesign .prode-friends-actions .prode-friends-join:focus-visible{
+  border-color:#496273;
+  color:#edf5fb;
+}
+@media(max-width:380px){
+  .prode-home-redesign .prode-friends-actions{gap:7px}
+  .prode-home-redesign .prode-friends-actions button{font-size:11px;padding:6px 9px}
+  .prode-home-redesign .prode-friends-actions .prode-friends-join{padding-inline:2px}
+}
