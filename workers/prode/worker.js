@@ -118,6 +118,10 @@ export default {
         const user = await env.DB.prepare(
           "SELECT u.id, n.username, u.created_at, COALESCE(c.primary_color,\'#7de83d\') AS crestPrimary, COALESCE(c.secondary_color,\'#10283c\') AS crestSecondary FROM prode_users u LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE u.auth_subject = ?"
         ).bind(identity.uid).first();
+        if (user) {
+          const crestText = await env.DB.prepare("SELECT color FROM prode_crest_texts WHERE kind=? AND entity_id=?").bind("user",user.id).first();
+          user.crestText = crestText?.color || "#ffffff";
+        }
         return reply({ ok: true, user: user || null, linkedToMiCarrera: false });
       } catch {
         return reply({ ok: false, error: "No se pudo consultar el perfil" }, 503);
