@@ -453,6 +453,48 @@ export default {
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
       }
     }
+    // Gestión de liga: abandonar, expulsar o eliminar; solo miembros autorizados.
+    const manageGroup = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/(leave|members|delete)$/.exec(url.pathname);
+    if (manageGroup && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      try {
+        const [, groupId, action] = manageGroup, actorId = "firebase:" + identity.uid;
+        const group = await env.DB.prepare("SELECT owner_id FROM prode_groups WHERE id=?").bind(groupId).first();
+        if (!group) return reply({ ok: false, error: "Liga no encontrada" }, 404);
+        const membership = await env.DB.prepare("SELECT role FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId,actorId).first();
+        if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
+        if (action === "leave") {
+          if (group.owner_id === actorId) return reply({ ok: false, error: "El creador debe eliminar la liga; no puede abandonarla" }, 403);
+          await env.DB.prepare("DELETE FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId,actorId).run();
+          return reply({ ok: true });
+        }
+        if (group.owner_id !== actorId) return reply({ ok: false, error: "Solo el administrador puede hacer esto" }, 403);
+        if (action === "members") {
+          const body = await request.json().catch(() => ({}));
+          const targetId = body.userId;
+          if (typeof targetId !== "string" || targetId === actorId || !targetId.startsWith("firebase:")) return reply({ ok: false, error: "Participante inválido" }, 400);
+          const deleted = await env.DB.prepare("DELETE FROM prode_memberships WHERE group_id=? AND user_id=? AND role != 'owner'").bind(groupId,targetId).run();
+          if (!deleted.meta?.changes) return reply({ ok: false, error: "Participante no encontrado" }, 404);
+          return reply({ ok: true });
+        }
+        const body = await request.json().catch(() => ({}));
+        if (body.confirmName !== (await env.DB.prepare("SELECT name FROM prode_groups WHERE id=?").bind(groupId).first())?.name)
+          return reply({ ok: false, error: "Confirmá el nombre exacto de la liga" }, 400);
+        await env.DB.batch([
+          env.DB.prepare("DELETE FROM prode_initial_points WHERE group_id=?").bind(groupId),
+          env.DB.prepare("DELETE FROM prode_league_starts WHERE group_id=?").bind(groupId),
+          env.DB.prepare("DELETE FROM prode_invitations WHERE group_id=?").bind(groupId),
+          env.DB.prepare("DELETE FROM prode_memberships WHERE group_id=?").bind(groupId),
+          env.DB.prepare("DELETE FROM prode_groups WHERE id=? AND owner_id=?").bind(groupId,actorId)
+        ]);
+        return reply({ ok: true });
+      } catch (error) {
+        console.error("Prode management:", error);
+        return reply({ ok: false, error: "No se pudo completar la operación" }, 503);
+      }
+    }
     const groupDetail = /^\/api\/prode\/groups\/([0-9a-f-]{36})$/.exec(url.pathname);
     if (groupDetail && request.method === "GET") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
@@ -465,7 +507,7 @@ export default {
         ).bind(groupId, userId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
         const members = await env.DB.prepare(
-          "SELECT COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id WHERE m.group_id = ? ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id WHERE m.group_id = ? ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         return reply({ ok: true, group, members: members.results || [] });
       } catch {
