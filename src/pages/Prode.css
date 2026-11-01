@@ -697,3 +697,40 @@
   .prode-league-premium .prode-ranking-premium .prode-ranking-points{min-height:30px}
   .prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:13px}
 }
+
+/* Mis ligas: filas compactas, sin perder nombre ni acceso a la liga. */
+.prode-home-redesign .prode-my-groups{gap:7px}
+.prode-home-redesign .prode-my-group.prode-group-link{
+  min-height:64px;padding:6px 10px;gap:10px;
+  border-radius:10px;align-items:center;
+}
+.prode-home-redesign .prode-friend-league-badge{
+  flex:0 0 47px;width:47px;height:54px;
+}
+.prode-home-redesign .prode-friend-league-badge svg{width:47px;height:54px}
+.prode-home-redesign .prode-friend-league-info{gap:3px}
+.prode-home-redesign .prode-friend-league-info strong{font-size:15px;line-height:1.15}
+.prode-home-redesign .prode-friend-league-info small{
+  font-size:10px;line-height:1.35;white-space:normal;
+}
+.prode-home-redesign .prode-friend-enter{
+  flex-shrink:0;min-height:34px;padding:7px 10px;
+  border-radius:8px;font-size:11px;
+}
+.prode-league-premium .prode-week-loading{
+  color:#c7d2dc;font-size:12px;font-weight:700;
+  animation:prode-week-pulse 1.6s ease-in-out infinite;
+}
+@keyframes prode-week-pulse{50%{opacity:.65}}
+@media(max-width:600px){
+  .prode-home-redesign .prode-my-group.prode-group-link{min-height:59px;padding:5px 9px;gap:8px}
+  .prode-home-redesign .prode-friend-league-badge{flex-basis:41px;width:41px;height:48px}
+  .prode-home-redesign .prode-friend-league-badge svg{width:41px;height:48px}
+  .prode-home-redesign .prode-friend-league-info strong{font-size:14px}
+  .prode-home-redesign .prode-friend-league-info small{font-size:9px}
+  .prode-home-redesign .prode-friend-enter{min-height:32px;padding:7px 9px;font-size:11px}
+}
+@media(max-width:390px){
+  .prode-home-redesign .prode-friend-league-badge{flex-basis:37px;width:37px;height:44px}
+  .prode-home-redesign .prode-friend-league-badge svg{width:37px;height:44px}
+}
