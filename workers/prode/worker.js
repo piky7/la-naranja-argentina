@@ -197,7 +197,7 @@ export default {
               if (!response.ok) return null;
               const data = await response.json();
               if (!data.ok || !Number.isFinite(data.points)) return null;
-              return { username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary };
+              return { username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary, crestText: item.crestText };
             } catch { return null; }
           }));
           results.push(...batch.filter(Boolean));
@@ -248,7 +248,7 @@ export default {
                 if (week===thisWeek) { points+=5; wrong++; }
               }
             }
-            return { username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
+            return { username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,crestText:item.crestText,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
           }));
           all.push(...batch);
         }
