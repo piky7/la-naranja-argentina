@@ -93,7 +93,7 @@ export default function ProdeGoogleAccess() {
       });
       const data = await response.json();
       if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el escudo");
-      setProfile(prev => ({ ...prev, crestPrimary: data.crestPrimary, crestSecondary: data.crestSecondary }));
+      setProfile(prev => ({ ...prev, crestPrimary: data.crestPrimary, crestSecondary: data.crestSecondary, crestText: data.crestText }));
       setCrestMessage("Colores guardados correctamente");
       window.dispatchEvent(new Event("prode-profile-updated"));
     } catch (error) { setCrestMessage(error.message || "Error al guardar"); }
@@ -145,7 +145,7 @@ export default function ProdeGoogleAccess() {
       {loading ? <span>Comprobando sesión…</span> : user ? (
         <>
           <div className="prode-google-identity">
-            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} size={55} className="prode-account-crest"/>
+            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} size={55} className="prode-account-crest"/>
             <div><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
           </div>
           <button type="button" className="prode-profile-edit-button" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={16}/> Mi perfil</button>
@@ -169,7 +169,7 @@ export default function ProdeGoogleAccess() {
       {error && <p role="alert">{error}</p>}
       {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveUsername}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setEditOpen(false)}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>
         <div className="prode-crest-config">
-          <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary} size={90}/>
+          <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary} textColor={crestText} size={90}/>
           <div className="prode-crest-colors">
             <label>Color principal<input type="color" value={crestPrimary} onChange={e => setCrestPrimary(e.target.value)}/></label>
             <label>Color secundario<input type="color" value={crestSecondary} onChange={e => setCrestSecondary(e.target.value)}/></label>
