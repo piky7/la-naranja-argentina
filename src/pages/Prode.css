@@ -416,7 +416,7 @@
 .prode-crest-config,.prode-league-crest-form{display:flex;align-items:center;gap:15px;margin:12px 0;padding:12px;border:1px solid #3e5f58;border-radius:11px;background:#102d2e}
 .prode-crest-config>svg,.prode-league-crest-form>svg{flex-shrink:0}
 .prode-crest-colors{display:flex;flex:1;flex-direction:column;gap:11px;min-width:0}
-.prode-crest-colors label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:#cce4d5;font-weight:700}
+.prode-crest-colors label{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:#cce4d5;font-weight:700}
 .prode-crest-colors input[type=color]{width:53px;height:37px;padding:2px;border-radius:7px;cursor:pointer;border:1px solid #5f8078;background:transparent;flex-shrink:0}
 .prode-crest-save{display:flex;align-items:center;justify-content:center;min-height:40px;padding:10px 12px;width:100%;background:#294d3c;color:#b7fa8b;border:1px solid #6cb859;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer}
 .prode-crest-save:disabled{opacity:.6}
