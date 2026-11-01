@@ -1161,3 +1161,37 @@
   .prode-profile-premium .prode-profile-streak{padding:9px 10px;gap:7px}
   .prode-profile-premium .prode-profile-streak-progress>span{height:8px}
 }
+
+/* Cambiar nombre de liga desde Configuración > Administrar liga. */
+.prode-league-premium .prode-rename-form{
+  display:flex;flex-direction:column;gap:7px;
+  padding:10px;margin-bottom:14px;border:1px solid #445f78;
+  border-radius:10px;background:#11273b;
+}
+.prode-league-premium .prode-rename-form>label{
+  color:#e4edf5;font-size:12px;font-weight:800;
+}
+.prode-league-premium .prode-rename-fields{
+  display:flex;align-items:center;gap:7px;min-width:0;
+}
+.prode-league-premium .prode-rename-fields>input{
+  min-width:0;flex:1;min-height:38px;padding:8px 10px;
+  border:1px solid #58738b;border-radius:8px;
+  background:#0c1e2f;color:#f5f8fc;font-size:13px;
+}
+.prode-league-premium .prode-rename-fields>input:focus-visible{
+  outline:2px solid var(--league-accent);outline-offset:1px;
+}
+.prode-league-premium .prode-rename-fields>button{
+  min-height:38px;padding:8px 12px;border:1px solid #eab468;
+  border-radius:8px;background:#f7a036;color:#102031;
+  font-size:12px;font-weight:900;cursor:pointer;white-space:nowrap;
+}
+.prode-league-premium .prode-rename-fields>button:disabled{opacity:.5;cursor:default}
+.prode-league-premium .prode-rename-form .prode-rename-message{
+  margin:0;color:#bfd1dd;font-size:11px;line-height:1.4;
+}
+@media(max-width:380px){
+ .prode-league-premium .prode-rename-form{padding:8px}
+ .prode-league-premium .prode-rename-fields>button{padding:8px 9px}
+}
