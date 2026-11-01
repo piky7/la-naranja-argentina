@@ -734,3 +734,18 @@
   .prode-home-redesign .prode-friend-league-badge{flex-basis:37px;width:37px;height:44px}
   .prode-home-redesign .prode-friend-league-badge svg{width:37px;height:44px}
 }
+
+/* Identificación discreta del usuario conectado: sin contorno neón. */
+.prode-league-premium .prode-ranking-premium .prode-ranking-row.is-current-user{
+  border:1px solid rgba(133,190,151,.48);
+  background:linear-gradient(90deg,rgba(48,91,77,.23),#12283a 72%);
+  box-shadow:inset 2px 0 0 rgba(148,208,157,.70);
+}
+.prode-league-premium .prode-ranking-premium .is-current-user .prode-ranking-name strong{
+  color:#eef8f0;
+}
+.prode-league-premium .prode-ranking-premium .is-current-user .prode-ranking-points{
+  border-color:#698d70;
+  background:#26382f;
+  color:#b9dfb8;
+}
