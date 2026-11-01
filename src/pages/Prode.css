@@ -302,3 +302,13 @@
 .prode-profile-best-week{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;padding:11px 12px;border:1px solid #335549;border-radius:9px;background:#142e30}
 .prode-profile-best-week span{color:#abcbbc;font-size:12px}
 .prode-profile-best-week strong{color:#a8f57a;font-size:13px;text-align:right}
+
+/* Cuatro secciones de liga, en grilla 2×2 para pantallas móviles. */
+.prode-group-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+.prode-season-archive{margin-top:12px;padding:14px;border:1px solid #315344;border-radius:11px;background:#10292b;color:#eff9f0}
+.prode-season-archive>strong{display:block;margin-bottom:7px;color:#a8f57a;font-size:15px}
+.prode-season-archive>p{margin:0;color:#abcbbc;font-size:12px;line-height:1.5}
+.prode-season-item{display:flex;flex-direction:column;gap:5px;padding:12px 0;border-top:1px solid #315344}
+.prode-season-item strong{color:#a8f57a}
+.prode-season-item span{font-size:13px}
+.prode-season-item small{color:#abcbbc}
