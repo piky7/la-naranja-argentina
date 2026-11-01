@@ -53,7 +53,7 @@ export default function ProdeGoogleAccess() {
       });
       const data = await response.json();
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
-      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); }
+      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); }
       const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
       if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
     }).catch(() => {
@@ -89,7 +89,7 @@ export default function ProdeGoogleAccess() {
       const token = await user.getIdToken();
       const response = await fetch(PRODE_API + "/api/prode/profile/crest", {
         method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary }),
+        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText }),
       });
       const data = await response.json();
       if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el escudo");
