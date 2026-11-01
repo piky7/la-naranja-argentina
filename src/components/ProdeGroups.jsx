@@ -17,6 +17,8 @@ export default function ProdeGroups() {
   const [detail, setDetail] = useState(null);
   const [leagueRanking, setLeagueRanking] = useState(null);
   const [weeklyRanking, setWeeklyRanking] = useState(null);
+  const [weeklyHistory, setWeeklyHistory] = useState([]);
+  const [selectedWeek, setSelectedWeek] = useState("");
   const [medalTable, setMedalTable] = useState(null);
   const [manageOpen, setManageOpen] = useState(false);
   const [manageBusy, setManageBusy] = useState(false);
@@ -68,6 +70,7 @@ export default function ProdeGroups() {
     setDetail(null);
     setLeagueRanking(null);
     setWeeklyRanking(null);
+    setWeeklyHistory([]); setSelectedWeek("");
     setMedalTable(null);
     setManageOpen(false); setManageError("");
     setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
@@ -89,6 +92,8 @@ export default function ProdeGroups() {
         if (!rankingRes.ok || !rankingData.ok) throw Error(rankingData.error || "Clasificación no disponible");
         setLeagueRanking(rankingData.ranking || []);
         setWeeklyRanking(rankingData.weeklyRanking || []);
+        setWeeklyHistory(rankingData.weeklyHistory || []);
+        setSelectedWeek(String((rankingData.weeklyHistory || []).at(-1)?.number || ""));
         setMedalTable(rankingData.medalTable || []);
       } catch (rankingFailure) { setRankingError(rankingFailure.message || "Clasificación no disponible"); }
     } catch (e) {
@@ -119,6 +124,7 @@ export default function ProdeGroups() {
       if (updated.ok && ranking.ok) {
         setLeagueRanking(ranking.ranking || []);
         setWeeklyRanking(ranking.weeklyRanking || []);
+        setWeeklyHistory(ranking.weeklyHistory || []);
         setMedalTable(ranking.medalTable || []);
       }
     } catch (e) { setInitialMessage(e.message || "Error al asignar puntos"); }
@@ -253,6 +259,14 @@ export default function ProdeGroups() {
             <button type="button" role="tab" aria-selected={groupTab === "general"} className={groupTab === "general" ? "active" : ""} onClick={() => setGroupTab("general")}><Trophy size={16}/> Tabla general</button>
             <button type="button" role="tab" aria-selected={groupTab === "medals"} className={groupTab === "medals" ? "active" : ""} onClick={() => setGroupTab("medals")}><Trophy size={16}/> Medallero</button>
           </div>
+          {groupTab === "weekly" && weeklyHistory.length > 0 && <div className="prode-week-selector">
+            <div className="prode-week-title"><Trophy size={15}/> Semana {weeklyHistory.find(w => String(w.number) === selectedWeek)?.number || weeklyHistory.at(-1).number} {weeklyHistory.find(w => String(w.number) === selectedWeek)?.finished ? "· Finalizada" : "· En juego"}</div>
+            <label>Elegir semana
+              <select value={selectedWeek || String(weeklyHistory.at(-1).number)} onChange={e => setSelectedWeek(e.target.value)}>
+                {[...weeklyHistory].reverse().map(w => <option key={w.number} value={w.number}>Semana {w.number}{w.finished ? " · Finalizada" : " · En juego"}</option>)}
+              </select>
+            </label>
+          </div>}
           {groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
             <div className="prode-ranking-head"><span>JUGADOR</span><span>🥇</span><span>🥈</span><span>🥉</span></div>
             {(medalTable || detail.members).map((member,index) => <div className="prode-ranking-row" key={index}><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.gold ?? 0}</span><span>{member.silver ?? 0}</span><span>{member.bronze ?? 0}</span></div>)}
@@ -260,9 +274,9 @@ export default function ProdeGroups() {
             <p className="prode-group-pending">Medallas acumuladas por semana finalizada. Se entregan solo si al menos 3 participantes pronosticaron esa semana. Los empates comparten medalla.</p>
           </div> : <div className="prode-group-ranking" role="tabpanel">
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
-            {((groupTab === "weekly" ? weeklyRanking : leagueRanking) || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position ? member.position + "°" : "—"}</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span></div>)}
+            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position === 1 ? "🥇" : member.position === 2 ? "🥈" : member.position === 3 ? "🥉" : member.position ? member.position + "°" : "—"}</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span></div>)}
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
-            <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de los partidos iniciados esta semana (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
+            <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de la semana seleccionada (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
           <div className="prode-manage-control">
             <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
