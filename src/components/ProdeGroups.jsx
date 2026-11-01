@@ -27,6 +27,9 @@ export default function ProdeGroups() {
   const [weeklyHistory, setWeeklyHistory] = useState([]);
   const [seasonArchives, setSeasonArchives] = useState([]);
   const [archiveError, setArchiveError] = useState("");
+  const [closeCheck, setCloseCheck] = useState(null);
+  const [closeCheckBusy, setCloseCheckBusy] = useState(false);
+  const [closeCheckError, setCloseCheckError] = useState("");
   const [selectedWeek, setSelectedWeek] = useState("");
   const [medalTable, setMedalTable] = useState(null);
   const [expandedMedal, setExpandedMedal] = useState(null);
@@ -74,6 +77,18 @@ export default function ProdeGroups() {
   useEffect(() => { const refresh = () => { if (selected) openGroup(selected); }; window.addEventListener("prode-profile-updated", refresh); return () => window.removeEventListener("prode-profile-updated", refresh); }, [selected, user]);
   useEffect(() => { const code = new URLSearchParams(window.location.search).get("invite"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
 
+  const checkSeasonClose = async () => {
+    if (!user || !selected || closeCheckBusy) return;
+    setCloseCheckBusy(true); setCloseCheckError(""); setCloseCheck(null);
+    try {
+      const token = await user.getIdToken();
+      const response = await fetch(API + "/api/prode/groups/" + encodeURIComponent(selected.id) + "/seasons/close-check", { headers: { Authorization: "Bearer " + token } });
+      const data = await response.json();
+      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo comprobar el cierre");
+      setCloseCheck(data);
+    } catch (error) { setCloseCheckError(error.message || "Validación no disponible"); }
+    finally { setCloseCheckBusy(false); }
+  };
   const openGroup = async (group) => {
     if (!user) return;
     setSelected(group);
@@ -83,6 +98,7 @@ export default function ProdeGroups() {
     setWeeklyRanking(null);
     setWeeklyHistory([]); setSelectedWeek("");
     setSeasonArchives([]); setArchiveError("");
+    setCloseCheck(null); setCloseCheckError("");
     setMedalTable(null);
     setExpandedMedal(null);
     setProfileUserId(null);
@@ -297,6 +313,16 @@ export default function ProdeGroups() {
               <span>🏆 {archive.champions.map(id => archive.ranking.find(row => row.userId === id)?.username || "Campeón").join(" · ")}</span>
               <small>{archive.ranking.length} participantes · Clasificación definitiva guardada</small>
             </div>)}
+            {detail.group.role === "owner" && <div className="prode-close-check">
+              <button type="button" onClick={checkSeasonClose} disabled={closeCheckBusy}>{closeCheckBusy ? "Comprobando…" : "Comprobar si la temporada puede cerrarse"}</button>
+              {closeCheckError && <p className="prode-group-error" role="alert">{closeCheckError}</p>}
+              {closeCheck && <div role="status">
+                <strong>Temporada {closeCheck.season}: cierre bloqueado</strong>
+                {closeCheck.fixture.available && <p>Fixture publicado: {closeCheck.fixture.total} partidos registrados · {closeCheck.fixture.pending} sin resultado confirmado. Estos datos pueden no incluir partidos aplazados.</p>}
+                {closeCheck.blockers.map((reason,i) => <p key={i}>{reason}</p>)}
+                <small>Esta comprobación no guarda ni modifica resultados.</small>
+              </div>}
+            </div>}
           </div> : groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
             <div className="prode-ranking-head"><span>JUGADOR</span><span>🥇</span><span>🥈</span><span>🥉</span></div>
             {(medalTable || detail.members).map((member,index) => <div className="prode-medal-member" key={member.userId || index}>
