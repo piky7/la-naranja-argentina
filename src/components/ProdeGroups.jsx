@@ -18,6 +18,10 @@ export default function ProdeGroups() {
   const [leagueRanking, setLeagueRanking] = useState(null);
   const [weeklyRanking, setWeeklyRanking] = useState(null);
   const [medalTable, setMedalTable] = useState(null);
+  const [initialTarget, setInitialTarget] = useState("");
+  const [initialAmount, setInitialAmount] = useState("0");
+  const [initialBusy, setInitialBusy] = useState(false);
+  const [initialMessage, setInitialMessage] = useState("");
   const [rankingError, setRankingError] = useState("");
   const [groupTab, setGroupTab] = useState("weekly");
   const [detailBusy, setDetailBusy] = useState(false);
@@ -61,6 +65,7 @@ export default function ProdeGroups() {
     setLeagueRanking(null);
     setWeeklyRanking(null);
     setMedalTable(null);
+    setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
     setRankingError("");
     setDetailError("");
     setInvite(""); setInviteMessage("");
@@ -86,6 +91,32 @@ export default function ProdeGroups() {
     } finally {
       setDetailBusy(false);
     }
+  };
+
+  const assignInitialPoints = async (event) => {
+    event.preventDefault();
+    if (!user || !selected || !initialTarget || initialBusy) return;
+    setInitialBusy(true); setInitialMessage("");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(API + "/api/prode/groups/" + selected.id + "/ranking", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: initialTarget, points: Number(initialAmount) }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudieron asignar los puntos");
+      setInitialMessage("Se asignaron " + data.points + " puntos iniciales correctamente.");
+      setInitialTarget(""); setInitialAmount("0");
+      const updated = await fetch(API + "/api/prode/groups/" + selected.id + "/ranking", { headers: { Authorization: "Bearer " + token } });
+      const ranking = await updated.json();
+      if (updated.ok && ranking.ok) {
+        setLeagueRanking(ranking.ranking || []);
+        setWeeklyRanking(ranking.weeklyRanking || []);
+        setMedalTable(ranking.medalTable || []);
+      }
+    } catch (e) { setInitialMessage(e.message || "Error al asignar puntos"); }
+    finally { setInitialBusy(false); }
   };
 
   const generateInvite = async () => {
@@ -192,6 +223,19 @@ export default function ProdeGroups() {
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de los partidos iniciados esta semana (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
+          {detail.group.role === "owner" && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
+            <strong>Asignar puntos iniciales</strong>
+            <p>Solo una vez para quien todavía no haya sumado puntos. Máximo: {Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} PTS (líder actual).</p>
+            <div className="prode-initial-fields">
+              <select aria-label="Participante" required value={initialTarget} onChange={e => setInitialTarget(e.target.value)}>
+                <option value="">Elegir participante</option>
+                {(leagueRanking || []).filter(m => m.userId && m.initialPoints === null && !m.played && !m.mvpHits && m.userId !== "firebase:" + user?.uid).map(m => <option key={m.userId} value={m.userId}>{m.username}</option>)}
+              </select>
+              <input aria-label="Puntos iniciales" type="number" inputMode="numeric" min="0" max={Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} step="1" required value={initialAmount} onChange={e => setInitialAmount(e.target.value)}/>
+              <button type="submit" disabled={initialBusy || !initialTarget || initialAmount === "" || Number(initialAmount) < 0 || Number(initialAmount) > Math.max(0,...(leagueRanking || []).map(m => m.points || 0))}>{initialBusy ? "Guardando…" : "Asignar"}</button>
+            </div>
+            {initialMessage && <p role="status">{initialMessage}</p>}
+          </form>}
           {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
           {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit" disabled={inviteBusy} onClick={generateInvite}>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
         </>}
