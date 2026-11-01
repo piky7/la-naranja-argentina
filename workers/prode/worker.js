@@ -339,7 +339,7 @@ export default {
     // Archivo histórico de temporadas. Solo lectura; nunca cierra ni modifica una temporada.
     // Una futura operación de cierre deberá verificar todos los partidos oficiales pendientes
     // y guardar de forma atómica el resumen y las filas antes de declarar un campeón.
-    const seasonHistory = /^\\/api\\/prode\\/groups\\/([0-9a-f-]{36})\\/seasons$/.exec(url.pathname);
+    const seasonHistory = new RegExp("^/api/prode/groups/([0-9a-f-]{36})/seasons$").exec(url.pathname);
     if (seasonHistory && request.method === "GET") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       const identity = await verifiedFirebaseUser(request);
