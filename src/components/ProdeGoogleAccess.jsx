@@ -166,9 +166,18 @@ export default function ProdeGoogleAccess() {
         <>
           <div className="prode-google-identity">
             <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} size={55} className="prode-account-crest"/>
-            <div><div className="prode-identity-name-row"><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong>{adminAllowed && <Link className="prode-admin-entry" to="/admin" title="Panel de administración" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={16}/></Link>}</div><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
+            <div className="prode-identity-info">
+              <div className="prode-identity-name-row">
+                <strong>{profile?.username || "Elegí tu nombre de usuario"}</strong>
+                <div className="prode-account-actions">
+                  {adminAllowed && <Link className="prode-admin-entry" to="/admin" title="Panel de administración" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={17}/></Link>}
+                  <button type="button" className="prode-account-icon prode-account-edit" title="Mi perfil" aria-label="Editar mi perfil" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={17}/></button>
+                  <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={logout} disabled={busy}><LogOut size={17}/></button>
+                </div>
+              </div>
+              <span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span>
+            </div>
           </div>
-          <button type="button" className="prode-profile-edit-button" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={16}/> Mi perfil</button>
           {(careerLink === false || linkNotice) && <div className="prode-career-link" role={linkNotice ? "status" : undefined}>
             <strong>{careerLink ? "✓ Mi Carrera vinculada" : "Vincular Mi Carrera"}</strong>
             <p>{careerLink ? "Tu cuenta Google quedó asociada a esta carrera. Los pronósticos y puntos de Prode todavía no se sincronizan." : "Vinculá la carrera de este navegador con tu cuenta Prode. No cambia los votos ni puntos existentes."}</p>
@@ -178,7 +187,6 @@ export default function ProdeGoogleAccess() {
             </>}
             {linkError && <p role="alert" className="prode-group-error">{linkError}</p>}
           </div>}
-          <button type="button" onClick={logout} disabled={busy}><LogOut size={16}/> Cerrar sesión</button>
         </>
       ) : (
         <>
