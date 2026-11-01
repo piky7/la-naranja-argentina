@@ -345,9 +345,16 @@ export default function ProdeGroups() {
           <div className="prode-profile-identity"><span className="prode-member-avatar">{player.username.slice(0,1).toUpperCase()}</span><div><h3>{player.username}</h3><small>{selected.name} · Temporada {selected.season || "2026/27"}</small></div></div>
           <div className="prode-profile-points"><strong>{player.points ?? 0}</strong><span>PUNTOS EN LA LIGA</span></div>
           <div className="prode-profile-stats">
+            <div><strong>{player.played ?? 0}</strong><span>Jugados</span></div>
+            <div><strong>{player.accuracy ?? 0}%</strong><span>Efectividad</span></div>
+            <div><strong>{player.mvpHits ?? 0}</strong><span>MVP acertados</span></div>
             <div><strong>{player.correct ?? 0}</strong><span>Aciertos</span></div>
             <div><strong>{player.wrong ?? 0}</strong><span>Errores</span></div>
-            <div><strong>{player.mvpHits ?? 0}</strong><span>MVP</span></div>
+            <div><strong>{player.mvpVotes ?? 0}</strong><span>MVP votados</span></div>
+          </div>
+          <div className="prode-profile-best-week">
+            <span>Mejor semana</span>
+            <strong>{player.bestWeek ? `Semana ${player.bestWeek.number} · ${player.bestWeek.points} pts` : "Sin partidos puntuados"}</strong>
           </div>
           <div className="prode-profile-medals">
             <div><strong>🥇 {awards?.gold ?? 0}</strong><span>Oro</span></div>
