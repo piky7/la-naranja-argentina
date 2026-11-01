@@ -394,11 +394,17 @@ export default function ProdeGroups() {
             </div>)} 
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">Medallas acumuladas por semana finalizada. Se entregan solo si al menos 3 participantes pronosticaron esa semana. Los empates comparten medalla.</p>
-          </div> : <div className="prode-group-ranking" role="tabpanel">
+          </div> : <div className="prode-group-ranking prode-ranking-premium" role="tabpanel">
+            <h4>{groupTab === "weekly" ? "Clasificación semanal" : "Clasificación general"}</h4>
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
-            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position === 1 ? "🥇" : member.position === 2 ? "🥈" : member.position === 3 ? "🥉" : member.position ? member.position + "°" : "—"}</span><button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={36} className="prode-member-crest"/><strong>{member.username}</strong></button><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span></div>)}
+            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member,index) => <div key={member.userId || index} className="prode-ranking-row">
+              <span className={"prode-ranking-position " + (member.position && member.position <= 3 ? "podium-position" : "")}>{member.position ? member.position + "°" : "—"}</span>
+              <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={42} className="prode-member-crest"/><strong>{member.username}</strong></button>
+              <span className="prode-ranking-points"><strong>{member.points ?? 0}</strong><small>PTS</small></span>
+              <span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span>
+            </div>)}
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
-            <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de la semana seleccionada (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
+            <p className="prode-group-pending">Los puntos se actualizan con los resultados oficiales. AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
           {detail.group.role === "owner" && <div className="prode-league-crest-control">
             <button type="button" className="prode-initial-toggle" aria-expanded={crestEditing} onClick={() => { setCrestEditing(!crestEditing); setCrestMessage(""); }}>
