@@ -242,3 +242,12 @@
 .prode-manage-member button,.prode-manage-danger{padding:7px 11px;border:1px solid #8e4b4b;border-radius:7px;background:#3b252b;color:#ffb9b9;font-size:11px;font-weight:800;cursor:pointer}
 .prode-manage-danger{display:block;margin-top:12px;width:100%;min-height:35px}
 .prode-manage-member button:disabled,.prode-manage-danger:disabled{opacity:.5}
+
+/* Historial semanal: título visible y selector compacto. */
+.prode-week-selector{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 7px 7px;min-width:0}
+.prode-week-title{display:flex;align-items:center;gap:5px;min-width:0;color:#a8f17e;font-size:12px;font-weight:800}
+.prode-week-title svg{flex-shrink:0}
+.prode-week-selector label{display:flex;align-items:center;gap:5px;color:#a6c5b4;font-size:10px;white-space:nowrap}
+.prode-week-selector select{max-width:150px;min-width:0;height:33px;padding:5px 7px;border:1px solid #41684d;border-radius:8px;background:#102b29;color:#efffec;font-size:11px;font-weight:700}
+.prode-ranking-position{font-size:15px;line-height:1}
+@media(max-width:380px){.prode-week-selector{flex-wrap:wrap}.prode-week-selector label{margin-left:auto}}
