@@ -306,7 +306,7 @@ export default function ProdeGroups() {
   const renameLeague = async event => {
     event.preventDefault();
     if (!user || !selected || renameBusy || detail?.group?.role !== "owner") return;
-    const nextName = leagueNameDraft.trim().replace(/\\s+/g, " ");
+    const nextName = leagueNameDraft.trim().replace(/\s+/g, " ");
     if (nextName.length < 3 || nextName.length > 60) {
       setRenameMessage("El nombre debe tener entre 3 y 60 caracteres.");
       return;
