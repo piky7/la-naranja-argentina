@@ -88,6 +88,11 @@ async function ensureMembershipPeriods(db) {
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_membership_periods (group_id TEXT NOT NULL REFERENCES prode_groups(id) ON DELETE CASCADE, user_id TEXT NOT NULL REFERENCES prode_users(id) ON DELETE CASCADE, entered_at TEXT NOT NULL, exited_at TEXT, PRIMARY KEY(group_id,user_id,entered_at))").run();
   await db.prepare("INSERT OR IGNORE INTO prode_membership_periods(group_id,user_id,entered_at) SELECT m.group_id,m.user_id,m.joined_at FROM prode_memberships m").run();
 }
+const validCrest = color => typeof color === "string" && /^#[0-9a-fA-F]{6}$/.test(color);
+async function ensureCrests(db) {
+  await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crests (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
+  await db.prepare("CREATE TABLE IF NOT EXISTS prode_group_crests (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
+}
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -108,8 +113,9 @@ export default {
             "INSERT INTO prode_users (id, auth_subject, display_name) VALUES (?, ?, ?) ON CONFLICT(auth_subject) DO NOTHING"
           ).bind(id, identity.uid, name).run();
         }
+        await ensureCrests(env.DB);
         const user = await env.DB.prepare(
-          "SELECT u.id, n.username, u.created_at FROM prode_users u LEFT JOIN prode_usernames n ON n.user_id = u.id WHERE u.auth_subject = ?"
+          "SELECT u.id, n.username, u.created_at, COALESCE(c.primary_color,\'#7de83d\') AS crestPrimary, COALESCE(c.secondary_color,\'#10283c\') AS crestSecondary FROM prode_users u LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE u.auth_subject = ?"
         ).bind(identity.uid).first();
         return reply({ ok: true, user: user || null, linkedToMiCarrera: false });
       } catch {
@@ -138,6 +144,35 @@ export default {
         if (String(error).includes("UNIQUE")) return reply({ ok: false, error: "Ese nombre de usuario ya está en uso" }, 409);
         return reply({ ok: false, error: "No se pudo guardar el nombre de usuario" }, 503);
       }
+    }
+    if (url.pathname === "/api/prode/profile/crest" && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      try {
+        const body = await request.json();
+        if (!validCrest(body.primary) || !validCrest(body.secondary)) return reply({ ok: false, error: "Colores inválidos" }, 400);
+        const userId = "firebase:" + identity.uid;
+        await ensureCrests(env.DB);
+        if (!(await env.DB.prepare("SELECT id FROM prode_users WHERE id=?").bind(userId).first())) return reply({ ok: false, error: "Primero registrá tu perfil" }, 409);
+        await env.DB.prepare("INSERT INTO prode_user_crests(user_id,primary_color,secondary_color) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET primary_color=excluded.primary_color,secondary_color=excluded.secondary_color").bind(userId,body.primary,body.secondary).run();
+        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary });
+      } catch { return reply({ ok: false, error: "No se pudo guardar el escudo" }, 503); }
+    }
+    const crestRoute = new RegExp("^/api/prode/groups/([0-9a-f-]{36})/crest$").exec(url.pathname);
+    if (crestRoute && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      try {
+        const body = await request.json();
+        if (!validCrest(body.primary) || !validCrest(body.secondary)) return reply({ ok: false, error: "Colores inválidos" }, 400);
+        const groupId = crestRoute[1];
+        if (!(await env.DB.prepare("SELECT id FROM prode_groups WHERE id=? AND owner_id=?").bind(groupId,"firebase:"+identity.uid).first())) return reply({ ok: false, error: "Solo el administrador puede editar el trofeo" }, 403);
+        await ensureCrests(env.DB);
+        await env.DB.prepare("INSERT INTO prode_group_crests(group_id,primary_color,secondary_color) VALUES (?,?,?) ON CONFLICT(group_id) DO UPDATE SET primary_color=excluded.primary_color,secondary_color=excluded.secondary_color").bind(groupId,body.primary,body.secondary).run();
+        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary });
+      } catch { return reply({ ok: false, error: "No se pudo guardar el trofeo" }, 503); }
     }
     // Clasificación histórica: consulta en vivo los puntos de Mi Carrera de las cuentas vinculadas.
     if (url.pathname === "/api/prode/ranking/historical" && request.method === "GET") {
@@ -242,8 +277,8 @@ export default {
         const body = await request.json();
         const name = typeof body.name === "string" ? body.name.trim().replace(/\\s+/g, " ") : "";
         const description = typeof body.description === "string" ? body.description.trim() : "";
-        const visibility = body.visibility;
-        if (name.length < 3 || name.length > 60 || description.length > 240 || !["public", "private"].includes(visibility))
+        const visibility = "private";
+        if (name.length < 3 || name.length > 60 || description.length > 240 || body.visibility === "public")
           return reply({ ok: false, error: "Revisá el nombre, la descripción y la privacidad" }, 400);
         const ownerId = "firebase:" + identity.uid;
         const owner = await env.DB.prepare("SELECT id FROM prode_users WHERE auth_subject = ?").bind(identity.uid).first();
@@ -253,13 +288,17 @@ export default {
         const id = crypto.randomUUID();
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
         await ensureMembershipPeriods(env.DB);
+        await ensureCrests(env.DB);
+        const crestPrimary = validCrest(body.crestPrimary) ? body.crestPrimary : "#ff9a39";
+        const crestSecondary = validCrest(body.crestSecondary) ? body.crestSecondary : "#10283c";
         await env.DB.batch([
           env.DB.prepare("INSERT INTO prode_groups (id, name, description, visibility, owner_id) VALUES (?, ?, ?, ?, ?)").bind(id, name, description, visibility, ownerId),
           env.DB.prepare("INSERT INTO prode_memberships (group_id, user_id, role) VALUES (?, ?, 'owner')").bind(id, ownerId),
+          env.DB.prepare("INSERT INTO prode_group_crests(group_id,primary_color,secondary_color) VALUES (?,?,?)").bind(id,crestPrimary,crestSecondary),
           env.DB.prepare("INSERT INTO prode_membership_periods(group_id,user_id,entered_at) VALUES (?,?,?)").bind(id,ownerId,new Date().toISOString()),
           env.DB.prepare("INSERT INTO prode_league_starts(group_id) VALUES (?)").bind(id),
         ]);
-        return reply({ ok: true, group: { id, name, description, visibility, season: "2026/27", role: "owner" } }, 201);
+        return reply({ ok: true, group: { id, name, description, visibility, crestPrimary, crestSecondary, season: "2026/27", role: "owner" } }, 201);
       } catch {
         return reply({ ok: false, error: "No se pudo crear la liga. Intentá de nuevo" }, 503);
       }
