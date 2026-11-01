@@ -65,6 +65,9 @@ export default function ProdeGroups() {
   const [manageOpen, setManageOpen] = useState(false);
   const [manageBusy, setManageBusy] = useState(false);
   const [manageError, setManageError] = useState("");
+  const [leagueNameDraft, setLeagueNameDraft] = useState("");
+  const [renameBusy, setRenameBusy] = useState(false);
+  const [renameMessage, setRenameMessage] = useState("");
   const [initialOpen, setInitialOpen] = useState(false);
   const [initialTarget, setInitialTarget] = useState("");
   const [initialAmount, setInitialAmount] = useState("0");
@@ -187,6 +190,7 @@ export default function ProdeGroups() {
     setExpandedMedal(null);
     setProfileUserId(null);
     setManageOpen(false); setManageError("");
+    setLeagueNameDraft(group.name || ""); setRenameMessage("");
     setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
     setRankingError("");
     setRankingBusy(true);
@@ -297,6 +301,40 @@ export default function ProdeGroups() {
       }
     } catch (e) { setManageError(e.message || "Error de conexión"); }
     finally { setManageBusy(false); }
+  };
+
+  const renameLeague = async event => {
+    event.preventDefault();
+    if (!user || !selected || renameBusy || detail?.group?.role !== "owner") return;
+    const nextName = leagueNameDraft.trim().replace(/\\s+/g, " ");
+    if (nextName.length < 3 || nextName.length > 60) {
+      setRenameMessage("El nombre debe tener entre 3 y 60 caracteres.");
+      return;
+    }
+    if (nextName === detail.group.name) {
+      setRenameMessage("El nombre no cambió.");
+      return;
+    }
+    setRenameBusy(true); setRenameMessage("");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(API + "/api/prode/groups/" + encodeURIComponent(selected.id) + "/rename", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({ name: nextName }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudo cambiar el nombre.");
+      setGroups(prev => prev.map(group => group.id === selected.id ? { ...group, name: data.name } : group));
+      setSelected(prev => prev && prev.id === selected.id ? { ...prev, name: data.name } : prev);
+      setDetail(prev => prev ? { ...prev, group: { ...prev.group, name: data.name } } : prev);
+      setLeagueNameDraft(data.name);
+      setRenameMessage("Nombre de la liga actualizado correctamente.");
+    } catch (error) {
+      setRenameMessage(error.message || "No se pudo guardar el nombre.");
+    } finally {
+      setRenameBusy(false);
+    }
   };
 
   const saveLeagueCrest = async () => {
@@ -435,6 +473,14 @@ export default function ProdeGroups() {
             <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
             {manageOpen && <div className="prode-manage-panel">
               {detail.group.role === "owner" ? <>
+                <form className="prode-rename-form" onSubmit={renameLeague}>
+                  <label htmlFor="prode-league-rename">Nombre de la liga</label>
+                  <div className="prode-rename-fields">
+                    <input id="prode-league-rename" type="text" maxLength={60} minLength={3} required value={leagueNameDraft} onChange={event => { setLeagueNameDraft(event.target.value); setRenameMessage(""); }} disabled={renameBusy} />
+                    <button type="submit" disabled={renameBusy || leagueNameDraft.trim().length < 3 || leagueNameDraft.trim() === detail.group.name}>{renameBusy ? "Guardando…" : "Guardar"}</button>
+                  </div>
+                  {renameMessage && <p role="status" className="prode-rename-message">{renameMessage}</p>}
+                </form>
                 <strong>Participantes</strong>
                 {detail.members.filter(member => member.role !== "owner").map(member => <div className="prode-manage-member" key={member.userId}><span>{member.username}</span><button type="button" disabled={manageBusy} onClick={() => manageLeague("members",member)}>Quitar</button></div>)}
                 {detail.members.length <= 1 && <p>Todavía no hay otros participantes.</p>}
