@@ -166,7 +166,7 @@ export default function ProdeGoogleAccess() {
         <>
           <div className="prode-google-identity">
             <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} size={55} className="prode-account-crest"/>
-            <div><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
+            <div><div className="prode-identity-name-row"><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong>{adminAllowed && <Link className="prode-admin-entry" to="/admin" title="Panel de administración" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={16}/></Link>}</div><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
           </div>
           <button type="button" className="prode-profile-edit-button" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={16}/> Mi perfil</button>
           {(careerLink === false || linkNotice) && <div className="prode-career-link" role={linkNotice ? "status" : undefined}>
@@ -178,7 +178,6 @@ export default function ProdeGoogleAccess() {
             </>}
             {linkError && <p role="alert" className="prode-group-error">{linkError}</p>}
           </div>}
-          {adminAllowed && <Link className="prode-admin-entry" to="/admin" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={16}/> Panel de administración</Link>}
           <button type="button" onClick={logout} disabled={busy}><LogOut size={16}/> Cerrar sesión</button>
         </>
       ) : (
