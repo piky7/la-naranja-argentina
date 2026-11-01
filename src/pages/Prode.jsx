@@ -1,5 +1,5 @@
 import ProdeHistoricalRanking from "../components/ProdeHistoricalRanking";
-import { Trophy, UsersRound, Medal, Target, ChartNoAxesColumn, ShieldCheck } from "lucide-react";
+import { Trophy, UsersRound, Medal, Target, ChartNoAxesColumn, ShieldCheck, CalendarDays } from "lucide-react";
 import "./Prode.css";
 import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
 import ProdeGroups from "../components/ProdeGroups";
@@ -35,7 +35,7 @@ export default function Prode() {
         </section>
 
         <section className="prode-panel prode-general-section prode-weekly-section">
-          <div className="prode-panel-heading"><span className="prode-panel-icon"><Trophy size={21}/></span><h2>RANKING <em>SEMANAL</em></h2><span className="prode-small-tag">Lun – Dom</span></div>
+          <div className="prode-panel-heading"><span className="prode-panel-icon"><CalendarDays size={21}/></span><h2>RANKING <em>SEMANAL</em></h2><span className="prode-small-tag">Lun – Dom</span></div>
           <ProdeHistoricalRanking weekly />
         </section>
 
