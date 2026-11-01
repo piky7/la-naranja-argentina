@@ -360,7 +360,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, points: 0, correct: 0, wrong: 0, played: 0, mvpHits: 0, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, points: 0, correct: 0, wrong: 0, played: 0, mvpHits: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -371,16 +371,20 @@ export default {
             for (const game of data.games) {
               const kickoff = Date.parse(game.startsAt);
               if (!Number.isFinite(kickoff) || kickoff < since || !game.finished || kickoff > Date.now()) continue;
-              const weekly = kickoff >= weekStart && kickoff < weekStart + 7*86400000;
-              if (game.mvpCorrect) { base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
+              const gameDate = new Date(kickoff);
+              const gameWeek = Date.UTC(gameDate.getUTCFullYear(),gameDate.getUTCMonth(),gameDate.getUTCDate()-((gameDate.getUTCDay()+6)%7));
+              const weekly = gameWeek === weekStart;
+              const week = base.weeks[gameWeek] ||= { points: 0, played: 0, mvpVoted: 0 };
+              if (game.mvpVoted) week.mvpVoted++;
+              if (game.mvpCorrect) { week.points += 20; base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
               if (!game.voted) { streak = 0; continue; }
-              base.played++; if (weekly) base.weekly.played++;
+              base.played++; week.played++; if (weekly) base.weekly.played++;
               if (game.correct) {
-                base.correct++; base.points += 15; streak++;
+                base.correct++; base.points += 15; week.points += 15; streak++;
                 if (weekly) { base.weekly.correct++; base.weekly.points += 15; }
-                if (streak === 5) { base.points += 45; if (weekly) base.weekly.points += 45; }
+                if (streak === 5) { base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
               } else {
-                base.wrong++; base.points += 5; streak = 0;
+                base.wrong++; base.points += 5; week.points += 5; streak = 0;
                 if (weekly) { base.weekly.wrong++; base.weekly.points += 5; }
               }
             }
@@ -402,7 +406,25 @@ export default {
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
           return { ...row.weekly, username: row.username, position: weeklyRank };
         });
-        return reply({ ok: true, ranking, weeklyRanking, weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
+        // Medallas de semanas cerradas con al menos tres pronosticadores.
+        const medals = new Map(rows.map(row => [row.userId, { username: row.username, gold: 0, silver: 0, bronze: 0 }]));
+        const weeks = [...new Set(rows.flatMap(row => Object.keys(row.weeks).map(Number)))].filter(week => week + 7*86400000 <= Date.now()).sort((a,b)=>a-b);
+        for (const week of weeks) {
+          const participants = rows.filter(row => (row.weeks[week]?.played || 0) + (row.weeks[week]?.mvpVoted || 0) > 0);
+          if (participants.length < 3) continue;
+          participants.sort((a,b) => b.weeks[week].points-a.weeks[week].points);
+          let place = 0, lastPoints = null;
+          for (const row of participants) {
+            const pts = row.weeks[week].points;
+            if (pts !== lastPoints) { place++; lastPoints = pts; }
+            const entry = medals.get(row.userId);
+            if (place === 1) entry.gold++;
+            else if (place === 2) entry.silver++;
+            else if (place === 3) entry.bronze++;
+          }
+        }
+        const medalTable = [...medals.values()].sort((a,b)=>b.gold-a.gold || b.silver-a.silver || b.bronze-a.bronze || a.username.localeCompare(b.username,"es"));
+        return reply({ ok: true, ranking, weeklyRanking, medalTable, weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
         console.error("Prode league ranking:", error);
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
