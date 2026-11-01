@@ -209,7 +209,23 @@ export default {
           ...entry, position: results.findIndex(x => x.points === entry.points) + 1
         }));
         const myPosition = viewerId ? ranked.find(entry => entry.userId === viewerId)?.position ?? null : null;
-        return reply({ ok: true, total: results.length, myPosition,
+        // Solo un integrante de una liga puede consultar los puntos históricos
+        // y la posición global de otro integrante de esa misma liga.
+        let memberProfile = null;
+        const groupId = url.searchParams.get("groupId");
+        const memberId = url.searchParams.get("memberId");
+        if (groupId && memberId && /^[0-9a-f-]{36}$/i.test(groupId)
+            && /^firebase:[A-Za-z0-9_-]{1,128}$/.test(memberId) && viewerId) {
+          await ensureMembershipPeriods(env.DB);
+          const membership = await env.DB.prepare(
+            "SELECT 1 AS permitted FROM prode_memberships viewer JOIN prode_memberships target ON target.group_id=viewer.group_id AND target.user_id=? WHERE viewer.group_id=? AND viewer.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=viewer.group_id AND p.user_id=viewer.user_id AND p.exited_at IS NULL) AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=target.group_id AND p.user_id=target.user_id AND p.exited_at IS NULL)"
+          ).bind(memberId, groupId, viewerId).first();
+          if (membership) {
+            const row = ranked.find(entry => entry.userId === memberId);
+            memberProfile = row ? { points: row.points, position: row.position } : null;
+          }
+        }
+        return reply({ ok: true, total: results.length, myPosition, memberProfile,
           ranking: ranked.slice(0,20).map(({userId,...entry}) => entry) });
       } catch (error) {
         return reply({ ok: false, error: "No se pudo cargar el ranking histórico" }, 503);
