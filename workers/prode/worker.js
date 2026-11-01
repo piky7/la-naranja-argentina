@@ -786,7 +786,7 @@ export default {
         if (group.owner_id !== actorId) return reply({ ok: false, error: "Solo el administrador puede hacer esto" }, 403);
         if (action === "rename") {
           const body = await request.json().catch(() => ({}));
-          const newName = typeof body.name === "string" ? body.name.trim().replace(/\\s+/g, " ") : "";
+          const newName = typeof body.name === "string" ? body.name.trim().replace(/\s+/g, " ") : "";
           if (newName.length < 3 || newName.length > 60)
             return reply({ ok: false, error: "El nombre debe tener entre 3 y 60 caracteres" }, 400);
           await env.DB.prepare("UPDATE prode_groups SET name=? WHERE id=? AND owner_id=?").bind(newName,groupId,actorId).run();
