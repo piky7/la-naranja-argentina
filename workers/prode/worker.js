@@ -245,9 +245,11 @@ export default {
         const count = await env.DB.prepare("SELECT COUNT(*) AS total FROM prode_groups WHERE owner_id = ?").bind(ownerId).first();
         if (Number(count?.total || 0) >= 5) return reply({ ok: false, error: "Podés crear hasta cinco ligas" }, 409);
         const id = crypto.randomUUID();
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
         await env.DB.batch([
           env.DB.prepare("INSERT INTO prode_groups (id, name, description, visibility, owner_id) VALUES (?, ?, ?, ?, ?)").bind(id, name, description, visibility, ownerId),
           env.DB.prepare("INSERT INTO prode_memberships (group_id, user_id, role) VALUES (?, ?, 'owner')").bind(id, ownerId),
+          env.DB.prepare("INSERT INTO prode_league_starts(group_id) VALUES (?)").bind(id),
         ]);
         return reply({ ok: true, group: { id, name, description, visibility, season: "2026/27", role: "owner" } }, 201);
       } catch {
@@ -409,7 +411,7 @@ export default {
           const leaderPoints = Math.max(0, ...rows.map(row => row.points));
           if (amount > leaderPoints) return reply({ ok: false, error: "El máximo permitido es " + leaderPoints + " puntos" }, 400);
           // No se permiten ajustes retroactivos cuando el integrante ya sumó puntos propios.
-          if (target.played || target.mvpHits) return reply({ ok: false, error: "El participante ya comenzó a puntuar en la liga" }, 409);
+          if (target.played || target.mvpHits || Object.values(target.weeks).some(w => w.mvpVoted > 0)) return reply({ ok: false, error: "El participante ya comenzó a puntuar en la liga" }, 409);
           const saved = await env.DB.prepare("INSERT INTO prode_initial_points(group_id,user_id,points,assigned_by) VALUES(?,?,?,?) ON CONFLICT(group_id,user_id) DO NOTHING")
             .bind(groupId,targetId,amount,userId).run();
           if (!saved.meta?.changes) return reply({ ok: false, error: "Los puntos iniciales ya fueron asignados" }, 409);
@@ -418,23 +420,23 @@ export default {
         rows.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
         let rank = 0, previousPoints = null;
         const ranking = rows.map(row => {
-          if (!row.played && !row.mvpHits) return { ...row, position: null };
+          if (!row.played && !row.mvpHits && row.initialPoints === null) return { ...row, position: null };
           if (row.points !== previousPoints) { rank++; previousPoints = row.points; }
           return { ...row, position: rank };
         });
         let weeklyRank = 0, previousWeekly = null;
         const weeklyRanking = [...rows].sort((a,b) => b.weekly.points-a.weekly.points || b.weekly.correct-a.weekly.correct || a.username.localeCompare(b.username,"es")).map(row => {
           const pts = row.weekly.points;
-          if (!row.weekly.played && !row.weekly.mvpHits) return { ...row.weekly, username: row.username, position: null };
+          if (!row.weekly.played && !row.weekly.mvpHits) return { ...row.weekly, userId: row.userId, username: row.username, position: null };
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
-          return { ...row.weekly, username: row.username, position: weeklyRank };
+          return { ...row.weekly, userId: row.userId, username: row.username, position: weeklyRank };
         });
         // Historial numerado desde la semana de inicio de la liga, incluyendo semanas sin partidos.
         const firstDate = new Date(leagueStart);
         const firstWeek = Date.UTC(firstDate.getUTCFullYear(), firstDate.getUTCMonth(), firstDate.getUTCDate()-((firstDate.getUTCDay()+6)%7));
         const weeklyHistory = [];
         for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
-          const participants = rows.map(row => {
+          const participants = rows.filter(row => time(allMembers.find(m => m.user_id === row.userId)?.joined_at) < startMs + 7*86400000).map(row => {
             const w = row.weeks[startMs] || { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
             return { username: row.username, userId: row.userId, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
           });
