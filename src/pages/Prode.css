@@ -1196,16 +1196,14 @@
  .prode-league-premium .prode-rename-fields>button{padding:8px 9px}
 }
 
-/* Acceso administrativo privado, mostrado solo tras autorización del Worker. */
-.prode-google-access>.prode-admin-entry{
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  min-height:38px;padding:8px 12px;border:1px solid #f1a558;border-radius:9px;
-  background:#2a2930;color:#ffbf7b;font-size:12px;font-weight:850;
-  text-decoration:none;cursor:pointer;
+/* Acceso compacto a administración: junto al nombre, sin ocupar otra fila. */
+.prode-google-identity .prode-identity-name-row{display:flex;align-items:center;gap:9px;min-width:0}
+.prode-google-identity .prode-identity-name-row strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prode-google-identity .prode-admin-entry{
+  display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;
+  width:32px;height:32px;border:1px solid #b37a45;border-radius:9px;
+  background:#243044;color:#ffc18a;text-decoration:none;
+  box-shadow:0 0 0 1px rgba(255,169,77,.05) inset;
 }
-.prode-google-access>.prode-admin-entry:focus-visible{outline:2px solid #ffb464;outline-offset:2px}
-.prode-home-redesign .prode-hero-account .prode-google-access>.prode-admin-entry{
-  grid-column:1/-1;display:flex;justify-content:center;
-  width:100%;background:#202c3b;border-color:#98683d;color:#ffc18a;
-  font-size:11px;
-}
+.prode-google-identity .prode-admin-entry:active{background:#39475b}
+.prode-google-identity .prode-admin-entry:focus-visible{outline:2px solid #ffb464;outline-offset:2px}
