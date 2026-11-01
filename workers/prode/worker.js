@@ -102,6 +102,31 @@ export default {
       return reply({ ok: false, error: "Origen no permitido" }, 403);
     if (url.pathname === "/api/prode/health" && request.method === "GET")
       return reply({ ok: true, service: "prode-lna", stage: "profiles", authEnabled: true });
+    if (url.pathname === "/api/prode/admin/summary" && request.method === "GET") {
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión requerida" }, 401);
+      if (!env.ADMIN_FIREBASE_UID || identity.uid !== env.ADMIN_FIREBASE_UID)
+        return reply({ ok: false, error: "Sin permiso" }, 403);
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no disponible" }, 503);
+      try {
+        const reports = await env.DB.batch([
+          env.DB.prepare("SELECT COUNT(*) AS total FROM prode_users"),
+          env.DB.prepare("SELECT COUNT(*) AS total FROM prode_career_links"),
+          env.DB.prepare("SELECT COUNT(*) AS total FROM prode_groups"),
+          env.DB.prepare("SELECT COUNT(*) AS total FROM prode_users WHERE datetime(created_at) >= datetime('now','-7 days')"),
+          env.DB.prepare("SELECT COUNT(*) AS total FROM prode_users WHERE datetime(created_at) >= datetime('now','-30 days')"),
+          env.DB.prepare("SELECT COUNT(*) AS total FROM prode_memberships"),
+          env.DB.prepare("SELECT date(created_at) AS day,COUNT(*) AS total FROM prode_users WHERE datetime(created_at) >= datetime('now','-6 days') GROUP BY date(created_at) ORDER BY day")
+        ]);
+        const total = index => Number(reports[index]?.results?.[0]?.total || 0);
+        return reply({ ok: true, generatedAt: new Date().toISOString(),
+          accounts: total(0), linkedCareers: total(1), leagues: total(2),
+          new7Days: total(3), new30Days: total(4), memberships: total(5),
+          daily: reports[6]?.results || [] });
+      } catch {
+        return reply({ ok: false, error: "Métricas no disponibles" }, 503);
+      }
+    }
     if (url.pathname === "/api/prode/me" && (request.method === "GET" || request.method === "POST")) {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       const identity = await verifiedFirebaseUser(request);
