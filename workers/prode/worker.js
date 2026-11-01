@@ -695,7 +695,26 @@ export default {
           }
         }
         const medalTable = [...medals.values()].sort((a,b)=>b.gold-a.gold || b.silver-a.silver || b.bronze-a.bronze || a.username.localeCompare(b.username,"es"));
-        return reply({ ok: true, ranking, weeklyRanking, weeklyHistory, medalTable, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
+        // Vista semanal de partidos finalizados: únicamente la semana elegida en la UI.
+        // Los votos se revelan solo a miembros autenticados de esta liga y tras finalizar.
+        const matchesByWeek = {};
+        for (const match of completedMatches.values()) {
+          const number = Math.floor((match.weekKey - firstWeek) / (7 * 86400000)) + 1;
+          if (number < 1 || number > 110) continue;
+          const existing = new Map(match.participants.map(p => [p.userId, p]));
+          const participants = allMembers.map(member => existing.get(member.user_id) || {
+            userId: member.user_id, username: member.username,
+            crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary,
+            crestText: member.crestText, winnerPick: null, mvpPick: null,
+            winnerPoints: 0, mvpPoints: 0, streakPoints: 0, points: 0,
+            winnerCorrect: false, mvpCorrect: false, eligible: false,
+          });
+          (matchesByWeek[number] ||= []).push({ ...match, participants, weekKey: undefined });
+        }
+        for (const matches of Object.values(matchesByWeek)) {
+          matches.sort((a,b) => Date.parse(b.startsAt) - Date.parse(a.startsAt) || a.id.localeCompare(b.id));
+        }
+        return reply({ ok: true, ranking, weeklyRanking, weeklyHistory, medalTable, matchesByWeek, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
         console.error("Prode league ranking:", error);
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
