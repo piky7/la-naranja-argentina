@@ -20,6 +20,7 @@ export default function ProdeGroups() {
   const [weeklyHistory, setWeeklyHistory] = useState([]);
   const [selectedWeek, setSelectedWeek] = useState("");
   const [medalTable, setMedalTable] = useState(null);
+  const [expandedMedal, setExpandedMedal] = useState(null);
   const [manageOpen, setManageOpen] = useState(false);
   const [manageBusy, setManageBusy] = useState(false);
   const [manageError, setManageError] = useState("");
@@ -72,6 +73,7 @@ export default function ProdeGroups() {
     setWeeklyRanking(null);
     setWeeklyHistory([]); setSelectedWeek("");
     setMedalTable(null);
+    setExpandedMedal(null);
     setManageOpen(false); setManageError("");
     setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
     setRankingError("");
@@ -270,7 +272,16 @@ export default function ProdeGroups() {
           </div>}
           {groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
             <div className="prode-ranking-head"><span>JUGADOR</span><span>🥇</span><span>🥈</span><span>🥉</span></div>
-            {(medalTable || detail.members).map((member,index) => <div className="prode-ranking-row" key={index}><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.gold ?? 0}</span><span>{member.silver ?? 0}</span><span>{member.bronze ?? 0}</span></div>)}
+            {(medalTable || detail.members).map((member,index) => <div className="prode-medal-member" key={member.userId || index}>
+              <div className="prode-ranking-row">
+                <span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span>
+                {["gold","silver","bronze"].map((type,i) => <button type="button" key={type} className="prode-medal-count" aria-expanded={expandedMedal === (member.userId || index) + ":" + type} aria-label={member.username + ": ver medallas de " + ["oro","plata","bronce"][i]} onClick={() => setExpandedMedal(current => current === (member.userId || index) + ":" + type ? null : (member.userId || index) + ":" + type)}>{member[type] ?? 0}</button>)}
+              </div>
+              {["gold","silver","bronze"].map((type,i) => expandedMedal === (member.userId || index) + ":" + type && <div className="prode-medal-history" key={type}>
+                <strong>{["🥇 Oros","🥈 Platas","🥉 Bronces"][i]} de {member.username}</strong>
+                {(member.history || []).filter(h => h.position === i+1).length ? (member.history || []).filter(h => h.position === i+1).map(h => <button type="button" key={h.week} onClick={() => { setSelectedWeek(String(h.week)); setGroupTab("weekly"); }}><span>Semana {h.week}</span><span>{h.points} PTS <ChevronRight size={14}/></span></button>) : <p>Todavía no consiguió medallas de este tipo.</p>}
+              </div>)}
+            </div>)} 
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">Medallas acumuladas por semana finalizada. Se entregan solo si al menos 3 participantes pronosticaron esa semana. Los empates comparten medalla.</p>
           </div> : <div className="prode-group-ranking" role="tabpanel">
