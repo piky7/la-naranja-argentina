@@ -885,3 +885,27 @@
   color:#e8f0f7;
   border-bottom-color:#3b5570;
 }
+
+/* Controles del encabezado: zona táctil separada entre ajustes y cerrar. */
+.prode-league-premium .prode-league-hero{padding-right:92px}
+.prode-league-premium .prode-league-settings-button{
+  right:49px;top:0;width:35px;height:35px;
+}
+.prode-league-premium .prode-league-close{
+  right:0;top:0;width:35px;height:35px;
+}
+.prode-league-premium .prode-league-settings-open .prode-invite-panel{
+  margin:10px 0 0;padding-top:11px;border-top:1px solid #3b5570;
+}
+.prode-league-premium .prode-league-settings-open .prode-invite-primary{
+  min-height:40px;font-size:14px;border-radius:9px;
+}
+@media(max-width:600px){
+ .prode-league-premium .prode-league-hero{padding-right:80px}
+ .prode-league-premium .prode-league-settings-button{
+   right:44px;top:0;width:31px;height:31px;
+ }
+ .prode-league-premium .prode-league-close{
+   right:0;top:0;width:31px;height:31px;
+ }
+}
