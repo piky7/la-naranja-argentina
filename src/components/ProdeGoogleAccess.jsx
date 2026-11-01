@@ -135,6 +135,8 @@ export default function ProdeGoogleAccess() {
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo vincular");
       setCareerLink(true); setLinkConfirm(false); setLinkNotice(true);
+      // Actualizar los rankings sin pedir que el usuario cambie su alias.
+      window.dispatchEvent(new Event("prode-profile-updated"));
     } catch (e) { setLinkError(e.message || "Error de conexión"); }
     finally { setLinkBusy(false); }
   };
