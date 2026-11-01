@@ -336,6 +336,45 @@ export default {
         return reply({ ok: false, error: "No se pudo aceptar la invitación" }, 503);
       }
     }
+    // Diagnóstico de cierre: operación estrictamente de solo lectura.
+    // No existe ruta de cierre; un fixture parcial nunca habilita un archivo definitivo.
+    const closeCheck = new RegExp("^/api/prode/groups/([0-9a-f-]{36})/seasons/close-check$").exec(url.pathname);
+    if (closeCheck && request.method === "GET") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      try {
+        const groupId = closeCheck[1], userId = "firebase:" + identity.uid;
+        const group = await env.DB.prepare(
+          "SELECT g.season, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id=g.id WHERE g.id=? AND m.user_id=?"
+        ).bind(groupId,userId).first();
+        if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
+        if (group.role !== "owner") return reply({ ok: false, error: "Solo el administrador puede consultar la validación" }, 403);
+        const blockers = ["No existe todavía un cierre autorizado ni una confirmación oficial de fin de temporada."];
+        const season = group.season || "2026/27";
+        let fixture = { available: false, complete: false, total: 0, pending: null };
+        try {
+          const response = await fetch(SITE + "/voting-fixture.json", { headers: { accept: "application/json" }, cf: { cacheTtl: 0 } });
+          if (!response.ok) throw Error("Fixture no disponible");
+          const data = await response.json();
+          if (!Array.isArray(data.games) || !Number.isFinite(Date.parse(data.generatedAt))) throw Error("Fixture incompleto");
+          // El archivo publicado puede omitir encuentros aplazados: es informativo, nunca prueba de cierre.
+          const games = data.games.filter(game => game && typeof game.id === "string");
+          const pending = games.filter(game => !(game.finished === true && Number.isFinite(game.homeScore) && Number.isFinite(game.awayScore) && game.homeScore !== game.awayScore));
+          const fresh = Date.now() - Date.parse(data.generatedAt) <= 14*86400000 && Date.now() >= Date.parse(data.generatedAt) - 300000;
+          fixture = { available: true, complete: fresh, total: games.length, pending: pending.length, generatedAt: data.generatedAt };
+          if (!fresh) blockers.push("El fixture publicado no está actualizado.");
+          if (pending.length) blockers.push("El fixture publicado todavía contiene " + pending.length + " partidos sin resultado confirmado.");
+        } catch {
+          blockers.push("No se pudo verificar el fixture publicado.");
+        }
+        // Una comprobación de fixture vacío no autoriza el cierre, porque pueden faltar aplazados.
+        return reply({ ok: true, season, canClose: false, mode: "read-only", fixture, blockers });
+      } catch (error) {
+        console.error("Prode close check:", error);
+        return reply({ ok: false, error: "No se pudo validar el cierre" }, 503);
+      }
+    }
     // Archivo histórico de temporadas. Solo lectura; nunca cierra ni modifica una temporada.
     // Una futura operación de cierre deberá verificar todos los partidos oficiales pendientes
     // y guardar de forma atómica el resumen y las filas antes de declarar un campeón.
