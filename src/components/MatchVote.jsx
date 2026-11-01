@@ -47,7 +47,7 @@ export default function MatchVote({ match, onStatusChange }) {
   useEffect(() => { if (data && onStatusChange) onStatusChange({ voted: data.voted, open: data.open }); }, [data, onStatusChange]);
 
   if (!id) return null;
-  if (!data) return <section className="lna-vote" aria-label="Pronóstico de hinchas" aria-busy="true"><div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA?</strong></div><span>Consultando votos…</span></div><div className="lna-vote-options">{[home, away].map(team => <div key={team} className="lna-vote-option" style={{opacity:.65,cursor:"default"}}><span className="lna-vote-team">{teams.find(item => item.id === team)?.logo && <img className="lna-vote-logo" src={teams.find(item => item.id === team).logo} alt="" />}{teams.find(item => item.id === team)?.shortName || team.replace(/-/g," ")}</span><span>—</span></div>)}</div><small>{error || "Cargando tu pronóstico y los porcentajes…"}</small></section>;
+  if (!data) return <section className="lna-vote" aria-label="Pronóstico de hinchas" aria-busy="true"><div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div><span>Consultando votos…</span></div><div className="lna-vote-options">{[home, away].map(team => <div key={team} className="lna-vote-option" style={{opacity:.65,cursor:"default"}}><span className="lna-vote-team">{teams.find(item => item.id === team)?.logo && <img className="lna-vote-logo" src={teams.find(item => item.id === team).logo} alt="" />}{teams.find(item => item.id === team)?.shortName || team.replace(/-/g," ")}</span><span>—</span></div>)}</div><small>{error || "Cargando tu pronóstico y los porcentajes…"}</small></section>;
   if (!data.open && !data.voted) return null;
 
   async function vote(team) {
@@ -75,14 +75,14 @@ export default function MatchVote({ match, onStatusChange }) {
   const percent = votes => total ? Math.round(votes * 100 / total) : 0;
   return (
     <section className="lna-vote" aria-label="Pronóstico de hinchas">
-      <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA?</strong></div><span>{data.voted ? `${total} ${total === 1 ? "voto" : "votos"}` : "Votá tu favorito"}</span></div>
+      <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div><span>{data.voted ? `${total} ${total === 1 ? "voto" : "votos"}` : "Elegí el ganador"}</span></div>
       <div className="lna-vote-options">
         {[{ team: home, result: data.home }, { team: away, result: data.away }].map(({ team, result }) => (
           <button key={team} type="button" disabled={busy || !data.open || (data.voted && !editing) || (data.voted && data.selected === team)}
             className={`lna-vote-option ${data.selected === team ? "is-selected" : ""}`}
             onClick={() => vote(team)}>
             <span className="lna-vote-team">{teamInfo(team)?.logo && <img className="lna-vote-logo" src={teamInfo(team).logo} alt="" />}{teamInfo(team)?.shortName || team.replace(/-/g, " ")}</span>
-            {data.voted && <strong>{percent(result?.votes || 0)}%</strong>}
+            {data.voted ? <strong>{percent(result?.votes || 0)}%</strong> : <span className="lna-vote-radio" aria-hidden="true" />}
             {data.voted && <span className="lna-vote-bar" style={{ width: `${percent(result?.votes || 0)}%` }} />}
           </button>
         ))}
