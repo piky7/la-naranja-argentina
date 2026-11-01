@@ -288,7 +288,7 @@ export default function ProdeGroups() {
             <p className="prode-group-pending">Medallas acumuladas por semana finalizada. Se entregan solo si al menos 3 participantes pronosticaron esa semana. Los empates comparten medalla.</p>
           </div> : <div className="prode-group-ranking" role="tabpanel">
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
-            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position === 1 ? "🥇" : member.position === 2 ? "🥈" : member.position === 3 ? "🥉" : member.position ? member.position + "°" : "—"}</span><span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span></div>)}
+            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position === 1 ? "🥇" : member.position === 2 ? "🥈" : member.position === 3 ? "🥉" : member.position ? member.position + "°" : "—"}</span><button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></button><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span></div>)}
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de la semana seleccionada (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
@@ -328,7 +328,7 @@ export default function ProdeGroups() {
       </section>
     </div>}
     {selected && detail && profileUserId && (() => {
-      const player = (leagueRanking || []).find(m => m.userId === profileUserId);
+      const player = (leagueRanking || []).find(m => m.userId === profileUserId) || (weeklyRanking || []).find(m => m.userId === profileUserId) || detail.members.find(m => m.userId === profileUserId);
       const awards = (medalTable || []).find(m => m.userId === profileUserId);
       if (!player) return null;
       return <div className="prode-profile-backdrop" onClick={() => setProfileUserId(null)}>
