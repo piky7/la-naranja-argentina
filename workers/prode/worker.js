@@ -376,17 +376,8 @@ export default {
         return reply({ ok: false, error: "No se pudieron cargar tus ligas" }, 503);
       }
     }
-    if (url.pathname === "/api/prode/groups/public" && request.method === "GET") {
-      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
-      try {
-        const result = await env.DB.prepare(
-          "SELECT id, name, description, season, created_at FROM prode_groups WHERE visibility = 'public' ORDER BY created_at DESC LIMIT 30"
-        ).all();
-        return reply({ ok: true, groups: result.results || [] });
-      } catch {
-        return reply({ ok: false, error: "Grupos no disponibles" }, 503);
-      }
-    }
+    // No existen ligas públicas: se mantiene la ruta antigua por compatibilidad.
+    if (url.pathname === "/api/prode/groups/public" && request.method === "GET") return reply({ ok: true, groups: [] });
     // Invitaciones: token aleatorio de 256 bits; solo se guarda su SHA-256.
     const inviteCreate = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/invite$/.exec(url.pathname);
     if (inviteCreate && request.method === "POST") {
@@ -630,9 +621,9 @@ export default {
         let weeklyRank = 0, previousWeekly = null;
         const weeklyRanking = [...rows].sort((a,b) => b.weekly.points-a.weekly.points || b.weekly.correct-a.weekly.correct || a.username.localeCompare(b.username,"es")).map(row => {
           const pts = row.weekly.points;
-          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, position: null };
+          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, position: null };
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
-          return { ...row.weekly, userId: row.userId, username: row.username, position: weeklyRank };
+          return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, position: weeklyRank };
         });
         // Historial numerado desde la semana de inicio de la liga, incluyendo semanas sin partidos.
         const firstWeek = mondayOf(argentinaDateKey(leagueStart));
@@ -640,7 +631,7 @@ export default {
         for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
           const participants = rows.filter(row => argentinaDateKey(time(allMembers.find(m => m.user_id === row.userId)?.joined_at)) < startMs + 7*86400000).map(row => {
             const w = row.weeks[startMs] || { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
-            return { username: row.username, userId: row.userId, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
+            return { username: row.username, userId: row.userId, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
           });
           participants.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
           let place = 0, last = null;
