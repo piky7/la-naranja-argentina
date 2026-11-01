@@ -337,16 +337,19 @@ export default {
     // Clasificación por liga. Los votos se leen de Mi Carrera; nunca se duplican.
     // El primer acceso activa la liga para partidos futuros (no importa puntos anteriores).
     const leagueRanking = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/ranking$/.exec(url.pathname);
-    if (leagueRanking && request.method === "GET") {
+    if (leagueRanking && (request.method === "GET" || request.method === "POST")) {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Clasificación no disponible" }, 503);
       const identity = await verifiedFirebaseUser(request);
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const groupId = leagueRanking[1], userId = "firebase:" + identity.uid;
-        const membership = await env.DB.prepare("SELECT 1 AS present FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId,userId).first();
+        const membership = await env.DB.prepare("SELECT m.role FROM prode_memberships m WHERE m.group_id=? AND m.user_id=?").bind(groupId,userId).first();
         if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
         await env.DB.prepare("INSERT OR IGNORE INTO prode_league_starts(group_id) VALUES (?)").bind(groupId).run();
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_initial_points (group_id TEXT NOT NULL, user_id TEXT NOT NULL, points INTEGER NOT NULL CHECK(points >= 0), assigned_by TEXT NOT NULL, assigned_at TEXT NOT NULL DEFAULT (datetime('now')), PRIMARY KEY(group_id,user_id), FOREIGN KEY(group_id,user_id) REFERENCES prode_memberships(group_id,user_id))").run();
+        const initialRows = await env.DB.prepare("SELECT user_id, points FROM prode_initial_points WHERE group_id=?").bind(groupId).all();
+        const initialPoints = new Map((initialRows.results || []).map(row => [row.user_id, Number(row.points)]));
         const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
         const members = await env.DB.prepare(
           "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id WHERE m.group_id=? ORDER BY m.joined_at ASC LIMIT 200"
@@ -360,7 +363,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, points: 0, correct: 0, wrong: 0, played: 0, mvpHits: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, correct: 0, wrong: 0, played: 0, mvpHits: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -391,6 +394,25 @@ export default {
             return base;
           }));
           rows.push(...batch);
+        }
+        if (request.method === "POST") {
+          if (membership.role !== "owner") return reply({ ok: false, error: "Solo el administrador puede asignar puntos" }, 403);
+          const body = await request.json().catch(() => ({}));
+          const targetId = body.userId;
+          const amount = body.points;
+          if (typeof targetId !== "string" || !Number.isSafeInteger(amount) || amount < 0)
+            return reply({ ok: false, error: "Puntos inválidos" }, 400);
+          const target = rows.find(row => row.userId === targetId);
+          if (!target || targetId === userId) return reply({ ok: false, error: "Seleccioná otro participante de la liga" }, 400);
+          if (target.initialPoints !== null) return reply({ ok: false, error: "Los puntos iniciales ya fueron asignados" }, 409);
+          const leaderPoints = Math.max(0, ...rows.map(row => row.points));
+          if (amount > leaderPoints) return reply({ ok: false, error: "El máximo permitido es " + leaderPoints + " puntos" }, 400);
+          // No se permiten ajustes retroactivos cuando el integrante ya sumó puntos propios.
+          if (target.played || target.mvpHits) return reply({ ok: false, error: "El participante ya comenzó a puntuar en la liga" }, 409);
+          const saved = await env.DB.prepare("INSERT INTO prode_initial_points(group_id,user_id,points,assigned_by) VALUES(?,?,?,?) ON CONFLICT(group_id,user_id) DO NOTHING")
+            .bind(groupId,targetId,amount,userId).run();
+          if (!saved.meta?.changes) return reply({ ok: false, error: "Los puntos iniciales ya fueron asignados" }, 409);
+          return reply({ ok: true, userId: targetId, points: amount, maxPoints: leaderPoints });
         }
         rows.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
         let rank = 0, previousPoints = null;
@@ -424,7 +446,7 @@ export default {
           }
         }
         const medalTable = [...medals.values()].sort((a,b)=>b.gold-a.gold || b.silver-a.silver || b.bronze-a.bronze || a.username.localeCompare(b.username,"es"));
-        return reply({ ok: true, ranking, weeklyRanking, medalTable, weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
+        return reply({ ok: true, ranking, weeklyRanking, medalTable, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
         console.error("Prode league ranking:", error);
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
