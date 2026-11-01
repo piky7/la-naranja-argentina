@@ -336,6 +336,32 @@ export default {
         return reply({ ok: false, error: "No se pudo aceptar la invitación" }, 503);
       }
     }
+    // Archivo histórico de temporadas. Solo lectura; nunca cierra ni modifica una temporada.
+    // Una futura operación de cierre deberá verificar todos los partidos oficiales pendientes
+    // y guardar de forma atómica el resumen y las filas antes de declarar un campeón.
+    const seasonHistory = /^\\/api\\/prode\\/groups\\/([0-9a-f-]{36})\\/seasons$/.exec(url.pathname);
+    if (seasonHistory && request.method === "GET") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
+      try {
+        const groupId = seasonHistory[1], userId = "firebase:" + identity.uid;
+        const member = await env.DB.prepare("SELECT 1 AS allowed FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId, userId).first();
+        if (!member) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_season_archives (group_id TEXT NOT NULL, season TEXT NOT NULL, closed_at TEXT NOT NULL DEFAULT (datetime('now')), champion_user_ids TEXT NOT NULL, standings_json TEXT NOT NULL, medals_json TEXT NOT NULL, weekly_history_json TEXT NOT NULL, PRIMARY KEY(group_id,season), FOREIGN KEY(group_id) REFERENCES prode_groups(id) ON DELETE RESTRICT)").run();
+        const archives = await env.DB.prepare("SELECT season, closed_at, champion_user_ids, standings_json, medals_json, weekly_history_json FROM prode_season_archives WHERE group_id=? ORDER BY season DESC LIMIT 30").bind(groupId).all();
+        return reply({ ok: true, seasons: (archives.results || []).map(row => ({
+          season: row.season, closedAt: row.closed_at,
+          champions: JSON.parse(row.champion_user_ids),
+          ranking: JSON.parse(row.standings_json),
+          medalTable: JSON.parse(row.medals_json),
+          weeklyHistory: JSON.parse(row.weekly_history_json),
+        })) });
+      } catch (error) {
+        console.error("Prode season history:", error);
+        return reply({ ok: false, error: "No se pudo consultar el historial de temporadas" }, 503);
+      }
+    }
     // Clasificación por liga. Los votos se leen de Mi Carrera; nunca se duplican.
     // El primer acceso activa la liga para partidos futuros (no importa puntos anteriores).
     const leagueRanking = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/ranking$/.exec(url.pathname);
