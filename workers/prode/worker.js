@@ -222,7 +222,7 @@ export default {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id WHERE n.username IS NOT NULL AND n.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
@@ -273,7 +273,7 @@ export default {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
         const dayKey = value => {
           const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(value));
           const n = type => Number(parts.find(p => p.type === type)?.value);
