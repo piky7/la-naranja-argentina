@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy, CalendarDays, Medal, Layers3, BarChart3, Settings2, Send } from "lucide-react";
+import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy, CalendarDays, Medal, Layers3, BarChart3, Settings2, Send, CircleCheck, CircleX } from "lucide-react";
+import { teams } from "../data/teams";
+import { players } from "../data/players";
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
+const teamLabel = id => teams.find(t => t.id === id)?.shortName || teams.find(t => t.id === id)?.name || (id || "—");
+const teamLogo = id => teams.find(t => t.id === id)?.logo;
+const mvpLabel = id => players.find(p => p.id === id)?.name || (id ? String(id).replace(/-/g, " ") : "No votó");
 const formatWeekRange = startsAt => {
   const start = new Date(startsAt);
   if (!Number.isFinite(start.getTime())) return "";
@@ -53,6 +58,10 @@ export default function ProdeGroups() {
   const [rankingError, setRankingError] = useState("");
   const [rankingBusy, setRankingBusy] = useState(false);
   const [groupTab, setGroupTab] = useState("weekly");
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [matchesByWeek, setMatchesByWeek] = useState({});
+  const [selectedMatch, setSelectedMatch] = useState(null);
+  const [showAllMatches, setShowAllMatches] = useState(false);
   const [detailBusy, setDetailBusy] = useState(false);
   const [detailError, setDetailError] = useState("");
   const [invite, setInvite] = useState("");
@@ -105,6 +114,7 @@ export default function ProdeGroups() {
     setEditCrestSecondary(group.crestSecondary || "#10283c");
     setCrestEditing(false); setCrestMessage("");
     setGroupTab("weekly");
+    setSettingsOpen(false); setSelectedMatch(null); setMatchesByWeek({}); setShowAllMatches(false);
     setDetail(null);
     setLeagueRanking(null);
     setWeeklyRanking(null);
@@ -140,6 +150,7 @@ export default function ProdeGroups() {
           setLeagueRanking(rankingData.ranking || []);
           setWeeklyRanking(rankingData.weeklyRanking || []);
           setWeeklyHistory(rankingData.weeklyHistory || []);
+          setMatchesByWeek(rankingData.matchesByWeek || {});
           setSelectedWeek(String((rankingData.weeklyHistory || []).at(-1)?.number || ""));
           setMedalTable(rankingData.medalTable || []);
         } catch (rankingFailure) { setRankingError(rankingFailure.message || "Clasificación no disponible"); }
@@ -185,6 +196,7 @@ export default function ProdeGroups() {
         setWeeklyRanking(ranking.weeklyRanking || []);
         setWeeklyHistory(ranking.weeklyHistory || []);
         setMedalTable(ranking.medalTable || []);
+        setMatchesByWeek(ranking.matchesByWeek || {});
       }
     } catch (e) { setInitialMessage(e.message || "Error al asignar puntos"); }
     finally { setInitialBusy(false); }
