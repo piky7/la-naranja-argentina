@@ -94,7 +94,7 @@ export default function ProdeGoogleAccess() {
         body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText }),
       });
       const data = await response.json();
-      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el escudo");
+      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el avatar");
       setProfile(prev => ({ ...prev, crestPrimary: data.crestPrimary, crestSecondary: data.crestSecondary, crestText: data.crestText }));
       setCrestMessage("Colores guardados correctamente");
       window.dispatchEvent(new Event("prode-profile-updated"));
@@ -178,7 +178,7 @@ export default function ProdeGoogleAccess() {
             <label>Color del texto<input type="color" value={crestText} onChange={e => setCrestText(e.target.value)}/></label>
           </div>
         </div>
-        <button className="prode-crest-save" type="button" disabled={crestBusy} onClick={saveCrest}>{crestBusy ? "Guardando colores…" : "Guardar colores del escudo"}</button>
+        <button className="prode-crest-save" type="button" disabled={crestBusy} onClick={saveCrest}>{crestBusy ? "Guardando avatar…" : "Guardar avatar"}</button>
         {crestMessage && <p role="status" className="prode-crest-feedback">{crestMessage}</p>}{profileError && <p className="prode-group-error" role="alert">{profileError}</p>}<button className="prode-create-submit" type="submit" disabled={saving || !/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())}>{saving ? "Guardando…" : "Guardar perfil"}</button></form></div>}
     </div>
   );
