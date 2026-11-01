@@ -178,7 +178,8 @@ export default {
     if (url.pathname === "/api/prode/ranking/historical" && request.method === "GET") {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
-        const rows = await env.DB.prepare("SELECT l.visitor_id, n.username FROM prode_career_links l JOIN prode_usernames n ON n.user_id = l.user_id WHERE n.username IS NOT NULL AND n.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
+        await ensureCrests(env.DB);
+        const rows = await env.DB.prepare("SELECT l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_career_links l JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id WHERE n.username IS NOT NULL AND n.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
@@ -189,7 +190,7 @@ export default {
               if (!response.ok) return null;
               const data = await response.json();
               if (!data.ok || !Number.isFinite(data.points)) return null;
-              return { username: item.username, points: data.points };
+              return { username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary };
             } catch { return null; }
           }));
           results.push(...batch.filter(Boolean));
@@ -309,8 +310,9 @@ export default {
       if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
       try {
         await ensureMembershipPeriods(env.DB);
+        await ensureCrests(env.DB);
         const groups = await env.DB.prepare(
-          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY g.created_at DESC LIMIT 50"
+          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role, COALESCE(c.primary_color,'#ff9a39') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id LEFT JOIN prode_group_crests c ON c.group_id=g.id WHERE m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY g.created_at DESC LIMIT 50"
         ).bind("firebase:" + identity.uid).all();
         return reply({ ok: true, groups: groups.results || [] });
       } catch {
@@ -472,8 +474,9 @@ export default {
         const initialRows = await env.DB.prepare("SELECT user_id, points FROM prode_initial_points WHERE group_id=?").bind(groupId).all();
         const initialPoints = new Map((initialRows.results || []).map(row => [row.user_id, Number(row.points)]));
         const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
+        await ensureCrests(env.DB);
         const members = await env.DB.prepare(
-          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         const periodsResult = await env.DB.prepare("SELECT user_id, entered_at, exited_at FROM prode_membership_periods WHERE group_id=? ORDER BY entered_at").bind(groupId).all();
         const periodsByUser = new Map();
@@ -496,7 +499,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -669,12 +672,13 @@ export default {
       try {
         const groupId = groupDetail[1], userId = "firebase:" + identity.uid;
         await ensureMembershipPeriods(env.DB);
+        await ensureCrests(env.DB);
         const group = await env.DB.prepare(
-          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE g.id = ? AND m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)"
+          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role, COALESCE(c.primary_color,'#ff9a39') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id LEFT JOIN prode_group_crests c ON c.group_id=g.id WHERE g.id = ? AND m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)"
         ).bind(groupId, userId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
         const members = await env.DB.prepare(
-          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id WHERE m.group_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         return reply({ ok: true, group, members: members.results || [] });
       } catch {
