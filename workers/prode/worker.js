@@ -152,12 +152,13 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const body = await request.json();
-        if (!validCrest(body.primary) || !validCrest(body.secondary)) return reply({ ok: false, error: "Colores inválidos" }, 400);
+        if (!validCrest(body.primary) || !validCrest(body.secondary) || !validCrest(body.textColor || "#ffffff")) return reply({ ok: false, error: "Colores inválidos" }, 400);
         const userId = "firebase:" + identity.uid;
         await ensureCrests(env.DB);
         if (!(await env.DB.prepare("SELECT id FROM prode_users WHERE id=?").bind(userId).first())) return reply({ ok: false, error: "Primero registrá tu perfil" }, 409);
         await env.DB.prepare("INSERT INTO prode_user_crests(user_id,primary_color,secondary_color) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET primary_color=excluded.primary_color,secondary_color=excluded.secondary_color").bind(userId,body.primary,body.secondary).run();
-        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary });
+        await env.DB.prepare("INSERT INTO prode_crest_texts(kind,entity_id,color) VALUES ('user',?,?) ON CONFLICT(kind,entity_id) DO UPDATE SET color=excluded.color").bind(userId,body.textColor || "#ffffff").run();
+        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary, crestText: body.textColor || "#ffffff" });
       } catch { return reply({ ok: false, error: "No se pudo guardar el escudo" }, 503); }
     }
     const crestRoute = new RegExp("^/api/prode/groups/([0-9a-f-]{36})/crest$").exec(url.pathname);
@@ -167,12 +168,13 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const body = await request.json();
-        if (!validCrest(body.primary) || !validCrest(body.secondary)) return reply({ ok: false, error: "Colores inválidos" }, 400);
+        if (!validCrest(body.primary) || !validCrest(body.secondary) || !validCrest(body.textColor || "#ffffff")) return reply({ ok: false, error: "Colores inválidos" }, 400);
         const groupId = crestRoute[1];
         if (!(await env.DB.prepare("SELECT id FROM prode_groups WHERE id=? AND owner_id=?").bind(groupId,"firebase:"+identity.uid).first())) return reply({ ok: false, error: "Solo el administrador puede editar el trofeo" }, 403);
         await ensureCrests(env.DB);
         await env.DB.prepare("INSERT INTO prode_group_crests(group_id,primary_color,secondary_color) VALUES (?,?,?) ON CONFLICT(group_id) DO UPDATE SET primary_color=excluded.primary_color,secondary_color=excluded.secondary_color").bind(groupId,body.primary,body.secondary).run();
-        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary });
+        await env.DB.prepare("INSERT INTO prode_crest_texts(kind,entity_id,color) VALUES ('league',?,?) ON CONFLICT(kind,entity_id) DO UPDATE SET color=excluded.color").bind(groupId,body.textColor || "#ffffff").run();
+        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary, crestText: body.textColor || "#ffffff" });
       } catch { return reply({ ok: false, error: "No se pudo guardar el trofeo" }, 503); }
     }
     // Clasificación histórica: consulta en vivo los puntos de Mi Carrera de las cuentas vinculadas.
