@@ -216,3 +216,11 @@
 .prode-medal-table .prode-ranking-head,.prode-medal-table .prode-ranking-row{grid-template-columns:minmax(0,1fr) repeat(3,45px);gap:8px}
 .prode-medal-table .prode-ranking-head span:nth-child(n+2),.prode-medal-table .prode-ranking-row>span:nth-child(n+2){text-align:center;font-variant-numeric:tabular-nums}
 @media(max-width:380px){.prode-group-tabs button{font-size:10px;gap:2px}.prode-medal-table .prode-ranking-head,.prode-medal-table .prode-ranking-row{grid-template-columns:minmax(0,1fr) repeat(3,36px);gap:4px}}
+
+.prode-initial-panel{margin-top:14px;padding:12px;border:1px solid #355846;border-radius:11px;background:#102a2a}
+.prode-initial-panel>strong{display:block;color:#a6f779;font-size:13px;margin-bottom:4px}
+.prode-initial-panel p{font-size:11px;color:#b2cbbc;line-height:1.5;margin:5px 0 10px}
+.prode-initial-fields{display:grid;grid-template-columns:minmax(0,1fr) 64px 75px;gap:6px}
+.prode-initial-fields select,.prode-initial-fields input{width:100%;min-width:0;height:38px;padding:7px;border:1px solid #486457;border-radius:8px;background:#0c2026;color:#f0fff1;font-size:12px}
+.prode-initial-fields button{border:0;border-radius:8px;background:#80e84c;color:#12251a;font-size:12px;font-weight:800}
+.prode-initial-fields button:disabled{opacity:.5}
