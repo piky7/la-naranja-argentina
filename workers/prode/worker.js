@@ -359,9 +359,15 @@ export default {
         const time = value => Date.parse(String(value).replace(" ", "T") + (String(value).includes("Z") ? "" : "Z"));
         const leagueStart = time(start.starts_at);
         const rows = [];
-        // Semana ISO: lunes 00:00 UTC a lunes siguiente; se calcula sobre la fecha de inicio del partido.
-        const today = new Date();
-        const weekStart = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - ((today.getUTCDay()+6)%7));
+        // Semanas de lunes a domingo según la fecha del partido en Argentina.
+        // Las claves son medianoches UTC de la fecha civil argentina, no del instante UTC del encuentro.
+        const argentinaDateKey = value => {
+          const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date(value));
+          const field = type => Number(parts.find(part => part.type === type)?.value);
+          return Date.UTC(field("year"), field("month") - 1, field("day"));
+        };
+        const mondayOf = dateKey => dateKey - ((new Date(dateKey).getUTCDay()+6)%7)*86400000;
+        const weekStart = mondayOf(argentinaDateKey(Date.now()));
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
@@ -373,11 +379,11 @@ export default {
             if (!data.ok || !Array.isArray(data.games)) throw Error("Historial de votaciones no disponible");
             const since = Math.max(leagueStart, time(member.joined_at));
             let streak = 0;
-            for (const game of data.games) {
+            const chronologicalGames = [...data.games].sort((a,b) => Date.parse(a.startsAt) - Date.parse(b.startsAt) || String(a.id || "").localeCompare(String(b.id || "")));
+            for (const game of chronologicalGames) {
               const kickoff = Date.parse(game.startsAt);
               if (!Number.isFinite(kickoff) || kickoff < since || !game.finished || kickoff > Date.now()) continue;
-              const gameDate = new Date(kickoff);
-              const gameWeek = Date.UTC(gameDate.getUTCFullYear(),gameDate.getUTCMonth(),gameDate.getUTCDate()-((gameDate.getUTCDay()+6)%7));
+              const gameWeek = mondayOf(argentinaDateKey(kickoff));
               const weekly = gameWeek === weekStart;
               const week = base.weeks[gameWeek] ||= { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
               if (game.mvpVoted) week.mvpVoted++;
@@ -432,8 +438,7 @@ export default {
           return { ...row.weekly, userId: row.userId, username: row.username, position: weeklyRank };
         });
         // Historial numerado desde la semana de inicio de la liga, incluyendo semanas sin partidos.
-        const firstDate = new Date(leagueStart);
-        const firstWeek = Date.UTC(firstDate.getUTCFullYear(), firstDate.getUTCMonth(), firstDate.getUTCDate()-((firstDate.getUTCDay()+6)%7));
+        const firstWeek = mondayOf(argentinaDateKey(leagueStart));
         const weeklyHistory = [];
         for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
           const participants = rows.filter(row => time(allMembers.find(m => m.user_id === row.userId)?.joined_at) < startMs + 7*86400000).map(row => {
