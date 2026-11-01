@@ -16,6 +16,7 @@ export default function ProdeGoogleAccess() {
   const [username, setUsername] = useState("");
   const [crestPrimary, setCrestPrimary] = useState("#7de83d");
   const [crestSecondary, setCrestSecondary] = useState("#10283c");
+  const [crestText, setCrestText] = useState("#ffffff");
   const [crestBusy, setCrestBusy] = useState(false);
   const [crestMessage, setCrestMessage] = useState("");
   const [saving, setSaving] = useState(false);
