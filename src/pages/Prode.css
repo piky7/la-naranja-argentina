@@ -224,3 +224,11 @@
 .prode-initial-fields select,.prode-initial-fields input{width:100%;min-width:0;height:38px;padding:7px;border:1px solid #486457;border-radius:8px;background:#0c2026;color:#f0fff1;font-size:12px}
 .prode-initial-fields button{border:0;border-radius:8px;background:#80e84c;color:#12251a;font-size:12px;font-weight:800}
 .prode-initial-fields button:disabled{opacity:.5}
+
+/* Acción administrativa secundaria: cerrada por defecto. */
+.prode-initial-control{margin-top:9px}
+.prode-initial-toggle{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;min-height:34px;padding:7px 10px;border:1px solid #355846;border-radius:9px;background:#112a2b;color:#b8d9c2;font-size:12px;font-weight:700;cursor:pointer}
+.prode-initial-toggle svg:last-child{margin-left:auto;transition:transform .2s}
+.prode-initial-toggle svg.expanded{transform:rotate(90deg)}
+.prode-initial-panel{margin-top:6px;padding:10px}
+.prode-initial-feedback{font-size:11px;color:#b8e8a6;margin:6px 0}
