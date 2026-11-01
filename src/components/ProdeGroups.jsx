@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy, CalendarDays, Medal, Layers3, BarChart3, Settings2, Send, CircleCheck, CircleX } from "lucide-react";
+import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy, CalendarDays, Medal, Layers3, BarChart3, Settings2, Send, CircleCheck, CircleX, Star, Target, ChartNoAxesColumn, Award } from "lucide-react";
 import { teams } from "../data/teams";
 import { players } from "../data/players";
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
@@ -47,6 +47,9 @@ export default function ProdeGroups() {
   const [medalTable, setMedalTable] = useState(null);
   const [expandedMedal, setExpandedMedal] = useState(null);
   const [profileUserId, setProfileUserId] = useState(null);
+  const [historicalProfile, setHistoricalProfile] = useState(null);
+  const [historicalBusy, setHistoricalBusy] = useState(false);
+  const [historicalError, setHistoricalError] = useState("");
   const [manageOpen, setManageOpen] = useState(false);
   const [manageBusy, setManageBusy] = useState(false);
   const [manageError, setManageError] = useState("");
@@ -94,6 +97,33 @@ export default function ProdeGroups() {
   useEffect(() => { setReady(false); load(user); }, [user]);
   useEffect(() => { const refresh = () => { if (selected) openGroup(selected); }; window.addEventListener("prode-profile-updated", refresh); return () => window.removeEventListener("prode-profile-updated", refresh); }, [selected, user]);
   useEffect(() => { const code = new URLSearchParams(window.location.search).get("invite"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
+
+  useEffect(() => {
+    if (!profileUserId || !selected?.id || !user) {
+      setHistoricalProfile(null); setHistoricalBusy(false); setHistoricalError("");
+      return;
+    }
+    let active = true;
+    setHistoricalProfile(null); setHistoricalBusy(true); setHistoricalError("");
+    const loadHistorical = async () => {
+      try {
+        const token = await user.getIdToken();
+        const query = new URLSearchParams({ groupId: selected.id, memberId: profileUserId });
+        const response = await fetch(API + "/api/prode/ranking/historical?" + query, {
+          headers: { Authorization: "Bearer " + token }
+        });
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw Error(data.error || "Ranking no disponible");
+        if (active) setHistoricalProfile(data.memberProfile);
+      } catch (error) {
+        if (active) setHistoricalError(error.message || "Datos no disponibles");
+      } finally {
+        if (active) setHistoricalBusy(false);
+      }
+    };
+    loadHistorical();
+    return () => { active = false; };
+  }, [profileUserId, selected?.id, user]);
 
   const checkSeasonClose = async () => {
     if (!user || !selected || closeCheckBusy) return;
@@ -557,27 +587,45 @@ export default function ProdeGroups() {
       const player = (leagueRanking || []).find(m => m.userId === profileUserId) || (weeklyRanking || []).find(m => m.userId === profileUserId) || detail.members.find(m => m.userId === profileUserId);
       const awards = (medalTable || []).find(m => m.userId === profileUserId);
       if (!player) return null;
+      const crestPrimary = detail.group?.crestPrimary || selected.crestPrimary || "#ff9a39";
+      const crestSecondary = detail.group?.crestSecondary || selected.crestSecondary || "#10283c";
+      const historicalPoints = historicalBusy ? "…" : historicalProfile?.points ?? "—";
+      const globalPosition = historicalBusy ? "…" : historicalProfile?.position != null ? "#" + historicalProfile.position : "—";
       return <div className="prode-profile-backdrop" onClick={() => setProfileUserId(null)}>
-        <section className="prode-profile-dialog" role="dialog" aria-modal="true" aria-label={"Perfil de " + player.username} onClick={e => e.stopPropagation()}>
-          <button type="button" className="prode-profile-close" aria-label="Cerrar perfil" onClick={() => setProfileUserId(null)}><X size={19}/></button>
-          <div className="prode-profile-identity"><ProdeCrest name={player.username} primary={player.crestPrimary} secondary={player.crestSecondary} textColor={player.crestText} size={54} className="prode-member-crest"/><div><h3>{player.username}</h3><small>{selected.name} · Temporada {selected.season || "2026/27"}</small></div></div>
-          <div className="prode-profile-points"><strong>{player.points ?? 0}</strong><span>PUNTOS EN LA LIGA</span></div>
+        <section className="prode-profile-dialog prode-profile-premium" style={{ "--profile-accent": crestPrimary, "--profile-secondary": crestSecondary }} role="dialog" aria-modal="true" aria-label={"Perfil de " + player.username} onClick={e => e.stopPropagation()}>
+          <button type="button" className="prode-profile-close" aria-label="Cerrar perfil" onClick={() => setProfileUserId(null)}><X size={20}/></button>
+          <div className="prode-profile-identity">
+            <ProdeCrest name={player.username} primary={player.crestPrimary} secondary={player.crestSecondary} textColor={player.crestText} size={75} className="prode-member-crest"/>
+            <div className="prode-profile-identity-copy">
+              <h3>{player.username}</h3>
+              <small>{selected.name} · Temporada {selected.season || "2026/27"}</small>
+              <div className="prode-profile-badges">
+                <span><Trophy size={14}/>{globalPosition} Ranking general</span>
+                <span><Star size={14}/>{historicalPoints} pts históricos</span>
+              </div>
+            </div>
+          </div>
+          <div className="prode-profile-summary">
+            <div><strong>{player.points ?? 0}</strong><span>PTS EN LA LIGA</span></div>
+            <div><strong>{historicalPoints}</strong><span>PTS HISTÓRICOS</span></div>
+            <div><strong>{globalPosition}</strong><span>PUESTO GENERAL</span></div>
+          </div>
+          {historicalError && <p className="prode-profile-history-notice" role="status">No pudimos consultar los puntos históricos en este momento.</p>}
+          {!historicalBusy && !historicalError && !historicalProfile && <p className="prode-profile-history-notice">Sin Mi Carrera vinculada o sin datos históricos disponibles.</p>}
+          <h4 className="prode-profile-section-title">ESTADÍSTICAS EN ESTA LIGA</h4>
           <div className="prode-profile-stats">
-            <div><strong>{player.played ?? 0}</strong><span>Jugados</span></div>
-            <div><strong>{player.accuracy ?? 0}%</strong><span>Efectividad</span></div>
-            <div><strong>{player.mvpHits ?? 0}</strong><span>MVP acertados</span></div>
-            <div><strong>{player.correct ?? 0}</strong><span>Aciertos</span></div>
-            <div><strong>{player.wrong ?? 0}</strong><span>Errores</span></div>
-            <div><strong>{player.mvpVotes ?? 0}</strong><span>MVP votados</span></div>
+            <div><span className="prode-profile-stat-icon"><ChartNoAxesColumn size={20}/></span><strong>{player.played ?? 0}</strong><span>Jugados</span></div>
+            <div><span className="prode-profile-stat-icon"><Target size={20}/></span><strong>{player.accuracy ?? 0}%</strong><span>Efectividad</span></div>
+            <div><span className="prode-profile-stat-icon"><Trophy size={20}/></span><strong>{player.mvpHits ?? 0}</strong><span>MVP acertados</span></div>
+            <div><span className="prode-profile-stat-icon good"><CircleCheck size={20}/></span><strong>{player.correct ?? 0}</strong><span>Aciertos</span></div>
+            <div><span className="prode-profile-stat-icon bad"><CircleX size={20}/></span><strong>{player.wrong ?? 0}</strong><span>Errores</span></div>
+            <div><span className="prode-profile-stat-icon"><Target size={20}/></span><strong>{player.mvpVotes ?? 0}</strong><span>MVP votados</span></div>
           </div>
-          <div className="prode-profile-best-week">
-            <span>Mejor semana</span>
-            <strong>{player.bestWeek ? `Semana ${player.bestWeek.number} · ${player.bestWeek.points} pts` : "Sin partidos puntuados"}</strong>
-          </div>
+          <div className="prode-profile-best-week"><span><CalendarDays size={17}/> Mejor semana</span><strong>{player.bestWeek ? `Semana ${player.bestWeek.number} · ${player.bestWeek.points} pts` : "Sin partidos puntuados"}</strong></div>
           <div className="prode-profile-medals">
-            <div><strong>🥇 {awards?.gold ?? 0}</strong><span>Oro</span></div>
-            <div><strong>🥈 {awards?.silver ?? 0}</strong><span>Plata</span></div>
-            <div><strong>🥉 {awards?.bronze ?? 0}</strong><span>Bronce</span></div>
+            <div><span className="prode-profile-medal-symbol">🥇</span><strong>{awards?.gold ?? 0}</strong><span>Oro</span></div>
+            <div><span className="prode-profile-medal-symbol">🥈</span><strong>{awards?.silver ?? 0}</strong><span>Plata</span></div>
+            <div><span className="prode-profile-medal-symbol">🥉</span><strong>{awards?.bronze ?? 0}</strong><span>Bronce</span></div>
           </div>
           <p>Estadísticas acumuladas en esta liga. Las medallas corresponden a semanas finalizadas.</p>
         </section>
