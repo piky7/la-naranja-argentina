@@ -25,6 +25,8 @@ export default function ProdeGroups() {
   const [leagueRanking, setLeagueRanking] = useState(null);
   const [weeklyRanking, setWeeklyRanking] = useState(null);
   const [weeklyHistory, setWeeklyHistory] = useState([]);
+  const [seasonArchives, setSeasonArchives] = useState([]);
+  const [archiveError, setArchiveError] = useState("");
   const [selectedWeek, setSelectedWeek] = useState("");
   const [medalTable, setMedalTable] = useState(null);
   const [expandedMedal, setExpandedMedal] = useState(null);
@@ -80,6 +82,7 @@ export default function ProdeGroups() {
     setLeagueRanking(null);
     setWeeklyRanking(null);
     setWeeklyHistory([]); setSelectedWeek("");
+    setSeasonArchives([]); setArchiveError("");
     setMedalTable(null);
     setExpandedMedal(null);
     setProfileUserId(null);
@@ -97,6 +100,12 @@ export default function ProdeGroups() {
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo abrir la liga");
       setDetail(data);
+      try {
+        const archiveResponse = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/seasons", { headers: { Authorization: "Bearer " + token } });
+        const archiveData = await archiveResponse.json();
+        if (!archiveResponse.ok || !archiveData.ok) throw Error(archiveData.error || "Historial no disponible");
+        setSeasonArchives(archiveData.seasons || []);
+      } catch (archiveFailure) { setArchiveError(archiveFailure.message || "Historial no disponible"); }
       try {
         const rankingRes = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/ranking", { headers: { Authorization: "Bearer " + token } });
         const rankingData = await rankingRes.json();
@@ -269,6 +278,7 @@ export default function ProdeGroups() {
             <button type="button" role="tab" aria-selected={groupTab === "weekly"} className={groupTab === "weekly" ? "active" : ""} onClick={() => setGroupTab("weekly")}><Trophy size={16}/> Ranking semanal</button>
             <button type="button" role="tab" aria-selected={groupTab === "general"} className={groupTab === "general" ? "active" : ""} onClick={() => setGroupTab("general")}><Trophy size={16}/> Tabla general</button>
             <button type="button" role="tab" aria-selected={groupTab === "medals"} className={groupTab === "medals" ? "active" : ""} onClick={() => setGroupTab("medals")}><Trophy size={16}/> Medallero</button>
+            <button type="button" role="tab" aria-selected={groupTab === "seasons"} className={groupTab === "seasons" ? "active" : ""} onClick={() => setGroupTab("seasons")}><Trophy size={16}/> Temporadas</button>
           </div>
           {groupTab === "weekly" && weeklyHistory.length > 0 && <div className="prode-week-selector">
             <label className="prode-week-select-label">
@@ -280,7 +290,14 @@ export default function ProdeGroups() {
             </label>
             <p className="prode-week-date-range">Del {formatWeekRange(weeklyHistory.find(w => String(w.number) === (selectedWeek || String(weeklyHistory.at(-1).number)))?.startsAt)}</p>
           </div>}
-          {groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
+          {groupTab === "seasons" ? <div className="prode-season-archive" role="tabpanel">
+            <strong>Historial de temporadas</strong>
+            {archiveError ? <p className="prode-group-error" role="alert">{archiveError}</p> : seasonArchives.length === 0 ? <p>La temporada 2026/27 sigue en juego. Cuando termine y se confirmen todos los resultados, acá aparecerán los campeones y las clasificaciones definitivas.</p> : seasonArchives.map(archive => <div className="prode-season-item" key={archive.season}>
+              <strong>Temporada {archive.season}</strong>
+              <span>🏆 {archive.champions.map(id => archive.ranking.find(row => row.userId === id)?.username || "Campeón").join(" · ")}</span>
+              <small>{archive.ranking.length} participantes · Clasificación definitiva guardada</small>
+            </div>)}
+          </div> : groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
             <div className="prode-ranking-head"><span>JUGADOR</span><span>🥇</span><span>🥈</span><span>🥉</span></div>
             {(medalTable || detail.members).map((member,index) => <div className="prode-medal-member" key={member.userId || index}>
               <div className="prode-ranking-row">
