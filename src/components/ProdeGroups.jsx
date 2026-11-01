@@ -225,11 +225,11 @@ export default function ProdeGroups() {
           </div>}
           {detail.group.role === "owner" && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
             <strong>Asignar puntos iniciales</strong>
-            <p>Solo una vez para quien todavía no haya sumado puntos. Máximo: {Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} PTS (líder actual).</p>
+            <p>Solo para integrantes nuevos, una única vez. Máximo: {Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} PTS (líder actual).</p>
             <div className="prode-initial-fields">
               <select aria-label="Participante" required value={initialTarget} onChange={e => setInitialTarget(e.target.value)}>
                 <option value="">Elegir participante</option>
-                {(leagueRanking || []).filter(m => m.userId && m.initialPoints === null && !m.played && !m.mvpHits && m.userId !== "firebase:" + user?.uid).map(m => <option key={m.userId} value={m.userId}>{m.username}</option>)}
+                {(leagueRanking || []).filter(m => m.userId && m.joinedLate && m.initialPoints === null && !m.played && !m.mvpHits && m.userId !== "firebase:" + user?.uid).map(m => <option key={m.userId} value={m.userId}>{m.username}</option>)}
               </select>
               <input aria-label="Puntos iniciales" type="number" inputMode="numeric" min="0" max={Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} step="1" required value={initialAmount} onChange={e => setInitialAmount(e.target.value)}/>
               <button type="submit" disabled={initialBusy || !initialTarget || initialAmount === "" || Number(initialAmount) < 0 || Number(initialAmount) > Math.max(0,...(leagueRanking || []).map(m => m.points || 0))}>{initialBusy ? "Guardando…" : "Asignar"}</button>
