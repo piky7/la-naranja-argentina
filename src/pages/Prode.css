@@ -208,3 +208,11 @@
 .prode-group-tabs button{min-width:0;font-size:12px;white-space:nowrap}
 .prode-ranking-head,.prode-ranking-row{min-width:0}
 @media(max-width:420px){.prode-ranking-name{gap:4px}.prode-ranking-name .prode-member-avatar{width:23px;height:23px;flex-basis:23px;font-size:10px}.prode-ranking-head{font-size:9px;padding-inline:2px}.prode-ranking-row{font-size:11px;padding-inline:2px}}
+
+/* Tres solapas compactas y medallero adaptable a móviles. */
+.prode-group-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+.prode-group-tabs button{font-size:11px;gap:4px;padding:10px 3px}
+.prode-group-tabs button svg{width:14px;height:14px;flex-shrink:0}
+.prode-medal-table .prode-ranking-head,.prode-medal-table .prode-ranking-row{grid-template-columns:minmax(0,1fr) repeat(3,45px);gap:8px}
+.prode-medal-table .prode-ranking-head span:nth-child(n+2),.prode-medal-table .prode-ranking-row>span:nth-child(n+2){text-align:center;font-variant-numeric:tabular-nums}
+@media(max-width:380px){.prode-group-tabs button{font-size:10px;gap:2px}.prode-medal-table .prode-ranking-head,.prode-medal-table .prode-ranking-row{grid-template-columns:minmax(0,1fr) repeat(3,36px);gap:4px}}
