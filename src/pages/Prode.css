@@ -251,3 +251,12 @@
 .prode-week-selector select{max-width:150px;min-width:0;height:33px;padding:5px 7px;border:1px solid #41684d;border-radius:8px;background:#102b29;color:#efffec;font-size:11px;font-weight:700}
 .prode-ranking-position{font-size:15px;line-height:1}
 @media(max-width:380px){.prode-week-selector{flex-wrap:wrap}.prode-week-selector label{margin-left:auto}}
+
+/* Selector semanal único: toda la franja abre la lista nativa. */
+.prode-week-selector{display:block;padding:12px 0 8px}
+.prode-week-select-label{position:relative;display:flex!important;align-items:center;gap:10px;width:100%;min-height:46px;padding:0 14px;border:1px solid #41684d;border-radius:10px;background:#112d2b;color:#a8f17e!important;cursor:pointer}
+.prode-week-select-label>svg{flex-shrink:0;pointer-events:none}
+.prode-week-select-label>svg:last-child{transform:rotate(90deg);margin-left:auto}
+.prode-week-select-label select{appearance:none;-webkit-appearance:none;flex:1;max-width:none!important;width:100%;height:46px;padding:0;border:0;outline:0;background:transparent;color:#a8f17e;font-size:15px;font-weight:800;cursor:pointer}
+.prode-week-select-label select option{background:#102b29;color:#efffec}
+@media(max-width:380px){.prode-week-selector{display:block}.prode-week-select-label{min-height:44px}.prode-week-select-label select{font-size:14px}}
