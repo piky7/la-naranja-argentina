@@ -1256,3 +1256,80 @@
   .prode-home-redesign .prode-friends-actions button{font-size:11px;padding:6px 9px}
   .prode-home-redesign .prode-friends-actions .prode-friends-join{padding-inline:2px}
 }
+
+
+/* Cuenta compacta: identidad y controles en una sola fila en la PWA. */
+.prode-home-redesign .prode-hero-account .prode-google-access{
+  grid-template-columns:minmax(0,1fr);
+}
+.prode-home-redesign .prode-hero-account .prode-google-identity{
+  grid-column:1/-1;
+  width:100%;
+  min-width:0;
+}
+.prode-home-redesign .prode-hero-account .prode-identity-info{
+  flex:1;
+  min-width:0;
+}
+.prode-home-redesign .prode-hero-account .prode-identity-name-row{
+  width:100%;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.prode-home-redesign .prode-hero-account .prode-identity-name-row>strong{
+  flex:1 1 auto;
+  min-width:0;
+}
+.prode-home-redesign .prode-hero-account .prode-account-actions{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.prode-home-redesign .prode-hero-account .prode-account-actions>.prode-admin-entry,
+.prode-home-redesign .prode-hero-account .prode-account-actions>.prode-account-icon{
+  display:inline-flex;
+  flex:0 0 34px;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+  width:34px;
+  height:34px;
+  min-height:34px;
+  padding:0;
+  border-radius:9px;
+  border:1px solid #54705f;
+  background:#18352f;
+  color:#b6fa8e;
+  cursor:pointer;
+  text-decoration:none;
+}
+.prode-home-redesign .prode-hero-account .prode-account-actions>.prode-admin-entry{
+  border-color:#b37a45;
+  background:#243044;
+  color:#ffc18a;
+}
+.prode-home-redesign .prode-hero-account .prode-account-actions>.prode-account-logout{
+  border-color:#586573;
+  background:#152935;
+  color:#c2cbd4;
+}
+.prode-home-redesign .prode-hero-account .prode-account-actions>.prode-account-icon:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+.prode-home-redesign .prode-hero-account .prode-account-actions>a:focus-visible,
+.prode-home-redesign .prode-hero-account .prode-account-actions>button:focus-visible{
+  outline:2px solid #ffb464;
+  outline-offset:2px;
+}
+@media(max-width:390px){
+  .prode-home-redesign .prode-hero-account .prode-account-actions{gap:4px}
+  .prode-home-redesign .prode-hero-account .prode-account-actions>.prode-admin-entry,
+  .prode-home-redesign .prode-hero-account .prode-account-actions>.prode-account-icon{
+    flex-basis:32px;width:32px;height:32px;min-height:32px;
+  }
+}
