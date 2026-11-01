@@ -90,6 +90,7 @@ async function ensureMembershipPeriods(db) {
 }
 const validCrest = color => typeof color === "string" && /^#[0-9a-fA-F]{6}$/.test(color);
 async function ensureCrests(db) {
+  await db.prepare("CREATE TABLE IF NOT EXISTS prode_crest_texts (kind TEXT NOT NULL, entity_id TEXT NOT NULL, color TEXT NOT NULL, PRIMARY KEY(kind,entity_id))").run();
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crests (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_group_crests (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
 }
