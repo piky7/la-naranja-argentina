@@ -44,6 +44,8 @@ export default function ProdeGoogleAccess() {
   useEffect(() => {
     let active = true;
     if (!user) { setProfile(null); setCareerLink(null); setSyncing(false); return () => { active = false; }; }
+    setCareerLink(null); // Pendiente de verificar: no mostrar la invitación durante la carga.
+    setLinkNotice(false);
     setSyncing(true);
     setError("");
     user.getIdToken().then(async (token) => {
@@ -149,7 +151,7 @@ export default function ProdeGoogleAccess() {
             <div><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
           </div>
           <button type="button" className="prode-profile-edit-button" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={16}/> Mi perfil</button>
-          {(careerLink !== true || linkNotice) && <div className="prode-career-link" role={linkNotice ? "status" : undefined}>
+          {(careerLink === false || linkNotice) && <div className="prode-career-link" role={linkNotice ? "status" : undefined}>
             <strong>{careerLink ? "✓ Mi Carrera vinculada" : "Vincular Mi Carrera"}</strong>
             <p>{careerLink ? "Tu cuenta Google quedó asociada a esta carrera. Los pronósticos y puntos de Prode todavía no se sincronizan." : "Vinculá la carrera de este navegador con tu cuenta Prode. No cambia los votos ni puntos existentes."}</p>
             {careerLink === false && <>
