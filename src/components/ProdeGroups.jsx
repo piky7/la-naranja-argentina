@@ -413,6 +413,7 @@ export default function ProdeGroups() {
           {!initialOpen && initialMessage && <p className="prode-initial-feedback" role="status">{initialMessage}</p>}
           </div>}
             </div>
+          {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit prode-invite-primary" disabled={inviteBusy} onClick={generateInvite}><Send size={18}/>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
           </div>
 
           </div>}
@@ -519,7 +520,6 @@ export default function ProdeGroups() {
             </section>;
           })()}
           {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
-          {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit prode-invite-primary" disabled={inviteBusy} onClick={generateInvite}><Send size={18}/>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
         </>}
         <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
