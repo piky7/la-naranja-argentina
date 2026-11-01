@@ -66,7 +66,7 @@ export default function MvpPrediction({ match, onStatusChange }) {
   return <section className="lna-mvp-prediction">
     <div className="lna-mvp-prediction-heading"><strong>★ ¿QUIÉN SERÁ EL MVP?</strong><span>+20 PTS</span></div>
     <button type="button" className="lna-mvp-prediction-trigger" onClick={() => setExpanded(value => !value)} aria-expanded={expanded} disabled={status !== "ready" || !open}>
-      <span>{selectedPlayer ? `${selectedPlayer.name} · ${teams.find(team => team.id === selectedPlayer.teamId)?.shortName || selectedPlayer.teamId}` : "Elegir jugador"}</span><span>{expanded ? "▴" : "▾"}</span>
+      <span>{selectedPlayer ? `${selectedPlayer.name} · ${teams.find(team => team.id === selectedPlayer.teamId)?.shortName || selectedPlayer.teamId}` : "Seleccioná un jugador"}</span><span>{expanded ? "▴" : "▾"}</span>
     </button>
     {expanded && <div className="lna-mvp-prediction-picker">
       <input type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Buscar jugador…" aria-label="Buscar jugador para MVP" />
