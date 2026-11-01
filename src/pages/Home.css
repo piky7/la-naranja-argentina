@@ -10830,14 +10830,14 @@
 .match-modal.match-modal-upcoming .upcoming-tabs-three>button.is-vote-glowing:not(.is-active){
   position:relative;
   z-index:1;
-  border-color:rgba(125,232,61,.75)!important;
-  background:linear-gradient(180deg,#1a3435,#152b33)!important;
-  color:#b5ff8c!important;
-  animation:lna-vote-tab-glow 2.8s ease-in-out infinite;
+  border-color:rgba(125,232,61,.42)!important;
+  background:linear-gradient(180deg,#192e34,#172633)!important;
+  color:#a8df91!important;
+  animation:lna-vote-tab-glow 3.6s ease-in-out infinite;
 }
 @keyframes lna-vote-tab-glow{
-  0%,100%{box-shadow:0 0 0 1px rgba(125,232,61,.16),0 0 7px rgba(125,232,61,.12)}
-  50%{box-shadow:0 0 0 1px rgba(156,255,105,.65),0 0 15px rgba(125,232,61,.48),0 0 24px rgba(125,232,61,.2)}
+  0%,100%{box-shadow:0 0 0 1px rgba(125,232,61,.06),0 0 5px rgba(125,232,61,.06)}
+  50%{box-shadow:0 0 0 1px rgba(125,232,61,.3),0 0 9px rgba(125,232,61,.22),0 0 14px rgba(125,232,61,.08)}
 }
 @media(max-width:390px){
   .match-modal.match-modal-upcoming .upcoming-tabs-three>button .upcoming-vote-tab-title{font-size:11px}
@@ -10845,6 +10845,6 @@
 @media(prefers-reduced-motion:reduce){
   .match-modal.match-modal-upcoming .upcoming-tabs-three>button.is-vote-glowing:not(.is-active){
     animation:none;
-    box-shadow:0 0 0 1px rgba(125,232,61,.5),0 0 10px rgba(125,232,61,.24);
+    box-shadow:0 0 0 1px rgba(125,232,61,.2),0 0 6px rgba(125,232,61,.12);
   }
 }
