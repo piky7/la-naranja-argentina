@@ -867,3 +867,21 @@
   .prode-league-premium .prode-played-indicators{font-size:9px;gap:5px}
   .prode-match-dialog{padding:15px 12px}
 }
+
+
+/* Administración de liga: panel neutro azul marino, sin fondo verde. */
+.prode-league-premium .prode-league-settings-open .prode-manage-panel{
+  background:linear-gradient(145deg,#142b41,#102337);
+  border:1px solid #425f79;
+  border-radius:9px;
+}
+.prode-league-premium .prode-league-settings-open .prode-manage-panel>strong{
+  color:#e2ebf5;
+}
+.prode-league-premium .prode-league-settings-open .prode-manage-panel p{
+  color:#b5c7d8;
+}
+.prode-league-premium .prode-league-settings-open .prode-manage-member{
+  color:#e8f0f7;
+  border-bottom-color:#3b5570;
+}
