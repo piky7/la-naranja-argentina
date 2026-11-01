@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy } from "lucide-react";
+import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy, CalendarDays, Medal, Layers3, BarChart3, Settings2, Send } from "lucide-react";
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
 
@@ -324,32 +324,44 @@ export default function ProdeGroups() {
     </div> : ready && user && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
     {selected && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
-      <section className="prode-dialog prode-group-detail" role="dialog" aria-modal="true" aria-label={"Liga " + selected.name} onClick={e => e.stopPropagation()}>
-        <div className="prode-dialog-heading prode-group-heading-with-crest">
-          <ProdeCrest type="league" name={selected.name} primary={detail?.group?.crestPrimary || selected.crestPrimary} secondary={detail?.group?.crestSecondary || selected.crestSecondary} size={60}/>
-          <h3>{selected.name}</h3>
-          <button type="button" aria-label="Cerrar" onClick={() => setSelected(null)}><X size={20}/></button>
+      <section className="prode-dialog prode-group-detail prode-league-premium" style={{ "--league-accent": detail?.group?.crestPrimary || selected.crestPrimary || "#ff9a39" }} role="dialog" aria-modal="true" aria-label={"Liga " + selected.name} onClick={e => e.stopPropagation()}>
+        <div className="prode-league-hero">
+          <ProdeCrest type="league" name={selected.name} primary={detail?.group?.crestPrimary || selected.crestPrimary} secondary={detail?.group?.crestSecondary || selected.crestSecondary} size={83}/>
+          <div className="prode-league-hero-info">
+            <h3>{selected.name}</h3>
+            <p>LIGA DE AMIGOS</p>
+            <div className="prode-league-hero-meta">
+              <span><LockKeyhole size={13}/> Privada</span>
+              <span><CalendarDays size={13}/> {selected.season || "2026/27"}</span>
+              <span><UsersRound size={13}/> {detail?.members?.length ?? "—"} participantes</span>
+            </div>
+          </div>
+          <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => setSelected(null)}><X size={20}/></button>
         </div>
-        <div className="prode-group-meta"><span>{detail?.group?.visibility === "private" ? "🔒 Privada" : detail?.group?.visibility === "public" ? "🌐 Pública" : "Cargando privacidad…"}</span><span>Temporada {selected.season || "2026/27"}</span></div>
         {selected.description && <p>{selected.description}</p>}
         {detailBusy && <p>Cargando participantes…</p>}
         {detailError && <p className="prode-group-error" role="alert">{detailError}</p>}
         {detail && <>
           <div className="prode-group-tabs" role="tablist" aria-label="Clasificaciones de la liga">
-            <button type="button" role="tab" aria-selected={groupTab === "weekly"} className={groupTab === "weekly" ? "active" : ""} onClick={() => setGroupTab("weekly")}><Trophy size={16}/> Ranking semanal</button>
-            <button type="button" role="tab" aria-selected={groupTab === "general"} className={groupTab === "general" ? "active" : ""} onClick={() => setGroupTab("general")}><Trophy size={16}/> Tabla general</button>
-            <button type="button" role="tab" aria-selected={groupTab === "medals"} className={groupTab === "medals" ? "active" : ""} onClick={() => setGroupTab("medals")}><Trophy size={16}/> Medallero</button>
-            <button type="button" role="tab" aria-selected={groupTab === "seasons"} className={groupTab === "seasons" ? "active" : ""} onClick={() => setGroupTab("seasons")}><Trophy size={16}/> Temporadas</button>
+            <button type="button" role="tab" aria-selected={groupTab === "weekly"} className={groupTab === "weekly" ? "active" : ""} onClick={() => setGroupTab("weekly")}><BarChart3 size={16}/> Semanal</button>
+            <button type="button" role="tab" aria-selected={groupTab === "general"} className={groupTab === "general" ? "active" : ""} onClick={() => setGroupTab("general")}><Trophy size={16}/> General</button>
+            <button type="button" role="tab" aria-selected={groupTab === "medals"} className={groupTab === "medals" ? "active" : ""} onClick={() => setGroupTab("medals")}><Medal size={16}/> Medallero</button>
+            <button type="button" role="tab" aria-selected={groupTab === "seasons"} className={groupTab === "seasons" ? "active" : ""} onClick={() => setGroupTab("seasons")}><Layers3 size={16}/> Temporadas</button>
           </div>
-          {groupTab === "weekly" && weeklyHistory.length > 0 && <div className="prode-week-selector">
-            <label className="prode-week-select-label">
-              <Trophy size={17} aria-hidden="true"/>
-              <select aria-label="Elegir semana del ranking" value={selectedWeek || String(weeklyHistory.at(-1).number)} onChange={e => setSelectedWeek(e.target.value)}>
-                {[...weeklyHistory].reverse().map(w => <option key={w.number} value={w.number}>Semana {w.number} · {w.finished ? "Finalizada" : "En juego"}</option>)}
-              </select>
-              <ChevronRight size={18} aria-hidden="true"/>
-            </label>
-            <p className="prode-week-date-range">Del {formatWeekRange(weeklyHistory.find(w => String(w.number) === (selectedWeek || String(weeklyHistory.at(-1).number)))?.startsAt)}</p>
+          {groupTab === "weekly" && weeklyHistory.length > 0 && <div className="prode-week-selector prode-week-premium">
+            <CalendarDays size={21} aria-hidden="true"/>
+            <div className="prode-week-premium-info">
+              <label className="prode-week-select-label">
+                <select aria-label="Elegir semana del ranking" value={selectedWeek || String(weeklyHistory.at(-1).number)} onChange={e => setSelectedWeek(e.target.value)}>
+                  {[...weeklyHistory].reverse().map(w => <option key={w.number} value={w.number}>Semana {w.number}</option>)}
+                </select>
+                <ChevronRight size={16} aria-hidden="true"/>
+              </label>
+              <p className="prode-week-date-range">{formatWeekRange(weeklyHistory.find(w => String(w.number) === (selectedWeek || String(weeklyHistory.at(-1).number)))?.startsAt)}</p>
+            </div>
+            <span className={"prode-week-status " + (weeklyHistory.find(w => String(w.number) === (selectedWeek || String(weeklyHistory.at(-1).number)))?.finished ? "completed" : "live")}>
+              {weeklyHistory.find(w => String(w.number) === (selectedWeek || String(weeklyHistory.at(-1).number)))?.finished ? "Finalizada" : "En juego"}
+            </span>
           </div>}
           {groupTab === "seasons" ? <div className="prode-season-archive" role="tabpanel">
             <strong>Historial de temporadas</strong>
