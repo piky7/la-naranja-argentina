@@ -21,6 +21,7 @@ export default function ProdeGroups() {
   const [selectedWeek, setSelectedWeek] = useState("");
   const [medalTable, setMedalTable] = useState(null);
   const [expandedMedal, setExpandedMedal] = useState(null);
+  const [profileUserId, setProfileUserId] = useState(null);
   const [manageOpen, setManageOpen] = useState(false);
   const [manageBusy, setManageBusy] = useState(false);
   const [manageError, setManageError] = useState("");
@@ -74,6 +75,7 @@ export default function ProdeGroups() {
     setWeeklyHistory([]); setSelectedWeek("");
     setMedalTable(null);
     setExpandedMedal(null);
+    setProfileUserId(null);
     setManageOpen(false); setManageError("");
     setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
     setRankingError("");
@@ -274,7 +276,7 @@ export default function ProdeGroups() {
             <div className="prode-ranking-head"><span>JUGADOR</span><span>🥇</span><span>🥈</span><span>🥉</span></div>
             {(medalTable || detail.members).map((member,index) => <div className="prode-medal-member" key={member.userId || index}>
               <div className="prode-ranking-row">
-                <span className="prode-ranking-name"><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></span>
+                <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></button>
                 {["gold","silver","bronze"].map((type,i) => <button type="button" key={type} className="prode-medal-count" aria-expanded={expandedMedal === (member.userId || index) + ":" + type} aria-label={member.username + ": ver medallas de " + ["oro","plata","bronce"][i]} onClick={() => setExpandedMedal(current => current === (member.userId || index) + ":" + type ? null : (member.userId || index) + ":" + type)}>{member[type] ?? 0}</button>)}
               </div>
               {["gold","silver","bronze"].map((type,i) => expandedMedal === (member.userId || index) + ":" + type && <div className="prode-medal-history" key={type}>
@@ -325,6 +327,29 @@ export default function ProdeGroups() {
         <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
     </div>}
+    {selected && detail && profileUserId && (() => {
+      const player = (leagueRanking || []).find(m => m.userId === profileUserId);
+      const awards = (medalTable || []).find(m => m.userId === profileUserId);
+      if (!player) return null;
+      return <div className="prode-profile-backdrop" onClick={() => setProfileUserId(null)}>
+        <section className="prode-profile-dialog" role="dialog" aria-modal="true" aria-label={"Perfil de " + player.username} onClick={e => e.stopPropagation()}>
+          <button type="button" className="prode-profile-close" aria-label="Cerrar perfil" onClick={() => setProfileUserId(null)}><X size={19}/></button>
+          <div className="prode-profile-identity"><span className="prode-member-avatar">{player.username.slice(0,1).toUpperCase()}</span><div><h3>{player.username}</h3><small>{selected.name} · Temporada {selected.season || "2026/27"}</small></div></div>
+          <div className="prode-profile-points"><strong>{player.points ?? 0}</strong><span>PUNTOS EN LA LIGA</span></div>
+          <div className="prode-profile-stats">
+            <div><strong>{player.correct ?? 0}</strong><span>Aciertos</span></div>
+            <div><strong>{player.wrong ?? 0}</strong><span>Errores</span></div>
+            <div><strong>{player.mvpHits ?? 0}</strong><span>MVP</span></div>
+          </div>
+          <div className="prode-profile-medals">
+            <div><strong>🥇 {awards?.gold ?? 0}</strong><span>Oro</span></div>
+            <div><strong>🥈 {awards?.silver ?? 0}</strong><span>Plata</span></div>
+            <div><strong>🥉 {awards?.bronze ?? 0}</strong><span>Bronce</span></div>
+          </div>
+          <p>Estadísticas acumuladas en esta liga. Las medallas corresponden a semanas finalizadas.</p>
+        </section>
+      </div>;
+    })()}
     {joinOpen && <div className="prode-dialog-backdrop" onClick={() => !inviteBusy && setJoinOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={joinGroup}>
       <div className="prode-dialog-heading"><h3>Unirme a un Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setJoinOpen(false)}><X size={20}/></button></div>
       <label>Código de invitación<input required autoCapitalize="none" autoCorrect="off" value={joinCode} onChange={e => setJoinCode((e.target.value.includes("invite=") ? e.target.value.split("invite=")[1].split("&")[0] : e.target.value).trim())} placeholder="Pegá el código o el enlace"/></label>
