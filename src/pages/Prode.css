@@ -321,3 +321,70 @@
 .prode-close-check>div strong{font-size:13px;color:#efd6a2}
 .prode-close-check>div p{margin:7px 0 0;color:#c6d9cb;font-size:12px;line-height:1.4}
 .prode-close-check>div small{display:block;margin-top:9px;color:#a6c5b4;font-size:11px}
+
+
+/* Rediseño principal Prode LNA: cuenta integrada y ligas privadas en primer plano. */
+.prode-home-redesign .prode-hero{display:flex;flex-direction:column;gap:18px;padding:24px 26px}
+.prode-home-redesign .prode-hero-content{max-width:100%}
+.prode-home-redesign .prode-hero-account{position:relative;z-index:2}
+.prode-home-redesign .prode-hero-account .prode-google-access{margin:0;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:12px 14px;background:rgba(6,29,34,.92);border:1px solid rgba(125,232,61,.37);border-radius:13px}
+.prode-home-redesign .prode-hero-account .prode-google-identity{min-width:0}
+.prode-home-redesign .prode-hero-account .prode-google-identity strong{font-size:16px}
+.prode-home-redesign .prode-hero-account .prode-google-access>button{width:auto;min-height:38px;padding:8px 12px;background:transparent;color:#edf8eb;border:1px solid #537467}
+.prode-home-redesign .prode-hero-account .prode-google-access>.prode-profile-edit-button{color:#b6fa8e;border-color:#7de83d}
+.prode-home-redesign .prode-hero-account .prode-career-link{grid-column:1/-1;width:100%}
+.prode-home-redesign .prode-hero-account .prode-google-access>p{grid-column:1/-1}
+.prode-home-redesign .prode-friends-section{margin-top:16px;padding:20px;border:1px solid rgba(255,151,59,.43);border-radius:17px;background:linear-gradient(130deg,#171f2a,#0b1c2c 90%);box-shadow:0 12px 28px #0002}
+.prode-home-redesign .prode-friends-heading{display:flex;align-items:center;gap:12px}
+.prode-home-redesign .prode-friends-heading-icon{display:grid;place-items:center;width:40px;height:40px;color:#ff9a39;flex-shrink:0}
+.prode-home-redesign .prode-friends-heading h2{font-family:var(--prode-gamer);font-weight:400;font-size:23px;line-height:1.1;color:#f3f6fa}
+.prode-home-redesign .prode-friends-heading p{margin-top:5px;font-size:12px;color:#bac8d4}
+.prode-home-redesign .prode-groups{display:flex;flex-direction:column;gap:12px;margin-top:15px}
+.prode-home-redesign .prode-friends-actions{display:flex;gap:9px;flex-wrap:wrap}
+.prode-home-redesign .prode-friends-actions button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 16px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer}
+.prode-home-redesign .prode-friends-actions button:disabled{opacity:.45;cursor:not-allowed}
+.prode-home-redesign .prode-friends-create{border:1px solid #ffa43b;color:#11212b;background:linear-gradient(180deg,#ffb24b,#fc8b26)}
+.prode-home-redesign .prode-friends-join{border:1px solid #829cae;color:#edf5fb;background:#122739}
+.prode-home-redesign .prode-my-groups{display:flex;flex-direction:column;gap:10px;margin:0}
+.prode-home-redesign .prode-my-groups>strong{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#b4c7d4}
+.prode-home-redesign .prode-my-group.prode-group-link{display:flex;align-items:center;gap:12px;width:100%;padding:15px;border:1px solid #3c566a;border-radius:12px;background:linear-gradient(100deg,#132434,#0c2539);text-align:left;color:#f0f6fb;cursor:pointer;min-height:83px}
+.prode-home-redesign .prode-my-group.prode-group-link:hover{border-color:#ff9a39}
+.prode-home-redesign .prode-friend-league-badge{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:12px;background:#3c2b22;color:#ff9a39}
+.prode-home-redesign .prode-friend-league-info{display:flex;flex:1;flex-direction:column;gap:7px;min-width:0}
+.prode-home-redesign .prode-friend-league-info strong{font-size:17px;overflow-wrap:anywhere}
+.prode-home-redesign .prode-friend-league-info small{display:flex;align-items:center;gap:5px;color:#b7c8d5;line-height:1.35;font-size:11px}
+.prode-home-redesign .prode-friend-league-info small svg{flex-shrink:0}
+.prode-home-redesign .prode-friend-enter{display:flex;align-items:center;gap:3px;flex-shrink:0;padding:9px 11px;border-radius:8px;color:#141f28;background:#ff9932;font-size:12px;font-weight:900}
+.prode-home-redesign .prode-friends-notice{margin:0;padding:13px;border:1px dashed #4b6575;border-radius:10px;color:#bdccd6;font-size:12px;line-height:1.5}
+.prode-home-redesign .prode-general-section{margin-top:16px}
+.prode-home-redesign .prode-how-section{display:grid;grid-template-columns:1.2fr repeat(3,minmax(0,1fr));gap:14px;align-items:center;margin-top:16px;padding:19px;border:1px solid #3a586b;border-radius:15px;background:linear-gradient(120deg,#12283a,#0c1a29)}
+.prode-home-redesign .prode-how-heading{display:flex;align-items:center;gap:10px;color:#f0f6fb}
+.prode-home-redesign .prode-how-heading h2{font-family:var(--prode-gamer);font-size:16px;font-weight:400}
+.prode-home-redesign .prode-how-step{display:flex;align-items:flex-start;gap:10px;padding-left:14px;border-left:1px solid #42586c}
+.prode-home-redesign .prode-how-step>svg{color:#a8f57a;flex-shrink:0}
+.prode-home-redesign .prode-how-step>div{display:flex;flex-direction:column;gap:5px}
+.prode-home-redesign .prode-how-step strong{font-size:13px}
+.prode-home-redesign .prode-how-step span{font-size:11px;color:#b6c9d5;line-height:1.35}
+@media(max-width:768px){
+.prode-home-redesign .prode-hero{gap:14px;padding:19px 15px}
+.prode-home-redesign .prode-hero-account .prode-google-access{grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:11px}
+.prode-home-redesign .prode-hero-account .prode-google-access>button:last-of-type{grid-column:2}
+.prode-home-redesign .prode-hero-account .prode-google-identity{grid-column:1/-1}
+.prode-home-redesign .prode-hero-account .prode-google-access>.prode-profile-edit-button{grid-column:1}
+.prode-home-redesign .prode-friends-section{padding:15px}
+.prode-home-redesign .prode-friends-heading h2{font-size:19px}
+.prode-home-redesign .prode-friends-actions{display:grid;grid-template-columns:1fr 1fr}
+.prode-home-redesign .prode-friends-actions button{padding:9px 6px;font-size:11px;min-width:0}
+.prode-home-redesign .prode-my-group.prode-group-link{gap:9px;padding:12px 10px}
+.prode-home-redesign .prode-friend-league-badge{flex-basis:35px;height:35px}
+.prode-home-redesign .prode-friend-league-info strong{font-size:15px}
+.prode-home-redesign .prode-friend-league-info small{font-size:10px}
+.prode-home-redesign .prode-friend-enter{padding:8px 7px;font-size:11px}
+.prode-home-redesign .prode-how-section{grid-template-columns:1fr;gap:12px;padding:14px}
+.prode-home-redesign .prode-how-step{padding:0 0 0 12px}
+}
+@media(max-width:390px){
+.prode-home-redesign .prode-hero-account .prode-google-access>button{font-size:11px;padding:8px}
+.prode-home-redesign .prode-friend-enter{font-size:0}
+.prode-home-redesign .prode-friend-enter svg{width:17px}
+}
