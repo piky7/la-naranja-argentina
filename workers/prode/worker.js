@@ -434,6 +434,23 @@ export default {
         return reply({ ok: false, error: "No se pudo generar la invitación" }, 503);
       }
     }
+    // Vista previa pública mínima: solo el nombre y los colores de la liga
+    // para quien ya posee el enlace secreto de invitación.
+    if (url.pathname === "/api/prode/invitations/preview" && request.method === "GET") {
+      if (!env.DB) return reply({ ok:false, error:"No disponible" },503);
+      const token = url.searchParams.get("token") || "";
+      if (!/^[a-f0-9]{64}$/i.test(token)) return reply({ok:false,error:"Invitación inválida"},400);
+      try {
+        const digest = await crypto.subtle.digest("SHA-256",new TextEncoder().encode(token.toLowerCase()));
+        const hash = Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");
+        await ensureCrests(env.DB);
+        const row = await env.DB.prepare(
+          "SELECT g.name,g.season,COALESCE(c.primary_color,'#ff9a39') AS crestPrimary,COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_invitations i JOIN prode_groups g ON g.id=i.group_id LEFT JOIN prode_group_crests c ON c.group_id=g.id WHERE i.token_hash=? AND i.revoked_at IS NULL AND i.expires_at>? AND i.used_count<i.max_uses"
+        ).bind(hash,new Date().toISOString()).first();
+        if (!row) return reply({ok:false,error:"La invitación venció o ya no está disponible"},404);
+        return reply({ok:true,league:{name:row.name,season:row.season||"2026/27",crestPrimary:row.crestPrimary,crestSecondary:row.crestSecondary}});
+      } catch {return reply({ok:false,error:"No se pudo verificar la invitación"},503);}
+    }
     if (url.pathname === "/api/prode/invitations/join" && request.method === "POST") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       const identity = await verifiedFirebaseUser(request);
