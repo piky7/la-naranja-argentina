@@ -1053,3 +1053,75 @@
   .prode-profile-premium .prode-profile-medals>div{grid-template-columns:24px auto;gap:4px;padding:8px 2px;min-height:52px}
   .prode-profile-premium .prode-profile-medal-symbol{font-size:20px}
 }
+
+
+/* Invitaciones Prode LNA: tarjeta de liga con identidad propia. */
+.prode-join-premium{
+  --join-accent:#ff9a39;
+  --join-secondary:#10283c;
+  width:min(100%,420px);
+  border:1.5px solid var(--join-accent);
+  background:linear-gradient(150deg,#0f2535 0%,var(--join-secondary) 78%,#0d1a2a);
+  box-shadow:0 22px 55px #000a;
+}
+.prode-join-premium .prode-dialog-heading h3{
+  font:italic 400 clamp(20px,5vw,26px) var(--prode-gamer),Impact,sans-serif;
+  color:var(--join-accent);
+}
+.prode-join-premium .prode-join-league-card{
+  display:flex;align-items:center;gap:15px;padding:14px 12px;
+  border:1px solid color-mix(in srgb,var(--join-accent) 62%,#334659);
+  border-radius:13px;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--join-accent) 10%,#16283c),#102336);
+}
+.prode-join-premium .prode-join-league-card>svg{
+  width:78px;height:94px;flex:0 0 78px;
+  filter:drop-shadow(0 4px 7px #0006);
+}
+.prode-join-premium .prode-join-league-card>div{
+  display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;
+}
+.prode-join-premium .prode-join-league-card span{
+  color:var(--join-accent);font-size:10px;font-weight:900;letter-spacing:.09em;
+}
+.prode-join-premium .prode-join-league-card strong{
+  color:#fff;font:italic 400 clamp(20px,5vw,29px) var(--prode-gamer),Impact,sans-serif;
+  line-height:1.12;overflow-wrap:anywhere;
+}
+.prode-join-premium .prode-join-league-card small{
+  color:#c7d8e5;font-size:11px;
+}
+.prode-join-premium .prode-join-description{
+  font-size:12px;line-height:1.5;color:#c6d5e0;margin:0;
+}
+.prode-join-premium .prode-join-verified{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding:9px 11px;
+  background:#172d37;border:1px solid #497063;border-radius:9px;
+}
+.prode-join-premium .prode-join-verified>span{
+  display:inline-flex;align-items:center;gap:6px;
+  color:#b1e6c7;font-weight:800;font-size:11px;
+}
+.prode-join-premium .prode-join-verified>button{
+  padding:5px 3px;border:0;background:transparent;color:#b9cedf;
+  font-size:10px;text-decoration:underline;cursor:pointer;
+}
+.prode-join-premium .prode-join-loading{font-size:12px;color:#bdd2df}
+.prode-join-premium .prode-join-confirm{
+  background:linear-gradient(180deg,#ffad48,#fb881e);
+  color:#111f2c;border:1px solid #ffb85d;
+}
+.prode-join-premium .prode-join-confirm:disabled{opacity:.58}
+.prode-league-premium .prode-invite-panel .prode-invite-share{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  min-height:37px;padding:8px 10px;border-radius:9px;
+  background:#18354a;border:1px solid #617a90;color:#e3edf6;
+  font-size:12px;font-weight:800;cursor:pointer;
+}
+.prode-league-premium .prode-invite-panel p strong{color:#f5f8fc}
+@media(max-width:420px){
+ .prode-join-premium .prode-join-league-card{padding:12px 9px;gap:9px}
+ .prode-join-premium .prode-join-league-card>svg{width:63px;height:76px;flex-basis:63px}
+ .prode-join-premium .prode-join-league-card strong{font-size:21px}
+}
