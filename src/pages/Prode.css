@@ -544,3 +544,84 @@
  .prode-league-premium .prode-ranking-name svg{width:24px;height:30px;flex-basis:24px}
  .prode-league-premium .prode-ranking-name strong{font-size:10px}
 }
+
+/* Afinado del popup de liga: ranking compacto, usuario propio y selector de semana. */
+.prode-league-premium .prode-week-premium{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;min-height:55px;margin:0;
+  border:1px solid #415b6b;border-radius:10px;
+  background:linear-gradient(105deg,#172a39,#112333);
+}
+.prode-league-premium .prode-week-premium>svg{width:18px;height:18px;color:var(--league-accent)}
+.prode-league-premium .prode-week-premium-info{display:flex;align-items:center;gap:10px;min-width:0;flex:1;flex-wrap:wrap}
+.prode-league-premium .prode-week-premium .prode-week-select-label{
+  position:relative;display:inline-flex;align-items:center;flex:0 0 auto;
+  width:auto;max-width:100%;margin:0;padding:0;border:0;border-radius:0;
+  background:transparent;box-shadow:none;overflow:visible;
+}
+.prode-league-premium .prode-week-premium .prode-week-select-label select{
+  appearance:none;-webkit-appearance:none;
+  width:auto;max-width:130px;min-width:0;height:auto;min-height:30px;
+  margin:0;padding:3px 21px 3px 0;background:transparent;border:0;
+  box-shadow:none;color:#f3f7fb;font-size:14px;line-height:1.2;
+  font-family:var(--prode-gamer),Impact,sans-serif;font-weight:400;
+  cursor:pointer;
+}
+.prode-league-premium .prode-week-premium .prode-week-select-label>svg{
+  position:absolute;right:1px;top:50%;transform:translateY(-50%);
+  pointer-events:none;color:var(--league-accent);width:15px;height:15px;
+}
+.prode-league-premium .prode-week-premium .prode-week-date-range{
+  margin:0;color:#abbecb;font-size:11px;white-space:nowrap;
+}
+.prode-league-premium .prode-week-status{margin-left:auto}
+.prode-league-premium .prode-ranking-premium{gap:6px}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row{
+  position:relative;min-height:51px;padding:5px 9px;gap:5px;
+  border-radius:9px;background:#12283a;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-name{position:relative;gap:6px;min-width:0}
+.prode-league-premium .prode-ranking-premium .prode-ranking-name svg{
+  width:31px;height:37px;flex:0 0 31px;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-name strong{
+  font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points{
+  padding:3px 2px;min-height:35px;border-radius:7px;gap:0;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:15px}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points small{font-size:7px}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row.is-current-user{
+  border-color:#7de83d;
+  background:linear-gradient(95deg,rgba(67,127,61,.32),#122b37 65%);
+  box-shadow:inset 3px 0 0 #85f14b,0 0 0 1px rgba(125,232,61,.13);
+}
+.prode-league-premium .prode-ranking-premium .is-current-user .prode-ranking-name strong{color:#e7ffdb}
+.prode-league-premium .prode-you-label{
+  flex-shrink:0;padding:2px 5px;margin-left:1px;
+  border-radius:4px;border:1px solid #7bce58;
+  background:#234a2c;color:#b9ff94;
+  font-size:8px;font-weight:900;letter-spacing:.035em;
+}
+.prode-league-premium .prode-ranking-premium .is-current-user .prode-ranking-points{
+  border-color:#7de83d;background:#203c2e;color:#abf57b;
+}
+@media(max-width:600px){
+  .prode-league-premium .prode-week-premium{min-height:51px;padding:7px 9px;gap:7px}
+  .prode-league-premium .prode-week-premium-info{gap:2px 8px}
+  .prode-league-premium .prode-week-premium .prode-week-select-label select{font-size:13px;min-height:27px}
+  .prode-league-premium .prode-week-premium .prode-week-date-range{font-size:10px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{min-height:47px;padding:5px 6px;gap:3px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-name{gap:4px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-name svg{width:26px;height:31px;flex-basis:26px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-name strong{font-size:11px}
+  .prode-league-premium .prode-you-label{font-size:7px;padding:2px 3px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:13px}
+}
+@media(max-width:355px){
+  .prode-league-premium .prode-week-premium-info{display:block}
+  .prode-league-premium .prode-week-premium .prode-week-date-range{margin-top:1px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-name svg{width:23px;height:28px;flex-basis:23px}
+  .prode-league-premium .prode-you-label{font-size:6px;padding:1px 2px}
+}
