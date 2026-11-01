@@ -260,3 +260,14 @@
 .prode-week-select-label select{appearance:none;-webkit-appearance:none;flex:1;max-width:none!important;width:100%;height:46px;padding:0;border:0;outline:0;background:transparent;color:#a8f17e;font-size:15px;font-weight:800;cursor:pointer}
 .prode-week-select-label select option{background:#102b29;color:#efffec}
 @media(max-width:380px){.prode-week-selector{display:block}.prode-week-select-label{min-height:44px}.prode-week-select-label select{font-size:14px}}
+
+/* Medallero interactivo: detalle bajo cada participante sin salir de la liga. */
+.prode-medal-member{min-width:0}
+.prode-medal-member .prode-ranking-row{border-top:1px solid #2d4b42}
+.prode-medal-count{display:flex;align-items:center;justify-content:center;min-width:0;width:100%;height:33px;padding:0;border:1px solid transparent;border-radius:7px;background:transparent;color:#eaf8f0;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;cursor:pointer}
+.prode-medal-count[aria-expanded="true"]{border-color:#567b50;background:#234631;color:#b8ff8b}
+.prode-medal-history{padding:10px 12px 12px;margin:0 6px 8px;border:1px solid #365c49;border-radius:9px;background:#102a2b}
+.prode-medal-history>strong{display:block;font-size:12px;color:#baf68f;margin-bottom:7px}
+.prode-medal-history button{display:flex;align-items:center;justify-content:space-between;width:100%;padding:9px 5px;border:0;border-top:1px solid #365247;background:transparent;color:#e4f5e9;font-size:12px;font-weight:700;cursor:pointer}
+.prode-medal-history button span:last-child{display:flex;align-items:center;gap:6px;color:#a6d9b2}
+.prode-medal-history p{margin:0;color:#aac6b8;font-size:11px}
