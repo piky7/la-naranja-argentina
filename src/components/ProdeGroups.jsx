@@ -6,6 +6,18 @@ import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
+const inviteUrl = token => "https://lanaranjaargentina.com.ar/invitacion?token=" + encodeURIComponent(token);
+const inviteText = (leagueName,token) => "🏀 ¡Te invito a jugar el Prode LNA!\\n\\n🏆 Liga de amigos: " + leagueName + "\\nPronosticá ganador y MVP, sumá puntos y competí conmigo.\\n\\n👉 Sumate desde acá:\\n" + inviteUrl(token);
+const parseInviteCode = value => {
+  const trimmed = value.trim();
+  try {
+    const address = new URL(trimmed);
+    return address.searchParams.get("token") || address.searchParams.get("invite") || trimmed;
+  } catch {
+    return trimmed.includes("invite=") ? trimmed.split("invite=")[1].split("&")[0]
+      : trimmed.includes("token=") ? trimmed.split("token=")[1].split("&")[0] : trimmed;
+  }
+};
 const teamLabel = id => teams.find(t => t.id === id)?.shortName || teams.find(t => t.id === id)?.name || (id || "—");
 const teamLogo = id => teams.find(t => t.id === id)?.logo;
 const mvpLabel = id => players.find(p => p.id === id)?.name || (id ? String(id).replace(/-/g, " ") : "No votó");
@@ -70,6 +82,9 @@ export default function ProdeGroups() {
   const [invite, setInvite] = useState("");
   const [joinOpen, setJoinOpen] = useState(false);
   const [joinCode, setJoinCode] = useState("");
+  const [joinPreview, setJoinPreview] = useState(null);
+  const [joinPreviewBusy, setJoinPreviewBusy] = useState(false);
+  const [joinPreviewError, setJoinPreviewError] = useState("");
   const [inviteBusy, setInviteBusy] = useState(false);
   const [inviteMessage, setInviteMessage] = useState("");
   const [loginBusy, setLoginBusy] = useState(false);
@@ -96,7 +111,24 @@ export default function ProdeGroups() {
   };
   useEffect(() => { setReady(false); load(user); }, [user]);
   useEffect(() => { const refresh = () => { if (selected) openGroup(selected); }; window.addEventListener("prode-profile-updated", refresh); return () => window.removeEventListener("prode-profile-updated", refresh); }, [selected, user]);
-  useEffect(() => { const code = new URLSearchParams(window.location.search).get("invite"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
+  useEffect(() => { const params = new URLSearchParams(window.location.search); const code = params.get("invite") || params.get("token"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
+  useEffect(() => {
+    if (!joinOpen || !/^[a-f0-9]{64}$/i.test(joinCode)) {
+      setJoinPreview(null); setJoinPreviewBusy(false); setJoinPreviewError("");
+      return;
+    }
+    const controller = new AbortController();
+    setJoinPreview(null); setJoinPreviewBusy(true); setJoinPreviewError("");
+    fetch(API + "/api/prode/invitations/preview?token=" + encodeURIComponent(joinCode), { signal:controller.signal })
+      .then(async response => {
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw Error(data.error || "Invitación no disponible");
+        setJoinPreview(data.league);
+      })
+      .catch(error => { if (!controller.signal.aborted) setJoinPreviewError(error.message || "No se pudo verificar la invitación"); })
+      .finally(() => { if (!controller.signal.aborted) setJoinPreviewBusy(false); });
+    return () => controller.abort();
+  }, [joinOpen, joinCode]);
 
   useEffect(() => {
     if (!profileUserId || !selected?.id || !user) {
@@ -443,7 +475,29 @@ export default function ProdeGroups() {
           {!initialOpen && initialMessage && <p className="prode-initial-feedback" role="status">{initialMessage}</p>}
           </div>}
             </div>
-          {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit prode-invite-primary" disabled={inviteBusy} onClick={generateInvite}><Send size={18}/>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
+          {detail.group.role === "owner" && <div className="prode-invite-panel">
+            <button type="button" className="prode-create-submit prode-invite-primary" disabled={inviteBusy} onClick={generateInvite}><Send size={18}/>{inviteBusy ? "Generando…" : "Generar invitación"}</button>
+            {invite && <>
+              <p>Invitación para <strong>{selected.name}</strong> · válida por 7 días.</p>
+              <div className="prode-invite-link">
+                <input readOnly aria-label="Enlace de invitación" value={inviteUrl(invite)}/>
+                <button type="button" aria-label="Copiar mensaje de invitación" title="Copiar invitación" onClick={async () => {
+                  try { await navigator.clipboard.writeText(inviteText(selected.name, invite)); setInviteMessage("Mensaje de invitación copiado. Pegalo en WhatsApp."); }
+                  catch { setInviteMessage("Seleccioná el enlace para copiarlo."); }
+                }}><Copy size={18}/></button>
+              </div>
+              <button type="button" className="prode-invite-share" onClick={async () => {
+                const text = inviteText(selected.name,invite);
+                if (navigator.share) {
+                  try { await navigator.share({text}); } catch (error) { if (error?.name !== "AbortError") setInviteMessage("No se pudo compartir. Podés copiar la invitación."); }
+                } else {
+                  try { await navigator.clipboard.writeText(text); setInviteMessage("Mensaje copiado. Pegalo en WhatsApp."); }
+                  catch { setInviteMessage("No se pudo copiar automáticamente."); }
+                }
+              }}><Send size={16}/> Compartir invitación</button>
+            </>}
+            {inviteMessage && <p role="status">{inviteMessage}</p>}
+          </div>}
           </div>
 
           </div>}
@@ -631,13 +685,17 @@ export default function ProdeGroups() {
         </section>
       </div>;
     })()}
-    {joinOpen && <div className="prode-dialog-backdrop" onClick={() => !inviteBusy && setJoinOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={joinGroup}>
-      <div className="prode-dialog-heading"><h3>Unirme a un Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setJoinOpen(false)}><X size={20}/></button></div>
-      <label>Código de invitación<input required autoCapitalize="none" autoCorrect="off" value={joinCode} onChange={e => setJoinCode((e.target.value.includes("invite=") ? e.target.value.split("invite=")[1].split("&")[0] : e.target.value).trim())} placeholder="Pegá el código o el enlace"/></label>
-      <p>Pedile al administrador el enlace de invitación. Necesitás una cuenta Google para ingresar.</p>
+    {joinOpen && <div className="prode-dialog-backdrop" onClick={() => !inviteBusy && setJoinOpen(false)}><form className="prode-dialog prode-join-premium" style={joinPreview ? {"--join-accent":joinPreview.crestPrimary,"--join-secondary":joinPreview.crestSecondary} : undefined} onClick={e => e.stopPropagation()} onSubmit={joinGroup}>
+      <div className="prode-dialog-heading"><h3>INVITACIÓN PRODE LNA</h3><button type="button" aria-label="Cerrar" onClick={() => setJoinOpen(false)}><X size={20}/></button></div>
+      {joinPreview ? <div className="prode-join-league-card">
+        <ProdeCrest type="league" name={joinPreview.name} primary={joinPreview.crestPrimary} secondary={joinPreview.crestSecondary} size={79}/>
+        <div><span>LIGA DE AMIGOS</span><strong>{joinPreview.name}</strong><small>Temporada {joinPreview.season}</small></div>
+      </div> : joinPreviewBusy ? <p className="prode-join-loading" role="status">Buscando los datos de tu liga…</p> : joinPreviewError ? <p className="prode-group-error" role="alert">{joinPreviewError}</p> : <p>Ingresá el código que te compartieron para descubrir la liga.</p>}
+      <p className="prode-join-description">{joinPreview ? "¡Te invitaron a competir! Elegí al ganador y al MVP de cada partido y sumá puntos con tus amigos." : "Necesitás una cuenta Google para unirte al Prode."}</p>
+      <label>Código de invitación<input required autoCapitalize="none" autoCorrect="off" value={joinCode} onChange={e => setJoinCode(parseInviteCode(e.target.value))} placeholder="Pegá el código o enlace"/></label>
       {!user && <button className="prode-create-submit" type="button" disabled={loginBusy} onClick={loginForInvite}>{loginBusy ? "Conectando…" : "Continuar con Google para unirme"}</button>}
       {inviteMessage && <p className="prode-group-error" role="alert">{inviteMessage}</p>}
-      <button className="prode-create-submit" type="submit" disabled={inviteBusy || !user || !joinCode.trim()}>{inviteBusy ? "Ingresando…" : user ? "Unirme a la liga" : "Primero iniciá sesión"}</button>
+      <button className="prode-create-submit prode-join-confirm" type="submit" disabled={inviteBusy || !user || !/^[a-f0-9]{64}$/i.test(joinCode) || joinPreviewBusy || Boolean(joinPreviewError)}>{inviteBusy ? "Ingresando…" : user ? joinPreview ? "Unirme a " + joinPreview.name : "Unirme a la liga" : "Primero iniciá sesión"}</button>
     </form></div>}
     {open && <div className="prode-dialog-backdrop" onClick={() => !busy && setOpen(false)}>
       <form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={create}>
