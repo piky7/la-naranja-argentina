@@ -2012,7 +2012,7 @@ const finishedMatch = {
             <div className="upcoming-tabs upcoming-tabs-three" role="tablist" aria-label="Información del próximo partido">
               <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa</button>
               <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores</button>
-              <button type="button" role="tab" aria-selected={upcomingTab === "carrera"} className={[upcomingTab === "carrera" ? "is-active" : "", upcomingTab !== "carrera" && ((upcomingVoteStatus?.open === true && !upcomingVoteStatus?.voted) || (upcomingMvpStatus?.open === true && !upcomingMvpStatus?.voted)) ? "is-vote-glowing" : ""].filter(Boolean).join(" ")} onClick={() => setUpcomingTab("carrera")}><span className="upcoming-vote-tab-title">◎ Votación</span></button>
+              <button type="button" role="tab" aria-selected={upcomingTab === "carrera"} className={upcomingTab === "carrera" ? "is-active" : "is-vote-glowing"} onClick={() => setUpcomingTab("carrera")}><span className="upcoming-vote-tab-title">◎ Votación</span></button>
             </div>
             </>}
             {!upcomingLive && upcomingTab === "carrera" && <div className="upcoming-tab-panel upcoming-career-panel upcoming-voting-redesign" role="tabpanel">
