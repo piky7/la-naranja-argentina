@@ -1333,3 +1333,28 @@
     flex-basis:32px;width:32px;height:32px;min-height:32px;
   }
 }
+
+
+/* Ajuste final de jerarquía visual entre rankings: general en verde, semanal en celeste. */
+.prode-home-redesign .prode-weekly-section{
+  border-color:#31566b;
+  background:linear-gradient(145deg,#132b40,#102338 72%,#102638);
+}
+.prode-home-redesign .prode-weekly-section .prode-panel-icon,
+.prode-home-redesign .prode-weekly-section .prode-panel-heading h2 em{
+  color:#71c7df;
+}
+.prode-home-redesign .prode-weekly-section .prode-panel-heading h2 em{
+  text-shadow:0 0 12px rgba(113,199,223,.14);
+}
+.prode-home-redesign .prode-weekly-section .prode-small-tag{
+  color:#a9d2e1;
+}
+.prode-home-redesign .prode-weekly-section .prode-panel-icon{
+  background:rgba(113,199,223,.09);
+  border-radius:8px;
+  padding:3px;
+}
+/* Menos aire entre bloques, sin tocar el diseño ni el espaciado interno de Cómo funciona. */
+.prode-home-redesign .prode-friends-section{margin-top:12px}
+.prode-home-redesign .prode-general-section{margin-top:12px}
