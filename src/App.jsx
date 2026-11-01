@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
 import SeoMeta from "./components/SeoMeta";
@@ -36,6 +36,11 @@ function AnimatedRoutes() {
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/prode" element={<Prode />} />
+        <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
+          const params = new URLSearchParams(location.search);
+          const token = params.get("token") || params.get("invite");
+          return token && /^[a-f0-9]{64}$/i.test(token) ? "?invite=" + encodeURIComponent(token) : "";
+        })()} replace />} />
         <Route path="/privacidad" element={<Privacidad />} />
         <Route path="/acerca" element={<Acerca />} />
       </Routes>
