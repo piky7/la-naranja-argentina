@@ -371,7 +371,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -386,7 +386,7 @@ export default {
               const gameWeek = mondayOf(argentinaDateKey(kickoff));
               const weekly = gameWeek === weekStart;
               const week = base.weeks[gameWeek] ||= { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
-              if (game.mvpVoted) week.mvpVoted++;
+              if (game.mvpVoted) { week.mvpVoted++; base.mvpVotes++; if (weekly) base.weekly.mvpVoted++; }
               if (game.mvpCorrect) { week.mvpHits++; week.points += 20; base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
               if (!game.voted) { streak = 0; continue; }
               base.played++; week.played++; if (weekly) base.weekly.played++;
@@ -426,14 +426,14 @@ export default {
         rows.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
         let rank = 0, previousPoints = null;
         const ranking = rows.map(row => {
-          if (!row.played && !row.mvpHits && row.initialPoints === null) return { ...row, position: null };
+          if (!row.played && !row.mvpVotes && row.initialPoints === null) return { ...row, position: null };
           if (row.points !== previousPoints) { rank++; previousPoints = row.points; }
           return { ...row, position: rank };
         });
         let weeklyRank = 0, previousWeekly = null;
         const weeklyRanking = [...rows].sort((a,b) => b.weekly.points-a.weekly.points || b.weekly.correct-a.weekly.correct || a.username.localeCompare(b.username,"es")).map(row => {
           const pts = row.weekly.points;
-          if (!row.weekly.played && !row.weekly.mvpHits) return { ...row.weekly, userId: row.userId, username: row.username, position: null };
+          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, position: null };
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
           return { ...row.weekly, userId: row.userId, username: row.username, position: weeklyRank };
         });
@@ -441,7 +441,7 @@ export default {
         const firstWeek = mondayOf(argentinaDateKey(leagueStart));
         const weeklyHistory = [];
         for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
-          const participants = rows.filter(row => time(allMembers.find(m => m.user_id === row.userId)?.joined_at) < startMs + 7*86400000).map(row => {
+          const participants = rows.filter(row => argentinaDateKey(time(allMembers.find(m => m.user_id === row.userId)?.joined_at)) < startMs + 7*86400000).map(row => {
             const w = row.weeks[startMs] || { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
             return { username: row.username, userId: row.userId, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
           });
@@ -456,7 +456,7 @@ export default {
         }
         // Medallas de semanas cerradas con al menos tres pronosticadores.
         const medals = new Map(rows.map(row => [row.userId, { userId: row.userId, username: row.username, gold: 0, silver: 0, bronze: 0, history: [] }]));
-        const weeks = [...new Set(rows.flatMap(row => Object.keys(row.weeks).map(Number)))].filter(week => week + 7*86400000 <= Date.now()).sort((a,b)=>a-b);
+        const weeks = [...new Set(rows.flatMap(row => Object.keys(row.weeks).map(Number)))].filter(week => week < weekStart).sort((a,b)=>a-b);
         for (const week of weeks) {
           const participants = rows.filter(row => (row.weeks[week]?.played || 0) + (row.weeks[week]?.mvpVoted || 0) > 0);
           if (participants.length < 3) continue;
