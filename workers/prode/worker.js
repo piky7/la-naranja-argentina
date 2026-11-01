@@ -183,10 +183,12 @@ export default {
     }
     // Clasificación histórica: consulta en vivo los puntos de Mi Carrera de las cuentas vinculadas.
     if (url.pathname === "/api/prode/ranking/historical" && request.method === "GET") {
+      const viewer = await verifiedFirebaseUser(request);
+      const viewerId = viewer ? "firebase:" + viewer.uid : null;
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id WHERE n.username IS NOT NULL AND n.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id WHERE n.username IS NOT NULL AND n.username <> '' ORDER BY l.linked_at ASC LIMIT 100").all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
@@ -197,13 +199,18 @@ export default {
               if (!response.ok) return null;
               const data = await response.json();
               if (!data.ok || !Number.isFinite(data.points)) return null;
-              return { username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary, crestText: item.crestText };
+              return { userId: item.user_id, username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary, crestText: item.crestText };
             } catch { return null; }
           }));
           results.push(...batch.filter(Boolean));
         }
         results.sort((a,b) => b.points-a.points || a.username.localeCompare(b.username, "es"));
-        return reply({ ok: true, total: results.length, ranking: results.slice(0, 20).map((entry,index) => ({ ...entry, position: index === 0 ? 1 : results[index-1].points === entry.points ? results.findIndex(x => x.points === entry.points)+1 : index+1 })) });
+        const ranked = results.map((entry,index) => ({
+          ...entry, position: results.findIndex(x => x.points === entry.points) + 1
+        }));
+        const myPosition = viewerId ? ranked.find(entry => entry.userId === viewerId)?.position ?? null : null;
+        return reply({ ok: true, total: results.length, myPosition,
+          ranking: ranked.slice(0,20).map(({userId,...entry}) => entry) });
       } catch (error) {
         return reply({ ok: false, error: "No se pudo cargar el ranking histórico" }, 503);
       }
@@ -211,10 +218,12 @@ export default {
     // Ranking general semanal: puntos de Mi Carrera obtenidos en partidos iniciados
     // entre el lunes y el domingo en Argentina, independientemente de las ligas privadas.
     if (url.pathname === "/api/prode/ranking/weekly" && request.method === "GET") {
+      const viewer = await verifiedFirebaseUser(request);
+      const viewerId = viewer ? "firebase:" + viewer.uid : null;
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText FROM prode_career_links l JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
         const dayKey = value => {
           const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(value));
           const n = type => Number(parts.find(p => p.type === type)?.value);
@@ -248,7 +257,7 @@ export default {
                 if (week===thisWeek) { points+=5; wrong++; }
               }
             }
-            return { username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,crestText:item.crestText,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
+            return { userId:item.user_id,username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,crestText:item.crestText,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
           }));
           all.push(...batch);
         }
@@ -259,7 +268,9 @@ export default {
           if (row.points!==previous) {rank++;previous=row.points;}
           return {...row,position:rank};
         });
-        return reply({ok:true,weekStartsAt:new Date(thisWeek).toISOString(),total:all.length,ranking:ranking.slice(0,20)});
+        const myPosition = viewerId ? ranking.find(row => row.userId === viewerId)?.position ?? null : null;
+        return reply({ok:true,weekStartsAt:new Date(thisWeek).toISOString(),total:all.length,myPosition,
+          ranking:ranking.slice(0,20).map(({userId,...row})=>row)});
       } catch (error) {
         console.error("Prode weekly ranking:",error);
         return reply({ok:false,error:"No se pudo calcular el ranking semanal"},503);
