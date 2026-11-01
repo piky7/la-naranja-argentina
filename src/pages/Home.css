@@ -10848,3 +10848,61 @@
     box-shadow:0 0 0 1px rgba(125,232,61,.2),0 0 6px rgba(125,232,61,.12);
   }
 }
+
+
+/* Partido en vivo: cuarta solapa y resumen de pronósticos sin edición. */
+.match-modal.match-modal-upcoming .upcoming-tabs.upcoming-live-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:4px!important;
+  padding:8px 8px 0!important;
+}
+.match-modal.match-modal-upcoming .upcoming-tabs.upcoming-live-tabs>button{
+  min-width:0!important;
+  padding:9px 2px!important;
+  font-size:10.5px!important;
+  white-space:nowrap!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.match-modal.match-modal-upcoming .upcoming-tabs.upcoming-live-tabs>button.live-my-vote-tab:not(.is-active){
+  color:#b7e4a3!important;
+  border-color:#4b6652!important;
+}
+.match-modal.match-modal-upcoming .upcoming-tabs.upcoming-live-tabs>button.live-my-vote-tab.is-active{
+  color:#9dee81!important;
+  border-bottom-color:#8be76c!important;
+  border-color:#60884b!important;
+  background:#182b25!important;
+}
+@media(max-width:380px){
+  .match-modal.match-modal-upcoming .upcoming-tabs.upcoming-live-tabs>button{
+    font-size:9.5px!important;
+    padding:8px 1px!important;
+  }
+}
+.match-modal-upcoming .live-my-vote-panel{
+  background:linear-gradient(165deg,#111e2e,#0d1a27);
+  padding:12px;
+  border-top:1px solid #334656;
+}
+.live-my-vote-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+.live-my-vote-heading strong{font-family:"Russo One",Impact,sans-serif;font-size:14px;font-weight:400;color:#e9f5eb}
+.live-my-vote-heading>span{font-size:9px;letter-spacing:.04em;color:#a4d69b;font-weight:800}
+.live-my-vote-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.live-my-vote-card{min-width:0;min-height:102px;padding:11px 9px;border:1px solid #476052;border-radius:10px;background:linear-gradient(130deg,#193331,#122538)}
+.live-my-vote-card>small{display:block;margin-bottom:11px;font-size:10px;font-weight:850;color:#a7dca0;letter-spacing:.02em}
+.live-my-vote-choice{display:flex;align-items:center;gap:9px;min-width:0}
+.live-my-vote-choice img{width:37px;height:37px;object-fit:contain;flex:0 0 37px}
+.live-my-vote-choice>div{min-width:0;display:flex;flex-direction:column;gap:4px}
+.live-my-vote-choice strong{color:#f1f6fa;font-size:14px;line-height:1.3;overflow-wrap:anywhere}
+.live-my-vote-choice span{font-size:10px;color:#b0c4cf}
+.live-my-vote-footnote{font-size:10px;line-height:1.5;color:#aabac8;margin:10px 2px 1px}
+@media(max-width:390px){
+  .match-modal-upcoming .live-my-vote-panel{padding:10px 8px}
+  .live-my-vote-grid{gap:6px}
+  .live-my-vote-card{padding:9px 7px}
+  .live-my-vote-choice{gap:5px}
+  .live-my-vote-choice img{width:28px;height:28px;flex-basis:28px}
+  .live-my-vote-choice strong{font-size:12px}
+}
