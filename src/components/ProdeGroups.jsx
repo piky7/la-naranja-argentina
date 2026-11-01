@@ -3,6 +3,13 @@ import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
+const formatWeekRange = startsAt => {
+  const start = new Date(startsAt);
+  if (!Number.isFinite(start.getTime())) return "";
+  const end = new Date(start.getTime() + 6 * 86400000);
+  const format = date => date.toLocaleDateString("es-AR", { day: "numeric", month: "short", timeZone: "UTC" });
+  return `${format(start)} – ${format(end)}`;
+};
 export default function ProdeGroups() {
   const [user, setUser] = useState(null);
   const [groups, setGroups] = useState([]);
@@ -271,6 +278,7 @@ export default function ProdeGroups() {
               </select>
               <ChevronRight size={18} aria-hidden="true"/>
             </label>
+            <p className="prode-week-date-range">Del {formatWeekRange(weeklyHistory.find(w => String(w.number) === (selectedWeek || String(weeklyHistory.at(-1).number)))?.startsAt)}</p>
           </div>}
           {groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
             <div className="prode-ranking-head"><span>JUGADOR</span><span>🥇</span><span>🥈</span><span>🥉</span></div>
