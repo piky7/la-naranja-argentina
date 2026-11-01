@@ -34,10 +34,15 @@ export default function Prode() {
           <ProdeHistoricalRanking />
         </section>
 
+        <section className="prode-panel prode-general-section prode-weekly-section">
+          <div className="prode-panel-heading"><span className="prode-panel-icon"><Trophy size={21}/></span><h2>RANKING <em>SEMANAL</em></h2><span className="prode-small-tag">Lun – Dom</span></div>
+          <ProdeHistoricalRanking weekly />
+        </section>
+
         <section className="prode-how-section" aria-label="Cómo funciona Prode LNA">
           <div className="prode-how-heading"><ShieldCheck size={19}/><h2>CÓMO FUNCIONA</h2></div>
-          <div className="prode-how-step"><Target size={20}/><div><strong>Pronosticá</strong><span>Elegí ganador y MVP desde cada partido.</span></div></div>
-          <div className="prode-how-step"><ChartNoAxesColumn size={20}/><div><strong>Sumá puntos</strong><span>Tus aciertos suman en todas tus ligas.</span></div></div>
+          <div className="prode-how-step"><Target size={20}/><div><strong>Pronosticá</strong><span>Desde el popup de cada partido en el Home, elegí ganador y MVP.</span></div></div>
+          <div className="prode-how-step"><ChartNoAxesColumn size={20}/><div><strong>Sumá puntos</strong><span>Ganador acertado +15 · Error +5 · MVP acertado +20 · 5 aciertos seguidos +45. No votar suma 0 y corta la racha.</span></div></div>
           <div className="prode-how-step"><Trophy size={20}/><div><strong>Competí</strong><span>Subí en los rankings semanales y generales.</span></div></div>
         </section>
       </div>
