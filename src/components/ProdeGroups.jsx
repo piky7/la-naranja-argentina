@@ -397,9 +397,9 @@ export default function ProdeGroups() {
           </div> : <div className="prode-group-ranking prode-ranking-premium" role="tabpanel">
             <h4>{groupTab === "weekly" ? "Clasificación semanal" : "Clasificación general"}</h4>
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
-            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member,index) => <div key={member.userId || index} className="prode-ranking-row">
+            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member,index) => <div key={member.userId || index} className={"prode-ranking-row" + (user?.uid && member.userId === "firebase:" + user.uid ? " is-current-user" : "")}>
               <span className={"prode-ranking-position " + (member.position && member.position <= 3 ? "podium-position" : "")}>{member.position ? member.position + "°" : "—"}</span>
-              <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={42} className="prode-member-crest"/><strong>{member.username}</strong></button>
+              <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={42} className="prode-member-crest"/><strong>{member.username}</strong>{user?.uid && member.userId === "firebase:" + user.uid && <small className="prode-you-label">VOS</small>}</button>
               <span className="prode-ranking-points"><strong>{member.points ?? 0}</strong><small>PTS</small></span>
               <span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span>
             </div>)}
