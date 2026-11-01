@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { LogIn, LogOut, ShieldCheck, Pencil, X } from "lucide-react";
+import { LogIn, LogOut, ShieldCheck, Pencil, X, LockKeyhole } from "lucide-react";
+import { Link } from "react-router-dom";
 import { signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
 
@@ -26,6 +27,7 @@ export default function ProdeGoogleAccess() {
   const [linkBusy, setLinkBusy] = useState(false);
   const [linkError, setLinkError] = useState("");
   const [linkConfirm, setLinkConfirm] = useState(false);
+  const [adminAllowed, setAdminAllowed] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -61,6 +63,22 @@ export default function ProdeGoogleAccess() {
     }).catch(() => {
       if (active) setError("Tu cuenta Google está conectada, pero no pudimos registrar tu perfil Prode. Intentá recargar la página.");
     }).finally(() => { if (active) setSyncing(false); });
+    return () => { active = false; };
+  }, [user]);
+
+  // No basarse en el alias: el Worker verifica firma Firebase y el UID autorizado.
+  useEffect(() => {
+    let active = true;
+    setAdminAllowed(false);
+    if (!user) return () => { active = false; };
+    user.getIdToken().then(token => fetch(PRODE_API + "/api/prode/admin/access", {
+      headers: { Authorization: "Bearer " + token },
+      cache: "no-store"
+    })).then(async response => {
+      if (!response.ok) return;
+      const result = await response.json();
+      if (active && result.ok && result.admin === true) setAdminAllowed(true);
+    }).catch(() => { /* Sin permiso o sin conexión: nunca mostrar el enlace. */ });
     return () => { active = false; };
   }, [user]);
 
@@ -160,6 +178,7 @@ export default function ProdeGoogleAccess() {
             </>}
             {linkError && <p role="alert" className="prode-group-error">{linkError}</p>}
           </div>}
+          {adminAllowed && <Link className="prode-admin-entry" to="/admin" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={16}/> Panel de administración</Link>}
           <button type="button" onClick={logout} disabled={busy}><LogOut size={16}/> Cerrar sesión</button>
         </>
       ) : (
