@@ -102,6 +102,15 @@ export default {
       return reply({ ok: false, error: "Origen no permitido" }, 403);
     if (url.pathname === "/api/prode/health" && request.method === "GET")
       return reply({ ok: true, service: "prode-lna", stage: "profiles", authEnabled: true });
+    // Confirmación liviana para mostrar el acceso administrativo dentro de la PWA.
+    // No devuelve estadísticas ni información de otros usuarios.
+    if (url.pathname === "/api/prode/admin/access" && request.method === "GET") {
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión requerida" }, 401);
+      if (!env.ADMIN_FIREBASE_UID || identity.uid !== env.ADMIN_FIREBASE_UID)
+        return reply({ ok: false, error: "Sin permiso" }, 403);
+      return reply({ ok: true, admin: true });
+    }
     if (url.pathname === "/api/prode/admin/summary" && request.method === "GET") {
       const identity = await verifiedFirebaseUser(request);
       if (!identity) return reply({ ok: false, error: "Sesión requerida" }, 401);
