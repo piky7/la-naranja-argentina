@@ -1125,3 +1125,39 @@
  .prode-join-premium .prode-join-league-card>svg{width:63px;height:76px;flex-basis:63px}
  .prode-join-premium .prode-join-league-card strong{font-size:21px}
 }
+
+
+/* Racha individual: progreso hasta el bonus de cinco aciertos. */
+.prode-profile-premium .prode-profile-streak{
+  display:flex;flex-direction:column;gap:8px;
+  margin:0;padding:11px 13px;border:1px solid #526981;border-radius:10px;
+  background:linear-gradient(110deg,#182d41,#122439);
+}
+.prode-profile-premium .prode-profile-streak-heading{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.prode-profile-premium .prode-profile-streak-heading>span{
+  display:inline-flex;align-items:center;gap:7px;
+  color:#f1f5f8;font-size:12px;font-weight:850;
+}
+.prode-profile-premium .prode-profile-streak-heading strong{
+  color:var(--profile-accent);font-size:15px;font-weight:900;
+  font-variant-numeric:tabular-nums;
+}
+.prode-profile-premium .prode-profile-streak-progress{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;
+}
+.prode-profile-premium .prode-profile-streak-progress>span{
+  height:9px;border-radius:5px;border:1px solid #52677b;background:#263b50;
+}
+.prode-profile-premium .prode-profile-streak-progress>span.is-complete{
+  background:var(--profile-accent);border-color:var(--profile-accent);
+  box-shadow:0 0 7px color-mix(in srgb,var(--profile-accent) 25%,transparent);
+}
+.prode-profile-premium .prode-profile-streak>small{
+  color:#bdcbd7;font-size:10px;line-height:1.4;
+}
+@media(max-width:600px){
+  .prode-profile-premium .prode-profile-streak{padding:9px 10px;gap:7px}
+  .prode-profile-premium .prode-profile-streak-progress>span{height:8px}
+}
