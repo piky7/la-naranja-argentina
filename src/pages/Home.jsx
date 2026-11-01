@@ -3,6 +3,7 @@ import useLiveMatch from "../hooks/useLiveMatch";
 import LiveMatchInfo from "../components/LiveMatchInfo";
 import LiveRosters from "../components/LiveRosters";
 import LiveStartingFive from "../components/LiveStartingFive";
+import LiveMyVote from "../components/LiveMyVote";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
@@ -1998,15 +1999,17 @@ const finishedMatch = {
 
             <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
             {upcomingLive && <>
-              <div className="upcoming-tabs" role="tablist" aria-label="Información del partido en vivo">
+              <div className="upcoming-tabs upcoming-live-tabs" role="tablist" aria-label="Información del partido en vivo">
                 <button type="button" role="tab" aria-selected={upcomingTab === "quintetos"} className={upcomingTab === "quintetos" ? "is-active" : ""} onClick={() => setUpcomingTab("quintetos")}>🏀 Quintetos</button>
                 <button type="button" role="tab" aria-selected={upcomingTab === "planteles"} className={upcomingTab === "planteles" ? "is-active" : ""} onClick={() => setUpcomingTab("planteles")}>♟ Planteles</button>
                 <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa</button>
+                <button type="button" role="tab" aria-selected={upcomingTab === "mi-voto"} className={upcomingTab === "mi-voto" ? "is-active live-my-vote-tab" : "live-my-vote-tab"} onClick={() => setUpcomingTab("mi-voto")}>◎ Mi voto</button>
               </div>
               {upcomingTab === "quintetos" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
                 <LiveStartingFive live={upcomingLive} homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} onPlayerClick={setSelectedPlayer} />}
               {upcomingTab === "planteles" && selectedUpcomingHomeTeam && selectedUpcomingAwayTeam &&
                 <LiveRosters homeTeam={selectedUpcomingHomeTeam} awayTeam={selectedUpcomingAwayTeam} matches={matches} onPlayerClick={setSelectedPlayer} />}
+              {upcomingTab === "mi-voto" && <LiveMyVote match={selectedUpcomingMatch} />}
             </>}
             {!upcomingLive && <>
             <div className="upcoming-tabs upcoming-tabs-three" role="tablist" aria-label="Información del próximo partido">
