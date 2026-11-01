@@ -388,3 +388,60 @@
 .prode-home-redesign .prode-friend-enter{font-size:0}
 .prode-home-redesign .prode-friend-enter svg{width:17px}
 }
+
+
+/* Escudos vectoriales, paletas editables y tarjetas de ligas — mobile first. */
+.prode-home-redesign .prode-friend-league-badge{display:flex;flex:0 0 74px;width:74px;height:84px;align-items:center;justify-content:center;background:transparent;border-radius:0;overflow:visible}
+.prode-home-redesign .prode-friend-league-badge svg{width:67px;height:79px;flex-shrink:0}
+.prode-home-redesign .prode-friend-league-info{gap:5px;flex:1;min-width:0}
+.prode-home-redesign .prode-friend-league-info strong{display:block;white-space:normal;overflow-wrap:anywhere}
+.prode-home-redesign .prode-friend-league-info small{display:block;white-space:normal;overflow-wrap:anywhere}
+.prode-home-redesign .prode-friend-enter{border:1px solid #ffac59;border-radius:10px;white-space:nowrap;background:#283746;color:#fff;padding:9px 10px;transition:background .18s,border-color .18s}
+.prode-home-redesign .prode-friend-enter svg{color:#ff9a39}
+.prode-home-redesign .prode-my-group.prode-group-link{gap:12px;background:linear-gradient(100deg,#10293a,#122236);border:1px solid #38586c}
+.prode-home-redesign .prode-friends-actions button{border-radius:10px}
+.prode-home-redesign .prode-hero-account .prode-account-crest{display:block;width:51px;height:56px;flex-shrink:0}
+.prode-home-redesign .prode-hero-account .prode-google-identity{gap:11px}
+.prode-home-redesign .prode-podium-vector{background:transparent!important;border:0!important;border-radius:0!important;width:73px!important;height:80px!important;overflow:visible}
+.prode-home-redesign .prode-podium-vector svg{width:70px;height:77px}
+.prode-home-redesign .prode-podium-item.first .prode-podium-vector{width:83px!important;height:91px!important}
+.prode-home-redesign .prode-podium-item.first .prode-podium-vector svg{width:80px;height:89px}
+.prode-home-redesign .prode-how-section{align-items:start}
+.prode-home-redesign .prode-how-step{min-width:0}
+.prode-home-redesign .prode-how-step span{font-size:12px}
+.prode-group-heading-with-crest{display:flex;align-items:center;gap:10px}
+.prode-group-heading-with-crest h3{min-width:0;overflow-wrap:anywhere;flex:1}
+.prode-group-heading-with-crest>svg{flex-shrink:0}
+.prode-member-crest{display:block;flex-shrink:0;min-width:0;max-width:100%}
+.prode-crest-config,.prode-league-crest-form{display:flex;align-items:center;gap:15px;margin:12px 0;padding:12px;border:1px solid #3e5f58;border-radius:11px;background:#102d2e}
+.prode-crest-config>svg,.prode-league-crest-form>svg{flex-shrink:0}
+.prode-crest-colors{display:flex;flex:1;flex-direction:column;gap:11px;min-width:0}
+.prode-crest-colors label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;color:#cce4d5;font-weight:700}
+.prode-crest-colors input[type=color]{width:53px;height:37px;padding:2px;border-radius:7px;cursor:pointer;border:1px solid #5f8078;background:transparent;flex-shrink:0}
+.prode-crest-save{display:flex;align-items:center;justify-content:center;min-height:40px;padding:10px 12px;width:100%;background:#294d3c;color:#b7fa8b;border:1px solid #6cb859;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer}
+.prode-crest-save:disabled{opacity:.6}
+.prode-crest-feedback,.prode-league-crest-control>p{font-size:12px;color:#b7fa8b}
+.prode-league-crest-control{margin:12px 0}
+.prode-league-crest-form{flex-wrap:wrap}
+.prode-league-crest-form .prode-crest-save{flex-basis:100%}
+.prode-profile-dialog .prode-profile-identity>svg{width:56px;max-width:none;height:64px;flex:0 0 56px}
+.prode-ranking-name.prode-profile-trigger svg{width:34px;height:39px;flex:0 0 34px}
+.prode-home-redesign .prode-how-step:nth-child(3) span{line-height:1.5}
+@media(max-width:768px){
+.prode-home-redesign .prode-friend-league-badge{flex:0 0 64px;width:64px;height:77px}
+.prode-home-redesign .prode-friend-league-badge svg{width:63px;height:74px}
+.prode-home-redesign .prode-my-group.prode-group-link{gap:9px;padding:12px 11px}
+.prode-home-redesign .prode-friend-enter{font-size:11px;padding:10px 9px;background:#223546}
+.prode-home-redesign .prode-friend-league-info strong{font-size:15px}
+.prode-home-redesign .prode-friend-league-info small{font-size:10px}
+.prode-home-redesign .prode-how-section{gap:14px}
+.prode-home-redesign .prode-how-step{border-left:1px solid #42586c;padding-left:11px}
+.prode-home-redesign .prode-how-step span{font-size:12px}
+}
+@media(max-width:390px){
+.prode-home-redesign .prode-friend-league-badge{flex-basis:54px;width:54px;height:65px}
+.prode-home-redesign .prode-friend-league-badge svg{width:54px;height:65px}
+.prode-home-redesign .prode-friend-enter{font-size:11px;padding:8px}
+.prode-home-redesign .prode-friend-enter svg{display:none}
+.prode-crest-config,.prode-league-crest-form{gap:8px;padding:9px}
+}
