@@ -377,17 +377,17 @@ export default {
               const gameDate = new Date(kickoff);
               const gameWeek = Date.UTC(gameDate.getUTCFullYear(),gameDate.getUTCMonth(),gameDate.getUTCDate()-((gameDate.getUTCDay()+6)%7));
               const weekly = gameWeek === weekStart;
-              const week = base.weeks[gameWeek] ||= { points: 0, played: 0, mvpVoted: 0 };
+              const week = base.weeks[gameWeek] ||= { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
               if (game.mvpVoted) week.mvpVoted++;
-              if (game.mvpCorrect) { week.points += 20; base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
+              if (game.mvpCorrect) { week.mvpHits++; week.points += 20; base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
               if (!game.voted) { streak = 0; continue; }
               base.played++; week.played++; if (weekly) base.weekly.played++;
               if (game.correct) {
-                base.correct++; base.points += 15; week.points += 15; streak++;
+                base.correct++; base.points += 15; week.correct++; week.points += 15; streak++;
                 if (weekly) { base.weekly.correct++; base.weekly.points += 15; }
                 if (streak === 5) { base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
               } else {
-                base.wrong++; base.points += 5; week.points += 5; streak = 0;
+                base.wrong++; base.points += 5; week.wrong++; week.points += 5; streak = 0;
                 if (weekly) { base.weekly.wrong++; base.weekly.points += 5; }
               }
             }
@@ -429,6 +429,24 @@ export default {
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
           return { ...row.weekly, username: row.username, position: weeklyRank };
         });
+        // Historial numerado desde la semana de inicio de la liga, incluyendo semanas sin partidos.
+        const firstDate = new Date(leagueStart);
+        const firstWeek = Date.UTC(firstDate.getUTCFullYear(), firstDate.getUTCMonth(), firstDate.getUTCDate()-((firstDate.getUTCDay()+6)%7));
+        const weeklyHistory = [];
+        for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
+          const participants = rows.map(row => {
+            const w = row.weeks[startMs] || { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
+            return { username: row.username, userId: row.userId, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
+          });
+          participants.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
+          let place = 0, last = null;
+          const ranked = participants.map(row => {
+            if (!row.participated) return { ...row, position: null };
+            if (row.points !== last) { place++; last = row.points; }
+            return { ...row, position: place };
+          });
+          weeklyHistory.push({ number, startsAt: new Date(startMs).toISOString(), finished: startMs < weekStart, eligibleForMedals: startMs < weekStart && ranked.filter(row => row.participated).length >= 3, ranking: ranked });
+        }
         // Medallas de semanas cerradas con al menos tres pronosticadores.
         const medals = new Map(rows.map(row => [row.userId, { username: row.username, gold: 0, silver: 0, bronze: 0 }]));
         const weeks = [...new Set(rows.flatMap(row => Object.keys(row.weeks).map(Number)))].filter(week => week + 7*86400000 <= Date.now()).sort((a,b)=>a-b);
@@ -447,7 +465,7 @@ export default {
           }
         }
         const medalTable = [...medals.values()].sort((a,b)=>b.gold-a.gold || b.silver-a.silver || b.bronze-a.bronze || a.username.localeCompare(b.username,"es"));
-        return reply({ ok: true, ranking, weeklyRanking, medalTable, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
+        return reply({ ok: true, ranking, weeklyRanking, weeklyHistory, medalTable, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
         console.error("Prode league ranking:", error);
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
