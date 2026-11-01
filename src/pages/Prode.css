@@ -909,3 +909,147 @@
    right:0;top:0;width:31px;height:31px;
  }
 }
+
+
+/* Perfiles de participantes: diseño deportivo personalizado según los dos colores de la liga. */
+.prode-profile-backdrop{background:rgba(1,8,18,.86);backdrop-filter:blur(6px)}
+.prode-profile-premium{
+  --profile-accent:#ff9a39;
+  --profile-secondary:#10283c;
+  width:min(100%,540px);max-width:540px;max-height:calc(100dvh - 30px);
+  display:flex;flex-direction:column;gap:13px;
+  padding:22px 20px 19px;border:2px solid var(--profile-accent);border-radius:20px;
+  background:
+    radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--profile-accent) 14%,transparent),transparent 48%),
+    linear-gradient(140deg,#091a2c 10%,var(--profile-secondary) 60%,#091a2c);
+  color:#f4f7fa;box-shadow:0 16px 65px #000b,0 0 27px color-mix(in srgb,var(--profile-accent) 16%,transparent);
+  overflow-y:auto;overscroll-behavior:contain;
+}
+.prode-profile-premium .prode-profile-close{
+  top:13px;right:13px;width:36px;height:36px;border-radius:11px;
+  background:#0e1d30;border:1px solid #8b9baa;color:#f6f9fa;
+}
+.prode-profile-premium .prode-profile-identity{align-items:center;gap:15px;padding-right:38px}
+.prode-profile-premium .prode-profile-identity>svg{
+  width:78px;height:91px;flex:0 0 78px;max-width:78px;filter:drop-shadow(0 4px 8px #0006);
+}
+.prode-profile-premium .prode-profile-identity-copy{min-width:0;flex:1}
+.prode-profile-premium .prode-profile-identity h3{
+  font:italic 400 clamp(24px,5vw,32px) var(--prode-gamer),Impact,sans-serif;
+  text-transform:uppercase;letter-spacing:.01em;line-height:1.06;color:#fff;
+  text-shadow:2px 3px #0007;
+}
+.prode-profile-premium .prode-profile-identity small{
+  color:#bdcbd8;font-size:11px;line-height:1.4;margin-top:6px;
+}
+.prode-profile-premium .prode-profile-badges{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;
+}
+.prode-profile-premium .prode-profile-badges>span{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 7px;min-width:0;border:1px solid var(--profile-accent);
+  border-radius:999px;background:color-mix(in srgb,var(--profile-accent) 15%,#112037);
+  color:#f9ede0;font-size:10px;font-weight:800;white-space:nowrap;
+}
+.prode-profile-premium .prode-profile-badges svg{color:var(--profile-accent);flex-shrink:0}
+.prode-profile-premium .prode-profile-summary{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;margin:0;min-height:91px;
+  border:1px solid var(--profile-accent);border-radius:13px;
+  background:linear-gradient(110deg,color-mix(in srgb,var(--profile-accent) 22%,#102139),#13243a 48%,color-mix(in srgb,var(--profile-accent) 25%,#17253b));
+  box-shadow:inset 0 0 19px color-mix(in srgb,var(--profile-accent) 8%,transparent);
+}
+.prode-profile-premium .prode-profile-summary>div{
+  position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  min-width:0;gap:6px;padding:12px 5px;text-align:center;
+}
+.prode-profile-premium .prode-profile-summary>div+div:before{
+  position:absolute;content:"";left:0;top:22%;height:56%;width:1px;background:#a0afc077;
+}
+.prode-profile-premium .prode-profile-summary strong{
+  font:italic 400 clamp(21px,5.8vw,35px) var(--prode-gamer),Impact,sans-serif;
+  line-height:1;color:#ffb75d;font-variant-numeric:tabular-nums;
+}
+.prode-profile-premium .prode-profile-summary>div:nth-child(2) strong{color:#fff}
+.prode-profile-premium .prode-profile-summary span{
+  color:#e6e8ec;font-size:9px;line-height:1.3;font-weight:800;
+  letter-spacing:.03em;
+}
+.prode-profile-premium .prode-profile-history-notice{
+  margin:-4px 0 0;text-align:center;font-size:10px;color:#b9c7d5;
+}
+.prode-profile-premium .prode-profile-section-title{
+  display:flex;align-items:center;gap:9px;
+  font:italic 400 17px var(--prode-gamer),Impact,sans-serif;
+  margin:2px 0 0;color:#f5f7fa;
+}
+.prode-profile-premium .prode-profile-section-title:before{
+  content:"";width:5px;height:22px;background:var(--profile-accent);transform:skew(-18deg);
+}
+.prode-profile-premium .prode-profile-stats,
+.prode-profile-premium .prode-profile-medals{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.prode-profile-premium .prode-profile-stats>div{
+  display:grid;grid-template-columns:25px 1fr;grid-template-rows:auto auto;
+  align-items:center;column-gap:5px;row-gap:2px;min-width:0;
+  padding:10px 8px;min-height:65px;
+  border:1px solid #50667e;border-radius:10px;background:#15283e;
+  text-align:left;
+}
+.prode-profile-premium .prode-profile-stat-icon{
+  grid-row:1 / span 2;grid-column:1;color:var(--profile-accent);display:grid;place-items:center;
+}
+.prode-profile-premium .prode-profile-stat-icon.good{color:#a9e881}
+.prode-profile-premium .prode-profile-stat-icon.bad{color:#ff766e}
+.prode-profile-premium .prode-profile-stats strong{grid-column:2;font-size:21px;line-height:1;color:#fff}
+.prode-profile-premium .prode-profile-stats>div>span:last-child{
+  grid-column:2;font-size:10px;color:#cdd7e0;line-height:1.2;text-align:left;
+}
+.prode-profile-premium .prode-profile-best-week{
+  margin:0;padding:11px 13px;border:1px solid #9f7042;border-radius:10px;
+  background:linear-gradient(100deg,#1b2c40,#132338);
+}
+.prode-profile-premium .prode-profile-best-week span{
+  display:inline-flex;align-items:center;gap:8px;flex-shrink:0;color:#e8edf2;
+  font-size:12px;font-weight:800;
+}
+.prode-profile-premium .prode-profile-best-week svg{color:var(--profile-accent)}
+.prode-profile-premium .prode-profile-best-week strong{
+  color:var(--profile-accent);font-size:12px;
+}
+.prode-profile-premium .prode-profile-medals{margin:0}
+.prode-profile-premium .prode-profile-medals>div{
+  display:grid;grid-template-columns:30px auto;grid-template-rows:auto auto;
+  align-items:center;justify-content:center;column-gap:7px;row-gap:0;
+  padding:10px 5px;min-height:59px;border-radius:10px;
+  border:1px solid #526981;background:#13263b;text-align:left;
+}
+.prode-profile-premium .prode-profile-medals>div:first-child{border-color:#cf9f4f}
+.prode-profile-premium .prode-profile-medals>div:last-child{border-color:#9b6d50}
+.prode-profile-premium .prode-profile-medal-symbol{grid-row:1 / span 2;grid-column:1;font-size:25px}
+.prode-profile-premium .prode-profile-medals strong{grid-column:2;font-size:20px;color:#fff;line-height:1}
+.prode-profile-premium .prode-profile-medals>div>span:last-child{grid-column:2;color:#cbd4dd;font-size:11px}
+.prode-profile-premium>p:last-child{
+  border-top:1px solid #43546a;padding-top:11px;margin:0;
+  color:#b5c4d1;font-size:10px;line-height:1.45;text-align:center;
+}
+@media(max-width:600px){
+  .prode-profile-backdrop{padding:10px}
+  .prode-profile-premium{padding:17px 12px 14px;gap:11px;border-radius:17px}
+  .prode-profile-premium .prode-profile-identity{gap:9px;padding-right:30px}
+  .prode-profile-premium .prode-profile-identity>svg{width:59px;height:72px;flex-basis:59px}
+  .prode-profile-premium .prode-profile-identity h3{font-size:24px}
+  .prode-profile-premium .prode-profile-badges{gap:4px;margin-top:7px}
+  .prode-profile-premium .prode-profile-badges>span{padding:4px 6px;font-size:9px}
+  .prode-profile-premium .prode-profile-summary{min-height:76px}
+  .prode-profile-premium .prode-profile-summary>div{padding:10px 2px;gap:4px}
+  .prode-profile-premium .prode-profile-summary span{font-size:8px}
+  .prode-profile-premium .prode-profile-section-title{font-size:14px}
+  .prode-profile-premium .prode-profile-stats>div{grid-template-columns:20px 1fr;column-gap:3px;padding:9px 5px;min-height:60px}
+  .prode-profile-premium .prode-profile-stat-icon svg{width:17px;height:17px}
+  .prode-profile-premium .prode-profile-stats strong{font-size:18px}
+  .prode-profile-premium .prode-profile-stats>div>span:last-child{font-size:9px}
+  .prode-profile-premium .prode-profile-best-week{padding:9px 8px;gap:6px}
+  .prode-profile-premium .prode-profile-best-week span,.prode-profile-premium .prode-profile-best-week strong{font-size:10px}
+  .prode-profile-premium .prode-profile-medals>div{grid-template-columns:24px auto;gap:4px;padding:8px 2px;min-height:52px}
+  .prode-profile-premium .prode-profile-medal-symbol{font-size:20px}
+}
