@@ -7,7 +7,7 @@ import ProdeCrest from "./ProdeCrest";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 const inviteUrl = token => "https://lanaranjaargentina.com.ar/invitacion?token=" + encodeURIComponent(token);
-const inviteText = (leagueName,token) => "🏀 ¡Te invito a jugar el Prode LNA!\\n\\n🏆 Liga de amigos: " + leagueName + "\\nPronosticá ganador y MVP, sumá puntos y competí conmigo.\\n\\n👉 Sumate desde acá:\\n" + inviteUrl(token);
+const inviteText = (leagueName,token) => "🏀 ¡Te invito a jugar el Prode LNA!\n\n🏆 Liga de amigos: " + leagueName + "\nPronosticá ganador y MVP, sumá puntos y competí conmigo.\n\n👉 Sumate desde acá:\n" + inviteUrl(token);
 const parseInviteCode = value => {
   const trimmed = value.trim();
   try {
@@ -692,7 +692,9 @@ export default function ProdeGroups() {
         <div><span>LIGA DE AMIGOS</span><strong>{joinPreview.name}</strong><small>Temporada {joinPreview.season}</small></div>
       </div> : joinPreviewBusy ? <p className="prode-join-loading" role="status">Buscando los datos de tu liga…</p> : joinPreviewError ? <p className="prode-group-error" role="alert">{joinPreviewError}</p> : <p>Ingresá el código que te compartieron para descubrir la liga.</p>}
       <p className="prode-join-description">{joinPreview ? "¡Te invitaron a competir! Elegí al ganador y al MVP de cada partido y sumá puntos con tus amigos." : "Necesitás una cuenta Google para unirte al Prode."}</p>
-      <label>Código de invitación<input required autoCapitalize="none" autoCorrect="off" value={joinCode} onChange={e => setJoinCode(parseInviteCode(e.target.value))} placeholder="Pegá el código o enlace"/></label>
+      {joinPreview
+        ? <div className="prode-join-verified"><span><CircleCheck size={16}/> Invitación verificada</span><button type="button" onClick={() => {setJoinCode("");setJoinPreview(null);setInviteMessage("");}}>Cambiar código</button></div>
+        : <label>Código de invitación<input required autoCapitalize="none" autoCorrect="off" value={joinCode} onChange={e => setJoinCode(parseInviteCode(e.target.value))} placeholder="Pegá el código o enlace"/></label>}
       {!user && <button className="prode-create-submit" type="button" disabled={loginBusy} onClick={loginForInvite}>{loginBusy ? "Conectando…" : "Continuar con Google para unirme"}</button>}
       {inviteMessage && <p className="prode-group-error" role="alert">{inviteMessage}</p>}
       <button className="prode-create-submit prode-join-confirm" type="submit" disabled={inviteBusy || !user || !/^[a-f0-9]{64}$/i.test(joinCode) || joinPreviewBusy || Boolean(joinPreviewError)}>{inviteBusy ? "Ingresando…" : user ? joinPreview ? "Unirme a " + joinPreview.name : "Unirme a la liga" : "Primero iniciá sesión"}</button>
