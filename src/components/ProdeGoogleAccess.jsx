@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { LogIn, LogOut, ShieldCheck, Pencil, X } from "lucide-react";
 import { signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
+import ProdeCrest from "./ProdeCrest";
 
 const PRODE_API = "https://lna-prode-api.lnab.workers.dev";
 
@@ -13,6 +14,10 @@ export default function ProdeGoogleAccess() {
   const [syncing, setSyncing] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [username, setUsername] = useState("");
+  const [crestPrimary, setCrestPrimary] = useState("#7de83d");
+  const [crestSecondary, setCrestSecondary] = useState("#10283c");
+  const [crestBusy, setCrestBusy] = useState(false);
+  const [crestMessage, setCrestMessage] = useState("");
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
   const [careerLink, setCareerLink] = useState(null);
@@ -47,7 +52,7 @@ export default function ProdeGoogleAccess() {
       });
       const data = await response.json();
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
-      if (active) { setProfile(data.user); setUsername(data.user.username || ""); }
+      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); }
       const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
       if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
     }).catch(() => {
@@ -74,6 +79,24 @@ export default function ProdeGoogleAccess() {
       window.dispatchEvent(new Event("prode-profile-updated"));
     } catch (e) { setProfileError(e.message || "Error de conexión"); }
     finally { setSaving(false); }
+  };
+
+  const saveCrest = async () => {
+    if (!user || crestBusy) return;
+    setCrestBusy(true); setCrestMessage("");
+    try {
+      const token = await user.getIdToken();
+      const response = await fetch(PRODE_API + "/api/prode/profile/crest", {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el escudo");
+      setProfile(prev => ({ ...prev, crestPrimary: data.crestPrimary, crestSecondary: data.crestSecondary }));
+      setCrestMessage("Colores guardados correctamente");
+      window.dispatchEvent(new Event("prode-profile-updated"));
+    } catch (error) { setCrestMessage(error.message || "Error al guardar"); }
+    finally { setCrestBusy(false); }
   };
 
   const linkCareer = async () => {
@@ -121,7 +144,7 @@ export default function ProdeGoogleAccess() {
       {loading ? <span>Comprobando sesión…</span> : user ? (
         <>
           <div className="prode-google-identity">
-            <span className="prode-profile-avatar">{(profile?.username || "J").slice(0,1).toUpperCase()}</span>
+            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} size={55} className="prode-account-crest"/>
             <div><strong>{profile?.username || "Elegí tu nombre de usuario"}</strong><span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span></div>
           </div>
           <button type="button" className="prode-profile-edit-button" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={16}/> Mi perfil</button>
@@ -143,7 +166,16 @@ export default function ProdeGoogleAccess() {
         </>
       )}
       {error && <p role="alert">{error}</p>}
-      {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveUsername}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setEditOpen(false)}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>{profileError && <p className="prode-group-error" role="alert">{profileError}</p>}<button className="prode-create-submit" type="submit" disabled={saving || !/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())}>{saving ? "Guardando…" : "Guardar perfil"}</button></form></div>}
+      {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveUsername}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setEditOpen(false)}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>
+        <div className="prode-crest-config">
+          <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary} size={90}/>
+          <div className="prode-crest-colors">
+            <label>Color principal<input type="color" value={crestPrimary} onChange={e => setCrestPrimary(e.target.value)}/></label>
+            <label>Color secundario<input type="color" value={crestSecondary} onChange={e => setCrestSecondary(e.target.value)}/></label>
+          </div>
+        </div>
+        <button className="prode-crest-save" type="button" disabled={crestBusy} onClick={saveCrest}>{crestBusy ? "Guardando colores…" : "Guardar colores del escudo"}</button>
+        {crestMessage && <p role="status" className="prode-crest-feedback">{crestMessage}</p>}{profileError && <p className="prode-group-error" role="alert">{profileError}</p>}<button className="prode-create-submit" type="submit" disabled={saving || !/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())}>{saving ? "Guardando…" : "Guardar perfil"}</button></form></div>}
     </div>
   );
 }
