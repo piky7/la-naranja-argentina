@@ -29,7 +29,7 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         <stop offset="50%" stopColor="#ffffff" stopOpacity=".08"/>
         <stop offset="100%" stopColor="#000000" stopOpacity=".22"/>
       </radialGradient>
-      <clipPath id={id + "ballClip"}><circle cx="48" cy="44" r="36"/></clipPath>
+      <clipPath id={id + "premiumClip"}><circle cx="48" cy="40" r="30.5"/></clipPath>
     </defs>
     {isLeague ? <>
       <path d="M31 14h34v29c0 18-10 27-17 27S31 61 31 43V14Z" fill={`url(#${id}face)`} stroke={a} strokeWidth="3"/>
@@ -41,26 +41,34 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         fontFamily="Impact, Russo One, Arial Black, sans-serif" fontStyle="italic"
         fontSize={fontSize} fontWeight="900" letterSpacing=".1">{label}</text>
     </> : <>
-      {/* Pelota deportiva personalizada, con paneles y brillo vectorial. */}
-      <circle cx="48" cy="44" r="39" fill={b} opacity=".65"/>
-      <circle cx="48" cy="44" r="36" fill={`url(#${id}face)`} stroke={b} strokeWidth="3"/>
-      <g clipPath={`url(#${id}ballClip)`} fill="none" stroke={b} strokeWidth="3.8" strokeLinecap="round">
-        <path d="M12 44h72"/>
-        <path d="M48 8v72"/>
-        <path d="M14 24c23 0 43 8 68 40"/>
-        <path d="M82 24C59 24 39 32 14 64"/>
-        <path d="M25 12c20 17 22 44 2 64"/>
-        <path d="M71 12C51 29 49 56 69 76"/>
+      {/* Player Badge LNA: insignia premium enteramente vectorial y personalizable. */}
+      <ellipse cx="48" cy="101" rx="30" ry="5" fill={a} opacity=".20"/>
+      <path d="M20 51 4 44l7 15-6 8 20 1 9-14Z" fill={b} stroke={a} strokeWidth="1.8" strokeLinejoin="round"/>
+      <path d="m76 51 16-7-7 15 6 8-20 1-9-14Z" fill={b} stroke={a} strokeWidth="1.8" strokeLinejoin="round"/>
+      <path d="m15 54 12 4-9 5-8-1Z M81 54l-12 4 9 5 8-1Z" fill={a} opacity=".75"/>
+      <path d="m22 65-13 7 17 2 11-8 M74 65l13 7-17 2-11-8" fill={b} stroke={a} strokeWidth="1.5" strokeLinejoin="round"/>
+      <circle cx="48" cy="40" r="37" fill={b} stroke={a} strokeWidth="2.6"/>
+      <circle cx="48" cy="40" r="34" fill="#071522" stroke="#ffffff" strokeOpacity=".65" strokeWidth="2"/>
+      <circle cx="48" cy="40" r="30.5" fill={`url(#${id}face)`}/>
+      <g clipPath={`url(#${id}premiumClip)`} fill="none" stroke={b} strokeWidth="3.6" strokeLinecap="round">
+        <path d="M17 40h62"/>
+        <path d="M48 9v62"/>
+        <path d="M23 14c24 16 26 36 6 53"/>
+        <path d="M73 14C49 30 47 50 67 67"/>
+        <path d="M21 23c14 0 22 6 27 17s13 17 27 17"/>
+        <path d="M75 23c-14 0-22 6-27 17S35 57 21 57"/>
       </g>
-      <circle cx="48" cy="44" r="36" fill={`url(#${id}shine)`}/>
-      <circle cx="48" cy="44" r="36" fill="none" stroke={a} strokeWidth="2.4"/>
-      <path d="M22 21c10-9 18-11 27-10" fill="none" stroke="#ffffff" strokeOpacity=".45" strokeWidth="2.8" strokeLinecap="round"/>
-      {/* Placa flotante con la tipografía deportiva y el color de texto elegido. */}
-      <path d="M8 77h80l-4 21H12Z" fill={b} stroke={a} strokeWidth="2.4" strokeLinejoin="round"/>
-      <path d="M13 80h70" stroke={a} strokeOpacity=".55" strokeWidth="1.1"/>
-      <text x="48" y="92" textAnchor="middle" fill={t}
-        fontFamily="Impact, Russo One, Arial Black, sans-serif" fontStyle="italic"
-        fontSize={fontSize} fontWeight="900" letterSpacing=".15">{label}</text>
+      <circle cx="48" cy="40" r="30.5" fill={`url(#${id}shine)`}/>
+      <circle cx="48" cy="40" r="30.5" fill="none" stroke="#ffffff" strokeOpacity=".33" strokeWidth="1.3"/>
+      <path d="M25 24c7-9 15-13 22-13" fill="none" stroke="#ffffff" strokeOpacity=".5" strokeWidth="2.4" strokeLinecap="round"/>
+      {/* Cinta deportiva envolvente; conserva el color de texto elegido. */}
+      <path d="m9 77 13-4 6 9-6 14-14-3 5-8Z M87 77l-13-4-6 9 6 14 14-3-5-8Z" fill={a} stroke={b} strokeWidth="1.5"/>
+      <path d="M19 76h58l7 10-7 13H19l-7-13Z" fill={b} stroke={a} strokeWidth="2.6" strokeLinejoin="round"/>
+      <path d="M23 79h50" stroke="#ffffff" strokeOpacity=".3" strokeWidth="1.3"/>
+      <text x="48" y="91.5" textAnchor="middle" fill={t}
+        fontFamily="Russo One,Impact,Arial Black,sans-serif" fontStyle="italic"
+        fontSize={fontSize} fontWeight="900" letterSpacing=".1">{label}</text>
+      <path d="m38 100 10 5 10-5" fill="none" stroke={a} strokeWidth="2" strokeLinecap="round"/>
     </>}
   </svg>;
 }
