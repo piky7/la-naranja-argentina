@@ -554,7 +554,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary, crestText: member.crestText, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -628,9 +628,9 @@ export default {
         let weeklyRank = 0, previousWeekly = null;
         const weeklyRanking = [...rows].sort((a,b) => b.weekly.points-a.weekly.points || b.weekly.correct-a.weekly.correct || a.username.localeCompare(b.username,"es")).map(row => {
           const pts = row.weekly.points;
-          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, position: null };
+          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, position: null };
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
-          return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, position: weeklyRank };
+          return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, position: weeklyRank };
         });
         // Historial numerado desde la semana de inicio de la liga, incluyendo semanas sin partidos.
         const firstWeek = mondayOf(argentinaDateKey(leagueStart));
@@ -638,7 +638,7 @@ export default {
         for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
           const participants = rows.filter(row => argentinaDateKey(time(allMembers.find(m => m.user_id === row.userId)?.joined_at)) < startMs + 7*86400000).map(row => {
             const w = row.weeks[startMs] || { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
-            return { username: row.username, userId: row.userId, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
+            return { username: row.username, userId: row.userId, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
           });
           participants.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
           let place = 0, last = null;
