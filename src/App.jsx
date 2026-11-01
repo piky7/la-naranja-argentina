@@ -15,6 +15,7 @@ import Estadisticas from "./pages/Estadisticas";
 import Privacidad from "./pages/Privacidad";
 import Acerca from "./pages/Acerca";
 import Prode from "./pages/Prode";
+import Admin from "./pages/Admin";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function AnimatedRoutes() {
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/prode" element={<Prode />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
           const params = new URLSearchParams(location.search);
           const token = params.get("token") || params.get("invite");
