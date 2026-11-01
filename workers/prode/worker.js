@@ -542,6 +542,7 @@ export default {
         const time = value => Date.parse(String(value).replace(" ", "T") + (String(value).includes("Z") ? "" : "Z"));
         const leagueStart = time(start.starts_at);
         const rows = [];
+        const completedMatches = new Map();
         // Semanas de lunes a domingo según la fecha del partido en Argentina.
         // Las claves son medianoches UTC de la fecha civil argentina, no del instante UTC del encuentro.
         const argentinaDateKey = value => {
@@ -571,19 +572,44 @@ export default {
               if (periodIndex < 0) continue; // No se suman partidos disputados durante la ausencia.
               if (lastPeriod !== periodIndex) { streak = 0; lastPeriod = periodIndex; }
               const gameWeek = mondayOf(argentinaDateKey(kickoff));
+              // Los partidos jugados se agrupan por la fecha de inicio argentina;
+              // nunca se incluyen predicciones de partidos sin resultado oficial.
+              if (game.homeTeam && game.awayTeam && Number.isFinite(game.homeScore) && Number.isFinite(game.awayScore)) {
+                if (!completedMatches.has(game.id)) completedMatches.set(game.id, {
+                  id: game.id, startsAt: game.startsAt, weekKey: gameWeek,
+                  homeTeam: game.homeTeam, awayTeam: game.awayTeam,
+                  homeScore: game.homeScore, awayScore: game.awayScore,
+                  winner: game.winner, mvpWinners: game.mvpWinners || [],
+                  participants: [],
+                });
+              }
+              const matchDetail = completedMatches.get(game.id);
+              const pointsDetail = { userId: member.user_id, username: member.username,
+                crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary,
+                crestText: member.crestText, winnerPick: game.selectedWinner || null,
+                mvpPick: game.selectedMvp || null,
+                winnerPoints: 0, mvpPoints: 0, streakPoints: 0, points: 0,
+                winnerCorrect: Boolean(game.correct), mvpCorrect: Boolean(game.mvpCorrect),
+                eligible: true };
               const weekly = gameWeek === weekStart;
               const week = base.weeks[gameWeek] ||= { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
               if (game.mvpVoted) { week.mvpVoted++; base.mvpVotes++; if (weekly) base.weekly.mvpVoted++; }
-              if (game.mvpCorrect) { week.mvpHits++; week.points += 20; base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
-              if (!game.voted) { streak = 0; continue; }
+              if (game.mvpCorrect) { pointsDetail.mvpPoints = 20; week.mvpHits++; week.points += 20; base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
+              if (!game.voted) { streak = 0; if (matchDetail) { pointsDetail.points = pointsDetail.mvpPoints; matchDetail.participants.push(pointsDetail); } continue; }
               base.played++; week.played++; if (weekly) base.weekly.played++;
               if (game.correct) {
+                pointsDetail.winnerPoints = 15;
                 base.correct++; base.points += 15; week.correct++; week.points += 15; streak++;
                 if (weekly) { base.weekly.correct++; base.weekly.points += 15; }
-                if (streak === 5) { base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
+                if (streak === 5) { pointsDetail.streakPoints = 45; base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
               } else {
+                pointsDetail.winnerPoints = 5;
                 base.wrong++; base.points += 5; week.wrong++; week.points += 5; streak = 0;
                 if (weekly) { base.weekly.wrong++; base.weekly.points += 5; }
+              }
+              if (matchDetail) {
+                pointsDetail.points = pointsDetail.winnerPoints + pointsDetail.mvpPoints + pointsDetail.streakPoints;
+                matchDetail.participants.push(pointsDetail);
               }
             }
             return base;
