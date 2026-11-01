@@ -448,7 +448,7 @@ export default {
           weeklyHistory.push({ number, startsAt: new Date(startMs).toISOString(), finished: startMs < weekStart, eligibleForMedals: startMs < weekStart && ranked.filter(row => row.participated).length >= 3, ranking: ranked });
         }
         // Medallas de semanas cerradas con al menos tres pronosticadores.
-        const medals = new Map(rows.map(row => [row.userId, { username: row.username, gold: 0, silver: 0, bronze: 0 }]));
+        const medals = new Map(rows.map(row => [row.userId, { userId: row.userId, username: row.username, gold: 0, silver: 0, bronze: 0, history: [] }]));
         const weeks = [...new Set(rows.flatMap(row => Object.keys(row.weeks).map(Number)))].filter(week => week + 7*86400000 <= Date.now()).sort((a,b)=>a-b);
         for (const week of weeks) {
           const participants = rows.filter(row => (row.weeks[week]?.played || 0) + (row.weeks[week]?.mvpVoted || 0) > 0);
@@ -459,6 +459,8 @@ export default {
             const pts = row.weeks[week].points;
             if (pts !== lastPoints) { place++; lastPoints = pts; }
             const entry = medals.get(row.userId);
+            const weekNumber = Math.floor((week - firstWeek) / (7*86400000)) + 1;
+            if (place <= 3) entry.history.push({ week: weekNumber, position: place, points: pts });
             if (place === 1) entry.gold++;
             else if (place === 2) entry.silver++;
             else if (place === 3) entry.bronze++;
