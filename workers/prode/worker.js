@@ -82,6 +82,12 @@ function extractSpkiFromCertificate(bytes) {
   return bytes.slice(pos, spki.next);
 }
 
+// Mantener el historial de afiliación sin borrar la membresía ni los puntos iniciales.
+// Las membresías existentes se registran una sola vez al migrar.
+async function ensureMembershipPeriods(db) {
+  await db.prepare("CREATE TABLE IF NOT EXISTS prode_membership_periods (group_id TEXT NOT NULL REFERENCES prode_groups(id) ON DELETE CASCADE, user_id TEXT NOT NULL REFERENCES prode_users(id) ON DELETE CASCADE, entered_at TEXT NOT NULL, exited_at TEXT, PRIMARY KEY(group_id,user_id,entered_at))").run();
+  await db.prepare("INSERT OR IGNORE INTO prode_membership_periods(group_id,user_id,entered_at) SELECT m.group_id,m.user_id,m.joined_at FROM prode_memberships m").run();
+}
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -246,9 +252,11 @@ export default {
         if (Number(count?.total || 0) >= 5) return reply({ ok: false, error: "Podés crear hasta cinco ligas" }, 409);
         const id = crypto.randomUUID();
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
+        await ensureMembershipPeriods(env.DB);
         await env.DB.batch([
           env.DB.prepare("INSERT INTO prode_groups (id, name, description, visibility, owner_id) VALUES (?, ?, ?, ?, ?)").bind(id, name, description, visibility, ownerId),
           env.DB.prepare("INSERT INTO prode_memberships (group_id, user_id, role) VALUES (?, ?, 'owner')").bind(id, ownerId),
+          env.DB.prepare("INSERT INTO prode_membership_periods(group_id,user_id,entered_at) VALUES (?,?,?)").bind(id,ownerId,new Date().toISOString()),
           env.DB.prepare("INSERT INTO prode_league_starts(group_id) VALUES (?)").bind(id),
         ]);
         return reply({ ok: true, group: { id, name, description, visibility, season: "2026/27", role: "owner" } }, 201);
@@ -261,8 +269,9 @@ export default {
       const identity = await verifiedFirebaseUser(request);
       if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
       try {
+        await ensureMembershipPeriods(env.DB);
         const groups = await env.DB.prepare(
-          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE m.user_id = ? ORDER BY g.created_at DESC LIMIT 50"
+          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY g.created_at DESC LIMIT 50"
         ).bind("firebase:" + identity.uid).all();
         return reply({ ok: true, groups: groups.results || [] });
       } catch {
@@ -319,14 +328,17 @@ export default {
           "SELECT i.id, i.group_id, g.name FROM prode_invitations i JOIN prode_groups g ON g.id = i.group_id WHERE i.token_hash = ? AND i.revoked_at IS NULL AND i.expires_at > ? AND i.used_count < i.max_uses"
         ).bind(hash, new Date().toISOString()).first();
         if (!invite) return reply({ ok: false, error: "Invitación vencida o inválida" }, 404);
+        await ensureMembershipPeriods(env.DB);
         const existing = await env.DB.prepare("SELECT 1 AS present FROM prode_memberships WHERE group_id = ? AND user_id = ?").bind(invite.group_id, userId).first();
-        if (existing) return reply({ ok: true, groupId: invite.group_id, name: invite.name, alreadyMember: true });
+        const active = await env.DB.prepare("SELECT 1 AS present FROM prode_membership_periods WHERE group_id=? AND user_id=? AND exited_at IS NULL").bind(invite.group_id,userId).first();
+        if (active) return reply({ ok: true, groupId: invite.group_id, name: invite.name, alreadyMember: true });
         const updated = await env.DB.prepare(
           "UPDATE prode_invitations SET used_count = used_count + 1 WHERE id = ? AND revoked_at IS NULL AND expires_at > ? AND used_count < max_uses RETURNING id"
         ).bind(invite.id, new Date().toISOString()).first();
         if (!updated) return reply({ ok: false, error: "Invitación agotada" }, 409);
         try {
-          await env.DB.prepare("INSERT INTO prode_memberships (group_id, user_id, role) VALUES (?, ?, 'member')").bind(invite.group_id, userId).run();
+          if (!existing) await env.DB.prepare("INSERT INTO prode_memberships (group_id, user_id, role) VALUES (?, ?, 'member')").bind(invite.group_id, userId).run();
+          await env.DB.prepare("INSERT INTO prode_membership_periods(group_id,user_id,entered_at) VALUES (?,?,?)").bind(invite.group_id, userId, new Date().toISOString()).run();
         } catch (error) {
           await env.DB.prepare("UPDATE prode_invitations SET used_count = MAX(0, used_count - 1) WHERE id = ?").bind(invite.id).run();
           throw error;
@@ -345,8 +357,9 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const groupId = closeCheck[1], userId = "firebase:" + identity.uid;
+        await ensureMembershipPeriods(env.DB);
         const group = await env.DB.prepare(
-          "SELECT g.season, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id=g.id WHERE g.id=? AND m.user_id=?"
+          "SELECT g.season, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id=g.id WHERE g.id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)"
         ).bind(groupId,userId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
         if (group.role !== "owner") return reply({ ok: false, error: "Solo el administrador puede consultar la validación" }, 403);
@@ -385,7 +398,8 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const groupId = seasonHistory[1], userId = "firebase:" + identity.uid;
-        const member = await env.DB.prepare("SELECT 1 AS allowed FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId, userId).first();
+        await ensureMembershipPeriods(env.DB);
+        const member = await env.DB.prepare("SELECT 1 AS allowed FROM prode_memberships m WHERE group_id=? AND user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId, userId).first();
         if (!member) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_season_archives (group_id TEXT NOT NULL, season TEXT NOT NULL, closed_at TEXT NOT NULL DEFAULT (datetime('now')), champion_user_ids TEXT NOT NULL, standings_json TEXT NOT NULL, medals_json TEXT NOT NULL, weekly_history_json TEXT NOT NULL, PRIMARY KEY(group_id,season), FOREIGN KEY(group_id) REFERENCES prode_groups(id) ON DELETE RESTRICT)").run();
         const archives = await env.DB.prepare("SELECT season, closed_at, champion_user_ids, standings_json, medals_json, weekly_history_json FROM prode_season_archives WHERE group_id=? ORDER BY season DESC LIMIT 30").bind(groupId).all();
@@ -410,7 +424,8 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const groupId = leagueRanking[1], userId = "firebase:" + identity.uid;
-        const membership = await env.DB.prepare("SELECT m.role FROM prode_memberships m WHERE m.group_id=? AND m.user_id=?").bind(groupId,userId).first();
+        await ensureMembershipPeriods(env.DB);
+        const membership = await env.DB.prepare("SELECT m.role FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId,userId).first();
         if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
         await env.DB.prepare("INSERT OR IGNORE INTO prode_league_starts(group_id) VALUES (?)").bind(groupId).run();
@@ -419,8 +434,14 @@ export default {
         const initialPoints = new Map((initialRows.results || []).map(row => [row.user_id, Number(row.points)]));
         const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
         const members = await env.DB.prepare(
-          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id WHERE m.group_id=? ORDER BY m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
+        const periodsResult = await env.DB.prepare("SELECT user_id, entered_at, exited_at FROM prode_membership_periods WHERE group_id=? ORDER BY entered_at").bind(groupId).all();
+        const periodsByUser = new Map();
+        for (const period of periodsResult.results || []) {
+          if (!periodsByUser.has(period.user_id)) periodsByUser.set(period.user_id, []);
+          periodsByUser.get(period.user_id).push({ start: Date.parse(period.entered_at.replace(" ","T") + (period.entered_at.includes("Z") ? "" : "Z")), end: period.exited_at ? Date.parse(period.exited_at.replace(" ","T") + (period.exited_at.includes("Z") ? "" : "Z")) : Infinity });
+        }
         const time = value => Date.parse(String(value).replace(" ", "T") + (String(value).includes("Z") ? "" : "Z"));
         const leagueStart = time(start.starts_at);
         const rows = [];
@@ -443,11 +464,15 @@ export default {
             const data = await response.json();
             if (!data.ok || !Array.isArray(data.games)) throw Error("Historial de votaciones no disponible");
             const since = Math.max(leagueStart, time(member.joined_at));
-            let streak = 0;
+            const periods = periodsByUser.get(member.user_id) || [];
+            let streak = 0, lastPeriod = -1;
             const chronologicalGames = [...data.games].sort((a,b) => Date.parse(a.startsAt) - Date.parse(b.startsAt) || String(a.id || "").localeCompare(String(b.id || "")));
             for (const game of chronologicalGames) {
               const kickoff = Date.parse(game.startsAt);
               if (!Number.isFinite(kickoff) || kickoff < since || !game.finished || kickoff > Date.now()) continue;
+              const periodIndex = periods.findIndex(p => kickoff >= p.start && kickoff < p.end);
+              if (periodIndex < 0) continue; // No se suman partidos disputados durante la ausencia.
+              if (lastPeriod !== periodIndex) { streak = 0; lastPeriod = periodIndex; }
               const gameWeek = mondayOf(argentinaDateKey(kickoff));
               const weekly = gameWeek === weekStart;
               const week = base.weeks[gameWeek] ||= { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
@@ -563,11 +588,12 @@ export default {
         const [, groupId, action] = manageGroup, actorId = "firebase:" + identity.uid;
         const group = await env.DB.prepare("SELECT owner_id FROM prode_groups WHERE id=?").bind(groupId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada" }, 404);
-        const membership = await env.DB.prepare("SELECT role FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId,actorId).first();
+        await ensureMembershipPeriods(env.DB);
+        const membership = await env.DB.prepare("SELECT m.role FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId,actorId).first();
         if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
         if (action === "leave") {
           if (group.owner_id === actorId) return reply({ ok: false, error: "El creador debe eliminar la liga; no puede abandonarla" }, 403);
-          await env.DB.prepare("DELETE FROM prode_memberships WHERE group_id=? AND user_id=?").bind(groupId,actorId).run();
+          await env.DB.prepare("UPDATE prode_membership_periods SET exited_at=? WHERE group_id=? AND user_id=? AND exited_at IS NULL").bind(new Date().toISOString(),groupId,actorId).run();
           return reply({ ok: true });
         }
         if (group.owner_id !== actorId) return reply({ ok: false, error: "Solo el administrador puede hacer esto" }, 403);
@@ -575,7 +601,7 @@ export default {
           const body = await request.json().catch(() => ({}));
           const targetId = body.userId;
           if (typeof targetId !== "string" || targetId === actorId || !targetId.startsWith("firebase:")) return reply({ ok: false, error: "Participante inválido" }, 400);
-          const deleted = await env.DB.prepare("DELETE FROM prode_memberships WHERE group_id=? AND user_id=? AND role != 'owner'").bind(groupId,targetId).run();
+          const deleted = await env.DB.prepare("UPDATE prode_membership_periods SET exited_at=? WHERE group_id=? AND user_id=? AND exited_at IS NULL AND EXISTS (SELECT 1 FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND m.role != 'owner')").bind(new Date().toISOString(),groupId,targetId,groupId,targetId).run();
           if (!deleted.meta?.changes) return reply({ ok: false, error: "Participante no encontrado" }, 404);
           return reply({ ok: true });
         }
@@ -583,6 +609,7 @@ export default {
         if (body.confirmName !== (await env.DB.prepare("SELECT name FROM prode_groups WHERE id=?").bind(groupId).first())?.name)
           return reply({ ok: false, error: "Confirmá el nombre exacto de la liga" }, 400);
         await env.DB.batch([
+          env.DB.prepare("DELETE FROM prode_membership_periods WHERE group_id=?").bind(groupId),
           env.DB.prepare("DELETE FROM prode_initial_points WHERE group_id=?").bind(groupId),
           env.DB.prepare("DELETE FROM prode_league_starts WHERE group_id=?").bind(groupId),
           env.DB.prepare("DELETE FROM prode_invitations WHERE group_id=?").bind(groupId),
@@ -602,12 +629,13 @@ export default {
       if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
       try {
         const groupId = groupDetail[1], userId = "firebase:" + identity.uid;
+        await ensureMembershipPeriods(env.DB);
         const group = await env.DB.prepare(
-          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE g.id = ? AND m.user_id = ?"
+          "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id WHERE g.id = ? AND m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)"
         ).bind(groupId, userId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
         const members = await env.DB.prepare(
-          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id WHERE m.group_id = ? ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id WHERE m.group_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         return reply({ ok: true, group, members: members.results || [] });
       } catch {
