@@ -79,7 +79,13 @@ export default function Admin() {
         <button type="button" disabled={loginBusy} onClick={signIn}>{loginBusy ? "Conectando…" : "Continuar con Google"}</button>
       </section>}
       {authLoaded && user && loading && <div className="lna-admin-notice">Consultando métricas protegidas…</div>}
-      {error && !loading && <div role="alert" className="lna-admin-notice lna-admin-error"><LockKeyhole size={20}/><p>{error}</p></div>}
+      {error && !loading && <div role="alert" className="lna-admin-notice lna-admin-error"><LockKeyhole size={20}/><p>{error}</p>
+        {user && error.includes("autorización") && <div className="lna-admin-setup">
+          <p>Para habilitar tu cuenta, copiá su UID de Firebase y guardalo como secreto <strong>ADMIN_FIREBASE_UID</strong> en GitHub Actions. Después ejecutá «Desplegar API Prode LNA».</p>
+          <code>{user.uid}</code>
+          <button type="button" onClick={() => navigator.clipboard.writeText(user.uid)}>Copiar UID de mi cuenta</button>
+        </div>}
+      </div>}
       {summary && !loading && <>
         <div className="lna-admin-toolbar"><span>Actualizado: {new Date(summary.generatedAt).toLocaleString("es-AR")}</span>
           <button type="button" onClick={() => setRevision(x => x + 1)}><RefreshCcw size={16}/> Actualizar</button></div>
