@@ -968,7 +968,7 @@
 }
 .prode-profile-premium .prode-profile-summary strong{
   font:italic 400 clamp(21px,5.8vw,35px) var(--prode-gamer),Impact,sans-serif;
-  line-height:1;color:#ffb75d;font-variant-numeric:tabular-nums;
+  line-height:1;color:var(--profile-accent);font-variant-numeric:tabular-nums;
 }
 .prode-profile-premium .prode-profile-summary>div:nth-child(2) strong{color:#fff}
 .prode-profile-premium .prode-profile-summary span{
@@ -1005,7 +1005,7 @@
   grid-column:2;font-size:10px;color:#cdd7e0;line-height:1.2;text-align:left;
 }
 .prode-profile-premium .prode-profile-best-week{
-  margin:0;padding:11px 13px;border:1px solid #9f7042;border-radius:10px;
+  margin:0;padding:11px 13px;border:1px solid var(--profile-accent);border-radius:10px;
   background:linear-gradient(100deg,#1b2c40,#132338);
 }
 .prode-profile-premium .prode-profile-best-week span{
