@@ -423,6 +423,14 @@ export default {
           if (!saved.meta?.changes) return reply({ ok: false, error: "Los puntos iniciales ya fueron asignados" }, 409);
           return reply({ ok: true, userId: targetId, points: amount, maxPoints: leaderPoints });
         }
+        // Estadísticas históricas de perfil calculadas únicamente a partir de partidos elegibles en esta liga.
+        const profileFirstWeek = mondayOf(argentinaDateKey(leagueStart));
+        for (const row of rows) {
+          row.accuracy = row.played ? Math.round(row.correct * 1000 / row.played) / 10 : 0;
+          const weeksPlayed = Object.entries(row.weeks).filter(([,w]) => w.played > 0 || w.mvpVoted > 0);
+          const best = weeksPlayed.sort((a,b) => b[1].points-a[1].points || Number(a[0])-Number(b[0]))[0];
+          row.bestWeek = best ? { number: Math.floor((Number(best[0])-profileFirstWeek)/(7*86400000))+1, points: best[1].points } : null;
+        }
         rows.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
         let rank = 0, previousPoints = null;
         const ranking = rows.map(row => {
