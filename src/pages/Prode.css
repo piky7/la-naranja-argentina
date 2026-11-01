@@ -661,3 +661,39 @@
  .prode-league-premium .prode-group-tabs button{gap:2px;font-size:8px;padding-inline:1px}
  .prode-league-premium .prode-group-tabs button svg{width:11px;height:11px;flex-basis:11px}
 }
+
+/* Ajuste final de densidad en ranking semanal: filas de 40px y selector bajo. */
+.prode-league-premium .prode-week-premium{
+  min-height:43px;
+  padding:5px 10px;
+  gap:7px;
+  border-radius:9px;
+}
+.prode-league-premium .prode-week-premium>svg{width:16px;height:16px}
+.prode-league-premium .prode-week-premium-info{gap:5px 10px}
+.prode-league-premium .prode-week-premium .prode-week-select-label select{
+  min-height:24px;padding-block:1px;font-size:13px;
+}
+.prode-league-premium .prode-week-premium .prode-week-date-range{font-size:10px}
+.prode-league-premium .prode-week-status{padding:4px 7px;font-size:9px}
+.prode-league-premium .prode-ranking-premium{gap:4px}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row{
+  min-height:43px;padding:4px 8px;gap:4px;border-radius:8px;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-name svg{
+  width:27px;height:32px;flex:0 0 27px;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-name strong{font-size:12px}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points{
+  min-height:32px;padding:2px;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:14px}
+@media(max-width:600px){
+  .prode-league-premium .prode-week-premium{min-height:40px;padding:4px 8px;gap:6px}
+  .prode-league-premium .prode-week-premium .prode-week-select-label select{min-height:23px;font-size:12px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{min-height:40px;padding:3px 5px;gap:3px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-name svg{width:23px;height:28px;flex-basis:23px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-name strong{font-size:11px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-points{min-height:30px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:13px}
+}
