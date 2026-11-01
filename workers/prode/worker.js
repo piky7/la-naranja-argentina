@@ -766,7 +766,7 @@ export default {
       }
     }
     // Gestión de liga: abandonar, expulsar o eliminar; solo miembros autorizados.
-    const manageGroup = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/(leave|members|delete)$/.exec(url.pathname);
+    const manageGroup = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/(leave|members|delete|rename)$/.exec(url.pathname);
     if (manageGroup && request.method === "POST") {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       const identity = await verifiedFirebaseUser(request);
@@ -784,6 +784,14 @@ export default {
           return reply({ ok: true });
         }
         if (group.owner_id !== actorId) return reply({ ok: false, error: "Solo el administrador puede hacer esto" }, 403);
+        if (action === "rename") {
+          const body = await request.json().catch(() => ({}));
+          const newName = typeof body.name === "string" ? body.name.trim().replace(/\\s+/g, " ") : "";
+          if (newName.length < 3 || newName.length > 60)
+            return reply({ ok: false, error: "El nombre debe tener entre 3 y 60 caracteres" }, 400);
+          await env.DB.prepare("UPDATE prode_groups SET name=? WHERE id=? AND owner_id=?").bind(newName,groupId,actorId).run();
+          return reply({ ok: true, groupId, name:newName });
+        }
         if (action === "members") {
           const body = await request.json().catch(() => ({}));
           const targetId = body.userId;
