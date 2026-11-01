@@ -2021,14 +2021,15 @@ const finishedMatch = {
                 <span className="upcoming-voting-rewards">Ganador <b>+15</b> · Error <b>+5</b> · MVP <b>+20</b></span>
               </div>
               <div className="upcoming-voting-subhead"><span>PRODE LNA</span><span>MI CARRERA</span><small>Se guarda automáticamente al elegir.</small></div>
-              {!upcomingLive && <button type="button" className={`upcoming-career-status ${upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
-              <span>{upcomingVoteStatus === null || upcomingMvpStatus === null ? "◷ CONSULTANDO…" : upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "✓ VOTACIÓN COMPLETA" : upcomingVoteStatus?.voted || upcomingMvpStatus?.voted ? "◷ VOTACIÓN INCOMPLETA" : upcomingVoteStatus?.error && upcomingMvpStatus?.error ? "◷ NO DISPONIBLE" : upcomingVoteStatus?.open === false && upcomingMvpStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
-              <small>{`Ganador: ${upcomingVoteStatus === null ? "consultando" : upcomingVoteStatus?.error ? "sin datos" : upcomingVoteStatus?.voted ? "✓ votado" : "pendiente"} · MVP: ${upcomingMvpStatus === null ? "consultando" : upcomingMvpStatus?.error ? "sin datos" : upcomingMvpStatus?.voted ? "✓ votado" : "pendiente"}`}</small>
-              <span aria-hidden="true">›</span>
-            </button>}
+
 
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
               <MvpPrediction match={selectedUpcomingMatch} onStatusChange={setUpcomingMvpStatus} />
+              <button type="button" className={`upcoming-career-status ${upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
+              <span>{upcomingVoteStatus === null || upcomingMvpStatus === null ? "◷ CONSULTANDO…" : upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "✓ VOTACIÓN COMPLETA" : upcomingVoteStatus?.voted || upcomingMvpStatus?.voted ? "◷ VOTACIÓN INCOMPLETA" : upcomingVoteStatus?.error && upcomingMvpStatus?.error ? "◷ NO DISPONIBLE" : upcomingVoteStatus?.open === false && upcomingMvpStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
+              <small>{`Ganador: ${upcomingVoteStatus === null ? "consultando" : upcomingVoteStatus?.error ? "sin datos" : upcomingVoteStatus?.voted ? "✓ votado" : "pendiente"} · MVP: ${upcomingMvpStatus === null ? "consultando" : upcomingMvpStatus?.error ? "sin datos" : upcomingMvpStatus?.voted ? "✓ votado" : "pendiente"}`}</small>
+              <span aria-hidden="true">›</span>
+            </button>
             </div>}
             {(upcomingTab === "comparativa" || (!upcomingLive && upcomingTab === "jugadores")) && <section className="match-highlighted-section">
               {(upcomingTab === "comparativa") && (<div className="upcoming-tab-panel" role="tabpanel">
