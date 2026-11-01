@@ -10818,26 +10818,33 @@
 }
 
 
-/* Próximo partido: llamada visual sutil a la votación pendiente.
-   Solo se activa si ganador o MVP todavía pueden votarse. */
+/* Próximo partido: llamada gamer verde a la pestaña Votación.
+   Pulsa mientras el usuario está en Comparativa o Jugadores. */
+.match-modal.match-modal-upcoming .upcoming-tabs-three>button .upcoming-vote-tab-title{
+  font-family:"Russo One",Impact,"Arial Black",sans-serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:12px;
+  letter-spacing:.015em;
+}
 .match-modal.match-modal-upcoming .upcoming-tabs-three>button.is-vote-glowing:not(.is-active){
   position:relative;
   z-index:1;
-  border-color:rgba(255,163,72,.8)!important;
-  background:linear-gradient(180deg,#273042,#1c2738)!important;
-  color:#ffbd76!important;
+  border-color:rgba(125,232,61,.75)!important;
+  background:linear-gradient(180deg,#1a3435,#152b33)!important;
+  color:#b5ff8c!important;
   animation:lna-vote-tab-glow 2.8s ease-in-out infinite;
 }
-.match-modal.match-modal-upcoming .upcoming-tabs-three>button.is-vote-glowing .upcoming-vote-tab-title{
-  font-weight:850;
-}
 @keyframes lna-vote-tab-glow{
-  0%,100%{box-shadow:0 0 0 1px rgba(255,150,53,.18),0 0 7px rgba(255,137,39,.14)}
-  50%{box-shadow:0 0 0 1px rgba(255,169,74,.65),0 0 14px rgba(255,142,42,.5),0 0 23px rgba(255,141,39,.2)}
+  0%,100%{box-shadow:0 0 0 1px rgba(125,232,61,.16),0 0 7px rgba(125,232,61,.12)}
+  50%{box-shadow:0 0 0 1px rgba(156,255,105,.65),0 0 15px rgba(125,232,61,.48),0 0 24px rgba(125,232,61,.2)}
+}
+@media(max-width:390px){
+  .match-modal.match-modal-upcoming .upcoming-tabs-three>button .upcoming-vote-tab-title{font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){
   .match-modal.match-modal-upcoming .upcoming-tabs-three>button.is-vote-glowing:not(.is-active){
     animation:none;
-    box-shadow:0 0 0 1px rgba(255,163,72,.5),0 0 10px rgba(255,142,42,.24);
+    box-shadow:0 0 0 1px rgba(125,232,61,.5),0 0 10px rgba(125,232,61,.24);
   }
 }
