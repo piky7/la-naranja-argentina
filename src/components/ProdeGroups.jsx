@@ -406,6 +406,21 @@ export default function ProdeGroups() {
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">Los puntos se actualizan con los resultados oficiales. AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
+          <div className="prode-league-admin">
+            <h4><Settings2 size={17}/> Administración</h4>
+            <div className="prode-league-admin-actions">
+          <div className="prode-manage-control">
+            <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
+            {manageOpen && <div className="prode-manage-panel">
+              {detail.group.role === "owner" ? <>
+                <strong>Participantes</strong>
+                {detail.members.filter(member => member.role !== "owner").map(member => <div className="prode-manage-member" key={member.userId}><span>{member.username}</span><button type="button" disabled={manageBusy} onClick={() => manageLeague("members",member)}>Quitar</button></div>)}
+                {detail.members.length <= 1 && <p>Todavía no hay otros participantes.</p>}
+                <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("delete")}>Eliminar liga</button>
+              </> : <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("leave")}>Abandonar liga</button>}
+              {manageError && <p className="prode-group-error" role="alert">{manageError}</p>}
+            </div>}
+          </div>
           {detail.group.role === "owner" && <div className="prode-league-crest-control">
             <button type="button" className="prode-initial-toggle" aria-expanded={crestEditing} onClick={() => { setCrestEditing(!crestEditing); setCrestMessage(""); }}>
               <Trophy size={17}/> Personalizar trofeo <ChevronRight size={15} className={crestEditing ? "expanded" : ""}/>
@@ -420,18 +435,6 @@ export default function ProdeGroups() {
             </div>}
             {crestMessage && <p role="status">{crestMessage}</p>}
           </div>}
-          <div className="prode-manage-control">
-            <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
-            {manageOpen && <div className="prode-manage-panel">
-              {detail.group.role === "owner" ? <>
-                <strong>Participantes</strong>
-                {detail.members.filter(member => member.role !== "owner").map(member => <div className="prode-manage-member" key={member.userId}><span>{member.username}</span><button type="button" disabled={manageBusy} onClick={() => manageLeague("members",member)}>Quitar</button></div>)}
-                {detail.members.length <= 1 && <p>Todavía no hay otros participantes.</p>}
-                <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("delete")}>Eliminar liga</button>
-              </> : <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("leave")}>Abandonar liga</button>}
-              {manageError && <p className="prode-group-error" role="alert">{manageError}</p>}
-            </div>}
-          </div>
           {detail.group.role === "owner" && <div className="prode-initial-control">
             <button type="button" className="prode-initial-toggle" aria-expanded={initialOpen} onClick={() => { setInitialOpen(!initialOpen); setInitialMessage(""); }}><PlusCircle size={15}/> Puntos iniciales <ChevronRight size={15} className={initialOpen ? "expanded" : ""}/></button>
             {initialOpen && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
@@ -449,8 +452,10 @@ export default function ProdeGroups() {
           </form>}
           {!initialOpen && initialMessage && <p className="prode-initial-feedback" role="status">{initialMessage}</p>}
           </div>}
+            </div>
+          </div>
           {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
-          {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit" disabled={inviteBusy} onClick={generateInvite}>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
+          {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit prode-invite-primary" disabled={inviteBusy} onClick={generateInvite}><Send size={18}/>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
         </>}
         <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
