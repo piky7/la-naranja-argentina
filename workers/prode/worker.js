@@ -363,7 +363,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, correct: 0, wrong: 0, played: 0, mvpHits: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -404,6 +404,7 @@ export default {
             return reply({ ok: false, error: "Puntos inválidos" }, 400);
           const target = rows.find(row => row.userId === targetId);
           if (!target || targetId === userId) return reply({ ok: false, error: "Seleccioná otro participante de la liga" }, 400);
+          if (!target.joinedLate) return reply({ ok: false, error: "Solo se pueden asignar puntos a integrantes que ingresaron después del inicio de la liga" }, 403);
           if (target.initialPoints !== null) return reply({ ok: false, error: "Los puntos iniciales ya fueron asignados" }, 409);
           const leaderPoints = Math.max(0, ...rows.map(row => row.points));
           if (amount > leaderPoints) return reply({ ok: false, error: "El máximo permitido es " + leaderPoints + " puntos" }, 400);
