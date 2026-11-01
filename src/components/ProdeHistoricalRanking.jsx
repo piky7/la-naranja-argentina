@@ -1,23 +1,43 @@
 import { useEffect, useState } from "react";
 import { Trophy } from "lucide-react";
 import ProdeCrest from "./ProdeCrest";
+import { watchProdeUser } from "../auth/prodeAuth";
 const API = "https://lna-prode-api.lnab.workers.dev";
 
 export default function ProdeHistoricalRanking({ weekly = false }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
+  const [authReady, setAuthReady] = useState(false);
+  useEffect(() => {
+    let active = true, unsubscribe;
+    watchProdeUser(next => { if (active) { setUser(next); setAuthReady(true); } }).then(stop => {
+      if (active) unsubscribe = stop; else stop?.();
+    }).catch(() => { if (active) setAuthReady(true); });
+    return () => { active = false; unsubscribe?.(); };
+  }, []);
   useEffect(() => {
     let active = true;
-    const load = () => fetch(API + (weekly ? "/api/prode/ranking/weekly" : "/api/prode/ranking/historical")).then(async res => {
+    if (!authReady) return;
+    setData(null);
+    const load = async () => {
+      try {
+        const token = user ? await user.getIdToken() : null;
+        const res = await fetch(API + (weekly ? "/api/prode/ranking/weekly" : "/api/prode/ranking/historical"), {
+          headers: token ? { Authorization: "Bearer " + token } : {},
+        });
       const json = await res.json();
       if (!res.ok || !json.ok) throw Error(json.error || "Ranking no disponible");
-      if (active) { setData(json); setError(""); }
-    }).catch(() => { if (active) setError("No se pudo cargar el ranking."); });
+        if (active) { setData(json); setError(""); }
+      } catch {
+        if (active) { setData(null); setError("No se pudo cargar el ranking."); }
+      }
+    };
     load();
     const refresh = () => { load(); };
     window.addEventListener("prode-profile-updated",refresh);
     return () => { active = false; window.removeEventListener("prode-profile-updated",refresh); };
-  }, [weekly]);
+  }, [weekly, user, authReady]);
   const leaders = (data?.ranking || []).filter(entry => entry.position != null);
   const podium = [leaders[1], leaders[0], leaders[2]];
   const weekLabel = data?.weekStartsAt ? (() => {
@@ -35,6 +55,6 @@ export default function ProdeHistoricalRanking({ weekly = false }) {
         <strong>{entry ? entry.points + " pts" : "— pts"}</strong>
       </div>)}
     </div>
-    <div className="prode-panel-bottom"><span>{error || (data ? weekly ? "Semana " + weekLabel + " · " + leaders.length + " participantes con pronósticos" : "Puntos históricos de Mi Carrera · " + data.total + " participantes vinculados" : "Cargando clasificación…")}</span></div>
+    <div className="prode-panel-bottom"><span>{error || (!authReady || !data ? "Cargando clasificación…" : !user ? "Tu posición: iniciá sesión en Prode" : data.myPosition != null ? "Tu posición: " + data.myPosition + "°" : "Tu posición: sin posición")}</span></div>
   </>;
 }
