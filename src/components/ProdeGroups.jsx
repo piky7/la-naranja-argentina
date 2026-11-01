@@ -18,6 +18,7 @@ export default function ProdeGroups() {
   const [leagueRanking, setLeagueRanking] = useState(null);
   const [weeklyRanking, setWeeklyRanking] = useState(null);
   const [medalTable, setMedalTable] = useState(null);
+  const [initialOpen, setInitialOpen] = useState(false);
   const [initialTarget, setInitialTarget] = useState("");
   const [initialAmount, setInitialAmount] = useState("0");
   const [initialBusy, setInitialBusy] = useState(false);
@@ -65,7 +66,7 @@ export default function ProdeGroups() {
     setLeagueRanking(null);
     setWeeklyRanking(null);
     setMedalTable(null);
-    setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
+    setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
     setRankingError("");
     setDetailError("");
     setInvite(""); setInviteMessage("");
@@ -107,6 +108,7 @@ export default function ProdeGroups() {
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudieron asignar los puntos");
       setInitialMessage("Se asignaron " + data.points + " puntos iniciales correctamente.");
+      setInitialOpen(false);
       setInitialTarget(""); setInitialAmount("0");
       const updated = await fetch(API + "/api/prode/groups/" + selected.id + "/ranking", { headers: { Authorization: "Bearer " + token } });
       const ranking = await updated.json();
@@ -223,7 +225,9 @@ export default function ProdeGroups() {
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de los partidos iniciados esta semana (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
-          {detail.group.role === "owner" && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
+          {detail.group.role === "owner" && <div className="prode-initial-control">
+            <button type="button" className="prode-initial-toggle" aria-expanded={initialOpen} onClick={() => { setInitialOpen(!initialOpen); setInitialMessage(""); }}><PlusCircle size={15}/> Puntos iniciales <ChevronRight size={15} className={initialOpen ? "expanded" : ""}/></button>
+            {initialOpen && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
             <strong>Asignar puntos iniciales</strong>
             <p>Solo para integrantes nuevos, una única vez. Máximo: {Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} PTS (líder actual).</p>
             <div className="prode-initial-fields">
@@ -236,6 +240,8 @@ export default function ProdeGroups() {
             </div>
             {initialMessage && <p role="status">{initialMessage}</p>}
           </form>}
+          {!initialOpen && initialMessage && <p className="prode-initial-feedback" role="status">{initialMessage}</p>}
+          </div>}
           {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
           {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit" disabled={inviteBusy} onClick={generateInvite}>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
         </>}
