@@ -24,10 +24,11 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         <stop offset="52%" stopColor={a}/>
         <stop offset="100%" stopColor={b}/>
       </linearGradient>
-      <radialGradient id={id + "shine"} cx="27%" cy="21%" r="75%">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity=".34"/>
-        <stop offset="50%" stopColor="#ffffff" stopOpacity=".08"/>
-        <stop offset="100%" stopColor="#000000" stopOpacity=".22"/>
+      <radialGradient id={id + "shine"} cx="25%" cy="19%" r="82%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity=".42"/>
+        <stop offset="40%" stopColor="#ffffff" stopOpacity=".13"/>
+        <stop offset="72%" stopColor="#07121e" stopOpacity=".06"/>
+        <stop offset="100%" stopColor="#050d19" stopOpacity=".48"/>
       </radialGradient>
       <clipPath id={id + "premiumClip"}><circle cx="48" cy="40" r="30.5"/></clipPath>
     </defs>
@@ -43,10 +44,9 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
     </> : <>
       {/* Player Badge LNA: insignia premium enteramente vectorial y personalizable. */}
       <ellipse cx="48" cy="101" rx="30" ry="5" fill={a} opacity=".20"/>
-      <path d="M20 51 4 44l7 15-6 8 20 1 9-14Z" fill={b} stroke={a} strokeWidth="1.8" strokeLinejoin="round"/>
-      <path d="m76 51 16-7-7 15 6 8-20 1-9-14Z" fill={b} stroke={a} strokeWidth="1.8" strokeLinejoin="round"/>
-      <path d="m15 54 12 4-9 5-8-1Z M81 54l-12 4 9 5 8-1Z" fill={a} opacity=".75"/>
-      <path d="m22 65-13 7 17 2 11-8 M74 65l13 7-17 2-11-8" fill={b} stroke={a} strokeWidth="1.5" strokeLinejoin="round"/>
+      {/* Dos aletas compactas, sin puntas superpuestas en tamaño pequeño. */}
+      <path d="M19 53 7 51l7 14 15-1 7-9Z M77 53l12-2-7 14-15-1-7-9Z" fill={b} stroke={a} strokeWidth="1.8" strokeLinejoin="round"/>
+      <path d="m13 56 13 4 M83 56l-13 4" fill="none" stroke={a} strokeWidth="2" strokeLinecap="round"/>
       <circle cx="48" cy="40" r="37" fill={b} stroke={a} strokeWidth="2.6"/>
       <circle cx="48" cy="40" r="34" fill="#071522" stroke="#ffffff" strokeOpacity=".65" strokeWidth="2"/>
       <circle cx="48" cy="40" r="30.5" fill={`url(#${id}face)`}/>
@@ -59,16 +59,15 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         <path d="M75 23c-14 0-22 6-27 17S35 57 21 57"/>
       </g>
       <circle cx="48" cy="40" r="30.5" fill={`url(#${id}shine)`}/>
-      <circle cx="48" cy="40" r="30.5" fill="none" stroke="#ffffff" strokeOpacity=".33" strokeWidth="1.3"/>
-      <path d="M25 24c7-9 15-13 22-13" fill="none" stroke="#ffffff" strokeOpacity=".5" strokeWidth="2.4" strokeLinecap="round"/>
+      <circle cx="48" cy="40" r="30.5" fill="none" stroke="#ffffff" strokeOpacity=".24" strokeWidth="1.2"/>
+      <path d="M24 25c6-9 14-13 22-14" fill="none" stroke="#ffffff" strokeOpacity=".58" strokeWidth="2.8" strokeLinecap="round"/>
       {/* Cinta deportiva envolvente; conserva el color de texto elegido. */}
-      <path d="m9 77 13-4 6 9-6 14-14-3 5-8Z M87 77l-13-4-6 9 6 14 14-3-5-8Z" fill={a} stroke={b} strokeWidth="1.5"/>
-      <path d="M19 76h58l7 10-7 13H19l-7-13Z" fill={b} stroke={a} strokeWidth="2.6" strokeLinejoin="round"/>
-      <path d="M23 79h50" stroke="#ffffff" strokeOpacity=".3" strokeWidth="1.3"/>
-      <text x="48" y="91.5" textAnchor="middle" fill={t}
+      <path d="M11 79 20 76l5 7-5 13-10-3 3-7Z M85 79l-9-3-5 7 5 13 10-3-3-7Z" fill={a} stroke={b} strokeWidth="1.4"/>
+      <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.4" strokeLinejoin="round"/>
+      <path d="M19 80h58" stroke="#ffffff" strokeOpacity=".23" strokeWidth="1"/>
+      <text x="48" y="92" textAnchor="middle" fill={t}
         fontFamily="Russo One,Impact,Arial Black,sans-serif" fontStyle="italic"
         fontSize={fontSize} fontWeight="900" letterSpacing=".1">{label}</text>
-      <path d="m38 100 10 5 10-5" fill="none" stroke={a} strokeWidth="2" strokeLinecap="round"/>
     </>}
   </svg>;
 }
