@@ -427,7 +427,7 @@ export default function ProdeGroups() {
             <CalendarDays size={21} aria-hidden="true"/>
             <div className="prode-week-premium-info">
               <label className="prode-week-select-label">
-                <select aria-label="Elegir semana del ranking" value={selectedWeek || String(weeklyHistory.at(-1).number)} onChange={e => setSelectedWeek(e.target.value)}>
+                <select aria-label="Elegir semana del ranking" value={selectedWeek || String(weeklyHistory.at(-1).number)} onChange={e => { setSelectedWeek(e.target.value); setShowAllMatches(false); }}>
                   {[...weeklyHistory].reverse().map(w => <option key={w.number} value={w.number}>Semana {w.number}</option>)}
                 </select>
                 <ChevronRight size={16} aria-hidden="true"/>
@@ -487,10 +487,70 @@ export default function ProdeGroups() {
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">Los puntos se actualizan con los resultados oficiales. AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
+          {groupTab === "weekly" && (() => {
+            const week = String(selectedWeek || weeklyHistory.at(-1)?.number || 1);
+            const games = matchesByWeek[week] || [];
+            const visible = showAllMatches ? games : games.slice(0, 5);
+            const myId = user ? "firebase:" + user.uid : null;
+            return <section className="prode-played-section" aria-label="Pronósticos jugados de la semana">
+              <div className="prode-played-heading"><h4>PRONÓSTICOS JUGADOS</h4><span>{games.length} partidos</span></div>
+              {rankingBusy ? <p className="prode-played-empty">Consultando los resultados de la semana…</p> : games.length === 0 ? <p className="prode-played-empty">Todavía no hay partidos finalizados para esta semana.</p> : <>
+                <div className="prode-played-grid">
+                  {visible.map(game => {
+                    const mine = game.participants.find(p => p.userId === myId);
+                    const date = new Date(game.startsAt).toLocaleDateString("es-AR", {timeZone:"America/Argentina/Buenos_Aires",day:"numeric",month:"numeric"});
+                    return <button type="button" className="prode-played-card" key={game.id} onClick={() => setSelectedMatch(game)} aria-label={teamLabel(game.homeTeam) + " contra " + teamLabel(game.awayTeam) + ". Ver los votos y puntos de los participantes"}>
+                      <small>{date}</small>
+                      <span className="prode-played-logos">
+                        {teamLogo(game.homeTeam) ? <img alt={teamLabel(game.homeTeam)} src={teamLogo(game.homeTeam)}/> : <span>{teamLabel(game.homeTeam).slice(0,3)}</span>}
+                        {teamLogo(game.awayTeam) ? <img alt={teamLabel(game.awayTeam)} src={teamLogo(game.awayTeam)}/> : <span>{teamLabel(game.awayTeam).slice(0,3)}</span>}
+                      </span>
+                      <strong>{game.homeScore}–{game.awayScore}</strong>
+                      <span className={"prode-played-points" + (mine?.points > 0 ? " scored" : "")}>+{mine?.points || 0} pts</span>
+                      <span className="prode-played-indicators">
+                        <span className={mine?.winnerPick ? mine.winnerCorrect ? "good" : "bad" : "neutral"}>{mine?.winnerPick ? mine.winnerCorrect ? "✓" : "×" : "–"} G</span>
+                        <span className={mine?.mvpPick ? mine.mvpCorrect ? "good" : "bad" : "neutral"}>{mine?.mvpPick ? mine.mvpCorrect ? "✓" : "×" : "–"} M</span>
+                      </span>
+                    </button>;
+                  })}
+                </div>
+                {games.length > 5 && <button type="button" className="prode-played-more" onClick={() => setShowAllMatches(v => !v)}>{showAllMatches ? "Mostrar menos" : "Ver todos los partidos (" + games.length + ")"}</button>}
+              </>}
+            </section>;
+          })()}
           {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
           {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit prode-invite-primary" disabled={inviteBusy} onClick={generateInvite}><Send size={18}/>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
         </>}
         <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
+      </section>
+    </div>}
+    {selected && selectedMatch && <div className="prode-match-backdrop" onClick={() => setSelectedMatch(null)}>
+      <section className="prode-match-dialog" role="dialog" aria-modal="true" aria-label="Pronósticos del partido terminado" onClick={event => event.stopPropagation()}>
+        <button type="button" className="prode-match-close" aria-label="Cerrar detalle del partido" onClick={() => setSelectedMatch(null)}><X size={19}/></button>
+        <div className="prode-match-detail-header">
+          <small>RESULTADO FINAL · {new Date(selectedMatch.startsAt).toLocaleDateString("es-AR",{timeZone:"America/Argentina/Buenos_Aires",day:"numeric",month:"short"})}</small>
+          <div className="prode-match-result">
+            <div>{teamLogo(selectedMatch.homeTeam) && <img src={teamLogo(selectedMatch.homeTeam)} alt=""/>}<strong>{teamLabel(selectedMatch.homeTeam)}</strong></div>
+            <span>{selectedMatch.homeScore} – {selectedMatch.awayScore}</span>
+            <div>{teamLogo(selectedMatch.awayTeam) && <img src={teamLogo(selectedMatch.awayTeam)} alt=""/>}<strong>{teamLabel(selectedMatch.awayTeam)}</strong></div>
+          </div>
+          <p>Ganador: <strong>{teamLabel(selectedMatch.winner)}</strong> · MVP oficial: <strong>{selectedMatch.mvpWinners?.length ? selectedMatch.mvpWinners.map(mvpLabel).join(" / ") : "Pendiente de valoración"}</strong></p>
+        </div>
+        <h4>VOTOS Y PUNTOS DE LA LIGA</h4>
+        <div className="prode-match-members">
+          {selectedMatch.participants.map(member => <div className={"prode-match-member" + (member.userId === "firebase:" + user?.uid ? " mine" : "")} key={member.userId}>
+            <div className="prode-match-member-top">
+              <ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={37}/>
+              <strong>{member.username}</strong>
+              <span>+{member.points} pts</span>
+            </div>
+            <div className="prode-match-member-votes">
+              <div><span>Ganador</span><strong>{member.winnerPick ? teamLabel(member.winnerPick) : "No votó"}</strong><small className={member.winnerPick ? member.winnerCorrect ? "good" : "bad" : ""}>{member.winnerPick ? (member.winnerCorrect ? "✓" : "×") : "–"} +{member.winnerPoints} pts</small></div>
+              <div><span>MVP</span><strong>{mvpLabel(member.mvpPick)}</strong><small className={member.mvpPick ? member.mvpCorrect ? "good" : "bad" : ""}>{member.mvpPick ? (member.mvpCorrect ? "✓" : "×") : "–"} +{member.mvpPoints} pts</small></div>
+            </div>
+            {member.streakPoints > 0 && <div className="prode-match-bonus">Racha de 5 aciertos: +{member.streakPoints} pts</div>}
+          </div>)}
+        </div>
       </section>
     </div>}
     {selected && detail && profileUserId && (() => {
