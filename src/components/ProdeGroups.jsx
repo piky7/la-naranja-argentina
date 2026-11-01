@@ -18,6 +18,9 @@ export default function ProdeGroups() {
   const [leagueRanking, setLeagueRanking] = useState(null);
   const [weeklyRanking, setWeeklyRanking] = useState(null);
   const [medalTable, setMedalTable] = useState(null);
+  const [manageOpen, setManageOpen] = useState(false);
+  const [manageBusy, setManageBusy] = useState(false);
+  const [manageError, setManageError] = useState("");
   const [initialOpen, setInitialOpen] = useState(false);
   const [initialTarget, setInitialTarget] = useState("");
   const [initialAmount, setInitialAmount] = useState("0");
@@ -66,6 +69,7 @@ export default function ProdeGroups() {
     setLeagueRanking(null);
     setWeeklyRanking(null);
     setMedalTable(null);
+    setManageOpen(false); setManageError("");
     setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
     setRankingError("");
     setDetailError("");
@@ -119,6 +123,41 @@ export default function ProdeGroups() {
       }
     } catch (e) { setInitialMessage(e.message || "Error al asignar puntos"); }
     finally { setInitialBusy(false); }
+  };
+
+  const manageLeague = async (action, member) => {
+    if (!user || !selected || manageBusy) return;
+    const isOwner = detail?.group?.role === "owner";
+    let body = {};
+    if (action === "members") {
+      if (!isOwner || !member || !window.confirm("¿Quitar a " + member.username + " de la liga?")) return;
+      body = { userId: member.userId };
+    } else if (action === "delete") {
+      if (!isOwner) return;
+      const confirmName = window.prompt("Esta acción es irreversible. Escribí el nombre exacto de la liga para eliminarla:");
+      if (confirmName !== detail.group.name) return;
+      body = { confirmName };
+    } else if (action === "leave") {
+      if (isOwner || !window.confirm("¿Querés abandonar " + selected.name + "?")) return;
+    }
+    setManageBusy(true); setManageError("");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(API + "/api/prode/groups/" + selected.id + "/" + action, {
+        method: "POST", headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudo completar la acción");
+      if (action === "leave" || action === "delete") {
+        setSelected(null); setDetail(null); setManageOpen(false);
+        await load(user);
+      } else {
+        await openGroup(selected);
+        setManageOpen(true);
+      }
+    } catch (e) { setManageError(e.message || "Error de conexión"); }
+    finally { setManageBusy(false); }
   };
 
   const generateInvite = async () => {
@@ -225,6 +264,18 @@ export default function ProdeGroups() {
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de los partidos iniciados esta semana (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
+          <div className="prode-manage-control">
+            <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
+            {manageOpen && <div className="prode-manage-panel">
+              {detail.group.role === "owner" ? <>
+                <strong>Participantes</strong>
+                {detail.members.filter(member => member.role !== "owner").map(member => <div className="prode-manage-member" key={member.userId}><span>{member.username}</span><button type="button" disabled={manageBusy} onClick={() => manageLeague("members",member)}>Quitar</button></div>)}
+                {detail.members.length <= 1 && <p>Todavía no hay otros participantes.</p>}
+                <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("delete")}>Eliminar liga</button>
+              </> : <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("leave")}>Abandonar liga</button>}
+              {manageError && <p className="prode-group-error" role="alert">{manageError}</p>}
+            </div>}
+          </div>
           {detail.group.role === "owner" && <div className="prode-initial-control">
             <button type="button" className="prode-initial-toggle" aria-expanded={initialOpen} onClick={() => { setInitialOpen(!initialOpen); setInitialMessage(""); }}><PlusCircle size={15}/> Puntos iniciales <ChevronRight size={15} className={initialOpen ? "expanded" : ""}/></button>
             {initialOpen && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
