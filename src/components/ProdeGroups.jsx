@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy } from "lucide-react";
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
+import ProdeCrest from "./ProdeCrest";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 const formatWeekRange = startsAt => {
@@ -17,6 +18,13 @@ export default function ProdeGroups() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState("private");
+  const [newCrestPrimary, setNewCrestPrimary] = useState("#ff9a39");
+  const [newCrestSecondary, setNewCrestSecondary] = useState("#10283c");
+  const [editCrestPrimary, setEditCrestPrimary] = useState("#ff9a39");
+  const [editCrestSecondary, setEditCrestSecondary] = useState("#10283c");
+  const [crestEditing, setCrestEditing] = useState(false);
+  const [crestSaving, setCrestSaving] = useState(false);
+  const [crestMessage, setCrestMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
@@ -92,6 +100,9 @@ export default function ProdeGroups() {
   const openGroup = async (group) => {
     if (!user) return;
     setSelected(group);
+    setEditCrestPrimary(group.crestPrimary || "#ff9a39");
+    setEditCrestSecondary(group.crestSecondary || "#10283c");
+    setCrestEditing(false); setCrestMessage("");
     setGroupTab("weekly");
     setDetail(null);
     setLeagueRanking(null);
@@ -116,6 +127,8 @@ export default function ProdeGroups() {
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo abrir la liga");
       setDetail(data);
+      setEditCrestPrimary(data.group?.crestPrimary || "#ff9a39");
+      setEditCrestSecondary(data.group?.crestSecondary || "#10283c");
       try {
         const archiveResponse = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/seasons", { headers: { Authorization: "Bearer " + token } });
         const archiveData = await archiveResponse.json();
@@ -202,6 +215,26 @@ export default function ProdeGroups() {
     finally { setManageBusy(false); }
   };
 
+  const saveLeagueCrest = async () => {
+    if (!user || !selected || detail?.group?.role !== "owner" || crestSaving) return;
+    setCrestSaving(true); setCrestMessage("");
+    try {
+      const token = await user.getIdToken();
+      const res = await fetch(API + "/api/prode/groups/" + selected.id + "/crest", {
+        method: "POST", headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({ primary: editCrestPrimary, secondary: editCrestSecondary }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw Error(data.error || "No se pudieron guardar los colores");
+      setGroups(previous => previous.map(group => group.id === selected.id ? { ...group, ...data } : group));
+      setSelected(previous => ({ ...previous, ...data }));
+      setDetail(previous => ({ ...previous, group: { ...previous.group, ...data } }));
+      setCrestMessage("Colores del trofeo guardados");
+      setCrestEditing(false);
+    } catch (error) { setCrestMessage(error.message || "No se pudo guardar"); }
+    finally { setCrestSaving(false); }
+  };
+
   const generateInvite = async () => {
     if (!user || !selected || inviteBusy) return;
     setInviteBusy(true); setInviteMessage("");
@@ -261,12 +294,12 @@ export default function ProdeGroups() {
       const res = await fetch(API + "/api/prode/groups", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-        body: JSON.stringify({ name: name.trim(), description: description.trim(), visibility: "private" }),
+        body: JSON.stringify({ name: name.trim(), description: description.trim(), visibility: "private", crestPrimary: newCrestPrimary, crestSecondary: newCrestSecondary }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo crear la liga");
       setGroups(previous => [data.group, ...previous]);
-      setOpen(false); setName(""); setDescription(""); setVisibility("private");
+      setOpen(false); setName(""); setDescription(""); setVisibility("private"); setNewCrestPrimary("#ff9a39"); setNewCrestSecondary("#10283c");
     } catch (e) { setError(e.message || "Error de conexión"); }
     finally { setBusy(false); }
   };
@@ -284,15 +317,16 @@ export default function ProdeGroups() {
     {ready && groups.length > 0 ? <div className="prode-my-groups">
       <strong>Mis ligas ({groups.length})</strong>
       {groups.map(group => <button type="button" key={group.id} className="prode-my-group prode-group-link" onClick={() => openGroup(group)}>
-        <span className="prode-friend-league-badge"><Trophy size={23}/></span>
+        <span className="prode-friend-league-badge"><ProdeCrest type="league" name={group.name} primary={group.crestPrimary} secondary={group.crestSecondary} size={76}/></span>
         <span className="prode-friend-league-info"><strong>{group.name}</strong><small><LockKeyhole size={12}/> Liga de amigos · Temporada {group.season || "2026/27"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small></span>
-        <span className="prode-friend-enter">Entrar <ChevronRight size={17}/></span>
+        <span className="prode-friend-enter">Ver liga <ChevronRight size={17}/></span>
       </button>)}
     </div> : ready && user && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
     {selected && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
       <section className="prode-dialog prode-group-detail" role="dialog" aria-modal="true" aria-label={"Liga " + selected.name} onClick={e => e.stopPropagation()}>
-        <div className="prode-dialog-heading">
+        <div className="prode-dialog-heading prode-group-heading-with-crest">
+          <ProdeCrest type="league" name={selected.name} primary={detail?.group?.crestPrimary || selected.crestPrimary} secondary={detail?.group?.crestSecondary || selected.crestSecondary} size={60}/>
           <h3>{selected.name}</h3>
           <button type="button" aria-label="Cerrar" onClick={() => setSelected(null)}><X size={20}/></button>
         </div>
@@ -353,6 +387,20 @@ export default function ProdeGroups() {
             {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member, index) => <div key={index} className="prode-ranking-row"><span className="prode-ranking-position">{member.position === 1 ? "🥇" : member.position === 2 ? "🥈" : member.position === 3 ? "🥉" : member.position ? member.position + "°" : "—"}</span><button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><span className="prode-member-avatar">{member.username.slice(0,1).toUpperCase()}</span><strong>{member.username}</strong></button><span>{member.points ?? 0}</span><span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span></div>)}
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">{groupTab === "weekly" ? "Puntos de la semana seleccionada (lunes a domingo)." : "Puntos acumulados desde el inicio de esta liga."} AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
+          </div>}
+          {detail.group.role === "owner" && <div className="prode-league-crest-control">
+            <button type="button" className="prode-initial-toggle" aria-expanded={crestEditing} onClick={() => { setCrestEditing(!crestEditing); setCrestMessage(""); }}>
+              <Trophy size={17}/> Personalizar trofeo <ChevronRight size={15} className={crestEditing ? "expanded" : ""}/>
+            </button>
+            {crestEditing && <div className="prode-league-crest-form">
+              <ProdeCrest type="league" name={selected.name} primary={editCrestPrimary} secondary={editCrestSecondary} size={87}/>
+              <div className="prode-crest-colors">
+                <label>Color principal<input type="color" value={editCrestPrimary} onChange={e => setEditCrestPrimary(e.target.value)}/></label>
+                <label>Color secundario<input type="color" value={editCrestSecondary} onChange={e => setEditCrestSecondary(e.target.value)}/></label>
+              </div>
+              <button type="button" className="prode-crest-save" onClick={saveLeagueCrest} disabled={crestSaving}>{crestSaving ? "Guardando…" : "Guardar trofeo"}</button>
+            </div>}
+            {crestMessage && <p role="status">{crestMessage}</p>}
           </div>}
           <div className="prode-manage-control">
             <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
@@ -433,7 +481,14 @@ export default function ProdeGroups() {
         <label>Nombre de la liga<input autoFocus required minLength={3} maxLength={60} value={name} onChange={e => setName(e.target.value)} placeholder="Ej. Amigos del básquet"/></label>
         <label>Descripción (opcional)<textarea maxLength={240} rows={2} value={description} onChange={e => setDescription(e.target.value)} placeholder="Contanos de qué se trata"/></label>
         <p>Tu liga será privada. Solo podrán ingresar las personas con tu invitación.</p>
-        <p>La liga se crea con tu cuenta Google. Podrás invitar participantes al crearla; los rankings se habilitarán más adelante.</p>
+        <div className="prode-league-crest-form">
+          <ProdeCrest type="league" name={name || "Mi liga"} primary={newCrestPrimary} secondary={newCrestSecondary} size={96}/>
+          <div className="prode-crest-colors">
+            <label>Color principal<input type="color" value={newCrestPrimary} onChange={e => setNewCrestPrimary(e.target.value)}/></label>
+            <label>Color secundario<input type="color" value={newCrestSecondary} onChange={e => setNewCrestSecondary(e.target.value)}/></label>
+          </div>
+        </div>
+        <p>La liga se crea con tu cuenta Google. Podrás invitar participantes al crearla; los rankings están disponibles dentro de cada liga.</p>
         {error && <p className="prode-group-error" role="alert">{error}</p>}
         <button className="prode-create-submit" type="submit" disabled={busy || name.trim().length < 3}>{busy ? "Creando…" : "Crear liga"}</button>
       </form>
