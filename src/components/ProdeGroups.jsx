@@ -393,7 +393,12 @@ export default function ProdeGroups() {
             </div>}
           </div> : groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
             <div className="prode-ranking-head"><span>JUGADOR</span><span>🥇</span><span>🥈</span><span>🥉</span></div>
-            {(medalTable || detail.members).map((member,index) => <div className="prode-medal-member" key={member.userId || index}>
+            {(medalTable || detail.members).map((entry,index) => {
+              // Usar la misma identidad visual que General; el medallero solo aporta medallas.
+              const savedCrest = (leagueRanking || []).find(player => player.userId === entry.userId)
+                || detail.members.find(player => player.userId === entry.userId);
+              const member = savedCrest ? { ...entry, crestPrimary: savedCrest.crestPrimary, crestSecondary: savedCrest.crestSecondary, crestText: savedCrest.crestText } : entry;
+              return <div className="prode-medal-member" key={member.userId || index}>
               <div className="prode-ranking-row">
                 <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={36} className="prode-member-crest"/><strong>{member.username}</strong></button>
                 {["gold","silver","bronze"].map((type,i) => <button type="button" key={type} className="prode-medal-count" aria-expanded={expandedMedal === (member.userId || index) + ":" + type} aria-label={member.username + ": ver medallas de " + ["oro","plata","bronce"][i]} onClick={() => setExpandedMedal(current => current === (member.userId || index) + ":" + type ? null : (member.userId || index) + ":" + type)}>{member[type] ?? 0}</button>)}
@@ -402,7 +407,8 @@ export default function ProdeGroups() {
                 <strong>{["🥇 Oros","🥈 Platas","🥉 Bronces"][i]} de {member.username}</strong>
                 {(member.history || []).filter(h => h.position === i+1).length ? (member.history || []).filter(h => h.position === i+1).map(h => <button type="button" key={h.week} onClick={() => { setSelectedWeek(String(h.week)); setGroupTab("weekly"); }}><span>Semana {h.week}</span><span>{h.points} PTS <ChevronRight size={14}/></span></button>) : <p>Todavía no consiguió medallas de este tipo.</p>}
               </div>)}
-            </div>)} 
+            </div>;
+            })} 
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">Medallas acumuladas por semana finalizada. Se entregan solo si al menos 3 participantes pronosticaron esa semana. Los empates comparten medalla.</p>
           </div> : <div className="prode-group-ranking prode-ranking-premium" role="tabpanel">
