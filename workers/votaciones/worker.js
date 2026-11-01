@@ -218,7 +218,13 @@ export default {
             return { id: g.id, startsAt: g.startsAt, finished, voted: Boolean(vote),
               correct: finished && Boolean(vote) && vote === winner,
               mvpCorrect: finished && Boolean(mvp) && Array.isArray(g.mvpWinners) && g.mvpWinners.includes(mvp),
-              mvpVoted: Boolean(mvp), mvpResolved: finished && Array.isArray(g.mvpWinners) };
+              mvpVoted: Boolean(mvp), mvpResolved: finished && Array.isArray(g.mvpWinners),
+              // Solo los resultados terminados exponen selecciones para compararlas en una liga.
+              homeTeam: finished ? g.homeTeam : null, awayTeam: finished ? g.awayTeam : null,
+              homeScore: finished ? g.homeScore : null, awayScore: finished ? g.awayScore : null,
+              winner: finished ? winner : null,
+              selectedWinner: finished ? (vote || null) : null, selectedMvp: finished ? (mvp || null) : null,
+              mvpWinners: finished && Array.isArray(g.mvpWinners) ? g.mvpWinners : [] };
           });
         return json({ ok: true, games }, 200, cors);
       } catch (error) {
