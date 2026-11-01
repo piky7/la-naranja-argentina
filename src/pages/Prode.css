@@ -312,3 +312,12 @@
 .prode-season-item strong{color:#a8f57a}
 .prode-season-item span{font-size:13px}
 .prode-season-item small{color:#abcbbc}
+
+/* Diagnóstico de cierre sin operaciones destructivas. */
+.prode-close-check{display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid #315344}
+.prode-close-check>button{width:100%;padding:11px 9px;border:1px solid #426e4e;border-radius:9px;background:#244d31;color:#a8f57a;font-size:12px;font-weight:800;cursor:pointer}
+.prode-close-check>button:disabled{opacity:.65;cursor:wait}
+.prode-close-check>div{padding:11px;border-radius:9px;background:#172b2d;border:1px solid #4d6052}
+.prode-close-check>div strong{font-size:13px;color:#efd6a2}
+.prode-close-check>div p{margin:7px 0 0;color:#c6d9cb;font-size:12px;line-height:1.4}
+.prode-close-check>div small{display:block;margin-top:9px;color:#a6c5b4;font-size:11px}
