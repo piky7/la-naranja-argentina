@@ -531,7 +531,7 @@ export default {
         const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
         await ensureCrests(env.DB);
         const members = await env.DB.prepare(
-          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         const periodsResult = await env.DB.prepare("SELECT user_id, entered_at, exited_at FROM prode_membership_periods WHERE group_id=? ORDER BY entered_at").bind(groupId).all();
         const periodsByUser = new Map();
@@ -733,7 +733,7 @@ export default {
         ).bind(groupId, userId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
         const members = await env.DB.prepare(
-          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         return reply({ ok: true, group, members: members.results || [] });
       } catch {
