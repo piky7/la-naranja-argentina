@@ -51,6 +51,7 @@ export default function ProdeGroups() {
   const [initialBusy, setInitialBusy] = useState(false);
   const [initialMessage, setInitialMessage] = useState("");
   const [rankingError, setRankingError] = useState("");
+  const [rankingBusy, setRankingBusy] = useState(false);
   const [groupTab, setGroupTab] = useState("weekly");
   const [detailBusy, setDetailBusy] = useState(false);
   const [detailError, setDetailError] = useState("");
@@ -116,6 +117,7 @@ export default function ProdeGroups() {
     setManageOpen(false); setManageError("");
     setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
     setRankingError("");
+    setRankingBusy(true);
     setDetailError("");
     setInvite(""); setInviteMessage("");
     setDetailBusy(true);
@@ -127,26 +129,34 @@ export default function ProdeGroups() {
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo abrir la liga");
       setDetail(data);
+      setDetailBusy(false); // Mostrar el contenido inmediatamente: el historial se descarga aparte.
       setEditCrestPrimary(data.group?.crestPrimary || "#ff9a39");
       setEditCrestSecondary(data.group?.crestSecondary || "#10283c");
-      try {
-        const archiveResponse = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/seasons", { headers: { Authorization: "Bearer " + token } });
-        const archiveData = await archiveResponse.json();
-        if (!archiveResponse.ok || !archiveData.ok) throw Error(archiveData.error || "Historial no disponible");
-        setSeasonArchives(archiveData.seasons || []);
-      } catch (archiveFailure) { setArchiveError(archiveFailure.message || "Historial no disponible"); }
-      try {
-        const rankingRes = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/ranking", { headers: { Authorization: "Bearer " + token } });
-        const rankingData = await rankingRes.json();
-        if (!rankingRes.ok || !rankingData.ok) throw Error(rankingData.error || "Clasificación no disponible");
-        setLeagueRanking(rankingData.ranking || []);
-        setWeeklyRanking(rankingData.weeklyRanking || []);
-        setWeeklyHistory(rankingData.weeklyHistory || []);
-        setSelectedWeek(String((rankingData.weeklyHistory || []).at(-1)?.number || ""));
-        setMedalTable(rankingData.medalTable || []);
-      } catch (rankingFailure) { setRankingError(rankingFailure.message || "Clasificación no disponible"); }
+      const rankingTask = (async () => {
+        try {
+          const rankingRes = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/ranking", { headers: { Authorization: "Bearer " + token } });
+          const rankingData = await rankingRes.json();
+          if (!rankingRes.ok || !rankingData.ok) throw Error(rankingData.error || "Clasificación no disponible");
+          setLeagueRanking(rankingData.ranking || []);
+          setWeeklyRanking(rankingData.weeklyRanking || []);
+          setWeeklyHistory(rankingData.weeklyHistory || []);
+          setSelectedWeek(String((rankingData.weeklyHistory || []).at(-1)?.number || ""));
+          setMedalTable(rankingData.medalTable || []);
+        } catch (rankingFailure) { setRankingError(rankingFailure.message || "Clasificación no disponible"); }
+        finally { setRankingBusy(false); }
+      })();
+      const archiveTask = (async () => {
+        try {
+          const archiveResponse = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/seasons", { headers: { Authorization: "Bearer " + token } });
+          const archiveData = await archiveResponse.json();
+          if (!archiveResponse.ok || !archiveData.ok) throw Error(archiveData.error || "Historial no disponible");
+          setSeasonArchives(archiveData.seasons || []);
+        } catch (archiveFailure) { setArchiveError(archiveFailure.message || "Historial no disponible"); }
+      })();
+      await Promise.all([rankingTask, archiveTask]);
     } catch (e) {
       setDetailError(e.message || "Error de conexión");
+      setRankingBusy(false);
     } finally {
       setDetailBusy(false);
     }
@@ -318,7 +328,7 @@ export default function ProdeGroups() {
       <strong>Mis ligas ({groups.length})</strong>
       {groups.map(group => <button type="button" key={group.id} className="prode-my-group prode-group-link" onClick={() => openGroup(group)}>
         <span className="prode-friend-league-badge"><ProdeCrest type="league" name={group.name} primary={group.crestPrimary} secondary={group.crestSecondary} size={76}/></span>
-        <span className="prode-friend-league-info"><strong>{group.name}</strong><small><LockKeyhole size={12}/> Liga de amigos · Temporada {group.season || "2026/27"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small></span>
+        <span className="prode-friend-league-info"><strong>{group.name}</strong><small><LockKeyhole size={12}/> {group.season || "2026/27"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small></span>
         <span className="prode-friend-enter">Ver liga <ChevronRight size={17}/></span>
       </button>)}
     </div> : ready && user && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
@@ -348,6 +358,7 @@ export default function ProdeGroups() {
             <button type="button" role="tab" aria-selected={groupTab === "medals"} className={groupTab === "medals" ? "active" : ""} onClick={() => setGroupTab("medals")}><Medal size={16}/> Medallero</button>
             <button type="button" role="tab" aria-selected={groupTab === "seasons"} className={groupTab === "seasons" ? "active" : ""} onClick={() => setGroupTab("seasons")}><Layers3 size={16}/> Temporadas</button>
           </div>
+          {groupTab === "weekly" && rankingBusy && <div className="prode-week-selector prode-week-premium prode-week-loading" role="status" aria-live="polite"><CalendarDays size={17}/><span>Cargando semana…</span></div>}
           {groupTab === "weekly" && weeklyHistory.length > 0 && <div className="prode-week-selector prode-week-premium">
             <CalendarDays size={21} aria-hidden="true"/>
             <div className="prode-week-premium-info">
