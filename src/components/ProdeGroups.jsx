@@ -676,6 +676,16 @@ export default function ProdeGroups() {
             <div><span className="prode-profile-stat-icon"><Target size={20}/></span><strong>{player.mvpVotes ?? 0}</strong><span>MVP votados</span></div>
           </div>
           <div className="prode-profile-best-week"><span><CalendarDays size={17}/> Mejor semana</span><strong>{player.bestWeek ? `Semana ${player.bestWeek.number} · ${player.bestWeek.points} pts` : "Sin partidos puntuados"}</strong></div>
+          <div className="prode-profile-streak" aria-label={`Racha actual de ${player.currentStreak ?? 0} aciertos consecutivos de ganador`}>
+            <div className="prode-profile-streak-heading">
+              <span><span aria-hidden="true">🔥</span> Racha de aciertos</span>
+              <strong>{Math.min(5, player.currentStreak ?? 0)}/5</strong>
+            </div>
+            <div className="prode-profile-streak-progress" aria-hidden="true">
+              {[0,1,2,3,4].map(i => <span key={i} className={i < (player.currentStreak ?? 0) ? "is-complete" : ""}/>)}
+            </div>
+            <small>{(player.currentStreak ?? 0) >= 5 ? `¡Bonus de +45 pts alcanzado! Racha actual: ${player.currentStreak} aciertos.` : `A ${5 - (player.currentStreak ?? 0)} acierto${5 - (player.currentStreak ?? 0) === 1 ? "" : "s"} consecutivo${5 - (player.currentStreak ?? 0) === 1 ? "" : "s"} de sumar +45 pts.`}</small>
+          </div>
           <div className="prode-profile-medals">
             <div><span className="prode-profile-medal-symbol">🥇</span><strong>{awards?.gold ?? 0}</strong><span>Oro</span></div>
             <div><span className="prode-profile-medal-symbol">🥈</span><strong>{awards?.silver ?? 0}</strong><span>Plata</span></div>
