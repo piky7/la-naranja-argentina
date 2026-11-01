@@ -358,12 +358,64 @@ export default function ProdeGroups() {
               <span><UsersRound size={13}/> {detail?.members?.length ?? "—"} participantes</span>
             </div>
           </div>
+          <button type="button" className="prode-league-settings-button" aria-label="Configuración de la liga" aria-expanded={settingsOpen} onClick={() => setSettingsOpen(v => !v)}><Settings2 size={20}/></button>
           <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => setSelected(null)}><X size={20}/></button>
         </div>
         {selected.description && <p>{selected.description}</p>}
         {detailBusy && <p>Cargando participantes…</p>}
         {detailError && <p className="prode-group-error" role="alert">{detailError}</p>}
         {detail && <>
+          {settingsOpen && <div className="prode-league-settings-open">
+          <div className="prode-league-admin">
+            <h4><Settings2 size={17}/> Administración</h4>
+            <div className="prode-league-admin-actions">
+          <div className="prode-manage-control">
+            <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
+            {manageOpen && <div className="prode-manage-panel">
+              {detail.group.role === "owner" ? <>
+                <strong>Participantes</strong>
+                {detail.members.filter(member => member.role !== "owner").map(member => <div className="prode-manage-member" key={member.userId}><span>{member.username}</span><button type="button" disabled={manageBusy} onClick={() => manageLeague("members",member)}>Quitar</button></div>)}
+                {detail.members.length <= 1 && <p>Todavía no hay otros participantes.</p>}
+                <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("delete")}>Eliminar liga</button>
+              </> : <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("leave")}>Abandonar liga</button>}
+              {manageError && <p className="prode-group-error" role="alert">{manageError}</p>}
+            </div>}
+          </div>
+          {detail.group.role === "owner" && <div className="prode-league-crest-control">
+            <button type="button" className="prode-initial-toggle" aria-expanded={crestEditing} onClick={() => { setCrestEditing(!crestEditing); setCrestMessage(""); }}>
+              <Trophy size={17}/> Personalizar trofeo <ChevronRight size={15} className={crestEditing ? "expanded" : ""}/>
+            </button>
+            {crestEditing && <div className="prode-league-crest-form">
+              <ProdeCrest type="league" name={selected.name} primary={editCrestPrimary} secondary={editCrestSecondary} size={87}/>
+              <div className="prode-crest-colors">
+                <label>Color principal<input type="color" value={editCrestPrimary} onChange={e => setEditCrestPrimary(e.target.value)}/></label>
+                <label>Color secundario<input type="color" value={editCrestSecondary} onChange={e => setEditCrestSecondary(e.target.value)}/></label>
+              </div>
+              <button type="button" className="prode-crest-save" onClick={saveLeagueCrest} disabled={crestSaving}>{crestSaving ? "Guardando…" : "Guardar trofeo"}</button>
+            </div>}
+            {crestMessage && <p role="status">{crestMessage}</p>}
+          </div>}
+          {detail.group.role === "owner" && <div className="prode-initial-control">
+            <button type="button" className="prode-initial-toggle" aria-expanded={initialOpen} onClick={() => { setInitialOpen(!initialOpen); setInitialMessage(""); }}><PlusCircle size={15}/> Puntos iniciales <ChevronRight size={15} className={initialOpen ? "expanded" : ""}/></button>
+            {initialOpen && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
+            <strong>Asignar puntos iniciales</strong>
+            <p>Solo para integrantes nuevos, una única vez. Máximo: {Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} PTS (líder actual).</p>
+            <div className="prode-initial-fields">
+              <select aria-label="Participante" required value={initialTarget} onChange={e => setInitialTarget(e.target.value)}>
+                <option value="">Elegir participante</option>
+                {(leagueRanking || []).filter(m => m.userId && m.joinedLate && m.initialPoints === null && !m.played && !m.mvpHits && m.userId !== "firebase:" + user?.uid).map(m => <option key={m.userId} value={m.userId}>{m.username}</option>)}
+              </select>
+              <input aria-label="Puntos iniciales" type="number" inputMode="numeric" min="0" max={Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} step="1" required value={initialAmount} onChange={e => setInitialAmount(e.target.value)}/>
+              <button type="submit" disabled={initialBusy || !initialTarget || initialAmount === "" || Number(initialAmount) < 0 || Number(initialAmount) > Math.max(0,...(leagueRanking || []).map(m => m.points || 0))}>{initialBusy ? "Guardando…" : "Asignar"}</button>
+            </div>
+            {initialMessage && <p role="status">{initialMessage}</p>}
+          </form>}
+          {!initialOpen && initialMessage && <p className="prode-initial-feedback" role="status">{initialMessage}</p>}
+          </div>}
+            </div>
+          </div>
+
+          </div>}
           <div className="prode-group-tabs" role="tablist" aria-label="Clasificaciones de la liga">
             <button type="button" role="tab" aria-selected={groupTab === "weekly"} className={groupTab === "weekly" ? "active" : ""} onClick={() => setGroupTab("weekly")}><BarChart3 size={16}/> Semanal</button>
             <button type="button" role="tab" aria-selected={groupTab === "general"} className={groupTab === "general" ? "active" : ""} onClick={() => setGroupTab("general")}><Trophy size={16}/> General</button>
@@ -435,54 +487,6 @@ export default function ProdeGroups() {
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">Los puntos se actualizan con los resultados oficiales. AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
           </div>}
-          <div className="prode-league-admin">
-            <h4><Settings2 size={17}/> Administración</h4>
-            <div className="prode-league-admin-actions">
-          <div className="prode-manage-control">
-            <button type="button" className="prode-initial-toggle" aria-expanded={manageOpen} onClick={() => setManageOpen(!manageOpen)}><UsersRound size={15}/> Administrar liga <ChevronRight size={15} className={manageOpen ? "expanded" : ""}/></button>
-            {manageOpen && <div className="prode-manage-panel">
-              {detail.group.role === "owner" ? <>
-                <strong>Participantes</strong>
-                {detail.members.filter(member => member.role !== "owner").map(member => <div className="prode-manage-member" key={member.userId}><span>{member.username}</span><button type="button" disabled={manageBusy} onClick={() => manageLeague("members",member)}>Quitar</button></div>)}
-                {detail.members.length <= 1 && <p>Todavía no hay otros participantes.</p>}
-                <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("delete")}>Eliminar liga</button>
-              </> : <button type="button" className="prode-manage-danger" disabled={manageBusy} onClick={() => manageLeague("leave")}>Abandonar liga</button>}
-              {manageError && <p className="prode-group-error" role="alert">{manageError}</p>}
-            </div>}
-          </div>
-          {detail.group.role === "owner" && <div className="prode-league-crest-control">
-            <button type="button" className="prode-initial-toggle" aria-expanded={crestEditing} onClick={() => { setCrestEditing(!crestEditing); setCrestMessage(""); }}>
-              <Trophy size={17}/> Personalizar trofeo <ChevronRight size={15} className={crestEditing ? "expanded" : ""}/>
-            </button>
-            {crestEditing && <div className="prode-league-crest-form">
-              <ProdeCrest type="league" name={selected.name} primary={editCrestPrimary} secondary={editCrestSecondary} size={87}/>
-              <div className="prode-crest-colors">
-                <label>Color principal<input type="color" value={editCrestPrimary} onChange={e => setEditCrestPrimary(e.target.value)}/></label>
-                <label>Color secundario<input type="color" value={editCrestSecondary} onChange={e => setEditCrestSecondary(e.target.value)}/></label>
-              </div>
-              <button type="button" className="prode-crest-save" onClick={saveLeagueCrest} disabled={crestSaving}>{crestSaving ? "Guardando…" : "Guardar trofeo"}</button>
-            </div>}
-            {crestMessage && <p role="status">{crestMessage}</p>}
-          </div>}
-          {detail.group.role === "owner" && <div className="prode-initial-control">
-            <button type="button" className="prode-initial-toggle" aria-expanded={initialOpen} onClick={() => { setInitialOpen(!initialOpen); setInitialMessage(""); }}><PlusCircle size={15}/> Puntos iniciales <ChevronRight size={15} className={initialOpen ? "expanded" : ""}/></button>
-            {initialOpen && <form className="prode-initial-panel" onSubmit={assignInitialPoints}>
-            <strong>Asignar puntos iniciales</strong>
-            <p>Solo para integrantes nuevos, una única vez. Máximo: {Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} PTS (líder actual).</p>
-            <div className="prode-initial-fields">
-              <select aria-label="Participante" required value={initialTarget} onChange={e => setInitialTarget(e.target.value)}>
-                <option value="">Elegir participante</option>
-                {(leagueRanking || []).filter(m => m.userId && m.joinedLate && m.initialPoints === null && !m.played && !m.mvpHits && m.userId !== "firebase:" + user?.uid).map(m => <option key={m.userId} value={m.userId}>{m.username}</option>)}
-              </select>
-              <input aria-label="Puntos iniciales" type="number" inputMode="numeric" min="0" max={Math.max(0,...(leagueRanking || []).map(m => m.points || 0))} step="1" required value={initialAmount} onChange={e => setInitialAmount(e.target.value)}/>
-              <button type="submit" disabled={initialBusy || !initialTarget || initialAmount === "" || Number(initialAmount) < 0 || Number(initialAmount) > Math.max(0,...(leagueRanking || []).map(m => m.points || 0))}>{initialBusy ? "Guardando…" : "Asignar"}</button>
-            </div>
-            {initialMessage && <p role="status">{initialMessage}</p>}
-          </form>}
-          {!initialOpen && initialMessage && <p className="prode-initial-feedback" role="status">{initialMessage}</p>}
-          </div>}
-            </div>
-          </div>
           {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
           {detail.group.role === "owner" && <div className="prode-invite-panel"><button type="button" className="prode-create-submit prode-invite-primary" disabled={inviteBusy} onClick={generateInvite}><Send size={18}/>{inviteBusy ? "Generando…" : "Generar invitación"}</button>{invite && <><p>Enlace para compartir:</p><div className="prode-invite-link"><input readOnly aria-label="Enlace de invitación" value={"https://lanaranjaargentina.com.ar/prode?invite=" + invite}/><button type="button" aria-label="Copiar enlace" onClick={async () => { try { await navigator.clipboard.writeText("https://lanaranjaargentina.com.ar/prode?invite=" + invite); setInviteMessage("Enlace copiado"); } catch { setInviteMessage("Seleccioná y copiá el enlace"); } }}><Copy size={18}/></button></div></>}{inviteMessage && <p role="status">{inviteMessage}</p>}</div>}
         </>}
