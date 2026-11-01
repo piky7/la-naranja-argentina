@@ -261,7 +261,7 @@ export default function ProdeGroups() {
       const res = await fetch(API + "/api/prode/groups", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-        body: JSON.stringify({ name: name.trim(), description: description.trim(), visibility }),
+        body: JSON.stringify({ name: name.trim(), description: description.trim(), visibility: "private" }),
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo crear la liga");
@@ -272,12 +272,23 @@ export default function ProdeGroups() {
   };
 
   return <div className="prode-groups">
-    <button className="prode-onboarding-action prode-action-button" type="button" disabled={!user} onClick={() => { setError(""); setOpen(true); }}>
-      <PlusCircle size={21}/><span><strong>Crear un Prode</strong><small>{user ? "Armá tu grupo público o privado" : "Iniciá sesión con Google"}</small></span>
-    </button>
-    <button className="prode-onboarding-action prode-action-button" type="button" disabled={!user} onClick={() => { setInviteMessage(""); setJoinOpen(true); }}><Ticket size={21}/><span><strong>Unirme a un Prode</strong><small>{user ? "Ingresá tu código de invitación" : "Iniciá sesión con Google"}</small></span></button>
-    <div className="prode-onboarding-action"><Globe2 size={21}/><div><strong>Ranking general</strong><span>Todos los participantes de LNA · Histórico</span></div></div>
-    {ready && groups.length > 0 && <div className="prode-my-groups"><strong>Mis ligas ({groups.length})</strong>{groups.map(group => <button type="button" key={group.id} className="prode-my-group prode-group-link" onClick={() => openGroup(group)}><span>{group.name}</span><small>{group.visibility === "private" ? "Privada" : "Pública"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small><ChevronRight size={16}/></button>)}</div>}
+    <div className="prode-friends-actions">
+      <button className="prode-friends-create" type="button" disabled={!user} onClick={() => { setError(""); setVisibility("private"); setOpen(true); }}>
+        <PlusCircle size={18}/> Crear liga
+      </button>
+      <button className="prode-friends-join" type="button" disabled={!user} onClick={() => { setInviteMessage(""); setJoinOpen(true); }}>
+        <Ticket size={18}/> Unirme con código
+      </button>
+    </div>
+    {!user && ready && <p className="prode-friends-notice">Iniciá sesión con Google desde el perfil superior para crear una liga o unirte a tus amigos.</p>}
+    {ready && groups.length > 0 ? <div className="prode-my-groups">
+      <strong>Mis ligas ({groups.length})</strong>
+      {groups.map(group => <button type="button" key={group.id} className="prode-my-group prode-group-link" onClick={() => openGroup(group)}>
+        <span className="prode-friend-league-badge"><Trophy size={23}/></span>
+        <span className="prode-friend-league-info"><strong>{group.name}</strong><small><LockKeyhole size={12}/> Liga de amigos · Temporada {group.season || "2026/27"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small></span>
+        <span className="prode-friend-enter">Entrar <ChevronRight size={17}/></span>
+      </button>)}
+    </div> : ready && user && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
     {selected && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
       <section className="prode-dialog prode-group-detail" role="dialog" aria-modal="true" aria-label={"Liga " + selected.name} onClick={e => e.stopPropagation()}>
@@ -421,7 +432,7 @@ export default function ProdeGroups() {
         <div className="prode-dialog-heading"><h3>Crear un Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setOpen(false)}><X size={20}/></button></div>
         <label>Nombre de la liga<input autoFocus required minLength={3} maxLength={60} value={name} onChange={e => setName(e.target.value)} placeholder="Ej. Amigos del básquet"/></label>
         <label>Descripción (opcional)<textarea maxLength={240} rows={2} value={description} onChange={e => setDescription(e.target.value)} placeholder="Contanos de qué se trata"/></label>
-        <label>Privacidad<select value={visibility} onChange={e => setVisibility(e.target.value)}><option value="private">Privada</option><option value="public">Pública</option></select></label>
+        <p>Tu liga será privada. Solo podrán ingresar las personas con tu invitación.</p>
         <p>La liga se crea con tu cuenta Google. Podrás invitar participantes al crearla; los rankings se habilitarán más adelante.</p>
         {error && <p className="prode-group-error" role="alert">{error}</p>}
         <button className="prode-create-submit" type="submit" disabled={busy || name.trim().length < 3}>{busy ? "Creando…" : "Crear liga"}</button>
