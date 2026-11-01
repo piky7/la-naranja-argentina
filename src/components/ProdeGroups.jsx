@@ -260,11 +260,12 @@ export default function ProdeGroups() {
             <button type="button" role="tab" aria-selected={groupTab === "medals"} className={groupTab === "medals" ? "active" : ""} onClick={() => setGroupTab("medals")}><Trophy size={16}/> Medallero</button>
           </div>
           {groupTab === "weekly" && weeklyHistory.length > 0 && <div className="prode-week-selector">
-            <div className="prode-week-title"><Trophy size={15}/> Semana {weeklyHistory.find(w => String(w.number) === selectedWeek)?.number || weeklyHistory.at(-1).number} {weeklyHistory.find(w => String(w.number) === selectedWeek)?.finished ? "· Finalizada" : "· En juego"}</div>
-            <label>Elegir semana
-              <select value={selectedWeek || String(weeklyHistory.at(-1).number)} onChange={e => setSelectedWeek(e.target.value)}>
-                {[...weeklyHistory].reverse().map(w => <option key={w.number} value={w.number}>Semana {w.number}{w.finished ? " · Finalizada" : " · En juego"}</option>)}
+            <label className="prode-week-select-label">
+              <Trophy size={17} aria-hidden="true"/>
+              <select aria-label="Elegir semana del ranking" value={selectedWeek || String(weeklyHistory.at(-1).number)} onChange={e => setSelectedWeek(e.target.value)}>
+                {[...weeklyHistory].reverse().map(w => <option key={w.number} value={w.number}>Semana {w.number} · {w.finished ? "Finalizada" : "En juego"}</option>)}
               </select>
+              <ChevronRight size={18} aria-hidden="true"/>
             </label>
           </div>}
           {groupTab === "medals" ? <div className="prode-group-ranking prode-medal-table" role="tabpanel">
