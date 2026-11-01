@@ -201,6 +201,63 @@ export default {
         return reply({ ok: false, error: "No se pudo cargar el ranking histórico" }, 503);
       }
     }
+    // Ranking general semanal: puntos de Mi Carrera obtenidos en partidos iniciados
+    // entre el lunes y el domingo en Argentina, independientemente de las ligas privadas.
+    if (url.pathname === "/api/prode/ranking/weekly" && request.method === "GET") {
+      if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
+      try {
+        await ensureCrests(env.DB);
+        const rows = await env.DB.prepare("SELECT l.visitor_id, n.username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_career_links l JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
+        const dayKey = value => {
+          const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(value));
+          const n = type => Number(parts.find(p => p.type === type)?.value);
+          return Date.UTC(n("year"),n("month")-1,n("day"));
+        };
+        const startOfWeek = day => day - ((new Date(day).getUTCDay()+6)%7)*86400000;
+        const thisWeek = startOfWeek(dayKey(Date.now()));
+        const all = [];
+        const linked = rows.results || [];
+        for (let i=0;i<linked.length;i+=6) {
+          const batch = await Promise.all(linked.slice(i,i+6).map(async item => {
+            const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId="+encodeURIComponent(item.visitor_id));
+            if (!response.ok) throw Error("Votaciones no disponibles");
+            const data = await response.json();
+            if (!data.ok || !Array.isArray(data.games)) throw Error("Historial no disponible");
+            let streak=0, points=0, played=0, correct=0, wrong=0, mvpHits=0, mvpVoted=0;
+            const ordered = [...data.games].sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || String(a.id).localeCompare(String(b.id)));
+            for (const game of ordered) {
+              const ts = Date.parse(game.startsAt);
+              if (!Number.isFinite(ts) || ts>Date.now() || !game.finished) continue;
+              const week = startOfWeek(dayKey(ts));
+              if (game.mvpCorrect && week===thisWeek) { points+=20; mvpHits++; }
+              if (game.mvpVoted && week===thisWeek) mvpVoted++;
+              if (!game.voted) { streak=0; continue; }
+              if (week===thisWeek) played++;
+              if (game.correct) {
+                streak++;
+                if (week===thisWeek) { points+=15; correct++; if (streak===5) points+=45; }
+              } else {
+                streak=0;
+                if (week===thisWeek) { points+=5; wrong++; }
+              }
+            }
+            return { username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
+          }));
+          all.push(...batch);
+        }
+        all.sort((a,b)=>b.points-a.points || a.username.localeCompare(b.username,"es"));
+        let rank=0,previous=null;
+        const ranking=all.map(row=>{
+          if (!row.participated) return {...row,position:null};
+          if (row.points!==previous) {rank++;previous=row.points;}
+          return {...row,position:rank};
+        });
+        return reply({ok:true,weekStartsAt:new Date(thisWeek).toISOString(),total:all.length,ranking:ranking.slice(0,20)});
+      } catch (error) {
+        console.error("Prode weekly ranking:",error);
+        return reply({ok:false,error:"No se pudo calcular el ranking semanal"},503);
+      }
+    }
     // Vinculación voluntaria desde el mismo navegador de Mi Carrera.
     // No otorga puntos ni importa votos; se impide compartir un visitante entre cuentas.
     if (url.pathname === "/api/prode/career-link" && ["GET", "POST"].includes(request.method)) {
