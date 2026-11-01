@@ -32,3 +32,7 @@
 .lna-admin-notice p{margin:0;font-size:13px;line-height:1.5}
 .lna-admin-error{border-color:#a45456;color:#f2c3c5}
 @media(max-width:600px){.lna-admin-page{padding:20px 12px 65px}.lna-admin-header{padding:17px}.lna-admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.lna-admin-metric{padding:12px}.lna-admin-metric strong{font-size:27px}.lna-admin-metric>div{font-size:11px}.lna-admin-section{padding:12px}.lna-admin-bars{gap:5px}.lna-admin-toolbar{font-size:10px}}
+
+.lna-admin-setup{display:flex;flex-direction:column;gap:10px;align-items:center;max-width:530px;width:100%}
+.lna-admin-setup p{font-size:12px;line-height:1.55}
+.lna-admin-setup code{display:block;width:100%;overflow-wrap:anywhere;padding:11px;border-radius:8px;border:1px solid #526278;background:#0b1c2e;color:#e9f4fb;font-size:12px;user-select:all}
