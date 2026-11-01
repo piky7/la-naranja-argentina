@@ -1,19 +1,12 @@
 import ProdeHistoricalRanking from "../components/ProdeHistoricalRanking";
-import { Trophy, UsersRound, ChartNoAxesColumn, Flame, LockKeyhole, Medal, ChevronRight, Sparkles, UserRound, PlusCircle, Ticket, Globe2, ShieldCheck } from "lucide-react";
+import { Trophy, UsersRound, Medal, Target, ChartNoAxesColumn, ShieldCheck } from "lucide-react";
 import "./Prode.css";
 import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
 import ProdeGroups from "../components/ProdeGroups";
 
-const Section = ({ icon: Icon, title, children, extra }) => (
-  <section className="prode-panel">
-    <div className="prode-panel-heading"><span className="prode-panel-icon"><Icon size={18} /></span><h2>{title}</h2>{extra}</div>
-    {children}
-  </section>
-);
-
 export default function Prode() {
   return (
-    <main className="prode-page">
+    <main className="prode-page prode-home-redesign">
       <div className="prode-container">
         <header className="prode-hero">
           <div className="prode-hero-content">
@@ -23,46 +16,30 @@ export default function Prode() {
             <div className="prode-hero-foot"><span><Trophy size={14}/> Competí</span><span><UsersRound size={14}/> Creá tu liga</span><span><Medal size={14}/> Subí en el ranking</span></div>
           </div>
           <div className="prode-hero-ball" aria-hidden="true"><span /></div>
+          <div className="prode-hero-account">
+            <ProdeGoogleAccess />
+          </div>
         </header>
 
-        <div className="prode-coming"><Sparkles size={18} /><div><strong>PRÓXIMAMENTE</strong><span>Ya podés crear ligas e invitar amigos. Los votos de ganador y MVP se realizan desde los popups de los partidos. Estamos preparando la vinculación segura con Prode; los puntos y rankings se habilitarán después.</span></div></div>
-
-        <section className="prode-onboarding" aria-label="Acceso al Prode">
-          <div className="prode-onboarding-intro">
-            <span className="prode-onboarding-icon"><UserRound size={20}/></span>
-            <div><strong>TU CUENTA PRODE</strong><p>Un solo usuario, una votación por partido y tus puntos en todas las clasificaciones.</p></div>
-            <span className="prode-onboarding-tag"><LockKeyhole size={12}/> En preparación</span>
+        <section className="prode-friends-section" aria-label="Ligas de amigos">
+          <div className="prode-friends-heading">
+            <div className="prode-friends-heading-icon"><UsersRound size={25}/></div>
+            <div><h2>LIGAS DE AMIGOS</h2><p>Competí con tus amigos en ligas privadas.</p></div>
           </div>
-          <ProdeGoogleAccess />
           <ProdeGroups />
-          <p className="prode-onboarding-foot"><ShieldCheck size={14}/> Tu cuenta Google puede vincularse con Mi Carrera. El ranking general muestra sus puntos históricos; las ligas tendrán puntos independientes.</p>
         </section>
 
-        <div className="prode-grid">
-          <Section icon={Trophy} title={<>Ranking <em>general</em></>} extra={<span className="prode-small-tag">Histórico</span>}>
-            <ProdeHistoricalRanking />
-          </Section>
+        <section className="prode-panel prode-general-section">
+          <div className="prode-panel-heading"><span className="prode-panel-icon"><Trophy size={21}/></span><h2>RANKING <em>GENERAL</em></h2><span className="prode-small-tag">Histórico</span></div>
+          <ProdeHistoricalRanking />
+        </section>
 
-          <Section icon={UsersRound} title={<>Mis <em>ligas</em></>}>
-            <div className="prode-league-placeholder"><div className="prode-league-symbol"><UsersRound size={26}/></div><div><strong>Tus ligas ya están disponibles</strong><p>Creá grupos públicos o privados, compartí invitaciones y consultá sus participantes desde «Tu cuenta Prode».</p></div></div>
-            <div className="prode-panel-bottom"><span>Gestioná tus ligas en el panel superior. Los rankings llegarán pronto.</span></div>
-          </Section>
-
-          <Section icon={ChartNoAxesColumn} title={<>Mis <em>estadísticas</em></>}>
-            <div className="prode-stats-grid">
-              <div><span>Pronósticos</span><strong>—</strong><small>Realizados</small></div>
-              <div><span>Aciertos</span><strong>—</strong><small>Ganadores</small></div>
-              <div><span>Puntos</span><strong>—</strong><small>Acumulados</small></div>
-              <div><span>Posición</span><strong>—</strong><small>General</small></div>
-            </div>
-            <p className="prode-muted-note">Tus estadísticas estarán disponibles cuando inicies sesión y comience el Prode.</p>
-          </Section>
-
-          <Section icon={Flame} title={<>Líderes <em>de la semana</em></>} extra={<span className="prode-small-tag">Lun – Dom</span>}>
-            <div className="prode-weekly-empty"><div className="prode-weekly-icon"><Flame size={23}/></div><strong>La próxima semana puede ser tuya</strong><p>Acá aparecerán los mejores participantes de cada semana.</p></div>
-            <div className="prode-panel-bottom"><span>Ranking semanal próximamente</span><ChevronRight size={17}/></div>
-          </Section>
-        </div>
+        <section className="prode-how-section" aria-label="Cómo funciona Prode LNA">
+          <div className="prode-how-heading"><ShieldCheck size={19}/><h2>CÓMO FUNCIONA</h2></div>
+          <div className="prode-how-step"><Target size={20}/><div><strong>Pronosticá</strong><span>Elegí ganador y MVP desde cada partido.</span></div></div>
+          <div className="prode-how-step"><ChartNoAxesColumn size={20}/><div><strong>Sumá puntos</strong><span>Tus aciertos suman en todas tus ligas.</span></div></div>
+          <div className="prode-how-step"><Trophy size={20}/><div><strong>Competí</strong><span>Subí en los rankings semanales y generales.</span></div></div>
+        </section>
       </div>
     </main>
   );
