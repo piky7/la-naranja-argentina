@@ -1,0 +1,34 @@
+.lna-admin-page{min-height:80vh;background:#081623;color:#ecf3f9;padding:32px 16px 65px}
+.lna-admin-container{max-width:850px;margin:0 auto}
+.lna-admin-back{display:inline-flex;align-items:center;gap:7px;color:#aebdcb;font-size:13px;text-decoration:none;margin-bottom:20px}
+.lna-admin-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px;border:1px solid #34485c;border-radius:18px;background:linear-gradient(120deg,#162a42,#091d32)}
+.lna-admin-header>svg{color:#ff9a39;flex-shrink:0}
+.lna-admin-eyebrow{display:inline-flex;align-items:center;gap:7px;color:#f5a354;font-size:10px;font-weight:900;letter-spacing:.1em}
+.lna-admin-header h1{font-family:"Anton",Impact,sans-serif;line-height:1.15;font-size:clamp(28px,5vw,42px);text-transform:uppercase;font-weight:400;margin:9px 0}
+.lna-admin-header h1 em{font-style:normal;color:#ff9a39}
+.lna-admin-header p{font-size:13px;color:#b2c4d3;margin:0}
+.lna-admin-toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:18px 0 14px;color:#aabbc9;font-size:12px}
+.lna-admin-toolbar button,.lna-admin-notice button{display:inline-flex;align-items:center;gap:7px;border:1px solid #e4a053;background:#ee932f;color:#101d2c;border-radius:9px;padding:9px 12px;font-size:12px;font-weight:900;cursor:pointer}
+.lna-admin-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lna-admin-metric{border:1px solid #344c64;background:#13263c;border-radius:12px;padding:14px;min-width:0}
+.lna-admin-metric>div{display:flex;gap:8px;justify-content:space-between;align-items:center;color:#c4d4e2;font-size:12px}
+.lna-admin-metric>div svg{color:#fba144;flex-shrink:0}
+.lna-admin-metric strong{display:block;font-size:31px;line-height:1.2;margin:13px 0 5px;font-variant-numeric:tabular-nums}
+.lna-admin-metric small{color:#a3b6c8;font-size:11px}
+.lna-admin-section{margin-top:16px;border:1px solid #344c64;border-radius:13px;padding:17px;background:#13263c}
+.lna-admin-section h2{color:#f3f7fa;font-size:17px;margin:0 0 16px;font-weight:800}
+.lna-admin-bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;height:180px}
+.lna-admin-bar-col{display:flex;align-items:center;flex-direction:column;gap:6px;min-width:0;font-size:11px;color:#dee8f1}
+.lna-admin-bar-track{position:relative;display:flex;align-items:end;flex:1;width:100%;max-width:65px;background:#1b3249;border-radius:6px;overflow:hidden}
+.lna-admin-bar-track>div{width:100%;background:linear-gradient(0deg,#db701c,#ffa545);border-radius:6px 6px 0 0}
+.lna-admin-bar-col small{color:#a9bdce;font-size:10px;text-transform:capitalize}
+.lna-admin-system h2{display:flex;align-items:center;gap:8px}
+.lna-admin-system p{display:flex;align-items:center;gap:7px;color:#d8e5ee;font-size:13px}
+.lna-admin-system small{display:block;color:#a6b9c7;line-height:1.6}
+.lna-admin-status-dot{width:8px;height:8px;border-radius:50%;background:#8cd981;box-shadow:0 0 5px #8cd981}
+.lna-admin-footnote{font-size:11px;color:#93a8b9;line-height:1.6;margin-top:16px}
+.lna-admin-notice{display:flex;flex-direction:column;align-items:center;gap:13px;margin:20px 0;padding:32px 20px;background:#13263c;border:1px solid #3b5469;border-radius:14px;text-align:center;color:#d4e1ed}
+.lna-admin-notice h2{font-size:20px;margin:0}
+.lna-admin-notice p{margin:0;font-size:13px;line-height:1.5}
+.lna-admin-error{border-color:#a45456;color:#f2c3c5}
+@media(max-width:600px){.lna-admin-page{padding:20px 12px 65px}.lna-admin-header{padding:17px}.lna-admin-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.lna-admin-metric{padding:12px}.lna-admin-metric strong{font-size:27px}.lna-admin-metric>div{font-size:11px}.lna-admin-section{padding:12px}.lna-admin-bars{gap:5px}.lna-admin-toolbar{font-size:10px}}
