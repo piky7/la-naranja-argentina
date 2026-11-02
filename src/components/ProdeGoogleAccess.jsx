@@ -19,6 +19,7 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [crestPrimary, setCrestPrimary] = useState("#7de83d");
   const [crestSecondary, setCrestSecondary] = useState("#10283c");
   const [crestText, setCrestText] = useState("#ffffff");
+  const [crestStyle, setCrestStyle] = useState("pro");
   const [crestBusy, setCrestBusy] = useState(false);
   const [crestMessage, setCrestMessage] = useState("");
   const [saving, setSaving] = useState(false);
@@ -59,7 +60,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       });
       const data = await response.json();
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
-      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); }
+      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); }
       const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
       if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
     }).catch(() => {
@@ -113,12 +114,12 @@ export default function ProdeGoogleAccess({ onReady }) {
       const token = await user.getIdToken();
       const response = await fetch(PRODE_API + "/api/prode/profile/crest", {
         method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText }),
+        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText, style: crestStyle }),
       });
       const data = await response.json();
       if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el avatar");
-      setProfile(prev => ({ ...prev, crestPrimary: data.crestPrimary, crestSecondary: data.crestSecondary, crestText: data.crestText }));
-      setCrestMessage("Colores guardados correctamente");
+      setProfile(prev => ({ ...prev, crestPrimary: data.crestPrimary, crestSecondary: data.crestSecondary, crestText: data.crestText, crestStyle: data.crestStyle }));
+      setCrestMessage("Avatar guardado correctamente");
       window.dispatchEvent(new Event("prode-profile-updated"));
     } catch (error) { setCrestMessage(error.message || "Error al guardar"); }
     finally { setCrestBusy(false); }
@@ -171,7 +172,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       {loading ? <span>Comprobando sesión…</span> : user ? (
         <>
           <div className="prode-google-identity">
-            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} size={55} className="prode-account-crest"/>
+            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} size={55} className="prode-account-crest"/>
             <div className="prode-identity-info">
               <div className="prode-identity-name-row">
                 <strong>{profile?.username || "Elegí tu nombre de usuario"}</strong>
@@ -202,8 +203,23 @@ export default function ProdeGoogleAccess({ onReady }) {
       )}
       {error && <p role="alert">{error}</p>}
       {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveUsername}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setEditOpen(false)}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>
+
+        <fieldset className="prode-avatar-styles">
+          <legend>Elegí tu modelo de avatar</legend>
+          <div className="prode-avatar-style-grid">
+            {[{id:"elite",label:"Escudo Elite"},{id:"pro",label:"Insignia Pro"},{id:"legend",label:"Emblema Legend"}].map(option => (
+              <button key={option.id} type="button" aria-pressed={crestStyle === option.id}
+                className={"prode-avatar-style-option" + (crestStyle === option.id ? " is-selected" : "")}
+                onClick={() => setCrestStyle(option.id)}>
+                <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary}
+                  textColor={crestText} style={option.id} size={66}/>
+                <span>{option.label}</span>
+              </button>
+            ))}
+          </div>
+        </fieldset>
         <div className="prode-crest-config">
-          <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary} textColor={crestText} size={90}/>
+          <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary} textColor={crestText} style={crestStyle} size={90}/>
           <div className="prode-crest-colors">
             <label>Color principal<input type="color" value={crestPrimary} onChange={e => setCrestPrimary(e.target.value)}/></label>
             <label>Color secundario<input type="color" value={crestSecondary} onChange={e => setCrestSecondary(e.target.value)}/></label>
