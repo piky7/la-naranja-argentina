@@ -9,6 +9,7 @@ const manualBroadcasts = {
   "2026-10-28-boca-regatas": "DSports",
   "2026-10-29-lanus-san-martin": "TyC Sports",
   "2026-10-31-quimsa-penarol": "TyC Sports",
+  "2026-11-04-olimpico-lanus": "TyC Sports",
 };
 
 const fixture = [
