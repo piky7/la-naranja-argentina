@@ -13,8 +13,12 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
   const id = React.useId().replace(/:/g, "");
   const label = displayName(name, isLeague ? 24 : 20);
   const fontSize = isLeague
-    ? label.length > 19 ? 5.5 : label.length > 14 ? 7 : 9
+    ? label.length > 19 ? 6.5 : label.length > 14 ? 7.5 : label.length > 10 ? 8.5 : 9
     : label.length > 16 ? 6 : label.length > 12 ? 7 : label.length > 9 ? 8 : 10;
+  // La placa central mide 62 unidades. Reservamos margen y, si hace falta,
+  // comprimimos el texto SVG para que nunca invada los extremos de la cinta.
+  const leagueEstimatedWidth = [...label].reduce((sum, char) => sum + (char === " " ? 0.33 : /[MW]/.test(char) ? 0.92 : /[IJ1]/.test(char) ? 0.42 : 0.67) * fontSize, 0);
+  const fitLeagueText = isLeague && leagueEstimatedWidth > 55;
 
   return <svg className={className} width={size} height={size} viewBox="0 0 96 110"
     aria-label={(isLeague ? "Trofeo de " : "Pelota personalizada de ") + (name || "Prode")} role="img">
@@ -96,7 +100,9 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
       <path d="M21 89h54" stroke="#ffffff" strokeOpacity=".25" strokeWidth="1.1"/>
       <text x="48" y="100" textAnchor="middle" fill={t}
         fontFamily="Russo One,Impact,Arial Black,sans-serif" fontStyle="italic"
-        fontSize={fontSize} fontWeight="900" letterSpacing=".05">{label}</text>
+        fontSize={fontSize} fontWeight="900" letterSpacing=".05"
+        textLength={fitLeagueText ? 55 : undefined}
+        lengthAdjust={fitLeagueText ? "spacingAndGlyphs" : undefined}>{label}</text>
     </> : <>
       {/* Player Badge LNA: insignia premium enteramente vectorial y personalizable. */}
       <ellipse cx="48" cy="101" rx="30" ry="5" fill={a} opacity=".20"/>
