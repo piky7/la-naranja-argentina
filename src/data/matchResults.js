@@ -610,5 +610,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2O67XWrxPflljZgEEJD-3bdWyQM7ra8eg0veLomDzQMvL8LIzy_tEag==/quimsa-vs-penarol-mdp"
     }
+  },
+  "2026-11-01-instituto-gimnasia": {
+    "status": "finished",
+    "homeScore": 57,
+    "awayScore": 58,
+    "time": "20:30",
+    "homeTeam": "instituto",
+    "awayTeam": "gimnasia",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2B07QSZqaeGjjQym96bI-InDgsGe0kAe_ZjKxbeFaz6M8jjmkXpG4cw==/instituto-vs-gimnasia-cr",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2B07QSZqaeGjjQym96bI-InDgsGe0kAe_ZjKxbeFaz6M8jjmkXpG4cw==/instituto-vs-gimnasia-cr"
+    }
   }
 };

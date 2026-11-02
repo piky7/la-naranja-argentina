@@ -2442,4 +2442,12 @@ export const players = [
     teamId: "penarol",
     number: 9,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-391061",
+    officialPlayerId: 391061,
+    name: "Augusto Demichelis",
+    teamId: "instituto",
+    number: 14,
+  },
 ];
