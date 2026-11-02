@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft, Copy, Ticket, Trophy, CalendarDays, Medal, Layers3, BarChart3, Settings2, Send, CircleCheck, CircleX, Star, Target, ChartNoAxesColumn, Award } from "lucide-react";
 import { teams } from "../data/teams";
 import { players } from "../data/players";
@@ -76,6 +76,10 @@ export default function ProdeGroups({ onReady }) {
   const [initialMessage, setInitialMessage] = useState("");
   const [rankingError, setRankingError] = useState("");
   const [rankingBusy, setRankingBusy] = useState(false);
+  const [refreshingLeague, setRefreshingLeague] = useState(false);
+  const [refreshWarning, setRefreshWarning] = useState("");
+  const leagueCache = useRef(new Map());
+  const leagueRequest = useRef(0);
   const [groupTab, setGroupTab] = useState("weekly");
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [matchesByWeek, setMatchesByWeek] = useState({});
@@ -174,70 +178,87 @@ export default function ProdeGroups({ onReady }) {
     } catch (error) { setCloseCheckError(error.message || "Validación no disponible"); }
     finally { setCloseCheckBusy(false); }
   };
+  const closeGroup = () => {
+    leagueRequest.current += 1;
+    setSelected(null);
+    setRefreshingLeague(false);
+  };
   const openGroup = async (group) => {
     if (!user) return;
+    const requestId = ++leagueRequest.current;
+    const key = user.uid + ":" + group.id;
+    const cached = leagueCache.current.get(key);
+    const isCurrent = () => leagueRequest.current === requestId;
     setSelected(group);
-    setEditCrestPrimary(group.crestPrimary || "#ff9a39");
-    setEditCrestSecondary(group.crestSecondary || "#10283c");
+    setEditCrestPrimary(cached?.detail.group?.crestPrimary || group.crestPrimary || "#ff9a39");
+    setEditCrestSecondary(cached?.detail.group?.crestSecondary || group.crestSecondary || "#10283c");
     setCrestEditing(false); setCrestMessage("");
     setGroupTab("weekly");
-    setSettingsOpen(false); setSelectedMatch(null); setMatchesByWeek({}); setShowAllMatches(false);
-    setDetail(null);
-    setLeagueRanking(null);
-    setWeeklyRanking(null);
-    setWeeklyHistory([]); setSelectedWeek("");
-    setSeasonArchives([]); setArchiveError("");
+    setSettingsOpen(false); setSelectedMatch(null); setShowAllMatches(false);
+    setDetail(cached?.detail || null);
+    setLeagueRanking(cached?.ranking.ranking || null);
+    setWeeklyRanking(cached?.ranking.weeklyRanking || null);
+    setWeeklyHistory(cached?.ranking.weeklyHistory || []);
+    setSelectedWeek(String(cached?.ranking.weeklyHistory?.at(-1)?.number || ""));
+    setMatchesByWeek(cached?.ranking.matchesByWeek || {});
+    setMedalTable(cached?.ranking.medalTable || null);
+    setSeasonArchives(cached?.archives || []); setArchiveError("");
     setCloseCheck(null); setCloseCheckError("");
-    setMedalTable(null);
-    setExpandedMedal(null);
-    setProfileUserId(null);
+    setExpandedMedal(null); setProfileUserId(null);
     setManageOpen(false); setManageError("");
     setLeagueNameDraft(group.name || ""); setRenameMessage("");
     setInitialOpen(false); setInitialTarget(""); setInitialAmount("0"); setInitialMessage("");
-    setRankingError("");
-    setRankingBusy(true);
-    setDetailError("");
+    setRankingError(""); setDetailError(""); setRefreshWarning("");
     setInvite(""); setInviteMessage("");
-    setDetailBusy(true);
+    setDetailBusy(!cached);
+    setRankingBusy(!cached);
+    setRefreshingLeague(Boolean(cached));
     try {
       const token = await user.getIdToken();
-      const res = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id), {
-        headers: { Authorization: "Bearer " + token },
-      });
-      const data = await res.json();
-      if (!res.ok || !data.ok) throw Error(data.error || "No se pudo abrir la liga");
-      setDetail(data);
-      setDetailBusy(false); // Mostrar el contenido inmediatamente: el historial se descarga aparte.
-      setEditCrestPrimary(data.group?.crestPrimary || "#ff9a39");
-      setEditCrestSecondary(data.group?.crestSecondary || "#10283c");
-      const rankingTask = (async () => {
-        try {
-          const rankingRes = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/ranking", { headers: { Authorization: "Bearer " + token } });
-          const rankingData = await rankingRes.json();
-          if (!rankingRes.ok || !rankingData.ok) throw Error(rankingData.error || "Clasificación no disponible");
-          setLeagueRanking(rankingData.ranking || []);
-          setWeeklyRanking(rankingData.weeklyRanking || []);
-          setWeeklyHistory(rankingData.weeklyHistory || []);
-          setMatchesByWeek(rankingData.matchesByWeek || {});
-          setSelectedWeek(String((rankingData.weeklyHistory || []).at(-1)?.number || ""));
-          setMedalTable(rankingData.medalTable || []);
-        } catch (rankingFailure) { setRankingError(rankingFailure.message || "Clasificación no disponible"); }
-        finally { setRankingBusy(false); }
-      })();
-      const archiveTask = (async () => {
-        try {
-          const archiveResponse = await fetch(API + "/api/prode/groups/" + encodeURIComponent(group.id) + "/seasons", { headers: { Authorization: "Bearer " + token } });
-          const archiveData = await archiveResponse.json();
-          if (!archiveResponse.ok || !archiveData.ok) throw Error(archiveData.error || "Historial no disponible");
-          setSeasonArchives(archiveData.seasons || []);
-        } catch (archiveFailure) { setArchiveError(archiveFailure.message || "Historial no disponible"); }
-      })();
-      await Promise.all([rankingTask, archiveTask]);
-    } catch (e) {
-      setDetailError(e.message || "Error de conexión");
-      setRankingBusy(false);
+      const headers = { Authorization: "Bearer " + token };
+      const base = API + "/api/prode/groups/" + encodeURIComponent(group.id);
+      const requestData = async (url) => {
+        const response = await fetch(url, { headers, cache: "no-store" });
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw Error(data.error || "Datos no disponibles");
+        return data;
+      };
+      const [detailResult, rankingResult, archiveResult] = await Promise.allSettled([
+        requestData(base), requestData(base + "/ranking"), requestData(base + "/seasons"),
+      ]);
+      if (!isCurrent()) return;
+      if (detailResult.status === "fulfilled" && rankingResult.status === "fulfilled") {
+        const nextDetail = detailResult.value;
+        const rankingData = rankingResult.value;
+        const archives = archiveResult.status === "fulfilled" ? archiveResult.value.seasons || [] : cached?.archives || [];
+        leagueCache.current.set(key, { detail: nextDetail, ranking: rankingData, archives });
+        setDetail(nextDetail);
+        setLeagueRanking(rankingData.ranking || []);
+        setWeeklyRanking(rankingData.weeklyRanking || []);
+        setWeeklyHistory(rankingData.weeklyHistory || []);
+        setMatchesByWeek(rankingData.matchesByWeek || {});
+        setMedalTable(rankingData.medalTable || []);
+        if (!cached) setSelectedWeek(String((rankingData.weeklyHistory || []).at(-1)?.number || ""));
+        setEditCrestPrimary(nextDetail.group?.crestPrimary || "#ff9a39");
+        setEditCrestSecondary(nextDetail.group?.crestSecondary || "#10283c");
+        setArchiveError(archiveResult.status === "rejected" ? "Historial no disponible" : "");
+        setSeasonArchives(archives);
+      } else {
+        const failure = detailResult.status === "rejected" ? detailResult.reason : rankingResult.reason;
+        if (cached) setRefreshWarning("No se pudo actualizar la liga. Se muestran los últimos datos cargados.");
+        else if (detailResult.status === "rejected") setDetailError(failure?.message || "No se pudo abrir la liga");
+        else { setDetail(detailResult.value); setRankingError(failure?.message || "Clasificación no disponible"); }
+      }
+    } catch (failure) {
+      if (!isCurrent()) return;
+      if (cached) setRefreshWarning("Sin conexión. Se muestran los últimos datos cargados.");
+      else setDetailError(failure?.message || "Error de conexión");
     } finally {
-      setDetailBusy(false);
+      if (isCurrent()) {
+        setDetailBusy(false);
+        setRankingBusy(false);
+        setRefreshingLeague(false);
+      }
     }
   };
 
@@ -295,7 +316,7 @@ export default function ProdeGroups({ onReady }) {
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo completar la acción");
       if (action === "leave" || action === "delete") {
-        setSelected(null); setDetail(null); setManageOpen(false);
+        closeGroup(); setDetail(null); setManageOpen(false);
         await load(user);
       } else {
         await openGroup(selected);
@@ -447,9 +468,9 @@ export default function ProdeGroups({ onReady }) {
       </button>)}
     </div> : ready && user && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
-    {selected && (detailBusy || rankingBusy) && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
+    {selected && (detailBusy || rankingBusy) && <div className="prode-dialog-backdrop" onClick={() => closeGroup()}>
       <section className="prode-dialog prode-group-detail prode-league-premium prode-league-loading" role="dialog" aria-modal="true" aria-label={"Cargando liga " + selected.name} onClick={e => e.stopPropagation()}>
-        <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => setSelected(null)}><X size={20}/></button>
+        <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => closeGroup()}><X size={20}/></button>
         <ProdeCrest type="league" name={selected.name} primary={selected.crestPrimary} secondary={selected.crestSecondary} size={93}/>
         <h3>{selected.name}</h3>
         <div className="prode-league-loading-spinner" aria-hidden="true"/>
@@ -457,7 +478,7 @@ export default function ProdeGroups({ onReady }) {
         <p>Cargando participantes, posiciones y pronósticos</p>
       </section>
     </div>}
-    {selected && !detailBusy && !rankingBusy && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
+    {selected && !detailBusy && !rankingBusy && <div className="prode-dialog-backdrop" onClick={() => closeGroup()}>
       <section className="prode-dialog prode-group-detail prode-league-premium" style={{ "--league-accent": detail?.group?.crestPrimary || selected.crestPrimary || "#ff9a39" }} role="dialog" aria-modal="true" aria-label={"Liga " + selected.name} onClick={e => e.stopPropagation()}>
         <div className="prode-league-hero">
           <ProdeCrest type="league" name={selected.name} primary={detail?.group?.crestPrimary || selected.crestPrimary} secondary={detail?.group?.crestSecondary || selected.crestSecondary} size={83}/>
@@ -471,11 +492,13 @@ export default function ProdeGroups({ onReady }) {
             </div>
           </div>
           <button type="button" className="prode-league-settings-button" aria-label="Configuración de la liga" aria-expanded={settingsOpen} onClick={() => setSettingsOpen(v => !v)}><Settings2 size={20}/></button>
-          <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => setSelected(null)}><X size={20}/></button>
+          <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => closeGroup()}><X size={20}/></button>
         </div>
         {selected.description && <p>{selected.description}</p>}
         {detailBusy && <p>Cargando participantes…</p>}
         {detailError && <p className="prode-group-error" role="alert">{detailError}</p>}
+        {refreshingLeague && <p className="prode-league-refresh" role="status">Actualizando datos…</p>}
+        {refreshWarning && <p className="prode-league-refresh-warning" role="status">{refreshWarning}</p>}
         {detail && <>
           {settingsOpen && <div className="prode-league-settings-open">
           <div className="prode-league-admin">
@@ -663,7 +686,7 @@ export default function ProdeGroups({ onReady }) {
           })()}
           {detail.group.role === "owner" && <div className="prode-group-subtitle"><UsersRound size={16}/> {detail.members.length} participantes</div>}
         </>}
-        <button type="button" className="prode-group-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/> Volver a mis ligas</button>
+        <button type="button" className="prode-group-back" onClick={() => closeGroup()}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
     </div>}
     {selected && selectedMatch && <div className="prode-match-backdrop" onClick={() => setSelectedMatch(null)}>
