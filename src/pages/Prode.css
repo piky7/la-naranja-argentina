@@ -1483,3 +1483,20 @@
   animation:prode-page-wait .85s linear infinite;
 }
 @media(prefers-reduced-motion:reduce){.prode-league-loading-spinner{animation:none;border-color:#ffda78}}
+
+/* Al reabrir una liga ya visitada, mantener la clasificación visible y refrescar en segundo plano. */
+.prode-league-premium .prode-league-refresh,
+.prode-league-premium .prode-league-refresh-warning{
+  margin:5px 0 8px;
+  padding:5px 9px;
+  border:1px solid #3e5d64;
+  border-radius:7px;
+  background:rgba(22,46,56,.75);
+  color:#a9cbbf;
+  font-size:10px;
+  text-align:center;
+}
+.prode-league-premium .prode-league-refresh-warning{
+  border-color:#796248;
+  color:#edc38e;
+}
