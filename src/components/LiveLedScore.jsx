@@ -15,9 +15,9 @@ const PATHS = {
   g: "M4 14H12L14 15.5L12 17H4L2 15.5Z",
 };
 const SEGMENT_NAMES = Object.keys(PATHS);
-function Digit({ value, x, color }) {
+function Digit({ value, x, color, y = 4, scaleX = 1.03, scaleY = 1.08 }) {
   const enabled = SEGMENTS[value] || "";
-  return <g transform={`translate(${x} 4) scale(1.03 1.08)`}>
+  return <g transform={`translate(${x} ${y}) scale(${scaleX} ${scaleY})`}>
     {SEGMENT_NAMES.map(segment =>
       <path key={segment} d={PATHS[segment]} fill={enabled.includes(segment) ? color : "#23303c"}
         opacity={enabled.includes(segment) ? 1 : .26} />
@@ -50,4 +50,32 @@ export default function LiveLedScore({ home, away }) {
       <path d="M73 20h7" stroke="#dde6ed" strokeWidth="2.2" strokeLinecap="round"/>
     </svg>
   </strong>;
+}
+
+
+// Segundo visor compacto, debajo del resultado: 4º 05:53 en una sola línea.
+// Mismas piezas LED, pero escaladas para no aumentar el alto de la tarjeta.
+export function LiveLedPeriod({ quarter, time, isHalftime = false }) {
+  const q = String(quarter ?? "").match(/\d+/)?.[0] ?? "";
+  const match = typeof time === "string" ? time.match(/^(\d{1,2}):(\d{2})$/) : null;
+  const digits = match ? (match[1].padStart(2, "0") + match[2]) : null;
+  const showClock = !isHalftime && Boolean(q) && Boolean(digits);
+  const label = isHalftime ? "ENTRETIEMPO" : q ? `${q}º${digits ? " " + digits.slice(0, 2) + ":" + digits.slice(2) : ""}` : "EN JUEGO";
+  return <small className="fixture-live-period fixture-live-led-period" aria-label={label}>
+    <svg viewBox="0 0 150 34" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <rect x="0.5" y="0.5" width="149" height="33" rx="7" fill="#070e18" stroke="#536273" strokeOpacity=".4"/>
+      {showClock ? <>
+        <Digit value={q.slice(-1)} x={20} y={4} scaleX={.78} scaleY={.79} color="#f2f6fc"/>
+        <text x="37" y="15" fill="#f2f6fc" fontFamily="Arial,sans-serif" fontSize="11" fontWeight="800">º</text>
+        {[54, 72, 98, 116].map((x,i) =>
+          <Digit key={i} value={digits[i]} x={x} y={4} scaleX={.8} scaleY={.79} color="#ff9c30"/>
+        )}
+        <circle cx="92" cy="14" r="1.5" fill="#ff9c30"/>
+        <circle cx="92" cy="22" r="1.5" fill="#ff9c30"/>
+      </> : <text x="75" y="22" fill={isHalftime ? "#f1f5f9" : "#ffad59"}
+          textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="12" fontWeight="800" letterSpacing=".6">
+          {isHalftime ? "ENTRETIEMPO" : q ? q + "º" : "EN JUEGO"}
+        </text>}
+    </svg>
+  </small>;
 }
