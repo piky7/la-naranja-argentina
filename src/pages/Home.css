@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap");
 
 
 /* =========================================
@@ -10917,4 +10916,60 @@
 }
 @media (max-width: 600px) {
   .home-page .fixture-center .fixture-live-score { font-size: 24px; }
+}
+
+/* Tablero LED de siete segmentos: limitado al ancho real de la columna central.
+   Evita que los tanteadores invadan los separadores verticales en iPhone. */
+.home-page .fixture-panel .home-fixture:has(.fixture-led-score){
+  grid-template-columns:minmax(0,1fr) clamp(116px,29vw,148px) minmax(0,1fr);
+  column-gap:4px;
+}
+.home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-center{
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+  padding-inline:3px;
+  overflow:hidden;
+}
+.home-page .fixture-panel .fixture-center .fixture-live-score.fixture-led-score{
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  line-height:0;
+  font-size:0;
+  overflow:hidden;
+  white-space:normal;
+  background:#070e18;
+  border-radius:7px;
+  font-family:inherit;
+}
+.home-page .fixture-panel .fixture-live-score.fixture-led-score svg{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  overflow:hidden;
+  filter:drop-shadow(0 0 3px rgba(255,135,33,.16));
+}
+.home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-live-period{
+  display:block;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  font-size:clamp(8px,1.65vw,10px);
+  line-height:1.25;
+  letter-spacing:0;
+  white-space:normal;
+  text-wrap:balance;
+}
+@media(max-width:375px){
+  .home-page .fixture-panel .home-fixture:has(.fixture-led-score){
+    grid-template-columns:minmax(0,1fr) 114px minmax(0,1fr);
+    column-gap:3px;
+  }
+  .home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-center{padding-inline:2px}
+  .home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-team{gap:3px}
+  .home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-team img{width:29px;height:29px}
 }
