@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -24,6 +24,17 @@ function AnimatedRoutes() {
   const isProde = location.pathname === "/prode";
   const [prodeVisited, setProdeVisited] = useState(isProde);
   const [animation, setAnimation] = useState("");
+  const prodeLeftAt = useRef(null);
+
+  useEffect(() => {
+    if (!isProde && prodeVisited && prodeLeftAt.current === null) {
+      prodeLeftAt.current = Date.now();
+    } else if (isProde && prodeLeftAt.current !== null) {
+      const elapsed = Date.now() - prodeLeftAt.current;
+      prodeLeftAt.current = null;
+      if (elapsed > 60_000) window.dispatchEvent(new Event("prode-page-reopened"));
+    }
+  }, [isProde, prodeVisited]);
 
   useEffect(() => {
     if (isProde) setProdeVisited(true);
