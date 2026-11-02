@@ -36,7 +36,8 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
     load();
     const refresh = () => { load(); };
     window.addEventListener("prode-profile-updated",refresh);
-    return () => { active = false; window.removeEventListener("prode-profile-updated",refresh); };
+    window.addEventListener("prode-page-reopened",refresh);
+    return () => { active = false; window.removeEventListener("prode-profile-updated",refresh); window.removeEventListener("prode-page-reopened",refresh); };
   }, [weekly, user, authReady]);
   useEffect(() => { if (authReady && (data || error)) onReady?.(true); }, [authReady, data, error, onReady]);
   const leaders = (data?.ranking || []).filter(entry => entry.position != null);
