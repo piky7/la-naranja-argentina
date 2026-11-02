@@ -633,7 +633,7 @@ export default function ProdeGroups({ onReady }) {
                 || detail.members.find(player => player.userId === entry.userId);
               const member = savedCrest ? { ...entry, crestPrimary: savedCrest.crestPrimary, crestSecondary: savedCrest.crestSecondary, crestText: savedCrest.crestText } : entry;
               return <div className="prode-medal-member" key={member.userId || index}>
-              <div className="prode-ranking-row" style={{ "--member-accent": memberAccent(member.crestPrimary) }}>
+              <div className={"prode-ranking-row" + (user?.uid && member.userId === "firebase:" + user.uid ? " is-current-user" : "")} style={{ "--member-accent": memberAccent(member.crestPrimary) }}>
                 <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={36} className="prode-member-crest"/><strong>{member.username}</strong></button>
                 {["gold","silver","bronze"].map((type,i) => <button type="button" key={type} className="prode-medal-count" aria-expanded={expandedMedal === (member.userId || index) + ":" + type} aria-label={member.username + ": ver medallas de " + ["oro","plata","bronce"][i]} onClick={() => setExpandedMedal(current => current === (member.userId || index) + ":" + type ? null : (member.userId || index) + ":" + type)}>{member[type] ?? 0}</button>)}
               </div>
