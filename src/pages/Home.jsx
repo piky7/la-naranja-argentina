@@ -4,7 +4,7 @@ import LiveMatchInfo from "../components/LiveMatchInfo";
 import LiveRosters from "../components/LiveRosters";
 import LiveStartingFive from "../components/LiveStartingFive";
 import LiveMyVote from "../components/LiveMyVote";
-import LiveLedScore from "../components/LiveLedScore";
+import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
@@ -1570,9 +1570,7 @@ const finishedMatch = {
 
     <LiveLedScore home={liveMatch?.homeScore ?? match.homeScore ?? 0} away={liveMatch?.awayScore ?? match.awayScore ?? 0} />
 
-    <small className="fixture-live-period">
-      {liveMatch?.isHalftime ? "ENTRETIEMPO" : liveMatch?.quarter ? <><span>{liveMatch.quarter}.º CUARTO</span>{formatLiveRemaining(liveMatch) != null && <span className="fixture-live-clock"> · {formatLiveRemaining(liveMatch)} RESTANTES</span>}</> : "PARTIDO EN JUEGO"}
-    </small>
+    <LiveLedPeriod quarter={liveMatch?.quarter} time={formatLiveRemaining(liveMatch)} isHalftime={liveMatch?.isHalftime} />
 
   </>
 ) : (
