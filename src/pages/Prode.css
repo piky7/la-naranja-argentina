@@ -1358,3 +1358,13 @@
 /* Menos aire entre bloques, sin tocar el diseño ni el espaciado interno de Cómo funciona. */
 .prode-home-redesign .prode-friends-section{margin-top:12px}
 .prode-home-redesign .prode-general-section{margin-top:12px}
+
+
+/* No presentar cero puntos provisionales mientras llega la clasificación real. */
+.prode-league-premium .prode-ranking-loading{
+  display:flex;align-items:center;justify-content:center;
+  min-height:76px;margin:6px 0;padding:18px 12px;
+  border:1px dashed #456178;border-radius:10px;
+  background:rgba(18,38,57,.72);
+  color:#adc1d2;font-size:12px;font-weight:650;text-align:center;
+}
