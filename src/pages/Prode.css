@@ -1719,3 +1719,25 @@
   .prode-league-premium .prode-medal-table .prode-medal-count{font-size:16px;height:27px}
   .prode-league-premium .prode-weekly-ranking .prode-ranking-position.weekly-position{font-size:17px}
 }
+
+
+/* Medallero: íconos de oro/plata/bronce legibles sin agrandar las filas. */
+.prode-league-premium .prode-medal-table .prode-ranking-head{
+  align-items:center;
+  padding-top:6px;
+  padding-bottom:6px;
+}
+.prode-league-premium .prode-medal-table .prode-ranking-head span:nth-child(n+2){
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:system-ui,-apple-system,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  font-size:23px;
+  font-weight:400;
+  line-height:1.15;
+}
+@media(max-width:380px){
+  .prode-league-premium .prode-medal-table .prode-ranking-head span:nth-child(n+2){
+    font-size:21px;
+  }
+}
