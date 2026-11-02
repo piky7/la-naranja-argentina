@@ -5,11 +5,12 @@ import React from "react";
 const safeColor = (value, fallback) => /^#[0-9a-f]{6}$/i.test(value || "") ? value : fallback;
 const displayName = (name, max = 19) => String(name || "PRODE").trim().slice(0, max).toUpperCase();
 
-export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", size = 55, className = "" }) {
+export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", style = "pro", size = 55, className = "" }) {
   const a = safeColor(primary, "#7de83d");
   const b = safeColor(secondary, "#152b3a");
   const t = safeColor(textColor, "#ffffff");
   const isLeague = type === "league";
+  const avatarStyle = ["pro","elite","legend"].includes(style) ? style : "pro";
   const id = React.useId().replace(/:/g, "");
   const label = displayName(name, isLeague ? 24 : 20);
   const fontSize = isLeague
@@ -103,6 +104,34 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         fontSize={fontSize} fontWeight="900" letterSpacing=".05"
         textLength={fitLeagueText ? 55 : undefined}
         lengthAdjust={fitLeagueText ? "spacingAndGlyphs" : undefined}>{label}</text>
+
+    </> : avatarStyle !== "pro" ? <>
+      {/* Escudo Elite y Emblema Legend conservan los colores elegidos. */}
+      <ellipse cx="48" cy="103" rx="31" ry="4" fill={a} opacity=".2"/>
+      {avatarStyle === "elite" ? <>
+        <path d="M18 54 6 46 12 69 28 77 M78 54 90 46 84 69 68 77" fill={a} stroke={b} strokeWidth="2"/>
+        <path d="M48 3 88 20 84 68 48 90 12 68 8 20Z" fill={b} stroke={a} strokeWidth="4"/>
+        <path d="M48 9 82 24 78 64 48 83 18 64 14 24Z" fill="none" stroke="#ffffff" strokeOpacity=".7" strokeWidth="2"/>
+      </> : <>
+        <path d="M18 47 4 59 21 68 M78 47 92 59 75 68" fill={a} stroke={b} strokeWidth="3"/>
+        <path d="M48 3 87 25 87 67 48 90 9 67 9 25Z" fill={b} stroke={a} strokeWidth="4"/>
+        <path d="M48 9 81 28 81 63 48 82 15 63 15 28Z" fill="none" stroke="#ffffff" strokeOpacity=".72" strokeWidth="2"/>
+      </>}
+      <circle cx="48" cy="43" r="28" fill={`url(#${id}face)`}/>
+      <g fill="none" stroke={b} strokeWidth="3.5" strokeLinecap="round">
+        <circle cx="48" cy="43" r="27"/>
+        <path d="M21 43h54 M48 16v54 M28 22q31 20 0 42 M68 22q-31 20 0 42"/>
+      </g>
+      <circle cx="48" cy="43" r="28" fill={`url(#${id}shine)`}/>
+      {avatarStyle === "elite" ?
+        <path d="m48 7 3 5.8 6.5 1-4.7 4.6 1.1 6.5-5.9-3.1-5.9 3.1 1.1-6.5-4.7-4.6 6.5-1Z" fill="#fff0b6" stroke={b}/> :
+        <path d="m48 55 4.5 9.2 10.2 1.5-7.3 7.2 1.7 10.1-9.1-4.8-9.1 4.8 1.7-10.1-7.3-7.2 10.2-1.5Z" fill="#eef7ff" stroke={b} strokeWidth="1.5"/>}
+      <path d="M10 79 20 76l5 7-5 13-13-3Z M86 79 76 76l-5 7 5 13 13-3Z" fill={a} stroke={b}/>
+      <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.4"/>
+      <text x="48" y="92" textAnchor="middle" fill={t} fontFamily="Russo One,Impact,Arial Black,sans-serif"
+        fontStyle="italic" fontSize={fontSize} fontWeight="900"
+        textLength={label.length > 11 ? 55 : undefined}
+        lengthAdjust={label.length > 11 ? "spacingAndGlyphs" : undefined}>{label}</text>
     </> : <>
       {/* Player Badge LNA: insignia premium enteramente vectorial y personalizable. */}
       <ellipse cx="48" cy="101" rx="30" ry="5" fill={a} opacity=".20"/>
