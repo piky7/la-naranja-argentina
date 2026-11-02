@@ -645,11 +645,11 @@ export default function ProdeGroups({ onReady }) {
             })} 
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
             <p className="prode-group-pending">Medallas acumuladas por semana finalizada. Se entregan solo si al menos 3 participantes pronosticaron esa semana. Los empates comparten medalla.</p>
-          </div> : <div className="prode-group-ranking prode-ranking-premium" role="tabpanel">
+          </div> : <div className={"prode-group-ranking prode-ranking-premium" + (groupTab === "weekly" ? " prode-weekly-ranking" : " prode-general-ranking")} role="tabpanel">
             <h4>{groupTab === "weekly" ? "Clasificación semanal" : "Clasificación general"}</h4>
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
             {rankingBusy ? <div className="prode-ranking-loading" role="status" aria-live="polite">Calculando posiciones y puntos de la liga…</div> : rankingError ? null : (groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking || []) : (leagueRanking || [])).map((member,index) => <div key={member.userId || index} style={{ "--member-accent": memberAccent(member.crestPrimary) }} className="prode-ranking-row">
-              <span className={"prode-ranking-position" + (member.position && member.position <= 3 ? " podium-position rank-" + member.position : "")}>{member.position ? member.position + "°" : "—"}</span>
+              <span className={"prode-ranking-position" + (groupTab === "weekly" ? " weekly-position" : "") + (member.position && member.position <= 3 && groupTab !== "weekly" ? " podium-position rank-" + member.position : "")} aria-label={member.position ? member.position + "° puesto" : "Sin posición"}>{member.position ? groupTab === "weekly" && member.position <= 3 ? ["🥇","🥈","🥉"][member.position - 1] : member.position + "°" : "—"}</span>
               <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={42} className="prode-member-crest"/><strong>{member.username}</strong></button>
               <span className="prode-ranking-points"><strong>{member.points ?? 0}</strong><small>PTS</small></span>
               <span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span>
