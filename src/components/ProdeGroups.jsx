@@ -609,14 +609,14 @@ export default function ProdeGroups() {
           </div> : <div className="prode-group-ranking prode-ranking-premium" role="tabpanel">
             <h4>{groupTab === "weekly" ? "Clasificación semanal" : "Clasificación general"}</h4>
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
-            {((groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking) : leagueRanking) || detail.members).map((member,index) => <div key={member.userId || index} className={"prode-ranking-row" + (user?.uid && member.userId === "firebase:" + user.uid ? " is-current-user" : "")}>
+            {rankingBusy ? <div className="prode-ranking-loading" role="status" aria-live="polite">Calculando posiciones y puntos de la liga…</div> : rankingError ? null : (groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking || []) : (leagueRanking || [])).map((member,index) => <div key={member.userId || index} className={"prode-ranking-row" + (user?.uid && member.userId === "firebase:" + user.uid ? " is-current-user" : "")}>
               <span className={"prode-ranking-position " + (member.position && member.position <= 3 ? "podium-position" : "")}>{member.position ? member.position + "°" : "—"}</span>
               <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={42} className="prode-member-crest"/><strong>{member.username}</strong></button>
               <span className="prode-ranking-points"><strong>{member.points ?? 0}</strong><small>PTS</small></span>
               <span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span>
             </div>)}
             {rankingError && <p className="prode-group-error" role="alert">{rankingError}</p>}
-            <p className="prode-group-pending">Los puntos se actualizan con los resultados oficiales. AC: aciertos · ERR: errores · MVP: MVP acertados.</p>
+            {!rankingBusy && !rankingError && <p className="prode-group-pending">Los puntos se actualizan con los resultados oficiales. AC: aciertos · ERR: errores · MVP: MVP acertados.</p>}
           </div>}
           {groupTab === "weekly" && (() => {
             const week = String(selectedWeek || weeklyHistory.at(-1)?.number || 1);
