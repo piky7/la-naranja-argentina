@@ -10973,3 +10973,29 @@
   .home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-team{gap:3px}
   .home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-team img{width:29px;height:29px}
 }
+
+/* Segundo display LED: cuarto y reloj juntos, sin "CUARTO" ni "RESTANTES".
+   Misma anchura del marcador y sin invadir los separadores. */
+.home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-center{
+  gap:2px;
+}
+.home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-live-period.fixture-live-led-period{
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  height:auto;
+  margin:0;
+  padding:0;
+  line-height:0;
+  overflow:hidden;
+  white-space:nowrap;
+  background:#070e18;
+  border-radius:7px;
+}
+.home-page .fixture-panel .fixture-live-led-period svg{
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:100%;
+}
