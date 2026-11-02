@@ -17,7 +17,7 @@ const PATHS = {
 const SEGMENT_NAMES = Object.keys(PATHS);
 function Digit({ value, x, color }) {
   const enabled = SEGMENTS[value] || "";
-  return <g transform={`translate(${x} 5) scale(.92 1)`}>
+  return <g transform={`translate(${x} 4) scale(1.03 1.08)`}>
     {SEGMENT_NAMES.map(segment =>
       <path key={segment} d={PATHS[segment]} fill={enabled.includes(segment) ? color : "#23303c"}
         opacity={enabled.includes(segment) ? 1 : .26} />
@@ -43,7 +43,7 @@ export default function LiveLedScore({ home, away }) {
           <circle cx="1" cy="1" r=".45" fill="#536071" opacity=".27"/>
         </pattern>
       </defs>
-      <rect x="0.5" y="1" width="149" height="38" rx="7" fill="#070e18" stroke="#546073" strokeOpacity=".55"/>
+      <rect x="0.5" y="1" width="149" height="38" rx="7" fill="#070e18" stroke="#465363" strokeOpacity=".28"/>
       <rect x="2" y="2.5" width="146" height="35" rx="6" fill="url(#lna-led-dots)"/>
       <NumberDisplay score={h} end="home" color={h > a ? "#ff8b1b" : "#f4f7ff"}/>
       <NumberDisplay score={a} end="away" color={a > h ? "#ff8b1b" : "#f4f7ff"}/>
