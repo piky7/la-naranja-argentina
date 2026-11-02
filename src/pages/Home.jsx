@@ -1317,14 +1317,13 @@ const standingsMatches = matches.map((match) => {
 
           
 <div className="scorer-points">
-  <div className="scorer-games">
-    <strong>{player.stats?.gamesPlayed ?? 0}</strong>
-    <span>PJ</span>
-  </div>
-
   <div className="scorer-average">
     <strong>{player.points.toFixed(1)}</strong>
     <span>PTS</span>
+  </div>
+  <div className="scorer-games">
+    <strong>{player.stats?.gamesPlayed ?? 0}</strong>
+    <span>PJ</span>
   </div>
 </div>
 
