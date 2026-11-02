@@ -626,5 +626,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2B07QSZqaeGjjQym96bI-InDgsGe0kAe_ZjKxbeFaz6M8jjmkXpG4cw==/instituto-vs-gimnasia-cr"
     }
+  },
+  "2026-11-01-atenas-racing-chivilcoy": {
+    "status": "finished",
+    "homeScore": 95,
+    "awayScore": 94,
+    "time": "21:00",
+    "homeTeam": "atenas",
+    "awayTeam": "racing-chivilcoy",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Obdrjn5r6pTZmtULitLdtQ-MeWIMYAvE2nQDyXWwK5Di9S7MMRE3Fg==/atenas-c-vs-racing-ch",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Obdrjn5r6pTZmtULitLdtQ-MeWIMYAvE2nQDyXWwK5Di9S7MMRE3Fg==/atenas-c-vs-racing-ch"
+    }
   }
 };

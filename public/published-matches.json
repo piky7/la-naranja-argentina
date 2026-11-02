@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T02:10:55.821Z",
+  "generatedAt": "2026-11-02T02:15:57.574Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -375,6 +375,14 @@
       "awayScore": 58,
       "homeTeam": "instituto",
       "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-11-01-atenas-racing-chivilcoy": {
+      "status": "published",
+      "homeScore": 95,
+      "awayScore": 94,
+      "homeTeam": "atenas",
+      "awayTeam": "racing-chivilcoy",
       "hasStats": true
     }
   }

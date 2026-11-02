@@ -2450,4 +2450,12 @@ export const players = [
     teamId: "instituto",
     number: 14,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-380595",
+    officialPlayerId: 380595,
+    name: "Joaquin Valinotti",
+    teamId: "racing-chivilcoy",
+    number: 4,
+  },
 ];
