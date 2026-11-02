@@ -6,9 +6,10 @@ import ProdeCrest from "./ProdeCrest";
 
 const PRODE_API = "https://lna-prode-api.lnab.workers.dev";
 
-export default function ProdeGoogleAccess() {
+export default function ProdeGoogleAccess({ onReady }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [profileLoaded, setProfileLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [profile, setProfile] = useState(null);
@@ -45,7 +46,8 @@ export default function ProdeGoogleAccess() {
 
   useEffect(() => {
     let active = true;
-    if (!user) { setProfile(null); setCareerLink(null); setSyncing(false); return () => { active = false; }; }
+    if (!user) { setProfile(null); setCareerLink(null); setSyncing(false); setProfileLoaded(true); return () => { active = false; }; }
+    setProfileLoaded(false);
     setCareerLink(null); // Pendiente de verificar: no mostrar la invitación durante la carga.
     setLinkNotice(false);
     setSyncing(true);
@@ -62,9 +64,11 @@ export default function ProdeGoogleAccess() {
       if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
     }).catch(() => {
       if (active) setError("Tu cuenta Google está conectada, pero no pudimos registrar tu perfil Prode. Intentá recargar la página.");
-    }).finally(() => { if (active) setSyncing(false); });
+    }).finally(() => { if (active) { setSyncing(false); setProfileLoaded(true); } });
     return () => { active = false; };
   }, [user]);
+
+  useEffect(() => { if (!loading && profileLoaded) onReady?.(true); }, [loading, profileLoaded, onReady]);
 
   // No basarse en el alias: el Worker verifica firma Firebase y el UID autorizado.
   useEffect(() => {
