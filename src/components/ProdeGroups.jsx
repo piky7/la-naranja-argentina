@@ -28,7 +28,7 @@ const formatWeekRange = startsAt => {
   const format = date => date.toLocaleDateString("es-AR", { day: "numeric", month: "short", timeZone: "UTC" });
   return `${format(start)} – ${format(end)}`;
 };
-export default function ProdeGroups() {
+export default function ProdeGroups({ onReady }) {
   const [user, setUser] = useState(null);
   const [groups, setGroups] = useState([]);
   const [open, setOpen] = useState(false);
@@ -45,6 +45,7 @@ export default function ProdeGroups() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [ready, setReady] = useState(false);
+  const [authReady, setAuthReady] = useState(false);
   const [selected, setSelected] = useState(null);
   const [detail, setDetail] = useState(null);
   const [leagueRanking, setLeagueRanking] = useState(null);
@@ -94,9 +95,9 @@ export default function ProdeGroups() {
 
   useEffect(() => {
     let active = true, stop;
-    watchProdeUser(next => { if (active) setUser(next); }).then(fn => {
+    watchProdeUser(next => { if (active) { setUser(next); setAuthReady(true); } }).then(fn => {
       if (active) stop = fn; else fn();
-    }).catch(() => { if (active) setReady(true); });
+    }).catch(() => { if (active) { setAuthReady(true); setReady(true); } });
     return () => { active = false; stop?.(); };
   }, []);
 
@@ -112,7 +113,8 @@ export default function ProdeGroups() {
     } catch (e) { setError(e.message || "Error de conexión"); }
     finally { setReady(true); }
   };
-  useEffect(() => { setReady(false); load(user); }, [user]);
+  useEffect(() => { if (!authReady) return; setReady(false); load(user); }, [user, authReady]);
+  useEffect(() => { if (authReady && ready) onReady?.(true); }, [authReady, ready, onReady]);
   useEffect(() => { const refresh = () => { if (selected) openGroup(selected); }; window.addEventListener("prode-profile-updated", refresh); return () => window.removeEventListener("prode-profile-updated", refresh); }, [selected, user]);
   useEffect(() => { const params = new URLSearchParams(window.location.search); const code = params.get("invite") || params.get("token"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
   useEffect(() => {
