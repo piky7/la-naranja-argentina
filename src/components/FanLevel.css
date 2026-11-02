@@ -728,3 +728,54 @@
  .lna-fan-bar>svg:last-child{width:9px;flex-basis:9px}
  .lna-fan-bar .lna-fan-progress-row .lna-fan-track{width:100%;height:7px;flex-basis:7px}
 }
+
+
+/* Mi Carrera · puntos históricos separados del progreso, sin estrella ni números apretados. */
+.lna-fan-bar .lna-fan-historic-badge{
+  display:flex;align-items:center;justify-content:center;
+  flex:0 0 37px;width:37px;min-width:37px;
+  align-self:center;margin:0;
+}
+.lna-fan-bar .lna-fan-historic-shield{
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1px;
+  box-sizing:border-box;width:36px;height:39px;
+  padding:3px 2px 6px;
+  color:#fff4fb;
+  background:linear-gradient(150deg,#f4afd4 0%,#db69ac 36%,#8d3c75 100%);
+  clip-path:polygon(50% 0,97% 12%,94% 71%,50% 100%,6% 71%,3% 12%);
+  filter:drop-shadow(0 1px 2px #0007);
+  isolation:isolate;
+}
+.lna-fan-bar .lna-fan-historic-shield::before{
+  content:"";position:absolute;z-index:-1;inset:2px;
+  background:linear-gradient(155deg,#30243d,#151d32 70%);
+  clip-path:inherit;
+}
+.lna-fan-bar .lna-fan-historic-shield strong{
+  display:block;max-width:100%;
+  font:800 11px/1 system-ui,-apple-system,sans-serif;
+  letter-spacing:-.35px;font-variant-numeric:tabular-nums;
+  white-space:nowrap;color:#fff5fa;
+}
+.lna-fan-bar .lna-fan-historic-shield small{
+  font:900 7px/1 system-ui,-apple-system,sans-serif;
+  color:#ffb3da;letter-spacing:.2px;
+}
+@media(max-width:768px){
+  .lna-fan-bar{width:149px;min-width:149px;padding:7px 6px;gap:4px}
+  .lna-fan-bar .lna-fan-historic-badge{flex-basis:34px;width:34px;min-width:34px}
+  .lna-fan-bar .lna-fan-historic-shield{width:33px;height:37px}
+  .lna-fan-bar .lna-fan-historic-shield strong{font-size:10px}
+  .lna-fan-bar .lna-fan-bar-medals{flex:0 0 23px;min-width:23px}
+  .lna-fan-bar .lna-fan-bar-trophy{width:23px;height:32px}
+  .lna-fan-bar .lna-fan-summary{gap:4px}
+  .lna-fan-bar .lna-fan-bar-category{font-size:9px}
+}
+@media(max-width:390px){
+  .lna-fan-bar{width:143px;min-width:143px;padding:6px 5px;gap:3px}
+  .lna-fan-bar .lna-fan-historic-badge{flex-basis:32px;width:32px;min-width:32px}
+  .lna-fan-bar .lna-fan-historic-shield{width:31px;height:35px}
+  .lna-fan-bar .lna-fan-historic-shield strong{font-size:9px}
+  .lna-fan-bar .lna-fan-bar-category{font-size:8px}
+}
