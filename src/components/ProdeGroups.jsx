@@ -22,6 +22,7 @@ const parseInviteCode = value => {
 const teamLabel = id => teams.find(t => t.id === id)?.shortName || teams.find(t => t.id === id)?.name || (id || "—");
 const teamLogo = id => teams.find(t => t.id === id)?.logo;
 const mvpLabel = id => players.find(p => p.id === id)?.name || (id ? String(id).replace(/-/g, " ") : "No votó");
+const memberAccent = color => /^#[0-9a-fA-F]{6}$/.test(color || "") ? color : "#3f718c";
 const formatWeekRange = startsAt => {
   const start = new Date(startsAt);
   if (!Number.isFinite(start.getTime())) return "";
@@ -632,7 +633,7 @@ export default function ProdeGroups({ onReady }) {
                 || detail.members.find(player => player.userId === entry.userId);
               const member = savedCrest ? { ...entry, crestPrimary: savedCrest.crestPrimary, crestSecondary: savedCrest.crestSecondary, crestText: savedCrest.crestText } : entry;
               return <div className="prode-medal-member" key={member.userId || index}>
-              <div className="prode-ranking-row">
+              <div className="prode-ranking-row" style={{ "--member-accent": memberAccent(member.crestPrimary) }}>
                 <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={36} className="prode-member-crest"/><strong>{member.username}</strong></button>
                 {["gold","silver","bronze"].map((type,i) => <button type="button" key={type} className="prode-medal-count" aria-expanded={expandedMedal === (member.userId || index) + ":" + type} aria-label={member.username + ": ver medallas de " + ["oro","plata","bronce"][i]} onClick={() => setExpandedMedal(current => current === (member.userId || index) + ":" + type ? null : (member.userId || index) + ":" + type)}>{member[type] ?? 0}</button>)}
               </div>
@@ -647,8 +648,8 @@ export default function ProdeGroups({ onReady }) {
           </div> : <div className="prode-group-ranking prode-ranking-premium" role="tabpanel">
             <h4>{groupTab === "weekly" ? "Clasificación semanal" : "Clasificación general"}</h4>
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
-            {rankingBusy ? <div className="prode-ranking-loading" role="status" aria-live="polite">Calculando posiciones y puntos de la liga…</div> : rankingError ? null : (groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking || []) : (leagueRanking || [])).map((member,index) => <div key={member.userId || index} className={"prode-ranking-row" + (user?.uid && member.userId === "firebase:" + user.uid ? " is-current-user" : "")}>
-              <span className={"prode-ranking-position " + (member.position && member.position <= 3 ? "podium-position" : "")}>{member.position ? member.position + "°" : "—"}</span>
+            {rankingBusy ? <div className="prode-ranking-loading" role="status" aria-live="polite">Calculando posiciones y puntos de la liga…</div> : rankingError ? null : (groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking || []) : (leagueRanking || [])).map((member,index) => <div key={member.userId || index} style={{ "--member-accent": memberAccent(member.crestPrimary) }} className={"prode-ranking-row" + (user?.uid && member.userId === "firebase:" + user.uid ? " is-current-user" : "")}>
+              <span className={"prode-ranking-position" + (member.position && member.position <= 3 ? " podium-position rank-" + member.position : "")}>{member.position ? member.position + "°" : "—"}</span>
               <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} size={42} className="prode-member-crest"/><strong>{member.username}</strong></button>
               <span className="prode-ranking-points"><strong>{member.points ?? 0}</strong><small>PTS</small></span>
               <span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span>
