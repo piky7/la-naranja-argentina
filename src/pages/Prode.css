@@ -1434,3 +1434,52 @@
 @media(prefers-reduced-motion:reduce){
   .prode-page-loading-spinner{animation:none;border-color:#7de83d}
 }
+
+
+/* Espera única al abrir una liga: no mostrar participantes ni puntos provisionales. */
+.prode-league-premium.prode-league-loading{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:330px;
+  max-width:480px;
+  padding:48px 20px 40px;
+  text-align:center;
+}
+.prode-league-loading>.prode-league-close{
+  position:absolute;
+  top:15px;
+  right:15px;
+}
+.prode-league-loading>svg{flex-shrink:0}
+.prode-league-loading h3{
+  margin:0;
+  color:#f3f7fb;
+  font-family:"Russo One",Impact,"Arial Black",sans-serif;
+  font-style:italic;
+  font-size:clamp(19px,5vw,27px);
+  text-transform:uppercase;
+}
+.prode-league-loading>strong{
+  color:#fff0c4;
+  font-size:15px;
+  font-weight:850;
+}
+.prode-league-loading>p{
+  color:#b5c4d3;
+  font-size:12px;
+  line-height:1.5;
+  margin:0;
+}
+.prode-league-loading-spinner{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  border:3px solid #fee29b30;
+  border-top-color:#ffda78;
+  animation:prode-page-wait .85s linear infinite;
+}
+@media(prefers-reduced-motion:reduce){.prode-league-loading-spinner{animation:none;border-color:#ffda78}}
