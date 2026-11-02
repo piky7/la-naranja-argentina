@@ -447,7 +447,17 @@ export default function ProdeGroups({ onReady }) {
       </button>)}
     </div> : ready && user && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
     {error && <p className="prode-group-error" role="alert">{error}</p>}
-    {selected && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
+    {selected && (detailBusy || rankingBusy) && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
+      <section className="prode-dialog prode-group-detail prode-league-premium prode-league-loading" role="dialog" aria-modal="true" aria-label={"Cargando liga " + selected.name} onClick={e => e.stopPropagation()}>
+        <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => setSelected(null)}><X size={20}/></button>
+        <ProdeCrest type="league" name={selected.name} primary={selected.crestPrimary} secondary={selected.crestSecondary} size={93}/>
+        <h3>{selected.name}</h3>
+        <div className="prode-league-loading-spinner" aria-hidden="true"/>
+        <strong role="status" aria-live="polite">Preparando tu liga…</strong>
+        <p>Cargando participantes, posiciones y pronósticos</p>
+      </section>
+    </div>}
+    {selected && !detailBusy && !rankingBusy && <div className="prode-dialog-backdrop" onClick={() => setSelected(null)}>
       <section className="prode-dialog prode-group-detail prode-league-premium" style={{ "--league-accent": detail?.group?.crestPrimary || selected.crestPrimary || "#ff9a39" }} role="dialog" aria-modal="true" aria-label={"Liga " + selected.name} onClick={e => e.stopPropagation()}>
         <div className="prode-league-hero">
           <ProdeCrest type="league" name={selected.name} primary={detail?.group?.crestPrimary || selected.crestPrimary} secondary={detail?.group?.crestSecondary || selected.crestSecondary} size={83}/>
