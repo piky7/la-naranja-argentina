@@ -4,6 +4,7 @@ import LiveMatchInfo from "../components/LiveMatchInfo";
 import LiveRosters from "../components/LiveRosters";
 import LiveStartingFive from "../components/LiveStartingFive";
 import LiveMyVote from "../components/LiveMyVote";
+import LiveLedScore from "../components/LiveLedScore";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
@@ -1567,11 +1568,7 @@ const finishedMatch = {
       EN VIVO
     </span>
 
-    <strong className="fixture-live-score">
-      <span key={`home-${liveMatch?.homeScore ?? match.homeScore ?? 0}`} className={Number(liveMatch?.homeScore ?? match.homeScore ?? 0) > Number(liveMatch?.awayScore ?? match.awayScore ?? 0) ? "fixture-live-leading fixture-live-score-changed" : "fixture-live-trailing fixture-live-score-changed"}>{liveMatch?.homeScore ?? match.homeScore ?? 0}</span>
-      <span className="fixture-live-score-separator"> - </span>
-      <span key={`away-${liveMatch?.awayScore ?? match.awayScore ?? 0}`} className={Number(liveMatch?.awayScore ?? match.awayScore ?? 0) > Number(liveMatch?.homeScore ?? match.homeScore ?? 0) ? "fixture-live-leading fixture-live-score-changed" : "fixture-live-trailing fixture-live-score-changed"}>{liveMatch?.awayScore ?? match.awayScore ?? 0}</span>
-    </strong>
+    <LiveLedScore home={liveMatch?.homeScore ?? match.homeScore ?? 0} away={liveMatch?.awayScore ?? match.awayScore ?? 0} />
 
     <small className="fixture-live-period">
       {liveMatch?.isHalftime ? "ENTRETIEMPO" : liveMatch?.quarter ? <><span>{liveMatch.quarter}.º CUARTO</span>{formatLiveRemaining(liveMatch) != null && <span className="fixture-live-clock"> · {formatLiveRemaining(liveMatch)} RESTANTES</span>}</> : "PARTIDO EN JUEGO"}
