@@ -1,3 +1,4 @@
+import { useState } from "react";
 import ProdeHistoricalRanking from "../components/ProdeHistoricalRanking";
 import { Trophy, UsersRound, Medal, Target, ChartNoAxesColumn, ShieldCheck, CalendarDays } from "lucide-react";
 import "./Prode.css";
@@ -5,9 +6,21 @@ import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
 import ProdeGroups from "../components/ProdeGroups";
 
 export default function Prode() {
+  const [accountReady, setAccountReady] = useState(false);
+  const [groupsReady, setGroupsReady] = useState(false);
+  const [generalReady, setGeneralReady] = useState(false);
+  const [weeklyReady, setWeeklyReady] = useState(false);
+  const pageReady = accountReady && groupsReady && generalReady && weeklyReady;
   return (
-    <main className="prode-page prode-home-redesign">
-      <div className="prode-container">
+    <main className={"prode-page prode-home-redesign" + (pageReady ? " prode-page-ready" : " prode-page-loading")}>
+      {!pageReady && <div className="prode-page-loading-screen" role="status" aria-live="polite">
+        <div className="prode-page-loading-ball" aria-hidden="true"><span /></div>
+        <strong>PRODE <em>LNA</em></strong>
+        <div className="prode-page-loading-spinner" aria-hidden="true" />
+        <p>Preparando tu Prode…</p>
+        <small>Cargando perfil, ligas y clasificaciones</small>
+      </div>}
+      <div className="prode-container" style={pageReady ? undefined : { display: "none" }}>
         <header className="prode-hero">
           <div className="prode-hero-content">
             <span className="prode-eyebrow"><span className="prode-live-dot" /> LA NARANJA ARGENTINA · 2026/27</span>
@@ -17,7 +30,7 @@ export default function Prode() {
           </div>
           <div className="prode-hero-ball" aria-hidden="true"><span /></div>
           <div className="prode-hero-account">
-            <ProdeGoogleAccess />
+            <ProdeGoogleAccess onReady={setAccountReady} />
           </div>
         </header>
 
@@ -26,17 +39,17 @@ export default function Prode() {
             <div className="prode-friends-heading-icon"><UsersRound size={25}/></div>
             <div><h2>LIGAS DE AMIGOS</h2><p>Competí con tus amigos en ligas privadas.</p></div>
           </div>
-          <ProdeGroups />
+          <ProdeGroups onReady={setGroupsReady} />
         </section>
 
         <section className="prode-panel prode-general-section">
           <div className="prode-panel-heading"><span className="prode-panel-icon"><Trophy size={21}/></span><h2>RANKING <em>GENERAL</em></h2><span className="prode-small-tag">Histórico</span></div>
-          <ProdeHistoricalRanking />
+          <ProdeHistoricalRanking onReady={setGeneralReady} />
         </section>
 
         <section className="prode-panel prode-general-section prode-weekly-section">
           <div className="prode-panel-heading"><span className="prode-panel-icon"><CalendarDays size={21}/></span><h2>RANKING <em>SEMANAL</em></h2><span className="prode-small-tag">Lun – Dom</span></div>
-          <ProdeHistoricalRanking weekly />
+          <ProdeHistoricalRanking weekly onReady={setWeeklyReady} />
         </section>
 
         <section className="prode-how-section" aria-label="Cómo funciona Prode LNA">
