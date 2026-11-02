@@ -1611,3 +1611,31 @@
   .prode-league-premium .prode-ranking-premium .podium-position::after{display:none}
   .prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:14px}
 }
+
+
+/* Identificación de la tarjeta propia en Semanal, General y Medallero.
+   Mantiene el degradado personal; señal luminosa sutil, sin cambiar el ranking. */
+.prode-league-premium .prode-ranking-premium .prode-ranking-row.is-current-user,
+.prode-league-premium .prode-medal-table .prode-medal-member>.prode-ranking-row.is-current-user{
+  position:relative;
+  border-color:color-mix(in srgb,var(--member-accent,#3f718c) 55%,#9cb3c3);
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--member-accent,#3f718c) 36%,#102338) 0%,
+    color-mix(in srgb,var(--member-accent,#3f718c) 15%,#102338) 66%,
+    #102338 100%);
+  box-shadow:inset 3px 0 0 color-mix(in srgb,var(--member-accent,#3f718c) 75%,#e5f3fa),
+    0 0 0 1px color-mix(in srgb,var(--member-accent,#3f718c) 27%,transparent),
+    0 0 11px color-mix(in srgb,var(--member-accent,#3f718c) 15%,transparent);
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row.is-current-user::after,
+.prode-league-premium .prode-medal-table .prode-medal-member>.prode-ranking-row.is-current-user::after{
+  content:"";
+  position:absolute;top:8px;right:8px;
+  width:5px;height:5px;border-radius:50%;
+  background:#c5f5d0;
+  box-shadow:0 0 6px #95f5b0;
+  pointer-events:none;
+}
+.prode-league-premium .prode-medal-table .prode-medal-member>.prode-ranking-row.is-current-user .prode-ranking-name strong{
+  color:#f7fcff;
+}
