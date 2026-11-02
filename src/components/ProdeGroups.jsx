@@ -3,6 +3,7 @@ import { PlusCircle, X, LockKeyhole, Globe2, ChevronRight, UsersRound, ArrowLeft
 import { teams } from "../data/teams";
 import { players } from "../data/players";
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
+import { useLocation } from "react-router-dom";
 import ProdeCrest from "./ProdeCrest";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
@@ -29,6 +30,7 @@ const formatWeekRange = startsAt => {
   return `${format(start)} – ${format(end)}`;
 };
 export default function ProdeGroups({ onReady }) {
+  const location = useLocation();
   const [user, setUser] = useState(null);
   const [groups, setGroups] = useState([]);
   const [open, setOpen] = useState(false);
@@ -119,8 +121,9 @@ export default function ProdeGroups({ onReady }) {
   };
   useEffect(() => { if (!authReady) return; setReady(false); load(user); }, [user, authReady]);
   useEffect(() => { if (authReady && ready) onReady?.(true); }, [authReady, ready, onReady]);
+  useEffect(() => { const refresh = () => { if (authReady) load(user); }; window.addEventListener("prode-page-reopened", refresh); return () => window.removeEventListener("prode-page-reopened", refresh); }, [authReady, user]);
   useEffect(() => { const refresh = () => { if (selected) openGroup(selected); }; window.addEventListener("prode-profile-updated", refresh); return () => window.removeEventListener("prode-profile-updated", refresh); }, [selected, user]);
-  useEffect(() => { const params = new URLSearchParams(window.location.search); const code = params.get("invite") || params.get("token"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, []);
+  useEffect(() => { if (location.pathname !== "/prode") return; const params = new URLSearchParams(location.search); const code = params.get("invite") || params.get("token"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, [location.pathname, location.search]);
   useEffect(() => {
     if (!joinOpen || !/^[a-f0-9]{64}$/i.test(joinCode)) {
       setJoinPreview(null); setJoinPreviewBusy(false); setJoinPreviewError("");
