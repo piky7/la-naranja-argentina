@@ -10951,7 +10951,7 @@
   max-width:100%;
   height:auto;
   overflow:hidden;
-  filter:drop-shadow(0 0 3px rgba(255,135,33,.16));
+  filter:drop-shadow(0 0 2px rgba(255,135,33,.09));
 }
 .home-page .fixture-panel .home-fixture:has(.fixture-led-score) .fixture-live-period{
   display:block;
