@@ -4,7 +4,7 @@ import ProdeCrest from "./ProdeCrest";
 import { watchProdeUser } from "../auth/prodeAuth";
 const API = "https://lna-prode-api.lnab.workers.dev";
 
-export default function ProdeHistoricalRanking({ weekly = false }) {
+export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [user, setUser] = useState(null);
@@ -38,6 +38,7 @@ export default function ProdeHistoricalRanking({ weekly = false }) {
     window.addEventListener("prode-profile-updated",refresh);
     return () => { active = false; window.removeEventListener("prode-profile-updated",refresh); };
   }, [weekly, user, authReady]);
+  useEffect(() => { if (authReady && (data || error)) onReady?.(true); }, [authReady, data, error, onReady]);
   const leaders = (data?.ranking || []).filter(entry => entry.position != null);
   const podium = [leaders[1], leaders[0], leaders[2]];
   const weekLabel = data?.weekStartsAt ? (() => {
