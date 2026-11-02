@@ -1666,3 +1666,56 @@
   }
   .prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:13px}
 }
+
+
+/* Semanal: medallas de premio semanales, distintas de la insignia de General. */
+.prode-league-premium .prode-weekly-ranking .prode-ranking-position.weekly-position{
+  width:100%;min-height:24px;
+  padding:0;border:0;background:transparent;box-shadow:none;
+  font-family:system-ui,-apple-system,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  font-size:19px;font-style:normal;line-height:1;
+  text-shadow:0 1px 2px #0007;
+}
+.prode-league-premium .prode-weekly-ranking .prode-ranking-position.weekly-position::before,
+.prode-league-premium .prode-weekly-ranking .prode-ranking-position.weekly-position::after{display:none}
+
+/* Medallero: misma legibilidad con tarjetas más bajas y cantidades tipo marcador. */
+.prode-league-premium .prode-medal-table .prode-medal-member>.prode-ranking-row{
+  min-height:42px;padding:3px 9px;
+  gap:6px;border-radius:8px;
+}
+.prode-league-premium .prode-medal-table .prode-ranking-head,
+.prode-league-premium .prode-medal-table .prode-ranking-row{
+  grid-template-columns:minmax(0,1fr) repeat(3,38px);
+  column-gap:5px;
+}
+.prode-league-premium .prode-medal-table .prode-ranking-name{gap:6px;min-width:0}
+.prode-league-premium .prode-medal-table .prode-ranking-name svg{
+  width:26px;height:32px;flex:0 0 26px;
+}
+.prode-league-premium .prode-medal-table .prode-ranking-name strong{font-size:12px}
+.prode-league-premium .prode-medal-table .prode-medal-count{
+  height:30px;padding:0 1px;border:0;background:transparent;
+  font:italic 400 18px/1 var(--prode-gamer),Impact,sans-serif;
+  color:#f4f7fc;font-variant-numeric:tabular-nums;
+}
+.prode-league-premium .prode-medal-table .prode-medal-count[aria-expanded="true"]{
+  border:1px solid #667c92;border-radius:6px;
+  background:rgba(92,120,145,.23);
+  color:#f8fbff;
+}
+@media(max-width:380px){
+  .prode-league-premium .prode-medal-table .prode-ranking-head,
+  .prode-league-premium .prode-medal-table .prode-ranking-row{
+    grid-template-columns:minmax(0,1fr) repeat(3,33px);
+    column-gap:3px;
+  }
+  .prode-league-premium .prode-medal-table .prode-medal-member>.prode-ranking-row{
+    min-height:38px;padding:3px 6px;
+  }
+  .prode-league-premium .prode-medal-table .prode-ranking-name svg{
+    width:23px;height:28px;flex-basis:23px;
+  }
+  .prode-league-premium .prode-medal-table .prode-medal-count{font-size:16px;height:27px}
+  .prode-league-premium .prode-weekly-ranking .prode-ranking-position.weekly-position{font-size:17px}
+}
