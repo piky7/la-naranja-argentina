@@ -1500,3 +1500,114 @@
   border-color:#796248;
   color:#edc38e;
 }
+
+
+/* Prode LNA · clasificación deportiva: medallas de posición y degradado por escudo. */
+.prode-league-premium .prode-ranking-premium .prode-ranking-head,
+.prode-league-premium .prode-ranking-premium .prode-ranking-row{
+  grid-template-columns:45px minmax(0,1fr) 52px 25px 29px 28px;
+  column-gap:6px;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row,
+.prode-league-premium .prode-medal-table .prode-medal-member>.prode-ranking-row{
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--member-accent,#3f718c) 30%,#102338) 0%,
+    color-mix(in srgb,var(--member-accent,#3f718c) 13%,#102338) 57%,
+    #102338 100%);
+  border-color:color-mix(in srgb,var(--member-accent,#3f718c) 35%,#40596d);
+  box-shadow:inset 3px 0 0 color-mix(in srgb,var(--member-accent,#3f718c) 65%,transparent);
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row.is-current-user{
+  background:linear-gradient(90deg,
+    color-mix(in srgb,var(--member-accent,#3f718c) 36%,#102338) 0%,
+    color-mix(in srgb,var(--member-accent,#3f718c) 15%,#102338) 66%,
+    #102338 100%);
+  border-color:color-mix(in srgb,var(--member-accent,#3f718c) 46%,#728896);
+  box-shadow:inset 3px 0 0 var(--member-accent,#3f718c);
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-position{
+  display:flex;align-items:center;justify-content:center;
+  min-width:0;min-height:27px;position:relative;
+  font-family:var(--prode-gamer),Impact,sans-serif;
+  font-size:12px;line-height:1;color:#b7c5d1;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-position.podium-position{
+  width:30px;height:30px;min-height:30px;margin-inline:auto;padding:0;
+  border-radius:50%;
+  border:1px solid #fce19a;
+  background:linear-gradient(145deg,#ffeaa2 0%,#d59c31 66%,#90611d 100%);
+  box-shadow:0 1px 5px #0007,inset 0 1px 2px #ffffff78;
+  color:#182332;font-size:14px;text-shadow:0 1px #fff6b24d;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-position.rank-2{
+  border-color:#eef4f9;
+  background:linear-gradient(145deg,#f0f5fa,#abb9c8 63%,#718498);
+  color:#172738;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-position.rank-3{
+  border-color:#f0c69b;
+  background:linear-gradient(145deg,#f1c19a,#c08856 65%,#8c5537);
+  color:#231d1b;
+}
+.prode-league-premium .prode-ranking-premium .podium-position::before,
+.prode-league-premium .prode-ranking-premium .podium-position::after{
+  position:absolute;top:50%;font-family:Georgia,serif;
+  font-size:17px;line-height:1;color:#eac46c;
+  text-shadow:0 1px 2px #0007;
+}
+.prode-league-premium .prode-ranking-premium .podium-position::before{
+  content:"❧";right:calc(100% - 4px);transform:translateY(-50%) rotate(40deg);
+}
+.prode-league-premium .prode-ranking-premium .podium-position::after{
+  content:"❧";left:calc(100% - 4px);transform:translateY(-50%) scaleX(-1) rotate(40deg);
+}
+.prode-league-premium .prode-ranking-premium .rank-2::before,
+.prode-league-premium .prode-ranking-premium .rank-2::after{color:#c9d3dd}
+.prode-league-premium .prode-ranking-premium .rank-3::before,
+.prode-league-premium .prode-ranking-premium .rank-3::after{color:#cc9b73}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points,
+.prode-league-premium .prode-ranking-premium .is-current-user .prode-ranking-points{
+  min-height:0;padding:0;gap:0;border:0;border-radius:0;
+  background:transparent;box-shadow:none;color:#f5f8ff;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points strong{
+  font:italic 400 19px/1 var(--prode-gamer),Impact,sans-serif;
+  color:#f5f8ff;letter-spacing:-.025em;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-points small{
+  font:italic 700 9px/1.1 var(--prode-gamer),Impact,sans-serif;
+  color:#b9c9d9;letter-spacing:.02em;
+}
+.prode-league-premium .prode-ranking-premium .is-current-user .prode-ranking-name strong{
+  color:#f4f8fc;
+}
+@media(max-width:600px){
+  .prode-league-premium .prode-ranking-premium .prode-ranking-head,
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{
+    grid-template-columns:34px minmax(0,1fr) 42px 19px 22px 23px;
+    column-gap:3px;
+  }
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{
+    min-height:47px;padding:5px 6px;
+  }
+  .prode-league-premium .prode-ranking-premium .prode-ranking-position.podium-position{
+    width:26px;height:26px;min-height:26px;font-size:12px;
+  }
+  .prode-league-premium .prode-ranking-premium .podium-position::before,
+  .prode-league-premium .prode-ranking-premium .podium-position::after{font-size:13px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:16px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-points small{font-size:8px}
+}
+@media(max-width:355px){
+  .prode-league-premium .prode-ranking-premium .prode-ranking-head,
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{
+    grid-template-columns:29px minmax(0,1fr) 37px 18px 20px 21px;
+    column-gap:2px;
+  }
+  .prode-league-premium .prode-ranking-premium .prode-ranking-position.podium-position{
+    width:23px;height:23px;min-height:23px;font-size:11px;
+  }
+  .prode-league-premium .prode-ranking-premium .podium-position::before,
+  .prode-league-premium .prode-ranking-premium .podium-position::after{display:none}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-points strong{font-size:14px}
+}
