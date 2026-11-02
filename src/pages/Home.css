@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&display=swap");
 
 
 /* =========================================
@@ -10905,4 +10906,15 @@
   .live-my-vote-choice{gap:5px}
   .live-my-vote-choice img{width:28px;height:28px;flex-basis:28px}
   .live-my-vote-choice strong{font-size:12px}
+}
+
+/* Marcador electrónico: tipografía exclusiva de los resultados EN VIVO del Home. */
+.home-page .fixture-center .fixture-live-score {
+  font-family: "Orbitron", "Arial Black", sans-serif;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -.045em;
+}
+@media (max-width: 600px) {
+  .home-page .fixture-center .fixture-live-score { font-size: 24px; }
 }
