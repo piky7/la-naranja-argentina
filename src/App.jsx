@@ -19,7 +19,15 @@ import Admin from "./pages/Admin";
 
 function AnimatedRoutes() {
   const location = useLocation();
+  // Mantener Prode montado después de la primera visita: no repetir la carga
+  // de Firebase, ligas y rankings cada vez que cambia la pestaña.
+  const isProde = location.pathname === "/prode";
+  const [prodeVisited, setProdeVisited] = useState(isProde);
   const [animation, setAnimation] = useState("");
+
+  useEffect(() => {
+    if (isProde) setProdeVisited(true);
+  }, [isProde]);
 
   useEffect(() => {
     const direction = location.state?.swipeDirection;
@@ -28,6 +36,7 @@ function AnimatedRoutes() {
   }, [location.key, location.state]);
 
   return (
+    <>
     <div key={location.key} className={animation}>
       <Routes location={location}>
         <Route path="/" element={<Home />} />
@@ -36,7 +45,7 @@ function AnimatedRoutes() {
         <Route path="/equipos/:teamId" element={<Equipo />} />
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/estadisticas" element={<Estadisticas />} />
-        <Route path="/prode" element={<Prode />} />
+        <Route path="/prode" element={null} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
           const params = new URLSearchParams(location.search);
@@ -47,6 +56,10 @@ function AnimatedRoutes() {
         <Route path="/acerca" element={<Acerca />} />
       </Routes>
     </div>
+    {prodeVisited && <div style={{ display: isProde ? undefined : "none" }} aria-hidden={!isProde}>
+      <Prode />
+    </div>}
+    </>
   );
 }
 
