@@ -46,6 +46,7 @@ export default function LiveLedScore({ home, away }) {
       <rect x="0.5" y="1" width="149" height="38" rx="7" fill="#070e18" stroke="#546073" strokeOpacity=".55"/>
       <rect x="2" y="2.5" width="146" height="35" rx="6" fill="url(#lna-led-dots)"/>
       <NumberDisplay score={h} end="home" color={h > a ? "#ff8b1b" : "#f4f7ff"}/>
+      <NumberDisplay score={a} end="away" color={a > h ? "#ff8b1b" : "#f4f7ff"}/>
       <path d="M73 20h7" stroke="#dde6ed" strokeWidth="2.2" strokeLinecap="round"/>
     </svg>
   </strong>;
