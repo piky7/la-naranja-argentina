@@ -1741,3 +1741,50 @@
     font-size:21px;
   }
 }
+
+
+/* Liga de amigos · selector de semana en una sola línea, más bajo y sin scroll. */
+.prode-league-premium .prode-week-selector.prode-week-premium{
+  display:flex;align-items:center;flex-wrap:nowrap;
+  box-sizing:border-box;width:100%;min-height:38px;
+  padding:4px 9px;gap:7px;margin:0;
+  border-radius:9px;
+}
+.prode-league-premium .prode-week-premium>svg{
+  width:16px;height:16px;flex:0 0 16px;
+}
+.prode-league-premium .prode-week-premium .prode-week-premium-info{
+  display:flex;align-items:center;flex-wrap:nowrap;
+  min-width:0;flex:1;gap:9px;
+}
+.prode-league-premium .prode-week-premium .prode-week-select-label{
+  flex:0 0 auto;width:auto;min-height:0;margin:0;
+}
+.prode-league-premium .prode-week-premium .prode-week-select-label select{
+  height:25px;min-height:25px;max-width:115px;
+  padding:0 17px 0 0;font-size:12px;line-height:1.1;
+}
+.prode-league-premium .prode-week-premium .prode-week-select-label>svg{
+  right:0;width:13px;height:13px;
+}
+.prode-league-premium .prode-week-premium .prode-week-date-range{
+  min-width:0;margin:0;font-size:10px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.prode-league-premium .prode-week-premium .prode-week-status{
+  flex:0 0 auto;min-height:23px;padding:3px 8px;margin-left:auto;
+  font-size:9px;line-height:1;gap:5px;
+}
+@media(max-width:390px){
+  .prode-league-premium .prode-week-selector.prode-week-premium{
+    min-height:36px;padding:3px 7px;gap:5px;
+  }
+  .prode-league-premium .prode-week-premium .prode-week-premium-info{gap:5px}
+  .prode-league-premium .prode-week-premium .prode-week-select-label select{
+    font-size:11px;min-height:23px;height:23px;max-width:98px;
+  }
+  .prode-league-premium .prode-week-premium .prode-week-date-range{font-size:9px}
+  .prode-league-premium .prode-week-premium .prode-week-status{
+    min-height:21px;padding:3px 6px;font-size:8px;
+  }
+}
