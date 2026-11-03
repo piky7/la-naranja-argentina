@@ -6,6 +6,7 @@ import { matches } from "../data/matches";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
+import { playerMatchStatCorrections } from "../data/playerMatchStatCorrections";
 
 
 export default function PlayerModal({
@@ -22,6 +23,20 @@ export default function PlayerModal({
   const match = matchContext?.match;
   const matchStat = matchContext?.playerStats;
   const hasMatchTab = Boolean(match && matchStat && matchContext.teamId);
+  const matchKey = match ? (match.id || `${match.date}-${match.homeTeam}-${match.awayTeam}`) : null;
+  const manualStat = playerMatchStatCorrections[matchKey]?.[player?.id] || {};
+  // Las correcciones puntuales solo cubren datos ausentes, nunca sustituyen
+  // un valor oficial publicado (incluido el cero).
+  const gameMetric = key => matchStat?.[key] ?? manualStat[key] ?? null;
+  const shotValues = value => {
+    if (!value || typeof value !== "object") return null;
+    // Las planillas oficiales preservan Aciertos/Totales/Porcentaje.
+    // También aceptar el formato normalizado made/attempted/percentage.
+    const made = value.made ?? value.Aciertos;
+    const attempted = value.attempted ?? value.Totales;
+    const percentage = value.percentage ?? value.Porcentaje;
+    return { made, attempted, percentage };
+  };
   useEffect(() => {
     setActiveTab("match");
   }, [player?.id, match?.id, match?.date]);
@@ -165,10 +180,10 @@ export default function PlayerModal({
             <span className="home-player-modal-label">PLANILLA COMPLETA</span>
             <div className="lna-player-match-extra">
               {[
-                ["REB OF", matchStat.offensiveRebounds], ["REB DEF", matchStat.defensiveRebounds],
-                ["ROB", matchStat.steals], ["TAP", matchStat.blocks],
-                ["PÉRD", matchStat.turnovers], ["FALTAS", matchStat.fouls ?? matchStat.personalFouls],
-                ["+/-", matchStat.plusMinus]
+                ["REB OF", gameMetric("offensiveRebounds")], ["REB DEF", gameMetric("defensiveRebounds")],
+                ["ROB", gameMetric("steals")], ["TAP", gameMetric("blocks")],
+                ["PÉRD", gameMetric("turnovers")], ["FALTAS", gameMetric("fouls") ?? gameMetric("personalFouls")],
+                ["+/-", gameMetric("plusMinus")]
               ].map(([label, value]) => (
                 <div key={label}><span>{label}</span><strong>{value ?? "—"}</strong></div>
               ))}
@@ -179,9 +194,10 @@ export default function PlayerModal({
                 ["TRIPLES", matchStat.threePointers],
                 ["LIBRES", matchStat.freeThrows]
               ].map(([label, value]) => {
-                const made = value?.made;
-                const attempted = value?.attempted;
-                const pct = value?.percentage;
+                const shots = shotValues(value);
+                const made = shots?.made;
+                const attempted = shots?.attempted;
+                const pct = shots?.percentage;
                 return <div key={label}>
                   <span>{label}</span>
                   <strong>{made != null && attempted != null ? `${made}/${attempted}` : "—"}</strong>
