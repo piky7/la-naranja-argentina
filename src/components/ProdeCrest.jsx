@@ -1,11 +1,12 @@
 import React from "react";
+import ProdeCrestSymbol, { PRODE_SYMBOL_IDS } from "./ProdeCrestSymbol";
 
 // Identidades vectoriales de Prode LNA: copa para ligas y pelota de básquet para usuarios.
 // Los diseños se dibujan a partir del nombre y de los colores guardados; no hay imagen fija.
 const safeColor = (value, fallback) => /^#[0-9a-f]{6}$/i.test(value || "") ? value : fallback;
 const displayName = (name, max = 19) => String(name || "PRODE").trim().slice(0, max).toUpperCase();
 
-export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", style = "pro", font = "sport", size = 55, className = "" }) {
+export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", style = "pro", symbol, font = "sport", size = 55, className = "" }) {
   const a = safeColor(primary, "#7de83d");
   const b = safeColor(secondary, "#152b3a");
   const t = safeColor(textColor, "#ffffff");
@@ -13,6 +14,8 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
   const fontFamily = font === "college" ? "Impact,Arial Black,sans-serif" : font === "gamer" ? "Orbitron,Russo One,Arial Black,sans-serif" : "Russo One,Impact,Arial Black,sans-serif";
   const fontItalic = font !== "college";
   const avatarStyle = ["pro","elite","legend"].includes(style) ? style : "pro";
+  const selectedSymbol = PRODE_SYMBOL_IDS.includes(symbol) ? symbol : ({ elite: "eagle", pro: "ball", legend: "torch" })[avatarStyle];
+  const symbolGroup = ["eagle","lion","wolf","tiger","bear","shark"].includes(selectedSymbol) ? "animals" : ["ball","hoop","jersey","court"].includes(selectedSymbol) ? "sports" : "emblems";
   const id = React.useId().replace(/:/g, "");
   const label = displayName(name, isLeague ? 24 : 20);
   const fontSize = isLeague
@@ -107,60 +110,34 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         textLength={fitLeagueText ? 55 : undefined}
         lengthAdjust={fitLeagueText ? "spacingAndGlyphs" : undefined}>{label}</text>
 
-    </> : avatarStyle !== "pro" ? <>
-      {/* Escudo Elite y Emblema Legend conservan los colores elegidos. */}
-      <ellipse cx="48" cy="103" rx="31" ry="4" fill={a} opacity=".2"/>
-      {avatarStyle === "elite" ? <>
-        <path d="M18 54 6 46 12 69 28 77 M78 54 90 46 84 69 68 77" fill={a} stroke={b} strokeWidth="2"/>
-        <path d="M48 3 88 20 84 68 48 90 12 68 8 20Z" fill={b} stroke={a} strokeWidth="4"/>
-        <path d="M48 9 82 24 78 64 48 83 18 64 14 24Z" fill="none" stroke="#ffffff" strokeOpacity=".7" strokeWidth="2"/>
+
+    </> : <>
+      {/* Tres marcos distintivos: escudo animal, medallón deportivo y hexágono de emblema.
+          Los símbolos no contienen estrellas ni marcas de campeonatos. */}
+      <ellipse cx="48" cy="103" rx="31" ry="4" fill={a} opacity=".20"/>
+      {symbolGroup === "animals" ? <>
+        <path d="M48 3 86 18 81 64 48 85 15 64 10 18Z" fill={b} stroke={a} strokeWidth="4" strokeLinejoin="round"/>
+        <path d="M48 9 79 22 75 60 48 77 21 60 17 22Z" fill="#101f31" stroke="#e2f4ff" strokeOpacity=".8" strokeWidth="2"/>
+        <path d="M23 25 48 15 73 25" fill="none" stroke={a} strokeWidth="2.4" strokeLinecap="round"/>
+      </> : symbolGroup === "sports" ? <>
+        <circle cx="48" cy="43" r="39" fill={b} stroke={a} strokeWidth="4"/>
+        <circle cx="48" cy="43" r="34" fill="#102339" stroke="#e2f4ff" strokeOpacity=".82" strokeWidth="2.2"/>
+        <circle cx="48" cy="43" r="31" fill="none" stroke={a} strokeWidth="1" strokeDasharray="2 5" opacity=".7"/>
       </> : <>
-        <path d="M18 47 4 59 21 68 M78 47 92 59 75 68" fill={a} stroke={b} strokeWidth="3"/>
-        <path d="M48 3 87 25 87 67 48 90 9 67 9 25Z" fill={b} stroke={a} strokeWidth="4"/>
-        <path d="M48 9 81 28 81 63 48 82 15 63 15 28Z" fill="none" stroke="#ffffff" strokeOpacity=".72" strokeWidth="2"/>
+        <path d="M48 2 85 21 85 63 48 85 11 63 11 21Z" fill={b} stroke={a} strokeWidth="4" strokeLinejoin="round"/>
+        <path d="M48 10 78 25 78 59 48 76 18 59 18 25Z" fill="#112536" stroke="#e2f4ff" strokeOpacity=".8" strokeWidth="2"/>
+        <path d="M18 31 11 25M78 31l7-6M18 53l-7 6M78 53l7 6" stroke={a} strokeWidth="2"/>
       </>}
-      <circle cx="48" cy="43" r="28" fill={`url(#${id}face)`}/>
-      <g fill="none" stroke={b} strokeWidth="3.5" strokeLinecap="round">
-        <circle cx="48" cy="43" r="27"/>
-        <path d="M21 43h54 M48 16v54 M28 22q31 20 0 42 M68 22q-31 20 0 42"/>
-      </g>
-      <circle cx="48" cy="43" r="28" fill={`url(#${id}shine)`}/>
-      {avatarStyle === "elite" ?
-        <path d="m48 7 3 5.8 6.5 1-4.7 4.6 1.1 6.5-5.9-3.1-5.9 3.1 1.1-6.5-4.7-4.6 6.5-1Z" fill="#fff0b6" stroke={b}/> :
-        <path d="m48 55 4.5 9.2 10.2 1.5-7.3 7.2 1.7 10.1-9.1-4.8-9.1 4.8 1.7-10.1-7.3-7.2 10.2-1.5Z" fill="#eef7ff" stroke={b} strokeWidth="1.5"/>}
-      <path d="M10 79 20 76l5 7-5 13-13-3Z M86 79 76 76l-5 7 5 13 13-3Z" fill={a} stroke={b}/>
-      <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.4"/>
-      <text x="48" y="92" textAnchor="middle" fill={t} fontFamily={fontFamily}
-        fontStyle={fontItalic ? "italic" : "normal"} fontSize={fontSize} fontWeight="900"
+      <ProdeCrestSymbol symbol={selectedSymbol} primary={a} secondary={b}/>
+      {/* Alias unido al marco, legible también en rankings pequeños. */}
+      <path d="M10 79 21 75l5 8-6 14-13-4Z M86 79l-11-4-5 8 6 14 13-4Z" fill={a} stroke={b} strokeWidth="1.5"/>
+      <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.5" strokeLinejoin="round"/>
+      <path d="M20 80h56" stroke="#ffffff" strokeOpacity=".27" strokeWidth="1.2"/>
+      <text x="48" y="92" textAnchor="middle" fill={t}
+        fontFamily={fontFamily} fontStyle={fontItalic ? "italic" : "normal"}
+        fontSize={fontSize} fontWeight="900"
         textLength={label.length > 11 ? 55 : undefined}
         lengthAdjust={label.length > 11 ? "spacingAndGlyphs" : undefined}>{label}</text>
-    </> : <>
-      {/* Player Badge LNA: insignia premium enteramente vectorial y personalizable. */}
-      <ellipse cx="48" cy="101" rx="30" ry="5" fill={a} opacity=".20"/>
-      {/* Dos aletas compactas, sin puntas superpuestas en tamaño pequeño. */}
-      <path d="M19 53 7 51l7 14 15-1 7-9Z M77 53l12-2-7 14-15-1-7-9Z" fill={b} stroke={a} strokeWidth="1.8" strokeLinejoin="round"/>
-      <path d="m13 56 13 4 M83 56l-13 4" fill="none" stroke={a} strokeWidth="2" strokeLinecap="round"/>
-      <circle cx="48" cy="40" r="37" fill={b} stroke={a} strokeWidth="2.6"/>
-      <circle cx="48" cy="40" r="34" fill="#071522" stroke="#ffffff" strokeOpacity=".65" strokeWidth="2"/>
-      <circle cx="48" cy="40" r="30.5" fill={`url(#${id}face)`}/>
-      <g clipPath={`url(#${id}premiumClip)`} fill="none" stroke={b} strokeWidth="3.6" strokeLinecap="round">
-        <path d="M17 40h62"/>
-        <path d="M48 9v62"/>
-        <path d="M23 14c24 16 26 36 6 53"/>
-        <path d="M73 14C49 30 47 50 67 67"/>
-        <path d="M21 23c14 0 22 6 27 17s13 17 27 17"/>
-        <path d="M75 23c-14 0-22 6-27 17S35 57 21 57"/>
-      </g>
-      <circle cx="48" cy="40" r="30.5" fill={`url(#${id}shine)`}/>
-      <circle cx="48" cy="40" r="30.5" fill="none" stroke="#ffffff" strokeOpacity=".24" strokeWidth="1.2"/>
-      <path d="M24 25c6-9 14-13 22-14" fill="none" stroke="#ffffff" strokeOpacity=".58" strokeWidth="2.8" strokeLinecap="round"/>
-      {/* Cinta deportiva envolvente; conserva el color de texto elegido. */}
-      <path d="M11 79 20 76l5 7-5 13-10-3 3-7Z M85 79l-9-3-5 7 5 13 10-3-3-7Z" fill={a} stroke={b} strokeWidth="1.4"/>
-      <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.4" strokeLinejoin="round"/>
-      <path d="M19 80h58" stroke="#ffffff" strokeOpacity=".23" strokeWidth="1"/>
-      <text x="48" y="92" textAnchor="middle" fill={t}
-        fontFamily={isLeague ? "Russo One,Impact,Arial Black,sans-serif" : fontFamily} fontStyle={isLeague ? "italic" : fontItalic ? "italic" : "normal"}
-        fontSize={fontSize} fontWeight="900" letterSpacing=".1">{label}</text>
     </>}
   </svg>;
 }
