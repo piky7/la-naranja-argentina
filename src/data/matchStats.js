@@ -453,7 +453,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -1689,7 +1689,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "Martin Chapero",
+        "name": "Martín Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -20511,7 +20511,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -20773,7 +20773,7 @@ export const matchPlayerStats = {
     "obera": [
       {
         "id": "oficial-430497",
-        "name": "Matheus Santos Simao Costa",
+        "name": "Matheus Santos Simão Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -30825,7 +30825,7 @@ export const matchPlayerStats = {
     "obera": [
       {
         "id": "oficial-430497",
-        "name": "Matheus Santos Simao Costa",
+        "name": "Matheus Santos Simão Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -32529,7 +32529,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -33051,7 +33051,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "Martin Chapero",
+        "name": "Martín Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -34798,7 +34798,7 @@ export const matchPlayerStats = {
     "platense": [
       {
         "id": "oficial-184197",
-        "name": "Vicente Blazica Cristobal",
+        "name": "Vicente Blazica Cristóbal",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -34850,7 +34850,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-273373",
-        "name": "Joaquin Goncalves",
+        "name": "Joaquín Gonçalves",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -37024,7 +37024,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "Martin Chapero",
+        "name": "Martín Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -38104,7 +38104,7 @@ export const matchPlayerStats = {
     "obera": [
       {
         "id": "oficial-430497",
-        "name": "Matheus Santos Simao Costa",
+        "name": "Matheus Santos Simão Costa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -41148,7 +41148,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -43464,7 +43464,7 @@ export const matchPlayerStats = {
     "platense": [
       {
         "id": "oficial-184197",
-        "name": "Vicente Blazica Cristobal",
+        "name": "Vicente Blazica Cristóbal",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -43516,7 +43516,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-273373",
-        "name": "Joaquin Goncalves",
+        "name": "Joaquín Gonçalves",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -46508,7 +46508,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -49188,7 +49188,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -52530,7 +52530,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -53870,7 +53870,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "Martin Chapero",
+        "name": "Martín Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -55576,7 +55576,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-273373",
-        "name": "Joaquin Goncalves",
+        "name": "Joaquín Gonçalves",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -59230,7 +59230,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-431355",
-        "name": "Joaquin Coria Fa",
+        "name": "Joaquín Coria Fa",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -61196,7 +61196,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "Martin Chapero",
+        "name": "Martín Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
@@ -63673,7 +63673,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-380595",
-        "name": "Joaquin Valinotti",
+        "name": "Joaquín Valinotti",
         "points": 19,
         "rebounds": 1,
         "assists": 3,
@@ -65221,7 +65221,7 @@ export const matchPlayerStats = {
       },
       {
         "id": "oficial-274342",
-        "name": "Martin Chapero",
+        "name": "Martín Chapero",
         "points": 0,
         "rebounds": 0,
         "assists": 0,
