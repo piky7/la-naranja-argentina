@@ -2,6 +2,12 @@ name: Desplegar API Prode LNA
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "workers/prode/worker.js"
+      - ".github/workflows/deploy-prode.yml"
 
 permissions:
   contents: read
