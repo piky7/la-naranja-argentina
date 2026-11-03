@@ -38,6 +38,29 @@ export default function FinishedMatchModal({
 
   const formatStat = (value) => value == null ? "0" : value;
 
+  // Adjuntar la planilla de este partido a la ficha del jugador. No altera
+  // el perfil ni sus promedios, y solo se usa desde partidos finalizados.
+  const openPlayerFromMatch = (matchPlayer, teamId) => {
+    const info = getMatchPlayerInfo(matchPlayer);
+    if (!info) return;
+    onPlayerClick({
+      ...info,
+      matchContext: {
+        match: {
+          id: selectedMatch.id,
+          date: selectedMatch.date,
+          homeTeam: selectedMatch.homeTeam,
+          awayTeam: selectedMatch.awayTeam,
+          homeScore: selectedMatch.homeScore,
+          awayScore: selectedMatch.awayScore,
+        },
+        teamId,
+        playerStats: matchPlayer,
+        valuation: getOfficialValuation(selectedMatch, teamId, matchPlayer.id),
+      },
+    });
+  };
+
   const selectedMatchMvp = selectedMatchStats
     ? [selectedMatch.homeTeam, selectedMatch.awayTeam]
         .flatMap((teamId) =>
@@ -231,8 +254,7 @@ export default function FinishedMatchModal({
                   aria-label={`Abrir ficha de ${selectedMatchMvp.player.name}, jugador del partido`}
                   onClick={(event) => {
                     event.stopPropagation();
-                    const playerInfo = getMatchPlayerInfo(selectedMatchMvp.player);
-                    if (playerInfo) onPlayerClick(playerInfo);
+                    openPlayerFromMatch(selectedMatchMvp.player, selectedMatchMvp.teamId);
                   }}
                 >
                   <span className="match-mvp-heading">♛ JUGADOR DEL PARTIDO</span>
@@ -321,16 +343,7 @@ export default function FinishedMatchModal({
                             onClick={(event) => {
                               event.stopPropagation();
 
-                              const playerInfo =
-                                getMatchPlayerInfo(
-                                  player
-                                );
-
-                              if (!playerInfo) {
-                                return;
-                              }
-
-                              onPlayerClick(playerInfo);
+                              openPlayerFromMatch(player, selectedMatch.homeTeam);
                             }}
                           >
                             <strong>
@@ -423,16 +436,7 @@ export default function FinishedMatchModal({
                             onClick={(event) => {
                               event.stopPropagation();
 
-                              const playerInfo =
-                                getMatchPlayerInfo(
-                                  player
-                                );
-
-                              if (!playerInfo) {
-                                return;
-                              }
-
-                              onPlayerClick(playerInfo);
+                              openPlayerFromMatch(player, selectedMatch.awayTeam);
                             }}
                           >
                             <strong>
