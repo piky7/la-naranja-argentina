@@ -317,7 +317,7 @@ export default {
                 if (week===thisWeek) { points+=5; wrong++; }
               }
             }
-            return { userId:item.user_id,username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,crestText:item.crestText,crestStyle:item.crestStyle,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
+            return { userId:item.user_id,username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,crestText:item.crestText,crestStyle:item.crestStyle,crestFont:item.crestFont,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
           }));
           all.push(...batch);
         }
