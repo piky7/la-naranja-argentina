@@ -206,6 +206,8 @@ async function main() {
         turnovers: Number(player.turnovers || 0),
         offensiveRebounds: Number(player.offensiveRebounds || 0),
         defensiveRebounds: Number(player.defensiveRebounds || 0),
+        blocks: player.blocks == null ? null : Number(player.blocks),
+        fouls: player.fouls == null ? null : Number(player.fouls),
         twoPointers: player.twoPointers ?? null,
         threePointers: player.threePointers ?? null,
         freeThrows: player.freeThrows ?? null,
