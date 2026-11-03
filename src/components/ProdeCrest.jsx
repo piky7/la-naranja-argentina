@@ -5,11 +5,13 @@ import React from "react";
 const safeColor = (value, fallback) => /^#[0-9a-f]{6}$/i.test(value || "") ? value : fallback;
 const displayName = (name, max = 19) => String(name || "PRODE").trim().slice(0, max).toUpperCase();
 
-export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", style = "pro", size = 55, className = "" }) {
+export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", style = "pro", font = "sport", size = 55, className = "" }) {
   const a = safeColor(primary, "#7de83d");
   const b = safeColor(secondary, "#152b3a");
   const t = safeColor(textColor, "#ffffff");
   const isLeague = type === "league";
+  const fontFamily = font === "college" ? "Impact,Arial Black,sans-serif" : font === "gamer" ? "Orbitron,Russo One,Arial Black,sans-serif" : "Russo One,Impact,Arial Black,sans-serif";
+  const fontItalic = font !== "college";
   const avatarStyle = ["pro","elite","legend"].includes(style) ? style : "pro";
   const id = React.useId().replace(/:/g, "");
   const label = displayName(name, isLeague ? 24 : 20);
@@ -100,7 +102,7 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         fill={`url(#${id}ribbon)`} stroke="#f3c15d" strokeWidth="1.9" strokeLinejoin="round"/>
       <path d="M21 89h54" stroke="#ffffff" strokeOpacity=".25" strokeWidth="1.1"/>
       <text x="48" y="100" textAnchor="middle" fill={t}
-        fontFamily="Russo One,Impact,Arial Black,sans-serif" fontStyle="italic"
+        fontFamily={isLeague ? "Russo One,Impact,Arial Black,sans-serif" : fontFamily} fontStyle={isLeague ? "italic" : fontItalic ? "italic" : "normal"}
         fontSize={fontSize} fontWeight="900" letterSpacing=".05"
         textLength={fitLeagueText ? 55 : undefined}
         lengthAdjust={fitLeagueText ? "spacingAndGlyphs" : undefined}>{label}</text>
@@ -128,8 +130,8 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         <path d="m48 55 4.5 9.2 10.2 1.5-7.3 7.2 1.7 10.1-9.1-4.8-9.1 4.8 1.7-10.1-7.3-7.2 10.2-1.5Z" fill="#eef7ff" stroke={b} strokeWidth="1.5"/>}
       <path d="M10 79 20 76l5 7-5 13-13-3Z M86 79 76 76l-5 7 5 13 13-3Z" fill={a} stroke={b}/>
       <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.4"/>
-      <text x="48" y="92" textAnchor="middle" fill={t} fontFamily="Russo One,Impact,Arial Black,sans-serif"
-        fontStyle="italic" fontSize={fontSize} fontWeight="900"
+      <text x="48" y="92" textAnchor="middle" fill={t} fontFamily={fontFamily}
+        fontStyle={fontItalic ? "italic" : "normal"} fontSize={fontSize} fontWeight="900"
         textLength={label.length > 11 ? 55 : undefined}
         lengthAdjust={label.length > 11 ? "spacingAndGlyphs" : undefined}>{label}</text>
     </> : <>
@@ -157,7 +159,7 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
       <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.4" strokeLinejoin="round"/>
       <path d="M19 80h58" stroke="#ffffff" strokeOpacity=".23" strokeWidth="1"/>
       <text x="48" y="92" textAnchor="middle" fill={t}
-        fontFamily="Russo One,Impact,Arial Black,sans-serif" fontStyle="italic"
+        fontFamily={isLeague ? "Russo One,Impact,Arial Black,sans-serif" : fontFamily} fontStyle={isLeague ? "italic" : fontItalic ? "italic" : "normal"}
         fontSize={fontSize} fontWeight="900" letterSpacing=".1">{label}</text>
     </>}
   </svg>;
