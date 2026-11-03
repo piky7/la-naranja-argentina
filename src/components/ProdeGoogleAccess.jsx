@@ -21,6 +21,7 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [crestSecondary, setCrestSecondary] = useState("#10283c");
   const [crestText, setCrestText] = useState("#ffffff");
   const [crestStyle, setCrestStyle] = useState("pro");
+  const [crestFont, setCrestFont] = useState("sport");
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
   const [careerLink, setCareerLink] = useState(null);
@@ -59,7 +60,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       });
       const data = await response.json();
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
-      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); }
+      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); setCrestFont(data.user.crestFont || "sport"); }
       const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
       if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
     }).catch(() => {
@@ -106,7 +107,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       const crestResponse = await fetch(PRODE_API + "/api/prode/profile/crest", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText, style: crestStyle }),
+        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText, style: crestStyle, font: crestFont }),
       });
       const crestData = await crestResponse.json();
       if (!crestResponse.ok || !crestData.ok) {
@@ -120,6 +121,7 @@ export default function ProdeGoogleAccess({ onReady }) {
         crestSecondary: crestData.crestSecondary,
         crestText: crestData.crestText,
         crestStyle: crestData.crestStyle,
+        crestFont: crestData.crestFont,
       }));
       setEditOpen(false);
       window.dispatchEvent(new Event("prode-profile-updated"));
@@ -178,13 +180,22 @@ export default function ProdeGoogleAccess({ onReady }) {
       {loading ? <span>Comprobando sesión…</span> : user ? (
         <>
           <div className="prode-google-identity">
-            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} size={55} className="prode-account-crest"/>
+            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} font={profile?.crestFont} size={55} className="prode-account-crest"/>
             <div className="prode-identity-info">
               <div className="prode-identity-name-row">
                 <strong>{profile?.username || "Elegí tu nombre de usuario"}</strong>
                 <div className="prode-account-actions">
                   {adminAllowed && <Link className="prode-admin-entry" to="/admin" title="Panel de administración" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={17}/></Link>}
-                  <button type="button" className="prode-account-icon prode-account-edit" title="Mi perfil" aria-label="Editar mi perfil" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={17}/></button>
+                  <button type="button" className="prode-account-icon prode-account-edit" title="Mi perfil" aria-label="Editar mi perfil" onClick={() => {
+                    setProfileError("");
+                    setUsername(profile?.username || "");
+                    setCrestPrimary(profile?.crestPrimary || "#7de83d");
+                    setCrestSecondary(profile?.crestSecondary || "#10283c");
+                    setCrestText(profile?.crestText || "#ffffff");
+                    setCrestStyle(profile?.crestStyle || "pro");
+                    setCrestFont(profile?.crestFont || "sport");
+                    setEditOpen(true);
+                  }} disabled={busy || syncing || !profile}><Pencil size={17}/></button>
                   <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={() => setLogoutConfirmOpen(true)} disabled={busy}><LogOut size={17}/></button>
                 </div>
               </div>
@@ -221,31 +232,90 @@ export default function ProdeGoogleAccess({ onReady }) {
           </div>
         </div>
       </div>}
-      {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveProfile}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => !saving && setEditOpen(false)} disabled={saving}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>
+      {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}>
+        <form className="prode-dialog prode-profile-editor" onClick={e => e.stopPropagation()} onSubmit={saveProfile}>
+          <div className="prode-dialog-heading">
+            <h3>Mi perfil Prode</h3>
+            <button type="button" aria-label="Cerrar" disabled={saving} onClick={() => setEditOpen(false)}><X size={20}/></button>
+          </div>
 
-        <fieldset className="prode-avatar-styles">
-          <legend>Elegí tu modelo de avatar</legend>
-          <div className="prode-avatar-style-grid">
-            {[{id:"elite",label:"Escudo Elite"},{id:"pro",label:"Insignia Pro"},{id:"legend",label:"Emblema Legend"}].map(option => (
-              <button key={option.id} type="button" aria-pressed={crestStyle === option.id}
-                className={"prode-avatar-style-option" + (crestStyle === option.id ? " is-selected" : "")}
-                onClick={() => setCrestStyle(option.id)}>
-                <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary}
-                  textColor={crestText} style={option.id} size={66}/>
-                <span>{option.label}</span>
-              </button>
-            ))}
+          <div className="prode-identity-preview">
+            <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary}
+              textColor={crestText} style={crestStyle} font={crestFont} size={80}/>
+            <div className="prode-identity-preview-copy">
+              <span className="prode-identity-preview-eyebrow">TU IDENTIDAD EN PRODE</span>
+              <strong>{username.trim() || "Jugador"}</strong>
+              <span>Temporada 2026/27 · Liga Nacional</span>
+              {careerLink && <small><ShieldCheck size={13}/> Mi Carrera vinculada</small>}
+            </div>
           </div>
-        </fieldset>
-        <div className="prode-crest-config">
-          <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary} textColor={crestText} style={crestStyle} size={90}/>
-          <div className="prode-crest-colors">
-            <label>Color principal<input type="color" value={crestPrimary} onChange={e => setCrestPrimary(e.target.value)}/></label>
-            <label>Color secundario<input type="color" value={crestSecondary} onChange={e => setCrestSecondary(e.target.value)}/></label>
-            <label>Color del texto<input type="color" value={crestText} onChange={e => setCrestText(e.target.value)}/></label>
-          </div>
-        </div>
-{profileError && <p className="prode-group-error" role="alert">{profileError}</p>}<button className="prode-create-submit" type="submit" disabled={saving || !/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())}>{saving ? "Guardando…" : "Guardar perfil"}</button></form></div>}
+
+          <label className="prode-profile-alias">Nombre de usuario
+            <input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off"
+              value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/>
+          </label>
+          <p className="prode-profile-helper">Este alias es público. No se muestra tu nombre de Google.</p>
+
+          <fieldset className="prode-avatar-styles">
+            <legend>Modelo de escudo</legend>
+            <div className="prode-avatar-style-grid">
+              {[{id:"elite",label:"Elite"},{id:"pro",label:"Pro"},{id:"legend",label:"Legend"}].map(option => (
+                <button key={option.id} type="button" aria-pressed={crestStyle === option.id}
+                  className={"prode-avatar-style-option" + (crestStyle === option.id ? " is-selected" : "")}
+                  onClick={() => setCrestStyle(option.id)}>
+                  <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary}
+                    textColor={crestText} style={option.id} font={crestFont} size={55}/>
+                  <span>{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="prode-profile-fonts">
+            <legend>Tipografía del escudo</legend>
+            <div className="prode-profile-font-grid">
+              {[{id:"sport",label:"Deportiva"},{id:"college",label:"Universitaria"},{id:"gamer",label:"Gamer"}].map(option => (
+                <button key={option.id} type="button" aria-pressed={crestFont === option.id}
+                  className={"prode-profile-font-option" + (crestFont === option.id ? " is-selected" : "")}
+                  onClick={() => setCrestFont(option.id)}>
+                  <strong className={"font-" + option.id}>ABC</strong>
+                  <span>{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="prode-profile-colors">
+            <legend>Colores del escudo</legend>
+            <div className="prode-profile-color-grid">
+              {[{label:"Principal",value:crestPrimary,set:setCrestPrimary},{label:"Secundario",value:crestSecondary,set:setCrestSecondary},{label:"Texto",value:crestText,set:setCrestText}].map(option => (
+                <label key={option.label}>{option.label}
+                  <input type="color" value={option.value} onChange={e => option.set(e.target.value)}/>
+                </label>
+              ))}
+            </div>
+            <div className="prode-profile-palette-list" aria-label="Paletas rápidas">
+              {[{name:"Azul hielo",colors:["#073e82","#b9e9ff","#06111c"]},
+                {name:"Bordó oro",colors:["#7c182b","#d9aa53","#fff2cc"]},
+                {name:"Grafito",colors:["#17232f","#d9dfe6","#101820"]},
+                {name:"Verde",colors:["#125b40","#c0df70","#102b1c"]},
+                {name:"Violeta",colors:["#54258d","#efa7d2","#1a0f2d"]}].map(option => (
+                <button key={option.name} type="button" title={option.name} aria-label={"Aplicar paleta " + option.name}
+                  className="prode-profile-palette"
+                  onClick={() => {setCrestPrimary(option.colors[0]);setCrestSecondary(option.colors[1]);setCrestText(option.colors[2]);}}>
+                  <i style={{background:option.colors[0]}}/><i style={{background:option.colors[1]}}/>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          {profileError && <p className="prode-group-error" role="alert">{profileError}</p>}
+          <button className="prode-create-submit prode-profile-save" type="submit"
+            disabled={saving || !/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())}>
+            {saving ? "Guardando…" : "Guardar perfil"}
+          </button>
+        </form>
+      </div>}
     </div>
   );
 }
