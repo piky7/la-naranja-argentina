@@ -119,6 +119,9 @@ export default function ProdeGoogleAccess({ onReady }) {
       if (!crestResponse.ok || !crestData.ok) {
         throw Error("El alias se guardó, pero el escudo no. " + (crestData.error || "Intentá nuevamente."));
       }
+      if (crestData.crestSymbol !== crestSymbol) {
+        throw Error("El nuevo catálogo de escudos todavía no está disponible en la API. Intentá guardar nuevamente cuando termine su despliegue.");
+      }
 
       setProfile(prev => ({
         ...prev,
