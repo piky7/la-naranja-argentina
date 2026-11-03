@@ -176,6 +176,23 @@ async function obtenerFixture(fecha) {
   return partidos;
 }
 
+// Respaldo cuando el endpoint de próximos partidos deja de listar
+// un encuentro que ya comenzó. Las URLs provienen del calendario oficial
+// publicado en este mismo repositorio, no de un marcador estimado.
+async function obtenerCalendarioRespaldo(fecha) {
+  const source = await descargar("https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/src/data/officialSchedule.js");
+  const match = source.match(/export const officialSchedule\s*=\s*(\[[\s\S]*\]);?\s*$/);
+  if (!match) throw new Error("Calendario oficial de respaldo inválido");
+  const rows = JSON.parse(match[1]);
+  return rows.filter(item => item.date === fecha && item.homeTeam && item.awayTeam &&
+    item.officialUrl && item.time && /^\d{2}:\d{2}$/.test(item.time))
+    .map(item => ({
+      fecha: item.date, hora: item.time,
+      localLNA: item.homeTeam, visitanteLNA: item.awayTeam,
+      url: item.officialUrl,
+    }));
+}
+
 function interpretarMarcador(html) {
   const estado =
     html.match(/data-estado="([^"]*)"/)?.[1] || null;
@@ -507,12 +524,40 @@ async function generarLive(fecha, anteriores = null, env) {
     console.log("Sin candidatos en eventos-lnb; verificando fixture oficial:", fecha);
   }
 
-  const oficiales = await obtenerConCache(
-    env,
-    `fixture-oficial:${fecha}`,
-    600,
-    () => obtenerFixture(fecha)
-  );
+  // El endpoint ProximosPartidos puede omitir partidos al comenzar.
+  // Completar solamente los encuentros ausentes usando sus URLs oficiales.
+  let proximos = [];
+  try {
+    proximos = await obtenerConCache(
+      env,
+      `fixture-oficial:${fecha}`,
+      600,
+      () => obtenerFixture(fecha)
+    );
+  } catch (error) {
+    console.warn("Fixture oficial no disponible, usando respaldo:", error.message);
+  }
+  let respaldo = [];
+  try {
+    respaldo = await obtenerConCache(
+      env,
+      `calendario-respaldo:${fecha}`,
+      600,
+      () => obtenerCalendarioRespaldo(fecha)
+    );
+  } catch (error) {
+    console.warn("No se pudo obtener calendario de respaldo:", error.message);
+  }
+  const oficiales = [...proximos];
+  const conocidos = new Set(proximos.map(item => item.localLNA + "|" + item.visitanteLNA));
+  for (const item of respaldo) {
+    const key = item.localLNA + "|" + item.visitanteLNA;
+    if (!conocidos.has(key)) {
+      oficiales.push(item);
+      conocidos.add(key);
+      console.log("Partido recuperado del calendario:", item.localLNA, item.visitanteLNA, fecha);
+    }
+  }
 
   const anterioresPorId = new Map(
     (anteriores?.date === fecha
