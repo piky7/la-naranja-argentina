@@ -2148,24 +2148,8 @@ export const players = [
 
   { id: "alejandro-talavera", name: "Alejandro Talavera Espínola", teamId: "la-union",
   position: "Base", position: null, number: 1, nationality: "Argentina", officialPlayerId: 430816 },
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
 
 // JUGADORES INCORPORADOS DESDE LA LIGA OFICIAL
-,
 {
   id: "matias-joaquin-fernandez",
   officialPlayerId: 78864,
