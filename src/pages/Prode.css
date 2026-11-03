@@ -1798,3 +1798,40 @@
 .prode-avatar-style-option span{font-size:10px;font-weight:800;line-height:1.25;text-align:center}
 .prode-avatar-style-option.is-selected{border-color:#83ee47;box-shadow:inset 0 0 0 1px #83ee47,0 0 13px #79e63b28;background:#1b3731;color:#d5ffbc}
 .prode-avatar-style-option:focus-visible{outline:2px solid #b5fa82;outline-offset:2px}
+
+
+/* Editor compacto de identidad Prode: la vista previa responde a cada elección. */
+.prode-profile-editor{gap:9px;padding:16px 17px;max-height:min(86dvh,780px);overscroll-behavior:contain}
+.prode-profile-editor .prode-dialog-heading h3{font-size:19px}
+.prode-identity-preview{display:flex;align-items:center;gap:12px;min-width:0;padding:10px 12px;background:linear-gradient(125deg,#12313a,#102331);border:1px solid #456c60;border-radius:12px}
+.prode-identity-preview>svg{flex:0 0 72px;width:72px;height:auto;max-height:83px}
+.prode-identity-preview-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.prode-identity-preview-eyebrow{color:#90cbb0;font-size:9px;font-weight:900;letter-spacing:1px}
+.prode-identity-preview-copy>strong{font-family:var(--prode-gamer);font-size:22px;color:#f5fff5;overflow-wrap:anywhere;line-height:1.15}
+.prode-identity-preview-copy>span:not(.prode-identity-preview-eyebrow){font-size:10px;color:#a6c4c1}
+.prode-identity-preview-copy>small{display:flex;align-items:center;gap:4px;color:#aaf38b;font-size:10px;font-weight:700}
+.prode-profile-editor .prode-profile-alias{gap:5px}
+.prode-profile-editor .prode-profile-alias input{padding:9px 11px}
+.prode-profile-editor .prode-profile-helper{margin:-5px 0 0;font-size:10px;color:#91b4ab;line-height:1.35}
+.prode-profile-editor fieldset{border:0;padding:0;margin:3px 0 0;min-width:0}
+.prode-profile-editor fieldset legend{margin-bottom:6px;color:#e0f5e8;font-size:12px;font-weight:900}
+.prode-profile-editor .prode-avatar-style-option{min-height:78px;padding:5px 3px;gap:1px}
+.prode-profile-editor .prode-avatar-style-option svg{width:52px;height:57px}
+.prode-profile-editor .prode-avatar-style-option span{font-size:10px}
+.prode-profile-font-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.prode-profile-font-option{min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid #385769;border-radius:9px;background:#102535;padding:6px 2px;color:#d8e8ec;cursor:pointer}
+.prode-profile-font-option strong{font-size:17px;line-height:1.25}
+.prode-profile-font-option .font-sport{font-family:"Russo One",Impact,sans-serif;font-style:italic}
+.prode-profile-font-option .font-college{font-family:Impact,"Arial Black",sans-serif;font-stretch:condensed}
+.prode-profile-font-option .font-gamer{font-family:Orbitron,"Russo One",sans-serif;letter-spacing:1px}
+.prode-profile-font-option span{font-size:9px;font-weight:800}
+.prode-profile-font-option.is-selected{border-color:#83ee47;box-shadow:inset 0 0 0 1px #83ee47;background:#1b3731;color:#d5ffbc}
+.prode-profile-color-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.prode-profile-editor .prode-profile-color-grid label{display:flex;align-items:center;flex-direction:column;gap:4px;font-size:10px;color:#cce4d5;font-weight:800;min-width:0}
+.prode-profile-editor .prode-profile-color-grid input[type="color"]{width:100%;height:37px;padding:3px;cursor:pointer;border:1px solid #53756b;background:#102a30;border-radius:9px}
+.prode-profile-palette-list{display:flex;gap:9px;justify-content:center;margin-top:8px}
+.prode-profile-palette{display:flex;overflow:hidden;flex:1;max-width:53px;height:27px;padding:0;border:1px solid #6d8b8b;border-radius:7px;cursor:pointer}
+.prode-profile-palette i{flex:1}
+.prode-profile-palette:focus-visible,.prode-profile-font-option:focus-visible{outline:2px solid #c3ffa4;outline-offset:2px}
+.prode-profile-editor .prode-profile-save{width:100%;margin-top:3px;padding:13px}
+@media(max-width:390px){.prode-profile-editor{padding:13px;gap:7px}.prode-identity-preview>svg{flex-basis:64px;width:64px}.prode-identity-preview-copy>strong{font-size:19px}}
