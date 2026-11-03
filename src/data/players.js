@@ -2475,8 +2475,10 @@ export const players = [
   {
     id: "oficial-380595",
     officialPlayerId: 380595,
-    name: "Joaquin Valinotti",
+    name: "Joaquín Valinotti",
     teamId: "racing-chivilcoy",
+    position: "Base",
+    nationality: "Argentina",
     number: 4,
   },
 ];
