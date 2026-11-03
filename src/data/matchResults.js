@@ -642,5 +642,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Obdrjn5r6pTZmtULitLdtQ-MeWIMYAvE2nQDyXWwK5Di9S7MMRE3Fg==/atenas-c-vs-racing-ch"
     }
+  },
+  "2026-11-02-olimpico-penarol": {
+    "status": "finished",
+    "homeScore": 74,
+    "awayScore": 87,
+    "time": "22:00",
+    "homeTeam": "olimpico",
+    "awayTeam": "penarol",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jsTnp8j_eJAUcCza8OwZrDNjIoIb9LQyG50cydNiScGDqFDOT64DLQ==/olimpico-lb-vs-penarol-mdp",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jsTnp8j_eJAUcCza8OwZrDNjIoIb9LQyG50cydNiScGDqFDOT64DLQ==/olimpico-lb-vs-penarol-mdp"
+    }
   }
 };
