@@ -498,7 +498,7 @@ export const officialSchedule = [
   {
     "id": "2026-11-09-gimnasia-obera",
     "date": "2026-11-09",
-    "time": "21:00",
+    "time": "20:30",
     "homeTeam": "gimnasia",
     "awayTeam": "obera",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
