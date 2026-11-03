@@ -1835,3 +1835,17 @@
 .prode-profile-palette:focus-visible,.prode-profile-font-option:focus-visible{outline:2px solid #c3ffa4;outline-offset:2px}
 .prode-profile-editor .prode-profile-save{width:100%;margin-top:3px;padding:13px}
 @media(max-width:390px){.prode-profile-editor{padding:13px;gap:7px}.prode-identity-preview>svg{flex-basis:64px;width:64px}.prode-identity-preview-copy>strong{font-size:19px}}
+
+
+/* Prode: catálogo de 16 escudos independientes, agrupados por temática. */
+.prode-profile-editor .prode-symbol-selector{margin-top:3px}
+.prode-symbol-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:8px}
+.prode-symbol-tabs button{min-width:0;padding:8px 3px;border:1px solid #3c6062;border-radius:8px;background:#102737;color:#bfd8db;font-size:11px;font-weight:800;cursor:pointer}
+.prode-symbol-tabs button.is-selected{background:#1b3d30;border-color:#8cf247;color:#baff9b;box-shadow:inset 0 0 0 1px #8cf247}
+.prode-symbol-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;max-height:205px;overflow-y:auto;padding:2px 2px 4px;overscroll-behavior:contain}
+.prode-symbol-option{display:flex;min-width:0;min-height:86px;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:1px solid #395b69;border-radius:10px;background:#102535;color:#d8e7e8;cursor:pointer;padding:5px 2px}
+.prode-symbol-option svg{width:51px;height:59px;flex:0 0 auto}
+.prode-symbol-option span{font-size:10px;font-weight:800;line-height:1.15;text-align:center}
+.prode-symbol-option.is-selected{border-color:#83ee47;box-shadow:inset 0 0 0 1px #83ee47,0 0 13px #79e63b28;background:#1b3731;color:#d5ffbc}
+.prode-symbol-option:focus-visible,.prode-symbol-tabs button:focus-visible{outline:2px solid #c0ffab;outline-offset:2px}
+@media(max-width:390px){.prode-symbol-grid{max-height:191px}.prode-symbol-option{min-height:79px}.prode-symbol-option svg{width:46px;height:52px}.prode-symbol-tabs button{font-size:10px}}
