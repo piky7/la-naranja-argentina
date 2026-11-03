@@ -11124,3 +11124,82 @@
  .home-page .standings-panel .home-scorers-grid .scorer-games {min-width:30px;padding-left:4px}
  .home-page .standings-panel .home-scorers-grid .scorer-average strong {font-size:15px}
 }
+
+/* Ficha jugador: dos vistas al entrar desde un partido finalizado. */
+.home-player-modal .lna-player-modal-tabs{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
+  margin:10px 12px 0;padding:4px;border:1px solid #294157;
+  border-radius:11px;background:#071624;
+}
+.home-player-modal .lna-player-modal-tabs button{
+  min-width:0;min-height:35px;border:1px solid transparent;border-radius:8px;
+  background:transparent;color:#b5c6d5;font-size:12px;font-weight:850;
+  cursor:pointer;
+}
+.home-player-modal .lna-player-modal-tabs button[aria-selected="true"]{
+  border-color:#ff9b40;background:linear-gradient(180deg,#f99932,#df741c);
+  color:#0d1824;
+}
+.home-player-modal .lna-player-modal-tabs button:focus-visible{
+  outline:2px solid #fff;outline-offset:2px;
+}
+.home-player-modal .lna-player-match-panel{
+  padding:12px;margin:10px 12px 12px;border:1px solid #e87b29;
+  border-radius:12px;background:#071b2b;color:#f6f8fb;
+}
+.home-player-modal .lna-player-match-context{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
+.home-player-modal .lna-player-match-context>span{
+  font-size:10px;letter-spacing:.7px;font-weight:800;color:#f99240;
+}
+.home-player-modal .lna-player-match-context>strong{
+  display:flex;justify-content:center;align-items:center;gap:10px;
+  font-size:13px;line-height:1.3;
+}
+.home-player-modal .lna-player-match-context em{
+  font-style:normal;font-weight:900;font-size:19px;color:#ff912e;
+}
+.home-player-modal .lna-player-match-main{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:12px 0 15px;
+  border:1px solid #284357;border-radius:10px;overflow:hidden;
+}
+.home-player-modal .lna-player-match-main>div{
+  min-width:0;padding:10px 2px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;border-right:1px solid #284357;
+}
+.home-player-modal .lna-player-match-main>div:last-child{border-right:0}
+.home-player-modal .lna-player-match-main strong{font-size:19px;color:#ff902d;font-weight:900;line-height:1.2}
+.home-player-modal .lna-player-match-main span{font-size:9px;font-weight:800;color:#b0c1d0}
+.home-player-modal .lna-player-match-panel>.home-player-modal-label{
+  display:block;margin:0 0 8px;color:#f58b31;font-weight:900;font-size:13px;
+}
+.home-player-modal .lna-player-match-extra{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;
+}
+.home-player-modal .lna-player-match-extra>div,
+.home-player-modal .lna-player-match-shots>div{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:0;min-height:51px;padding:5px 2px;border:1px solid #284357;
+  border-radius:8px;background:#102638;gap:4px;
+}
+.home-player-modal .lna-player-match-extra span,
+.home-player-modal .lna-player-match-shots span{
+  color:#aec0cd;font-size:9px;font-weight:800;text-align:center;
+}
+.home-player-modal .lna-player-match-extra strong,
+.home-player-modal .lna-player-match-shots strong{
+  font-size:15px;line-height:1;font-weight:900;color:#f5f8fc;
+}
+.home-player-modal .lna-player-match-shots{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:9px;
+}
+.home-player-modal .lna-player-match-shots small{font-size:9px;color:#e68a3a;font-weight:800}
+.home-player-modal .lna-player-match-note{margin:10px 1px 0;font-size:10px;color:#8da6b9}
+@media(max-width:440px){
+  .home-player-modal .lna-player-modal-tabs{margin-inline:8px}
+  .home-player-modal .lna-player-modal-tabs button{font-size:11px}
+  .home-player-modal .lna-player-match-panel{margin-inline:8px;padding:10px 8px}
+  .home-player-modal .lna-player-match-main strong{font-size:16px}
+  .home-player-modal .lna-player-match-main span{font-size:8px}
+  .home-player-modal .lna-player-match-extra{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  .home-player-modal .lna-player-match-extra span{font-size:8px}
+}
