@@ -52,7 +52,7 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
     <div className="prode-podium" aria-label={weekly ? "Tres mejores de la semana" : "Tres mejores del ranking histórico"}>
       {podium.map((entry, index) => <div key={index} className={"prode-podium-item " + ["second","first","third"][index]}>
         <span className="prode-podium-medal">{[2,1,3][index]}</span>
-        <div className="prode-podium-avatar prode-podium-vector">{entry ? <ProdeCrest name={entry.username} primary={entry.crestPrimary} secondary={entry.crestSecondary} textColor={entry.crestText} style={entry.crestStyle} font={entry.crestFont} size={index === 1 ? 64 : 54}/> : <Trophy size={23}/>}</div>
+        <div className="prode-podium-avatar prode-podium-vector">{entry ? <ProdeCrest name={entry.username} primary={entry.crestPrimary} secondary={entry.crestSecondary} textColor={entry.crestText} style={entry.crestStyle} font={entry.crestFont} symbol={entry.crestSymbol} size={index === 1 ? 64 : 54}/> : <Trophy size={23}/>}</div>
         <span>{entry?.username || "Sin participante"}</span>
         <strong>{entry ? entry.points + " pts" : "— pts"}</strong>
       </div>)}
