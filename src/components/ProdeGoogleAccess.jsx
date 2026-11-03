@@ -15,6 +15,7 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [profile, setProfile] = useState(null);
   const [syncing, setSyncing] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [crestPrimary, setCrestPrimary] = useState("#7de83d");
   const [crestSecondary, setCrestSecondary] = useState("#10283c");
@@ -165,8 +166,9 @@ export default function ProdeGoogleAccess({ onReady }) {
   };
 
   const logout = async () => {
+    if (busy) return;
     setBusy(true);
-    try { await signOutProde(); }
+    try { await signOutProde(); setLogoutConfirmOpen(false); }
     catch { setError("No se pudo cerrar la sesión."); }
     finally { setBusy(false); }
   };
@@ -183,7 +185,7 @@ export default function ProdeGoogleAccess({ onReady }) {
                 <div className="prode-account-actions">
                   {adminAllowed && <Link className="prode-admin-entry" to="/admin" title="Panel de administración" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={17}/></Link>}
                   <button type="button" className="prode-account-icon prode-account-edit" title="Mi perfil" aria-label="Editar mi perfil" onClick={() => { setProfileError(""); setEditOpen(true); }} disabled={busy || syncing || !profile}><Pencil size={17}/></button>
-                  <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={logout} disabled={busy}><LogOut size={17}/></button>
+                  <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={() => setLogoutConfirmOpen(true)} disabled={busy}><LogOut size={17}/></button>
                 </div>
               </div>
               <span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span>
@@ -206,6 +208,19 @@ export default function ProdeGoogleAccess({ onReady }) {
         </>
       )}
       {error && <p role="alert">{error}</p>}
+      {logoutConfirmOpen && <div className="prode-dialog-backdrop" onClick={() => !busy && setLogoutConfirmOpen(false)}>
+        <div className="prode-dialog" role="alertdialog" aria-modal="true" aria-labelledby="prode-logout-title" aria-describedby="prode-logout-description" onClick={e => e.stopPropagation()}>
+          <div className="prode-dialog-heading">
+            <h3 id="prode-logout-title">¿Querés cerrar sesión?</h3>
+            <button type="button" aria-label="Cancelar cierre de sesión" disabled={busy} onClick={() => setLogoutConfirmOpen(false)}><X size={20}/></button>
+          </div>
+          <p id="prode-logout-description">Vas a salir de tu cuenta Prode. Podés volver a ingresar con Google cuando quieras.</p>
+          <div style={{ display: "flex", gap: 12 }}>
+            <button type="button" className="prode-create-submit" style={{ flex: 1, background: "#273f48", color: "#f2f7f5" }} disabled={busy} onClick={() => setLogoutConfirmOpen(false)}>Cancelar</button>
+            <button type="button" className="prode-create-submit" style={{ flex: 1 }} disabled={busy} onClick={logout}>{busy ? "Saliendo…" : "Cerrar sesión"}</button>
+          </div>
+        </div>
+      </div>}
       {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveProfile}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => !saving && setEditOpen(false)} disabled={saving}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>
 
         <fieldset className="prode-avatar-styles">
