@@ -164,7 +164,7 @@ const [upcomingTab, setUpcomingTab] = useState("comparativa");
 useEffect(() => { setUpcomingTab(upcomingLive ? "quintetos" : "comparativa"); setUpcomingVoteStatus(null); setUpcomingMvpStatus(null); }, [selectedUpcomingMatch?.id, Boolean(upcomingLive)]);
 const [liveMatches, setLiveMatches] = useState([]);
 const [liveDate, setLiveDate] = useState(null);
-const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL;
+const LIVE_API_URL = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL || "https://lna-live-oficial.lnab.workers.dev/api/live";
 
 
   // El reloj oficial indica los minutos restantes del cuarto.
