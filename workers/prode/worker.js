@@ -91,6 +91,7 @@ async function ensureMembershipPeriods(db) {
 const validCrest = color => typeof color === "string" && /^#[0-9a-fA-F]{6}$/.test(color);
 async function ensureCrests(db) {
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crest_styles (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, style TEXT NOT NULL DEFAULT 'pro')").run();
+  await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crest_fonts (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, font TEXT NOT NULL DEFAULT 'sport')").run();
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_crest_texts (kind TEXT NOT NULL, entity_id TEXT NOT NULL, color TEXT NOT NULL, PRIMARY KEY(kind,entity_id))").run();
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crests (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_group_crests (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
@@ -158,6 +159,8 @@ export default {
           user.crestText = crestText?.color || "#ffffff";
           const styleRow = await env.DB.prepare("SELECT style FROM prode_user_crest_styles WHERE user_id=?").bind(user.id).first();
           user.crestStyle = styleRow?.style || "pro";
+          const fontRow = await env.DB.prepare("SELECT font FROM prode_user_crest_fonts WHERE user_id=?").bind(user.id).first();
+          user.crestFont = fontRow?.font || "sport";
         }
         return reply({ ok: true, user: user || null, linkedToMiCarrera: false });
       } catch {
@@ -195,13 +198,15 @@ export default {
         const body = await request.json();
         if (!validCrest(body.primary) || !validCrest(body.secondary) || !validCrest(body.textColor || "#ffffff")) return reply({ ok: false, error: "Colores inválidos" }, 400);
         if (body.style != null && !["pro","elite","legend"].includes(body.style)) return reply({ok:false,error:"Modelo inválido"},400);
+        if (body.font != null && !["sport","college","gamer"].includes(body.font)) return reply({ok:false,error:"Tipografía inválida"},400);
         const userId = "firebase:" + identity.uid;
         await ensureCrests(env.DB);
         if (!(await env.DB.prepare("SELECT id FROM prode_users WHERE id=?").bind(userId).first())) return reply({ ok: false, error: "Primero registrá tu perfil" }, 409);
         await env.DB.prepare("INSERT INTO prode_user_crests(user_id,primary_color,secondary_color) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET primary_color=excluded.primary_color,secondary_color=excluded.secondary_color").bind(userId,body.primary,body.secondary).run();
         await env.DB.prepare("INSERT INTO prode_crest_texts(kind,entity_id,color) VALUES ('user',?,?) ON CONFLICT(kind,entity_id) DO UPDATE SET color=excluded.color").bind(userId,body.textColor || "#ffffff").run();
         await env.DB.prepare("INSERT INTO prode_user_crest_styles(user_id,style) VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET style=excluded.style").bind(userId,body.style || "pro").run();
-        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary, crestText: body.textColor || "#ffffff", crestStyle: body.style || "pro" });
+        await env.DB.prepare("INSERT INTO prode_user_crest_fonts(user_id,font) VALUES (?,?) ON CONFLICT(user_id) DO UPDATE SET font=excluded.font").bind(userId,body.font || "sport").run();
+        return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary, crestText: body.textColor || "#ffffff", crestStyle: body.style || "pro", crestFont: body.font || "sport" });
       } catch { return reply({ ok: false, error: "No se pudo guardar el escudo" }, 503); }
     }
     const crestRoute = new RegExp("^/api/prode/groups/([0-9a-f-]{36})/crest$").exec(url.pathname);
@@ -227,7 +232,7 @@ export default {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') AS crestStyle FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=l.user_id),'sport') AS crestFont FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
@@ -238,7 +243,7 @@ export default {
               if (!response.ok) return null;
               const data = await response.json();
               if (!data.ok || !Number.isFinite(data.points)) return null;
-              return { userId: item.user_id, username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary, crestText: item.crestText, crestStyle: item.crestStyle };
+              return { userId: item.user_id, username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary, crestText: item.crestText, crestStyle: item.crestStyle, crestFont: item.crestFont };
             } catch { return null; }
           }));
           results.push(...batch.filter(Boolean));
@@ -278,7 +283,7 @@ export default {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') AS crestStyle FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=l.user_id),'sport') AS crestFont FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
         const dayKey = value => {
           const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(value));
           const n = type => Number(parts.find(p => p.type === type)?.value);
@@ -614,7 +619,7 @@ export default {
         const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
         await ensureCrests(env.DB);
         const members = await env.DB.prepare(
-          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         const periodsResult = await env.DB.prepare("SELECT user_id, entered_at, exited_at FROM prode_membership_periods WHERE group_id=? ORDER BY entered_at").bind(groupId).all();
         const periodsByUser = new Map();
@@ -638,7 +643,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary, crestText: member.crestText, crestStyle: member.crestStyle, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, currentStreak: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary, crestText: member.crestText, crestStyle: member.crestStyle, crestFont: member.crestFont, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, currentStreak: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -669,7 +674,7 @@ export default {
               const matchDetail = completedMatches.get(game.id);
               const pointsDetail = { userId: member.user_id, username: member.username,
                 crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary,
-                crestText: member.crestText, crestStyle: member.crestStyle, winnerPick: game.selectedWinner || null,
+                crestText: member.crestText, crestStyle: member.crestStyle, crestFont: member.crestFont, winnerPick: game.selectedWinner || null,
                 mvpPick: game.selectedMvp || null,
                 winnerPoints: 0, mvpPoints: 0, streakPoints: 0, points: 0,
                 winnerCorrect: Boolean(game.correct), mvpCorrect: Boolean(game.mvpCorrect),
@@ -738,9 +743,9 @@ export default {
         let weeklyRank = 0, previousWeekly = null;
         const weeklyRanking = [...rows].sort((a,b) => b.weekly.points-a.weekly.points || b.weekly.correct-a.weekly.correct || a.username.localeCompare(b.username,"es")).map(row => {
           const pts = row.weekly.points;
-          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, position: null };
+          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, position: null };
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
-          return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, position: weeklyRank };
+          return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, position: weeklyRank };
         });
         // Historial numerado desde la semana de inicio de la liga, incluyendo semanas sin partidos.
         const firstWeek = mondayOf(argentinaDateKey(leagueStart));
@@ -748,7 +753,7 @@ export default {
         for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
           const participants = rows.filter(row => argentinaDateKey(time(allMembers.find(m => m.user_id === row.userId)?.joined_at)) < startMs + 7*86400000).map(row => {
             const w = row.weeks[startMs] || { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
-            return { username: row.username, userId: row.userId, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
+            return { username: row.username, userId: row.userId, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, participated: w.played > 0 || w.mvpVoted > 0 };
           });
           participants.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
           let place = 0, last = null;
@@ -760,7 +765,7 @@ export default {
           weeklyHistory.push({ number, startsAt: new Date(startMs).toISOString(), finished: startMs < weekStart, eligibleForMedals: startMs < weekStart && ranked.filter(row => row.participated).length >= 3, ranking: ranked });
         }
         // Medallas de semanas cerradas con al menos tres pronosticadores.
-        const medals = new Map(rows.map(row => [row.userId, { userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, gold: 0, silver: 0, bronze: 0, history: [] }]));
+        const medals = new Map(rows.map(row => [row.userId, { userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, gold: 0, silver: 0, bronze: 0, history: [] }]));
         const weeks = [...new Set(rows.flatMap(row => Object.keys(row.weeks).map(Number)))].filter(week => week < weekStart).sort((a,b)=>a-b);
         for (const week of weeks) {
           const participants = rows.filter(row => (row.weeks[week]?.played || 0) + (row.weeks[week]?.mvpVoted || 0) > 0);
@@ -789,7 +794,7 @@ export default {
           const participants = allMembers.map(member => existing.get(member.user_id) || {
             userId: member.user_id, username: member.username,
             crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary,
-            crestText: member.crestText, crestStyle: member.crestStyle, winnerPick: null, mvpPick: null,
+            crestText: member.crestText, crestStyle: member.crestStyle, crestFont: member.crestFont, winnerPick: null, mvpPick: null,
             winnerPoints: 0, mvpPoints: 0, streakPoints: 0, points: 0,
             winnerCorrect: false, mvpCorrect: false, eligible: false,
           });
@@ -870,7 +875,7 @@ export default {
         ).bind(groupId, userId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada o sin acceso" }, 404);
         const members = await env.DB.prepare(
-          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id AS userId, COALESCE(n.username, 'Jugador sin alias') AS username, m.role, m.joined_at, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id = m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY CASE WHEN m.role = 'owner' THEN 0 ELSE 1 END, m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         return reply({ ok: true, group, members: members.results || [] });
       } catch {
