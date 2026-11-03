@@ -3,6 +3,10 @@ import { LogIn, LogOut, ShieldCheck, Pencil, X, LockKeyhole } from "lucide-react
 import { Link } from "react-router-dom";
 import { signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
+import { PRODE_SYMBOL_CATEGORIES, PRODE_SYMBOL_IDS } from "./ProdeCrestSymbol";
+
+const defaultCrestSymbol = style => ({ elite:"eagle", pro:"ball", legend:"torch" })[style] || "ball";
+const crestSymbolCategory = symbol => PRODE_SYMBOL_CATEGORIES.find(group => group.options.some(([id]) => id === symbol))?.id || "sports";
 
 const PRODE_API = "https://lna-prode-api.lnab.workers.dev";
 
@@ -22,6 +26,8 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [crestText, setCrestText] = useState("#ffffff");
   const [crestStyle, setCrestStyle] = useState("pro");
   const [crestFont, setCrestFont] = useState("sport");
+  const [crestSymbol, setCrestSymbol] = useState("ball");
+  const [crestCategory, setCrestCategory] = useState("sports");
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
   const [careerLink, setCareerLink] = useState(null);
@@ -60,7 +66,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       });
       const data = await response.json();
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
-      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); setCrestFont(data.user.crestFont || "sport"); }
+      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); setCrestFont(data.user.crestFont || "sport"); const selectedSymbol = PRODE_SYMBOL_IDS.includes(data.user.crestSymbol) ? data.user.crestSymbol : defaultCrestSymbol(data.user.crestStyle); setCrestSymbol(selectedSymbol); setCrestCategory(crestSymbolCategory(selectedSymbol)); }
       const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
       if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
     }).catch(() => {
@@ -107,7 +113,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       const crestResponse = await fetch(PRODE_API + "/api/prode/profile/crest", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText, style: crestStyle, font: crestFont }),
+        body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText, style: crestStyle, font: crestFont, symbol: crestSymbol }),
       });
       const crestData = await crestResponse.json();
       if (!crestResponse.ok || !crestData.ok) {
@@ -122,6 +128,7 @@ export default function ProdeGoogleAccess({ onReady }) {
         crestText: crestData.crestText,
         crestStyle: crestData.crestStyle,
         crestFont: crestData.crestFont,
+        crestSymbol: crestData.crestSymbol,
       }));
       setEditOpen(false);
       window.dispatchEvent(new Event("prode-profile-updated"));
@@ -180,7 +187,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       {loading ? <span>Comprobando sesión…</span> : user ? (
         <>
           <div className="prode-google-identity">
-            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} font={profile?.crestFont} size={55} className="prode-account-crest"/>
+            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} font={profile?.crestFont} symbol={profile?.crestSymbol} size={55} className="prode-account-crest"/>
             <div className="prode-identity-info">
               <div className="prode-identity-name-row">
                 <strong>{profile?.username || "Elegí tu nombre de usuario"}</strong>
@@ -194,6 +201,9 @@ export default function ProdeGoogleAccess({ onReady }) {
                     setCrestText(profile?.crestText || "#ffffff");
                     setCrestStyle(profile?.crestStyle || "pro");
                     setCrestFont(profile?.crestFont || "sport");
+                    const selectedSymbol = PRODE_SYMBOL_IDS.includes(profile?.crestSymbol) ? profile.crestSymbol : defaultCrestSymbol(profile?.crestStyle);
+                    setCrestSymbol(selectedSymbol);
+                    setCrestCategory(crestSymbolCategory(selectedSymbol));
                     setEditOpen(true);
                   }} disabled={busy || syncing || !profile}><Pencil size={17}/></button>
                   <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={() => setLogoutConfirmOpen(true)} disabled={busy}><LogOut size={17}/></button>
@@ -241,7 +251,7 @@ export default function ProdeGoogleAccess({ onReady }) {
 
           <div className="prode-identity-preview">
             <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary}
-              textColor={crestText} style={crestStyle} font={crestFont} size={80}/>
+              textColor={crestText} style={crestStyle} font={crestFont} symbol={crestSymbol} size={80}/>
             <div className="prode-identity-preview-copy">
               <span className="prode-identity-preview-eyebrow">TU IDENTIDAD EN PRODE</span>
               <strong>{username.trim() || "Jugador"}</strong>
@@ -256,16 +266,23 @@ export default function ProdeGoogleAccess({ onReady }) {
           </label>
           <p className="prode-profile-helper">Este alias es público. No se muestra tu nombre de Google.</p>
 
-          <fieldset className="prode-avatar-styles">
-            <legend>Modelo de escudo</legend>
-            <div className="prode-avatar-style-grid">
-              {[{id:"elite",label:"Elite"},{id:"pro",label:"Pro"},{id:"legend",label:"Legend"}].map(option => (
-                <button key={option.id} type="button" aria-pressed={crestStyle === option.id}
-                  className={"prode-avatar-style-option" + (crestStyle === option.id ? " is-selected" : "")}
-                  onClick={() => setCrestStyle(option.id)}>
+          <fieldset className="prode-avatar-styles prode-symbol-selector">
+            <legend>Elegí tu escudo</legend>
+            <div className="prode-symbol-tabs" role="group" aria-label="Categorías de escudos">
+              {PRODE_SYMBOL_CATEGORIES.map(group => (
+                <button key={group.id} type="button" aria-pressed={crestCategory === group.id}
+                  className={crestCategory === group.id ? "is-selected" : ""}
+                  onClick={() => setCrestCategory(group.id)}>{group.label}</button>
+              ))}
+            </div>
+            <div className="prode-symbol-grid">
+              {PRODE_SYMBOL_CATEGORIES.find(group => group.id === crestCategory)?.options.map(([id,label]) => (
+                <button key={id} type="button" aria-pressed={crestSymbol === id}
+                  className={"prode-symbol-option" + (crestSymbol === id ? " is-selected" : "")}
+                  onClick={() => setCrestSymbol(id)}>
                   <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary}
-                    textColor={crestText} style={option.id} font={crestFont} size={55}/>
-                  <span>{option.label}</span>
+                    textColor={crestText} style={crestStyle} symbol={id} font={crestFont} size={53}/>
+                  <span>{label}</span>
                 </button>
               ))}
             </div>
