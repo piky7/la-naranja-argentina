@@ -1,3 +1,4 @@
+import { useEffect, useId, useState } from "react";
 import { isPlayerAppearance } from "../utils/playerAppearance";
 import { createPortal } from "react-dom";
 import { teams } from "../data/teams";
@@ -15,6 +16,16 @@ export default function PlayerModal({
   onClose,
   onTeamClick,
 }) {
+  const [activeTab, setActiveTab] = useState("match");
+  const tabId = useId();
+  const matchContext = player?.matchContext;
+  const match = matchContext?.match;
+  const matchStat = matchContext?.playerStats;
+  const hasMatchTab = Boolean(match && matchStat && matchContext.teamId);
+  useEffect(() => {
+    setActiveTab("match");
+  }, [player?.id, match?.id, match?.date]);
+
   if (!player) return null;
 
   // Priorizar el dorsal extraído del partido más reciente de la temporada.
@@ -123,6 +134,68 @@ export default function PlayerModal({
           </button>
         </div>
 
+        {hasMatchTab && (
+          <div className="lna-player-modal-tabs" role="tablist" aria-label="Estadísticas del jugador">
+            <button type="button" role="tab" id={tabId + "-match-tab"}
+              aria-controls={tabId + "-match-panel"} aria-selected={activeTab === "match"}
+              onClick={() => setActiveTab("match")}>Este partido</button>
+            <button type="button" role="tab" id={tabId + "-season-tab"}
+              aria-controls={tabId + "-season-panel"} aria-selected={activeTab === "season"}
+              onClick={() => setActiveTab("season")}>Promedios temporada</button>
+          </div>
+        )}
+        {hasMatchTab && activeTab === "match" && (
+          <section role="tabpanel" id={tabId + "-match-panel"} aria-labelledby={tabId + "-match-tab"}
+            className="lna-player-match-panel">
+            <div className="lna-player-match-context">
+              <span>ESTADÍSTICAS DEL PARTIDO · {match.date?.split("-").reverse().join("/")}</span>
+              <strong>{teams.find(t => t.id === match.homeTeam)?.shortName || "Local"}
+                <em>{match.homeScore ?? "—"} - {match.awayScore ?? "—"}</em>
+                {teams.find(t => t.id === match.awayTeam)?.shortName || "Visitante"}</strong>
+            </div>
+            <div className="lna-player-match-main">
+              {[
+                ["PTS", matchStat.points], ["REB", matchStat.rebounds],
+                ["AST", matchStat.assists], ["VAL", matchContext.valuation],
+                ["MIN", matchStat.minutes]
+              ].map(([label, value]) => (
+                <div key={label}><strong>{value ?? "—"}</strong><span>{label}</span></div>
+              ))}
+            </div>
+            <span className="home-player-modal-label">PLANILLA COMPLETA</span>
+            <div className="lna-player-match-extra">
+              {[
+                ["REB OF", matchStat.offensiveRebounds], ["REB DEF", matchStat.defensiveRebounds],
+                ["ROB", matchStat.steals], ["TAP", matchStat.blocks],
+                ["PÉRD", matchStat.turnovers], ["FALTAS", matchStat.fouls ?? matchStat.personalFouls],
+                ["+/-", matchStat.plusMinus]
+              ].map(([label, value]) => (
+                <div key={label}><span>{label}</span><strong>{value ?? "—"}</strong></div>
+              ))}
+            </div>
+            <div className="lna-player-match-shots">
+              {[
+                ["DOBLES", matchStat.twoPointers],
+                ["TRIPLES", matchStat.threePointers],
+                ["LIBRES", matchStat.freeThrows]
+              ].map(([label, value]) => {
+                const made = value?.made;
+                const attempted = value?.attempted;
+                const pct = value?.percentage;
+                return <div key={label}>
+                  <span>{label}</span>
+                  <strong>{made != null && attempted != null ? `${made}/${attempted}` : "—"}</strong>
+                  <small>{pct != null ? `${pct}%` : "Sin dato"}</small>
+                </div>;
+              })}
+            </div>
+            <p className="lna-player-match-note">Valores de la planilla oficial; los datos no disponibles se muestran con —.</p>
+          </section>
+        )}
+        {(!hasMatchTab || activeTab === "season") && (
+          <div role={hasMatchTab ? "tabpanel" : undefined}
+            id={hasMatchTab ? tabId + "-season-panel" : undefined}
+            aria-labelledby={hasMatchTab ? tabId + "-season-tab" : undefined}>
         <div className="home-player-modal-details">
           <div>
             <span>POSICIÓN</span>
@@ -212,6 +285,9 @@ export default function PlayerModal({
             </p>
           )}
         </div>
+
+          </div>
+        )}
 
         <div className="home-player-modal-footer">
           <span>LIGA NACIONAL 2026/27</span>
