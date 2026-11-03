@@ -734,7 +734,7 @@ export default function ProdeGroups({ onReady }) {
         <section className="prode-profile-dialog prode-profile-premium" style={{ "--profile-accent": crestPrimary, "--profile-secondary": crestSecondary }} role="dialog" aria-modal="true" aria-label={"Perfil de " + player.username} onClick={e => e.stopPropagation()}>
           <button type="button" className="prode-profile-close" aria-label="Cerrar perfil" onClick={() => setProfileUserId(null)}><X size={20}/></button>
           <div className="prode-profile-identity">
-            <ProdeCrest name={player.username} primary={player.crestPrimary} secondary={player.crestSecondary} textColor={player.crestText} style={player.crestStyle} size={75} className="prode-member-crest"/>
+            <ProdeCrest name={player.username} primary={player.crestPrimary} secondary={player.crestSecondary} textColor={player.crestText} style={player.crestStyle} font={player.crestFont} symbol={player.crestSymbol} size={75} className="prode-member-crest"/>
             <div className="prode-profile-identity-copy">
               <h3>{player.username}</h3>
               <small>{selected.name} · Temporada {selected.season || "2026/27"}</small>
