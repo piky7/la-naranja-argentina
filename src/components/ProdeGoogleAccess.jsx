@@ -20,8 +20,6 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [crestSecondary, setCrestSecondary] = useState("#10283c");
   const [crestText, setCrestText] = useState("#ffffff");
   const [crestStyle, setCrestStyle] = useState("pro");
-  const [crestBusy, setCrestBusy] = useState(false);
-  const [crestMessage, setCrestMessage] = useState("");
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
   const [careerLink, setCareerLink] = useState(null);
@@ -87,42 +85,48 @@ export default function ProdeGoogleAccess({ onReady }) {
     return () => { active = false; };
   }, [user]);
 
-  const saveUsername = async (event) => {
+  const saveProfile = async (event) => {
     event.preventDefault();
     if (!user || saving) return;
-    setSaving(true); setProfileError("");
+    setSaving(true);
+    setProfileError("");
     try {
       const token = await user.getIdToken();
-      const response = await fetch(PRODE_API + "/api/prode/profile/username", {
+      const usernameResponse = await fetch(PRODE_API + "/api/prode/profile/username", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
         body: JSON.stringify({ username: username.trim() }),
       });
-      const data = await response.json();
-      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el perfil");
-      setProfile(prev => ({ ...prev, username: data.username }));
-      setEditOpen(false);
-      window.dispatchEvent(new Event("prode-profile-updated"));
-    } catch (e) { setProfileError(e.message || "Error de conexión"); }
-    finally { setSaving(false); }
-  };
+      const usernameData = await usernameResponse.json();
+      if (!usernameResponse.ok || !usernameData.ok) {
+        throw Error(usernameData.error || "No se pudo guardar el alias");
+      }
 
-  const saveCrest = async () => {
-    if (!user || crestBusy) return;
-    setCrestBusy(true); setCrestMessage("");
-    try {
-      const token = await user.getIdToken();
-      const response = await fetch(PRODE_API + "/api/prode/profile/crest", {
-        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+      const crestResponse = await fetch(PRODE_API + "/api/prode/profile/crest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
         body: JSON.stringify({ primary: crestPrimary, secondary: crestSecondary, textColor: crestText, style: crestStyle }),
       });
-      const data = await response.json();
-      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar el avatar");
-      setProfile(prev => ({ ...prev, crestPrimary: data.crestPrimary, crestSecondary: data.crestSecondary, crestText: data.crestText, crestStyle: data.crestStyle }));
-      setCrestMessage("Avatar guardado correctamente");
+      const crestData = await crestResponse.json();
+      if (!crestResponse.ok || !crestData.ok) {
+        throw Error("El alias se guardó, pero el escudo no. " + (crestData.error || "Intentá nuevamente."));
+      }
+
+      setProfile(prev => ({
+        ...prev,
+        username: usernameData.username,
+        crestPrimary: crestData.crestPrimary,
+        crestSecondary: crestData.crestSecondary,
+        crestText: crestData.crestText,
+        crestStyle: crestData.crestStyle,
+      }));
+      setEditOpen(false);
       window.dispatchEvent(new Event("prode-profile-updated"));
-    } catch (error) { setCrestMessage(error.message || "Error al guardar"); }
-    finally { setCrestBusy(false); }
+    } catch (error) {
+      setProfileError(error.message || "Error de conexión al guardar el perfil");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const linkCareer = async () => {
@@ -202,7 +206,7 @@ export default function ProdeGoogleAccess({ onReady }) {
         </>
       )}
       {error && <p role="alert">{error}</p>}
-      {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveUsername}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => setEditOpen(false)}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>
+      {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}><form className="prode-dialog" onClick={e => e.stopPropagation()} onSubmit={saveProfile}><div className="prode-dialog-heading"><h3>Mi perfil Prode</h3><button type="button" aria-label="Cerrar" onClick={() => !saving && setEditOpen(false)} disabled={saving}><X size={20}/></button></div><label>Nombre de usuario<input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off" value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/></label><p>Es el nombre que verán los demás en ligas y rankings. Tu nombre y apellido de Google no se mostrarán.</p>
 
         <fieldset className="prode-avatar-styles">
           <legend>Elegí tu modelo de avatar</legend>
@@ -226,8 +230,7 @@ export default function ProdeGoogleAccess({ onReady }) {
             <label>Color del texto<input type="color" value={crestText} onChange={e => setCrestText(e.target.value)}/></label>
           </div>
         </div>
-        <button className="prode-crest-save" type="button" disabled={crestBusy} onClick={saveCrest}>{crestBusy ? "Guardando avatar…" : "Guardar avatar"}</button>
-        {crestMessage && <p role="status" className="prode-crest-feedback">{crestMessage}</p>}{profileError && <p className="prode-group-error" role="alert">{profileError}</p>}<button className="prode-create-submit" type="submit" disabled={saving || !/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())}>{saving ? "Guardando…" : "Guardar perfil"}</button></form></div>}
+{profileError && <p className="prode-group-error" role="alert">{profileError}</p>}<button className="prode-create-submit" type="submit" disabled={saving || !/^[a-zA-Z0-9_]{3,20}$/.test(username.trim())}>{saving ? "Guardando…" : "Guardar perfil"}</button></form></div>}
     </div>
   );
 }
