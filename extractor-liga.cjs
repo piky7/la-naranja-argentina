@@ -62,6 +62,9 @@ function obtenerJugador($, fila) {
     turnovers: datos.Perdidas,
     offensiveRebounds: datos.ReboteOfensivo,
     defensiveRebounds: datos.ReboteDefensivo,
+    // Son acciones cometidas/hechas por el jugador, no recibidas por él.
+    blocks: datos.Tapones ?? datos.TaponesRealizados ?? null,
+    fouls: datos.FaltasCometidas ?? datos.FaltasPersonales ?? datos.Faltas ?? null,
     twoPointers: datos.TirosDos,
     threePointers: datos.TirosTres,
     freeThrows: datos.TirosLibres,
