@@ -418,7 +418,7 @@ export const officialSchedule = [
   {
     "id": "2026-11-04-olimpico-lanus",
     "date": "2026-11-04",
-    "time": "22:00",
+    "time": "22:05",
     "homeTeam": "olimpico",
     "awayTeam": "lanus",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Dwl_xkHPmU-Y45ThMvKQCNI1D4aJt4H7o0hYzHLMG3gxRN3uS685ZQ==/olimpico-lb-vs-lanus"
@@ -440,20 +440,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DdxcQfe5DOMIjm3PSVXfUup54JdRNPHs3xu4b0oQn7vVwz2Tbn_tZQ==/independiente-o-vs-gimnasia-cr"
   },
   {
-    "id": "2026-11-06-boca-san-martin",
-    "date": "2026-11-06",
-    "time": "20:30",
-    "homeTeam": "boca",
-    "awayTeam": "san-martin",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v202CzFYOlx7dwRmYmH3bZZXgIR52tZOnx4bjfLsZyWMeQAGHRLII2-Q==/boca-vs-san-martin-c"
-  },
-  {
     "id": "2026-11-06-quimsa-lanus",
     "date": "2026-11-06",
     "time": "21:00",
     "homeTeam": "quimsa",
     "awayTeam": "lanus",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jfcZQ0wQGO1O51uH-bEXJBWuF-bu1keyPJjjxiUOc3MuEXzdOOey9Q==/quimsa-vs-lanus"
+  },
+  {
+    "id": "2026-11-06-boca-san-martin",
+    "date": "2026-11-06",
+    "time": "21:35",
+    "homeTeam": "boca",
+    "awayTeam": "san-martin",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v202CzFYOlx7dwRmYmH3bZZXgIR52tZOnx4bjfLsZyWMeQAGHRLII2-Q==/boca-vs-san-martin-c"
   },
   {
     "id": "2026-11-06-san-lorenzo-regatas",
@@ -512,20 +512,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2-SZ_1lbZNkaj4jzP8Z_ZdT8wEdaKKh2OJacur-Sn_arN5n2nJnuQYg==/argentino-j-vs-regatas-c"
   },
   {
-    "id": "2026-11-10-ferro-san-martin",
-    "date": "2026-11-10",
-    "time": "21:35",
-    "homeTeam": "ferro",
-    "awayTeam": "san-martin",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fPAZxIxy_mOWqiFp7utvzROZbTVyFqrJ4_IxOYANuFDIcfdM3RFkew==/ferro-vs-san-martin-c"
-  },
-  {
     "id": "2026-11-10-olimpico-instituto",
     "date": "2026-11-10",
     "time": "22:00",
     "homeTeam": "olimpico",
     "awayTeam": "instituto",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto"
+  },
+  {
+    "id": "2026-11-10-ferro-san-martin",
+    "date": "2026-11-10",
+    "time": "22:05",
+    "homeTeam": "ferro",
+    "awayTeam": "san-martin",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fPAZxIxy_mOWqiFp7utvzROZbTVyFqrJ4_IxOYANuFDIcfdM3RFkew==/ferro-vs-san-martin-c"
   },
   {
     "id": "2026-11-11-platense-penarol",
