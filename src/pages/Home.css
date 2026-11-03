@@ -11203,3 +11203,126 @@
   .home-player-modal .lna-player-match-extra{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
   .home-player-modal .lna-player-match-extra span{font-size:8px}
 }
+
+
+/* LNA 2026/27: ficha del jugador desde resultados. Layout compacto, sin podio ni scroll interior. */
+.home-player-modal:has(.lna-player-match-panel) .home-player-modal-header {
+  padding-block: 14px;
+  min-height: 108px;
+}
+.home-player-modal .lna-player-modal-tabs {
+  margin-top: 9px;
+  padding: 3px;
+  gap: 5px;
+}
+.home-player-modal .lna-player-modal-tabs button {
+  min-height: 33px;
+}
+.home-player-modal .lna-player-match-panel {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 11px 12px;
+  border-radius: 11px;
+}
+.home-player-modal .lna-player-match-context {gap: 4px}
+.home-player-modal .lna-player-match-context>span {font-size: 10px}
+.home-player-modal .lna-player-match-context>strong {gap: 9px;font-size: 12px}
+.home-player-modal .lna-player-match-context em {font-size: 18px}
+.home-player-modal .lna-player-match-main {
+  margin: 11px 0 12px;
+  border-radius: 9px;
+  background: #0e2637;
+}
+.home-player-modal .lna-player-match-main>div {
+  padding: 9px 2px;
+  gap: 4px;
+  background: transparent;
+}
+.home-player-modal .lna-player-match-main>div.is-primary {
+  background: linear-gradient(180deg,rgba(246,142,44,.13),rgba(236,124,28,.04));
+}
+.home-player-modal .lna-player-match-main strong {
+  color: #f7f9fb;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.home-player-modal .lna-player-match-main>div.is-primary strong {color:#ff9634}
+.home-player-modal .lna-player-match-panel>.home-player-modal-label {
+  margin-bottom: 7px;
+  font-size: 12px;
+  letter-spacing: .7px;
+}
+.home-player-modal .lna-player-match-extra {
+  display: grid;
+  grid-template-columns: repeat(7,minmax(0,1fr));
+  gap: 4px;
+}
+.home-player-modal .lna-player-match-extra>div {
+  min-height: 49px;
+  gap: 5px;
+  padding: 6px 1px;
+  border-radius: 6px;
+  background: #122b40;
+}
+.home-player-modal .lna-player-match-extra span {
+  font-size: 8px;
+  line-height: 1.1;
+  white-space: nowrap;
+  letter-spacing: -.15px;
+}
+.home-player-modal .lna-player-match-extra strong {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.home-player-modal .lna-player-match-shots {
+  margin-top: 7px;
+  gap: 6px;
+}
+.home-player-modal .lna-player-match-shots>div {
+  min-height: 88px;
+  padding: 9px 8px 7px;
+  gap: 6px;
+  background: #112b40;
+}
+.home-player-modal .lna-player-match-shots>div strong {
+  font-size: 19px;
+  color: #f8fafc;
+  font-variant-numeric: tabular-nums;
+}
+.home-player-modal .lna-player-match-shots>div small {
+  color: #ff9b40;
+  font-size: 11px;
+}
+.home-player-modal .lna-player-shot-track {
+  width:100%;
+  height:5px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#344a5e;
+}
+.home-player-modal .lna-player-shot-track>span {
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#ec781c,#ffa640);
+  border-radius:inherit;
+  transition:width .2s ease;
+}
+.home-player-modal .lna-player-match-note {
+  margin:7px 0 0;
+  font-size:9px;
+}
+.home-player-modal:has(.lna-player-match-panel) .home-player-modal-footer {
+  margin-top: 7px;
+}
+@media(max-width:440px) {
+ .home-player-modal .lna-player-match-panel {padding:10px 8px}
+ .home-player-modal .lna-player-match-extra {grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+ .home-player-modal .lna-player-match-extra>div {min-height:45px;padding:5px 0}
+ .home-player-modal .lna-player-match-extra span {font-size:7px}
+ .home-player-modal .lna-player-match-extra strong {font-size:13px}
+ .home-player-modal .lna-player-match-shots>div {padding:8px 5px 6px;min-height:80px}
+ .home-player-modal .lna-player-match-shots>div strong {font-size:18px}
+}
+@media(max-width:350px){
+ .home-player-modal .lna-player-match-extra {grid-template-columns:repeat(4,minmax(0,1fr))}
+}
