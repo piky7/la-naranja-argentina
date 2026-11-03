@@ -634,7 +634,7 @@ export default function ProdeGroups({ onReady }) {
               const member = savedCrest ? { ...entry, crestPrimary: savedCrest.crestPrimary, crestSecondary: savedCrest.crestSecondary, crestText: savedCrest.crestText } : entry;
               return <div className="prode-medal-member" key={member.userId || index}>
               <div className="prode-ranking-row" style={{ "--member-accent": memberAccent(member.crestPrimary) }}>
-                <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} style={member.crestStyle} font={member.crestFont} size={36} className="prode-member-crest"/><strong>{member.username}</strong></button>
+                <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} style={member.crestStyle} font={member.crestFont} symbol={member.crestSymbol} size={36} className="prode-member-crest"/><strong>{member.username}</strong></button>
                 {["gold","silver","bronze"].map((type,i) => <button type="button" key={type} className="prode-medal-count" aria-expanded={expandedMedal === (member.userId || index) + ":" + type} aria-label={member.username + ": ver medallas de " + ["oro","plata","bronce"][i]} onClick={() => setExpandedMedal(current => current === (member.userId || index) + ":" + type ? null : (member.userId || index) + ":" + type)}>{member[type] ?? 0}</button>)}
               </div>
               {["gold","silver","bronze"].map((type,i) => expandedMedal === (member.userId || index) + ":" + type && <div className="prode-medal-history" key={type}>
@@ -650,7 +650,7 @@ export default function ProdeGroups({ onReady }) {
             <div className="prode-ranking-head"><span>POS.</span><span>JUGADOR</span><span>PTS</span><span>AC</span><span>ERR</span><span>MVP</span></div>
             {rankingBusy ? <div className="prode-ranking-loading" role="status" aria-live="polite">Calculando posiciones y puntos de la liga…</div> : rankingError ? null : (groupTab === "weekly" ? (weeklyHistory.find(w => String(w.number) === selectedWeek)?.ranking || weeklyRanking || []) : (leagueRanking || [])).map((member,index) => <div key={member.userId || index} style={{ "--member-accent": memberAccent(member.crestPrimary) }} className="prode-ranking-row">
               <span className={"prode-ranking-position" + (groupTab === "weekly" ? " weekly-position" : "") + (member.position && member.position <= 3 && groupTab !== "weekly" ? " podium-position rank-" + member.position : "")} aria-label={member.position ? member.position + "° puesto" : "Sin posición"}>{member.position ? groupTab === "weekly" && member.position <= 3 ? ["🥇","🥈","🥉"][member.position - 1] : member.position + "°" : "—"}</span>
-              <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} style={member.crestStyle} font={member.crestFont} size={42} className="prode-member-crest"/><strong>{member.username}</strong></button>
+              <button type="button" className="prode-ranking-name prode-profile-trigger" onClick={() => setProfileUserId(member.userId)}><ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} style={member.crestStyle} font={member.crestFont} symbol={member.crestSymbol} size={42} className="prode-member-crest"/><strong>{member.username}</strong></button>
               <span className="prode-ranking-points"><strong>{member.points ?? 0}</strong><small>PTS</small></span>
               <span>{member.correct ?? 0}</span><span>{member.wrong ?? 0}</span><span>{member.mvpHits ?? 0}</span>
             </div>)}
@@ -709,7 +709,7 @@ export default function ProdeGroups({ onReady }) {
         <div className="prode-match-members">
           {selectedMatch.participants.map(member => <div className={"prode-match-member" + (member.userId === "firebase:" + user?.uid ? " mine" : "")} key={member.userId}>
             <div className="prode-match-member-top">
-              <ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} style={member.crestStyle} font={member.crestFont} size={37}/>
+              <ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} style={member.crestStyle} font={member.crestFont} symbol={member.crestSymbol} size={37}/>
               <strong>{member.username}</strong>
               <span>+{member.points} pts</span>
             </div>
