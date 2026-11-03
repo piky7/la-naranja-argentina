@@ -20,7 +20,9 @@ const displayName = raw => {
   return arranged.toLocaleLowerCase("es-AR").replace(/(^|[\s-])\p{L}/gu, c => c.toLocaleUpperCase("es-AR"));
 };
 const source = fs.readFileSync(path,"utf8");
-// Aceptar jugadores en una sola línea y en múltiples líneas; el patrón anterior\n// omitía incorporaciones compactas y permitía crear duplicados del mismo ID oficial.\nconst roster = [...source.matchAll(/\{[^{}]*\bid:\s*"([^"]+)"[^{}]*\}/g)].map(m => ({
+// Aceptar jugadores en una sola línea y en múltiples líneas; el patrón anterior
+// omitía incorporaciones compactas y permitía crear duplicados del mismo ID oficial.
+const roster = [...source.matchAll(/\{[^{}]*\bid:\s*"([^"]+)"[^{}]*\}/g)].map(m => ({
   id:m[1], officialId:m[0].match(/officialPlayerId:\s*(\d+)/)?.[1],
   name:m[0].match(/name:\s*"([^"]+)"/)?.[1],
   team:m[0].match(/teamId:\s*"([^"]+)"/)?.[1]
