@@ -584,20 +584,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2SpXae8GOMLSjBTeLsFd_IFcVthcB6qxPyJFN7sCOnW95cOi8sPMkmA==/argentino-j-vs-lanus"
   },
   {
-    "id": "2026-11-15-la-union-atenas",
-    "date": "2026-11-15",
-    "time": "21:00",
-    "homeTeam": "la-union",
-    "awayTeam": "atenas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-  },
-  {
     "id": "2026-11-15-san-martin-quimsa",
     "date": "2026-11-15",
     "time": "21:00",
     "homeTeam": "san-martin",
     "awayTeam": "quimsa",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+  },
+  {
+    "id": "2026-11-15-la-union-atenas",
+    "date": "2026-11-15",
+    "time": "21:00",
+    "homeTeam": "la-union",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
   },
   {
     "id": "2026-11-16-instituto-san-lorenzo",
@@ -678,5 +678,21 @@ export const officialSchedule = [
     "homeTeam": "gimnasia",
     "awayTeam": "boca",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Uc7y8vlWq9ohrAhi9Bd9CV_FWmeJs-0jpwjQxoCHW4-_EvSq6F4Wgg==/gimnasia-cr-vs-boca"
+  },
+  {
+    "id": "2026-12-03-ferro-racing-chivilcoy",
+    "date": "2026-12-03",
+    "time": "20:00",
+    "homeTeam": "ferro",
+    "awayTeam": "racing-chivilcoy",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jkXEggLcqmOtU6k7qs-2huSi-FvCtxb0V4VAKsyqBXo30MhMut5nEQ==/ferro-vs-racing-ch"
+  },
+  {
+    "id": "2026-12-04-olimpico-san-lorenzo",
+    "date": "2026-12-04",
+    "time": null,
+    "homeTeam": "olimpico",
+    "awayTeam": "san-lorenzo",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2qwBh5lhRELhJ68L4jENX68dZw9Ctmvul79VWI9NgGz4kBqU96ZwXjA==/olimpico-lb-vs-san-lorenzo"
   }
 ];

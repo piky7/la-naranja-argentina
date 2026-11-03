@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-12-02",
+  "dateTo": "2026-12-03",
   "matches": [
     {
       "date": "2026-09-28",
@@ -1321,24 +1321,6 @@
       "date": "2026-11-15",
       "time": "21:00",
       "home": {
-        "name": "LA UNION FSA",
-        "officialClubId": 1541,
-        "officialTeamId": 114763
-      },
-      "away": {
-        "name": "ATENAS (C)",
-        "officialClubId": 1498,
-        "officialTeamId": 112793
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-    },
-    {
-      "date": "2026-11-15",
-      "time": "21:00",
-      "home": {
         "name": "SAN MARTÍN (C)",
         "officialClubId": 1426,
         "officialTeamId": 113546
@@ -1352,6 +1334,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+    },
+    {
+      "date": "2026-11-15",
+      "time": "21:00",
+      "home": {
+        "name": "LA UNION FSA",
+        "officialClubId": 1541,
+        "officialTeamId": 114763
+      },
+      "away": {
+        "name": "ATENAS (C)",
+        "officialClubId": 1498,
+        "officialTeamId": 112793
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
     },
     {
       "date": "2026-11-16",
@@ -1532,6 +1532,42 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Uc7y8vlWq9ohrAhi9Bd9CV_FWmeJs-0jpwjQxoCHW4-_EvSq6F4Wgg==/gimnasia-cr-vs-boca"
+    },
+    {
+      "date": "2026-12-03",
+      "time": "20:00",
+      "home": {
+        "name": "FERRO",
+        "officialClubId": 46,
+        "officialTeamId": 112566
+      },
+      "away": {
+        "name": "RACING (CH)",
+        "officialClubId": 1992,
+        "officialTeamId": 114607
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jkXEggLcqmOtU6k7qs-2huSi-FvCtxb0V4VAKsyqBXo30MhMut5nEQ==/ferro-vs-racing-ch"
+    },
+    {
+      "date": "2026-12-04",
+      "time": "00:00",
+      "home": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "away": {
+        "name": "SAN LORENZO",
+        "officialClubId": 88,
+        "officialTeamId": 113373
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2qwBh5lhRELhJ68L4jENX68dZw9Ctmvul79VWI9NgGz4kBqU96ZwXjA==/olimpico-lb-vs-san-lorenzo"
     }
   ]
 }
