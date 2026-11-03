@@ -23,8 +23,9 @@ export default function PlayerModal({
   const match = matchContext?.match;
   const matchStat = matchContext?.playerStats;
   const hasMatchTab = Boolean(match && matchStat && matchContext.teamId);
-  const matchKey = match ? (match.id || `${match.date}-${match.homeTeam}-${match.awayTeam}`) : null;
-  const manualStat = playerMatchStatCorrections[matchKey]?.[player?.id] || {};
+  // El id del fixture puede variar entre páginas; la clave por fecha y equipos es estable.
+  const matchKey = match ? `${match.date}-${match.homeTeam}-${match.awayTeam}` : null;
+  const manualStat = (playerMatchStatCorrections[matchKey] || playerMatchStatCorrections[match?.id])?.[player?.id] || {};
   // Las correcciones puntuales solo cubren datos ausentes, nunca sustituyen
   // un valor oficial publicado (incluido el cero).
   const gameMetric = key => matchStat?.[key] ?? manualStat[key] ?? null;
@@ -174,7 +175,9 @@ export default function PlayerModal({
                 ["AST", matchStat.assists], ["VAL", matchContext.valuation],
                 ["MIN", matchStat.minutes]
               ].map(([label, value]) => (
-                <div key={label}><strong>{value ?? "—"}</strong><span>{label}</span></div>
+                <div key={label} className={label === "PTS" ? "is-primary" : ""}>
+                  <strong>{value ?? "—"}</strong><span>{label}</span>
+                </div>
               ))}
             </div>
             <span className="home-player-modal-label">PLANILLA COMPLETA</span>
@@ -198,14 +201,26 @@ export default function PlayerModal({
                 const made = shots?.made;
                 const attempted = shots?.attempted;
                 const pct = shots?.percentage;
+                const rate = Number(pct);
+                const validRate = pct != null && Number.isFinite(rate);
                 return <div key={label}>
                   <span>{label}</span>
                   <strong>{made != null && attempted != null ? `${made}/${attempted}` : "—"}</strong>
-                  <small>{pct != null ? `${pct}%` : "Sin dato"}</small>
+                  <div className="lna-player-shot-track" aria-hidden="true">
+                    <span style={{ width: validRate ? `${Math.max(0, Math.min(100, rate))}%` : "0%" }} />
+                  </div>
+                  <small>{validRate ? `${rate}%` : "Sin dato"}</small>
                 </div>;
               })}
             </div>
-            <p className="lna-player-match-note">Valores de la planilla oficial; los datos no disponibles se muestran con —.</p>
+            {[
+              ["DOBLES", matchStat.twoPointers],
+              ["TRIPLES", matchStat.threePointers],
+              ["LIBRES", matchStat.freeThrows],
+            ].some(([, value]) => !shotValues(value) || shotValues(value).made == null || shotValues(value).attempted == null) ||
+            ["blocks", "fouls"].some(key => gameMetric(key) == null) ? (
+              <p className="lna-player-match-note">— indica un dato no disponible.</p>
+            ) : null}
           </section>
         )}
         {(!hasMatchTab || activeTab === "season") && (
