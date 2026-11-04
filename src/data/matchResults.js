@@ -690,5 +690,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Yv1N5bawwPYgHrqmJaLwvyzN_lBQq4ii0ncy7-AhsCN4QxanuvGXJw==/atenas-c-vs-gimnasia-cr"
     }
+  },
+  "2026-11-03-la-union-argentino": {
+    "status": "finished",
+    "homeScore": 75,
+    "awayScore": 57,
+    "time": "21:30",
+    "homeTeam": "la-union",
+    "awayTeam": "argentino",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y5HiTXi8GaC3173fMdTzrIQejXDlKK8SsFityZen1ImtyUG7FcwK5g==/la-union-fsa-vs-argentino-j",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y5HiTXi8GaC3173fMdTzrIQejXDlKK8SsFityZen1ImtyUG7FcwK5g==/la-union-fsa-vs-argentino-j"
+    }
   }
 };
