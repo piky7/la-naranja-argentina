@@ -11,6 +11,38 @@ const URL_PARTIDO =
 
 const OUTPUT = process.argv[3] || "liga-normalized.json";
 
+// La planilla oficial puede publicar estos campos con distintos nombres
+// dentro del objeto de la ficha. No deducir un cero si no están presentes.
+function campoEstadistico(datos, keys, matcher) {
+  for (const key of keys) {
+    const value = datos[key];
+    if (value != null && value !== "" && Number.isFinite(Number(value))) return Number(value);
+  }
+  const normalize = value => String(value).normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]/gi,"").toLowerCase();
+  for (const [key, value] of Object.entries(datos)) {
+    if (value == null || value === "" || !Number.isFinite(Number(value))) continue;
+    if (matcher(normalize(key))) return Number(value);
+  }
+  return null;
+}
+
+function campoTabla($, fila, kind) {
+  const table = $(fila).closest("table");
+  const cells = $(fila).children("th,td");
+  const headers = table.find("thead tr").last().children("th,td");
+  if (!headers.length || headers.length !== cells.length) return null;
+  const clean = value => String(value).normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/\\s+/g," ").trim();
+  for (let i=0;i<headers.length;i++) {
+    const heading = clean($(headers[i]).text());
+    const isBlocks = kind === "blocks" && /^(tap|tapon|tapones|blk|bloqueos?)$/.test(heading);
+    const isFouls = kind === "fouls" && /^(faltas?|faltas? personales?|fp|pf)$/.test(heading);
+    if (!isBlocks && !isFouls) continue;
+    const text = $(cells[i]).text().trim();
+    if (/^\\d+$/.test(text)) return Number(text);
+  }
+  return null;
+}
+
 function obtenerJugador($, fila) {
   const onclick = $(fila).attr("onclick") || "";
 
@@ -63,8 +95,14 @@ function obtenerJugador($, fila) {
     offensiveRebounds: datos.ReboteOfensivo,
     defensiveRebounds: datos.ReboteDefensivo,
     // Son acciones cometidas/hechas por el jugador, no recibidas por él.
-    blocks: datos.Tapones ?? datos.TaponesRealizados ?? null,
-    fouls: datos.FaltasCometidas ?? datos.FaltasPersonales ?? datos.Faltas ?? null,
+    blocks: campoEstadistico(datos,
+      ["Tapones","TaponesRealizados","TaponesHechos","TaponesDados","TaponesColocados","Bloqueos"],
+      key => /^(?:tapones?|bloqueos?)(?:realizados?|hechos?|dados?|colocados?|favor)?$/.test(key)
+        && !/recibidos?|contra/.test(key)) ?? campoTabla($,fila,"blocks"),
+    fouls: campoEstadistico(datos,
+      ["FaltasCometidas","FaltasPersonales","Faltas","FaltasRealizadas","FaltasJugador","PersonalFouls"],
+      key => /^(?:faltas?|personalfouls)(?:personales?|cometidas?|realizadas?|jugador)?$/.test(key)
+        && !/recibidas?|provocadas?|favor/.test(key)) ?? campoTabla($,fila,"fouls"),
     twoPointers: datos.TirosDos,
     threePointers: datos.TirosTres,
     freeThrows: datos.TirosLibres,
