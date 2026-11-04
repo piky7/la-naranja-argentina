@@ -1,6 +1,17 @@
 // Prode LNA API · Etapa 1. Worker independiente de Mi Carrera.
 // Los tokens Firebase se verifican criptográficamente antes de cualquier escritura.
 const SITE = "https://lanaranjaargentina.com.ar";
+// Una única cronología de resultados para puntuación, rachas y grilla.
+// Primero ordena por inicio; a igual inicio, por primer final detectado.
+function compareStreakGames(a,b) {
+  const kickoff = Date.parse(a.startsAt)-Date.parse(b.startsAt);
+  if (kickoff) return kickoff;
+  const finishA = Date.parse(a.finishedObservedAt || "");
+  const finishB = Date.parse(b.finishedObservedAt || "");
+  if (Number.isFinite(finishA) && Number.isFinite(finishB) && finishA !== finishB) return finishA-finishB;
+  return String(a.id || "").localeCompare(String(b.id || ""));
+}
+
 const PROJECT_ID = "lna-prode";
 const ISSUER = "https://securetoken.google.com/" + PROJECT_ID;
 const CERTS_URL = "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com";
@@ -317,7 +328,7 @@ export default {
             const data = await response.json();
             if (!data.ok || !Array.isArray(data.games)) throw Error("Historial no disponible");
             let streak=0, points=0, played=0, correct=0, wrong=0, mvpHits=0, mvpVoted=0;
-            const ordered = [...data.games].sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || String(a.id).localeCompare(String(b.id)));
+            const ordered = [...data.games].sort(compareStreakGames);
             for (const game of ordered) {
               const ts = Date.parse(game.startsAt);
               if (!Number.isFinite(ts) || ts>Date.now() || !game.finished) continue;
@@ -828,7 +839,7 @@ export default {
             const since = Math.max(leagueStart, time(member.joined_at));
             const periods = periodsByUser.get(member.user_id) || [];
             let streak = 0, lastPeriod = -1;
-            const chronologicalGames = [...data.games].sort((a,b) => Date.parse(a.startsAt) - Date.parse(b.startsAt) || String(a.id || "").localeCompare(String(b.id || "")));
+            const chronologicalGames = [...data.games].sort(compareStreakGames);
             for (const game of chronologicalGames) {
               const kickoff = Date.parse(game.startsAt);
               if (!Number.isFinite(kickoff) || kickoff < since || !game.finished || kickoff > Date.now()) continue;
@@ -840,7 +851,7 @@ export default {
               // nunca se incluyen predicciones de partidos sin resultado oficial.
               if (game.homeTeam && game.awayTeam && Number.isFinite(game.homeScore) && Number.isFinite(game.awayScore)) {
                 if (!completedMatches.has(game.id)) completedMatches.set(game.id, {
-                  id: game.id, startsAt: game.startsAt, weekKey: gameWeek,
+                  id: game.id, startsAt: game.startsAt, finishedObservedAt: game.finishedObservedAt || null, weekKey: gameWeek,
                   homeTeam: game.homeTeam, awayTeam: game.awayTeam,
                   homeScore: game.homeScore, awayScore: game.awayScore,
                   winner: game.winner, mvpWinners: game.mvpWinners || [],
@@ -981,7 +992,7 @@ export default {
           // Antes el desempate por id era ascendente en ambos sentidos: mostraba
           // Atenas–Gimnasia por delante de La Unión–Argentino aunque la racha
           // ya había procesado el encuentro de Argentino como el más reciente.
-          matches.sort((a,b) => Date.parse(b.startsAt) - Date.parse(a.startsAt) || String(b.id).localeCompare(String(a.id)));
+          matches.sort((a,b) => compareStreakGames(b,a));
         }
         return reply({ ok: true, ranking, weeklyRanking, weeklyHistory, medalTable, matchesByWeek, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
