@@ -383,6 +383,62 @@ export default {
         return reply({ ok: false, error: "No se pudo vincular Mi Carrera" }, 503);
       }
     }
+    // Pronósticos autenticados: un único historial por cuenta Google en todos
+    // los dispositivos, sin exponer el ID interno de votaciones al navegador.
+    if (url.pathname === "/api/prode/ballot" && ["GET","POST"].includes(request.method)) {
+      if (!env.DB || !env.VOTACIONES) return reply({ok:false,error:"Votaciones no disponibles"},503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ok:false,error:"Iniciá sesión en Prode"},401);
+      const userId = "firebase:" + identity.uid;
+      const body = request.method === "POST" ? await request.json().catch(() => ({})) : null;
+      const partidoId = request.method === "POST" ? body?.partidoId : url.searchParams.get("partidoId");
+      const kind = request.method === "POST" ? body?.kind : url.searchParams.get("kind");
+      if (typeof partidoId !== "string" || partidoId.length > 120 || !/^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$/.test(partidoId) ||
+          !["winner","mvp"].includes(kind)) return reply({ok:false,error:"Partido o pronóstico inválido"},400);
+      if (request.method === "POST") {
+        if (kind === "winner" && (typeof body?.equipoVotado !== "string" || body.equipoVotado.length > 90))
+          return reply({ok:false,error:"Equipo inválido"},400);
+        if (kind === "mvp" && (typeof body?.jugadorId !== "string" || body.jugadorId.length > 120))
+          return reply({ok:false,error:"Jugador inválido"},400);
+      }
+      try {
+        if (!await env.DB.prepare("SELECT 1 FROM prode_users WHERE id=?").bind(userId).first())
+          return reply({ok:false,error:"Primero registrá tu perfil Prode"},409);
+        await ensureVoteSources(env.DB);
+        const [career,source] = await Promise.all([
+          env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind(userId).first(),
+          env.DB.prepare("SELECT visitor_id FROM prode_vote_sources WHERE user_id=?").bind(userId).first(),
+        ]);
+        let visitorId = career?.visitor_id || source?.visitor_id;
+        if (!visitorId) {
+          visitorId = crypto.randomUUID();
+          try {
+            await env.DB.prepare("INSERT INTO prode_vote_sources(user_id,visitor_id) VALUES (?,?)").bind(userId,visitorId).run();
+          } catch {
+            const concurrent = await env.DB.prepare("SELECT visitor_id FROM prode_vote_sources WHERE user_id=?").bind(userId).first();
+            if (!concurrent?.visitor_id) throw Error("No se pudo preparar el perfil de votación");
+            visitorId = concurrent.visitor_id;
+          }
+        }
+        const target = kind === "winner" ? "/api/votos" : "/api/mvp";
+        const params = request.method === "GET"
+          ? "?partidoId=" + encodeURIComponent(partidoId) + "&visitanteId=" + encodeURIComponent(visitorId)
+          : "";
+        const upstream = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev" + target + params, {
+          method: request.method,
+          headers: { "Origin": SITE, "Content-Type": "application/json" },
+          ...(request.method === "POST" ? { body: JSON.stringify({
+            partidoId, visitanteId:visitorId,
+            ...(kind === "winner" ? {equipoVotado:body.equipoVotado} : {jugadorId:body.jugadorId}),
+          }) } : {}),
+        });
+        const payload = await upstream.json();
+        return reply(payload,upstream.status);
+      } catch (error) {
+        console.error("Prode authenticated ballot:",error);
+        return reply({ok:false,error:"No se pudo consultar el pronóstico"},503);
+      }
+    }
     // Prode usa los votos de este navegador aunque Mi Carrera no esté vinculada.
     // Un visitante solo puede pertenecer a una cuenta Prode.
     if (url.pathname === "/api/prode/vote-source" && request.method === "POST") {
@@ -406,7 +462,7 @@ export default {
         if ((careerOwner && careerOwner.user_id !== userId) || (sourceOwner && sourceOwner.user_id !== userId))
           return reply({ok:false,error:"Esta identidad de votaciones pertenece a otra cuenta"},409);
         if (existing && existing.visitor_id !== visitorId)
-          return reply({ok:false,error:"Ya hay un navegador asociado a estos pronósticos Prode"},409);
+          return reply({ok:true,registered:true,alreadyAssociated:true});
         await env.DB.prepare("INSERT OR IGNORE INTO prode_vote_sources(user_id,visitor_id) VALUES (?,?)").bind(userId,visitorId).run();
         return reply({ok:true,registered:true});
       } catch (error) {
