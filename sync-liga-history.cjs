@@ -254,6 +254,57 @@ async function main() {
     await esperar(ESPERA_MS);
   }
 
+  // Recuperar TAP/FALTAS faltantes en partidos ya publicados. Solo se
+  // completan valores oficiales nuevos; no se reescriben ceros ni registros
+  // que no coincidan en resultado, equipo e identificador de jugador.
+  // Revisión gradual en modo full para respetar la carga del sitio oficial.
+  let detallesCompletados = 0;
+  if (!recent) {
+    const candidatos = historial.matches
+      .filter(p => p.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/") &&
+        p.teams?.some(t => t.players?.some(j => j.blocks == null || j.fouls == null)))
+      .sort((a,b) => String(b.date).localeCompare(String(a.date))).slice(0, 6);
+    for (const existing of candidatos) {
+      if (fs.existsSync(TEMP)) fs.unlinkSync(TEMP);
+      const result = spawnSync(process.execPath,["extractor-liga.cjs",existing.officialUrl,TEMP],
+        {encoding:"utf8",timeout:30000});
+      if (result.error || result.status !== 0 || !fs.existsSync(TEMP)) continue;
+      try {
+        const fresh = leerJSON(TEMP);
+        if (!isConfirmedFinal({...fresh,officialUrl:existing.officialUrl}) ||
+            fresh.homeScore !== existing.homeScore || fresh.awayScore !== existing.awayScore) continue;
+        let changed = false;
+        for (const oldTeam of existing.teams) {
+          const newTeam = fresh.teams?.find(t => String(t.officialTeamId) === String(oldTeam.officialTeamId));
+          if (!newTeam) continue;
+          for (const oldPlayer of oldTeam.players || []) {
+            const updated = newTeam.players?.find(p => p.officialPlayerId != null &&
+              String(p.officialPlayerId) === String(oldPlayer.officialPlayerId));
+            if (!updated) continue;
+            for (const metric of ["blocks","fouls"]) {
+              if (oldPlayer[metric] == null && updated[metric] != null &&
+                  Number.isFinite(Number(updated[metric]))) {
+                oldPlayer[metric] = Number(updated[metric]);
+                changed = true;
+              }
+            }
+          }
+        }
+        if (changed) {
+          detallesCompletados++;
+          fs.writeFileSync(OUTPUT,JSON.stringify(historial,null,2),"utf8");
+          console.log("Tapas/faltas recuperadas del sitio oficial:",existing.date,existing.officialUrl);
+        } else {
+          console.log("Sin nuevos campos oficiales de tapas/faltas:",existing.date);
+        }
+      } catch(error) {
+        console.warn("No fue posible verificar tapas/faltas:",existing.date,error.message);
+      }
+      await esperar(ESPERA_MS);
+    }
+  }
+  console.log("Partidos históricos enriquecidos con tapas/faltas:",detallesCompletados);
+
   // Completar los cuartos de partidos ya guardados sin volver a publicar
   // ni modificar sus estadísticas de jugadores o marcadores oficiales.
   // Límite por ejecución para no saturar la Liga ni alargar el workflow.
