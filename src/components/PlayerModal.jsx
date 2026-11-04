@@ -87,6 +87,15 @@ export default function PlayerModal({
       points: Number(entry.points) || 0,
       rebounds: Number(entry.rebounds) || 0,
       assists: Number(entry.assists) || 0,
+      steals: entry.steals ?? null,
+      turnovers: entry.turnovers ?? null,
+      blocks: entry.blocks ?? null,
+      fouls: entry.fouls ?? entry.personalFouls ?? null,
+      offensiveRebounds: entry.offensiveRebounds ?? null,
+      defensiveRebounds: entry.defensiveRebounds ?? null,
+      twoPointers: entry.twoPointers ?? null,
+      threePointers: entry.threePointers ?? null,
+      freeThrows: entry.freeThrows ?? null,
       minutes: entry.minutes,
       valuation: getOfficialValuation(match, player.teamId, player.id),
     };
@@ -94,6 +103,21 @@ export default function PlayerModal({
   const mean = (field) => games.length
     ? average(games.reduce((sum, game) => sum + game[field], 0) / games.length)
     : "—";
+  // Un promedio se calcula solo sobre partidos con el dato publicado.
+  // Para tiro usamos el porcentaje ponderado: sumatoria de aciertos / intentos.
+  const metricMean = field => {
+    const available = games.map(game => game[field]).filter(v => v != null && Number.isFinite(Number(v)));
+    return available.length ? average(available.reduce((sum,value) => sum + Number(value), 0) / available.length) : "—";
+  };
+  const shotSeason = field => {
+    const available = games.map(game => shotValues(game[field]))
+      .filter(v => v && Number.isFinite(Number(v.made)) && Number.isFinite(Number(v.attempted)) && v.made != null && v.attempted != null);
+    if (!available.length) return null;
+    const made = available.reduce((sum,v) => sum + Number(v.made),0);
+    const attempted = available.reduce((sum,v) => sum + Number(v.attempted),0);
+    const percentage = attempted > 0 ? Math.round(made / attempted * 1000) / 10 : 0;
+    return {made,attempted,percentage, games:available.length};
+  };
   const minuteValues = games.map(game => {
     const parts = typeof game.minutes === "string" ? game.minutes.match(/^(\d+):(\d{2})$/) : null;
     return parts && Number(parts[2]) < 60 ? Number(parts[1]) * 60 + Number(parts[2]) : null;
@@ -269,7 +293,35 @@ export default function PlayerModal({
           </div>
         </div>
 
-        <div className="home-player-modal-recent-section">
+        <section className="lna-player-season-expanded" aria-label="Estadísticas completas de la temporada">
+          <span className="home-player-modal-label">PROMEDIOS POR PARTIDO</span>
+          <div className="lna-player-match-extra lna-player-season-extra">
+            {[
+              ["REB OF", metricMean("offensiveRebounds")],
+              ["REB DEF", metricMean("defensiveRebounds")],
+              ["ROB", metricMean("steals")],
+              ["TAP", metricMean("blocks")],
+              ["PÉRD", metricMean("turnovers")],
+              ["FALTAS", metricMean("fouls")]
+            ].map(([label,value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}
+          </div>
+          <span className="home-player-modal-label lna-player-season-shots-title">TIROS · TOTALES Y PORCENTAJES DE TEMPORADA</span>
+          <div className="lna-player-match-shots lna-player-season-shots">
+            {[
+              ["DOBLES",shotSeason("twoPointers")],
+              ["TRIPLES",shotSeason("threePointers")],
+              ["LIBRES",shotSeason("freeThrows")]
+            ].map(([label,shots]) => <div key={label}>
+              <span>{label}</span>
+              <strong>{shots ? `${shots.made}/${shots.attempted}` : "—"}</strong>
+              <div className="lna-player-shot-track" aria-hidden="true"><span style={{width: shots ? `${Math.min(100,Math.max(0,shots.percentage))}%` : "0%"}}/></div>
+              <small>{shots ? `${shots.percentage.toFixed(1)}%` : "Sin dato"}</small>
+            </div>)}
+          </div>
+          <p className="lna-player-match-note">Robos, tapas, pérdidas y faltas: promedio por partido con dato disponible. Tiros: aciertos/intentos acumulados y porcentaje real.</p>
+        </section>
+
+        {(!hasMatchTab) && <div className="home-player-modal-recent-section">
           <span className="home-player-modal-label">
             ÚLTIMOS 2 PARTIDOS
           </span>
@@ -315,7 +367,7 @@ export default function PlayerModal({
               Todavía no hay estadísticas de partidos disponibles.
             </p>
           )}
-        </div>
+        </div>}
 
           </div>
         )}
