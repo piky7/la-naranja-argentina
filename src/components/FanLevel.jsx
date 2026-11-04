@@ -5,6 +5,8 @@ import "./FanLevel.css";
 import { teams } from "../data/teams";
 import { matches } from "../data/matches";
 import { players } from "../data/players";
+import { fetchCareerData, fetchCareerJersey, saveCareerJersey, useCareerSession } from "../auth/careerAccount";
+import { requestPrediction } from "../auth/prodeBallot";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
@@ -61,6 +63,7 @@ function PlayerJersey({ name, number }) {
 
 export default function FanLevel() {
   const modalRef = useRef(null);
+  const {user,loading:authLoading,login,busy:authBusy,error:authError} = useCareerSession();
   const [pendingToday, setPendingToday] = useState([]);
   const seenEventsRef = useRef(readSeenEvents());
   const [pendingEvents, setPendingEvents] = useState([]);
@@ -79,15 +82,16 @@ export default function FanLevel() {
     setEditingProfile(false);
     setProfileError("");
   };
-  const saveProfile = (event) => {
+  const saveProfile = async (event) => {
     event.preventDefault();
     const name = nameDraft.trim().replace(/\s+/g, " ");
     if (!name || name.length > 24) { setProfileError("Ingresá un nombre de hasta 24 caracteres."); return; }
     if (!/^(?:[0-9]|[1-9][0-9])$/.test(numberDraft)) { setProfileError("Elegí un dorsal del 0 al 99."); return; }
     try {
+      await saveCareerJersey(name,numberDraft);
       localStorage.setItem(PLAYER_NAME_KEY, name);
       localStorage.setItem(PLAYER_NUMBER_KEY, numberDraft);
-    } catch { setProfileError("No se pudo guardar el perfil en este navegador."); return; }
+    } catch(error) { setProfileError(error.message || "No se pudo guardar el perfil de Google."); return; }
     setPlayerName(name); setPlayerNumber(numberDraft); closeProfileEditor();
   };
   const [points, setPoints] = useState(null);
@@ -102,14 +106,14 @@ export default function FanLevel() {
   const [introStep, setIntroStep] = useState(null);
   const finishIntro = () => { try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* Sin almacenamiento disponible. */ } setIntroStep(null); };
   const openCareer = async () => {
-    refresh(); setActiveView("levels"); setOpen(true);
+    setOpen(true);
+    if (!user) return;
+    refresh(); setActiveView("levels");
     try { if (localStorage.getItem(INTRO_KEY) !== "1") { setIntroStep(0); return; } } catch { setIntroStep(0); return; }
     const id = getVisitorId();
     if (!id) return;
     try {
-      const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId=${encodeURIComponent(id)}`, { cache: "no-store" });
-      if (!response.ok) return;
-      const data = await response.json();
+      const data = await fetchCareerData("predictions");
       if (!data.ok || !Array.isArray(data.predictions)) return;
       const rewarded = data.predictions.filter(p => p.earned != null && Number(p.earned) > 0);
       const snapshot = Object.fromEntries(rewarded.map(p => [p.partidoId, Number(p.earned)]));
@@ -154,11 +158,8 @@ export default function FanLevel() {
         });
         let currentPoints = null;
         try {
-          const pointsResponse = await fetch(`${API}?visitanteId=${encodeURIComponent(id)}`,{cache:"no-store"});
-          if (pointsResponse.ok) {
-            const pointsData = await pointsResponse.json();
-            if (pointsData.ok && Number.isFinite(Number(pointsData.points))) currentPoints = Number(pointsData.points);
-          }
+          const pointsData = await fetchCareerData("points");
+          if (Number.isFinite(Number(pointsData.points))) currentPoints = Number(pointsData.points);
         } catch { /* El detalle se muestra aunque no se pueda consultar el total. */ }
         setRewardNotice({total,games,currentPoints});
 
@@ -183,9 +184,7 @@ export default function FanLevel() {
     const id = getVisitorId();
     if (!id) return;
     try {
-      const response = await fetch(`${API}?visitanteId=${encodeURIComponent(id)}`, { cache: "no-store" });
-      if (!response.ok) return;
-      const result = await response.json();
+      const result = await fetchCareerData("points");
       if (result.ok && Number.isFinite(result.points)) {
         setPoints(result.points);
         setSeasonPoints(Number.isFinite(result.seasonPoints) ? result.seasonPoints : result.points);
@@ -210,7 +209,17 @@ export default function FanLevel() {
   }, []);
 
   useEffect(() => {
+    if (!user) {setPoints(null);setSeasonPoints(null);setCareer(null);return;}
     refresh();
+    fetchCareerJersey().then(async jersey => {
+      if (jersey) {setPlayerName(jersey.name);setPlayerNumber(jersey.number);return;}
+      const legacyName = readPlayerName();
+      const legacyNumber = readPlayerNumber();
+      if (legacyName && /^(?:[0-9]|[1-9][0-9])$/.test(legacyNumber)) {
+        const imported = await saveCareerJersey(legacyName,legacyNumber);
+        if (imported) {setPlayerName(imported.name);setPlayerNumber(imported.number);}
+      }
+    }).catch(()=>{});
     const onVisible = () => { if (!document.hidden) refresh(); };
     const onVote = () => refresh();
     document.addEventListener("visibilitychange", onVisible);
@@ -219,7 +228,7 @@ export default function FanLevel() {
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("lna-vote-updated", onVote);
     };
-  }, [refresh]);
+  }, [refresh,user]);
 
   // El distintivo estático indica recompensas aún no vistas; la consulta no las marca como vistas.
   useEffect(() => {
@@ -232,9 +241,7 @@ export default function FanLevel() {
         if (!previous || typeof previous !== "object" || Array.isArray(previous)) return;
         const id = getVisitorId();
         if (!id) return;
-        const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId=${encodeURIComponent(id)}`, {cache:"no-store"});
-        if (!response.ok) return;
-        const data = await response.json();
+        const data = await fetchCareerData("predictions");
         if (mounted && data.ok && Array.isArray(data.predictions)) {
           setUnseenRewards(data.predictions.some(p => Number(p.earned) > Number(previous[p.partidoId] || 0)));
         }
@@ -253,8 +260,7 @@ export default function FanLevel() {
   useEffect(() => {
     let active = true;
     const checkTodayVotes = async () => {
-      const id = getVisitorId();
-      if (!id) return;
+      if (!user) return;
       const dateParts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).map(part => [part.type, part.value]));
       const today = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
       const games = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
@@ -262,9 +268,7 @@ export default function FanLevel() {
       const checks = await Promise.all(games.map(async match => {
         const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
         try {
-          const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/votos?partidoId=${encodeURIComponent(gameId)}&visitanteId=${encodeURIComponent(id)}`, { cache: "no-store" });
-          if (!response.ok) return null;
-          const data = await response.json();
+          const data = await requestPrediction("winner",gameId);
           return data.open && !data.voted ? gameId : null;
         } catch { return null; }
       }));
@@ -277,17 +281,14 @@ export default function FanLevel() {
     window.addEventListener("lna-vote-updated", onVote);
     document.addEventListener("visibilitychange", onVisible);
     return () => { active = false; window.clearInterval(timer); window.removeEventListener("lna-vote-updated", onVote); document.removeEventListener("visibilitychange", onVisible); };
-  }, []);
+  }, [user]);
 
   const refreshHistory = useCallback(async () => {
-    const id = getVisitorId();
-    if (!id) return;
+    if (!user) return;
     setHistoryLoading(true);
     setHistoryError(false);
     try {
-      const response = await fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId=${encodeURIComponent(id)}`, { cache: "no-store" });
-      if (!response.ok) throw new Error("Historial no disponible");
-      const result = await response.json();
+      const result = await fetchCareerData("predictions");
       if (!result.ok || !Array.isArray(result.predictions)) throw new Error("Historial inválido");
       setPredictions([...result.predictions].sort((a, b) => {
         const aTime = Date.parse(a.startsAt || "");
@@ -301,7 +302,7 @@ export default function FanLevel() {
     } finally {
       setHistoryLoading(false);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (open && activeView === "predictions") refreshHistory();
@@ -377,7 +378,7 @@ export default function FanLevel() {
           <button type="button" className="lna-fan-achievement-continue" onClick={() => dismissEvent(pendingEvents.length <= 1)}>{pendingEvents.length > 1 ? "Siguiente logro" : "Continuar mi carrera"}</button>
         </section>
       </div>, document.body)}
-      {open && introStep !== null && <div className="lna-fan-backdrop lna-fan-intro-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) finishIntro(); }}>
+      {open && user && introStep !== null && <div className="lna-fan-backdrop lna-fan-intro-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) finishIntro(); }}>
         <section className="lna-fan-intro" role="dialog" aria-modal="true" aria-labelledby="lna-career-intro-title">
           <button className="lna-fan-close" type="button" onClick={finishIntro} aria-label="Cerrar presentación"><X size={20}/></button>
           <Trophy size={36} className="lna-fan-intro-icon" aria-hidden="true" />
@@ -404,7 +405,8 @@ export default function FanLevel() {
           <button className="lna-fan-intro-dismiss" type="button" onClick={finishIntro}>Entendido · Ver mi carrera</button>
         </section>
       </div>}
-      {open && introStep === null && <div className="lna-fan-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
+      {open && !authLoading && !user && <div className="lna-fan-backdrop" onMouseDown={event => {if(event.target===event.currentTarget)setOpen(false);}}><section className="lna-fan-modal" role="dialog" aria-modal="true" aria-label="Ingresar a Mi Carrera" style={{padding:24,textAlign:"center"}}><button className="lna-fan-close" type="button" onClick={()=>setOpen(false)} aria-label="Cerrar"><X size={20}/></button><Trophy size={34}/><h2>MI CARRERA</h2><p>Ingresá con Google para guardar tus puntos, copas y pronósticos en todos tus dispositivos.</p><button className="lna-fan-achievement-continue" type="button" onClick={login} disabled={authBusy}>{authBusy?"Conectando…":"Continuar con Google"}</button>{authError && <p role="alert">{authError}</p>}</section></div>}
+      {open && user && introStep === null && <div className="lna-fan-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}>
         <section ref={modalRef} className={`lna-fan-modal ${activeView === "palmares" ? "lna-fan-modal-palmares" : ""}`} role="dialog" aria-modal="true" aria-labelledby="lna-fan-title">
           <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>
           <div className="lna-fan-gamer-heading">
@@ -527,7 +529,7 @@ export default function FanLevel() {
               {predictions.filter(p => p.status === "correct" || p.status === "incorrect").length > 15 && <div className="lna-fan-pages"><button type="button" disabled={page === 0} onClick={() => setPage(v => v - 1)}>‹ Recientes</button><span>{page + 1} / {Math.ceil(predictions.filter(p => p.status === "correct" || p.status === "incorrect").length / 15)}</span><button type="button" disabled={(page + 1) * 15 >= predictions.filter(p => p.status === "correct" || p.status === "incorrect").length} onClick={() => setPage(v => v + 1)}>Anteriores ›</button></div>}
             </>}
           </div>}
-          <p className="lna-fan-note">Los puntos están vinculados a este navegador. Si borrás sus datos o cambiás de dispositivo, podrías perder el acceso a tu progreso.</p>
+          <p className="lna-fan-note">Tus puntos, pronósticos y camiseta se guardan en tu cuenta Google y estarán disponibles desde cualquier dispositivo.</p>
         </section>
       </div>}
     </>
