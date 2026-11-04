@@ -104,6 +104,31 @@ async function fixtureGame(id) {
 
 
 
+// Primer momento en que LNA detecta y confirma el final en el fixture.
+// NO es la hora exacta de la chicharra: se conserva como orden de
+// finalización observado para desempatar partidos con igual inicio.
+async function ensureFinishObservations(db) {
+  await db.prepare("CREATE TABLE IF NOT EXISTS partidos_final_detectado (partido_id TEXT PRIMARY KEY, detectado_en TEXT NOT NULL)").run();
+}
+async function captureFinishObservations(db, games) {
+  await ensureFinishObservations(db);
+  const now = new Date().toISOString();
+  const confirmed = (games || []).filter(game =>
+    typeof game?.id === "string" && game.id.length <= 120 &&
+    game.finished === true && Number.isFinite(game.homeScore) &&
+    Number.isFinite(game.awayScore) && game.homeScore !== game.awayScore);
+  for (let i=0; i<confirmed.length; i+=50) {
+    const batch = confirmed.slice(i,i+50).map(game =>
+      db.prepare("INSERT OR IGNORE INTO partidos_final_detectado(partido_id,detectado_en) VALUES (?,?)").bind(game.id,now));
+    if(batch.length) await db.batch(batch);
+  }
+}
+async function getFinishObservations(db) {
+  await ensureFinishObservations(db);
+  const rows = await db.prepare("SELECT partido_id, detectado_en FROM partidos_final_detectado").all();
+  return new Map((rows.results || []).map(row => [row.partido_id,row.detectado_en]));
+}
+
 // Archivo permanente de partidos en D1: permite recalcular carreras aunque roten los fixtures.
 // Se conserva el resultado confirmado; una versión futura sin resultado no puede borrarlo.
 async function archiveFixture(db, fixture) {
@@ -120,6 +145,7 @@ async function archiveFixture(db, fixture) {
       .bind(game.id, JSON.stringify(game), confirmed));
   }
   for (let i = 0; i < updates.length; i += 50) await db.batch(updates.slice(i, i + 50));
+  await captureFinishObservations(db,fixture.games);
 }
 
 // Lectura sin escrituras: el cron archiva y las consultas solo combinan datos.
@@ -282,6 +308,7 @@ export default {
         ]);
         if (!fixtureResponse.ok) throw Error("Fixture no disponible");
         const fixture = await loadCareerFixture(env.DB, await fixtureResponse.json());
+        const finalObservations = await getFinishObservations(env.DB);
         const byVote = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
         const byMvp = new Map((mvpVotes.results || []).map(v => [v.partido_id, v.jugador_id]));
         const games = fixture.games.filter(g => g?.id && Number.isFinite(Date.parse(g.startsAt)))
@@ -291,7 +318,7 @@ export default {
             const winner = finished ? (g.homeScore > g.awayScore ? g.homeTeam : g.awayTeam) : null;
             const vote = byVote.get(g.id);
             const mvp = byMvp.get(g.id);
-            return { id: g.id, startsAt: g.startsAt, finished, voted: Boolean(vote),
+            return { id: g.id, startsAt: g.startsAt, finished, finishedObservedAt: finished ? finalObservations.get(g.id) || null : null, voted: Boolean(vote),
               correct: finished && Boolean(vote) && vote === winner,
               mvpCorrect: finished && Boolean(mvp) && Array.isArray(g.mvpWinners) && g.mvpWinners.includes(mvp),
               mvpVoted: Boolean(mvp), mvpResolved: finished && Array.isArray(g.mvpWinners),
