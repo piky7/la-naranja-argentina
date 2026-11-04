@@ -89,6 +89,9 @@ async function ensureMembershipPeriods(db) {
   await db.prepare("INSERT OR IGNORE INTO prode_membership_periods(group_id,user_id,entered_at) SELECT m.group_id,m.user_id,m.joined_at FROM prode_memberships m").run();
 }
 const validCrest = color => typeof color === "string" && /^#[0-9a-fA-F]{6}$/.test(color);
+async function ensureVoteSources(db) {
+  await db.prepare("CREATE TABLE IF NOT EXISTS prode_vote_sources (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, visitor_id TEXT NOT NULL UNIQUE, registered_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
+}
 async function ensureCrests(db) {
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crest_styles (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, style TEXT NOT NULL DEFAULT 'pro')").run();
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crest_fonts (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, font TEXT NOT NULL DEFAULT 'sport')").run();
@@ -239,7 +242,8 @@ export default {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=l.user_id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=l.user_id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
+        await ensureVoteSources(env.DB);
+        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(vs.visitor_id,l.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(vs.visitor_id,l.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT 100").all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
@@ -290,7 +294,8 @@ export default {
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
-        const rows = await env.DB.prepare("SELECT l.user_id, l.visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=l.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=l.user_id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=l.user_id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=l.user_id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_career_links l LEFT JOIN prode_usernames n ON n.user_id=l.user_id LEFT JOIN prode_user_crests c ON c.user_id=l.user_id ORDER BY l.linked_at ASC LIMIT 100").all();
+        await ensureVoteSources(env.DB);
+        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(vs.visitor_id,l.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id=u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(vs.visitor_id,l.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT 100").all();
         const dayKey = value => {
           const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(value));
           const n = type => Number(parts.find(p => p.type === type)?.value);
@@ -372,6 +377,37 @@ export default {
       } catch (error) {
         if (String(error).includes("UNIQUE")) return reply({ ok: false, error: "Esta carrera ya está vinculada a otra cuenta Prode" }, 409);
         return reply({ ok: false, error: "No se pudo vincular Mi Carrera" }, 503);
+      }
+    }
+    // Prode usa los votos de este navegador aunque Mi Carrera no esté vinculada.
+    // Un visitante solo puede pertenecer a una cuenta Prode.
+    if (url.pathname === "/api/prode/vote-source" && request.method === "POST") {
+      if (!env.DB) return reply({ok:false,error:"Base de datos no disponible"},503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ok:false,error:"Iniciá sesión con Google"},401);
+      const userId = "firebase:" + identity.uid;
+      const body = await request.json().catch(() => ({}));
+      const visitorId = typeof body.visitorId === "string" ? body.visitorId : "";
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(visitorId))
+        return reply({ok:false,error:"Identificador de votaciones inválido"},400);
+      try {
+        const profile = await env.DB.prepare("SELECT id FROM prode_users WHERE id=?").bind(userId).first();
+        if (!profile) return reply({ok:false,error:"Primero registrá tu perfil Prode"},409);
+        await ensureVoteSources(env.DB);
+        const [careerOwner,sourceOwner,existing] = await Promise.all([
+          env.DB.prepare("SELECT user_id FROM prode_career_links WHERE visitor_id=?").bind(visitorId).first(),
+          env.DB.prepare("SELECT user_id FROM prode_vote_sources WHERE visitor_id=?").bind(visitorId).first(),
+          env.DB.prepare("SELECT visitor_id FROM prode_vote_sources WHERE user_id=?").bind(userId).first(),
+        ]);
+        if ((careerOwner && careerOwner.user_id !== userId) || (sourceOwner && sourceOwner.user_id !== userId))
+          return reply({ok:false,error:"Esta identidad de votaciones pertenece a otra cuenta"},409);
+        if (existing && existing.visitor_id !== visitorId)
+          return reply({ok:false,error:"Ya hay un navegador asociado a estos pronósticos Prode"},409);
+        await env.DB.prepare("INSERT OR IGNORE INTO prode_vote_sources(user_id,visitor_id) VALUES (?,?)").bind(userId,visitorId).run();
+        return reply({ok:true,registered:true});
+      } catch (error) {
+        console.error("Prode vote source:",error);
+        return reply({ok:false,error:"No se pudo asociar la votación con Prode"},503);
       }
     }
     // Pronósticos de prueba: calendario generado desde los datos oficiales de LNA.
@@ -625,8 +661,9 @@ export default {
         const initialPoints = new Map((initialRows.results || []).map(row => [row.user_id, Number(row.points)]));
         const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
         await ensureCrests(env.DB);
+        await ensureVoteSources(env.DB);
         const members = await env.DB.prepare(
-          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, l.visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=m.user_id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
+          "SELECT m.user_id, m.joined_at, COALESCE(n.username,'Jugador sin alias') AS username, COALESCE(vs.visitor_id,l.visitor_id) AS visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=m.user_id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_memberships m LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_vote_sources vs ON vs.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
         const periodsResult = await env.DB.prepare("SELECT user_id, entered_at, exited_at FROM prode_membership_periods WHERE group_id=? ORDER BY entered_at").bind(groupId).all();
         const periodsByUser = new Map();
