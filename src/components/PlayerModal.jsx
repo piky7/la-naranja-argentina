@@ -312,7 +312,7 @@ export default function PlayerModal({
             <span className="home-player-modal-label">PERFIL ESTADÍSTICO</span>
             <small>PTS · REB · AST · ROB</small>
           </div>
-          <svg className="lna-player-radar-graphic" viewBox="0 0 300 280" role="img"
+          <svg className="lna-player-radar-graphic" viewBox="0 55 260 210" role="img"
             aria-label={`Radar: ${radarItems.map(item => item.label+" "+item.value).join(", ")}`}>
             {[.25,.5,.75,1].map(level => <polygon key={level} points={radarPoints(level)}
               fill="none" stroke="#446178" strokeWidth="1" />)}
