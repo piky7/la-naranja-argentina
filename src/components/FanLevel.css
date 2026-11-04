@@ -779,3 +779,7 @@
   .lna-fan-bar .lna-fan-historic-shield strong{font-size:9px}
   .lna-fan-bar .lna-fan-bar-category{font-size:8px}
 }
+
+/* Regla de descenso visible en la categoría actual sin agrandar el popup. */
+.lna-fan-modal .lna-fan-next .lna-fan-descent-rule{display:block;margin-top:3px;font-size:10px;line-height:1.2;color:#ffbddc;font-weight:600}
+@media(max-width:440px){.lna-fan-modal .lna-fan-next .lna-fan-descent-rule{font-size:9px;margin-top:2px}}
