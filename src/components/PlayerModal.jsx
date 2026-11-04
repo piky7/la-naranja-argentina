@@ -127,7 +127,7 @@ export default function PlayerModal({
     {key:"steals",label:"ROB",value:metricMean("steals")},
   ].map(item => ({...item,percent:radarPercent(item.key,item.value==="—"?null:Number(item.value))}));
   const radarXY = (index,ratio) => {
-    const positions = [[110,88],[180,158],[110,228],[40,158]];
+    const positions = [[110,98],[177,158],[110,218],[43,158]];
     return [110+(positions[index][0]-110)*ratio,158+(positions[index][1]-158)*ratio];
   };
   const radarPoints = ratio => radarItems.map((_,i) => radarXY(i,ratio).join(",")).join(" ");
@@ -307,36 +307,35 @@ export default function PlayerModal({
           </div>
         </div>
 
-        <section className="lna-player-radar-section" aria-label="Radar de estadísticas de temporada">
-          <span className="home-player-modal-label">RADAR ESTADÍSTICO</span>
-          <div className="lna-player-radar-content">
-            <svg viewBox="0 0 220 286" role="img"
-              aria-label={`Radar de temporada: ${radarItems.map(item => item.label+" "+item.value).join(", ")}`}>
-              {[.25,.5,.75,1].map(level => <polygon key={level} points={radarPoints(level)}
-                fill="none" stroke="#446178" strokeWidth="1" />)}
-              {radarItems.map((item,i) => {
-                const [x,y]=radarXY(i,1);
-                return <line key={item.key} x1="110" y1="158" x2={x} y2={y} stroke="#446178" strokeWidth="1" />;
-              })}
-              <polygon points={radarFill} fill="#f68b2c" fillOpacity=".23"
-                stroke="#fa9233" strokeWidth="2.8" strokeLinejoin="round" />
-              {radarItems.map((item,i) => {
-                const [x,y]=radarXY(i,(item.percent??0)/100);
-                return item.percent!=null && <circle key={item.key} cx={x} cy={y} r="3.2" fill="#ffa447"/>;
-              })}
-              {radarItems.map((item,i)=>{
-                const anchors=[[110,42],[210,153],[110,268],[10,153]];
-                return <text key={item.key} x={anchors[i][0]} y={anchors[i][1]}
-                  textAnchor={i===1?"end":i===3?"start":"middle"} fill="#e8f1f8" fontSize="13" fontWeight="800">{item.label}</text>;
-              })}
-            </svg>
-            <div className="lna-player-radar-values">
-              {radarItems.map(item => <div key={item.key}>
-                <span>{item.label}</span><strong>{item.value}</strong>
-              </div>)}
-            </div>
+        <section className="lna-player-radar-section" aria-label="Radar de puntos, rebotes, asistencias y robos">
+          <div className="lna-player-radar-heading">
+            <span className="home-player-modal-label">PERFIL ESTADÍSTICO</span>
+            <small>PTS · REB · AST · ROB</small>
           </div>
-          <p className="lna-player-radar-note">Escala comparativa: cada eje usa como referencia el percentil 90 de los promedios de la Liga Nacional (mínimo 3 PJ). Las cifras de la derecha son valores reales.</p>
+          <svg className="lna-player-radar-graphic" viewBox="0 0 300 280" role="img"
+            aria-label={`Radar: ${radarItems.map(item => item.label+" "+item.value).join(", ")}`}>
+            {[.25,.5,.75,1].map(level => <polygon key={level} points={radarPoints(level)}
+              fill="none" stroke="#446178" strokeWidth="1" />)}
+            {radarItems.map((item,i) => {
+              const [x,y] = radarXY(i,1);
+              return <line key={item.key} x1="110" y1="158" x2={x} y2={y} stroke="#446178" strokeWidth="1" />;
+            })}
+            <polygon points={radarFill} fill="#f68b2c" fillOpacity=".23"
+              stroke="#fa9233" strokeWidth="2.8" strokeLinejoin="round" />
+            {radarItems.map((item,i)=>{
+              const [x,y] = radarXY(i,(item.percent??0)/100);
+              return item.percent!=null && <circle key={item.key} cx={x} cy={y} r="3.1" fill="#ffa447"/>;
+            })}
+            {radarItems.map((item,i)=>{
+              // Las etiquetas incluyen el dato real; no se repiten cuatro tarjetas.
+              const ty = i === 2 ? 248 : i === 0 ? 79 : 164;
+              const tx = i === 1 ? 192 : i === 3 ? 5 : 110;
+              return <text key={item.key} x={tx} y={ty}
+                textAnchor={i===1?"start":i===3?"start":"middle"}
+                fill="#e8f1f8" fontSize="13" fontWeight="800">{item.label} <tspan fill="#ff9b39">{item.value}</tspan></text>;
+            })}
+          </svg>
+          <small className="lna-player-radar-note">Escala de referencia: 25 PTS · 12 REB · 8 AST · 3 ROB por partido.</small>
         </section>
         <section className="lna-player-season-expanded" aria-label="Estadísticas completas de la temporada">
           <span className="home-player-modal-label">PROMEDIOS POR PARTIDO</span>
