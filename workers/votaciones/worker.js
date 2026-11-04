@@ -123,6 +123,16 @@ async function captureFinishObservations(db, games) {
     if(batch.length) await db.batch(batch);
   }
 }
+// Una observación histórica incorporada horas después del partido no prueba
+// que dos encuentros hayan terminado juntos. Sólo se acepta como desempate
+// si el final fue detectado dentro de las 6 horas posteriores al inicio.
+// Así evitamos que la primera sincronización masiva altere rachas anteriores.
+function timelyFinishObservation(game, observedAt) {
+  const start = Date.parse(game?.startsAt || "");
+  const end = Date.parse(observedAt || "");
+  return Number.isFinite(start) && Number.isFinite(end) &&
+    end >= start && end - start <= 6 * 60 * 60 * 1000 ? observedAt : null;
+}
 async function getFinishObservations(db) {
   await ensureFinishObservations(db);
   const rows = await db.prepare("SELECT partido_id, detectado_en FROM partidos_final_detectado").all();
@@ -189,8 +199,8 @@ async function calculateRewards(db, fixture, visitorId) {
   const finishTimes = await getFinishObservations(db);
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => {
-      const aFinish = finishTimes.get(a.id) || null;
-      const bFinish = finishTimes.get(b.id) || null;
+      const aFinish = timelyFinishObservation(a,finishTimes.get(a.id));
+      const bFinish = timelyFinishObservation(b,finishTimes.get(b.id));
       const base = comparePredictionGames(
         {...a,finishedObservedAt:aFinish},
         {...b,finishedObservedAt:bFinish}
@@ -354,7 +364,7 @@ export default {
             const winner = finished ? (g.homeScore > g.awayScore ? g.homeTeam : g.awayTeam) : null;
             const vote = byVote.get(g.id);
             const mvp = byMvp.get(g.id);
-            return { id: g.id, startsAt: g.startsAt, finished, finishedObservedAt: finished ? finalObservations.get(g.id) || null : null, voted: Boolean(vote),
+            return { id: g.id, startsAt: g.startsAt, finished, finishedObservedAt: finished ? timelyFinishObservation(g,finalObservations.get(g.id)) : null, voted: Boolean(vote),
               correct: finished && Boolean(vote) && vote === winner,
               mvpCorrect: finished && Boolean(mvp) && Array.isArray(g.mvpWinners) && g.mvpWinners.includes(mvp),
               mvpVoted: Boolean(mvp), mvpResolved: finished && Array.isArray(g.mvpWinners),
