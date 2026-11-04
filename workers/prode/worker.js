@@ -463,7 +463,7 @@ export default {
       const body = request.method === "POST" ? await request.json().catch(() => ({})) : null;
       const partidoId = request.method === "POST" ? body?.partidoId : url.searchParams.get("partidoId");
       const kind = request.method === "POST" ? body?.kind : url.searchParams.get("kind");
-      if (typeof partidoId !== "string" || partidoId.length > 120 || !/^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$/.test(partidoId) ||
+      if (typeof partidoId !== "string" || partidoId.length > 120 || !/^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/.test(partidoId) ||
           !["winner","mvp"].includes(kind)) return reply({ok:false,error:"Partido o pronóstico inválido"},400);
       if (request.method === "POST") {
         if (kind === "winner" && (typeof body?.equipoVotado !== "string" || body.equipoVotado.length > 90))
