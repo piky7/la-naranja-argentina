@@ -48,6 +48,25 @@ export async function fetchCareerData(kind) {
   return body;
 }
 
+export async function fetchCareerJersey() {
+  const token = await requireCareerToken();
+  const response = await fetch(BASE+"/api/prode/career/jersey",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
+  const data = await response.json();
+  if (!response.ok || !data.ok) throw Error(data.error || "No se pudo cargar la camiseta");
+  return data.jersey;
+}
+
+export async function saveCareerJersey(name,number) {
+  const token = await requireCareerToken();
+  const response = await fetch(BASE+"/api/prode/career/jersey",{
+    method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},
+    body:JSON.stringify({name,number})
+  });
+  const data = await response.json();
+  if (!response.ok || !data.ok) throw Error(data.error || "No se pudo guardar la camiseta");
+  return data.jersey;
+}
+
 // Un solo acceso para Mi Carrera y Prode. El estado se restaura al abrir la PWA.
 export function useCareerSession() {
   const [user,setUser] = useState(null);
