@@ -4,6 +4,7 @@ import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import "./MvpPrediction.css";
 import { requestPrediction } from "../auth/prodeBallot";
+import { useCareerSession } from "../auth/careerAccount";
 
 export default function MvpPrediction({ match, onStatusChange }) {
   const [expanded, setExpanded] = useState(false);
@@ -16,19 +17,21 @@ export default function MvpPrediction({ match, onStatusChange }) {
   const [ranking, setRanking] = useState([]);
   const id = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
   const [sessionRevision, setSessionRevision] = useState(0);
+  const { user, loading: authLoading, login, busy: authBusy, error: authError } = useCareerSession();
   useEffect(() => {
     const refresh = () => setSessionRevision(value => value + 1);
     window.addEventListener("prode-profile-updated", refresh);
     return () => window.removeEventListener("prode-profile-updated", refresh);
   }, []);
   useEffect(() => {
+    if (authLoading || !user) return;
     let active = true;
     setStatus("loading");
     requestPrediction("mvp", id)
       .then(body => { if (active) { setSelected(body.selected); setOpen(body.open); setRanking(Array.isArray(body.ranking) ? body.ranking : []); setStatus("ready"); } })
       .catch(err => { if (active) { setStatus("error"); setError(err.message); } });
     return () => { active = false; };
-  }, [id, sessionRevision]);
+  }, [id, sessionRevision, user, authLoading]);
   async function choosePlayer(playerId) {
     if (busy || !open) return;
     setBusy(true); setError("");
@@ -58,6 +61,12 @@ export default function MvpPrediction({ match, onStatusChange }) {
   const selectedPlayer = allPlayers.find(player => player.id === selected);
   const rankedPlayers = ranking.filter(item => Number(item.votes) > 0).map(item => ({...item,player:allPlayers.find(player => player.id === item.playerId)})).filter(item => item.player);
   const totalVotes = rankedPlayers.reduce((sum,item) => sum + Number(item.votes),0);
+  if (!authLoading && !user) return <section className="lna-mvp-prediction">
+    <div className="lna-mvp-prediction-heading"><strong>★ ¿QUIÉN SERÁ EL MVP?</strong><span>+20 PTS</span></div>
+    <p>Ingresá con Google para elegir MVP y sumar puntos en ambos modos.</p>
+    <button type="button" onClick={login} disabled={authBusy}>{authBusy ? "Conectando…" : "Continuar con Google"}</button>
+    {authError && <small role="alert">{authError}</small>}
+  </section>;
   return <section className="lna-mvp-prediction">
     <div className="lna-mvp-prediction-heading"><strong>★ ¿QUIÉN SERÁ EL MVP?</strong><span>+20 PTS</span></div>
     <button type="button" className="lna-mvp-prediction-trigger" onClick={() => setExpanded(value => !value)} aria-expanded={expanded} disabled={status !== "ready" || !open}>
