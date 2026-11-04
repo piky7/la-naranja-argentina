@@ -333,11 +333,11 @@ export default function FanLevel() {
 
   return (
     <>
-      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}${unseenRewards ? " has-unseen-rewards" : ""}`} type="button" onClick={openCareer} aria-label={pendingToday.length ? "Ver mi carrera LNA. Tenés un pronóstico pendiente de hoy" : "Ver mi carrera LNA"}>
+      <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}${unseenRewards ? " has-unseen-rewards" : ""}`} type="button" onClick={openCareer} aria-label={!user ? "Iniciar sesión con Google para Mi Carrera" : pendingToday.length ? "Ver Mi Carrera. Tenés un pronóstico pendiente de hoy" : "Ver Mi Carrera"}>
         <span className="lna-fan-bar-medals"><img className="lna-fan-bar-trophy" src={TROPHY_IMAGES[Math.max(0, LEVELS.findIndex(item => item.name === level.name))]} alt="" aria-hidden="true" /></span>
         {unseenRewards && <span className="lna-fan-new-reward-mark" aria-hidden="true">NUEVOS PTS</span>}
         <span className="lna-fan-summary">
-          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{career && seasonPoints !== null ? (level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : displayLevel(level.name)) : "Cargando…"}</strong></span>
+          <span className="lna-fan-line"><strong className="lna-fan-bar-category">{career && seasonPoints !== null ? (level.name === "Liga de Desarrollo" ? <>Liga de<br/>Desarrollo</> : displayLevel(level.name)) : (authLoading ? "Cargando…" : !user ? "Ingresá con Google" : "Cargando…")}</strong></span>
           <span className="lna-fan-progress-row"><b className="lna-fan-progress-count">{career && seasonPoints !== null ? `${seasonScore}/${level.goal ?? "∞"}` : ""}</b><span className="lna-fan-track"><span style={{ width: `${career && seasonPoints !== null ? percent : 0}%` }} /></span></span>
           {pendingToday.length > 0 && <span className="lna-fan-vote-alert"><span className="lna-fan-vote-dot" />SIN VOTAR</span>}
         </span>
