@@ -207,6 +207,17 @@ const encabezado = contenedor
     }
   }
 
+  for (const equipo of equipos) {
+    const missingBlocks = equipo.players.filter(j => j.blocks == null).length;
+    const missingFouls = equipo.players.filter(j => j.fouls == null).length;
+    if (missingBlocks || missingFouls) {
+      console.log("Diagnóstico estadística individual oficial:", JSON.stringify({
+        equipo: equipo.name, jugadores: equipo.players.length,
+        sinTapones: missingBlocks, sinFaltas: missingFouls,
+      }));
+    }
+  }
+
   extractTeamStats($, equipos);
 
   const finalPagina = parseOfficialFinal($, URL_PARTIDO);
