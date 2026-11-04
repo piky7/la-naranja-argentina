@@ -9,6 +9,7 @@ import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
 import MvpPrediction from "../components/MvpPrediction";
+import { requestPrediction } from "../auth/prodeBallot";
 import PlayerModal from "../components/PlayerModal";
 import FinishedMatchModal from "../components/FinishedMatchModal";
 import MatchStatsTabs from "../components/MatchStatsTabs";
@@ -137,15 +138,9 @@ const [upcomingTab, setUpcomingTab] = useState("comparativa");
     let cancelled = false;
     const check = async () => {
       try {
-        const visitorId = localStorage.getItem("lna-vote-visitor-id");
-        if (!visitorId) {
-          if (!cancelled) { setUpcomingVoteStatus({voted:false,open:true}); setUpcomingMvpStatus({voted:false,open:true}); }
-          return;
-        }
-        const query = `?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`;
         const [winnerResult, mvpResult] = await Promise.allSettled([
-          fetch(`https://lna-votaciones-api.lnab.workers.dev/api/votos${query}`).then(async response => {if (!response.ok) throw Error("No disponible"); return response.json();}),
-          fetch(`https://lna-votaciones-api.lnab.workers.dev/api/mvp${query}`, {cache:"no-store"}).then(async response => {if (!response.ok) throw Error("No disponible"); return response.json();}),
+          requestPrediction("winner",id),
+          requestPrediction("mvp",id),
         ]);
         if (!cancelled) {
           setUpcomingVoteStatus(winnerResult.status === "fulfilled" ? {voted:winnerResult.value.voted,open:winnerResult.value.open} : {error:true});
@@ -159,7 +154,8 @@ const [upcomingTab, setUpcomingTab] = useState("comparativa");
     setUpcomingMvpStatus(null);
     check();
     window.addEventListener("lna-vote-updated", check);
-    return () => { cancelled = true; window.removeEventListener("lna-vote-updated", check); };
+    window.addEventListener("career-auth-updated", check);
+    return () => { cancelled = true; window.removeEventListener("lna-vote-updated", check); window.removeEventListener("career-auth-updated",check); };
   }, [selectedUpcomingMatch?.date, selectedUpcomingMatch?.homeTeam, selectedUpcomingMatch?.awayTeam, upcomingLive]);
 useEffect(() => { setUpcomingTab(upcomingLive ? "quintetos" : "comparativa"); setUpcomingVoteStatus(null); setUpcomingMvpStatus(null); }, [selectedUpcomingMatch?.id, Boolean(upcomingLive)]);
 const [liveMatches, setLiveMatches] = useState([]);
