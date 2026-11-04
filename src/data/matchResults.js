@@ -658,5 +658,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jsTnp8j_eJAUcCza8OwZrDNjIoIb9LQyG50cydNiScGDqFDOT64DLQ==/olimpico-lb-vs-penarol-mdp"
     }
+  },
+  "2026-11-03-instituto-racing-chivilcoy": {
+    "status": "finished",
+    "homeScore": 75,
+    "awayScore": 71,
+    "time": "21:00",
+    "homeTeam": "instituto",
+    "awayTeam": "racing-chivilcoy",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y8gyn48_2X3woRlYedudE9I-sDMd-AxRjfnO556CHv_e-oHVIvbmfw==/instituto-vs-racing-ch",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y8gyn48_2X3woRlYedudE9I-sDMd-AxRjfnO556CHv_e-oHVIvbmfw==/instituto-vs-racing-ch"
+    }
   }
 };

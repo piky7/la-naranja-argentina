@@ -2465,4 +2465,12 @@ export const players = [
     nationality: "Argentina",
     number: 4,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-330413",
+    officialPlayerId: 330413,
+    name: "Felipe Serio Roldan",
+    teamId: "racing-chivilcoy",
+    number: 30,
+  },
 ];
