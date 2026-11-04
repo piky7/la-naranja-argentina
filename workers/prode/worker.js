@@ -383,6 +383,49 @@ export default {
         return reply({ ok: false, error: "No se pudo vincular Mi Carrera" }, 503);
       }
     }
+    // Inicializa una sola carrera persistente por cuenta Google.
+    if (url.pathname === "/api/prode/career/initialize" && request.method === "POST") {
+      if (!env.DB || !env.VOTACIONES) return reply({ok:false,error:"Servicio no disponible"},503);
+      const identity=await verifiedFirebaseUser(request);
+      if (!identity) return reply({ok:false,error:"Iniciá sesión con Google"},401);
+      const userId="firebase:"+identity.uid;
+      const input=await request.json().catch(()=>({}));
+      const localId=typeof input.visitorId==="string" && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(input.visitorId)?input.visitorId:null;
+      try {
+        await env.DB.prepare("INSERT INTO prode_users(id,auth_subject,display_name) VALUES (?,?,?) ON CONFLICT(auth_subject) DO NOTHING").bind(userId,identity.uid,identity.name.trim().slice(0,32)||"Usuario LNA").run();
+        await ensureVoteSources(env.DB);
+        const existing=await env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind(userId).first();
+        if(existing?.visitor_id) return reply({ok:true,ready:true,existing:true});
+        const source=await env.DB.prepare("SELECT visitor_id FROM prode_vote_sources WHERE user_id=?").bind(userId).first();
+        let candidate=source?.visitor_id||localId||crypto.randomUUID();
+        const otherCareer=await env.DB.prepare("SELECT user_id FROM prode_career_links WHERE visitor_id=? AND user_id<>?").bind(candidate,userId).first();
+        const otherSource=await env.DB.prepare("SELECT user_id FROM prode_vote_sources WHERE visitor_id=? AND user_id<>?").bind(candidate,userId).first();
+        if(otherCareer||otherSource){
+          if(source?.visitor_id) return reply({ok:false,error:"El historial está asociado a otra cuenta"},409);
+          candidate=crypto.randomUUID();
+        }
+        const verify=await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId="+encodeURIComponent(candidate));
+        if(!verify.ok || !(await verify.json()).ok) throw Error("Carrera no disponible");
+        await env.DB.prepare("INSERT OR IGNORE INTO prode_career_links(user_id,visitor_id) VALUES (?,?)").bind(userId,candidate).run();
+        const linked=await env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind(userId).first();
+        if(!linked) throw Error("Carrera no vinculada");
+        return reply({ok:true,ready:true,existing:false});
+      }catch(error){console.error("Career initialize",error);return reply({ok:false,error:"No se pudo preparar Mi Carrera"},503);}
+    }
+    if(url.pathname==="/api/prode/career/data" && request.method==="GET"){
+      if(!env.DB||!env.VOTACIONES) return reply({ok:false,error:"Servicio no disponible"},503);
+      const identity=await verifiedFirebaseUser(request);
+      if(!identity) return reply({ok:false,error:"Iniciá sesión con Google"},401);
+      const kind=url.searchParams.get("kind");
+      if(!["points","predictions"].includes(kind)) return reply({ok:false,error:"Consulta inválida"},400);
+      try{
+        const linked=await env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind("firebase:"+identity.uid).first();
+        if(!linked?.visitor_id) return reply({ok:false,error:"Mi Carrera todavía no está preparada"},409);
+        const endpoint=kind==="points"?"/api/puntos":"/api/mis-pronosticos";
+        const response=await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev"+endpoint+"?visitanteId="+encodeURIComponent(linked.visitor_id));
+        return reply(await response.json(),response.status);
+      }catch(error){console.error("Career data",error);return reply({ok:false,error:"No se pudo consultar Mi Carrera"},503);}
+    }
     // Pronósticos autenticados: un único historial por cuenta Google en todos
     // los dispositivos, sin exponer el ID interno de votaciones al navegador.
     if (url.pathname === "/api/prode/ballot" && ["GET","POST"].includes(request.method)) {
@@ -402,8 +445,7 @@ export default {
           return reply({ok:false,error:"Jugador inválido"},400);
       }
       try {
-        if (!await env.DB.prepare("SELECT 1 FROM prode_users WHERE id=?").bind(userId).first())
-          return reply({ok:false,error:"Primero registrá tu perfil Prode"},409);
+        await env.DB.prepare("INSERT INTO prode_users(id,auth_subject,display_name) VALUES (?,?,?) ON CONFLICT(auth_subject) DO NOTHING").bind(userId,identity.uid,identity.name.trim().slice(0,32)||"Usuario LNA").run();
         await ensureVoteSources(env.DB);
         const [career,source] = await Promise.all([
           env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind(userId).first(),
