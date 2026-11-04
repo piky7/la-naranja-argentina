@@ -246,7 +246,7 @@ export default function ProdeGoogleAccess({ onReady }) {
           </div>
           {(careerLink === false || linkNotice) && <div className="prode-career-link" role={linkNotice ? "status" : undefined}>
             <strong>{careerLink ? "✓ Mi Carrera vinculada" : "Vincular Mi Carrera"}</strong>
-            <p>{careerLink ? "Tu cuenta Google quedó asociada a esta carrera. Los pronósticos y puntos de Prode todavía no se sincronizan." : "Vinculá la carrera de este navegador con tu cuenta Prode. No cambia los votos ni puntos existentes."}</p>
+            <p>{careerLink ? "Tu cuenta Google quedó asociada a esta carrera. Tus pronósticos cuentan en Prode según las reglas de cada liga." : "Opcional: podés vincular Mi Carrera a tu cuenta Google. Los votos de este dispositivo ya cuentan en Prode sin vincularla."}</p>
             {careerLink === false && <>
               <label className="prode-career-consent"><input type="checkbox" checked={linkConfirm} onChange={e => setLinkConfirm(e.target.checked)}/> Confirmo que esta es mi carrera y quiero asociarla a mi cuenta Google.</label>
               <button type="button" onClick={linkCareer} disabled={!linkConfirm || linkBusy}>{linkBusy ? "Vinculando…" : "Vincular Mi Carrera"}</button>
