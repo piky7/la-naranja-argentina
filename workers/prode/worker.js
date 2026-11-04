@@ -443,7 +443,7 @@ export default {
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_career_jerseys(user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, name TEXT NOT NULL, number TEXT NOT NULL)").run();
         if(request.method==="POST"){
           const body=await request.json().catch(()=>({}));
-          const name=typeof body.name==="string"?body.name.trim().replace(/\\s+/g," "):"";
+          const name=typeof body.name==="string"?body.name.trim().replace(/\s+/g," "):"";
           const number=typeof body.number==="string"?body.number:"";
           if(!name||name.length>24||!/^(?:[0-9]|[1-9][0-9])$/.test(number))
             return reply({ok:false,error:"Nombre o dorsal inválido"},400);
