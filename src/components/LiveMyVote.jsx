@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { teams } from "../data/teams";
 import { players } from "../data/players";
-
-const API = "https://lna-votaciones-api.lnab.workers.dev";
-const VISITOR_KEY = "lna-vote-visitor-id";
+import { requestPrediction } from "../auth/prodeBallot";
 
 export default function LiveMyVote({ match }) {
   const matchId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
@@ -11,21 +9,9 @@ export default function LiveMyVote({ match }) {
 
   useEffect(() => {
     const controller = new AbortController();
-    const visitorId = (() => {
-      try { return localStorage.getItem(VISITOR_KEY); }
-      catch { return null; }
-    })();
-    setVotes({ loading: true, winner: null, mvp: null, winnerError: false, mvpError: false, missingCareer: !visitorId });
-    if (!visitorId) return () => controller.abort();
-
-    const params = `?partidoId=${encodeURIComponent(matchId)}&visitanteId=${encodeURIComponent(visitorId)}`;
-    const load = async endpoint => {
-      const response = await fetch(API + endpoint + params, { cache: "no-store", signal: controller.signal });
-      const body = await response.json();
-      if (!response.ok || !body.ok) throw new Error("Consulta no disponible");
-      return body.selected || null;
-    };
-    Promise.allSettled([load("/api/votos"), load("/api/mvp")]).then(([winner, mvp]) => {
+    setVotes({ loading: true, winner: null, mvp: null, winnerError: false, mvpError: false, missingCareer: false });
+    const load = kind => requestPrediction(kind, matchId, null, controller.signal).then(body => body.selected || null);
+    Promise.allSettled([load("winner"), load("mvp")]).then(([winner, mvp]) => {
       if (controller.signal.aborted) return;
       setVotes({
         loading: false,
@@ -64,7 +50,7 @@ export default function LiveMyVote({ match }) {
       </div>
     </div>
     <p className="live-my-vote-footnote">{votes.missingCareer
-      ? "Los votos se guardan en la Mi Carrera de cada navegador. Abrí esta sección en el dispositivo donde votaste."
+      ? "Si tenés Prode iniciado con Google, tus pronósticos se consultan desde la misma cuenta en todos los dispositivos."
       : "Estos son tus pronósticos guardados antes del partido. Durante el vivo no se pueden cambiar."}</p>
   </section>;
 }
