@@ -79,7 +79,8 @@ export default function ProdeGoogleAccess({ onReady }) {
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
       if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); setCrestFont(data.user.crestFont || "sport"); const selectedSymbol = PRODE_SYMBOL_IDS.includes(data.user.crestSymbol) ? data.user.crestSymbol : defaultCrestSymbol(data.user.crestStyle); setCrestSymbol(selectedSymbol); setCrestCategory(crestSymbolCategory(selectedSymbol)); }
       const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
-      if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
+      const wasLinked = linkRes.ok ? Boolean((await linkRes.json()).linked) : null;
+      if (active && wasLinked !== null) setCareerLink(wasLinked);
 
       // Los votos de la sesión se reconocen en Prode sin vincular Mi Carrera.
       // El Worker verifica el usuario Google y evita atribuir un visitante a dos cuentas.
@@ -93,6 +94,18 @@ export default function ProdeGoogleAccess({ onReady }) {
           });
           const sourceData = await sourceRes.json();
           if (!sourceRes.ok || !sourceData.ok) throw Error(sourceData.error || "No se pudieron sincronizar los pronósticos");
+          // Primera sesión Prode: asociar Mi Carrera automáticamente a Google.
+          // Nunca reemplazar una carrera que ya estaba vinculada.
+          if (wasLinked === false && !sourceData.alreadyAssociated) {
+            const autoLinkRes = await fetch(PRODE_API + "/api/prode/career-link", {
+              method: "POST",
+              headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+              body: JSON.stringify({ visitorId, confirm: true }),
+            });
+            const autoLink = await autoLinkRes.json();
+            if (!autoLinkRes.ok || !autoLink.ok) throw Error(autoLink.error || "No se pudo vincular Mi Carrera automáticamente");
+            if (active) setCareerLink(true);
+          }
           if (active) window.dispatchEvent(new Event("prode-profile-updated"));
         } catch (error) {
           if (active) setVoteSourceError(error.message || "No se pudieron reconocer los pronósticos de este dispositivo.");
