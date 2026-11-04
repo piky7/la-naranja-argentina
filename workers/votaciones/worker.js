@@ -129,6 +129,17 @@ async function getFinishObservations(db) {
   return new Map((rows.results || []).map(row => [row.partido_id,row.detectado_en]));
 }
 
+// Orden único para Mi Carrera y Prode: inicio ascendente y, si empatan,
+// primer final observado ascendente. Sin registro comparable, se usa ID.
+function comparePredictionGames(a,b) {
+  const kickoff = Date.parse(a.startsAt)-Date.parse(b.startsAt);
+  if (kickoff) return kickoff;
+  const endA = Date.parse(a.finishedObservedAt || "");
+  const endB = Date.parse(b.finishedObservedAt || "");
+  if (Number.isFinite(endA) && Number.isFinite(endB) && endA !== endB) return endA-endB;
+  return String(a.id).localeCompare(String(b.id));
+}
+
 // Archivo permanente de partidos en D1: permite recalcular carreras aunque roten los fixtures.
 // Se conserva el resultado confirmado; una versión futura sin resultado no puede borrarlo.
 async function archiveFixture(db, fixture) {
@@ -175,8 +186,12 @@ async function calculateRewards(db, fixture, visitorId) {
   const firstVote = await db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first();
   const firstMvp = await db.prepare("SELECT MIN(partido_id) AS first_id FROM votos_mvp").first();
   const firstDate = [firstVote?.first_id, firstMvp?.first_id].filter(Boolean).sort()[0]?.slice(0,10) || "9999-12-31";
+  const finishTimes = await getFinishObservations(db);
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
-    .sort((a,b) => Date.parse(a.startsAt)-Date.parse(b.startsAt) || a.id.localeCompare(b.id));
+    .sort((a,b) => comparePredictionGames(
+      {...a,finishedObservedAt:finishTimes.get(a.id)},
+      {...b,finishedObservedAt:finishTimes.get(b.id)}
+    ));
   let points = 0, wins = 0, losses = 0, missed = 0, legacyMvps = 0, mvpHits = 0, bestStreak = 0;
   const categories = [{name:"Liga de Desarrollo",goal:50},{name:"Liga Federal",goal:100},{name:"Liga Argentina",goal:150},{name:"Liga Nacional",goal:200},{name:"Estrella LNB",goal:300},{name:"Leyenda LNA",goal:null}];
   // Cada categoría tiene su propio puntaje desde cero; el histórico nunca se reinicia.
