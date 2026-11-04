@@ -7,6 +7,7 @@ import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 import { playerMatchStatCorrections } from "../data/playerMatchStatCorrections";
+import "./PlayerModalSeason.css";
 
 
 export default function PlayerModal({
