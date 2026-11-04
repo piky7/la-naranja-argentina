@@ -18,7 +18,7 @@ function campoEstadistico(datos, keys, matcher) {
     const value = datos[key];
     if (value != null && value !== "" && Number.isFinite(Number(value))) return Number(value);
   }
-  const normalize = value => String(value).normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/[^a-z0-9]/gi,"").toLowerCase();
+  const normalize = value => String(value).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/gi,"").toLowerCase();
   for (const [key, value] of Object.entries(datos)) {
     if (value == null || value === "" || !Number.isFinite(Number(value))) continue;
     if (matcher(normalize(key))) return Number(value);
@@ -31,14 +31,14 @@ function campoTabla($, fila, kind) {
   const cells = $(fila).children("th,td");
   const headers = table.find("thead tr").last().children("th,td");
   if (!headers.length || headers.length !== cells.length) return null;
-  const clean = value => String(value).normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/\\s+/g," ").trim();
+  const clean = value => String(value).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
   for (let i=0;i<headers.length;i++) {
     const heading = clean($(headers[i]).text());
     const isBlocks = kind === "blocks" && /^(tap|tapon|tapones|blk|bloqueos?)$/.test(heading);
     const isFouls = kind === "fouls" && /^(faltas?|faltas? personales?|fp|pf)$/.test(heading);
     if (!isBlocks && !isFouls) continue;
     const text = $(cells[i]).text().trim();
-    if (/^\\d+$/.test(text)) return Number(text);
+    if (/^\d+$/.test(text)) return Number(text);
   }
   return null;
 }
