@@ -419,6 +419,26 @@ export default {
             open: Boolean(game && !game.finished && Number.isFinite(Date.parse(game.startsAt)) && Date.now() < Date.parse(game.startsAt)),
           };
         });
+        // Usar la MISMA secuencia individual que el cálculo de rachas:
+        // hora de inicio, final observado válido y desempate por acierto.
+        const finishTimes = await getFinishObservations(env.DB);
+        const sequence = [...predictions].sort((a,b) => {
+          const startA = Date.parse(a.startsAt || "");
+          const startB = Date.parse(b.startsAt || "");
+          if (Number.isFinite(startA) && Number.isFinite(startB) && startA !== startB) return startA-startB;
+          const gameA = byId.get(a.partidoId);
+          const gameB = byId.get(b.partidoId);
+          const endA = timelyFinishObservation(gameA,finishTimes.get(a.partidoId));
+          const endB = timelyFinishObservation(gameB,finishTimes.get(b.partidoId));
+          const timeA = Date.parse(endA || "");
+          const timeB = Date.parse(endB || "");
+          if (Number.isFinite(timeA) && Number.isFinite(timeB) && timeA !== timeB) return timeA-timeB;
+          if (endA && endB && endA===endB && a.status!=="pending" && b.status!=="pending" && a.status!==b.status)
+            return a.status==="correct" ? 1 : -1;
+          return String(a.partidoId).localeCompare(String(b.partidoId));
+        });
+        sequence.forEach((prediction,index) => { prediction.streakOrder = index; });
+        predictions.sort((a,b) => b.streakOrder-a.streakOrder);
         const rewards = await calculateRewards(env.DB, archivedFixture, visitorId);
         for (const p of predictions) {
           const detail = rewards.perGame[p.partidoId];
