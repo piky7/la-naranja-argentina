@@ -2,6 +2,7 @@ import { teams } from "../data/teams";
 import { useEffect, useState } from "react";
 import "./MatchVote.css";
 import { requestPrediction } from "../auth/prodeBallot";
+import { useCareerSession } from "../auth/careerAccount";
 
 export default function MatchVote({ match, onStatusChange }) {
   const date = match?.date;
@@ -13,6 +14,7 @@ export default function MatchVote({ match, onStatusChange }) {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
   const [sessionRevision, setSessionRevision] = useState(0);
+  const { user, loading: authLoading, login, busy: authBusy, error: authError } = useCareerSession();
   useEffect(() => {
     const refresh = () => setSessionRevision(value => value + 1);
     window.addEventListener("prode-profile-updated", refresh);
@@ -20,7 +22,7 @@ export default function MatchVote({ match, onStatusChange }) {
   }, []);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id || authLoading || !user) return;
     const controller = new AbortController();
     setData(null);
     setEditing(false);
@@ -29,11 +31,17 @@ export default function MatchVote({ match, onStatusChange }) {
       .then(body => { if (!controller.signal.aborted) setData(body); })
       .catch(err => { if (!controller.signal.aborted) setError(err.message || "Votación no disponible"); });
     return () => controller.abort();
-  }, [id, sessionRevision]);
+  }, [id, sessionRevision, user, authLoading]);
 
   useEffect(() => { if (data && onStatusChange) onStatusChange({ voted: data.voted, open: data.open }); }, [data, onStatusChange]);
 
   if (!id) return null;
+  if (!authLoading && !user) return <section className="lna-vote lna-vote-login">
+    <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div></div>
+    <p>Iniciá sesión con Google para votar y sumar puntos en Mi Carrera y Prode.</p>
+    <button type="button" onClick={login} disabled={authBusy}> {authBusy ? "Conectando…" : "Continuar con Google"} </button>
+    {authError && <small role="alert">{authError}</small>}
+  </section>;
   if (!data) return <section className="lna-vote" aria-label="Pronóstico de hinchas" aria-busy="true"><div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div><span>Consultando votos…</span></div><div className="lna-vote-options">{[home, away].map(team => <div key={team} className="lna-vote-option" style={{opacity:.65,cursor:"default"}}><span className="lna-vote-team">{teams.find(item => item.id === team)?.logo && <img className="lna-vote-logo" src={teams.find(item => item.id === team).logo} alt="" />}{teams.find(item => item.id === team)?.shortName || team.replace(/-/g," ")}</span><span>—</span></div>)}</div><small>{error || "Cargando tu pronóstico y los porcentajes…"}</small></section>;
   if (!data.open && !data.voted) return null;
 
