@@ -488,7 +488,7 @@ export default {
           : "";
         const upstream = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev" + target + params, {
           method: request.method,
-          headers: { "Origin": SITE, "Content-Type": "application/json" },
+          headers: { "Origin": SITE, "Content-Type": "application/json", "Authorization": request.headers.get("Authorization") || "" },
           ...(request.method === "POST" ? { body: JSON.stringify({
             partidoId, visitanteId:visitorId,
             ...(kind === "winner" ? {equipoVotado:body.equipoVotado} : {jugadorId:body.jugadorId}),
