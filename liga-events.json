@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-12-03",
+  "dateTo": "2026-12-04",
   "matches": [
     {
       "date": "2026-09-28",
@@ -899,7 +899,7 @@
         "officialTeamId": 114607
       },
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 2,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y8gyn48_2X3woRlYedudE9I-sDMd-AxRjfnO556CHv_e-oHVIvbmfw==/instituto-vs-racing-ch"
     },
@@ -1568,6 +1568,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2qwBh5lhRELhJ68L4jENX68dZw9Ctmvul79VWI9NgGz4kBqU96ZwXjA==/olimpico-lb-vs-san-lorenzo"
+    },
+    {
+      "date": "2026-12-05",
+      "time": "00:00",
+      "home": {
+        "name": "PLATENSE",
+        "officialClubId": 80,
+        "officialTeamId": 112549
+      },
+      "away": {
+        "name": "RACING (CH)",
+        "officialClubId": 1992,
+        "officialTeamId": 114607
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2p3ayCBhlDOmrhURyg96dZ8u4v8xFrpL1sRddWggxVruzxjv2QIDnPA==/platense-vs-racing-ch"
     }
   ]
 }

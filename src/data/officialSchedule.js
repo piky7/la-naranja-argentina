@@ -694,5 +694,13 @@ export const officialSchedule = [
     "homeTeam": "olimpico",
     "awayTeam": "san-lorenzo",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2qwBh5lhRELhJ68L4jENX68dZw9Ctmvul79VWI9NgGz4kBqU96ZwXjA==/olimpico-lb-vs-san-lorenzo"
+  },
+  {
+    "id": "2026-12-05-platense-racing-chivilcoy",
+    "date": "2026-12-05",
+    "time": null,
+    "homeTeam": "platense",
+    "awayTeam": "racing-chivilcoy",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2p3ayCBhlDOmrhURyg96dZ8u4v8xFrpL1sRddWggxVruzxjv2QIDnPA==/platense-vs-racing-ch"
   }
 ];
