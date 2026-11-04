@@ -9,6 +9,15 @@ const defaultCrestSymbol = style => ({ elite:"eagle", pro:"ball", legend:"torch"
 const crestSymbolCategory = symbol => PRODE_SYMBOL_CATEGORIES.find(group => group.options.some(([id]) => id === symbol))?.id || "sports";
 
 const PRODE_API = "https://lna-prode-api.lnab.workers.dev";
+const VOTING_VISITOR_KEY = "lna-vote-visitor-id";
+
+function getVotingVisitorId() {
+  try {
+    let id = localStorage.getItem(VOTING_VISITOR_KEY);
+    if (!id) { id = crypto.randomUUID(); localStorage.setItem(VOTING_VISITOR_KEY, id); }
+    return id;
+  } catch { return null; }
+}
 
 export default function ProdeGoogleAccess({ onReady }) {
   const [user, setUser] = useState(null);
@@ -30,6 +39,7 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [crestCategory, setCrestCategory] = useState("sports");
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
+  const [voteSourceError, setVoteSourceError] = useState("");
   const [careerLink, setCareerLink] = useState(null);
   const [linkNotice, setLinkNotice] = useState(false);
   const [linkBusy, setLinkBusy] = useState(false);
@@ -59,6 +69,7 @@ export default function ProdeGoogleAccess({ onReady }) {
     setLinkNotice(false);
     setSyncing(true);
     setError("");
+    setVoteSourceError("");
     user.getIdToken().then(async (token) => {
       const response = await fetch(PRODE_API + "/api/prode/me", {
         method: "POST",
@@ -69,6 +80,24 @@ export default function ProdeGoogleAccess({ onReady }) {
       if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); setCrestFont(data.user.crestFont || "sport"); const selectedSymbol = PRODE_SYMBOL_IDS.includes(data.user.crestSymbol) ? data.user.crestSymbol : defaultCrestSymbol(data.user.crestStyle); setCrestSymbol(selectedSymbol); setCrestCategory(crestSymbolCategory(selectedSymbol)); }
       const linkRes = await fetch(PRODE_API + "/api/prode/career-link", { headers: { Authorization: "Bearer " + token } });
       if (linkRes.ok) { const link = await linkRes.json(); if (active) setCareerLink(Boolean(link.linked)); }
+
+      // Los votos de la sesión se reconocen en Prode sin vincular Mi Carrera.
+      // El Worker verifica el usuario Google y evita atribuir un visitante a dos cuentas.
+      const visitorId = getVotingVisitorId();
+      if (visitorId) {
+        try {
+          const sourceRes = await fetch(PRODE_API + "/api/prode/vote-source", {
+            method: "POST",
+            headers: { Authorization: "Bearer " + token, "Content-Type": "application/json" },
+            body: JSON.stringify({ visitorId }),
+          });
+          const sourceData = await sourceRes.json();
+          if (!sourceRes.ok || !sourceData.ok) throw Error(sourceData.error || "No se pudieron sincronizar los pronósticos");
+          if (active) window.dispatchEvent(new Event("prode-profile-updated"));
+        } catch (error) {
+          if (active) setVoteSourceError(error.message || "No se pudieron reconocer los pronósticos de este dispositivo.");
+        }
+      }
     }).catch(() => {
       if (active) setError("Tu cuenta Google está conectada, pero no pudimos registrar tu perfil Prode. Intentá recargar la página.");
     }).finally(() => { if (active) { setSyncing(false); setProfileLoaded(true); } });
@@ -232,6 +261,7 @@ export default function ProdeGoogleAccess({ onReady }) {
         </>
       )}
       {error && <p role="alert">{error}</p>}
+      {user && voteSourceError && <p role="status" className="prode-group-error">Pronósticos Prode: {voteSourceError}</p>}
       {logoutConfirmOpen && <div className="prode-dialog-backdrop" onClick={() => !busy && setLogoutConfirmOpen(false)}>
         <div className="prode-dialog" role="alertdialog" aria-modal="true" aria-labelledby="prode-logout-title" aria-describedby="prode-logout-description" onClick={e => e.stopPropagation()}>
           <div className="prode-dialog-heading">
