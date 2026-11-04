@@ -1,20 +1,7 @@
 import { teams } from "../data/teams";
 import { useEffect, useState } from "react";
 import "./MatchVote.css";
-
-const API = "https://lna-votaciones-api.lnab.workers.dev/api/votos";
-const KEY = "lna-vote-visitor-id";
-
-function getVisitorId() {
-  try {
-    let id = localStorage.getItem(KEY);
-    if (!id) {
-      id = crypto.randomUUID();
-      localStorage.setItem(KEY, id);
-    }
-    return id;
-  } catch { return null; }
-}
+import { requestPrediction } from "../auth/prodeBallot";
 
 export default function MatchVote({ match, onStatusChange }) {
   const date = match?.date;
@@ -25,24 +12,24 @@ export default function MatchVote({ match, onStatusChange }) {
   const [busy, setBusy] = useState(false);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
+  const [sessionRevision, setSessionRevision] = useState(0);
+  useEffect(() => {
+    const refresh = () => setSessionRevision(value => value + 1);
+    window.addEventListener("prode-profile-updated", refresh);
+    return () => window.removeEventListener("prode-profile-updated", refresh);
+  }, []);
 
   useEffect(() => {
     if (!id) return;
     const controller = new AbortController();
-    const visitorId = getVisitorId();
     setData(null);
     setEditing(false);
     setError("");
-    if (!visitorId) return;
-    fetch(`${API}?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`, { signal: controller.signal })
-      .then(async res => {
-        const body = await res.json();
-        if (!res.ok) throw new Error(body.error || "No disponible");
-        setData(body);
-      })
-      .catch(err => { if (err.name !== "AbortError") setError("Votación no disponible"); });
+    requestPrediction("winner", id, null, controller.signal)
+      .then(body => { if (!controller.signal.aborted) setData(body); })
+      .catch(err => { if (!controller.signal.aborted) setError(err.message || "Votación no disponible"); });
     return () => controller.abort();
-  }, [id]);
+  }, [id, sessionRevision]);
 
   useEffect(() => { if (data && onStatusChange) onStatusChange({ voted: data.voted, open: data.open }); }, [data, onStatusChange]);
 
@@ -52,17 +39,10 @@ export default function MatchVote({ match, onStatusChange }) {
 
   async function vote(team) {
     if (busy || !data.open || (data.voted && !editing) || (data.voted && data.selected === team)) return;
-    const visitorId = getVisitorId();
-    if (!visitorId) return;
     setBusy(true);
     setError("");
     try {
-      const res = await fetch(API, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ partidoId: id, visitanteId: visitorId, equipoVotado: team }),
-      });
-      const body = await res.json();
-      if (!res.ok || !body.ok) throw new Error(body.error || "No se pudo votar");
+      const body = await requestPrediction("winner", id, team);
       setData(body);
       setEditing(false);
       window.dispatchEvent(new Event("lna-vote-updated"));
