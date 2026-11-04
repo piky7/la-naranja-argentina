@@ -243,7 +243,7 @@ export default {
       try {
         await ensureCrests(env.DB);
         await ensureVoteSources(env.DB);
-        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(vs.visitor_id,l.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id = l.user_id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(vs.visitor_id,l.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(vs.visitor_id,l.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(vs.visitor_id,l.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT 100").all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
@@ -372,6 +372,10 @@ export default {
         if (!careerRes.ok) return reply({ ok: false, error: "No se pudo verificar Mi Carrera (servicio de votaciones: " + careerRes.status + ")" }, 503);
         const career = await careerRes.json();
         if (!career.ok) return reply({ ok: false, error: "Mi Carrera no está disponible" }, 409);
+        await ensureVoteSources(env.DB);
+        const voteOwner = await env.DB.prepare("SELECT user_id FROM prode_vote_sources WHERE visitor_id=?").bind(visitorId).first();
+        if (voteOwner && voteOwner.user_id !== userId)
+          return reply({ ok: false, error: "Esta carrera ya está asociada a los pronósticos de otra cuenta Prode" }, 409);
         await env.DB.prepare("INSERT INTO prode_career_links (user_id, visitor_id) VALUES (?, ?)").bind(userId, visitorId).run();
         return reply({ ok: true, linked: true });
       } catch (error) {
