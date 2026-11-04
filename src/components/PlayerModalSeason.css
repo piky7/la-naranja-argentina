@@ -140,3 +140,130 @@
   .home-player-modal .lna-player-shot-bar-row strong {font-size:11px}
   .home-player-modal .lna-player-shot-bar-row small {font-size:9px}
 }
+
+/* Vista de temporada compacta: el popup conserva los datos, sin scroll vertical
+   en pantallas comunes y sin duplicar estadísticas en el radar. */
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-header {
+  min-height: 76px;
+  padding-block: 7px;
+}
+.home-player-modal:has(.lna-player-radar-section) .lna-player-modal-tabs {
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+.home-player-modal:has(.lna-player-radar-section) .lna-player-modal-tabs button {
+  min-height: 30px;
+}
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-details {
+  margin: 5px 10px 0;
+  gap: 5px;
+}
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-details > div {
+  min-height: 41px;
+  padding: 4px 2px;
+  gap: 2px;
+}
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-season {
+  margin: 6px 10px 0;
+  padding: 6px 9px 7px !important;
+}
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-season .home-player-modal-label {
+  margin-bottom: 5px;
+}
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-stats > div {
+  min-height: 42px;
+  padding: 5px 1px;
+  gap: 3px;
+}
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-stats strong {
+  font-size: clamp(13px, 3.7vw, 19px);
+}
+.home-player-modal .lna-player-radar-section {
+  margin: 6px 10px;
+  padding: 6px 9px 7px;
+}
+.home-player-modal .lna-player-radar-heading {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+}
+.home-player-modal .lna-player-radar-heading > .home-player-modal-label {
+  margin:0 !important;
+  font-size:10px;
+  text-align:left;
+  color:#f28a32 !important;
+}
+.home-player-modal .lna-player-radar-heading > small {
+  font-size:9px;
+  color:#9fb7c7;
+  font-weight:800;
+  white-space:nowrap;
+}
+.home-player-modal .lna-player-radar-graphic {
+  display:block;
+  width: min(100%, 265px);
+  height: 137px;
+  margin:-6px auto -7px;
+}
+.home-player-modal .lna-player-radar-note {
+  display:block;
+  font-size:9px;
+  line-height:1.2;
+  text-align:center;
+  margin:0;
+}
+.home-player-modal .lna-player-season-expanded {
+  margin:6px 10px 5px;
+  padding:7px 9px;
+}
+.home-player-modal .lna-player-season-expanded .home-player-modal-label {
+  margin-bottom:5px;
+  font-size:10px;
+}
+.home-player-modal .lna-player-season-extra {
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:4px;
+}
+.home-player-modal .lna-player-season-extra > div {
+  min-height:38px;
+  padding:3px 1px;
+  gap:2px;
+}
+.home-player-modal .lna-player-season-extra strong {
+  font-size:13px;
+}
+.home-player-modal .lna-player-season-shots-title {
+  margin-top:6px !important;
+}
+.home-player-modal .lna-player-shot-bars {gap:5px}
+.home-player-modal .lna-player-shot-bar-track {height:8px}
+.home-player-modal .lna-player-season-expanded .lna-player-match-note {
+  display:none;
+}
+.home-player-modal:has(.lna-player-radar-section) .home-player-modal-footer {
+  min-height:30px;
+  margin-top:4px;
+  padding-block:3px;
+}
+@media(max-width:440px) {
+  .home-player-modal:has(.lna-player-radar-section) .home-player-modal-header {
+    min-height:75px;
+    padding:7px 11px;
+  }
+  .home-player-modal:has(.lna-player-radar-section) .home-player-modal-logo {
+    width:43px;height:43px;
+  }
+  .home-player-modal:has(.lna-player-radar-section) .home-player-modal-info h2 {
+    font-size:clamp(16px,4.4vw,21px);
+  }
+  .home-player-modal .lna-player-season-extra {
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:3px;
+  }
+  .home-player-modal .lna-player-season-extra > div {min-height:39px}
+  .home-player-modal .lna-player-season-extra span {font-size:7px}
+  .home-player-modal .lna-player-season-extra strong {font-size:12px}
+  .home-player-modal .lna-player-radar-graphic {height:130px}
+  .home-player-modal .lna-player-shot-bar-row {gap:4px}
+}
