@@ -188,10 +188,31 @@ async function calculateRewards(db, fixture, visitorId) {
   const firstDate = [firstVote?.first_id, firstMvp?.first_id].filter(Boolean).sort()[0]?.slice(0,10) || "9999-12-31";
   const finishTimes = await getFinishObservations(db);
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
-    .sort((a,b) => comparePredictionGames(
-      {...a,finishedObservedAt:finishTimes.get(a.id)},
-      {...b,finishedObservedAt:finishTimes.get(b.id)}
-    ));
+    .sort((a,b) => {
+      const aFinish = finishTimes.get(a.id) || null;
+      const bFinish = finishTimes.get(b.id) || null;
+      const base = comparePredictionGames(
+        {...a,finishedObservedAt:aFinish},
+        {...b,finishedObservedAt:bFinish}
+      );
+      // Si iniciaron juntos y ambos finales se detectaron en la misma
+      // consulta, procesar el pronóstico errado antes que el acertado.
+      // La decisión es individual: el orden puede variar por usuario.
+      const sameStart = Date.parse(a.startsAt) === Date.parse(b.startsAt);
+      const sameDetection = aFinish && bFinish && aFinish === bFinish;
+      const confirmed = game => game.finished === true &&
+        Number.isFinite(game.homeScore) && Number.isFinite(game.awayScore) &&
+        game.homeScore !== game.awayScore;
+      if (sameStart && sameDetection && confirmed(a) && confirmed(b)) {
+        const acertado = game => {
+          const vote = voteMap.get(game.id);
+          return Boolean(vote) && vote === (game.homeScore > game.awayScore ? game.homeTeam : game.awayTeam);
+        };
+        const correctA = acertado(a), correctB = acertado(b);
+        if (correctA !== correctB) return correctA ? 1 : -1;
+      }
+      return base;
+    });
   let points = 0, wins = 0, losses = 0, missed = 0, legacyMvps = 0, mvpHits = 0, bestStreak = 0;
   const categories = [{name:"Liga de Desarrollo",goal:50},{name:"Liga Federal",goal:100},{name:"Liga Argentina",goal:150},{name:"Liga Nacional",goal:200},{name:"Estrella LNB",goal:300},{name:"Leyenda LNA",goal:null}];
   // Cada categoría tiene su propio puntaje desde cero; el histórico nunca se reinicia.
