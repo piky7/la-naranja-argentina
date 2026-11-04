@@ -40,5 +40,6 @@ export async function getProdeIdToken() {
 // Devuelve null si no hay sesión: las votaciones anónimas de Mi Carrera siguen funcionando.
 export async function getOptionalProdeIdToken() {
   const { auth } = await sdk();
+  await auth.authStateReady();
   return auth.currentUser ? auth.currentUser.getIdToken() : null;
 }
