@@ -426,6 +426,26 @@ export default {
         return reply(await response.json(),response.status);
       }catch(error){console.error("Career data",error);return reply({ok:false,error:"No se pudo consultar Mi Carrera"},503);}
     }
+    // Camiseta de Mi Carrera guardada por cuenta Google (sin depender del dispositivo).
+    if(url.pathname==="/api/prode/career/jersey" && ["GET","POST"].includes(request.method)){
+      if(!env.DB) return reply({ok:false,error:"Base de datos no disponible"},503);
+      const identity=await verifiedFirebaseUser(request);
+      if(!identity) return reply({ok:false,error:"Iniciá sesión con Google"},401);
+      const userId="firebase:"+identity.uid;
+      try{
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_career_jerseys(user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, name TEXT NOT NULL, number TEXT NOT NULL)").run();
+        if(request.method==="POST"){
+          const body=await request.json().catch(()=>({}));
+          const name=typeof body.name==="string"?body.name.trim().replace(/\\s+/g," "):"";
+          const number=typeof body.number==="string"?body.number:"";
+          if(!name||name.length>24||!/^(?:[0-9]|[1-9][0-9])$/.test(number))
+            return reply({ok:false,error:"Nombre o dorsal inválido"},400);
+          await env.DB.prepare("INSERT INTO prode_career_jerseys(user_id,name,number) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET name=excluded.name, number=excluded.number").bind(userId,name,number).run();
+        }
+        const jersey=await env.DB.prepare("SELECT name,number FROM prode_career_jerseys WHERE user_id=?").bind(userId).first();
+        return reply({ok:true,jersey:jersey||null});
+      }catch(error){console.error("Career jersey",error);return reply({ok:false,error:"No se pudo guardar el jugador"},503);}
+    }
     // Pronósticos autenticados: un único historial por cuenta Google en todos
     // los dispositivos, sin exponer el ID interno de votaciones al navegador.
     if (url.pathname === "/api/prode/ballot" && ["GET","POST"].includes(request.method)) {
