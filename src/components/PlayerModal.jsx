@@ -7,6 +7,7 @@ import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 import { playerMatchStatCorrections } from "../data/playerMatchStatCorrections";
+import { radarPercent } from "../utils/seasonRadar";
 import "./PlayerModalSeason.css";
 
 
@@ -119,6 +120,18 @@ export default function PlayerModal({
     const percentage = attempted > 0 ? Math.round(made / attempted * 1000) / 10 : 0;
     return {made,attempted,percentage, games:available.length};
   };
+  const radarItems = [
+    {key:"points",label:"PTS",value:mean("points")},
+    {key:"rebounds",label:"REB",value:mean("rebounds")},
+    {key:"assists",label:"AST",value:mean("assists")},
+    {key:"steals",label:"ROB",value:metricMean("steals")},
+  ].map(item => ({...item,percent:radarPercent(item.key,item.value==="—"?null:Number(item.value))}));
+  const radarXY = (index,ratio) => {
+    const positions = [[110,88],[180,158],[110,228],[40,158]];
+    return [110+(positions[index][0]-110)*ratio,158+(positions[index][1]-158)*ratio];
+  };
+  const radarPoints = ratio => radarItems.map((_,i) => radarXY(i,ratio).join(",")).join(" ");
+  const radarFill = radarItems.map((item,i) => radarXY(i,(item.percent??0)/100).join(",")).join(" ");
   const minuteValues = games.map(game => {
     const parts = typeof game.minutes === "string" ? game.minutes.match(/^(\d+):(\d{2})$/) : null;
     return parts && Number(parts[2]) < 60 ? Number(parts[1]) * 60 + Number(parts[2]) : null;
@@ -294,6 +307,37 @@ export default function PlayerModal({
           </div>
         </div>
 
+        <section className="lna-player-radar-section" aria-label="Radar de estadísticas de temporada">
+          <span className="home-player-modal-label">RADAR ESTADÍSTICO</span>
+          <div className="lna-player-radar-content">
+            <svg viewBox="0 0 220 286" role="img"
+              aria-label={`Radar de temporada: ${radarItems.map(item => item.label+" "+item.value).join(", ")}`}>
+              {[.25,.5,.75,1].map(level => <polygon key={level} points={radarPoints(level)}
+                fill="none" stroke="#446178" strokeWidth="1" />)}
+              {radarItems.map((item,i) => {
+                const [x,y]=radarXY(i,1);
+                return <line key={item.key} x1="110" y1="158" x2={x} y2={y} stroke="#446178" strokeWidth="1" />;
+              })}
+              <polygon points={radarFill} fill="#f68b2c" fillOpacity=".23"
+                stroke="#fa9233" strokeWidth="2.8" strokeLinejoin="round" />
+              {radarItems.map((item,i) => {
+                const [x,y]=radarXY(i,(item.percent??0)/100);
+                return item.percent!=null && <circle key={item.key} cx={x} cy={y} r="3.2" fill="#ffa447"/>;
+              })}
+              {radarItems.map((item,i)=>{
+                const anchors=[[110,42],[210,153],[110,268],[10,153]];
+                return <text key={item.key} x={anchors[i][0]} y={anchors[i][1]}
+                  textAnchor={i===1?"end":i===3?"start":"middle"} fill="#e8f1f8" fontSize="13" fontWeight="800">{item.label}</text>;
+              })}
+            </svg>
+            <div className="lna-player-radar-values">
+              {radarItems.map(item => <div key={item.key}>
+                <span>{item.label}</span><strong>{item.value}</strong>
+              </div>)}
+            </div>
+          </div>
+          <p className="lna-player-radar-note">Escala comparativa: cada eje usa como referencia el percentil 90 de los promedios de la Liga Nacional (mínimo 3 PJ). Las cifras de la derecha son valores reales.</p>
+        </section>
         <section className="lna-player-season-expanded" aria-label="Estadísticas completas de la temporada">
           <span className="home-player-modal-label">PROMEDIOS POR PARTIDO</span>
           <div className="lna-player-match-extra lna-player-season-extra">
@@ -306,20 +350,22 @@ export default function PlayerModal({
               ["FALTAS", metricMean("fouls")]
             ].map(([label,value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}
           </div>
-          <span className="home-player-modal-label lna-player-season-shots-title">TIROS · TOTALES Y PORCENTAJES DE TEMPORADA</span>
-          <div className="lna-player-match-shots lna-player-season-shots">
+          <span className="home-player-modal-label lna-player-season-shots-title">EFECTIVIDAD DE TIRO</span>
+          <div className="lna-player-shot-bars">
             {[
               ["DOBLES",shotSeason("twoPointers")],
               ["TRIPLES",shotSeason("threePointers")],
               ["LIBRES",shotSeason("freeThrows")]
-            ].map(([label,shots]) => <div key={label}>
-              <span>{label}</span>
-              <strong>{shots ? `${shots.made}/${shots.attempted}` : "—"}</strong>
-              <div className="lna-player-shot-track" aria-hidden="true"><span style={{width: shots ? `${Math.min(100,Math.max(0,shots.percentage))}%` : "0%"}}/></div>
-              <small>{shots ? `${shots.percentage.toFixed(1)}%` : "Sin dato"}</small>
+            ].map(([label,shots]) => <div key={label} className="lna-player-shot-bar-row">
+              <span className="lna-player-shot-bar-label">{label}</span>
+              <div className="lna-player-shot-bar-track" role="img" aria-label={shots ? `${label}: ${shots.made} de ${shots.attempted}, ${shots.percentage.toFixed(1)} por ciento` : `${label}: sin dato`}>
+                <span style={{width:shots?`${Math.min(100,Math.max(0,shots.percentage))}%`:"0%"}}/>
+              </div>
+              <strong>{shots?`${shots.percentage.toFixed(1)}%`:"—"}</strong>
+              <small>{shots?`${shots.made}/${shots.attempted}`:"S/D"}</small>
             </div>)}
           </div>
-          <p className="lna-player-match-note">Robos, tapas, pérdidas y faltas: promedio por partido con dato disponible. Tiros: aciertos/intentos acumulados y porcentaje real.</p>
+          <p className="lna-player-match-note">Promedios por partido con dato oficial. Tiros: porcentaje de aciertos sobre intentos acumulados.</p>
         </section>
 
         {(!hasMatchTab) && <div className="home-player-modal-recent-section">
