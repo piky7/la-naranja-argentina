@@ -3,6 +3,7 @@ import { teams } from "../data/teams";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import "./MvpPrediction.css";
+import { requestPrediction } from "../auth/prodeBallot";
 
 export default function MvpPrediction({ match, onStatusChange }) {
   const [expanded, setExpanded] = useState(false);
@@ -14,31 +15,25 @@ export default function MvpPrediction({ match, onStatusChange }) {
   const [busy, setBusy] = useState(false);
   const [ranking, setRanking] = useState([]);
   const id = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-  const API = "https://lna-votaciones-api.lnab.workers.dev/api/mvp";
-  const visitorId = (() => {
-    try {
-      let value = localStorage.getItem("lna-vote-visitor-id");
-      if (!value) { value = crypto.randomUUID(); localStorage.setItem("lna-vote-visitor-id", value); }
-      return value;
-    } catch { return null; }
-  })();
+  const [sessionRevision, setSessionRevision] = useState(0);
   useEffect(() => {
-    if (!visitorId) { setStatus("error"); return; }
+    const refresh = () => setSessionRevision(value => value + 1);
+    window.addEventListener("prode-profile-updated", refresh);
+    return () => window.removeEventListener("prode-profile-updated", refresh);
+  }, []);
+  useEffect(() => {
     let active = true;
     setStatus("loading");
-    fetch(`${API}?partidoId=${encodeURIComponent(id)}&visitanteId=${encodeURIComponent(visitorId)}`, {cache:"no-store"})
-      .then(async response => { const body = await response.json(); if (!response.ok) throw new Error(body.error || "No disponible"); return body; })
+    requestPrediction("mvp", id)
       .then(body => { if (active) { setSelected(body.selected); setOpen(body.open); setRanking(Array.isArray(body.ranking) ? body.ranking : []); setStatus("ready"); } })
       .catch(err => { if (active) { setStatus("error"); setError(err.message); } });
     return () => { active = false; };
-  }, [id, visitorId]);
+  }, [id, sessionRevision]);
   async function choosePlayer(playerId) {
-    if (busy || !open || !visitorId) return;
+    if (busy || !open) return;
     setBusy(true); setError("");
     try {
-      const response = await fetch(API, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({partidoId:id,visitanteId:visitorId,jugadorId:playerId})});
-      const body = await response.json();
-      if (!response.ok || !body.ok) throw new Error(body.error || "No se pudo guardar");
+      const body = await requestPrediction("mvp", id, playerId);
       setSelected(body.selected); setOpen(body.open); setRanking(Array.isArray(body.ranking) ? body.ranking : []); setExpanded(false);
       window.dispatchEvent(new Event("lna-vote-updated"));
     } catch(err) { setError(err.message || "No se pudo guardar"); }
