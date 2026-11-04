@@ -594,7 +594,7 @@ export const players = [
   name: "Anyelo Cisneros",
   teamId: "gimnasia",
   position: "Alero",
-  number: null,
+  number: 6,
   nationality: "Venezuela",
   category: "E",
 },

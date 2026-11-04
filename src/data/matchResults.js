@@ -674,5 +674,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y8gyn48_2X3woRlYedudE9I-sDMd-AxRjfnO556CHv_e-oHVIvbmfw==/instituto-vs-racing-ch"
     }
+  },
+  "2026-11-03-atenas-gimnasia": {
+    "status": "finished",
+    "homeScore": 76,
+    "awayScore": 79,
+    "time": "21:30",
+    "homeTeam": "atenas",
+    "awayTeam": "gimnasia",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Yv1N5bawwPYgHrqmJaLwvyzN_lBQq4ii0ncy7-AhsCN4QxanuvGXJw==/atenas-c-vs-gimnasia-cr",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Yv1N5bawwPYgHrqmJaLwvyzN_lBQq4ii0ncy7-AhsCN4QxanuvGXJw==/atenas-c-vs-gimnasia-cr"
+    }
   }
 };
