@@ -977,7 +977,11 @@ export default {
           (matchesByWeek[number] ||= []).push({ ...match, participants, weekKey: undefined });
         }
         for (const matches of Object.values(matchesByWeek)) {
-          matches.sort((a,b) => Date.parse(b.startsAt) - Date.parse(a.startsAt) || a.id.localeCompare(b.id));
+          // La grilla es exactamente el inverso del orden en que se procesan las rachas.
+          // Antes el desempate por id era ascendente en ambos sentidos: mostraba
+          // Atenas–Gimnasia por delante de La Unión–Argentino aunque la racha
+          // ya había procesado el encuentro de Argentino como el más reciente.
+          matches.sort((a,b) => Date.parse(b.startsAt) - Date.parse(a.startsAt) || String(b.id).localeCompare(String(a.id)));
         }
         return reply({ ok: true, ranking, weeklyRanking, weeklyHistory, medalTable, matchesByWeek, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
