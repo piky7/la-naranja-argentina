@@ -236,14 +236,9 @@ export default function ProdeGoogleAccess({ onReady }) {
               <span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span>
             </div>
           </div>
-          {(careerLink === false || linkNotice) && <div className="prode-career-link" role={linkNotice ? "status" : undefined}>
-            <strong>{careerLink ? "✓ Mi Carrera vinculada" : "Vincular Mi Carrera"}</strong>
-            <p>{careerLink ? "Tu cuenta Google quedó asociada a esta carrera. Tus pronósticos cuentan en Prode según las reglas de cada liga." : "Opcional: podés vincular Mi Carrera a tu cuenta Google. Los votos de este dispositivo ya cuentan en Prode sin vincularla."}</p>
-            {careerLink === false && <>
-              <label className="prode-career-consent"><input type="checkbox" checked={linkConfirm} onChange={e => setLinkConfirm(e.target.checked)}/> Confirmo que esta es mi carrera y quiero asociarla a mi cuenta Google.</label>
-              <button type="button" onClick={linkCareer} disabled={!linkConfirm || linkBusy}>{linkBusy ? "Vinculando…" : "Vincular Mi Carrera"}</button>
-            </>}
-            {linkError && <p role="alert" className="prode-group-error">{linkError}</p>}
+          {careerLink === false && !syncing && <div className="prode-career-link" role="status">
+            <strong>Mi Carrera todavía no está sincronizada</strong>
+            <p>Volvé a abrir la página para reintentar. No se borraron tus puntos anteriores.</p>
           </div>}
         </>
       ) : (
