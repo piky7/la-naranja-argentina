@@ -61610,7 +61610,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -61662,7 +61662,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -61714,7 +61714,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 8,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -61766,7 +61766,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -61818,7 +61818,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -61870,7 +61870,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 6,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -61922,7 +61922,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 5,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -61974,7 +61974,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -62026,7 +62026,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -62078,7 +62078,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 7,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -62130,7 +62130,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -62182,7 +62182,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -62236,7 +62236,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -62288,7 +62288,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 5,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -62340,7 +62340,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -62392,7 +62392,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -62444,7 +62444,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -62496,7 +62496,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -62548,7 +62548,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -62600,7 +62600,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -62652,7 +62652,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -62704,7 +62704,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -62756,7 +62756,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 5,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -62808,7 +62808,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -62955,7 +62955,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -63007,7 +63007,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -63059,7 +63059,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -63111,7 +63111,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -63163,7 +63163,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -63215,7 +63215,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -63267,7 +63267,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 3,
         "defensiveRebounds": 5,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 10,
           "AciertosPorPartido": 0,
@@ -63319,7 +63319,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -63371,7 +63371,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -63423,7 +63423,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -63475,7 +63475,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -63527,7 +63527,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 7,
         "blocks": null,
-        "fouls": null,
+        "fouls": 5,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -63581,7 +63581,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -63633,7 +63633,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -63685,7 +63685,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 5,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -63737,7 +63737,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -63789,7 +63789,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -63841,7 +63841,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 4,
         "defensiveRebounds": 8,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -63893,7 +63893,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 3,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -63945,7 +63945,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -63997,7 +63997,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -64049,7 +64049,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -64101,7 +64101,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64153,7 +64153,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -64295,7 +64295,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -64347,7 +64347,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 8,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -64399,7 +64399,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64451,7 +64451,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64503,7 +64503,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64555,7 +64555,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -64607,7 +64607,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 5,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -64659,7 +64659,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64711,7 +64711,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64763,7 +64763,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64815,7 +64815,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -64867,7 +64867,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -64921,7 +64921,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -64973,7 +64973,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 9,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 7,
           "AciertosPorPartido": 0,
@@ -65025,7 +65025,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -65077,7 +65077,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -65129,7 +65129,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -65181,7 +65181,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -65233,7 +65233,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -65285,7 +65285,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 5,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -65337,7 +65337,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 8,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -65389,7 +65389,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -65441,7 +65441,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -65493,7 +65493,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 7,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -65635,7 +65635,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 8,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -65687,7 +65687,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -65739,7 +65739,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -65791,7 +65791,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 6,
           "AciertosPorPartido": 0,
@@ -65843,7 +65843,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -65895,7 +65895,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -65947,7 +65947,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 7,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -65999,7 +65999,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -66051,7 +66051,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -66103,7 +66103,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -66155,7 +66155,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 8,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -66207,7 +66207,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -66261,7 +66261,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -66313,7 +66313,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -66365,7 +66365,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -66417,7 +66417,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -66469,7 +66469,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 4,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -66521,7 +66521,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 8,
         "blocks": null,
-        "fouls": null,
+        "fouls": 5,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -66573,7 +66573,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -66625,7 +66625,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -66677,7 +66677,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -66729,7 +66729,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -66781,7 +66781,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -66833,7 +66833,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -66975,7 +66975,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67027,7 +67027,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -67079,7 +67079,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 6,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -67131,7 +67131,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67183,7 +67183,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67235,7 +67235,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 3,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -67287,7 +67287,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67339,7 +67339,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67391,7 +67391,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67443,7 +67443,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -67495,7 +67495,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -67547,7 +67547,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 6,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -67601,7 +67601,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67653,7 +67653,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -67705,7 +67705,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -67757,7 +67757,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -67809,7 +67809,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 7,
           "AciertosPorPartido": 0,
@@ -67861,7 +67861,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -67913,7 +67913,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -67965,7 +67965,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68017,7 +68017,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68069,7 +68069,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 5,
         "twoPointers": {
           "Aciertos": 8,
           "AciertosPorPartido": 0,
@@ -68121,7 +68121,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -68173,7 +68173,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -68315,7 +68315,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 5,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 4,
           "AciertosPorPartido": 0,
@@ -68367,7 +68367,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68419,7 +68419,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 5,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 4,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -68471,7 +68471,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68523,7 +68523,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 7,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -68575,7 +68575,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 6,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -68627,7 +68627,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -68679,7 +68679,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68731,7 +68731,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68783,7 +68783,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68835,7 +68835,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 6,
         "defensiveRebounds": 6,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 6,
           "AciertosPorPartido": 0,
@@ -68887,7 +68887,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -68941,7 +68941,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 2,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -68993,7 +68993,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 2,
         "blocks": null,
-        "fouls": null,
+        "fouls": 5,
         "twoPointers": {
           "Aciertos": 2,
           "AciertosPorPartido": 0,
@@ -69045,7 +69045,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
@@ -69097,7 +69097,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 1,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -69149,7 +69149,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 0,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -69201,7 +69201,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 3,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 3,
           "AciertosPorPartido": 0,
@@ -69253,7 +69253,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 2,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -69305,7 +69305,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 5,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -69357,7 +69357,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -69409,7 +69409,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 0,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 0,
           "AciertosPorPartido": 0,
@@ -69461,7 +69461,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 0,
         "defensiveRebounds": 1,
         "blocks": null,
-        "fouls": null,
+        "fouls": 1,
         "twoPointers": {
           "Aciertos": 1,
           "AciertosPorPartido": 0,
@@ -69513,7 +69513,7 @@ export const matchPlayerStats = {
         "offensiveRebounds": 5,
         "defensiveRebounds": 4,
         "blocks": null,
-        "fouls": null,
+        "fouls": 3,
         "twoPointers": {
           "Aciertos": 5,
           "AciertosPorPartido": 0,
