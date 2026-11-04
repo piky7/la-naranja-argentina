@@ -12,6 +12,22 @@ function compareStreakGames(a,b) {
   return String(a.id || "").localeCompare(String(b.id || ""));
 }
 
+// Únicamente si los dos encuentros empezaron a la misma hora Y se
+// detectaron finalizados en la misma consulta, los errores (y las
+// ausencias de voto) se procesan antes de los aciertos de este usuario.
+// Cada participante puede tener un orden distinto y correcto para su racha.
+function compareUserStreakGames(a,b) {
+  const base = compareStreakGames(a,b);
+  const sameStart = Date.parse(a.startsAt) === Date.parse(b.startsAt);
+  const sameFinish = a.finishedObservedAt && b.finishedObservedAt &&
+    a.finishedObservedAt === b.finishedObservedAt;
+  if (sameStart && sameFinish && a.finished && b.finished &&
+      Boolean(a.correct) !== Boolean(b.correct)) {
+    return a.correct ? 1 : -1;
+  }
+  return base;
+}
+
 const PROJECT_ID = "lna-prode";
 const ISSUER = "https://securetoken.google.com/" + PROJECT_ID;
 const CERTS_URL = "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com";
@@ -328,7 +344,7 @@ export default {
             const data = await response.json();
             if (!data.ok || !Array.isArray(data.games)) throw Error("Historial no disponible");
             let streak=0, points=0, played=0, correct=0, wrong=0, mvpHits=0, mvpVoted=0;
-            const ordered = [...data.games].sort(compareStreakGames);
+            const ordered = [...data.games].sort(compareUserStreakGames);
             for (const game of ordered) {
               const ts = Date.parse(game.startsAt);
               if (!Number.isFinite(ts) || ts>Date.now() || !game.finished) continue;
@@ -839,7 +855,7 @@ export default {
             const since = Math.max(leagueStart, time(member.joined_at));
             const periods = periodsByUser.get(member.user_id) || [];
             let streak = 0, lastPeriod = -1;
-            const chronologicalGames = [...data.games].sort(compareStreakGames);
+            const chronologicalGames = [...data.games].sort(compareUserStreakGames);
             for (const game of chronologicalGames) {
               const kickoff = Date.parse(game.startsAt);
               if (!Number.isFinite(kickoff) || kickoff < since || !game.finished || kickoff > Date.now()) continue;
@@ -992,7 +1008,18 @@ export default {
           // Antes el desempate por id era ascendente en ambos sentidos: mostraba
           // Atenas–Gimnasia por delante de La Unión–Argentino aunque la racha
           // ya había procesado el encuentro de Argentino como el más reciente.
-          matches.sort((a,b) => compareStreakGames(b,a));
+          matches.sort((a,b) => {
+            const base = compareStreakGames(b,a);
+            // La lista del usuario que la consulta refleja su propia racha.
+            const mineA = a.participants.find(p => p.userId === userId);
+            const mineB = b.participants.find(p => p.userId === userId);
+            const tied = a.startsAt === b.startsAt && a.finishedObservedAt &&
+              a.finishedObservedAt === b.finishedObservedAt;
+            if (tied && mineA?.eligible && mineB?.eligible &&
+                Boolean(mineA.winnerCorrect) !== Boolean(mineB.winnerCorrect))
+              return mineA.winnerCorrect ? -1 : 1;
+            return base;
+          });
         }
         return reply({ ok: true, ranking, weeklyRanking, weeklyHistory, medalTable, matchesByWeek, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
       } catch (error) {
