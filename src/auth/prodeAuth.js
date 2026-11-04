@@ -36,3 +36,9 @@ export async function getProdeIdToken() {
   if (!auth.currentUser) throw new Error("Iniciá sesión para continuar");
   return auth.currentUser.getIdToken();
 }
+
+// Devuelve null si no hay sesión: las votaciones anónimas de Mi Carrera siguen funcionando.
+export async function getOptionalProdeIdToken() {
+  const { auth } = await sdk();
+  return auth.currentUser ? auth.currentUser.getIdToken() : null;
+}
