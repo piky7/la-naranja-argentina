@@ -464,14 +464,6 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2ZN2RgIDH1tzuPUWeHTZIKA94xBmqX_JtuPI7DlNUv9dRPH2PJXYUPQ==/san-lorenzo-vs-regatas-c"
   },
   {
-    "id": "2026-11-08-racing-chivilcoy-regatas",
-    "date": "2026-11-08",
-    "time": null,
-    "homeTeam": "racing-chivilcoy",
-    "awayTeam": "regatas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
-  },
-  {
     "id": "2026-11-08-san-lorenzo-san-martin",
     "date": "2026-11-08",
     "time": "20:00",
@@ -486,6 +478,14 @@ export const officialSchedule = [
     "homeTeam": "quimsa",
     "awayTeam": "instituto",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J_e5RfzduUehOmQLSnOCGhCRYgYvMcqw0JfmNwOyqywZtOXqoVnanA==/quimsa-vs-instituto"
+  },
+  {
+    "id": "2026-11-08-racing-chivilcoy-regatas",
+    "date": "2026-11-08",
+    "time": "21:00",
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "regatas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
   },
   {
     "id": "2026-11-09-boca-la-union",

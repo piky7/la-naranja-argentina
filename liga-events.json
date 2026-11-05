@@ -1049,24 +1049,6 @@
     },
     {
       "date": "2026-11-08",
-      "time": "00:00",
-      "home": {
-        "name": "RACING (CH)",
-        "officialClubId": 1992,
-        "officialTeamId": 114607
-      },
-      "away": {
-        "name": "REGATAS (C)",
-        "officialClubId": 1424,
-        "officialTeamId": 114561
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
-    },
-    {
-      "date": "2026-11-08",
       "time": "20:00",
       "home": {
         "name": "SAN LORENZO",
@@ -1100,6 +1082,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J_e5RfzduUehOmQLSnOCGhCRYgYvMcqw0JfmNwOyqywZtOXqoVnanA==/quimsa-vs-instituto"
+    },
+    {
+      "date": "2026-11-08",
+      "time": "21:00",
+      "home": {
+        "name": "RACING (CH)",
+        "officialClubId": 1992,
+        "officialTeamId": 114607
+      },
+      "away": {
+        "name": "REGATAS (C)",
+        "officialClubId": 1424,
+        "officialTeamId": 114561
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
     },
     {
       "date": "2026-11-09",
