@@ -1894,3 +1894,34 @@
   .prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars{width:43px}
   .prode-league-premium .prode-ranking-premium .prode-ranking-streak{gap:3px}
 }
+
+/* RAC = cantidad de bonos +45 obtenidos; no representa campeonatos.
+   Reglas de grilla exclusivas de las clasificaciones, sin afectar Medallero. */
+.prode-league-premium .prode-ranking-premium .prode-ranking-head,
+.prode-league-premium .prode-ranking-premium .prode-ranking-row{
+  grid-template-columns:27px minmax(0,1fr) 41px 19px 22px 22px 27px;
+  column-gap:3px;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-head>span:last-child{
+  text-align:center;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row>.prode-ranking-rac{
+  text-align:center;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  color:#f5d1a1;
+}
+@media(max-width:600px){
+  .prode-league-premium .prode-ranking-premium .prode-ranking-head,
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{
+    grid-template-columns:24px minmax(0,1fr) 36px 17px 19px 21px 24px;
+    column-gap:2px;
+  }
+}
+@media(max-width:355px){
+  .prode-league-premium .prode-ranking-premium .prode-ranking-head,
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{
+    grid-template-columns:21px minmax(0,1fr) 33px 16px 18px 20px 22px;
+    column-gap:2px;
+  }
+}
