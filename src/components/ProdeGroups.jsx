@@ -255,8 +255,8 @@ export default function ProdeGroups({ onReady }) {
         // Avisar una sola vez por cuenta, liga y semana cerrada, al abrir la liga.
         // Solo las semanas con al menos tres participantes con pronósticos tienen podio.
         const lastClosedWeek = [...(rankingData.weeklyHistory || [])]
-          .reverse().find(week => week.finished && week.eligibleForMedals);
-        if (lastClosedWeek && lastClosedWeek.ranking?.some(player => player.position >= 1 && player.position <= 3)) {
+          .reverse().find(week => week.finished);
+        if (lastClosedWeek?.eligibleForMedals && lastClosedWeek.ranking?.some(player => player.position >= 1 && player.position <= 3)) {
           const storageKey = `lna-week-award:${user.uid}:${group.id}:${lastClosedWeek.startsAt}`;
           let alreadySeen = shownAwards.current.has(storageKey);
           try { alreadySeen ||= localStorage.getItem(storageKey) === "1"; } catch { /* almacenamiento bloqueado */ }
