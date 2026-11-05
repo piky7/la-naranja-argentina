@@ -68,3 +68,26 @@
   .prode-award-score{font-size:14px}
   .prode-award-lead{font-size:12px}
 }
+
+.prode-award-certificates{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;margin:4px 0 12px;
+}
+.prode-award-certificate{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  min-width:0;min-height:132px;gap:7px;padding:10px 5px;
+  border:1px solid var(--award-color);border-radius:10px;
+  background:repeating-linear-gradient(125deg,transparent 0 18px,#ffffff0a 18px 20px),
+    linear-gradient(145deg,color-mix(in srgb,var(--award-color) 12%,#111c2e),#071523);
+  box-shadow:inset 0 0 12px color-mix(in srgb,var(--award-color) 18%,transparent);
+}
+.prode-award-certificate span{font:900 11px/1 system-ui,sans-serif;color:#8cf044}
+.prode-award-certificate small{font-size:8px;font-weight:800;color:#b8cbd9}
+.prode-award-certificate strong{font:italic 900 19px/1 var(--prode-gamer),Impact,sans-serif;color:var(--award-color)}
+.prode-award-certificate b{max-width:100%;font-size:10px;overflow-wrap:anywhere}
+@media(max-width:420px){
+  .prode-award-certificates{gap:5px}
+  .prode-award-certificate{min-height:108px;gap:6px;padding:7px 3px}
+  .prode-award-certificate strong{font-size:16px}
+  .prode-award-certificate b{font-size:9px}
+}
