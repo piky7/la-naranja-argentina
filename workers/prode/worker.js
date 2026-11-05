@@ -381,6 +381,7 @@ export default {
             if (!data.ok || !Array.isArray(data.games)) throw Error("Historial no disponible");
             let streak=0, points=0, played=0, correct=0, wrong=0, mvpHits=0, mvpVoted=0;
             const ordered = [...data.games].sort(compareUserStreakGames);
+            const globalTimeline = unifiedStreakTimeline(ordered);
             for (const game of ordered) {
               const ts = Date.parse(game.startsAt);
               if (!Number.isFinite(ts) || ts>Date.now() || !game.finished) continue;
@@ -391,7 +392,7 @@ export default {
               if (week===rankingWeek) played++;
               if (game.correct) {
                 streak++;
-                if (week===rankingWeek) { points+=15; correct++; if (streak===5) points+=45; }
+                if (week===rankingWeek) { points+=15; correct++; if ((ts>=UNIFIED_STREAK_START ? globalTimeline.byGame.get(game.id)?.bonus : streak===5)) points+=45; }
               } else {
                 streak=0;
                 if (week===rankingWeek) { points+=5; wrong++; }
