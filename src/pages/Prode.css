@@ -1849,3 +1849,48 @@
 .prode-symbol-option.is-selected{border-color:#83ee47;box-shadow:inset 0 0 0 1px #83ee47,0 0 13px #79e63b28;background:#1b3731;color:#d5ffbc}
 .prode-symbol-option:focus-visible,.prode-symbol-tabs button:focus-visible{outline:2px solid #c0ffab;outline-offset:2px}
 @media(max-width:390px){.prode-symbol-grid{max-height:191px}.prode-symbol-option{min-height:79px}.prode-symbol-option svg{width:46px;height:52px}.prode-symbol-tabs button{font-size:10px}}
+
+
+/* Rachas por liga: cinco segmentos del color principal del escudo.
+   Mantener la clasificación compacta también en iPhone. */
+.prode-league-premium .prode-ranking-premium .prode-ranking-name .prode-ranking-member-copy{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  flex:1;min-width:0;gap:3px;overflow:hidden;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-member-copy>strong{
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-streak{
+  display:flex;align-items:center;gap:4px;max-width:100%;min-width:0;
+  line-height:1;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:3px;width:74px;max-width:100%;height:6px;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars i{
+  display:block;min-width:0;border-radius:3px;
+  background:#64778966;box-shadow:inset 0 1px 1px #0005;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars i.is-complete{
+  background:var(--member-accent,#7de83d);
+  box-shadow:0 0 5px color-mix(in srgb,var(--member-accent,#7de83d) 40%,transparent);
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-streak small{
+  font:700 9px/1 system-ui,sans-serif;color:#b9ccda;white-space:nowrap;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-streak em{
+  font-style:normal;font-size:10px;line-height:1;
+}
+.prode-league-premium .prode-ranking-premium .prode-ranking-row{
+  min-height:48px;
+}
+@media(max-width:600px){
+  .prode-league-premium .prode-ranking-premium .prode-ranking-row{min-height:45px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars{width:56px;gap:2px;height:5px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-streak small{font-size:8px}
+}
+@media(max-width:355px){
+  .prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars{width:43px}
+  .prode-league-premium .prode-ranking-premium .prode-ranking-streak{gap:3px}
+}
