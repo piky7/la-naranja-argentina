@@ -319,15 +319,17 @@ export default {
     }
     // Ranking general semanal: puntos de Mi Carrera obtenidos en partidos iniciados
     // entre el lunes y el domingo en Argentina, independientemente de las ligas privadas.
-    if (url.pathname === "/api/prode/ranking/weekly" && request.method === "GET") {
+    if ((url.pathname === "/api/prode/ranking/weekly" || url.pathname === "/api/prode/ranking/weekly/awards") && request.method === "GET") {
+      const awardsRequest = url.pathname.endsWith("/awards");
       const viewer = await verifiedFirebaseUser(request);
       const viewerId = viewer ? "firebase:" + viewer.uid : null;
+      if (awardsRequest && !viewer) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
         await ensureVoteSources(env.DB);
         await ensureCareerLinks(env.DB);
-        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id=u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(l.visitor_id,vs.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id=u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(l.visitor_id,vs.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT " + (awardsRequest ? 1000 : 100)).all();
         const dayKey = value => {
           const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(value));
           const n = type => Number(parts.find(p => p.type === type)?.value);
@@ -335,6 +337,7 @@ export default {
         };
         const startOfWeek = day => day - ((new Date(day).getUTCDay()+6)%7)*86400000;
         const thisWeek = startOfWeek(dayKey(Date.now()));
+        const rankingWeek = awardsRequest ? thisWeek - 7 * 86400000 : thisWeek;
         const all = [];
         const linked = rows.results || [];
         for (let i=0;i<linked.length;i+=6) {
@@ -349,16 +352,16 @@ export default {
               const ts = Date.parse(game.startsAt);
               if (!Number.isFinite(ts) || ts>Date.now() || !game.finished) continue;
               const week = startOfWeek(dayKey(ts));
-              if (game.mvpCorrect && week===thisWeek) { points+=20; mvpHits++; }
-              if (game.mvpVoted && week===thisWeek) mvpVoted++;
+              if (game.mvpCorrect && week===rankingWeek) { points+=20; mvpHits++; }
+              if (game.mvpVoted && week===rankingWeek) mvpVoted++;
               if (!game.voted) { streak=0; continue; }
-              if (week===thisWeek) played++;
+              if (week===rankingWeek) played++;
               if (game.correct) {
                 streak++;
-                if (week===thisWeek) { points+=15; correct++; if (streak===5) points+=45; }
+                if (week===rankingWeek) { points+=15; correct++; if (streak===5) points+=45; }
               } else {
                 streak=0;
-                if (week===thisWeek) { points+=5; wrong++; }
+                if (week===rankingWeek) { points+=5; wrong++; }
               }
             }
             return { userId:item.user_id,username:item.username,crestPrimary:item.crestPrimary,crestSecondary:item.crestSecondary,crestText:item.crestText,crestStyle:item.crestStyle,crestFont:item.crestFont, crestSymbol: item.crestSymbol,points,played,correct,wrong,mvpHits,participated: played>0||mvpVoted>0 };
@@ -373,6 +376,11 @@ export default {
           return {...row,position:rank};
         });
         const myPosition = viewerId ? ranking.find(row => row.userId === viewerId)?.position ?? null : null;
+        if (awardsRequest) {
+          const participants = ranking.filter(row => row.participated);
+          const eligible = participants.length >= 3;
+          return reply({ok:true,week:{number:Math.floor((rankingWeek-Date.UTC(2026,10,2))/604800000)+1,startsAt:new Date(rankingWeek).toISOString(),finished:true,eligibleForMedals:eligible,ranking:eligible?participants.filter(row=>row.position<=3):[]},myPosition});
+        }
         return reply({ok:true,weekStartsAt:new Date(thisWeek).toISOString(),total:all.length,myPosition,
           ranking:ranking.slice(0,20).map(({userId,...row})=>row)});
       } catch (error) {
