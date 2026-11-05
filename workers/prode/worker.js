@@ -846,7 +846,7 @@ export default {
         const allMembers = members.results || [];
         for (let i=0; i<allMembers.length; i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
-            const base = { username: member.username, userId: member.user_id, crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary, crestText: member.crestText, crestStyle: member.crestStyle, crestFont: member.crestFont, crestSymbol: member.crestSymbol, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, currentStreak: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
+            const base = { username: member.username, userId: member.user_id, crestPrimary: member.crestPrimary, crestSecondary: member.crestSecondary, crestText: member.crestText, crestStyle: member.crestStyle, crestFont: member.crestFont, crestSymbol: member.crestSymbol, points: initialPoints.get(member.user_id) || 0, initialPoints: initialPoints.get(member.user_id) ?? null, joinedLate: time(member.joined_at) > leagueStart, correct: 0, wrong: 0, played: 0, mvpHits: 0, mvpVotes: 0, currentStreak: 0, streakWins: 0, weeks: {}, weekly: { points: 0, correct: 0, wrong: 0, mvpHits: 0, mvpVoted: 0, played: 0 } };
             if (!member.visitor_id) return base;
             const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId=" + encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
@@ -883,7 +883,7 @@ export default {
                 winnerCorrect: Boolean(game.correct), mvpCorrect: Boolean(game.mvpCorrect),
                 eligible: true };
               const weekly = gameWeek === weekStart;
-              const week = base.weeks[gameWeek] ||= { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0, currentStreak: streak };
+              const week = base.weeks[gameWeek] ||= { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0, currentStreak: streak, streakWins: 0 };
               if (game.mvpVoted) { week.mvpVoted++; base.mvpVotes++; if (weekly) base.weekly.mvpVoted++; }
               if (game.mvpCorrect) { pointsDetail.mvpPoints = 20; week.mvpHits++; week.points += 20; base.points += 20; base.mvpHits++; if (weekly) { base.weekly.points += 20; base.weekly.mvpHits++; } }
               if (!game.voted) { streak = 0; week.currentStreak = 0; if (matchDetail) { pointsDetail.points = pointsDetail.mvpPoints; matchDetail.participants.push(pointsDetail); } continue; }
@@ -892,7 +892,7 @@ export default {
                 pointsDetail.winnerPoints = 15;
                 base.correct++; base.points += 15; week.correct++; week.points += 15; streak++;
                 if (weekly) { base.weekly.correct++; base.weekly.points += 15; }
-                if (streak === 5) { pointsDetail.streakPoints = 45; base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
+                if (streak === 5) { pointsDetail.streakPoints = 45; base.streakWins++; week.streakWins++; base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
               } else {
                 pointsDetail.winnerPoints = 5;
                 base.wrong++; base.points += 5; week.wrong++; week.points += 5; streak = 0;
@@ -947,9 +947,9 @@ export default {
         let weeklyRank = 0, previousWeekly = null;
         const weeklyRanking = [...rows].sort((a,b) => b.weekly.points-a.weekly.points || b.weekly.correct-a.weekly.correct || a.username.localeCompare(b.username,"es")).map(row => {
           const pts = row.weekly.points;
-          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, crestSymbol: row.crestSymbol, currentStreak: row.currentStreak, position: null };
+          if (!row.weekly.played && !row.weekly.mvpVoted) return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, crestSymbol: row.crestSymbol, currentStreak: row.currentStreak, streakWins: row.weeks[weekStart]?.streakWins || 0, position: null };
           if (pts !== previousWeekly) { weeklyRank++; previousWeekly = pts; }
-          return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, crestSymbol: row.crestSymbol, currentStreak: row.currentStreak, position: weeklyRank };
+          return { ...row.weekly, userId: row.userId, username: row.username, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, crestSymbol: row.crestSymbol, currentStreak: row.currentStreak, streakWins: row.weeks[weekStart]?.streakWins || 0, position: weeklyRank };
         });
         // Historial numerado desde la semana de inicio de la liga, incluyendo semanas sin partidos.
         const firstWeek = mondayOf(argentinaDateKey(leagueStart));
@@ -957,7 +957,7 @@ export default {
         for (let startMs = firstWeek, number = 1; startMs <= weekStart && number <= 110; startMs += 7*86400000, number++) {
           const participants = rows.filter(row => argentinaDateKey(time(allMembers.find(m => m.user_id === row.userId)?.joined_at)) < startMs + 7*86400000).map(row => {
             const w = row.weeks[startMs] || { points: 0, correct: 0, wrong: 0, mvpHits: 0, played: 0, mvpVoted: 0 };
-            return { username: row.username, userId: row.userId, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, crestSymbol: row.crestSymbol, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, currentStreak: w.currentStreak ?? 0, participated: w.played > 0 || w.mvpVoted > 0 };
+            return { username: row.username, userId: row.userId, crestPrimary: row.crestPrimary, crestSecondary: row.crestSecondary, crestText: row.crestText, crestStyle: row.crestStyle, crestFont: row.crestFont, crestSymbol: row.crestSymbol, points: w.points, correct: w.correct, wrong: w.wrong, mvpHits: w.mvpHits, played: w.played, currentStreak: w.currentStreak ?? 0, streakWins: w.streakWins || 0, participated: w.played > 0 || w.mvpVoted > 0 };
           });
           participants.sort((a,b) => b.points-a.points || b.correct-a.correct || a.username.localeCompare(b.username,"es"));
           let place = 0, last = null;
