@@ -308,9 +308,9 @@ async function calculateRewards(db, fixture, visitorId) {
       const earnedBonus = unifiedGame ? globalProgress===5 : wins===5;
       if (earnedBonus) {points+=45;seasonPoints+=45;}
       if (wins % 10 === 0) legacyMvps++;
-      perGame.set(g.id,{earned:(earnedBonus ? 60 : 15)+mvpEarned,mvpEarned,medal:wins % 10 === 0 ? "gold" : earnedBonus ? "silver" : wins === 3 ? "bronze" : null, streak:unifiedGame ? (earnedBonus ? 0 : globalProgress) : wins});
+      perGame.set(g.id,{earned:(earnedBonus ? 60 : 15)+mvpEarned,mvpEarned,medal:unifiedGame ? (earnedBonus ? "silver" : globalProgress === 3 ? "bronze" : null) : wins % 10 === 0 ? "gold" : earnedBonus ? "silver" : wins === 3 ? "bronze" : null, streak:unifiedGame ? (earnedBonus ? 0 : globalProgress) : wins});
       updateCareer(g,false,true,true);
-      if (unifiedGame && earnedBonus) { globalProgress=0; categoryWinStreak=0; }
+      if (unifiedGame && earnedBonus) { globalProgress=0; categoryWinStreak=0; wins=0; }
     } else {
       wins=0; if (unifiedGame) globalProgress=0; losses++; points+=5; seasonPoints+=5;
       perGame.set(g.id,{earned:5+mvpEarned,mvpEarned,medal:null,streak:losses});
