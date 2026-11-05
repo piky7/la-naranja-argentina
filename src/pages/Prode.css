@@ -1894,37 +1894,3 @@
   .prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars{width:43px}
   .prode-league-premium .prode-ranking-premium .prode-ranking-streak{gap:3px}
 }
-
-/* Columna RAC: cantidad de bonos +45 ganados en la liga, no campeonatos. */
-.prode-league-premium .prode-ranking-premium .prode-ranking-head,
-.prode-league-premium .prode-ranking-premium .prode-ranking-row{
-  grid-template-columns:27px minmax(0,1fr) 41px 19px 22px 22px 30px;
-  column-gap:3px;
-}
-.prode-league-premium .prode-ranking-premium .prode-ranking-head>span:last-child{
-  white-space:nowrap;font-size:9px;text-align:center;
-}
-.prode-league-premium .prode-ranking-premium .prode-ranking-row>.prode-ranking-bonuses{
-  min-width:0;justify-self:stretch;text-align:center;
-  font-size:12px;font-weight:800;color:#ffd39a;
-  border-left:1px solid #ffffff25;
-  font-variant-numeric:tabular-nums;
-}
-@media(max-width:600px){
-  .prode-league-premium .prode-ranking-premium .prode-ranking-head,
-  .prode-league-premium .prode-ranking-premium .prode-ranking-row{
-    grid-template-columns:24px minmax(0,1fr) 37px 17px 19px 21px 25px;
-    column-gap:2px;
-  }
-  .prode-league-premium .prode-ranking-premium .prode-ranking-row>.prode-ranking-bonuses{font-size:11px}
-  .prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars{width:56px}
-}
-@media(max-width:355px){
-  .prode-league-premium .prode-ranking-premium .prode-ranking-head,
-  .prode-league-premium .prode-ranking-premium .prode-ranking-row{
-    grid-template-columns:21px minmax(0,1fr) 34px 16px 18px 20px 23px;
-    column-gap:2px;
-  }
-  .prode-league-premium .prode-ranking-premium .prode-ranking-streak-bars{width:43px}
-  .prode-league-premium .prode-ranking-premium .prode-ranking-head>span:last-child{font-size:8px}
-}
