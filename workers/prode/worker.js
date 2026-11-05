@@ -28,6 +28,33 @@ function compareUserStreakGames(a,b) {
   return base;
 }
 
+// La racha de aciertos pertenece al usuario, no a la liga o categoría.
+// Se respeta la puntuación histórica anterior al corte del 05/11/2026.
+// Desde el corte, el quinto acierto premia +45 y reinicia a 0.
+const UNIFIED_STREAK_START = Date.parse("2026-11-05T15:00:00-03:00");
+function unifiedStreakTimeline(games) {
+  const byGame = new Map();
+  let legacy = 0, progress = 0, switched = false;
+  for (const game of [...games].sort(compareUserStreakGames)) {
+    const kickoff = Date.parse(game.startsAt);
+    if (!game.finished || !Number.isFinite(kickoff) || kickoff > Date.now()) continue;
+    const isNew = kickoff >= UNIFIED_STREAK_START;
+    if (isNew && !switched) { progress = legacy % 5; switched = true; }
+    let bonus = false;
+    if (!game.voted || !game.correct) {
+      legacy = 0;
+      progress = 0;
+    } else if (isNew) {
+      progress++;
+      if (progress === 5) { bonus = true; progress = 0; }
+    } else {
+      legacy++;
+    }
+    byGame.set(game.id, { progress: isNew ? progress : legacy % 5, bonus });
+  }
+  return { byGame, current: switched ? progress : legacy % 5 };
+}
+
 const PROJECT_ID = "lna-prode";
 const ISSUER = "https://securetoken.google.com/" + PROJECT_ID;
 const CERTS_URL = "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com";
