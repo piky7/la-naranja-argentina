@@ -1925,3 +1925,10 @@
     column-gap:2px;
   }
 }
+
+/* Reabrir reconocimiento sin repetir automáticamente la felicitación. */
+.prode-league-premium .prode-ranking-premium .prode-award-reopen{
+  justify-self:start;display:inline-flex;align-items:center;gap:5px;
+  margin:0 0 5px;padding:5px 9px;border:1px solid #f1b75e80;border-radius:8px;
+  background:#f1b75e16;color:#ffd48e;font-size:10px;font-weight:800;cursor:pointer;
+}
