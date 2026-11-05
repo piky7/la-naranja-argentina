@@ -3,7 +3,7 @@ import { Trophy, X, ListOrdered } from "lucide-react";
 import ProdeCrest from "./ProdeCrest";
 import ProdeCareerDetails from "./ProdeCareerDetails";
 import { watchProdeUser } from "../auth/prodeAuth";
-const API = "https://lna-prode-api.lnab.workers.dev";
+import { fetchProdeRead, invalidateProdeReads } from "../utils/prodeRequestCache";
 
 export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
   const [data, setData] = useState(null);
@@ -28,22 +28,18 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
     setData(null);
     const load = async () => {
       try {
-        const token = user ? await user.getIdToken() : null;
-        const res = await fetch(API + (weekly ? "/api/prode/ranking/weekly" : "/api/prode/ranking/historical"), {
-          headers: token ? { Authorization: "Bearer " + token } : {},
-        });
-      const json = await res.json();
-      if (!res.ok || !json.ok) throw Error(json.error || "Ranking no disponible");
+        const json = await fetchProdeRead(weekly ? "/api/prode/ranking/weekly" : "/api/prode/ranking/historical", user);
         if (active) { setData(json); setError(""); }
       } catch {
         if (active) { setData(null); setError("No se pudo cargar el ranking."); }
       }
     };
     load();
-    const refresh = () => { load(); };
-    window.addEventListener("prode-profile-updated",refresh);
-    window.addEventListener("prode-page-reopened",refresh);
-    return () => { active = false; window.removeEventListener("prode-profile-updated",refresh); window.removeEventListener("prode-page-reopened",refresh); };
+    const refreshProfile = () => { invalidateProdeReads(); void load(); };
+    const refreshPage = () => { void load(); };
+    window.addEventListener("prode-profile-updated",refreshProfile);
+    window.addEventListener("prode-page-reopened",refreshPage);
+    return () => { active = false; window.removeEventListener("prode-profile-updated",refreshProfile); window.removeEventListener("prode-page-reopened",refreshPage); };
   }, [weekly, user, authReady]);
   useEffect(() => { if (authReady && (data || error)) onReady?.(true); }, [authReady, data, error, onReady]);
   const openTable = async () => {
@@ -52,13 +48,7 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
     setFullBusy(true);
     setFullError("");
     try {
-      const token = user ? await user.getIdToken() : null;
-      const res = await fetch(API + "/api/prode/ranking/historical?full=1", {
-        headers: token ? { Authorization: "Bearer " + token } : {},
-        cache: "no-store",
-      });
-      const json = await res.json();
-      if (!res.ok || !json.ok) throw Error(json.error || "Clasificación no disponible");
+      const json = await fetchProdeRead("/api/prode/ranking/historical?full=1", user, { ttlMs: 20000 });
       setFullData(json);
     } catch (cause) {
       setFullError(cause.message || "No se pudo cargar la tabla");
