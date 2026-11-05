@@ -1932,3 +1932,12 @@
   margin:0 0 5px;padding:5px 9px;border:1px solid #f1b75e80;border-radius:8px;
   background:#f1b75e16;color:#ffd48e;font-size:10px;font-weight:800;cursor:pointer;
 }
+
+/* Reconocimiento público de los mejores de la semana global. */
+.prode-weekly-section .prode-global-award-open{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  align-self:center;margin:8px auto 0;padding:8px 13px;
+  border:1px solid #d6ab6088;border-radius:20px;
+  background:#f0ba5615;color:#fbd497;font-size:11px;font-weight:800;
+  cursor:pointer;max-width:100%;
+}
