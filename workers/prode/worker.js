@@ -292,6 +292,40 @@ export default {
         return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary, crestText: body.textColor || "#ffffff" });
       } catch { return reply({ ok: false, error: "No se pudo guardar el trofeo" }, 503); }
     }
+    // Perfil público de Mi Carrera: únicamente estadísticas agregadas y trayectoria.
+    // Requiere Google; no expone visitanteId, votos ni datos de autenticación.
+    if (url.pathname === "/api/prode/career/public-profile" && request.method === "GET") {
+      const viewer = await verifiedFirebaseUser(request);
+      if (!viewer) return reply({ok:false,error:"Iniciá sesión con Google para ver Mi Carrera"},401);
+      const memberId = url.searchParams.get("memberId");
+      if (!memberId || !/^firebase:[A-Za-z0-9_-]{1,128}$/.test(memberId)) return reply({ok:false,error:"Jugador inválido"},400);
+      if (!env.DB || !env.VOTACIONES) return reply({ok:false,error:"Mi Carrera no disponible"},503);
+      try {
+        await ensureCareerLinks(env.DB);
+        await ensureVoteSources(env.DB);
+        const profile = await env.DB.prepare(
+          "SELECT COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id WHERE u.id=?"
+        ).bind(memberId).first();
+        if (!profile?.visitor_id) return reply({ok:true,available:false});
+        const upstream = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId="+encodeURIComponent(profile.visitor_id));
+        if (!upstream.ok) return reply({ok:false,error:"No se pudieron consultar los datos de Mi Carrera"},503);
+        const data = await upstream.json();
+        if (!data.ok || !data.career) return reply({ok:true,available:false});
+        const career = data.career;
+        return reply({ok:true,available:true,points:data.points || 0,seasonPoints:data.seasonPoints || 0,
+          winStreak:data.winStreak || 0,bestStreak:data.bestStreak || 0,
+          mvpHits:data.mvpHits || 0,career:{
+            categoryIndex:career.categoryIndex,bestCategory:career.bestCategory,
+            cups:career.cups,descents:career.descents,
+            cupCounts:career.cupCounts || [],records:career.records || [],
+            gamesPlayed:career.gamesPlayed || [],goal:career.goal,
+            history:career.history || career.moves || []
+          }});
+      } catch (error) {
+        console.error("Prode public career profile:",error);
+        return reply({ok:false,error:"No se pudo cargar la trayectoria"},503);
+      }
+    }
     // Clasificación histórica: consulta en vivo los puntos de Mi Carrera de las cuentas vinculadas.
     if (url.pathname === "/api/prode/ranking/historical" && request.method === "GET") {
       const viewer = await verifiedFirebaseUser(request);
@@ -340,7 +374,7 @@ export default {
           }
         }
         return reply({ ok: true, total: results.length, myPosition, memberProfile,
-          ranking: (fullRanking ? ranked : ranked.slice(0,20)).map(({userId,...entry}) => ({...entry,isMe: userId === viewerId})) });
+          ranking: (fullRanking ? ranked : ranked.slice(0,20)).map(({userId,...entry}) => ({...entry,...(viewerId ? {userId} : {}),isMe: userId === viewerId})) });
       } catch (error) {
         return reply({ ok: false, error: "No se pudo cargar el ranking histórico" }, 503);
       }
@@ -416,7 +450,7 @@ export default {
           return reply({ok:true,week:{number:Math.floor((rankingWeek-Date.UTC(2026,10,2))/604800000)+1,startsAt:new Date(rankingWeek).toISOString(),finished:true,eligibleForMedals:eligible,ranking:eligible?participants.filter(row=>row.position<=3):[]},myPosition});
         }
         return reply({ok:true,weekStartsAt:new Date(thisWeek).toISOString(),total:all.length,myPosition,
-          ranking:ranking.slice(0,20).map(({userId,...row})=>row)});
+          ranking:ranking.slice(0,20).map(({userId,...row})=>({...row,...(viewerId ? {userId} : {})}))});
       } catch (error) {
         console.error("Prode weekly ranking:",error);
         return reply({ok:false,error:"No se pudo calcular el ranking semanal"},503);
