@@ -114,7 +114,7 @@ async function createAwardImage({ league, week, player, crestElement }) {
   return blob;
 }
 
-export default function ProdeWeeklyAwards({ award, userId, onClose }) {
+export default function ProdeWeeklyAwards({ award, userId, onClose, variant = "league" }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const crestRefs = useRef({});
@@ -140,7 +140,7 @@ export default function ProdeWeeklyAwards({ award, userId, onClose }) {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `LNA-Prode-${String(league.name).replace(/[^a-z0-9-]/gi, "-")}-semana-${week.number}-puesto-${mine.position}.png`;
+      link.download = `LNA-Prode-${variant === "global" ? "Ranking-Global" : String(league.name).replace(/[^a-z0-9-]/gi, "-")}-semana-${week.number}-puesto-${mine.position}.png`;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -156,8 +156,8 @@ export default function ProdeWeeklyAwards({ award, userId, onClose }) {
       <section className="prode-award-modal" role="dialog" aria-modal="true" aria-label={`Podio de la semana ${week.number}`} onClick={e => e.stopPropagation()}>
         <button className="prode-award-close" type="button" onClick={onClose} aria-label="Cerrar reconocimiento"><X size={21}/></button>
         <div className="prode-award-brand"><strong>🏀 LNA</strong><span>PRODE</span></div>
-        <h2>¡SEMANA <span>FINALIZADA!</span></h2>
-        <p className="prode-award-lead">Felicitaciones a los mejores de la semana {week.number}</p>
+        <h2>{variant === "global" ? <>¡LOS MEJORES <span>DE LA SEMANA!</span></> : <>¡SEMANA <span>FINALIZADA!</span></>}</h2>
+        <p className="prode-award-lead">{variant === "global" ? "Ranking global de todos los usuarios de Prode LNA" : `Felicitaciones a los mejores de la semana ${week.number}`}</p>
         <div className="prode-award-podium">
           {display.map(player => <div key={player.userId} className={`prode-award-place place-${player.position}`} style={{ "--award-color": medalColors[player.position] }}>
             <span className="prode-award-rank">{player.position}°</span>
@@ -168,7 +168,7 @@ export default function ProdeWeeklyAwards({ award, userId, onClose }) {
             <strong className="prode-award-score">{player.points} <small>PTS</small></strong>
           </div>)}
         </div>
-        <p className="prode-award-league">{league.name} · Semana {week.number}</p>
+        <p className="prode-award-league">{variant === "global" ? "PRODE LNA · RANKING GLOBAL" : league.name} · Semana {week.number}</p>
         <div className="prode-award-certificates" aria-label="Reconocimientos del podio">
           {display.map(player => <div key={player.userId} className={`prode-award-certificate place-${player.position}`} style={{ "--award-color": medalColors[player.position] }}>
             <span>LNA PRODE</span>
