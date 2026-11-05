@@ -338,6 +338,11 @@ export default {
         const startOfWeek = day => day - ((new Date(day).getUTCDay()+6)%7)*86400000;
         const thisWeek = startOfWeek(dayKey(Date.now()));
         const rankingWeek = awardsRequest ? thisWeek - 7 * 86400000 : thisWeek;
+        // La temporada de reconocimientos globales comienza el lunes 02/11/2026.
+        // Antes del lunes 09/11 todavía no terminó ninguna semana premiable.
+        if (awardsRequest && rankingWeek < Date.UTC(2026, 10, 2)) {
+          return reply({ ok: true, week: null, myPosition: null });
+        }
         const all = [];
         const linked = rows.results || [];
         for (let i=0;i<linked.length;i+=6) {
