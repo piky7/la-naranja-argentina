@@ -695,13 +695,26 @@ const CLAVE_KV = "live-matches";
 
 
 async function actualizarMarcadores(env) {
-  const fecha = fechaHoraArgentina(new Date()).fecha;
+  const ahoraArgentina = fechaHoraArgentina(new Date());
+  const hoy = ahoraArgentina.fecha;
+  const ayer = fechaHoraArgentina(new Date(Date.now() - 24 * 60 * 60 * 1000)).fecha;
 
   // Leer primero los marcadores guardados.
   const anteriores = await env.LNA_LIVE_OFICIAL.get(
     CLAVE_KV,
     "json"
   );
+
+  // Seguir los partidos iniciados ayer si cruzan la medianoche. El cron
+  // debe poder detectar el final sin depender de las planillas de jugadores.
+  const continuaPartidoDeAyer =
+    anteriores?.date === ayer &&
+    ahoraArgentina.hora < "06:00" &&
+    Array.isArray(anteriores.liveMatches) &&
+    anteriores.liveMatches.some((partido) =>
+      partido.status === "live" || partido.isLive === true
+    );
+  const fecha = continuaPartidoDeAyer ? ayer : hoy;
 
   // Pasarlos al extractor para evitar consultas innecesarias.
   const datos = await generarLive(fecha, anteriores, env);
@@ -927,12 +940,12 @@ if (request.method !== "GET") {
         "json"
       );
 
-     // PRUEBA LOCAL: usar la fecha de los marcadores guardados.
-// RESTAURAR ANTES DEL DESPLIEGUE.
+// Los partidos de ayer siguen siendo consultables después de medianoche
+// mientras llega su publicación definitiva a matchResults.js.
 const hoy = fechaHoraArgentina(new Date()).fecha;
+const ayer = fechaHoraArgentina(new Date(Date.now() - 24 * 60 * 60 * 1000)).fecha;
 
-
-if (!guardado || guardado.date !== hoy) {
+if (!guardado || (guardado.date !== hoy && guardado.date !== ayer)) {
   return Response.json(
     {
       updatedAt: null,
