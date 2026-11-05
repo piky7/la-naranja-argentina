@@ -269,12 +269,13 @@ export default {
     if (url.pathname === "/api/prode/ranking/historical" && request.method === "GET") {
       const viewer = await verifiedFirebaseUser(request);
       const viewerId = viewer ? "firebase:" + viewer.uid : null;
+      const fullRanking = url.searchParams.get("full") === "1";
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
         await ensureCrests(env.DB);
         await ensureVoteSources(env.DB);
         await ensureCareerLinks(env.DB);
-        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(l.visitor_id,vs.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT 100").all();
+        const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(l.visitor_id,vs.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT " + (fullRanking ? 1000 : 100)).all();
         const linked = rows.results || [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
@@ -312,7 +313,7 @@ export default {
           }
         }
         return reply({ ok: true, total: results.length, myPosition, memberProfile,
-          ranking: ranked.slice(0,20).map(({userId,...entry}) => entry) });
+          ranking: (fullRanking ? ranked : ranked.slice(0,20)).map(({userId,...entry}) => ({...entry,isMe: userId === viewerId})) });
       } catch (error) {
         return reply({ ok: false, error: "No se pudo cargar el ranking histórico" }, 503);
       }
