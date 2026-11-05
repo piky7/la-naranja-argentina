@@ -5,6 +5,7 @@ import { players } from "../data/players";
 import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 import { useLocation } from "react-router-dom";
 import ProdeCrest from "./ProdeCrest";
+import ProdeWeeklyAwards from "./ProdeWeeklyAwards";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 const inviteUrl = token => "https://lanaranjaargentina.com.ar/invitacion?token=" + encodeURIComponent(token);
@@ -54,6 +55,8 @@ export default function ProdeGroups({ onReady }) {
   const [leagueRanking, setLeagueRanking] = useState(null);
   const [weeklyRanking, setWeeklyRanking] = useState(null);
   const [weeklyHistory, setWeeklyHistory] = useState([]);
+  const [weeklyAward, setWeeklyAward] = useState(null);
+  const shownAwards = useRef(new Set());
   const [seasonArchives, setSeasonArchives] = useState([]);
   const [archiveError, setArchiveError] = useState("");
   const [closeCheck, setCloseCheck] = useState(null);
@@ -185,6 +188,7 @@ export default function ProdeGroups({ onReady }) {
   const closeGroup = () => {
     leagueRequest.current += 1;
     setSelected(null);
+    setWeeklyAward(null);
     setRefreshingLeague(false);
   };
   const openGroup = async (group) => {
@@ -194,6 +198,7 @@ export default function ProdeGroups({ onReady }) {
     const cached = leagueCache.current.get(key);
     const isCurrent = () => leagueRequest.current === requestId;
     setSelected(group);
+    setWeeklyAward(null);
     setEditCrestPrimary(cached?.detail.group?.crestPrimary || group.crestPrimary || "#ff9a39");
     setEditCrestSecondary(cached?.detail.group?.crestSecondary || group.crestSecondary || "#10283c");
     setCrestEditing(false); setCrestMessage("");
@@ -247,6 +252,19 @@ export default function ProdeGroups({ onReady }) {
         setEditCrestSecondary(nextDetail.group?.crestSecondary || "#10283c");
         setArchiveError(archiveResult.status === "rejected" ? "Historial no disponible" : "");
         setSeasonArchives(archives);
+        // Avisar una sola vez por cuenta, liga y semana cerrada, al abrir la liga.
+        // Solo las semanas con al menos tres participantes con pronósticos tienen podio.
+        const lastClosedWeek = [...(rankingData.weeklyHistory || [])]
+          .reverse().find(week => week.finished && week.eligibleForMedals);
+        if (lastClosedWeek && lastClosedWeek.ranking?.some(player => player.position >= 1 && player.position <= 3)) {
+          const storageKey = `lna-week-award:${user.uid}:${group.id}:${lastClosedWeek.startsAt}`;
+          let alreadySeen = shownAwards.current.has(storageKey);
+          try { alreadySeen ||= localStorage.getItem(storageKey) === "1"; } catch { /* almacenamiento bloqueado */ }
+          if (!alreadySeen) {
+            shownAwards.current.add(storageKey);
+            setWeeklyAward({ week: lastClosedWeek, league: { name: nextDetail.group?.name || group.name }, storageKey });
+          }
+        }
       } else {
         const failure = detailResult.status === "rejected" ? detailResult.reason : rankingResult.reason;
         if (cached) setRefreshWarning("No se pudo actualizar la liga. Se muestran los últimos datos cargados.");
@@ -693,6 +711,10 @@ export default function ProdeGroups({ onReady }) {
         <button type="button" className="prode-group-back" onClick={() => closeGroup()}><ArrowLeft size={16}/> Volver a mis ligas</button>
       </section>
     </div>}
+    {selected && weeklyAward && <ProdeWeeklyAwards award={weeklyAward} userId={user ? "firebase:" + user.uid : null} onClose={() => {
+      try { localStorage.setItem(weeklyAward.storageKey, "1"); } catch { /* almacenamiento bloqueado */ }
+      setWeeklyAward(null);
+    }}/>}
     {selected && selectedMatch && <div className="prode-match-backdrop" onClick={() => setSelectedMatch(null)}>
       <section className="prode-match-dialog" role="dialog" aria-modal="true" aria-label="Pronósticos del partido terminado" onClick={event => event.stopPropagation()}>
         <button type="button" className="prode-match-close" aria-label="Cerrar detalle del partido" onClick={() => setSelectedMatch(null)}><X size={19}/></button>
