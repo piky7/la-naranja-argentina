@@ -1941,3 +1941,34 @@
   background:#f0ba5615;color:#fbd497;font-size:11px;font-weight:800;
   cursor:pointer;max-width:100%;
 }
+
+/* Ranking general: podio interactivo y tabla histórica completa. */
+.prode-general-section .prode-podium-tappable{cursor:pointer;border-radius:12px}
+.prode-general-section .prode-podium-tappable:focus-visible{outline:2px solid #7de83d;outline-offset:3px}
+.prode-ranking-view-all{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid #48677b;border-radius:8px;background:#192f41;color:#dceefb;font-size:11px;font-weight:800;cursor:pointer}
+.prode-general-section .prode-panel-bottom{gap:7px;flex-wrap:wrap}
+.prode-global-table-backdrop{position:fixed;inset:0;z-index:21000;display:flex;align-items:center;justify-content:center;padding:12px;background:#030914e8;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.prode-global-table-dialog{display:flex;flex-direction:column;width:min(500px,100%);max-height:min(88dvh,850px);overflow:hidden;border:1px solid #4a7b8e;border-radius:18px;background:linear-gradient(145deg,#152b3c,#0a1929);box-shadow:0 24px 75px #000b;color:#f5f8fb}
+.prode-global-table-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:19px 17px 12px}
+.prode-global-table-header small{font-size:10px;color:#ffab51;letter-spacing:.7px;font-weight:900}
+.prode-global-table-header h3{margin:5px 0;font:900 25px/1.1 var(--prode-gamer),Impact,sans-serif}
+.prode-global-table-header h3 em{font-style:normal;color:#80ee46}
+.prode-global-table-header p{font-size:11px;color:#afc1cf}
+.prode-global-table-header>button{display:grid;place-items:center;width:34px;height:34px;flex-shrink:0;border:1px solid #49677d;border-radius:50%;background:#182d3e;color:#e9f1f8;cursor:pointer}
+.prode-global-table-meta{display:flex;justify-content:space-between;gap:10px;margin:0 17px 10px;color:#abc0cd;font-size:11px;font-weight:700}
+.prode-global-table-head,.prode-global-table-row{display:grid;grid-template-columns:43px minmax(0,1fr) 58px;column-gap:9px;align-items:center}
+.prode-global-table-head{margin:0 12px;padding:10px 8px;background:#0b2533;border:1px solid #335469;border-radius:8px;color:#a4c9d8;font-size:10px;font-weight:900}
+.prode-global-table-head span:last-child{text-align:right}
+.prode-global-table-list{min-height:90px;overflow-y:auto;overscroll-behavior:contain;padding:6px 12px 15px}
+.prode-global-table-row{min-height:59px;padding:7px 8px;border-bottom:1px solid #2a4356}
+.prode-global-table-row.is-me{background:#7de83d14;border:1px solid #81df5d66;border-radius:9px}
+.prode-global-table-position{font-size:13px;font-weight:900;color:#d2deea}
+.prode-global-table-position.is-medal{font-size:21px}
+.prode-global-table-person{display:flex;min-width:0;align-items:center;gap:9px}
+.prode-global-table-person svg{flex-shrink:0}
+.prode-global-table-person>span{display:flex;min-width:0;flex-direction:column;gap:3px}
+.prode-global-table-person strong{min-width:0;font-size:12px;line-height:1.25;overflow-wrap:anywhere}
+.prode-global-table-person small{color:#92ed63;font-size:9px;font-weight:800}
+.prode-global-table-points{text-align:right;color:#f2f8ff;font-size:14px;font-variant-numeric:tabular-nums}
+.prode-global-table-message{padding:28px 8px;text-align:center;font-size:12px;color:#c8d9e2}
+@media(max-width:400px){.prode-global-table-dialog{max-height:91dvh}.prode-global-table-header{padding:15px 12px 11px}.prode-global-table-head,.prode-global-table-row{grid-template-columns:35px minmax(0,1fr) 48px;column-gap:5px}.prode-global-table-list{padding-left:8px;padding-right:8px}.prode-global-table-head{margin-left:8px;margin-right:8px}.prode-global-table-person{gap:6px}.prode-global-table-person strong{font-size:11px}}
