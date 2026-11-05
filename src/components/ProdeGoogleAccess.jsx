@@ -211,10 +211,10 @@ export default function ProdeGoogleAccess({ onReady }) {
       {loading ? <span>Comprobando sesión…</span> : user ? (
         <>
           <div className="prode-google-identity">
-            <ProdeCrest name={profile?.username || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} font={profile?.crestFont} symbol={profile?.crestSymbol} size={55} className="prode-account-crest"/>
+            <ProdeCrest name={profile?.username || profile?.googleName || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} font={profile?.crestFont} symbol={profile?.crestSymbol} size={55} className="prode-account-crest"/>
             <div className="prode-identity-info">
               <div className="prode-identity-name-row">
-                <strong>{profile?.username || "Elegí tu nombre de usuario"}</strong>
+                <strong>{profile?.username || profile?.googleName || "Elegí tu nombre de usuario"}</strong>
                 <div className="prode-account-actions">
                   {adminAllowed && <Link className="prode-admin-entry" to="/admin" title="Panel de administración" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={17}/></Link>}
                   <button type="button" className="prode-account-icon prode-account-edit" title="Mi perfil" aria-label="Editar mi perfil" onClick={() => {
@@ -233,7 +233,7 @@ export default function ProdeGoogleAccess({ onReady }) {
                   <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={() => setLogoutConfirmOpen(true)} disabled={busy}><LogOut size={17}/></button>
                 </div>
               </div>
-              <span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Configurá tu alias para aparecer en las ligas"}</span>
+              <span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Se muestra tu nombre de Google hasta que elijas un alias"}</span>
             </div>
           </div>
           {careerLink === false && !syncing && <div className="prode-career-link" role="status">
@@ -284,7 +284,7 @@ export default function ProdeGoogleAccess({ onReady }) {
             <input required minLength={3} maxLength={20} autoCapitalize="none" autoCorrect="off"
               value={username} onChange={e => setUsername(e.target.value)} placeholder="Ej. TripleMaestro"/>
           </label>
-          <p className="prode-profile-helper">Este alias es público. No se muestra tu nombre de Google.</p>
+          <p className="prode-profile-helper">Si no elegís un alias, se muestra tu nombre de Google en Prode.</p>
 
           <fieldset className="prode-avatar-styles prode-symbol-selector">
             <legend>Elegí tu escudo</legend>
