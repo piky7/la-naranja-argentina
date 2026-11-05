@@ -35,8 +35,9 @@ export default function ProdeGlobalWeeklyAward() {
         if (!res.ok || !data.ok) throw Error(data.error || "Reconocimiento no disponible");
         if (!active) return;
         const week = data.week;
-        if (!week?.finished || !week.eligibleForMedals || !week.ranking?.length) {
+        if (!week?.finished || !week.eligibleForMedals || !week.ranking?.length || week.number < 1 || Date.parse(week.startsAt) < Date.UTC(2026, 10, 2)) {
           setLatest(null);
+          setAward(null);
           return;
         }
         const item = { week, league: { name: "PRODE LNA · RANKING GLOBAL" }, storageKey: seenKey(user.uid, week), variant: "global" };
