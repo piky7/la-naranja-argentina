@@ -353,9 +353,16 @@ export default {
           results.push(...batch.filter(Boolean));
         }
         results.sort((a,b) => b.points-a.points || a.username.localeCompare(b.username, "es"));
-        const ranked = results.map((entry,index) => ({
-          ...entry, position: results.findIndex(x => x.points === entry.points) + 1
-        }));
+        // Ranking de competición (1°, 1°, 3°), calculado en una sola pasada.
+        // Evita buscar de nuevo en toda la lista para cada participante.
+        let previousScore = null, previousPlace = 0;
+        const ranked = results.map((entry,index) => {
+          if (entry.points !== previousScore) {
+            previousScore = entry.points;
+            previousPlace = index + 1;
+          }
+          return { ...entry, position: previousPlace };
+        });
         const myPosition = viewerId ? ranked.find(entry => entry.userId === viewerId)?.position ?? null : null;
         // Solo un integrante de una liga puede consultar los puntos históricos
         // y la posición global de otro integrante de esa misma liga.
