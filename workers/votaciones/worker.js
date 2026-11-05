@@ -223,6 +223,10 @@ async function calculateRewards(db, fixture, visitorId) {
       }
       return base;
     });
+  // Transición: el histórico anterior conserva exactamente sus puntos y bonos.
+  // La nueva racha es única, continua entre categorías y reinicia al completar 5.
+  const UNIFIED_STREAK_START = Date.parse("2026-11-05T15:00:00-03:00");
+  let unifiedStarted = false, globalProgress = 0;
   let points = 0, wins = 0, losses = 0, missed = 0, legacyMvps = 0, mvpHits = 0, bestStreak = 0;
   const categories = [{name:"Liga de Desarrollo",goal:50},{name:"Liga Federal",goal:100},{name:"Liga Argentina",goal:150},{name:"Liga Nacional",goal:200},{name:"Estrella LNB",goal:300},{name:"Leyenda LNA",goal:null}];
   // Cada categoría tiene su propio puntaje desde cero; el histórico nunca se reinicia.
@@ -247,7 +251,7 @@ async function calculateRewards(db, fixture, visitorId) {
     }
     if(categoryIndex!==before){
       currentStay=0;
-      categoryWinStreak=0;
+      if (!unifiedStarted) categoryWinStreak=0;
       if(categoryIndex>before){
         for(let i=before;i<categoryIndex;i++){cups++;cupCounts[i]++;moves.push({type:"promotion",category:categories[i].name,gameId:g.id});}
       }else{
@@ -279,12 +283,18 @@ async function calculateRewards(db, fixture, visitorId) {
       continue;
     }
     if (g.homeScore === g.awayScore) { continue; }
+    const unifiedGame = Date.parse(g.startsAt) >= UNIFIED_STREAK_START;
+    if (unifiedGame && !unifiedStarted) {
+      globalProgress = wins % 5;
+      categoryWinStreak = globalProgress;
+      unifiedStarted = true;
+    }
     const mvpEarned = mvpChoice && Array.isArray(g.mvpWinners) && g.mvpWinners.includes(mvpChoice) ? 20 : 0;
     if (mvpEarned) { points += 20; seasonPoints += 20; mvpHits++; }
     if (!vote) {
       // No votar corta los aciertos, pero conserva la racha negativa sin incrementarla.
       // Solo un acierto o un descenso reinicia los errores consecutivos.
-      wins=0; missed++;
+      wins=0; if (unifiedGame) globalProgress=0; missed++;
       if (mvpEarned) perGame.set(g.id,{earned:20,mvpEarned:20,medal:null,streak:0});
       updateCareer(g,false);
       continue;
@@ -293,19 +303,22 @@ async function calculateRewards(db, fixture, visitorId) {
     const winner = g.homeScore > g.awayScore ? g.homeTeam : g.awayTeam;
     if (vote === winner) {
       wins++; losses=0; points+=15; seasonPoints+=15;
+      if (unifiedGame) globalProgress++;
       bestStreak=Math.max(bestStreak,wins);
-      if (wins === 5) {points+=45;seasonPoints+=45;}
+      const earnedBonus = unifiedGame ? globalProgress===5 : wins===5;
+      if (earnedBonus) {points+=45;seasonPoints+=45;}
       if (wins % 10 === 0) legacyMvps++;
-      perGame.set(g.id,{earned:(wins === 5 ? 60 : 15)+mvpEarned,mvpEarned,medal:wins % 10 === 0 ? "gold" : wins === 5 ? "silver" : wins === 3 ? "bronze" : null, streak:wins});
+      perGame.set(g.id,{earned:(earnedBonus ? 60 : 15)+mvpEarned,mvpEarned,medal:wins % 10 === 0 ? "gold" : earnedBonus ? "silver" : wins === 3 ? "bronze" : null, streak:unifiedGame ? (earnedBonus ? 0 : globalProgress) : wins});
       updateCareer(g,false,true,true);
+      if (unifiedGame && earnedBonus) { globalProgress=0; categoryWinStreak=0; }
     } else {
-      wins=0; losses++; points+=5; seasonPoints+=5;
+      wins=0; if (unifiedGame) globalProgress=0; losses++; points+=5; seasonPoints+=5;
       perGame.set(g.id,{earned:5+mvpEarned,mvpEarned,medal:null,streak:losses});
       updateCareer(g,true,false,true);
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
-  return {points:Math.max(0,points),seasonPoints,mvps:legacyMvps+Math.floor(mvpHits/5),mvpHits,mvpProgress:mvpHits%5,bestStreak,winStreak:wins,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,gamesPlayed,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
+  return {points:Math.max(0,points),seasonPoints,mvps:legacyMvps+Math.floor(mvpHits/5),mvpHits,mvpProgress:mvpHits%5,bestStreak,winStreak:unifiedStarted ? globalProgress : wins % 5,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,gamesPlayed,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
 }
 async function getRewards(db, visitorId) {
   const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
