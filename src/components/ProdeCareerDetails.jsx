@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Award, ArrowDownRight, ArrowUpRight, Crown, Flame, Trophy } from "lucide-react";
+import { fetchProdeRead } from "../utils/prodeRequestCache";
 import "./ProdeCareerDetails.css";
 
-const API = "https://lna-prode-api.lnab.workers.dev";
 const CATEGORIES = ["Liga de Desarrollo","Liga Federal","Liga Argentina","Liga Nacional","Estrella LNB","Leyenda LNA"];
 
 const fmt = value => Number.isFinite(Number(value)) ? Number(value).toLocaleString("es-AR") : "—";
@@ -23,13 +23,7 @@ export default function ProdeCareerDetails({ memberId, user }) {
     }
     const load = async () => {
       try {
-        const token = await user.getIdToken();
-        const res = await fetch(API + "/api/prode/career/public-profile?memberId=" + encodeURIComponent(memberId), {
-          headers: { Authorization: "Bearer " + token },
-          cache: "no-store"
-        });
-        const result = await res.json();
-        if (!res.ok || !result.ok) throw Error(result.error || "No pudimos cargar Mi Carrera");
+        const result = await fetchProdeRead("/api/prode/career/public-profile?memberId=" + encodeURIComponent(memberId), user, { ttlMs: 30000 });
         if (active) setData(result);
       } catch (cause) {
         if (active) setError(cause.message || "Error al cargar Mi Carrera");
