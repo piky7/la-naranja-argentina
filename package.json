@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/check-player-roster.mjs && node scripts/generate-published-matches.cjs && node scripts/generate-voting-fixture.mjs && vite build",
+    "build": "npm test && node scripts/check-player-roster.mjs && node scripts/generate-published-matches.cjs && node scripts/generate-voting-fixture.mjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs"
