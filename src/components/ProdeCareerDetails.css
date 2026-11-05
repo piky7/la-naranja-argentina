@@ -1,0 +1,42 @@
+.prode-career-details{display:grid;gap:14px;text-align:left;color:#eff7ff}
+.prode-career-note{padding:20px 12px;border:1px solid #325064;border-radius:12px;background:#0c2333;color:#bed2e0;font-size:12px;line-height:1.5}
+.prode-career-current{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:17px;border:1px solid #98eb66a0;border-radius:14px;background:linear-gradient(128deg,#183832,#0b202e)}
+.prode-career-current>span{display:flex;align-items:center;gap:7px;color:#95ec64;font-size:10px;font-weight:900;letter-spacing:.7px}
+.prode-career-current strong{font:900 clamp(20px,4vw,26px)/1.1 var(--prode-gamer),Impact,sans-serif;color:#fff}
+.prode-career-current small{font-size:11px;color:#b3cbd7}
+.prode-career-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.prode-career-metrics>div{display:grid;justify-items:start;gap:6px;padding:12px;border:1px solid #385568;border-radius:11px;background:#10263a}
+.prode-career-metrics svg{color:#8ae94b}
+.prode-career-metrics strong{font-size:22px;line-height:1;font-weight:900}
+.prode-career-metrics span{font-size:10px;color:#b2c3d0}
+.prode-career-progress{display:grid;gap:8px;padding:13px;border:1px solid #385568;border-radius:11px;background:#0e2233}
+.prode-career-progress-copy{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:11px}
+.prode-career-progress-copy span{white-space:nowrap;color:#9aee66;font-weight:800}
+.prode-career-progress-track{height:8px;overflow:hidden;border-radius:8px;background:#324556}
+.prode-career-progress-track span{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#50b930,#a1fa51)}
+.prode-career-progress small{font-size:10px;line-height:1.4;color:#a6bccb}
+.prode-career-subtitle{margin:3px 0 -5px;color:#dceffa;font:900 15px var(--prode-gamer),Impact,sans-serif}
+.prode-career-cups{display:grid;gap:5px}
+.prode-career-cups>div{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;border:1px solid #2c485a;border-radius:8px;background:#0e2032}
+.prode-career-cups>div.is-current{border-color:#7de83d81}
+.prode-career-cups span{min-width:0;color:#bdcfdb;font-size:11px}
+.prode-career-cups strong{display:flex;align-items:center;gap:6px;white-space:nowrap;color:#ffcf77;font-size:12px}
+.prode-career-timeline{display:grid;gap:2px;max-height:350px;overflow-y:auto;overscroll-behavior:contain;padding:2px 4px}
+.prode-career-event{display:flex;align-items:center;gap:10px;padding:11px 7px;border-bottom:1px solid #38506675}
+.prode-career-event-icon{display:grid;place-items:center;width:32px;height:32px;flex-shrink:0;border-radius:50%;background:#296143;color:#a0f361}
+.prode-career-event.descent .prode-career-event-icon{background:#57392f;color:#f9a37e}
+.prode-career-event.legend-cup .prode-career-event-icon{background:#5c4829;color:#ffd679}
+.prode-career-event>div{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+.prode-career-event strong{font-size:12px}
+.prode-career-event div span,.prode-career-event>small{font-size:10px;color:#aabecf}
+.prode-career-disclaimer{margin:0;color:#9cb4c5;font-size:10px;line-height:1.4}
+.prode-profile-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:9px 0 12px;padding:4px;border:1px solid #35576a;border-radius:10px;background:#0b2032}
+.prode-profile-tabs button{padding:10px 5px;border:0;border-radius:7px;background:transparent;color:#b7ccda;font-size:12px;font-weight:800;cursor:pointer}
+.prode-profile-tabs button.active{background:#294534;color:#a5f574;box-shadow:inset 0 0 0 1px #9aee6280}
+.prode-career-standalone{position:fixed;inset:0;z-index:23000;display:flex;justify-content:center;align-items:center;padding:12px;background:#020911eb;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.prode-career-dialog{width:min(460px,100%);max-height:88dvh;overflow-y:auto;padding:16px;border:1px solid #547484;border-radius:16px;background:linear-gradient(145deg,#152d40,#091b2a);color:#fff;box-shadow:0 30px 65px #000a}
+.prode-career-dialog-head{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.prode-career-dialog-head>div{flex:1;min-width:0}
+.prode-career-dialog-head strong{display:block;overflow-wrap:anywhere;font-size:16px}
+.prode-career-dialog-head small{color:#9fe760;font-size:10px;font-weight:900}
+.prode-career-dialog-head button{display:grid;place-items:center;width:33px;height:33px;border:1px solid #526777;border-radius:50%;background:#1d3346;color:#fff;cursor:pointer}
