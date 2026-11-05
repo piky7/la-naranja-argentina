@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Download, X } from "lucide-react";
 import ProdeCrest from "./ProdeCrest";
+import "./ProdeWeeklyAwards.css";
 
 const medalColors = { 1: "#f8c85b", 2: "#cbd7e6", 3: "#d59c73" };
 const safeColor = color => /^#[0-9a-f]{6}$/i.test(color || "") ? color : "#7de83d";
