@@ -6,6 +6,7 @@ import { watchProdeUser, signInProdeWithGoogle } from "../auth/prodeAuth";
 import { useLocation } from "react-router-dom";
 import ProdeCrest from "./ProdeCrest";
 import ProdeWeeklyAwards from "./ProdeWeeklyAwards";
+import ProdeCareerDetails from "./ProdeCareerDetails";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 const inviteUrl = token => "https://lanaranjaargentina.com.ar/invitacion?token=" + encodeURIComponent(token);
@@ -66,6 +67,7 @@ export default function ProdeGroups({ onReady }) {
   const [medalTable, setMedalTable] = useState(null);
   const [expandedMedal, setExpandedMedal] = useState(null);
   const [profileUserId, setProfileUserId] = useState(null);
+  const [profileTab, setProfileTab] = useState("league");
   const [historicalProfile, setHistoricalProfile] = useState(null);
   const [historicalBusy, setHistoricalBusy] = useState(false);
   const [historicalError, setHistoricalError] = useState("");
@@ -172,6 +174,7 @@ export default function ProdeGroups({ onReady }) {
     loadHistorical();
     return () => { active = false; };
   }, [profileUserId, selected?.id, user]);
+  useEffect(() => { setProfileTab("league"); }, [profileUserId]);
 
   const checkSeasonClose = async () => {
     if (!user || !selected || closeCheckBusy) return;
@@ -770,6 +773,11 @@ export default function ProdeGroups({ onReady }) {
               </div>
             </div>
           </div>
+          <div className="prode-profile-tabs" role="tablist" aria-label="Información del participante">
+            <button type="button" role="tab" aria-selected={profileTab === "league"} className={profileTab === "league" ? "active" : ""} onClick={() => setProfileTab("league")}>Esta liga</button>
+            <button type="button" role="tab" aria-selected={profileTab === "career"} className={profileTab === "career" ? "active" : ""} onClick={() => setProfileTab("career")}>Mi Carrera</button>
+          </div>
+          {profileTab === "league" ? <>
           <div className="prode-profile-summary">
             <div><strong>{player.points ?? 0}</strong><span>PTS EN LA LIGA</span></div>
             <div><strong>{historicalPoints}</strong><span>PTS HISTÓRICOS</span></div>
@@ -803,6 +811,7 @@ export default function ProdeGroups({ onReady }) {
             <div><span className="prode-profile-medal-symbol">🥉</span><strong>{awards?.bronze ?? 0}</strong><span>Bronce</span></div>
           </div>
           <p>Estadísticas acumuladas en esta liga. Las medallas corresponden a semanas finalizadas.</p>
+          </> : <div role="tabpanel"><ProdeCareerDetails memberId={player.userId} user={user}/></div>}
         </section>
       </div>;
     })()}
