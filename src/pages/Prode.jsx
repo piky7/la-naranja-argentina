@@ -4,6 +4,7 @@ import { Trophy, UsersRound, Medal, Target, ChartNoAxesColumn, ShieldCheck, Cale
 import "./Prode.css";
 import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
 import ProdeGroups from "../components/ProdeGroups";
+import ProdeGlobalWeeklyAward from "../components/ProdeGlobalWeeklyAward";
 
 export default function Prode() {
   const [accountReady, setAccountReady] = useState(false);
@@ -50,6 +51,7 @@ export default function Prode() {
         <section className="prode-panel prode-general-section prode-weekly-section">
           <div className="prode-panel-heading"><span className="prode-panel-icon"><CalendarDays size={21}/></span><h2>RANKING <em>SEMANAL</em></h2><span className="prode-small-tag">Lun – Dom</span></div>
           <ProdeHistoricalRanking weekly onReady={setWeeklyReady} />
+          <ProdeGlobalWeeklyAward />
         </section>
 
         <section className="prode-how-section" aria-label="Cómo funciona Prode LNA">
