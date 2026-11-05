@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T03:00:50.999Z",
+  "generatedAt": "2026-11-05T03:05:59.216Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -415,6 +415,14 @@
       "awayScore": 57,
       "homeTeam": "la-union",
       "awayTeam": "argentino",
+      "hasStats": true
+    },
+    "2026-11-04-olimpico-lanus": {
+      "status": "published",
+      "homeScore": 95,
+      "awayScore": 94,
+      "homeTeam": "olimpico",
+      "awayTeam": "lanus",
       "hasStats": true
     }
   }

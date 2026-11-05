@@ -706,5 +706,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y5HiTXi8GaC3173fMdTzrIQejXDlKK8SsFityZen1ImtyUG7FcwK5g==/la-union-fsa-vs-argentino-j"
     }
+  },
+  "2026-11-04-olimpico-lanus": {
+    "status": "finished",
+    "homeScore": 95,
+    "awayScore": 94,
+    "time": "22:05",
+    "homeTeam": "olimpico",
+    "awayTeam": "lanus",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Dwl_xkHPmU-Y45ThMvKQCNI1D4aJt4H7o0hYzHLMG3gxRN3uS685ZQ==/olimpico-lb-vs-lanus",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Dwl_xkHPmU-Y45ThMvKQCNI1D4aJt4H7o0hYzHLMG3gxRN3uS685ZQ==/olimpico-lb-vs-lanus"
+    }
   }
 };

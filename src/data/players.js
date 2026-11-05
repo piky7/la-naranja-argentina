@@ -2473,4 +2473,12 @@ export const players = [
     teamId: "racing-chivilcoy",
     number: 30,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-432878",
+    officialPlayerId: 432878,
+    name: "William Leon Garret",
+    teamId: "lanus",
+    number: 30,
+  },
 ];
