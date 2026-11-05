@@ -318,7 +318,7 @@ async function calculateRewards(db, fixture, visitorId) {
     }
   }
   // Los partidos ausentes del calendario no se puntúan hasta recuperar su resultado oficial.
-  return {points:Math.max(0,points),seasonPoints,mvps:legacyMvps+Math.floor(mvpHits/5),mvpHits,mvpProgress:mvpHits%5,bestStreak,winStreak:unifiedStarted ? globalProgress : wins % 5,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,gamesPlayed,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse()},perGame:Object.fromEntries(perGame)};
+  return {points:Math.max(0,points),seasonPoints,mvps:legacyMvps+Math.floor(mvpHits/5),mvpHits,mvpProgress:mvpHits%5,bestStreak,winStreak:unifiedStarted ? globalProgress : wins % 5,lossStreak:losses,missedStreak:missed,career:{categoryIndex,bestCategory,cups,descents,cupCounts,records,gamesPlayed,currentStay,categoryWinStreak,goal:categories[categoryIndex].goal,moves:moves.slice(-20).reverse(),history:[...moves].reverse()},perGame:Object.fromEntries(perGame)};
 }
 async function getRewards(db, visitorId) {
   const response=await fetch(FIXTURE,{headers:{accept:"application/json"},cf:{cacheTtl:60,cacheEverything:true}});
