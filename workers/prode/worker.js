@@ -893,6 +893,7 @@ export default {
             if (!response.ok) throw Error("Servicio de votaciones no disponible");
             const data = await response.json();
             if (!data.ok || !Array.isArray(data.games)) throw Error("Historial de votaciones no disponible");
+            const globalTimeline = unifiedStreakTimeline(data.games);
             const since = Math.max(leagueStart, time(member.joined_at));
             const periods = periodsByUser.get(member.user_id) || [];
             let streak = 0, lastPeriod = -1;
@@ -933,7 +934,11 @@ export default {
                 pointsDetail.winnerPoints = 15;
                 base.correct++; base.points += 15; week.correct++; week.points += 15; streak++;
                 if (weekly) { base.weekly.correct++; base.weekly.points += 15; }
-                if (streak === 5) { pointsDetail.streakPoints = 45; base.streakWins++; week.streakWins++; base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
+                const unifiedGame = kickoff >= UNIFIED_STREAK_START;
+                const timelineState = globalTimeline.byGame.get(game.id);
+                const earnedBonus = unifiedGame ? Boolean(timelineState?.bonus) : streak === 5;
+                if (earnedBonus) { pointsDetail.streakPoints = 45; base.streakWins++; week.streakWins++; base.points += 45; week.points += 45; if (weekly) base.weekly.points += 45; }
+                if (unifiedGame) streak = timelineState?.progress ?? 0;
               } else {
                 pointsDetail.winnerPoints = 5;
                 base.wrong++; base.points += 5; week.wrong++; week.points += 5; streak = 0;
@@ -945,7 +950,8 @@ export default {
                 matchDetail.participants.push(pointsDetail);
               }
             }
-            base.currentStreak = streak;
+            // Todas las ligas muestran el mismo progreso global, incluso las nuevas.
+            base.currentStreak = globalTimeline.current;
             return base;
           }));
           rows.push(...batch);
