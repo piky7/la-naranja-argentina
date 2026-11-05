@@ -40,3 +40,11 @@
 .prode-career-dialog-head strong{display:block;overflow-wrap:anywhere;font-size:16px}
 .prode-career-dialog-head small{color:#9fe760;font-size:10px;font-weight:900}
 .prode-career-dialog-head button{display:grid;place-items:center;width:33px;height:33px;border:1px solid #526777;border-radius:50%;background:#1d3346;color:#fff;cursor:pointer}
+
+/* Clicks on player identity open Mi Carrera without changing the podium layout. */
+.prode-podium-player-trigger{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:100%;min-width:0;margin:0;padding:0;background:none;border:0;color:inherit;font:inherit;text-align:center;cursor:pointer}
+.prode-podium-player-trigger>span{max-width:100%;overflow-wrap:anywhere}
+.prode-podium-player-trigger:focus-visible,.prode-global-player-trigger:focus-visible{outline:2px solid #9bf867;outline-offset:3px;border-radius:9px}
+.prode-podium-player-trigger:disabled,.prode-global-player-trigger:disabled{cursor:default}
+.prode-global-player-trigger{border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;padding:0}
+.prode-global-player-trigger>span{display:flex;flex-direction:column;gap:3px;min-width:0}
