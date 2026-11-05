@@ -169,6 +169,14 @@ export default function ProdeWeeklyAwards({ award, userId, onClose }) {
           </div>)}
         </div>
         <p className="prode-award-league">{league.name} · Semana {week.number}</p>
+        <div className="prode-award-certificates" aria-label="Reconocimientos del podio">
+          {display.map(player => <div key={player.userId} className={`prode-award-certificate place-${player.position}`} style={{ "--award-color": medalColors[player.position] }}>
+            <span>LNA PRODE</span>
+            <small>SEMANA {week.number}</small>
+            <strong>{player.position}° PUESTO</strong>
+            <b>{player.username}</b>
+          </div>)}
+        </div>
         {mine ? <>
           <p className="prode-award-message">¡Felicitaciones! Conseguí tu reconocimiento personalizado para compartirlo.</p>
           <button className="prode-award-download" type="button" disabled={busy} onClick={download}><Download size={20}/>{busy ? "Preparando imagen…" : "Descargar reconocimiento"}</button>
