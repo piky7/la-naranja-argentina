@@ -16,6 +16,7 @@ import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
 import { getMatchStats } from "../utils/getMatchStats";
+import { indexFinishedLiveMatches, getFinishedLiveMatch } from "../utils/indexFinishedLiveMatches";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
@@ -135,17 +136,15 @@ function Liga() {
 
   // Igual que Home: mostrar el resultado final confirmado por el Worker
   // hasta que se publique en matchResults.js, sin inventar estadísticas.
-  const matches = useMemo(() => publishedMatches.map(match => {
-    if (match.status === "finished" || liveSnapshot.date !== match.date) return match;
-    const live = liveSnapshot.liveMatches.find(item =>
-      item.homeTeam === match.homeTeam && item.awayTeam === match.awayTeam &&
-      item.status === "finished" && !item.isHalftime &&
-      item.homeScore != null && item.awayScore != null
-    );
-    return live ? { ...match, status: "finished",
-      homeScore: Number(live.homeScore), awayScore: Number(live.awayScore) } : match;
-  }), [liveSnapshot]);
-
+  const matches = useMemo(() => {
+    const finishedLive = indexFinishedLiveMatches(liveSnapshot);
+    return publishedMatches.map(match => {
+      if (match.status === "finished") return match;
+      const live = getFinishedLiveMatch(finishedLive, match);
+      return live ? { ...match, status: "finished",
+        homeScore: Number(live.homeScore), awayScore: Number(live.awayScore) } : match;
+    });
+  }, [liveSnapshot]);
 
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
