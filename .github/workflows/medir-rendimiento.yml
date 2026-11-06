@@ -40,6 +40,12 @@ jobs:
             for (const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','interactive','total-byte-weight']) {
               console.log(`  ${id}: ${data.audits?.[id]?.displayValue ?? 'sin datos'}`);
             }
+            const lcp=data.audits?.['largest-contentful-paint-element']?.details?.items?.flatMap(item=>item?.items||[])?.[0]?.node;
+            console.log(`  LCP element: ${lcp?.snippet || lcp?.selector || 'no identificado'}`);
+            const images=data.audits?.['total-byte-weight']?.details?.items || [];
+            for(const item of images.filter(item=>item.url?.includes('logo-lna.'))) {
+              console.log(`  Logo descargado: ${item.url} / ${(item.totalBytes/1024).toFixed(1)} KiB`);
+            }
             if(data.runtimeError) console.error('Error del navegador:',data.runtimeError.message);
           }
           EOF
