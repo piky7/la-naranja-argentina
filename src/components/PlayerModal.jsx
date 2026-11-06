@@ -1,3 +1,4 @@
+import "./PopupDeferredOverrides.css";
 import { useEffect, useId, useState } from "react";
 import { isPlayerAppearance } from "../utils/playerAppearance";
 import { createPortal } from "react-dom";
