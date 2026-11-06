@@ -6,11 +6,11 @@ import ProdeSportsShield from "./ProdeSportsShield";
 const safeColor = (value, fallback) => /^#[0-9a-f]{6}$/i.test(value || "") ? value : fallback;
 
 export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", style = "pro", symbol, font = "sport", size = 55, className = "" }) {
+  const id = React.useId().replace(/:/g, "");
   if (type !== "league") return <ProdeSportsShield name={name} primary={primary} secondary={secondary} textColor={textColor} font={font} symbol={symbol} size={size} className={className}/>;
   const a = safeColor(primary, "#7de83d");
   const b = safeColor(secondary, "#152b3a");
   const t = safeColor(textColor, "#ffffff");
-  const id = React.useId().replace(/:/g, "");
   const label = String(name || "PRODE").trim().slice(0,24).toUpperCase();
   const fontSize = label.length > 19 ? 6.5 : label.length > 14 ? 7.5 : label.length > 10 ? 8.5 : 9;
   const estimated = [...label].reduce((sum, c) => sum + (c === " " ? .33 : /[MW]/.test(c) ? .92 : /[IJ1]/.test(c) ? .42 : .67)*fontSize, 0);
