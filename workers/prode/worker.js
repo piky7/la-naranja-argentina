@@ -913,6 +913,7 @@ export default {
           await env.DB.prepare("UPDATE prode_invitations SET used_count = MAX(0, used_count - 1) WHERE id = ?").bind(invite.id).run();
           throw error;
         }
+        await invalidateLeagueRankingCache(env.DB,invite.group_id);
         return reply({ ok: true, groupId: invite.group_id, name: invite.name });
       } catch {
         return reply({ ok: false, error: "No se pudo aceptar la invitación" }, 503);
@@ -1225,6 +1226,7 @@ export default {
         if (action === "leave") {
           if (group.owner_id === actorId) return reply({ ok: false, error: "El creador debe eliminar la liga; no puede abandonarla" }, 403);
           await env.DB.prepare("UPDATE prode_membership_periods SET exited_at=? WHERE group_id=? AND user_id=? AND exited_at IS NULL").bind(new Date().toISOString(),groupId,actorId).run();
+          await invalidateLeagueRankingCache(env.DB,groupId);
           return reply({ ok: true });
         }
         if (group.owner_id !== actorId) return reply({ ok: false, error: "Solo el administrador puede hacer esto" }, 403);
@@ -1242,11 +1244,13 @@ export default {
           if (typeof targetId !== "string" || targetId === actorId || !targetId.startsWith("firebase:")) return reply({ ok: false, error: "Participante inválido" }, 400);
           const deleted = await env.DB.prepare("UPDATE prode_membership_periods SET exited_at=? WHERE group_id=? AND user_id=? AND exited_at IS NULL AND EXISTS (SELECT 1 FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND m.role != 'owner')").bind(new Date().toISOString(),groupId,targetId,groupId,targetId).run();
           if (!deleted.meta?.changes) return reply({ ok: false, error: "Participante no encontrado" }, 404);
+          await invalidateLeagueRankingCache(env.DB,groupId);
           return reply({ ok: true });
         }
         const body = await request.json().catch(() => ({}));
         if (body.confirmName !== (await env.DB.prepare("SELECT name FROM prode_groups WHERE id=?").bind(groupId).first())?.name)
           return reply({ ok: false, error: "Confirmá el nombre exacto de la liga" }, 400);
+        await invalidateLeagueRankingCache(env.DB,groupId);
         await env.DB.batch([
           env.DB.prepare("DELETE FROM prode_membership_periods WHERE group_id=?").bind(groupId),
           env.DB.prepare("DELETE FROM prode_initial_points WHERE group_id=?").bind(groupId),
