@@ -18,8 +18,6 @@ const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Acerca = lazy(() => import("./pages/Acerca"));
 const Prode = lazy(() => import("./pages/Prode"));
 const Admin = lazy(() => import("./pages/Admin"));
-// Ruta de pruebas: sin enlaces públicos y con autorización del administrador.
-const CaminoAlTitulo = lazy(() => import("./pages/CaminoAlTitulo"));
 
 // Precarga suave: no bloquea el render inicial ni consume datos extra
 // en conexiones lentas o con ahorro de datos activado.
@@ -91,7 +89,6 @@ function AnimatedRoutes() {
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/prode" element={null} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/camino-al-titulo-test" element={<CaminoAlTitulo />} />
         <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
           const params = new URLSearchParams(location.search);
           const token = params.get("token") || params.get("invite");
