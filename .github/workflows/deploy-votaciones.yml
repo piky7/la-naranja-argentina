@@ -7,6 +7,7 @@ on:
     paths:
       - "workers/votaciones/**"
       - "tests/career-rules-regression.test.mjs"
+      - "tests/career-db-performance.test.mjs"
       - "tests/prode-ranking-medals.test.mjs"
       - "workers/prode/worker.js"
       - ".github/workflows/deploy-votaciones.yml"
@@ -34,7 +35,7 @@ jobs:
         run: |
           node --check workers/votaciones/worker.js
           node --check workers/prode/worker.js
-          node --test tests/career-rules-regression.test.mjs tests/prode-ranking-medals.test.mjs
+          node --test tests/career-rules-regression.test.mjs tests/prode-ranking-medals.test.mjs tests/career-db-performance.test.mjs
 
       - name: Comprobar credenciales
         env:
