@@ -722,5 +722,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Dwl_xkHPmU-Y45ThMvKQCNI1D4aJt4H7o0hYzHLMG3gxRN3uS685ZQ==/olimpico-lb-vs-lanus"
     }
+  },
+  "2026-11-05-obera-argentino": {
+    "status": "finished",
+    "homeScore": 98,
+    "awayScore": 84,
+    "time": "21:00",
+    "homeTeam": "obera",
+    "awayTeam": "argentino",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BOveP4ksUjd_qnQIARGZW1H0IPmsfKoNyzsToyxOnl2uNcM5H2ykOw==/obera-vs-argentino-j"
+    }
   }
 };
