@@ -8,6 +8,7 @@ on:
       - "src/components/Header.jsx"
       - "index.html"
       - "scripts/optimize-logo.mjs"
+      - "scripts/optimize-legacy-logo.mjs"
       - "tests/home-image-performance.test.mjs"
       - "package.json"
       - "package-lock.json"
@@ -72,6 +73,8 @@ jobs:
         run: |
           test -s public/logo-lna.webp
           test -s dist/logo-lna.webp
+          test $(wc -c < dist/logo-lna.png) -lt 180000
+          echo "Logo PNG heredado: $(wc -c < dist/logo-lna.png) bytes"
           test -s dist/favicon-lna-64.png
           echo "Favicon optimizado: $(wc -c < dist/favicon-lna-64.png) bytes"
           echo "Logo WebP generado: $(wc -c < dist/logo-lna.webp) bytes"
