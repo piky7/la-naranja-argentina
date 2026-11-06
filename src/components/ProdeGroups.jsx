@@ -483,6 +483,7 @@ export default function ProdeGroups({ onReady }) {
         <Ticket size={18}/> Unirme con código
       </button>
     </div>
+    {!ready && <div className="prode-friends-notice" role="status" aria-live="polite">Cargando tus ligas de amigos…</div>}
     {!user && ready && <p className="prode-friends-notice">Iniciá sesión con Google desde el perfil superior para crear una liga o unirte a tus amigos.</p>}
     {ready && groups.length > 0 ? <div className="prode-my-groups">
       <strong>Mis ligas ({groups.length})</strong>
@@ -491,8 +492,8 @@ export default function ProdeGroups({ onReady }) {
         <span className="prode-friend-league-info"><strong>{group.name}</strong><small><LockKeyhole size={12}/> {group.season || "2026/27"} · {group.role === "owner" ? "Administrador" : "Miembro"}</small></span>
         <span className="prode-friend-enter">Ver liga <ChevronRight size={17}/></span>
       </button>)}
-    </div> : ready && user && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
-    {error && <p className="prode-group-error" role="alert">{error}</p>}
+    </div> : ready && user && !error && <div className="prode-friends-notice">Todavía no tenés ligas de amigos. Creá una o ingresá con un código de invitación.</div>}
+    {error && <div className="prode-friends-notice" role="alert"><span>{error}</span> <button type="button" className="prode-friends-retry" onClick={() => { setReady(false); void load(user); }}>Reintentar</button></div>}
     {selected && (detailBusy || rankingBusy) && <div className="prode-dialog-backdrop" onClick={() => closeGroup()}>
       <section className="prode-dialog prode-group-detail prode-league-premium prode-league-loading" role="dialog" aria-modal="true" aria-label={"Cargando liga " + selected.name} onClick={e => e.stopPropagation()}>
         <button type="button" className="prode-league-close" aria-label="Cerrar liga" onClick={() => closeGroup()}><X size={20}/></button>
