@@ -152,9 +152,9 @@ export function randomOpponentIds(teamId, allIds, random = Math.random) {
 // no dispone de dos ataques "gratis" sin una respuesta ofensiva adversaria.
 export const ROUND_DIFFICULTY = [
   { startingMin: -3, startingMax: 2, shotPenalty: 0, rivalCounter: .24, counterThree: .18, defenseBonus: 0 },
-  { startingMin: -4, startingMax: 1, shotPenalty: .04, rivalCounter: .32, counterThree: .20, defenseBonus: .025 },
-  { startingMin: -4, startingMax: 1, shotPenalty: .08, rivalCounter: .40, counterThree: .24, defenseBonus: .045 },
-  { startingMin: -5, startingMax: 0, shotPenalty: .12, rivalCounter: .46, counterThree: .28, defenseBonus: .065 },
+  { startingMin: -3, startingMax: 1, shotPenalty: .03, rivalCounter: .29, counterThree: .20, defenseBonus: .025 },
+  { startingMin: -3, startingMax: 1, shotPenalty: .06, rivalCounter: .35, counterThree: .23, defenseBonus: .040 },
+  { startingMin: -3, startingMax: 1, shotPenalty: .09, rivalCounter: .38, counterThree: .26, defenseBonus: .055 },
 ];
 
 export function createMatch(round, teamId, opponentId, random = Math.random) {
