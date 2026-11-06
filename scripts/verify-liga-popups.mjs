@@ -1,19 +1,23 @@
 import { readFileSync } from "node:fs";
 import assert from "node:assert/strict";
 
-const source = readFileSync("src/pages/Liga.jsx", "utf8");
-const popupStart = source.indexOf("{/* POPUP PRÓXIMO PARTIDO */}");
-const popupEnd = source.indexOf("{/* =========================\n          MODAL EQUIPO", popupStart);
-assert(popupStart >= 0 && popupEnd > popupStart, "No se encontró el popup de próximo partido");
-const popup = source.slice(popupStart, popupEnd);
-assert(popup.includes("createPortal("), "El popup debe abrirse mediante portal");
-assert(popup.includes("LiveMatchInfo"), "Falta información LIVE del popup");
+const home = readFileSync("src/pages/Home.jsx", "utf8");
+const liga = readFileSync("src/pages/Liga.jsx", "utf8");
+const popup = readFileSync("src/components/UpcomingMatchModal.jsx", "utf8");
 
-for (const name of ["selectedUpcomingHomeTeam", "selectedUpcomingAwayTeam"]) {
-  if (popup.includes(name)) {
-    const declaration = new RegExp(`\\b(?:const|let|var)\\s+${name}\\b`);
-    assert(declaration.test(source.slice(0, popupStart)), `Variable sin definir en popup: ${name}`);
+for (const [name, source] of [["Home", home], ["Liga", liga]]) {
+  assert(source.includes("import UpcomingMatchModal"), `Falta importar popup común en ${name}`);
+  assert(source.includes("<UpcomingMatchModal"), `Falta usar popup común en ${name}`);
+  assert(!source.includes('{/* POPUP PRÓXIMO PARTIDO */}'),
+    `Quedó una variante local antigua del popup en ${name}`);
+  for (const team of ["selectedUpcomingHomeTeam", "selectedUpcomingAwayTeam"]) {
+    assert(new RegExp(`\\b(?:const|let)\\s+${team}\\b`).test(source),
+      `Variable sin definir en ${name}: ${team}`);
   }
 }
-
-console.log("OK: estructura y referencias de equipos del popup de Liga verificadas.");
+assert(popup.includes("createPortal("), "El popup debe mostrarse en un portal");
+assert(popup.includes("<LiveMatchInfo"), "Falta información LIVE");
+assert(popup.includes("<MatchVote"), "Falta votación de ganador");
+assert(popup.includes("<MvpPrediction"), "Falta votación del MVP");
+assert(popup.includes("upcoming-tabs-three"), "Faltan pestañas unificadas");
+console.log("OK: Home y Liga usan el mismo popup completo y sus referencias son válidas.");
