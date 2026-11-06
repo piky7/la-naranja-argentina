@@ -1,0 +1,292 @@
+/* Estilos exclusivos de popups: se cargan con los componentes diferidos. */
+/* Ficha jugador: dos vistas al entrar desde un partido finalizado. */
+.home-player-modal .lna-player-modal-tabs{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
+  margin:10px 12px 0;padding:4px;border:1px solid #294157;
+  border-radius:11px;background:#071624;
+}
+.home-player-modal .lna-player-modal-tabs button{
+  min-width:0;min-height:35px;border:1px solid transparent;border-radius:8px;
+  background:transparent;color:#b5c6d5;font-size:12px;font-weight:850;
+  cursor:pointer;
+}
+.home-player-modal .lna-player-modal-tabs button[aria-selected="true"]{
+  border-color:#ff9b40;background:linear-gradient(180deg,#f99932,#df741c);
+  color:#0d1824;
+}
+.home-player-modal .lna-player-modal-tabs button:focus-visible{
+  outline:2px solid #fff;outline-offset:2px;
+}
+.home-player-modal .lna-player-match-panel{
+  padding:12px;margin:10px 12px 12px;border:1px solid #e87b29;
+  border-radius:12px;background:#071b2b;color:#f6f8fb;
+}
+.home-player-modal .lna-player-match-context{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
+.home-player-modal .lna-player-match-context>span{
+  font-size:10px;letter-spacing:.7px;font-weight:800;color:#f99240;
+}
+.home-player-modal .lna-player-match-context>strong{
+  display:flex;justify-content:center;align-items:center;gap:10px;
+  font-size:13px;line-height:1.3;
+}
+.home-player-modal .lna-player-match-context em{
+  font-style:normal;font-weight:900;font-size:19px;color:#ff912e;
+}
+.home-player-modal .lna-player-match-main{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:12px 0 15px;
+  border:1px solid #284357;border-radius:10px;overflow:hidden;
+}
+.home-player-modal .lna-player-match-main>div{
+  min-width:0;padding:10px 2px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;border-right:1px solid #284357;
+}
+.home-player-modal .lna-player-match-main>div:last-child{border-right:0}
+.home-player-modal .lna-player-match-main strong{font-size:19px;color:#ff902d;font-weight:900;line-height:1.2}
+.home-player-modal .lna-player-match-main span{font-size:9px;font-weight:800;color:#b0c1d0}
+.home-player-modal .lna-player-match-panel>.home-player-modal-label{
+  display:block;margin:0 0 8px;color:#f58b31;font-weight:900;font-size:13px;
+}
+.home-player-modal .lna-player-match-extra{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;
+}
+.home-player-modal .lna-player-match-extra>div,
+.home-player-modal .lna-player-match-shots>div{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:0;min-height:51px;padding:5px 2px;border:1px solid #284357;
+  border-radius:8px;background:#102638;gap:4px;
+}
+.home-player-modal .lna-player-match-extra span,
+.home-player-modal .lna-player-match-shots span{
+  color:#aec0cd;font-size:9px;font-weight:800;text-align:center;
+}
+.home-player-modal .lna-player-match-extra strong,
+.home-player-modal .lna-player-match-shots strong{
+  font-size:15px;line-height:1;font-weight:900;color:#f5f8fc;
+}
+.home-player-modal .lna-player-match-shots{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:9px;
+}
+.home-player-modal .lna-player-match-shots small{font-size:9px;color:#e68a3a;font-weight:800}
+.home-player-modal .lna-player-match-note{margin:10px 1px 0;font-size:10px;color:#8da6b9}
+@media(max-width:440px){
+  .home-player-modal .lna-player-modal-tabs{margin-inline:8px}
+  .home-player-modal .lna-player-modal-tabs button{font-size:11px}
+  .home-player-modal .lna-player-match-panel{margin-inline:8px;padding:10px 8px}
+  .home-player-modal .lna-player-match-main strong{font-size:16px}
+  .home-player-modal .lna-player-match-main span{font-size:8px}
+  .home-player-modal .lna-player-match-extra{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  .home-player-modal .lna-player-match-extra span{font-size:8px}
+}
+
+
+/* LNA 2026/27: ficha del jugador desde resultados. Layout compacto, sin podio ni scroll interior. */
+.home-player-modal:has(.lna-player-match-panel) .home-player-modal-header {
+  padding-block: 14px;
+  min-height: 108px;
+}
+.home-player-modal .lna-player-modal-tabs {
+  margin-top: 9px;
+  padding: 3px;
+  gap: 5px;
+}
+.home-player-modal .lna-player-modal-tabs button {
+  min-height: 33px;
+}
+.home-player-modal .lna-player-match-panel {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 11px 12px;
+  border-radius: 11px;
+}
+.home-player-modal .lna-player-match-context {gap: 4px}
+.home-player-modal .lna-player-match-context>span {font-size: 10px}
+.home-player-modal .lna-player-match-context>strong {gap: 9px;font-size: 12px}
+.home-player-modal .lna-player-match-context em {font-size: 18px}
+.home-player-modal .lna-player-match-main {
+  margin: 11px 0 12px;
+  border-radius: 9px;
+  background: #0e2637;
+}
+.home-player-modal .lna-player-match-main>div {
+  padding: 9px 2px;
+  gap: 4px;
+  background: transparent;
+}
+.home-player-modal .lna-player-match-main>div.is-primary {
+  background: linear-gradient(180deg,rgba(246,142,44,.13),rgba(236,124,28,.04));
+}
+.home-player-modal .lna-player-match-main strong {
+  color: #f7f9fb;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+.home-player-modal .lna-player-match-main>div.is-primary strong {color:#ff9634}
+.home-player-modal .lna-player-match-panel>.home-player-modal-label {
+  margin-bottom: 7px;
+  font-size: 12px;
+  letter-spacing: .7px;
+}
+.home-player-modal .lna-player-match-extra {
+  display: grid;
+  grid-template-columns: repeat(7,minmax(0,1fr));
+  gap: 4px;
+}
+.home-player-modal .lna-player-match-extra>div {
+  min-height: 49px;
+  gap: 5px;
+  padding: 6px 1px;
+  border-radius: 6px;
+  background: #122b40;
+}
+.home-player-modal .lna-player-match-extra span {
+  font-size: 8px;
+  line-height: 1.1;
+  white-space: nowrap;
+  letter-spacing: -.15px;
+}
+.home-player-modal .lna-player-match-extra strong {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.home-player-modal .lna-player-match-shots {
+  margin-top: 7px;
+  gap: 6px;
+}
+.home-player-modal .lna-player-match-shots>div {
+  min-height: 88px;
+  padding: 9px 8px 7px;
+  gap: 6px;
+  background: #112b40;
+}
+.home-player-modal .lna-player-match-shots>div strong {
+  font-size: 19px;
+  color: #f8fafc;
+  font-variant-numeric: tabular-nums;
+}
+.home-player-modal .lna-player-match-shots>div small {
+  color: #ff9b40;
+  font-size: 11px;
+}
+.home-player-modal .lna-player-shot-track {
+  width:100%;
+  height:5px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#344a5e;
+}
+.home-player-modal .lna-player-shot-track>span {
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#ec781c,#ffa640);
+  border-radius:inherit;
+  transition:width .2s ease;
+}
+.home-player-modal .lna-player-match-note {
+  margin:7px 0 0;
+  font-size:9px;
+}
+.home-player-modal:has(.lna-player-match-panel) .home-player-modal-footer {
+  margin-top: 7px;
+}
+@media(max-width:440px) {
+ .home-player-modal .lna-player-match-panel {padding:10px 8px}
+ .home-player-modal .lna-player-match-extra {grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+ .home-player-modal .lna-player-match-extra>div {min-height:45px;padding:5px 0}
+ .home-player-modal .lna-player-match-extra span {font-size:7px}
+ .home-player-modal .lna-player-match-extra strong {font-size:13px}
+ .home-player-modal .lna-player-match-shots>div {padding:8px 5px 6px;min-height:80px}
+ .home-player-modal .lna-player-match-shots>div strong {font-size:18px}
+}
+@media(max-width:350px){
+ .home-player-modal .lna-player-match-extra {grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+/* Popup de próximo partido: pie legible y contenido, sin invadir el borde. */
+.match-modal.match-modal-upcoming > .match-modal-footer {
+  position: relative;
+  inset: auto;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  min-height: 34px;
+  margin: 0;
+  padding: 8px 15px 10px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(126, 152, 175, .22);
+  background: #0b141e;
+  line-height: 1.25;
+}
+.match-modal.match-modal-upcoming > .match-modal-footer > span {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 900;
+  color: #ff8c20;
+  letter-spacing: .08em;
+}
+.match-modal.match-modal-upcoming > .match-modal-footer > strong {
+  min-width: 0;
+  font-size: 10px;
+  font-weight: 700;
+  color: #aebdcb;
+  letter-spacing: .045em;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .match-modal.match-modal-upcoming > .match-modal-footer {
+    min-height: 31px;
+    padding: 7px 12px 9px;
+  }
+  .match-modal.match-modal-upcoming > .match-modal-footer > strong {
+    font-size: 9px;
+  }
+}
+
+/* Popup de resultados anteriores: pie separado y legible en todas las pantallas. */
+.match-modal.match-modal-finished .match-modal-footer {
+  position: relative;
+  inset: auto;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  min-height: 34px;
+  margin: 0;
+  padding: 8px 15px 10px;
+  box-sizing: border-box;
+  border-top: 1px solid #304354;
+  background: #0b121a;
+  line-height: 1.25;
+}
+.match-modal.match-modal-finished .match-modal-footer > span {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 900;
+  color: #ff8c20;
+  letter-spacing: .08em;
+}
+.match-modal.match-modal-finished .match-modal-footer > strong {
+  min-width: 0;
+  font-size: 10px;
+  font-weight: 700;
+  color: #aebdcb;
+  letter-spacing: .045em;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .match-modal.match-modal-finished .match-modal-footer {
+    min-height: 31px;
+    padding: 7px 12px 9px;
+  }
+  .match-modal.match-modal-finished .match-modal-footer > strong {
+    font-size: 9px;
+  }
+}
