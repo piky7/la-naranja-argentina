@@ -1,4 +1,4 @@
-import useLiveMatch from "../hooks/useLiveMatch";
+import UpcomingMatchModal from "../components/UpcomingMatchModal";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveMatchInfo from "../components/LiveMatchInfo";
 import CategoryBalance from "../components/CategoryBalance";
@@ -149,10 +149,8 @@ function Liga() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
-  const upcomingLive = useLiveMatch(selectedUpcomingMatch);
   const selectedUpcomingHomeTeam = selectedUpcomingMatch ? TEAMS_BY_ID.get(selectedUpcomingMatch.homeTeam) : null;
   const selectedUpcomingAwayTeam = selectedUpcomingMatch ? TEAMS_BY_ID.get(selectedUpcomingMatch.awayTeam) : null;
-  const [upcomingTab, setUpcomingTab] = useState("comparativa");
   const [selectedPlayer, setSelectedPlayer] = useState(null);
 const [resultsPage, setResultsPage] = useState(null);
   const getTeamPosition = (id) => standings.findIndex(t => t.id === id) + 1;
@@ -1185,319 +1183,33 @@ onClick={() => {
         </div>
       </section>
 
-{/* POPUP PRÓXIMO PARTIDO */}
-
-      {selectedUpcomingMatch && !selectedMatch && createPortal(
-        <div
-          className="match-modal-overlay"
-          onClick={() =>
-            setSelectedUpcomingMatch(null)
-          }
-        >
-          <div
-          className={`match-modal match-modal-upcoming${upcomingLive ? " match-modal-is-live" : ""}`}
-            onClick={(event) =>
-              event.stopPropagation()
-            }
-          >
-            <button
-              className="match-modal-close"
-              type="button"
-              onClick={() =>
-                setSelectedUpcomingMatch(null)
-              }
-              aria-label="Cerrar"
-            >
-              ×
-            </button>
-
-            <div className="match-modal-header">
-              <div className="upcoming-header-meta">
-                <span className="match-modal-label">LIGA NACIONAL 2026/27</span>
-                <strong className="match-modal-date">{formatDate(selectedUpcomingMatch.date)}</strong>
-              </div>
-              <div className="match-modal-teams">
-                <div className="match-modal-team">
-                  {getTeam(selectedUpcomingMatch.homeTeam) && (
-                    <button
-                      type="button"
-                      className="home-modal-team-logo-button"
-                      onClick={() =>
-                        openTeamFromUpcoming(
-                          getTeam(selectedUpcomingMatch.homeTeam).id
-                        )
-                      }
-                      aria-label={`Ir al equipo ${getTeam(selectedUpcomingMatch.homeTeam).name}`}
-                    >
-                      <img
-                        src={
-                          getTeam(selectedUpcomingMatch.homeTeam).logo
-                        }
-                        alt={`Escudo de ${getTeam(selectedUpcomingMatch.homeTeam).name}`}
-                      />
-                    </button>
-                  )}
-
-                  <strong>
-                    {getTeam(selectedUpcomingMatch.homeTeam)?.shortName ||
-                      getTeam(selectedUpcomingMatch.homeTeam)?.name}
-
-                    {getTeam(selectedUpcomingMatch.homeTeam) && (
-                      <small>
-                        {getTeamPosition(
-                          getTeam(selectedUpcomingMatch.homeTeam).id
-                        )}
-                        ° •{" "}
-                        {
-                          getTeamRecord(
-                            getTeam(selectedUpcomingMatch.homeTeam).id
-                          ).wins
-                        }
-                        -
-                        {
-                          getTeamRecord(
-                            getTeam(selectedUpcomingMatch.homeTeam).id
-                          ).losses
-                        }
-                      </small>
-                    )}
-                  </strong>
-                </div>
-
-                <div className="match-modal-score">
-                  <span className="match-modal-status">{upcomingLive ? `EN VIVO · ${upcomingLive.isHalftime ? "ENTRETIEMPO" : upcomingLive.quarter ? `${upcomingLive.quarter}° CUARTO` : "PARTIDO EN JUEGO"}` : "PRÓXIMO PARTIDO"}</span>
-                  <strong>
-                    {upcomingLive && upcomingLive.homeScore != null && upcomingLive.awayScore != null && Number.isFinite(Number(upcomingLive.homeScore)) && Number.isFinite(Number(upcomingLive.awayScore)) ? `${upcomingLive.homeScore} - ${upcomingLive.awayScore}` : selectedUpcomingMatch.time || "VS"}
-                  </strong>
-
-                  {selectedUpcomingMatch.tv &&
-                    selectedUpcomingMatch.tv.length >
-                      0 && (
-                      <span>
-                        {selectedUpcomingMatch.tv.join(
-                          " · "
-                        )}
-                      </span>
-                    )}
-                </div>
-
-                <div className="match-modal-team">
-                  {getTeam(selectedUpcomingMatch.awayTeam) && (
-                    <button
-                      type="button"
-                      className="home-modal-team-logo-button"
-                      onClick={() =>
-                        openTeamFromUpcoming(
-                          getTeam(selectedUpcomingMatch.awayTeam).id
-                        )
-                      }
-                      aria-label={`Ir al equipo ${getTeam(selectedUpcomingMatch.awayTeam).name}`}
-                    >
-                      <img
-                        src={
-                          getTeam(selectedUpcomingMatch.awayTeam).logo
-                        }
-                        alt={`Escudo de ${getTeam(selectedUpcomingMatch.awayTeam).name}`}
-                      />
-                    </button>
-                  )}
-
-                  <strong>
-                    {getTeam(selectedUpcomingMatch.awayTeam)?.shortName ||
-                      getTeam(selectedUpcomingMatch.awayTeam)?.name}
-
-                    {getTeam(selectedUpcomingMatch.awayTeam) && (
-                      <small>
-                        {getTeamPosition(
-                          getTeam(selectedUpcomingMatch.awayTeam).id
-                        )}
-                        ° •{" "}
-                        {
-                          getTeamRecord(
-                            getTeam(selectedUpcomingMatch.awayTeam).id
-                          ).wins
-                        }
-                        -
-                        {
-                          getTeamRecord(
-                            getTeam(selectedUpcomingMatch.awayTeam).id
-                          ).losses
-                        }
-                      </small>
-                    )}
-                  </strong>
-                </div>
-              </div>
-            </div>
-
-            <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
-            <MatchVote match={selectedUpcomingMatch} />
-            <div className="upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
-              <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa de equipos</button>
-              <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores destacados</button>
-            </div>
-            <section className="match-highlighted-section">
-              {upcomingTab === "comparativa" && (<div className="upcoming-tab-panel" role="tabpanel">
-              {/* COMPARATIVA DE EQUIPOS */}
-
-<div className="upcoming-team-comparison upcoming-official-comparison" style={getMatchColorStyle(selectedUpcomingMatch.homeTeam, selectedUpcomingMatch.awayTeam)}>
-  <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
-  {(() => {
-    const home = UPCOMING_COLLECTIVE_BY_TEAM[selectedUpcomingMatch.homeTeam];
-    const away = UPCOMING_COLLECTIVE_BY_TEAM[selectedUpcomingMatch.awayTeam];
-    return <>
-      <CategoryBalance home={home} away={away} homeId={selectedUpcomingMatch.homeTeam} awayId={selectedUpcomingMatch.awayTeam} stats={UPCOMING_COLLECTIVE_STATS} />
-      <p className="upcoming-collective-source">Partidos con datos: {home.games} / {away.games} · Naranja = mejor registro</p>
-      {UPCOMING_COLLECTIVE_STATS.map(([label, key, lowerIsBetter], index) => {
-        const hv = home.values[key], av = away.values[key];
-        const both = Number.isFinite(hv) && Number.isFinite(av);
-        const homeBetter = both && hv !== av && (lowerIsBetter ? hv < av : hv > av);
-        const awayBetter = both && hv !== av && (lowerIsBetter ? av < hv : av > hv);
-        const percentage = index >= 8;
-        const fmt = value => Number.isFinite(value) ? `${value.toFixed(1)}${percentage ? "%" : ""}` : "—";
-        const max = Math.max(hv || 0, av || 0, 1);
-        const homeRank = UPCOMING_COLLECTIVE_RANKS[key]?.[selectedUpcomingMatch.homeTeam];
-        const awayRank = UPCOMING_COLLECTIVE_RANKS[key]?.[selectedUpcomingMatch.awayTeam];
-        return <div className="upcoming-comparison-row upcoming-comparison-stat upcoming-ranked-row" key={key}>
-          <span className={`upcoming-rank-badge rank-${homeRank || "none"}`} aria-label={homeRank ? `Puesto ${homeRank}` : "Sin posición"}>{homeRank ? `#${homeRank}` : "—"}</span>
-          <strong className={homeBetter ? "collective-better" : ""}>{fmt(hv)}</strong>
-          <div className="upcoming-comparison-track" aria-hidden="true"><span className={homeBetter ? "collective-better-bar" : ""} style={{ width: `${(Math.max(0, hv || 0) / max) * 100}%` }} /></div>
-          <span className="upcoming-ranked-label">{label === "Recibidos" ? "Pts recibidos" : label}</span>
-          <div className="upcoming-comparison-track" aria-hidden="true"><span className={awayBetter ? "collective-better-bar" : ""} style={{ width: `${(Math.max(0, av || 0) / max) * 100}%` }} /></div>
-          <strong className={awayBetter ? "collective-better" : ""}>{fmt(av)}</strong>
-          <span className={`upcoming-rank-badge rank-${awayRank || "none"}`} aria-label={awayRank ? `Puesto ${awayRank}` : "Sin posición"}>{awayRank ? `#${awayRank}` : "—"}</span>
-        </div>;
-      })}
-    </>;
-  })()}
-</div>
-{!upcomingLive && (<div className="upcoming-last-matches">
-  <h3>ÚLTIMOS 2 PARTIDOS</h3>
-
-  <div className="upcoming-last-matches-grid">
-    {[
-      selectedUpcomingMatch.homeTeam,
-      selectedUpcomingMatch.awayTeam,
-    ].map((teamId) => (
-      <div className="upcoming-last-team" key={teamId}>
-        <strong>{getTeam(teamId)?.shortName}</strong>
-
-        {getTeamLastTwoMatches(teamId).map((match) => {
-          const hasStats = Boolean(getMatchStats(match));
-
-          return (
-            <button
-              type="button"
-              key={match.id}
-              className="upcoming-last-result"
-              disabled={!hasStats}
-             onClick={() => {
-  setSelectedMatch(match);
-}}
-              title={
-                hasStats
-                  ? "Ver estadísticas del partido"
-                  : "Estadísticas no disponibles"
-              }
-            >
-              <span>{formatDate(match.date)}</span>
-
-             <div className="upcoming-last-score">
-  <div className="upcoming-last-score-team">
-    {match.home?.logo && (
-      <img src={match.home.logo} alt="" />
-    )}
-    <span>{match.home?.shortName || match.homeTeam}</span>
-  </div>
-
-  <strong>
-    {match.homeScore} - {match.awayScore}
-  </strong>
-
-  <div className="upcoming-last-score-team">
-    {match.away?.logo && (
-      <img src={match.away.logo} alt="" />
-    )}
-    <span>{match.away?.shortName || match.awayTeam}</span>
-  </div>
-</div>
-
-              <span className={
-                match.result === "G" ? "is-win" : "is-loss"
-              }>
-                {match.result}
-              </span>
-            </button>
-          );
-        })}
-
-        {getTeamLastTwoMatches(teamId).length === 0 && (
-          <p>Sin resultados recientes</p>
-        )}
-      </div>
-    ))}
-  </div>
-</div>)}
-              </div>)}
-              {upcomingTab === "jugadores" && (
-                <div className="upcoming-tab-panel upcoming-players-comparison" role="tabpanel">
-                  <div className="match-highlighted-title">
-                    <h3>JUGADORES DESTACADOS</h3>
-                    <span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA 2026/27</span>
-                  </div>
-                  {upcomingLeaderCategories.map(category => {
-                    const getLeaders = teamId => ["valuation", "steals"].includes(category.key)
-                      ? getOfficialPlayerLeaders(teamId, category.key)
-                      : getHighlightedPlayers(teamId, category.key);
-                    const homeLeaders = getLeaders(selectedUpcomingMatch.homeTeam);
-                    const awayLeaders = getLeaders(selectedUpcomingMatch.awayTeam);
-                    const allValues = [...homeLeaders, ...awayLeaders].map(player => Number(player.stats[category.key]));
-                    const max = Math.max(...allValues, 0);
-                    const renderSide = (leaders, team, side) => (
-                      <div className={`upcoming-player-side upcoming-player-side-${side}`}>
-                        {leaders.length ? leaders.map(player => {
-                          const value = Number(player.stats[category.key]);
-                          const isLeader = max > 0 && Math.abs(value - max) < 0.00001;
-                          return <button key={player.id} type="button" className="upcoming-player-entry"
-                            onClick={() => setSelectedPlayer({
-                              ...player,
-                              team: getTeam(player.teamId),
-                              stats: getPlayerStats(player.id),
-                            })}>
-                            {team?.logo && <img src={team.logo} alt="" className="upcoming-player-crest" />}
-                            <div className="upcoming-player-info">
-                              <span className="upcoming-player-name">{player.name}</span>
-                              <div className="upcoming-player-meter"><span style={{ width: `${max > 0 ? Math.max(0, value / max * 100) : 0}%` }} /></div>
-                            </div>
-                            <strong className={isLeader ? "upcoming-player-best" : ""}>{value.toFixed(1)}</strong>
-                            {isLeader && <span className="upcoming-player-leader" aria-label="Mejor promedio">★</span>}
-                          </button>;
-                        }) : <span className="upcoming-player-empty">Sin datos disponibles</span>}
-                      </div>
-                    );
-                    return <div className="upcoming-player-category" key={category.key}>
-                      <div className="upcoming-player-category-title">{category.title}</div>
-                      <div className="upcoming-player-versus">
-                        {renderSide(homeLeaders, getTeam(selectedUpcomingMatch.homeTeam), "home")}
-                        <div className="upcoming-player-center-icon" aria-hidden="true">{category.icon}</div>
-                        {renderSide(awayLeaders, getTeam(selectedUpcomingMatch.awayTeam), "away")}
-                      </div>
-                    </div>;
-                  })}
-                </div>
-              )}
-            </section>
-
-            <div className="match-modal-footer">
-              <span>LNA</span>
-
-              <strong>
-                PROMEDIOS DE TEMPORADA
-              </strong>
-            </div>
-          </div>
-        </div>
-      , document.body)}
+{/* El mismo popup de próximos partidos de Home, incluyendo LIVE y Votación. */}
+      {selectedUpcomingMatch && !selectedMatch && (
+        <UpcomingMatchModal
+          selectedUpcomingMatch={selectedUpcomingMatch}
+          selectedMatch={selectedMatch}
+          setSelectedUpcomingMatch={setSelectedUpcomingMatch}
+          selectedUpcomingHomeTeam={selectedUpcomingHomeTeam}
+          selectedUpcomingAwayTeam={selectedUpcomingAwayTeam}
+          getTeam={getTeam}
+          getTeamPosition={getTeamPosition}
+          getTeamRecord={getTeamRecord}
+          goToTeam={openTeamFromUpcoming}
+          formatDate={formatDate}
+          matches={matches}
+          getTeamLastTwoMatches={getTeamLastTwoMatches}
+          getMatchStats={getMatchStats}
+          getOfficialPlayerLeaders={getOfficialPlayerLeaders}
+          getHighlightedPlayers={getHighlightedPlayers}
+          getPlayerStats={getPlayerStats}
+          upcomingLeaderCategories={upcomingLeaderCategories}
+          UPCOMING_COLLECTIVE_BY_TEAM={UPCOMING_COLLECTIVE_BY_TEAM}
+          UPCOMING_COLLECTIVE_STATS={UPCOMING_COLLECTIVE_STATS}
+          UPCOMING_COLLECTIVE_RANKS={UPCOMING_COLLECTIVE_RANKS}
+          setSelectedMatch={setSelectedMatch}
+          setSelectedPlayer={setSelectedPlayer}
+        />
+      )}
 {/* =========================
           MODAL EQUIPO
       ========================= */}
