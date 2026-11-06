@@ -98,7 +98,7 @@ test("El acceso sigue requiriendo autenticación y pertenencia antes de consulta
   assert.ok(route.includes("await invalidateLeagueRankingCache(env.DB,groupId)"));
 });
 test("Se invalidan cambios de integrantes sin compartir permisos",()=>{
-  const join=source.slice(source.indexOf("if (url.pathname === \"/api/prode/groups/join\""),source.indexOf("// Diagnóstico de cierre"));
+  const join=source.slice(source.indexOf("if (url.pathname === \"/api/prode/invitations/join\""),source.indexOf("// Diagnóstico de cierre"));
   const management=source.slice(source.indexOf("// Gestión de liga: abandonar"),source.indexOf("const groupDetail ="));
   assert.match(join,/invalidateLeagueRankingCache\(env.DB,invite.group_id\)/);
   assert.ok((management.match(/invalidateLeagueRankingCache\(env.DB,groupId\)/g)||[]).length>=3);
