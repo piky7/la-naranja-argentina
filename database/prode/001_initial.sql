@@ -63,9 +63,7 @@ CREATE TABLE IF NOT EXISTS prode_global_ranking_cache (
   expires_at INTEGER NOT NULL
 );
 
--- Índices para las consultas frecuentes de grupos, invitaciones y votos.
+-- Índices para consultas frecuentes de grupos administrados y votos recientes.
 -- Se crean sin modificar ni eliminar datos existentes.
 CREATE INDEX IF NOT EXISTS idx_prode_groups_owner ON prode_groups(owner_id);
 CREATE INDEX IF NOT EXISTS idx_prode_vote_links_recent_user ON prode_vote_links(user_id, submitted_at DESC);
-CREATE INDEX IF NOT EXISTS idx_prode_memberships_group ON prode_memberships(group_id, user_id);
-CREATE INDEX IF NOT EXISTS idx_prode_invitations_creator ON prode_invitations(created_by);
