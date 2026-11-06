@@ -8,6 +8,7 @@ import "./Estadisticas.css";
 import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
+import { getMatchStats } from "../utils/getMatchStats";
 import PlayerModal from "../components/PlayerModal";
 import TeamRankings from "../components/TeamRankings";
 import TripleRankings from "../components/TripleRankings";
@@ -75,18 +76,7 @@ function Estadisticas() {
     return stats ? { ...stats, valuation: valuationAverages.get(playerId) ?? null } : null;
   };
 
-const getMatchStats = (match) => {
-  if (!match) return null;
 
-  const normalizedId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-  const directStats = matchPlayerStats[match.id] || matchPlayerStats[normalizedId];
-  if (directStats) return directStats;
-
-  if (match.officialUrl) return null;
-
-  const simpleId = `${match.homeTeam}-${match.awayTeam}`;
-  return matchPlayerStats[simpleId] || null;
-};
 
 const getPlayerLastMatches = (player) => {
   if (!player) return [];
