@@ -80,7 +80,7 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         fill={`url(#${id}ribbon)`} stroke="#f3c15d" strokeWidth="1.9" strokeLinejoin="round"/>
       <path d="M21 89h54" stroke="#ffffff" strokeOpacity=".25" strokeWidth="1.1"/>
       <text x="48" y="100" textAnchor="middle" fill={t}
-        fontFamily={isLeague ? "Russo One,Impact,Arial Black,sans-serif" : fontFamily} fontStyle={isLeague ? "italic" : fontItalic ? "italic" : "normal"}
+        fontFamily="Russo One,Impact,Arial Black,sans-serif" fontStyle="italic"
         fontSize={fontSize} fontWeight="900" letterSpacing=".05"
         textLength={fitLeagueText ? 55 : undefined}
         lengthAdjust={fitLeagueText ? "spacingAndGlyphs" : undefined}>{label}</text>
