@@ -184,6 +184,55 @@ async function storeGlobalRankingSources(db,updates) {
     }
   } catch(error) { console.warn("Prode global ranking cache:",error); }
 }
+// Clasificación compartida por liga: cachear solo los cálculos comunes, nunca
+// permisos ni el orden personalizado de los partidos simultáneos.
+const LEAGUE_RANKING_CACHE_SECONDS = 30;
+const leagueRankingCacheKey = groupId => "league-ranking:v1:" + groupId;
+async function readLeagueRankingCache(db,groupId) {
+  try {
+    const row = await db.prepare("SELECT payload FROM prode_global_ranking_cache WHERE cache_key=? AND expires_at>?")
+      .bind(leagueRankingCacheKey(groupId),Math.floor(Date.now()/1000)).first();
+    if (!row) return null;
+    const value = JSON.parse(row.payload);
+    return value && Array.isArray(value.ranking) && Array.isArray(value.weeklyRanking) &&
+      Array.isArray(value.weeklyHistory) && Array.isArray(value.medalTable) &&
+      value.matchesByWeek && typeof value.matchesByWeek === "object" ? value : null;
+  } catch { return null; }
+}
+async function storeLeagueRankingCache(db,groupId,value) {
+  try {
+    const payload = JSON.stringify(value);
+    // No saturar D1 con ligas enormes; sin caché sigue funcionando normalmente.
+    if (payload.length > 900000) return;
+    await db.prepare("INSERT INTO prode_global_ranking_cache(cache_key,payload,expires_at) VALUES(?,?,?) ON CONFLICT(cache_key) DO UPDATE SET payload=excluded.payload,expires_at=excluded.expires_at")
+      .bind(leagueRankingCacheKey(groupId),payload,Math.floor(Date.now()/1000)+LEAGUE_RANKING_CACHE_SECONDS).run();
+  } catch(error) { console.warn("Prode league ranking cache:",error); }
+}
+async function invalidateLeagueRankingCache(db,groupId) {
+  try {
+    await db.prepare("DELETE FROM prode_global_ranking_cache WHERE cache_key=?")
+      .bind(leagueRankingCacheKey(groupId)).run();
+  } catch(error) { console.warn("Prode league ranking invalidation:",error); }
+}
+function presentLeagueRanking(shared,userId,role) {
+  // La clasificación y las medallas se comparten. El orden de partidos
+  // simultáneos depende del acierto o error del usuario que consulta.
+  const matchesByWeek = {};
+  for (const [week,games] of Object.entries(shared.matchesByWeek)) {
+    matchesByWeek[week] = [...games].sort((a,b) => {
+      const base = compareStreakGames(b,a);
+      const mineA = a.participants.find(p => p.userId === userId);
+      const mineB = b.participants.find(p => p.userId === userId);
+      const tied = a.startsAt === b.startsAt && a.finishedObservedAt &&
+        a.finishedObservedAt === b.finishedObservedAt;
+      if (tied && mineA?.eligible && mineB?.eligible &&
+          Boolean(mineA.winnerCorrect) !== Boolean(mineB.winnerCorrect))
+        return mineA.winnerCorrect ? -1 : 1;
+      return base;
+    });
+  }
+  return reply({...shared,matchesByWeek,ok:true,canAssignInitialPoints:role==="owner"});
+}
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -948,6 +997,10 @@ export default {
         await ensureMembershipPeriods(env.DB);
         const membership = await env.DB.prepare("SELECT m.role FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId,userId).first();
         if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
+        if (request.method === "GET") {
+          const cachedLeague = await readLeagueRankingCache(env.DB,groupId);
+          if (cachedLeague) return presentLeagueRanking(cachedLeague,userId,membership.role);
+        }
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
         await env.DB.prepare("INSERT OR IGNORE INTO prode_league_starts(group_id) VALUES (?)").bind(groupId).run();
         await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_initial_points (group_id TEXT NOT NULL, user_id TEXT NOT NULL, points INTEGER NOT NULL CHECK(points >= 0), assigned_by TEXT NOT NULL, assigned_at TEXT NOT NULL DEFAULT (datetime('now')), PRIMARY KEY(group_id,user_id), FOREIGN KEY(group_id,user_id) REFERENCES prode_memberships(group_id,user_id))").run();
@@ -1069,6 +1122,7 @@ export default {
           const saved = await env.DB.prepare("INSERT INTO prode_initial_points(group_id,user_id,points,assigned_by) VALUES(?,?,?,?) ON CONFLICT(group_id,user_id) DO NOTHING")
             .bind(groupId,targetId,amount,userId).run();
           if (!saved.meta?.changes) return reply({ ok: false, error: "Los puntos iniciales ya fueron asignados" }, 409);
+          await invalidateLeagueRankingCache(env.DB,groupId);
           return reply({ ok: true, userId: targetId, points: amount, maxPoints: leaderPoints });
         }
         // Estadísticas históricas de perfil calculadas únicamente a partir de partidos elegibles en esta liga.
@@ -1146,25 +1200,10 @@ export default {
           });
           (matchesByWeek[number] ||= []).push({ ...match, participants, weekKey: undefined });
         }
-        for (const matches of Object.values(matchesByWeek)) {
-          // La grilla es exactamente el inverso del orden en que se procesan las rachas.
-          // Antes el desempate por id era ascendente en ambos sentidos: mostraba
-          // Atenas–Gimnasia por delante de La Unión–Argentino aunque la racha
-          // ya había procesado el encuentro de Argentino como el más reciente.
-          matches.sort((a,b) => {
-            const base = compareStreakGames(b,a);
-            // La lista del usuario que la consulta refleja su propia racha.
-            const mineA = a.participants.find(p => p.userId === userId);
-            const mineB = b.participants.find(p => p.userId === userId);
-            const tied = a.startsAt === b.startsAt && a.finishedObservedAt &&
-              a.finishedObservedAt === b.finishedObservedAt;
-            if (tied && mineA?.eligible && mineB?.eligible &&
-                Boolean(mineA.winnerCorrect) !== Boolean(mineB.winnerCorrect))
-              return mineA.winnerCorrect ? -1 : 1;
-            return base;
-          });
-        }
-        return reply({ ok: true, ranking, weeklyRanking, weeklyHistory, medalTable, matchesByWeek, canAssignInitialPoints: membership.role === "owner", weekStartsAt: new Date(weekStart).toISOString(), startedAt: start.starts_at });
+        const sharedLeague = {ranking,weeklyRanking,weeklyHistory,medalTable,matchesByWeek,
+          weekStartsAt:new Date(weekStart).toISOString(),startedAt:start.starts_at};
+        await storeLeagueRankingCache(env.DB,groupId,sharedLeague);
+        return presentLeagueRanking(sharedLeague,userId,membership.role);
       } catch (error) {
         console.error("Prode league ranking:", error);
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
