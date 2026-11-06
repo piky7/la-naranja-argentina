@@ -78,7 +78,7 @@ function Header() {
             className="logo"
           >
             <img
-              src="/logo-lna.png"
+              src="/logo-lna.webp"
               alt="La Naranja Argentina"
               className="logo-image"
             />
@@ -121,7 +121,7 @@ function Header() {
 
       {installPlatform && !installDismissed && !installOpen && (
         <aside className="lna-install-tip" aria-label="Instalar La Naranja Argentina">
-          <img src="/logo-lna.png" alt="" />
+          <img src="/logo-lna.webp" alt="" />
           <div><strong>Llevá LNA a tu inicio</strong><span>Accedé como una app desde tu celular.</span></div>
           <button type="button" className="lna-install-tip-action" onClick={installApp}>Ver cómo</button>
           <button type="button" className="lna-install-tip-close" onClick={dismissInstall} aria-label="Cerrar aviso"><X size={18} /></button>
@@ -131,7 +131,7 @@ function Header() {
         <div className="lna-install-overlay" onClick={() => setInstallOpen(false)}>
           <section className="lna-install-dialog" role="dialog" aria-modal="true" aria-labelledby="lna-install-title" onClick={event => event.stopPropagation()}>
             <button type="button" className="lna-install-dialog-close" aria-label="Cerrar" onClick={() => { setInstallOpen(false); dismissInstall(); }}><X size={22} /></button>
-            <img src="/logo-lna.png" alt="La Naranja Argentina" />
+            <img src="/logo-lna.webp" alt="La Naranja Argentina" />
             <h2 id="lna-install-title">LNA EN TU CELULAR</h2>
             <p>Agregá La Naranja Argentina a tu pantalla de inicio y entrá directamente, como una app.</p>
             <ol>
