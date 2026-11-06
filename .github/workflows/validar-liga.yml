@@ -5,6 +5,11 @@ on:
     paths:
       - "src/pages/Liga.jsx"
       - "src/pages/Home.jsx"
+      - "src/components/Header.jsx"
+      - "scripts/optimize-logo.mjs"
+      - "tests/home-image-performance.test.mjs"
+      - "package.json"
+      - "package-lock.json"
       - "src/pages/Estadisticas.jsx"
       - "src/pages/Estadisticas.css"
       - "src/pages/Equipos.jsx"
@@ -62,3 +67,9 @@ jobs:
         run: npm run build
       - name: Verificar separación de estadísticas oficiales
         run: node scripts/verify-stats-chunk.cjs
+      - name: Verificar reducción del logo en producción
+        run: |
+          test -s public/logo-lna.webp
+          test -s dist/logo-lna.webp
+          echo "Logo WebP generado: $(wc -c < dist/logo-lna.webp) bytes"
+
