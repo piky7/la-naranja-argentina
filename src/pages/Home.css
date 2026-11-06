@@ -11326,3 +11326,48 @@
 @media(max-width:350px){
  .home-player-modal .lna-player-match-extra {grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+/* Popup de próximo partido: pie legible y contenido, sin invadir el borde. */
+.match-modal.match-modal-upcoming > .match-modal-footer {
+  position: relative;
+  inset: auto;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  min-height: 34px;
+  margin: 0;
+  padding: 8px 15px 10px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(126, 152, 175, .22);
+  background: #0b141e;
+  line-height: 1.25;
+}
+.match-modal.match-modal-upcoming > .match-modal-footer > span {
+  flex: 0 0 auto;
+  font-size: 11px;
+  font-weight: 900;
+  color: #ff8c20;
+  letter-spacing: .08em;
+}
+.match-modal.match-modal-upcoming > .match-modal-footer > strong {
+  min-width: 0;
+  font-size: 10px;
+  font-weight: 700;
+  color: #aebdcb;
+  letter-spacing: .045em;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .match-modal.match-modal-upcoming > .match-modal-footer {
+    min-height: 31px;
+    padding: 7px 12px 9px;
+  }
+  .match-modal.match-modal-upcoming > .match-modal-footer > strong {
+    font-size: 9px;
+  }
+}
