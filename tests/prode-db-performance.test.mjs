@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 
 const sql = readFileSync(new URL("../database/prode/001_initial.sql", import.meta.url), "utf8");
 const worker = readFileSync(new URL("../workers/prode/worker.js", import.meta.url), "utf8");
-const profileStart = worker.indexOf('if (url.pathname === "/api/prode/profile"');
+const profileStart = worker.indexOf('if (url.pathname === "/api/prode/me"');
 const profileEnd = worker.indexOf('if (url.pathname === "/api/prode/profile/username"', profileStart);
 assert.ok(profileStart >= 0 && profileEnd > profileStart);
 const profile = worker.slice(profileStart, profileEnd);
