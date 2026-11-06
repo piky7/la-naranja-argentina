@@ -49,6 +49,8 @@ jobs:
             console.log(`  LCP precargado: ${discover?.priorityHinted?.value ?? 'no disponible'}`);
             const boot=data.audits?.['bootup-time'];
             console.log(`  Tiempo ejecución JS: ${boot?.displayValue ?? 'no disponible'}`);
+            const blocking=data.audits?.['render-blocking-insight']?.details?.items || [];
+            console.log(`  Recursos bloqueantes: ${blocking.map(x=>x.url).join(' | ') || 'ninguno'}`);
             const breakdown=data.audits?.['lcp-breakdown-insight']?.details?.items || [];
             console.log(`  LCP breakdown: ${JSON.stringify(breakdown).slice(0,500)}`);
             const images=data.audits?.['total-byte-weight']?.details?.items || [];
