@@ -7,6 +7,8 @@ on:
       - main
     paths:
       - "workers/prode/worker.js"
+      - "tests/global-ranking-cache.test.mjs"
+      - "database/prode/001_initial.sql"
       - ".github/workflows/deploy-prode.yml"
 
 permissions:
@@ -28,6 +30,8 @@ jobs:
           node-version: "22"
       - name: Verificar sintaxis del Worker
         run: node --check workers/prode/worker.js
+      - name: Verificar caché y reglas existentes
+        run: node --test tests/global-ranking-cache.test.mjs tests/prode-optimization.test.mjs
       - name: Aplicar esquema D1 de Prode
         run: npx --yes wrangler@4 d1 execute lna-prode --remote --config workers/prode/wrangler.toml --file database/prode/001_initial.sql
         env:
