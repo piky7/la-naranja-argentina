@@ -25,3 +25,4 @@ dist-ssr
 **/.wrangler/
 # Archivo derivado del logo, generado por predev/prebuild
 /public/logo-lna.webp
+/public/favicon-lna-64.png
