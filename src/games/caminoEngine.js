@@ -164,7 +164,7 @@ export function createMatch(round, teamId, opponentId, random = Math.random) {
   const scenarioIds = SCENARIOS.map(group => Math.min(group.length - 1, Math.floor(random() * group.length)));
   return {
     round, teamId, opponentId, score: homeScore,
-    opponentScore: homeScore + lead, moment: 0, clock: 58,
+    opponentScore: homeScore - lead, moment: 0, clock: 58,
     scenarioIds, log: [], done: false, won: false,
   };
 }
