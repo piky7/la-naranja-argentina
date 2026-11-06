@@ -1,25 +1,62 @@
 import { isPlayerAppearance } from "../utils/playerAppearance";
 
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
-import LiveMatchInfo from "../components/LiveMatchInfo";
-import LiveRosters from "../components/LiveRosters";
-import LiveStartingFive from "../components/LiveStartingFive";
-import LiveMyVote from "../components/LiveMyVote";
 import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
-import CategoryBalance from "../components/CategoryBalance";
-import "../components/UpcomingHeader.css";
-import MatchVote from "../components/MatchVote";
-import MvpPrediction from "../components/MvpPrediction";
-import { requestPrediction } from "../auth/prodeBallot";
 
 
-import MatchStatsTabs from "../components/MatchStatsTabs";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 
-// El código de los popups se descarga cuando el usuario abre uno.
-const UpcomingMatchModal = lazy(() => import("../components/UpcomingMatchModal"));
-const FinishedMatchModal = lazy(() => import("../components/FinishedMatchModal"));
-const PlayerModal = lazy(() => import("../components/PlayerModal"));
+// Las importaciones son compartidas por React.lazy y la precarga en inactividad.
+const loadUpcomingModal = () => import("../components/UpcomingMatchModal");
+const loadFinishedModal = () => import("../components/FinishedMatchModal");
+const loadPlayerModal = () => import("../components/PlayerModal");
+const UpcomingMatchModal = lazy(loadUpcomingModal);
+const FinishedMatchModal = lazy(loadFinishedModal);
+const PlayerModal = lazy(loadPlayerModal);
+
+function useIdlePopupPreload() {
+  useEffect(() => {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (connection?.saveData || /^(slow-2g|2g)$/i.test(connection?.effectiveType || "")) return;
+    let timer = null;
+    let idle = null;
+    let cancelled = false;
+    const prepare = () => {
+      if (cancelled) return;
+      void Promise.allSettled([loadUpcomingModal(), loadFinishedModal(), loadPlayerModal()]);
+    };
+    const schedule = () => {
+      timer = window.setTimeout(() => {
+        if (cancelled) return;
+        if ("requestIdleCallback" in window) {
+          idle = window.requestIdleCallback(prepare, { timeout: 12000 });
+        } else {
+          prepare();
+        }
+      }, 2800);
+    };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", schedule);
+      if (timer !== null) window.clearTimeout(timer);
+      if (idle !== null && "cancelIdleCallback" in window) window.cancelIdleCallback(idle);
+    };
+  }, []);
+}
+
+function PopupLoading() {
+  return (
+    <div className="match-modal-overlay" role="status" aria-live="polite"
+      style={{ display: "grid", placeItems: "center", color: "#fff", background: "rgba(0,0,0,.76)" }}>
+      <div style={{ background: "#111c28", border: "1px solid #ff8c20",
+        padding: "14px 20px", borderRadius: "10px", fontWeight: 700 }}>
+        Cargando partido...
+      </div>
+    </div>
+  );
+}
 import { Link, useNavigate } from "react-router-dom";
 
 import { teams, getMatchColorStyle } from "../data/teams";
@@ -120,6 +157,7 @@ const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
 );
 
 function Home() {
+  useIdlePopupPreload();
   const navigate = useNavigate();
 
   const getLocalDateString = (date = new Date()) => {
@@ -1748,7 +1786,7 @@ const finishedMatch = {
       )}
 
       {/* POPUP PARTIDO TERMINADO */}
-      <Suspense fallback={null}>
+      <Suspense fallback={<PopupLoading />}>
       {selectedMatch && (
         <FinishedMatchModal
           selectedMatch={selectedMatch}
