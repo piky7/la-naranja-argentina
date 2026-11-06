@@ -576,12 +576,12 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo"
   },
   {
-    "id": "2026-11-15-argentino-lanus",
+    "id": "2026-11-15-la-union-atenas",
     "date": "2026-11-15",
-    "time": "20:30",
-    "homeTeam": "argentino",
-    "awayTeam": "lanus",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2SpXae8GOMLSjBTeLsFd_IFcVthcB6qxPyJFN7sCOnW95cOi8sPMkmA==/argentino-j-vs-lanus"
+    "time": "21:00",
+    "homeTeam": "la-union",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
   },
   {
     "id": "2026-11-15-san-martin-quimsa",
@@ -590,14 +590,6 @@ export const officialSchedule = [
     "homeTeam": "san-martin",
     "awayTeam": "quimsa",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
-  },
-  {
-    "id": "2026-11-15-la-union-atenas",
-    "date": "2026-11-15",
-    "time": "21:00",
-    "homeTeam": "la-union",
-    "awayTeam": "atenas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
   },
   {
     "id": "2026-11-16-instituto-san-lorenzo",
@@ -654,6 +646,14 @@ export const officialSchedule = [
     "homeTeam": "olimpico",
     "awayTeam": "ferro",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24xvC_QYBw6z3gfFJ1WDyYzkNhCyApzGcontxgC0_x8Fz8mb64t7KQg==/olimpico-lb-vs-ferro"
+  },
+  {
+    "id": "2026-11-19-argentino-lanus",
+    "date": "2026-11-19",
+    "time": "21:00",
+    "homeTeam": "argentino",
+    "awayTeam": "lanus",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y9sQ-mmEousQ2AzqHNCHZXmMa7xNarU6-gGK-rQP2rsLb6PjAVNPTw==/argentino-j-vs-lanus"
   },
   {
     "id": "2026-11-20-atenas-instituto",
