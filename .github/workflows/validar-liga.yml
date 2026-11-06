@@ -32,6 +32,8 @@ on:
       - "src/components/MatchVote.jsx"
       - "src/components/MatchStatsTabs.jsx"
       - "src/components/FinishedMatchModal.jsx"
+      - "src/components/UpcomingMatchModal.jsx"
+      - "tests/upcoming-popup-shared.test.mjs"
       - "src/components/MatchStatsTabs.css"
       - "scripts/verify-liga-popups.mjs"
       - "scripts/verify-liga-collective.mjs"
