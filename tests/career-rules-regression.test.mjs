@@ -80,9 +80,9 @@ test("Ascenso por puntos conserva histórico y reinicia puntos de categoría",as
 });
 
 test("Cinco errores consecutivos descienden desde Liga Argentina",async()=>{
-  const games=Array.from({length:17},(_,i)=>fixtureGame(i));
+  const games=Array.from({length:13},(_,i)=>fixtureGame(i));
   const result=await career(games,[
-    ...Array(12).fill(true),...Array(5).fill(false)
+    ...Array(8).fill(true),...Array(5).fill(false)
   ]);
   assert.ok(result.career.bestCategory>=2,"Debe haber alcanzado Liga Argentina");
   assert.equal(result.career.categoryIndex,1);
