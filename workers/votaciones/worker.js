@@ -187,16 +187,21 @@ async function loadCareerFixture(db, fixture) {
 }
 
 async function calculateRewards(db, fixture, visitorId) {
-  const votes = await db.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all();
-  const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
+  // La tabla MVP debe existir antes de iniciar las lecturas concurrentes.
   await db.prepare("CREATE TABLE IF NOT EXISTS votos_mvp (partido_id TEXT NOT NULL, visitante_id TEXT NOT NULL, jugador_id TEXT NOT NULL, creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(partido_id, visitante_id))").run();
-  const mvpVotes = await db.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=?").bind(visitorId).all();
+  // Consultas independientes: ejecutarlas juntas ahorra latencia de D1.
+  // Se conservan exactamente las mismas filas, criterios y reglas.
+  const [votes, mvpVotes, firstVote, firstMvp, finishTimes] = await Promise.all([
+    db.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all(),
+    db.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=?").bind(visitorId).all(),
+    db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first(),
+    db.prepare("SELECT MIN(partido_id) AS first_id FROM votos_mvp").first(),
+    getFinishObservations(db),
+  ]);
+  const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
   const mvpMap = new Map((mvpVotes.results || []).map(v => [v.partido_id, v.jugador_id]));
   // Las reglas se aplican retroactivamente desde el primer partido con votos registrados.
-  const firstVote = await db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first();
-  const firstMvp = await db.prepare("SELECT MIN(partido_id) AS first_id FROM votos_mvp").first();
   const firstDate = [firstVote?.first_id, firstMvp?.first_id].filter(Boolean).sort()[0]?.slice(0,10) || "9999-12-31";
-  const finishTimes = await getFinishObservations(db);
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => {
       const aFinish = timelyFinishObservation(a,finishTimes.get(a.id));
