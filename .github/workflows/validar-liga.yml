@@ -15,6 +15,7 @@ on:
       - "tests/render-optimization.test.mjs"
       - "tests/match-stats-shared.test.mjs"
       - "src/App.jsx"
+      - "tests/lazy-secondary-routes.test.mjs"
       - "src/hooks/useLiveMatch.js"
       - "src/hooks/useLiveSnapshot.js"
       - "tests/live-shared.test.mjs"
