@@ -162,7 +162,7 @@ function MiniCourt({ moment, round, event }) {
           <circle cx="328" cy="148" r="13" fill="#163856" stroke="#d3edff" strokeWidth="2"/>
         </g>
         <path key={round + "-" + moment + "-" + variant} d={line} className="ct-trajectory" pathLength="100"/>
-        <circle key={"ball-" + round + "-" + moment + "-" + variant} cx="168" cy="115" r="9" fill="#ff8b08" stroke="#101b29" strokeWidth="2" className={"ct-moving-ball ct-moving-" + variant}/>
+        <circle key={"ball-" + round + "-" + moment + "-" + variant} cx="0" cy="0" r="9" fill="#ff8b08" stroke="#101b29" strokeWidth="2" className="ct-moving-ball"><animateMotion dur="1.8s" path={line} repeatCount="indefinite"/></circle>
         <circle cx="392" cy="102" r="15" fill="none" stroke="#fff8" strokeWidth="1" strokeDasharray="3 4"/>
       </svg>
       {isOutcome && <div className={"ct-court-flash " + (isPositive ? "ct-flash-good" : "ct-flash-bad")} aria-live="polite" key={round + "-" + moment + "-" + variant}>
