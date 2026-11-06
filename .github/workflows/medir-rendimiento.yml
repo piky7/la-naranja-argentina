@@ -26,6 +26,8 @@ jobs:
           mkdir -p lighthouse-reports
           npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --preset=desktop --output=json --output-path=lighthouse-reports/desktop.json --quiet
           npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile-2.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile-3.json --quiet
       - name: Resumir métricas
         if: always()
         run: |
@@ -48,6 +50,19 @@ jobs:
             }
             if(data.runtimeError) console.error('Error del navegador:',data.runtimeError.message);
           }
+          EOF
+      - name: Mediana de las tres mediciones móviles
+        run: |
+          node --input-type=module <<'EOF'
+          import fs from 'node:fs';
+          const names=['mobile','mobile-2','mobile-3'];
+          const records=names.map(name=>JSON.parse(fs.readFileSync(`lighthouse-reports/${name}.json`,'utf8')));
+          const median=xs=>[...xs].sort((a,b)=>a-b)[1];
+          for(const metric of ['first-contentful-paint','largest-contentful-paint','total-blocking-time','cumulative-layout-shift']) {
+            const values=records.map(r=>r.audits[metric].numericValue);
+            console.log(`Mediana móvil ${metric}: ${median(values).toFixed(metric==='cumulative-layout-shift'?3:0)}`);
+          }
+          console.log(`Mediana móvil puntuación: ${median(records.map(r=>Math.round(r.categories.performance.score*100)))}/100`);
           EOF
       - uses: actions/upload-artifact@v4
         if: always()
