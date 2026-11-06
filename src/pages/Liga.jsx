@@ -15,6 +15,7 @@ import { teams, getMatchColorStyle } from "../data/teams";
 import { matches as baseMatches } from "../data/matches";
 import { matchResults } from "../data/matchResults";
 import { matchPlayerStats } from "../data/matchStats";
+import { getMatchStats } from "../utils/getMatchStats";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
@@ -161,18 +162,7 @@ const [resultsPage, setResultsPage] = useState(null);
   const openTeamFromUpcoming = (id) => { setSelectedUpcomingMatch(null); setSelectedTeam(TEAMS_BY_ID.get(id) || null); };
   const getTeam = (teamId) =>
     TEAMS_BY_ID.get(teamId);
-  const getMatchStats = (match) => {
-  if (!match) return null;
 
-  const dateKey = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-  const directStats = matchPlayerStats[match.id] || matchPlayerStats[dateKey];
-  if (directStats) return directStats;
-
-  if (match.officialUrl) return null;
-
-  const teamsKey = `${match.homeTeam}-${match.awayTeam}`;
-  return matchPlayerStats[teamsKey] || null;
-};
   const getTeamLastTwoMatches = (teamId) => {
   return matches
     .filter(
