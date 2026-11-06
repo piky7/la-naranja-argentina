@@ -47,6 +47,10 @@ jobs:
             const discover=data.audits?.['lcp-discovery-insight']?.details?.items?.find(item=>item.type==='checklist')?.items;
             console.log(`  LCP detectable en HTML: ${discover?.requestDiscoverable?.value ?? 'no disponible'}`);
             console.log(`  LCP precargado: ${discover?.priorityHinted?.value ?? 'no disponible'}`);
+            const boot=data.audits?.['bootup-time'];
+            console.log(`  Tiempo ejecución JS: ${boot?.displayValue ?? 'no disponible'}`);
+            const breakdown=data.audits?.['lcp-breakdown-insight']?.details?.items || [];
+            console.log(`  LCP breakdown: ${JSON.stringify(breakdown).slice(0,500)}`);
             const images=data.audits?.['total-byte-weight']?.details?.items || [];
             const oldLogo=images.find(item=>item.url?.includes('/logo-lna.png'));
             const favicon=images.find(item=>item.url?.includes('/favicon-lna-64.png'));
