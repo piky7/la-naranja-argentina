@@ -53,6 +53,8 @@ jobs:
             console.log(`  Recursos bloqueantes: ${blocking.map(x=>x.url).join(' | ') || 'ninguno'}`);
             console.log(`  CSS principal: ${blocking.filter(x=>x.url?.includes("/assets/index-")).map(x=>x.url.split("/").pop()).join(", ") || "sin datos"}`);
             const assetItems=data.audits?.['network-requests']?.details?.items || [];
+            const cssRequests=assetItems.filter(item=>/\/assets\/[^/]+\.css(?:\?|$)/.test(item.url || ""));
+            console.log(`  CSS descargado: ${cssRequests.map(item=>item.url.split("/").pop()+": "+Math.round((item.transferSize || item.resourceSize || 0)/1024)+" KiB").join(" | ") || "sin datos"}`);
             const shieldRequests=assetItems.filter(item=>['quimsa-','lanus-','boca-','san-martin-'].some(name=>(item.url || '').includes('/assets/'+name)));
             console.log(`  Escudos del día: ${shieldRequests.map(item=>item.url.split('/').pop()+': '+Math.round((item.transferSize || 0)/1024)+' KiB').join(' | ') || 'sin registros'}`);
             const breakdown=data.audits?.['lcp-breakdown-insight']?.details?.items || [];
