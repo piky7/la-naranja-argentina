@@ -128,7 +128,7 @@ test("A igual inicio, se procesa antes el partido que terminó antes",async()=>{
   const startsAt="2026-11-06T22:00:00-03:00";
   const first=fixtureGame(1,{id:"2026-11-06-z",startsAt});
   const second=fixtureGame(2,{id:"2026-11-06-a",startsAt});
-  const result=await career([second,first],[true,false],{
+  const result=await career([second,first],[false,true],{
     [first.id]:"2026-11-06T23:00:00-03:00",
     [second.id]:"2026-11-06T23:30:00-03:00"
   });
