@@ -54,3 +54,11 @@ CREATE TABLE IF NOT EXISTS prode_usernames (
   username TEXT NOT NULL COLLATE NOCASE UNIQUE
     CHECK(length(username) BETWEEN 3 AND 20)
 );
+
+-- Clasificaciones globales precalculadas, con vencimiento breve.
+-- No almacena tokens Firebase ni visitor_id; solo datos del ranking.
+CREATE TABLE IF NOT EXISTS prode_global_ranking_cache (
+  cache_key TEXT PRIMARY KEY,
+  payload TEXT NOT NULL,
+  expires_at INTEGER NOT NULL
+);
