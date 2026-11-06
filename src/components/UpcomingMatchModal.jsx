@@ -12,6 +12,20 @@ import { getMatchColorStyle } from "../data/teams";
 import "../pages/Home.css";
 import "./UpcomingHeader.css";
 
+function defaultFormatLiveRemaining(live) {
+  const parts = typeof live?.lastActionTime === "string"
+    ? live.lastActionTime.match(/^(\\d{2}):(\\d{2}):(\\d{2})$/)
+    : null;
+  if (parts) {
+    const seconds = Number(parts[1])*3600 + Number(parts[2])*60 + Number(parts[3]);
+    if (seconds >= 0 && seconds <= 600)
+      return `${String(Math.floor(seconds/60)).padStart(2,"0")}:${String(seconds%60).padStart(2,"0")}`;
+  }
+  const minutes = Number(live?.minutesRemaining);
+  return live?.minutesRemaining == null || !Number.isFinite(minutes)
+    ? null : `${String(Math.max(0,Math.min(10,minutes))).padStart(2,"0")}:00`;
+}
+
 /**
  * Popup único de próximos partidos para Home y Liga.
  * La interfaz se conserva de Home, incluyendo voto, MVP, jugadores y LIVE.
@@ -21,7 +35,7 @@ export default function UpcomingMatchModal({
   selectedUpcomingMatch, selectedMatch, setSelectedUpcomingMatch,
   selectedUpcomingHomeTeam, selectedUpcomingAwayTeam,
   getTeam, getTeamPosition, getTeamRecord, goToTeam,
-  formatDate, formatLiveRemaining, matches,
+  formatDate, formatLiveRemaining = defaultFormatLiveRemaining, matches,
   getTeamLastTwoMatches, getMatchStats,
   getOfficialPlayerLeaders, getHighlightedPlayers, getPlayerStats,
   upcomingLeaderCategories, UPCOMING_COLLECTIVE_BY_TEAM,
