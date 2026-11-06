@@ -74,7 +74,8 @@ test("La dificultad escala por ronda y el rival puede responder tras nuestro ata
     entry.rivalCounter > ROUND_DIFFICULTY[i - 1].rivalCounter));
   const match = createMatch(3, "boca", "quimsa", () => .99);
   const first = getScenario(match).options[0];
-  const outcome = playAction(match, first.id, () => .2);
+  const rolls = [.2, .2, .7];
+  const outcome = playAction(match, first.id, () => rolls.shift());
   assert.equal(outcome.moment, 1);
   assert.equal(outcome.opponentScore - match.opponentScore, 2);
   assert.match(outcome.log[0].message, /rival responde rápido/);
