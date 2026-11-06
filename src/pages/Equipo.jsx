@@ -21,6 +21,7 @@ import { players } from "../data/players";
 import { matches } from "../data/matches";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
+import { getMatchStats } from "../utils/getMatchStats";
 
 // Índice de estadísticas: conserva la primera coincidencia de la búsqueda original.
 const PLAYER_STATS_BY_ID = new Map();
@@ -472,19 +473,7 @@ function getHighlightedPlayers(teamId, stat) {
    BUSCAR ESTADÍSTICAS DEL PARTIDO
    ========================================= */
 
-function getMatchStats(match) {
-  if (!match) return null;
 
-  const matchKey = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-  const directStats = matchPlayerStats[match.id] || matchPlayerStats[matchKey];
-  if (directStats) return directStats;
-
-  // Los partidos enlazados a la Liga Nacional no usan fallback legado.
-  if (match.officialUrl) return null;
-
-  const legacyKey = `${match.homeTeam}-${match.awayTeam}`;
-  return matchPlayerStats[legacyKey] || null;
-}
 
 
 /* =========================================
