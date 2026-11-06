@@ -45,6 +45,10 @@ jobs:
             const lcp=data.audits?.['largest-contentful-paint-element']?.details?.items?.flatMap(item=>item?.items||[])?.[0]?.node;
             console.log(`  LCP element: ${lcp?.snippet || lcp?.selector || 'no identificado'}`);
             const images=data.audits?.['total-byte-weight']?.details?.items || [];
+            const oldLogo=images.find(item=>item.url?.includes('/logo-lna.png'));
+            const favicon=images.find(item=>item.url?.includes('/favicon-lna-64.png'));
+            console.log(`  PNG heredado: ${oldLogo ? (oldLogo.totalBytes/1024).toFixed(1)+' KiB' : 'no descargado'}`);
+            console.log(`  Favicon liviano: ${favicon ? (favicon.totalBytes/1024).toFixed(1)+' KiB' : 'no descargado'}`);
             for(const item of images.filter(item=>item.url?.includes('logo-lna.'))) {
               console.log(`  Logo descargado: ${item.url} / ${(item.totalBytes/1024).toFixed(1)} KiB`);
             }
@@ -63,6 +67,13 @@ jobs:
             console.log(`Mediana móvil ${metric}: ${median(values).toFixed(metric==='cumulative-layout-shift'?3:0)}`);
           }
           console.log(`Mediana móvil puntuación: ${median(records.map(r=>Math.round(r.categories.performance.score*100)))}/100`);
+          const images=records[0].audits?.['total-byte-weight']?.details?.items || [];
+          const png=images.find(item=>item.url?.endsWith('/logo-lna.png'));
+          console.log(`Comprobación PNG antiguo: ${png ? (png.totalBytes/1024).toFixed(1)+' KiB' : 'no descargado'}`);
+          if(png && png.totalBytes>180000) {
+            console.error('La web pública sigue sirviendo el logo PNG pesado: verificar despliegue Cloudflare');
+            process.exitCode=1;
+          }
           EOF
       - uses: actions/upload-artifact@v4
         if: always()
