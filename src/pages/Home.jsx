@@ -23,6 +23,7 @@ import { matchResults } from "../data/matchResults";
 import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
+import { getMatchStats } from "../utils/getMatchStats";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 
 
@@ -484,20 +485,7 @@ const getPlayerLastMatches = (player) => {
     };
   };
 
-  const getMatchStats = (match) => {
-    if (!match) return null;
 
-    const normalizedId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-    const directStats = matchPlayerStats[match.id] || matchPlayerStats[normalizedId];
-    if (directStats) return directStats;
-
-    // Si el calendario identifica el partido como oficial, nunca recurrimos
-    // a estadísticas antiguas de Flashscore u otra clave ambigua.
-    if (match.officialUrl) return null;
-
-    const simpleId = `${match.homeTeam}-${match.awayTeam}`;
-    return matchPlayerStats[simpleId] || null;
-  };
 
   const getHighlightedPlayers = (teamId, stat) => {
     return players
