@@ -1,0 +1,52 @@
+name: Medir rendimiento móvil LNA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/medir-rendimiento.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse-mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar Lighthouse
+        run: npm install --no-save --no-package-lock --ignore-scripts lighthouse@12
+      - name: Medir Home móvil en producción
+        run: |
+          mkdir -p lighthouse-reports
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --preset=desktop --output=json --output-path=lighthouse-reports/desktop.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile.json --quiet
+      - name: Resumir métricas
+        if: always()
+        run: |
+          node --input-type=module <<'EOF'
+          import fs from 'node:fs';
+          for (const label of ['mobile','desktop']) {
+            const path = `lighthouse-reports/${label}.json`;
+            if(!fs.existsSync(path)) {console.log(`${label}: no hubo medición`);continue;}
+            const data=JSON.parse(fs.readFileSync(path,'utf8'));
+            const perf=data.categories?.performance;
+            console.log(`${label}: score=${Math.round((perf?.score ?? 0)*100)} | URL=${data.finalDisplayedUrl || data.finalUrl}`);
+            for (const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','interactive','total-byte-weight']) {
+              console.log(`  ${id}: ${data.audits?.[id]?.displayValue ?? 'sin datos'}`);
+            }
+            if(data.runtimeError) console.error('Error del navegador:',data.runtimeError.message);
+          }
+          EOF
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-lna
+          path: lighthouse-reports/
+          if-no-files-found: warn
+          retention-days: 14
