@@ -6,6 +6,9 @@ on:
     branches: [main]
     paths:
       - "workers/votaciones/**"
+      - "tests/career-rules-regression.test.mjs"
+      - "tests/prode-ranking-medals.test.mjs"
+      - "workers/prode/worker.js"
       - ".github/workflows/deploy-votaciones.yml"
 
 permissions:
@@ -26,6 +29,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Verificar sintaxis y reglas deportivas de Mi Carrera y Prode
+        run: |
+          node --check workers/votaciones/worker.js
+          node --check workers/prode/worker.js
+          node --test tests/career-rules-regression.test.mjs tests/prode-ranking-medals.test.mjs
 
       - name: Comprobar credenciales
         env:
