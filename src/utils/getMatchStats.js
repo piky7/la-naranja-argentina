@@ -1,4 +1,4 @@
-import { matchPlayerStats } from "../data/matchStats";
+import { matchPlayerStats } from "../data/matchStats.js";
 
 /**
  * Única resolución de planillas para Home, Liga, Equipo y Estadísticas.
