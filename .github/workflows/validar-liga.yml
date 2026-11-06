@@ -16,6 +16,8 @@ on:
       - "tests/home-first-render.test.mjs"
       - "src/components/Header.jsx"
       - "index.html"
+      - "src/main.jsx"
+      - "src/components/AppErrorBoundary.jsx"
       - "scripts/optimize-logo.mjs"
       - "scripts/optimize-team-logos.mjs"
       - "src/data/teams.js"
