@@ -11,6 +11,8 @@ on:
       - "src/pages/Equipos.css"
       - "src/pages/Equipo.jsx"
       - "src/App.jsx"
+      - "vite.config.js"
+      - "scripts/verify-stats-chunk.cjs"
       - "eslint.config.js"
       - "src/components/LiveMatchInfo.jsx"
       - "src/components/CategoryBalance.jsx"
@@ -44,3 +46,5 @@ jobs:
         run: node scripts/verify-liga-collective.mjs
       - name: Compilar LNA
         run: npm run build
+      - name: Verificar separación de estadísticas oficiales
+        run: node scripts/verify-stats-chunk.cjs
