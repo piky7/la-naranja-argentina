@@ -4,6 +4,20 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Separar la planilla oficial del código de interfaz: los resultados cambian
+  // con cada sincronización, pero los componentes mantienen su caché propia.
+  // Por ahora es una dependencia síncrona: no alterar popups ni rankings.
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (/[\\/]src[\\/]data[\\/]matchStats\\.js$/.test(id)) {
+            return "match-stats";
+          }
+        },
+      },
+    },
+  },
   plugins: [
     react(),
 
