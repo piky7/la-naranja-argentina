@@ -5,6 +5,10 @@ on:
     paths:
       - "src/pages/Liga.jsx"
       - "src/pages/Home.jsx"
+      - "src/pages/CaminoAlTitulo.jsx"
+      - "src/pages/CaminoAlTitulo.css"
+      - "src/games/caminoEngine.js"
+      - "tests/camino-al-titulo.test.mjs"
       - "src/pages/Home.css"
       - "tests/upcoming-popup-footer.test.mjs"
       - "tests/finished-popup-footer.test.mjs"
