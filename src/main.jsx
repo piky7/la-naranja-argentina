@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { registerSW } from 'virtual:pwa-register'
 import './index.css'
 import App from './App.jsx'
-import AppErrorBoundary from './components/AppErrorBoundary.jsx'
 
 // La PWA comprueba nuevas versiones al iniciarse y al volver al primer plano.
 // vite-plugin-pwa gestiona la activación y la recarga de la versión nueva.
@@ -36,8 +35,6 @@ registerSW({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AppErrorBoundary>
-      <App />
-    </AppErrorBoundary>
+    <App />
   </StrictMode>,
 )
