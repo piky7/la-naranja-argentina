@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { LogIn, LogOut, ShieldCheck, Pencil, X, LockKeyhole } from "lucide-react";
 import { Link } from "react-router-dom";
 import { signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
@@ -258,7 +259,7 @@ export default function ProdeGoogleAccess({ onReady }) {
           </div>
         </div>
       </div>}
-      {editOpen && <div className="prode-dialog-backdrop" onClick={() => !saving && setEditOpen(false)}>
+      {editOpen && createPortal(<div className="prode-dialog-backdrop prode-crest-editor-overlay" onClick={() => !saving && setEditOpen(false)}>
         <form className="prode-dialog prode-profile-editor" onClick={e => e.stopPropagation()} onSubmit={saveProfile}>
           <div className="prode-dialog-heading">
             <h3>Mi perfil Prode</h3>
@@ -373,7 +374,7 @@ export default function ProdeGoogleAccess({ onReady }) {
             {saving ? "Guardando…" : "Guardar perfil"}
           </button>
         </form>
-      </div>}
+      </div>, document.body)}
     </div>
   );
 }
