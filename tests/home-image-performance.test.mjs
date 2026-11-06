@@ -21,6 +21,8 @@ test("El logo de cabecera utiliza WebP y conserva el PNG original para metadatos
 test("Logo optimizado se genera antes del desarrollo y del build con dependencia explícita",()=>{
   assert.equal(pkg.scripts.predev,"node scripts/optimize-logo.mjs");
   assert.equal(pkg.scripts.prebuild,"node scripts/optimize-logo.mjs");
+  assert.equal(pkg.scripts.postbuild,"node scripts/optimize-legacy-logo.mjs");
+  assert.match(read("scripts/optimize-legacy-logo.mjs"),/dist\\/logo-lna\\.png/);
   assert.equal(pkg.dependencies.sharp,lock.packages[""].dependencies.sharp);
   assert.ok(lock.packages["node_modules/sharp"]);
 });
