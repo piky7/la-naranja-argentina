@@ -1972,3 +1972,30 @@
 .prode-global-table-points{text-align:right;color:#f2f8ff;font-size:14px;font-variant-numeric:tabular-nums}
 .prode-global-table-message{padding:28px 8px;text-align:center;font-size:12px;color:#c8d9e2}
 @media(max-width:400px){.prode-global-table-dialog{max-height:91dvh}.prode-global-table-header{padding:15px 12px 11px}.prode-global-table-head,.prode-global-table-row{grid-template-columns:35px minmax(0,1fr) 48px;column-gap:5px}.prode-global-table-list{padding-left:8px;padding-right:8px}.prode-global-table-head{margin-left:8px;margin-right:8px}.prode-global-table-person{gap:6px}.prode-global-table-person strong{font-size:11px}}
+
+/* Carga progresiva: cada módulo muestra su propio estado sin bloquear Prode. */
+.prode-ranking-initial-state{
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:11px;min-height:118px;padding:16px;
+  border:1px dashed rgba(133,163,179,.35);border-radius:12px;
+  background:rgba(14,34,49,.55);color:#b6ccd9;
+  text-align:center;font-size:12px;font-weight:650;
+}
+.prode-ranking-initial-spinner{
+  width:20px;height:20px;flex-shrink:0;
+  border:2px solid rgba(125,232,61,.2);border-top-color:#7de83d;
+  border-radius:50%;animation:prode-page-wait .85s linear infinite;
+}
+.prode-ranking-initial-state button,
+.prode-friends-retry{
+  border:1px solid #7de83d;border-radius:8px;padding:7px 12px;
+  background:#193b2d;color:#b8f88e;font-size:12px;font-weight:800;
+  cursor:pointer;
+}
+.prode-ranking-initial-state button:focus-visible,
+.prode-friends-retry:focus-visible{
+  outline:2px solid #b0f890;outline-offset:2px;
+}
+@media(prefers-reduced-motion:reduce){
+  .prode-ranking-initial-spinner{animation:none}
+}
