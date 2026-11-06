@@ -11,7 +11,7 @@
     "test": "node --test tests/*.test.mjs",
     "predev": "node scripts/optimize-logo.mjs",
     "prebuild": "node scripts/optimize-logo.mjs",
-    "postbuild": "node scripts/optimize-legacy-logo.mjs"
+    "postbuild": "node scripts/optimize-legacy-logo.mjs && node scripts/preload-home-logos.mjs"
   },
   "dependencies": {
     "cheerio": "^1.2.0",
