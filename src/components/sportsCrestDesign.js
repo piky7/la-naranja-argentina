@@ -23,7 +23,7 @@ export function parseSportsDesign(value) {
   const parts = typeof value === "string" ? value.split(":") : [];
   if (parts.length !== 6 || parts[0] !== "sport") return { ...DEFAULT_SPORTS_DESIGN };
   const [,shape,pattern,placement,border,label] = parts;
-  if (!/^[A-Z0-9 _-]{0,20}$/.test(label) || !allowed(SPORTS_SHAPES, shape) || !allowed(SPORTS_PATTERNS, pattern) ||
+  if (!/^[A-ZÁÉÍÓÚÜÑ0-9 _-]{0,20}$/u.test(label) || !allowed(SPORTS_SHAPES, shape) || !allowed(SPORTS_PATTERNS, pattern) ||
       !allowed(SPORTS_PLACEMENTS, placement) || !allowed(SPORTS_BORDERS, border)) {
     return { ...DEFAULT_SPORTS_DESIGN };
   }
@@ -31,7 +31,7 @@ export function parseSportsDesign(value) {
 }
 export function serializeSportsDesign(design) {
   const d = { ...DEFAULT_SPORTS_DESIGN, ...design };
-  const label = String(d.label || "").trim().toUpperCase().replace(/[^A-Z0-9 _-]/g, "").slice(0,20);
+  const label = String(d.label || "").trim().toUpperCase().replace(/[^A-ZÁÉÍÓÚÜÑ0-9 _-]/gu, "").slice(0,20);
   return "sport:" + d.shape + ":" + d.pattern + ":" + d.placement + ":" + d.border + ":" + label;
 }
 export function isSportsDesign(value) {
