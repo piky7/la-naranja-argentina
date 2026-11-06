@@ -7,6 +7,7 @@ on:
       - "src/pages/Home.jsx"
       - "src/pages/Home.css"
       - "tests/upcoming-popup-footer.test.mjs"
+      - "tests/finished-popup-footer.test.mjs"
       - "tests/home-font-render.test.mjs"
       - "tests/home-first-render.test.mjs"
       - "src/components/Header.jsx"
