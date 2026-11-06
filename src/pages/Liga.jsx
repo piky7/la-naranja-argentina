@@ -1,14 +1,47 @@
-import UpcomingMatchModal from "../components/UpcomingMatchModal";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
-import LiveMatchInfo from "../components/LiveMatchInfo";
-import CategoryBalance from "../components/CategoryBalance";
-import "../components/UpcomingHeader.css";
-import MatchVote from "../components/MatchVote";
 import { createPortal } from "react-dom";
-import PlayerModal from "../components/PlayerModal";
-import FinishedMatchModal from "../components/FinishedMatchModal";
-import MatchStatsTabs from "../components/MatchStatsTabs";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+
+// Los tres popups comparten los mismos componentes de Home, pero no bloquean la carga de Liga.
+const loadUpcomingModal = () => import("../components/UpcomingMatchModal");
+const loadFinishedModal = () => import("../components/FinishedMatchModal");
+const loadPlayerModal = () => import("../components/PlayerModal");
+const UpcomingMatchModal = lazy(loadUpcomingModal);
+const FinishedMatchModal = lazy(loadFinishedModal);
+const PlayerModal = lazy(loadPlayerModal);
+
+function useIdlePopupPreload() {
+  useEffect(() => {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (connection?.saveData || /^(slow-2g|2g)$/i.test(connection?.effectiveType || "")) return;
+    let idle = null;
+    const timer = window.setTimeout(() => {
+      const prepare = () => {
+        void Promise.allSettled([loadUpcomingModal(), loadFinishedModal(), loadPlayerModal()]);
+      };
+      if ("requestIdleCallback" in window) idle = window.requestIdleCallback(prepare, { timeout: 12000 });
+      else prepare();
+    }, 2800);
+    return () => {
+      window.clearTimeout(timer);
+      if (idle !== null && "cancelIdleCallback" in window) window.cancelIdleCallback(idle);
+    };
+  }, []);
+}
+
+function PopupLoading() {
+  return (
+    <div role="status" aria-live="polite" style={{
+      position: "fixed", inset: 0, zIndex: 100000, display: "grid", placeItems: "center",
+      background: "rgba(0,0,0,.76)", color: "#fff"
+    }}>
+      <div style={{
+        background: "#111c28", border: "1px solid #ff8c20",
+        padding: "14px 20px", borderRadius: "10px", fontWeight: 700
+      }}>Cargando partido...</div>
+    </div>
+  );
+}
 import { Link } from "react-router-dom";
 
 import { teams, getMatchColorStyle } from "../data/teams";
@@ -121,6 +154,7 @@ const PLAYER_STATS_BY_ID = new Map();
 for (const stats of playerStats) if (!PLAYER_STATS_BY_ID.has(stats.playerId)) PLAYER_STATS_BY_ID.set(stats.playerId, stats);
 
 function Liga() {
+  useIdlePopupPreload();
   const getLocalDate = () => {
     const date = new Date();
 
@@ -1184,6 +1218,7 @@ onClick={() => {
       </section>
 
 {/* El mismo popup de próximos partidos de Home, incluyendo LIVE y Votación. */}
+      <Suspense fallback={<PopupLoading />}>
       {selectedUpcomingMatch && !selectedMatch && (
         <UpcomingMatchModal
           selectedUpcomingMatch={selectedUpcomingMatch}
@@ -1210,7 +1245,8 @@ onClick={() => {
           setSelectedPlayer={setSelectedPlayer}
         />
       )}
-{/* =========================
+
+      </Suspense>{/* =========================
           MODAL EQUIPO
       ========================= */}
 
@@ -1339,6 +1375,7 @@ onClick={() => {
           MODAL PARTIDO
       ========================= */}
 
+      <Suspense fallback={<PopupLoading />}>
       {selectedMatch && (
         <FinishedMatchModal
           selectedMatch={selectedMatch}
@@ -1353,8 +1390,10 @@ onClick={() => {
           onPlayerClick={setSelectedPlayer}
         />
       )}
-{/* POPUP DEL JUGADOR */}
 
+      </Suspense>{/* POPUP DEL JUGADOR */}
+
+<Suspense fallback={<PopupLoading />}>
 {selectedPlayer && (
   <PlayerModal
     player={selectedPlayer}
@@ -1367,6 +1406,7 @@ onClick={() => {
     }}
   />
 )}
+</Suspense>
     </main>
   );
 }
