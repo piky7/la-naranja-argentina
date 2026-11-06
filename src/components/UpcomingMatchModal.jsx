@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import useLiveMatch from "../hooks/useLiveMatch";
 import LiveMatchInfo from "./LiveMatchInfo";
 import LiveRosters from "./LiveRosters";
@@ -81,7 +82,7 @@ export default function UpcomingMatchModal({
     setUpcomingMvpStatus(null);
   }, [selectedUpcomingMatch?.id, Boolean(upcomingLive)]);
 
-  return (
+  return createPortal(
     <>
       {/* POPUP PRÓXIMO PARTIDO */}
 
@@ -435,6 +436,7 @@ export default function UpcomingMatchModal({
       )}
 
 
-    </>
+    </>,
+    document.body
   );
 }
