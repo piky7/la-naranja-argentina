@@ -118,3 +118,6 @@
 @media(max-width:620px){.ct-root{padding:14px 10px 100px}.ct-brand{gap:10px}.ct-brand>svg{height:31px;width:31px}.ct-panel{padding:14px;margin:11px 0}.ct-intro{padding:19px}.ct-team-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.ct-team{min-height:99px;padding:9px 5px}.ct-team img{height:49px;width:49px}.ct-match{padding:0}.ct-match-top{padding:12px 11px;font-size:10px}.ct-scoreboard{padding:18px 8px}.ct-side img{width:54px;height:54px}.ct-situation{padding:15px 10px}.ct-action-list{padding:0 10px 13px}.ct-bracket-item{gap:4px}.ct-bracket-item small{font-size:8px}.ct-steps{gap:4px}.ct-steps span{font-size:8px;padding:10px 2px}.ct-bracket-item{gap:2px;padding:9px 2px}.ct-bracket-item span{height:20px;width:20px;flex-basis:20px;font-size:9px}}
 @media(min-width:621px) and (max-width:850px){.ct-team-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.ct-team{transition:none}.ct-trajectory,.ct-players,.ct-court-flash,.ct-outcome{animation:none}}
+
+/* Separar la respuesta del rival de los puntos conseguidos por tu equipo. */
+.ct-rival-response{display:block;margin:4px auto 12px;padding:9px 12px;width:fit-content;max-width:100%;border:1px solid #d16d3e;border-radius:8px;background:#612c24aa;color:#ffe5d3;font-size:12px;font-weight:950;letter-spacing:.4px;text-align:center}
