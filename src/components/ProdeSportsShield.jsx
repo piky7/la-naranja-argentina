@@ -20,7 +20,7 @@ export default function ProdeSportsShield({
   const t = color(textColor, "#ffffff");
   const path = paths[d.shape] || paths.classic;
   const id = React.useId().replace(/:/g, "");
-  const label = String(name || "PRODE").trim().toUpperCase().slice(0, 20);
+  const label = String(d.label || name || "PRODE").trim().toUpperCase().slice(0, 20);
   const family = font === "college" ? "Impact,Arial Black,sans-serif"
     : font === "gamer" ? "Orbitron,Arial Black,sans-serif" : "Russo One,Impact,Arial Black,sans-serif";
   const labelWidth = Math.max(0, label.length);
