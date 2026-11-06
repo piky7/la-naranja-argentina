@@ -43,7 +43,11 @@ function getTeam(teamId) {
 }
 
 
+const TEAM_PLAYERS_CACHE = new Map();
+const TEAM_MATCHES_CACHE = new Map();
+
 function getPlayers(teamId) {
+  if (TEAM_PLAYERS_CACHE.has(teamId)) return TEAM_PLAYERS_CACHE.get(teamId);
   const positionOrder = {
     Base: 1,
     Escolta: 2,
@@ -52,7 +56,7 @@ function getPlayers(teamId) {
     Pívot: 5,
   };
 
-  return players
+  const result = players
     .filter(
       (player) =>
         player.teamId === teamId
@@ -73,6 +77,8 @@ function getPlayers(teamId) {
         "es"
       );
     });
+  TEAM_PLAYERS_CACHE.set(teamId, result);
+  return result;
 }
 
 
@@ -80,12 +86,15 @@ function getPlayers(teamId) {
  * Todos los partidos del equipo.
  */
 function getMatches(teamId) {
-  return matches
+  if (TEAM_MATCHES_CACHE.has(teamId)) return TEAM_MATCHES_CACHE.get(teamId);
+  const result = matches
     .filter(
       (match) =>
         match.homeTeam === teamId ||
         match.awayTeam === teamId
     );
+  TEAM_MATCHES_CACHE.set(teamId, result);
+  return result;
 }
 
 
