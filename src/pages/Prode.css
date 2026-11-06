@@ -2105,3 +2105,48 @@
   .prode-profile-editor .prode-sports-shapes{grid-template-columns:repeat(3,minmax(0,1fr))}
   .prode-profile-editor .prode-sports-patterns{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+
+/* El editor de escudos se monta en document.body, fuera del stacking context
+   de la cabecera PWA. Así ni el header ni el menú inferior pueden taparlo. */
+.prode-crest-editor-overlay{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100dvh;
+  z-index:2147483646;
+  padding:calc(12px + env(safe-area-inset-top,0px)) 12px calc(12px + env(safe-area-inset-bottom,0px));
+  background:rgba(2,8,16,.91);
+  -webkit-backdrop-filter:blur(9px);
+  backdrop-filter:blur(9px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  isolation:isolate;
+  --prode-gamer:"Russo One",Impact,"Arial Black",sans-serif;
+}
+.prode-crest-editor-overlay .prode-profile-editor{
+  display:grid;
+  width:min(470px,100%);
+  max-height:100%;
+  min-height:0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  padding:17px;
+  box-shadow:0 20px 70px #000b;
+}
+.prode-crest-editor-overlay .prode-dialog-heading{
+  position:sticky;
+  top:-17px;
+  z-index:3;
+  background:#10252d;
+  padding:10px 0 9px;
+  border-bottom:1px solid #456b4a55;
+}
+@media(max-width:600px){
+  .prode-crest-editor-overlay{padding:calc(8px + env(safe-area-inset-top,0px)) 10px calc(8px + env(safe-area-inset-bottom,0px));}
+  .prode-crest-editor-overlay .prode-profile-editor{padding:13px;max-height:100%;border-radius:14px}
+  .prode-crest-editor-overlay .prode-dialog-heading{top:-13px}
+}
