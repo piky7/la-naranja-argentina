@@ -4,13 +4,19 @@ import { readFileSync } from "node:fs";
 
 const home=readFileSync(new URL("../src/pages/Home.jsx",import.meta.url),"utf8");
 
-test("Los tres popups se importan bajo demanda, sin cargarlos al abrir Home",()=>{
-  for(const name of ["UpcomingMatchModal","FinishedMatchModal","PlayerModal"]){
-    assert.match(home,new RegExp('const '+name+' = lazy\\(\\(\\) => import\\("\\.\\./components/'+name+'"\\)\\)'));
+test("Los tres popups se importan bajo demanda y se preparan en inactividad",()=>{
+  for(const [name,loader] of [["UpcomingMatchModal","loadUpcomingModal"],["FinishedMatchModal","loadFinishedModal"],["PlayerModal","loadPlayerModal"]]){
+    assert.ok(home.includes(`const ${loader} = () => import("../components/${name}");`));
+    assert.ok(home.includes(`const ${name} = lazy(${loader});`));
     assert.doesNotMatch(home,new RegExp('import '+name+' from'));
     assert.ok(home.includes("<"+name),name);
   }
-  assert.match(home,/<Suspense fallback=\{null\}>/);
+  assert.match(home,/<Suspense fallback=\{<PopupLoading \/>\}>/);
+  assert.match(home,/requestIdleCallback\(prepare/);
+  assert.match(home,/connection\?\.saveData/);
+  assert.match(home,/Cargando partido/);
+  assert.doesNotMatch(home,/import "\.\.\/components\/UpcomingHeader\.css"/);
+  assert.doesNotMatch(home,/import MatchStatsTabs from/);
 });
 
 test("En móvil Posiciones no calcula Máximos anotadores antes de seleccionarlos",()=>{
