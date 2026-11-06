@@ -5,6 +5,8 @@ on:
     paths:
       - "src/pages/Liga.jsx"
       - "src/pages/Home.jsx"
+      - "src/pages/Home.css"
+      - "tests/home-font-render.test.mjs"
       - "tests/home-first-render.test.mjs"
       - "src/components/Header.jsx"
       - "index.html"
