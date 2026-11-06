@@ -10,6 +10,8 @@ on:
       - "src/pages/Equipos.jsx"
       - "src/pages/Equipos.css"
       - "src/pages/Equipo.jsx"
+      - "src/utils/getMatchStats.js"
+      - "tests/match-stats-shared.test.mjs"
       - "src/App.jsx"
       - "src/hooks/useLiveMatch.js"
       - "src/hooks/useLiveSnapshot.js"
