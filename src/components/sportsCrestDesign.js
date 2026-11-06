@@ -16,22 +16,23 @@ export const SPORTS_BORDERS = [
   ["simple","Borde simple"],["double","Borde doble"],["thick","Borde grueso"],
 ];
 export const DEFAULT_SPORTS_DESIGN = Object.freeze({
-  shape:"classic", pattern:"vertical", placement:"top", border:"double",
+  shape:"classic", pattern:"vertical", placement:"top", border:"double", label:"",
 });
 const allowed = (collection, value) => collection.some(([id]) => id === value);
 export function parseSportsDesign(value) {
   const parts = typeof value === "string" ? value.split(":") : [];
-  if (parts.length !== 5 || parts[0] !== "sport") return { ...DEFAULT_SPORTS_DESIGN };
-  const [,shape,pattern,placement,border] = parts;
-  if (!allowed(SPORTS_SHAPES, shape) || !allowed(SPORTS_PATTERNS, pattern) ||
+  if (parts.length !== 6 || parts[0] !== "sport") return { ...DEFAULT_SPORTS_DESIGN };
+  const [,shape,pattern,placement,border,label] = parts;
+  if (!/^[A-Z0-9 _-]{0,20}$/.test(label) || !allowed(SPORTS_SHAPES, shape) || !allowed(SPORTS_PATTERNS, pattern) ||
       !allowed(SPORTS_PLACEMENTS, placement) || !allowed(SPORTS_BORDERS, border)) {
     return { ...DEFAULT_SPORTS_DESIGN };
   }
-  return { shape,pattern,placement,border };
+  return { shape,pattern,placement,border,label };
 }
 export function serializeSportsDesign(design) {
   const d = { ...DEFAULT_SPORTS_DESIGN, ...design };
-  return "sport:" + d.shape + ":" + d.pattern + ":" + d.placement + ":" + d.border;
+  const label = String(d.label || "").trim().toUpperCase().replace(/[^A-Z0-9 _-]/g, "").slice(0,20);
+  return "sport:" + d.shape + ":" + d.pattern + ":" + d.placement + ":" + d.border + ":" + label;
 }
 export function isSportsDesign(value) {
   if (typeof value !== "string" || !value.startsWith("sport:")) return false;
