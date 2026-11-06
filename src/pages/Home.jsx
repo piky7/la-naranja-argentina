@@ -1297,7 +1297,7 @@ const standingsMatches = useMemo(() => {
 
               {selectedDayMatches.length > 0 ? (
                 <div className="home-fixtures">
-                  {selectedDayMatches.map((match) => {
+                  {selectedDayMatches.map((match, matchIndex) => {
                     const homeTeam = getTeam(match.homeTeam);
                     const awayTeam = getTeam(match.awayTeam);
 
@@ -1429,6 +1429,9 @@ const finishedMatch = {
                             <img
                               src={homeTeam.logo}
                               alt={`Escudo de ${homeTeam.name}`}
+                              loading={matchIndex < 3 ? "eager" : "lazy"}
+                              fetchPriority={matchIndex < 3 ? "high" : "auto"}
+                              decoding="async"
                             />
                           )}
                         </div>
@@ -1501,6 +1504,9 @@ const finishedMatch = {
                             <img
                               src={awayTeam.logo}
                               alt={`Escudo de ${awayTeam.name}`}
+                              loading={matchIndex < 3 ? "eager" : "lazy"}
+                              fetchPriority={matchIndex < 3 ? "high" : "auto"}
+                              decoding="async"
                             />
                           )}
 
