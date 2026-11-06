@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -7,15 +7,45 @@ import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
 
 import Home from "./pages/Home";
-import Liga from "./pages/Liga";
+const loadLiga = () => import("./pages/Liga");
+const Liga = lazy(loadLiga);
 import Equipos from "./pages/Equipos";
 import Equipo from "./pages/Equipo";
 import Jugadores from "./pages/Jugadores";
-import Estadisticas from "./pages/Estadisticas";
+const loadEstadisticas = () => import("./pages/Estadisticas");
+const Estadisticas = lazy(loadEstadisticas);
 import Privacidad from "./pages/Privacidad";
 import Acerca from "./pages/Acerca";
 import Prode from "./pages/Prode";
 import Admin from "./pages/Admin";
+
+// Precarga suave: no bloquea el render inicial ni consume datos extra
+// en conexiones lentas o con ahorro de datos activado.
+function PreloadSections() {
+  useEffect(() => {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (connection?.saveData || /(^|\\s)(slow-2g|2g)(\\s|$)/i.test(connection?.effectiveType || "")) return;
+    let idleId = null;
+    let timerId = window.setTimeout(() => {
+      const preload = () => {
+        void Promise.allSettled([loadLiga(), loadEstadisticas()]);
+      };
+      if ("requestIdleCallback" in window) idleId = window.requestIdleCallback(preload, { timeout: 6000 });
+      else preload();
+    }, 1400);
+    return () => {
+      window.clearTimeout(timerId);
+      if (idleId !== null && "cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
+    };
+  }, []);
+  return null;
+}
+
+function RouteLoading() {
+  return <div role="status" aria-live="polite" style={{ minHeight: "45vh", display: "grid", placeItems: "center", color: "#e9f0f5", fontSize: "14px", fontWeight: 700 }}>
+    Cargando sección…
+  </div>;
+}
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -49,6 +79,7 @@ function AnimatedRoutes() {
   return (
     <>
     <div key={location.key} className={animation}>
+      <Suspense fallback={<RouteLoading />}>
       <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/liga" element={<Liga />} />
@@ -66,6 +97,7 @@ function AnimatedRoutes() {
         <Route path="/privacidad" element={<Privacidad />} />
         <Route path="/acerca" element={<Acerca />} />
       </Routes>
+      </Suspense>
     </div>
     {prodeVisited && <div style={{ display: isProde ? undefined : "none" }} aria-hidden={!isProde}>
       <Prode />
@@ -77,6 +109,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter>
+      <PreloadSections />
       <SeoMeta />
       <SwipeNavigation />
       <Header />
