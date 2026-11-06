@@ -176,9 +176,12 @@ async function storeGlobalRankingSources(db,updates) {
   if(!updates.length) return;
   const expires=Math.floor(Date.now()/1000)+GLOBAL_RANKING_CACHE_SECONDS;
   try {
-    await db.batch(updates.map(({key,value})=>db.prepare(
-      "INSERT INTO prode_global_ranking_cache(cache_key,payload,expires_at) VALUES(?,?,?) ON CONFLICT(cache_key) DO UPDATE SET payload=excluded.payload,expires_at=excluded.expires_at"
-    ).bind(key,JSON.stringify(value),expires)));
+    // Mantener lotes pequeños para no saturar D1 con rankings muy numerosos.
+    for (let i=0;i<updates.length;i+=25) {
+      await db.batch(updates.slice(i,i+25).map(({key,value})=>db.prepare(
+        "INSERT INTO prode_global_ranking_cache(cache_key,payload,expires_at) VALUES(?,?,?) ON CONFLICT(cache_key) DO UPDATE SET payload=excluded.payload,expires_at=excluded.expires_at"
+      ).bind(key,JSON.stringify(value),expires)));
+    }
   } catch(error) { console.warn("Prode global ranking cache:",error); }
 }
 export default {
@@ -458,7 +461,12 @@ export default {
               if(!response.ok) throw Error("Votaciones no disponibles");
               const data=await response.json();
               if(!data.ok || !Array.isArray(data.games)) throw Error("Historial no disponible");
-              games=data.games;
+              games=data.games.map(g=>({
+                id:g.id,startsAt:g.startsAt,finished:g.finished,
+                finishedObservedAt:g.finishedObservedAt,
+                voted:g.voted,correct:g.correct,
+                mvpCorrect:g.mvpCorrect,mvpVoted:g.mvpVoted
+              }));
               freshGames.push({key,value:games});
             }
             let streak=0, points=0, played=0, correct=0, wrong=0, mvpHits=0, mvpVoted=0;
