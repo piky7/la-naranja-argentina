@@ -1,4 +1,5 @@
 import useLiveMatch from "../hooks/useLiveMatch";
+import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveMatchInfo from "../components/LiveMatchInfo";
 import CategoryBalance from "../components/CategoryBalance";
 import "../components/UpcomingHeader.css";
@@ -129,26 +130,7 @@ function Liga() {
   };
 
   const today = getLocalDate();
-  const [liveSnapshot, setLiveSnapshot] = useState({ date: null, liveMatches: [] });
-  useEffect(() => {
-    let active = true;
-    const url = import.meta.env.VITE_LNA_LIVE_OFICIAL_URL || "https://lna-live-oficial.lnab.workers.dev/api/live";
-    const refresh = async () => {
-      try {
-        const response = await fetch(url, { cache: "no-store" });
-        if (!response.ok) return;
-        const data = await response.json();
-        if (active && Array.isArray(data.liveMatches)) {
-          setLiveSnapshot({ date: data.date, liveMatches: data.liveMatches });
-        }
-      } catch { /* Conservar los resultados publicados si el LIVE no responde. */ }
-    };
-    refresh();
-    const timer = setInterval(refresh, 60000);
-    const onVisible = () => { if (!document.hidden) refresh(); };
-    document.addEventListener("visibilitychange", onVisible);
-    return () => { active = false; clearInterval(timer); document.removeEventListener("visibilitychange", onVisible); };
-  }, []);
+  const liveSnapshot = useLiveSnapshot();
 
   // Igual que Home: mostrar el resultado final confirmado por el Worker
   // hasta que se publique en matchResults.js, sin inventar estadísticas.
