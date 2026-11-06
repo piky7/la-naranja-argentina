@@ -1,3 +1,4 @@
+import "./PopupDeferredOverrides.css";
 import { createPortal } from "react-dom";
 import MatchStatsTabs from "./MatchStatsTabs";
 import { teams, teamMatchColors } from "../data/teams";
