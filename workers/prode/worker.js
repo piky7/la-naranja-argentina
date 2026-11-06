@@ -157,6 +157,30 @@ async function ensureCrests(db) {
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crests (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
   await db.prepare("CREATE TABLE IF NOT EXISTS prode_group_crests (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
 }
+// Caché D1 compartida de resultados ya confirmados. No altera reglas,
+// rachas ni permisos; reduce solicitudes repetidas entre visitantes.
+// Si D1 no está disponible, se consulta el Worker oficial normalmente.
+const GLOBAL_RANKING_CACHE_SECONDS = 60;
+async function getCachedGlobalRankingSources(db,kind) {
+  try {
+    const rows=await db.prepare("SELECT cache_key,payload FROM prode_global_ranking_cache WHERE cache_key LIKE ? AND expires_at>?")
+      .bind(kind+":%",Math.floor(Date.now()/1000)).all();
+    const cache=new Map();
+    for(const row of rows.results||[]) {
+      try { cache.set(row.cache_key,JSON.parse(row.payload)); } catch { /* Entrada incompleta. */ }
+    }
+    return cache;
+  } catch { return new Map(); }
+}
+async function storeGlobalRankingSources(db,updates) {
+  if(!updates.length) return;
+  const expires=Math.floor(Date.now()/1000)+GLOBAL_RANKING_CACHE_SECONDS;
+  try {
+    await db.batch(updates.map(({key,value})=>db.prepare(
+      "INSERT INTO prode_global_ranking_cache(cache_key,payload,expires_at) VALUES(?,?,?) ON CONFLICT(cache_key) DO UPDATE SET payload=excluded.payload,expires_at=excluded.expires_at"
+    ).bind(key,JSON.stringify(value),expires)));
+  } catch(error) { console.warn("Prode global ranking cache:",error); }
+}
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -338,20 +362,29 @@ export default {
         await ensureCareerLinks(env.DB);
         const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(l.visitor_id,vs.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT " + (fullRanking ? 1000 : 100)).all();
         const linked = rows.results || [];
+        const savedPoints = await getCachedGlobalRankingSources(env.DB,"historic");
+        const freshPoints = [];
         const results = [];
         for (let i = 0; i < linked.length; i += 8) {
           const chunk = linked.slice(i, i + 8);
           const batch = await Promise.all(chunk.map(async item => {
             try {
-              const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId=" + encodeURIComponent(item.visitor_id));
-              if (!response.ok) return null;
-              const data = await response.json();
-              if (!data.ok || !Number.isFinite(data.points)) return null;
-              return { userId: item.user_id, username: item.username, points: data.points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary, crestText: item.crestText, crestStyle: item.crestStyle, crestFont: item.crestFont, crestSymbol: item.crestSymbol };
+              const key="historic:"+item.user_id;
+              let points=savedPoints.get(key);
+              if(!Number.isFinite(points)) {
+                const response=await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/puntos?visitanteId="+encodeURIComponent(item.visitor_id));
+                if(!response.ok) return null;
+                const data=await response.json();
+                if(!data.ok || !Number.isFinite(data.points)) return null;
+                points=data.points;
+                freshPoints.push({key,value:points});
+              }
+              return { userId: item.user_id, username: item.username, points, crestPrimary: item.crestPrimary, crestSecondary: item.crestSecondary, crestText: item.crestText, crestStyle: item.crestStyle, crestFont: item.crestFont, crestSymbol: item.crestSymbol };
             } catch { return null; }
           }));
           results.push(...batch.filter(Boolean));
         }
+        await storeGlobalRankingSources(env.DB,freshPoints);
         results.sort((a,b) => b.points-a.points || a.username.localeCompare(b.username, "es"));
         // Ranking de competición (1°, 1°, 3°), calculado en una sola pasada.
         // Evita buscar de nuevo en toda la lista para cada participante.
@@ -414,14 +447,22 @@ export default {
         }
         const all = [];
         const linked = rows.results || [];
+        const savedGames = await getCachedGlobalRankingSources(env.DB,"weekly");
+        const freshGames = [];
         for (let i=0;i<linked.length;i+=6) {
           const batch = await Promise.all(linked.slice(i,i+6).map(async item => {
-            const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId="+encodeURIComponent(item.visitor_id));
-            if (!response.ok) throw Error("Votaciones no disponibles");
-            const data = await response.json();
-            if (!data.ok || !Array.isArray(data.games)) throw Error("Historial no disponible");
+            const key="weekly:"+item.user_id;
+            let games=savedGames.get(key);
+            if(!Array.isArray(games)) {
+              const response=await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId="+encodeURIComponent(item.visitor_id));
+              if(!response.ok) throw Error("Votaciones no disponibles");
+              const data=await response.json();
+              if(!data.ok || !Array.isArray(data.games)) throw Error("Historial no disponible");
+              games=data.games;
+              freshGames.push({key,value:games});
+            }
             let streak=0, points=0, played=0, correct=0, wrong=0, mvpHits=0, mvpVoted=0;
-            const ordered = [...data.games].sort(compareUserStreakGames);
+            const ordered = [...games].sort(compareUserStreakGames);
             const globalTimeline = unifiedStreakTimeline(ordered);
             for (const game of ordered) {
               const ts = Date.parse(game.startsAt);
@@ -443,6 +484,7 @@ export default {
           }));
           all.push(...batch);
         }
+        await storeGlobalRankingSources(env.DB,freshGames);
         all.sort((a,b)=>b.points-a.points || a.username.localeCompare(b.username,"es"));
         let rank=0,previous=null;
         const ranking=all.map(row=>{
