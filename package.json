@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "node --test tests/*.test.mjs",
-    "predev": "node scripts/optimize-logo.mjs",
-    "prebuild": "node scripts/optimize-logo.mjs",
+    "predev": "node scripts/optimize-logo.mjs && node scripts/optimize-team-logos.mjs",
+    "prebuild": "node scripts/optimize-logo.mjs && node scripts/optimize-team-logos.mjs",
     "postbuild": "node scripts/optimize-legacy-logo.mjs && node scripts/preload-home-logos.mjs"
   },
   "dependencies": {
