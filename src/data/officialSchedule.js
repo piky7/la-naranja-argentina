@@ -710,5 +710,13 @@ export const officialSchedule = [
     "homeTeam": "quimsa",
     "awayTeam": "san-lorenzo",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v22bQrDwJ1KEg25AlnagjXL62W_1w1I7A72IQHJ3KUacMte8Gz7j2zOA==/quimsa-vs-san-lorenzo"
+  },
+  {
+    "id": "2026-12-07-san-martin-atenas",
+    "date": "2026-12-07",
+    "time": null,
+    "homeTeam": "san-martin",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2eNlKVj8NT-EBdolQh32e5FvtWjPrBDGd2ekgLaWRFQNv7vFM_zz5gQ==/san-martin-c-vs-atenas-c"
   }
 ];
