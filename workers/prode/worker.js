@@ -243,13 +243,16 @@ export default {
           "SELECT u.id, n.username, u.display_name AS googleName, u.created_at, COALESCE(c.primary_color,\'#7de83d\') AS crestPrimary, COALESCE(c.secondary_color,\'#10283c\') AS crestSecondary FROM prode_users u LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE u.auth_subject = ?"
         ).bind(identity.uid).first();
         if (user) {
-          const crestText = await env.DB.prepare("SELECT color FROM prode_crest_texts WHERE kind=? AND entity_id=?").bind("user",user.id).first();
+          // Lecturas independientes: ejecutarlas juntas evita cuatro viajes secuenciales a D1.
+          const [crestText, styleRow, fontRow, symbolRow] = await Promise.all([
+            env.DB.prepare("SELECT color FROM prode_crest_texts WHERE kind=? AND entity_id=?").bind("user",user.id).first(),
+            env.DB.prepare("SELECT style FROM prode_user_crest_styles WHERE user_id=?").bind(user.id).first(),
+            env.DB.prepare("SELECT font FROM prode_user_crest_fonts WHERE user_id=?").bind(user.id).first(),
+            env.DB.prepare("SELECT symbol FROM prode_user_crest_symbols WHERE user_id=?").bind(user.id).first(),
+          ]);
           user.crestText = crestText?.color || "#ffffff";
-          const styleRow = await env.DB.prepare("SELECT style FROM prode_user_crest_styles WHERE user_id=?").bind(user.id).first();
           user.crestStyle = styleRow?.style || "pro";
-          const fontRow = await env.DB.prepare("SELECT font FROM prode_user_crest_fonts WHERE user_id=?").bind(user.id).first();
           user.crestFont = fontRow?.font || "sport";
-          const symbolRow = await env.DB.prepare("SELECT symbol FROM prode_user_crest_symbols WHERE user_id=?").bind(user.id).first();
           user.crestSymbol = symbolRow?.symbol || ({elite:"eagle",pro:"ball",legend:"torch"})[user.crestStyle] || "ball";
         }
         return reply({ ok: true, user: user || null, linkedToMiCarrera: false });
