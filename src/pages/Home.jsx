@@ -24,6 +24,7 @@ import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import { matchPlayerStats } from "../data/matchStats";
 import { getMatchStats } from "../utils/getMatchStats";
+import { indexFinishedLiveMatches, getFinishedLiveMatch } from "../utils/indexFinishedLiveMatches";
 import { getOfficialValuation } from "../utils/getOfficialValuation";
 
 
@@ -803,37 +804,20 @@ const getPlayerLastMatches = (player) => {
   }, []);
 // Incorporar resultados LIVE finalizados que todavía
 // no fueron publicados en matchResults.js.
-const standingsMatches = matches.map((match) => {
-  // Si ya tenemos el resultado definitivo publicado,
-  // conservarlo como fuente principal.
-  if (isMatchFinished(match)) {
-    return match;
-  }
-
-  const liveMatch =
-    liveDate === match.date
-      ? liveMatches.find(
-          (live) =>
-            live.homeTeam === match.homeTeam &&
-            live.awayTeam === match.awayTeam &&
-            live.status === "finished" &&
-            !live.isHalftime &&
-            live.homeScore != null &&
-            live.awayScore != null
-        )
-      : null;
-
-  if (!liveMatch) {
-    return match;
-  }
-
-  return {
-    ...match,
-    homeScore: Number(liveMatch.homeScore),
-    awayScore: Number(liveMatch.awayScore),
-    status: "finished",
-  };
-});
+const standingsMatches = useMemo(() => {
+  const finalLiveByMatch = indexFinishedLiveMatches({ date: liveDate, liveMatches });
+  return matches.map((match) => {
+    // Los resultados publicados mantienen la prioridad sobre el LIVE.
+    if (isMatchFinished(match)) return match;
+    const liveMatch = getFinishedLiveMatch(finalLiveByMatch, match);
+    return liveMatch ? {
+      ...match,
+      homeScore: Number(liveMatch.homeScore),
+      awayScore: Number(liveMatch.awayScore),
+      status: "finished",
+    } : match;
+  });
+}, [liveMatches, liveDate]);
   const standings = useMemo(() => {
     const finished = standingsMatches.filter(match => isMatchFinished(match));
     const byTeam = new Map(teams.map(team => [team.id, []]));
@@ -1059,15 +1043,17 @@ const standingsMatches = matches.map((match) => {
   }, []);
 
   // Módulos editoriales exclusivos de escritorio, derivados de los datos existentes.
-  const upcomingDesktop = matches
-    .filter((match) => match.date > today && !isMatchFinished(match) && match.status !== "postponed")
-    .sort((a, b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || ""))
-    .slice(0, 4);
-
-  const recentDesktop = matches
-    .filter((match) => isMatchFinished(match) && match.date <= today)
-    .sort((a, b) => b.date.localeCompare(a.date) || (b.time || "").localeCompare(a.time || ""))
-    .slice(0, 5);
+  // Estos módulos dependen del fixture estático y del día, no de los popups.
+  const { upcomingDesktop, recentDesktop } = useMemo(() => ({
+    upcomingDesktop: matches
+      .filter((match) => match.date > today && !isMatchFinished(match) && match.status !== "postponed")
+      .sort((a, b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || ""))
+      .slice(0, 4),
+    recentDesktop: matches
+      .filter((match) => isMatchFinished(match) && match.date <= today)
+      .sort((a, b) => b.date.localeCompare(a.date) || (b.time || "").localeCompare(a.time || ""))
+      .slice(0, 5),
+  }), [today]);
 
   return (
     <main className="home-page">
