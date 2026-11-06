@@ -265,6 +265,7 @@ function Game() {
           {outcome && <div className={"ct-outcome " + (match.log[match.log.length - 1]?.success ? "ct-success" : "ct-miss")} role="status">
             <strong>{match.log[match.log.length - 1]?.success ? "¡TE SALIÓ LA JUGADA!" : "NO SALIÓ COMO ESPERABAS"}</strong>
             <div className="ct-score-impact"><span>VOS <b>{match.score}</b></span><span>RIVAL <b>{match.opponentScore}</b></span></div>
+            {match.log[match.log.length - 1]?.conceded > 0 && <div className="ct-rival-response">⚡ RESPUESTA RIVAL: +{match.log[match.log.length - 1].conceded} PUNTOS</div>}
             <p>{match.log[match.log.length - 1]?.message}</p>
             <button className="ct-primary" onClick={advance}>{match.done ? "VER RESULTADO" : "CONTINUAR PARTIDO"} <ArrowRight size={18}/></button>
           </div>}
