@@ -6,6 +6,7 @@ on:
       - "src/pages/Liga.jsx"
       - "src/pages/Home.jsx"
       - "src/components/Header.jsx"
+      - "index.html"
       - "scripts/optimize-logo.mjs"
       - "tests/home-image-performance.test.mjs"
       - "package.json"
@@ -71,5 +72,7 @@ jobs:
         run: |
           test -s public/logo-lna.webp
           test -s dist/logo-lna.webp
+          test -s dist/favicon-lna-64.png
+          echo "Favicon optimizado: $(wc -c < dist/favicon-lna-64.png) bytes"
           echo "Logo WebP generado: $(wc -c < dist/logo-lna.webp) bytes"
 
