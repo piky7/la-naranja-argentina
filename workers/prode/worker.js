@@ -344,7 +344,7 @@ export default {
         const allowedSymbols = ["eagle","lion","wolf","tiger","bear","shark","ball","hoop","jersey","court","torch","bolt","shield","diamond","storm","trident"];
         // El constructor deportivo utiliza el campo de símbolo existente:
         // sport:forma:franjas:posición:borde:NOMBRE (sin migraciones D1).
-        const sportSymbolPattern = /^sport:(classic|pointed|rounded|flat|wide):(solid|vertical|thin|diagonal|horizontal|double|half|quarters):(top|middle|bottom|none):(simple|double|thick):[A-Z0-9 _-]{0,20}$/;
+        const sportSymbolPattern = /^sport:(classic|pointed|rounded|flat|wide):(solid|vertical|thin|diagonal|horizontal|double|half|quarters):(top|middle|bottom|none):(simple|double|thick):[A-ZÁÉÍÓÚÜÑ0-9 _-]{0,20}$/u;
         if (body.symbol != null && !allowedSymbols.includes(body.symbol) && !sportSymbolPattern.test(body.symbol)) return reply({ok:false,error:"Diseño inválido"},400);
         const userId = "firebase:" + identity.uid;
         await ensureCrests(env.DB);
