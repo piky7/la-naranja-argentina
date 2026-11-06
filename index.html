@@ -87,35 +87,6 @@
 
   <body>
     <div id="root"></div>
-    <!-- Red de seguridad exclusiva de la ruta de pruebas: si un archivo JS
-         queda en caché o falla al cargar, nunca dejar la pantalla negra. -->
-    <script>
-      if (location.pathname === "/camino-al-titulo-test") {
-        (function () {
-          var recovered = false;
-          function showRecovery() {
-            if (recovered) return;
-            var root = document.getElementById("root");
-            if (!root || root.textContent.trim().length > 15) return;
-            recovered = true;
-            var panel = document.createElement("section");
-            panel.setAttribute("role", "alert");
-            panel.style.cssText = "position:fixed;inset:0;z-index:2147483647;background:#0b1928;color:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:18px;padding:25px;font-family:Arial,sans-serif";
-            panel.innerHTML = '<h1 style="color:#ff9a32;font-size:26px">CAMINO AL TÍTULO</h1><p style="font-size:15px;line-height:1.5;max-width:330px">No pudimos iniciar el juego. Puede haber una versión anterior en caché.</p><button id="lna-retry" style="border:0;background:#ff9a32;color:#101621;font-weight:900;border-radius:10px;padding:15px 22px">ACTUALIZAR JUEGO</button><a href="/" style="color:#c1d5e8;font-size:13px">Volver a LNA</a>';
-            document.body.appendChild(panel);
-            document.getElementById("lna-retry").addEventListener("click", function () {
-              var url = new URL(location.href);
-              url.searchParams.set("actualizar", String(Date.now()));
-              location.replace(url.href);
-            });
-          }
-          window.addEventListener("load", function () { setTimeout(showRecovery, 6000); });
-          window.addEventListener("error", function (event) {
-            if (event && event.target && event.target.tagName === "SCRIPT") setTimeout(showRecovery, 250);
-          }, true);
-        })();
-      }
-    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
