@@ -22,7 +22,7 @@ test("Logo optimizado se genera antes del desarrollo y del build con dependencia
   assert.equal(pkg.scripts.predev,"node scripts/optimize-logo.mjs");
   assert.equal(pkg.scripts.prebuild,"node scripts/optimize-logo.mjs");
   assert.equal(pkg.scripts.postbuild,"node scripts/optimize-legacy-logo.mjs");
-  assert.match(read("scripts/optimize-legacy-logo.mjs"),/dist\\/logo-lna\\.png/);
+  assert.ok(read("scripts/optimize-legacy-logo.mjs").includes("dist/logo-lna.png"));
   assert.equal(pkg.dependencies.sharp,lock.packages[""].dependencies.sharp);
   assert.ok(lock.packages["node_modules/sharp"]);
 });
