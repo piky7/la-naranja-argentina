@@ -18,6 +18,7 @@ test("El diseño deportivo se serializa y recupera con nombre independiente", ()
   assert.deepEqual(parseSportsDesign(saved),original);
   assert.ok(isSportsDesign(saved));
   assert.equal(parseSportsDesign("ball").shape,"classic");
+  assert.ok(isSportsDesign(serializeSportsDesign({...original,label:"ATLÉTICO ÑANDÚ"})));
 });
 
 test("Nunca acepta configuraciones extrañas o inyectadas como un diseño válido", () => {
