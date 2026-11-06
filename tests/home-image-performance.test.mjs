@@ -13,7 +13,7 @@ test("El logo de cabecera utiliza WebP y conserva el PNG original para metadatos
   assert.ok(header.includes("/logo-lna.webp"));
   assert.ok(!header.includes("/logo-lna.png"));
   assert.match(read("index.html"),/logo-lna\.png/);
-  assert.match(script,/sharp\(input\)\.resize\(\{ width: 512/);
+  assert.match(script,/sharp\(fileURLToPath\(input\)\)\.resize\(\{ width: 512/);
   assert.match(script,/\.webp\(\{/);
 });
 
