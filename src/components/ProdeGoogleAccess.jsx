@@ -3,11 +3,9 @@ import { LogIn, LogOut, ShieldCheck, Pencil, X, LockKeyhole } from "lucide-react
 import { Link } from "react-router-dom";
 import { signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
-import { PRODE_SYMBOL_CATEGORIES, PRODE_SYMBOL_IDS } from "./ProdeCrestSymbol";
+import { SPORTS_SHAPES, SPORTS_PATTERNS, SPORTS_PLACEMENTS, SPORTS_BORDERS, parseSportsDesign, serializeSportsDesign, isSportsDesign } from "./sportsCrestDesign";
 import { ensureGoogleCareer } from "../auth/careerAccount";
 
-const defaultCrestSymbol = style => ({ elite:"eagle", pro:"ball", legend:"torch" })[style] || "ball";
-const crestSymbolCategory = symbol => PRODE_SYMBOL_CATEGORIES.find(group => group.options.some(([id]) => id === symbol))?.id || "sports";
 
 const PRODE_API = "https://lna-prode-api.lnab.workers.dev";
 const VOTING_VISITOR_KEY = "lna-vote-visitor-id";
@@ -36,8 +34,8 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [crestText, setCrestText] = useState("#ffffff");
   const [crestStyle, setCrestStyle] = useState("pro");
   const [crestFont, setCrestFont] = useState("sport");
-  const [crestSymbol, setCrestSymbol] = useState("ball");
-  const [crestCategory, setCrestCategory] = useState("sports");
+  const [crestSymbol, setCrestSymbol] = useState(serializeSportsDesign({}));
+  const updateSportsDesign = patch => setCrestSymbol(previous => serializeSportsDesign({ ...parseSportsDesign(previous), ...patch }));
   const [saving, setSaving] = useState(false);
   const [profileError, setProfileError] = useState("");
   const [voteSourceError, setVoteSourceError] = useState("");
@@ -78,7 +76,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       });
       const data = await response.json();
       if (!response.ok || !data.ok || !data.user) throw new Error("profile");
-      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); setCrestFont(data.user.crestFont || "sport"); const selectedSymbol = PRODE_SYMBOL_IDS.includes(data.user.crestSymbol) ? data.user.crestSymbol : defaultCrestSymbol(data.user.crestStyle); setCrestSymbol(selectedSymbol); setCrestCategory(crestSymbolCategory(selectedSymbol)); }
+      if (active) { setProfile(data.user); setUsername(data.user.username || ""); setCrestPrimary(data.user.crestPrimary || "#7de83d"); setCrestSecondary(data.user.crestSecondary || "#10283c"); setCrestText(data.user.crestText || "#ffffff"); setCrestStyle(data.user.crestStyle || "pro"); setCrestFont(data.user.crestFont || "sport"); setCrestSymbol(isSportsDesign(data.user.crestSymbol) ? data.user.crestSymbol : serializeSportsDesign({ label: data.user.username || "" })); }
       // Tanto Mi Carrera como Prode consultan una única identidad Google.
       // La inicialización es idempotente y no reemplaza una carrera ya vinculada.
       await ensureGoogleCareer(token);
@@ -225,9 +223,7 @@ export default function ProdeGoogleAccess({ onReady }) {
                     setCrestText(profile?.crestText || "#ffffff");
                     setCrestStyle(profile?.crestStyle || "pro");
                     setCrestFont(profile?.crestFont || "sport");
-                    const selectedSymbol = PRODE_SYMBOL_IDS.includes(profile?.crestSymbol) ? profile.crestSymbol : defaultCrestSymbol(profile?.crestStyle);
-                    setCrestSymbol(selectedSymbol);
-                    setCrestCategory(crestSymbolCategory(selectedSymbol));
+                    setCrestSymbol(isSportsDesign(profile?.crestSymbol) ? profile.crestSymbol : serializeSportsDesign({ label: profile?.username || "" }));
                     setEditOpen(true);
                   }} disabled={busy || syncing || !profile}><Pencil size={17}/></button>
                   <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={() => setLogoutConfirmOpen(true)} disabled={busy}><LogOut size={17}/></button>
@@ -286,25 +282,50 @@ export default function ProdeGoogleAccess({ onReady }) {
           </label>
           <p className="prode-profile-helper">Si no elegís un alias, se muestra tu nombre de Google en Prode.</p>
 
-          <fieldset className="prode-avatar-styles prode-symbol-selector">
-            <legend>Elegí tu escudo</legend>
-            <div className="prode-symbol-tabs" role="group" aria-label="Categorías de escudos">
-              {PRODE_SYMBOL_CATEGORIES.map(group => (
-                <button key={group.id} type="button" aria-pressed={crestCategory === group.id}
-                  className={crestCategory === group.id ? "is-selected" : ""}
-                  onClick={() => setCrestCategory(group.id)}>{group.label}</button>
-              ))}
+          <fieldset className="prode-sports-builder">
+            <legend>Forma del escudo</legend>
+            <div className="prode-sports-shapes">
+              {SPORTS_SHAPES.map(([id,label]) => <button key={id} type="button"
+                className={"prode-sports-choice" + (parseSportsDesign(crestSymbol).shape === id ? " is-selected" : "")}
+                aria-pressed={parseSportsDesign(crestSymbol).shape === id} onClick={() => updateSportsDesign({shape:id})}>
+                <ProdeCrest name="" primary={crestPrimary} secondary={crestSecondary} textColor={crestText} font={crestFont}
+                  symbol={serializeSportsDesign({...parseSportsDesign(crestSymbol),shape:id,pattern:"solid",placement:"none"})} size={48}/>
+                <span>{label}</span>
+              </button>)}
             </div>
-            <div className="prode-symbol-grid">
-              {PRODE_SYMBOL_CATEGORIES.find(group => group.id === crestCategory)?.options.map(([id,label]) => (
-                <button key={id} type="button" aria-pressed={crestSymbol === id}
-                  className={"prode-symbol-option" + (crestSymbol === id ? " is-selected" : "")}
-                  onClick={() => setCrestSymbol(id)}>
-                  <ProdeCrest name={username || "Jugador"} primary={crestPrimary} secondary={crestSecondary}
-                    textColor={crestText} style={crestStyle} symbol={id} font={crestFont} size={53}/>
-                  <span>{label}</span>
-                </button>
-              ))}
+          </fieldset>
+
+          <fieldset className="prode-sports-builder">
+            <legend>Diseño interior</legend>
+            <div className="prode-sports-patterns">
+              {SPORTS_PATTERNS.map(([id,label]) => <button key={id} type="button"
+                className={"prode-sports-choice" + (parseSportsDesign(crestSymbol).pattern === id ? " is-selected" : "")}
+                aria-pressed={parseSportsDesign(crestSymbol).pattern === id} onClick={() => updateSportsDesign({pattern:id})}>
+                <ProdeCrest name="" primary={crestPrimary} secondary={crestSecondary} textColor={crestText}
+                  symbol={serializeSportsDesign({...parseSportsDesign(crestSymbol),pattern:id,placement:"none"})} size={48}/>
+                <span>{label}</span>
+              </button>)}
+            </div>
+          </fieldset>
+
+          <fieldset className="prode-sports-builder">
+            <legend>Nombre del escudo</legend>
+            <input className="prode-sports-name" maxLength={20} value={parseSportsDesign(crestSymbol).label}
+              onChange={e => updateSportsDesign({label:e.target.value})} placeholder="Ej. CLUB PIKY"/>
+            <p className="prode-profile-helper">Este nombre puede ser distinto de tu alias. Hasta 20 caracteres.</p>
+            <div className="prode-sports-text-options">
+              {SPORTS_PLACEMENTS.map(([id,label]) => <button key={id} type="button"
+                className={"prode-sports-text-option" + (parseSportsDesign(crestSymbol).placement === id ? " is-selected" : "")}
+                aria-pressed={parseSportsDesign(crestSymbol).placement === id} onClick={() => updateSportsDesign({placement:id})}>{label}</button>)}
+            </div>
+          </fieldset>
+
+          <fieldset className="prode-sports-builder">
+            <legend>Borde del escudo</legend>
+            <div className="prode-sports-text-options">
+              {SPORTS_BORDERS.map(([id,label]) => <button key={id} type="button"
+                className={"prode-sports-text-option" + (parseSportsDesign(crestSymbol).border === id ? " is-selected" : "")}
+                aria-pressed={parseSportsDesign(crestSymbol).border === id} onClick={() => updateSportsDesign({border:id})}>{label}</button>)}
             </div>
           </fieldset>
 
