@@ -2150,3 +2150,17 @@
   .prode-crest-editor-overlay .prode-profile-editor{padding:13px;max-height:100%;border-radius:14px}
   .prode-crest-editor-overlay .prode-dialog-heading{top:-13px}
 }
+
+/* La identidad real se muestra sólo cuando llegó el perfil autenticado.
+   En la carga no usar escudos ni alias provisionales que luego cambian. */
+.prode-home-redesign .prode-hero-account .prode-profile-loading{
+  display:flex;align-items:center;gap:12px;min-height:70px;width:100%;
+  color:#bbd4cc;font-size:13px;font-weight:700;
+}
+.prode-profile-loading-spinner{
+  display:inline-block;flex:0 0 20px;width:20px;height:20px;
+  border:2px solid #557b73;border-top-color:#8af04b;
+  border-radius:50%;animation:prode-profile-spin .8s linear infinite;
+}
+@keyframes prode-profile-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.prode-profile-loading-spinner{animation:none;border-top-color:#8af04b}}
