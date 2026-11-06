@@ -342,7 +342,10 @@ export default {
         if (body.style != null && !["pro","elite","legend"].includes(body.style)) return reply({ok:false,error:"Modelo inválido"},400);
         if (body.font != null && !["sport","college","gamer"].includes(body.font)) return reply({ok:false,error:"Tipografía inválida"},400);
         const allowedSymbols = ["eagle","lion","wolf","tiger","bear","shark","ball","hoop","jersey","court","torch","bolt","shield","diamond","storm","trident"];
-        if (body.symbol != null && !allowedSymbols.includes(body.symbol)) return reply({ok:false,error:"Diseño inválido"},400);
+        // El constructor deportivo utiliza el campo de símbolo existente:
+        // sport:forma:franjas:posición:borde:NOMBRE (sin migraciones D1).
+        const sportSymbolPattern = /^sport:(classic|pointed|rounded|flat|wide):(solid|vertical|thin|diagonal|horizontal|double|half|quarters):(top|middle|bottom|none):(simple|double|thick):[A-Z0-9 _-]{0,20}$/;
+        if (body.symbol != null && !allowedSymbols.includes(body.symbol) && !sportSymbolPattern.test(body.symbol)) return reply({ok:false,error:"Diseño inválido"},400);
         const userId = "firebase:" + identity.uid;
         await ensureCrests(env.DB);
         if (!(await env.DB.prepare("SELECT id FROM prode_users WHERE id=?").bind(userId).first())) return reply({ ok: false, error: "Primero registrá tu perfil" }, 409);
