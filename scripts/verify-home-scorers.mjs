@@ -30,6 +30,9 @@ try {
     isMatchFinished: match => match?.status === "finished" || (match?.homeScore != null && match?.homeScore !== "" && match?.awayScore != null && match?.awayScore !== ""),
     getTeam: id => teams.find(team => team.id === id),
     useMemo: fn => fn(),
+    // El verificador evalúa el ranking en modo visible, no la pestaña Posiciones.
+    homeStatsTab: "anotadores",
+    desktopScorersVisible: false,
   });
   const oldCode = source.slice(oldStart, oldEnd).replace("const getPlayerStats =", "globalThis.getPlayerStats =");
   const newCode = source.slice(newStart, newEnd)
