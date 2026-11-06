@@ -131,30 +131,39 @@ function getUpcomingOfficialCollective(teamId) {
 }
 
 
-// Calcular una sola vez los promedios colectivos por equipo; antes se
-// recorrían todos los partidos por cada estadística y cada equipo.
-const UPCOMING_COLLECTIVE_BY_TEAM = Object.fromEntries(
-  teams.map(team => [team.id, getUpcomingOfficialCollective(team.id)])
-);
+// Los promedios colectivos se necesitan solo al abrir una ficha de equipo
+// o un próximo partido. Evitar recorrer todas las planillas durante el arranque.
+const EMPTY_UPCOMING_COLLECTIVES = Object.freeze({
+  UPCOMING_COLLECTIVE_BY_TEAM: {},
+  UPCOMING_COLLECTIVE_RANKS: {},
+});
+let upcomingCollectivesCache = null;
 
-// Puestos oficiales comparables entre los 18 equipos (solo planillas válidas).
-// Los empates comparten posición; equipos sin dato no reciben puesto.
-const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
-  UPCOMING_COLLECTIVE_STATS.map(([, key, lowerIsBetter]) => {
-    const entries = teams.map(team => ({
-      id: team.id,
-      value: UPCOMING_COLLECTIVE_BY_TEAM[team.id].values[key],
-    })).filter(item => Number.isFinite(item.value));
-    entries.sort((a, b) => (lowerIsBetter ? a.value - b.value : b.value - a.value));
-    const ranks = {};
-    entries.forEach((item, index) => {
-      const previous = entries[index - 1];
-      ranks[item.id] = previous && previous.value === item.value
-        ? ranks[previous.id] : index + 1;
-    });
-    return [key, ranks];
-  })
-);
+function getUpcomingCollectives() {
+  if (upcomingCollectivesCache) return upcomingCollectivesCache;
+  const UPCOMING_COLLECTIVE_BY_TEAM = Object.fromEntries(
+    teams.map(team => [team.id, getUpcomingOfficialCollective(team.id)])
+  );
+  // Misma clasificación, con empate por posición y sin alterar valores oficiales.
+  const UPCOMING_COLLECTIVE_RANKS = Object.fromEntries(
+    UPCOMING_COLLECTIVE_STATS.map(([, key, lowerIsBetter]) => {
+      const entries = teams.map(team => ({
+        id: team.id,
+        value: UPCOMING_COLLECTIVE_BY_TEAM[team.id].values[key],
+      })).filter(item => Number.isFinite(item.value));
+      entries.sort((a, b) => (lowerIsBetter ? a.value - b.value : b.value - a.value));
+      const ranks = {};
+      entries.forEach((item, index) => {
+        const previous = entries[index - 1];
+        ranks[item.id] = previous && previous.value === item.value
+          ? ranks[previous.id] : index + 1;
+      });
+      return [key, ranks];
+    })
+  );
+  upcomingCollectivesCache = { UPCOMING_COLLECTIVE_BY_TEAM, UPCOMING_COLLECTIVE_RANKS };
+  return upcomingCollectivesCache;
+}
 
 function Home() {
   useIdlePopupPreload();
@@ -183,6 +192,10 @@ const [homeStatsTab, setHomeStatsTab] = useState("posiciones");
     return () => media.removeEventListener("change", update);
   }, []);  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+  const { UPCOMING_COLLECTIVE_BY_TEAM, UPCOMING_COLLECTIVE_RANKS } =
+    selectedTeam || selectedUpcomingMatch
+      ? getUpcomingCollectives()
+      : EMPTY_UPCOMING_COLLECTIVES;
 const { liveMatches, date: liveDate } = useLiveSnapshot();
 
 
