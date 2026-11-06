@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-const css = readFileSync(new URL("../src/pages/Home.css",import.meta.url),"utf8");
+const css = readFileSync(new URL("../src/components/PopupDeferredOverrides.css",import.meta.url),"utf8");
 const popup = readFileSync(new URL("../src/components/UpcomingMatchModal.jsx",import.meta.url),"utf8");
 
 test("El pie del popup próximo partido conserva ambas leyendas",()=>{
