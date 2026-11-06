@@ -12,9 +12,10 @@ const lock=JSON.parse(read("package-lock.json"));
 test("El logo de cabecera utiliza WebP y conserva el PNG original para metadatos",()=>{
   assert.ok(header.includes("/logo-lna.webp"));
   assert.ok(!header.includes("/logo-lna.png"));
-  assert.match(read("index.html"),/logo-lna\.png/);
+  assert.match(read("index.html"),/favicon-lna-64\.png/);
   assert.match(script,/sharp\(fileURLToPath\(input\)\)\.resize\(\{ width: 512/);
   assert.match(script,/\.webp\(\{/);
+  assert.match(script,/favicon-lna-64\.png/);
 });
 
 test("Logo optimizado se genera antes del desarrollo y del build con dependencia explícita",()=>{
