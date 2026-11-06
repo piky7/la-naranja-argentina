@@ -1,43 +1,70 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { ACTIONS, ROUNDS, createMatch, playAction, randomOpponentIds } from "../src/games/caminoEngine.js";
+import { SCENARIOS, ACTIONS, ROUNDS, ROUND_SHORT, createMatch, getScenario, playAction, randomOpponentIds } from "../src/games/caminoEngine.js";
 
-test("Camino al Título tiene tres partidos y tres decisiones por encuentro", () => {
-  assert.deepEqual(ROUNDS, ["CUARTOS DE FINAL", "SEMIFINAL", "GRAN FINAL"]);
-  assert.equal(ACTIONS.length, 3);
-  assert.ok(ACTIONS.every(group => group.length === 3));
+test("Camino al Título tiene octavos, cuartos, semifinal y final", () => {
+  assert.deepEqual(ROUNDS, ["OCTAVOS DE FINAL", "CUARTOS DE FINAL", "SEMIFINAL", "GRAN FINAL"]);
+  assert.deepEqual(ROUND_SHORT, ["OCTAVOS", "CUARTOS", "SEMIFINAL", "FINAL"]);
+  assert.equal(SCENARIOS.length, 3);
+  assert.ok(SCENARIOS.every(group => group.length >= 4));
+  assert.ok(ACTIONS.every(group => group.length >= 9));
+  assert.ok(SCENARIOS.every(group => group.every(scenario => scenario.options.length === 3)));
 });
 
-test("No enfrenta al equipo seleccionado consigo mismo ni repite rivales", () => {
-  const ids = ["boca", "quimsa", "atenas", "regatas", "ferro"];
+test("No enfrenta al equipo seleccionado consigo mismo ni repite rivales en las cuatro rondas", () => {
+  const ids = ["boca", "quimsa", "atenas", "regatas", "ferro", "lanus"];
   const opponents = randomOpponentIds("boca", ids, () => .33);
-  assert.equal(opponents.length, 3);
-  assert.equal(new Set(opponents).size, 3);
+  assert.equal(opponents.length, 4);
+  assert.equal(new Set(opponents).size, 4);
   assert.ok(!opponents.includes("boca"));
 });
 
-test("Tres decisiones resuelven el partido sin revancha", () => {
-  let match = createMatch(0, "boca", "quimsa", () => .5);
-  match = playAction(match, "three", () => 0);
-  assert.equal(match.moment, 1);
-  assert.equal(match.done, false);
-  match = playAction(match, "press", () => 0);
-  assert.equal(match.moment, 2);
-  match = playAction(match, "hero", () => 0);
-  assert.equal(match.done, true);
-  assert.equal(match.log.length, 3);
-  assert.deepEqual(playAction(match, "hero", () => 0), match);
+test("Partidos nuevos pueden presentar situaciones diferentes", () => {
+  const a = createMatch(0, "boca", "quimsa", () => .01);
+  const b = createMatch(0, "boca", "quimsa", () => .99);
+  assert.notEqual(getScenario(a).id, getScenario(b).id);
+  assert.equal(a.scenarioIds.length, 3);
+  assert.equal(b.scenarioIds.length, 3);
 });
 
-test("Un partido perdido termina en eliminación, sin ronda adicional automática", () => {
+test("Tres decisiones resuelven un partido y guardan impacto, acción y animación", () => {
+  let match = createMatch(0, "boca", "quimsa", () => .01);
+  for (let i = 0; i < 3; i++) {
+    const choice = getScenario(match).options[0];
+    match = playAction(match, choice.id, () => 0);
+    assert.equal(match.moment, i + 1);
+    assert.ok(match.log[i].visual);
+    assert.ok(Number.isFinite(match.log[i].score));
+    assert.ok(Number.isFinite(match.log[i].opponentScore));
+  }
+  assert.equal(match.done, true);
+  assert.equal(match.log.length, 3);
+  assert.deepEqual(playAction(match, "arbitrary", () => 0), match);
+});
+
+test("Una jugada desconocida no altera el partido", () => {
+  const match = createMatch(2, "boca", "ferro", () => .32);
+  assert.equal(playAction(match, "no-existe", () => 0), match);
+});
+
+test("Un partido perdido termina sin revancha", () => {
   let match = createMatch(0, "boca", "quimsa", () => .99);
-  match = playAction(match, "inside", () => .99);
-  match = playAction(match, "zone", () => .99);
-  match = playAction(match, "quick", () => .99);
+  for (let i = 0; i < 3; i++) {
+    match = playAction(match, getScenario(match).options[0].id, () => .99);
+  }
   assert.equal(match.done, true);
   assert.equal(match.won, false);
   assert.ok(match.opponentScore > match.score);
+});
+
+test("La placa incorpora octavos y el ganador debe superar cuatro rondas", () => {
+  const game = readFileSync(new URL("../src/pages/CaminoAlTitulo.jsx", import.meta.url), "utf8");
+  assert.match(game, /CUATRO VICTORIAS. UNA COPA/);
+  assert.match(game, /ROUND_SHORT\[i\]/);
+  assert.match(game, /round === ROUNDS.length - 1/);
+  assert.match(game, /animateMotion/);
+  assert.match(game, /ct-court-flash/);
 });
 
 test("La ruta de pruebas exige autorización de administrador y no aparece en navegación", () => {
