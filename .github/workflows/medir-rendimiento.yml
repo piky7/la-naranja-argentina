@@ -52,7 +52,7 @@ jobs:
             const blocking=data.audits?.['render-blocking-insight']?.details?.items || [];
             console.log(`  Recursos bloqueantes: ${blocking.map(x=>x.url).join(' | ') || 'ninguno'}`);
             const assetItems=data.audits?.['network-requests']?.details?.items || [];
-            const shieldRequests=assetItems.filter(item=>/\\/assets\\/(quimsa|lanus|boca|san-martin)-/.test(item.url || ''));
+            const shieldRequests=assetItems.filter(item=>['quimsa-','lanus-','boca-','san-martin-'].some(name=>(item.url || '').includes('/assets/'+name)));
             console.log(`  Escudos del día: ${shieldRequests.map(item=>item.url.split('/').pop()+': '+Math.round((item.transferSize || 0)/1024)+' KiB').join(' | ') || 'sin registros'}`);
             const breakdown=data.audits?.['lcp-breakdown-insight']?.details?.items || [];
             console.log(`  LCP breakdown: ${JSON.stringify(breakdown).slice(0,500)}`);
