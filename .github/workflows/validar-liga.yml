@@ -9,6 +9,8 @@ on:
       - "index.html"
       - "scripts/optimize-logo.mjs"
       - "scripts/optimize-legacy-logo.mjs"
+      - "scripts/preload-home-logos.mjs"
+      - "tests/home-lcp-preload.test.mjs"
       - "tests/home-image-performance.test.mjs"
       - "package.json"
       - "package-lock.json"
@@ -69,6 +71,10 @@ jobs:
         run: npm run build
       - name: Verificar separación de estadísticas oficiales
         run: node scripts/verify-stats-chunk.cjs
+      - name: Verificar precarga LCP del primer partido
+        run: |
+          grep -q "data-lna-home-crest-preload" dist/index.html
+          echo "Precarga LCP disponible en HTML"
       - name: Verificar reducción del logo en producción
         run: |
           test -s public/logo-lna.webp
