@@ -9,7 +9,11 @@ const popup=read("src/components/UpcomingMatchModal.jsx");
 
 test("Home y Liga usan un solo popup de próximos partidos",()=>{
   for(const [name,source] of [["Home",home],["Liga",liga]]) {
-    assert.match(source,/import UpcomingMatchModal from "\.\.\/components\/UpcomingMatchModal";/,name);
+    if (name === "Home") {
+      assert.match(source,/const UpcomingMatchModal = lazy\(\(\) => import\("\.\.\/components\/UpcomingMatchModal"\)\)/,name);
+    } else {
+      assert.match(source,/import UpcomingMatchModal from "\.\.\/components\/UpcomingMatchModal";/,name);
+    }
     assert.match(source,/<UpcomingMatchModal\b/,name);
     assert.doesNotMatch(source,/className="match-modal-overlay"/,name);
     assert.doesNotMatch(source,/upcomingTab === "comparativa"/,name);
