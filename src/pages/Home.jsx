@@ -1,5 +1,5 @@
 import { isPlayerAppearance } from "../utils/playerAppearance";
-import UpcomingMatchModal from "../components/UpcomingMatchModal";
+
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveMatchInfo from "../components/LiveMatchInfo";
 import LiveRosters from "../components/LiveRosters";
@@ -11,10 +11,15 @@ import "../components/UpcomingHeader.css";
 import MatchVote from "../components/MatchVote";
 import MvpPrediction from "../components/MvpPrediction";
 import { requestPrediction } from "../auth/prodeBallot";
-import PlayerModal from "../components/PlayerModal";
-import FinishedMatchModal from "../components/FinishedMatchModal";
+
+
 import MatchStatsTabs from "../components/MatchStatsTabs";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+
+// El código de los popups se descarga cuando el usuario abre uno.
+const UpcomingMatchModal = lazy(() => import("../components/UpcomingMatchModal"));
+const FinishedMatchModal = lazy(() => import("../components/FinishedMatchModal"));
+const PlayerModal = lazy(() => import("../components/PlayerModal"));
 import { Link, useNavigate } from "react-router-dom";
 
 import { teams, getMatchColorStyle } from "../data/teams";
@@ -129,7 +134,16 @@ function Home() {
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
-const [homeStatsTab, setHomeStatsTab] = useState("posiciones");  const [selectedMatch, setSelectedMatch] = useState(null);
+const [homeStatsTab, setHomeStatsTab] = useState("posiciones");
+  // Las tarjetas extra de anotadores solo están visibles en escritorio >=1100px.
+  const [desktopScorersVisible, setDesktopScorersVisible] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(min-width: 1100px)").matches);
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1100px)");
+    const update = () => setDesktopScorersVisible(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);  const [selectedMatch, setSelectedMatch] = useState(null);
  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 const { liveMatches, date: liveDate } = useLiveSnapshot();
 
@@ -951,6 +965,8 @@ const standingsMatches = useMemo(() => {
   }, [selectedDate]);
 
   const topScorers = useMemo(() => {
+    // En móvil no recorrer todas las planillas mientras la pestaña Posiciones está activa.
+    if (homeStatsTab !== "anotadores" && !desktopScorersVisible) return [];
     // Un único recorrido de planillas oficiales para todos los jugadores.
     // Mantener los mismos filtros y el mismo criterio de partidos únicos
     // que getPlayerStats, usado por las fichas de jugadores.
@@ -1010,7 +1026,7 @@ const standingsMatches = useMemo(() => {
       .filter(player => player.stats?.gamesPlayed > 0)
       .sort((a, b) => b.points - a.points || a.name.localeCompare(b.name, "es"))
       .slice(0, 10);
-  }, []);
+  }, [homeStatsTab, desktopScorersVisible]);
 
   // Módulos editoriales exclusivos de escritorio, derivados de los datos existentes.
   // Estos módulos dependen del fixture estático y del día, no de los popups.
@@ -1732,7 +1748,7 @@ const finishedMatch = {
       )}
 
       {/* POPUP PARTIDO TERMINADO */}
-
+      <Suspense fallback={null}>
       {selectedMatch && (
         <FinishedMatchModal
           selectedMatch={selectedMatch}
@@ -1788,6 +1804,7 @@ const finishedMatch = {
           onTeamClick={goToTeam}
         />
       )}
+      </Suspense>
     </main>
   );
 }
