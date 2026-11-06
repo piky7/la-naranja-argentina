@@ -13,6 +13,9 @@ on:
       - "src/components/Header.jsx"
       - "index.html"
       - "scripts/optimize-logo.mjs"
+      - "scripts/optimize-team-logos.mjs"
+      - "src/data/teams.js"
+      - "tests/team-logo-webp.test.mjs"
       - "scripts/optimize-legacy-logo.mjs"
       - "scripts/preload-home-logos.mjs"
       - "tests/home-lcp-preload.test.mjs"
@@ -80,6 +83,11 @@ jobs:
         run: |
           grep -q "data-lna-home-crest-preload" dist/index.html
           echo "Precarga LCP disponible en HTML"
+      - name: Verificar escudos WebP optimizados
+        run: |
+          test "$(find src/assets/teams-webp -name '*.webp' | wc -l)" -eq 18
+          test "$(find dist/assets -name '*.webp' | wc -l)" -ge 18
+          echo "Escudos WebP generados y publicados correctamente"
       - name: Verificar reducción del logo en producción
         run: |
           test -s public/logo-lna.webp
