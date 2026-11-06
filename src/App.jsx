@@ -9,15 +9,15 @@ import SwipeNavigation from "./components/SwipeNavigation";
 import Home from "./pages/Home";
 const loadLiga = () => import("./pages/Liga");
 const Liga = lazy(loadLiga);
-import Equipos from "./pages/Equipos";
-import Equipo from "./pages/Equipo";
-import Jugadores from "./pages/Jugadores";
+const Equipos = lazy(() => import("./pages/Equipos"));
+const Equipo = lazy(() => import("./pages/Equipo"));
+const Jugadores = lazy(() => import("./pages/Jugadores"));
 const loadEstadisticas = () => import("./pages/Estadisticas");
 const Estadisticas = lazy(loadEstadisticas);
-import Privacidad from "./pages/Privacidad";
-import Acerca from "./pages/Acerca";
-import Prode from "./pages/Prode";
-import Admin from "./pages/Admin";
+const Privacidad = lazy(() => import("./pages/Privacidad"));
+const Acerca = lazy(() => import("./pages/Acerca"));
+const Prode = lazy(() => import("./pages/Prode"));
+const Admin = lazy(() => import("./pages/Admin"));
 
 // Precarga suave: no bloquea el render inicial ni consume datos extra
 // en conexiones lentas o con ahorro de datos activado.
@@ -100,7 +100,9 @@ function AnimatedRoutes() {
       </Suspense>
     </div>
     {prodeVisited && <div style={{ display: isProde ? undefined : "none" }} aria-hidden={!isProde}>
-      <Prode />
+      <Suspense fallback={isProde ? <RouteLoading /> : null}>
+        <Prode />
+      </Suspense>
     </div>}
     </>
   );
