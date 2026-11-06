@@ -8,13 +8,16 @@ const careerStart = careerSource.indexOf("async function calculateRewards(");
 const careerEnd = careerSource.indexOf("async function getRewards(",careerStart);
 const pureStart = careerSource.indexOf("function timelyFinishObservation(");
 const pureEnd = careerSource.indexOf("// Archivo permanente de partidos",pureStart);
+const lookupStart = careerSource.indexOf("async function getFinishObservations(",pureStart);
+const compareStart = careerSource.indexOf("function comparePredictionGames(",lookupStart);
+assert.ok(lookupStart>pureStart && compareStart>lookupStart);
 assert.ok(careerStart >= 0 && careerEnd > careerStart && pureStart >= 0 && pureEnd > pureStart);
 
 class FixedDate extends Date {
   static now() { return Date.parse("2026-12-01T12:00:00Z"); }
 }
 const compute = new Function("Date","getFinishObservations",
-  careerSource.slice(pureStart,pureEnd) + "\n" +
+  careerSource.slice(pureStart,lookupStart) + "\n" + careerSource.slice(compareStart,pureEnd) + "\n" +
   careerSource.slice(careerStart,careerEnd) + "\nreturn calculateRewards;"
 )(FixedDate,async db => new Map(db.observations));
 
