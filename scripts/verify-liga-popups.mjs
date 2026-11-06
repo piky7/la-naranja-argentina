@@ -6,7 +6,8 @@ const liga = readFileSync("src/pages/Liga.jsx", "utf8");
 const popup = readFileSync("src/components/UpcomingMatchModal.jsx", "utf8");
 
 for (const [name, source] of [["Home", home], ["Liga", liga]]) {
-  assert(source.includes(name === "Home" ? "const UpcomingMatchModal = lazy(loadUpcomingModal)" : "import UpcomingMatchModal"), `Falta importar popup común en ${name}`);
+  assert(source.includes('const loadUpcomingModal = () => import("../components/UpcomingMatchModal")'), `Falta cargar el popup común en ${name}`);
+  assert(source.includes("const UpcomingMatchModal = lazy(loadUpcomingModal)"), `Falta usar carga diferida del popup en ${name}`);
   assert(source.includes("<UpcomingMatchModal"), `Falta usar popup común en ${name}`);
   assert(!source.includes('{/* POPUP PRÓXIMO PARTIDO */}'),
     `Quedó una variante local antigua del popup en ${name}`);
