@@ -15,6 +15,7 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
   const [fullBusy, setFullBusy] = useState(false);
   const [fullError, setFullError] = useState("");
   const [profileMember, setProfileMember] = useState(null);
+  const [retryCounter, setRetryCounter] = useState(0);
   useEffect(() => {
     let active = true, unsubscribe;
     watchProdeUser(next => { if (active) { setUser(next); setAuthReady(true); } }).then(stop => {
@@ -40,7 +41,7 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
     window.addEventListener("prode-profile-updated",refreshProfile);
     window.addEventListener("prode-page-reopened",refreshPage);
     return () => { active = false; window.removeEventListener("prode-profile-updated",refreshProfile); window.removeEventListener("prode-page-reopened",refreshPage); };
-  }, [weekly, user, authReady]);
+  }, [weekly, user, authReady, retryCounter]);
   useEffect(() => { if (authReady && (data || error)) onReady?.(true); }, [authReady, data, error, onReady]);
   const openTable = async () => {
     if (weekly || tableOpen) return;
@@ -66,7 +67,11 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
     return fmt(start) + " – " + fmt(end);
   })() : "Lunes a domingo";
   return <>
-    <div className={"prode-podium" + (!weekly ? " prode-podium-tappable" : "")} aria-label={weekly ? "Tres mejores de la semana" : "Tres mejores del ranking histórico"} role={!weekly ? "button" : undefined} tabIndex={!weekly ? 0 : undefined} onClick={!weekly ? openTable : undefined} onKeyDown={!weekly ? event => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openTable(); } } : undefined}>
+    {!data && <div className="prode-ranking-initial-state" role="status" aria-live="polite">
+      {error ? <><span>{error}</span><button type="button" onClick={() => { invalidateProdeReads(); setRetryCounter(value => value + 1); }}>Reintentar</button></> :
+        <><span className="prode-ranking-initial-spinner" aria-hidden="true"/><span>Cargando {weekly ? "ranking semanal" : "ranking general"}…</span></>}
+    </div>}
+    {data && <div className={"prode-podium" + (!weekly ? " prode-podium-tappable" : "")} aria-label={weekly ? "Tres mejores de la semana" : "Tres mejores del ranking histórico"} role={!weekly ? "button" : undefined} tabIndex={!weekly ? 0 : undefined} onClick={!weekly ? openTable : undefined} onKeyDown={!weekly ? event => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); openTable(); } } : undefined}>
       {podium.map((entry, index) => <div key={index} className={"prode-podium-item " + ["second","first","third"][index]}>
         <span className="prode-podium-medal">{[2,1,3][index]}</span>
         <button type="button" className="prode-podium-player-trigger" disabled={!entry?.userId} aria-label={entry ? "Ver Mi Carrera de " + entry.username : "Sin jugador"} onClick={event => { event.stopPropagation(); openCareer(entry); }}>
@@ -75,7 +80,7 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
         </button>
         <strong>{entry ? entry.points + " pts" : "— pts"}</strong>
       </div>)}
-    </div>
+    </div>}
     <div className="prode-panel-bottom"><span>{error || (!authReady || !data ? "Cargando clasificación…" : !user ? "Tu posición: iniciá sesión en Prode" : data.myPosition != null ? "Tu posición: " + data.myPosition + "°" : "Tu posición: sin posición")}</span>{!weekly && <button className="prode-ranking-view-all" type="button" onClick={openTable}><ListOrdered size={15}/> Ver tabla completa</button>}</div>
     {profileMember && <div className="prode-career-standalone" onClick={() => setProfileMember(null)}>
       <section className="prode-career-dialog" role="dialog" aria-modal="true" aria-label={"Mi Carrera de " + profileMember.username} onClick={event => event.stopPropagation()}>
