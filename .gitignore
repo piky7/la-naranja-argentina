@@ -26,3 +26,6 @@ dist-ssr
 # Archivo derivado del logo, generado por predev/prebuild
 /public/logo-lna.webp
 /public/favicon-lna-64.png
+
+# Escudos convertidos automáticamente desde los PNG originales
+/src/assets/teams-webp/
