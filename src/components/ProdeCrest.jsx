@@ -1,47 +1,23 @@
 import React from "react";
-import ProdeCrestSymbol, { PRODE_SYMBOL_IDS } from "./ProdeCrestSymbol";
+import ProdeSportsShield from "./ProdeSportsShield";
 
-// Identidades vectoriales de Prode LNA: copa para ligas y pelota de básquet para usuarios.
-// Los diseños se dibujan a partir del nombre y de los colores guardados; no hay imagen fija.
+// La copa de cada liga conserva su identidad anterior. Los usuarios ahora
+// diseñan un escudo deportivo sin iconos ni placas con símbolos.
 const safeColor = (value, fallback) => /^#[0-9a-f]{6}$/i.test(value || "") ? value : fallback;
-const displayName = (name, max = 19) => String(name || "PRODE").trim().slice(0, max).toUpperCase();
 
 export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#152b3a", type = "user", textColor = "#ffffff", style = "pro", symbol, font = "sport", size = 55, className = "" }) {
+  if (type !== "league") return <ProdeSportsShield name={name} primary={primary} secondary={secondary} textColor={textColor} font={font} symbol={symbol} size={size} className={className}/>;
   const a = safeColor(primary, "#7de83d");
   const b = safeColor(secondary, "#152b3a");
   const t = safeColor(textColor, "#ffffff");
-  const isLeague = type === "league";
-  const fontFamily = font === "college" ? "Impact,Arial Black,sans-serif" : font === "gamer" ? "Orbitron,Russo One,Arial Black,sans-serif" : "Russo One,Impact,Arial Black,sans-serif";
-  const fontItalic = font !== "college";
-  const avatarStyle = ["pro","elite","legend"].includes(style) ? style : "pro";
-  const selectedSymbol = PRODE_SYMBOL_IDS.includes(symbol) ? symbol : ({ elite: "eagle", pro: "ball", legend: "torch" })[avatarStyle];
-  const symbolGroup = ["eagle","lion","wolf","tiger","bear","shark"].includes(selectedSymbol) ? "animals" : ["ball","hoop","jersey","court"].includes(selectedSymbol) ? "sports" : "emblems";
   const id = React.useId().replace(/:/g, "");
-  const label = displayName(name, isLeague ? 24 : 20);
-  const fontSize = isLeague
-    ? label.length > 19 ? 6.5 : label.length > 14 ? 7.5 : label.length > 10 ? 8.5 : 9
-    : label.length > 16 ? 6 : label.length > 12 ? 7 : label.length > 9 ? 8 : 10;
-  // La placa central mide 62 unidades. Reservamos margen y, si hace falta,
-  // comprimimos el texto SVG para que nunca invada los extremos de la cinta.
-  const leagueEstimatedWidth = [...label].reduce((sum, char) => sum + (char === " " ? 0.33 : /[MW]/.test(char) ? 0.92 : /[IJ1]/.test(char) ? 0.42 : 0.67) * fontSize, 0);
-  const fitLeagueText = isLeague && leagueEstimatedWidth > 55;
-
+  const label = String(name || "PRODE").trim().slice(0,24).toUpperCase();
+  const fontSize = label.length > 19 ? 6.5 : label.length > 14 ? 7.5 : label.length > 10 ? 8.5 : 9;
+  const estimated = [...label].reduce((sum, c) => sum + (c === " " ? .33 : /[MW]/.test(c) ? .92 : /[IJ1]/.test(c) ? .42 : .67)*fontSize, 0);
+  const fitLeagueText = estimated > 55;
   return <svg className={className} width={size} height={size} viewBox="0 0 96 110"
-    aria-label={(isLeague ? "Trofeo de " : "Pelota personalizada de ") + (name || "Prode")} role="img">
+    aria-label={"Trofeo de " + (name || "Prode")} role="img">
     <defs>
-      <linearGradient id={id + "face"} x1="0" x2="1" y1="0" y2="1">
-        <stop offset="0%" stopColor={a}/>
-        <stop offset="52%" stopColor={a}/>
-        <stop offset="100%" stopColor={b}/>
-      </linearGradient>
-      <radialGradient id={id + "shine"} cx="25%" cy="19%" r="82%">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity=".42"/>
-        <stop offset="40%" stopColor="#ffffff" stopOpacity=".13"/>
-        <stop offset="72%" stopColor="#07121e" stopOpacity=".06"/>
-        <stop offset="100%" stopColor="#050d19" stopOpacity=".48"/>
-      </radialGradient>
-      <clipPath id={id + "premiumClip"}><circle cx="48" cy="40" r="30.5"/></clipPath>
-      {/* Acabado metalizado de la copa, separado de los colores editables de la liga. */}
       <linearGradient id={id + "gold"} x1="0" y1="0" x2="1" y2=".25">
         <stop offset="0%" stopColor="#a76412"/>
         <stop offset="19%" stopColor="#ffda6b"/>
@@ -61,7 +37,6 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         <stop offset="100%" stopColor={a}/>
       </linearGradient>
     </defs>
-    {isLeague ? <>
       {/* Copa profesional con volumen metálico, estrella y laureles.
           Los colores elegidos se usan en la cinta, borde y detalles. */}
       <ellipse cx="48" cy="103" rx="35" ry="4" fill={a} opacity=".17"/>
@@ -111,33 +86,5 @@ export default function ProdeCrest({ name, primary = "#7de83d", secondary = "#15
         lengthAdjust={fitLeagueText ? "spacingAndGlyphs" : undefined}>{label}</text>
 
 
-    </> : <>
-      {/* Tres marcos distintivos: escudo animal, medallón deportivo y hexágono de emblema.
-          Los símbolos no contienen estrellas ni marcas de campeonatos. */}
-      <ellipse cx="48" cy="103" rx="31" ry="4" fill={a} opacity=".20"/>
-      {symbolGroup === "animals" ? <>
-        <path d="M48 3 86 18 81 64 48 85 15 64 10 18Z" fill={b} stroke={a} strokeWidth="4" strokeLinejoin="round"/>
-        <path d="M48 9 79 22 75 60 48 77 21 60 17 22Z" fill="#101f31" stroke="#e2f4ff" strokeOpacity=".8" strokeWidth="2"/>
-        <path d="M23 25 48 15 73 25" fill="none" stroke={a} strokeWidth="2.4" strokeLinecap="round"/>
-      </> : symbolGroup === "sports" ? <>
-        <circle cx="48" cy="43" r="39" fill={b} stroke={a} strokeWidth="4"/>
-        <circle cx="48" cy="43" r="34" fill="#102339" stroke="#e2f4ff" strokeOpacity=".82" strokeWidth="2.2"/>
-        <circle cx="48" cy="43" r="31" fill="none" stroke={a} strokeWidth="1" strokeDasharray="2 5" opacity=".7"/>
-      </> : <>
-        <path d="M48 2 85 21 85 63 48 85 11 63 11 21Z" fill={b} stroke={a} strokeWidth="4" strokeLinejoin="round"/>
-        <path d="M48 10 78 25 78 59 48 76 18 59 18 25Z" fill="#112536" stroke="#e2f4ff" strokeOpacity=".8" strokeWidth="2"/>
-        <path d="M18 31 11 25M78 31l7-6M18 53l-7 6M78 53l7 6" stroke={a} strokeWidth="2"/>
-      </>}
-      <ProdeCrestSymbol symbol={selectedSymbol} primary={a} secondary={b}/>
-      {/* Alias unido al marco, legible también en rankings pequeños. */}
-      <path d="M10 79 21 75l5 8-6 14-13-4Z M86 79l-11-4-5 8 6 14 13-4Z" fill={a} stroke={b} strokeWidth="1.5"/>
-      <path d="M15 77h66l4 10-7 13H18l-7-13Z" fill={b} stroke={a} strokeWidth="2.5" strokeLinejoin="round"/>
-      <path d="M20 80h56" stroke="#ffffff" strokeOpacity=".27" strokeWidth="1.2"/>
-      <text x="48" y="92" textAnchor="middle" fill={t}
-        fontFamily={fontFamily} fontStyle={fontItalic ? "italic" : "normal"}
-        fontSize={fontSize} fontWeight="900"
-        textLength={label.length > 11 ? 55 : undefined}
-        lengthAdjust={label.length > 11 ? "spacingAndGlyphs" : undefined}>{label}</text>
-    </>}
   </svg>;
 }
