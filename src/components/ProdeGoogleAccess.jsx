@@ -207,7 +207,7 @@ export default function ProdeGoogleAccess({ onReady }) {
 
   return (
     <div className="prode-google-access">
-      {loading ? <span>Comprobando sesión…</span> : user ? (
+      {loading || (user && !profile) ? <div className="prode-profile-loading" role="status" aria-live="polite"><span className="prode-profile-loading-spinner" aria-hidden="true"/><span>{error || (loading ? "Comprobando sesión…" : "Cargando tu perfil…")}</span></div> : user ? (
         <>
           <div className="prode-google-identity">
             <ProdeCrest name={profile?.username || profile?.googleName || "Jugador"} primary={profile?.crestPrimary} secondary={profile?.crestSecondary} textColor={profile?.crestText} style={profile?.crestStyle} font={profile?.crestFont} symbol={profile?.crestSymbol} size={55} className="prode-account-crest"/>
