@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Clock3, Download, LockKeyhole, Medal, Play, RotateCcw, ShieldCheck, Sparkles, Trophy, X } from "lucide-react";
 import { teams, teamMatchColors } from "../data/teams";
 import { signInProdeWithGoogle, watchProdeUser } from "../auth/prodeAuth";
-import { ACTIONS, ROUNDS, randomOpponentIds, createMatch, playAction } from "../games/caminoEngine";
+import { ROUNDS, ROUND_SHORT, getScenario, randomOpponentIds, createMatch, playAction } from "../games/caminoEngine";
 import "./CaminoAlTitulo.css";
 
 const ADMIN_ENDPOINT = "https://lna-prode-api.lnab.workers.dev/api/prode/admin/summary";
 const CLOCKS = ["00:58", "00:31", "00:10"];
-const MOMENTS = ["PRIMER ATAQUE", "DEFENSA DECISIVA", "ÚLTIMA POSESIÓN"];
+
 
 function useAdminAccess() {
   const [user, setUser] = useState(null);
@@ -88,14 +88,14 @@ async function exportResult(team, result, won) {
   await drawCrest(ctx, team.logo, 540, 455, 250);
   drawText(ctx, won ? "¡CAMPEÓN!" : "ELIMINADO", 540, 680, 98, won ? "#ffad40" : "#f5f7fa", 900);
   drawText(ctx, team.name.toUpperCase(), 540, 745, 39, "#ffffff", 800);
-  drawText(ctx, won ? "TRES VICTORIAS. UNA COPA." : "TU CAMINO TERMINÓ EN " + ROUNDS[result.length - 1], 540, 806, won ? 32 : 24, "#aec2d2", 700);
+  drawText(ctx, won ? "CUATRO VICTORIAS. UNA COPA." : "TU CAMINO TERMINÓ EN " + ROUND_SHORT[result.length - 1], 540, 806, won ? 30 : 25, "#aec2d2", 700);
   ctx.fillStyle = "#07121ecf";
-  ctx.fillRect(96, 855, 888, 275);
+  ctx.fillRect(96, 835, 888, 313);
   for (let i = 0; i < result.length; i++) {
     const item = result[i];
     const opponent = teams.find(t => t.id === item.opponentId);
-    const row = 920 + i * 72;
-    drawText(ctx, ["CUARTOS", "SEMIFINAL", "FINAL"][i], 126, row, 25, "#ff9c3c", 800, "left");
+    const row = 892 + i * 67;
+    drawText(ctx, ROUND_SHORT[i], 126, row, 25, "#ff9c3c", 800, "left");
     drawText(ctx, (item.score + " - " + item.opponentScore), 700, row, 34, "#ffffff", 900);
     drawText(ctx, opponent?.shortName || "", 934, row, 21, "#b3c7d6", 700, "right");
   }
@@ -123,35 +123,58 @@ async function exportResult(team, result, won) {
   setTimeout(() => URL.revokeObjectURL(url), 12000);
 }
 
-function MiniCourt({ action, round }) {
-  return <div className="ct-court" aria-label="Cancha de básquet animada">
-    <svg viewBox="0 0 440 205" role="img" aria-label="Representación de jugada en cancha">
-      <rect width="440" height="205" rx="13" fill="#ad672f"/>
-      <path d="M220 0V205 M0 100H440" stroke="#ffdfb1" strokeWidth="2" opacity=".65"/>
-      <circle cx="220" cy="102" r="37" fill="none" stroke="#ffdfb1" strokeWidth="2" opacity=".7"/>
-      <rect x="0" y="51" width="72" height="103" fill="none" stroke="#ffdfb1" strokeWidth="2"/>
-      <rect x="368" y="51" width="72" height="103" fill="none" stroke="#ffdfb1" strokeWidth="2"/>
-      <path d="M0 28A130 130 0 0 1 0 177 M440 28A130 130 0 0 0 440 177" fill="none" stroke="#ffdfb1" strokeWidth="2"/>
-      <circle cx="48" cy="102" r="9" fill="none" stroke="#ffffff" strokeWidth="3"/>
-      <circle cx="392" cy="102" r="9" fill="none" stroke="#ffffff" strokeWidth="3"/>
-      <g className="ct-players">
-        <circle cx="165" cy="102" r="14" fill="#f6a23c" stroke="#fff" strokeWidth="2"/>
-        <circle cx="223" cy="62" r="13" fill="#f6a23c" stroke="#fff" strokeWidth="2"/>
-        <circle cx="230" cy="151" r="13" fill="#f6a23c" stroke="#fff" strokeWidth="2"/>
-        <circle cx="275" cy="109" r="14" fill="#163856" stroke="#d3edff" strokeWidth="2"/>
-        <circle cx="330" cy="80" r="13" fill="#163856" stroke="#d3edff" strokeWidth="2"/>
-        <circle cx="332" cy="149" r="13" fill="#163856" stroke="#d3edff" strokeWidth="2"/>
-      </g>
-      <g key={round + "-" + action} className="ct-ball">
-        <circle cx="183" cy="102" r="8" fill="#ff8209" stroke="#111c2b" strokeWidth="2"/>
-        <path d="M175 102h16m-8-8v16" stroke="#111c2b" strokeWidth="1.3"/>
-      </g>
-    </svg>
-    <div className="ct-court-label">LNA · SIMULACIÓN DE JUGADA</div>
+function MiniCourt({ moment, round, event }) {
+  // Cada acción produce una secuencia de movimiento distinta y un desenlace visible.
+  const variant = event?.visual || (moment === 1 ? "block" : "pass");
+  const isOutcome = Boolean(event);
+  const isPositive = event?.success ?? false;
+  const line = {
+    shot: "M168 115 Q275 -40 391 101",
+    drive: "M168 115 Q248 146 390 105",
+    pass: "M168 115 Q225 28 286 68 T393 104",
+    screen: "M168 115 Q228 155 265 119 T391 104",
+    foul: "M168 115 Q283 165 393 104",
+    steal: "M319 123 Q243 123 170 111",
+    block: "M319 123 Q288 35 243 70",
+    rebound: "M389 101 Q353 12 312 79 T170 116",
+  }[variant] || "M168 115 Q277 55 391 104";
+  return <div className={"ct-court ct-court-" + variant + (isOutcome ? " ct-court-result" : "")} aria-label="Representación de la jugada">
+    <div className="ct-court-stage">
+      <svg viewBox="0 0 440 205" role="img" aria-label={"Cancha animada: " + variant}>
+        <defs><linearGradient id="ctCourtWood" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#ba783e"/><stop offset="1" stopColor="#8c4b24"/></linearGradient></defs>
+        <rect width="440" height="205" rx="12" fill="url(#ctCourtWood)"/>
+        {[1,2,3,4,5,6,7,8,9].map(n => <path key={n} d={"M0 " + (n*20) + "H440"} stroke="#57331c" strokeWidth="1" opacity=".18"/>)}
+        <path d="M220 0V205" stroke="#ffdfb1" strokeWidth="2" opacity=".65"/>
+        <circle cx="220" cy="102" r="37" fill="none" stroke="#ffdfb1" strokeWidth="2" opacity=".7"/>
+        <rect x="0" y="51" width="72" height="103" fill="none" stroke="#ffdfb1" strokeWidth="2"/>
+        <rect x="368" y="51" width="72" height="103" fill="none" stroke="#ffdfb1" strokeWidth="2"/>
+        <path d="M0 28A130 130 0 0 1 0 177 M440 28A130 130 0 0 0 440 177" fill="none" stroke="#ffdfb1" strokeWidth="2"/>
+        <circle cx="48" cy="102" r="9" fill="none" stroke="#ffffff" strokeWidth="3"/>
+        <circle cx="392" cy="102" r="9" fill="none" stroke="#ffffff" strokeWidth="3"/>
+        <g className="ct-players ct-attack">
+          <circle cx="165" cy="111" r="14" fill="#f6a23c" stroke="#fff" strokeWidth="2"/>
+          <circle cx="225" cy="60" r="13" fill="#f6a23c" stroke="#fff" strokeWidth="2"/>
+          <circle cx="232" cy="151" r="13" fill="#f6a23c" stroke="#fff" strokeWidth="2"/>
+        </g>
+        <g className="ct-players ct-defense">
+          <circle cx="278" cy="110" r="14" fill="#163856" stroke="#d3edff" strokeWidth="2"/>
+          <circle cx="331" cy="77" r="13" fill="#163856" stroke="#d3edff" strokeWidth="2"/>
+          <circle cx="328" cy="148" r="13" fill="#163856" stroke="#d3edff" strokeWidth="2"/>
+        </g>
+        <path key={round + "-" + moment + "-" + variant} d={line} className="ct-trajectory" pathLength="100"/>
+        <circle key={"ball-" + round + "-" + moment + "-" + variant} cx="168" cy="115" r="9" fill="#ff8b08" stroke="#101b29" strokeWidth="2" className={"ct-moving-ball ct-moving-" + variant}/>
+        <circle cx="392" cy="102" r="15" fill="none" stroke="#fff8" strokeWidth="1" strokeDasharray="3 4"/>
+      </svg>
+      {isOutcome && <div className={"ct-court-flash " + (isPositive ? "ct-flash-good" : "ct-flash-bad")} aria-live="polite" key={round + "-" + moment + "-" + variant}>
+        <strong>{event.scored > 0 ? "+" + event.scored + " PUNTOS" : event.conceded > 0 ? "+" + event.conceded + " RIVAL" : isPositive ? "¡DEFENSA!" : "¡NO ENTRÓ!"}</strong>
+        <span>{isPositive ? "JUGADA FAVORABLE" : "JUGADA DESFAVORABLE"}</span>
+      </div>}
+    </div>
+    <div className="ct-court-label">{isOutcome ? event.action.toUpperCase() : "ELEGÍ UNA ACCIÓN PARA VER LA JUGADA"}</div>
   </div>;
 }
 
-function Game({ access }) {
+function Game() {
   const [teamId, setTeamId] = useState("");
   const [rivals, setRivals] = useState([]);
   const [round, setRound] = useState(0);
@@ -181,7 +204,7 @@ function Game({ access }) {
     if (!match.done) { setOutcome(false); return; }
     const next = [...results, { ...match }];
     setResults(next);
-    setPhase(match.won ? (round === 2 ? "champion" : "advanced") : "eliminated");
+    setPhase(match.won ? (round === ROUNDS.length - 1 ? "champion" : "advanced") : "eliminated");
     setOutcome(false);
   };
   const nextRound = () => {
@@ -205,13 +228,13 @@ function Game({ access }) {
   return <main className="ct-root">
     <div className="ct-container">
       <div className="ct-eyebrow"><span>LNA GAMES</span><span className="ct-private"><LockKeyhole size={12}/> PRUEBA PRIVADA</span></div>
-      <div className="ct-brand"><Trophy size={37}/><div><h1>CAMINO <em>AL TÍTULO</em></h1><p>3 PARTIDOS · 1 OPORTUNIDAD · 5 MINUTOS</p></div></div>
+      <div className="ct-brand"><Trophy size={37}/><div><h1>CAMINO <em>AL TÍTULO</em></h1><p>4 PARTIDOS · 1 OPORTUNIDAD · 5 MINUTOS APROX.</p></div></div>
       {phase === "lobby" && <>
         <section className="ct-panel ct-intro">
           <div className="ct-kicker"><Sparkles size={15}/> PLAYOFFS EXPRESS</div>
           <h2>La gloria se decide ahora.</h2>
-          <p>Elegí tu equipo, superá cuartos, semifinal y final. Si perdés, volvés a empezar. No hay revancha.</p>
-          <div className="ct-steps"><span>01 CUARTOS</span><span>02 SEMIFINAL</span><span>03 FINAL</span></div>
+          <p>Elegí tu equipo, superá octavos, cuartos, semifinal y final. Cada partido tiene situaciones nuevas. Si perdés, volvés a empezar desde octavos.</p>
+          <div className="ct-steps">{ROUND_SHORT.map((name, i) => <span key={name}>0{i + 1} {name}</span>)}</div>
         </section>
         <section className="ct-panel">
           <div className="ct-section-header"><div><small>PRIMER PASO</small><h2>Elegí tus colores</h2></div><span>18 EQUIPOS</span></div>
@@ -224,7 +247,7 @@ function Game({ access }) {
         </section>
       </>}
       {phase === "playing" && match && <>
-        <div className="ct-bracket">{ROUNDS.map((label, i) => <div key={label} className={"ct-bracket-item " + (i === round ? "ct-active" : i < round ? "ct-passed" : "")}><span>{i < round ? "✓" : "0" + (i + 1)}</span><small>{["CUARTOS", "SEMIFINAL", "FINAL"][i]}</small></div>)}</div>
+        <div className="ct-bracket">{ROUNDS.map((label, i) => <div key={label} className={"ct-bracket-item " + (i === round ? "ct-active" : i < round ? "ct-passed" : "")}><span>{i < round ? "✓" : "0" + (i + 1)}</span><small>{ROUND_SHORT[i]}</small></div>)}</div>
         <section className="ct-panel ct-match" style={{ "--ct-club": teamMatchColors[team.id] || "#f28e22" }}>
           <div className="ct-match-top"><span>{ROUNDS[round]}</span><span>4.º CUARTO · {CLOCKS[Math.min(match.moment, 2)] && !match.done ? CLOCKS[Math.min(match.moment, 2)] : "00:00"}</span></div>
           <div className="ct-scoreboard">
@@ -232,19 +255,16 @@ function Game({ access }) {
             <div className="ct-center"><span>VS</span><strong>{match.done ? "FINAL" : CLOCKS[match.moment]}</strong></div>
             <div className="ct-side"><img src={rival.logo} alt=""/><strong>{match.opponentScore}</strong><span>{rival.shortName}</span></div>
           </div>
-          <MiniCourt action={match.moment} round={round}/>
+          <MiniCourt key={round + "-" + match.moment} moment={match.moment} round={round} event={outcome ? match.log[match.log.length - 1] : null}/>
           <div className="ct-situation">
             <span>DECISIÓN {Math.min(match.moment + 1, 3)} DE 3</span>
-            <h2>{match.done ? "¡FINAL DEL PARTIDO!" : MOMENTS[match.moment]}</h2>
-            <p>{match.done ? (match.won ? "¡Lo lograste! Superaste a tu rival." : "El rival se quedó con la victoria.") : [
-              "Tenés la pelota. Elegí cómo atacar el aro.",
-              "Ahora defiende tu equipo. ¿Cómo frenás al rival?",
-              "Última posesión. Elegí cómo cerrar el encuentro.",
-            ][match.moment]}</p>
+            <h2>{match.done ? "¡FINAL DEL PARTIDO!" : getScenario(match)?.title}</h2>
+            <p>{match.done ? (match.won ? "¡Lo lograste! Superaste a tu rival." : "El rival se quedó con la victoria.") : getScenario(match)?.description}</p>
           </div>
-          {!outcome && !match.done && <div className="ct-action-list">{ACTIONS[match.moment].map((option, i) => <button key={option.id} className="ct-action" onClick={() => choose(option.id)}><span className="ct-action-number">0{i + 1}</span><span><strong>{option.title}</strong><small>{option.detail}</small></span><ArrowRight size={19}/></button>)}</div>}
+          {!outcome && !match.done && <div className="ct-action-list">{getScenario(match)?.options.map((option, i) => <button key={option.id} className="ct-action" onClick={() => choose(option.id)}><span className="ct-action-number">0{i + 1}</span><span><strong>{option.title}</strong><small>{option.detail}</small></span><ArrowRight size={19}/></button>)}</div>}
           {outcome && <div className={"ct-outcome " + (match.log[match.log.length - 1]?.success ? "ct-success" : "ct-miss")} role="status">
-            <strong>{match.log[match.log.length - 1]?.success ? "¡BUENA JUGADA!" : "LA POSESIÓN CONTINÚA"}</strong>
+            <strong>{match.log[match.log.length - 1]?.success ? "¡TE SALIÓ LA JUGADA!" : "NO SALIÓ COMO ESPERABAS"}</strong>
+            <div className="ct-score-impact"><span>VOS <b>{match.score}</b></span><span>RIVAL <b>{match.opponentScore}</b></span></div>
             <p>{match.log[match.log.length - 1]?.message}</p>
             <button className="ct-primary" onClick={advance}>{match.done ? "VER RESULTADO" : "CONTINUAR PARTIDO"} <ArrowRight size={18}/></button>
           </div>}
@@ -262,8 +282,8 @@ function Game({ access }) {
         <small>{phase === "champion" ? "CAMPEONES · PLAYOFFS EXPRESS" : "ELIMINACIÓN DIRECTA"}</small>
         <h2>{phase === "champion" ? "¡SOS CAMPEÓN!" : "FIN DEL CAMINO"}</h2>
         <img className="ct-finish-crest" src={team.logo} alt={"Escudo de " + team.name}/>
-        <p>{phase === "champion" ? "¡" + team.name + " conquistó el título! Tres partidos, tres victorias." : "Caíste en " + ROUNDS[round].toLowerCase() + " ante " + rival.shortName + ". Para volver a intentarlo tenés que empezar desde cuartos."}</p>
-        <div className="ct-results">{results.map((item, i) => <div key={i}><span>{["CUARTOS", "SEMIFINAL", "FINAL"][i]}</span><strong>{item.score} – {item.opponentScore}</strong><small>{teams.find(t => t.id === item.opponentId)?.shortName}</small></div>)}</div>
+        <p>{phase === "champion" ? "¡" + team.name + " conquistó el título! Cuatro partidos, cuatro victorias." : "Caíste en " + ROUNDS[round].toLowerCase() + " ante " + rival.shortName + ". Para volver a intentarlo tenés que empezar desde octavos."}</p>
+        <div className="ct-results">{results.map((item, i) => <div key={i}><span>{ROUND_SHORT[i]}</span><strong>{item.score} – {item.opponentScore}</strong><small>{teams.find(t => t.id === item.opponentId)?.shortName}</small></div>)}</div>
         <button className="ct-primary" disabled={saving} onClick={download}><Download size={18}/>{saving ? "GENERANDO IMAGEN…" : "DESCARGAR MI RESULTADO"}</button>
         {exportError && <p className="ct-error">{exportError}</p>}
         <button className="ct-secondary" onClick={reset}><RotateCcw size={17}/> JUGAR DESDE CERO</button>
