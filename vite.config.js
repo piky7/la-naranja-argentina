@@ -8,12 +8,15 @@ export default defineConfig({
   // con cada sincronización, pero los componentes mantienen su caché propia.
   // Por ahora es una dependencia síncrona: no alterar popups ni rankings.
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks(id) {
-          if (/[\\/]src[\\/]data[\\/]matchStats\\.js$/.test(id)) {
-            return "match-stats";
-          }
+        codeSplitting: {
+          groups: [
+            {
+              name: "match-stats",
+              test: /[\\/]src[\\/]data[\\/]matchStats\.js$/,
+            },
+          ],
         },
       },
     },
