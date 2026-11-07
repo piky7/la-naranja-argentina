@@ -2497,4 +2497,19 @@ export const players = [
     teamId: "san-martin",
     number: 33,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-432945",
+    officialPlayerId: 432945,
+    name: "Julian Lorca",
+    teamId: "san-lorenzo",
+    number: 11,
+  },
+  {
+    id: "oficial-186116",
+    officialPlayerId: 186116,
+    name: "Lautaro Morales Gomez",
+    teamId: "regatas",
+    number: 27,
+  },
 ];
