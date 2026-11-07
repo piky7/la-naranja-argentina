@@ -770,5 +770,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jfcZQ0wQGO1O51uH-bEXJBWuF-bu1keyPJjjxiUOc3MuEXzdOOey9Q==/quimsa-vs-lanus"
     }
+  },
+  "2026-11-06-boca-san-martin": {
+    "status": "finished",
+    "homeScore": 90,
+    "awayScore": 63,
+    "time": "21:35",
+    "homeTeam": "boca",
+    "awayTeam": "san-martin",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v202CzFYOlx7dwRmYmH3bZZXgIR52tZOnx4bjfLsZyWMeQAGHRLII2-Q==/boca-vs-san-martin-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v202CzFYOlx7dwRmYmH3bZZXgIR52tZOnx4bjfLsZyWMeQAGHRLII2-Q==/boca-vs-san-martin-c"
+    }
   }
 };

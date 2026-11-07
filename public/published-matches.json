@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T02:20:59.545Z",
+  "generatedAt": "2026-11-07T02:25:56.112Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -447,6 +447,14 @@
       "awayScore": 71,
       "homeTeam": "quimsa",
       "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-11-06-boca-san-martin": {
+      "status": "published",
+      "homeScore": 90,
+      "awayScore": 63,
+      "homeTeam": "boca",
+      "awayTeam": "san-martin",
       "hasStats": true
     }
   }
