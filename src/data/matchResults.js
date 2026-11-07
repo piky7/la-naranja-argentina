@@ -754,5 +754,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DdxcQfe5DOMIjm3PSVXfUup54JdRNPHs3xu4b0oQn7vVwz2Tbn_tZQ==/independiente-o-vs-gimnasia-cr"
     }
+  },
+  "2026-11-06-quimsa-lanus": {
+    "status": "finished",
+    "homeScore": 88,
+    "awayScore": 71,
+    "time": "21:00",
+    "homeTeam": "quimsa",
+    "awayTeam": "lanus",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jfcZQ0wQGO1O51uH-bEXJBWuF-bu1keyPJjjxiUOc3MuEXzdOOey9Q==/quimsa-vs-lanus",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jfcZQ0wQGO1O51uH-bEXJBWuF-bu1keyPJjjxiUOc3MuEXzdOOey9Q==/quimsa-vs-lanus"
+    }
   }
 };

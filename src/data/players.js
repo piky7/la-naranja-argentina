@@ -2303,7 +2303,7 @@ export const players = [
     officialPlayerId: 388284,
     name: "Agustin Moraga",
     teamId: "lanus",
-    number: 27,
+    number: 15,
     position: "Escolta",
     nationality: "Argentina",
   },
@@ -2480,5 +2480,13 @@ export const players = [
     name: "William Leon Garret",
     teamId: "lanus",
     number: 30,
+  },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-225429",
+    officialPlayerId: 225429,
+    name: "Patricio Andres Cogliati",
+    teamId: "quimsa",
+    number: 0,
   },
 ];
