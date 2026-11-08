@@ -576,20 +576,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo"
   },
   {
-    "id": "2026-11-15-la-union-atenas",
-    "date": "2026-11-15",
-    "time": "21:00",
-    "homeTeam": "la-union",
-    "awayTeam": "atenas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-  },
-  {
     "id": "2026-11-15-san-martin-quimsa",
     "date": "2026-11-15",
     "time": "21:00",
     "homeTeam": "san-martin",
     "awayTeam": "quimsa",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+  },
+  {
+    "id": "2026-11-15-la-union-atenas",
+    "date": "2026-11-15",
+    "time": "21:00",
+    "homeTeam": "la-union",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
   },
   {
     "id": "2026-11-16-instituto-san-lorenzo",
@@ -718,5 +718,21 @@ export const officialSchedule = [
     "homeTeam": "san-martin",
     "awayTeam": "atenas",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2eNlKVj8NT-EBdolQh32e5FvtWjPrBDGd2ekgLaWRFQNv7vFM_zz5gQ==/san-martin-c-vs-atenas-c"
+  },
+  {
+    "id": "2026-12-09-regatas-atenas",
+    "date": "2026-12-09",
+    "time": null,
+    "homeTeam": "regatas",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2qGkgDbmt3RqbZhNR4rvSgd-VB9HKbbF_7671AnRndIkZc7eDDCHcYg==/regatas-c-vs-atenas-c"
+  },
+  {
+    "id": "2026-12-09-independiente-oliva-argentino",
+    "date": "2026-12-09",
+    "time": null,
+    "homeTeam": "independiente-oliva",
+    "awayTeam": "argentino",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DI3KNmxSq7kBVM_Zyjz537VqpO-CWEkLedWN7ZfJRBSkjP_tc8f5jg==/independiente-o-vs-argentino-j"
   }
 ];
