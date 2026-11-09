@@ -555,11 +555,13 @@ export default {
           if (row.points!==previous) {rank++;previous=row.points;}
           return {...row,position:rank};
         });
-        const myPosition = viewerId ? ranking.find(row => row.userId === viewerId)?.position ?? null : null;
+        const myStanding = viewerId ? ranking.find(row => row.userId === viewerId) || null : null;
+        const myPosition = myStanding?.position ?? null;
         if (awardsRequest) {
           const participants = ranking.filter(row => row.participated);
           const eligible = participants.length >= 3;
-          return reply({ok:true,week:{number:Math.floor((rankingWeek-Date.UTC(2026,10,2))/604800000)+1,startsAt:new Date(rankingWeek).toISOString(),finished:true,eligibleForMedals:eligible,ranking:eligible?participants.filter(row=>row.position<=3):[]},myPosition});
+          const { userId: _privateUserId, ...publicMyStanding } = myStanding || {};
+          return reply({ok:true,week:{number:Math.floor((rankingWeek-Date.UTC(2026,10,2))/604800000)+1,startsAt:new Date(rankingWeek).toISOString(),finished:true,eligibleForMedals:eligible,ranking:eligible?participants.filter(row=>row.position<=3):[],myStanding:myStanding?{...publicMyStanding}:null},myPosition});
         }
         return reply({ok:true,weekStartsAt:new Date(thisWeek).toISOString(),total:all.length,myPosition,
           ranking:ranking.slice(0,20).map(({userId,...row})=>({...row,...(viewerId ? {userId} : {})}))});
