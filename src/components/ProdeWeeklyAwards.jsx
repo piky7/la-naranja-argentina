@@ -123,6 +123,7 @@ export default function ProdeWeeklyAwards({ award, userId, onClose, variant = "l
   // Los empates conservan el puesto denso oficial y comparten reconocimiento.
   const podium = (week.ranking || []).filter(p => p.position >= 1 && p.position <= 3);
   const mine = podium.find(p => p.userId === userId);
+  const myStanding = (week.ranking || []).find(p => p.userId === userId);
   const ordered = [...podium].sort((a, b) => a.position - b.position || b.points - a.points);
   const display = [...ordered].sort((a, b) => {
     const order = rank => rank === 1 ? 1 : rank === 2 ? 0 : 2;
@@ -169,6 +170,11 @@ export default function ProdeWeeklyAwards({ award, userId, onClose, variant = "l
           </div>)}
         </div>
         <p className="prode-award-league">{variant === "global" ? "PRODE LNA · RANKING GLOBAL" : league.name} · Semana {week.number}</p>
+        {!mine && myStanding && myStanding.position != null && <div className="prode-award-my-position" aria-live="polite">
+          <span>TU RESULTADO ESTA SEMANA</span>
+          <strong>{myStanding.position}° <small>PUESTO</small></strong>
+          <b>{myStanding.points ?? 0} <small>PTS</small></b>
+        </div>}
         {mine ? <>
           <p className="prode-award-message">¡Felicitaciones! Conseguí tu reconocimiento personalizado para compartirlo.</p>
           <button className="prode-award-download" type="button" disabled={busy} onClick={download}><Download size={20}/>{busy ? "Preparando imagen…" : "Descargar reconocimiento"}</button>
