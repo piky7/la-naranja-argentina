@@ -1215,6 +1215,47 @@ export default {
         return reply({ ok: false, error: "No se pudo calcular la clasificación de esta liga" }, 503);
       }
     }
+    // Votos visibles únicamente después del horario oficial de inicio y solo para miembros activos de la liga.
+    const liveLeagueVotes = /^\\/api\\/prode\\/groups\\/([0-9a-f-]{36})\\/live-votes$/.exec(url.pathname);
+    if (liveLeagueVotes && request.method === "GET") {
+      if (!env.DB || !env.VOTACIONES) return reply({ok:false,error:"Pronósticos no disponibles"},503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ok:false,error:"Iniciá sesión con Google"},401);
+      try {
+        const groupId = liveLeagueVotes[1], userId = "firebase:" + identity.uid;
+        await ensureMembershipPeriods(env.DB);
+        const membership = await env.DB.prepare("SELECT 1 AS allowed FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId,userId).first();
+        if (!membership) return reply({ok:false,error:"No pertenecés a esta liga"},403);
+        const fixtureResponse = await fetch(SITE + "/voting-fixture.json", {headers:{accept:"application/json"},cf:{cacheTtl:0}});
+        if (!fixtureResponse.ok) return reply({ok:false,error:"Calendario oficial no disponible"},503);
+        const fixture = await fixtureResponse.json();
+        if (!Array.isArray(fixture.games) || !Number.isFinite(Date.parse(fixture.generatedAt)) || Date.now()-Date.parse(fixture.generatedAt)>14*86400000)
+          return reply({ok:false,error:"Calendario oficial desactualizado"},503);
+        const now = Date.now();
+        const started = fixture.games.filter(game => game && typeof game.id==="string" && Number.isFinite(Date.parse(game.startsAt)) && Date.parse(game.startsAt)<=now && game.finished!==true)
+          .sort((a,b)=>Date.parse(b.startsAt)-Date.parse(a.startsAt)).slice(0,12);
+        if (!started.length) return reply({ok:true,games:[],checkedAt:new Date(now).toISOString()});
+        await ensureCrests(env.DB); await ensureVoteSources(env.DB); await ensureCareerLinks(env.DB);
+        const members = await env.DB.prepare("SELECT m.user_id,COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username,COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id,COALESCE(c.primary_color,'#7de83d') AS crestPrimary,COALESCE(c.secondary_color,'#10283c') AS crestSecondary,COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText,COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle,COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont,COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=m.user_id),'') AS crestSymbol FROM prode_memberships m JOIN prode_users u ON u.id=m.user_id LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_vote_sources vs ON vs.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200").bind(groupId).all();
+        const allMembers = members.results || [], picksByMember = new Map();
+        for (let i=0;i<allMembers.length;i+=6) {
+          const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
+            if (!member.visitor_id) return {userId:member.user_id,games:[]};
+            const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId="+encodeURIComponent(member.visitor_id));
+            if (!response.ok) throw Error("Historial de pronósticos no disponible");
+            const data = await response.json();
+            if (!data.ok || !Array.isArray(data.games)) throw Error("Historial de pronósticos inválido");
+            return {userId:member.user_id,games:data.games};
+          }));
+          for (const item of batch) picksByMember.set(item.userId,new Map(item.games.map(game=>[game.id,game])));
+        }
+        const games = started.map(game => ({id:game.id,startsAt:game.startsAt,homeTeam:game.homeTeam,awayTeam:game.awayTeam,participants:allMembers.map(member=>{
+          const pick=picksByMember.get(member.user_id)?.get(game.id);
+          return {userId:member.user_id,username:member.username,crestPrimary:member.crestPrimary,crestSecondary:member.crestSecondary,crestText:member.crestText,crestStyle:member.crestStyle,crestFont:member.crestFont,crestSymbol:member.crestSymbol,winnerPick:pick?.selectedWinner||null,mvpPick:pick?.selectedMvp||null,winnerPoints:0,mvpPoints:0,streakPoints:0,points:0,winnerCorrect:false,mvpCorrect:false};
+        })}));
+        return reply({ok:true,games,checkedAt:new Date(now).toISOString()});
+      } catch(error) { console.error("Prode live league votes:",error); return reply({ok:false,error:"No se pudieron consultar los votos de los partidos iniciados"},503); }
+    }
     // Gestión de liga: abandonar, expulsar o eliminar; solo miembros autorizados.
     const manageGroup = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/(leave|members|delete|rename)$/.exec(url.pathname);
     if (manageGroup && request.method === "POST") {
