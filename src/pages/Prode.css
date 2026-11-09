@@ -2164,3 +2164,29 @@
 }
 @keyframes prode-profile-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.prode-profile-loading-spinner{animation:none;border-top-color:#8af04b}}
+
+
+/* Medallero: columna de total y jerarquía compacta en móvil. */
+.prode-league-premium .prode-medal-table .prode-ranking-head,
+.prode-league-premium .prode-medal-table .prode-ranking-row{
+  grid-template-columns:minmax(0,1fr) repeat(3,34px) 42px;
+}
+.prode-league-premium .prode-medal-table .prode-ranking-head>span:last-child{
+  color:#ffbd63;
+  font-size:9px;
+  text-align:center;
+}
+.prode-league-premium .prode-medal-table .prode-medal-total{
+  color:#ffbd63;
+  font-size:14px;
+  font-weight:900;
+  text-align:center;
+}
+@media(max-width:600px){
+  .prode-league-premium .prode-medal-table .prode-ranking-head,
+  .prode-league-premium .prode-medal-table .prode-ranking-row{
+    grid-template-columns:minmax(0,1fr) repeat(3,27px) 34px;
+    column-gap:3px;
+  }
+  .prode-league-premium .prode-medal-table .prode-medal-total{font-size:12px}
+}
