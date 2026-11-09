@@ -2195,3 +2195,56 @@
   }
   .prode-league-premium .prode-medal-table .prode-medal-total{font-size:12px}
 }
+
+
+/* Partidos en juego: grilla propia para evitar que dos tarjetas queden
+   comprimidas en cinco columnas y que los nombres de equipos se superpongan. */
+.prode-league-premium .prode-live-league-votes .prode-played-grid{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));
+  align-items:stretch;
+  gap:8px;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-vote-card{
+  width:100%;
+  min-height:145px;
+  padding:10px 8px;
+  gap:7px;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-vote-card>small{
+  white-space:normal;
+  text-align:center;
+  line-height:1.3;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-vote-card>strong{
+  width:100%;
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  text-align:center;
+  line-height:1.2;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-vote-card .prode-played-logos{
+  flex-shrink:0;
+}
+@media(max-width:600px){
+  .prode-league-premium .prode-live-league-votes .prode-played-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+  }
+  .prode-league-premium .prode-live-league-votes .prode-live-vote-card{
+    min-height:142px;
+    padding:9px 5px;
+    gap:7px;
+  }
+  .prode-league-premium .prode-live-league-votes .prode-live-vote-card>small{
+    font-size:8px;
+  }
+  .prode-league-premium .prode-live-league-votes .prode-live-vote-card>strong{
+    font-size:11px;
+  }
+}
+@media(max-width:360px){
+  .prode-league-premium .prode-live-league-votes .prode-played-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+}
