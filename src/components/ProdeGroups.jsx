@@ -793,13 +793,13 @@ export default function ProdeGroups({ onReady }) {
             <div className="prode-match-member-top">
               <ProdeCrest name={member.username} primary={member.crestPrimary} secondary={member.crestSecondary} textColor={member.crestText} style={member.crestStyle} font={member.crestFont} symbol={member.crestSymbol} size={37}/>
               <strong>{member.username}</strong>
-              <span>+{member.points} pts</span>
+              {!selectedMatch.live && <span>+{member.points} pts</span>}
             </div>
             <div className="prode-match-member-votes">
-              <div className="prode-match-vote-item"><span>Ganador</span><strong>{member.winnerPick ? teamLabel(member.winnerPick) : "No votó"}</strong><small className={member.winnerPick ? member.winnerCorrect ? "good" : "bad" : ""}>{member.winnerPick ? (member.winnerCorrect ? "✓" : "×") : "–"} +{member.winnerPoints} pts</small></div>
-              <div className="prode-match-vote-item"><span>MVP</span><strong>{mvpLabel(member.mvpPick)}</strong><small className={member.mvpPick ? member.mvpCorrect ? "good" : "bad" : ""}>{member.mvpPick ? (member.mvpCorrect ? "✓" : "×") : "–"} +{member.mvpPoints} pts</small></div>
+              <div className="prode-match-vote-item"><span>Ganador</span><strong>{member.winnerPick ? teamLabel(member.winnerPick) : "No votó"}</strong>{!selectedMatch.live && <small className={member.winnerPick ? member.winnerCorrect ? "good" : "bad" : ""}>{member.winnerPick ? (member.winnerCorrect ? "✓" : "×") : "–"} +{member.winnerPoints} pts</small>}</div>
+              <div className="prode-match-vote-item"><span>MVP</span><strong>{mvpLabel(member.mvpPick)}</strong>{!selectedMatch.live && <small className={member.mvpPick ? member.mvpCorrect ? "good" : "bad" : ""}>{member.mvpPick ? (member.mvpCorrect ? "✓" : "×") : "–"} +{member.mvpPoints} pts</small>}</div>
             </div>
-            {member.streakPoints > 0 && <div className="prode-match-bonus">Racha de 5 aciertos: +{member.streakPoints} pts</div>}
+            {!selectedMatch.live && member.streakPoints > 0 && <div className="prode-match-bonus">Racha de 5 aciertos: +{member.streakPoints} pts</div>}
           </div>)}
         </div>
       </section>
