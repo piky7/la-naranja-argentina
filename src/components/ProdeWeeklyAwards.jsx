@@ -123,7 +123,8 @@ export default function ProdeWeeklyAwards({ award, userId, onClose, variant = "l
   // Los empates conservan el puesto denso oficial y comparten reconocimiento.
   const podium = (week.ranking || []).filter(p => p.position >= 1 && p.position <= 3);
   const mine = podium.find(p => p.userId === userId);
-  const myStanding = (week.ranking || []).find(p => p.userId === userId);
+  // El endpoint global entrega el podio público por separado del resultado privado del usuario.
+  const myStanding = week.myStanding || (week.ranking || []).find(p => p.userId === userId);
   const ordered = [...podium].sort((a, b) => a.position - b.position || b.points - a.points);
   const display = [...ordered].sort((a, b) => {
     const order = rank => rank === 1 ? 1 : rank === 2 ? 0 : 2;
