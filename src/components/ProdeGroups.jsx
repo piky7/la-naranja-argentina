@@ -294,23 +294,28 @@ export default function ProdeGroups({ onReady }) {
   useEffect(() => {
     if (!user || !selected || detailBusy || rankingBusy) return;
     let active = true, timer;
-    const refreshLiveVotes = async () => {
+    const loadStartedVotes = async () => {
       setLiveVotesBusy(true);
       try {
         const token = await user.getIdToken();
         const response = await fetch(API + "/api/prode/groups/" + encodeURIComponent(selected.id) + "/live-votes", {headers:{Authorization:"Bearer "+token},cache:"no-store"});
         const data = await response.json();
-        if (!response.ok || !data.ok) throw Error(data.error || "No se pudieron actualizar los votos en vivo");
-        if (active) {
-          const games = data.games || [];
-          setLiveLeagueGames(games);
-          setSelectedMatch(current => current?.live ? (games.find(game => game.id === current.id) ? {...games.find(game => game.id === current.id),live:true} : current) : current);
-          setLiveVotesError("");
+        if (!response.ok || !data.ok) throw Error(data.error || "No se pudieron cargar los votos en vivo");
+        if (!active) return;
+        const games = data.games || [];
+        setLiveLeagueGames(games);
+        setSelectedMatch(current => current?.live ? (games.find(game => game.id === current.id) ? {...games.find(game => game.id === current.id),live:true} : current) : current);
+        setLiveVotesError("");
+        // Una sola consulta al llegar al próximo horario oficial de inicio.
+        // Los votos de un partido iniciado quedan congelados durante todo el juego.
+        const nextStart = Date.parse(data.nextStartsAt || "");
+        if (Number.isFinite(nextStart) && nextStart > Date.now()) {
+          timer = setTimeout(loadStartedVotes, Math.min(nextStart - Date.now() + 1000, 2147483647));
         }
-      } catch(error) { if (active) setLiveVotesError(error.message || "No se pudieron actualizar los votos"); }
-      finally { if (active) { setLiveVotesBusy(false); timer = setTimeout(refreshLiveVotes, 30000); } }
+      } catch(error) { if (active) setLiveVotesError(error.message || "No se pudieron cargar los votos"); }
+      finally { if (active) setLiveVotesBusy(false); }
     };
-    void refreshLiveVotes();
+    void loadStartedVotes();
     return () => { active = false; clearTimeout(timer); };
   }, [user, selected?.id, detailBusy, rankingBusy]);
 
