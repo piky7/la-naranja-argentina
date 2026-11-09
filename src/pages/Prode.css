@@ -793,6 +793,11 @@
   background:linear-gradient(165deg,#172b40,#0c2034);border:1px solid #44637b;
   border-radius:10px;color:#f6f8fb;cursor:pointer;
 }
+.prode-league-premium .prode-live-league-votes{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid #3c7257;border-radius:12px;background:linear-gradient(145deg,#102b2b,#102338)}
+.prode-league-premium .prode-live-vote-card{border-color:#4b8a67;background:linear-gradient(165deg,#173b35,#102b36)}
+.prode-league-premium .prode-live-vote-card>strong{font-size:12px}
+.prode-league-premium .prode-live-vote-card .prode-played-indicators{align-items:center;color:#b5e6c6}
+.prode-live-dot{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:#63e28b;box-shadow:0 0 8px #63e28b;vertical-align:middle}
 .prode-league-premium .prode-played-card:focus-visible{outline:2px solid var(--league-accent);outline-offset:2px}
 .prode-league-premium .prode-played-card:hover{border-color:var(--league-accent)}
 .prode-league-premium .prode-played-card>small{color:#c5d2de;font-size:10px;font-weight:750;white-space:nowrap}
