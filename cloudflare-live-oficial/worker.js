@@ -592,12 +592,24 @@ async function generarLive(fecha, anteriores = null, env) {
       evento.homeTeam === oficial.localLNA &&
       evento.awayTeam === oficial.visitanteLNA
     );
+    // El calendario oficial es la fuente de verdad para identificar
+    // partidos. lnb-events.json puede llegar incompleto o con horarios
+    // desactualizados; no descartar un partido oficial por faltar allí.
     const evento = coincidencias.length === 1
       ? coincidencias[0]
-      : porEquipos.length === 1 ? porEquipos[0] : null;
-    if (!evento) {
-      console.warn("Correspondencia insegura:", oficial.localLNA, oficial.visitanteLNA, coincidencias.length, porEquipos.length);
-      continue;
+      : porEquipos.length === 1 ? porEquipos[0] : {
+          eventId: `oficial-${oficial.fecha}-${oficial.localLNA}-${oficial.visitanteLNA}`,
+          homeTeam: oficial.localLNA,
+          awayTeam: oficial.visitanteLNA,
+          homeName: oficial.localLNA,
+          awayName: oficial.visitanteLNA,
+          homeScore: null,
+          awayScore: null,
+          status: "scheduled",
+          timestamp: Math.floor(Date.parse(`${oficial.fecha}T${oficial.hora}:00-03:00`) / 1000),
+        };
+    if (coincidencias.length !== 1) {
+      console.log("Partido identificado por calendario oficial:", oficial.localLNA, oficial.visitanteLNA, oficial.fecha, oficial.hora);
     }
     if (coincidencias.length !== 1) {
       console.log("Partido reprogramado detectado en fixture oficial:", oficial.localLNA, oficial.visitanteLNA, oficial.fecha, oficial.hora);
