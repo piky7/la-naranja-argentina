@@ -1234,7 +1234,9 @@ export default {
         const now = Date.now();
         const started = fixture.games.filter(game => game && typeof game.id==="string" && Number.isFinite(Date.parse(game.startsAt)) && Date.parse(game.startsAt)<=now && game.finished!==true)
           .sort((a,b)=>Date.parse(b.startsAt)-Date.parse(a.startsAt)).slice(0,12);
-        if (!started.length) return reply({ok:true,games:[],checkedAt:new Date(now).toISOString()});
+        const nextStartsAt = fixture.games.filter(game => game && game.finished!==true && Number.isFinite(Date.parse(game.startsAt)) && Date.parse(game.startsAt)>now)
+          .sort((a,b)=>Date.parse(a.startsAt)-Date.parse(b.startsAt))[0]?.startsAt || null;
+        if (!started.length) return reply({ok:true,games:[],nextStartsAt,checkedAt:new Date(now).toISOString()});
         await ensureCrests(env.DB); await ensureVoteSources(env.DB); await ensureCareerLinks(env.DB);
         const members = await env.DB.prepare("SELECT m.user_id,COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username,COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id,COALESCE(c.primary_color,'#7de83d') AS crestPrimary,COALESCE(c.secondary_color,'#10283c') AS crestSecondary,COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText,COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle,COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont,COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=m.user_id),'') AS crestSymbol FROM prode_memberships m JOIN prode_users u ON u.id=m.user_id LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_vote_sources vs ON vs.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200").bind(groupId).all();
         const allMembers = members.results || [], picksByMember = new Map();
@@ -1253,7 +1255,7 @@ export default {
           const pick=picksByMember.get(member.user_id)?.get(game.id);
           return {userId:member.user_id,username:member.username,crestPrimary:member.crestPrimary,crestSecondary:member.crestSecondary,crestText:member.crestText,crestStyle:member.crestStyle,crestFont:member.crestFont,crestSymbol:member.crestSymbol,winnerPick:pick?.selectedWinner||null,mvpPick:pick?.selectedMvp||null,winnerPoints:0,mvpPoints:0,streakPoints:0,points:0,winnerCorrect:false,mvpCorrect:false};
         })}));
-        return reply({ok:true,games,checkedAt:new Date(now).toISOString()});
+        return reply({ok:true,games,nextStartsAt,checkedAt:new Date(now).toISOString()});
       } catch(error) { console.error("Prode live league votes:",error); return reply({ok:false,error:"No se pudieron consultar los votos de los partidos iniciados"},503); }
     }
     // Gestión de liga: abandonar, expulsar o eliminar; solo miembros autorizados.
