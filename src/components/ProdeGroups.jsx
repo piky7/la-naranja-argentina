@@ -301,7 +301,12 @@ export default function ProdeGroups({ onReady }) {
         const response = await fetch(API + "/api/prode/groups/" + encodeURIComponent(selected.id) + "/live-votes", {headers:{Authorization:"Bearer "+token},cache:"no-store"});
         const data = await response.json();
         if (!response.ok || !data.ok) throw Error(data.error || "No se pudieron actualizar los votos en vivo");
-        if (active) { setLiveLeagueGames(data.games || []); setLiveVotesError(""); }
+        if (active) {
+          const games = data.games || [];
+          setLiveLeagueGames(games);
+          setSelectedMatch(current => current?.live ? (games.find(game => game.id === current.id) ? {...games.find(game => game.id === current.id),live:true} : current) : current);
+          setLiveVotesError("");
+        }
       } catch(error) { if (active) setLiveVotesError(error.message || "No se pudieron actualizar los votos"); }
       finally { if (active) { setLiveVotesBusy(false); timer = setTimeout(refreshLiveVotes, 30000); } }
     };
