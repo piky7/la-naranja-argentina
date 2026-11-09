@@ -1241,11 +1241,11 @@ export default {
         for (let i=0;i<allMembers.length;i+=6) {
           const batch = await Promise.all(allMembers.slice(i,i+6).map(async member => {
             if (!member.visitor_id) return {userId:member.user_id,games:[]};
-            const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/prode-results?visitanteId="+encodeURIComponent(member.visitor_id));
+            const response = await env.VOTACIONES.fetch("https://lna-votaciones-api.lnab.workers.dev/api/mis-pronosticos?visitanteId="+encodeURIComponent(member.visitor_id));
             if (!response.ok) throw Error("Historial de pronósticos no disponible");
             const data = await response.json();
-            if (!data.ok || !Array.isArray(data.games)) throw Error("Historial de pronósticos inválido");
-            return {userId:member.user_id,games:data.games};
+            if (!data.ok || !Array.isArray(data.predictions)) throw Error("Historial de pronósticos inválido");
+            return {userId:member.user_id,games:data.predictions.map(pick=>({id:pick.partidoId,selectedWinner:pick.selected,selectedMvp:pick.mvpSelected}))};
           }));
           for (const item of batch) picksByMember.set(item.userId,new Map(item.games.map(game=>[game.id,game])));
         }
