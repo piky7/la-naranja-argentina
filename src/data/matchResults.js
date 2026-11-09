@@ -818,5 +818,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BC4yg1A_AQP5LCuOTtxu1GMW8kVihViJDas2jqehqvumUvNyVAObTw==/san-lorenzo-vs-san-martin-c"
     }
+  },
+  "2026-11-08-quimsa-instituto": {
+    "status": "finished",
+    "homeScore": 88,
+    "awayScore": 92,
+    "time": "20:30",
+    "homeTeam": "quimsa",
+    "awayTeam": "instituto",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J_e5RfzduUehOmQLSnOCGhCRYgYvMcqw0JfmNwOyqywZtOXqoVnanA==/quimsa-vs-instituto",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J_e5RfzduUehOmQLSnOCGhCRYgYvMcqw0JfmNwOyqywZtOXqoVnanA==/quimsa-vs-instituto"
+    }
   }
 };
