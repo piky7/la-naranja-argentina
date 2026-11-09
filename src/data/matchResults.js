@@ -802,5 +802,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2ZN2RgIDH1tzuPUWeHTZIKA94xBmqX_JtuPI7DlNUv9dRPH2PJXYUPQ==/san-lorenzo-vs-regatas-c"
     }
+  },
+  "2026-11-08-san-lorenzo-san-martin": {
+    "status": "finished",
+    "homeScore": 42,
+    "awayScore": 75,
+    "time": "20:00",
+    "homeTeam": "san-lorenzo",
+    "awayTeam": "san-martin",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BC4yg1A_AQP5LCuOTtxu1GMW8kVihViJDas2jqehqvumUvNyVAObTw==/san-lorenzo-vs-san-martin-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BC4yg1A_AQP5LCuOTtxu1GMW8kVihViJDas2jqehqvumUvNyVAObTw==/san-lorenzo-vs-san-martin-c"
+    }
   }
 };

@@ -2495,7 +2495,7 @@ export const players = [
     officialPlayerId: 375107,
     name: "Franco Gaston Aguerre",
     teamId: "san-martin",
-    number: 33,
+    number: 27,
   },
   // Incorporaciones detectadas en planillas oficiales
   {
@@ -2511,5 +2511,13 @@ export const players = [
     name: "Lautaro Morales Gomez",
     teamId: "regatas",
     number: 27,
+  },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-432809",
+    officialPlayerId: 432809,
+    name: "Luke Edward Anderson",
+    teamId: "san-martin",
+    number: 11,
   },
 ];
