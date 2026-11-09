@@ -248,4 +248,18 @@ export const broadcasts = {
     "awayTeam": "penarol",
     "channel": "TyC Sports"
   }
+  "2026-11-10-ferro-san-martin": {
+    "date": "2026-11-10",
+    "time": "22:05",
+    "homeTeam": "ferro",
+    "awayTeam": "san-martin",
+    "channel": "TyC Sports"
+  },
+  "2026-11-11-platense-penarol": {
+    "date": "2026-11-11",
+    "time": "20:30",
+    "homeTeam": "platense",
+    "awayTeam": "penarol",
+    "channel": "DSports"
+  }
 };
