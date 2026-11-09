@@ -2329,3 +2329,62 @@
   .prode-match-dialog.is-live .prode-match-vote-item{min-height:36px;padding:4px 6px!important}
   .prode-league-premium .prode-live-league-votes .prode-live-vote-card{min-height:104px;padding:6px 4px;gap:4px}
 }
+
+
+/* Tarjetas live ultra compactas: sólo escudos y acciones en una línea. */
+.prode-league-premium .prode-live-league-votes .prode-live-vote-card{
+  min-height:76px;
+  height:76px;
+  padding:7px 8px;
+  justify-content:center;
+  gap:7px;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-vote-card .prode-played-logos{
+  justify-content:center;
+  gap:7px;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-vote-card .prode-played-logos img{
+  width:25px;
+  height:25px;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-card-footer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  min-width:0;
+  white-space:nowrap;
+  line-height:1;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-vote-count{
+  display:inline-flex;
+  align-items:center;
+  min-width:0;
+  font-size:10px;
+  font-weight:800;
+  color:#d7e6ed;
+}
+.prode-league-premium .prode-live-league-votes .prode-live-card-action{
+  display:inline-flex;
+  align-items:center;
+  gap:1px;
+  color:#a9e0c2;
+  font-size:10px;
+  font-weight:900;
+}
+@media(max-width:600px){
+  .prode-league-premium .prode-live-league-votes .prode-live-vote-card{
+    min-height:68px;
+    height:68px;
+    padding:6px 4px;
+    gap:6px;
+  }
+  .prode-league-premium .prode-live-league-votes .prode-live-vote-card .prode-played-logos img{
+    width:23px;
+    height:23px;
+  }
+  .prode-league-premium .prode-live-league-votes .prode-live-card-footer{gap:7px}
+  .prode-league-premium .prode-live-league-votes .prode-live-vote-count,
+  .prode-league-premium .prode-live-league-votes .prode-live-card-action{font-size:9px}
+}
