@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-12-08",
+  "dateTo": "2026-12-09",
   "matches": [
     {
       "date": "2026-09-28",
@@ -1060,7 +1060,7 @@
         "officialClubId": 1426,
         "officialTeamId": 113546
       },
-      "homeScore": 25,
+      "homeScore": 27,
       "awayScore": 37,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BC4yg1A_AQP5LCuOTtxu1GMW8kVihViJDas2jqehqvumUvNyVAObTw==/san-lorenzo-vs-san-martin-c"
@@ -1078,8 +1078,8 @@
         "officialClubId": 1790,
         "officialTeamId": 112809
       },
-      "homeScore": 33,
-      "awayScore": 22,
+      "homeScore": 34,
+      "awayScore": 29,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J_e5RfzduUehOmQLSnOCGhCRYgYvMcqw0JfmNwOyqywZtOXqoVnanA==/quimsa-vs-instituto"
     },
@@ -1658,6 +1658,42 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DI3KNmxSq7kBVM_Zyjz537VqpO-CWEkLedWN7ZfJRBSkjP_tc8f5jg==/independiente-o-vs-argentino-j"
+    },
+    {
+      "date": "2026-12-10",
+      "time": "00:00",
+      "home": {
+        "name": "OBERÁ",
+        "officialClubId": 2305,
+        "officialTeamId": 113652
+      },
+      "away": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2AhiZ7jbxpWigAXi76WYROd-Cymv3xAmqjt0cN6Y5A3abUcdwID-GIg==/obera-vs-olimpico-lb"
+    },
+    {
+      "date": "2026-12-10",
+      "time": "00:00",
+      "home": {
+        "name": "PEÑAROL (MDP)",
+        "officialClubId": 2376,
+        "officialTeamId": 114902
+      },
+      "away": {
+        "name": "BOCA",
+        "officialClubId": 19,
+        "officialTeamId": 114735
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WAnPk8NpXzydGWm6soylof_Bt2xR_EuCPANtJ7P8nS7ztLz0BykrTw==/penarol-mdp-vs-boca"
     }
   ]
 }

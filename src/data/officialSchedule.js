@@ -734,5 +734,21 @@ export const officialSchedule = [
     "homeTeam": "independiente-oliva",
     "awayTeam": "argentino",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2DI3KNmxSq7kBVM_Zyjz537VqpO-CWEkLedWN7ZfJRBSkjP_tc8f5jg==/independiente-o-vs-argentino-j"
+  },
+  {
+    "id": "2026-12-10-obera-olimpico",
+    "date": "2026-12-10",
+    "time": null,
+    "homeTeam": "obera",
+    "awayTeam": "olimpico",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2AhiZ7jbxpWigAXi76WYROd-Cymv3xAmqjt0cN6Y5A3abUcdwID-GIg==/obera-vs-olimpico-lb"
+  },
+  {
+    "id": "2026-12-10-penarol-boca",
+    "date": "2026-12-10",
+    "time": null,
+    "homeTeam": "penarol",
+    "awayTeam": "boca",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WAnPk8NpXzydGWm6soylof_Bt2xR_EuCPANtJ7P8nS7ztLz0BykrTw==/penarol-mdp-vs-boca"
   }
 ];
