@@ -91,6 +91,9 @@ export default function ProdeGroups({ onReady }) {
   const [groupTab, setGroupTab] = useState("weekly");
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [matchesByWeek, setMatchesByWeek] = useState({});
+  const [liveLeagueGames, setLiveLeagueGames] = useState([]);
+  const [liveVotesBusy, setLiveVotesBusy] = useState(false);
+  const [liveVotesError, setLiveVotesError] = useState("");
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [showAllMatches, setShowAllMatches] = useState(false);
   const [detailBusy, setDetailBusy] = useState(false);
@@ -207,6 +210,7 @@ export default function ProdeGroups({ onReady }) {
     setCrestEditing(false); setCrestMessage("");
     setGroupTab("weekly");
     setSettingsOpen(false); setSelectedMatch(null); setShowAllMatches(false);
+    setLiveLeagueGames([]); setLiveVotesError("");
     setDetail(cached?.detail || null);
     setLeagueRanking(cached?.ranking.ranking || null);
     setWeeklyRanking(cached?.ranking.weeklyRanking || null);
@@ -286,6 +290,24 @@ export default function ProdeGroups({ onReady }) {
       }
     }
   };
+
+  useEffect(() => {
+    if (!user || !selected || detailBusy || rankingBusy) return;
+    let active = true, timer;
+    const refreshLiveVotes = async () => {
+      setLiveVotesBusy(true);
+      try {
+        const token = await user.getIdToken();
+        const response = await fetch(API + "/api/prode/groups/" + encodeURIComponent(selected.id) + "/live-votes", {headers:{Authorization:"Bearer "+token},cache:"no-store"});
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw Error(data.error || "No se pudieron actualizar los votos en vivo");
+        if (active) { setLiveLeagueGames(data.games || []); setLiveVotesError(""); }
+      } catch(error) { if (active) setLiveVotesError(error.message || "No se pudieron actualizar los votos"); }
+      finally { if (active) { setLiveVotesBusy(false); timer = setTimeout(refreshLiveVotes, 30000); } }
+    };
+    void refreshLiveVotes();
+    return () => { active = false; clearTimeout(timer); };
+  }, [user, selected?.id, detailBusy, rankingBusy]);
 
   const assignInitialPoints = async (event) => {
     event.preventDefault();
@@ -695,6 +717,17 @@ export default function ProdeGroups({ onReady }) {
             const visible = showAllMatches ? games : games.slice(0, 5);
             const myId = user ? "firebase:" + user.uid : null;
             return <section className="prode-played-section" aria-label="Pronósticos jugados de la semana">
+              {(liveLeagueGames.length>0 || liveVotesBusy || liveVotesError) && <div className="prode-live-league-votes">
+                <div className="prode-played-heading"><h4>PARTIDOS EN JUEGO</h4><span>{liveLeagueGames.length} partidos</span></div>
+                {liveVotesError && <p className="prode-played-empty" role="status">{liveVotesError}</p>}
+                {liveLeagueGames.map(game => <button type="button" className="prode-played-card prode-live-vote-card" key={game.id} onClick={() => setSelectedMatch({...game,live:true})} aria-label={teamLabel(game.homeTeam)+" contra "+teamLabel(game.awayTeam)+". Ver votos de la liga"}>
+                  <small><span className="prode-live-dot"/> EN JUEGO · {new Date(game.startsAt).toLocaleTimeString("es-AR",{timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit"})}</small>
+                  <span className="prode-played-logos">{teamLogo(game.homeTeam)?<img alt={teamLabel(game.homeTeam)} src={teamLogo(game.homeTeam)}/>:<span>{teamLabel(game.homeTeam).slice(0,3)}</span>}{teamLogo(game.awayTeam)?<img alt={teamLabel(game.awayTeam)} src={teamLogo(game.awayTeam)}/>:<span>{teamLabel(game.awayTeam).slice(0,3)}</span>}</span>
+                  <strong>{teamLabel(game.homeTeam)} – {teamLabel(game.awayTeam)}</strong>
+                  <span className="prode-played-points">{game.participants.filter(member=>member.winnerPick||member.mvpPick).length}/{game.participants.length} votaron</span>
+                  <span className="prode-played-indicators">Ver votos <ChevronRight size={14}/></span>
+                </button>)}
+              </div>}
               <div className="prode-played-heading"><h4>PRONÓSTICOS JUGADOS</h4><span>{games.length} partidos</span></div>
               {rankingBusy ? <p className="prode-played-empty">Consultando los resultados de la semana…</p> : games.length === 0 ? <p className="prode-played-empty">Todavía no hay partidos finalizados para esta semana.</p> : <>
                 <div className="prode-played-grid">
@@ -733,13 +766,14 @@ export default function ProdeGroups({ onReady }) {
       <section className="prode-match-dialog" role="dialog" aria-modal="true" aria-label="Pronósticos del partido terminado" onClick={event => event.stopPropagation()}>
         <button type="button" className="prode-match-close" aria-label="Cerrar detalle del partido" onClick={() => setSelectedMatch(null)}><X size={19}/></button>
         <div className="prode-match-detail-header">
-          <small>RESULTADO FINAL · {new Date(selectedMatch.startsAt).toLocaleDateString("es-AR",{timeZone:"America/Argentina/Buenos_Aires",day:"numeric",month:"short"})}</small>
+          <small>{selectedMatch.live ? "PARTIDO EN JUEGO" : "RESULTADO FINAL"} · {new Date(selectedMatch.startsAt).toLocaleDateString("es-AR",{timeZone:"America/Argentina/Buenos_Aires",day:"numeric",month:"short"})}</small>
           <div className="prode-match-result">
             <div>{teamLogo(selectedMatch.homeTeam) && <img src={teamLogo(selectedMatch.homeTeam)} alt=""/>}<strong>{teamLabel(selectedMatch.homeTeam)}</strong></div>
-            <span>{selectedMatch.homeScore} – {selectedMatch.awayScore}</span>
+            <span>{selectedMatch.live ? "EN VIVO" : selectedMatch.homeScore+" – "+selectedMatch.awayScore}</span>
             <div>{teamLogo(selectedMatch.awayTeam) && <img src={teamLogo(selectedMatch.awayTeam)} alt=""/>}<strong>{teamLabel(selectedMatch.awayTeam)}</strong></div>
           </div>
-          <p>Ganador: <strong>{teamLabel(selectedMatch.winner)}</strong> · MVP oficial: <strong>{selectedMatch.mvpWinners?.length ? selectedMatch.mvpWinners.map(mvpLabel).join(" / ") : "Pendiente de valoración"}</strong></p>
+          {!selectedMatch.live && <p>Ganador: <strong>{teamLabel(selectedMatch.winner)}</strong> · MVP oficial: <strong>{selectedMatch.mvpWinners?.length ? selectedMatch.mvpWinners.map(mvpLabel).join(" / ") : "Pendiente de valoración"}</strong></p>}
+          {selectedMatch.live && <p>Los pronósticos se revelaron automáticamente al comenzar el partido.</p>}
         </div>
         <h4>VOTOS Y PUNTOS DE LA LIGA</h4>
         <div className="prode-match-members">
