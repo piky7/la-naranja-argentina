@@ -775,7 +775,7 @@ export default function ProdeGroups({ onReady }) {
       setWeeklyAward(null);
     }}/>}
     {selected && selectedMatch && <div className="prode-match-backdrop" onClick={() => setSelectedMatch(null)}>
-      <section className="prode-match-dialog" role="dialog" aria-modal="true" aria-label="Pronósticos del partido terminado" onClick={event => event.stopPropagation()}>
+      <section className={"prode-match-dialog" + (selectedMatch.live ? " is-live" : "")} role="dialog" aria-modal="true" aria-label="Pronósticos del partido terminado" onClick={event => event.stopPropagation()}>
         <button type="button" className="prode-match-close" aria-label="Cerrar detalle del partido" onClick={() => setSelectedMatch(null)}><X size={19}/></button>
         <div className="prode-match-detail-header">
           <small>{selectedMatch.live ? "PARTIDO EN JUEGO" : "RESULTADO FINAL"} · {new Date(selectedMatch.startsAt).toLocaleDateString("es-AR",{timeZone:"America/Argentina/Buenos_Aires",day:"numeric",month:"short"})}</small>
