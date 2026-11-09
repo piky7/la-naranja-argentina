@@ -1216,7 +1216,7 @@ export default {
       }
     }
     // Votos visibles únicamente después del horario oficial de inicio y solo para miembros activos de la liga.
-    const liveLeagueVotes = /^\\/api\\/prode\\/groups\\/([0-9a-f-]{36})\\/live-votes$/.exec(url.pathname);
+    const liveLeagueVotes = /^\/api\/prode\/groups\/([0-9a-f-]{36})\/live-votes$/.exec(url.pathname);
     if (liveLeagueVotes && request.method === "GET") {
       if (!env.DB || !env.VOTACIONES) return reply({ok:false,error:"Pronósticos no disponibles"},503);
       const identity = await verifiedFirebaseUser(request);
