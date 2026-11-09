@@ -834,5 +834,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2J_e5RfzduUehOmQLSnOCGhCRYgYvMcqw0JfmNwOyqywZtOXqoVnanA==/quimsa-vs-instituto"
     }
+  },
+  "2026-11-08-racing-chivilcoy-regatas": {
+    "status": "finished",
+    "homeScore": 68,
+    "awayScore": 80,
+    "time": "21:00",
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "regatas",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
+    }
   }
 };

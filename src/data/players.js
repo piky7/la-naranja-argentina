@@ -2520,4 +2520,12 @@ export const players = [
     teamId: "san-martin",
     number: 11,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-432880",
+    officialPlayerId: 432880,
+    name: "Dayon Lynn Griffin",
+    teamId: "regatas",
+    number: 2,
+  },
 ];
