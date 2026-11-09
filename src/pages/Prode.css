@@ -2251,50 +2251,50 @@
 
 
 /* Prode live: vista de votos compacta, sin puntos provisionales durante el juego. */
-.prode-match-dialog:has(.prode-match-detail-header) {
+.prode-match-dialog.is-live {
   gap:8px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-detail-header>p{
+.prode-match-dialog.is-live .prode-match-detail-header>p{
   margin:2px 0;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-result{
+.prode-match-dialog.is-live .prode-match-result{
   gap:8px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-members{
+.prode-match-dialog.is-live .prode-match-members{
   gap:6px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-member{
+.prode-match-dialog.is-live .prode-match-member{
   gap:5px;
   padding:7px 8px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-member-top{
+.prode-match-dialog.is-live .prode-match-member-top{
   min-height:29px;
   gap:7px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-member-top>svg{
+.prode-match-dialog.is-live .prode-match-member-top>svg{
   width:30px;height:33px;flex-basis:30px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-member-top>strong{
+.prode-match-dialog.is-live .prode-match-member-top>strong{
   font-size:12px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-member-votes{
+.prode-match-dialog.is-live .prode-match-member-votes{
   gap:5px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-vote-item{
+.prode-match-dialog.is-live .prode-match-vote-item{
   min-height:39px;
   padding:5px 7px!important;
   gap:2px 4px!important;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-vote-item>strong{
+.prode-match-dialog.is-live .prode-match-vote-item>strong{
   font-size:10px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-vote-item>span{
+.prode-match-dialog.is-live .prode-match-vote-item>span{
   font-size:8px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-member-top>span{
+.prode-match-dialog.is-live .prode-match-member-top>span{
   font-size:12px;
 }
-.prode-match-dialog:has(.prode-match-detail-header) .prode-match-bonus{
+.prode-match-dialog.is-live .prode-match-bonus{
   font-size:9px;
 }
 .prode-league-premium .prode-live-league-votes .prode-live-vote-card{
@@ -2323,9 +2323,9 @@
   line-height:1;
 }
 @media(max-width:600px){
-  .prode-match-dialog:has(.prode-match-detail-header){padding:11px 9px;gap:7px}
-  .prode-match-dialog:has(.prode-match-detail-header) .prode-match-member{padding:6px 7px;gap:4px}
-  .prode-match-dialog:has(.prode-match-detail-header) .prode-match-member-top>svg{width:27px;height:30px;flex-basis:27px}
-  .prode-match-dialog:has(.prode-match-detail-header) .prode-match-vote-item{min-height:36px;padding:4px 6px!important}
+  .prode-match-dialog.is-live{padding:11px 9px;gap:7px}
+  .prode-match-dialog.is-live .prode-match-member{padding:6px 7px;gap:4px}
+  .prode-match-dialog.is-live .prode-match-member-top>svg{width:27px;height:30px;flex-basis:27px}
+  .prode-match-dialog.is-live .prode-match-vote-item{min-height:36px;padding:4px 6px!important}
   .prode-league-premium .prode-live-league-votes .prode-live-vote-card{min-height:104px;padding:6px 4px;gap:4px}
 }
