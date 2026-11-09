@@ -247,7 +247,7 @@ export const broadcasts = {
     "homeTeam": "olimpico",
     "awayTeam": "penarol",
     "channel": "TyC Sports"
-  }
+  },
   "2026-11-10-ferro-san-martin": {
     "date": "2026-11-10",
     "time": "22:05",
