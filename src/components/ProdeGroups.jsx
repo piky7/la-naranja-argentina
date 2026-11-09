@@ -732,11 +732,11 @@ export default function ProdeGroups({ onReady }) {
                 {liveVotesError && <p className="prode-played-empty" role="status">{liveVotesError}</p>}
                 <div className="prode-played-grid">
                 {liveLeagueGames.map(game => <button type="button" className="prode-played-card prode-live-vote-card" key={game.id} onClick={() => setSelectedMatch({...game,live:true})} aria-label={teamLabel(game.homeTeam)+" contra "+teamLabel(game.awayTeam)+". Ver votos de la liga"}>
-                  <small><span className="prode-live-dot"/> EN JUEGO · {new Date(game.startsAt).toLocaleTimeString("es-AR",{timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit"})}</small>
                   <span className="prode-played-logos">{teamLogo(game.homeTeam)?<img alt={teamLabel(game.homeTeam)} src={teamLogo(game.homeTeam)}/>:<span>{teamLabel(game.homeTeam).slice(0,3)}</span>}{teamLogo(game.awayTeam)?<img alt={teamLabel(game.awayTeam)} src={teamLogo(game.awayTeam)}/>:<span>{teamLabel(game.awayTeam).slice(0,3)}</span>}</span>
-                  <strong>{teamLabel(game.homeTeam)} – {teamLabel(game.awayTeam)}</strong>
-                  <span className="prode-played-points">{game.participants.filter(member=>member.winnerPick||member.mvpPick).length}/{game.participants.length} votaron</span>
-                  <span className="prode-played-indicators">Ver votos <ChevronRight size={14}/></span>
+                  <span className="prode-live-card-footer">
+                    <span className="prode-live-vote-count">{game.participants.filter(member=>member.winnerPick||member.mvpPick).length}/{game.participants.length} votaron</span>
+                    <span className="prode-live-card-action">Ver votos <ChevronRight size={14}/></span>
+                  </span>
                 </button>)}
                 </div>
               </div>}
