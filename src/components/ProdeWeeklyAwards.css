@@ -91,3 +91,23 @@
   .prode-award-certificate strong{font-size:16px}
   .prode-award-certificate b{font-size:9px}
 }
+
+
+/* Resultado personal cuando el usuario no integra el podio. */
+.prode-award-my-position{
+  display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;
+  max-width:390px;margin:12px auto 14px;padding:11px 13px;
+  border:1px solid #54738d;border-left:3px solid #ff982f;border-radius:12px;
+  background:linear-gradient(110deg,#183149,#102438);
+  text-align:left;
+}
+.prode-award-my-position>span{color:#b9cad9;font-size:10px;font-weight:900;letter-spacing:.06em}
+.prode-award-my-position>strong{color:#fff;font-size:17px;font-weight:900;white-space:nowrap}
+.prode-award-my-position>b{color:#91fa41;font-size:17px;font-weight:900;white-space:nowrap}
+.prode-award-my-position small{font-size:9px;letter-spacing:.04em}
+@media(max-width:420px){
+  .prode-award-my-position{gap:7px;padding:10px}
+  .prode-award-my-position>span{font-size:9px}
+  .prode-award-my-position>strong,.prode-award-my-position>b{font-size:14px}
+  .prode-award-my-position small{font-size:8px}
+}
