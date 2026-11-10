@@ -850,5 +850,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v23aeQSGj-YLi4wXVZA7UOm454OkPLDhZCEGmNI4eVkWNi5aS1WjXExg==/racing-ch-vs-regatas-c"
     }
+  },
+  "2026-11-09-boca-la-union": {
+    "status": "finished",
+    "homeScore": 97,
+    "awayScore": 93,
+    "time": "20:00",
+    "homeTeam": "boca",
+    "awayTeam": "la-union",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2_OT5XAB5lsw6fzwbBSxKHSYpHlLL0ykzB5YXu1PR0s0Jx7Jh5S0IIg==/boca-vs-la-union-fsa",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2_OT5XAB5lsw6fzwbBSxKHSYpHlLL0ykzB5YXu1PR0s0Jx7Jh5S0IIg==/boca-vs-la-union-fsa"
+    }
   }
 };

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T00:55:55.795Z",
+  "generatedAt": "2026-11-10T01:01:01.450Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -487,6 +487,14 @@
       "awayScore": 80,
       "homeTeam": "racing-chivilcoy",
       "awayTeam": "regatas",
+      "hasStats": true
+    },
+    "2026-11-09-boca-la-union": {
+      "status": "published",
+      "homeScore": 97,
+      "awayScore": 93,
+      "homeTeam": "boca",
+      "awayTeam": "la-union",
       "hasStats": true
     }
   }
