@@ -866,5 +866,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2_OT5XAB5lsw6fzwbBSxKHSYpHlLL0ykzB5YXu1PR0s0Jx7Jh5S0IIg==/boca-vs-la-union-fsa"
     }
+  },
+  "2026-11-09-gimnasia-obera": {
+    "status": "finished",
+    "homeScore": 92,
+    "awayScore": 95,
+    "time": "20:30",
+    "homeTeam": "gimnasia",
+    "awayTeam": "obera",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
+    }
   }
 };

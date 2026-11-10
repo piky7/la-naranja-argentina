@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T01:25:55.315Z",
+  "generatedAt": "2026-11-10T01:30:55.884Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -495,6 +495,14 @@
       "awayScore": 93,
       "homeTeam": "boca",
       "awayTeam": "la-union",
+      "hasStats": true
+    },
+    "2026-11-09-gimnasia-obera": {
+      "status": "published",
+      "homeScore": 92,
+      "awayScore": 95,
+      "homeTeam": "gimnasia",
+      "awayTeam": "obera",
       "hasStats": true
     }
   }
