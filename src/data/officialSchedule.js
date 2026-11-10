@@ -750,5 +750,13 @@ export const officialSchedule = [
     "homeTeam": "penarol",
     "awayTeam": "boca",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WAnPk8NpXzydGWm6soylof_Bt2xR_EuCPANtJ7P8nS7ztLz0BykrTw==/penarol-mdp-vs-boca"
+  },
+  {
+    "id": "2026-12-11-instituto-argentino",
+    "date": "2026-12-11",
+    "time": null,
+    "homeTeam": "instituto",
+    "awayTeam": "argentino",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2uhSyVE6aJmVfXoKpnCXvr-7MSnDQo_njyz9cFgOAuJp_ZS49S09UtQ==/instituto-vs-argentino-j"
   }
 ];

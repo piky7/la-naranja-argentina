@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-12-09",
+  "dateTo": "2026-12-10",
   "matches": [
     {
       "date": "2026-09-28",
@@ -1132,8 +1132,8 @@
         "officialClubId": 2305,
         "officialTeamId": 113652
       },
-      "homeScore": 21,
-      "awayScore": 31,
+      "homeScore": 24,
+      "awayScore": 38,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
     },
@@ -1694,6 +1694,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WAnPk8NpXzydGWm6soylof_Bt2xR_EuCPANtJ7P8nS7ztLz0BykrTw==/penarol-mdp-vs-boca"
+    },
+    {
+      "date": "2026-12-11",
+      "time": "00:00",
+      "home": {
+        "name": "INSTITUTO",
+        "officialClubId": 1790,
+        "officialTeamId": 112809
+      },
+      "away": {
+        "name": "ARGENTINO (J)",
+        "officialClubId": 1932,
+        "officialTeamId": 115240
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2uhSyVE6aJmVfXoKpnCXvr-7MSnDQo_njyz9cFgOAuJp_ZS49S09UtQ==/instituto-vs-argentino-j"
     }
   ]
 }
