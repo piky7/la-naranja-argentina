@@ -74,7 +74,8 @@ export default function ProdeGoogleAccess({ onReady }) {
         const link = await linkRes.json();
         if (active) setCareerLink(Boolean(link.linked));
       }
-      if (active) window.dispatchEvent(new Event("prode-profile-updated"));
+      // La carga inicial no modifica el perfil: no notificar al encabezado
+      // para evitar que vuelva a consultar escudo y puntos al entrar a Prode.
     }).catch(() => {
       if (active) setError("Tu cuenta Google está conectada, pero no pudimos registrar tu perfil Prode. Intentá recargar la página.");
     }).finally(() => { if (active) { setSyncing(false); setProfileLoaded(true); } });
