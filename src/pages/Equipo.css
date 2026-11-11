@@ -2943,3 +2943,7 @@
   .team-page .team-roster-crest { width: 20px; height: 20px; }
   .team-page .team-roster-name > span { min-width: 0; font-size: 11px; }
 }
+
+
+.team-head-coach{margin-top:7px!important;color:#aebdce!important;font-size:13px;font-weight:500}
+.team-head-coach strong{color:#ffad62;font-weight:800}
