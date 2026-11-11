@@ -30,13 +30,13 @@ test("El aviso de puntos conserva el seguimiento de recompensas y su desglose", 
   assert.match(notices, /PUNTUACIÓN TOTAL/);
 });
 
-test("El recordatorio de pronósticos consulta solo la fecha argentina y no se repite en la misma sesión", () => {
+test("El recordatorio de pronósticos consulta la fecha argentina y se muestra una sola vez por día y usuario", () => {
   assert.match(notices, /America\/Argentina\/Buenos_Aires/);
   assert.match(notices, /match\.date === today/);
   assert.match(notices, /requestPrediction\("winner", gameId\)/);
   assert.match(notices, /requestPrediction\("mvp", gameId\)/);
   assert.match(notices, /winnerPending \|\| mvpPending/);
-  assert.match(notices, /lna-vote-entry-notice-session-v1/);
+  assert.match(notices, /lna-vote-entry-notice-seen-v1/);
   assert.match(notices, /user\.uid/);
   assert.match(notices, /Todavía no completaste tus pronósticos de hoy/);
   assert.match(notices, /lna-vote-updated/);
