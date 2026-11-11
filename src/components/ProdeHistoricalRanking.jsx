@@ -40,8 +40,7 @@ export default function ProdeHistoricalRanking({ weekly = false, onReady }) {
     const refreshPage = () => { void load(); };
     window.addEventListener("prode-profile-updated",refreshProfile);
     window.addEventListener("prode-page-reopened",refreshPage);
-    window.addEventListener("prode-data-updated",refreshPage);
-    return () => { active = false; window.removeEventListener("prode-profile-updated",refreshProfile); window.removeEventListener("prode-page-reopened",refreshPage); window.removeEventListener("prode-data-updated",refreshPage); };
+    return () => { active = false; window.removeEventListener("prode-profile-updated",refreshProfile); window.removeEventListener("prode-page-reopened",refreshPage); };
   }, [weekly, user, authReady, retryCounter]);
   useEffect(() => { if (authReady && (data || error)) onReady?.(true); }, [authReady, data, error, onReady]);
   const openTable = async () => {
