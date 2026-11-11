@@ -105,3 +105,12 @@
 
 
 .match-modal-coach{display:inline!important;margin-left:3px;color:#ffb36e!important;font-size:10px!important;font-weight:700;line-height:1.25;white-space:normal!important}
+
+
+/* Franja independiente para los cuerpos técnicos, debajo del encabezado de equipos. */
+.match-modal-coaches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 12px 10px;padding:7px 9px;border:1px solid rgba(255,157,72,.28);border-radius:9px;background:linear-gradient(110deg,rgba(255,137,47,.075),rgba(20,43,65,.72))}
+.match-modal-coach-item{display:flex;flex-direction:column;gap:2px;min-width:0}
+.match-modal-coach-item+ .match-modal-coach-item{border-left:1px solid rgba(255,255,255,.12);padding-left:10px}
+.match-modal-coach-item span{color:#91a4b8;font-size:8px;font-weight:800;letter-spacing:1px}
+.match-modal-coach-item strong{color:#ffb36e;font-size:11px;line-height:1.25;overflow-wrap:anywhere}
+@media(max-width:380px){.match-modal-coaches{margin-left:8px;margin-right:8px;padding:6px 7px;gap:5px}.match-modal-coach-item strong{font-size:10px}.match-modal-coach-item+ .match-modal-coach-item{padding-left:7px}}
