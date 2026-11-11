@@ -997,3 +997,24 @@
 @media(prefers-reduced-motion:reduce){.lna-fan-page-card *{scroll-behavior:auto!important;transition:none!important}}
 
 /* Mi Carrera responsive visual system verified with the page regression test. */
+
+
+/* Mi Carrera page: neutralizar el posicionamiento absoluto heredado del popup.
+   En la página la llama ocupa la primera columna del grid y el texto la segunda. */
+.lna-fan-page-card .lna-fan-streak-flame{
+  position:static;
+  left:auto;
+  top:auto;
+  transform:none;
+  grid-column:1;
+  grid-row:1 / 4;
+  align-self:center;
+}
+.lna-fan-page-card .lna-fan-streak-panel > strong,
+.lna-fan-page-card .lna-fan-streak-panel > span,
+.lna-fan-page-card .lna-fan-streak-panel > small{
+  grid-column:2;
+  min-width:0;
+  width:100%;
+  overflow-wrap:anywhere;
+}
