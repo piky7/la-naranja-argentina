@@ -17,6 +17,8 @@ const Estadisticas = lazy(loadEstadisticas);
 const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Acerca = lazy(() => import("./pages/Acerca"));
 const Prode = lazy(() => import("./pages/Prode"));
+const MiCarrera = lazy(() => import("./pages/MiCarrera"));
+const Perfil = lazy(() => import("./pages/Perfil"));
 const Admin = lazy(() => import("./pages/Admin"));
 
 // Precarga suave: no bloquea el render inicial ni consume datos extra
@@ -88,6 +90,8 @@ function AnimatedRoutes() {
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/prode" element={null} />
+        <Route path="/mi-carrera" element={<MiCarrera />} />
+        <Route path="/perfil" element={<Perfil />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
           const params = new URLSearchParams(location.search);
