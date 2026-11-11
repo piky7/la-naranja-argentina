@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Bell, Trophy } from "lucide-react";
+import { X, Trophy } from "lucide-react";
 import { teams } from "../data/teams";
 import { players } from "../data/players";
 import { fetchCareerData, useCareerSession } from "../auth/careerAccount";
@@ -96,8 +96,7 @@ export default function CareerEntryNotices() {
 
   return createPortal(
     <div className="lna-entry-notice-backdrop" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) dismiss(); }}>
-      {notice.type === "rewards" ? (
-        <section className="lna-entry-notice lna-entry-notice-rewards" role="dialog" aria-modal="true" aria-labelledby="lna-entry-reward-title">
+              <section className="lna-entry-notice lna-entry-notice-rewards" role="dialog" aria-modal="true" aria-labelledby="lna-entry-reward-title">
           <button type="button" className="lna-entry-notice-close" onClick={dismiss} aria-label="Cerrar felicitación"><X size={20}/></button>
           <span className="lna-entry-notice-kicker"><Trophy size={15}/> MI CARRERA · RECOMPENSAS</span>
           <h2 id="lna-entry-reward-title">¡FELICITACIONES!</h2>
@@ -119,16 +118,6 @@ export default function CareerEntryNotices() {
           {notice.currentPoints !== null && <div className="lna-entry-reward-total"><span>PUNTUACIÓN TOTAL</span><strong>{Math.max(0, notice.currentPoints - notice.total)} <i>→</i> <em>{notice.currentPoints} PTS</em></strong></div>}
           <button type="button" className="lna-entry-notice-action" onClick={dismiss}>Continuar</button>
         </section>
-      ) : (
-        <section className="lna-entry-notice lna-entry-notice-vote" role="dialog" aria-modal="true" aria-labelledby="lna-entry-vote-title">
-          <button type="button" className="lna-entry-notice-close" onClick={dismiss} aria-label="Cerrar aviso"><X size={20}/></button>
-          <span className="lna-entry-notice-kicker"><Bell size={15}/> MI CARRERA · PRONÓSTICOS</span>
-          <h2 id="lna-entry-vote-title">¡HOY HAY QUE VOTAR!</h2>
-          <p>Todavía no completaste tus pronósticos de hoy.</p>
-          <strong className="lna-entry-vote-count">{notice.pendingCount} {notice.pendingCount === 1 ? "PARTIDO PENDIENTE" : "PARTIDOS PENDIENTES"}</strong>
-          <button type="button" className="lna-entry-notice-action" onClick={dismiss}>Entendido</button>
-        </section>
-      )}
     </div>,
     document.body
   );
