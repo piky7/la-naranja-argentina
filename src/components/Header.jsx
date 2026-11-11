@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import CareerProfileAccess from "./CareerProfileAccess";
-import { House, Trophy, Shield, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target, UserRound } from "lucide-react";
+import { House, Trophy, Shield, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
 
 function Header() {
   const [navCompact, setNavCompact] = useState(false);
