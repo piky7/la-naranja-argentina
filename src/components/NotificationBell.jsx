@@ -63,7 +63,7 @@ export default function NotificationBell({ user }) {
     return () => { window.removeEventListener("lna-vote-updated", onUpdate); window.clearInterval(interval); };
   }, [user?.uid, loadInbox, refreshPending]);
 
-  const unread = useMemo(() => items.filter(item => !item.readAt).length + pendingMatches.length, [items, pendingMatches]);
+  const unread = useMemo(() => items.filter(item => !item.readAt).length + (pendingMatches.length ? 1 : 0), [items, pendingMatches]);
 
   const openAnnouncement = async item => {
     try {
@@ -100,9 +100,9 @@ export default function NotificationBell({ user }) {
       <section className="lna-notification-panel" aria-label="Centro de notificaciones">
         <header><div><span>LNA</span><strong>Notificaciones</strong></div><button type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={18}/></button></header>
         <div className="lna-notification-list">
-          {pendingMatches.map(item => <button type="button" className="lna-notification-item is-unread" key={item.id} onClick={() => { setOpen(false); navigate(item.href); }}>
-            <span className="lna-notification-dot"/><span><strong>{item.title}</strong><small>{item.message}</small><em>Recordatorio automático</em></span>
-          </button>)}
+          {pendingMatches.length > 0 && <button type="button" className="lna-notification-item is-unread" onClick={() => { setOpen(false); navigate("/liga"); }}>
+            <span className="lna-notification-dot"/><span><strong>Pronósticos pendientes</strong><small>Todavía tenés {pendingMatches.length} {pendingMatches.length === 1 ? "partido" : "partidos"} de hoy sin completar. Entrá a la Liga para votar.</small><em>Recordatorio automático</em></span>
+          </button>}
           {items.map(item => <button type="button" className={"lna-notification-item" + (!item.readAt ? " is-unread" : "")} key={item.id} onClick={() => openAnnouncement(item)}>
             {!item.readAt && <span className="lna-notification-dot"/>}<span><strong>{item.title}</strong><small>{item.message}</small><em>{new Date(item.createdAt + (item.createdAt?.endsWith("Z") ? "" : "Z")).toLocaleString("es-AR", { dateStyle: "short", timeStyle: "short" })}{item.href ? " · Ver más" : ""}</em></span>{item.href && <ExternalLink size={15}/>}
           </button>)}
