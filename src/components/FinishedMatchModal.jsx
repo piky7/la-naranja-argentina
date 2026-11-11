@@ -149,27 +149,12 @@ export default function FinishedMatchModal({
                         selectedMatchHomeTeam?.name}
 
                       {selectedMatchHomeTeam && (
-                        <>
                         <small>
-                          {getTeamPosition(
-                            selectedMatchHomeTeam.id
-                          )}
-                          ° •{" "}
-                          {
-                            getTeamRecord(
-                              selectedMatchHomeTeam.id
-                            ).wins
-                          }
-                          -
-                          {
-                            getTeamRecord(
-                              selectedMatchHomeTeam.id
-                            ).losses
-                          }
+                          {getTeamPosition(selectedMatchHomeTeam.id)}° •{" "}
+                          {getTeamRecord(selectedMatchHomeTeam.id).wins}-{getTeamRecord(selectedMatchHomeTeam.id).losses}
+                          {selectedMatchHomeTeam.coach && <span className="match-modal-coach"> · DT: {selectedMatchHomeTeam.coach}</span>}
                         </small>
-                        {selectedMatchHomeTeam?.coach && <small className="match-modal-coach">DT: {selectedMatchHomeTeam.coach}</small>}
-                                              </>
-)}
+                      )}
                     </strong>
                   </div>
 
@@ -211,27 +196,12 @@ export default function FinishedMatchModal({
                         selectedMatchAwayTeam?.name}
 
                       {selectedMatchAwayTeam && (
-                        <>
                         <small>
-                          {getTeamPosition(
-                            selectedMatchAwayTeam.id
-                          )}
-                          ° •{" "}
-                          {
-                            getTeamRecord(
-                              selectedMatchAwayTeam.id
-                            ).wins
-                          }
-                          -
-                          {
-                            getTeamRecord(
-                              selectedMatchAwayTeam.id
-                            ).losses
-                          }
+                          {getTeamPosition(selectedMatchAwayTeam.id)}° •{" "}
+                          {getTeamRecord(selectedMatchAwayTeam.id).wins}-{getTeamRecord(selectedMatchAwayTeam.id).losses}
+                          {selectedMatchAwayTeam.coach && <span className="match-modal-coach"> · DT: {selectedMatchAwayTeam.coach}</span>}
                         </small>
-                        {selectedMatchAwayTeam?.coach && <small className="match-modal-coach">DT: {selectedMatchAwayTeam.coach}</small>}
-                                              </>
-)}
+                      )}
                     </strong>
                   </div>
                 </div>
