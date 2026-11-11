@@ -48,7 +48,6 @@ export default function FanLevel({ isPage = false }) {
   const seenEventsRef = useRef(readSeenEvents());
   const [pendingEvents, setPendingEvents] = useState([]);
   const [eventNotice, setEventNotice] = useState(null);
-  const [rewardNotice, setRewardNotice] = useState(null);
   const [unseenRewards, setUnseenRewards] = useState(false);
   const [prodeProfile, setProdeProfile] = useState(null);
   const [points, setPoints] = useState(null);
@@ -62,66 +61,13 @@ export default function FanLevel({ isPage = false }) {
   const [open, setOpen] = useState(isPage);
   const [introStep, setIntroStep] = useState(null);
   const finishIntro = () => { try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* Sin almacenamiento disponible. */ } setIntroStep(null); };
-  const openCareer = async () => {
+  const openCareer = () => {
     setOpen(true);
     if (!user) return;
-    refresh(); setActiveView("levels");
-    try { if (localStorage.getItem(INTRO_KEY) !== "1") { setIntroStep(0); return; } } catch { setIntroStep(0); return; }
-    const id = getVisitorId();
-    if (!id) return;
-    try {
-      const data = await fetchCareerData("predictions");
-      if (!data.ok || !Array.isArray(data.predictions)) return;
-      const rewarded = data.predictions.filter(p => p.earned != null && Number(p.earned) > 0);
-      const snapshot = Object.fromEntries(rewarded.map(p => [p.partidoId, Number(p.earned)]));
-      const previousRaw = localStorage.getItem(REWARD_SEEN_KEY);
-      // Sin referencia previa, las recompensas existentes también están pendientes de ver.
-      let previous = {};
-      try { previous = JSON.parse(previousRaw) || {}; } catch { /* Reestablecer seguimiento. */ }
-      const changes = rewarded.filter(p => Number(p.earned) > Number(previous[p.partidoId] || 0));
-      localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot));
-      setUnseenRewards(false);
-      if (changes.length) {
-        const total = changes.reduce((sum,p) => sum + Number(p.earned) - Number(previous[p.partidoId] || 0), 0);
-        const games = changes.map(p => {
-          const previousPoints = Number(previous[p.partidoId] || 0);
-          const earned = Number(p.earned || 0);
-          const delta = earned - previousPoints;
-          const mvpPoints = Number(p.mvpEarned) || 0;
-          const winnerPoints = p.status === "correct" ? 15 : p.status === "incorrect" ? 5 : 0;
-          const bonus = Math.max(0,earned - winnerPoints - mvpPoints);
-          const newMvpPoints = Math.min(mvpPoints,delta);
-          const newWinnerPoints = Math.min(winnerPoints,Math.max(0,delta - newMvpPoints));
-          const newBonusPoints = Math.max(0,delta - newMvpPoints - newWinnerPoints);
-          const home = teams.find(t => t.id === p.homeTeam);
-          const away = teams.find(t => t.id === p.awayTeam);
-          const mvpPlayer = players.find(player => player.id === p.mvpSelected);
-          return {
-            id:p.partidoId,
-            date:p.partidoId?.slice(5,10)?.replace("-","/") || "",
-            home:home?.shortName || p.homeTeam || "Local",
-            homeLogo:home?.logo || null,
-            away:away?.shortName || p.awayTeam || "Visitante",
-            awayLogo:away?.logo || null,
-            score:Number.isFinite(p.homeScore) && Number.isFinite(p.awayScore) ? `${p.homeScore}–${p.awayScore}` : "Finalizado",
-            winnerStatus:p.status,
-            winnerPoints:newWinnerPoints,
-            mvpStatus:p.mvpStatus,
-            mvpName:mvpPlayer?.name || (p.mvpSelected ? "Jugador elegido" : ""),
-            mvpPoints:newMvpPoints,
-            bonus:newBonusPoints,
-            delta,
-          };
-        });
-        let currentPoints = null;
-        try {
-          const pointsData = await fetchCareerData("points");
-          if (Number.isFinite(Number(pointsData.points))) currentPoints = Number(pointsData.points);
-        } catch { /* El detalle se muestra aunque no se pueda consultar el total. */ }
-        setRewardNotice({total,games,currentPoints});
-
-      }
-    } catch { /* No anunciar premios sin confirmación del servidor. */ }
+    refresh();
+    setActiveView("levels");
+    try { if (localStorage.getItem(INTRO_KEY) !== "1") { setIntroStep(0); return; } }
+    catch { setIntroStep(0); }
   };
   const dismissEvent = (goToCareer = false) => {
     if (!eventNotice) return;
@@ -297,28 +243,6 @@ export default function FanLevel({ isPage = false }) {
         <span className="lna-fan-historic-badge" title={`${score} puntos históricos`} aria-label={`${score} puntos históricos`}><span className="lna-fan-historic-shield"><strong>{points === null ? "–" : score.toLocaleString("es-AR")}</strong><small>PTS</small></span></span>
         <ChevronRight size={16} aria-hidden="true" />
       </button>}
-      {rewardNotice && open && introStep === null && createPortal(<div className="lna-fan-achievement-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) setRewardNotice(null); }}>
-        <section className="lna-fan-achievement is-promotion" role="dialog" aria-modal="true" aria-labelledby="lna-fan-reward-title">
-          <div className="lna-fan-achievement-rays" aria-hidden="true" />
-          <button type="button" className="lna-fan-achievement-close" onClick={() => setRewardNotice(null)} aria-label="Cerrar felicitación"><X size={20}/></button>
-          <span className="lna-fan-achievement-kicker">MI CARRERA · RECOMPENSAS</span>
-          <h2 id="lna-fan-reward-title">¡FELICITACIONES!</h2>
-          <strong className="lna-fan-reward-points">+{rewardNotice.total} PTS</strong>
-          <div className="lna-fan-reward-games">{rewardNotice.games.map(game => <div className="lna-fan-reward-game" key={game.id}>
-            <div className="lna-fan-reward-match"><small>{game.date}</small><div className="lna-fan-reward-scoreline"><span className="lna-fan-reward-team">{game.homeLogo && <img src={game.homeLogo} alt="" />}<strong>{game.home}</strong></span><b className="lna-fan-reward-score">{game.score}</b><span className="lna-fan-reward-team">{game.awayLogo && <img src={game.awayLogo} alt="" />}<strong>{game.away}</strong></span></div></div>
-            <div className="lna-fan-reward-outcomes">
-              <span><b>{game.winnerStatus === "correct" ? "✓" : "✕"} Ganador</b><strong>+{game.winnerPoints} pts</strong></span>
-              {game.mvpStatus !== "none" && <span><b>{game.mvpStatus === "correct" ? "✓" : game.mvpStatus === "incorrect" ? "✕" : "·"} MVP</b><small>{game.mvpName}</small><strong>{game.mvpStatus === "pending" ? "Pendiente" : `+${game.mvpPoints} pts`}</strong></span>}
-              {game.bonus > 0 && <span><b>★ Racha</b><strong>+{game.bonus} pts</strong></span>}
-            </div>
-          </div>)}</div>
-          {rewardNotice.currentPoints !== null && <div className="lna-fan-reward-total">
-            <span>PUNTUACIÓN TOTAL</span>
-            <strong>{Math.max(0,rewardNotice.currentPoints - rewardNotice.total)} <span aria-hidden="true">→</span> <em>{rewardNotice.currentPoints} PTS</em></strong>
-          </div>}
-          <button type="button" className="lna-fan-achievement-continue" onClick={() => setRewardNotice(null)}>Continuar mi carrera</button>
-        </section>
-      </div>, document.body)}
       {eventNotice && createPortal(<div className="lna-fan-achievement-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) dismissEvent(false); }}>
         <section className={`lna-fan-achievement ${eventNotice.type === "descent" ? "is-descent" : "is-promotion"}`} role="dialog" aria-modal="true" aria-labelledby="lna-fan-achievement-title">
           <div className="lna-fan-achievement-rays" aria-hidden="true" />
