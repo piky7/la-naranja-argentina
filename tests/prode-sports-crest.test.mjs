@@ -45,4 +45,11 @@ test("Render de escudos deportivo y trofeo de liga permanecen separados", () => 
   assert.doesNotMatch(access,/prode-account-edit/);
   assert.match(worker,/sportSymbolPattern/);
   assert.doesNotMatch(access,/PRODE_SYMBOL_CATEGORIES/);
+  assert.doesNotMatch(access,/signOutProde|prode-account-logout|logoutConfirmOpen/);
+  assert.match(profile,/signOutProde/);
+  assert.match(profile,/¿Querés cerrar sesión\?/);
+  const careerAccount = read("src/auth/careerAccount.js");
+  const profileAccess = read("src/components/CareerProfileAccess.jsx");
+  assert.doesNotMatch(careerAccount,/career-auth-updated/);
+  assert.doesNotMatch(profileAccess,/career-auth-updated|visibilitychange/);
 });
