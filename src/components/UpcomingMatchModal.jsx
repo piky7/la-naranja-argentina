@@ -143,27 +143,12 @@ export default function UpcomingMatchModal({
                       selectedUpcomingHomeTeam?.name}
 
                     {selectedUpcomingHomeTeam && (
-                        <>
-                      <small>
-                        {getTeamPosition(
-                          selectedUpcomingHomeTeam.id
-                        )}
-                        ° •{" "}
-                        {
-                          getTeamRecord(
-                            selectedUpcomingHomeTeam.id
-                          ).wins
-                        }
-                        -
-                        {
-                          getTeamRecord(
-                            selectedUpcomingHomeTeam.id
-                          ).losses
-                        }
-                      </small>
-                        {selectedUpcomingHomeTeam?.coach && <small className="match-modal-coach">DT: {selectedUpcomingHomeTeam.coach}</small>}
-                                            </>
-)}
+                        <small>
+                          {getTeamPosition(selectedUpcomingHomeTeam.id)}° •{" "}
+                          {getTeamRecord(selectedUpcomingHomeTeam.id).wins}-{getTeamRecord(selectedUpcomingHomeTeam.id).losses}
+                          {selectedUpcomingHomeTeam.coach && <span className="match-modal-coach"> · DT: {selectedUpcomingHomeTeam.coach}</span>}
+                        </small>
+                      )}
                   </strong>
                 </div>
 
@@ -216,27 +201,12 @@ export default function UpcomingMatchModal({
                       selectedUpcomingAwayTeam?.name}
 
                     {selectedUpcomingAwayTeam && (
-                        <>
-                      <small>
-                        {getTeamPosition(
-                          selectedUpcomingAwayTeam.id
-                        )}
-                        ° •{" "}
-                        {
-                          getTeamRecord(
-                            selectedUpcomingAwayTeam.id
-                          ).wins
-                        }
-                        -
-                        {
-                          getTeamRecord(
-                            selectedUpcomingAwayTeam.id
-                          ).losses
-                        }
-                      </small>
-                        {selectedUpcomingAwayTeam?.coach && <small className="match-modal-coach">DT: {selectedUpcomingAwayTeam.coach}</small>}
-                                            </>
-)}
+                        <small>
+                          {getTeamPosition(selectedUpcomingAwayTeam.id)}° •{" "}
+                          {getTeamRecord(selectedUpcomingAwayTeam.id).wins}-{getTeamRecord(selectedUpcomingAwayTeam.id).losses}
+                          {selectedUpcomingAwayTeam.coach && <span className="match-modal-coach"> · DT: {selectedUpcomingAwayTeam.coach}</span>}
+                        </small>
+                      )}
                   </strong>
                 </div>
               </div>
