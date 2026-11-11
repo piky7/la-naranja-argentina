@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bell, Check, ExternalLink, X } from "lucide-react";
+import { Bell, Check, ExternalLink, Trash2, X } from "lucide-react";
 import { matches } from "../data/matches";
 import { requestPrediction } from "../auth/prodeBallot";
 import "./NotificationBell.css";
@@ -77,6 +77,19 @@ export default function NotificationBell({ user }) {
     if (item.href) navigate(item.href);
   };
 
+  const deleteAnnouncement = async (event, item) => {
+    event.stopPropagation();
+    if (item.type !== "announcement") return;
+    try {
+      const token = await user.getIdToken();
+      const response = await fetch(API + "/api/prode/notifications/" + encodeURIComponent(item.id), {
+        method: "DELETE", headers: { Authorization: "Bearer " + token },
+      });
+      const body = await response.json();
+      if (response.ok && body.ok) setItems(current => current.filter(entry => entry.id !== item.id));
+    } catch { /* Si falla, el aviso permanece en la bandeja para poder reintentar. */ }
+  };
+
   const markAllRead = async () => {
     const unreadItems = items.filter(item => !item.readAt);
     if (!unreadItems.length) return;
@@ -103,9 +116,12 @@ export default function NotificationBell({ user }) {
           {pendingMatches.length > 0 && <button type="button" className="lna-notification-item is-unread" onClick={() => { setOpen(false); navigate("/liga"); }}>
             <span className="lna-notification-dot"/><span><strong>Pronósticos pendientes</strong><small>Todavía tenés {pendingMatches.length} {pendingMatches.length === 1 ? "partido" : "partidos"} de hoy sin completar. Entrá a la Liga para votar.</small><em>Recordatorio automático</em></span>
           </button>}
-          {items.map(item => <button type="button" className={"lna-notification-item" + (!item.readAt ? " is-unread" : "")} key={item.id} onClick={() => openAnnouncement(item)}>
-            {!item.readAt && <span className="lna-notification-dot"/>}<span><strong>{item.title}</strong><small>{item.message}</small><em>{new Date(item.createdAt + (item.createdAt?.endsWith("Z") ? "" : "Z")).toLocaleString("es-AR", { dateStyle: "short", timeStyle: "short" })}{item.href ? " · Ver más" : ""}</em></span>{item.href && <ExternalLink size={15}/>}
-          </button>)}
+          {items.map(item => <div className={"lna-notification-item" + (!item.readAt ? " is-unread" : "")} key={item.id}>
+            <button type="button" className="lna-notification-content" onClick={() => openAnnouncement(item)}>
+              {!item.readAt && <span className="lna-notification-dot"/>}<span><strong>{item.title}</strong><small>{item.message}</small><em>{new Date(item.createdAt + (item.createdAt?.endsWith("Z") ? "" : "Z")).toLocaleString("es-AR", { dateStyle: "short", timeStyle: "short" })}{item.href ? " · Ver más" : ""}</em></span>{item.href && <ExternalLink size={15}/>}
+            </button>
+            {item.type === "announcement" && <button type="button" className="lna-notification-delete" aria-label={"Eliminar notificación: " + item.title} title="Eliminar notificación" onClick={event => deleteAnnouncement(event, item)}><Trash2 size={16}/></button>}
+          </div>)}
           {!loading && !pendingMatches.length && !items.length && <p className="lna-notification-empty"><Check size={20}/> No tenés notificaciones.</p>}
           {loading && !items.length && <p className="lna-notification-empty">Cargando notificaciones…</p>}
         </div>
