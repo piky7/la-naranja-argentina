@@ -53,3 +53,16 @@ test("Render de escudos deportivo y trofeo de liga permanecen separados", () => 
   assert.doesNotMatch(careerAccount,/career-auth-updated/);
   assert.doesNotMatch(profileAccess,/career-auth-updated|visibilitychange/);
 });
+
+
+test("Mi Carrera aplica el rediseño premium únicamente a su página", () => {
+  const read = path => readFileSync(new URL("../"+path,import.meta.url),"utf8");
+  const page = read("src/components/FanLevel.jsx");
+  const styles = read("src/components/FanLevel.css");
+  assert.match(page,/lna-fan-page-eyebrow/);
+  assert.match(page,/Tus puntos, pronósticos y escudo/);
+  assert.match(styles,/\.lna-fan-page-card\s*\{/);
+  assert.match(styles,/\.lna-fan-page-card \.lna-fan-gamer-hero/);
+  assert.match(styles,/\.lna-fan-page-card \.lna-fan-tabs/);
+  assert.match(styles,/@media\(max-width:650px\)/);
+});
