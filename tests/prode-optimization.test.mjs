@@ -151,3 +151,14 @@ test("la migración de votaciones prepara las tablas auxiliares de Mi Carrera", 
     assert.match(migration, new RegExp("CREATE TABLE IF NOT EXISTS " + table));
   }
 });
+
+test("los votos y cambios de ligas invalidan también sus snapshots en memoria", () => {
+  const groups = readFileSync(new URL("../src/components/ProdeGroups.jsx", import.meta.url), "utf8");
+  const cache = readFileSync(new URL("../src/utils/prodeRequestCache.js", import.meta.url), "utf8");
+  const career = readFileSync(new URL("../src/auth/careerAccount.js", import.meta.url), "utf8");
+  assert.match(groups, /addEventListener\("lna-vote-updated", refreshAfterVote\)/);
+  assert.match(groups, /leagueCache\.current\.clear\(\)/);
+  assert.match(groups, /notifyProdeDataUpdated\(\)/);
+  assert.match(cache, /addEventListener\("lna-vote-updated", invalidateProdeReads\)/);
+  assert.match(career, /entry\.expiresAt = Date\.now\(\) \+ CAREER_READ_TTL/);
+});
