@@ -130,11 +130,15 @@ export default function ProdeGroups({ onReady }) {
   useEffect(() => { if (authReady && ready) onReady?.(true); }, [authReady, ready, onReady]);
   useEffect(() => {
     const refresh = () => { if (authReady) load(user); };
+    const refreshAfterMutation = () => {
+      leagueCache.current.clear();
+      refresh();
+    };
     window.addEventListener("prode-page-reopened", refresh);
-    window.addEventListener("prode-data-updated", refresh);
+    window.addEventListener("prode-data-updated", refreshAfterMutation);
     return () => {
       window.removeEventListener("prode-page-reopened", refresh);
-      window.removeEventListener("prode-data-updated", refresh);
+      window.removeEventListener("prode-data-updated", refreshAfterMutation);
     };
   }, [authReady, user]);
   useEffect(() => {
