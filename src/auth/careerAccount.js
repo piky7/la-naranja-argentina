@@ -38,14 +38,40 @@ export async function requireCareerToken() {
   return token;
 }
 
+const careerReads = new Map();
+const CAREER_READ_TTL = 20000;
+
+export function invalidateCareerReads() {
+  careerReads.clear();
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("lna-vote-updated", invalidateCareerReads);
+  window.addEventListener("prode-profile-updated", invalidateCareerReads);
+}
+
 export async function fetchCareerData(kind) {
   const token = await requireCareerToken();
-  const response = await fetch(BASE + "/api/prode/career/data?kind="+encodeURIComponent(kind),{
-    headers:{Authorization:"Bearer "+token},cache:"no-store"
-  });
-  const body = await response.json();
-  if (!response.ok || !body.ok) throw Error(body.error || "Mi Carrera no disponible");
-  return body;
+  const key = token.slice(-16) + ":" + kind;
+  const now = Date.now();
+  const cached = careerReads.get(key);
+  if (cached && cached.expiresAt > now) return cached.promise;
+  const promise = (async () => {
+    const response = await fetch(BASE + "/api/prode/career/data?kind="+encodeURIComponent(kind),{
+      headers:{Authorization:"Bearer "+token},cache:"no-store"
+    });
+    const body = await response.json();
+    if (!response.ok || !body.ok) throw Error(body.error || "Mi Carrera no disponible");
+    return body;
+  })();
+  const entry = { promise, expiresAt: now + CAREER_READ_TTL };
+  careerReads.set(key, entry);
+  if (careerReads.size > 12) careerReads.delete(careerReads.keys().next().value);
+  try { return await promise; }
+  catch (error) {
+    if (careerReads.get(key) === entry) careerReads.delete(key);
+    throw error;
+  }
 }
 
 export async function fetchCareerJersey() {
