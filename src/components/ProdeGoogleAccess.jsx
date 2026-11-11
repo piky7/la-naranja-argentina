@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { LogIn, LogOut, ShieldCheck, X, LockKeyhole } from "lucide-react";
+import { LogIn, ShieldCheck, LockKeyhole } from "lucide-react";
 import { Link } from "react-router-dom";
-import { signInProdeWithGoogle, signOutProde, watchProdeUser } from "../auth/prodeAuth";
+import { signInProdeWithGoogle, watchProdeUser } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
 import { ensureGoogleCareer } from "../auth/careerAccount";
 
@@ -25,7 +25,6 @@ export default function ProdeGoogleAccess({ onReady }) {
   const [error, setError] = useState("");
   const [profile, setProfile] = useState(null);
   const [syncing, setSyncing] = useState(false);
-  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const [voteSourceError, setVoteSourceError] = useState("");
   const [careerLink, setCareerLink] = useState(null);
   const [linkNotice, setLinkNotice] = useState(false);
@@ -135,13 +134,7 @@ export default function ProdeGoogleAccess({ onReady }) {
     finally { setBusy(false); }
   };
 
-  const logout = async () => {
-    if (busy) return;
-    setBusy(true);
-    try { await signOutProde(); setLogoutConfirmOpen(false); }
-    catch { setError("No se pudo cerrar la sesión."); }
-    finally { setBusy(false); }
-  };
+
 
   return (
     <div className="prode-google-access">
@@ -154,7 +147,7 @@ export default function ProdeGoogleAccess({ onReady }) {
                 <strong>{profile?.username || profile?.googleName || "Elegí tu nombre de usuario"}</strong>
                 <div className="prode-account-actions">
                   {adminAllowed && <Link className="prode-admin-entry" to="/admin" title="Panel de administración" aria-label="Abrir panel de administración de LNA"><LockKeyhole size={17}/></Link>}
-                  <button type="button" className="prode-account-icon prode-account-logout" title="Cerrar sesión" aria-label="Cerrar sesión" onClick={() => setLogoutConfirmOpen(true)} disabled={busy}><LogOut size={17}/></button>
+                  
                 </div>
               </div>
               <span>{syncing ? "Registrando perfil Prode…" : profile?.username ? "Tu identidad pública en Prode LNA" : "Se muestra tu nombre de Google hasta que elijas un alias"}</span>
@@ -173,19 +166,7 @@ export default function ProdeGoogleAccess({ onReady }) {
       )}
       {error && <p role="alert">{error}</p>}
       {user && voteSourceError && <p role="status" className="prode-group-error">Pronósticos Prode: {voteSourceError}</p>}
-      {logoutConfirmOpen && <div className="prode-dialog-backdrop" onClick={() => !busy && setLogoutConfirmOpen(false)}>
-        <div className="prode-dialog" role="alertdialog" aria-modal="true" aria-labelledby="prode-logout-title" aria-describedby="prode-logout-description" onClick={e => e.stopPropagation()}>
-          <div className="prode-dialog-heading">
-            <h3 id="prode-logout-title">¿Querés cerrar sesión?</h3>
-            <button type="button" aria-label="Cancelar cierre de sesión" disabled={busy} onClick={() => setLogoutConfirmOpen(false)}><X size={20}/></button>
-          </div>
-          <p id="prode-logout-description">Vas a salir de tu cuenta Prode. Podés volver a ingresar con Google cuando quieras.</p>
-          <div style={{ display: "flex", gap: 12 }}>
-            <button type="button" className="prode-create-submit" style={{ flex: 1, background: "#273f48", color: "#f2f7f5" }} disabled={busy} onClick={() => setLogoutConfirmOpen(false)}>Cancelar</button>
-            <button type="button" className="prode-create-submit" style={{ flex: 1 }} disabled={busy} onClick={logout}>{busy ? "Saliendo…" : "Cerrar sesión"}</button>
-          </div>
-        </div>
-      </div>}
+
 
     </div>
   );
