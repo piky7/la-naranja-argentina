@@ -868,6 +868,7 @@ const selectedUpcomingAwayTeam = selectedUpcomingMatch
                 {team.city},{" "}
                 {team.province}
               </p>
+              {team.coach && <p className="team-head-coach">Director técnico: <strong>{team.coach}</strong></p>}
 
             </div>
 
