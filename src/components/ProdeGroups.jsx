@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import ProdeCrest from "./ProdeCrest";
 import ProdeWeeklyAwards from "./ProdeWeeklyAwards";
 import ProdeCareerDetails from "./ProdeCareerDetails";
+import { fetchProdeRead } from "../utils/prodeRequestCache";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 const inviteUrl = token => "https://lanaranjaargentina.com.ar/invitacion?token=" + encodeURIComponent(token);
@@ -119,10 +120,7 @@ export default function ProdeGroups({ onReady }) {
   const load = async (current) => {
     if (!current) { setGroups([]); setReady(true); return; }
     try {
-      const token = await current.getIdToken();
-      const res = await fetch(API + "/api/prode/groups/mine", { headers: { Authorization: "Bearer " + token } });
-      const data = await res.json();
-      if (!res.ok || !data.ok) throw Error(data.error || "No se pudieron cargar tus ligas");
+      const data = await fetchProdeRead("/api/prode/groups/mine", current);
       setGroups(data.groups || []);
       setError("");
     } catch (e) { setError(e.message || "Error de conexión"); }
