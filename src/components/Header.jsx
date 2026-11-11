@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import CareerProfileAccess from "./CareerProfileAccess";
-import { House, Trophy, Shield, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
+import { House, Trophy, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
 
 function Header() {
   const [navCompact, setNavCompact] = useState(false);
@@ -178,16 +178,6 @@ function Header() {
   >
     <Trophy size={22} strokeWidth={2} aria-hidden="true" />
     <span>Liga</span>
-  </NavLink>
-
-  <NavLink
-    to="/equipos"
-    className={({ isActive }) =>
-      `bottom-nav-link ${isActive ? "active" : ""}`
-    }
-  >
-    <Shield size={22} strokeWidth={2} aria-hidden="true" />
-    <span>Equipos</span>
   </NavLink>
 
 
