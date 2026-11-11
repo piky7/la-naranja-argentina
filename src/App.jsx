@@ -90,6 +90,7 @@ function AnimatedRoutes() {
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/prode" element={null} />
+        {/* Mi Carrera y el perfil del usuario son páginas independientes. */}
         <Route path="/mi-carrera" element={<MiCarrera />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/admin" element={<Admin />} />
