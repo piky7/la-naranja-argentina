@@ -18,6 +18,7 @@ const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Acerca = lazy(() => import("./pages/Acerca"));
 const Prode = lazy(() => import("./pages/Prode"));
 const Admin = lazy(() => import("./pages/Admin"));
+const EstadioPreview = lazy(() => import("./pages/EstadioPreview"));
 
 // Precarga suave: no bloquea el render inicial ni consume datos extra
 // en conexiones lentas o con ahorro de datos activado.
@@ -89,6 +90,7 @@ function AnimatedRoutes() {
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/prode" element={null} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/mi-estadio-preview" element={<EstadioPreview />} />
         <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
           const params = new URLSearchParams(location.search);
           const token = params.get("token") || params.get("invite");
