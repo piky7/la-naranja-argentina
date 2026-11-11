@@ -64,3 +64,16 @@ test("el panel administrador envía título, mensaje y enlace opcional", () => {
   assert.match(admin, /JSON\.stringify\(\{ title, message, href:/);
   assert.match(admin, /Enviar a todos los usuarios/);
 });
+
+test("el usuario puede eliminar solo avisos generales de su propia bandeja", () => {
+  assert.match(worker, /access-control-allow-methods": "GET, POST, DELETE, OPTIONS"/);
+  const start = worker.indexOf("const deleteNotificationMatch");
+  const end = worker.indexOf("const readNotificationMatch", start);
+  const route = worker.slice(start, end);
+  assert.match(route, /request\.method === "DELETE"/);
+  assert.match(route, /verifiedFirebaseUser\(request\)/);
+  assert.match(route, /DELETE FROM lna_notifications WHERE id=\? AND user_id=\? AND type='announcement'/);
+  assert.match(bell, /method: "DELETE"/);
+  assert.match(bell, /item\.type === "announcement"/);
+  assert.match(bell, /setItems\(current => current\.filter\(entry => entry\.id !== item\.id\)\)/);
+});
