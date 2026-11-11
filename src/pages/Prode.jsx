@@ -4,8 +4,20 @@ import "./Prode.css";
 import ProdeGoogleAccess from "../components/ProdeGoogleAccess";
 import ProdeGroups from "../components/ProdeGroups";
 import ProdeGlobalWeeklyAward from "../components/ProdeGlobalWeeklyAward";
+import { useEffect } from "react";
 
 export default function Prode() {
+  useEffect(() => {
+    const id = "lna-prode-fonts";
+    if (document.getElementById(id)) return;
+    const link = document.createElement("link");
+    link.id = id;
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Russo+One&display=swap";
+    link.media = "print";
+    link.onload = () => { link.media = "all"; };
+    document.head.appendChild(link);
+  }, []);
   return (
     <main className="prode-page prode-home-redesign">
       <div className="prode-container">
