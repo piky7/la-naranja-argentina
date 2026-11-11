@@ -69,3 +69,10 @@ test("El cron archiva solo partidos del fixture y no relee toda la tabla histór
   assert.match(archive,/slice\(i, i \+ 80\)/);
   assert.doesNotMatch(archive,/FROM carrera_partidos"\)\.all\(\)/);
 });
+
+test("Las consultas de detección de finales se limitan a los partidos necesarios",()=>{
+  assert.match(worker,/async function getFinishObservations\(db, gameIds = null\)/);
+  assert.match(worker,/WHERE partido_id IN \(\$\{placeholders\}\)/);
+  assert.match(worker,/getFinishObservations\(db, fixture\.games\.map\(game => game\?\.id\)\)/);
+  assert.match(worker,/getFinishObservations\(env\.DB, predictions\.map\(prediction => prediction\.partidoId\)\)/);
+});
