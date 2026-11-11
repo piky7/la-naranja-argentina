@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 
 const sql = readFileSync(new URL("../database/prode/001_initial.sql", import.meta.url), "utf8");
 const runtimeMigration = readFileSync(new URL("../database/prode/002_runtime_tables.sql", import.meta.url), "utf8");
+const readIndexes = readFileSync(new URL("../database/prode/004_read_indexes.sql", import.meta.url), "utf8");
 const worker = readFileSync(new URL("../workers/prode/worker.js", import.meta.url), "utf8");
 const profileStart = worker.indexOf('if (url.pathname === "/api/prode/me"');
 const profileEnd = worker.indexOf('if (url.pathname === "/api/prode/profile/username"', profileStart);
@@ -44,4 +45,12 @@ test("Las tablas operativas de Prode se crean en migración, no durante las peti
     "prode_career_jerseys", "prode_league_starts", "prode_initial_points", "prode_season_archives",
   ]) assert.match(runtimeMigration, new RegExp("CREATE TABLE IF NOT EXISTS " + table));
   assert.match(runtimeMigration, /INSERT OR IGNORE INTO prode_membership_periods/);
+});
+
+test("Los índices cubren períodos activos y orden cronológico de membresías", () => {
+  assert.match(readIndexes, /idx_prode_membership_periods_group_entered/);
+  assert.match(readIndexes, /ON prode_membership_periods\(group_id, entered_at\)/);
+  assert.match(readIndexes, /idx_prode_membership_periods_active/);
+  assert.match(readIndexes, /ON prode_membership_periods\(group_id, user_id\)\s+WHERE exited_at IS NULL/);
+  assert.match(worker, /FROM prode_membership_periods WHERE group_id=\? ORDER BY entered_at/);
 });
