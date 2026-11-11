@@ -290,3 +290,33 @@
     font-size: 9px;
   }
 }
+
+
+/* Próximo partido: viewport visible real en navegadores móviles.
+   Safari/Chrome pueden mantener barras del navegador superpuestas al viewport
+   de layout; dvh + safe-area evita que el encabezado quede debajo de ellas. */
+.match-modal-overlay:has(> .match-modal-upcoming) {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  padding-top: max(12px, env(safe-area-inset-top, 0px));
+  padding-right: max(12px, env(safe-area-inset-right, 0px));
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(12px, env(safe-area-inset-left, 0px));
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+.match-modal-overlay:has(> .match-modal-upcoming) > .match-modal-upcoming {
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - max(12px, env(safe-area-inset-top, 0px)) - max(24px, env(safe-area-inset-bottom, 0px)) - 12px);
+  margin-top: 0;
+  margin-bottom: 12px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
