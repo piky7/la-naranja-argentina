@@ -19,11 +19,16 @@ test("Las páginas secundarias se descargan solo cuando se navega a ellas",()=>{
   assert.doesNotMatch(source,/import Prode from /);
 });
 
-test("Liga y Estadísticas conservan precarga controlada sin bloquear la portada",()=>{
-  assert.match(source,/const Liga = lazy\(loadLiga\)/);
-  assert.match(source,/const Estadisticas = lazy\(loadEstadisticas\)/);
+test("La precarga de secciones solo se inicia desde Inicio",()=>{
+  assert.match(source,/const location = useLocation\(\)/);
+  assert.match(source,/location\.pathname !== "\/"/);
+  assert.match(source,/const preloadStarted = useRef\(false\)/);
+  assert.match(source,/preloadStarted\.current = true/);
+  assert.match(source,/\}, \[location\.pathname\]\)/);
   assert.match(source,/connection\?\.saveData/);
   assert.match(source,/requestIdleCallback/);
+  assert.match(source,/const Liga = lazy\(loadLiga\)/);
+  assert.match(source,/const Estadisticas = lazy\(loadEstadisticas\)/);
 });
 
 test("Prode se mantiene montado tras primera visita, con Suspense propio",()=>{
