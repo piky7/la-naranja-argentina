@@ -114,3 +114,33 @@
 .match-modal-coach-item span{color:#91a4b8;font-size:8px;font-weight:800;letter-spacing:1px}
 .match-modal-coach-item strong{color:#ffb36e;font-size:11px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:380px){.match-modal-coaches{margin-left:8px;margin-right:8px;padding:6px 7px;gap:5px}.match-modal-coach-item strong{font-size:10px}.match-modal-coach-item+ .match-modal-coach-item{padding-left:7px}}
+
+/* iPhone: mantener el popup debajo del área segura y el cierre dentro del panel. */
+@media(max-width:600px){
+  .match-modal-overlay:has(> .match-modal-upcoming){
+    display:flex!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    height:100dvh!important;
+    min-height:100dvh!important;
+    padding: max(18px, env(safe-area-inset-top)) 10px max(20px, env(safe-area-inset-bottom))!important;
+    box-sizing:border-box!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+  .match-modal-overlay:has(> .match-modal-upcoming) > .match-modal-upcoming{
+    position:relative!important;
+    width:100%!important;
+    max-width:520px!important;
+    max-height:calc(100dvh - max(18px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)))!important;
+    margin:0 auto 12px!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+  }
+  .match-modal-upcoming > .match-modal-close{
+    position:absolute!important;
+    top:10px!important;
+    right:10px!important;
+    z-index:20!important;
+  }
+}
