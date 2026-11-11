@@ -143,6 +143,7 @@ export default function UpcomingMatchModal({
                       selectedUpcomingHomeTeam?.name}
 
                     {selectedUpcomingHomeTeam && (
+                        <>
                       <small>
                         {getTeamPosition(
                           selectedUpcomingHomeTeam.id
@@ -161,7 +162,8 @@ export default function UpcomingMatchModal({
                         }
                       </small>
                         {selectedUpcomingHomeTeam?.coach && <small className="match-modal-coach">DT: {selectedUpcomingHomeTeam.coach}</small>}
-                    )}
+                                            </>
+)}
                   </strong>
                 </div>
 
@@ -214,6 +216,7 @@ export default function UpcomingMatchModal({
                       selectedUpcomingAwayTeam?.name}
 
                     {selectedUpcomingAwayTeam && (
+                        <>
                       <small>
                         {getTeamPosition(
                           selectedUpcomingAwayTeam.id
@@ -232,7 +235,8 @@ export default function UpcomingMatchModal({
                         }
                       </small>
                         {selectedUpcomingAwayTeam?.coach && <small className="match-modal-coach">DT: {selectedUpcomingAwayTeam.coach}</small>}
-                    )}
+                                            </>
+)}
                   </strong>
                 </div>
               </div>
