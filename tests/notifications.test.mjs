@@ -49,7 +49,7 @@ test("la campanita une avisos generales y recordatorios de votación activos", (
   assert.match(bell, /requestPrediction\("winner"/);
   assert.match(bell, /requestPrediction\("mvp"/);
   assert.match(bell, /setPendingMatches\(checks\.filter\(Boolean\)\)/);
-  assert.match(bell, /items\.filter\(item => !item\.readAt\)\.length \+ pendingMatches\.length/);
+  assert.match(bell, /items\.filter\(item => !item\.readAt\)\.length \+ \(pendingMatches\.length \? 1 : 0\)/);
   assert.match(bell, /lna-vote-updated/);
   assert.match(bell, /if \(!user\) return null/);
 });
