@@ -129,7 +129,23 @@ function timelyFinishObservation(game, observedAt) {
   return Number.isFinite(start) && Number.isFinite(end) &&
     end >= start && end - start <= 6 * 60 * 60 * 1000 ? observedAt : null;
 }
-async function getFinishObservations(db) {
+async function getFinishObservations(db, gameIds = null) {
+  // Las rutas que ya conocen sus partidos consultan solo esas claves.
+  // Se evita recorrer detecciones históricas ajenas al fixture o usuario.
+  if (Array.isArray(gameIds)) {
+    const ids = [...new Set(gameIds.filter(id => typeof id === "string" && id.length <= 120))];
+    const observations = new Map();
+    for (let i = 0; i < ids.length; i += 80) {
+      const chunk = ids.slice(i, i + 80);
+      if (!chunk.length) continue;
+      const placeholders = chunk.map(() => "?").join(",");
+      const rows = await db.prepare(
+        `SELECT partido_id, detectado_en FROM partidos_final_detectado WHERE partido_id IN (${placeholders})`
+      ).bind(...chunk).all();
+      for (const row of rows.results || []) observations.set(row.partido_id, row.detectado_en);
+    }
+    return observations;
+  }
   const rows = await db.prepare("SELECT partido_id, detectado_en FROM partidos_final_detectado").all();
   return new Map((rows.results || []).map(row => [row.partido_id,row.detectado_en]));
 }
@@ -202,7 +218,7 @@ async function calculateRewards(db, fixture, visitorId) {
     db.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=?").bind(visitorId).all(),
     db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first(),
     db.prepare("SELECT MIN(partido_id) AS first_id FROM votos_mvp").first(),
-    getFinishObservations(db),
+    getFinishObservations(db, fixture.games.map(game => game?.id)),
   ]);
   const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
   const mvpMap = new Map((mvpVotes.results || []).map(v => [v.partido_id, v.jugador_id]));
@@ -378,7 +394,7 @@ export default {
         ]);
         if (!fixtureResponse.ok) throw Error("Fixture no disponible");
         const fixture = await loadCareerFixture(env.DB, await fixtureResponse.json());
-        const finalObservations = await getFinishObservations(env.DB);
+        const finalObservations = await getFinishObservations(env.DB, fixture.games.map(game => game?.id));
         const byVote = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
         const byMvp = new Map((mvpVotes.results || []).map(v => [v.partido_id, v.jugador_id]));
         const games = fixture.games.filter(g => g?.id && Number.isFinite(Date.parse(g.startsAt)))
@@ -444,7 +460,7 @@ export default {
         });
         // Usar la MISMA secuencia individual que el cálculo de rachas:
         // hora de inicio, final observado válido y desempate por acierto.
-        const finishTimes = await getFinishObservations(env.DB);
+        const finishTimes = await getFinishObservations(env.DB, predictions.map(prediction => prediction.partidoId));
         const sequence = [...predictions].sort((a,b) => {
           const startA = Date.parse(a.startsAt || "");
           const startB = Date.parse(b.startsAt || "");
