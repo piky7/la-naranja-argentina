@@ -62,7 +62,7 @@ const headers = {
   "content-type": "application/json; charset=utf-8",
   "cache-control": "no-store",
   "access-control-allow-origin": SITE,
-  "access-control-allow-methods": "GET, POST, OPTIONS",
+  "access-control-allow-methods": "GET, POST, DELETE, OPTIONS",
   "access-control-allow-headers": "authorization, content-type",
   "vary": "Origin",
 };
@@ -269,6 +269,20 @@ export default {
         return reply({ ok: true, notifications, unreadCount: notifications.filter(item => !item.readAt).length });
       } catch {
         return reply({ ok: false, error: "No se pudieron cargar las notificaciones" }, 503);
+      }
+    }
+    const deleteNotificationMatch = url.pathname.match(/^\/api\/prode\/notifications\/([a-f0-9-]{16,64})$/i);
+    if (deleteNotificationMatch && request.method === "DELETE") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no disponible" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión requerida" }, 401);
+      try {
+        const result = await env.DB.prepare(
+          "DELETE FROM lna_notifications WHERE id=? AND user_id=? AND type='announcement'"
+        ).bind(deleteNotificationMatch[1], "firebase:" + identity.uid).run();
+        return reply({ ok: true, deleted: Number(result.meta?.changes || 0) });
+      } catch {
+        return reply({ ok: false, error: "No se pudo eliminar la notificación" }, 503);
       }
     }
     const readNotificationMatch = url.pathname.match(/^\/api\/prode\/notifications\/([a-f0-9-]{16,64})\/read$/i);
