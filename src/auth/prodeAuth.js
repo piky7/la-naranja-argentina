@@ -16,9 +16,39 @@ async function sdk() {
   return sdkPromise;
 }
 
+// Un único observador Firebase para toda la aplicación. Los componentes se
+// suscriben a este emisor compartido en lugar de abrir listeners independientes.
+const authSubscribers = new Set();
+let authObserverPromise = null;
+
+async function ensureSharedAuthObserver() {
+  if (authObserverPromise) return authObserverPromise;
+  authObserverPromise = (async () => {
+    const { authSdk, auth } = await sdk();
+    return authSdk.onAuthStateChanged(auth, user => {
+      for (const subscriber of [...authSubscribers]) {
+        try { subscriber(user); } catch (error) {
+          console.error("LNA: error notificando sesión Google", error);
+        }
+      }
+    });
+  })().catch(error => {
+    authObserverPromise = null;
+    throw error;
+  });
+  return authObserverPromise;
+}
+
 export async function watchProdeUser(callback) {
-  const { authSdk, auth } = await sdk();
-  return authSdk.onAuthStateChanged(auth, callback);
+  if (typeof callback !== "function") throw new TypeError("Se requiere una función para observar la sesión");
+  authSubscribers.add(callback);
+  try {
+    await ensureSharedAuthObserver();
+  } catch (error) {
+    authSubscribers.delete(callback);
+    throw error;
+  }
+  return () => authSubscribers.delete(callback);
 }
 
 export async function signInProdeWithGoogle() {
