@@ -32,7 +32,7 @@ test("El aviso de puntos conserva el seguimiento de recompensas y su desglose", 
 });
 
 test("El recordatorio de pronósticos vive en la campanita y desaparece al completar los votos", () => {
-  assert.match(notificationBell, /America\\/Argentina\\/Buenos_Aires/);
+  assert.match(notificationBell, /America\/Argentina\/Buenos_Aires/);
   assert.match(notificationBell, /match\.date === today/);
   assert.match(notificationBell, /requestPrediction\("winner", gameId\)/);
   assert.match(notificationBell, /requestPrediction\("mvp", gameId\)/);
