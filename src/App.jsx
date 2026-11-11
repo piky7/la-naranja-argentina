@@ -47,9 +47,15 @@ function PreloadSections() {
           if (!active || !user || warmedUsers.has(user.uid)) return;
           warmedUsers.add(user.uid);
           void Promise.allSettled([
+            // Prode: ligas, rankings, identidad, vínculo, permisos y premio semanal.
             fetchProdeRead("/api/prode/groups/mine", user),
             fetchProdeRead("/api/prode/ranking/historical", user),
             fetchProdeRead("/api/prode/ranking/weekly", user),
+            fetchProdeRead("/api/prode/ranking/weekly/awards", user),
+            fetchProdeRead("/api/prode/me", user),
+            fetchProdeRead("/api/prode/career-link", user),
+            fetchProdeRead("/api/prode/admin/access", user),
+            // Mi Carrera: resumen de puntos y pronósticos recientes.
             fetchCareerData("points"),
             fetchCareerData("predictions"),
           ]);
