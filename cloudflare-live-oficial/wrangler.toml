@@ -12,3 +12,6 @@ id = "6f5403a4700f40a1b1c656606dbb1040"
 
 [observability]
 enabled = true
+
+[cache]
+enabled = true
