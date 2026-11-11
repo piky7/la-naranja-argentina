@@ -77,7 +77,7 @@ export default function CareerEntryNotices() {
         } catch { previous = {}; }
         const changes = rewarded.filter(p => Number(p.earned) > Number(previous[p.partidoId] || 0));
         const snapshot = Object.fromEntries(rewarded.map(p => [p.partidoId, Number(p.earned)]));
-        try { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); } catch {}
+        try { localStorage.setItem(REWARD_SEEN_KEY, JSON.stringify(snapshot)); } catch { /* La notificación puede repetirse si el navegador bloquea el almacenamiento. */ }
         const next = [];
         if (changes.length) {
           const total = changes.reduce((sum, p) => sum + Number(p.earned) - Number(previous[p.partidoId] || 0), 0);
@@ -91,7 +91,7 @@ export default function CareerEntryNotices() {
 
         const today = argentinaToday();
         let voteNoticeAlreadyShown = false;
-        try { voteNoticeAlreadyShown = sessionStorage.getItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`) === today; } catch {}
+        try { voteNoticeAlreadyShown = sessionStorage.getItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`) === today; } catch { /* Sin sessionStorage, se prioriza mostrar el aviso. */ }
         if (!voteNoticeAlreadyShown) {
           const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
           const checks = await Promise.all(gamesToday.map(async match => {
@@ -103,7 +103,7 @@ export default function CareerEntryNotices() {
           }));
           const pending = checks.filter(Boolean);
           if (active && pending.length) {
-            try { sessionStorage.setItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`, today); } catch {}
+            try { sessionStorage.setItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`, today); } catch { /* El aviso queda limitado al estado actual de la app. */ }
             next.push({ type: "vote", date: today, pendingCount: pending.length });
           }
         }
