@@ -149,6 +149,7 @@ export default function FinishedMatchModal({
                         selectedMatchHomeTeam?.name}
 
                       {selectedMatchHomeTeam && (
+                        <>
                         <small>
                           {getTeamPosition(
                             selectedMatchHomeTeam.id
@@ -167,7 +168,8 @@ export default function FinishedMatchModal({
                           }
                         </small>
                         {selectedMatchHomeTeam?.coach && <small className="match-modal-coach">DT: {selectedMatchHomeTeam.coach}</small>}
-                      )}
+                                              </>
+)}
                     </strong>
                   </div>
 
@@ -209,6 +211,7 @@ export default function FinishedMatchModal({
                         selectedMatchAwayTeam?.name}
 
                       {selectedMatchAwayTeam && (
+                        <>
                         <small>
                           {getTeamPosition(
                             selectedMatchAwayTeam.id
@@ -227,7 +230,8 @@ export default function FinishedMatchModal({
                           }
                         </small>
                         {selectedMatchAwayTeam?.coach && <small className="match-modal-coach">DT: {selectedMatchAwayTeam.coach}</small>}
-                      )}
+                                              </>
+)}
                     </strong>
                   </div>
                 </div>
