@@ -147,7 +147,6 @@ export default function UpcomingMatchModal({
                         <small>
                           {getTeamPosition(selectedUpcomingHomeTeam.id)}° •{" "}
                           {getTeamRecord(selectedUpcomingHomeTeam.id).wins}-{getTeamRecord(selectedUpcomingHomeTeam.id).losses}
-                          {selectedUpcomingHomeTeam.coach && <span className="match-modal-coach"> · DT: {selectedUpcomingHomeTeam.coach}</span>}
                         </small>
                       )}
                   </strong>
@@ -205,13 +204,18 @@ export default function UpcomingMatchModal({
                         <small>
                           {getTeamPosition(selectedUpcomingAwayTeam.id)}° •{" "}
                           {getTeamRecord(selectedUpcomingAwayTeam.id).wins}-{getTeamRecord(selectedUpcomingAwayTeam.id).losses}
-                          {selectedUpcomingAwayTeam.coach && <span className="match-modal-coach"> · DT: {selectedUpcomingAwayTeam.coach}</span>}
                         </small>
                       )}
                   </strong>
                 </div>
               </div>
             </div>
+            {(selectedUpcomingHomeTeam?.coach || selectedUpcomingAwayTeam?.coach) && (
+              <div className="match-modal-coaches" aria-label="Directores técnicos">
+                {selectedUpcomingHomeTeam?.coach && <div className="match-modal-coach-item"><span>DT LOCAL</span><strong>{selectedUpcomingHomeTeam.coach}</strong></div>}
+                {selectedUpcomingAwayTeam?.coach && <div className="match-modal-coach-item"><span>DT VISITANTE</span><strong>{selectedUpcomingAwayTeam.coach}</strong></div>}
+              </div>
+            )}
 
             <LiveMatchInfo live={upcomingLive} homeName={selectedUpcomingHomeTeam?.shortName || selectedUpcomingHomeTeam?.name || selectedUpcomingMatch.homeTeam} awayName={selectedUpcomingAwayTeam?.shortName || selectedUpcomingAwayTeam?.name || selectedUpcomingMatch.awayTeam} />
             {upcomingLive && <>
