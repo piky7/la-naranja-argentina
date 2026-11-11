@@ -102,3 +102,6 @@
 .match-modal-upcoming .match-modal-header .match-modal-score::after{
   content:none!important;display:none!important;
 }
+
+
+.match-modal-coach{display:block!important;margin-top:4px;color:#ffb36e!important;font-size:10px!important;font-weight:700;line-height:1.25;white-space:normal!important}
