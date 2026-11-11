@@ -1,0 +1,116 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Bell, Check, ExternalLink, X } from "lucide-react";
+import { matches } from "../data/matches";
+import { requestPrediction } from "../auth/prodeBallot";
+import "./NotificationBell.css";
+
+const API = "https://lna-prode-api.lnab.workers.dev";
+
+function argentinaToday() {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(new Date()).map(part => [part.type, part.value]));
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
+export default function NotificationBell({ user }) {
+  const navigate = useNavigate();
+  const [items, setItems] = useState([]);
+  const [pendingMatches, setPendingMatches] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const loadInbox = useCallback(async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      const token = await user.getIdToken();
+      const response = await fetch(API + "/api/prode/notifications", {
+        headers: { Authorization: "Bearer " + token }, cache: "no-store",
+      });
+      const body = await response.json();
+      if (response.ok && body.ok) setItems(Array.isArray(body.notifications) ? body.notifications : []);
+    } catch { /* La campana no debe afectar la navegación si el servicio no responde. */ }
+    finally { setLoading(false); }
+  }, [user]);
+
+  const refreshPending = useCallback(async () => {
+    if (!user) return;
+    const today = argentinaToday();
+    const todaysGames = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
+    const checks = await Promise.all(todaysGames.map(async match => {
+      const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
+      const [winner, mvp] = await Promise.allSettled([
+        requestPrediction("winner", gameId),
+        requestPrediction("mvp", gameId),
+      ]);
+      const winnerPending = winner.status === "fulfilled" && winner.value.open && !winner.value.voted;
+      const mvpPending = mvp.status === "fulfilled" && mvp.value.open && !mvp.value.voted;
+      if (winner.status === "rejected" && mvp.status === "rejected") return null;
+      return winnerPending || mvpPending ? { id: gameId, title: "Pronósticos pendientes", message: "Todavía tenés partidos de hoy sin completar. Entrá a la Liga para votar.", href: "/liga", automatic: true } : null;
+    }));
+    setPendingMatches(checks.filter(Boolean));
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) { setItems([]); setPendingMatches([]); setOpen(false); return; }
+    loadInbox();
+    refreshPending();
+    const onUpdate = () => { loadInbox(); refreshPending(); };
+    window.addEventListener("lna-vote-updated", onUpdate);
+    const interval = window.setInterval(() => { loadInbox(); refreshPending(); }, 60000);
+    return () => { window.removeEventListener("lna-vote-updated", onUpdate); window.clearInterval(interval); };
+  }, [user?.uid, loadInbox, refreshPending]);
+
+  const unread = useMemo(() => items.filter(item => !item.readAt).length + pendingMatches.length, [items, pendingMatches]);
+
+  const openAnnouncement = async item => {
+    try {
+      const token = await user.getIdToken();
+      await fetch(API + "/api/prode/notifications/" + encodeURIComponent(item.id) + "/read", {
+        method: "POST", headers: { Authorization: "Bearer " + token },
+      });
+    } catch { /* Se puede abrir el destino aunque falle el marcado de lectura. */ }
+    setItems(current => current.map(entry => entry.id === item.id ? { ...entry, readAt: new Date().toISOString() } : entry));
+    setOpen(false);
+    if (item.href) navigate(item.href);
+  };
+
+  const markAllRead = async () => {
+    const unreadItems = items.filter(item => !item.readAt);
+    if (!unreadItems.length) return;
+    try {
+      const token = await user.getIdToken();
+      await Promise.all(unreadItems.map(item => fetch(API + "/api/prode/notifications/" + encodeURIComponent(item.id) + "/read", {
+        method: "POST", headers: { Authorization: "Bearer " + token },
+      })));
+      setItems(current => current.map(item => ({ ...item, readAt: item.readAt || new Date().toISOString() })));
+    } catch { /* Mantener el estado local sin cerrar la bandeja. */ }
+  };
+
+  if (!user) return null;
+  return <div className="lna-notification-wrap">
+    <button type="button" className={"lna-notification-trigger" + (open ? " is-open" : "")} onClick={() => setOpen(value => !value)} aria-label={unread ? `Notificaciones: ${unread} sin leer` : "Notificaciones"} aria-expanded={open}>
+      <Bell size={21} strokeWidth={2.2}/>
+      {unread > 0 && <span className="lna-notification-count">{unread > 99 ? "99+" : unread}</span>}
+    </button>
+    {open && <>
+      <button type="button" className="lna-notification-dismiss" aria-label="Cerrar notificaciones" onClick={() => setOpen(false)}/>
+      <section className="lna-notification-panel" aria-label="Centro de notificaciones">
+        <header><div><span>LNA</span><strong>Notificaciones</strong></div><button type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={18}/></button></header>
+        <div className="lna-notification-list">
+          {pendingMatches.map(item => <button type="button" className="lna-notification-item is-unread" key={item.id} onClick={() => { setOpen(false); navigate(item.href); }}>
+            <span className="lna-notification-dot"/><span><strong>{item.title}</strong><small>{item.message}</small><em>Recordatorio automático</em></span>
+          </button>)}
+          {items.map(item => <button type="button" className={"lna-notification-item" + (!item.readAt ? " is-unread" : "")} key={item.id} onClick={() => openAnnouncement(item)}>
+            {!item.readAt && <span className="lna-notification-dot"/>}<span><strong>{item.title}</strong><small>{item.message}</small><em>{new Date(item.createdAt + (item.createdAt?.endsWith("Z") ? "" : "Z")).toLocaleString("es-AR", { dateStyle: "short", timeStyle: "short" })}{item.href ? " · Ver más" : ""}</em></span>{item.href && <ExternalLink size={15}/>}
+          </button>)}
+          {!loading && !pendingMatches.length && !items.length && <p className="lna-notification-empty"><Check size={20}/> No tenés notificaciones.</p>}
+          {loading && !items.length && <p className="lna-notification-empty">Cargando notificaciones…</p>}
+        </div>
+        {items.some(item => !item.readAt) && <footer><button type="button" onClick={markAllRead}>Marcar todas como leídas</button></footer>}
+      </section>
+    </>}
+  </div>;
+}
