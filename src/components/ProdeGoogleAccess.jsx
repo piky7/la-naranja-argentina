@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { signInProdeWithGoogle, watchProdeUser } from "../auth/prodeAuth";
 import ProdeCrest from "./ProdeCrest";
 import { ensureGoogleCareer } from "../auth/careerAccount";
+import { fetchProdeRead } from "../utils/prodeRequestCache";
 
 
 const PRODE_API = "https://lna-prode-api.lnab.workers.dev";
@@ -67,13 +68,8 @@ export default function ProdeGoogleAccess({ onReady }) {
       // Tanto Mi Carrera como Prode consultan una única identidad Google.
       // La inicialización es idempotente y no reemplaza una carrera ya vinculada.
       await ensureGoogleCareer(token);
-      const linkRes = await fetch(PRODE_API + "/api/prode/career-link", {
-        headers: { Authorization: "Bearer " + token }, cache: "no-store"
-      });
-      if (linkRes.ok) {
-        const link = await linkRes.json();
-        if (active) setCareerLink(Boolean(link.linked));
-      }
+      const link = await fetchProdeRead("/api/prode/career-link", user);
+      if (active) setCareerLink(Boolean(link.linked));
       // La carga inicial no modifica el perfil: no notificar al encabezado
       // para evitar que vuelva a consultar escudo y puntos al entrar a Prode.
     }).catch(() => {
@@ -89,14 +85,9 @@ export default function ProdeGoogleAccess({ onReady }) {
     let active = true;
     setAdminAllowed(false);
     if (!user) return () => { active = false; };
-    user.getIdToken().then(token => fetch(PRODE_API + "/api/prode/admin/access", {
-      headers: { Authorization: "Bearer " + token },
-      cache: "no-store"
-    })).then(async response => {
-      if (!response.ok) return;
-      const result = await response.json();
-      if (active && result.ok && result.admin === true) setAdminAllowed(true);
-    }).catch(() => { /* Sin permiso o sin conexión: nunca mostrar el enlace. */ });
+    fetchProdeRead("/api/prode/admin/access", user)
+      .then(result => { if (active && result.admin === true) setAdminAllowed(true); })
+      .catch(() => { /* Sin permiso o sin conexión: nunca mostrar el enlace. */ });
     return () => { active = false; };
   }, [user]);
 
