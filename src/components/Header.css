@@ -781,3 +781,11 @@
  .bottom-nav-link.career-nav-link.active::after{background:#ff8fc9;box-shadow:0 0 7px rgba(255,143,201,.55)}
 }
 @media(max-width:380px){.bottom-nav-link{font-size:8.5px}.bottom-nav-link svg{width:18px;height:18px}}
+
+
+/* La botonera móvil tiene cinco accesos visibles: distribuirlos en partes iguales. */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
