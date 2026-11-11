@@ -9,7 +9,6 @@ import { requestPrediction } from "../auth/prodeBallot";
 import "./CareerEntryNotices.css";
 
 const REWARD_SEEN_KEY = "lna-career-rewards-seen-v1";
-const VOTE_NOTICE_SEEN_KEY = "lna-vote-entry-notice-seen-v1";
 const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
 
 function argentinaToday() {
@@ -89,28 +88,6 @@ export default function CareerEntryNotices() {
           });
         }
 
-        const today = argentinaToday();
-        let voteNoticeAlreadyShown = false;
-        try { voteNoticeAlreadyShown = localStorage.getItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}:${today}`) === "1"; } catch { /* Sin localStorage, se prioriza mostrar el aviso. */ }
-        if (!voteNoticeAlreadyShown) {
-          const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
-          const checks = await Promise.all(gamesToday.map(async match => {
-            const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-            const [winnerResult, mvpResult] = await Promise.allSettled([
-              requestPrediction("winner", gameId),
-              requestPrediction("mvp", gameId),
-            ]);
-            const winnerPending = winnerResult.status === "fulfilled" &&
-              winnerResult.value.open && !winnerResult.value.voted;
-            const mvpPending = mvpResult.status === "fulfilled" &&
-              mvpResult.value.open && !mvpResult.value.voted;
-            return winnerPending || mvpPending ? gameId : null;
-          }));
-          const pending = checks.filter(Boolean);
-          if (active && pending.length) {
-            next.push({ type: "vote", date: today, pendingCount: pending.length });
-          }
-        }
         if (active) setQueue(next);
       } catch {
         // No mostrar avisos si no se pudo confirmar la información de la cuenta.
@@ -120,41 +97,9 @@ export default function CareerEntryNotices() {
     return () => { active = false; };
   }, [loading, user?.uid]);
 
-  useEffect(() => {
-    if (!user) return;
-    const refreshVoteStatus = async () => {
-      const today = argentinaToday();
-      const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
-      const checks = await Promise.all(gamesToday.map(async match => {
-        const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-        const [winnerResult, mvpResult] = await Promise.allSettled([
-          requestPrediction("winner", gameId),
-          requestPrediction("mvp", gameId),
-        ]);
-        const winnerPending = winnerResult.status === "fulfilled" &&
-          winnerResult.value.open && !winnerResult.value.voted;
-        const mvpPending = mvpResult.status === "fulfilled" &&
-          mvpResult.value.open && !mvpResult.value.voted;
-        if (winnerResult.status === "rejected" && mvpResult.status === "rejected") return null;
-        return winnerPending || mvpPending;
-      }));
-      if (checks.length && checks.every(pending => pending === false)) {
-        setQueue(current => current.filter(item => item.type !== "vote"));
-      }
-    };
-    window.addEventListener("lna-vote-updated", refreshVoteStatus);
-    return () => window.removeEventListener("lna-vote-updated", refreshVoteStatus);
-  }, [user?.uid]);
-
   if (!user || !queue.length) return null;
   const notice = queue[0];
 
-  useEffect(() => {
-    if (!user?.uid || notice?.type !== "vote" || !notice.date) return;
-    try {
-      localStorage.setItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}:${notice.date}`, "1");
-    } catch { /* Se mantiene el aviso en memoria si el navegador bloquea el almacenamiento. */ }
-  }, [user?.uid, notice?.type, notice?.date]);
 
   const dismiss = () => setQueue(current => current.slice(1));
 
