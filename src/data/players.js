@@ -2274,7 +2274,7 @@ export const players = [
   name: "Giovano Gabriel Pertile Damilano",
   teamId: "san-martin",
   position: null,
-  number: 1,
+  number: 33,
   nationality: "Argentina",
 },
 {

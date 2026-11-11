@@ -914,5 +914,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto"
     }
+  },
+  "2026-11-10-ferro-san-martin": {
+    "status": "finished",
+    "homeScore": 84,
+    "awayScore": 87,
+    "time": "22:05",
+    "homeTeam": "ferro",
+    "awayTeam": "san-martin",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fPAZxIxy_mOWqiFp7utvzROZbTVyFqrJ4_IxOYANuFDIcfdM3RFkew==/ferro-vs-san-martin-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fPAZxIxy_mOWqiFp7utvzROZbTVyFqrJ4_IxOYANuFDIcfdM3RFkew==/ferro-vs-san-martin-c"
+    }
   }
 };
