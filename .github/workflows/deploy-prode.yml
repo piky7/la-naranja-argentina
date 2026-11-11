@@ -11,6 +11,7 @@ on:
       - "tests/career-rules-regression.test.mjs"
       - "tests/prode-ranking-medals.test.mjs"
       - "tests/prode-db-performance.test.mjs"
+      - "tests/prode-optimization.test.mjs"
       - "tests/prode-league-cache.test.mjs"
       - "database/prode/001_initial.sql"
       - "database/prode/002_runtime_tables.sql"
