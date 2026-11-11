@@ -38,14 +38,14 @@ export async function fetchProdeRead(path, user, { ttlMs = 20000, fresh = false 
     });
     const data = await response.json();
     if (!response.ok || !data.ok) throw new Error(data.error || "Datos de Prode no disponibles");
-    entry.expiresAt = Date.now() + Math.max(0, ttlMs);
+    entry.expiresAt = ttlMs > 0 ? Date.now() + ttlMs : 0;
     return data;
   })();
   entry.promise = pending;
   entries.set(key, entry);
   if (entries.size > MAX_ENTRIES) {
-    const oldest = entries.keys().next().value;
-    if (oldest !== key) entries.delete(oldest);
+    const oldest = [...entries.keys()].find(candidate => candidate !== key);
+    if (oldest) entries.delete(oldest);
   }
   try {
     return await pending;
