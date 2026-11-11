@@ -40,3 +40,15 @@ test("Las tareas de esquema no se ejecutan durante las peticiones de votaciones"
     assert.match(migration,new RegExp("CREATE TABLE IF NOT EXISTS "+table));
   }
 });
+
+test("GET /api/votos no recalcula puntos ni barre el historial completo",()=>{
+  const start=worker.indexOf('if (url.pathname !== "/api/votos")');
+  const end=worker.indexOf('} catch (error) {\n      console.error("LNA votos:"',start);
+  assert.ok(start>=0&&end>start);
+  const route=worker.slice(start,end);
+  const readBranch=route.slice(route.indexOf('if (request.method === "GET")'),route.indexOf("// Tras guardar un voto"));
+  assert.match(readBranch,/SELECT equipo_votado/);
+  assert.match(readBranch,/voteCounts\(env\.DB, id\)/);
+  assert.doesNotMatch(readBranch,/getRewards|calculateRewards/);
+  assert.match(route,/const rewards = await getRewards\(env\.DB, visitorId\)/);
+});
