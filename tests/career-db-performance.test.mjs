@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const worker=readFileSync(new URL("../workers/votaciones/worker.js",import.meta.url),"utf8");
+const migration=readFileSync(new URL("../database/votaciones/002_runtime_tables.sql",import.meta.url),"utf8");
 const start=worker.indexOf("async function calculateRewards(");
 const end=worker.indexOf("async function getRewards(",start);
 assert.ok(start>=0&&end>start);
@@ -17,10 +18,12 @@ test("Mi Carrera obtiene votos, MVP, fecha mínima y finales en un solo grupo co
   assert.match(block,/SELECT MIN\(partido_id\) AS first_id FROM votos_mvp/);
   assert.match(block,/getFinishObservations\(db\)/);
 });
-test("Antes de leer votos MVP se garantiza la tabla y se conservan los mapas",()=>{
-  const create=rewards.indexOf("CREATE TABLE IF NOT EXISTS votos_mvp");
+test("La tabla MVP se prepara en migración y las lecturas permanecen concurrentes",()=>{
+  const migration=readFileSync(new URL("../database/votaciones/002_runtime_tables.sql",import.meta.url),"utf8");
+  assert.match(migration,/CREATE TABLE IF NOT EXISTS votos_mvp/);
+  assert.doesNotMatch(rewards,/CREATE TABLE IF NOT EXISTS/);
   const parallel=rewards.indexOf("Promise.all([");
-  assert.ok(create>=0&&parallel>create);
+  assert.ok(parallel>=0);
   assert.match(rewards,/const voteMap = new Map\(\(votes\.results \|\| \[\]\)\.map/);
   assert.match(rewards,/const mvpMap = new Map\(\(mvpVotes\.results \|\| \[\]\)\.map/);
   assert.match(rewards,/const firstDate = \[firstVote\?\.first_id, firstMvp\?\.first_id\]/);
@@ -28,5 +31,12 @@ test("Antes de leer votos MVP se garantiza la tabla y se conservan los mapas",()
 test("No modifica reglas de aciertos, errores, MVP ni racha unificada",()=>{
   for(const term of ["points+=15","points+=5","points += 20","points+=45","UNIFIED_STREAK_START","timelyFinishObservation","currentStay","categoryIndex"]) {
     assert.ok(rewards.includes(term),term);
+  }
+});
+
+test("Las tareas de esquema no se ejecutan durante las peticiones de votaciones",()=>{
+  assert.doesNotMatch(worker,/CREATE TABLE IF NOT EXISTS/);
+  for(const table of ["partidos_final_detectado","carrera_partidos","votos_mvp","voto_limites"]) {
+    assert.match(migration,new RegExp("CREATE TABLE IF NOT EXISTS "+table));
   }
 });
