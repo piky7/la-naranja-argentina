@@ -1,12 +1,22 @@
-// Lecturas GET compartidas entre rankings y fichas de Prode.
-// La caché solo vive en memoria y cada cuenta Google usa sus propias claves.
-// Nunca guarda tokens ni resultados fallidos y reutiliza solicitudes simultáneas.
+// Lecturas GET compartidas entre rankings, grupos y perfil de Prode.
+// Deduplica solicitudes simultáneas y separa estrictamente las cuentas Google.
 const API = "https://lna-prode-api.lnab.workers.dev";
 const entries = new Map();
 const MAX_ENTRIES = 120;
 
 export function invalidateProdeReads() {
   entries.clear();
+}
+
+export function notifyProdeDataUpdated() {
+  invalidateProdeReads();
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("prode-data-updated"));
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("lna-vote-updated", invalidateProdeReads);
+  window.addEventListener("prode-profile-updated", invalidateProdeReads);
+  window.addEventListener("prode-data-updated", invalidateProdeReads);
 }
 
 export async function fetchProdeRead(path, user, { ttlMs = 20000, fresh = false } = {}) {
@@ -17,10 +27,9 @@ export async function fetchProdeRead(path, user, { ttlMs = 20000, fresh = false 
   const key = identity + ":" + path;
   const now = Date.now();
   const previous = entries.get(key);
-  if (!fresh && previous && previous.expiresAt > now) {
-    return previous.promise;
-  }
+  if (!fresh && previous && previous.expiresAt > now) return previous.promise;
 
+  const entry = { promise: null, expiresAt: Number.POSITIVE_INFINITY };
   const pending = (async () => {
     const token = user ? await user.getIdToken() : null;
     const response = await fetch(API + path, {
@@ -28,17 +37,15 @@ export async function fetchProdeRead(path, user, { ttlMs = 20000, fresh = false 
       cache: "no-store",
     });
     const data = await response.json();
-    if (!response.ok || !data.ok) {
-      throw new Error(data.error || "Datos de Prode no disponibles");
-    }
+    if (!response.ok || !data.ok) throw new Error(data.error || "Datos de Prode no disponibles");
+    entry.expiresAt = Date.now() + Math.max(0, ttlMs);
     return data;
   })();
-
-  const entry = { promise: pending, expiresAt: now + Math.max(0, ttlMs) };
+  entry.promise = pending;
   entries.set(key, entry);
   if (entries.size > MAX_ENTRIES) {
     const oldest = entries.keys().next().value;
-    entries.delete(oldest);
+    if (oldest !== key) entries.delete(oldest);
   }
   try {
     return await pending;
