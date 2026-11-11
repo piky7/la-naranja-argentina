@@ -142,6 +142,14 @@ export default function ProdeGroups({ onReady }) {
     };
   }, [authReady, user]);
   useEffect(() => {
+    const refreshAfterVote = () => {
+      leagueCache.current.clear();
+      if (selected) void openGroup(selected);
+    };
+    window.addEventListener("lna-vote-updated", refreshAfterVote);
+    return () => window.removeEventListener("lna-vote-updated", refreshAfterVote);
+  }, [selected, user]);
+  useEffect(() => {
     const refresh = () => { if (selected) openGroup(selected); };
     window.addEventListener("prode-profile-updated", refresh);
     window.addEventListener("prode-data-updated", refresh);
