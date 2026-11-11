@@ -995,3 +995,5 @@
  .lna-fan-page-card .lna-fan-level-requirement{font-size:8px}
 }
 @media(prefers-reduced-motion:reduce){.lna-fan-page-card *{scroll-behavior:auto!important;transition:none!important}}
+
+/* Mi Carrera responsive visual system verified with the page regression test. */
