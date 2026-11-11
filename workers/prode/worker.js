@@ -255,6 +255,60 @@ export default {
         return reply({ ok: false, error: "Métricas no disponibles" }, 503);
       }
     }
+    // Bandeja persistente: cada usuario solo puede leer y marcar sus propios avisos.
+    if (url.pathname === "/api/prode/notifications" && request.method === "GET") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no disponible" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión requerida" }, 401);
+      try {
+        const userId = "firebase:" + identity.uid;
+        const rows = await env.DB.prepare(
+          "SELECT id,title,message,href,type,created_at AS createdAt,read_at AS readAt FROM lna_notifications WHERE user_id=? ORDER BY created_at DESC LIMIT 50"
+        ).bind(userId).all();
+        const notifications = rows.results || [];
+        return reply({ ok: true, notifications, unreadCount: notifications.filter(item => !item.readAt).length });
+      } catch {
+        return reply({ ok: false, error: "No se pudieron cargar las notificaciones" }, 503);
+      }
+    }
+    const readNotificationMatch = url.pathname.match(/^\/api\/prode\/notifications\/([a-f0-9-]{16,64})\/read$/i);
+    if (readNotificationMatch && request.method === "POST") {
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no disponible" }, 503);
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión requerida" }, 401);
+      try {
+        const result = await env.DB.prepare(
+          "UPDATE lna_notifications SET read_at=datetime('now') WHERE id=? AND user_id=? AND read_at IS NULL"
+        ).bind(readNotificationMatch[1], "firebase:" + identity.uid).run();
+        return reply({ ok: true, changed: Number(result.meta?.changes || 0) });
+      } catch {
+        return reply({ ok: false, error: "No se pudo actualizar la notificación" }, 503);
+      }
+    }
+    // Envío general restringido al UID administrador verificado por Firebase.
+    if (url.pathname === "/api/prode/admin/notifications" && request.method === "POST") {
+      const identity = await verifiedFirebaseUser(request);
+      if (!identity) return reply({ ok: false, error: "Sesión requerida" }, 401);
+      if (!env.ADMIN_FIREBASE_UID || identity.uid !== env.ADMIN_FIREBASE_UID)
+        return reply({ ok: false, error: "Sin permiso" }, 403);
+      if (!env.DB) return reply({ ok: false, error: "Base de datos no disponible" }, 503);
+      try {
+        const body = await request.json();
+        const title = typeof body.title === "string" ? body.title.trim() : "";
+        const message = typeof body.message === "string" ? body.message.trim() : "";
+        const href = body.href == null || body.href === "" ? null : body.href;
+        if (title.length < 2 || title.length > 90 || message.length < 2 || message.length > 500)
+          return reply({ ok: false, error: "El título debe tener 2–90 caracteres y el mensaje 2–500." }, 400);
+        if (href !== null && (typeof href !== "string" || href.length > 200 || !href.startsWith("/") || href.startsWith("//")))
+          return reply({ ok: false, error: "El enlace debe ser una ruta interna de LNA." }, 400);
+        const result = await env.DB.prepare(
+          "INSERT INTO lna_notifications (id,user_id,title,message,href,type,created_at) SELECT lower(hex(randomblob(16))),id,?,?,?,'announcement',datetime('now') FROM prode_users"
+        ).bind(title, message, href).run();
+        return reply({ ok: true, recipients: Number(result.meta?.changes || 0) });
+      } catch {
+        return reply({ ok: false, error: "No se pudo enviar la notificación" }, 503);
+      }
+    }
     if (url.pathname === "/api/prode/me" && (request.method === "GET" || request.method === "POST")) {
       if (!env.DB) return reply({ ok: false, error: "Base de datos no configurada" }, 503);
       const identity = await verifiedFirebaseUser(request);
