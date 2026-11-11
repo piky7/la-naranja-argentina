@@ -4,6 +4,7 @@ import { UserRound, LogIn } from "lucide-react";
 import { fetchCareerData, useCareerSession } from "../auth/careerAccount";
 import { fetchProdeProfile } from "../auth/prodeProfile";
 import ProdeCrest from "./ProdeCrest";
+import NotificationBell from "./NotificationBell";
 import { isSportsDesign, serializeSportsDesign } from "./sportsCrestDesign";
 import "./CareerProfileAccess.css";
 
@@ -43,9 +44,12 @@ export default function CareerProfileAccess(){
    {error&&<span className="lna-profile-access-error" role="alert">{error}</span>}
   </div>;
  }
- return <Link to="/perfil" className="lna-profile-access" aria-label="Abrir mi perfil">
-  <span className={"lna-profile-access-avatar"+(waiting?" is-loading":"")}>{waiting?<span className="lna-profile-spinner" aria-label="Cargando perfil"/>:profile?<ProdeCrest name={profile.username||profile.googleName||"Jugador"} primary={profile.crestPrimary} secondary={profile.crestSecondary} textColor={profile.crestText} style={profile.crestStyle} font={profile.crestFont} symbol={crestSymbol} size={34}/>:<UserRound size={18}/>}</span>
-  <span className="lna-profile-access-copy"><strong>{waiting?"Cargando perfil…":profile?.username||"Mi perfil"}</strong><small>Mi perfil</small></span>
-  <span className="lna-profile-access-points"><b aria-hidden="true">★</b><strong>{waiting?"…":points===null?"—":points.toLocaleString("es-AR")}</strong></span>
- </Link>;
+ return <div className="lna-profile-access-group">
+  <Link to="/perfil" className="lna-profile-access" aria-label="Abrir mi perfil">
+   <span className={"lna-profile-access-avatar"+(waiting?" is-loading":"")}>{waiting?<span className="lna-profile-spinner" aria-label="Cargando perfil"/>:profile?<ProdeCrest name={profile.username||profile.googleName||"Jugador"} primary={profile.crestPrimary} secondary={profile.crestSecondary} textColor={profile.crestText} style={profile.crestStyle} font={profile.crestFont} symbol={crestSymbol} size={34}/>:<UserRound size={18}/>}</span>
+   <span className="lna-profile-access-copy"><strong>{waiting?"Cargando perfil…":profile?.username||"Mi perfil"}</strong><small>Mi perfil</small></span>
+   <span className="lna-profile-access-points"><b aria-hidden="true">★</b><strong>{waiting?"…":points===null?"—":points.toLocaleString("es-AR")}</strong></span>
+  </Link>
+  <NotificationBell user={user}/>
+ </div>;
 }
