@@ -9,13 +9,13 @@
 .lna-notification-panel>header strong{font-size:15px}
 .lna-notification-panel>header button{display:grid;place-items:center;width:30px;height:30px;border:1px solid #465a6e;border-radius:50%;background:#1b2d40;color:#eaf0f6}
 .lna-notification-list{overflow-y:auto;overscroll-behavior:contain}
-.lna-notification-item{width:100%;display:flex;align-items:flex-start;gap:9px;padding:13px 14px;border:0;border-bottom:1px solid #293c50;background:transparent;color:inherit;text-align:left;cursor:pointer}
-.lna-notification-item:hover{background:#1a2c40}
-.lna-notification-item>span:nth-child(2),.lna-notification-item>span:first-child:not(.lna-notification-dot){display:flex;flex:1;flex-direction:column;gap:5px;min-width:0}
-.lna-notification-item strong{font-size:12px;color:#ffb36a}
-.lna-notification-item small{font-size:12px;line-height:1.45;color:#d3deea}
-.lna-notification-item em{font-size:10px;font-style:normal;color:#8fa3b7}
-.lna-notification-item>svg{flex:0 0 auto;color:#f3a04f;margin-top:3px}
+.lna-notification-item{width:100%;display:flex;align-items:flex-start;gap:8px;padding:0 10px 0 14px;border-bottom:1px solid #293c50;background:transparent;color:inherit;text-align:left}.lna-notification-content{min-width:0;flex:1;display:flex;align-items:flex-start;gap:9px;padding:13px 0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}.lna-notification-delete{flex:0 0 30px;width:30px;height:30px;margin:10px 0 0;display:grid;place-items:center;border:1px solid #40536a;border-radius:8px;background:#17283a;color:#aebdcb;cursor:pointer}.lna-notification-delete:hover{border-color:#ef8a45;background:#38291f;color:#ffad61}
+.lna-notification-item:hover{background:#1a2c40}.lna-notification-content>span:nth-child(2),.lna-notification-content>span:first-child:not(.lna-notification-dot){display:flex;flex:1;flex-direction:column;gap:5px;min-width:0}
+
+.lna-notification-content strong{font-size:12px;color:#ffb36a}
+.lna-notification-content small{font-size:12px;line-height:1.45;color:#d3deea}
+.lna-notification-content em{font-size:10px;font-style:normal;color:#8fa3b7}
+.lna-notification-content>svg{flex:0 0 auto;color:#f3a04f;margin-top:3px}
 .lna-notification-item.is-unread{background:#172a3e}
 .lna-notification-dot{width:7px;height:7px;flex:0 0 7px;margin-top:5px;border-radius:50%;background:#ff963c;box-shadow:0 0 8px #ff963c88}
 .lna-notification-empty{display:flex;align-items:center;justify-content:center;gap:8px;padding:24px 12px;color:#9eb0c0;font-size:12px}
