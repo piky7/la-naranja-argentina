@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const sql = readFileSync(new URL("../database/prode/001_initial.sql", import.meta.url), "utf8");
+const runtimeMigration = readFileSync(new URL("../database/prode/002_runtime_tables.sql", import.meta.url), "utf8");
 const worker = readFileSync(new URL("../workers/prode/worker.js", import.meta.url), "utf8");
 const profileStart = worker.indexOf('if (url.pathname === "/api/prode/me"');
 const profileEnd = worker.indexOf('if (url.pathname === "/api/prode/profile/username"', profileStart);
@@ -32,4 +33,15 @@ test("La carga del perfil ejecuta cuatro consultas independientes en paralelo", 
   assert.match(profile, /styleRow\?\.style \|\| "pro"/);
   assert.match(profile, /fontRow\?\.font \|\| "sport"/);
   assert.match(profile, /symbolRow\?\.symbol \|\|/);
+});
+
+test("Las tablas operativas de Prode se crean en migración, no durante las peticiones", () => {
+  assert.doesNotMatch(worker, /CREATE TABLE IF NOT EXISTS/);
+  for (const table of [
+    "prode_membership_periods", "prode_career_links", "prode_vote_sources",
+    "prode_user_crest_styles", "prode_user_crest_fonts", "prode_user_crest_symbols",
+    "prode_crest_texts", "prode_user_crests", "prode_group_crests",
+    "prode_career_jerseys", "prode_league_starts", "prode_initial_points", "prode_season_archives",
+  ]) assert.match(runtimeMigration, new RegExp("CREATE TABLE IF NOT EXISTS " + table));
+  assert.match(runtimeMigration, /INSERT OR IGNORE INTO prode_membership_periods/);
 });
