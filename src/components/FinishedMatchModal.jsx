@@ -206,8 +206,8 @@ export default function FinishedMatchModal({
               </div>
               {(selectedMatchHomeTeam?.coach || selectedMatchAwayTeam?.coach) && (
                 <div className="match-modal-coaches" aria-label="Directores técnicos">
-                  {selectedMatchHomeTeam?.coach && <div className="match-modal-coach-item"><span>DT LOCAL</span><strong>{selectedMatchHomeTeam.coach}</strong></div>}
-                  {selectedMatchAwayTeam?.coach && <div className="match-modal-coach-item"><span>DT VISITANTE</span><strong>{selectedMatchAwayTeam.coach}</strong></div>}
+                  {selectedMatchHomeTeam?.coach && <div className="match-modal-coach-item"><span>DT:</span><strong>{selectedMatchHomeTeam.coach}</strong></div>}
+                  {selectedMatchAwayTeam?.coach && <div className="match-modal-coach-item"><span>DT:</span><strong>{selectedMatchAwayTeam.coach}</strong></div>}
                 </div>
               )}
               {selectedMatchStats?.quarterScores?.length > 0 && (
