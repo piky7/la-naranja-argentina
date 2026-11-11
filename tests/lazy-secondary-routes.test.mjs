@@ -10,10 +10,13 @@ test("La portada permanece disponible como ruta inicial directa",()=>{
 });
 
 test("Las páginas secundarias se descargan solo cuando se navega a ellas",()=>{
-  for(const name of ["Equipos","Equipo","Jugadores","Privacidad","Acerca","Prode","Admin"]){
-    assert.match(source,new RegExp("const "+name+" = lazy\\(\\(\\) => import\\(\"\\./pages/"+name+"\\\"\\)\\);"));
+  for(const name of ["Equipos","Equipo","Jugadores","Privacidad","Acerca","Admin"]){
+    assert.match(source,new RegExp("const "+name+" = lazy\\(\\(\\) => import\\(\\\"\\.\\/pages/"+name+"\\\"\\)\\);"));
     assert.doesNotMatch(source,new RegExp("import "+name+" from "));
   }
+  assert.match(source,/const loadProde = \(\) => import\("\.\/pages\/Prode"\);/);
+  assert.match(source,/const Prode = lazy\(loadProde\);/);
+  assert.doesNotMatch(source,/import Prode from /);
 });
 
 test("Liga y Estadísticas conservan precarga controlada sin bloquear la portada",()=>{
