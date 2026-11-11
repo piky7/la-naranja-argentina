@@ -166,6 +166,7 @@ export default function FinishedMatchModal({
                             ).losses
                           }
                         </small>
+                        {selectedMatchHomeTeam?.coach && <small className="match-modal-coach">DT: {selectedMatchHomeTeam.coach}</small>}
                       )}
                     </strong>
                   </div>
@@ -225,6 +226,7 @@ export default function FinishedMatchModal({
                             ).losses
                           }
                         </small>
+                        {selectedMatchAwayTeam?.coach && <small className="match-modal-coach">DT: {selectedMatchAwayTeam.coach}</small>}
                       )}
                     </strong>
                   </div>
