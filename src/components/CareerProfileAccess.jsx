@@ -25,12 +25,11 @@ export default function CareerProfileAccess(){
   load();
   const onUpdate=()=>load();
   const onVote=()=>load();
-  const onVisible=()=>{if(!document.hidden)load()};
-  window.addEventListener("career-auth-updated",onUpdate);
+  // Solo refrescar ante cambios reales del perfil o de los puntos.
+  // El montaje de otras páginas no debe reiniciar esta carga.
   window.addEventListener("prode-profile-updated",onUpdate);
   window.addEventListener("lna-vote-updated",onVote);
-  document.addEventListener("visibilitychange",onVisible);
-  return()=>{window.removeEventListener("career-auth-updated",onUpdate);window.removeEventListener("prode-profile-updated",onUpdate);window.removeEventListener("lna-vote-updated",onVote);document.removeEventListener("visibilitychange",onVisible)};
+  return()=>{window.removeEventListener("prode-profile-updated",onUpdate);window.removeEventListener("lna-vote-updated",onVote)};
  },[load,loading]);
  const crestSymbol=isSportsDesign(profile?.crestSymbol)?profile.crestSymbol:serializeSportsDesign({label:profile?.username||""});
  const waiting=loading||profileLoading;
