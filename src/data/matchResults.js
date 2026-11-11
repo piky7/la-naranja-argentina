@@ -882,5 +882,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2WoZ7PjDFWHJG3kz6-3y5eO76y9AUOS3pn77a4bftmJ7xCMwAXDYFNQ==/gimnasia-cr-vs-obera"
     }
+  },
+  "2026-11-10-argentino-regatas": {
+    "status": "finished",
+    "homeScore": 79,
+    "awayScore": 69,
+    "time": "21:00",
+    "homeTeam": "argentino",
+    "awayTeam": "regatas",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2-SZ_1lbZNkaj4jzP8Z_ZdT8wEdaKKh2OJacur-Sn_arN5n2nJnuQYg==/argentino-j-vs-regatas-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2-SZ_1lbZNkaj4jzP8Z_ZdT8wEdaKKh2OJacur-Sn_arN5n2nJnuQYg==/argentino-j-vs-regatas-c"
+    }
   }
 };
