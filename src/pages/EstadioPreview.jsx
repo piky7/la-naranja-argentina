@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowLeft, ArrowUpRight, Award, Banknote, Building2, Check, ChevronRight,
   CircleHelp, Crown, Dumbbell, Eye, Flame, Hammer, House, LockKeyhole,
@@ -92,6 +92,21 @@ function AdminGate({ children }) {
 }
 
 export default function EstadioPreview() {
+  useEffect(() => {
+    let robots = document.querySelector('meta[name="robots"]');
+    const previous = robots?.getAttribute("content");
+    if (!robots) {
+      robots = document.createElement("meta");
+      robots.name = "robots";
+      document.head.appendChild(robots);
+    }
+    robots.content = "noindex, nofollow";
+    return () => {
+      if (previous === null || previous === undefined) robots.remove();
+      else robots.content = previous;
+    };
+  }, []);
+
   const [tab, setTab] = useState("overview");
   const [selectedZone, setSelectedZone] = useState("stands");
   const [stadiumName, setStadiumName] = useState("Arena del Barrio");
