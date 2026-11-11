@@ -136,27 +136,7 @@ function extractSpkiFromCertificate(bytes) {
   return bytes.slice(pos, spki.next);
 }
 
-// Mantener el historial de afiliación sin borrar la membresía ni los puntos iniciales.
-// Las membresías existentes se registran una sola vez al migrar.
-async function ensureMembershipPeriods(db) {
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_membership_periods (group_id TEXT NOT NULL REFERENCES prode_groups(id) ON DELETE CASCADE, user_id TEXT NOT NULL REFERENCES prode_users(id) ON DELETE CASCADE, entered_at TEXT NOT NULL, exited_at TEXT, PRIMARY KEY(group_id,user_id,entered_at))").run();
-  await db.prepare("INSERT OR IGNORE INTO prode_membership_periods(group_id,user_id,entered_at) SELECT m.group_id,m.user_id,m.joined_at FROM prode_memberships m").run();
-}
-const validCrest = color => typeof color === "string" && /^#[0-9a-fA-F]{6}$/.test(color);
-async function ensureCareerLinks(db) {
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_career_links (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, visitor_id TEXT NOT NULL UNIQUE, linked_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
-}
-async function ensureVoteSources(db) {
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_vote_sources (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, visitor_id TEXT NOT NULL UNIQUE, registered_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)").run();
-}
-async function ensureCrests(db) {
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crest_styles (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, style TEXT NOT NULL DEFAULT 'pro')").run();
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crest_fonts (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, font TEXT NOT NULL DEFAULT 'sport')").run();
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crest_symbols (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, symbol TEXT NOT NULL DEFAULT 'ball')").run();
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_crest_texts (kind TEXT NOT NULL, entity_id TEXT NOT NULL, color TEXT NOT NULL, PRIMARY KEY(kind,entity_id))").run();
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_user_crests (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
-  await db.prepare("CREATE TABLE IF NOT EXISTS prode_group_crests (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, primary_color TEXT NOT NULL, secondary_color TEXT NOT NULL)").run();
-}
+// Las tablas operativas se crean mediante database/prode/002_runtime_tables.sql.
 // Caché D1 compartida de resultados ya confirmados. No altera reglas,
 // rachas ni permisos; reduce solicitudes repetidas entre visitantes.
 // Si D1 no está disponible, se consulta el Worker oficial normalmente.
@@ -287,7 +267,6 @@ export default {
             "INSERT INTO prode_users (id, auth_subject, display_name) VALUES (?, ?, ?) ON CONFLICT(auth_subject) DO NOTHING"
           ).bind(id, identity.uid, name).run();
         }
-        await ensureCrests(env.DB);
         const user = await env.DB.prepare(
           "SELECT u.id, n.username, u.display_name AS googleName, u.created_at, COALESCE(c.primary_color,\'#7de83d\') AS crestPrimary, COALESCE(c.secondary_color,\'#10283c\') AS crestSecondary FROM prode_users u LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE u.auth_subject = ?"
         ).bind(identity.uid).first();
@@ -347,7 +326,6 @@ export default {
         const sportSymbolPattern = /^sport:(classic|pointed|rounded|flat|wide):(solid|vertical|thin|diagonal|horizontal|double|half|quarters):(top|middle|bottom|none):(simple|double|thick):[A-ZÁÉÍÓÚÜÑ0-9 _-]{0,20}$/u;
         if (body.symbol != null && !allowedSymbols.includes(body.symbol) && !sportSymbolPattern.test(body.symbol)) return reply({ok:false,error:"Diseño inválido"},400);
         const userId = "firebase:" + identity.uid;
-        await ensureCrests(env.DB);
         if (!(await env.DB.prepare("SELECT id FROM prode_users WHERE id=?").bind(userId).first())) return reply({ ok: false, error: "Primero registrá tu perfil" }, 409);
         await env.DB.prepare("INSERT INTO prode_user_crests(user_id,primary_color,secondary_color) VALUES (?,?,?) ON CONFLICT(user_id) DO UPDATE SET primary_color=excluded.primary_color,secondary_color=excluded.secondary_color").bind(userId,body.primary,body.secondary).run();
         await env.DB.prepare("INSERT INTO prode_crest_texts(kind,entity_id,color) VALUES ('user',?,?) ON CONFLICT(kind,entity_id) DO UPDATE SET color=excluded.color").bind(userId,body.textColor || "#ffffff").run();
@@ -368,7 +346,6 @@ export default {
         if (!validCrest(body.primary) || !validCrest(body.secondary) || !validCrest(body.textColor || "#ffffff")) return reply({ ok: false, error: "Colores inválidos" }, 400);
         const groupId = crestRoute[1];
         if (!(await env.DB.prepare("SELECT id FROM prode_groups WHERE id=? AND owner_id=?").bind(groupId,"firebase:"+identity.uid).first())) return reply({ ok: false, error: "Solo el administrador puede editar el trofeo" }, 403);
-        await ensureCrests(env.DB);
         await env.DB.prepare("INSERT INTO prode_group_crests(group_id,primary_color,secondary_color) VALUES (?,?,?) ON CONFLICT(group_id) DO UPDATE SET primary_color=excluded.primary_color,secondary_color=excluded.secondary_color").bind(groupId,body.primary,body.secondary).run();
         await env.DB.prepare("INSERT INTO prode_crest_texts(kind,entity_id,color) VALUES ('league',?,?) ON CONFLICT(kind,entity_id) DO UPDATE SET color=excluded.color").bind(groupId,body.textColor || "#ffffff").run();
         return reply({ ok: true, crestPrimary: body.primary, crestSecondary: body.secondary, crestText: body.textColor || "#ffffff" });
@@ -383,8 +360,6 @@ export default {
       if (!memberId || !/^firebase:[A-Za-z0-9_-]{1,128}$/.test(memberId)) return reply({ok:false,error:"Jugador inválido"},400);
       if (!env.DB || !env.VOTACIONES) return reply({ok:false,error:"Mi Carrera no disponible"},503);
       try {
-        await ensureCareerLinks(env.DB);
-        await ensureVoteSources(env.DB);
         const profile = await env.DB.prepare(
           "SELECT COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id WHERE u.id=?"
         ).bind(memberId).first();
@@ -415,9 +390,6 @@ export default {
       const fullRanking = url.searchParams.get("full") === "1";
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
-        await ensureCrests(env.DB);
-        await ensureVoteSources(env.DB);
-        await ensureCareerLinks(env.DB);
         const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id = u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(l.visitor_id,vs.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT " + (fullRanking ? 1000 : 100)).all();
         const linked = rows.results || [];
         const savedPoints = await getCachedGlobalRankingSources(env.DB,"historic");
@@ -462,7 +434,6 @@ export default {
         const memberId = url.searchParams.get("memberId");
         if (groupId && memberId && /^[0-9a-f-]{36}$/i.test(groupId)
             && /^firebase:[A-Za-z0-9_-]{1,128}$/.test(memberId) && viewerId) {
-          await ensureMembershipPeriods(env.DB);
           const membership = await env.DB.prepare(
             "SELECT 1 AS permitted FROM prode_memberships viewer JOIN prode_memberships target ON target.group_id=viewer.group_id AND target.user_id=? WHERE viewer.group_id=? AND viewer.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=viewer.group_id AND p.user_id=viewer.user_id AND p.exited_at IS NULL) AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=target.group_id AND p.user_id=target.user_id AND p.exited_at IS NULL)"
           ).bind(memberId, groupId, viewerId).first();
@@ -486,9 +457,6 @@ export default {
       if (awardsRequest && !viewer) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       if (!env.DB || !env.VOTACIONES) return reply({ ok: false, error: "Ranking no disponible" }, 503);
       try {
-        await ensureCrests(env.DB);
-        await ensureVoteSources(env.DB);
-        await ensureCareerLinks(env.DB);
         const rows = await env.DB.prepare("SELECT u.id AS user_id, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=u.id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=u.id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=u.id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=u.id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_users u LEFT JOIN prode_career_links l ON l.user_id=u.id LEFT JOIN prode_vote_sources vs ON vs.user_id=u.id LEFT JOIN prode_usernames n ON n.user_id=u.id LEFT JOIN prode_user_crests c ON c.user_id=u.id WHERE COALESCE(l.visitor_id,vs.visitor_id) IS NOT NULL ORDER BY u.created_at ASC LIMIT " + (awardsRequest ? 1000 : 100)).all();
         const dayKey = value => {
           const parts = new Intl.DateTimeFormat("en-US",{timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(value));
@@ -578,7 +546,6 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       const userId = "firebase:" + identity.uid;
       try {
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_career_links (user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, visitor_id TEXT NOT NULL UNIQUE, linked_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
         const profile = await env.DB.prepare("SELECT id FROM prode_users WHERE id = ?").bind(userId).first();
         if (!profile) return reply({ ok: false, error: "Primero registrá tu perfil Prode" }, 409);
         const linked = await env.DB.prepare("SELECT visitor_id, linked_at FROM prode_career_links WHERE user_id = ?").bind(userId).first();
@@ -594,7 +561,6 @@ export default {
         if (!careerRes.ok) return reply({ ok: false, error: "No se pudo verificar Mi Carrera (servicio de votaciones: " + careerRes.status + ")" }, 503);
         const career = await careerRes.json();
         if (!career.ok) return reply({ ok: false, error: "Mi Carrera no está disponible" }, 409);
-        await ensureVoteSources(env.DB);
         const voteOwner = await env.DB.prepare("SELECT user_id FROM prode_vote_sources WHERE visitor_id=?").bind(visitorId).first();
         if (voteOwner && voteOwner.user_id !== userId)
           return reply({ ok: false, error: "Esta carrera ya está asociada a los pronósticos de otra cuenta Prode" }, 409);
@@ -614,9 +580,7 @@ export default {
       const input=await request.json().catch(()=>({}));
       const localId=typeof input.visitorId==="string" && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(input.visitorId)?input.visitorId:null;
       try {
-        await ensureCareerLinks(env.DB);
         await env.DB.prepare("INSERT INTO prode_users(id,auth_subject,display_name) VALUES (?,?,?) ON CONFLICT(auth_subject) DO NOTHING").bind(userId,identity.uid,identity.name.trim().slice(0,32)||"Usuario LNA").run();
-        await ensureVoteSources(env.DB);
         const existing=await env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind(userId).first();
         if(existing?.visitor_id) return reply({ok:true,ready:true,existing:true});
         const source=await env.DB.prepare("SELECT visitor_id FROM prode_vote_sources WHERE user_id=?").bind(userId).first();
@@ -642,7 +606,6 @@ export default {
       const kind=url.searchParams.get("kind");
       if(!["points","predictions"].includes(kind)) return reply({ok:false,error:"Consulta inválida"},400);
       try{
-        await ensureCareerLinks(env.DB);
         const linked=await env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind("firebase:"+identity.uid).first();
         if(!linked?.visitor_id) return reply({ok:false,error:"Mi Carrera todavía no está preparada"},409);
         const endpoint=kind==="points"?"/api/puntos":"/api/mis-pronosticos";
@@ -657,7 +620,6 @@ export default {
       if(!identity) return reply({ok:false,error:"Iniciá sesión con Google"},401);
       const userId="firebase:"+identity.uid;
       try{
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_career_jerseys(user_id TEXT PRIMARY KEY REFERENCES prode_users(id) ON DELETE CASCADE, name TEXT NOT NULL, number TEXT NOT NULL)").run();
         if(request.method==="POST"){
           const body=await request.json().catch(()=>({}));
           const name=typeof body.name==="string"?body.name.trim().replace(/\s+/g," "):"";
@@ -689,9 +651,7 @@ export default {
           return reply({ok:false,error:"Jugador inválido"},400);
       }
       try {
-        await ensureCareerLinks(env.DB);
         await env.DB.prepare("INSERT INTO prode_users(id,auth_subject,display_name) VALUES (?,?,?) ON CONFLICT(auth_subject) DO NOTHING").bind(userId,identity.uid,identity.name.trim().slice(0,32)||"Usuario LNA").run();
-        await ensureVoteSources(env.DB);
         const [career,source] = await Promise.all([
           env.DB.prepare("SELECT visitor_id FROM prode_career_links WHERE user_id=?").bind(userId).first(),
           env.DB.prepare("SELECT visitor_id FROM prode_vote_sources WHERE user_id=?").bind(userId).first(),
@@ -738,10 +698,8 @@ export default {
       if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(visitorId))
         return reply({ok:false,error:"Identificador de votaciones inválido"},400);
       try {
-        await ensureCareerLinks(env.DB);
         const profile = await env.DB.prepare("SELECT id FROM prode_users WHERE id=?").bind(userId).first();
         if (!profile) return reply({ok:false,error:"Primero registrá tu perfil Prode"},409);
-        await ensureVoteSources(env.DB);
         const [careerOwner,sourceOwner,existing] = await Promise.all([
           env.DB.prepare("SELECT user_id FROM prode_career_links WHERE visitor_id=?").bind(visitorId).first(),
           env.DB.prepare("SELECT user_id FROM prode_vote_sources WHERE visitor_id=?").bind(visitorId).first(),
@@ -813,9 +771,6 @@ export default {
         const count = await env.DB.prepare("SELECT COUNT(*) AS total FROM prode_groups WHERE owner_id = ?").bind(ownerId).first();
         if (Number(count?.total || 0) >= 5) return reply({ ok: false, error: "Podés crear hasta cinco ligas" }, 409);
         const id = crypto.randomUUID();
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
-        await ensureMembershipPeriods(env.DB);
-        await ensureCrests(env.DB);
         const crestPrimary = validCrest(body.crestPrimary) ? body.crestPrimary : "#ff9a39";
         const crestSecondary = validCrest(body.crestSecondary) ? body.crestSecondary : "#10283c";
         await env.DB.batch([
@@ -835,8 +790,6 @@ export default {
       const identity = await verifiedFirebaseUser(request);
       if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
       try {
-        await ensureMembershipPeriods(env.DB);
-        await ensureCrests(env.DB);
         const groups = await env.DB.prepare(
           "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role, COALESCE(c.primary_color,'#ff9a39') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id LEFT JOIN prode_group_crests c ON c.group_id=g.id WHERE m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY g.created_at DESC LIMIT 50"
         ).bind("firebase:" + identity.uid).all();
@@ -878,7 +831,6 @@ export default {
       try {
         const digest = await crypto.subtle.digest("SHA-256",new TextEncoder().encode(token.toLowerCase()));
         const hash = Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");
-        await ensureCrests(env.DB);
         const row = await env.DB.prepare(
           "SELECT g.name,g.season,COALESCE(c.primary_color,'#ff9a39') AS crestPrimary,COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_invitations i JOIN prode_groups g ON g.id=i.group_id LEFT JOIN prode_group_crests c ON c.group_id=g.id WHERE i.token_hash=? AND i.revoked_at IS NULL AND i.expires_at>? AND i.used_count<i.max_uses"
         ).bind(hash,new Date().toISOString()).first();
@@ -903,7 +855,6 @@ export default {
           "SELECT i.id, i.group_id, g.name FROM prode_invitations i JOIN prode_groups g ON g.id = i.group_id WHERE i.token_hash = ? AND i.revoked_at IS NULL AND i.expires_at > ? AND i.used_count < i.max_uses"
         ).bind(hash, new Date().toISOString()).first();
         if (!invite) return reply({ ok: false, error: "Invitación vencida o inválida" }, 404);
-        await ensureMembershipPeriods(env.DB);
         const existing = await env.DB.prepare("SELECT 1 AS present FROM prode_memberships WHERE group_id = ? AND user_id = ?").bind(invite.group_id, userId).first();
         const active = await env.DB.prepare("SELECT 1 AS present FROM prode_membership_periods WHERE group_id=? AND user_id=? AND exited_at IS NULL").bind(invite.group_id,userId).first();
         if (active) return reply({ ok: true, groupId: invite.group_id, name: invite.name, alreadyMember: true });
@@ -933,7 +884,6 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const groupId = closeCheck[1], userId = "firebase:" + identity.uid;
-        await ensureMembershipPeriods(env.DB);
         const group = await env.DB.prepare(
           "SELECT g.season, m.role FROM prode_groups g JOIN prode_memberships m ON m.group_id=g.id WHERE g.id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)"
         ).bind(groupId,userId).first();
@@ -974,10 +924,8 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const groupId = seasonHistory[1], userId = "firebase:" + identity.uid;
-        await ensureMembershipPeriods(env.DB);
         const member = await env.DB.prepare("SELECT 1 AS allowed FROM prode_memberships m WHERE group_id=? AND user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId, userId).first();
         if (!member) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_season_archives (group_id TEXT NOT NULL, season TEXT NOT NULL, closed_at TEXT NOT NULL DEFAULT (datetime('now')), champion_user_ids TEXT NOT NULL, standings_json TEXT NOT NULL, medals_json TEXT NOT NULL, weekly_history_json TEXT NOT NULL, PRIMARY KEY(group_id,season), FOREIGN KEY(group_id) REFERENCES prode_groups(id) ON DELETE RESTRICT)").run();
         const archives = await env.DB.prepare("SELECT season, closed_at, champion_user_ids, standings_json, medals_json, weekly_history_json FROM prode_season_archives WHERE group_id=? ORDER BY season DESC LIMIT 30").bind(groupId).all();
         return reply({ ok: true, seasons: (archives.results || []).map(row => ({
           season: row.season, closedAt: row.closed_at,
@@ -1000,22 +948,16 @@ export default {
       if (!identity) return reply({ ok: false, error: "Iniciá sesión con Google" }, 401);
       try {
         const groupId = leagueRanking[1], userId = "firebase:" + identity.uid;
-        await ensureMembershipPeriods(env.DB);
         const membership = await env.DB.prepare("SELECT m.role FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId,userId).first();
         if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
         if (request.method === "GET") {
           const cachedLeague = await readLeagueRankingCache(env.DB,groupId);
           if (cachedLeague) return presentLeagueRanking(cachedLeague,userId,membership.role);
         }
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_league_starts (group_id TEXT PRIMARY KEY REFERENCES prode_groups(id) ON DELETE CASCADE, starts_at TEXT NOT NULL DEFAULT (datetime('now')))").run();
         await env.DB.prepare("INSERT OR IGNORE INTO prode_league_starts(group_id) VALUES (?)").bind(groupId).run();
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS prode_initial_points (group_id TEXT NOT NULL, user_id TEXT NOT NULL, points INTEGER NOT NULL CHECK(points >= 0), assigned_by TEXT NOT NULL, assigned_at TEXT NOT NULL DEFAULT (datetime('now')), PRIMARY KEY(group_id,user_id), FOREIGN KEY(group_id,user_id) REFERENCES prode_memberships(group_id,user_id))").run();
         const initialRows = await env.DB.prepare("SELECT user_id, points FROM prode_initial_points WHERE group_id=?").bind(groupId).all();
         const initialPoints = new Map((initialRows.results || []).map(row => [row.user_id, Number(row.points)]));
         const start = await env.DB.prepare("SELECT starts_at FROM prode_league_starts WHERE group_id=?").bind(groupId).first();
-        await ensureCrests(env.DB);
-        await ensureVoteSources(env.DB);
-        await ensureCareerLinks(env.DB);
         const members = await env.DB.prepare(
           "SELECT m.user_id, m.joined_at, COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username, COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id, COALESCE(c.primary_color,'#7de83d') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary, COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText, COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle, COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont, COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=m.user_id), CASE COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') WHEN 'elite' THEN 'eagle' WHEN 'legend' THEN 'torch' ELSE 'ball' END) AS crestSymbol FROM prode_memberships m JOIN prode_users u ON u.id=m.user_id LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_vote_sources vs ON vs.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200"
         ).bind(groupId).all();
@@ -1223,7 +1165,6 @@ export default {
       if (!identity) return reply({ok:false,error:"Iniciá sesión con Google"},401);
       try {
         const groupId = liveLeagueVotes[1], userId = "firebase:" + identity.uid;
-        await ensureMembershipPeriods(env.DB);
         const membership = await env.DB.prepare("SELECT 1 AS allowed FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId,userId).first();
         if (!membership) return reply({ok:false,error:"No pertenecés a esta liga"},403);
         const fixtureResponse = await fetch(SITE + "/voting-fixture.json", {headers:{accept:"application/json"},cf:{cacheTtl:0}});
@@ -1237,7 +1178,6 @@ export default {
         const nextStartsAt = fixture.games.filter(game => game && game.finished!==true && Number.isFinite(Date.parse(game.startsAt)) && Date.parse(game.startsAt)>now)
           .sort((a,b)=>Date.parse(a.startsAt)-Date.parse(b.startsAt))[0]?.startsAt || null;
         if (!started.length) return reply({ok:true,games:[],nextStartsAt,checkedAt:new Date(now).toISOString()});
-        await ensureCrests(env.DB); await ensureVoteSources(env.DB); await ensureCareerLinks(env.DB);
         const members = await env.DB.prepare("SELECT m.user_id,COALESCE(NULLIF(TRIM(n.username),''),NULLIF(TRIM(u.display_name),''),'Jugador sin alias') AS username,COALESCE(l.visitor_id,vs.visitor_id) AS visitor_id,COALESCE(c.primary_color,'#7de83d') AS crestPrimary,COALESCE(c.secondary_color,'#10283c') AS crestSecondary,COALESCE((SELECT color FROM prode_crest_texts WHERE kind='user' AND entity_id=m.user_id),'#ffffff') AS crestText,COALESCE((SELECT style FROM prode_user_crest_styles WHERE user_id=m.user_id),'pro') AS crestStyle,COALESCE((SELECT font FROM prode_user_crest_fonts WHERE user_id=m.user_id),'sport') AS crestFont,COALESCE((SELECT symbol FROM prode_user_crest_symbols WHERE user_id=m.user_id),'') AS crestSymbol FROM prode_memberships m JOIN prode_users u ON u.id=m.user_id LEFT JOIN prode_usernames n ON n.user_id=m.user_id LEFT JOIN prode_career_links l ON l.user_id=m.user_id LEFT JOIN prode_vote_sources vs ON vs.user_id=m.user_id LEFT JOIN prode_user_crests c ON c.user_id=m.user_id WHERE m.group_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL) ORDER BY m.joined_at ASC LIMIT 200").bind(groupId).all();
         const allMembers = members.results || [], picksByMember = new Map();
         for (let i=0;i<allMembers.length;i+=6) {
@@ -1268,7 +1208,6 @@ export default {
         const [, groupId, action] = manageGroup, actorId = "firebase:" + identity.uid;
         const group = await env.DB.prepare("SELECT owner_id FROM prode_groups WHERE id=?").bind(groupId).first();
         if (!group) return reply({ ok: false, error: "Liga no encontrada" }, 404);
-        await ensureMembershipPeriods(env.DB);
         const membership = await env.DB.prepare("SELECT m.role FROM prode_memberships m WHERE m.group_id=? AND m.user_id=? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)").bind(groupId,actorId).first();
         if (!membership) return reply({ ok: false, error: "No pertenecés a esta liga" }, 403);
         if (action === "leave") {
@@ -1320,8 +1259,6 @@ export default {
       if (!identity) return reply({ ok: false, error: "Sesión inválida" }, 401);
       try {
         const groupId = groupDetail[1], userId = "firebase:" + identity.uid;
-        await ensureMembershipPeriods(env.DB);
-        await ensureCrests(env.DB);
         const group = await env.DB.prepare(
           "SELECT g.id, g.name, g.description, g.visibility, g.season, g.created_at, m.role, COALESCE(c.primary_color,'#ff9a39') AS crestPrimary, COALESCE(c.secondary_color,'#10283c') AS crestSecondary FROM prode_groups g JOIN prode_memberships m ON m.group_id = g.id LEFT JOIN prode_group_crests c ON c.group_id=g.id WHERE g.id = ? AND m.user_id = ? AND EXISTS (SELECT 1 FROM prode_membership_periods p WHERE p.group_id=m.group_id AND p.user_id=m.user_id AND p.exited_at IS NULL)"
         ).bind(groupId, userId).first();
