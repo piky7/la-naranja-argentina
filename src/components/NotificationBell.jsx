@@ -59,9 +59,13 @@ export default function NotificationBell({ user }) {
     refreshPending();
     const onUpdate = () => { loadInbox(); refreshPending(); };
     window.addEventListener("lna-vote-updated", onUpdate);
-    const interval = window.setInterval(() => { loadInbox(); refreshPending(); }, 60000);
-    return () => { window.removeEventListener("lna-vote-updated", onUpdate); window.clearInterval(interval); };
+    return () => window.removeEventListener("lna-vote-updated", onUpdate);
   }, [user?.uid, loadInbox, refreshPending]);
+
+  // Actualizar al abrir la bandeja, no cada minuto en segundo plano.
+  useEffect(() => {
+    if (open && user) { loadInbox(); refreshPending(); }
+  }, [open, user, loadInbox, refreshPending]);
 
   const unread = useMemo(() => items.filter(item => !item.readAt).length + (pendingMatches.length ? 1 : 0), [items, pendingMatches]);
 
