@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { fetchProdeRead, invalidateProdeReads } from "../src/utils/prodeRequestCache.js";
+import { fetchProdeRead, invalidateProdeReads, notifyProdeDataUpdated } from "../src/utils/prodeRequestCache.js";
 
 // Verifica la lógica real utilizada por el Worker (no una copia de sus reglas).
 // Se extraen sólo los helpers puros, anteriores a los secretos y rutas HTTP.
@@ -87,5 +87,67 @@ test("una consulta fallida no queda en caché", async () => {
   } finally {
     globalThis.fetch = original;
     invalidateProdeReads();
+  }
+});
+
+test("un cambio de datos invalida todas las lecturas compartidas de Prode", async () => {
+  invalidateProdeReads();
+  const original = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => {
+    calls++;
+    return { ok: true, json: async () => ({ ok: true, version: calls }) };
+  };
+  try {
+    const user = { uid: "cache-user", getIdToken: async () => "token" };
+    const first = await fetchProdeRead("/api/prode/groups/mine", user);
+    assert.equal(first.version, 1);
+    notifyProdeDataUpdated();
+    const second = await fetchProdeRead("/api/prode/groups/mine", user);
+    assert.equal(second.version, 2);
+    assert.equal(calls, 2);
+  } finally {
+    globalThis.fetch = original;
+    invalidateProdeReads();
+  }
+});
+
+test("la precarga cubre las lecturas reutilizadas por Prode y Mi Carrera", () => {
+  const app = readFileSync(new URL("../src/App.jsx", import.meta.url), "utf8");
+  for (const endpoint of [
+    "/api/prode/groups/mine",
+    "/api/prode/ranking/historical",
+    "/api/prode/ranking/weekly",
+    "/api/prode/ranking/weekly/awards",
+    "/api/prode/career-link",
+    "/api/prode/admin/access",
+  ]) assert.ok(app.includes(endpoint), endpoint);
+  assert.match(app, /fetchCareerData\("points"\)/);
+  assert.match(app, /fetchCareerData\("predictions"\)/);
+});
+
+test("Firebase comparte un solo observador de estado entre los componentes", () => {
+  const auth = readFileSync(new URL("../src/auth/prodeAuth.js", import.meta.url), "utf8");
+  assert.equal((auth.match(/onAuthStateChanged\(/g) || []).length, 1);
+  assert.match(auth, /const authSubscribers = new Set\(\)/);
+  assert.match(auth, /deliveredAuthVersions/);
+});
+
+test("la migración Prode crea las tablas operativas y preserva membresías existentes", () => {
+  const migration = readFileSync(new URL("../database/prode/002_runtime_tables.sql", import.meta.url), "utf8");
+  for (const table of [
+    "prode_membership_periods", "prode_career_links", "prode_vote_sources",
+    "prode_user_crest_styles", "prode_user_crest_fonts", "prode_user_crest_symbols",
+    "prode_crest_texts", "prode_user_crests", "prode_group_crests",
+    "prode_career_jerseys", "prode_league_starts", "prode_initial_points", "prode_season_archives",
+  ]) assert.match(migration, new RegExp("CREATE TABLE IF NOT EXISTS " + table));
+  assert.match(migration, /INSERT OR IGNORE INTO prode_membership_periods/);
+  assert.match(migration, /SELECT m\.group_id,m\.user_id,m\.joined_at FROM prode_memberships m/);
+});
+
+test("la migración de votaciones prepara las tablas auxiliares de Mi Carrera", () => {
+  const migration = readFileSync(new URL("../database/votaciones/002_runtime_tables.sql", import.meta.url), "utf8");
+  for (const table of ["partidos_final_detectado", "carrera_partidos", "votos_mvp", "voto_limites"]) {
+    assert.match(migration, new RegExp("CREATE TABLE IF NOT EXISTS " + table));
   }
 });
