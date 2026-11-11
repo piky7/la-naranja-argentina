@@ -91,7 +91,7 @@ export default function CareerEntryNotices() {
 
         const today = argentinaToday();
         let voteNoticeAlreadyShown = false;
-        try { voteNoticeAlreadyShown = localStorage.getItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}`) === "1"; } catch { /* Sin localStorage, se prioriza mostrar el aviso. */ }
+        try { voteNoticeAlreadyShown = localStorage.getItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}:${today}`) === "1"; } catch { /* Sin localStorage, se prioriza mostrar el aviso. */ }
         if (!voteNoticeAlreadyShown) {
           const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
           const checks = await Promise.all(gamesToday.map(async match => {
@@ -108,7 +108,6 @@ export default function CareerEntryNotices() {
           }));
           const pending = checks.filter(Boolean);
           if (active && pending.length) {
-            try { localStorage.setItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}`, "1"); } catch { /* El aviso queda limitado al estado actual de la app. */ }
             next.push({ type: "vote", date: today, pendingCount: pending.length });
           }
         }
