@@ -160,6 +160,7 @@ export default function UpcomingMatchModal({
                           ).losses
                         }
                       </small>
+                        {selectedUpcomingHomeTeam?.coach && <small className="match-modal-coach">DT: {selectedUpcomingHomeTeam.coach}</small>}
                     )}
                   </strong>
                 </div>
@@ -230,6 +231,7 @@ export default function UpcomingMatchModal({
                           ).losses
                         }
                       </small>
+                        {selectedUpcomingAwayTeam?.coach && <small className="match-modal-coach">DT: {selectedUpcomingAwayTeam.coach}</small>}
                     )}
                   </strong>
                 </div>
