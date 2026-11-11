@@ -53,3 +53,12 @@ test("No se muestran ventanas duplicadas de votación al abrir el próximo parti
   assert.doesNotMatch(liga,/<MatchVote\s+match=\{selectedUpcomingMatch\}/);
   assert.match(popup,/<MatchVote match=\{selectedUpcomingMatch\}/);
 });
+
+test("El popup de próximo partido respeta el viewport dinámico y las áreas seguras del navegador móvil",()=>{
+  const css=read("src/components/PopupDeferredOverrides.css");
+  assert.match(css,/\.match-modal-overlay:has\(> \.match-modal-upcoming\)/);
+  assert.match(css,/height:\s*100dvh/);
+  assert.match(css,/env\(safe-area-inset-top/);
+  assert.match(css,/env\(safe-area-inset-bottom/);
+  assert.match(css,/max-height:\s*calc\(100dvh/);
+});
