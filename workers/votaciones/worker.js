@@ -566,17 +566,22 @@ export default {
       }
 
       const existing = await env.DB.prepare("SELECT equipo_votado FROM votos WHERE partido_id=? AND visitante_id=?").bind(id, visitorId).first();
-      // Los puntos se calculan desde votos realmente guardados en D1.
-      // No se confía en puntos enviados por el navegador ni se duplica el saldo.
+      // Las consultas GET solo necesitan el estado del pronóstico y los porcentajes.
+      // Recalcular toda Mi Carrera en cada apertura del popup multiplica lecturas D1;
+      // los puntos se consultan por el endpoint dedicado /api/puntos.
+      if (request.method === "GET") {
+        if (!existing) return json({ ok: true, voted: false, open }, 200, cors);
+        const counts = await voteCounts(env.DB, id);
+        return json({
+          ok: true, voted: true, open, selected: existing.equipo_votado,
+          home: { id: game.homeTeam, votes: counts[game.homeTeam] || 0 },
+          away: { id: game.awayTeam, votes: counts[game.awayTeam] || 0 },
+        }, 200, cors);
+      }
+      // Tras guardar un voto sí devolvemos el saldo actualizado, calculado desde D1.
       const rewards = await getRewards(env.DB, visitorId);
-      const points = rewards.points;
-      if (!existing) return json({ ok: true, voted: false, open, points, mvps: rewards.mvps }, 200, cors);
-      const counts = await voteCounts(env.DB, id);
-      return json({
-        ok: true, voted: true, open, points, mvps: rewards.mvps, selected: existing.equipo_votado,
-        home: { id: game.homeTeam, votes: counts[game.homeTeam] || 0 },
-        away: { id: game.awayTeam, votes: counts[game.awayTeam] || 0 },
-      }, 200, cors);
+      return json({ ok: true, voted: true, open, points: rewards.points, mvps: rewards.mvps,
+        selected: existing?.equipo_votado || null }, 200, cors);
     } catch (error) {
       console.error("LNA votos:", error);
       return fail("No se pudo procesar la votación", 503);
