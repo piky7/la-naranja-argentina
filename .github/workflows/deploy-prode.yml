@@ -15,6 +15,7 @@ on:
       - "tests/prode-league-cache.test.mjs"
       - "database/prode/001_initial.sql"
       - "database/prode/002_runtime_tables.sql"
+      - "database/prode/003_notifications.sql"
       - ".github/workflows/deploy-prode.yml"
 
 permissions:
@@ -45,6 +46,11 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Aplicar migración de tablas operativas Prode
         run: npx --yes wrangler@4 d1 execute lna-prode --remote --config workers/prode/wrangler.toml --file database/prode/002_runtime_tables.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Aplicar migración del centro de notificaciones
+        run: npx --yes wrangler@4 d1 execute lna-prode --remote --config workers/prode/wrangler.toml --file database/prode/003_notifications.sql
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
