@@ -17,7 +17,7 @@ test("Mi Carrera obtiene votos, MVP, fecha mínima y finales en un solo grupo co
   assert.match(block,/SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=\?/);
   assert.match(block,/SELECT MIN\(partido_id\) AS first_id FROM votos/);
   assert.match(block,/SELECT MIN\(partido_id\) AS first_id FROM votos_mvp/);
-  assert.match(block,/getFinishObservations\(db\)/);
+  assert.match(block,/getFinishObservations\(db, fixture\.games\.map\(game => game\?\.id\)\)/);
 });
 test("La tabla MVP se prepara en migración y las lecturas permanecen concurrentes",()=>{
   const migration=readFileSync(new URL("../database/votaciones/002_runtime_tables.sql",import.meta.url),"utf8");
