@@ -78,7 +78,6 @@ export function useCareerSession() {
     watchProdeUser(next => {
       if (!active) return;
       setUser(next);setLoading(false);
-      window.dispatchEvent(new Event("career-auth-updated"));
     }).then(unsubscribe => {if(active)stop=unsubscribe;else unsubscribe();})
       .catch(()=>{if(active){setError("No se pudo cargar la sesión Google");setLoading(false);}});
     return ()=>{active=false;stop?.();};
