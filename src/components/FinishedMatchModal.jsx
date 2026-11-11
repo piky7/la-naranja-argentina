@@ -152,7 +152,6 @@ export default function FinishedMatchModal({
                         <small>
                           {getTeamPosition(selectedMatchHomeTeam.id)}° •{" "}
                           {getTeamRecord(selectedMatchHomeTeam.id).wins}-{getTeamRecord(selectedMatchHomeTeam.id).losses}
-                          {selectedMatchHomeTeam.coach && <span className="match-modal-coach"> · DT: {selectedMatchHomeTeam.coach}</span>}
                         </small>
                       )}
                     </strong>
@@ -199,13 +198,18 @@ export default function FinishedMatchModal({
                         <small>
                           {getTeamPosition(selectedMatchAwayTeam.id)}° •{" "}
                           {getTeamRecord(selectedMatchAwayTeam.id).wins}-{getTeamRecord(selectedMatchAwayTeam.id).losses}
-                          {selectedMatchAwayTeam.coach && <span className="match-modal-coach"> · DT: {selectedMatchAwayTeam.coach}</span>}
                         </small>
                       )}
                     </strong>
                   </div>
                 </div>
               </div>
+              {(selectedMatchHomeTeam?.coach || selectedMatchAwayTeam?.coach) && (
+                <div className="match-modal-coaches" aria-label="Directores técnicos">
+                  {selectedMatchHomeTeam?.coach && <div className="match-modal-coach-item"><span>DT LOCAL</span><strong>{selectedMatchHomeTeam.coach}</strong></div>}
+                  {selectedMatchAwayTeam?.coach && <div className="match-modal-coach-item"><span>DT VISITANTE</span><strong>{selectedMatchAwayTeam.coach}</strong></div>}
+                </div>
+              )}
               {selectedMatchStats?.quarterScores?.length > 0 && (
                 <div className="match-quarters-inline" aria-label="Puntos por cuarto">
                   {selectedMatchStats.quarterScores.map((quarter) => (
