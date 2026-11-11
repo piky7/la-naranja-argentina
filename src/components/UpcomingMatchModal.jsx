@@ -212,8 +212,8 @@ export default function UpcomingMatchModal({
             </div>
             {(selectedUpcomingHomeTeam?.coach || selectedUpcomingAwayTeam?.coach) && (
               <div className="match-modal-coaches" aria-label="Directores técnicos">
-                {selectedUpcomingHomeTeam?.coach && <div className="match-modal-coach-item"><span>DT LOCAL</span><strong>{selectedUpcomingHomeTeam.coach}</strong></div>}
-                {selectedUpcomingAwayTeam?.coach && <div className="match-modal-coach-item"><span>DT VISITANTE</span><strong>{selectedUpcomingAwayTeam.coach}</strong></div>}
+                {selectedUpcomingHomeTeam?.coach && <div className="match-modal-coach-item"><span>DT:</span><strong>{selectedUpcomingHomeTeam.coach}</strong></div>}
+                {selectedUpcomingAwayTeam?.coach && <div className="match-modal-coach-item"><span>DT:</span><strong>{selectedUpcomingAwayTeam.coach}</strong></div>}
               </div>
             )}
 
