@@ -136,7 +136,7 @@ export default function FanLevel({ isPage = false }) {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyError, setHistoryError] = useState(false);
   const [activeView, setActiveView] = useState("levels");
-  useEffect(() => { if (modalRef.current) modalRef.current.scrollTop = 0; }, [editingProfile, activeView]);
+  useEffect(() => { if (modalRef.current) modalRef.current.scrollTop = 0; }, [activeView]);
   const refresh = useCallback(async () => {
     const id = getVisitorId();
     if (!id) return;
