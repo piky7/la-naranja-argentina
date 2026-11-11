@@ -48,3 +48,12 @@ test("Las fuentes externas de Prode se cargan de forma diferida al abrir la pág
   assert.match(page,/link\.onload = \(\) => \{ link\.media = "all"; \}/);
   assert.doesNotMatch(styles,/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com/);
 });
+
+
+test("Mi jugador muestra el trofeo de la categoría actual",()=>{
+  const page=readFileSync(new URL("../src/components/FanLevel.jsx",import.meta.url),"utf8");
+  const styles=readFileSync(new URL("../src/components/FanLevel.css",import.meta.url),"utf8");
+  assert.match(page,/<small className="lna-fan-player-display-league"><img src=\{TROPHY_IMAGES\[index\]\}/);
+  assert.match(page,/alt=\{\x60Trofeo \$\{displayLevel\(level\.name\)\}\x60\}/);
+  assert.match(styles,/\.lna-fan-player-display-league img\{[^}]*object-fit:contain/);
+});
