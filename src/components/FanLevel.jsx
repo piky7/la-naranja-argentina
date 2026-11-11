@@ -362,6 +362,7 @@ export default function FanLevel({ isPage = false }) {
       {open && user && introStep === null && <div className={isPage ? "lna-fan-page-backdrop" : "lna-fan-backdrop"} onMouseDown={isPage ? undefined : (event) => { if (event.target === event.currentTarget) setOpen(false); }}>
         <section ref={modalRef} className={`lna-fan-modal ${isPage ? "lna-fan-page-card" : ""} ${activeView === "palmares" ? "lna-fan-modal-palmares" : ""}`} role={isPage ? undefined : "dialog"} aria-modal={isPage ? undefined : "true"} aria-labelledby="lna-fan-title">
           {!isPage && <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>}
+          {isPage && <div className="lna-fan-page-eyebrow"><span>LA NARANJA ARGENTINA</span><i/> <span>MI RECORRIDO DEPORTIVO</span></div>}
           <div className="lna-fan-gamer-heading">
             <span className="lna-fan-gamer-trophy"><Trophy size={23} aria-hidden="true" /></span>
             <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
@@ -463,7 +464,7 @@ export default function FanLevel({ isPage = false }) {
               {predictions.filter(p => p.status === "correct" || p.status === "incorrect").length > 15 && <div className="lna-fan-pages"><button type="button" disabled={page === 0} onClick={() => setPage(v => v - 1)}>‹ Recientes</button><span>{page + 1} / {Math.ceil(predictions.filter(p => p.status === "correct" || p.status === "incorrect").length / 15)}</span><button type="button" disabled={(page + 1) * 15 >= predictions.filter(p => p.status === "correct" || p.status === "incorrect").length} onClick={() => setPage(v => v + 1)}>Anteriores ›</button></div>}
             </>}
           </div>}
-          <p className="lna-fan-note">Tus puntos, pronósticos y camiseta se guardan en tu cuenta Google y estarán disponibles desde cualquier dispositivo.</p>
+          <p className="lna-fan-note">Tus puntos, pronósticos y escudo se guardan en tu cuenta Google y estarán disponibles desde cualquier dispositivo.</p>
         </section>
       </div>}
     </>
