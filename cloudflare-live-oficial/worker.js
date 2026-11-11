@@ -433,6 +433,11 @@ async function obtenerMarcadorConRecuperacion(
 
 
 async function generarLive(fecha, anteriores = null, env) {
+  // Un solo GET KV agrupa eventos, fixture y calendario de respaldo.
+  // Debe cargarse antes de utilizarlo en obtenerConCache.
+  const cacheReferencia =
+    await env.LNA_LIVE_OFICIAL.get("live-reference-data", "json") || {};
+
   // Primero consultamos únicamente los eventos, usando su caché de 30 minutos.
   // Así podemos evitar descargar el fixture oficial cuando no hay partidos
   // dentro de la ventana de seguimiento.
@@ -444,9 +449,6 @@ async function generarLive(fecha, anteriores = null, env) {
   );
 
   const ahora = Date.now();
-  // Un solo GET KV agrupa eventos, fixture y calendario de respaldo.
-  const cacheReferencia =
-    await env.LNA_LIVE_OFICIAL.get("live-reference-data", "json") || {};
   const anterioresDelDia =
     anteriores?.date === fecha
       ? anteriores.liveMatches || []
