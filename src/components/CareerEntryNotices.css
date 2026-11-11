@@ -1,0 +1,30 @@
+.lna-entry-notice-backdrop{position:fixed;inset:0;z-index:4100;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(3,8,14,.82);backdrop-filter:blur(5px)}
+.lna-entry-notice{position:relative;box-sizing:border-box;width:min(100%,420px);max-height:calc(100dvh - 36px);overflow:auto;padding:24px 20px 20px;border:1px solid rgba(255,157,65,.65);border-radius:18px;background:radial-gradient(circle at 50% 0,rgba(255,143,49,.17),transparent 48%),linear-gradient(150deg,#1a2b3e,#0d1825 72%);color:#f5f7fb;text-align:center;box-shadow:0 22px 70px #000b}
+.lna-entry-notice-close{position:absolute;right:11px;top:10px;display:grid;place-items:center;width:32px;height:32px;border:1px solid #ffffff20;border-radius:50%;background:#ffffff0b;color:#c7d2df;cursor:pointer}
+.lna-entry-notice-kicker{display:flex;align-items:center;justify-content:center;gap:6px;color:#ffb16a;font-size:10px;font-weight:900;letter-spacing:1.6px}
+.lna-entry-notice h2{margin:13px 0 5px;font-size:22px;letter-spacing:.7px}
+.lna-entry-notice-points{display:block;margin:5px 0 15px;color:#ffad5e;font-size:42px;font-weight:950;line-height:1.1}
+.lna-entry-reward-games{display:grid;gap:8px;max-height:36dvh;overflow:auto;text-align:left}
+.lna-entry-reward-game{padding:9px;border:1px solid #40546a;border-radius:10px;background:#17283a}
+.lna-entry-reward-match small{display:block;margin-bottom:5px;color:#91a5ba;font-size:9px}
+.lna-entry-reward-scoreline{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:5px;font-size:11px}
+.lna-entry-reward-scoreline>span{display:flex;align-items:center;gap:4px;min-width:0}
+.lna-entry-reward-scoreline>span:last-child{justify-content:flex-end;text-align:right}
+.lna-entry-reward-scoreline img{width:21px;height:21px;object-fit:contain;flex-shrink:0}
+.lna-entry-reward-scoreline strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lna-entry-reward-scoreline>b{color:#fff;font-size:13px;white-space:nowrap}
+.lna-entry-reward-outcomes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.lna-entry-reward-outcomes span{display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:6px;background:#0d1b29;color:#b8c7d5;font-size:9px}
+.lna-entry-reward-outcomes strong{color:#ffb36c}
+.lna-entry-reward-outcomes small{color:#d5dce5}
+.lna-entry-reward-total{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding:10px;border:1px solid #3c5268;border-radius:9px;background:#0d1b29;text-align:left}
+.lna-entry-reward-total>span{color:#9fb1c3;font-size:9px;font-weight:800;letter-spacing:1px}
+.lna-entry-reward-total strong{font-size:13px;white-space:nowrap}
+.lna-entry-reward-total i{padding:0 4px;color:#8da0b4;font-style:normal}
+.lna-entry-reward-total em{color:#ffb36c;font-style:normal}
+.lna-entry-notice-vote{padding-top:30px}
+.lna-entry-notice-vote h2{margin-top:19px;color:#ffad5e}
+.lna-entry-notice-vote p{margin:12px auto;color:#c4d0dc;font-size:13px;line-height:1.5;max-width:290px}
+.lna-entry-vote-count{display:block;margin:15px 0;padding:10px;border:1px solid #465c72;border-radius:9px;background:#14283a;color:#ffb36c;font-size:11px;letter-spacing:1px}
+.lna-entry-notice-action{width:100%;margin-top:14px;padding:12px;border:0;border-radius:9px;background:linear-gradient(100deg,#ff8b2c,#ffad55);color:#172333;font-size:13px;font-weight:900;cursor:pointer}
+@media(max-width:390px){.lna-entry-notice{padding:22px 14px 15px}.lna-entry-notice-points{font-size:37px}.lna-entry-reward-scoreline{font-size:10px}}
