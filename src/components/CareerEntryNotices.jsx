@@ -9,7 +9,7 @@ import { requestPrediction } from "../auth/prodeBallot";
 import "./CareerEntryNotices.css";
 
 const REWARD_SEEN_KEY = "lna-career-rewards-seen-v1";
-const VOTE_NOTICE_SESSION_KEY = "lna-vote-entry-notice-session-v1";
+const VOTE_NOTICE_SEEN_KEY = "lna-vote-entry-notice-seen-v1";
 const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
 
 function argentinaToday() {
@@ -91,7 +91,7 @@ export default function CareerEntryNotices() {
 
         const today = argentinaToday();
         let voteNoticeAlreadyShown = false;
-        try { voteNoticeAlreadyShown = sessionStorage.getItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`) === today; } catch { /* Sin sessionStorage, se prioriza mostrar el aviso. */ }
+        try { voteNoticeAlreadyShown = localStorage.getItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}`) === "1"; } catch { /* Sin localStorage, se prioriza mostrar el aviso. */ }
         if (!voteNoticeAlreadyShown) {
           const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
           const checks = await Promise.all(gamesToday.map(async match => {
@@ -108,7 +108,7 @@ export default function CareerEntryNotices() {
           }));
           const pending = checks.filter(Boolean);
           if (active && pending.length) {
-            try { sessionStorage.setItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`, today); } catch { /* El aviso queda limitado al estado actual de la app. */ }
+            try { localStorage.setItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}`, "1"); } catch { /* El aviso queda limitado al estado actual de la app. */ }
             next.push({ type: "vote", date: today, pendingCount: pending.length });
           }
         }
@@ -149,6 +149,14 @@ export default function CareerEntryNotices() {
 
   if (!user || !queue.length) return null;
   const notice = queue[0];
+
+  useEffect(() => {
+    if (!user?.uid || notice?.type !== "vote" || !notice.date) return;
+    try {
+      localStorage.setItem(`${VOTE_NOTICE_SEEN_KEY}:${user.uid}:${notice.date}`, "1");
+    } catch { /* Se mantiene el aviso en memoria si el navegador bloquea el almacenamiento. */ }
+  }, [user?.uid, notice?.type, notice?.date]);
+
   const dismiss = () => setQueue(current => current.slice(1));
 
   return createPortal(
