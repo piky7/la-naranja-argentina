@@ -56,15 +56,17 @@ export async function fetchCareerData(kind) {
   const now = Date.now();
   const cached = careerReads.get(key);
   if (cached && cached.expiresAt > now) return cached.promise;
+  const entry = { promise: null, expiresAt: Number.POSITIVE_INFINITY };
   const promise = (async () => {
     const response = await fetch(BASE + "/api/prode/career/data?kind="+encodeURIComponent(kind),{
       headers:{Authorization:"Bearer "+token},cache:"no-store"
     });
     const body = await response.json();
     if (!response.ok || !body.ok) throw Error(body.error || "Mi Carrera no disponible");
+    entry.expiresAt = Date.now() + CAREER_READ_TTL;
     return body;
   })();
-  const entry = { promise, expiresAt: now + CAREER_READ_TTL };
+  entry.promise = promise;
   careerReads.set(key, entry);
   if (careerReads.size > 12) careerReads.delete(careerReads.keys().next().value);
   try { return await promise; }
