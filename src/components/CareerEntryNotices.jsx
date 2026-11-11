@@ -91,7 +91,7 @@ export default function CareerEntryNotices() {
 
         const today = argentinaToday();
         let voteNoticeAlreadyShown = false;
-        try { voteNoticeAlreadyShown = sessionStorage.getItem(VOTE_NOTICE_SESSION_KEY) === today; } catch {}
+        try { voteNoticeAlreadyShown = sessionStorage.getItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`) === today; } catch {}
         if (!voteNoticeAlreadyShown) {
           const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
           const checks = await Promise.all(gamesToday.map(async match => {
@@ -103,7 +103,7 @@ export default function CareerEntryNotices() {
           }));
           const pending = checks.filter(Boolean);
           if (active && pending.length) {
-            try { sessionStorage.setItem(VOTE_NOTICE_SESSION_KEY, today); } catch {}
+            try { sessionStorage.setItem(`${VOTE_NOTICE_SESSION_KEY}:${user.uid}`, today); } catch {}
             next.push({ type: "vote", date: today, pendingCount: pending.length });
           }
         }
@@ -125,10 +125,10 @@ export default function CareerEntryNotices() {
         const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
         try {
           const ballot = await requestPrediction("winner", gameId);
-          return ballot.open && !ballot.voted;
-        } catch { return false; }
+          return ballot.open && !ballot.voted ? true : false;
+        } catch { return null; }
       }));
-      if (checks.length && checks.every(voted => !voted)) {
+      if (checks.length && checks.every(pending => pending === false)) {
         setQueue(current => current.filter(item => item.type !== "vote"));
       }
     };
@@ -157,7 +157,7 @@ export default function CareerEntryNotices() {
               </div></div>
               <div className="lna-entry-reward-outcomes">
                 <span><b>{game.winnerStatus === "correct" ? "✓" : "✕"} Ganador</b><strong>+{game.winnerPoints} pts</strong></span>
-                {game.mvpStatus !== "none" && <span><b>{game.mvpStatus === "correct" ? "✓" : game.mvpStatus === "incorrect" ? "✕" : "·"} MVP</b><small>{game.mvpName}</small><strong>{game.mvpStatus === "pending" ? "Pendiente" : `+ ${game.mvpPoints} pts`}</strong></span>}
+                {game.mvpStatus !== "none" && <span><b>{game.mvpStatus === "correct" ? "✓" : game.mvpStatus === "incorrect" ? "✕" : "·"} MVP</b><small>{game.mvpName}</small><strong>{game.mvpStatus === "pending" ? "Pendiente" : `+${game.mvpPoints} pts`}</strong></span>}
                 {game.bonus > 0 && <span><b>★ Racha</b><strong>+{game.bonus} pts</strong></span>}
               </div>
             </div>
