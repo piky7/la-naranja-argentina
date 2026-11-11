@@ -38,3 +38,13 @@ test("Prode se mantiene montado tras primera visita, con Suspense propio",()=>{
   assert.match(source,/<Prode \/>/);
   assert.match(source,/prode-page-reopened/);
 });
+
+test("Las fuentes externas de Prode se cargan de forma diferida al abrir la página",async()=>{
+  const page=await import("node:fs").then(({readFileSync})=>readFileSync(new URL("../src/pages/Prode.jsx",import.meta.url),"utf8"));
+  const styles=readFileSync(new URL("../src/pages/Prode.css",import.meta.url),"utf8");
+  assert.match(page,/id = "lna-prode-fonts"/);
+  assert.match(page,/fonts\.googleapis\.com\/css2\?family=Orbitron/);
+  assert.match(page,/link\.media = "print"/);
+  assert.match(page,/link\.onload = \(\) => \{ link\.media = "all"; \}/);
+  assert.doesNotMatch(styles,/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com/);
+});
