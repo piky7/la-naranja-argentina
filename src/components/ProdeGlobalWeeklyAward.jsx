@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Award } from "lucide-react";
 import { watchProdeUser } from "../auth/prodeAuth";
+import { fetchProdeRead } from "../utils/prodeRequestCache";
 import ProdeWeeklyAwards from "./ProdeWeeklyAwards";
 
-const API = "https://lna-prode-api.lnab.workers.dev";
 const seenKey = (uid, week) => `lna-global-week-award:${uid}:${week.startsAt}`;
 
 export default function ProdeGlobalWeeklyAward() {
@@ -26,13 +26,7 @@ export default function ProdeGlobalWeeklyAward() {
     if (!user) { return undefined; }
     const load = async () => {
       try {
-        const token = await user.getIdToken();
-        const res = await fetch(API + "/api/prode/ranking/weekly/awards", {
-          headers: { Authorization: "Bearer " + token },
-          cache: "no-store",
-        });
-        const data = await res.json();
-        if (!res.ok || !data.ok) throw Error(data.error || "Reconocimiento no disponible");
+        const data = await fetchProdeRead("/api/prode/ranking/weekly/awards", user);
         if (!active) return;
         const week = data.week;
         if (!week?.finished || !week.eligibleForMedals || !week.ranking?.length || week.number < 1 || Date.parse(week.startsAt) < Date.UTC(2026, 10, 2)) {
