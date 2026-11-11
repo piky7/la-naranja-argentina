@@ -56,48 +56,18 @@ async function descargar(url, opciones = {}) {
   return respuesta.text();
 }
 
-async function obtenerConCache(
-  env,
-  clave,
-  duracionSegundos,
-  obtenerDatos
-) {
-  // Los datos de referencia no necesitan KV: Cache API los conserva
-  // en el edge y evita varias lecturas/escrituras KV por cada minuto.
-  const cache = caches.default;
-  const cacheKey = new Request(
-    `https://lna-live-cache.internal/${encodeURIComponent(clave)}`
-  );
-  const guardado = await cache.match(cacheKey);
-
-  if (guardado) {
-    try {
-      const datos = await guardado.json();
-      if (Array.isArray(datos)) {
-        console.log("Caché edge utilizada:", clave);
-        return datos;
-      }
-    } catch (_) {
-      console.warn("Caché edge inválida:", clave);
-    }
+async function obtenerConCache(cacheReferencia, clave, duracionSegundos, obtenerDatos) {
+  const ahora = Date.now();
+  const guardado = cacheReferencia[clave];
+  if (guardado && Array.isArray(guardado.datos) && Number.isFinite(guardado.guardadoEn) && ahora - guardado.guardadoEn < duracionSegundos * 1000) {
+    console.log("Caché de referencias utilizada:", clave);
+    return guardado.datos;
   }
-
   const datos = await obtenerDatos();
-  if (!Array.isArray(datos)) {
-    throw new Error("Datos inválidos para caché: " + clave);
-  }
-
-  await cache.put(
-    cacheKey,
-    new Response(JSON.stringify(datos), {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": `public, max-age=${duracionSegundos}`,
-      },
-    })
-  );
-
-  console.log("Caché edge actualizada:", clave);
+  if (!Array.isArray(datos)) throw new Error("Datos inválidos para caché: " + clave);
+  cacheReferencia[clave] = { guardadoEn: ahora, datos };
+  cacheReferencia.modificada = true;
+  console.log("Caché de referencias actualizada:", clave);
   return datos;
 }
 
@@ -467,13 +437,16 @@ async function generarLive(fecha, anteriores = null, env) {
   // Así podemos evitar descargar el fixture oficial cuando no hay partidos
   // dentro de la ventana de seguimiento.
   const eventos = await obtenerConCache(
-    env,
+    cacheReferencia,
     "eventos-lnb",
     1800,
     () => obtenerEventos()
   );
 
   const ahora = Date.now();
+  // Un solo GET KV agrupa eventos, fixture y calendario de respaldo.
+  const cacheReferencia =
+    await env.LNA_LIVE_OFICIAL.get("live-reference-data", "json") || {};
   const anterioresDelDia =
     anteriores?.date === fecha
       ? anteriores.liveMatches || []
@@ -531,7 +504,7 @@ async function generarLive(fecha, anteriores = null, env) {
   let proximos = [];
   try {
     proximos = await obtenerConCache(
-      env,
+      cacheReferencia,
       `fixture-oficial:${fecha}`,
       600,
       () => obtenerFixture(fecha)
@@ -542,13 +515,17 @@ async function generarLive(fecha, anteriores = null, env) {
   let respaldo = [];
   try {
     respaldo = await obtenerConCache(
-      env,
+      cacheReferencia,
       `calendario-respaldo:${fecha}`,
       600,
       () => obtenerCalendarioRespaldo(fecha)
     );
   } catch (error) {
     console.warn("No se pudo obtener calendario de respaldo:", error.message);
+  }
+  if (cacheReferencia.modificada) {
+    delete cacheReferencia.modificada;
+    await env.LNA_LIVE_OFICIAL.put("live-reference-data", JSON.stringify(cacheReferencia));
   }
   const oficiales = [...proximos];
   const conocidos = new Set(proximos.map(item => item.localLNA + "|" + item.visitanteLNA));
@@ -949,23 +926,6 @@ if (request.method !== "GET") {
 
 
     try {
-      // Compartir la respuesta entre visitantes del mismo edge durante
-      // 15 segundos. La API sigue entregando no-store al navegador, pero
-      // evita una lectura KV por cada visita/actualización de la PWA.
-      const cache = caches.default;
-      const cacheKey = new Request(
-        `${url.origin}${url.pathname}?edge-cache=live-v1`
-      );
-      const respuestaCacheada = await cache.match(cacheKey);
-      if (respuestaCacheada) {
-        return Response.json(await respuestaCacheada.json(), {
-          headers: {
-            ...obtenerCorsHeaders(request),
-            "Cache-Control": "no-store",
-          },
-        });
-      }
-
       const guardado = await env.LNA_LIVE_OFICIAL.get(
         CLAVE_KV,
         "json"
@@ -1024,14 +984,6 @@ const desactualizado =
   }),
 };
 
-
-const respuesta = Response.json(datosActualizados, {
-  headers: {
-    "Content-Type": "application/json",
-    "Cache-Control": "public, max-age=15",
-  },
-});
-await cache.put(cacheKey, respuesta.clone());
 
 return Response.json(datosActualizados, {
   headers: {
