@@ -50,6 +50,12 @@ on:
       - "tests/career-entry-notices.test.mjs"
       - "src/components/CareerProfileAccess.jsx"
       - "src/components/CareerProfileAccess.css"
+      - "src/components/NotificationBell.jsx"
+      - "src/components/NotificationBell.css"
+      - "src/pages/Admin.jsx"
+      - "src/pages/AdminNotifications.jsx"
+      - "src/pages/Admin.css"
+      - "tests/notifications.test.mjs"
       - "src/pages/Perfil.jsx"
       - "src/pages/Perfil.css"
       - "src/auth/prodeProfile.js"
@@ -88,11 +94,11 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Detectar variables no definidas en Liga, Home, Estadísticas y Equipo
-        run: npx eslint src/pages/Liga.jsx src/pages/Home.jsx src/pages/Estadisticas.jsx src/pages/Equipos.jsx src/pages/Equipo.jsx src/App.jsx src/components/MatchStatsTabs.jsx src/components/FinishedMatchModal.jsx src/components/CareerEntryNotices.jsx --rule "no-undef:error" --rule "no-constant-condition:off" --rule "no-unused-vars:off" --rule "react-hooks/exhaustive-deps:off" --rule "react-hooks/set-state-in-effect:off" --rule "react-hooks/immutability:off" --rule "react-hooks/purity:off" --rule "react-hooks/refs:off" --rule "react-hooks/static-components:off" --rule "react-hooks/preserve-manual-memoization:off" --rule "react-refresh/only-export-components:off"
+        run: npx eslint src/pages/Liga.jsx src/pages/Home.jsx src/pages/Estadisticas.jsx src/pages/Equipos.jsx src/pages/Equipo.jsx src/App.jsx src/components/MatchStatsTabs.jsx src/components/FinishedMatchModal.jsx src/components/CareerEntryNotices.jsx src/components/NotificationBell.jsx src/pages/Admin.jsx src/pages/AdminNotifications.jsx --rule "no-undef:error" --rule "no-constant-condition:off" --rule "no-unused-vars:off" --rule "react-hooks/exhaustive-deps:off" --rule "react-hooks/set-state-in-effect:off" --rule "react-hooks/immutability:off" --rule "react-hooks/purity:off" --rule "react-hooks/refs:off" --rule "react-hooks/static-components:off" --rule "react-hooks/preserve-manual-memoization:off" --rule "react-refresh/only-export-components:off"
       - name: Validar referencias del popup de Liga
         run: node scripts/verify-liga-popups.mjs
-      - name: Validar avisos globales de Mi Carrera
-        run: node --test tests/career-entry-notices.test.mjs
+      - name: Validar avisos globales de Mi Carrera y centro de notificaciones
+        run: node --test tests/career-entry-notices.test.mjs tests/notifications.test.mjs
       - name: Comparar promedios y rankings colectivos originales y optimizados
         run: node scripts/verify-liga-collective.mjs
       - name: Compilar LNA
