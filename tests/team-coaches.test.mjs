@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const teamsSource = readFileSync(new URL("../src/data/teams.js", import.meta.url), "utf8");
-const coaches = [...teamsSource.matchAll(/id: "([^"]+)"[\\s\\S]*?coach: "([^"]+)"/g)].map(([, id, coach]) => ({ id, coach }));
+const coaches = [...teamsSource.matchAll(/id: "([^"]+)"[\s\S]*?coach: "([^"]+)"/g)].map(([, id, coach]) => ({ id, coach }));
 
 test("Los 18 equipos tienen un director técnico vigente cargado",()=>{
   assert.equal(coaches.length,18);
