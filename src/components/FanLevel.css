@@ -1018,3 +1018,9 @@
   width:100%;
   overflow-wrap:anywhere;
 }
+
+
+/* Trofeo de la categoría que el jugador está disputando actualmente. */
+.lna-fan-page-card .lna-fan-player-display-league{display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;font-weight:800}
+.lna-fan-page-card .lna-fan-player-display-league img{display:block;width:22px;height:29px;flex:0 0 22px;object-fit:contain;filter:drop-shadow(0 2px 4px #0008)}
+@media(max-width:650px){.lna-fan-page-card .lna-fan-player-display-league{gap:6px}.lna-fan-page-card .lna-fan-player-display-league img{width:20px;height:27px;flex-basis:20px}}
