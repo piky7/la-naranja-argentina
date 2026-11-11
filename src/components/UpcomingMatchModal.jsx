@@ -139,6 +139,7 @@ export default function UpcomingMatchModal({
                   )}
 
                   <strong>
+                    {/* El registro central del equipo aporta también su DT. */}
                     {selectedUpcomingHomeTeam?.shortName ||
                       selectedUpcomingHomeTeam?.name}
 
