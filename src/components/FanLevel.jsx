@@ -1,24 +1,23 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown, Pencil, Check } from "lucide-react";
+import { Trophy, X, ChevronRight, Flame, LockKeyhole, Target, Crown } from "lucide-react";
 import "./FanLevel.css";
 import { teams } from "../data/teams";
 import { matches } from "../data/matches";
 import { players } from "../data/players";
-import { fetchCareerData, fetchCareerJersey, saveCareerJersey, useCareerSession } from "../auth/careerAccount";
+import { fetchCareerData, useCareerSession } from "../auth/careerAccount";
+import { fetchProdeProfile } from "../auth/prodeProfile";
+import ProdeCrest from "./ProdeCrest";
+import { isSportsDesign, serializeSportsDesign } from "./sportsCrestDesign";
 import { requestPrediction } from "../auth/prodeBallot";
 
 const API = "https://lna-votaciones-api.lnab.workers.dev/api/puntos";
 const KEY = "lna-vote-visitor-id";
 const INTRO_KEY = "lna-career-intro-seen-v1";
-const PLAYER_NAME_KEY = "lna-career-player-name-v1";
-const PLAYER_NUMBER_KEY = "lna-career-player-number-v1";
 const CAREER_EVENTS_KEY = "lna-career-events-seen-v1";
 const REWARD_SEEN_KEY = "lna-career-rewards-seen-v1";
 const careerEventId = event => `${event.gameId}:${event.type}:${event.category}`;
 const readSeenEvents = () => { try { const value = JSON.parse(localStorage.getItem(CAREER_EVENTS_KEY) || "null"); return Array.isArray(value) ? value : null; } catch { return null; } };
-const readPlayerNumber = () => { try { return localStorage.getItem(PLAYER_NUMBER_KEY) ?? ""; } catch { return ""; } };
-const readPlayerName = () => { try { return localStorage.getItem(PLAYER_NAME_KEY) || ""; } catch { return ""; } };
 const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
 const LEVELS = [
   { name: "Liga de Desarrollo", goal: 50 },
@@ -42,25 +41,6 @@ function getVisitorId() {
   } catch { return null; }
 }
 
-function PlayerJersey({ name, number }) {
-  const displayName = (name || "TU NOMBRE").toLocaleUpperCase("es-AR");
-  const fontSize = displayName.length > 18 ? 8 : displayName.length > 12 ? 10 : displayName.length > 8 ? 12 : 15;
-  return <svg className="lna-fan-player-jersey" viewBox="0 0 116 134" role="img" aria-label={`Camiseta de básquet de ${name || "jugador"} con número ${number || "sin asignar"}`}>
-    <defs>
-      <linearGradient id="lnaJersey" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#20253b"/><stop offset=".5" stopColor="#090f1f"/><stop offset="1" stopColor="#2c1733"/></linearGradient>
-      <linearGradient id="lnaJerseyTrim" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#ffa4da"/><stop offset=".5" stopColor="#e83c9e"/><stop offset="1" stopColor="#ffb1df"/></linearGradient>
-    </defs>
-    <path d="M36 9 43 5h30l7 4 24 11-9 33-13-5v73H34V48l-13 5-9-33z" fill="url(#lnaJersey)" stroke="#f86cb5" strokeWidth="2.4" strokeLinejoin="round"/>
-    <path d="M36 9 43 5Q43 23 58 23T73 5l7 4M12 20l9 33 13-5M104 20 95 53 82 48" fill="none" stroke="url(#lnaJerseyTrim)" strokeWidth="5"/>
-    <path d="M34 117h48M38 42v70M78 42v70" fill="none" stroke="#ed4b9f" strokeWidth="1.5" opacity=".65"/>
-    <path d="M39 10q19 24 38 0" fill="none" stroke="#ffb1df" strokeWidth="1.5"/>
-    <circle cx="58" cy="39" r="7" fill="none" stroke="#ff83c4" strokeWidth="1.5"/>
-    <path d="M51 39h14M58 32v14M53 34q9 6 10 10" fill="none" stroke="#ff83c4" strokeWidth="1"/>
-    <text x="58" y="60" textAnchor="middle" fontFamily="Arial,sans-serif" fontWeight="900" fontSize={fontSize} textLength={displayName.length > 9 ? 72 : undefined} lengthAdjust="spacingAndGlyphs" fill="#fff">{displayName}</text>
-    <text x="58" y="102" textAnchor="middle" fontFamily="Arial,sans-serif" fontWeight="950" fontSize={number?.length === 2 ? 45 : 50} fill="#f15aa9" stroke="#fff0fa" strokeWidth="1.3" paintOrder="stroke">{number || "—"}</text>
-  </svg>;
-}
-
 export default function FanLevel({ isPage = false }) {
   const modalRef = useRef(null);
   const {user,loading:authLoading,login,busy:authBusy,error:authError} = useCareerSession();
@@ -70,30 +50,7 @@ export default function FanLevel({ isPage = false }) {
   const [eventNotice, setEventNotice] = useState(null);
   const [rewardNotice, setRewardNotice] = useState(null);
   const [unseenRewards, setUnseenRewards] = useState(false);
-  const [playerName, setPlayerName] = useState(readPlayerName);
-  const [playerNumber, setPlayerNumber] = useState(readPlayerNumber);
-  const [nameDraft, setNameDraft] = useState("");
-  const [numberDraft, setNumberDraft] = useState("");
-  const [editingProfile, setEditingProfile] = useState(false);
-  const [profileError, setProfileError] = useState("");
-  const startEditProfile = () => { setNameDraft(playerName); setNumberDraft(playerNumber); setProfileError(""); setEditingProfile(true); };
-  const closeProfileEditor = () => {
-    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-    setEditingProfile(false);
-    setProfileError("");
-  };
-  const saveProfile = async (event) => {
-    event.preventDefault();
-    const name = nameDraft.trim().replace(/\s+/g, " ");
-    if (!name || name.length > 24) { setProfileError("Ingresá un nombre de hasta 24 caracteres."); return; }
-    if (!/^(?:[0-9]|[1-9][0-9])$/.test(numberDraft)) { setProfileError("Elegí un dorsal del 0 al 99."); return; }
-    try {
-      await saveCareerJersey(name,numberDraft);
-      localStorage.setItem(PLAYER_NAME_KEY, name);
-      localStorage.setItem(PLAYER_NUMBER_KEY, numberDraft);
-    } catch(error) { setProfileError(error.message || "No se pudo guardar el perfil de Google."); return; }
-    setPlayerName(name); setPlayerNumber(numberDraft); closeProfileEditor();
-  };
+  const [prodeProfile, setProdeProfile] = useState(null);
   const [points, setPoints] = useState(null);
   const [mvps, setMvps] = useState(0);
   const [mvpHits, setMvpHits] = useState(0);
@@ -209,25 +166,18 @@ export default function FanLevel({ isPage = false }) {
   }, []);
 
   useEffect(() => {
-    if (!user) {setPoints(null);setSeasonPoints(null);setCareer(null);return;}
+    if (!user) {setPoints(null);setSeasonPoints(null);setCareer(null);setProdeProfile(null);return;}
+    let active = true;
     refresh();
-    fetchCareerJersey().then(async jersey => {
-      if (jersey) {setPlayerName(jersey.name);setPlayerNumber(jersey.number);return;}
-      const legacyName = readPlayerName();
-      const legacyNumber = readPlayerNumber();
-      if (legacyName && /^(?:[0-9]|[1-9][0-9])$/.test(legacyNumber)) {
-        const imported = await saveCareerJersey(legacyName,legacyNumber);
-        if (imported) {setPlayerName(imported.name);setPlayerNumber(imported.number);}
-      }
-    }).catch(()=>{});
-    const onVisible = () => { if (!document.hidden) refresh(); };
+    const loadIdentity = () => fetchProdeProfile().then(profile => { if (active) setProdeProfile(profile); }).catch(() => { if (active) setProdeProfile(null); });
+    loadIdentity();
+    const onProfile = () => loadIdentity();
+    const onVisible = () => { if (!document.hidden) { refresh(); loadIdentity(); } };
     const onVote = () => refresh();
     document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("lna-vote-updated", onVote);
-    return () => {
-      document.removeEventListener("visibilitychange", onVisible);
-      window.removeEventListener("lna-vote-updated", onVote);
-    };
+    window.addEventListener("prode-profile-updated", onProfile);
+    return () => { active = false; document.removeEventListener("visibilitychange", onVisible); window.removeEventListener("lna-vote-updated", onVote); window.removeEventListener("prode-profile-updated", onProfile); };
   }, [refresh,user]);
 
   // El distintivo estático indica recompensas aún no vistas; la consulta no las marca como vistas.
@@ -312,8 +262,8 @@ export default function FanLevel({ isPage = false }) {
   }, [open, activeView, refreshHistory]);
 
   useEffect(() => {
-    if (!editingProfile && !eventNotice && pendingEvents.length && (introStep === null || !open)) setEventNotice(pendingEvents[0]);
-  }, [open, introStep, editingProfile, eventNotice, pendingEvents]);
+    if (!eventNotice && pendingEvents.length && (introStep === null || !open)) setEventNotice(pendingEvents[0]);
+  }, [open, introStep, eventNotice, pendingEvents]);
 
   useEffect(() => {
     if (!open || isPage) return;
@@ -416,29 +366,10 @@ export default function FanLevel({ isPage = false }) {
             <span className="lna-fan-gamer-trophy"><Trophy size={23} aria-hidden="true" /></span>
             <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
           </div>
-          <div className="lna-fan-player-profile lna-fan-player-profile-with-jersey">
-            <div className="lna-fan-jersey-panel"><PlayerJersey name={playerName} number={playerNumber}/></div>
-            <div className="lna-fan-player-fields lna-fan-player-display">
-              <div className="lna-fan-player-display-top">
-                <span className="lna-fan-player-caption">MI JUGADOR</span>
-                <button type="button" className="lna-fan-edit-profile-button" onClick={startEditProfile} aria-label="Editar perfil de jugador"><Pencil size={13} aria-hidden="true" /> <span>Editar perfil</span></button>
-              </div>
-              <strong className="lna-fan-player-display-name">{playerName || "TU NOMBRE"}</strong>
-              <span className="lna-fan-player-display-number">DORSAL <b>#{playerNumber || "—"}</b></span>
-              <small className="lna-fan-player-display-league">{displayLevel(level.name)}</small>
-            </div>
+          <div className="lna-fan-player-profile lna-fan-player-profile-prode">
+            <div className="lna-fan-player-crest">{prodeProfile ? <ProdeCrest name={prodeProfile.username || prodeProfile.googleName || "Jugador"} primary={prodeProfile.crestPrimary} secondary={prodeProfile.crestSecondary} textColor={prodeProfile.crestText} style={prodeProfile.crestStyle} font={prodeProfile.crestFont} symbol={isSportsDesign(prodeProfile.crestSymbol) ? prodeProfile.crestSymbol : serializeSportsDesign({ label: prodeProfile.username || "" })} size={62}/> : <span className="lna-fan-player-crest-loading" aria-label="Cargando escudo">…</span>}</div>
+            <div className="lna-fan-player-fields lna-fan-player-display"><span className="lna-fan-player-caption">MI JUGADOR</span><strong className="lna-fan-player-display-name">{prodeProfile?.username || prodeProfile?.googleName || user?.displayName || "Jugador"}</strong><small className="lna-fan-player-display-league">{displayLevel(level.name)}</small></div>
           </div>
-          {editingProfile && createPortal(<div className="lna-fan-profile-edit-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) closeProfileEditor(); }}>
-            <form className="lna-fan-profile-edit-dialog" onSubmit={saveProfile} role="dialog" aria-modal="true" aria-labelledby="lna-fan-edit-title">
-              <div className="lna-fan-profile-edit-heading"><h3 id="lna-fan-edit-title">EDITAR MI JUGADOR</h3><button type="button" aria-label="Cerrar edición" onClick={closeProfileEditor}><X size={18}/></button></div>
-              <label htmlFor="lna-player-name">Nombre o apodo</label>
-              <input id="lna-player-name" maxLength={24} value={nameDraft} onChange={e => { setNameDraft(e.target.value); setProfileError(""); }} placeholder="Tu nombre" />
-              <label htmlFor="lna-player-number">Número de camiseta (0 a 99)</label>
-              <input id="lna-player-number" inputMode="numeric" maxLength={2} pattern="[0-9]{1,2}" value={numberDraft} onChange={e => { setNumberDraft(e.target.value.replace(/\D/g, "").slice(0,2)); setProfileError(""); }} placeholder="Ej. 7" />
-              {profileError && <small role="alert" className="lna-fan-profile-edit-error">{profileError}</small>}
-              <div className="lna-fan-profile-edit-actions"><button type="button" onClick={closeProfileEditor}>Cancelar</button><button type="submit"><Check size={15}/> Guardar perfil</button></div>
-            </form>
-          </div>, document.body)}
           <div className="lna-fan-gamer-hero">
             <div className="lna-fan-gamer-score">
               <p className="lna-fan-total">{seasonPoints === null ? "—" : seasonScore} <span>/ {level.goal ?? "∞"} PTS</span></p>
