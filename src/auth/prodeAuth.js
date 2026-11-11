@@ -20,12 +20,16 @@ async function sdk() {
 // suscriben a este emisor compartido en lugar de abrir listeners independientes.
 const authSubscribers = new Set();
 let authObserverPromise = null;
+let latestAuthUser = null;
+let hasAuthState = false;
 
 async function ensureSharedAuthObserver() {
   if (authObserverPromise) return authObserverPromise;
   authObserverPromise = (async () => {
     const { authSdk, auth } = await sdk();
     return authSdk.onAuthStateChanged(auth, user => {
+      latestAuthUser = user;
+      hasAuthState = true;
       for (const subscriber of [...authSubscribers]) {
         try { subscriber(user); } catch (error) {
           console.error("LNA: error notificando sesión Google", error);
@@ -44,6 +48,7 @@ export async function watchProdeUser(callback) {
   authSubscribers.add(callback);
   try {
     await ensureSharedAuthObserver();
+    if (hasAuthState && authSubscribers.has(callback)) callback(latestAuthUser);
   } catch (error) {
     authSubscribers.delete(callback);
     throw error;
