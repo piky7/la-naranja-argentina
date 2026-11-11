@@ -844,3 +844,154 @@
 .lna-fan-modal .lna-fan-player-profile-prode .lna-fan-player-caption{color:#9fdb72}
 .lna-fan-modal .lna-fan-player-profile-prode .lna-fan-player-display-name{font-size:clamp(17px,4.5vw,22px)}
 @media(max-width:600px){.lna-fan-modal .lna-fan-player-profile-prode{grid-template-columns:64px minmax(0,1fr);min-height:76px;padding:5px 8px;gap:8px}.lna-fan-player-crest{min-height:68px}.lna-fan-modal .lna-fan-player-profile-prode .lna-fan-player-display-name{font-size:17px}}
+
+
+/* ── Mi Carrera · sistema visual premium LNA ── */
+.lna-fan-page-backdrop{
+  padding:clamp(14px,3vw,34px) 14px 42px;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(255,133,44,.10),transparent 42%),
+    radial-gradient(ellipse at 8% 34%,rgba(37,111,145,.09),transparent 36%);
+}
+.lna-fan-page-card{
+  width:min(100%,1000px)!important;max-width:1000px!important;
+  padding:clamp(18px,3vw,34px)!important;
+  border:1px solid #263b50!important;border-radius:24px!important;
+  background:linear-gradient(155deg,#111f2e 0%,#0c1724 52%,#101d2b 100%)!important;
+  box-shadow:0 28px 80px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.035)!important;
+  color:#f3f7fb;
+}
+.lna-fan-page-eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 18px;color:#91a5b8;font-size:9px;font-weight:900;letter-spacing:1.65px}
+.lna-fan-page-eyebrow i{width:4px;height:4px;border-radius:50%;background:#ff9138;box-shadow:0 0 10px #ff9138}
+.lna-fan-page-card .lna-fan-gamer-heading{flex-direction:row;justify-content:flex-start;gap:12px;margin:0 0 16px;text-align:left}
+.lna-fan-page-card .lna-fan-gamer-trophy{width:46px;height:46px;border:1px solid rgba(255,153,72,.5);border-radius:14px;background:linear-gradient(145deg,rgba(255,151,65,.19),rgba(255,151,65,.045));color:#ffad63;box-shadow:0 8px 24px rgba(255,126,40,.10)}
+.lna-fan-page-card .lna-fan-gamer-trophy svg{width:25px;height:25px}
+.lna-fan-page-card .lna-fan-gamer-heading h2{font-size:clamp(23px,4vw,30px)!important;letter-spacing:1.5px!important;font-weight:950}
+.lna-fan-page-card .lna-fan-help{width:23px;height:23px;margin-left:5px;border:1px solid #506277;border-radius:50%;background:#1a2b3c;color:#c7d2dd;font-size:13px;vertical-align:middle}
+.lna-fan-page-card .lna-fan-player-profile-prode{
+  grid-template-columns:86px minmax(0,1fr);gap:15px;min-height:104px;
+  margin:0 0 14px;padding:12px 16px;border:1px solid rgba(255,151,65,.25);
+  border-radius:16px;background:linear-gradient(105deg,rgba(255,145,53,.105),rgba(22,43,61,.76) 52%,rgba(16,31,47,.8));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);text-align:left
+}
+.lna-fan-page-card .lna-fan-player-crest{min-height:78px;border-right:1px solid rgba(255,255,255,.09)}
+.lna-fan-page-card .lna-fan-player-profile-prode .lna-fan-player-caption{color:#ffb36f;font-size:9px;letter-spacing:1.5px;font-weight:900}
+.lna-fan-page-card .lna-fan-player-profile-prode .lna-fan-player-display-name{font-size:clamp(19px,3vw,25px);font-weight:950;letter-spacing:-.35px;color:#fff}
+.lna-fan-page-card .lna-fan-player-display-league{color:#9fb2c5;font-size:11px;font-weight:750;letter-spacing:.4px}
+.lna-fan-page-card .lna-fan-gamer-hero{
+  grid-template-columns:minmax(0,1.2fr) minmax(190px,.8fr);gap:18px;align-items:stretch;
+  margin:0 0 13px;padding:clamp(17px,3vw,25px);border:1px solid #31465a;border-radius:18px;
+  background:linear-gradient(115deg,#1a2c3e 0%,#17283a 52%,#1d2c3b 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);overflow:hidden;position:relative
+}
+.lna-fan-page-card .lna-fan-gamer-hero:after{content:"";position:absolute;right:-45px;top:-85px;width:230px;height:230px;border:1px solid rgba(255,157,78,.11);border-radius:50%;box-shadow:0 0 0 24px rgba(255,157,78,.025),0 0 0 50px rgba(255,157,78,.02);pointer-events:none}
+.lna-fan-page-card .lna-fan-gamer-score,.lna-fan-page-card .lna-fan-gamer-rank{position:relative;z-index:1;justify-content:center}
+.lna-fan-page-card .lna-fan-gamer-score .lna-fan-total{font-size:clamp(42px,7vw,62px);line-height:1;letter-spacing:-2.3px;color:#ff9a43}
+.lna-fan-page-card .lna-fan-gamer-score .lna-fan-total span{font-size:14px;letter-spacing:0;color:#b9c8d6}
+.lna-fan-page-card .lna-fan-gamer-score .lna-fan-historical{margin-top:10px;padding:6px 10px;border-color:rgba(255,255,255,.11);background:rgba(6,16,27,.28);color:#aebdca;font-size:10px}
+.lna-fan-page-card .lna-fan-gamer-score .lna-fan-historical b{color:#f4f7fa}
+.lna-fan-page-card .lna-fan-gamer-rank{gap:7px;padding:5px 0 5px 20px;border-left:1px solid rgba(255,255,255,.12)}
+.lna-fan-page-card .lna-fan-gamer-rank>span{font-size:9px;letter-spacing:1.5px;color:#9eb1c3;font-weight:900}
+.lna-fan-page-card .lna-fan-gamer-rank>strong{font-size:clamp(18px,3vw,25px);line-height:1.1;color:#fff;font-weight:950}
+.lna-fan-page-card .lna-fan-gamer-rank>small{font-size:10px;letter-spacing:1px;color:#ffb36f;font-weight:900}
+.lna-fan-page-card .lna-fan-gamer-progress{gap:14px;margin:0 0 12px;padding:0 3px}
+.lna-fan-page-card .lna-fan-gamer-progress .lna-fan-track-large{height:11px;background:#263b4f}
+.lna-fan-page-card .lna-fan-gamer-progress .lna-fan-track-large>span{background:linear-gradient(90deg,#ff852d,#ffbd72);box-shadow:0 0 14px rgba(255,145,54,.38)}
+.lna-fan-page-card .lna-fan-gamer-progress>strong{font-size:13px;color:#ffb36f;text-align:right}
+.lna-fan-page-card .lna-fan-gamer-progress>strong small{margin-top:3px;color:#91a5b8;font-size:8px;letter-spacing:1.2px;text-align:right}
+.lna-fan-page-card .lna-fan-next{gap:12px;margin:0 0 14px;padding:12px 14px;border:1px solid rgba(255,153,70,.23);border-radius:13px;background:linear-gradient(100deg,rgba(255,143,48,.085),rgba(19,38,55,.75));color:#c7d4df;font-size:11px;line-height:1.5}
+.lna-fan-page-card .lna-fan-next>.lna-fan-next-icon{flex-basis:34px;width:34px;height:34px;border:1px solid rgba(255,160,83,.3);border-radius:10px;background:rgba(255,143,48,.10)}
+.lna-fan-page-card .lna-fan-next>.lna-fan-next-icon svg{width:28px;height:28px}
+.lna-fan-page-card .lna-fan-next>.lna-fan-next-copy{font-size:11px;color:#cbd7e1;line-height:1.5}
+.lna-fan-page-card .lna-fan-next .lna-fan-descent-rule{margin-top:5px;color:#ffb2a1;font-size:10px}
+.lna-fan-page-card .lna-fan-today-reminder{border-radius:12px}
+.lna-fan-page-card .lna-fan-tabs{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;max-width:none;margin:0 0 16px!important;padding:5px;border:1px solid #263b50;border-radius:14px;background:#0a1521}
+.lna-fan-page-card .lna-fan-tabs button{min-height:43px;padding:9px 7px;border:1px solid transparent;border-radius:10px;background:transparent;color:#9fb0c1;font-size:11px;font-weight:900;letter-spacing:.25px;transition:background .18s ease,border-color .18s ease,color .18s ease}
+.lna-fan-page-card .lna-fan-tabs button.active{border-color:rgba(255,157,75,.35);background:linear-gradient(130deg,#ff9b43,#f47d2a);color:#172331;box-shadow:0 5px 15px rgba(255,130,43,.17)}
+.lna-fan-page-card .lna-fan-streak-panel{display:grid;grid-template-columns:42px minmax(0,1fr);grid-template-rows:auto auto auto;align-items:center;column-gap:12px;row-gap:3px;margin:0 0 13px;padding:14px 16px;border:1px solid #2d465b;border-radius:15px;background:linear-gradient(110deg,#192d40,#142537);text-align:left}
+.lna-fan-page-card .lna-fan-streak-flame{grid-row:1/4;grid-column:1;color:#ff9a43}
+.lna-fan-page-card .lna-fan-streak-panel strong{font-size:9px;letter-spacing:1.3px;color:#ffb36f}
+.lna-fan-page-card .lna-fan-streak-panel span{font-size:16px;line-height:1.25;color:#f6f8fb}
+.lna-fan-page-card .lna-fan-streak-panel small{font-size:10px;color:#9fb1c2;line-height:1.4}
+.lna-fan-page-card .lna-fan-levels{gap:8px}
+.lna-fan-page-card .lna-fan-level{
+  min-height:66px;gap:12px;padding:10px 13px;border:1px solid #2b4054;border-radius:13px;
+  background:linear-gradient(100deg,#172a3d,#142334);color:#c4d0dc;transition:border-color .18s ease,transform .18s ease
+}
+.lna-fan-page-card .lna-fan-level>span{flex:0 0 29px;width:29px;height:29px;background:#263b50;color:#aebdca;font-size:11px}
+.lna-fan-page-card .lna-fan-level .lna-fan-level-trophy{width:30px;height:34px;object-fit:contain}
+.lna-fan-page-card .lna-fan-level strong{font-size:12px;color:#e8eef4}
+.lna-fan-page-card .lna-fan-level .lna-fan-record{display:block;margin-top:4px;font-size:9px;font-style:normal;font-weight:650;color:#8fa3b6}
+.lna-fan-page-card .lna-fan-level-requirement{display:flex;flex-direction:column;align-items:flex-end;gap:3px;color:#aebdca;font-size:10px;font-weight:850}
+.lna-fan-page-card .lna-fan-level .lna-fan-current-tag{display:inline-flex;margin-left:7px;padding:3px 6px;border-radius:5px;background:rgba(255,157,67,.15);color:#ffb36f;font-size:8px;letter-spacing:.7px;vertical-align:middle}
+.lna-fan-page-card .lna-fan-level.is-current{border-color:rgba(255,157,67,.65);background:linear-gradient(100deg,rgba(255,145,53,.14),#182a3b 70%);box-shadow:0 0 0 1px rgba(255,145,53,.08),0 8px 20px rgba(0,0,0,.12)}
+.lna-fan-page-card .lna-fan-level.is-current>span{background:#ff9a43;color:#182431}
+.lna-fan-page-card .lna-fan-level.is-earned{border-color:rgba(69,191,137,.24)}
+.lna-fan-page-card .lna-fan-level.is-earned>span{background:rgba(58,181,126,.14);color:#63d5a0}
+.lna-fan-page-card .lna-fan-level-lock{color:#657b90}
+.lna-fan-page-card .lna-fan-history,.lna-fan-page-card .lna-fan-palmares,.lna-fan-page-card .lna-fan-mvp{padding:clamp(13px,2.5vw,20px);border:1px solid #293f54;border-radius:16px;background:linear-gradient(145deg,#172a3d,#122234)}
+.lna-fan-page-card .lna-fan-section-title{display:flex;align-items:center;gap:9px;margin-bottom:14px;color:#ffad66;font-size:11px;font-weight:950;letter-spacing:1.3px}
+.lna-fan-page-card .lna-fan-stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.lna-fan-page-card .lna-fan-stats span{min-height:76px;justify-content:center;border:1px solid #2c4358;border-radius:12px;background:#102033;color:#91a5b8;font-size:10px;font-weight:750}
+.lna-fan-page-card .lna-fan-stats b{font-size:25px;color:#f4f7fa}
+.lna-fan-page-card .lna-fan-stats b.correct{color:#61d5a0}
+.lna-fan-page-card .lna-fan-stats b.incorrect{color:#ffad66}
+.lna-fan-page-card .lna-fan-history-list{gap:7px}
+.lna-fan-page-card .lna-fan-prediction{border-color:#2c4358;border-radius:11px;background:#112235}
+.lna-fan-page-card .lna-fan-mvp{border-color:rgba(255,191,96,.27);background:linear-gradient(145deg,#243247,#17283a)}
+.lna-fan-page-card .lna-fan-mvp>strong{color:#ffd18a;letter-spacing:1px}
+.lna-fan-page-card .lna-fan-mvp-count{font-size:48px;color:#fff}
+.lna-fan-page-card .lna-fan-mvp p{color:#ffd18a}
+.lna-fan-page-card .lna-fan-mvp small{max-width:440px;color:#aebdca}
+.lna-fan-page-card .lna-fan-mvp-progress{width:100%;max-width:520px}
+.lna-fan-page-card .lna-fan-palmares{text-align:left}
+.lna-fan-page-card .lna-fan-palmares-totals>div{border-color:#344a5f;border-radius:13px;background:#13263a;color:#ffb36f}
+.lna-fan-page-card .lna-fan-palmares h3{margin-top:18px;color:#ffb36f}
+.lna-fan-page-card .lna-fan-cup{border-color:#30465b;border-radius:12px;background:#14283b}
+.lna-fan-page-card .lna-fan-cup.earned{border-color:rgba(255,170,89,.5);background:linear-gradient(145deg,rgba(255,145,53,.12),#172b3e)}
+.lna-fan-page-card .lna-fan-journey{margin-top:18px;padding:14px;border:1px solid #30465b;border-radius:13px;background:#102033}
+.lna-fan-page-card .lna-fan-journey-heading{color:#ffb36f}
+.lna-fan-page-card .lna-fan-note{margin:17px 0 0;color:#71879b;font-size:9px;line-height:1.5;text-align:center}
+@media(max-width:650px){
+ .lna-fan-page-backdrop{padding:9px 7px 24px}
+ .lna-fan-page-card{padding:15px 11px!important;border-radius:18px!important}
+ .lna-fan-page-eyebrow{margin-bottom:14px;font-size:8px;letter-spacing:1.2px}
+ .lna-fan-page-card .lna-fan-gamer-heading{margin-bottom:13px}
+ .lna-fan-page-card .lna-fan-gamer-trophy{width:40px;height:40px}
+ .lna-fan-page-card .lna-fan-gamer-heading h2{font-size:23px!important}
+ .lna-fan-page-card .lna-fan-player-profile-prode{grid-template-columns:67px minmax(0,1fr);min-height:83px;padding:8px 10px;gap:9px}
+ .lna-fan-page-card .lna-fan-player-crest{min-height:66px}
+ .lna-fan-page-card .lna-fan-player-profile-prode .lna-fan-player-display-name{font-size:18px}
+ .lna-fan-page-card .lna-fan-gamer-hero{grid-template-columns:minmax(0,1fr) minmax(112px,.8fr);gap:10px;padding:15px 12px;border-radius:15px}
+ .lna-fan-page-card .lna-fan-gamer-score .lna-fan-total{font-size:clamp(36px,10vw,48px);letter-spacing:-1.5px}
+ .lna-fan-page-card .lna-fan-gamer-score .lna-fan-total span{font-size:11px}
+ .lna-fan-page-card .lna-fan-gamer-rank{padding-left:11px}
+ .lna-fan-page-card .lna-fan-gamer-rank>strong{font-size:17px}
+ .lna-fan-page-card .lna-fan-gamer-rank>span{font-size:8px}
+ .lna-fan-page-card .lna-fan-gamer-progress{gap:9px}
+ .lna-fan-page-card .lna-fan-gamer-progress>strong{font-size:11px}
+ .lna-fan-page-card .lna-fan-next{padding:10px;gap:9px}
+ .lna-fan-page-card .lna-fan-tabs{gap:4px;padding:4px;border-radius:12px}
+ .lna-fan-page-card .lna-fan-tabs button{min-height:39px;padding:8px 2px;font-size:10px;letter-spacing:0}
+ .lna-fan-page-card .lna-fan-streak-panel{grid-template-columns:34px minmax(0,1fr);padding:12px}
+ .lna-fan-page-card .lna-fan-streak-flame{width:23px}
+ .lna-fan-page-card .lna-fan-streak-panel span{font-size:14px}
+ .lna-fan-page-card .lna-fan-level{min-height:61px;gap:7px;padding:8px}
+ .lna-fan-page-card .lna-fan-level>span{flex-basis:25px;width:25px;height:25px}
+ .lna-fan-page-card .lna-fan-level .lna-fan-level-trophy{width:25px;height:29px}
+ .lna-fan-page-card .lna-fan-level strong{font-size:10px}
+ .lna-fan-page-card .lna-fan-level .lna-fan-record{font-size:8px}
+ .lna-fan-page-card .lna-fan-level-requirement{font-size:9px}
+ .lna-fan-page-card .lna-fan-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .lna-fan-page-card .lna-fan-stats span{min-height:66px}
+ .lna-fan-page-card .lna-fan-cup-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:360px){
+ .lna-fan-page-card .lna-fan-player-profile-prode{grid-template-columns:58px minmax(0,1fr)}
+ .lna-fan-page-card .lna-fan-gamer-hero{grid-template-columns:minmax(0,1fr) 105px}
+ .lna-fan-page-card .lna-fan-gamer-score .lna-fan-total{font-size:34px}
+ .lna-fan-page-card .lna-fan-gamer-rank>strong{font-size:15px}
+ .lna-fan-page-card .lna-fan-tabs button{font-size:9px}
+ .lna-fan-page-card .lna-fan-level-requirement{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){.lna-fan-page-card *{scroll-behavior:auto!important;transition:none!important}}
