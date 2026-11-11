@@ -13,7 +13,7 @@ permissions:
 jobs:
   lighthouse-mobile:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,12 +28,18 @@ jobs:
           npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile.json --quiet
           npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile-2.json --quiet
           npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile-3.json --quiet
+          # Prode y Mi Carrera se miden también en móvil y escritorio.
+          # Las rutas protegidas se evalúan en su estado público sin sesión.
+          npx lighthouse https://lanaranjaargentina.com.ar/prode --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --preset=desktop --output=json --output-path=lighthouse-reports/prode-desktop.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/prode --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/prode-mobile.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/mi-carrera --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --preset=desktop --output=json --output-path=lighthouse-reports/career-desktop.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/mi-carrera --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/career-mobile.json --quiet
       - name: Resumir métricas
         if: always()
         run: |
           node --input-type=module <<'EOF'
           import fs from 'node:fs';
-          for (const label of ['mobile','desktop']) {
+          for (const label of ['mobile','desktop','prode-mobile','prode-desktop','career-mobile','career-desktop']) {
             const path = `lighthouse-reports/${label}.json`;
             if(!fs.existsSync(path)) {console.log(`${label}: no hubo medición`);continue;}
             const data=JSON.parse(fs.readFileSync(path,'utf8'));
