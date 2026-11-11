@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, Bell, Trophy } from "lucide-react";
-import { matches } from "../data/matches";
 import { teams } from "../data/teams";
 import { players } from "../data/players";
 import { fetchCareerData, useCareerSession } from "../auth/careerAccount";
-import { requestPrediction } from "../auth/prodeBallot";
 import "./CareerEntryNotices.css";
 
 const REWARD_SEEN_KEY = "lna-career-rewards-seen-v1";
 const TROPHY_IMAGES = ["/trofeos/desarrollo.svg", "/trofeos/federal.svg", "/trofeos/argentina.svg", "/trofeos/nacional.svg", "/trofeos/estrella.svg", "/trofeos/leyenda.svg"];
-
-function argentinaToday() {
-  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit",
-  }).formatToParts(new Date()).map(part => [part.type, part.value]));
-  return `${parts.year}-${parts.month}-${parts.day}`;
-}
 
 function buildRewardGames(changes, previous) {
   return changes.map(p => {
