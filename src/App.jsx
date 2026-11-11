@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
+const CareerEntryNotices = lazy(() => import("./components/CareerEntryNotices"));
 import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
@@ -163,6 +164,7 @@ function App() {
       <SeoMeta />
       <SwipeNavigation />
       <Header />
+      <Suspense fallback={null}><CareerEntryNotices /></Suspense>
       <AnimatedRoutes />
       <Footer />
     </BrowserRouter>
