@@ -770,3 +770,14 @@
 .bottom-nav-link.prode-nav-link.active{color:#8ee95b;background:rgba(125,232,61,.12)}
 .bottom-nav-link.prode-nav-link.active::after{background:#8ee95b;box-shadow:0 0 7px rgba(125,232,61,.55)}
 }
+
+
+/* Seis accesos visibles en la navegación inferior. */
+@media(max-width:768px){
+ .bottom-navigation{grid-template-columns:repeat(6,minmax(0,1fr));}
+ .bottom-nav-link{font-size:9.5px;letter-spacing:-.2px;white-space:nowrap;}
+ .bottom-nav-link svg{width:19px;height:19px;}
+ .bottom-nav-link.career-nav-link.active{color:#ff9bcf;background:rgba(236,91,168,.12)}
+ .bottom-nav-link.career-nav-link.active::after{background:#ff8fc9;box-shadow:0 0 7px rgba(255,143,201,.55)}
+}
+@media(max-width:380px){.bottom-nav-link{font-size:8.5px}.bottom-nav-link svg{width:18px;height:18px}}
