@@ -21,7 +21,7 @@ jobs:
           node-version: "22"
       - name: Instalar Lighthouse
         run: npm install --no-save --no-package-lock --ignore-scripts lighthouse@12
-      - name: Medir Home móvil en producción
+      - name: Medir Home, Prode y Mi Carrera en producción
         run: |
           mkdir -p lighthouse-reports
           npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --preset=desktop --output=json --output-path=lighthouse-reports/desktop.json --quiet
