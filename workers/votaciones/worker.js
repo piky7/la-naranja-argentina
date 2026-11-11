@@ -107,11 +107,7 @@ async function fixtureGame(id) {
 // Primer momento en que LNA detecta y confirma el final en el fixture.
 // NO es la hora exacta de la chicharra: se conserva como orden de
 // finalización observado para desempatar partidos con igual inicio.
-async function ensureFinishObservations(db) {
-  await db.prepare("CREATE TABLE IF NOT EXISTS partidos_final_detectado (partido_id TEXT PRIMARY KEY, detectado_en TEXT NOT NULL)").run();
-}
 async function captureFinishObservations(db, games) {
-  await ensureFinishObservations(db);
   const now = new Date().toISOString();
   const confirmed = (games || []).filter(game =>
     typeof game?.id === "string" && game.id.length <= 120 &&
@@ -134,7 +130,6 @@ function timelyFinishObservation(game, observedAt) {
     end >= start && end - start <= 6 * 60 * 60 * 1000 ? observedAt : null;
 }
 async function getFinishObservations(db) {
-  await ensureFinishObservations(db);
   const rows = await db.prepare("SELECT partido_id, detectado_en FROM partidos_final_detectado").all();
   return new Map((rows.results || []).map(row => [row.partido_id,row.detectado_en]));
 }
@@ -153,7 +148,6 @@ function comparePredictionGames(a,b) {
 // Archivo permanente de partidos en D1: permite recalcular carreras aunque roten los fixtures.
 // Se conserva el resultado confirmado; una versión futura sin resultado no puede borrarlo.
 async function archiveFixture(db, fixture) {
-  await db.prepare("CREATE TABLE IF NOT EXISTS carrera_partidos (partido_id TEXT PRIMARY KEY, datos TEXT NOT NULL, confirmado INTEGER NOT NULL DEFAULT 0)").run();
   const saved = await db.prepare("SELECT partido_id, datos, confirmado FROM carrera_partidos").all();
   const existing = new Map((saved.results || []).map(row => [row.partido_id, row]));
   const updates = [];
@@ -188,7 +182,6 @@ async function loadCareerFixture(db, fixture) {
 
 async function calculateRewards(db, fixture, visitorId) {
   // La tabla MVP debe existir antes de iniciar las lecturas concurrentes.
-  await db.prepare("CREATE TABLE IF NOT EXISTS votos_mvp (partido_id TEXT NOT NULL, visitante_id TEXT NOT NULL, jugador_id TEXT NOT NULL, creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(partido_id, visitante_id))").run();
   // Consultas independientes: ejecutarlas juntas ahorra latencia de D1.
   // Se conservan exactamente las mismas filas, criterios y reglas.
   const [votes, mvpVotes, firstVote, firstMvp, finishTimes] = await Promise.all([
@@ -404,7 +397,6 @@ export default {
       if (!visitorId || !visitorPattern.test(visitorId)) return fail("Identificador inválido", 400);
       if (!env.DB) return fail("Base de datos no configurada", 503);
       try {
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS votos_mvp (partido_id TEXT NOT NULL, visitante_id TEXT NOT NULL, jugador_id TEXT NOT NULL, creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(partido_id, visitante_id))").run();
         const [votes, mvpVotes, fixtureResponse] = await Promise.all([
           env.DB.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=? ORDER BY partido_id DESC LIMIT 200").bind(visitorId).all(),
           env.DB.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=? ORDER BY partido_id DESC LIMIT 200").bind(visitorId).all(),
@@ -508,7 +500,6 @@ export default {
         const start = Date.parse(game.startsAt);
         if (!Number.isFinite(start)) return fail("Horario sin confirmar", 409);
         const open = !game.finished && Date.now() < start;
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS votos_mvp (partido_id TEXT NOT NULL, visitante_id TEXT NOT NULL, jugador_id TEXT NOT NULL, creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(partido_id, visitante_id))").run();
         if (request.method === "POST") {
           if (!open) return fail("Votación cerrada", 409);
           if (typeof playerId !== "string" || playerId.length > 120 || !Array.isArray(game.eligiblePlayers) || !game.eligiblePlayers.includes(playerId)) return fail("Jugador no habilitado para este partido", 400);
@@ -563,7 +554,6 @@ export default {
         if (ip && !previousVote) {
           const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(day + ":" + ip));
           const hash = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, "0")).join("");
-          await env.DB.prepare("CREATE TABLE IF NOT EXISTS voto_limites (hash TEXT PRIMARY KEY, cantidad INTEGER NOT NULL)").run();
           const limit = await env.DB.prepare("INSERT INTO voto_limites(hash,cantidad) VALUES (?,1) ON CONFLICT(hash) DO UPDATE SET cantidad=cantidad+1 WHERE cantidad<30 RETURNING cantidad").bind(hash).first();
           if (!limit) return fail("Demasiadas solicitudes", 429);
         }
