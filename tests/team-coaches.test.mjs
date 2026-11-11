@@ -18,12 +18,12 @@ test("Los popups de partidos y la ficha de equipo reutilizan el DT del registro 
   const finished=read("src/components/FinishedMatchModal.jsx");
   const team=read("src/pages/Equipo.jsx");
   assert.match(upcoming,/className="match-modal-coaches"/);
-  assert.match(upcoming,/DT LOCAL/);
-  assert.match(upcoming,/DT VISITANTE/);
+  assert.equal((upcoming.match(/<span>DT:<\/span>/g)||[]).length,2);
   assert.match(upcoming,/selectedUpcomingHomeTeam\.coach/);
   assert.match(upcoming,/selectedUpcomingAwayTeam\.coach/);
   
   assert.match(finished,/className="match-modal-coaches"/);
+  assert.equal((finished.match(/<span>DT:<\/span>/g)||[]).length,2);
   assert.match(finished,/selectedMatchHomeTeam\.coach/);
   assert.match(finished,/selectedMatchAwayTeam\.coach/);
   
