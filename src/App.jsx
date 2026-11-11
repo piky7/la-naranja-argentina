@@ -5,9 +5,14 @@ import Header from "./components/Header";
 import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
+import { watchProdeUser } from "./auth/prodeAuth";
+import { fetchCareerData } from "./auth/careerAccount";
+import { fetchProdeRead } from "./utils/prodeRequestCache";
 
 import Home from "./pages/Home";
 const loadLiga = () => import("./pages/Liga");
+const loadProde = () => import("./pages/Prode");
+const loadMiCarrera = () => import("./pages/MiCarrera");
 const Liga = lazy(loadLiga);
 const Equipos = lazy(() => import("./pages/Equipos"));
 const Equipo = lazy(() => import("./pages/Equipo"));
@@ -16,8 +21,8 @@ const loadEstadisticas = () => import("./pages/Estadisticas");
 const Estadisticas = lazy(loadEstadisticas);
 const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Acerca = lazy(() => import("./pages/Acerca"));
-const Prode = lazy(() => import("./pages/Prode"));
-const MiCarrera = lazy(() => import("./pages/MiCarrera"));
+const Prode = lazy(loadProde);
+const MiCarrera = lazy(loadMiCarrera);
 const Perfil = lazy(() => import("./pages/Perfil"));
 const Admin = lazy(() => import("./pages/Admin"));
 
@@ -28,14 +33,38 @@ function PreloadSections() {
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (connection?.saveData || /(^|\\s)(slow-2g|2g)(\\s|$)/i.test(connection?.effectiveType || "")) return;
     let idleId = null;
-    let timerId = window.setTimeout(() => {
-      const preload = () => {
-        void Promise.allSettled([loadLiga(), loadEstadisticas()]);
-      };
+    let timerId = null;
+    let stopAuth = null;
+    let active = true;
+    const warmedUsers = new Set();
+    const preload = async () => {
+      // Primero se descargan los módulos; luego, si hay sesión, se calientan
+      // lecturas reutilizables sin bloquear la pantalla inicial.
+      await Promise.allSettled([loadLiga(), loadEstadisticas(), loadProde(), loadMiCarrera()]);
+      if (!active) return;
+      try {
+        const unsubscribe = await watchProdeUser(user => {
+          if (!active || !user || warmedUsers.has(user.uid)) return;
+          warmedUsers.add(user.uid);
+          void Promise.allSettled([
+            fetchProdeRead("/api/prode/groups/mine", user),
+            fetchProdeRead("/api/prode/ranking/historical", user),
+            fetchProdeRead("/api/prode/ranking/weekly", user),
+            fetchCareerData("points"),
+            fetchCareerData("predictions"),
+          ]);
+        });
+        if (active) stopAuth = unsubscribe;
+        else unsubscribe?.();
+      } catch { /* La precarga nunca debe afectar la navegación. */ }
+    };
+    timerId = window.setTimeout(() => {
       if ("requestIdleCallback" in window) idleId = window.requestIdleCallback(preload, { timeout: 6000 });
-      else preload();
+      else void preload();
     }, 1400);
     return () => {
+      active = false;
+      stopAuth?.();
       window.clearTimeout(timerId);
       if (idleId !== null && "cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
     };
