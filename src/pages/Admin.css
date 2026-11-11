@@ -36,3 +36,15 @@
 .lna-admin-setup{display:flex;flex-direction:column;gap:10px;align-items:center;max-width:530px;width:100%}
 .lna-admin-setup p{font-size:12px;line-height:1.55}
 .lna-admin-setup code{display:block;width:100%;overflow-wrap:anywhere;padding:11px;border-radius:8px;border:1px solid #526278;background:#0b1c2e;color:#e9f4fb;font-size:12px;user-select:all}
+
+.lna-admin-notifications>h2{display:flex;align-items:center;gap:8px}
+.lna-admin-notifications>h2 svg{color:#ffa24c}
+.lna-admin-notifications>p{color:#aebfd0;font-size:12px;line-height:1.55}
+.lna-admin-notifications form{display:grid;gap:12px;margin-top:14px}
+.lna-admin-notifications label{display:grid;gap:6px;color:#dce7f0;font-size:12px;font-weight:800}
+.lna-admin-notifications input,.lna-admin-notifications textarea{width:100%;box-sizing:border-box;border:1px solid #465d73;border-radius:9px;background:#0c1d2e;color:#f2f6fa;padding:11px 12px;font:inherit;font-size:13px;outline:none}
+.lna-admin-notifications input:focus,.lna-admin-notifications textarea:focus{border-color:#f5a04a;box-shadow:0 0 0 2px #f5a04a22}
+.lna-admin-notifications textarea{resize:vertical;min-height:82px}
+.lna-admin-notifications form>button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;border:1px solid #f5a04a;border-radius:9px;background:linear-gradient(100deg,#f28b2c,#ffb25c);color:#17202b;font-size:12px;font-weight:900;cursor:pointer}
+.lna-admin-notifications form>button:disabled{opacity:.55;cursor:wait}
+.lna-admin-notification-feedback{padding:10px 12px;border:1px solid #4d806c;border-radius:8px;background:#142f2b;color:#a7e7c3!important}
