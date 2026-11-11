@@ -77,3 +77,9 @@ test("el usuario puede eliminar solo avisos generales de su propia bandeja", () 
   assert.match(bell, /item\.type === "announcement"/);
   assert.match(bell, /setItems\(current => current\.filter\(entry => entry\.id !== item\.id\)\)/);
 });
+
+test("la campanita no consulta D1 en polling periódico; actualiza al entrar y al votar",()=>{
+  assert.doesNotMatch(bell,/setInterval\(/);
+  assert.match(bell,/if \(open && user\) \{ loadInbox\(\); refreshPending\(\); \}/);
+  assert.match(bell,/window\.addEventListener\("lna-vote-updated", onUpdate\)/);
+});
