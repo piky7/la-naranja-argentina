@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ShieldCheck, UsersRound, Trophy, Link2, UserPlus, RefreshCcw, LockKeyhole, ArrowLeft, Database } from "lucide-react";
 import { signInProdeWithGoogle, watchProdeUser } from "../auth/prodeAuth";
 import "./Admin.css";
+import AdminNotifications from "./AdminNotifications";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 const days = Array.from({ length: 7 }, (_, offset) => {
@@ -90,6 +91,7 @@ export default function Admin() {
             <small>{metric.detail}</small>
           </article>; })}
         </div>
+        <AdminNotifications user={user}/>
         <section className="lna-admin-section">
           <h2>Registros de los últimos 7 días</h2>
           <div className="lna-admin-bars" role="img" aria-label={"Registros diarios: " + days.map((day, index) => day + ": " + dailyValues[index]).join(", ")}>
