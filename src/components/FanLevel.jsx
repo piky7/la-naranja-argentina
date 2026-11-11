@@ -61,7 +61,7 @@ function PlayerJersey({ name, number }) {
   </svg>;
 }
 
-export default function FanLevel({ page = false }) {
+export default function FanLevel({ isPage = false }) {
   const modalRef = useRef(null);
   const {user,loading:authLoading,login,busy:authBusy,error:authError} = useCareerSession();
   const [pendingToday, setPendingToday] = useState([]);
@@ -102,7 +102,7 @@ export default function FanLevel({ page = false }) {
   const [streaks, setStreaks] = useState({winStreak:0,lossStreak:0,missedStreak:0});
   const [page, setPage] = useState(0);
   const [careerHistoryExpanded, setCareerHistoryExpanded] = useState(false);
-  const [open, setOpen] = useState(page);
+  const [open, setOpen] = useState(isPage);
   const [introStep, setIntroStep] = useState(null);
   const finishIntro = () => { try { localStorage.setItem(INTRO_KEY, "1"); } catch { /* Sin almacenamiento disponible. */ } setIntroStep(null); };
   const openCareer = async () => {
@@ -316,11 +316,11 @@ export default function FanLevel({ page = false }) {
   }, [open, introStep, editingProfile, eventNotice, pendingEvents]);
 
   useEffect(() => {
-    if (!open || page) return;
+    if (!open || isPage) return;
     const onKey = (event) => { if (event.key === "Escape") setOpen(false); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, page]);
+  }, [open, isPage]);
 
   const score = points ?? 0;
   const seasonScore = seasonPoints ?? score;
@@ -336,7 +336,7 @@ export default function FanLevel({ page = false }) {
 
   return (
     <>
-      {!page && <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}${unseenRewards ? " has-unseen-rewards" : ""}`} type="button" onClick={openCareer} aria-label={!user ? "Iniciar sesión con Google para Mi Carrera" : pendingToday.length ? "Ver Mi Carrera. Tenés un pronóstico pendiente de hoy" : "Ver Mi Carrera"}>
+      {!isPage && <button className={`lna-fan-bar${pendingToday.length ? " has-pending-vote" : ""}${unseenRewards ? " has-unseen-rewards" : ""}`} type="button" onClick={openCareer} aria-label={!user ? "Iniciar sesión con Google para Mi Carrera" : pendingToday.length ? "Ver Mi Carrera. Tenés un pronóstico pendiente de hoy" : "Ver Mi Carrera"}>
         <span className="lna-fan-bar-medals"><img className="lna-fan-bar-trophy" src={TROPHY_IMAGES[Math.max(0, LEVELS.findIndex(item => item.name === level.name))]} alt="" aria-hidden="true" /></span>
         {unseenRewards && <span className="lna-fan-new-reward-mark" aria-hidden="true">NUEVOS PTS</span>}
         <span className="lna-fan-summary">
@@ -409,9 +409,9 @@ export default function FanLevel({ page = false }) {
         </section>
       </div>}
       {open && !authLoading && !user && <div className="lna-fan-backdrop" onMouseDown={event => {if(event.target===event.currentTarget)setOpen(false);}}><section className="lna-fan-modal" role="dialog" aria-modal="true" aria-label="Ingresar a Mi Carrera" style={{padding:24,textAlign:"center"}}><button className="lna-fan-close" type="button" onClick={()=>setOpen(false)} aria-label="Cerrar"><X size={20}/></button><Trophy size={34}/><h2>MI CARRERA</h2><p>Ingresá con Google para guardar tus puntos, copas y pronósticos en todos tus dispositivos.</p><button className="lna-fan-achievement-continue" type="button" onClick={login} disabled={authBusy}>{authBusy?"Conectando…":"Continuar con Google"}</button>{authError && <p role="alert">{authError}</p>}</section></div>}
-      {open && user && introStep === null && <div className={page ? "lna-fan-page-backdrop" : "lna-fan-backdrop"} onMouseDown={page ? undefined : (event) => { if (event.target === event.currentTarget) setOpen(false); }}>
-        <section ref={modalRef} className={`lna-fan-modal ${page ? "lna-fan-page-card" : ""} ${activeView === "palmares" ? "lna-fan-modal-palmares" : ""}`} role={page ? undefined : "dialog"} aria-modal={page ? undefined : "true"} aria-labelledby="lna-fan-title">
-          {!page && <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>}
+      {open && user && introStep === null && <div className={isPage ? "lna-fan-page-backdrop" : "lna-fan-backdrop"} onMouseDown={isPage ? undefined : (event) => { if (event.target === event.currentTarget) setOpen(false); }}>
+        <section ref={modalRef} className={`lna-fan-modal ${isPage ? "lna-fan-page-card" : ""} ${activeView === "palmares" ? "lna-fan-modal-palmares" : ""}`} role={isPage ? undefined : "dialog"} aria-modal={isPage ? undefined : "true"} aria-labelledby="lna-fan-title">
+          {!isPage && <button className="lna-fan-close" type="button" onClick={() => setOpen(false)} aria-label="Cerrar"><X size={20}/></button>}
           <div className="lna-fan-gamer-heading">
             <span className="lna-fan-gamer-trophy"><Trophy size={23} aria-hidden="true" /></span>
             <h2 id="lna-fan-title">MI CARRERA <button type="button" className="lna-fan-help" onClick={() => setIntroStep(0)} aria-label="Ver presentación de Mi carrera" title="Cómo jugar">?</button></h2>
