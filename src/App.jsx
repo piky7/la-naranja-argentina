@@ -52,7 +52,6 @@ function PreloadSections() {
             fetchProdeRead("/api/prode/ranking/historical", user),
             fetchProdeRead("/api/prode/ranking/weekly", user),
             fetchProdeRead("/api/prode/ranking/weekly/awards", user),
-            fetchProdeRead("/api/prode/me", user),
             fetchProdeRead("/api/prode/career-link", user),
             fetchProdeRead("/api/prode/admin/access", user),
             // Mi Carrera: resumen de puntos y pronósticos recientes.
