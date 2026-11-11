@@ -29,7 +29,14 @@ const Admin = lazy(() => import("./pages/Admin"));
 // Precarga suave: no bloquea el render inicial ni consume datos extra
 // en conexiones lentas o con ahorro de datos activado.
 function PreloadSections() {
+  const location = useLocation();
+  const preloadStarted = useRef(false);
+
   useEffect(() => {
+    // La precarga de secciones se inicia desde Inicio. Si se abre una ruta
+    // secundaria directamente, no competir con su carga inicial descargando
+    // módulos de otras páginas.
+    if (location.pathname !== "/" || preloadStarted.current) return;
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (connection?.saveData || /(^|\\s)(slow-2g|2g)(\\s|$)/i.test(connection?.effectiveType || "")) return;
     let idleId = null;
@@ -38,6 +45,8 @@ function PreloadSections() {
     let active = true;
     const warmedUsers = new Set();
     const preload = async () => {
+      if (!active || preloadStarted.current) return;
+      preloadStarted.current = true;
       // Primero se descargan los módulos; luego, si hay sesión, se calientan
       // lecturas reutilizables sin bloquear la pantalla inicial.
       await Promise.allSettled([loadLiga(), loadEstadisticas(), loadProde(), loadMiCarrera()]);
@@ -73,7 +82,7 @@ function PreloadSections() {
       window.clearTimeout(timerId);
       if (idleId !== null && "cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
     };
-  }, []);
+  }, [location.pathname]);
   return null;
 }
 
