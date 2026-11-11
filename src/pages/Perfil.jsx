@@ -21,14 +21,16 @@ export default function Perfil(){
  const [saving,setSaving]=useState(false);
  const [message,setMessage]=useState("");
  const [messageError,setMessageError]=useState("");
+ const [loadError,setLoadError]=useState("");
  const loadProfile=useCallback(async()=>{
   if(!user){setProfile(null);setPoints(null);return}
   setProfileLoading(true);
   const [p,c]=await Promise.allSettled([fetchProdeProfile(),fetchCareerData("points")]);
   const next=p.status==="fulfilled"?p.value:null;
   setProfile(next);
+  setLoadError(p.status==="rejected"?(p.reason?.message||"No se pudo cargar el perfil."): "");
   setPoints(c.status==="fulfilled"&&Number.isFinite(Number(c.value.points))?Number(c.value.points):null);
-  if(next)setDraft({username:next.username||"",primary:next.crestPrimary||"#7de83d",secondary:next.crestSecondary||"#10283c",text:next.crestText||"#ffffff",font:next.crestFont||"sport",design:parseSportsDesign(next.crestSymbol)});
+  if(next){const design=parseSportsDesign(next.crestSymbol);if(!design.label)design.label=next.username||"";setDraft({username:next.username||"",primary:next.crestPrimary||"#7de83d",secondary:next.crestSecondary||"#10283c",text:next.crestText||"#ffffff",font:next.crestFont||"sport",design});}
   setProfileLoading(false);
  },[user]);
  useEffect(()=>{loadProfile();const onProfile=()=>loadProfile();const onVote=()=>loadProfile();window.addEventListener("prode-profile-updated",onProfile);window.addEventListener("lna-vote-updated",onVote);return()=>{window.removeEventListener("prode-profile-updated",onProfile);window.removeEventListener("lna-vote-updated",onVote)}},[loadProfile]);
@@ -62,11 +64,12 @@ export default function Perfil(){
     <div className="lna-profile-editor-heading"><div><small>PERSONALIZACIÓN</small><h2>Tu identidad deportiva</h2></div><span>PERFIL LNA</span></div>
     <label className="lna-profile-field">Alias público<input value={draft.username} onChange={e=>setField("username",e.target.value.replace(/\s/g,"").slice(0,20))} minLength={3} maxLength={20} autoComplete="nickname" placeholder="Ej. Piky_10"/><small>Entre 3 y 20 caracteres. Letras, números y guion bajo. Debe ser único.</small></label>
     <div className="lna-profile-editor-preview"><div><small>VISTA PREVIA</small><strong>{crestName}</strong></div><ProdeCrest name={crestName} primary={draft.primary} secondary={draft.secondary} textColor={draft.text} style="pro" font={draft.font} symbol={crestSymbol} size={86}/></div>
+    <label className="lna-profile-field">Nombre dentro del escudo<input value={draft.design.label} maxLength={20} onChange={e=>setDesign("label",e.target.value.toUpperCase())} placeholder="Ej. CLUB PIKY"/><small>Puede ser distinto de tu alias. Hasta 20 caracteres.</small></label>
     <div className="lna-profile-editor-section"><h3>Colores del escudo</h3><div className="lna-profile-colors">
       <label><span>Principal</span><input type="color" value={draft.primary} onChange={e=>setField("primary",e.target.value)}/><code>{draft.primary.toUpperCase()}</code></label>
       <label><span>Secundario</span><input type="color" value={draft.secondary} onChange={e=>setField("secondary",e.target.value)}/><code>{draft.secondary.toUpperCase()}</code></label>
       <label><span>Texto</span><input type="color" value={draft.text} onChange={e=>setField("text",e.target.value)}/><code>{draft.text.toUpperCase()}</code></label>
-    </div></div>
+    </div><div className="lna-profile-palette-list" aria-label="Paletas rápidas">{[{name:"Azul hielo",colors:["#073e82","#b9e9ff","#06111c"]},{name:"Bordó oro",colors:["#7c182b","#d9aa53","#fff2cc"]},{name:"Grafito",colors:["#17232f","#d9dfe6","#101820"]},{name:"Verde",colors:["#125b40","#c0df70","#102b1c"]},{name:"Violeta",colors:["#54258d","#efa7d2","#1a0f2d"]}].map(option=><button key={option.name} type="button" title={option.name} aria-label={"Aplicar paleta "+option.name} onClick={()=>{setField("primary",option.colors[0]);setField("secondary",option.colors[1]);setField("text",option.colors[2])}}><i style={{background:option.colors[0]}}/><i style={{background:option.colors[1]}}/></button>)}</div></div>
     <div className="lna-profile-editor-section"><h3>Diseño del escudo</h3><div className="lna-profile-select-grid">
       <label>Forma<select value={draft.design.shape} onChange={e=>setDesign("shape",e.target.value)}>{SPORTS_SHAPES.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>
       <label>Franjas<select value={draft.design.pattern} onChange={e=>setDesign("pattern",e.target.value)}>{SPORTS_PATTERNS.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>
