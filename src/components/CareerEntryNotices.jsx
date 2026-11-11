@@ -96,10 +96,15 @@ export default function CareerEntryNotices() {
           const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
           const checks = await Promise.all(gamesToday.map(async match => {
             const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-            try {
-              const ballot = await requestPrediction("winner", gameId);
-              return ballot.open && !ballot.voted ? gameId : null;
-            } catch { return null; }
+            const [winnerResult, mvpResult] = await Promise.allSettled([
+              requestPrediction("winner", gameId),
+              requestPrediction("mvp", gameId),
+            ]);
+            const winnerPending = winnerResult.status === "fulfilled" &&
+              winnerResult.value.open && !winnerResult.value.voted;
+            const mvpPending = mvpResult.status === "fulfilled" &&
+              mvpResult.value.open && !mvpResult.value.voted;
+            return winnerPending || mvpPending ? gameId : null;
           }));
           const pending = checks.filter(Boolean);
           if (active && pending.length) {
@@ -123,10 +128,16 @@ export default function CareerEntryNotices() {
       const gamesToday = matches.filter(match => match.date === today && match.status !== "finished" && match.status !== "postponed");
       const checks = await Promise.all(gamesToday.map(async match => {
         const gameId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-        try {
-          const ballot = await requestPrediction("winner", gameId);
-          return ballot.open && !ballot.voted ? true : false;
-        } catch { return null; }
+        const [winnerResult, mvpResult] = await Promise.allSettled([
+          requestPrediction("winner", gameId),
+          requestPrediction("mvp", gameId),
+        ]);
+        const winnerPending = winnerResult.status === "fulfilled" &&
+          winnerResult.value.open && !winnerResult.value.voted;
+        const mvpPending = mvpResult.status === "fulfilled" &&
+          mvpResult.value.open && !mvpResult.value.voted;
+        if (winnerResult.status === "rejected" && mvpResult.status === "rejected") return null;
+        return winnerPending || mvpPending;
       }));
       if (checks.length && checks.every(pending => pending === false)) {
         setQueue(current => current.filter(item => item.type !== "vote"));
