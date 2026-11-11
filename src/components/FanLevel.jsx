@@ -369,7 +369,7 @@ export default function FanLevel({ isPage = false }) {
           </div>
           <div className="lna-fan-player-profile lna-fan-player-profile-prode">
             <div className="lna-fan-player-crest">{prodeProfile ? <ProdeCrest name={prodeProfile.username || prodeProfile.googleName || "Jugador"} primary={prodeProfile.crestPrimary} secondary={prodeProfile.crestSecondary} textColor={prodeProfile.crestText} style={prodeProfile.crestStyle} font={prodeProfile.crestFont} symbol={isSportsDesign(prodeProfile.crestSymbol) ? prodeProfile.crestSymbol : serializeSportsDesign({ label: prodeProfile.username || "" })} size={62}/> : <span className="lna-fan-player-crest-loading" aria-label="Cargando escudo">…</span>}</div>
-            <div className="lna-fan-player-fields lna-fan-player-display"><span className="lna-fan-player-caption">MI JUGADOR</span><strong className="lna-fan-player-display-name">{prodeProfile?.username || prodeProfile?.googleName || user?.displayName || "Jugador"}</strong><small className="lna-fan-player-display-league">{displayLevel(level.name)}</small></div>
+            <div className="lna-fan-player-fields lna-fan-player-display"><span className="lna-fan-player-caption">MI JUGADOR</span><strong className="lna-fan-player-display-name">{prodeProfile?.username || prodeProfile?.googleName || user?.displayName || "Jugador"}</strong><small className="lna-fan-player-display-league"><img src={TROPHY_IMAGES[index]} alt={`Trofeo ${displayLevel(level.name)}`} />{displayLevel(level.name)}</small></div>
           </div>
           <div className="lna-fan-gamer-hero">
             <div className="lna-fan-gamer-score">
