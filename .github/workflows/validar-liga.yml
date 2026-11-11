@@ -67,6 +67,7 @@ on:
       - "src/components/MatchStatsTabs.jsx"
       - "src/components/FinishedMatchModal.jsx"
       - "src/components/UpcomingMatchModal.jsx"
+      - "src/components/UpcomingHeader.css"
       - "tests/upcoming-popup-shared.test.mjs"
       - "src/components/MatchStatsTabs.css"
       - "scripts/verify-liga-popups.mjs"
