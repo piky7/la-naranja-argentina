@@ -47,7 +47,7 @@ test("Render de escudos deportivo y trofeo de liga permanecen separados", () => 
   assert.doesNotMatch(access,/PRODE_SYMBOL_CATEGORIES/);
   assert.doesNotMatch(access,/signOutProde|prode-account-logout|logoutConfirmOpen/);
   assert.match(profile,/signOutProde/);
-  assert.match(profile,/¿Querés cerrar sesión\?/);
+  assert.match(profile,/¿Querés cerrar sesión?/);
   const careerAccount = read("src/auth/careerAccount.js");
   const profileAccess = read("src/components/CareerProfileAccess.jsx");
   assert.doesNotMatch(careerAccount,/career-auth-updated/);
@@ -65,4 +65,17 @@ test("Mi Carrera aplica el rediseño premium únicamente a su página", () => {
   assert.match(styles,/\.lna-fan-page-card \.lna-fan-gamer-hero/);
   assert.match(styles,/\.lna-fan-page-card \.lna-fan-tabs/);
   assert.match(styles,/@media\(max-width:650px\)/);
+});
+
+test("El encabezado ofrece iniciar sesión y crear cuenta cuando no hay usuario", () => {
+  const read = path => readFileSync(new URL("../"+path,import.meta.url),"utf8");
+  const access = read("src/components/CareerProfileAccess.jsx");
+  const auth = read("src/auth/careerAccount.js");
+  assert.match(access,/if\(!waiting&&!user\)/);
+  assert.match(access,/Iniciar sesión/);
+  assert.match(access,/o crear una cuenta/);
+  assert.match(access,/onClick=\{login\}/);
+  assert.match(access,/Continuando|Conectando/);
+  assert.match(auth,/signInProdeWithGoogle\(\)/);
+  assert.match(access,/to="\/perfil"/);
 });
