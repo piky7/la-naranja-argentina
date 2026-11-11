@@ -898,5 +898,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2-SZ_1lbZNkaj4jzP8Z_ZdT8wEdaKKh2OJacur-Sn_arN5n2nJnuQYg==/argentino-j-vs-regatas-c"
     }
+  },
+  "2026-11-10-olimpico-instituto": {
+    "status": "finished",
+    "homeScore": 82,
+    "awayScore": 83,
+    "time": "22:00",
+    "homeTeam": "olimpico",
+    "awayTeam": "instituto",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BaD637AfCzHf8kMKo-geEDSdXaNoQ4BKhtc1E0m1dz5qN52kCQzLrA==/olimpico-lb-vs-instituto"
+    }
   }
 };
