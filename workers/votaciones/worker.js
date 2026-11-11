@@ -148,10 +148,23 @@ function comparePredictionGames(a,b) {
 // Archivo permanente de partidos en D1: permite recalcular carreras aunque roten los fixtures.
 // Se conserva el resultado confirmado; una versión futura sin resultado no puede borrarlo.
 async function archiveFixture(db, fixture) {
-  const saved = await db.prepare("SELECT partido_id, datos, confirmado FROM carrera_partidos").all();
-  const existing = new Map((saved.results || []).map(row => [row.partido_id, row]));
+  // El cron corre cada 5 minutos: leer toda la tabla histórica en cada ciclo
+  // multiplicaba filas leídas aunque el fixture no hubiera cambiado.
+  // Buscar únicamente los IDs presentes en el fixture usa la clave primaria.
+  const games = (fixture.games || []).filter(game =>
+    typeof game?.id === "string" && game.id.length <= 120);
+  const existing = new Map();
+  for (let i = 0; i < games.length; i += 80) {
+    const ids = games.slice(i, i + 80).map(game => game.id);
+    if (!ids.length) continue;
+    const placeholders = ids.map(() => "?").join(",");
+    const saved = await db.prepare(
+      `SELECT partido_id, datos, confirmado FROM carrera_partidos WHERE partido_id IN (${placeholders})`
+    ).bind(...ids).all();
+    for (const row of saved.results || []) existing.set(row.partido_id, row);
+  }
   const updates = [];
-  for (const game of fixture.games || []) {
+  for (const game of games) {
     if (typeof game?.id !== "string" || game.id.length > 120) continue;
     const confirmed = Number(game.finished === true && Number.isFinite(game.homeScore) && Number.isFinite(game.awayScore) && game.homeScore !== game.awayScore);
     const previous = existing.get(game.id);
