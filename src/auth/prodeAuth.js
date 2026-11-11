@@ -22,6 +22,8 @@ const authSubscribers = new Set();
 let authObserverPromise = null;
 let latestAuthUser = null;
 let hasAuthState = false;
+let authStateVersion = 0;
+const deliveredAuthVersions = new WeakMap();
 
 async function ensureSharedAuthObserver() {
   if (authObserverPromise) return authObserverPromise;
@@ -30,8 +32,9 @@ async function ensureSharedAuthObserver() {
     return authSdk.onAuthStateChanged(auth, user => {
       latestAuthUser = user;
       hasAuthState = true;
+      authStateVersion += 1;
       for (const subscriber of [...authSubscribers]) {
-        try { subscriber(user); } catch (error) {
+        try { subscriber(user); deliveredAuthVersions.set(subscriber, authStateVersion); } catch (error) {
           console.error("LNA: error notificando sesión Google", error);
         }
       }
@@ -48,7 +51,10 @@ export async function watchProdeUser(callback) {
   authSubscribers.add(callback);
   try {
     await ensureSharedAuthObserver();
-    if (hasAuthState && authSubscribers.has(callback)) callback(latestAuthUser);
+    if (hasAuthState && authSubscribers.has(callback) && deliveredAuthVersions.get(callback) !== authStateVersion) {
+      callback(latestAuthUser);
+      deliveredAuthVersions.set(callback, authStateVersion);
+    }
   } catch (error) {
     authSubscribers.delete(callback);
     throw error;
