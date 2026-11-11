@@ -2,8 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
-import FanLevel from "./FanLevel";
-import { House, Trophy, Shield, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
+import CareerProfileAccess from "./CareerProfileAccess";
+import { House, Trophy, Shield, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target, UserRound } from "lucide-react";
 
 function Header() {
   const [navCompact, setNavCompact] = useState(false);
@@ -103,7 +103,7 @@ function Header() {
             <div className="header-ball-line header-ball-line-3"></div>
           </div>
 
-          <FanLevel />
+          <CareerProfileAccess />
 
           {/* NAVEGACIÓN ESCRITORIO */}
           <nav className="navigation">
@@ -210,6 +210,16 @@ function Header() {
   >
     <Target size={22} strokeWidth={2} aria-hidden="true" />
     <span>Prode</span>
+  </NavLink>
+
+  <NavLink
+    to="/mi-carrera"
+    className={({ isActive }) =>
+      `bottom-nav-link career-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <Trophy size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Mi Carrera</span>
   </NavLink>
 </nav>
     </>
