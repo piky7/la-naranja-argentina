@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import ProdeCrest from "./ProdeCrest";
 import ProdeWeeklyAwards from "./ProdeWeeklyAwards";
 import ProdeCareerDetails from "./ProdeCareerDetails";
-import { fetchProdeRead } from "../utils/prodeRequestCache";
+import { fetchProdeRead, notifyProdeDataUpdated } from "../utils/prodeRequestCache";
 
 const API = "https://lna-prode-api.lnab.workers.dev";
 const inviteUrl = token => "https://lanaranjaargentina.com.ar/invitacion?token=" + encodeURIComponent(token);
@@ -128,8 +128,24 @@ export default function ProdeGroups({ onReady }) {
   };
   useEffect(() => { if (!authReady) return; setReady(false); load(user); }, [user, authReady]);
   useEffect(() => { if (authReady && ready) onReady?.(true); }, [authReady, ready, onReady]);
-  useEffect(() => { const refresh = () => { if (authReady) load(user); }; window.addEventListener("prode-page-reopened", refresh); return () => window.removeEventListener("prode-page-reopened", refresh); }, [authReady, user]);
-  useEffect(() => { const refresh = () => { if (selected) openGroup(selected); }; window.addEventListener("prode-profile-updated", refresh); return () => window.removeEventListener("prode-profile-updated", refresh); }, [selected, user]);
+  useEffect(() => {
+    const refresh = () => { if (authReady) load(user); };
+    window.addEventListener("prode-page-reopened", refresh);
+    window.addEventListener("prode-data-updated", refresh);
+    return () => {
+      window.removeEventListener("prode-page-reopened", refresh);
+      window.removeEventListener("prode-data-updated", refresh);
+    };
+  }, [authReady, user]);
+  useEffect(() => {
+    const refresh = () => { if (selected) openGroup(selected); };
+    window.addEventListener("prode-profile-updated", refresh);
+    window.addEventListener("prode-data-updated", refresh);
+    return () => {
+      window.removeEventListener("prode-profile-updated", refresh);
+      window.removeEventListener("prode-data-updated", refresh);
+    };
+  }, [selected, user]);
   useEffect(() => { if (location.pathname !== "/prode") return; const params = new URLSearchParams(location.search); const code = params.get("invite") || params.get("token"); if (code && /^[a-f0-9]{64}$/i.test(code)) { setJoinCode(code); setJoinOpen(true); } }, [location.pathname, location.search]);
   useEffect(() => {
     if (!joinOpen || !/^[a-f0-9]{64}$/i.test(joinCode)) {
@@ -330,6 +346,7 @@ export default function ProdeGroups({ onReady }) {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudieron asignar los puntos");
+      notifyProdeDataUpdated();
       setInitialMessage("Se asignaron " + data.points + " puntos iniciales correctamente.");
       setInitialOpen(false);
       setInitialTarget(""); setInitialAmount("0");
@@ -370,6 +387,7 @@ export default function ProdeGroups({ onReady }) {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo completar la acción");
+      notifyProdeDataUpdated();
       if (action === "leave" || action === "delete") {
         closeGroup(); setDetail(null); setManageOpen(false);
         await load(user);
@@ -403,6 +421,7 @@ export default function ProdeGroups({ onReady }) {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo cambiar el nombre.");
+      notifyProdeDataUpdated();
       setGroups(prev => prev.map(group => group.id === selected.id ? { ...group, name: data.name } : group));
       setSelected(prev => prev && prev.id === selected.id ? { ...prev, name: data.name } : prev);
       setDetail(prev => prev ? { ...prev, group: { ...prev.group, name: data.name } } : prev);
@@ -426,6 +445,7 @@ export default function ProdeGroups({ onReady }) {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudieron guardar los colores");
+      notifyProdeDataUpdated();
       setGroups(previous => previous.map(group => group.id === selected.id ? { ...group, ...data } : group));
       setSelected(previous => ({ ...previous, ...data }));
       setDetail(previous => ({ ...previous, group: { ...previous.group, ...data } }));
@@ -462,6 +482,7 @@ export default function ProdeGroups({ onReady }) {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo ingresar");
+      notifyProdeDataUpdated();
       await load(user);
       setJoinOpen(false); setJoinCode("");
       setInviteMessage("");
@@ -498,6 +519,7 @@ export default function ProdeGroups({ onReady }) {
       });
       const data = await res.json();
       if (!res.ok || !data.ok) throw Error(data.error || "No se pudo crear la liga");
+      notifyProdeDataUpdated();
       setGroups(previous => [data.group, ...previous]);
       setOpen(false); setName(""); setDescription(""); setVisibility("private"); setNewCrestPrimary("#ff9a39"); setNewCrestSecondary("#10283c");
     } catch (e) { setError(e.message || "Error de conexión"); }
