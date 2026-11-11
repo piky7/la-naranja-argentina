@@ -54,6 +54,12 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: Aplicar índices de lectura de votaciones
+        run: npx --yes wrangler@4 d1 execute lna-votaciones --remote --config workers/votaciones/wrangler.toml --file database/votaciones/003_read_indexes.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Publicar solamente lna-votaciones-api
         uses: cloudflare/wrangler-action@v3
         with:
