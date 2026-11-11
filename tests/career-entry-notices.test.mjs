@@ -6,6 +6,7 @@ const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8"
 const app = read("src/App.jsx");
 const notices = read("src/components/CareerEntryNotices.jsx");
 const fanLevel = read("src/components/FanLevel.jsx");
+const upcomingHeader = read("src/components/UpcomingHeader.css");
 
 test("Los avisos de Mi Carrera se montan desde la aplicación y no desde la página", () => {
   assert.match(app, /const CareerEntryNotices = lazy\(\(\) => import\("\.\/components\/CareerEntryNotices"\)\)/);
@@ -33,8 +34,17 @@ test("El recordatorio de pronósticos consulta solo la fecha argentina y no se r
   assert.match(notices, /America\/Argentina\/Buenos_Aires/);
   assert.match(notices, /match\.date === today/);
   assert.match(notices, /requestPrediction\("winner", gameId\)/);
+  assert.match(notices, /requestPrediction\("mvp", gameId\)/);
+  assert.match(notices, /winnerPending \|\| mvpPending/);
   assert.match(notices, /lna-vote-entry-notice-session-v1/);
   assert.match(notices, /user\.uid/);
   assert.match(notices, /Todavía no completaste tus pronósticos de hoy/);
   assert.match(notices, /lna-vote-updated/);
+});
+
+test("El popup de próximo partido respeta el área segura del iPhone", () => {
+  assert.match(upcomingHeader, /safe-area-inset-top/);
+  assert.match(upcomingHeader, /height:100dvh/);
+  assert.match(upcomingHeader, /\.match-modal-upcoming > \.match-modal-close/);
+  assert.match(upcomingHeader, /top:10px!important/);
 });
