@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 
 const worker=readFileSync(new URL("../workers/votaciones/worker.js",import.meta.url),"utf8");
 const migration=readFileSync(new URL("../database/votaciones/002_runtime_tables.sql",import.meta.url),"utf8");
+const indexes=readFileSync(new URL("../database/votaciones/003_read_indexes.sql",import.meta.url),"utf8");
 const start=worker.indexOf("async function calculateRewards(");
 const end=worker.indexOf("async function getRewards(",start);
 assert.ok(start>=0&&end>start);
@@ -51,4 +52,20 @@ test("GET /api/votos no recalcula puntos ni barre el historial completo",()=>{
   assert.match(readBranch,/voteCounts\(env\.DB, id\)/);
   assert.doesNotMatch(readBranch,/getRewards|calculateRewards/);
   assert.match(route,/const rewards = await getRewards\(env\.DB, visitorId\)/);
+});
+
+test("Los índices cubren búsquedas por usuario y conteos por partido",()=>{
+  for(const index of [
+    "idx_votos_visitante_partido","idx_votos_partido_equipo",
+    "idx_votos_mvp_visitante_partido","idx_votos_mvp_partido_jugador"
+  ]) assert.match(indexes,new RegExp("CREATE INDEX IF NOT EXISTS "+index));
+});
+test("El cron archiva solo partidos del fixture y no relee toda la tabla histórica",()=>{
+  const start=worker.indexOf("async function archiveFixture(");
+  const end=worker.indexOf("// Lectura sin escrituras",start);
+  assert.ok(start>=0&&end>start);
+  const archive=worker.slice(start,end);
+  assert.match(archive,/WHERE partido_id IN/);
+  assert.match(archive,/slice\(i, i \+ 80\)/);
+  assert.doesNotMatch(archive,/FROM carrera_partidos"\)\.all\(\)/);
 });
