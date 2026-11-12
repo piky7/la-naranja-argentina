@@ -35,7 +35,7 @@ export default function AdminNotifications({ user }) {
     <form onSubmit={send}>
       <label>Título<input value={title} onChange={event => setTitle(event.target.value)} maxLength={90} minLength={2} required placeholder="Ej. Se viene una nueva jornada"/></label>
       <label>Mensaje<textarea value={message} onChange={event => setMessage(event.target.value)} maxLength={500} minLength={2} required rows={3} placeholder="Escribí el mensaje para los usuarios…"/></label>
-      <label>Enlace interno (opcional)<input value={href} onChange={event => setHref(event.target.value)} maxLength={200} placeholder="Ej. /liga o /prode"/></label>
+      <label>Enlace (interno o externo, opcional)<input value={href} onChange={event => setHref(event.target.value)} maxLength={200} placeholder="Ej. /liga o https://x.com/lnabasket"/><small>Se aceptan rutas de LNA o enlaces externos seguros (HTTPS).</small></label>
       <button type="submit" disabled={busy || title.trim().length < 2 || message.trim().length < 2}><Send size={16}/>{busy ? "Enviando…" : "Enviar a todos los usuarios"}</button>
     </form>
     {feedback && <p className="lna-admin-notification-feedback" role="status">{feedback}</p>}
