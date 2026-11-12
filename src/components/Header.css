@@ -789,3 +789,66 @@
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
+
+
+/* Ajuste de legibilidad de la botonera inferior: cinco accesos, sin compactación excesiva. */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: 66px;
+    padding: 5px 7px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .bottom-nav-link {
+    min-width: 0;
+    min-height: 56px;
+    gap: 5px;
+    padding: 5px 1px 7px;
+    font-size: 11px;
+    line-height: 1.15;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .bottom-nav-link svg {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+  }
+
+  .bottom-navigation.is-compact {
+    min-height: 58px;
+    padding: 4px 7px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .bottom-navigation.is-compact .bottom-nav-link {
+    min-height: 50px;
+    gap: 3px;
+    padding: 4px 1px 6px;
+    font-size: 10.5px;
+  }
+
+  .bottom-navigation.is-compact .bottom-nav-link svg {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+
+  body {
+    padding-bottom: calc(94px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 380px) {
+  .bottom-nav-link {
+    font-size: 10px;
+  }
+
+  .bottom-navigation.is-compact .bottom-nav-link {
+    font-size: 9.5px;
+  }
+}
