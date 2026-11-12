@@ -2445,7 +2445,7 @@ export const players = [
     officialPlayerId: 385981,
     name: "Joaquin Bulchi Alessandrini",
     teamId: "penarol",
-    number: 9,
+    number: 78,
   },
   // Incorporaciones detectadas en planillas oficiales
   {

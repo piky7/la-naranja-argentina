@@ -946,5 +946,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2FwP9HG3UHTLgGGkf4DBfebM1lNyqdohPOHBpWdRJHHPvfCtm6ROdyg==/lanus-vs-la-union-fsa"
     }
+  },
+  "2026-11-11-platense-penarol": {
+    "status": "finished",
+    "homeScore": 75,
+    "awayScore": 79,
+    "time": "20:30",
+    "homeTeam": "platense",
+    "awayTeam": "penarol",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2V0RWcvNSEm77CRHI3UH_6nsBANtEzz4WJAQmXcPXCbTUmBMwr4O8Qw==/platense-vs-penarol-mdp",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2V0RWcvNSEm77CRHI3UH_6nsBANtEzz4WJAQmXcPXCbTUmBMwr4O8Qw==/platense-vs-penarol-mdp"
+    }
   }
 };
