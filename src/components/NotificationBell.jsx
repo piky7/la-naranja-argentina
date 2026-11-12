@@ -70,6 +70,11 @@ export default function NotificationBell({ user }) {
   const unread = useMemo(() => items.filter(item => !item.readAt).length + (pendingMatches.length ? 1 : 0), [items, pendingMatches]);
 
   const openAnnouncement = async item => {
+    const isInternalHref = typeof item.href === "string" && item.href.startsWith("/") && !item.href.startsWith("//");
+    if (item.href && !isInternalHref && /^https:\/\//i.test(item.href)) {
+      // Abrir en el mismo gesto del usuario para evitar bloqueos de ventanas emergentes en iOS.
+      window.open(item.href, "_blank", "noopener,noreferrer");
+    }
     try {
       const token = await user.getIdToken();
       await fetch(API + "/api/prode/notifications/" + encodeURIComponent(item.id) + "/read", {
@@ -78,7 +83,7 @@ export default function NotificationBell({ user }) {
     } catch { /* Se puede abrir el destino aunque falle el marcado de lectura. */ }
     setItems(current => current.map(entry => entry.id === item.id ? { ...entry, readAt: new Date().toISOString() } : entry));
     setOpen(false);
-    if (item.href) navigate(item.href);
+    if (isInternalHref) navigate(item.href);
   };
 
   const deleteAnnouncement = async (event, item) => {
