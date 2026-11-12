@@ -34,7 +34,7 @@ test("marcar como leída está limitado al propietario de la notificación", () 
   assert.match(route, /WHERE id=\? AND user_id=\?/);
 });
 
-test("el envío general requiere UID administrador y solo admite enlaces internos", () => {
+test("el envío general requiere UID administrador y admite rutas internas o URLs HTTPS externas", () => {
   const start = worker.indexOf('url.pathname === "/api/prode/admin/notifications"');
   const end = worker.indexOf('if (url.pathname === "/api/prode/me"', start);
   const route = worker.slice(start, end);
@@ -42,6 +42,8 @@ test("el envío general requiere UID administrador y solo admite enlaces interno
   assert.match(route, /title\.length > 90/);
   assert.match(route, /message\.length > 500/);
   assert.match(route, /href\.startsWith\("\/\/"\)/);
+  assert.match(route, /parsedHref\.protocol === "https:"/);
+  assert.match(route, /!internalHref && !externalHttpsHref/);
   assert.match(route, /INSERT INTO lna_notifications[\s\S]*SELECT[\s\S]*FROM prode_users/);
 });
 
@@ -63,6 +65,10 @@ test("el panel administrador envía título, mensaje y enlace opcional", () => {
   assert.match(admin, /\/api\/prode\/admin\/notifications/);
   assert.match(admin, /JSON\.stringify\(\{ title, message, href:/);
   assert.match(admin, /Enviar a todos los usuarios/);
+  assert.match(admin, /Enlace \(interno o externo, opcional\)/);
+  assert.match(admin, /https:\/\/x\.com\/lnabasket/);
+  assert.match(bell, /window\.open\(item\.href, "_blank", "noopener,noreferrer"\)/);
+  assert.match(bell, /if \(isInternalHref\) navigate\(item\.href\)/);
 });
 
 test("el usuario puede eliminar solo avisos generales de su propia bandeja", () => {
