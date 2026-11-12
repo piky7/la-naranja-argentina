@@ -1337,7 +1337,7 @@
     },
     {
       "date": "2026-11-16",
-      "time": "00:00",
+      "time": "22:05",
       "home": {
         "name": "INSTITUTO",
         "officialClubId": 1790,
@@ -1355,7 +1355,7 @@
     },
     {
       "date": "2026-11-17",
-      "time": "00:00",
+      "time": "20:30",
       "home": {
         "name": "RACING (CH)",
         "officialClubId": 1992,
@@ -1373,7 +1373,7 @@
     },
     {
       "date": "2026-11-17",
-      "time": "00:00",
+      "time": "21:00",
       "home": {
         "name": "OBERÁ",
         "officialClubId": 2305,
@@ -1391,7 +1391,7 @@
     },
     {
       "date": "2026-11-17",
-      "time": "00:00",
+      "time": "21:00",
       "home": {
         "name": "REGATAS (C)",
         "officialClubId": 1424,
@@ -1406,42 +1406,6 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LXl2HWyszntKQ9pyJ6DMtjMVK5-VsGy6WmCBg-NPWnflaG3i-sq4Aw==/regatas-c-vs-quimsa"
-    },
-    {
-      "date": "2026-11-19",
-      "time": "00:00",
-      "home": {
-        "name": "OBERÁ",
-        "officialClubId": 2305,
-        "officialTeamId": 113652
-      },
-      "away": {
-        "name": "INDEPENDIENTE (O)",
-        "officialClubId": 2025,
-        "officialTeamId": 114628
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2n_lkJzRNNLckVoLe-84_tSespDLS5b3TWLa2DxnbrlmBupyZmJDZng==/obera-vs-independiente-o"
-    },
-    {
-      "date": "2026-11-19",
-      "time": "00:00",
-      "home": {
-        "name": "OLIMPICO (LB)",
-        "officialClubId": 1882,
-        "officialTeamId": 113870
-      },
-      "away": {
-        "name": "FERRO",
-        "officialClubId": 46,
-        "officialTeamId": 112566
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24xvC_QYBw6z3gfFJ1WDyYzkNhCyApzGcontxgC0_x8Fz8mb64t7KQg==/olimpico-lb-vs-ferro"
     },
     {
       "date": "2026-11-19",
@@ -1462,8 +1426,44 @@
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y9sQ-mmEousQ2AzqHNCHZXmMa7xNarU6-gGK-rQP2rsLb6PjAVNPTw==/argentino-j-vs-lanus"
     },
     {
+      "date": "2026-11-19",
+      "time": "21:30",
+      "home": {
+        "name": "OBERÁ",
+        "officialClubId": 2305,
+        "officialTeamId": 113652
+      },
+      "away": {
+        "name": "INDEPENDIENTE (O)",
+        "officialClubId": 2025,
+        "officialTeamId": 114628
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2n_lkJzRNNLckVoLe-84_tSespDLS5b3TWLa2DxnbrlmBupyZmJDZng==/obera-vs-independiente-o"
+    },
+    {
+      "date": "2026-11-19",
+      "time": "22:05",
+      "home": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "away": {
+        "name": "FERRO",
+        "officialClubId": 46,
+        "officialTeamId": 112566
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24xvC_QYBw6z3gfFJ1WDyYzkNhCyApzGcontxgC0_x8Fz8mb64t7KQg==/olimpico-lb-vs-ferro"
+    },
+    {
       "date": "2026-11-20",
-      "time": "00:00",
+      "time": "21:30",
       "home": {
         "name": "ATENAS (C)",
         "officialClubId": 1498,
@@ -1478,24 +1478,6 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2a3rzGONK9rElcviFTj2BCYNJQVw8goI7MrWsrUiBHqCVxLUjQWV6vA==/atenas-c-vs-instituto"
-    },
-    {
-      "date": "2026-11-21",
-      "time": "00:00",
-      "home": {
-        "name": "QUIMSA",
-        "officialClubId": 1869,
-        "officialTeamId": 112657
-      },
-      "away": {
-        "name": "FERRO",
-        "officialClubId": 46,
-        "officialTeamId": 112566
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro"
     },
     {
       "date": "2026-11-21",
@@ -1516,8 +1498,26 @@
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o"
     },
     {
+      "date": "2026-11-21",
+      "time": "11:30",
+      "home": {
+        "name": "QUIMSA",
+        "officialClubId": 1869,
+        "officialTeamId": 112657
+      },
+      "away": {
+        "name": "FERRO",
+        "officialClubId": 46,
+        "officialTeamId": 112566
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro"
+    },
+    {
       "date": "2026-11-22",
-      "time": "00:00",
+      "time": "20:00",
       "home": {
         "name": "GIMNASIA (CR)",
         "officialClubId": 1474,
