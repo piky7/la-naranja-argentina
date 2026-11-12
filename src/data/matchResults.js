@@ -930,5 +930,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2fPAZxIxy_mOWqiFp7utvzROZbTVyFqrJ4_IxOYANuFDIcfdM3RFkew==/ferro-vs-san-martin-c"
     }
+  },
+  "2026-11-11-lanus-la-union": {
+    "status": "finished",
+    "homeScore": 93,
+    "awayScore": 57,
+    "time": "20:30",
+    "homeTeam": "lanus",
+    "awayTeam": "la-union",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2FwP9HG3UHTLgGGkf4DBfebM1lNyqdohPOHBpWdRJHHPvfCtm6ROdyg==/lanus-vs-la-union-fsa",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2FwP9HG3UHTLgGGkf4DBfebM1lNyqdohPOHBpWdRJHHPvfCtm6ROdyg==/lanus-vs-la-union-fsa"
+    }
   }
 };

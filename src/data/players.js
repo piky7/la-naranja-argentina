@@ -2303,7 +2303,7 @@ export const players = [
     officialPlayerId: 388284,
     name: "Agustin Moraga",
     teamId: "lanus",
-    number: 15,
+    number: 27,
     position: "Escolta",
     nationality: "Argentina",
   },
@@ -2527,5 +2527,13 @@ export const players = [
     name: "Dayon Lynn Griffin",
     teamId: "regatas",
     number: 2,
+  },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-432949",
+    officialPlayerId: 432949,
+    name: "Mojeed O Ewuosho",
+    teamId: "la-union",
+    number: 5,
   },
 ];
