@@ -313,8 +313,16 @@ export default {
         const href = body.href == null || body.href === "" ? null : body.href;
         if (title.length < 2 || title.length > 90 || message.length < 2 || message.length > 500)
           return reply({ ok: false, error: "El título debe tener 2–90 caracteres y el mensaje 2–500." }, 400);
-        if (href !== null && (typeof href !== "string" || href.length > 200 || !href.startsWith("/") || href.startsWith("//")))
-          return reply({ ok: false, error: "El enlace debe ser una ruta interna de LNA." }, 400);
+        const internalHref = typeof href === "string" && href.startsWith("/") && !href.startsWith("//") && !href.includes("\\\\");
+        let externalHttpsHref = false;
+        if (typeof href === "string" && href.length <= 200) {
+          try {
+            const parsedHref = new URL(href);
+            externalHttpsHref = parsedHref.protocol === "https:" && Boolean(parsedHref.hostname) && !parsedHref.username && !parsedHref.password;
+          } catch { /* El enlace no es una URL absoluta válida. */ }
+        }
+        if (href !== null && (typeof href !== "string" || href.length > 200 || (!internalHref && !externalHttpsHref)))
+          return reply({ ok: false, error: "El enlace debe ser una ruta interna de LNA o una URL externa HTTPS válida." }, 400);
         const result = await env.DB.prepare(
           "INSERT INTO lna_notifications (id,user_id,title,message,href,type,created_at) SELECT lower(hex(randomblob(16))),id,?,?,?,'announcement',datetime('now') FROM prode_users"
         ).bind(title, message, href).run();
