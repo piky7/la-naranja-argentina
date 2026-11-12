@@ -760,14 +760,6 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2uhSyVE6aJmVfXoKpnCXvr-7MSnDQo_njyz9cFgOAuJp_ZS49S09UtQ==/instituto-vs-argentino-j"
   },
   {
-    "id": "2026-12-12-la-union-olimpico",
-    "date": "2026-12-12",
-    "time": null,
-    "homeTeam": "la-union",
-    "awayTeam": "olimpico",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
-  },
-  {
     "id": "2026-12-12-san-lorenzo-boca",
     "date": "2026-12-12",
     "time": null,
@@ -784,11 +776,35 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2OytywGsqxHvvWg2VgSu2oX62Qkgiy2HGUgozOs5PenPp1VoHbJkVRA==/independiente-o-vs-racing-ch"
   },
   {
+    "id": "2026-12-12-la-union-olimpico",
+    "date": "2026-12-12",
+    "time": null,
+    "homeTeam": "la-union",
+    "awayTeam": "olimpico",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
+  },
+  {
     "id": "2026-12-12-lanus-platense",
     "date": "2026-12-12",
     "time": null,
     "homeTeam": "lanus",
     "awayTeam": "platense",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v26JmfHj7FenpTdGlNxCoCY4gU1WrmTqiSsQiG4mxZVmgCU2ZWd3aAJQ==/lanus-vs-platense"
+  },
+  {
+    "id": "2026-12-13-penarol-obera",
+    "date": "2026-12-13",
+    "time": null,
+    "homeTeam": "penarol",
+    "awayTeam": "obera",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2j0sOIejHzAckI8RVdvdY_qoURE3uJNGyk5WCEMS-1q4eTxqyuO6L0g==/penarol-mdp-vs-obera"
+  },
+  {
+    "id": "2026-12-13-atenas-argentino",
+    "date": "2026-12-13",
+    "time": null,
+    "homeTeam": "atenas",
+    "awayTeam": "argentino",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2MqAtGtwqOTiExDvbEcmEIT7JZjQg-_S5ep7E2ALlJLOOtliKxJy8AQ==/atenas-c-vs-argentino-j"
   }
 ];
