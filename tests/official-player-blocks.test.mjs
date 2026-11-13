@@ -46,3 +46,10 @@ test("cuenta acciones oficiales TAPON-COMETIDO del jugador sin confundir TAPON-R
   `);
   assert.equal(countCommittedBlocksFromActions($, "Bryan Carabali"), 2);
 });
+
+test("no inventa cero tapones si no hay una acción positiva del jugador", () => {
+  const $ = cheerio.load(`
+    <ul><li class="accion">Otro Jugador - TAPON-COMETIDO</li></ul>
+  `);
+  assert.equal(countCommittedBlocksFromActions($, "Bryan Carabali"), null);
+});
