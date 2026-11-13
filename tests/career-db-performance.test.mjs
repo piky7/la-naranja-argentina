@@ -11,13 +11,24 @@ assert.ok(start>=0&&end>start);
 const rewards=worker.slice(start,end);
 
 test("Mi Carrera obtiene votos, MVP, fecha mínima y finales en un solo grupo concurrente",()=>{
-  assert.match(rewards,/const \[votes, mvpVotes, firstVote, firstMvp, finishTimes\] = await Promise\.all\(\[/);
+  assert.match(rewards,/const \[votes, mvpVotes, finishTimes\] = await Promise\.all\(\[/);
   const block=rewards.slice(rewards.indexOf("const [votes, mvpVotes"),rewards.indexOf("]);",rewards.indexOf("const [votes, mvpVotes"))+3);
   assert.match(block,/SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=\?/);
   assert.match(block,/SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=\?/);
-  assert.match(block,/SELECT MIN\(partido_id\) AS first_id FROM votos/);
-  assert.match(block,/SELECT MIN\(partido_id\) AS first_id FROM votos_mvp/);
+  assert.doesNotMatch(block,/SELECT MIN\(partido_id\)/);
   assert.match(block,/getFinishObservations\(db, fixture\.games\.map\(game => game\?\.id\)\)/);
+});
+test("El histórico archivado se lee desde la primera fecha con votos usando la clave primaria",()=>{
+  const start=worker.indexOf("async function loadCareerFixture(");
+  const end=worker.indexOf("async function calculateRewards(",start);
+  assert.ok(start>=0&&end>start);
+  const loader=worker.slice(start,end);
+  assert.match(loader,/SELECT MIN\(partido_id\) AS first_id FROM votos/);
+  assert.match(loader,/SELECT MIN\(partido_id\) AS first_id FROM votos_mvp/);
+  assert.match(loader,/WHERE partido_id >= \?/);
+  assert.match(loader,/\.bind\(careerStartDate\)\.all\(\)/);
+  assert.match(loader,/careerStartDate === "9999-12-31"/);
+  assert.match(loader,/return \{ \.\.\.fixture, games: \[\.\.\.byId\.values\(\)\], careerStartDate \}/);
 });
 test("La tabla MVP se prepara en migración y las lecturas permanecen concurrentes",()=>{
   const migration=readFileSync(new URL("../database/votaciones/002_runtime_tables.sql",import.meta.url),"utf8");
@@ -27,7 +38,7 @@ test("La tabla MVP se prepara en migración y las lecturas permanecen concurrent
   assert.ok(parallel>=0);
   assert.match(rewards,/const voteMap = new Map\(\(votes\.results \|\| \[\]\)\.map/);
   assert.match(rewards,/const mvpMap = new Map\(\(mvpVotes\.results \|\| \[\]\)\.map/);
-  assert.match(rewards,/const firstDate = \[firstVote\?\.first_id, firstMvp\?\.first_id\]/);
+  assert.match(rewards,/const firstDate = fixture\.careerStartDate \|\| "9999-12-31"/);
 });
 test("No modifica reglas de aciertos, errores, MVP ni racha unificada",()=>{
   for(const term of ["points+=15","points+=5","points += 20","points+=45","UNIFIED_STREAK_START","timelyFinishObservation","currentStay","categoryIndex"]) {
