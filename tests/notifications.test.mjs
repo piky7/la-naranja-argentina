@@ -84,8 +84,11 @@ test("el usuario puede eliminar solo avisos generales de su propia bandeja", () 
   assert.match(bell, /setItems\(current => current\.filter\(entry => entry\.id !== item\.id\)\)/);
 });
 
-test("la campanita no consulta D1 en polling periódico; actualiza al entrar y al votar",()=>{
+test("la campanita difiere las consultas hasta abrirse y actualiza al votar si sigue abierta",()=>{
   assert.doesNotMatch(bell,/setInterval\(/);
-  assert.match(bell,/if \(open && user\) \{ loadInbox\(\); refreshPending\(\); \}/);
+  assert.match(bell,/if \(open && user\) \{/);
+  assert.match(bell,/if \(Date\.now\(\) - inboxFetchedAt\.current > 30000\) loadInbox\(\)/);
+  assert.match(bell,/refreshPending\(\)/);
+  assert.match(bell,/if \(openRef\.current\) \{ loadInbox\(\); refreshPending\(\); \}/);
   assert.match(bell,/window\.addEventListener\("lna-vote-updated", onUpdate\)/);
 });
