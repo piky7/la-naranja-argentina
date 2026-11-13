@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bell, Check, ExternalLink, Trash2, X } from "lucide-react";
 import { matches } from "../data/matches";
@@ -20,6 +20,7 @@ export default function NotificationBell({ user }) {
   const [pendingMatches, setPendingMatches] = useState([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const inboxFetchedAt = useRef(0);
 
   const loadInbox = useCallback(async () => {
     if (!user) return;
@@ -30,7 +31,7 @@ export default function NotificationBell({ user }) {
         headers: { Authorization: "Bearer " + token }, cache: "no-store",
       });
       const body = await response.json();
-      if (response.ok && body.ok) setItems(Array.isArray(body.notifications) ? body.notifications : []);
+      if (response.ok && body.ok) { setItems(Array.isArray(body.notifications) ? body.notifications : []); inboxFetchedAt.current = Date.now(); }
     } catch { /* La campana no debe afectar la navegación si el servicio no responde. */ }
     finally { setLoading(false); }
   }, [user]);
@@ -56,15 +57,19 @@ export default function NotificationBell({ user }) {
   useEffect(() => {
     if (!user) { setItems([]); setPendingMatches([]); setOpen(false); return; }
     loadInbox();
-    refreshPending();
-    const onUpdate = () => { loadInbox(); refreshPending(); };
+    // Los pronósticos pendientes se consultan al abrir la campana, no durante
+    // la carga inicial de Inicio. Así evitamos dos requests por cada partido.
+    const onUpdate = () => { loadInbox(); if (open) refreshPending(); };
     window.addEventListener("lna-vote-updated", onUpdate);
     return () => window.removeEventListener("lna-vote-updated", onUpdate);
-  }, [user?.uid, loadInbox, refreshPending]);
+  }, [user?.uid, loadInbox, refreshPending, open]);
 
   // Actualizar al abrir la bandeja, no cada minuto en segundo plano.
   useEffect(() => {
-    if (open && user) { loadInbox(); refreshPending(); }
+    if (open && user) {
+      if (Date.now() - inboxFetchedAt.current > 30000) loadInbox();
+      refreshPending();
+    }
   }, [open, user, loadInbox, refreshPending]);
 
   const unread = useMemo(() => items.filter(item => !item.readAt).length + (pendingMatches.length ? 1 : 0), [items, pendingMatches]);
