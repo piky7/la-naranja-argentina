@@ -66,7 +66,7 @@ function obtenerJugador($, fila) {
   if (fin === -1) return null;
 
   const datos = JSON.parse(onclick.slice(inicio, fin));
-  const nombreDiagnostico = String(datos.NombreCompleto || datos.Nombre || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase();
+  const nombreDiagnostico = normalizeText(datos.NombreCompleto || datos.Nombre);
   if (nombreDiagnostico.includes("bryan carabali")) {
     const tabla = $(fila).closest("table");
     const encabezados = tabla.find("thead tr").last().children("th,td").map((_, celda) => $(celda).text().trim()).get();
@@ -98,8 +98,8 @@ function obtenerJugador($, fila) {
     blocks: campoEstadistico(datos,
       ["Tapones","TaponesCometidos","TaponesRealizados","TaponesHechos","TaponesDados","TaponesColocados","Bloqueos"],
       key => /^(?:tapones?|bloqueos?)(?:com(?:etidos?)?|realizados?|hechos?|dados?|colocados?|favor)?$/.test(key)
-        && !/recibidos?|contra/.test(key)) ?? campoTabla($,fila,"blocks") ??
-        contarTaponesCometidosDesdeAcciones($, datos.NombreCompleto || datos.Nombre),
+        && !/recibidos?|contra/.test(key)) ?? readStatFromTable($, fila, "blocks") ??
+        countCommittedBlocksFromActions($, datos.NombreCompleto || datos.Nombre),
     fouls: campoEstadistico(datos,
       ["FaltasCometidas","FaltasPersonales","Faltas","FaltasRealizadas","FaltasJugador","PersonalFouls"],
       key => /^(?:faltas?|personalfouls)(?:personales?|cometidas?|realizadas?|jugador)?$/.test(key)
