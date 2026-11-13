@@ -13,12 +13,29 @@ export default function CareerProfileAccess(){
  const [points,setPoints]=useState(null);
  const [profile,setProfile]=useState(null);
  const [profileLoading,setProfileLoading]=useState(true);
+ const [profileUid,setProfileUid]=useState(null);
  const load=useCallback(async()=>{
-  if(!user){setPoints(null);setProfile(null);setProfileLoading(false);return}
-  setProfileLoading(true);
+  if(!user){setPoints(null);setProfile(null);setProfileUid(null);setProfileLoading(false);return}
+  const cacheKey="lna-header-profile:"+user.uid;
+  let cached=null;
+  try { cached=JSON.parse(sessionStorage.getItem(cacheKey)||"null"); } catch {}
+  if(cached?.profile){
+   setProfile(cached.profile);
+   setPoints(Number.isFinite(Number(cached.points))?Number(cached.points):null);
+   setProfileUid(user.uid);
+   setProfileLoading(false);
+  } else {
+   setProfileLoading(true);
+  }
   const [p,c]=await Promise.allSettled([fetchProdeProfile(),fetchCareerData("points")]);
-  setProfile(p.status==="fulfilled"?p.value:null);
-  setPoints(c.status==="fulfilled"&&Number.isFinite(Number(c.value.points))?Number(c.value.points):null);
+  const nextProfile=p.status==="fulfilled"?p.value:null;
+  const nextPoints=c.status==="fulfilled"&&Number.isFinite(Number(c.value.points))?Number(c.value.points):null;
+  if(nextProfile) setProfile(nextProfile);
+  if(c.status==="fulfilled") setPoints(nextPoints);
+  setProfileUid(user.uid);
+  if(nextProfile || c.status==="fulfilled"){
+   try { sessionStorage.setItem(cacheKey,JSON.stringify({profile:nextProfile||cached?.profile||null,points:c.status==="fulfilled"?nextPoints:(cached?.points??null)})); } catch {}
+  }
   setProfileLoading(false);
  },[user]);
  useEffect(()=>{
@@ -33,7 +50,7 @@ export default function CareerProfileAccess(){
   return()=>{window.removeEventListener("prode-profile-updated",onUpdate);window.removeEventListener("lna-vote-updated",onVote)};
  },[load,loading]);
  const crestSymbol=isSportsDesign(profile?.crestSymbol)?profile.crestSymbol:serializeSportsDesign({label:profile?.username||""});
- const waiting=loading||profileLoading;
+ const waiting=loading||(profileLoading&&profileUid!==user?.uid);
  if(!waiting&&!user){
   return <div className="lna-profile-access-guest">
    <button type="button" className="lna-profile-access-login" onClick={login} disabled={busy}>
