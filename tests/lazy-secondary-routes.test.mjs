@@ -66,9 +66,10 @@ test("Mi jugador muestra el trofeo de la categoría actual",()=>{
 });
 
 
-test("El popup de próximos partidos se precarga al montar Inicio",()=>{
+test("Los tres popups se precargan juntos durante inactividad",()=>{
   const home=readFileSync(new URL("../src/pages/Home.jsx",import.meta.url),"utf8");
-  assert.match(home,/void loadUpcomingModal\(\);/);
-  assert.match(home,/Promise\.allSettled\(\[loadFinishedModal\(\), loadPlayerModal\(\)\]\)/);
-  assert.doesNotMatch(home,/Promise\.allSettled\(\[loadUpcomingModal\(\),/);
+  assert.match(home,/Promise\.allSettled\(\[loadUpcomingModal\(\), loadFinishedModal\(\), loadPlayerModal\(\)\]\)/);
+  assert.match(home,/requestIdleCallback\(prepare, \{ timeout: 12000 \}\)/);
+  assert.match(home,/}, 2800\)/);
+  assert.doesNotMatch(home,/void loadUpcomingModal\(\);/);
 });
