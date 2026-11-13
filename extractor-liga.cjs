@@ -1,6 +1,11 @@
 const { extractTeamStats } = require("./scripts/official-team-stats.cjs");
 const { parseOfficialFinal } = require("./scripts/parse-official-final.cjs");
 const { extraerParcialesDesdeAcciones } = require("./scripts/extraer-parciales-acciones.cjs");
+const {
+  normalizeText,
+  readStatFromTable,
+  countCommittedBlocksFromActions,
+} = require("./scripts/official-player-blocks.cjs");
 
 const fs = require("node:fs");
 const cheerio = require("cheerio");
@@ -24,46 +29,6 @@ function campoEstadistico(datos, keys, matcher) {
     if (matcher(normalize(key))) return Number(value);
   }
   return null;
-}
-
-function campoTabla($, fila, kind) {
-  const table = $(fila).closest("table");
-  const cells = $(fila).children("th,td");
-  const headers = table.find("thead tr").last().children("th,td");
-  if (!headers.length || headers.length !== cells.length) return null;
-  const clean = value => String(value).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
-  for (let i=0;i<headers.length;i++) {
-    const heading = clean($(headers[i]).text());
-    const isBlocks = kind === "blocks" && /^(tap|tapon|tapones|tapones com\.?|tapones cometidos|tapones realizados|tapones hechos|tap com\.?|blk|bloqueos?)$/.test(heading);
-    const isFouls = kind === "fouls" && /^(faltas?|faltas? personales?|fp|pf)$/.test(heading);
-    if (!isBlocks && !isFouls) continue;
-    const text = $(cells[i]).text().trim();
-    if (/^\d+$/.test(text)) return Number(text);
-  }
-  return null;
-}
-
-function normalizarNombreJugador(valor) {
-  return String(valor || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "")
-    .replace(/[^a-z0-9]+/gi, " ").trim().toLowerCase();
-}
-
-// La planilla de la Liga incluye una jugada por cada tapón cometido.
-// Si la tabla estadística no trae el acumulado, reconstruirlo contando
-// exclusivamente TAPON-COMETIDO del jugador en la ficha oficial.
-function contarTaponesCometidosDesdeAcciones($, nombreJugador) {
-  const nombre = normalizarNombreJugador(nombreJugador);
-  if (!nombre) return null;
-  let total = 0;
-  let encontroAcciones = false;
-  $("li.accion").each((_, elemento) => {
-    const texto = $(elemento).text().replace(/\\s+/g, " ").trim();
-    if (!/TAPON[-\\s]COMETIDO/i.test(texto)) return;
-    encontroAcciones = true;
-    const textoNormalizado = normalizarNombreJugador(texto);
-    if (textoNormalizado.includes(nombre)) total++;
-  });
-  return encontroAcciones ? total : null;
 }
 
 function obtenerJugador($, fila) {
@@ -138,7 +103,7 @@ function obtenerJugador($, fila) {
     fouls: campoEstadistico(datos,
       ["FaltasCometidas","FaltasPersonales","Faltas","FaltasRealizadas","FaltasJugador","PersonalFouls"],
       key => /^(?:faltas?|personalfouls)(?:personales?|cometidas?|realizadas?|jugador)?$/.test(key)
-        && !/recibidas?|provocadas?|favor/.test(key)) ?? campoTabla($,fila,"fouls"),
+        && !/recibidas?|provocadas?|favor/.test(key)) ?? readStatFromTable($, fila, "fouls"),
     twoPointers: datos.TirosDos,
     threePointers: datos.TirosTres,
     freeThrows: datos.TirosLibres,
