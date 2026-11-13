@@ -962,5 +962,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2V0RWcvNSEm77CRHI3UH_6nsBANtEzz4WJAQmXcPXCbTUmBMwr4O8Qw==/platense-vs-penarol-mdp"
     }
+  },
+  "2026-11-12-atenas-san-lorenzo": {
+    "status": "finished",
+    "homeScore": 81,
+    "awayScore": 55,
+    "time": "21:00",
+    "homeTeam": "atenas",
+    "awayTeam": "san-lorenzo",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2K9HadYpUmbm5kmWR0wipUYdsjjhkKy0NhdRD7aaIERgeidfNRp8cfg==/atenas-c-vs-san-lorenzo",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2K9HadYpUmbm5kmWR0wipUYdsjjhkKy0NhdRD7aaIERgeidfNRp8cfg==/atenas-c-vs-san-lorenzo"
+    }
   }
 };

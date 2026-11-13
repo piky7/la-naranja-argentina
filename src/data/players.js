@@ -2536,4 +2536,12 @@ export const players = [
     teamId: "la-union",
     number: 5,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-293949",
+    officialPlayerId: 293949,
+    name: "Juan Ignacio Farias",
+    teamId: "atenas",
+    number: 15,
+  },
 ];
