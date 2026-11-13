@@ -21,6 +21,7 @@ export default function NotificationBell({ user }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const inboxFetchedAt = useRef(0);
+  const openRef = useRef(false);
 
   const loadInbox = useCallback(async () => {
     if (!user) return;
@@ -54,15 +55,17 @@ export default function NotificationBell({ user }) {
     setPendingMatches(checks.filter(Boolean));
   }, [user]);
 
+  useEffect(() => { openRef.current = open; }, [open]);
+
   useEffect(() => {
     if (!user) { setItems([]); setPendingMatches([]); setOpen(false); return; }
     loadInbox();
     // Los pronósticos pendientes se consultan al abrir la campana, no durante
     // la carga inicial de Inicio. Así evitamos dos requests por cada partido.
-    const onUpdate = () => { loadInbox(); };
+    const onUpdate = () => { loadInbox(); if (openRef.current) refreshPending(); };
     window.addEventListener("lna-vote-updated", onUpdate);
     return () => window.removeEventListener("lna-vote-updated", onUpdate);
-  }, [user?.uid, loadInbox]);
+  }, [user?.uid, loadInbox, refreshPending]);
 
   // Actualizar al abrir la bandeja, no cada minuto en segundo plano.
   useEffect(() => {
