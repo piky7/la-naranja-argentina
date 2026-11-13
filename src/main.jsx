@@ -4,15 +4,31 @@ import { registerSW } from 'virtual:pwa-register'
 import './index.css'
 import App from './App.jsx'
 
-// Buscar versiones nuevas al iniciar, pero dejar que el Service Worker nuevo
-// espere a que se cierre la sesión actual. Así no se recarga LNA mientras se usa.
+// La PWA comprueba nuevas versiones al iniciarse y al volver al primer plano.
+// vite-plugin-pwa gestiona la activación y la recarga de la versión nueva.
 registerSW({
   immediate: true,
   onRegisteredSW(_swUrl, registration) {
-    if (!registration || !navigator.onLine) return
+    if (!registration) return
 
-    void registration.update().catch((error) => {
-      console.warn('No se pudo comprobar la actualización de LNA:', error)
+    let checking = false
+    const checkForUpdates = async () => {
+      if (checking || !navigator.onLine) return
+      checking = true
+      try {
+        await registration.update()
+      } catch (error) {
+        console.warn('No se pudo comprobar la actualización de LNA:', error)
+      } finally {
+        checking = false
+      }
+    }
+
+    void checkForUpdates()
+    window.addEventListener('focus', checkForUpdates)
+    window.addEventListener('online', checkForUpdates)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') void checkForUpdates()
     })
   },
 })
