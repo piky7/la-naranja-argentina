@@ -112,18 +112,11 @@ test("un cambio de datos invalida todas las lecturas compartidas de Prode", asyn
   }
 });
 
-test("la precarga cubre las lecturas reutilizadas por Prode y Mi Carrera", () => {
+test("la precarga de secciones no consulta APIs autenticadas antes de abrirlas", () => {
   const app = readFileSync(new URL("../src/App.jsx", import.meta.url), "utf8");
-  for (const endpoint of [
-    "/api/prode/groups/mine",
-    "/api/prode/ranking/historical",
-    "/api/prode/ranking/weekly",
-    "/api/prode/ranking/weekly/awards",
-    "/api/prode/career-link",
-    "/api/prode/admin/access",
-  ]) assert.ok(app.includes(endpoint), endpoint);
-  assert.match(app, /fetchCareerData\("points"\)/);
-  assert.match(app, /fetchCareerData\("predictions"\)/);
+  assert.match(app, /Promise\.allSettled\(\[loadLiga\(\), loadEstadisticas\(\), loadProde\(\), loadMiCarrera\(\)\]\)/);
+  assert.doesNotMatch(app, /watchProdeUser|fetchProdeRead|fetchCareerData/);
+  assert.match(app, /requestIdleCallback\(preload/);
 });
 
 test("Firebase comparte un solo observador de estado entre los componentes", () => {
