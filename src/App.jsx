@@ -6,10 +6,6 @@ const CareerEntryNotices = lazy(() => import("./components/CareerEntryNotices"))
 import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
-import { watchProdeUser } from "./auth/prodeAuth";
-import { fetchCareerData } from "./auth/careerAccount";
-import { fetchProdeRead } from "./utils/prodeRequestCache";
-
 import Home from "./pages/Home";
 const loadLiga = () => import("./pages/Liga");
 const loadProde = () => import("./pages/Prode");
@@ -27,60 +23,36 @@ const MiCarrera = lazy(loadMiCarrera);
 const Perfil = lazy(() => import("./pages/Perfil"));
 const Admin = lazy(() => import("./pages/Admin"));
 
-// Precarga suave: no bloquea el render inicial ni consume datos extra
-// en conexiones lentas o con ahorro de datos activado.
+// Precarga solo código de secciones, sin consultar APIs ni D1
+// hasta que el usuario abra cada sección.
 function PreloadSections() {
   const location = useLocation();
   const preloadStarted = useRef(false);
 
   useEffect(() => {
-    // La precarga de secciones se inicia desde Inicio. Si se abre una ruta
-    // secundaria directamente, no competir con su carga inicial descargando
-    // módulos de otras páginas.
     if (location.pathname !== "/" || preloadStarted.current) return;
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (connection?.saveData || /(^|\\s)(slow-2g|2g)(\\s|$)/i.test(connection?.effectiveType || "")) return;
     let idleId = null;
     let timerId = null;
-    let stopAuth = null;
+    let fallbackId = null;
     let active = true;
-    const warmedUsers = new Set();
-    const preload = async () => {
-      if (!active || preloadStarted.current) return;
+    const preload = () => {
+      if (!active || preloadStarted.current || document.visibilityState !== "visible") return;
       preloadStarted.current = true;
-      // Primero se descargan los módulos; luego, si hay sesión, se calientan
-      // lecturas reutilizables sin bloquear la pantalla inicial.
-      await Promise.allSettled([loadLiga(), loadEstadisticas(), loadProde(), loadMiCarrera()]);
-      if (!active) return;
-      try {
-        const unsubscribe = await watchProdeUser(user => {
-          if (!active || !user || warmedUsers.has(user.uid)) return;
-          warmedUsers.add(user.uid);
-          void Promise.allSettled([
-            // Prode: ligas, rankings, identidad, vínculo, permisos y premio semanal.
-            fetchProdeRead("/api/prode/groups/mine", user),
-            fetchProdeRead("/api/prode/ranking/historical", user),
-            fetchProdeRead("/api/prode/ranking/weekly", user),
-            fetchProdeRead("/api/prode/ranking/weekly/awards", user),
-            fetchProdeRead("/api/prode/career-link", user),
-            fetchProdeRead("/api/prode/admin/access", user),
-            // Mi Carrera: resumen de puntos y pronósticos recientes.
-            fetchCareerData("points"),
-            fetchCareerData("predictions"),
-          ]);
-        });
-        if (active) stopAuth = unsubscribe;
-        else unsubscribe?.();
-      } catch { /* La precarga nunca debe afectar la navegación. */ }
+      void Promise.allSettled([loadLiga(), loadEstadisticas(), loadProde(), loadMiCarrera()]);
     };
     timerId = window.setTimeout(() => {
-      if ("requestIdleCallback" in window) idleId = window.requestIdleCallback(preload, { timeout: 6000 });
-      else void preload();
-    }, 1400);
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(preload, { timeout: 10000 });
+      } else {
+        fallbackId = window.setTimeout(preload, 1800);
+      }
+    }, 3600);
     return () => {
       active = false;
-      stopAuth?.();
       window.clearTimeout(timerId);
+      if (fallbackId !== null) window.clearTimeout(fallbackId);
       if (idleId !== null && "cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
     };
   }, [location.pathname]);
