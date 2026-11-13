@@ -64,3 +64,11 @@ test("Mi jugador muestra el trofeo de la categoría actual",()=>{
   assert.match(page,/alt=\{\x60Trofeo \$\{displayLevel\(level\.name\)\}\x60\}/);
   assert.match(styles,/\.lna-fan-player-display-league img\{[^}]*object-fit:contain/);
 });
+
+
+test("El popup de próximos partidos se precarga al montar Inicio",()=>{
+  const home=readFileSync(new URL("../src/pages/Home.jsx",import.meta.url),"utf8");
+  assert.match(home,/void loadUpcomingModal\(\);/);
+  assert.match(home,/Promise\.allSettled\(\[loadFinishedModal\(\), loadPlayerModal\(\)\]\)/);
+  assert.doesNotMatch(home,/Promise\.allSettled\(\[loadUpcomingModal\(\),/);
+});
