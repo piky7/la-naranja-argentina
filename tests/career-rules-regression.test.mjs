@@ -57,7 +57,11 @@ function makeDb(games,ballots,observations={}) {
   return db;
 }
 async function career(games,ballots,observations) {
-  return compute(makeDb(games,ballots,observations),{games},"usuario-test");
+  const firstVotedGame = games
+    .filter((game,index) => ballots[index] === true || ballots[index] === false)
+    .map(game => game.id).sort()[0];
+  const careerStartDate = firstVotedGame?.slice(0,10) || "9999-12-31";
+  return compute(makeDb(games,ballots,observations),{games,careerStartDate},"usuario-test");
 }
 
 test("Cinco aciertos de Mi Carrera dan 120 puntos y bono solo en el quinto",async()=>{
