@@ -32,7 +32,7 @@ function PreloadSections() {
   useEffect(() => {
     if (location.pathname !== "/" || preloadStarted.current) return;
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    if (connection?.saveData || /(^|\\s)(slow-2g|2g)(\\s|$)/i.test(connection?.effectiveType || "")) return;
+    if (connection?.saveData || /^(slow-2g|2g|3g)$/i.test(connection?.effectiveType || "")) return;
     let idleId = null;
     let timerId = null;
     let fallbackId = null;
