@@ -62,7 +62,7 @@ function countCommittedBlocksFromActions($, playerName) {
     foundAction = true;
     if (nameTokens.every((token) => text.includes(token))) total++;
   });
-  return foundAction ? total : null;
+  return foundAction && total > 0 ? total : null;
 }
 
 module.exports = {
