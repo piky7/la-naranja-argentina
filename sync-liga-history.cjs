@@ -254,25 +254,24 @@ async function main() {
     await esperar(ESPERA_MS);
   }
 
-  // Recuperar TAP/FALTAS faltantes en partidos ya publicados. Solo se
-  // completan valores oficiales nuevos; no se reescriben ceros ni registros
-  // que no coincidan en resultado, equipo e identificador de jugador.
-  // Revisión gradual en modo full para respetar la carga del sitio oficial.
+  // Pasada completa de recuperación de TAPONES faltantes en partidos ya
+  // publicados. Se consulta todo el histórico pendiente en esta ejecución,
+  // no solo seis partidos cada seis horas. Cada partido guarda la fecha del
+  // último intento para evitar repetir consultas en cada sincronización full;
+  // los que sigan sin dato oficial se reintentan después de siete días.
   let detallesCompletados = 0;
-  if (!recent) {
+  let detallesRevisados = 0;
+  {
+    const ahora = Date.now();
+    const sieteDias = 7 * 24 * 60 * 60 * 1000;
     const pendientesDeDetalle = historial.matches
       .filter(p => p.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/") &&
-        p.teams?.some(t => t.players?.some(j => j.blocks == null || j.fouls == null)))
-      .sort((a,b) => String(b.date).localeCompare(String(a.date)));
-    // Priorizar el partido de control informado por el usuario para asegurar
-    // que la corrección de "Tapones com." se vuelva a aplicar al histórico.
-    const urlControlTapones = "https://www.laliganacional.com.ar/laliga/partido/v2YKJ0KFBH-Pbigo5T9qxu2TVb56F0CCEJdPs_LAH-HObnKsv7pavwEQ==/atenas-c-vs-san-lorenzo";
-    const partidoControl = pendientesDeDetalle.find(p => p.officialUrl === urlControlTapones);
-    const candidatos = [
-      ...(partidoControl ? [partidoControl] : []),
-      ...pendientesDeDetalle.filter(p => p !== partidoControl).slice(0, 6),
-    ];
-    for (const existing of candidatos) {
+        p.teams?.some(t => t.players?.some(j => j.blocks == null)) &&
+        (!p.blocksCheckedAt || !Number.isFinite(Date.parse(p.blocksCheckedAt)) ||
+          ahora - Date.parse(p.blocksCheckedAt) >= sieteDias))
+      .sort((a,b) => String(a.date).localeCompare(String(b.date)));
+    console.log(`Partidos históricos pendientes de tapones para esta pasada: ${pendientesDeDetalle.length}`);
+    for (const existing of pendientesDeDetalle) {
       if (fs.existsSync(TEMP)) fs.unlinkSync(TEMP);
       const result = spawnSync(process.execPath,["extractor-liga.cjs",existing.officialUrl,TEMP],
         {encoding:"utf8",timeout:30000});
@@ -289,35 +288,35 @@ async function main() {
             const updated = newTeam.players?.find(p => p.officialPlayerId != null &&
               String(p.officialPlayerId) === String(oldPlayer.officialPlayerId));
             if (!updated) continue;
-            for (const metric of ["blocks","fouls"]) {
-              if (oldPlayer[metric] == null && updated[metric] != null &&
-                  Number.isFinite(Number(updated[metric]))) {
-                oldPlayer[metric] = Number(updated[metric]);
-                changed = true;
-              }
+            if (oldPlayer.blocks == null && updated.blocks != null &&
+                Number.isFinite(Number(updated.blocks))) {
+              oldPlayer.blocks = Number(updated.blocks);
+              changed = true;
             }
           }
         }
-        if (existing.officialUrl === urlControlTapones) {
+        if (existing.officialUrl.includes("v2YKJ0KFBH-Pbigo5T9qxu2TVb56F0CCEJdPs_LAH-HObnKsv7pavwEQ==")) {
           const control = fresh.teams?.flatMap(t => t.players || []).find(p =>
             String(p.name || "").toLowerCase().includes("bryan") &&
             String(p.name || "").toLowerCase().includes("carabali"));
           console.log("Control Bryan Carabalí - tapones oficiales:", control?.blocks ?? "SIN DATO", "nombre:", control?.name ?? "no encontrado");
         }
+        existing.blocksCheckedAt = new Date().toISOString();
+        detallesRevisados++;
         if (changed) {
           detallesCompletados++;
-          fs.writeFileSync(OUTPUT,JSON.stringify(historial,null,2),"utf8");
-          console.log("Tapas/faltas recuperadas del sitio oficial:",existing.date,existing.officialUrl);
+          console.log("Tapones recuperados del sitio oficial:",existing.date,existing.officialUrl);
         } else {
-          console.log("Sin nuevos campos oficiales de tapas/faltas:",existing.date);
+          console.log("Sin nuevos tapones oficiales:",existing.date);
         }
+        fs.writeFileSync(OUTPUT,JSON.stringify(historial,null,2),"utf8");
       } catch(error) {
         console.warn("No fue posible verificar tapas/faltas:",existing.date,error.message);
       }
       await esperar(ESPERA_MS);
     }
   }
-  console.log("Partidos históricos enriquecidos con tapas/faltas:",detallesCompletados);
+  console.log(`Partidos históricos revisados por tapones: ${detallesRevisados}; con datos nuevos: ${detallesCompletados}`);
 
   // Completar los cuartos de partidos ya guardados sin volver a publicar
   // ni modificar sus estadísticas de jugadores o marcadores oficiales.
