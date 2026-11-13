@@ -59,10 +59,10 @@ export default function NotificationBell({ user }) {
     loadInbox();
     // Los pronósticos pendientes se consultan al abrir la campana, no durante
     // la carga inicial de Inicio. Así evitamos dos requests por cada partido.
-    const onUpdate = () => { loadInbox(); if (open) refreshPending(); };
+    const onUpdate = () => { loadInbox(); };
     window.addEventListener("lna-vote-updated", onUpdate);
     return () => window.removeEventListener("lna-vote-updated", onUpdate);
-  }, [user?.uid, loadInbox, refreshPending, open]);
+  }, [user?.uid, loadInbox]);
 
   // Actualizar al abrir la bandeja, no cada minuto en segundo plano.
   useEffect(() => {
