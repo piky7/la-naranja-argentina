@@ -34,7 +34,7 @@ function campoTabla($, fila, kind) {
   const clean = value => String(value).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
   for (let i=0;i<headers.length;i++) {
     const heading = clean($(headers[i]).text());
-    const isBlocks = kind === "blocks" && /^(tap|tapon|tapones|blk|bloqueos?)$/.test(heading);
+    const isBlocks = kind === "blocks" && /^(tap|tapon|tapones|tapones cometidos|tapones realizados|tapones hechos|blk|bloqueos?)$/.test(heading);
     const isFouls = kind === "fouls" && /^(faltas?|faltas? personales?|fp|pf)$/.test(heading);
     if (!isBlocks && !isFouls) continue;
     const text = $(cells[i]).text().trim();
@@ -96,8 +96,8 @@ function obtenerJugador($, fila) {
     defensiveRebounds: datos.ReboteDefensivo,
     // Son acciones cometidas/hechas por el jugador, no recibidas por él.
     blocks: campoEstadistico(datos,
-      ["Tapones","TaponesRealizados","TaponesHechos","TaponesDados","TaponesColocados","Bloqueos"],
-      key => /^(?:tapones?|bloqueos?)(?:realizados?|hechos?|dados?|colocados?|favor)?$/.test(key)
+      ["Tapones","TaponesCometidos","TaponesRealizados","TaponesHechos","TaponesDados","TaponesColocados","Bloqueos"],
+      key => /^(?:tapones?|bloqueos?)(?:cometidos?|realizados?|hechos?|dados?|colocados?|favor)?$/.test(key)
         && !/recibidos?|contra/.test(key)) ?? campoTabla($,fila,"blocks"),
     fouls: campoEstadistico(datos,
       ["FaltasCometidas","FaltasPersonales","Faltas","FaltasRealizadas","FaltasJugador","PersonalFouls"],
