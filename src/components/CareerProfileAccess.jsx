@@ -19,7 +19,7 @@ export default function CareerProfileAccess(){
   const uid=user.uid;
   const cacheKey="lna-header-profile:"+uid;
   let cached=null;
-  try { cached=JSON.parse(sessionStorage.getItem(cacheKey)||"null"); } catch {}
+  try { cached=JSON.parse(localStorage.getItem(cacheKey)||sessionStorage.getItem(cacheKey)||"null"); } catch {}
   if(cached?.profile){
    setProfile(cached.profile);
    setProfileUid(uid);
@@ -34,7 +34,7 @@ export default function CareerProfileAccess(){
    if(nextProfile && user.uid===uid){
     setProfile(nextProfile);
     setProfileUid(uid);
-    try { sessionStorage.setItem(cacheKey,JSON.stringify({profile:nextProfile,points:cached?.points??null})); } catch {}
+    try { localStorage.setItem(cacheKey,JSON.stringify({profile:nextProfile,points:cached?.points??null})); } catch {}
    }
   }).catch(()=>{}).finally(()=>{
    if(user.uid===uid){setProfileUid(uid);setProfileLoading(false);}
@@ -43,8 +43,8 @@ export default function CareerProfileAccess(){
    const nextPoints=Number.isFinite(Number(result.points))?Number(result.points):null;
    if(user.uid===uid) setPoints(nextPoints);
    try {
-    const latest=JSON.parse(sessionStorage.getItem(cacheKey)||"null");
-    if(latest?.profile) sessionStorage.setItem(cacheKey,JSON.stringify({profile:latest.profile,points:nextPoints}));
+    const latest=JSON.parse(localStorage.getItem(cacheKey)||"null");
+    if(latest?.profile) localStorage.setItem(cacheKey,JSON.stringify({profile:latest.profile,points:nextPoints}));
    } catch {}
   }).catch(()=>{});
   await Promise.allSettled([profileTask,pointsTask]);
