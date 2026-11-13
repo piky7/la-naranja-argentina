@@ -298,18 +298,18 @@ async function main() {
             }
           }
         }
+        if (existing.officialUrl === urlControlTapones) {
+          const control = fresh.teams?.flatMap(t => t.players || []).find(p =>
+            String(p.name || "").toLowerCase().includes("bryan") &&
+            String(p.name || "").toLowerCase().includes("carabali"));
+          console.log("Control Bryan Carabalí - tapones oficiales:", control?.blocks ?? "SIN DATO", "nombre:", control?.name ?? "no encontrado");
+        }
         if (changed) {
           detallesCompletados++;
           fs.writeFileSync(OUTPUT,JSON.stringify(historial,null,2),"utf8");
           console.log("Tapas/faltas recuperadas del sitio oficial:",existing.date,existing.officialUrl);
         } else {
           console.log("Sin nuevos campos oficiales de tapas/faltas:",existing.date);
-          if (existing.officialUrl === urlControlTapones) {
-            const control = fresh.teams?.flatMap(t => t.players || []).find(p =>
-              String(p.name || "").toLowerCase().includes("bryan") &&
-              String(p.name || "").toLowerCase().includes("carabali"));
-            console.log("Control Bryan Carabalí - tapones oficiales:", control?.blocks ?? "SIN DATO", "nombre:", control?.name ?? "no encontrado");
-          }
         }
       } catch(error) {
         console.warn("No fue posible verificar tapas/faltas:",existing.date,error.message);
