@@ -78,6 +78,18 @@ function obtenerJugador($, fila) {
   if (fin === -1) return null;
 
   const datos = JSON.parse(onclick.slice(inicio, fin));
+  const nombreDiagnostico = String(datos.NombreCompleto || datos.Nombre || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase();
+  if (nombreDiagnostico.includes("bryan carabali")) {
+    const tabla = $(fila).closest("table");
+    const encabezados = tabla.find("thead tr").last().children("th,td").map((_, celda) => $(celda).text().trim()).get();
+    const clavesTapones = Object.entries(datos).filter(([key]) => /tap|bloq/i.test(key));
+    console.log("Diagnóstico fuente oficial tapones Bryan:", JSON.stringify({
+      playerId: datos.IdJugador,
+      rawBlockFields: clavesTapones,
+      tableHeaders: encabezados,
+      rowCells: $(fila).children("th,td").map((_, celda) => $(celda).text().trim()).get(),
+    }));
+  }
 
   return {
     officialPlayerId: datos.IdJugador,
