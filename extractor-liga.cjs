@@ -43,6 +43,29 @@ function campoTabla($, fila, kind) {
   return null;
 }
 
+function normalizarNombreJugador(valor) {
+  return String(valor || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "")
+    .replace(/[^a-z0-9]+/gi, " ").trim().toLowerCase();
+}
+
+// La planilla de la Liga incluye una jugada por cada tapón cometido.
+// Si la tabla estadística no trae el acumulado, reconstruirlo contando
+// exclusivamente TAPON-COMETIDO del jugador en la ficha oficial.
+function contarTaponesCometidosDesdeAcciones($, nombreJugador) {
+  const nombre = normalizarNombreJugador(nombreJugador);
+  if (!nombre) return null;
+  let total = 0;
+  let encontroAcciones = false;
+  $("li.accion").each((_, elemento) => {
+    const texto = $(elemento).text().replace(/\\s+/g, " ").trim();
+    if (!/TAPON[-\\s]COMETIDO/i.test(texto)) return;
+    encontroAcciones = true;
+    const textoNormalizado = normalizarNombreJugador(texto);
+    if (textoNormalizado.includes(nombre)) total++;
+  });
+  return encontroAcciones ? total : null;
+}
+
 function obtenerJugador($, fila) {
   const onclick = $(fila).attr("onclick") || "";
 
@@ -110,7 +133,8 @@ function obtenerJugador($, fila) {
     blocks: campoEstadistico(datos,
       ["Tapones","TaponesCometidos","TaponesRealizados","TaponesHechos","TaponesDados","TaponesColocados","Bloqueos"],
       key => /^(?:tapones?|bloqueos?)(?:cometidos?|realizados?|hechos?|dados?|colocados?|favor)?$/.test(key)
-        && !/recibidos?|contra/.test(key)) ?? campoTabla($,fila,"blocks"),
+        && !/recibidos?|contra/.test(key)) ?? campoTabla($,fila,"blocks") ??
+        contarTaponesCometidosDesdeAcciones($, datos.NombreCompleto || datos.Nombre),
     fouls: campoEstadistico(datos,
       ["FaltasCometidas","FaltasPersonales","Faltas","FaltasRealizadas","FaltasJugador","PersonalFouls"],
       key => /^(?:faltas?|personalfouls)(?:personales?|cometidas?|realizadas?|jugador)?$/.test(key)
