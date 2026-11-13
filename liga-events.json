@@ -1717,24 +1717,6 @@
       "date": "2026-12-12",
       "time": "00:00",
       "home": {
-        "name": "LA UNION FSA",
-        "officialClubId": 1541,
-        "officialTeamId": 114763
-      },
-      "away": {
-        "name": "OLIMPICO (LB)",
-        "officialClubId": 1882,
-        "officialTeamId": 113870
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
-    },
-    {
-      "date": "2026-12-12",
-      "time": "00:00",
-      "home": {
         "name": "SAN LORENZO",
         "officialClubId": 88,
         "officialTeamId": 113373
@@ -1766,6 +1748,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2OytywGsqxHvvWg2VgSu2oX62Qkgiy2HGUgozOs5PenPp1VoHbJkVRA==/independiente-o-vs-racing-ch"
+    },
+    {
+      "date": "2026-12-12",
+      "time": "00:00",
+      "home": {
+        "name": "LA UNION FSA",
+        "officialClubId": 1541,
+        "officialTeamId": 114763
+      },
+      "away": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
     },
     {
       "date": "2026-12-12",
