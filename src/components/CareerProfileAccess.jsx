@@ -16,27 +16,38 @@ export default function CareerProfileAccess(){
  const [profileUid,setProfileUid]=useState(null);
  const load=useCallback(async()=>{
   if(!user){setPoints(null);setProfile(null);setProfileUid(null);setProfileLoading(false);return}
-  const cacheKey="lna-header-profile:"+user.uid;
+  const uid=user.uid;
+  const cacheKey="lna-header-profile:"+uid;
   let cached=null;
   try { cached=JSON.parse(sessionStorage.getItem(cacheKey)||"null"); } catch {}
   if(cached?.profile){
    setProfile(cached.profile);
-   setPoints(Number.isFinite(Number(cached.points))?Number(cached.points):null);
-   setProfileUid(user.uid);
+   setProfileUid(uid);
    setProfileLoading(false);
   } else {
    setProfileLoading(true);
   }
-  const [p,c]=await Promise.allSettled([fetchProdeProfile(),fetchCareerData("points")]);
-  const nextProfile=p.status==="fulfilled"?p.value:null;
-  const nextPoints=c.status==="fulfilled"&&Number.isFinite(Number(c.value.points))?Number(c.value.points):null;
-  if(nextProfile) setProfile(nextProfile);
-  if(c.status==="fulfilled") setPoints(nextPoints);
-  setProfileUid(user.uid);
-  if(nextProfile || c.status==="fulfilled"){
-   try { sessionStorage.setItem(cacheKey,JSON.stringify({profile:nextProfile||cached?.profile||null,points:c.status==="fulfilled"?nextPoints:(cached?.points??null)})); } catch {}
-  }
-  setProfileLoading(false);
+  if(cached && Number.isFinite(Number(cached.points))) setPoints(Number(cached.points));
+  // El perfil y los puntos se resuelven por separado: el header no espera
+  // la consulta de Mi Carrera para mostrar el alias y el escudo.
+  const profileTask=fetchProdeProfile().then(nextProfile=>{
+   if(nextProfile && user.uid===uid){
+    setProfile(nextProfile);
+    setProfileUid(uid);
+    try { sessionStorage.setItem(cacheKey,JSON.stringify({profile:nextProfile,points:cached?.points??null})); } catch {}
+   }
+  }).catch(()=>{}).finally(()=>{
+   if(user.uid===uid){setProfileUid(uid);setProfileLoading(false);}
+  });
+  const pointsTask=fetchCareerData("points").then(result=>{
+   const nextPoints=Number.isFinite(Number(result.points))?Number(result.points):null;
+   if(user.uid===uid) setPoints(nextPoints);
+   try {
+    const latest=JSON.parse(sessionStorage.getItem(cacheKey)||"null");
+    if(latest?.profile) sessionStorage.setItem(cacheKey,JSON.stringify({profile:latest.profile,points:nextPoints}));
+   } catch {}
+  }).catch(()=>{});
+  await Promise.allSettled([profileTask,pointsTask]);
  },[user]);
  useEffect(()=>{
   if(loading)return;
