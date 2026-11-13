@@ -25,8 +25,10 @@ export default defineConfig({
     react(),
 
     VitePWA({
-      registerType: "autoUpdate",
-      // El registro se gestiona desde main.jsx para comprobar actualizaciones al reanudar.
+      // La versión nueva queda esperando hasta que se cierre la sesión actual.
+      // Evita que el Service Worker fuerce una recarga mientras se usa la app.
+      registerType: "prompt",
+      // El registro se gestiona desde main.jsx para comprobar actualizaciones al iniciar.
       injectRegister: null,
 
       manifest: {
