@@ -192,9 +192,21 @@ async function archiveFixture(db, fixture) {
   await captureFinishObservations(db,fixture.games);
 }
 
-// Lectura sin escrituras: el cron archiva y las consultas solo combinan datos.
+// Lectura sin escrituras: solo recupera el histórico desde el primer partido
+// que tuvo votos registrados. La PK textual YYYY-MM-DD permite un range scan.
 async function loadCareerFixture(db, fixture) {
-  const saved = await db.prepare("SELECT datos FROM carrera_partidos").all();
+  const [firstVote, firstMvp] = await Promise.all([
+    db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first(),
+    db.prepare("SELECT MIN(partido_id) AS first_id FROM votos_mvp").first(),
+  ]);
+  // Se conserva el comportamiento anterior: incluir todos los partidos del día
+  // del primer voto, aunque el ID de otro encuentro de ese día ordene antes.
+  const careerStartDate = [firstVote?.first_id, firstMvp?.first_id]
+    .filter(Boolean).sort()[0]?.slice(0, 10) || "9999-12-31";
+  const saved = careerStartDate === "9999-12-31"
+    ? { results: [] }
+    : await db.prepare("SELECT datos FROM carrera_partidos WHERE partido_id >= ?")
+      .bind(careerStartDate).all();
   const byId = new Map();
   for (const row of saved.results || []) {
     try { const game = JSON.parse(row.datos); if (game?.id) byId.set(game.id, game); } catch {}
@@ -206,24 +218,22 @@ async function loadCareerFixture(db, fixture) {
     const currentConfirmed = game.finished === true && Number.isFinite(game.homeScore) && Number.isFinite(game.awayScore) && game.homeScore !== game.awayScore;
     if (!previousConfirmed || currentConfirmed) byId.set(game.id, game);
   }
-  return { ...fixture, games: [...byId.values()] };
+  return { ...fixture, games: [...byId.values()], careerStartDate };
 }
 
 async function calculateRewards(db, fixture, visitorId) {
   // La tabla MVP debe existir antes de iniciar las lecturas concurrentes.
   // Consultas independientes: ejecutarlas juntas ahorra latencia de D1.
   // Se conservan exactamente las mismas filas, criterios y reglas.
-  const [votes, mvpVotes, firstVote, firstMvp, finishTimes] = await Promise.all([
+  const [votes, mvpVotes, finishTimes] = await Promise.all([
     db.prepare("SELECT partido_id, equipo_votado FROM votos WHERE visitante_id=?").bind(visitorId).all(),
     db.prepare("SELECT partido_id,jugador_id FROM votos_mvp WHERE visitante_id=?").bind(visitorId).all(),
-    db.prepare("SELECT MIN(partido_id) AS first_id FROM votos").first(),
-    db.prepare("SELECT MIN(partido_id) AS first_id FROM votos_mvp").first(),
     getFinishObservations(db, fixture.games.map(game => game?.id)),
   ]);
   const voteMap = new Map((votes.results || []).map(v => [v.partido_id, v.equipo_votado]));
   const mvpMap = new Map((mvpVotes.results || []).map(v => [v.partido_id, v.jugador_id]));
   // Las reglas se aplican retroactivamente desde el primer partido con votos registrados.
-  const firstDate = [firstVote?.first_id, firstMvp?.first_id].filter(Boolean).sort()[0]?.slice(0,10) || "9999-12-31";
+  const firstDate = fixture.careerStartDate || "9999-12-31";
   const games = [...fixture.games].filter(g => g?.id && g.id.slice(0,10) >= firstDate && Number.isFinite(Date.parse(g.startsAt)))
     .sort((a,b) => {
       const aFinish = timelyFinishObservation(a,finishTimes.get(a.id));
