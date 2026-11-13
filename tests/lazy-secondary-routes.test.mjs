@@ -31,6 +31,13 @@ test("La precarga de secciones solo se inicia desde Inicio",()=>{
   assert.match(source,/const Estadisticas = lazy\(loadEstadisticas\)/);
 });
 
+test("La precarga inicial descarga solo módulos en inactividad y no consulta datos autenticados",()=>{
+  assert.match(source,/const preload = \(\) => \{/);
+  assert.match(source,/Promise\.allSettled\(\[loadLiga\(\), loadEstadisticas\(\), loadProde\(\), loadMiCarrera\(\)\]\)/);
+  assert.match(source,/}, 3600\)/);
+  assert.match(source,/requestIdleCallback\(preload, \{ timeout: 10000 \}\)/);
+  assert.doesNotMatch(source,/watchProdeUser|fetchProdeRead|fetchCareerData/);
+});
 test("Prode se mantiene montado tras primera visita, con Suspense propio",()=>{
   assert.match(source,/prodeVisited && <div/);
   assert.match(source,/display: isProde \? undefined : "none"/);
