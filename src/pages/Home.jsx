@@ -18,25 +18,20 @@ function useIdlePopupPreload() {
   useEffect(() => {
     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     if (connection?.saveData || /^(slow-2g|2g)$/i.test(connection?.effectiveType || "")) return;
-
-    // El popup de próximos partidos se prepara apenas monta Home: es el que
-    // el usuario suele abrir desde Inicio y no debe esperar al preload idle.
-    void loadUpcomingModal();
-
     let timer = null;
     let idle = null;
     let cancelled = false;
-    const prepareSecondaryPopups = () => {
-      if (cancelled || document.visibilityState !== "visible") return;
-      void Promise.allSettled([loadFinishedModal(), loadPlayerModal()]);
+    const prepare = () => {
+      if (cancelled) return;
+      void Promise.allSettled([loadUpcomingModal(), loadFinishedModal(), loadPlayerModal()]);
     };
     const schedule = () => {
       timer = window.setTimeout(() => {
         if (cancelled) return;
         if ("requestIdleCallback" in window) {
-          idle = window.requestIdleCallback(prepareSecondaryPopups, { timeout: 12000 });
+          idle = window.requestIdleCallback(prepare, { timeout: 12000 });
         } else {
-          prepareSecondaryPopups();
+          prepare();
         }
       }, 2800);
     };
@@ -50,7 +45,6 @@ function useIdlePopupPreload() {
     };
   }, []);
 }
-
 function PopupLoading() {
   return (
     <div className="match-modal-overlay" role="status" aria-live="polite"
