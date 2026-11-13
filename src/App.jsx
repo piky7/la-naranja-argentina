@@ -44,11 +44,11 @@ function PreloadSections() {
     };
     timerId = window.setTimeout(() => {
       if ("requestIdleCallback" in window) {
-        idleId = window.requestIdleCallback(preload, { timeout: 10000 });
+        idleId = window.requestIdleCallback(preload, { timeout: 6000 });
       } else {
-        fallbackId = window.setTimeout(preload, 1800);
+        preload();
       }
-    }, 3600);
+    }, 1400);
     return () => {
       active = false;
       window.clearTimeout(timerId);
