@@ -260,10 +260,18 @@ async function main() {
   // Revisión gradual en modo full para respetar la carga del sitio oficial.
   let detallesCompletados = 0;
   if (!recent) {
-    const candidatos = historial.matches
+    const pendientesDeDetalle = historial.matches
       .filter(p => p.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/") &&
         p.teams?.some(t => t.players?.some(j => j.blocks == null || j.fouls == null)))
-      .sort((a,b) => String(b.date).localeCompare(String(a.date))).slice(0, 6);
+      .sort((a,b) => String(b.date).localeCompare(String(a.date)));
+    // Priorizar el partido de control informado por el usuario para asegurar
+    // que la corrección de "Tapones com." se vuelva a aplicar al histórico.
+    const urlControlTapones = "https://www.laliganacional.com.ar/laliga/partido/v2YKJ0KFBH-Pbigo5T9qxu2TVb56F0CCEJdPs_LAH-HObnKsv7pavwEQ==/atenas-c-vs-san-lorenzo";
+    const partidoControl = pendientesDeDetalle.find(p => p.officialUrl === urlControlTapones);
+    const candidatos = [
+      ...(partidoControl ? [partidoControl] : []),
+      ...pendientesDeDetalle.filter(p => p !== partidoControl).slice(0, 6),
+    ];
     for (const existing of candidatos) {
       if (fs.existsSync(TEMP)) fs.unlinkSync(TEMP);
       const result = spawnSync(process.execPath,["extractor-liga.cjs",existing.officialUrl,TEMP],
@@ -296,6 +304,12 @@ async function main() {
           console.log("Tapas/faltas recuperadas del sitio oficial:",existing.date,existing.officialUrl);
         } else {
           console.log("Sin nuevos campos oficiales de tapas/faltas:",existing.date);
+          if (existing.officialUrl === urlControlTapones) {
+            const control = fresh.teams?.flatMap(t => t.players || []).find(p =>
+              String(p.name || "").toLowerCase().includes("bryan") &&
+              String(p.name || "").toLowerCase().includes("carabali"));
+            console.log("Control Bryan Carabalí - tapones oficiales:", control?.blocks ?? "SIN DATO", "nombre:", control?.name ?? "no encontrado");
+          }
         }
       } catch(error) {
         console.warn("No fue posible verificar tapas/faltas:",existing.date,error.message);
