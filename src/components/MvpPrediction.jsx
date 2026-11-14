@@ -36,8 +36,16 @@ export default function MvpPrediction({ match, onStatusChange }) {
     if (busy || !open) return;
     setBusy(true); setError("");
     try {
-      const body = await requestPrediction("mvp", id, playerId);
-      setSelected(body.selected); setOpen(body.open); setRanking(Array.isArray(body.ranking) ? body.ranking : []); setExpanded(false);
+      const saved = await requestPrediction("mvp", id, playerId);
+      let body = saved;
+      try {
+        // Leer nuevamente el ranking consolidado después de guardar el pronóstico.
+        body = await requestPrediction("mvp", id);
+      } catch { /* El POST ya confirmó el voto y trae un ranking utilizable. */ }
+      setSelected(body.selected || saved.selected || playerId);
+      setOpen(body.open ?? saved.open);
+      setRanking(Array.isArray(body.ranking) ? body.ranking : Array.isArray(saved.ranking) ? saved.ranking : []);
+      setExpanded(false);
       window.dispatchEvent(new Event("lna-vote-updated"));
     } catch(err) { setError(err.message || "No se pudo guardar"); }
     finally { setBusy(false); }
