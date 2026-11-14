@@ -60,11 +60,26 @@ export default function NotificationBell({ user }) {
   useEffect(() => {
     if (!user) { setItems([]); setPendingMatches([]); setOpen(false); return; }
     inboxFetchedAt.current = 0;
-    // La bandeja se consulta recién cuando el usuario abre la campana.
-    // Los votos sólo fuerzan una actualización si ya está abierta.
-    const onUpdate = () => { if (openRef.current) { loadInbox(); refreshPending(); } };
-    window.addEventListener("lna-vote-updated", onUpdate);
-    return () => window.removeEventListener("lna-vote-updated", onUpdate);
+    // Cargar la bandeja y los recordatorios al iniciar sesión, para que
+    // el indicador aparezca sin tener que abrir manualmente la campanita.
+    loadInbox();
+    refreshPending();
+    const refresh = () => {
+      if (document.visibilityState === "visible") {
+        loadInbox();
+        refreshPending();
+      }
+    };
+    window.addEventListener("lna-vote-updated", refresh);
+    window.addEventListener("career-auth-updated", refresh);
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      window.removeEventListener("lna-vote-updated", refresh);
+      window.removeEventListener("career-auth-updated", refresh);
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
+    };
   }, [user?.uid, loadInbox, refreshPending]);
 
   // Actualizar al abrir la bandeja, no cada minuto en segundo plano.
