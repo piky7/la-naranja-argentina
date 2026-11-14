@@ -21,7 +21,6 @@ export default function NotificationBell({ user }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const inboxFetchedAt = useRef(0);
-  const openRef = useRef(false);
 
   const loadInbox = useCallback(async () => {
     if (!user) return;
@@ -54,8 +53,6 @@ export default function NotificationBell({ user }) {
     }));
     setPendingMatches(checks.filter(Boolean));
   }, [user]);
-
-  useEffect(() => { openRef.current = open; }, [open]);
 
   useEffect(() => {
     if (!user) { setItems([]); setPendingMatches([]); setOpen(false); return; }
