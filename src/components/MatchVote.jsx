@@ -50,8 +50,16 @@ export default function MatchVote({ match, onStatusChange }) {
     setBusy(true);
     setError("");
     try {
-      const body = await requestPrediction("winner", id, team);
-      setData(body);
+      await requestPrediction("winner", id, team);
+      let refreshed;
+      try {
+        // El POST confirma el guardado, pero no devuelve los totales colectivos.
+        refreshed = await requestPrediction("winner", id);
+      } catch {
+        // El voto ya quedó guardado: conservar el estado confirmado si falla la lectura.
+        refreshed = { ...data, voted: true, selected: team };
+      }
+      setData(refreshed);
       setEditing(false);
       window.dispatchEvent(new Event("lna-vote-updated"));
     } catch (err) { setError(err.message || "No se pudo registrar el voto. Reintentá."); }
