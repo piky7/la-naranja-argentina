@@ -978,5 +978,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2K9HadYpUmbm5kmWR0wipUYdsjjhkKy0NhdRD7aaIERgeidfNRp8cfg==/atenas-c-vs-san-lorenzo"
     }
+  },
+  "2026-11-13-ferro-penarol": {
+    "status": "finished",
+    "homeScore": 76,
+    "awayScore": 85,
+    "time": "20:00",
+    "homeTeam": "ferro",
+    "awayTeam": "penarol",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2zcZ6Qk6p3w7_0S_F_6n0bNBN_cVeOUUGz6i6EUfWQtud11zBuG9nwg==/ferro-vs-penarol-mdp",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2zcZ6Qk6p3w7_0S_F_6n0bNBN_cVeOUUGz6i6EUfWQtud11zBuG9nwg==/ferro-vs-penarol-mdp"
+    }
   }
 };

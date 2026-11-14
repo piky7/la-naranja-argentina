@@ -2544,4 +2544,19 @@ export const players = [
     teamId: "atenas",
     number: 15,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-277049",
+    officialPlayerId: 277049,
+    name: "Roman Moravansky",
+    teamId: "ferro",
+    number: 20,
+  },
+  {
+    id: "oficial-385806",
+    officialPlayerId: 385806,
+    name: "Juan Cruz Locatelli",
+    teamId: "penarol",
+    number: 20,
+  },
 ];
