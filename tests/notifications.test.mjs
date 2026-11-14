@@ -84,11 +84,12 @@ test("el usuario puede eliminar solo avisos generales de su propia bandeja", () 
   assert.match(bell, /setItems\(current => current\.filter\(entry => entry\.id !== item\.id\)\)/);
 });
 
-test("la campanita difiere las consultas hasta abrirse y actualiza al votar si sigue abierta",()=>{
+test("la campanita carga avisos y recordatorios al iniciar sesión sin abrir el panel",()=>{
   assert.doesNotMatch(bell,/setInterval\(/);
+  assert.match(bell,/loadInbox\(\);\s*refreshPending\(\);/);
+  assert.match(bell,/window\.addEventListener\("lna-vote-updated", refresh\)/);
+  assert.match(bell,/window\.addEventListener\("focus", refresh\)/);
+  assert.match(bell,/document\.addEventListener\("visibilitychange", refresh\)/);
   assert.match(bell,/if \(open && user\) \{/);
   assert.match(bell,/if \(Date\.now\(\) - inboxFetchedAt\.current > 30000\) loadInbox\(\)/);
-  assert.match(bell,/refreshPending\(\)/);
-  assert.match(bell,/if \(openRef\.current\) \{ loadInbox\(\); refreshPending\(\); \}/);
-  assert.match(bell,/window\.addEventListener\("lna-vote-updated", onUpdate\)/);
 });
