@@ -994,5 +994,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2zcZ6Qk6p3w7_0S_F_6n0bNBN_cVeOUUGz6i6EUfWQtud11zBuG9nwg==/ferro-vs-penarol-mdp"
     }
+  },
+  "2026-11-14-gimnasia-platense": {
+    "status": "finished",
+    "homeScore": 68,
+    "awayScore": 58,
+    "time": "21:00",
+    "homeTeam": "gimnasia",
+    "awayTeam": "platense",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NiT2DNBpmRwkAzX5foy4IFEaYOZ-LMcsvGdP50-aiaiESRS21cC8bA==/gimnasia-cr-vs-platense",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NiT2DNBpmRwkAzX5foy4IFEaYOZ-LMcsvGdP50-aiaiESRS21cC8bA==/gimnasia-cr-vs-platense"
+    }
   }
 };
