@@ -1010,5 +1010,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2NiT2DNBpmRwkAzX5foy4IFEaYOZ-LMcsvGdP50-aiaiESRS21cC8bA==/gimnasia-cr-vs-platense"
     }
+  },
+  "2026-11-14-independiente-oliva-san-lorenzo": {
+    "status": "finished",
+    "homeScore": 122,
+    "awayScore": 89,
+    "time": "21:30",
+    "homeTeam": "independiente-oliva",
+    "awayTeam": "san-lorenzo",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo"
+    }
   }
 };
