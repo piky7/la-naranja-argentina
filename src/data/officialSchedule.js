@@ -576,20 +576,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo"
   },
   {
-    "id": "2026-11-15-la-union-atenas",
-    "date": "2026-11-15",
-    "time": "21:00",
-    "homeTeam": "la-union",
-    "awayTeam": "atenas",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
-  },
-  {
     "id": "2026-11-15-san-martin-quimsa",
     "date": "2026-11-15",
     "time": "21:00",
     "homeTeam": "san-martin",
     "awayTeam": "quimsa",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+  },
+  {
+    "id": "2026-11-15-la-union-atenas",
+    "date": "2026-11-15",
+    "time": "21:00",
+    "homeTeam": "la-union",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
   },
   {
     "id": "2026-11-16-instituto-san-lorenzo",
@@ -768,20 +768,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
   },
   {
-    "id": "2026-12-12-san-lorenzo-boca",
-    "date": "2026-12-12",
-    "time": null,
-    "homeTeam": "san-lorenzo",
-    "awayTeam": "boca",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2tZwPgAoAYomYKDLXx5VKUeamaXJKS88TMe8MBTPtZZ3SA3F6SKM4Pw==/san-lorenzo-vs-boca"
-  },
-  {
     "id": "2026-12-12-independiente-oliva-racing-chivilcoy",
     "date": "2026-12-12",
     "time": null,
     "homeTeam": "independiente-oliva",
     "awayTeam": "racing-chivilcoy",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2OytywGsqxHvvWg2VgSu2oX62Qkgiy2HGUgozOs5PenPp1VoHbJkVRA==/independiente-o-vs-racing-ch"
+  },
+  {
+    "id": "2026-12-12-san-lorenzo-boca",
+    "date": "2026-12-12",
+    "time": null,
+    "homeTeam": "san-lorenzo",
+    "awayTeam": "boca",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2tZwPgAoAYomYKDLXx5VKUeamaXJKS88TMe8MBTPtZZ3SA3F6SKM4Pw==/san-lorenzo-vs-boca"
   },
   {
     "id": "2026-12-12-lanus-platense",
@@ -806,5 +806,37 @@ export const officialSchedule = [
     "homeTeam": "atenas",
     "awayTeam": "argentino",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2MqAtGtwqOTiExDvbEcmEIT7JZjQg-_S5ep7E2ALlJLOOtliKxJy8AQ==/atenas-c-vs-argentino-j"
+  },
+  {
+    "id": "2026-12-15-ferro-obera",
+    "date": "2026-12-15",
+    "time": "20:00",
+    "homeTeam": "ferro",
+    "awayTeam": "obera",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Ow4QDVc8LmNqKzGNGpcek73GCDhz53dlUv8_L78VOWfbPiFE-CnuMw==/ferro-vs-obera"
+  },
+  {
+    "id": "2026-12-16-argentino-san-lorenzo",
+    "date": "2026-12-16",
+    "time": null,
+    "homeTeam": "argentino",
+    "awayTeam": "san-lorenzo",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2HKi_ZYHGLXEtlS_BCGX4dUnmYAqdq_JYJVNpzMaSqFz93Dj3qE7mbA==/argentino-j-vs-san-lorenzo"
+  },
+  {
+    "id": "2026-12-16-la-union-quimsa",
+    "date": "2026-12-16",
+    "time": null,
+    "homeTeam": "la-union",
+    "awayTeam": "quimsa",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2KLVqZyVN_a_w4blRlZjk2Y4Y15JnsGv73ypaSt1mVQzYQGBQBW5jDQ==/la-union-fsa-vs-quimsa"
+  },
+  {
+    "id": "2026-12-16-san-martin-independiente-oliva",
+    "date": "2026-12-16",
+    "time": null,
+    "homeTeam": "san-martin",
+    "awayTeam": "independiente-oliva",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2bvkhY7NbaMCttdbOcHQ3NfHJnivv_lCkQWqco6zW-vPlSPYNgBVwTg==/san-martin-c-vs-independiente-o"
   }
 ];
