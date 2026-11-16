@@ -2274,7 +2274,7 @@ export const players = [
   name: "Giovano Gabriel Pertile Damilano",
   teamId: "san-martin",
   position: null,
-  number: 33,
+  number: 1,
   nationality: "Argentina",
 },
 {
@@ -2495,7 +2495,7 @@ export const players = [
     officialPlayerId: 375107,
     name: "Franco Gaston Aguerre",
     teamId: "san-martin",
-    number: 27,
+    number: 33,
   },
   // Incorporaciones detectadas en planillas oficiales
   {

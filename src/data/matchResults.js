@@ -1026,5 +1026,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2biWDxbZmaijcaAFYJW8uQpbHWZqNeEgMyz-cckEWypWt9wQJyMoSqw==/independiente-o-vs-san-lorenzo"
     }
+  },
+  "2026-11-15-san-martin-quimsa": {
+    "status": "finished",
+    "homeScore": 86,
+    "awayScore": 81,
+    "time": "21:00",
+    "homeTeam": "san-martin",
+    "awayTeam": "quimsa",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2nawwbBDOPm_U7O2HP3jpkx6lqH_nugDtk1b_VEJ1tB9rAP3_nR1kXg==/san-martin-c-vs-quimsa"
+    }
   }
 };
