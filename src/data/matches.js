@@ -13,6 +13,9 @@ const manualBroadcasts = {
   "2026-11-06-boca-san-martin": "DSports",
   "2026-11-10-ferro-san-martin": "TyC Sports",
   "2026-11-11-platense-penarol": "DSports",
+  "2026-11-16-instituto-san-lorenzo": "TyC Sports",
+  "2026-11-19-olimpico-ferro": "TyC Sports",
+  "2026-11-20-atenas-instituto": "DSports",
 };
 
 // La única fuente de fechas, horarios y encuentros es la Liga Nacional.
