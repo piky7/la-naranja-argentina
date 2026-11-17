@@ -2559,4 +2559,12 @@ export const players = [
     teamId: "penarol",
     number: 20,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-379566",
+    officialPlayerId: 379566,
+    name: "Juan Bautista Aguilar Villalba",
+    teamId: "instituto",
+    number: 77,
+  },
 ];

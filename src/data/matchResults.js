@@ -1058,5 +1058,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2PuNIW7fmxkczfip021g4LHnDwtQXKUpHf0V8fNt2EoD93STRXxSMxg==/la-union-fsa-vs-atenas-c"
     }
+  },
+  "2026-11-16-instituto-san-lorenzo": {
+    "status": "finished",
+    "homeScore": 82,
+    "awayScore": 70,
+    "time": "22:05",
+    "homeTeam": "instituto",
+    "awayTeam": "san-lorenzo",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IgSllaDMujrb2dAgOhh1Ho8wczDgVT1V5-Llui8CoKgLJydBZSQl6Q==/instituto-vs-san-lorenzo",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IgSllaDMujrb2dAgOhh1Ho8wczDgVT1V5-Llui8CoKgLJydBZSQl6Q==/instituto-vs-san-lorenzo"
+    }
   }
 };
