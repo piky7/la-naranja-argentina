@@ -1074,5 +1074,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IgSllaDMujrb2dAgOhh1Ho8wczDgVT1V5-Llui8CoKgLJydBZSQl6Q==/instituto-vs-san-lorenzo"
     }
+  },
+  "2026-11-17-racing-chivilcoy-lanus": {
+    "status": "finished",
+    "homeScore": 69,
+    "awayScore": 66,
+    "time": "20:30",
+    "homeTeam": "racing-chivilcoy",
+    "awayTeam": "lanus",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2HxrNHkwl-JjBB11nSbQGILxDXG71BActdSkUiwEs9M4iBCAR2jemAQ==/racing-ch-vs-lanus",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2HxrNHkwl-JjBB11nSbQGILxDXG71BActdSkUiwEs9M4iBCAR2jemAQ==/racing-ch-vs-lanus"
+    }
   }
 };
