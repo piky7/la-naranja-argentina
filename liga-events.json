@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-12-17",
+  "dateTo": "2026-12-18",
   "matches": [
     {
       "date": "2026-09-28",
@@ -1366,8 +1366,8 @@
         "officialClubId": 63,
         "officialTeamId": 112600
       },
-      "homeScore": 28,
-      "awayScore": 21,
+      "homeScore": 32,
+      "awayScore": 26,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2HxrNHkwl-JjBB11nSbQGILxDXG71BActdSkUiwEs9M4iBCAR2jemAQ==/racing-ch-vs-lanus"
     },
@@ -1964,6 +1964,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2CXabiI0LIvUv2FR_VrvbG2LvSX3RNdvkhuxmxW8IOhVLW5-BqsPoxg==/racing-ch-vs-san-lorenzo"
+    },
+    {
+      "date": "2026-12-19",
+      "time": "00:00",
+      "home": {
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
+      },
+      "away": {
+        "name": "GIMNASIA (CR)",
+        "officialClubId": 1474,
+        "officialTeamId": 112553
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2rQM7TLyPXGkRgUQoTqzu964-BZQJHpVi62yVJwUjcjesxVTKL3-t-Q==/olimpico-lb-vs-gimnasia-cr"
     }
   ]
 }
