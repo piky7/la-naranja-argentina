@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T02:00:57.876Z",
+  "generatedAt": "2026-11-18T02:05:56.160Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -615,6 +615,14 @@
       "awayScore": 72,
       "homeTeam": "obera",
       "awayTeam": "atenas",
+      "hasStats": true
+    },
+    "2026-11-17-regatas-quimsa": {
+      "status": "published",
+      "homeScore": 79,
+      "awayScore": 83,
+      "homeTeam": "regatas",
+      "awayTeam": "quimsa",
       "hasStats": true
     }
   }

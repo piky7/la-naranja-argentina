@@ -1106,5 +1106,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Hya_ATyzry471kmRlZhi7Phx6FnzETrI7ePjrV4n83SsLpy2bPqGkg==/obera-vs-atenas-c"
     }
+  },
+  "2026-11-17-regatas-quimsa": {
+    "status": "finished",
+    "homeScore": 79,
+    "awayScore": 83,
+    "time": "21:00",
+    "homeTeam": "regatas",
+    "awayTeam": "quimsa",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LXl2HWyszntKQ9pyJ6DMtjMVK5-VsGy6WmCBg-NPWnflaG3i-sq4Aw==/regatas-c-vs-quimsa",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LXl2HWyszntKQ9pyJ6DMtjMVK5-VsGy6WmCBg-NPWnflaG3i-sq4Aw==/regatas-c-vs-quimsa"
+    }
   }
 };
