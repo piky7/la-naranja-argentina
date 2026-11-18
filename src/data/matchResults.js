@@ -1090,5 +1090,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2HxrNHkwl-JjBB11nSbQGILxDXG71BActdSkUiwEs9M4iBCAR2jemAQ==/racing-ch-vs-lanus"
     }
+  },
+  "2026-11-17-obera-atenas": {
+    "status": "finished",
+    "homeScore": 79,
+    "awayScore": 72,
+    "time": "21:00",
+    "homeTeam": "obera",
+    "awayTeam": "atenas",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Hya_ATyzry471kmRlZhi7Phx6FnzETrI7ePjrV4n83SsLpy2bPqGkg==/obera-vs-atenas-c",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Hya_ATyzry471kmRlZhi7Phx6FnzETrI7ePjrV4n83SsLpy2bPqGkg==/obera-vs-atenas-c"
+    }
   }
 };
