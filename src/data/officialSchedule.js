@@ -768,20 +768,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
   },
   {
-    "id": "2026-12-12-independiente-oliva-racing-chivilcoy",
-    "date": "2026-12-12",
-    "time": null,
-    "homeTeam": "independiente-oliva",
-    "awayTeam": "racing-chivilcoy",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2OytywGsqxHvvWg2VgSu2oX62Qkgiy2HGUgozOs5PenPp1VoHbJkVRA==/independiente-o-vs-racing-ch"
-  },
-  {
     "id": "2026-12-12-san-lorenzo-boca",
     "date": "2026-12-12",
     "time": null,
     "homeTeam": "san-lorenzo",
     "awayTeam": "boca",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2tZwPgAoAYomYKDLXx5VKUeamaXJKS88TMe8MBTPtZZ3SA3F6SKM4Pw==/san-lorenzo-vs-boca"
+  },
+  {
+    "id": "2026-12-12-independiente-oliva-racing-chivilcoy",
+    "date": "2026-12-12",
+    "time": null,
+    "homeTeam": "independiente-oliva",
+    "awayTeam": "racing-chivilcoy",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2OytywGsqxHvvWg2VgSu2oX62Qkgiy2HGUgozOs5PenPp1VoHbJkVRA==/independiente-o-vs-racing-ch"
   },
   {
     "id": "2026-12-12-lanus-platense",
