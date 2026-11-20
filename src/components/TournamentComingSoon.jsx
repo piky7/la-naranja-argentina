@@ -6,7 +6,7 @@ function TournamentComingSoon({ tournament, onBack }) {
   const navigate = useNavigate();
   const names = { lab: "Liga Argentina", federal: "La Liga Federal" };
   const name = names[tournament] || "Esta competencia";
-  const logo = tournament === "lab" ? "/tournament-logos/lab.svg" : "/tournament-logos/federal.svg";
+  const logo = tournament === "lab" ? "/tournament-logos/liga-argentina.webp" : "/tournament-logos/liga-federal.webp";
   const back = () => {
     onBack?.();
     navigate("/", { replace: true });
