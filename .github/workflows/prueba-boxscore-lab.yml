@@ -1,0 +1,118 @@
+name: Probar estructura oficial de Liga Argentina
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/prueba-boxscore-lab.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspeccionar-boxscore-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Inspeccionar boxscore oficial LAB sin tocar datos LNB
+        run: |
+          node --input-type=commonjs <<'NODE'
+          const cheerio = require("cheerio");
+
+          const url = "https://www.laliganacional.com.ar/laligaargentina/partido/v2dTPbQr2iK36n-4ZKAPaW29tfIoutNo5ftvap_YfLYONYB-V6FAzVXQ==/quilmes-mdp-vs-river";
+
+          (async () => {
+            const response = await fetch(url, {
+              headers: {
+                "User-Agent": "Mozilla/5.0",
+                "Accept": "text/html",
+              },
+            });
+
+            console.log("HTTP:", response.status);
+            if (!response.ok) throw new Error("El sitio oficial respondió HTTP " + response.status);
+
+            const html = await response.text();
+            const $ = cheerio.load(html);
+            const tables = $(".tabla-estadisticas");
+            const teams = [];
+
+            tables.each((_, table) => {
+              const container = $(table).closest(".table-responsive");
+              const heading = container.prevAll(".nombre-equipo").first();
+              const name = heading.find("strong").first().text().trim();
+              const crest = heading.find("img").attr("src") || "";
+              const teamIds = crest.match(/\/escudos\/(\d+)\/(\d+)/);
+              const rows = $(table).find("tbody tr");
+              const samples = [];
+
+              rows.slice(0, 3).each((__, row) => {
+                const onclick = $(row).attr("onclick") || "";
+                const start = onclick.indexOf("{");
+                let player = null;
+                if (start >= 0) {
+                  const raw = onclick.slice(start, onclick.lastIndexOf("}") + 1);
+                  try {
+                    const data = JSON.parse(raw);
+                    player = {
+                      id: data.IdJugador ?? null,
+                      teamId: data.IdEquipo ?? null,
+                      name: data.NombreCompleto || data.Nombre || null,
+                      keys: Object.keys(data),
+                    };
+                  } catch {}
+                }
+                samples.push(player);
+              });
+
+              teams.push({
+                name,
+                officialClubId: teamIds ? Number(teamIds[1]) : null,
+                officialTeamId: teamIds ? Number(teamIds[2]) : null,
+                playerRows: rows.length,
+                samplePlayers: samples,
+              });
+            });
+
+            const result = {
+              url,
+              title: $("title").text().trim(),
+              statusElementCount: $("#status-partido").length,
+              statusText: $("#status-partido").text().trim(),
+              homeScoreElementCount: $("#score-local").length,
+              awayScoreElementCount: $("#score-visitante").length,
+              statsTables: tables.length,
+              teams,
+              comparisonTable: $("#tarjeta-comparativa .comparativa").length,
+              hasMatchId: /var\s+idEnc\s*=/.test(html),
+              htmlBytes: Buffer.byteLength(html),
+            };
+
+            console.log(JSON.stringify(result, null, 2));
+
+            if (tables.length !== 2) throw new Error("Se esperaban dos tablas de estadísticas.");
+            if (teams.some(team => !team.name || !team.officialTeamId || !team.playerRows)) {
+              throw new Error("No se pudieron identificar ambos equipos y sus jugadores.");
+            }
+            if (teams.some(team => !team.samplePlayers.some(player => player?.id && player?.teamId))) {
+              throw new Error("No se encontraron IDs oficiales de jugadores/equipos en las filas.");
+            }
+            console.log("ESTRUCTURA LAB COMPATIBLE: tablas, equipos e IDs de jugadores detectados.");
+          })().catch(error => {
+            console.error(error);
+            process.exitCode = 1;
+          });
+          NODE
