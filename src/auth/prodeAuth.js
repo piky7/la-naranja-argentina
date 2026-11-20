@@ -78,7 +78,7 @@ export async function getProdeIdToken() {
   return auth.currentUser.getIdToken();
 }
 
-// Devuelve null si no hay sesión: las votaciones anónimas de Mi Carrera siguen funcionando.
+// Devuelve null si no hay una sesión Google activa.
 export async function getOptionalProdeIdToken() {
   const { auth } = await sdk();
   await auth.authStateReady();
