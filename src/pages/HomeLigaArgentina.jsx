@@ -8,7 +8,7 @@ import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 import boxscores from "../../data/lab/labBoxscores.json";
-import "./LigaArgentina.css";
+import { isLabMatchFinished } from "../utils/labMatchStatus";\nimport "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
 
@@ -210,7 +210,7 @@ export function LabUpcomingMatchModal({match,onClose}) {
   const home={...match.homeTeam,name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
   const away={...match.awayTeam,name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
   const date=(()=>{const [y,m,d]=String(match.date).split("-").map(Number);return new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"2-digit",timeZone:"UTC"}).format(new Date(Date.UTC(y,m-1,d,12))).replace(/\./g,"").toUpperCase()})();
-  const completed=fixture.matches.filter(item=>item.status==="finished"&&item.homeScore!=null&&item.awayScore!=null);
+  const completed=fixture.matches.filter(isLabMatchFinished);
   const metrics=[["Puntos","points"],["Puntos recibidos","pointsAgainst"],["Rebotes","rebounds"],["Asistencias","assists"],["Recuperaciones","steals"],["Tapones","blocks"],["Pérdidas","turnovers"],["Faltas","fouls"],["Dobles","twoPointersPct"],["Triples","threePointersPct"],["Libres","freeThrowsPct"]];
   const aggregate=teamId=>{
     const totals={games:0,points:0,pointsAgainst:0,rebounds:0,assists:0,steals:0,blocks:0,turnovers:0,fouls:0,twoPointersMade:0,twoPointersAttempted:0,threePointersMade:0,threePointersAttempted:0,freeThrowsMade:0,freeThrowsAttempted:0};
