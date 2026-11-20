@@ -656,20 +656,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2a3rzGONK9rElcviFTj2BCYNJQVw8goI7MrWsrUiBHqCVxLUjQWV6vA==/atenas-c-vs-instituto"
   },
   {
-    "id": "2026-11-21-la-union-independiente-oliva",
-    "date": "2026-11-21",
-    "time": null,
-    "homeTeam": "la-union",
-    "awayTeam": "independiente-oliva",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o"
-  },
-  {
     "id": "2026-11-21-quimsa-ferro",
     "date": "2026-11-21",
     "time": "11:30",
     "homeTeam": "quimsa",
     "awayTeam": "ferro",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro"
+  },
+  {
+    "id": "2026-11-21-la-union-independiente-oliva",
+    "date": "2026-11-21",
+    "time": "21:30",
+    "homeTeam": "la-union",
+    "awayTeam": "independiente-oliva",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o"
   },
   {
     "id": "2026-11-22-gimnasia-boca",

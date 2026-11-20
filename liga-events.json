@@ -1481,24 +1481,6 @@
     },
     {
       "date": "2026-11-21",
-      "time": "00:00",
-      "home": {
-        "name": "LA UNION FSA",
-        "officialClubId": 1541,
-        "officialTeamId": 114763
-      },
-      "away": {
-        "name": "INDEPENDIENTE (O)",
-        "officialClubId": 2025,
-        "officialTeamId": 114628
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o"
-    },
-    {
-      "date": "2026-11-21",
       "time": "11:30",
       "home": {
         "name": "QUIMSA",
@@ -1514,6 +1496,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro"
+    },
+    {
+      "date": "2026-11-21",
+      "time": "21:30",
+      "home": {
+        "name": "LA UNION FSA",
+        "officialClubId": 1541,
+        "officialTeamId": 114763
+      },
+      "away": {
+        "name": "INDEPENDIENTE (O)",
+        "officialClubId": 2025,
+        "officialTeamId": 114628
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o"
     },
     {
       "date": "2026-11-22",
