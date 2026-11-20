@@ -83,8 +83,8 @@ const teamMetrics=[
   ["homeWins","G. LOC","Ganados de local"],["awayWins","G. VIS","Ganados de visitante"]
 ];
 const valueForTeam=(row,key,scope="overall")=>{
-  if(key==="homeWins") return scope==="away" ? row.awayWins : row.homeWins;
-  if(key==="awayWins") return scope==="home" ? row.homeWins : row.awayWins;
+  if(key==="homeWins") return row.homeWins;
+  if(key==="awayWins") return row.awayWins;
   if(key==="rebounds"||key==="assists") {
     const totalGames=scope==="home"?row.homeCollectiveGames:scope==="away"?row.awayCollectiveGames:row.collectiveGames;
     const total=scope==="home"?(key==="rebounds"?row.homeRebounds:row.homeAssists):scope==="away"?(key==="rebounds"?row.awayRebounds:row.awayAssists):row[key];
