@@ -62,7 +62,8 @@ function TeamMatchRow({match,teamId,finished,onClick}) {
 }
 
 function TeamDetail({team}) {
- const roster=rosters.teams[String(team.teamId)]||{players:[],playersCount:0};\n const [selectedMatch,setSelectedMatch]=useState(null);
+ const roster=rosters.teams[String(team.teamId)]||{players:[],playersCount:0};
+ const [selectedMatch,setSelectedMatch]=useState(null);
  const teamMatches=fixture.matches.filter(m=>Number(m.homeTeam.teamId)===Number(team.teamId)||Number(m.awayTeam.teamId)===Number(team.teamId));
  const played=teamMatches.filter(m=>m.date<=today()&&m.homeScore!=null&&m.awayScore!=null&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0));
  const upcoming=teamMatches.filter(m=>m.date>=today()&&(m.homeScore==null||m.awayScore==null||((Number(m.homeScore)===0&&Number(m.awayScore)===0)))).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")).slice(0,4);
@@ -88,6 +89,7 @@ function TeamDetail({team}) {
    </section>
    <p className="lab-team-source-note">Plantel detectado en planillas oficiales importadas. No representa necesariamente la lista de buena fe completa.</p>
   </div></section>
+  {selectedMatch&&<LabHomeBoxscore match={selectedMatch} onClose={()=>setSelectedMatch(null)}/>}
  </main>;
 }
 
