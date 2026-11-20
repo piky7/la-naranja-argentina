@@ -5,7 +5,7 @@ import "./Header.css";
 import CareerProfileAccess from "./CareerProfileAccess";
 import { House, Trophy, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
 
-function Header() {
+function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
   const [navCompact, setNavCompact] = useState(false);
   const lastScrollY = useRef(0);
   const [installPlatform, setInstallPlatform] = useState(null);
@@ -69,7 +69,7 @@ function Header() {
 
   return (
     <>
-      <header className="header">
+      <header className="header" data-tournament={selectedTournament}>
         <div className="header-container">
 
           {/* LOGO */}
@@ -91,9 +91,7 @@ function Header() {
               <strong>EN UN SOLO LUGAR.</strong>
             </div>
 
-            <div className="header-league">
-              LIGA NACIONAL
-            </div>
+            <div className="header-league" aria-hidden="true">LIGA NACIONAL</div>
           </div>
 
           {/* DECORACIÓN */}
@@ -104,6 +102,21 @@ function Header() {
           </div>
 
           <CareerProfileAccess />
+
+          <div className="tournament-selector" role="group" aria-label="Seleccionar torneo">
+            <button type="button" className={selectedTournament === "lnb" ? "tournament-option active" : "tournament-option"} aria-pressed={selectedTournament === "lnb"} onClick={() => onTournamentChange("lnb")}>
+              <img src="/tournament-logos/lnb.svg" alt="" />
+              <span className="sr-only">Liga Nacional</span>
+            </button>
+            <button type="button" className={selectedTournament === "lab" ? "tournament-option active" : "tournament-option"} aria-pressed={selectedTournament === "lab"} onClick={() => onTournamentChange("lab")}>
+              <img src="/tournament-logos/lab.svg" alt="" />
+              <span className="sr-only">Liga Argentina</span>
+            </button>
+            <button type="button" className={selectedTournament === "federal" ? "tournament-option active" : "tournament-option"} aria-pressed={selectedTournament === "federal"} onClick={() => onTournamentChange("federal")}>
+              <img src="/tournament-logos/federal.svg" alt="" />
+              <span className="sr-only">La Liga Federal</span>
+            </button>
+          </div>
 
           {/* NAVEGACIÓN ESCRITORIO */}
           <nav className="navigation">
