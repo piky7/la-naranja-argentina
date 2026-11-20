@@ -22,19 +22,3 @@
 .lna-vote-rewards-track>span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#ff8728,#ffb45c);transition:width .25s ease}
 .lna-vote-rewards small{display:block;color:#b7c5d4;font-size:10px}
 
-/* Identidad Mi carrera dentro del pronóstico */
-.lna-vote-title-group{display:flex;align-items:center;gap:8px;min-width:0}
-.lna-vote-title .lna-vote-career-label{display:inline-flex;align-items:center;white-space:nowrap;padding:3px 7px;border:1px solid rgba(255,165,75,.55);border-radius:6px;background:linear-gradient(110deg,rgba(255,139,44,.25),rgba(255,139,44,.07));box-shadow:inset 0 0 10px rgba(255,153,55,.06);color:#ffb974;font-size:9px;font-weight:800;letter-spacing:.055em}
-@media(max-width:390px){.lna-vote-title-group{gap:5px}.lna-vote-title .lna-vote-career-label{padding:3px 5px;font-size:8px}}
-
-/* Pronósticos = Mi carrera: rosa sobre la base azul LNA */
-.lna-vote{border-color:rgba(221,101,164,.58);background:radial-gradient(ellipse at 8% 0%,rgba(190,58,135,.19),transparent 62%),linear-gradient(120deg,#1d2236,#101d2b 78%);box-shadow:inset 0 0 16px rgba(216,83,153,.035)}
-.lna-vote-title strong{color:#ff9ecb}
-.lna-vote-title .lna-vote-career-label{border-color:rgba(242,127,190,.65);background:linear-gradient(110deg,rgba(222,78,151,.34),rgba(128,56,124,.12));box-shadow:inset 0 0 12px rgba(255,121,194,.1),0 0 10px rgba(224,78,154,.08);color:#ffb1d9}
-
-.lna-vote-change{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:8px}.lna-vote-change small{flex:1;min-width:150px}.lna-vote-change button{border:1px solid #ef86bc;border-radius:9px;background:rgba(239,134,188,.12);color:#f5a8d1;padding:7px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}.lna-vote-change button:disabled{opacity:.5}
-
-/* Acción secundaria discreta: no ocupa el ancho de la tarjeta */
-.lna-vote .lna-vote-change{display:flex;align-items:center;justify-content:flex-start;gap:6px;margin-top:5px;flex-wrap:wrap}
-.lna-vote .lna-vote-change small{flex:0 1 auto;min-width:0;margin:0;font-size:9px}
-.lna-vote .lna-vote-change button{display:inline-flex;flex:0 0 auto;width:auto;min-width:0;min-height:0;margin:0;padding:3px 7px;border:1px solid rgba(239,134,188,.5);border-radius:6px;background:rgba(239,134,188,.08);color:#f5a8d1;font-size:10px;line-height:1.2;font-weight:600;box-shadow:none}
