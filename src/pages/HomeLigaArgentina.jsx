@@ -11,7 +11,11 @@ import "./HomeLigaArgentina.css";
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
 }).format(new Date());
-const displayName = name => String(name || "").replace(/\s+\([^)]*\)$/i, "");
+const displayName = name => {
+  const clean = String(name || "").replace(/\\s+\\([^)]*\\)$/i, "").trim();
+  if (!clean || clean !== clean.toLocaleUpperCase("es-AR")) return clean;
+  return clean.toLocaleLowerCase("es-AR").replace(/(^|[\\s-])([\\p{L}])/gu, (_, separator, letter) => separator + letter.toLocaleUpperCase("es-AR"));
+};
 const dateFromKey = key => new Date(key + "T12:00:00Z");
 const formatDay = key => new Intl.DateTimeFormat("es-AR", {
   timeZone: "UTC", weekday: "short", day: "2-digit", month: "short"
