@@ -137,9 +137,9 @@ jobs:
                 team.samplePlayers.some(player => player?.id && player?.teamId))
                 ? "**Estructura compatible:** se detectaron las dos tablas, equipos e IDs oficiales de jugadores."
                 : "**Estructura incompleta:** revisar los detalles y el log del paso.",
-            ].join("\\n");
+            ].join("\n");
 
-            require("node:fs").writeFileSync(process.env.GITHUB_STEP_SUMMARY, md + "\\n");
+            require("node:fs").writeFileSync(process.env.GITHUB_STEP_SUMMARY, md + "\n");
 
             if (tables.length !== 2) throw new Error("Se esperaban dos tablas de estadísticas.");
             if (teams.some(team => !team.name || !team.officialTeamId || !team.playerRows)) {
