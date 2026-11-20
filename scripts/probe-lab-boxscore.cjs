@@ -74,6 +74,8 @@ async function main() {
     `- Etiquetas estadísticas en HTML: ${report.htmlHasStatLabels?"Sí":"No"}`,"",
     "## Pestañas","","```json",JSON.stringify(tabs,null,2),"```","",
     "## Tablas","","```json",JSON.stringify(tables,null,2),"```","",
+    "## Candidatos de estadísticas colectivas","","```json",JSON.stringify(aggregateCandidates,null,2),"```","",
+    "## Coincidencias en HTML","","```json",JSON.stringify(statTextMatches,null,2),"```","",
     "## Jugadores y datos oficiales","","```json",JSON.stringify(playerTables,null,2),"```","",
     "## JavaScript inline","","```json",JSON.stringify(relevantInline,null,2),"```","",
     "## JavaScript externo","","```json",JSON.stringify(external,null,2),"```"
