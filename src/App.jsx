@@ -3,14 +3,12 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-route
 
 import Header from "./components/Header";
 import TournamentComingSoon from "./components/TournamentComingSoon";
-const CareerEntryNotices = lazy(() => import("./components/CareerEntryNotices"));
 import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
 import Home from "./pages/Home";
 const loadLiga = () => import("./pages/Liga");
 const loadProde = () => import("./pages/Prode");
-const loadMiCarrera = () => import("./pages/MiCarrera");
 const Liga = lazy(loadLiga);
 const Equipos = lazy(() => import("./pages/Equipos"));
 const Equipo = lazy(() => import("./pages/Equipo"));
@@ -20,7 +18,6 @@ const Estadisticas = lazy(loadEstadisticas);
 const Privacidad = lazy(() => import("./pages/Privacidad"));
 const Acerca = lazy(() => import("./pages/Acerca"));
 const Prode = lazy(loadProde);
-const MiCarrera = lazy(loadMiCarrera);
 const Perfil = lazy(() => import("./pages/Perfil"));
 const Admin = lazy(() => import("./pages/Admin"));
 
@@ -41,7 +38,7 @@ function PreloadSections() {
     const preload = () => {
       if (!active || preloadStarted.current || document.visibilityState !== "visible") return;
       preloadStarted.current = true;
-      void Promise.allSettled([loadLiga(), loadEstadisticas(), loadProde(), loadMiCarrera()]);
+      void Promise.allSettled([loadLiga(), loadEstadisticas(), loadProde()]);
     };
     timerId = window.setTimeout(() => {
       if ("requestIdleCallback" in window) {
@@ -110,8 +107,6 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
         <Route path="/jugadores" element={<Jugadores />} />
         <Route path="/estadisticas" element={<Estadisticas />} />
         <Route path="/prode" element={null} />
-        {/* Mi Carrera y el perfil del usuario son páginas independientes. */}
-        <Route path="/mi-carrera" element={<MiCarrera />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
@@ -142,7 +137,6 @@ function App() {
       <SeoMeta />
       <SwipeNavigation />
       <Header selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
-      {selectedTournament === "lnb" && <Suspense fallback={null}><CareerEntryNotices /></Suspense>}
       <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
       <Footer />
     </BrowserRouter>
