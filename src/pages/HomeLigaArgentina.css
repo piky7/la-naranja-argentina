@@ -269,3 +269,68 @@
   line-height: 1;
   letter-spacing: .8px;
 }
+
+/* Popup de próximos partidos LAB: reutiliza la identidad visual del modal LNB. */
+.lab-upcoming-match{
+  border-color:#e9852c;
+  background:#0b111a;
+  box-shadow:0 20px 65px rgba(0,0,0,.62),0 0 0 1px rgba(255,145,48,.12);
+}
+.lab-upcoming-match .match-modal-header{
+  background:linear-gradient(180deg,#142235 0%,#0d1724 100%);
+  border-bottom:1px solid rgba(255,145,48,.48);
+}
+.lab-upcoming-match .match-modal-label{color:#ff963d}
+.lab-upcoming-match .match-modal-score strong{color:#ff922b}
+.lab-upcoming-match .match-modal-team img{width:clamp(48px,10vw,76px);height:clamp(48px,10vw,76px);object-fit:contain}
+.lab-upcoming-match .lab-upcoming-venue{
+  display:flex;justify-content:center;padding:8px 14px;color:#aebccc;
+  background:#111d2a;border-bottom:1px solid #27394b;font-size:11px;font-weight:750;
+}
+.lab-upcoming-match .lab-upcoming-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+.lab-upcoming-match .lab-upcoming-comparison{padding:10px 12px 14px;background:#0b111a}
+.lab-upcoming-match .upcoming-team-comparison{
+  margin:0;padding:12px;background:linear-gradient(110deg,rgba(32,105,76,.24),#0d1b2a 48%,rgba(132,39,55,.24));
+  border:1px solid #df812d;border-radius:12px;
+}
+.lab-upcoming-match .upcoming-comparison-label{margin-bottom:10px;color:#ff963d}
+.lab-upcoming-match .lab-upcoming-team-head{
+  display:grid;grid-template-columns:minmax(0,1fr) 35px minmax(0,1fr);align-items:center;gap:6px;
+  padding:4px 0 8px;border-bottom:1px solid #314354;
+}
+.lab-upcoming-match .lab-upcoming-team-head>span{display:flex;align-items:center;gap:6px;min-width:0;font-size:11px;font-weight:850}
+.lab-upcoming-match .lab-upcoming-team-head>span:last-child{justify-content:flex-end;text-align:right}
+.lab-upcoming-match .lab-upcoming-team-head img{width:27px;height:27px;object-fit:contain;flex:none}
+.lab-upcoming-match .lab-upcoming-team-head>b{color:#ff963d;text-align:center;font-size:10px}
+.lab-upcoming-match .upcoming-collective-source{margin:8px 0;color:#9eacbb;font-size:10px;text-align:center}
+.lab-upcoming-match .upcoming-comparison-row{
+  display:grid;grid-template-columns:43px minmax(30px,1fr) 82px minmax(30px,1fr) 43px;
+  gap:6px;padding:7px 0;align-items:center;border-bottom:1px solid rgba(255,255,255,.07);
+}
+.lab-upcoming-match .upcoming-comparison-row strong{font-size:12px;color:#e9eef5;text-align:center;font-variant-numeric:tabular-nums}
+.lab-upcoming-match .upcoming-comparison-row .upcoming-ranked-label{font-size:10px;color:#c2ccd7;text-align:center;font-weight:800}
+.lab-upcoming-match .upcoming-comparison-track{height:6px;border-radius:10px;background:#263748;overflow:hidden}
+.lab-upcoming-match .upcoming-comparison-track span{display:block;height:100%;border-radius:inherit;background:#8797a8}
+.lab-upcoming-match .upcoming-comparison-track span.collective-better-bar{background:#ff922b}
+.lab-upcoming-match .upcoming-comparison-row strong.collective-better{color:#ff9b37}
+.lab-upcoming-match .lab-upcoming-players{padding:12px;background:#0b111a}
+.lab-upcoming-match .match-highlighted-title h3{color:#ff963d}
+.lab-upcoming-match .upcoming-player-category{border-color:#df812d;background:#091521}
+.lab-upcoming-match .upcoming-player-category-title{background:#2a2119;color:#ff963d}
+.lab-upcoming-match .upcoming-player-entry{cursor:default}
+.lab-upcoming-match .upcoming-player-entry>strong{font-size:12px;color:#e9eef5;white-space:nowrap}
+.lab-upcoming-match .upcoming-player-meter span{background:#ff922b}
+.lab-upcoming-match .match-modal-footer{border-top:1px solid #28394a}
+@media(max-width:600px){
+ .lab-upcoming-match{width:95vw;max-height:85dvh;border-radius:12px}
+ .lab-upcoming-match .upcoming-comparison-row{grid-template-columns:36px minmax(20px,1fr) 70px minmax(20px,1fr) 36px;gap:4px;padding:6px 0}
+ .lab-upcoming-match .upcoming-comparison-row strong{font-size:10px}
+ .lab-upcoming-match .upcoming-comparison-row .upcoming-ranked-label{font-size:9px}
+ .lab-upcoming-match .upcoming-comparison-track{height:4px}
+ .lab-upcoming-match .upcoming-player-versus{grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);gap:3px}
+ .lab-upcoming-match .upcoming-player-entry{gap:4px;padding:6px 4px}
+ .lab-upcoming-match .upcoming-player-crest{width:21px;height:21px;flex-basis:21px}
+ .lab-upcoming-match .upcoming-player-name{font-size:9px}
+ .lab-upcoming-match .upcoming-player-entry>strong{font-size:10px}
+ .lab-upcoming-match .upcoming-player-center-icon{font-size:15px}
+}
