@@ -18,7 +18,7 @@ function hasCompleteBoxscore(box) {
 }
 function pollDecision(event, schedule, requestedMode = "", now = new Date()) {
   if (fixture.competition !== "Liga Argentina" || !Array.isArray(fixture.matches)) throw new Error("Fixture LAB inválido");
-  if (event === "workflow_dispatch" && requestedMode === "backfill") return {run:true,mode:"backfill"};
+  if (["workflow_dispatch","push"].includes(event) && requestedMode === "backfill") return {run:true,mode:"backfill"};
   // Los pushes de código y los ciclos automáticos nunca deben disparar un backfill histórico.
   if (event === "push") return {run:true,mode:"recent"};
   if (event === "schedule" && schedule !== "*/10 * * * *") return {run:true,mode:"full"};
