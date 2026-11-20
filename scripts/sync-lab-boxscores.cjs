@@ -3,7 +3,8 @@ const path = require("node:path");
 const cheerio = require("cheerio");
 const fixture = require("../data/lab/labSchedule.json");
 
-const TARGET = process.argv.find(arg => arg.startsWith("--match="))?.split("=")[1];
+const TARGET_ARG = process.argv.find(arg => arg.startsWith("--match="));
+const TARGET = TARGET_ARG ? TARGET_ARG.slice("--match=".length) : null;
 const OUTPUT = path.join(__dirname, "../data/lab/labBoxscores.json");
 const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari/537.36";
 
