@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-20T18:45:52.193Z",
+  "importedAt": "2026-11-20T18:59:06.066Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3579,10 +3579,11 @@
       },
       "homeScore": 86,
       "awayScore": 68,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==/river-vs-regatas-sn",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T18:59:04.734Z"
     },
     {
       "id": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
@@ -3609,10 +3610,11 @@
       },
       "homeScore": 72,
       "awayScore": 81,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==/quilmes-mdp-vs-racing-a",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T18:59:06.031Z"
     },
     {
       "id": "v26yIXFWCrri1DVzUUPGyDS-eomIfwTPmxJLS34TC-QmtUtdCjnqAQqw==",
@@ -16454,5 +16456,7 @@
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2zi4LOtluk6amWgrbE_i3IUBzIuee5bRoGMT3Fz9a-MotK0CYLhuHAA==/river-vs-dep-viedma",
       "source": "Liga Nacional oficial"
     }
-  ]
+  ],
+  "finished": 2,
+  "pending": 537
 }
