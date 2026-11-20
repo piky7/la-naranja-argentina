@@ -10,7 +10,7 @@ import rosters from "../../data/lab/labRosters.json";
 import boxscores from "../../data/lab/labBoxscores.json";
 import { isLabMatchFinished } from "../utils/labMatchStatus";
 import { LAB_CONFERENCES, labMatchColor, formatLabLiveRemaining } from "../utils/labPresentation";
-export { LAB_TEAM_COLORS } from "../utils/labPresentation";
+export { LAB_TEAM_COLORS, labMatchColor } from "../utils/labPresentation";
 import "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
