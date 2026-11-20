@@ -11182,3 +11182,40 @@
 .home-team-modal-v2 .team-v2-player-category h4{padding:5px 1px}
 .home-team-modal-v2 .team-v2-player-category button{padding:6px 1px}
 }
+
+/* LAB: nombres legibles en formato título y sin recortes en tarjetas móviles. */
+.lab-home-page .fixture-team-name {
+  min-width: 0;
+  flex: 1 1 0;
+}
+.lab-home-page .fixture-team-name > span {
+  display: block;
+  min-width: 0;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-transform: none !important;
+  font-size: clamp(10px, 2.8vw, 13px);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+.lab-home-page .home-fixture {
+  grid-template-columns: minmax(0, 1fr) clamp(62px, 18vw, 76px) minmax(0, 1fr);
+  gap: 6px;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+.lab-home-page .fixture-team {
+  min-width: 0;
+  gap: 5px;
+}
+.lab-home-page .fixture-team img {
+  flex: 0 0 34px;
+}
+.lab-home-page .fixture-home .fixture-team-name { text-align: right; }
+.lab-home-page .fixture-away .fixture-team-name { text-align: left; }
+@media (max-width: 600px) {
+  .lab-home-page .home-fixture { min-height: 86px; }
+  .lab-home-page .fixture-team-name > span { font-size: clamp(10px, 2.8vw, 12px); }
+}
