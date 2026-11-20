@@ -196,6 +196,7 @@ const [homeStatsTab, setHomeStatsTab] = useState("posiciones");
       ? getUpcomingCollectives()
       : EMPTY_UPCOMING_COLLECTIVES;
 const { liveMatches, date: liveDate } = useLiveSnapshot();
+const lnbLiveMatches = lnbLiveMatches.filter((liveMatch) => liveMatch.competition !== "LAB");
 
 
   // El reloj oficial indica los minutos restantes del cuarto.
@@ -732,7 +733,7 @@ const getPlayerLastMatches = (player) => {
 
   // El panel LIVE solo retira partidos finalizados cuando el resultado
   // y la planilla de ambos equipos ya están disponibles en el Home.
-  const visibleLiveMatches = liveMatches.filter((liveMatch) => {
+  const visibleLiveMatches = lnbLiveMatches.filter((liveMatch) => {
   // Los partidos en juego siempre se muestran.
   if (liveMatch.status !== "finished") {
     return true;
@@ -839,7 +840,7 @@ const getPlayerLastMatches = (player) => {
 // Incorporar resultados LIVE finalizados que todavía
 // no fueron publicados en matchResults.js.
 const standingsMatches = useMemo(() => {
-  const finalLiveByMatch = indexFinishedLiveMatches({ date: liveDate, liveMatches });
+  const finalLiveByMatch = indexFinishedLiveMatches({ date: liveDate, liveMatches: lnbLiveMatches });
   return matches.map((match) => {
     // Los resultados publicados mantienen la prioridad sobre el LIVE.
     if (isMatchFinished(match)) return match;
@@ -851,7 +852,7 @@ const standingsMatches = useMemo(() => {
       status: "finished",
     } : match;
   });
-}, [liveMatches, liveDate]);
+}, [lnbLiveMatches, liveDate]);
   const standings = useMemo(() => {
     const finished = standingsMatches.filter(match => isMatchFinished(match));
     const byTeam = new Map(teams.map(team => [team.id, []]));
@@ -985,7 +986,7 @@ const standingsMatches = useMemo(() => {
 });
 
 
-  }, [liveMatches, liveDate]);
+  }, [lnbLiveMatches, liveDate]);
 
   const selectedDayMatches = useMemo(() => {
     return matches
@@ -1384,7 +1385,7 @@ const standingsMatches = useMemo(() => {
                       : null;
 
                     const liveMatch = liveDate === match.date
-  ? liveMatches.find(
+  ? lnbLiveMatches.find(
       (live) =>
         live.homeTeam === match.homeTeam &&
         live.awayTeam === match.awayTeam
