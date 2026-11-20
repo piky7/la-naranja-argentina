@@ -158,3 +158,16 @@
  .lab-league-page .results-card,.lab-league-page .upcoming-card { border-radius:12px; }
  .lab-league-page .result-teams { min-height:62px; }
 }
+
+/* La tabla LAB usa la misma estructura responsive del Home de Liga Argentina. */
+.lab-league-page.lab-home-page .standings-table-desktop{display:block!important;width:100%;overflow:hidden}
+.lab-league-page.lab-home-page .standings-table-header,
+.lab-league-page.lab-home-page .standings-table-desktop .home-standing-row{
+ display:grid!important;grid-template-columns:32px minmax(0,1fr) 34px 34px;align-items:center;column-gap:7px;padding:0 10px;
+}
+.lab-league-page.lab-home-page .standings-table-header{min-height:38px}
+.lab-league-page.lab-home-page .standings-table-desktop .home-standing-row{min-height:49px;border-bottom:1px solid rgba(255,255,255,.08)}
+.lab-league-page.lab-home-page .standings-table-desktop .home-standing-team{display:flex;align-items:center;min-width:0;gap:8px}
+.lab-league-page.lab-home-page .standings-table-desktop .home-standing-team span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lab-league-page.lab-home-page .standings-table-desktop .home-standing-team img{width:27px;height:27px;object-fit:contain;flex-shrink:0}
+.lab-league-page.lab-home-page .standings-table-desktop .home-standing-row>strong{text-align:center}
