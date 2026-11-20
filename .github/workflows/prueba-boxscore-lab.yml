@@ -103,6 +103,44 @@ jobs:
 
             console.log(JSON.stringify(result, null, 2));
 
+            const md = [
+              "# Informe de inspección del boxscore LAB",
+              "",
+              `- **URL:** [Abrir boxscore](${url})`,
+              `- **HTTP:** ${response.status}`,
+              `- **Título:** ${result.title || "No detectado"}`,
+              `- **Estado del partido:** ${result.statusText || "No detectado"}`,
+              `- **Tablas de estadísticas:** ${result.statsTables}`,
+              `- **Comparativa:** ${result.comparisonTable ? "Detectada" : "No detectada"}`,
+              `- **ID de partido en HTML:** ${result.hasMatchId ? "Detectado" : "No detectado"}`,
+              `- **Tamaño HTML:** ${result.htmlBytes} bytes`,
+              "",
+              "## Equipos y jugadores",
+              "",
+              ...result.teams.flatMap((team, index) => [
+                `### ${index + 1}. ${team.name || "Equipo sin nombre"}`,
+                `- ID de club: ${team.officialClubId ?? "No detectado"}`,
+                `- ID oficial de equipo: ${team.officialTeamId ?? "No detectado"}`,
+                `- Filas de jugadores: ${team.playerRows}`,
+                "- Muestra de jugadores:",
+                ...(team.samplePlayers.length
+                  ? team.samplePlayers.map(player => player
+                    ? `  - ${player.name || "Nombre no detectado"} — jugador ID: ${player.id ?? "No detectado"}, equipo ID: ${player.teamId ?? "No detectado"}`
+                    : "  - No se pudo interpretar la fila")
+                  : ["  - Sin filas de muestra"]),
+                "",
+              ]),
+              "## Resultado",
+              "",
+              tables.length === 2 &&
+              teams.every(team => team.name && team.officialTeamId && team.playerRows &&
+                team.samplePlayers.some(player => player?.id && player?.teamId))
+                ? "**Estructura compatible:** se detectaron las dos tablas, equipos e IDs oficiales de jugadores."
+                : "**Estructura incompleta:** revisar los detalles y el log del paso.",
+            ].join("\\n");
+
+            require("node:fs").writeFileSync(process.env.GITHUB_STEP_SUMMARY, md + "\\n");
+
             if (tables.length !== 2) throw new Error("Se esperaban dos tablas de estadísticas.");
             if (teams.some(team => !team.name || !team.officialTeamId || !team.playerRows)) {
               throw new Error("No se pudieron identificar ambos equipos y sus jugadores.");
