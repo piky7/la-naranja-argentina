@@ -312,3 +312,74 @@
     font-size: 9px;
   }
 }
+
+/* Identidad visual LAB: celeste del logotipo para bordes y divisores.
+   Los fondos, textos y botones naranjas de acción se mantienen intactos. */
+.lab-page,
+.lab-home-page,
+.lab-league-page,
+.lab-team-detail,
+.lab-team-directory {
+  --lab-accent: #43b9d5;
+}
+.lab-page .lab-tabs button.active { border-color: var(--lab-accent); }
+.lab-page .lab-match-card:hover,
+.lab-page .lab-team-card:hover,
+.lab-page .lab-team-directory-row:hover,
+.lab-page .lab-team-detail .lab-team-result-clickable:hover {
+  border-color: var(--lab-accent);
+}
+.lab-page .lab-team-modal,
+.lab-page .lab-table-wrap,
+.lab-page .lab-stat-ranking,
+.lab-page .lab-empty,
+.lab-page .lab-standings-note,
+.lab-page .lab-match-modal {
+  border-color: var(--lab-accent);
+}
+.lab-page .lab-native-boxscore,
+.lab-page .lab-native-table,
+.lab-page .lab-native-mvp,
+.lab-page .lab-native-tabs button,
+.lab-page .lab-native-team-tabs button,
+.lab-page .lab-roster-toolbar button {
+  border-color: color-mix(in srgb, var(--lab-accent) 72%, #183247);
+}
+.lab-page .lab-native-head,
+.lab-page .lab-team-modal,
+.lab-page .lab-match-modal {
+  --lab-accent: #43b9d5;
+}
+.lab-page .lab-native-head { border-bottom-color: var(--lab-accent); }
+.lab-page .lab-native-tabs button.active,
+.lab-page .lab-native-team-tabs button.active {
+  border-color: var(--lab-accent);
+}
+.lab-page .lab-team-directory-row:hover,
+.lab-page .lab-team-result,
+.lab-page .lab-table td,
+.lab-page .lab-match-venue {
+  border-color: color-mix(in srgb, var(--lab-accent) 38%, transparent);
+}
+.lab-player-modal {
+  border-color: var(--lab-accent, #43b9d5) !important;
+}
+.lab-player-modal .home-player-modal-header,
+.lab-player-modal .home-player-modal-footer {
+  border-color: color-mix(in srgb, var(--lab-accent, #43b9d5) 65%, #173044);
+}
+.lab-player-modal .lna-player-modal-tabs,
+.lab-player-modal .lna-player-match-panel,
+.lab-player-modal .home-player-modal-season,
+.lab-player-modal .home-player-modal-details > div,
+.lab-player-modal .lna-player-radar-section,
+.lab-player-modal .lna-player-season-expanded {
+  border-color: color-mix(in srgb, var(--lab-accent, #43b9d5) 70%, #173044);
+}
+.lab-player-modal .lna-player-modal-tabs button {
+  border-color: color-mix(in srgb, var(--lab-accent, #43b9d5) 55%, #173044);
+}
+.lab-player-modal .lna-player-modal-tabs button.active,
+.lab-player-modal .lna-player-modal-tabs button[aria-selected="true"] {
+  border-color: var(--lab-accent, #43b9d5);
+}
