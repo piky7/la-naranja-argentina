@@ -5,8 +5,8 @@ import boxscores from "../../data/lab/labBoxscores.json";
 import { labMatchColor, labCrest } from "./HomeLigaArgentina";
 import "./LigaArgentina.css";
 import "./Estadisticas.css";
-import "./TeamRankings.css";
-import "./TripleRankings.css";
+import "../components/TeamRankings.css";
+import "../components/TripleRankings.css";
 import "./LigaArgentinaEstadisticas.css";
 
 const number = value => Number.isFinite(Number(value)) ? Number(value) : 0;
