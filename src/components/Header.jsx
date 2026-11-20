@@ -109,7 +109,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
               <span className="sr-only">Liga Nacional</span>
             </button>
             <button type="button" className={selectedTournament === "lab" ? "tournament-option active" : "tournament-option"} aria-pressed={selectedTournament === "lab"} onClick={() => onTournamentChange("lab")}>
-              <img src="/tournament-logos/lab.svg" alt="" />
+              <img src="/tournament-logos/lab-selector.svg" alt="" />
               <span className="sr-only">Liga Argentina</span>
             </button>
             <button type="button" className={selectedTournament === "federal" ? "tournament-option active" : "tournament-option"} aria-pressed={selectedTournament === "federal"} onClick={() => onTournamentChange("federal")}>
