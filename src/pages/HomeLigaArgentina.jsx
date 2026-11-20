@@ -54,6 +54,11 @@ const labMatchColor = team => LAB_TEAM_COLORS[team?.slug] || "#315a7b";
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
 }).format(new Date());
+const displayPersonName = name => {
+  const clean = String(name || "").trim();
+  if (!clean) return clean;
+  return clean.toLocaleLowerCase("es-AR").replace(/(^|[\\s-])([\\p{L}])/gu, (_, separator, letter) => separator + letter.toLocaleUpperCase("es-AR"));
+};
 const displayName = name => {
   const clean = String(name || "").replace(/\s+\([^)]*\)$/i, "").trim();
   if (!clean) return clean;
@@ -91,7 +96,7 @@ function LabHomeBoxscore({match, onClose}) {
   const renderTeamRows = (teamPlayers, teamId) => teamPlayers.filter(hasPlayed).slice()
     .sort((a,b)=>Number(b.points||0)-Number(a.points||0))
     .map(player=><button type="button" className="match-stat-player" key={player.id}>
-      <strong>{player.number != null && /^\d{1,3}$/.test(String(player.number).trim()) ? "#"+player.number+" · " : ""}{player.name}</strong>
+      <strong>{player.number != null && /^\d{1,3}$/.test(String(player.number).trim()) ? "#"+player.number+" · " : ""}{displayPersonName(player.name)}</strong>
       <span>{formatStat(player.points)}</span><span>{formatStat(player.rebounds)}</span>
       <span>{formatStat(player.assists)}</span><span>{player.minutes || "—"}</span>
       <span>{formatStat(player.valuation)}</span>
@@ -129,7 +134,7 @@ function LabHomeBoxscore({match, onClose}) {
             <div className="match-mvp-card" style={{"--mvp-team-color":labMatchColor(mvpTeam)}}>
               <span className="match-mvp-heading">♛ JUGADOR DEL PARTIDO</span>
               <span className="match-mvp-body">
-                <span className="match-mvp-identity"><img src={mvpTeam.logo} alt=""/><span className="match-mvp-name"><strong>{mvp.name}</strong><small>{mvpTeam.name}</small></span></span>
+                <span className="match-mvp-identity"><img src={mvpTeam.logo} alt=""/><span className="match-mvp-name"><strong>{displayPersonName(mvp.name)}</strong><small>{mvpTeam.name}</small></span></span>
                 <span className="match-mvp-numbers">
                   <span><strong>{formatStat(mvp.points)}</strong><small>PTS</small></span>
                   <span><strong>{formatStat(mvp.rebounds)}</strong><small>REB</small></span>
