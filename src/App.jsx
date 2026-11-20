@@ -104,6 +104,40 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
   if (selectedTournament === "lab" && location.pathname === "/estadisticas") {
     return <Suspense fallback={<RouteLoading />}><LigaArgentinaEstadisticas /></Suspense>;
   }
+  if (selectedTournament === "lab") {
+    return (
+      <>
+        <div key={location.key} className={animation}>
+          <Suspense fallback={<RouteLoading />}>
+            <Routes location={location}>
+              <Route path="/" element={<Home />} />
+              <Route path="/liga" element={<LigaArgentina />} />
+              <Route path="/equipos" element={<LigaArgentinaEquipos />} />
+              <Route path="/equipos/:teamId" element={<LigaArgentinaEquipos />} />
+              <Route path="/jugadores" element={<Navigate to="/estadisticas" replace />} />
+              <Route path="/estadisticas" element={<LigaArgentinaEstadisticas />} />
+              <Route path="/prode" element={null} />
+              <Route path="/perfil" element={<Perfil />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
+                const params = new URLSearchParams(location.search);
+                const token = params.get("token") || params.get("invite");
+                return token && /^[a-f0-9]{64}$/i.test(token) ? "?invite=" + encodeURIComponent(token) : "";
+              })()} replace />} />
+              <Route path="/privacidad" element={<Privacidad />} />
+              <Route path="/acerca" element={<Acerca />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </div>
+        {prodeVisited && <div style={{ display: isProde ? undefined : "none" }} aria-hidden={!isProde}>
+          <Suspense fallback={isProde ? <RouteLoading /> : null}>
+            <Prode />
+          </Suspense>
+        </div>}
+      </>
+    );
+  }
   if (selectedTournament !== "lnb") {
     return <TournamentComingSoon tournament={selectedTournament} onBack={() => onTournamentChange("lnb")} />;
   }
