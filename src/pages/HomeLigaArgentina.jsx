@@ -8,6 +8,10 @@ import "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
 
+const labCrest = team => {
+  const id = team?.teamId ?? String(team?.crestUrl || "").match(/\\/(\\d+)\\/?$/)?.[1];
+  return id ? `/lab-team-logos/${id}.webp` : "";
+};
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
 }).format(new Date());
@@ -30,7 +34,7 @@ function LabHomeBoxscore({match}) {
   const rows = box.players.filter(player => player.teamId === team.teamId).sort((a,b) => b.points-a.points);
   const mvp = box.players.slice().sort((a,b) => b.valuation-a.valuation || b.points-a.points)[0];
   const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? match.homeTeam : match.awayTeam);
-  const crest = team => team.crestUrl || "";
+  const crest = team => labCrest(team);
   const teamLabel = name => String(name || "").replace(/ \((MDP|SF|CC|LR|T|VT|J)\)/g, "");
   const date = new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"}).format(new Date(match.date+"T12:00:00Z")).replace(/\./g,"").toUpperCase();
   return <div className="lab-native-boxscore">
@@ -78,7 +82,7 @@ function HomeLigaArgentina() {
       .sort((a,b) => (a.time || "").localeCompare(b.time || ""));
     const allDates = [...new Set(fixture.matches.map(match => match.date).filter(Boolean))].sort();
     const scorers = Object.values(rosters.teams).flatMap(team => team.players.map(player => ({
-      ...player, teamName: team.name, crestUrl: team.crestUrl
+      ...player, teamName: team.name, crestUrl: labCrest(team)
     }))).filter(player => player.gamesPlayed > 0)
       .sort((a,b) => (b.averages?.points || 0) - (a.averages?.points || 0) || a.name.localeCompare(b.name, "es"))
       .slice(0,10);
@@ -106,7 +110,7 @@ function HomeLigaArgentina() {
           <span>{displayName(match.homeTeam.name)}</span>
           <small><b className="fixture-rank">{homeIndex + 1}°</b> <span className="fixture-record-separator">•</span> <b className="fixture-record">{home?.wins || 0}-{home?.losses || 0}</b></small>
         </div>
-        <img src={match.homeTeam.crestUrl} alt="" loading="lazy"/>
+        <img src={labCrest(match.homeTeam)} alt="" loading="lazy"/>
       </div>
       <div className="fixture-center">
         {hasScore ? <>
@@ -119,7 +123,7 @@ function HomeLigaArgentina() {
         </> : <strong className="fixture-time">{match.time || "A CONFIRMAR"}</strong>}
       </div>
       <div className="fixture-team fixture-away">
-        <img src={match.awayTeam.crestUrl} alt="" loading="lazy"/>
+        <img src={labCrest(match.awayTeam)} alt="" loading="lazy"/>
         <div className="fixture-team-name">
           <span>{displayName(match.awayTeam.name)}</span>
           <small><b className="fixture-rank">{awayIndex + 1}°</b> <span className="fixture-record-separator">•</span> <b className="fixture-record">{away?.wins || 0}-{away?.losses || 0}</b></small>
@@ -135,7 +139,7 @@ function HomeLigaArgentina() {
     const position = offset + index + 1;
     return <div key={team.teamId} className="home-standing-row">
       <span className={`standing-position ${positionClass(position-1)}`}>{position}</span>
-      <span className="home-standing-team"><img src={team.crestUrl} alt="" loading="lazy"/><span>{displayName(team.name)}</span></span>
+      <span className="home-standing-team"><img src={labCrest(team)} alt="" loading="lazy"/><span>{displayName(team.name)}</span></span>
       <strong>{team.wins}</strong><strong>{team.losses}</strong>
     </div>;
   });
