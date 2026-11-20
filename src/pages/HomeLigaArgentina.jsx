@@ -283,7 +283,7 @@ function HomeLigaArgentina() {
   }, [data.standings, conferenceTab]);
 
   const positionClass = index => index < 4 ? "standing-position-direct" :
-    index < 12 ? "standing-position-reclasificacion" : index >= conferenceTeams.length - 2 ? "standing-position-descenso" : "";
+    index < 12 ? "standing-position-reclasificacion" : index === conferenceTeams.length - 1 ? "standing-position-descenso" : "";
 
   const StandingRows = ({teams, offset=0}) => teams.map((team,index) => {
     const position = offset + index + 1;
