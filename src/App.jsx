@@ -9,6 +9,8 @@ import SwipeNavigation from "./components/SwipeNavigation";
 import Home from "./pages/Home";
 const loadLiga = () => import("./pages/Liga");
 const loadLigaArgentina = () => import("./pages/LigaArgentina");
+const LigaArgentinaEquipos = lazy(() => import("./pages/LigaArgentinaEquipos"));
+const LigaArgentinaEstadisticas = lazy(() => import("./pages/LigaArgentinaEstadisticas"));
 const LigaArgentina = lazy(loadLigaArgentina);
 const loadProde = () => import("./pages/Prode");
 const Liga = lazy(loadLiga);
@@ -93,8 +95,14 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
       direction === "right" ? "page-enter-from-left" : "");
   }, [location.key, location.state]);
 
-  if (selectedTournament === "lab") {
+  if (selectedTournament === "lab" && location.pathname === "/liga") {
     return <Suspense fallback={<RouteLoading />}><LigaArgentina /></Suspense>;
+  }
+  if (selectedTournament === "lab" && location.pathname === "/equipos") {
+    return <Suspense fallback={<RouteLoading />}><LigaArgentinaEquipos /></Suspense>;
+  }
+  if (selectedTournament === "lab" && location.pathname === "/estadisticas") {
+    return <Suspense fallback={<RouteLoading />}><LigaArgentinaEstadisticas /></Suspense>;
   }
   if (selectedTournament !== "lnb") {
     return <TournamentComingSoon tournament={selectedTournament} onBack={() => onTournamentChange("lnb")} />;
