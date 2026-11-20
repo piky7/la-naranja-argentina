@@ -155,3 +155,70 @@
  .lab-league-page .results-card,.lab-league-page .upcoming-card { border-radius:12px; }
  .lab-league-page .result-teams { min-height:62px; }
 }
+
+
+/* Directorio y fichas de equipos LAB: composición visual basada en LNB. */
+.lab-team-directory .lab-content{padding-top:28px}
+.lab-team-directory .lab-section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+.lab-team-directory .lab-section-heading>div>span{display:block;color:#f49a32;font-size:10px;font-weight:900;letter-spacing:1.3px}
+.lab-team-directory .lab-section-heading h2{margin:5px 0 0;color:#f4f6fa;font-size:clamp(24px,4vw,34px);font-weight:900}
+.lab-team-directory .lab-section-heading input{width:min(100%,280px);height:44px;padding:0 14px;border:1px solid #304257;border-radius:10px;background:#101e2d;color:#fff;font:inherit}
+.lab-team-directory-list{display:flex;flex-direction:column;gap:8px}
+.lab-team-directory-row{display:grid;grid-template-columns:58px minmax(0,1fr) 34px 30px;align-items:center;gap:14px;min-height:82px;padding:10px 15px;border:1px solid #2b4055;border-radius:12px;background:linear-gradient(110deg,#10243a,#0d1b2a);color:#f4f6fa;text-decoration:none;transition:border-color .18s ease,background .18s ease}
+.lab-team-directory-row:nth-child(4n+2){background:linear-gradient(110deg,#102a2a,#0d1b2a)}
+.lab-team-directory-row:nth-child(4n+3){background:linear-gradient(110deg,#252238,#0d1b2a)}
+.lab-team-directory-row:hover{border-color:#f49a32;background:#15283a}
+.lab-team-directory-row>img{width:52px;height:52px;object-fit:contain}
+.lab-team-directory-info{display:flex;flex-direction:column;gap:4px;min-width:0}
+.lab-team-directory-info strong{overflow:hidden;font-size:14px;font-weight:850;text-overflow:ellipsis;white-space:nowrap}
+.lab-team-directory-info small{color:#9eafc1;font-size:11px}
+.lab-team-directory-code{color:#9eafc1;font-size:11px;font-weight:900;text-align:right}
+.lab-team-directory-arrow{color:#f49a32;font-size:25px;text-align:right}
+.lab-team-detail .team-header{background:linear-gradient(115deg,#0e1d2c,#0a1521);border-bottom:1px solid #e27c1d}
+.lab-team-detail .team-content{padding-top:26px}
+.lab-team-detail .team-header .page-container{max-width:1100px}
+.lab-team-detail .team-header-info h1{font-size:clamp(23px,4vw,34px)}
+.lab-team-detail .team-season-stats{margin-bottom:24px}
+.lab-team-agenda-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:28px}
+.lab-team-agenda-grid .team-section{min-width:0}
+.lab-team-detail .section-heading-team h2{font-size:clamp(18px,2.5vw,23px)}
+.lab-team-detail .team-match-row{grid-template-columns:76px minmax(0,1fr) 65px;gap:8px}
+.lab-team-detail .team-match-side strong{font-size:10px}
+.lab-team-detail .team-match-side{gap:5px}
+.lab-team-detail .team-match-logo{width:30px;height:30px}
+.lab-team-detail .team-result-center{white-space:nowrap;font-size:11px;font-weight:900;text-align:center}
+.lab-team-detail .lab-team-roster-section{margin-top:8px}
+.lab-team-detail .lab-team-roster-table{overflow-x:auto}
+.lab-team-detail .lab-team-roster-table .team-roster-head,
+.lab-team-detail .lab-team-roster-table .team-roster-row{grid-template-columns:minmax(160px,1fr) 34px 42px 42px 42px 55px 42px;min-width:510px}
+.lab-team-detail .lab-team-roster-table .team-roster-row{display:grid;cursor:default}
+.lab-team-detail .lab-team-roster-table .team-roster-name{display:flex;align-items:center;gap:8px;min-width:0}
+.lab-team-detail .lab-team-roster-table .team-roster-name>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lab-team-detail .lab-team-roster-table .team-roster-crest{width:25px;height:25px;object-fit:contain;flex-shrink:0}
+.lab-team-source-note{margin-top:10px;color:#9eafc1;font-size:10px;line-height:1.5}
+@media(max-width:768px){
+ .lab-team-directory .lab-content{padding:22px 0 44px}
+ .lab-team-directory .lab-section-heading{align-items:stretch;flex-direction:column;gap:12px}
+ .lab-team-directory .lab-section-heading input{width:100%;height:44px}
+ .lab-team-directory-list{gap:7px}
+ .lab-team-directory-row{grid-template-columns:54px minmax(0,1fr) 25px 24px;gap:10px;min-height:76px;padding:9px 12px}
+ .lab-team-directory-row>img{width:48px;height:48px}
+ .lab-team-directory-info strong{font-size:13px}
+ .lab-team-detail .team-content{padding-top:18px}
+ .lab-team-detail .team-header{padding:24px 0 26px}
+ .lab-team-detail .team-header-content{gap:14px}
+ .lab-team-detail .team-main-logo{width:76px;height:76px}
+ .lab-team-detail .team-main-logo img{width:62px;height:62px}
+ .lab-team-agenda-grid{grid-template-columns:1fr;gap:22px}
+ .lab-team-detail .team-match-row{grid-template-columns:62px minmax(0,1fr) 52px;gap:5px;padding:8px 7px;min-height:62px}
+ .lab-team-detail .team-match-logo{width:23px;height:23px}
+ .lab-team-detail .team-match-side{gap:3px}
+ .lab-team-detail .team-match-side strong{font-size:8px}
+ .lab-team-detail .team-match-date-modern strong{font-size:10px}
+ .lab-team-detail .team-match-time-modern{font-size:8px}
+ .lab-team-detail .team-season-stats{padding:12px}
+ .lab-team-detail .team-season-stats-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .lab-team-detail .team-season-stat{min-height:63px;padding:9px 4px}
+ .lab-team-detail .team-season-stat strong{font-size:16px}
+ .lab-team-detail .team-season-stat span{font-size:9px}
+}
