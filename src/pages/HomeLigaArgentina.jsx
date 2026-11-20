@@ -99,7 +99,7 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
     <p>Datos extraídos directamente de la comparativa oficial publicada en el boxscore de Liga Argentina.</p>
   </section>;
 }
-function LabHomeBoxscore({match, onClose}) {
+export function LabHomeBoxscore({match, onClose}) {
   const box = boxscores[match.id];
   const players = box?.players || [];
   const homeTeam = { ...match.homeTeam, id: String(match.homeTeam.teamId), name: displayName(match.homeTeam.name), shortName: displayName(match.homeTeam.name), logo: labCrest(match.homeTeam) };
