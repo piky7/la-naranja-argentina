@@ -73,7 +73,7 @@ const displayName = name => {
 };
 const dateFromKey = key => new Date(key + "T12:00:00Z");
 const formatLabLiveRemaining = live => {
-  const parts = typeof live?.lastActionTime === "string" ? live.lastActionTime.match(/^(\\d{2}):(\\d{2}):(\\d{2})$/) : null;
+  const parts = typeof live?.lastActionTime === "string" ? live.lastActionTime.match(/^(\d{2}):(\d{2}):(\d{2})$/) : null;
   if (parts) {
     const elapsed = Number(parts[1])*3600 + Number(parts[2])*60 + Number(parts[3]);
     if (elapsed >= 0 && elapsed <= 600) return `${String(Math.floor(elapsed/60)).padStart(2,"0")}:${String(elapsed%60).padStart(2,"0")}`;
