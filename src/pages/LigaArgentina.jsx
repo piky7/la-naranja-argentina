@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import fixture from "../../data/lab/labSchedule.json";
 import { LabHomeBoxscore, LabUpcomingMatchModal } from "./HomeLigaArgentina.jsx";
 import boxscores from "../../data/lab/labBoxscores.json";
@@ -33,11 +34,11 @@ function LabBoxscore({match}) {
 }
 
 function MatchCard({match,onOpen}) {
- const finished=match.status==="finished", review=match.status==="needs_review";
+ const finished=match.status==="finished", live=match.status==="live", review=match.status==="needs_review";
  const Team=({team})=><div className="lab-match-team"><img src={team.crestUrl || `https://www.laliganacional.com.ar/escudos/${team.clubId}/${team.teamId}`} alt="" loading="lazy"/><span>{teamLabel(team.name)}</span></div>;
  return <button type="button" className="lab-match-card" onClick={()=>onOpen(match)}>
-  <div className="lab-match-meta"><span>{dateLabel(match.date)} · {match.time || "HORARIO A CONFIRMAR"}</span><span className={finished?"lab-status is-finished":review?"lab-status is-review":"lab-status"}>{finished?"FINAL":review?"A REVISAR":"PROGRAMADO"}</span></div>
-  <div className="lab-match-scoreline"><Team team={match.homeTeam}/><strong className={finished?"lab-score is-final":"lab-score"}>{finished?`${match.homeScore} - ${match.awayScore}`:"VS"}</strong><Team team={match.awayTeam}/></div>
+  <div className="lab-match-meta"><span>{dateLabel(match.date)} · {match.time || "HORARIO A CONFIRMAR"}</span><span className={finished?"lab-status is-finished":review?"lab-status is-review":"lab-status"}>{finished?"FINAL":live?"EN VIVO":review?"A REVISAR":"PROGRAMADO"}</span></div>
+  <div className="lab-match-scoreline"><Team team={match.homeTeam}/><strong className={finished?"lab-score is-final":"lab-score"}>{finished||live?`${match.homeScore ?? "—"} - ${match.awayScore ?? "—"}`:"VS"}</strong><Team team={match.awayTeam}/></div>
   <div className="lab-match-venue">{match.venue || "Estadio a confirmar"}<span>Ver planilla oficial ↗</span></div>
  </button>;
 }
@@ -73,14 +74,17 @@ export default function LigaArgentina(){
  const [section,setSection]=useState("fixture"),[filter,setFilter]=useState("all"),[search,setSearch]=useState("");
  const [selectedMatch,setSelectedMatch]=useState(null),[selectedUpcomingMatch,setSelectedUpcomingMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
  const today=todayArgentina();
+ const {liveMatches=[]}=useLiveSnapshot();
+ const labLiveById=new Map(liveMatches.filter(item=>item.competition==="LAB"&&item.matchId).map(item=>[String(item.matchId),item]));
  const classified=useMemo(()=>fixture.matches.map(m=>{
   const now=new Intl.DateTimeFormat("en-GB",{timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date());
   const future=m.date>today||(m.date===today&&m.time&&m.time>now);
-  return {...m,status:m.status==="finished"?"finished":future?"scheduled":"needs_review"};
- }),[today]);
+  const live=labLiveById.get(String(m.id));
+  return {...m,liveData:live||null,homeScore:live?.homeScore??m.homeScore,awayScore:live?.awayScore??m.awayScore,status:m.status==="finished"?"finished":live?.status==="live"?"live":future?"scheduled":"needs_review"};
+ }),[today,liveMatches]);
  const counts={results:classified.filter(m=>m.status==="finished").length,upcoming:classified.filter(m=>m.status==="scheduled").length,review:classified.filter(m=>m.status==="needs_review").length};
  const {todayMatches,allResults,upcomingMatches}=useMemo(()=>({
-  todayMatches:classified.filter(m=>m.date===today&&m.status==="scheduled").sort((a,b)=>(a.time||"").localeCompare(b.time||"")),
+  todayMatches:classified.filter(m=>m.date===today&&(m.status==="scheduled"||m.status==="live")).sort((a,b)=>(a.time||"").localeCompare(b.time||"")),
   allResults:classified.filter(m=>m.status==="finished").sort((a,b)=>a.date!==b.date?b.date.localeCompare(a.date):(b.time||"").localeCompare(a.time||"")),
   upcomingMatches:classified.filter(m=>m.status==="scheduled"&&m.date>=today).sort((a,b)=>a.date!==b.date?a.date.localeCompare(b.date):(a.time||"").localeCompare(b.time||"")).slice(0,10)
  }),[classified,today]);
@@ -114,7 +118,7 @@ export default function LigaArgentina(){
     {todayMatches.length?<div className="today-matches">{todayMatches.map(match=><button key={match.id} type="button" className="today-match-card" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
      <div className="match-date"><span>{formatLeagueDate(match.date)}</span>{match.time&&<strong>{match.time}</strong>}</div>
      <div className="match-teams"><div className="match-team"><img src={labTeamCrest(match.homeTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.homeTeam.name)}</span></div><div className="match-vs"><span>VS</span></div><div className="match-team"><img src={labTeamCrest(match.awayTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.awayTeam.name)}</span></div></div>
-     <div className="match-details"><strong>{match.time||"A confirmar"}</strong>{match.venue&&<span>📍 {match.venue}</span>}</div>
+     <div className="match-details"><strong>{live?"EN VIVO":match.time||"A confirmar"}</strong>{match.venue&&<span>📍 {match.venue}</span>}</div>
     </button>)}</div>:<div className="no-today-matches"><span className="no-matches-label">SIN PARTIDOS</span><h3>Hoy no hay partidos</h3><p>No hay encuentros programados para hoy.</p></div>}
    </section>
    <section className="league-columns lab-league-columns">
