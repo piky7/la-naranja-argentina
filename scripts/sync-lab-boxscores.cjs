@@ -50,8 +50,8 @@ function isOfficialFinal(statusText) {
 }
 function normalizePlayer(raw, row) {
   const safe = key => number(raw[key]) ?? 0;
-  const made = key => safe(key) >= 0 ? safe(key) : 0;
-  const attempts = key => safe(key) >= 0 ? safe(key) : 0;
+  const made = value => Math.max(0, number(value) ?? 0);
+  const attempts = value => Math.max(0, number(value) ?? 0);
   return {
     id: safe("IdJugador"), clubId: safe("IdClub"), teamId: safe("IdEquipo"),
     number: String(raw.Dorsal ?? ""), name: String(raw.NombreCompleto || raw.Nombre || "").trim(),
