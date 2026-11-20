@@ -226,53 +226,53 @@
 }
 
 
-/* LAB mobile: reducir altura de pestañas y densidad de la tabla de posiciones. */
+/* LAB mobile: compactar alturas conservando la tipografía original. */
 @media (max-width: 768px) {
   .lab-home-dashboard .home-stats-tabs {
     min-height: 0;
   }
   .lab-home-dashboard .home-stats-tabs .home-stats-tab {
-    min-height: 40px;
-    height: 40px;
-    padding: 6px 5px;
+    min-height: 36px;
+    height: 36px;
+    padding: 4px 5px;
     line-height: 1.1;
-    font-size: 10px;
+    font-size: 14px;
   }
   .lab-home-dashboard .lab-conference-tabs {
-    padding: 5px 8px;
+    padding: 3px 8px;
   }
   .lab-home-dashboard .lab-conference-tabs .home-stats-tab {
-    min-height: 38px;
-    height: 38px;
-    padding: 5px;
-    font-size: 11px;
+    min-height: 34px;
+    height: 34px;
+    padding: 4px 5px;
+    font-size: 14px;
   }
   .lab-home-dashboard .standings-table-header {
-    min-height: 32px;
+    min-height: 30px;
     padding: 0 10px;
     grid-template-columns: 28px minmax(0,1fr) 30px 30px;
-    font-size: 9px;
+    font-size: 10px;
   }
   .lab-home-dashboard .home-standing-row {
-    min-height: 46px;
+    min-height: 42px;
     padding: 0 10px;
-    grid-template-columns: 28px minmax(0,1fr) 30px 30px;
+    grid-template-columns: 30px minmax(0,1fr) 30px 30px;
   }
   .lab-home-dashboard .standing-position {
-    width: 23px;
-    height: 23px;
-    min-width: 23px;
-    font-size: 9px;
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    font-size: 10px;
   }
   .lab-home-dashboard .home-standing-team {
     gap: 6px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .lab-home-dashboard .home-standing-team img {
-    width: 23px;
-    height: 23px;
+    width: 25px;
+    height: 25px;
   }
   .lab-home-dashboard .home-standing-row > strong {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
