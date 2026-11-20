@@ -22,3 +22,12 @@ test("Las versiones nuevas se generan antes del build y el modo desarrollo", () 
   assert.match(script, /converted !== 18/);
   assert.match(script, /optimizedBytes >= originalBytes/);
 });
+
+
+test("Los escudos de LAB se convierten a WebP local antes del build y desarrollo", () => {
+  const home = readFileSync(new URL("../src/pages/HomeLigaArgentina.jsx", import.meta.url), "utf8");
+  assert.match(pkg.scripts.prebuild, /node scripts\\/optimize-lab-logos\\.mjs/);
+  assert.match(pkg.scripts.predev, /node scripts\\/optimize-lab-logos\\.mjs/);
+  assert.match(home, /lab-team-logos\\/\$\\{id\\}\\.webp/);
+  assert.doesNotMatch(home, /src=\\{match\\.(?:homeTeam|awayTeam)\\.crestUrl\\}/);
+});
