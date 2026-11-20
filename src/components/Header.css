@@ -969,3 +969,40 @@
   .tournament-option img { width: min(100%, 76px); height: 24px; object-fit: contain; }
   .tournament-option.active { background: linear-gradient(135deg, #ff9b35, #f47716); }
 }
+
+
+/* Botonera móvil final: cinco accesos equilibrados y legibles. */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    min-height: 64px;
+    padding: 4px 5px;
+  }
+  .bottom-nav-link {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: clamp(8px, 2.5vw, 10px);
+    letter-spacing: 0;
+    gap: 3px;
+  }
+  .bottom-nav-link svg {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+  }
+  .bottom-navigation.is-compact {
+    min-height: 52px;
+    padding: 3px 5px;
+  }
+  .bottom-navigation.is-compact .bottom-nav-link {
+    min-height: 44px;
+    font-size: clamp(7.5px, 2.25vw, 9px);
+  }
+  .bottom-navigation.is-compact .bottom-nav-link svg {
+    width: 18px;
+    height: 18px;
+    flex-basis: 18px;
+  }
+}
