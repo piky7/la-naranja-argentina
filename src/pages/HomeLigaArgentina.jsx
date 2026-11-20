@@ -14,6 +14,10 @@ const labCrest = team => {
   const id = team?.teamId || String(team?.crestUrl || "").split("/").filter(Boolean).at(-1);
   return id ? "/lab-team-logos/" + id + ".webp" : "";
 };
+const LAB_CONFERENCES = {
+  norte: ["amancay-lr","barrio-jardin-t","barrio-parque","bochas-cc","comunicaciones","el-ceibo-sf","hindu-c","independiente-sde","jujuy-basquet","mitre-posadas","riachuelo-lr","salta-basket","san-isidro","santa-paula-g","sp-suardi","union-sf","villa-san-martin"],
+  sur: ["centenario-vt","central-entrerriano","ciclista-j","dep-norte","dep-viedma","gimnasia-lp","la-union-c","pergamino-basquet","pico-fc","provincial-r","quilmes-mdp","racing-a","regatas-sn","river","rocamora","union-mdp","villa-mitre-bb"]
+};
 const LAB_TEAM_COLORS = {
   "amancay-lr": "#c49a32",
   "barrio-jardin-t": "#28794b",
@@ -193,6 +197,7 @@ function HomeLigaArgentina() {
   const today = todayInArgentina();
   const [selectedDate, setSelectedDate] = useState(today);
   const [statsTab, setStatsTab] = useState("posiciones");
+  const [conferenceTab, setConferenceTab] = useState("norte");
   const [selectedMatch, setSelectedMatch] = useState(null);
 
   const data = useMemo(() => {
@@ -272,8 +277,13 @@ function HomeLigaArgentina() {
     </button>;
   };
 
+  const conferenceTeams = useMemo(() => {
+    const allowed = new Set(LAB_CONFERENCES[conferenceTab]);
+    return data.standings.filter(team => allowed.has(team.slug));
+  }, [data.standings, conferenceTab]);
+
   const positionClass = index => index < 4 ? "standing-position-direct" :
-    index < 12 ? "standing-position-reclasificacion" : index >= data.standings.length - 2 ? "standing-position-descenso" : "";
+    index < 12 ? "standing-position-reclasificacion" : index >= conferenceTeams.length - 2 ? "standing-position-descenso" : "";
 
   const StandingRows = ({teams, offset=0}) => teams.map((team,index) => {
     const position = offset + index + 1;
@@ -296,17 +306,14 @@ function HomeLigaArgentina() {
             <button type="button" className={`home-stats-tab ${statsTab === "anotadores" ? "active" : ""}`} onClick={()=>setStatsTab("anotadores")}>MÁXIMOS ANOTADORES</button>
           </div>
           {statsTab === "posiciones" ? <>
-            <div className="standings-table standings-table-desktop">
+            <div className="home-stats-tabs lab-conference-tabs" aria-label="Conferencias">
+              <button type="button" className={`home-stats-tab ${conferenceTab === "norte" ? "active" : ""}`} onClick={()=>setConferenceTab("norte")}>NORTE</button>
+              <button type="button" className={`home-stats-tab ${conferenceTab === "sur" ? "active" : ""}`} onClick={()=>setConferenceTab("sur")}>SUR</button>
+            </div>
+            <div className="standings-table">
               <div className="standings-table-header"><span>#</span><span>Equipo</span><span>PG</span><span>PP</span></div>
-              <StandingRows teams={data.standings}/>
+              <StandingRows teams={conferenceTeams}/>
             </div>
-            <div className="standings-table-mobile">
-              {[data.standings.slice(0,17),data.standings.slice(17)].map((column,i)=><div className="standings-mobile-column" key={i}>
-                <div className="standings-table-header"><span>#</span><span>Equipo</span><span>PG</span><span>PP</span></div>
-                <StandingRows teams={column} offset={i*17}/>
-              </div>)}
-            </div>
-            <p className="lab-home-note">Tabla general provisoria según resultados identificados. Las zonas Norte y Sur se mostrarán cuando estén confirmadas.</p>
           </> : <div className="home-scorers home-scorers-grid">
             {data.scorers.map((player,index)=><div className="home-scorer" key={player.id}>
               <span className="scorer-position">{String(index+1).padStart(2,"0")}</span>
