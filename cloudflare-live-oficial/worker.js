@@ -441,12 +441,18 @@ async function generarLive(fecha, anteriores = null, env) {
   // Primero consultamos únicamente los eventos, usando su caché de 30 minutos.
   // Así podemos evitar descargar el fixture oficial cuando no hay partidos
   // dentro de la ventana de seguimiento.
-  const eventos = await obtenerConCache(
-    cacheReferencia,
-    "eventos-lnb",
-    1800,
-    () => obtenerEventos()
-  );
+  let eventos = [];
+  try {
+    eventos = await obtenerConCache(
+      cacheReferencia,
+      "eventos-lnb",
+      1800,
+      () => obtenerEventos()
+    );
+  } catch (error) {
+    // La falla de la fuente LNB no debe impedir consultar la fuente LAB.
+    console.warn("Eventos LNB no disponibles; se continúa con fixture oficial y LAB:", error.message);
+  }
 
   const ahora = Date.now();
   const anterioresDelDia =
