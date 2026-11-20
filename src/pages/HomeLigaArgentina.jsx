@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 import "./Home.css";
@@ -69,7 +70,7 @@ function HomeLigaArgentina() {
       style={{"--match-home-logo":`url("${match.homeTeam.crestUrl || ""}")`,"--match-away-logo":`url("${match.awayTeam.crestUrl || ""}")`}}>
       <div className="fixture-team fixture-home">
         <div className="fixture-team-name"><span>{displayName(match.homeTeam.name)}</span>
-          <small>{home ? `${home.wins}° · ${home.wins}-${home.losses}` : ""}</small></div>
+          <small>{home ? `${homeIndex+1}° · ${home.wins}-${home.losses}` : ""}</small></div>
         <img src={match.homeTeam.crestUrl} alt="" loading="lazy"/>
       </div>
       <div className="fixture-center">
@@ -81,7 +82,7 @@ function HomeLigaArgentina() {
       <div className="fixture-team fixture-away">
         <img src={match.awayTeam.crestUrl} alt="" loading="lazy"/>
         <div className="fixture-team-name"><span>{displayName(match.awayTeam.name)}</span>
-          <small>{away ? `${away.wins}° · ${away.wins}-${away.losses}` : ""}</small></div>
+          <small>{away ? `${awayIndex+1}° · ${away.wins}-${away.losses}` : ""}</small></div>
       </div>
     </a>;
   };
@@ -139,7 +140,7 @@ function HomeLigaArgentina() {
           </div>
           <div className="fixture-date-navigation">
             <button type="button" className="fixture-day-button" onClick={()=>changeDate(-1)} aria-label="Día anterior">‹</button>
-            <div className="fixture-selected-date"><strong>{formatDay(selectedDate)}</strong></div>
+            <FixtureCalendar selectedDate={selectedDate} onSelect={setSelectedDate}/>
             <button type="button" className="fixture-day-button" onClick={()=>changeDate(1)} aria-label="Día siguiente">›</button>
           </div>
           <div className="home-fixtures">
