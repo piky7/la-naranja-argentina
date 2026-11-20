@@ -933,3 +933,39 @@
   .header-container > .lna-profile-access-group,
   .header-container > .lna-profile-access-guest { order: 3; }
 }
+
+@media (min-width: 769px) {
+  .header-container { flex-wrap: wrap; row-gap: 0; }
+  .header-container > .logo { order: 1; }
+  .header-brand { order: 2; }
+  .header-container > .lna-profile-access-group,
+  .header-container > .lna-profile-access-guest { order: 3; }
+  .header-container > .navigation { order: 4; }
+  .tournament-selector {
+    order: 5;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(420px, 100%);
+    flex: 0 0 min(420px, 100%);
+    margin: 0 0 10px auto;
+    padding: 3px;
+    border: 1px solid rgba(255, 135, 35, .65);
+    border-radius: 12px;
+    background: linear-gradient(110deg, #111b29, #10151e);
+  }
+  .tournament-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 3px 8px;
+    border: 0;
+    border-right: 1px solid rgba(255,255,255,.16);
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .tournament-option:last-child { border-right: 0; }
+  .tournament-option img { width: min(100%, 76px); height: 28px; object-fit: contain; }
+  .tournament-option.active { background: linear-gradient(135deg, #ff9b35, #f47716); }
+}
