@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Header from "./components/Header";
+import TournamentComingSoon from "./components/TournamentComingSoon";
 const CareerEntryNotices = lazy(() => import("./components/CareerEntryNotices"));
 import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
@@ -64,7 +65,7 @@ function RouteLoading() {
   </div>;
 }
 
-function AnimatedRoutes() {
+function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
   const location = useLocation();
   // Mantener Prode montado después de la primera visita: no repetir la carga
   // de Firebase, ligas y rankings cada vez que cambia la pestaña.
@@ -134,9 +135,9 @@ function App() {
       <PreloadSections />
       <SeoMeta />
       <SwipeNavigation />
-      <Header />
+      <Header selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
       <Suspense fallback={null}><CareerEntryNotices /></Suspense>
-      <AnimatedRoutes />
+      <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
       <Footer />
     </BrowserRouter>
   );
