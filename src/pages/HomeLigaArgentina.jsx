@@ -273,7 +273,7 @@ export function LabUpcomingMatchModal({match,onClose}) {
           <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
           <div className="lab-upcoming-team-head"><span><img src={home.logo} alt=""/>{home.name}</span><b>VS</b><span><img src={away.logo} alt=""/>{away.name}</span></div>
           <p className="upcoming-collective-source">Promedios de temporada · {Math.round(homeStats.games)} / {Math.round(awayStats.games)} partidos</p>
-          {metrics.map(([label,key])=>{const hv=homeStats[key],av=awayStats[key],lower=["pointsAgainst","turnovers","fouls"].includes(key),homeBetter=lower?hv<av:hv>av,awayBetter=lower?av<hv:av>hv,max=Math.max(hv||0,av||0,1);return <div className="lab-team-stat-row" key={key}>
+          {metrics.map(([label,key])=>{const hv=homeStats[key],av=awayStats[key],lower=["pointsAgainst","turnovers","fouls"].includes(key),homeBetter=lower?hv<av:hv>av,awayBetter=lower?av<hv:av>hv,max=Math.max(hv||0,av||0,1);return <div className="lab-team-stat-row" key={key} style={{background:`linear-gradient(90deg,${hexRgba(homeColor,.14)},rgba(13,27,42,.12) 50%,${hexRgba(awayColor,.14)})`}}>
             <strong className={homeBetter?"collective-better":""}>{fmt(hv)}</strong><div className="lab-team-stat-track"><span className={homeBetter?"is-better":""} style={{width:`${Math.max(0,hv||0)/max*100}%`}}/></div><span className="lab-team-stat-label">{label}</span><div className="lab-team-stat-track"><span className={awayBetter?"is-better":""} style={{width:`${Math.max(0,av||0)/max*100}%`}}/></div><strong className={awayBetter?"collective-better":""}>{fmt(av)}</strong>
           </div>})}
           <div className="lab-upcoming-last-matches">
