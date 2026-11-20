@@ -36,7 +36,7 @@ jobs:
       - name: Inspeccionar pestaña Estadísticas del box score oficial
         run: node scripts/probe-lab-boxscore.cjs
       - name: Importar todos los box scores oficiales pendientes
-        run: node scripts/sync-lab-boxscores.cjs --all-finished
+        run: node scripts/sync-lab-boxscores.cjs --all-finished --refresh-comparison
       - name: Consolidar planteles y estadísticas por equipo
         run: node scripts/build-lab-rosters.cjs
       - name: Guardar box scores y planteles consolidados
