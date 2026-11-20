@@ -94,7 +94,7 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
       direction === "right" ? "page-enter-from-left" : "");
   }, [location.key, location.state]);
 
-  return (
+  if (selectedTournament !== "lnb") {\n    return <TournamentComingSoon tournament={selectedTournament} onBack={() => onTournamentChange("lnb")} />;\n  }\n\n  return (
     <>
     <div key={location.key} className={animation}>
       <Suspense fallback={<RouteLoading />}>
