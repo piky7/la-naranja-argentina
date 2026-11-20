@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import ProdeProfileAccess from "./ProdeProfileAccess";
-import { House, Trophy, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
+import { House, Trophy, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target, UsersRound } from "lucide-react";
 
 function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
   const [navCompact, setNavCompact] = useState(false);
@@ -195,6 +195,16 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
   </NavLink>
 
 
+
+  <NavLink
+    to="/equipos"
+    className={({ isActive }) =>
+      `bottom-nav-link ${isActive ? "active" : ""}`
+    }
+  >
+    <UsersRound size={22} strokeWidth={2} aria-hidden="true" />
+    <span>Equipos</span>
+  </NavLink>
 
   <NavLink
     to="/estadisticas"
