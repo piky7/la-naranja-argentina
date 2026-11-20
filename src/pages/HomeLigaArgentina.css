@@ -1,43 +1,15 @@
-/* Home LAB reutiliza la estructura y las clases originales de Home.css (LNB).
-   Solo se ajusta la distribución de dos paneles y el orden en móvil. */
+/* LAB utiliza las mismas reglas visuales y responsive del Home LNB.
+   Única diferencia estructural en escritorio: dos paneles (fixture + posiciones). */
 .lab-home-dashboard {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.55fr);
+  gap: 20px;
   align-items: start;
 }
 .lab-home-dashboard > .home-panel { min-width: 0; }
-.lab-home-dashboard .lab-home-fixture { text-decoration: none; }
-.lab-home-dashboard .fixture-team-name {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.lab-home-dashboard .fixture-team-name small {
-  margin-top: 3px;
-  color: #f49a32;
-  font-size: 10px;
-  font-weight: 800;
-}
-.lab-home-note {
-  margin: 0;
-  padding: 12px 14px;
-  color: #92a2b3;
-  font-size: 10px;
-  line-height: 1.45;
-  background: #101923;
-}
-.lab-home-next { border-top: 1px solid #28394b; }
-@media (max-width: 768px) {
-  .lab-home-dashboard { display: flex; flex-direction: column; gap: 14px; }
-  .lab-home-dashboard > .home-panel { width: 100%; }
-  .lab-home-dashboard > .fixture-panel { order: 1; }
-  .lab-home-dashboard > .standings-panel { order: 2; }
-  .lab-home-dashboard .home-fixture { min-height: 96px; }
-}
 
-/* Las tarjetas de resultados funcionan como botones internos para abrir el boxscore. */
 .lab-home-dashboard button.home-fixture {
+  appearance: none;
   width: 100%;
   border: 0;
   color: inherit;
@@ -48,4 +20,25 @@
 .lab-home-dashboard button.home-fixture:disabled {
   cursor: default;
   opacity: 1;
+}
+
+.lab-home-note {
+  margin: 0;
+  padding: 12px 14px;
+  color: #92a2b3;
+  font-size: 10px;
+  line-height: 1.45;
+  background: #101923;
+}
+
+/* En móvil, exactamente el orden y ancho del Home LNB. */
+@media (max-width: 768px) {
+  .lab-home-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .lab-home-dashboard > .home-panel { width: 100%; }
+  .lab-home-dashboard > .fixture-panel { order: -1; }
+  .lab-home-dashboard > .standings-panel { order: 2; }
 }
