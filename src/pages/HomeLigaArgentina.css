@@ -81,3 +81,74 @@
   .lab-finished-match .match-mvp-name strong { font-size: 12px; line-height: 1.15; }
   .lab-finished-match .match-stat-player strong { font-size: 11px; line-height: 1.3; }
 }
+
+
+/* Comparativa colectiva LAB: usa la identidad visual del boxscore LNB. */
+.lab-team-comparison {
+  margin: 12px 12px 10px;
+  padding: 12px;
+  border: 1px solid #ff8709;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #101d2a, #0b1621);
+  color: #f4f6f9;
+}
+.lab-team-comparison-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.lab-team-comparison-heading span {
+  color: #ff9a22;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+}
+.lab-team-comparison-heading strong {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+.lab-team-comparison-teams {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid #293c4c;
+  border-bottom: 1px solid #293c4c;
+}
+.lab-team-comparison-teams > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 10px;
+  font-weight: 800;
+}
+.lab-team-comparison-teams > span:last-child { justify-content: flex-end; text-align: right; }
+.lab-team-comparison-teams img { width: 23px; height: 23px; object-fit: contain; flex: 0 0 auto; }
+.lab-team-comparison-teams small { color: #8fa1b3; font-size: 8px; font-weight: 900; }
+.lab-team-comparison-row { padding: 7px 0 5px; border-bottom: 1px solid rgba(100,125,148,.16); }
+.lab-team-comparison-values {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(90px,1.2fr) minmax(0,1fr);
+  align-items: center;
+  gap: 5px;
+}
+.lab-team-comparison-values strong { font-size: 10px; font-weight: 900; font-variant-numeric: tabular-nums; }
+.lab-team-comparison-values strong:last-child { text-align: right; }
+.lab-team-comparison-values span { color: #aab8c6; text-align: center; font-size: 8px; font-weight: 800; letter-spacing: .35px; }
+.lab-team-comparison-bars { display: flex; justify-content: space-between; gap: 4px; margin-top: 4px; }
+.lab-team-comparison-bars span { display: block; height: 4px; min-width: 2px; border-radius: 5px; }
+.lab-team-comparison-bar-home { background: #ff8c00; margin-left: auto; }
+.lab-team-comparison-bar-away { background: #70a6d8; margin-right: auto; }
+.lab-team-comparison > p { margin: 9px 0 0; color: #8495a7; font-size: 8px; line-height: 1.4; text-align: center; }
+@media (max-width: 600px) {
+  .lab-team-comparison { margin: 8px 10px 6px; padding: 10px; }
+  .lab-team-comparison-teams > span { font-size: 9px; }
+  .lab-team-comparison-values { grid-template-columns: minmax(0,1fr) minmax(76px,1.2fr) minmax(0,1fr); }
+  .lab-team-comparison-values strong { font-size: 9px; }
+  .lab-team-comparison-values span { font-size: 7px; }
+}
