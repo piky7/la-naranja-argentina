@@ -72,3 +72,38 @@
 @media(max-width:600px){
  .lab-stats-leader{border-color:#c49a4b}
 }
+
+/* Tabla LAB: mismas columnas visibles que LNB, sin desplazamiento horizontal. */
+.lab-stats-table-wrap{overflow-x:hidden}
+.lab-player-ranking{width:100%;min-width:0;table-layout:fixed}
+.lab-player-ranking th:first-child,.lab-player-ranking td:first-child{width:40%;min-width:0}
+.lab-player-ranking th:nth-child(2),.lab-player-ranking td:nth-child(2){width:12%}
+.lab-player-ranking th:nth-child(n+3),.lab-player-ranking td:nth-child(n+3){width:9.6%}
+.lab-player-ranking th:first-child{text-align:left}
+.lab-player-ranking td:first-child{overflow:hidden}
+.lab-stats-player-cell{gap:6px}
+.lab-stats-player-cell>strong{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lab-player-ranking th,.lab-player-ranking td{padding-left:4px;padding-right:4px}
+.lab-player-ranking th:nth-child(2),.lab-player-ranking td:nth-child(2){text-align:center}
+.lab-stats-team-logo{display:block;margin:0 auto}
+@media(max-width:600px){
+ .lab-player-ranking{min-width:0;width:100%}
+ .lab-player-ranking th{font-size:9px;padding:0 2px;letter-spacing:0}
+ .lab-player-ranking td{font-size:11px;padding:7px 2px}
+ .lab-player-ranking th:first-child,.lab-player-ranking td:first-child{width:40%}
+ .lab-player-ranking th:nth-child(2),.lab-player-ranking td:nth-child(2){width:12%}
+ .lab-player-ranking th:nth-child(n+3),.lab-player-ranking td:nth-child(n+3){width:9.6%}
+ .lab-stats-player-cell{gap:5px}
+ .lab-stats-player-cell>b{width:25px;height:25px;font-size:10px}
+ .lab-stats-player-cell>strong{font-size:10px}
+ .lab-stats-team-logo{width:24px;height:24px}
+ .lab-player-ranking td:nth-child(n+3){font-size:10px}
+ .lab-player-ranking td.stats-active-column{font-size:11px}
+}
+@media(max-width:380px){
+ .lab-player-ranking th{font-size:8px}
+ .lab-player-ranking td{font-size:9px}
+ .lab-stats-player-cell>b{width:22px;height:22px}
+ .lab-stats-player-cell>strong{font-size:9px}
+ .lab-stats-team-logo{width:21px;height:21px}
+}
