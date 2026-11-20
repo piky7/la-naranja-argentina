@@ -235,20 +235,20 @@ export default function UpcomingMatchModal({
             <div className="upcoming-tabs upcoming-tabs-three" role="tablist" aria-label="Información del próximo partido">
               <button type="button" role="tab" aria-selected={upcomingTab === "comparativa"} className={upcomingTab === "comparativa" ? "is-active" : ""} onClick={() => setUpcomingTab("comparativa")}>▥ Comparativa</button>
               <button type="button" role="tab" aria-selected={upcomingTab === "jugadores"} className={upcomingTab === "jugadores" ? "is-active" : ""} onClick={() => setUpcomingTab("jugadores")}>♟ Jugadores</button>
-              <button type="button" role="tab" aria-selected={upcomingTab === "carrera"} className={upcomingTab === "carrera" ? "is-active" : "is-vote-glowing"} onClick={() => setUpcomingTab("carrera")}><span className="upcoming-vote-tab-title">◎ Votación</span></button>
+              <button type="button" role="tab" aria-selected={upcomingTab === "prode"} className={upcomingTab === "carrera" ? "is-active" : "is-vote-glowing"} onClick={() => setUpcomingTab("prode")}><span className="upcoming-vote-tab-title">◎ Votación</span></button>
             </div>
             </>}
-            {!upcomingLive && upcomingTab === "carrera" && <div className="upcoming-tab-panel upcoming-career-panel upcoming-voting-redesign" role="tabpanel">
+            {!upcomingLive && upcomingTab === "carrera" && <div className="upcoming-tab-panel upcoming-prode-panel upcoming-voting-redesign" role="tabpanel">
               <div className="upcoming-voting-head">
-                <div><strong>◎ TU VOTACIÓN</strong><small>Un mismo pronóstico para Prode y Mi Carrera</small></div>
+                <div><strong>◎ TU VOTACIÓN</strong><small>Pronósticos de Prode LNA</small></div>
                 <span className="upcoming-voting-rewards">Ganador <b>+15</b> · Error <b>+5</b> · MVP <b>+20</b></span>
               </div>
-              <div className="upcoming-voting-subhead"><span>PRODE LNA</span><span>MI CARRERA</span><small>Se guarda automáticamente al elegir.</small></div>
+              <div className="upcoming-voting-subhead"><span>PRODE LNA</span><small>Se guarda automáticamente al elegir.</small></div>
 
 
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
               <MvpPrediction match={selectedUpcomingMatch} onStatusChange={setUpcomingMvpStatus} />
-              <button type="button" className={`upcoming-career-status ${upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
+              <button type="button" className={`upcoming-prode-status ${upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("carrera")}>
               <span>{upcomingVoteStatus === null || upcomingMvpStatus === null ? "◷ CONSULTANDO…" : upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "✓ VOTACIÓN COMPLETA" : upcomingVoteStatus?.voted || upcomingMvpStatus?.voted ? "◷ VOTACIÓN INCOMPLETA" : upcomingVoteStatus?.error && upcomingMvpStatus?.error ? "◷ NO DISPONIBLE" : upcomingVoteStatus?.open === false && upcomingMvpStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
               <small>{`Ganador: ${upcomingVoteStatus === null ? "consultando" : upcomingVoteStatus?.error ? "sin datos" : upcomingVoteStatus?.voted ? "✓ votado" : "pendiente"} · MVP: ${upcomingMvpStatus === null ? "consultando" : upcomingMvpStatus?.error ? "sin datos" : upcomingMvpStatus?.voted ? "✓ votado" : "pendiente"}`}</small>
               <span aria-hidden="true">›</span>
