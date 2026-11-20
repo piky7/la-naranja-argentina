@@ -112,7 +112,7 @@ function HomeLigaArgentina() {
         <div className="fixture-team-name"><span>{displayName(match.awayTeam.name)}</span>
           <small>{away ? `${awayIndex+1}° · ${away.wins}-${away.losses}` : ""}</small></div>
       </div>
-    </a>;
+    </button>;
   };
 
   const positionClass = index => index < 4 ? "standing-position-direct" :
@@ -124,7 +124,7 @@ function HomeLigaArgentina() {
       <span className={`standing-position ${positionClass(position-1)}`}>{position}</span>
       <span className="home-standing-team"><img src={team.crestUrl} alt="" loading="lazy"/><span>{displayName(team.name)}</span></span>
       <strong>{team.wins}</strong><strong>{team.losses}</strong>
-    </a>;
+    </div>;
   });
 
   return <main className="home-page lab-home-page">
@@ -179,6 +179,15 @@ function HomeLigaArgentina() {
         </section>
       </div>
     </div></section>
+      {selectedMatch && <div className="lab-modal-backdrop" role="presentation" onClick={() => setSelectedMatch(null)}>
+        <section className="lab-team-modal lab-match-modal" role="dialog" aria-modal="true" aria-label="Estadísticas del partido" onClick={event => event.stopPropagation()}>
+          <button className="lab-modal-close" onClick={() => setSelectedMatch(null)} aria-label="Cerrar">×</button>
+          <span className="lab-kicker">{formatDay(selectedMatch.date)} · {selectedMatch.time || "FINAL"}</span>
+          <h2>{displayName(selectedMatch.homeTeam.name)} <strong>{selectedMatch.homeScore} - {selectedMatch.awayScore}</strong> {displayName(selectedMatch.awayTeam.name)}</h2>
+          <p>{selectedMatch.venue || "Liga Argentina"}</p>
+          <LabHomeBoxscore match={selectedMatch}/>
+        </section>
+      </div>}
   </main>;
 }
 export default HomeLigaArgentina;
