@@ -7,6 +7,7 @@ import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
 import Home from "./pages/Home";
+import HomeLigaArgentina from "./pages/HomeLigaArgentina";
 const loadLiga = () => import("./pages/Liga");
 const loadLigaArgentina = () => import("./pages/LigaArgentina");
 const LigaArgentinaEquipos = lazy(() => import("./pages/LigaArgentinaEquipos"));
@@ -101,7 +102,7 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
     <div key={location.key} className={animation}>
       <Suspense fallback={<RouteLoading />}>
       <Routes location={location}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={selectedTournament === "lab" ? <HomeLigaArgentina /> : <Home />} />
         <Route path="/liga" element={selectedTournament === "lab" ? <LigaArgentina /> : <Liga />} />
         <Route path="/equipos" element={selectedTournament === "lab" ? <LigaArgentinaEquipos /> : <Equipos />} />
         <Route path="/equipos/:teamId" element={selectedTournament === "lab" ? <LigaArgentinaEquipos /> : <Equipo />} />
