@@ -81,3 +81,5 @@
 .lab-native-footer{display:flex;justify-content:space-between;padding:11px 14px;background:#09121d;border-top:1px solid #34475b;color:#aebccc;font-size:9px;letter-spacing:1px}
 .lab-native-footer>b{color:#f49a32}
 @media(max-width:640px){.lab-match-modal{width:100%;max-height:94vh;padding:25px 9px 11px}.lab-native-score img{width:30px;height:30px}.lab-native-score>div{gap:4px}.lab-native-mvp{margin:9px}.lab-native-tabs,.lab-native-team-tabs{margin-left:9px;margin-right:9px}.lab-native-table{margin-left:9px;margin-right:9px}.lab-native-th,.lab-native-tr{grid-template-columns:minmax(105px,1fr) 28px 28px 28px 39px 30px;min-width:310px;padding:9px 5px;font-size:8px}.lab-native-tr strong{font-size:9px}}
+
+/* Box score LAB integrado y validado visualmente en estilos nativos. */
