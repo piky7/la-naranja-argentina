@@ -79,7 +79,7 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
     ['REBOTES', 'rebounds'], ['ASISTENCIAS', 'assists'], ['RECUPERACIONES', 'steals'],
     ['TAPONES', 'blocks'], ['PÉRDIDAS', 'turnovers'], ['FALTAS COMETIDAS', 'fouls']
   ];
-  return <section className='lab-team-comparison'>
+  return <section className='lab-team-comparison' style={{'--comparison-home-color':labMatchColor(homeTeam),'--comparison-away-color':labMatchColor(awayTeam)}}>
     <div className='lab-team-comparison-heading'><span>ESTADÍSTICAS COLECTIVAS OFICIALES</span><strong>COMPARATIVA DE EQUIPOS</strong></div>
     <div className='lab-team-comparison-teams'><span><img src={homeTeam.logo} alt=''/>{homeTeam.name}</span><small>LOCAL</small><span><img src={awayTeam.logo} alt=''/>{awayTeam.name}</span></div>
     <div className='lab-team-comparison-rows'>{rows.map(([label,key,isShot]) => {
