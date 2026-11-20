@@ -674,13 +674,101 @@ if (anterior?.status === "finished") {
     }
   }
 
+  const resultadosLab = await generarLiveLab(fecha, anteriores, env).catch(error => {
+    console.error("Error consultando LIVE LAB:", error.message);
+    return (anteriores?.date === fecha ? anteriores.liveMatches || [] : [])
+      .filter(match => match.competition === "LAB")
+      .map(match => ({ ...match, isStale: true }));
+  });
+
   return {
     updatedAt: new Date().toISOString(),
     date: fecha,
-    liveMatches: resultados,
+    liveMatches: [...resultados, ...resultadosLab],
   };
 }
 
+
+// ---------------- LIVE LIGA ARGENTINA ----------------
+async function obtenerFixtureLab(fecha, env) {
+  const clave = "fixture-lab:" + fecha;
+  const cache = await env.LNA_LIVE_OFICIAL.get(clave, "json");
+  if (cache && Array.isArray(cache.matches) && Date.now() - cache.guardadoEn < 5 * 60 * 1000) return cache.matches;
+  const source = await descargar("https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/data/lab/labSchedule.json");
+  const data = JSON.parse(source);
+  if (!Array.isArray(data.matches)) throw new Error("Fixture LAB inválido");
+  const matches = data.matches.filter(match => match.date === fecha && match.officialUrl && match.homeTeam?.teamId && match.awayTeam?.teamId);
+  await env.LNA_LIVE_OFICIAL.put(clave, JSON.stringify({ guardadoEn: Date.now(), matches }));
+  return matches;
+}
+
+function interpretarMarcadorLab(html) {
+  const statusText = (html.match(/id=["']status-partido["'][^>]*>([\s\S]*?)<\//i)?.[1] || "")
+    .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/\s+/g, " ").trim();
+  const estado = html.match(/data-estado=["']([^"']+)["']/i)?.[1] || "";
+  const finalizada = /data-finalizada=["']true["']/i.test(html);
+  const readScore = id => {
+    const match = html.match(new RegExp('id=["\\']' + id + '["\\'][^>]*>([\\s\\S]*?)<\\/', "i"));
+    const value = match?.[1]?.replace(/<[^>]+>/g, "").trim();
+    return value != null && /^\d{1,3}$/.test(value) ? Number(value) : null;
+  };
+  const homeScore = readScore("score-local");
+  const awayScore = readScore("score-visitante");
+  const normalized = statusText.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  let status = "unknown";
+  if (finalizada || /^(final|finalizado|finalizada|terminado|terminada)/.test(normalized) || estado === "FINALIZADO") status = "finished";
+  else if (/en juego|en curso|jugando|descanso|entretiempo|cuarto|periodo/.test(normalized) || estado === "COMENZADO") status = "live";
+  else if (/programado|proximo|a jugar|pendiente/.test(normalized)) status = "scheduled";
+  const accion = html.match(/Cuarto\s+(\d+)\s*-\s*(\d{2}:\d{2}:\d{2})/i);
+  const quarter = accion ? Number(accion[1]) : null;
+  const lastActionTime = accion?.[2] || null;
+  let minutesRemaining = null;
+  if (lastActionTime) {
+    const [h,m,s] = lastActionTime.split(":").map(Number);
+    const elapsed = h * 3600 + m * 60 + s;
+    if (elapsed >= 0 && elapsed <= 600) minutesRemaining = Math.floor(elapsed / 60);
+  }
+  return { status, homeScore, awayScore, quarter, lastActionTime, minutesRemaining, isHalftime: /entretiempo|descanso/i.test(normalized) };
+}
+
+async function generarLiveLab(fecha, anteriores, env) {
+  const fixture = await obtenerFixtureLab(fecha, env);
+  const previous = new Map((anteriores?.liveMatches || []).filter(match => match.competition === "LAB").map(match => [match.matchId, match]));
+  const now = Date.now();
+  const results = [];
+  for (const match of fixture) {
+    const id = String(match.id);
+    const anterior = previous.get(id);
+    if (anterior?.status === "finished") { results.push(anterior); continue; }
+    const start = Date.parse(match.date + "T" + (match.time || "20:00") + ":00-03:00");
+    const tracked = anterior?.status === "live" || anterior?.isLive === true;
+    if (!tracked && (!Number.isFinite(start) || now < start - 30 * 60 * 1000 || now > start + 240 * 60 * 1000)) continue;
+    try {
+      const html = await descargar(match.officialUrl, { headers: { Accept: "text/html", "User-Agent": "Mozilla/5.0 (compatible; LaNaranjaArgentina/1.0)" } });
+      const score = interpretarMarcadorLab(html);
+      if (score.status === "unknown") {
+        if (anterior) results.push({ ...anterior, isStale: true });
+        console.warn("LAB: estado oficial no reconocido", id);
+        continue;
+      }
+      results.push({
+        eventId: "LAB:" + id, matchId: id, competition: "LAB",
+        homeTeam: match.homeTeam.slug, awayTeam: match.awayTeam.slug,
+        homeName: match.homeTeam.name, awayName: match.awayTeam.name,
+        homeTeamId: Number(match.homeTeam.teamId), awayTeamId: Number(match.awayTeam.teamId),
+        homeScore: score.homeScore, awayScore: score.awayScore,
+        quarter: score.quarter, minutesRemaining: score.minutesRemaining,
+        lastActionTime: score.lastActionTime, isHalftime: score.isHalftime,
+        timestamp: Number.isFinite(start) ? Math.floor(start / 1000) : null,
+        status: score.status, isLive: score.status === "live", officialUrl: match.officialUrl
+      });
+    } catch (error) {
+      console.error("LAB LIVE error", id, error.message);
+      if (anterior) results.push({ ...anterior, isStale: true });
+    }
+  }
+  return results;
+}
 
 
 const CLAVE_KV = "live-matches";
