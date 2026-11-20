@@ -33,6 +33,36 @@ async function main() {
   );
   if (invalid.length) throw new Error(`Partidos incompletos: ${invalid.length}`);
 
+  // Conservar resultados ya validados por boxscore aunque el fixture oficial vuelva a mostrar 0-0.
+  const existingPath = OUTPUT;
+  const boxesPath = path.join(__dirname, "../data/lab/labBoxscores.json");
+  const boxes = fs.existsSync(boxesPath) && fs.readFileSync(boxesPath, "utf8").trim()
+    ? JSON.parse(fs.readFileSync(boxesPath, "utf8")) : {};
+  const previous = fs.existsSync(existingPath) && fs.readFileSync(existingPath, "utf8").trim()
+    ? JSON.parse(fs.readFileSync(existingPath, "utf8")) : null;
+  const previousById = new Map((previous?.matches || []).map(match => [match.id, match]));
+  for (const match of matches) {
+    const box = boxes[match.id];
+    const old = previousById.get(match.id);
+    const valid = box?.status === "finished" && Array.isArray(box.players) && box.players.length > 0 &&
+      box.teamComparison?.home && box.teamComparison?.away &&
+      Number(box.homeTeamId) === Number(match.homeTeam.teamId) &&
+      Number(box.awayTeamId) === Number(match.awayTeam.teamId);
+    if (valid) {
+      match.homeScore = Number(box.homeScore);
+      match.awayScore = Number(box.awayScore);
+      match.status = "finished";
+      match.statusSource = "official-final-and-complete-boxscore";
+      match.boxscoreImportedAt = box.importedAt || null;
+    } else if (old?.status === "finished") {
+      Object.assign(match, {
+        homeScore: old.homeScore, awayScore: old.awayScore,
+        status: "finished", statusSource: old.statusSource,
+        boxscoreImportedAt: old.boxscoreImportedAt || null
+      });
+    }
+  }
+
   const report = {
     competition: "Liga Argentina",
     season: "2026-2027",
