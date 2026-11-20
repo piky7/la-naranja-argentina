@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T02:21:00.540Z",
+  "generatedAt": "2026-11-20T02:25:56.301Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -631,6 +631,14 @@
       "awayScore": 69,
       "homeTeam": "argentino",
       "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-11-19-obera-independiente-oliva": {
+      "status": "published",
+      "homeScore": 96,
+      "awayScore": 89,
+      "homeTeam": "obera",
+      "awayTeam": "independiente-oliva",
       "hasStats": true
     }
   }

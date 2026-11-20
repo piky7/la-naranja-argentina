@@ -1138,5 +1138,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y9sQ-mmEousQ2AzqHNCHZXmMa7xNarU6-gGK-rQP2rsLb6PjAVNPTw==/argentino-j-vs-lanus"
     }
+  },
+  "2026-11-19-obera-independiente-oliva": {
+    "status": "finished",
+    "homeScore": 96,
+    "awayScore": 89,
+    "time": "21:30",
+    "homeTeam": "obera",
+    "awayTeam": "independiente-oliva",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2n_lkJzRNNLckVoLe-84_tSespDLS5b3TWLa2DxnbrlmBupyZmJDZng==/obera-vs-independiente-o",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2n_lkJzRNNLckVoLe-84_tSespDLS5b3TWLa2DxnbrlmBupyZmJDZng==/obera-vs-independiente-o"
+    }
   }
 };

@@ -2575,4 +2575,12 @@ export const players = [
     teamId: "lanus",
     number: 66,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-385859",
+    officialPlayerId: 385859,
+    name: "Elias Garcia Infante",
+    teamId: "independiente-oliva",
+    number: 5,
+  },
 ];
