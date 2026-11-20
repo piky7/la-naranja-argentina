@@ -5,7 +5,7 @@ const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari
 
 async function main() {
   const response = await fetch(URL, { headers: { "User-Agent": UA, Accept: "text/html" } });
-  if (!response.ok) throw new Error(\`Partido LAB HTTP \${response.status}\`);
+  if (!response.ok) throw new Error(`Partido LAB HTTP \${response.status}`);
   const html = await response.text();
   const $ = cheerio.load(html);
   const scripts = $("script[src]").map((_, el) => new URL($(el).attr("src"), URL).href).get();
@@ -46,15 +46,15 @@ async function main() {
   };
   console.log(JSON.stringify(report,null,2));
   const md=["# Inspección del box score LAB","",
-    \`- Partido: [Quilmes–River 15/10/2026](\${URL})\`,
-    \`- HTTP: \${report.http}\`,\`- Tablas HTML iniciales: \${tables.length}\`,
-    \`- Candidatos de pestaña: \${tabs.length}\`,
-    \`- Scripts externos con referencias estadísticas: \${external.length}\`,
-    \`- Etiquetas estadísticas en HTML: \${report.htmlHasStatLabels?"Sí":"No"}\`,"",
-    "## Pestañas","","\`\`\`json",JSON.stringify(tabs,null,2),"\`\`\`","",
-    "## Tablas","","\`\`\`json",JSON.stringify(tables,null,2),"\`\`\`","",
-    "## JavaScript inline","","\`\`\`json",JSON.stringify(relevantInline,null,2),"\`\`\`","",
-    "## JavaScript externo","","\`\`\`json",JSON.stringify(external,null,2),"\`\`\`"
+    `- Partido: [Quilmes–River 15/10/2026](\${URL})`,
+    `- HTTP: \${report.http}`,`- Tablas HTML iniciales: \${tables.length}`,
+    `- Candidatos de pestaña: \${tabs.length}`,
+    `- Scripts externos con referencias estadísticas: \${external.length}`,
+    `- Etiquetas estadísticas en HTML: \${report.htmlHasStatLabels?"Sí":"No"}`,"",
+    "## Pestañas","","```json",JSON.stringify(tabs,null,2),"```","",
+    "## Tablas","","```json",JSON.stringify(tables,null,2),"```","",
+    "## JavaScript inline","","```json",JSON.stringify(relevantInline,null,2),"```","",
+    "## JavaScript externo","","```json",JSON.stringify(external,null,2),"```"
   ].join("\n");
   require("node:fs").writeFileSync(process.env.GITHUB_STEP_SUMMARY,md+"\n");
 }
