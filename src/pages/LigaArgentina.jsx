@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
+import { Link } from "react-router-dom";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
 import fixture from "../../data/lab/labSchedule.json";
 import { LabHomeBoxscore, LabUpcomingMatchModal } from "./HomeLigaArgentina.jsx";
 import boxscores from "../../data/lab/labBoxscores.json";
+import rosters from "../../data/lab/labRosters.json";
 import { isLabMatchFinished } from "../utils/labMatchStatus";
 import { LAB_CONFERENCES, labMatchColor, formatLabLiveRemaining } from "../utils/labPresentation";
 import "./LigaArgentina.css";
@@ -65,6 +68,7 @@ const formatLeagueDate = date => new Intl.DateTimeFormat("es-AR",{day:"2-digit",
 export default function LigaArgentina(){
  const [section,setSection]=useState("fixture"),[filter,setFilter]=useState("all"),[search,setSearch]=useState("");
  const [selectedMatch,setSelectedMatch]=useState(null),[selectedUpcomingMatch,setSelectedUpcomingMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
+ const [selectedTeam,setSelectedTeam]=useState(null);
  const today=todayArgentina();
  const {liveMatches=[]}=useLiveSnapshot();
  const labLiveById=new Map(liveMatches.filter(item=>item.competition==="LAB"&&item.matchId).map(item=>[String(item.matchId),item]));
@@ -98,11 +102,11 @@ export default function LigaArgentina(){
  },[standings,conference]);
  const MatchTeam=({team,logoClass="result-logo"})=><div className="result-team"><img src={labTeamCrest(team)} alt="" className={logoClass} loading="lazy"/><span>{teamLabel(team.name)}</span></div>;
  const standingPositionClass=index=>index<4?"standing-position-direct":index<12?"standing-position-reclasificacion":index===16?"standing-position-descenso":"";
- const renderStandingRows=()=>conferenceTeams.map((team,index)=><div className="home-standing-row" key={team.teamId}>
+ const renderStandingRows=()=>conferenceTeams.map((team,index)=><button type="button" className="home-standing-row lab-standing-clickable" key={team.teamId} onClick={()=>setSelectedTeam(team)} aria-label={`Ver ficha de ${teamLabel(team.name)}`}>
   <span className={"standing-position "+standingPositionClass(index)}>{index+1}</span>
   <span className="home-standing-team"><img src={labTeamCrest(team)} alt="" loading="lazy"/><span>{teamLabel(team.name)}</span></span>
   <strong>{team.wins}</strong><strong>{team.losses}</strong>
- </div>);
+ </button>);
  return <main className="league-page lab-page lab-league-page lab-home-page">
   <section className="league-content"><div className="page-container">
    <section className="league-section today-section">
@@ -149,6 +153,16 @@ export default function LigaArgentina(){
    </section>
    <p className="lab-source">Fixture y planillas: <a href="https://www.laliganacional.com.ar/laligaargentina/fixture" target="_blank" rel="noreferrer">sitio oficial de Liga Argentina ↗</a>.</p>
   </div></section>
+   {selectedTeam&&createPortal(<div className="home-modal-overlay" onClick={()=>setSelectedTeam(null)}><div className="home-team-modal home-team-modal-v2" role="dialog" aria-modal="true" aria-label={teamLabel(selectedTeam.name)} onClick={event=>event.stopPropagation()}>
+    <header className="team-v2-hero"><img className="team-v2-watermark" src={labTeamCrest(selectedTeam)} alt="" aria-hidden="true"/><button type="button" className="home-modal-close team-v2-close" onClick={()=>setSelectedTeam(null)} aria-label="Cerrar">×</button><div className="team-v2-identity"><div className="team-v2-crest"><img src={labTeamCrest(selectedTeam)} alt=""/></div><div><span>LIGA ARGENTINA 2026/27</span><h2>{teamLabel(selectedTeam.name)} <span className="team-v2-record">({selectedTeam.wins}-{selectedTeam.losses})</span></h2><p>Conferencia {conference==="norte"?"Norte":"Sur"}</p></div></div></header>
+    <div className="team-v2-body">
+     {(()=>{const games=classified.filter(m=>m.status==="finished"&&(m.homeTeam.teamId===selectedTeam.teamId||m.awayTeam.teamId===selectedTeam.teamId));const totals={points:0,pointsAgainst:0,rebounds:0,assists:0,steals:0,blocks:0,turnovers:0,fouls:0};const shots={fieldGoals:[0,0],twoPointers:[0,0],threePointers:[0,0],freeThrows:[0,0]};let n=0;games.forEach(g=>{const home=g.homeTeam.teamId===selectedTeam.teamId,cmp=boxscores[g.id]?.teamComparison?.[home?"home":"away"];if(!cmp)return;n++;totals.points+=Number(home?g.homeScore:g.awayScore)||0;totals.pointsAgainst+=Number(home?g.awayScore:g.homeScore)||0;Object.keys(totals).filter(k=>!["points","pointsAgainst"].includes(k)).forEach(k=>totals[k]+=Number(cmp[k])||0);Object.keys(shots).forEach(k=>{shots[k][0]+=Number(cmp[k]?.made)||0;shots[k][1]+=Number(cmp[k]?.attempted)||0;});});const metrics=[["PTS/P","points"],["REC/P","pointsAgainst"],["REB/P","rebounds"],["AST/P","assists"],["RECUP/P","steals"],["TAP/P","blocks"],["PÉRD/P","turnovers"],["FALTAS/P","fouls"]];return <section className="team-v2-section team-v2-collective-section"><div className="team-v2-section-head"><h3>ESTADÍSTICAS COLECTIVAS</h3><span className="team-v2-official-count">{n} PJ con datos</span></div><div className="team-v2-collective-grid">{metrics.map(([l,k])=><div className="team-v2-collective-item" key={k}><span>{l}</span><strong>{n?(totals[k]/n).toFixed(1):"—"}</strong></div>)}</div><div className="team-v2-collective-shooting">{[["TC","fieldGoals"],["T2","twoPointers"],["T3","threePointers"],["TL","freeThrows"]].map(([l,k])=><div className="team-v2-collective-item" key={k}><span>{l}</span><strong>{shots[k][1]?(100*shots[k][0]/shots[k][1]).toFixed(1)+"%":"—"}</strong></div>)}</div></section>;})()}
+     {(()=>{const m=classified.filter(g=>g.status!=="finished"&&(g.homeTeam.teamId===selectedTeam.teamId||g.awayTeam.teamId===selectedTeam.teamId)&&g.date>=today).sort((a,b)=>(a.date+" "+(a.time||"")).localeCompare(b.date+" "+(b.time||"")))[0];return m?<section className="team-v2-section"><div className="team-v2-section-head"><h3>PRÓXIMO PARTIDO</h3><Link to="/liga-argentina" onClick={()=>setSelectedTeam(null)}>Ver fixture completo →</Link></div><button type="button" className="team-v2-next" onClick={()=>{setSelectedTeam(null);setSelectedUpcomingMatch(m);}}><div><img src={labTeamCrest(m.homeTeam)} alt=""/><strong>{teamLabel(m.homeTeam.name)}</strong></div><div className="team-v2-next-center"><span>{formatLeagueDate(m.date)}</span><strong>{m.time||"A confirmar"}</strong><span>{m.tv?.join(" · ")||"Transmisión a confirmar"}</span></div><div><img src={labTeamCrest(m.awayTeam)} alt=""/><strong>{teamLabel(m.awayTeam.name)}</strong></div></button></section>:null;})()}
+     <section className="team-v2-section"><div className="team-v2-section-head"><h3>ÚLTIMOS 2 PARTIDOS</h3><span>Resultados oficiales</span></div><div className="team-v2-recent">{classified.filter(g=>g.status==="finished"&&(g.homeTeam.teamId===selectedTeam.teamId||g.awayTeam.teamId===selectedTeam.teamId)).sort((a,b)=>(b.date+" "+(b.time||"")).localeCompare(a.date+" "+(a.time||""))).slice(0,2).map(g=>{const home=g.homeTeam.teamId===selectedTeam.teamId,won=Number(home?g.homeScore:g.awayScore)>Number(home?g.awayScore:g.homeScore);return <button type="button" key={g.id} onClick={()=>{setSelectedTeam(null);setSelectedMatch(g);}}><span className="team-v2-date">{formatLeagueDate(g.date)}</span><div className="team-v2-result"><img src={labTeamCrest(g.homeTeam)} alt=""/><strong>{g.homeScore} - {g.awayScore}</strong><img src={labTeamCrest(g.awayTeam)} alt=""/></div><span className={won?"team-v2-win":"team-v2-loss"}>{won?"VICTORIA":"DERROTA"}</span></button>;})}</div></section>
+     <section className="team-v2-section"><div className="team-v2-section-head"><h3>JUGADORES DESTACADOS</h3><span>Promedios de temporada</span></div><div className="team-v2-players">{[["PUNTOS","points","PTS"],["REBOTES","rebounds","REB"],["ASISTENCIAS","assists","AST"]].map(([label,key,unit])=><div className="team-v2-player-category" key={key}><h4>{label}</h4>{Object.values(rosters.teams||{}).flatMap(t=>t.players||[]).filter(p=>Number(p.teamId)===Number(selectedTeam.teamId)&&Number(p.gamesPlayed)>0&&Number.isFinite(Number(p.averages?.[key]))).sort((a,b)=>Number(b.averages[key])-Number(a.averages[key])).slice(0,2).map(p=><div className="team-v2-player-entry" key={p.id}><span>{p.name}</span><strong>{Number(p.averages[key]).toFixed(1)} {unit}</strong></div>)}</div>)}</div></section>
+     <Link className="team-v2-full-link" to="/liga-argentina" onClick={()=>setSelectedTeam(null)}>Ver equipo completo →</Link>
+    </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
+   </div></div>,document.body)}
   {selectedMatch&&<LabHomeBoxscore match={selectedMatch} onClose={()=>setSelectedMatch(null)}/>}
   {selectedUpcomingMatch&&<LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={()=>setSelectedUpcomingMatch(null)}/>}
  </main>;
