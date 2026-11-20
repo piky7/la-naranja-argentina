@@ -1154,5 +1154,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2n_lkJzRNNLckVoLe-84_tSespDLS5b3TWLa2DxnbrlmBupyZmJDZng==/obera-vs-independiente-o"
     }
+  },
+  "2026-11-19-olimpico-ferro": {
+    "status": "finished",
+    "homeScore": 80,
+    "awayScore": 84,
+    "time": "22:05",
+    "homeTeam": "olimpico",
+    "awayTeam": "ferro",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24xvC_QYBw6z3gfFJ1WDyYzkNhCyApzGcontxgC0_x8Fz8mb64t7KQg==/olimpico-lb-vs-ferro",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24xvC_QYBw6z3gfFJ1WDyYzkNhCyApzGcontxgC0_x8Fz8mb64t7KQg==/olimpico-lb-vs-ferro"
+    }
   }
 };

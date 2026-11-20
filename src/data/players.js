@@ -2583,4 +2583,19 @@ export const players = [
     teamId: "independiente-oliva",
     number: 5,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-226021",
+    officialPlayerId: 226021,
+    name: "Maximo Alberto Martinez Acuña",
+    teamId: "olimpico",
+    number: 3,
+  },
+  {
+    id: "oficial-433061",
+    officialPlayerId: 433061,
+    name: "Emiliano Guillermo Basabe",
+    teamId: "olimpico",
+    number: 17,
+  },
 ];
