@@ -255,3 +255,60 @@
 .lab-league-page .today-match-card.is-live .match-details{justify-content:center}
 @keyframes lab-live-ball-pulse{0%,100%{transform:scale(1);box-shadow:0 0 5px rgba(239,68,68,.45)}50%{transform:scale(1.45);box-shadow:0 0 12px rgba(239,68,68,.9)}}
 @media(max-width:600px){.lab-league-page .today-match-card.is-live .match-teams{grid-template-columns:minmax(0,1fr) minmax(105px,132px) minmax(0,1fr);gap:5px;padding:16px 8px 14px}.lab-league-page .lab-live-center .fixture-live-score{font-size:25px}.lab-league-page .lab-live-center .fixture-live-badge{font-size:10px}.lab-league-page .lab-live-center .fixture-live-period{font-size:9px}}
+
+
+/* LAB: el plantel debe entrar completo en el ancho disponible, también en móvil. */
+.lab-team-detail .lab-team-roster-table {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+.lab-team-detail .lab-team-roster-table .team-roster-head,
+.lab-team-detail .lab-team-roster-table .team-roster-row {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) 28px repeat(3, minmax(28px, 34px)) 34px 32px;
+  gap: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.lab-team-detail .lab-team-roster-table .team-roster-name {
+  min-width: 0;
+  overflow: hidden;
+  gap: 5px;
+}
+.lab-team-detail .lab-team-roster-table .team-roster-name > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lab-team-detail .lab-team-roster-table .team-roster-head > span:not(:first-child),
+.lab-team-detail .lab-team-roster-table .team-roster-row > span:not(:first-child) {
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 600px) {
+  .lab-team-detail .lab-team-roster-table .team-roster-head,
+  .lab-team-detail .lab-team-roster-table .team-roster-row {
+    grid-template-columns: minmax(0, 1fr) 24px repeat(3, 29px) 31px 28px;
+    gap: 2px;
+    padding: 9px 5px;
+  }
+  .lab-team-detail .lab-team-roster-table .team-roster-crest {
+    width: 19px;
+    height: 19px;
+  }
+  .lab-team-detail .lab-team-roster-table .team-roster-name {
+    gap: 4px;
+  }
+  .lab-team-detail .lab-team-roster-table .team-roster-head {
+    font-size: 8px;
+  }
+  .lab-team-detail .lab-team-roster-table .team-roster-row {
+    font-size: 9px;
+  }
+}
