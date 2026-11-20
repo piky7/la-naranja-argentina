@@ -32,3 +32,10 @@
 .lab-stat-row{display:grid;grid-template-columns:22px 30px minmax(0,1fr) auto;align-items:center;gap:8px;padding:9px 0;border-top:1px solid #263648;font-size:11px}
 .lab-stat-position{color:#f49a32}.lab-stat-row img{width:28px;height:28px;object-fit:contain}.lab-stat-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lab-stat-row strong{font-variant-numeric:tabular-nums}
 @media(max-width:640px){.lab-match-list,.lab-today-grid{grid-template-columns:1fr}.lab-team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.lab-team-card{padding:14px 8px}.lab-team-card img{width:54px;height:54px}.lab-stat-grid{grid-template-columns:1fr}.lab-match-modal h2{font-size:18px}}
+
+/* Box score LAB integrado en el detalle del partido */
+.lab-match-modal{width:min(100%,980px);max-height:92vh;padding:28px 20px 18px}
+.lab-match-modal .lab-official-stats{margin-top:16px}
+.lab-match-modal .lab-official-stats iframe{display:block;width:100%;height:min(68vh,680px);border:1px solid #2a3a4c;border-radius:10px;background:#fff}
+.lab-match-modal .lab-official-stats>a{display:inline-block;margin-top:10px}
+@media(max-width:640px){.lab-match-modal{width:100%;max-height:94vh;padding:26px 12px 14px}.lab-match-modal .lab-official-stats iframe{height:68vh}}
