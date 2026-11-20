@@ -59,7 +59,7 @@ function parseFixtureRows(html) {
     const scores = row.find("td.resultados strong").map((__, el) => parseScore($(el).text())).get();
     const homeScore = scores[0] ?? null;
     const awayScore = scores[1] ?? null;
-    const bothScores = homeScore !== null && awayScore !== null;
+    const bothScores = homeScore !== null && awayScore !== null && !(homeScore === 0 && awayScore === 0);
     const partialScore = (homeScore !== null) !== (awayScore !== null);
     const id = idMatch[1];
     if (seen.has(id)) return;
