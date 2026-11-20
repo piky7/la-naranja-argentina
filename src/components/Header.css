@@ -910,8 +910,7 @@
     outline-offset: 1px;
   }
   .header-league { display: none; }
-  .header[data-tournament="lab"] ~ .bottom-navigation,
-  .header[data-tournament="federal"] ~ .bottom-navigation { display: none !important; }
+  /* La navegación inferior permanece disponible en LAB y en todas las rutas. */
 }
 @media (max-width: 380px) {
   .tournament-option { padding: 2px 4px; }
