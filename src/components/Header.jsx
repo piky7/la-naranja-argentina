@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
-import CareerProfileAccess from "./CareerProfileAccess";
+import ProdeProfileAccess from "./ProdeProfileAccess";
 import { House, Trophy, ChartNoAxesColumn, Download, Share2, PlusSquare, X, Target } from "lucide-react";
 
 function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
@@ -101,7 +101,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
             <div className="header-ball-line header-ball-line-3"></div>
           </div>
 
-          <CareerProfileAccess />
+          <ProdeProfileAccess />
 
           <div className="tournament-selector" role="group" aria-label="Seleccionar torneo">
             <button type="button" className={selectedTournament === "lnb" ? "tournament-option active" : "tournament-option"} aria-pressed={selectedTournament === "lnb"} onClick={() => onTournamentChange("lnb")}>
@@ -216,15 +216,6 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
     <span>Prode</span>
   </NavLink>
 
-  <NavLink
-    to="/mi-carrera"
-    className={({ isActive }) =>
-      `bottom-nav-link career-nav-link ${isActive ? "active" : ""}`
-    }
-  >
-    <Trophy size={22} strokeWidth={2} aria-hidden="true" />
-    <span>Mi Carrera</span>
-  </NavLink>
 </nav>
 )}
     </>
