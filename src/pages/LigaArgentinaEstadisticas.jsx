@@ -11,7 +11,7 @@ import "./LigaArgentinaEstadisticas.css";
 
 const number = value => Number.isFinite(Number(value)) ? Number(value) : 0;
 const fmt = value => Number(value || 0).toFixed(1).replace(".", ",");
-const formatPersonName = value => String(value || "").toLocaleLowerCase("es").replace(/(^|[\\s'’\\-])([a-záéíóúüñ])/gu, (_, sep, letter) => sep + letter.toLocaleUpperCase("es"));
+const formatPersonName = value => String(value || "").toLocaleLowerCase("es").replace(/(^|[\s'’\-])([a-záéíóúüñ])/gu, (_, sep, letter) => sep + letter.toLocaleUpperCase("es"));
 const teams = fixture.teams;
 const teamFor = id => teams.find(team => Number(team.teamId) === Number(id));
 const allPlayers = Object.values(rosters.teams || {}).flatMap(roster =>
