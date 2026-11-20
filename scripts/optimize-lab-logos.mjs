@@ -14,15 +14,28 @@ if (!teams.length) throw new Error("No se encontraron equipos LAB para optimizar
 const removeBackground = ({ data, info }) => {
   const { width, height, channels } = info;
   if (channels < 4 || width < 2 || height < 2) return data;
-  const corners = [
-    0,
-    (width - 1) * channels,
-    ((height - 1) * width) * channels,
-    ((height * width) - 1) * channels,
-  ];
-  const background = [0, 1, 2].map(channel =>
-    corners.map(index => data[index + channel]).sort((a, b) => a - b)[1]
-  );
+  // Inferimos el fondo solo a partir de píxeles opacos del borde.
+  // Algunos escudos (como Barrio Jardín) tienen esquinas transparentes y un
+  // rectángulo blanco opaco detrás del escudo: incluir RGB de píxeles
+  // transparentes (normalmente 0,0,0) hacía fallar la detección del blanco.
+  const edgeSamples = [];
+  for (let x = 0; x < width; x++) {
+    for (const y of [0, height - 1]) {
+      const index = (y * width + x) * channels;
+      if (data[index + 3] > 0) edgeSamples.push(index);
+    }
+  }
+  for (let y = 1; y < height - 1; y++) {
+    for (const x of [0, width - 1]) {
+      const index = (y * width + x) * channels;
+      if (data[index + 3] > 0) edgeSamples.push(index);
+    }
+  }
+  if (!edgeSamples.length) return data;
+  const background = [0, 1, 2].map(channel => {
+    const values = edgeSamples.map(index => data[index + channel]).sort((a, b) => a - b);
+    return values[Math.floor(values.length / 2)];
+  });
   const thresholdSquared = 52 * 52;
   const total = width * height;
   const visited = new Uint8Array(total);
