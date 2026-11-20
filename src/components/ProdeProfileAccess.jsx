@@ -5,7 +5,7 @@ import { signInProdeWithGoogle, watchProdeUser } from "../auth/prodeAuth";
 import { fetchProdeProfile } from "../auth/prodeProfile";
 import ProdeCrest from "./ProdeCrest";
 import { isSportsDesign, serializeSportsDesign } from "./sportsCrestDesign";
-import "./CareerProfileAccess.css";
+import "./ProdeProfileAccess.css";
 
 export default function CareerProfileAccess(){
  const [user,setUser]=useState(null),[loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[profile,setProfile]=useState(null);
