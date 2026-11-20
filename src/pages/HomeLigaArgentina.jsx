@@ -27,8 +27,8 @@ function LabHomeBoxscore({match}) {
   const mvp = box.players.slice().sort((a,b) => b.valuation-a.valuation || b.points-a.points)[0];
   const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? match.homeTeam : match.awayTeam);
   const crest = team => team.crestUrl || "";
-  const teamLabel = name => String(name || "").replace(/ \\((MDP|SF|CC|LR|T|VT|J)\\)/g, "");
-  const date = new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"}).format(new Date(match.date+"T12:00:00Z")).replace(/\\./g,"").toUpperCase();
+  const teamLabel = name => String(name || "").replace(/ \((MDP|SF|CC|LR|T|VT|J)\)/g, "");
+  const date = new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"}).format(new Date(match.date+"T12:00:00Z")).replace(/\./g,"").toUpperCase();
   return <div className="lab-native-boxscore">
     <header className="lab-native-head"><b>LIGA ARGENTINA 2026/27</b><span>{date} <i>•</i> FINAL</span>
       <div className="lab-native-score"><div><img src={crest(match.homeTeam)} alt=""/><strong>{teamLabel(match.homeTeam.name)}</strong></div><b><em>{match.homeScore}</em> - <em>{match.awayScore}</em></b><div><img src={crest(match.awayTeam)} alt=""/><strong>{teamLabel(match.awayTeam.name)}</strong></div></div>
