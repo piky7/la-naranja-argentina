@@ -38,7 +38,7 @@ export default function MatchVote({ match, onStatusChange }) {
   if (!id) return null;
   if (!authLoading && !user) return <section className="lna-vote lna-vote-login">
     <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div></div>
-    <p>Iniciá sesión con Google para votar y sumar puntos en Mi Carrera y Prode.</p>
+    <p>Iniciá sesión con Google para pronosticar y sumar puntos en Prode.</p>
     <button type="button" onClick={login} disabled={authBusy}> {authBusy ? "Conectando…" : "Continuar con Google"} </button>
     {authError && <small role="alert">{authError}</small>}
   </section>;
