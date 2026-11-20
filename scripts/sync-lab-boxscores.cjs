@@ -6,6 +6,7 @@ const fixture = require("../data/lab/labSchedule.json");
 const TARGET_ARG = process.argv.find(arg => arg.startsWith("--match="));
 const TARGET = TARGET_ARG ? TARGET_ARG.slice("--match=".length) : null;
 const ALL_FINISHED = process.argv.includes("--all-finished");
+const REFRESH_COMPARISON = process.argv.includes("--refresh-comparison");
 const PAUSE_MS = 900;
 const OUTPUT = path.join(__dirname, "../data/lab/labBoxscores.json");
 const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari/537.36";
@@ -53,26 +54,48 @@ function normalizePlayer(raw, row) {
   };
 }
 
-function aggregateTeamStats(players, teamId) {
-  const rows = players.filter(player => Number(player.teamId) === Number(teamId));
-  const sum = key => rows.reduce((total, player) => total + Number(player[key] || 0), 0);
-  const shooting = key => ({
-    made: rows.reduce((total, player) => total + Number(player[key]?.made || 0), 0),
-    attempted: rows.reduce((total, player) => total + Number(player[key]?.attempted || 0), 0)
-  });
-  return { playerCount: rows.length, points: sum('points'), twoPointers: shooting('twoPointers'),
-    threePointers: shooting('threePointers'), freeThrows: shooting('freeThrows'),
-    rebounds: sum('rebounds'), offensiveRebounds: sum('offensiveRebounds'),
-    defensiveRebounds: sum('defensiveRebounds'), assists: sum('assists'), steals: sum('steals'),
-    turnovers: sum('turnovers'), blocks: sum('blocks'), fouls: sum('fouls'), valuation: sum('valuation') };
+function parseOfficialTeamComparison($) {
+  const root = $("#scroll-comparativa .tablaResultadosEstadisticas");
+  const lines = root.find(".linea");
+  if (!root.length || lines.length < 9) return null;
+  const readLine = line => {
+    const cols = $(line).children(".col");
+    if (cols.length < 3) return null;
+    const label = cols.eq(1).find(".stat-nombre-abrev").text().trim() ||
+      cols.eq(1).find(".stat-nombre-completo").text().trim();
+    const left = cols.eq(0).text().replace(/\\s+/g, " ").trim();
+    const right = cols.eq(2).text().replace(/\\s+/g, " ").trim();
+    const parseValue = value => {
+      const shot = value.match(/(\\d+)\\s*\\/\\s*(\\d+)\\s*(?:([\\d.,]+)\\s*%)?/);
+      if (shot) return { made: Number(shot[1]), attempted: Number(shot[2]), percentage: Number(String(shot[3] || "0").replace(",", ".")) };
+      const numeric = value.match(/-?\\d+/);
+      return numeric ? Number(numeric[0]) : null;
+    };
+    return { label, home: parseValue(left), away: parseValue(right) };
+  };
+  const rows = lines.toArray().map(readLine).filter(Boolean);
+  const aliases = {
+    "TC": "fieldGoals", "2P": "twoPointers", "3P": "threePointers", "TL": "freeThrows",
+    "Reb.": "rebounds", "As.": "assists", "Rec.": "steals", "Tap.": "blocks",
+    "Pér.": "turnovers", "Faltas Com.": "fouls"
+  };
+  const home = {}, away = {};
+  for (const row of rows) {
+    const key = aliases[row.label];
+    if (!key || row.home == null || row.away == null) continue;
+    home[key] = row.home;
+    away[key] = row.away;
+  }
+  const required = Object.values(aliases);
+  if (!required.every(key => home[key] != null && away[key] != null)) return null;
+  const teamNames = {
+    home: root.find(".tituloEquipoLocal strong").first().text().trim(),
+    away: root.find(".tituloEquipoVisitante strong").first().text().trim()
+  };
+  return { source: "Comparativa oficial del boxscore LAB", method: "official-boxscore-comparison",
+    teamNames, home, away };
 }
 
-function buildTeamComparison(players, homeTeamId, awayTeamId, homeScore, awayScore) {
-  const home = aggregateTeamStats(players, homeTeamId);
-  const away = aggregateTeamStats(players, awayTeamId);
-  if (!home.playerCount || !away.playerCount || home.points !== Number(homeScore) || away.points !== Number(awayScore)) return null;
-  return { source: 'Suma de estadísticas individuales del boxscore oficial', method: 'sum-player-boxscore', home, away };
-}
 async function main() {
   const importedAtStart = fs.existsSync(OUTPUT) ? JSON.parse(fs.readFileSync(OUTPUT, "utf8")) : {};
   const today = new Date().toISOString().slice(0, 10);
@@ -82,7 +105,7 @@ async function main() {
     const date = String(match.date || "");
     const hasRealScore = match.homeScore != null && match.awayScore != null &&
       !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
-    return date <= today && hasRealScore && !importedAtStart[match.id];
+    return date <= today && hasRealScore && (!importedAtStart[match.id] || REFRESH_COMPARISON);
   });
   if (!matches.length) {
     console.log("No hay partidos pendientes para importar.");
@@ -132,7 +155,7 @@ async function main() {
             homeScore: Number(match.homeScore), awayScore: Number(match.awayScore),
             source: "Liga Nacional oficial", officialUrl: match.officialUrl,
             importedAt: new Date().toISOString(), players,
-            teamComparison: buildTeamComparison(players, match.homeTeam.teamId, match.awayTeam.teamId, match.homeScore, match.awayScore)
+            teamComparison: parseOfficialTeamComparison($)
           };
           fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
           importedThisRun++;
