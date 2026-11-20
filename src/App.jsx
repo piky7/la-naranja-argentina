@@ -7,7 +7,7 @@ import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
 import Home from "./pages/Home";
-import HomeLigaArgentina from "./pages/HomeLigaArgentina";
+const HomeLigaArgentina = lazy(() => import("./pages/HomeLigaArgentina"));
 const loadLiga = () => import("./pages/Liga");
 const loadLigaArgentina = () => import("./pages/LigaArgentina");
 const LigaArgentinaEquipos = lazy(() => import("./pages/LigaArgentinaEquipos"));
