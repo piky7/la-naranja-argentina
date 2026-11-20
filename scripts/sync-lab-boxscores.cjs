@@ -64,48 +64,61 @@ async function main() {
       !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
     return date <= today && hasRealScore && !importedAtStart[match.id];
   });
-  if (!matches.length) throw new Error("No se encontró el partido solicitado en labSchedule.json");
-  const output = fs.existsSync(OUTPUT) ? JSON.parse(fs.readFileSync(OUTPUT, "utf8")) : {};
-  let importedThisRun = 0, skipped = 0, failed = 0;\n  for (const [index, match] of matches.entries()) {
-    if (!match.officialUrl) continue;
-    const response = await fetch(match.officialUrl, { headers: { "User-Agent": UA, Accept: "text/html" } });
-    if (!response.ok) throw new Error("Partido " + match.id + " respondió HTTP " + response.status);
-    const $ = cheerio.load(await response.text());
-    const tables = $(".tabla-estadisticas");
-    if (tables.length !== 2) {
-      console.log("SIN PLANILLA COMPLETA:", match.id, "tablas:", tables.length);
-      skipped++;
-      await new Promise(resolve => setTimeout(resolve, PAUSE_MS));
-      continue;
-    }
-    const players = [];
-    tables.each((_, table) => {
-      $(table).find("tbody tr").each((__, row) => {
-        const $row = $(row);
-        const onclick = $row.attr("onclick") || $row.find("[onclick]").first().attr("onclick") || "";
-        const raw = parseFirstObject(onclick);
-        if (!raw?.IdJugador || !raw?.IdEquipo) return;
-        players.push(normalizePlayer(raw, { minutes: $row.find("td").eq(3).text().trim() }));
-      });
-    });
-    const teams = [...new Set(players.map(player => player.teamId))];
-    if (teams.length !== 2 || players.length < 2) {
-      console.log("PLANILLA INCOMPLETA:", match.id, "equipos:", teams.length, "jugadores:", players.length);
-      skipped++;
-      await new Promise(resolve => setTimeout(resolve, PAUSE_MS));
-      continue;
-    }
-    output[match.id] = {
-      matchId: match.id, date: match.date, season: match.season,
-      homeTeamId: match.homeTeam.teamId, awayTeamId: match.awayTeam.teamId,
-      homeScore: Number(match.homeScore), awayScore: Number(match.awayScore),
-      source: "Liga Nacional oficial", officialUrl: match.officialUrl,
-      importedAt: new Date().toISOString(), players
-    };
-    fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\\n");
-    importedThisRun++;
-    console.log("BOX SCORE IMPORTADO", match.homeTeam.name, match.awayTeam.name, "jugadores:", players.length,
-      "progreso:", index + 1, "/", matches.length);
+  if (!matches.length) {
+    console.log("No hay partidos pendientes para importar.");
+    return;
+  }
+  const output = importedAtStart;
+  let importedThisRun = 0, skipped = 0, failed = 0;
+  for (const [index, match] of matches.entries()) {
+    try {
+      if (!match.officialUrl) { skipped++; continue; }
+      let response, lastError;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          response = await fetch(match.officialUrl, { headers: { "User-Agent": UA, Accept: "text/html" } });
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          break;
+        } catch (error) {
+          lastError = error;
+          if (attempt < 2) await new Promise(resolve => setTimeout(resolve, 1200 * (attempt + 1)));
+        }
+      }
+      if (!response?.ok) throw lastError || new Error("No se pudo obtener la planilla");
+      const $ = cheerio.load(await response.text());
+      const tables = $(".tabla-estadisticas");
+      if (tables.length !== 2) {
+        console.log("SIN PLANILLA COMPLETA:", match.id, "tablas:", tables.length);
+        skipped++;
+      } else {
+        const players = [];
+        tables.each((_, table) => {
+          $(table).find("tbody tr").each((__, row) => {
+            const $row = $(row);
+            const onclick = $row.attr("onclick") || $row.find("[onclick]").first().attr("onclick") || "";
+            const raw = parseFirstObject(onclick);
+            if (!raw?.IdJugador || !raw?.IdEquipo) return;
+            players.push(normalizePlayer(raw, { minutes: $row.find("td").eq(3).text().trim() }));
+          });
+        });
+        const teams = [...new Set(players.map(player => player.teamId))];
+        if (teams.length !== 2 || players.length < 2) {
+          console.log("PLANILLA INCOMPLETA:", match.id, "equipos:", teams.length, "jugadores:", players.length);
+          skipped++;
+        } else {
+          output[match.id] = {
+            matchId: match.id, date: match.date, season: match.season,
+            homeTeamId: match.homeTeam.teamId, awayTeamId: match.awayTeam.teamId,
+            homeScore: Number(match.homeScore), awayScore: Number(match.awayScore),
+            source: "Liga Nacional oficial", officialUrl: match.officialUrl,
+            importedAt: new Date().toISOString(), players
+          };
+          fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
+          importedThisRun++;
+          console.log("BOX SCORE IMPORTADO", match.homeTeam.name, match.awayTeam.name,
+            "jugadores:", players.length, "progreso:", index + 1, "/", matches.length);
+        }
+      }
     } catch (error) {
       failed++;
       console.log("ERROR PARTIDO", match.id, error.message);
@@ -113,6 +126,10 @@ async function main() {
     if (index < matches.length - 1) await new Promise(resolve => setTimeout(resolve, PAUSE_MS));
   }
   fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
-  console.log("ARCHIVO:", OUTPUT, "PARTIDOS:", Object.keys(output).length);
+  console.log("RESUMEN IMPORTACIÓN:", JSON.stringify({
+    solicitados: matches.length, importados: importedThisRun, omitidos: skipped,
+    errores: failed, totalBase: Object.keys(output).length
+  }));
+  console.log("ARCHIVO:", OUTPUT);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });
