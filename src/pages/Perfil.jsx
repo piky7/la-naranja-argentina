@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Check, LogIn, LogOut, Save, UserRound, X } from "lucide-react";
-import { useCareerSession } from "../auth/careerAccount";
+import { useProdeSession } from "../auth/prodeSession";
 import { fetchProdeProfile, saveProdeCrest, saveProdeUsername } from "../auth/prodeProfile";
 import { signOutProde } from "../auth/prodeAuth";
 import ProdeCrest from "../components/ProdeCrest";
@@ -14,7 +14,7 @@ import "./Perfil.css";
 const DEFAULT_PROFILE = { username:"", primary:"#7de83d", secondary:"#10283c", text:"#ffffff", font:"sport", design:{...DEFAULT_SPORTS_DESIGN} };
 
 export default function Perfil(){
- const {user,loading,login,busy,error}=useCareerSession();
+ const {user,loading,login,busy,error}=useProdeSession();
  const [profile,setProfile]=useState(null);
  const [profileLoading,setProfileLoading]=useState(false);
  const [draft,setDraft]=useState(DEFAULT_PROFILE);
