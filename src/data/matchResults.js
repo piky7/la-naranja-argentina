@@ -1122,5 +1122,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2LXl2HWyszntKQ9pyJ6DMtjMVK5-VsGy6WmCBg-NPWnflaG3i-sq4Aw==/regatas-c-vs-quimsa"
     }
+  },
+  "2026-11-19-argentino-lanus": {
+    "status": "finished",
+    "homeScore": 86,
+    "awayScore": 69,
+    "time": "21:00",
+    "homeTeam": "argentino",
+    "awayTeam": "lanus",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y9sQ-mmEousQ2AzqHNCHZXmMa7xNarU6-gGK-rQP2rsLb6PjAVNPTw==/argentino-j-vs-lanus",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y9sQ-mmEousQ2AzqHNCHZXmMa7xNarU6-gGK-rQP2rsLb6PjAVNPTw==/argentino-j-vs-lanus"
+    }
   }
 };

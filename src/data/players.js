@@ -2567,4 +2567,12 @@ export const players = [
     teamId: "instituto",
     number: 77,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-431354",
+    officialPlayerId: 431354,
+    name: "Juan Martín Estremero",
+    teamId: "lanus",
+    number: 66,
+  },
 ];
