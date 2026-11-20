@@ -70,6 +70,42 @@ const formatDay = key => new Intl.DateTimeFormat("es-AR", {
   timeZone: "UTC", weekday: "short", day: "2-digit", month: "short"
 }).format(dateFromKey(key)).replace(/\./g, "").toUpperCase();
 
+function calculateLabTeamComparison(players, homeTeamId, awayTeamId, homeScore, awayScore) {
+  const total = teamId => {
+    const rows = players.filter(player => Number(player.teamId) === Number(teamId));
+    const sum = key => rows.reduce((value, player) => value + Number(player[key] || 0), 0);
+    const shots = key => ({ made: rows.reduce((value, player) => value + Number(player[key]?.made || 0), 0), attempted: rows.reduce((value, player) => value + Number(player[key]?.attempted || 0), 0) });
+    return { playerCount: rows.length, points: sum('points'), twoPointers: shots('twoPointers'), threePointers: shots('threePointers'), freeThrows: shots('freeThrows'), rebounds: sum('rebounds'), offensiveRebounds: sum('offensiveRebounds'), defensiveRebounds: sum('defensiveRebounds'), assists: sum('assists'), steals: sum('steals'), turnovers: sum('turnovers'), blocks: sum('blocks'), fouls: sum('fouls'), valuation: sum('valuation') };
+  };
+  const home = total(homeTeamId), away = total(awayTeamId);
+  if (!home.playerCount || !away.playerCount || home.points !== Number(homeScore) || away.points !== Number(awayScore)) return null;
+  return { home, away, source: 'Suma de estadísticas individuales del boxscore oficial' };
+}
+
+function LabTeamComparison({comparison, homeTeam, awayTeam}) {
+  if (!comparison) return null;
+  const shotText = shot => `${shot.made}/${shot.attempted} · ${shot.attempted ? (shot.made / shot.attempted * 100).toFixed(1) : '0.0'}%`;
+  const rows = [
+    ['PUNTOS', 'points'], ['REBOTES', 'rebounds'], ['REB. OFENSIVOS', 'offensiveRebounds'], ['REB. DEFENSIVOS', 'defensiveRebounds'],
+    ['ASISTENCIAS', 'assists'], ['RECUPERACIONES', 'steals'], ['PÉRDIDAS', 'turnovers'], ['TAPONES', 'blocks'], ['FALTAS', 'fouls'], ['VALORACIÓN', 'valuation'],
+    ['DOBLES', 'twoPointers', true], ['TRIPLES', 'threePointers', true], ['LIBRES', 'freeThrows', true]
+  ];
+  return <section className='lab-team-comparison'>
+    <div className='lab-team-comparison-heading'><span>ESTADÍSTICAS COLECTIVAS</span><strong>COMPARATIVA DE EQUIPOS</strong></div>
+    <div className='lab-team-comparison-teams'><span><img src={homeTeam.logo} alt=''/>{homeTeam.name}</span><small>LOCAL</small><span><img src={awayTeam.logo} alt=''/>{awayTeam.name}</span></div>
+    <div className='lab-team-comparison-rows'>{rows.map(([label,key,isShot]) => {
+      const homeValue = comparison.home[key], awayValue = comparison.away[key];
+      const homeNumber = isShot ? homeValue.made : homeValue, awayNumber = isShot ? awayValue.made : awayValue;
+      const max = Math.max(homeNumber, awayNumber, 1);
+      const display = value => isShot ? shotText(value) : String(value);
+      return <div className='lab-team-comparison-row' key={key}>
+        <div className='lab-team-comparison-values'><strong>{display(homeValue)}</strong><span>{label}</span><strong>{display(awayValue)}</strong></div>
+        <div className='lab-team-comparison-bars'><span className='lab-team-comparison-bar-home' style={{width: `${homeNumber / max * 100}%`}}/><span className='lab-team-comparison-bar-away' style={{width: `${awayNumber / max * 100}%`}}/></div>
+      </div>;
+    })}</div>
+    <p>Datos calculados sumando las estadísticas individuales de la planilla oficial. Los porcentajes se calculan sobre lanzamientos convertidos e intentados.</p>
+  </section>;
+}
 function LabHomeBoxscore({match, onClose}) {
   const box = boxscores[match.id];
   const players = box?.players || [];
@@ -81,6 +117,7 @@ function LabHomeBoxscore({match, onClose}) {
   const matchForTabs = { ...match, homeTeam: String(match.homeTeam.teamId), awayTeam: String(match.awayTeam.teamId) };
   const mvp = players.slice().sort((a,b) => Number(b.valuation || 0)-Number(a.valuation || 0) || Number(b.points || 0)-Number(a.points || 0))[0];
   const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? homeTeam : awayTeam);
+  const teamComparison = box?.teamComparison || calculateLabTeamComparison(players, match.homeTeam.teamId, match.awayTeam.teamId, match.homeScore, match.awayScore);
   const [dateYear,dateMonth,dateDay] = String(match.date).split("-").map(Number);
   const dateObject = new Date(dateYear,dateMonth-1,dateDay);
   const weekdays = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
@@ -145,12 +182,15 @@ function LabHomeBoxscore({match, onClose}) {
               </span>
             </div>
           </div>}
-          {players.length ? <MatchStatsTabs match={matchForTabs} stats={stats} home={homeTeam} away={awayTeam}>
+          {players.length ? <>
+            <LabTeamComparison comparison={teamComparison} homeTeam={homeTeam} awayTeam={awayTeam}/>
+            <MatchStatsTabs match={matchForTabs} stats={stats} home={homeTeam} away={awayTeam}>
             <div className="match-modal-content">
               {renderTeam(homeTeam,homePlayers,"LOCAL")}
               {renderTeam(awayTeam,awayPlayers,"VISITANTE")}
             </div>
-          </MatchStatsTabs> : <div className="match-modal-no-stats"><span>📊</span><h3>Estadísticas no disponibles</h3><p>La planilla detallada de este partido todavía no fue cargada.</p></div>}
+            </MatchStatsTabs>
+          </> : <div className="match-modal-no-stats"><span>📊</span><h3>Estadísticas no disponibles</h3><p>La planilla detallada de este partido todavía no fue cargada.</p></div>}
           <div className="match-modal-footer"><span>LNA</span><strong>ESTADÍSTICAS DEL PARTIDO</strong></div>
         </div>
       </div>
