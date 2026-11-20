@@ -249,7 +249,7 @@ jobs:
             if [ "$PUBLICAR_LAB" = "true" ]; then
               for f in data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json; do
                 mkdir -p "$(dirname "$f")"
-                cp "artefactos/lab/$f" "$f"
+                cp "artefactos/lab/$(basename "$f")" "$f"
               done
             fi
           }
