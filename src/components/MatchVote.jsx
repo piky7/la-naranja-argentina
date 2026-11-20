@@ -2,7 +2,7 @@ import { teams } from "../data/teams";
 import { useEffect, useState } from "react";
 import "./MatchVote.css";
 import { requestPrediction } from "../auth/prodeBallot";
-import { useCareerSession } from "../auth/careerAccount";
+import { useProdeSession } from "../auth/prodeSession";
 
 export default function MatchVote({ match, onStatusChange }) {
   const date = match?.date;
@@ -14,7 +14,7 @@ export default function MatchVote({ match, onStatusChange }) {
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
   const [sessionRevision, setSessionRevision] = useState(0);
-  const { user, loading: authLoading, login, busy: authBusy, error: authError } = useCareerSession();
+  const { user, loading: authLoading, login, busy: authBusy, error: authError } = useProdeSession();
   useEffect(() => {
     const refresh = () => setSessionRevision(value => value + 1);
     window.addEventListener("prode-profile-updated", refresh);
