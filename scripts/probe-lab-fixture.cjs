@@ -87,7 +87,8 @@ async function main() {
     forms: $("form").map((_, el) => ({ action: $(el).attr("action"), method: $(el).attr("method"), id: $(el).attr("id") })).get(),
     inputs: $("input").map((_, el) => ({ name: $(el).attr("name"), id: $(el).attr("id"), value: $(el).attr("value") })).get(),
     fixtureContainers: $(".mn-fixture").map((_, el) => ({ html: $(el).html()?.slice(0, 4000) })).get(),
-    ajaxReport,\n    snippets: [...html.matchAll(/.{0,120}(?:laligaargentina|mn-fixture|handler|fixture|ajax|fetch\().{0,240}/gi)].slice(0, 80).map(m => m[0].replace(/\s+/g, " ")),
+    ajaxReport,
+    snippets: [...html.matchAll(/.{0,120}(?:laligaargentina|mn-fixture|handler|fixture|ajax|fetch\().{0,240}/gi)].slice(0, 80).map(m => m[0].replace(/\s+/g, " ")),
   };
 
   console.log("LAB_FIXTURE_REPORT");
