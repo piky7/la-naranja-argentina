@@ -3,5 +3,5 @@
     <circle cx="199" cy="34" r="28" fill="#f47721"/>
     <path d="M171 34h56M199 6c-18 18-18 38 0 56M178 14c26 7 43 21 43 40M220 13c-25 8-42 22-42 41"/>
   </g>
-  <text x="12" y="91" fill="#35b8d0" stroke="#0b1c2b" stroke-width="3.2" stroke-linejoin="round" paint-order="stroke fill" font-family="Arial,sans-serif" font-size="78" font-weight="900" font-style="italic" letter-spacing="-5">LAB</text>
+  <text x="12" y="91" fill="#35b8d0" stroke="#0b1c2b" stroke-width="5.5" stroke-linejoin="round" paint-order="stroke fill" font-family="Arial,sans-serif" font-size="78" font-weight="900" font-style="italic" letter-spacing="-5">LAB</text>
 </svg>
