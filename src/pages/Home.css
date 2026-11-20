@@ -11236,3 +11236,14 @@
   color: #11151b;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -5px 12px rgba(112,45,0,.2), 0 0 12px rgba(255,135,30,.22);
 }
+
+
+/* LAB debe conservar el celeste también en la pestaña principal POSICIONES.
+   Esta regla va después de los estilos compartidos de Home para evitar que el naranja LNB la sobrescriba. */
+.home-page.lab-home-page .home-stats-tab.active,
+.home-page.lab-home-page .standings-panel .home-stats-tab.active {
+  border: 1px solid rgba(77,232,247,.9);
+  background: linear-gradient(160deg,#12c9df 0%,#078eae 48%,#07506f 100%);
+  color: #f2fdff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.34), inset 0 -5px 12px rgba(0,35,57,.28), 0 0 12px rgba(27,190,216,.3);
+}
