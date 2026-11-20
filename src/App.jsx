@@ -142,7 +142,7 @@ function App() {
       <SeoMeta />
       <SwipeNavigation />
       <Header selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
-      <Suspense fallback={null}><CareerEntryNotices /></Suspense>
+      {selectedTournament === "lnb" && <Suspense fallback={null}><CareerEntryNotices /></Suspense>}
       <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
       <Footer />
     </BrowserRouter>
