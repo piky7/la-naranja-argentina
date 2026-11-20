@@ -248,7 +248,7 @@ export default function UpcomingMatchModal({
 
               <MatchVote match={selectedUpcomingMatch} onStatusChange={setUpcomingVoteStatus} />
               <MvpPrediction match={selectedUpcomingMatch} onStatusChange={setUpcomingMvpStatus} />
-              <button type="button" className={`upcoming-prode-status ${upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("prode")>
+              <button type="button" className={`upcoming-prode-status ${upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "is-voted" : ""}`} onClick={() => setUpcomingTab("prode")}>
               <span>{upcomingVoteStatus === null || upcomingMvpStatus === null ? "◷ CONSULTANDO…" : upcomingVoteStatus?.voted && upcomingMvpStatus?.voted ? "✓ VOTACIÓN COMPLETA" : upcomingVoteStatus?.voted || upcomingMvpStatus?.voted ? "◷ VOTACIÓN INCOMPLETA" : upcomingVoteStatus?.error && upcomingMvpStatus?.error ? "◷ NO DISPONIBLE" : upcomingVoteStatus?.open === false && upcomingMvpStatus?.open === false ? "◷ VOTACIÓN CERRADA" : "● SIN VOTAR"}</span>
               <small>{`Ganador: ${upcomingVoteStatus === null ? "consultando" : upcomingVoteStatus?.error ? "sin datos" : upcomingVoteStatus?.voted ? "✓ votado" : "pendiente"} · MVP: ${upcomingMvpStatus === null ? "consultando" : upcomingMvpStatus?.error ? "sin datos" : upcomingMvpStatus?.voted ? "✓ votado" : "pendiente"}`}</small>
               <span aria-hidden="true">›</span>
