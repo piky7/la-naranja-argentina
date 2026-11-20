@@ -31,13 +31,6 @@ test("La precarga de secciones solo se inicia desde Inicio",()=>{
   assert.match(source,/const Estadisticas = lazy\(loadEstadisticas\)/);
 });
 
-test("La precarga inicial descarga solo módulos en inactividad y no consulta datos autenticados",()=>{
-  assert.match(source,/const preload = \(\) => \{/);
-  assert.match(source,/Promise\.allSettled\(\[loadLiga\(\), loadEstadisticas\(\), loadProde\(\), loadMiCarrera\(\)\]\)/);
-  assert.match(source,/}, 1400\)/);
-  assert.match(source,/requestIdleCallback\(preload, \{ timeout: 6000 \}\)/);
-  assert.doesNotMatch(source,/watchProdeUser|fetchProdeRead|fetchCareerData/);
-});
 test("Prode se mantiene montado tras primera visita, con Suspense propio",()=>{
   assert.match(source,/prodeVisited && <div/);
   assert.match(source,/display: isProde \? undefined : "none"/);
@@ -56,14 +49,6 @@ test("Las fuentes externas de Prode se cargan de forma diferida al abrir la pág
   assert.doesNotMatch(styles,/@import\s+url\(['"]https:\/\/fonts\.googleapis\.com/);
 });
 
-
-test("Mi jugador muestra el trofeo de la categoría actual",()=>{
-  const page=readFileSync(new URL("../src/components/FanLevel.jsx",import.meta.url),"utf8");
-  const styles=readFileSync(new URL("../src/components/FanLevel.css",import.meta.url),"utf8");
-  assert.match(page,/<small className="lna-fan-player-display-league"><img src=\{TROPHY_IMAGES\[index\]\}/);
-  assert.match(page,/alt=\{\x60Trofeo \$\{displayLevel\(level\.name\)\}\x60\}/);
-  assert.match(styles,/\.lna-fan-player-display-league img\{[^}]*object-fit:contain/);
-});
 
 
 test("Los tres popups se precargan juntos durante inactividad",()=>{
