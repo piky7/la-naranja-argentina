@@ -183,6 +183,11 @@ async function main() {
     const date = String(match.date || "");
     if (RECENT && (date < yesterday || date > today)) return false;
     if (!ALL_FINISHED && !RECENT && date > today) return false;
+    if (ALL_FINISHED) {
+      const hasFixtureScore = match.homeScore != null && match.awayScore != null &&
+        (Number(match.homeScore) !== 0 || Number(match.awayScore) !== 0);
+      if (!hasFixtureScore) return false;
+    }
     if (RECENT && /^\d{2}:\d{2}$/.test(match.time || "")) {
       const start = Date.parse(`${date}T${match.time}:00-03:00`);
       if (Number.isFinite(start) && start > now.getTime()) return false;
