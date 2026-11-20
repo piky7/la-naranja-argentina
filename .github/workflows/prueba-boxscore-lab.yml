@@ -8,6 +8,7 @@ on:
       - ".github/workflows/prueba-boxscore-lab.yml"
       - "scripts/probe-lab-fixture.cjs"
       - "scripts/probe-lab-boxscore.cjs"
+      - "scripts/sync-lab-boxscores.cjs"
   workflow_dispatch:
 
 permissions:
@@ -32,3 +33,5 @@ jobs:
           node scripts/parse-fixture-lab.cjs --summary
       - name: Inspeccionar pestaña Estadísticas del box score oficial
         run: node scripts/probe-lab-boxscore.cjs
+      - name: Probar importación real de Quilmes–River
+        run: node scripts/sync-lab-boxscores.cjs --match=v2um1j83TfZEvkqWmhIy7wVxUnii7kE_pZTahfcniEeIFTwI7KnOcHOw==
