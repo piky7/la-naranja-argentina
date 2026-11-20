@@ -130,6 +130,8 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
 }
 
 function App() {
+  const [selectedTournament, setSelectedTournament] = useState("lnb");
+
   return (
     <BrowserRouter>
       <PreloadSections />
