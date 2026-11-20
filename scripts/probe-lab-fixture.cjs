@@ -39,6 +39,42 @@ async function main() {
     }
   }
 
+
+  const ajaxUrl = new URL("/laligaargentina/fixture", FIXTURE_URL);
+  ajaxUrl.searchParams.set("handler", "ProximosPartidos");
+  ajaxUrl.searchParams.set("fechaInicio", "2026-09-01");
+  ajaxUrl.searchParams.set("fechaFin", "2027-06-30");
+  const ajaxResponse = await fetch(ajaxUrl, {
+    headers: {
+      "User-Agent": UA,
+      Accept: "text/html, */*",
+      "X-Requested-With": "XMLHttpRequest",
+      Referer: FIXTURE_URL,
+    },
+  });
+  const ajaxHtml = await ajaxResponse.text();
+  const $ajax = cheerio.load(ajaxHtml);
+  const ajaxLinks = $ajax('a[href*="/laligaargentina/partido/"]').map((_, el) => ({
+    url: new URL($ajax(el).attr("href"), FIXTURE_URL).href,
+    text: $ajax(el).text().replace(/\\s+/g, " ").trim(),
+    row: $ajax(el).closest("tr").text().replace(/\\s+/g, " ").trim().slice(0, 300),
+  })).get();
+  const ajaxReport = {
+    url: ajaxUrl.href,
+    status: ajaxResponse.status,
+    contentType: ajaxResponse.headers.get("content-type"),
+    bytes: Buffer.byteLength(ajaxHtml),
+    title: $ajax("title").text().trim(),
+    tables: $ajax("table").length,
+    rows: $ajax("tr").length,
+    matchLinks: ajaxLinks.length,
+    links: ajaxLinks.slice(0, 20),
+    classes: [...new Set($ajax("[class]").map((_, el) => $ajax(el).attr("class")).get().filter(x => /calendario|partido|fixture/i.test(x || "")))].slice(0, 40),
+    snippet: ajaxHtml.slice(0, 1600),
+  };
+  console.log("LAB_AJAX_FIXTURE_REPORT");
+  console.log(JSON.stringify(ajaxReport, null, 2));
+
   const result = {
     url: FIXTURE_URL,
     title: $("title").text().trim(),
@@ -51,7 +87,7 @@ async function main() {
     forms: $("form").map((_, el) => ({ action: $(el).attr("action"), method: $(el).attr("method"), id: $(el).attr("id") })).get(),
     inputs: $("input").map((_, el) => ({ name: $(el).attr("name"), id: $(el).attr("id"), value: $(el).attr("value") })).get(),
     fixtureContainers: $(".mn-fixture").map((_, el) => ({ html: $(el).html()?.slice(0, 4000) })).get(),
-    snippets: [...html.matchAll(/.{0,120}(?:laligaargentina|mn-fixture|handler|fixture|ajax|fetch\().{0,240}/gi)].slice(0, 80).map(m => m[0].replace(/\s+/g, " ")),
+    ajaxReport,\n    snippets: [...html.matchAll(/.{0,120}(?:laligaargentina|mn-fixture|handler|fixture|ajax|fetch\().{0,240}/gi)].slice(0, 80).map(m => m[0].replace(/\s+/g, " ")),
   };
 
   console.log("LAB_FIXTURE_REPORT");
