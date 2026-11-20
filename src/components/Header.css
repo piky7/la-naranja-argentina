@@ -852,3 +852,77 @@
     font-size: 9.5px;
   }
 }
+
+
+/* Selector compacto de competencias: segunda línea del encabezado móvil. */
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap;
+    row-gap: 0;
+    padding-top: 5px;
+  }
+  .header-container > .logo { order: 1; }
+  .header-brand { order: 2; }
+  .tournament-selector {
+    order: 4;
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    min-height: 43px;
+    margin: 0 0 8px;
+    padding: 3px;
+    border: 1px solid rgba(255, 135, 35, .72);
+    border-radius: 13px;
+    background: linear-gradient(110deg, #111b29, #10151e);
+    box-shadow: 0 4px 14px rgba(0,0,0,.22);
+  }
+  .tournament-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 36px;
+    padding: 3px 8px;
+    border: 0;
+    border-right: 1px solid rgba(255,255,255,.16);
+    border-radius: 9px;
+    background: transparent;
+    cursor: pointer;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .tournament-option:last-child { border-right: 0; }
+  .tournament-option img {
+    display: block;
+    width: min(100%, 76px);
+    height: 29px;
+    object-fit: contain;
+  }
+  .tournament-option.active {
+    background: linear-gradient(135deg, #ff9b35, #f47716);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 2px 7px rgba(255,130,24,.2);
+  }
+  .tournament-option:active { transform: scale(.97); }
+  .tournament-option:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 1px;
+  }
+  .header-league { display: none; }
+  .header[data-tournament="lab"] ~ .bottom-navigation,
+  .header[data-tournament="federal"] ~ .bottom-navigation { display: none !important; }
+}
+@media (max-width: 380px) {
+  .tournament-option { padding: 3px 4px; }
+  .tournament-option img { height: 26px; }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
