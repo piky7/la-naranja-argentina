@@ -10,7 +10,7 @@ import "./HomeLigaArgentina.css";
 
 const labCrest = team => {
   const id = team?.teamId || String(team?.crestUrl || "").split("/").filter(Boolean).at(-1);
-  return id ? \`/lab-team-logos/\${id}.webp\` : "";
+  return id ? "/lab-team-logos/" + id + ".webp" : "";
 };
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
