@@ -53,6 +53,26 @@ function normalizePlayer(raw, row) {
   };
 }
 
+function aggregateTeamStats(players, teamId) {
+  const rows = players.filter(player => Number(player.teamId) === Number(teamId));
+  const sum = key => rows.reduce((total, player) => total + Number(player[key] || 0), 0);
+  const shooting = key => ({
+    made: rows.reduce((total, player) => total + Number(player[key]?.made || 0), 0),
+    attempted: rows.reduce((total, player) => total + Number(player[key]?.attempted || 0), 0)
+  });
+  return { playerCount: rows.length, points: sum('points'), twoPointers: shooting('twoPointers'),
+    threePointers: shooting('threePointers'), freeThrows: shooting('freeThrows'),
+    rebounds: sum('rebounds'), offensiveRebounds: sum('offensiveRebounds'),
+    defensiveRebounds: sum('defensiveRebounds'), assists: sum('assists'), steals: sum('steals'),
+    turnovers: sum('turnovers'), blocks: sum('blocks'), fouls: sum('fouls'), valuation: sum('valuation') };
+}
+
+function buildTeamComparison(players, homeTeamId, awayTeamId, homeScore, awayScore) {
+  const home = aggregateTeamStats(players, homeTeamId);
+  const away = aggregateTeamStats(players, awayTeamId);
+  if (!home.playerCount || !away.playerCount || home.points !== Number(homeScore) || away.points !== Number(awayScore)) return null;
+  return { source: 'Suma de estadísticas individuales del boxscore oficial', method: 'sum-player-boxscore', home, away };
+}
 async function main() {
   const importedAtStart = fs.existsSync(OUTPUT) ? JSON.parse(fs.readFileSync(OUTPUT, "utf8")) : {};
   const today = new Date().toISOString().slice(0, 10);
@@ -111,7 +131,8 @@ async function main() {
             homeTeamId: match.homeTeam.teamId, awayTeamId: match.awayTeam.teamId,
             homeScore: Number(match.homeScore), awayScore: Number(match.awayScore),
             source: "Liga Nacional oficial", officialUrl: match.officialUrl,
-            importedAt: new Date().toISOString(), players
+            importedAt: new Date().toISOString(), players,
+            teamComparison: buildTeamComparison(players, match.homeTeam.teamId, match.awayTeam.teamId, match.homeScore, match.awayScore)
           };
           fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
           importedThisRun++;
