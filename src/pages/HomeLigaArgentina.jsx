@@ -194,7 +194,7 @@ export function LabHomeBoxscore({match, onClose}) {
 }
 
 
-function LabUpcomingMatchModal({match,onClose}) {
+export function LabUpcomingMatchModal({match,onClose}) {
   const [tab,setTab]=useState("comparativa");
   const home={...match.homeTeam,name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
   const away={...match.awayTeam,name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
