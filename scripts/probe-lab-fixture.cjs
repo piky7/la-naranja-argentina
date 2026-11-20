@@ -1,46 +1,43 @@
 const cheerio = require("cheerio");
 
 const FIXTURE_URL = "https://www.laliganacional.com.ar/laligaargentina/fixture";
+const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari/537.36";
+
+function relevantLines(source) {
+  return source.split(/\r?\n/).map((line, index) => ({ line: index + 1, text: line.trim().slice(0, 700) }))
+    .filter(item => /laligaargentina|mn-fixture|fixture|ProximosPartidos|ajax|fetch\(|XMLHttpRequest|\.get\(|\.post\(|\.load\(|handler|partido\/|api\//i.test(item.text))
+    .slice(0, 100);
+}
 
 async function main() {
-  const response = await fetch(FIXTURE_URL, {
-    headers: { "User-Agent": "Mozilla/5.0", Accept: "text/html" },
-  });
+  const response = await fetch(FIXTURE_URL, { headers: { "User-Agent": UA, Accept: "text/html" } });
   console.log("LAB_FIXTURE_HTTP", response.status);
   if (!response.ok) throw new Error(`Fixture LAB respondió HTTP ${response.status}`);
 
   const html = await response.text();
   const $ = cheerio.load(html);
   const links = new Map();
-
-  $("a[href]").each((_, element) => {
-    const href = $(element).attr("href") || "";
-    if (!href.includes("/laligaargentina/partido/")) return;
-    const absolute = new URL(href, FIXTURE_URL).href;
-    links.set(absolute, {
-      url: absolute,
-      text: $(element).text().replace(/\s+/g, " ").trim(),
-      parentText: $(element).parent().text().replace(/\s+/g, " ").trim().slice(0, 180),
-    });
-  });
-
-  const classes = new Map();
-  $("[class]").each((_, element) => {
-    const value = ($(element).attr("class") || "").trim();
-    if (!value) return;
-    for (const name of value.split(/\s+/)) {
-      if (/partido|fixture|fecha|calend|tabla|jornada/i.test(name)) {
-        classes.set(name, (classes.get(name) || 0) + 1);
-      }
+  $("a[href]").each((_, el) => {
+    const href = $(el).attr("href") || "";
+    if (href.includes("/laligaargentina/partido/")) {
+      const url = new URL(href, FIXTURE_URL).href;
+      links.set(url, { url, text: $(el).text().replace(/\s+/g, " ").trim() });
     }
   });
 
-  const scripts = $("script").map((_, el) => ({
-    src: $(el).attr("src") || null,
-    type: $(el).attr("type") || null,
-    id: $(el).attr("id") || null,
-    inline: !$(el).attr("src") ? ($(el).html() || "").trim().slice(0, 12000) : null,
-  })).get();
+  const scriptRefs = $("script[src]").map((_, el) => new URL($(el).attr("src"), FIXTURE_URL).href).get();
+  const inlineScripts = $("script:not([src])").map((_, el) => $(el).html() || "").get();
+  const external = [];
+  for (const url of [...new Set(scriptRefs)].slice(0, 40)) {
+    try {
+      const r = await fetch(url, { headers: { "User-Agent": UA, Accept: "*/*", Referer: FIXTURE_URL } });
+      const body = await r.text();
+      external.push({ url, status: r.status, bytes: Buffer.byteLength(body), lines: relevantLines(body) });
+      console.log("LAB_SCRIPT", r.status, url, Buffer.byteLength(body));
+    } catch (error) {
+      external.push({ url, error: String(error) });
+    }
+  }
 
   const result = {
     url: FIXTURE_URL,
@@ -48,19 +45,13 @@ async function main() {
     htmlBytes: Buffer.byteLength(html),
     matchLinks: links.size,
     links: [...links.values()],
-    structuralClasses: [...classes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 50),
-    tables: $("table").length,
-    rows: $("tr").length,
-    scripts,
-    forms: $("form").map((_, el) => ({ action: $(el).attr("action"), method: $(el).attr("method") })).get(),
+    scriptRefs: [...new Set(scriptRefs)],
+    inlineScripts: inlineScripts.map((body, index) => ({ index, lines: relevantLines(body), bytes: Buffer.byteLength(body) })),
+    externalScripts: external,
+    forms: $("form").map((_, el) => ({ action: $(el).attr("action"), method: $(el).attr("method"), id: $(el).attr("id") })).get(),
     inputs: $("input").map((_, el) => ({ name: $(el).attr("name"), id: $(el).attr("id"), value: $(el).attr("value") })).get(),
-    dataAttributes: $("[data-url], [data-endpoint], [data-handler], [data-id]").map((_, el) => ({
-      tag: el.tagName, id: $(el).attr("id"), className: $(el).attr("class"),
-      url: $(el).attr("data-url"), endpoint: $(el).attr("data-endpoint"),
-      handler: $(el).attr("data-handler"), dataId: $(el).attr("data-id"),
-    })).get().slice(0, 80),
-    relevantSnippets: [...html.matchAll(/.{0,100}(?:laligaargentina|mn-fixture|handler|fixture|ajax|fetch\().{0,180}/gi)]
-      .slice(0, 100).map(match => match[0].replace(/\s+/g, " ")),
+    fixtureContainers: $(".mn-fixture").map((_, el) => ({ html: $(el).html()?.slice(0, 4000) })).get(),
+    snippets: [...html.matchAll(/.{0,120}(?:laligaargentina|mn-fixture|handler|fixture|ajax|fetch\().{0,240}/gi)].slice(0, 80).map(m => m[0].replace(/\s+/g, " ")),
   };
 
   console.log("LAB_FIXTURE_REPORT");
@@ -70,27 +61,28 @@ async function main() {
     "# Diagnóstico del fixture oficial LAB", "",
     `- URL: [Fixture oficial](${FIXTURE_URL})`,
     `- HTTP: ${response.status}`,
-    `- Título: ${result.title || "No detectado"}`,
-    `- Enlaces únicos a partidos LAB: **${result.matchLinks}**`,
-    `- Tablas HTML: ${result.tables}`,
-    `- Filas HTML: ${result.rows}`,
+    `- Enlaces directos a partidos: **${result.matchLinks}**`,
+    `- Scripts externos inspeccionados: **${external.length}**`,
     `- Tamaño HTML: ${result.htmlBytes} bytes`, "",
-    "## Primeros partidos encontrados", "",
-    ...(result.links.length
-      ? result.links.slice(0, 30).map((item, i) => `${i + 1}. [${item.text || item.parentText || "Partido"}](${item.url})`)
-      : ["No se encontraron enlaces con la ruta esperada /laligaargentina/partido/ ."]),
-    "", "## Clases estructurales", "",
-    ...result.structuralClasses.map(([name, count]) => `- ${name}: ${count}`),
-    "", "## Scripts externos", "",
-    ...result.scripts.filter(item => item.src).map(item => `- ${item.src}`),
-    "", "## Scripts inline y referencias candidatas", "",
-    ...result.scripts.filter(item => item.inline).map(item => `### Script ${item.id || "(sin id)"}`, "```js", item.inline, "```"),
-    "", "## Snippets relevantes", "",
-    ...result.relevantSnippets.map(value => `- \`${value}\``),
+    "## Scripts externos y referencias de red", "",
+    ...external.flatMap(item => [
+      `### ${item.status || "Error"} — ${item.url}`,
+      ...(item.lines || []).map(x => `- L${x.line}: \`${x.text}\``),
+      ...(item.error ? [item.error] : []), ""
+    ]),
+    "## Scripts inline", "",
+    ...result.inlineScripts.flatMap(item => [
+      `### Inline ${item.index} (${item.bytes} bytes)`,
+      ...(item.lines || []).map(x => `- L${x.line}: \`${x.text}\``), ""
+    ]),
+    "## Contenedores y referencias HTML", "",
+    ...result.snippets.map(x => `- \`${x}\``),
+    "", "## Estado", "",
+    result.matchLinks ? "Se encontraron enlaces directos; se puede avanzar al parser." :
+      "El HTML inicial no contiene partidos. Se inspeccionaron los scripts para identificar el endpoint que carga el fixture."
   ].join("\n");
-
   require("node:fs").writeFileSync(process.env.GITHUB_STEP_SUMMARY, summary + "\n");
-  if (!result.matchLinks) console.log("FIXTURE_DINAMICO: investigar endpoint de carga antes de extraer partidos.");
+  console.log(result.matchLinks ? "FIXTURE_LINKS_FOUND" : "FIXTURE_DYNAMIC_SOURCE_INSPECTED");
 }
 
 main().catch(error => {
