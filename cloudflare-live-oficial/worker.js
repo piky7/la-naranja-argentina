@@ -708,7 +708,7 @@ function interpretarMarcadorLab(html) {
   const estado = html.match(/data-estado=["']([^"']+)["']/i)?.[1] || "";
   const finalizada = /data-finalizada=["']true["']/i.test(html);
   const readScore = id => {
-    const match = html.match(new RegExp('id=["\\']' + id + '["\\'][^>]*>([\\s\\S]*?)<\\/', "i"));
+    const match = html.match(new RegExp('id="' + id + '"[^>]*>([\\s\\S]*?)<\\/', "i"));
     const value = match?.[1]?.replace(/<[^>]+>/g, "").trim();
     return value != null && /^\d{1,3}$/.test(value) ? Number(value) : null;
   };
