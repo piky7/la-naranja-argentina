@@ -38,6 +38,7 @@ on:
       - "tests/match-stats-shared.test.mjs"
       - "src/App.jsx"
       - "src/pages/LigaArgentina.jsx"
+      - "src/pages/LigaArgentinaEquipos.jsx"
       - "src/pages/LigaArgentina.css"
       - "data/lab/labSchedule.json"
       - "tests/lab-fixture.test.mjs"
