@@ -74,10 +74,9 @@ export default function LigaArgentina(){
  const [selectedMatch,setSelectedMatch]=useState(null),[selectedUpcomingMatch,setSelectedUpcomingMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
  const today=todayArgentina();
  const classified=useMemo(()=>fixture.matches.map(m=>{
-  const hasScore=m.homeScore!==null&&m.awayScore!==null;
   const now=new Intl.DateTimeFormat("en-GB",{timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date());
   const future=m.date>today||(m.date===today&&m.time&&m.time>now);
-  return {...m,status:m.status==="needs_review"?"needs_review":future?"scheduled":hasScore&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0)?"finished":"needs_review"};
+  return {...m,status:m.status==="finished"?"finished":future?"scheduled":"needs_review"};
  }),[today]);
  const counts={results:classified.filter(m=>m.status==="finished").length,upcoming:classified.filter(m=>m.status==="scheduled").length,review:classified.filter(m=>m.status==="needs_review").length};
  const {todayMatches,allResults,upcomingMatches}=useMemo(()=>({
@@ -90,7 +89,7 @@ export default function LigaArgentina(){
  const results=allResults.slice((totalResultsPages-1-currentResultsPage)*resultsPerPage,(totalResultsPages-currentResultsPage)*resultsPerPage);
  const standings=useMemo(()=>{
   const rows=new Map(fixture.teams.map(t=>[t.teamId,{...t,played:0,wins:0,losses:0,pf:0,pc:0}]));
-  fixture.matches.filter(m=>m.date<today&&m.homeScore!=null&&m.awayScore!=null&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0)&&Number.isFinite(Number(m.homeScore))&&Number.isFinite(Number(m.awayScore))).forEach(m=>{
+  fixture.matches.filter(m=>m.status==="finished"&&m.homeScore!=null&&m.awayScore!=null&&Number.isFinite(Number(m.homeScore))&&Number.isFinite(Number(m.awayScore))).forEach(m=>{
    const h=rows.get(m.homeTeam.teamId),a=rows.get(m.awayTeam.teamId);if(!h||!a)return;
    h.played++;a.played++;h.pf+=Number(m.homeScore);h.pc+=Number(m.awayScore);a.pf+=Number(m.awayScore);a.pc+=Number(m.homeScore);
    if(Number(m.homeScore)>Number(m.awayScore)){h.wins++;a.losses++;}else{a.wins++;h.losses++;}
