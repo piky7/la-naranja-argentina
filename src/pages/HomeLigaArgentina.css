@@ -207,3 +207,20 @@
   .lab-home-dashboard .lab-home-fixture .fixture-team { gap: 5px; }
   .lab-home-dashboard .lab-home-fixture .fixture-team img { width: 32px; height: 32px; }
 }
+
+/* Selector de conferencia dentro de la tabla de posiciones LAB. */
+.lab-home-dashboard .lab-conference-tabs {
+  margin: 0;
+  padding: 8px 10px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  background: #101923;
+}
+.lab-home-dashboard .lab-conference-tabs .home-stats-tab {
+  min-height: 42px;
+  font-size: 13px;
+  letter-spacing: .8px;
+}
+.lab-home-dashboard .lab-conference-tabs + .standings-table {
+  margin-top: 0;
+}
