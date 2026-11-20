@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import MatchStatsTabs from "../components/MatchStatsTabs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
 import FixtureCalendar from "../components/FixtureCalendar";
@@ -312,6 +312,8 @@ export function LabUpcomingMatchModal({match,onClose}) {
 
 function HomeLigaArgentina() {
   const today = todayInArgentina();
+  const { liveMatches = [] } = useLiveSnapshot();
+  const labLiveById = useMemo(() => new Map(liveMatches.filter(item => item.competition === "LAB" && item.matchId).map(item => [String(item.matchId), item])), [liveMatches]);
   const [selectedDate, setSelectedDate] = useState(today);
   const [statsTab, setStatsTab] = useState("posiciones");
   const [conferenceTab, setConferenceTab] = useState("norte");
@@ -369,7 +371,7 @@ function HomeLigaArgentina() {
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
     const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
-    return <button type="button" onClick={() => isLive ? navigate("/liga") : hasScore ? setSelectedMatch(match) : setSelectedUpcomingMatch(match)}
+    return <button type="button" onClick={() => { if (isLive) return; if (hasScore) setSelectedMatch(match); else setSelectedUpcomingMatch(match); }}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""} ${isLive ? "home-fixture-live" : ""}`}
       style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`,"--match-home-color":labMatchColor(match.homeTeam),"--match-away-color":labMatchColor(match.awayTeam)}}>
       <div className="fixture-team fixture-home">
