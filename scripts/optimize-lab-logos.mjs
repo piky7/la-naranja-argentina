@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { readFile, readdir, mkdir, rm, writeFile } from "node:fs/promises";
+import { readFile, mkdir, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = process.cwd();
@@ -15,7 +15,6 @@ await mkdir(outputDir, { recursive: true });
 let originalBytes = 0;
 let webpBytes = 0;
 let converted = 0;
-const failures = [];
 
 for (let offset = 0; offset < teams.length; offset += 4) {
   const batch = teams.slice(offset, offset + 4);
