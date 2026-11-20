@@ -1,0 +1,23 @@
+.lab-home-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 22px;padding:22px 24px;background:linear-gradient(120deg,#13263a,#0d1723);border:1px solid #26394d;border-left:3px solid #f49a32;border-radius:14px}
+.lab-home-heading>div>span{color:#f49a32;font-size:10px;font-weight:900;letter-spacing:1.5px}
+.lab-home-heading h1{margin:7px 0;color:#f4f6f8;font-size:clamp(25px,3vw,36px);font-weight:950}
+.lab-home-heading h1 strong{color:#f49a32}
+.lab-home-heading p{color:#aebccc;font-size:13px}
+.lab-home-heading>img{width:84px;height:84px;object-fit:contain}
+.lab-home-dashboard{grid-template-columns:minmax(260px,.9fr) minmax(360px,1.45fr) minmax(220px,.75fr)}
+.lab-home-fixture{min-height:102px;padding:14px 12px;grid-template-columns:minmax(0,1fr) 110px minmax(0,1fr);gap:6px;text-decoration:none}
+.lab-home-fixture .fixture-team{font-size:12px;gap:6px}
+.lab-home-fixture .fixture-team img{width:34px;height:34px}
+.lab-home-fixture .fixture-center>span{font-size:8px}
+.lab-home-fixture .fixture-center>small{color:#93a5b8;font-size:8px;text-align:center}
+.lab-home-fixture .fixture-time{font-size:17px}
+.lab-home-fixture .fixture-score{font-size:21px}
+.lab-home-note{padding:12px;color:#92a2b3;font-size:10px;line-height:1.45}
+.lab-home-next{border-top:1px solid #28394b}
+.lab-home-teams{min-width:0}
+.lab-home-team{min-height:49px;display:flex;align-items:center;gap:9px;padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.07);color:#f5f7fa;text-decoration:none;font-size:11px;font-weight:750}
+.lab-home-team img{width:30px;height:30px;object-fit:contain}
+.lab-home-team span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lab-home-team strong{color:#f49a32;font-size:10px;white-space:nowrap}
+@media(max-width:1050px){.lab-home-dashboard{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}.lab-home-teams{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lab-home-teams .home-panel-header{grid-column:1/-1}}
+@media(max-width:680px){.lab-home-dashboard{display:flex;flex-direction:column;gap:14px}.lab-home-dashboard>.home-panel{width:100%}.lab-home-heading{padding:16px;margin-bottom:14px}.lab-home-heading>img{width:60px;height:60px}.lab-home-heading p{font-size:11px}.lab-home-teams{display:block}.lab-home-fixture{grid-template-columns:minmax(0,1fr) 88px minmax(0,1fr);padding:12px 8px}.lab-home-fixture .fixture-team{font-size:10px}.lab-home-fixture .fixture-team img{width:29px;height:29px}}
