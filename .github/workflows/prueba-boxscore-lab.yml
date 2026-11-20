@@ -1,15 +1,6 @@
 name: Probar estructura oficial de Liga Argentina
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/prueba-boxscore-lab.yml"
-      - "scripts/probe-lab-fixture.cjs"
-      - "scripts/probe-lab-boxscore.cjs"
-      - "scripts/sync-lab-boxscores.cjs"
-      - "scripts/build-lab-rosters.cjs"
   workflow_dispatch:
 
 permissions:
