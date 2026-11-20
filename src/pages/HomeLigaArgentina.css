@@ -42,3 +42,42 @@
   .lab-home-dashboard > .fixture-panel { order: -1; }
   .lab-home-dashboard > .standings-panel { order: 2; }
 }
+
+
+/* Tipografía de nombres LAB: mismos tamaños, peso y tratamiento que las planillas LNB. */
+.lab-finished-match .match-modal-team strong,
+.lab-finished-match .match-mvp-name strong,
+.lab-finished-match .match-stats-team-header h3,
+.lab-finished-match .match-stat-player strong {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.lab-finished-match .match-modal-team strong {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.lab-finished-match .match-mvp-name strong {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+.lab-finished-match .match-stats-team-header h3 {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.lab-finished-match .match-stat-player strong {
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-overflow: clip;
+}
+@media (max-width: 600px) {
+  .lab-finished-match .match-modal-team strong { font-size: 11px; line-height: 1.12; }
+  .lab-finished-match .match-mvp-name strong { font-size: 12px; line-height: 1.15; }
+  .lab-finished-match .match-stat-player strong { font-size: 11px; line-height: 1.3; }
+}
