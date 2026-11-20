@@ -138,7 +138,7 @@ test("la migración Prode crea las tablas operativas y preserva membresías exis
   assert.match(migration, /SELECT m\.group_id,m\.user_id,m\.joined_at FROM prode_memberships m/);
 });
 
-test("la migración de votaciones prepara las tablas auxiliares de Mi Carrera", () => {
+test("la migración conserva las tablas de resultados y votaciones necesarias para Prode", () => {
   const migration = readFileSync(new URL("../database/votaciones/002_runtime_tables.sql", import.meta.url), "utf8");
   for (const table of ["partidos_final_detectado", "carrera_partidos", "votos_mvp", "voto_limites"]) {
     assert.match(migration, new RegExp("CREATE TABLE IF NOT EXISTS " + table));
@@ -148,10 +148,10 @@ test("la migración de votaciones prepara las tablas auxiliares de Mi Carrera", 
 test("los votos y cambios de ligas invalidan también sus snapshots en memoria", () => {
   const groups = readFileSync(new URL("../src/components/ProdeGroups.jsx", import.meta.url), "utf8");
   const cache = readFileSync(new URL("../src/utils/prodeRequestCache.js", import.meta.url), "utf8");
-  const career = readFileSync(new URL("../src/auth/careerAccount.js", import.meta.url), "utf8");
+  const career = readFileSync(new URL("../src/auth/prodeSession.js", import.meta.url), "utf8");
   assert.match(groups, /addEventListener\("lna-vote-updated", refreshAfterVote\)/);
   assert.match(groups, /leagueCache\.current\.clear\(\)/);
   assert.match(groups, /notifyProdeDataUpdated\(\)/);
   assert.match(cache, /addEventListener\("lna-vote-updated", invalidateProdeReads\)/);
-  assert.match(career, /entry\.expiresAt = Date\.now\(\) \+ CAREER_READ_TTL/);
+  assert.match(career, /export function useProdeSession/);
 });
