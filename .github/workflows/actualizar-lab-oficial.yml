@@ -1,0 +1,77 @@
+name: Actualizar resultados y estadísticas oficiales LAB
+
+on:
+  schedule:
+    # Consulta frecuente para incorporar boxscores cuando finalizan los partidos.
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "data/lab/labSchedule.json"
+      - ".github/workflows/actualizar-lab-oficial.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-lab-oficial
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Importar boxscores oficiales de partidos finalizados
+        run: node scripts/sync-lab-boxscores.cjs --all-finished
+
+      - name: Consolidar planteles solo si llegaron nuevas planillas
+        id: data
+        run: |
+          if git diff --quiet -- data/lab/labBoxscores.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No hay boxscores nuevos para publicar."
+          else
+            node scripts/build-lab-rosters.cjs
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validar datos consolidados
+        if: steps.data.outputs.changed == 'true'
+        run: |
+          node -e "const b=require('./data/lab/labBoxscores.json'); const r=require('./data/lab/labRosters.json'); if (!Object.keys(b).length || !r.teams) process.exit(1); console.log('Boxscores:',Object.keys(b).length,'Equipos:',Object.keys(r.teams).length)"
+
+      - name: Publicar resultados y estadísticas en main
+        if: steps.data.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/lab/labBoxscores.json data/lab/labRosters.json
+          git commit -m "Actualizar resultados y estadísticas oficiales LAB"
+          git push origin HEAD:main
+
+      - name: Resumen de actualización
+        if: always()
+        run: |
+          {
+            echo "## Actualización automática LAB"
+            echo ""
+            echo "- Boxscores nuevos: ${{ steps.data.outputs.changed || 'no determinado' }}"
+            echo "- Estado: ${{ job.status }}"
+            echo "- Commit de partida: ${{ github.sha }}"
+          } >> "$GITHUB_STEP_SUMMARY"
