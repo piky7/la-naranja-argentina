@@ -24,7 +24,7 @@ const allPlayers = Object.values(rosters.teams || {}).flatMap(roster =>
 ).filter(player => player.gamesPlayed > 0);
 
 const teamColors = player => player.team ? labMatchColor(player.team) : "#315a7b";
-const playerStats = ["points","rebounds","assists","steals","blocks","valuation"];
+const playerStats = ["points","rebounds","assists","valuation"];
 const minutesInSeconds = value => { const parts=String(value||"").split(":").map(Number); return parts.length===3?parts[0]*3600+parts[1]*60+parts[2]:parts.length===2?parts[0]*60+parts[1]:number(value)*60; };
 
 function calculateMvpCounts() {
@@ -160,7 +160,7 @@ function LigaArgentinaEstadisticas(){
         </button>)}</div>
         <div className="lab-stats-table-wrap"><table className="stats-table lab-player-ranking"><thead><tr>
           <th>JUGADOR</th><th>EQUIPO</th><th><button onClick={()=>toggleSort("gamesPlayed")}>PJ ↕</button></th>
-          {playerStats.map(key=><th key={key}><button onClick={()=>toggleSort(key)}>{({points:"PTS",rebounds:"REB",assists:"AST",steals:"REC",blocks:"TAP",valuation:"VAL"})[key]} {sortBy===key?(sortDir==="desc"?"↓":"↑"):"↕"}</button></th>)}
+          {playerStats.map(key=><th key={key}><button onClick={()=>toggleSort(key)}>{({points:"PTS",rebounds:"REB",assists:"AST",valuation:"VAL"})[key]} {sortBy===key?(sortDir==="desc"?"↓":"↑"):"↕"}</button></th>)}
         </tr></thead><tbody>{playerRows.slice(0,20).map((p,i)=><tr key={p.id} style={{"--stats-team-color":teamColors(p)}} onClick={()=>{}}>
           <td><span className="lab-stats-player-cell"><b className={i<3?"lab-stats-medal":""}>{i+1}</b><strong>{formatPersonName(p.name)}</strong></span></td>
           <td><img className="lab-stats-team-logo" src={labCrest(p.team)} alt={p.team?.name||""}/></td><td>{p.gamesPlayed}</td>
