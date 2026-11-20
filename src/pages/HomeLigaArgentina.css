@@ -459,3 +459,71 @@
  .lab-upcoming-overlay .lab-upcoming-match .lab-upcoming-last-matches{margin-top:5px!important}
  .lab-upcoming-overlay .lab-upcoming-match .lab-upcoming-last-result{padding:3px!important}
 }
+
+
+/* Marcador LIVE LAB en la portada: reutiliza el endpoint y los componentes LED compartidos. */
+.lab-home-page .lab-home-fixture.home-fixture-live .fixture-center {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  overflow:hidden;
+}
+.lab-home-page .lab-home-live-center {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  width:100%;
+  min-width:0;
+}
+.lab-home-page .lab-home-live-center .fixture-live-badge {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  color:#ef4444;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.8px;
+  line-height:1.2;
+}
+.lab-home-page .lab-home-live-center .fixture-live-dot {
+  width:6px;
+  height:6px;
+  flex:0 0 6px;
+  border-radius:50%;
+  background:#ef4444;
+  box-shadow:0 0 8px rgba(239,68,68,.65);
+  animation:lab-live-ball-pulse 1.15s ease-in-out infinite;
+}
+.lab-home-page .lab-home-live-center .fixture-live-score,
+.lab-home-page .lab-home-live-center .fixture-live-period {
+  display:block;
+  width:100%;
+  color:#fff;
+  text-align:center;
+  white-space:nowrap;
+}
+.lab-home-page .lab-home-live-center .fixture-live-score svg,
+.lab-home-page .lab-home-live-center .fixture-live-period svg {
+  display:block;
+  width:100%;
+  max-width:128px;
+  height:auto;
+  margin:0 auto;
+}
+.lab-home-page .lab-home-live-center .fixture-live-period {
+  color:#a5a9b2;
+  font-size:9px;
+  font-weight:700;
+  line-height:1.2;
+}
+.lab-home-page .lab-home-fixture.home-fixture-live { cursor:pointer; }
+@media(max-width:600px) {
+  .lab-home-page .lab-home-fixture.home-fixture-live .fixture-center { padding-inline:2px; }
+  .lab-home-page .lab-home-live-center .fixture-live-badge { font-size:9px; }
+  .lab-home-page .lab-home-live-center .fixture-live-score svg,
+  .lab-home-page .lab-home-live-center .fixture-live-period svg { max-width:112px; }
+}
