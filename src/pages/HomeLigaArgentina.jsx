@@ -8,7 +8,8 @@ import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 import boxscores from "../../data/lab/labBoxscores.json";
-import { isLabMatchFinished } from "../utils/labMatchStatus";\nimport "./LigaArgentina.css";
+import { isLabMatchFinished } from "../utils/labMatchStatus";
+import "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
 
