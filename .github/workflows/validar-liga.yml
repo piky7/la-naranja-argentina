@@ -18,6 +18,7 @@ on:
       - "index.html"
       - "scripts/optimize-logo.mjs"
       - "scripts/optimize-team-logos.mjs"
+      - "scripts/optimize-lab-logos.mjs"
       - "src/data/teams.js"
       - "tests/team-logo-webp.test.mjs"
       - "scripts/optimize-legacy-logo.mjs"
