@@ -2,6 +2,9 @@ import { useMemo, useState } from "react";
 import fixture from "../../data/lab/labSchedule.json";
 import boxscores from "../../data/lab/labBoxscores.json";
 import "./LigaArgentina.css";
+import "./Liga.css";
+import "./Home.css";
+import "./HomeLigaArgentina.css";
 
 const todayArgentina = () => new Intl.DateTimeFormat("en-CA", {timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const dateLabel = date => date ? new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"short",timeZone:"UTC"}).format(new Date(date+"T12:00:00Z")).replace(/\./g,"").toUpperCase() : "FECHA A CONFIRMAR";
@@ -37,36 +40,119 @@ function MatchCard({match,onOpen}) {
   <div className="lab-match-venue">{match.venue || "Estadio a confirmar"}<span>Ver planilla oficial ↗</span></div>
  </button>;
 }
+const LAB_CONFERENCES = {
+ norte: ["amancay-lr","barrio-jardin-t","barrio-parque","bochas-cc","comunicaciones","el-ceibo-sf","hindu-c","independiente-sde","jujuy-basquet","mitre-posadas","riachuelo-lr","salta-basket","san-isidro","santa-paula-g","sp-suardi","union-sf","villa-san-martin"],
+ sur: ["centenario-vt","central-entrerriano","ciclista-j","dep-norte","dep-viedma","gimnasia-lp","la-union-c","pergamino-basquet","pico-fc","provincial-r","quilmes-mdp","racing-a","regatas-sn","river","rocamora","union-mdp","villa-mitre-bb"]
+};
+const LAB_TEAM_COLORS = {
+ "amancay-lr":"#c49a32","barrio-jardin-t":"#28794b","barrio-parque":"#28794b","bochas-cc":"#c52f3d",
+ "centenario-vt":"#287db8","central-entrerriano":"#b72d3b","ciclista-j":"#bd303e","comunicaciones":"#d5a62c",
+ "dep-norte":"#1783bd","dep-viedma":"#2775b7","el-ceibo-sf":"#c52f3d","gimnasia-lp":"#24558c",
+ "hindu-c":"#28784b","independiente-sde":"#c32f3d","jujuy-basquet":"#287bb6","la-union-c":"#1878b5",
+ "mitre-posadas":"#d2a32b","pergamino-basquet":"#2774ae","pico-fc":"#bd303c","provincial-r":"#c22e3c",
+ "quilmes-mdp":"#2b5689","racing-a":"#258bc0","regatas-sn":"#267eb5","riachuelo-lr":"#b72d3d",
+ "river":"#c32d3b","rocamora":"#bf303c","salta-basket":"#287bb6","san-isidro":"#c52e3d",
+ "santa-paula-g":"#287bb6","sp-suardi":"#c52f3d","union-mdp":"#2678b6","union-sf":"#c52e3c",
+ "villa-mitre-bb":"#28794b","villa-san-martin":"#bd303e"
+};
+const labTeamCrest = team => team?.teamId ? "/lab-team-logos/"+team.teamId+".webp" : team?.crestUrl || "";
+const labTeamColor = team => LAB_TEAM_COLORS[team?.slug] || "#315a7b";
+const labMatchStyle = match => ({
+ "--match-home-color": labTeamColor(match.homeTeam),
+ "--match-away-color": labTeamColor(match.awayTeam),
+ "--match-home-logo": 'url("'+labTeamCrest(match.homeTeam)+'")',
+ "--match-away-logo": 'url("'+labTeamCrest(match.awayTeam)+'")'
+});
+const formatLeagueWeekday = date => new Intl.DateTimeFormat("es-AR",{weekday:"short",timeZone:"UTC"})
+ .format(new Date(date+"T12:00:00Z")).replace(/\./g,"").toUpperCase();
+const formatLeagueDate = date => new Intl.DateTimeFormat("es-AR",{day:"2-digit",month:"short",timeZone:"UTC"})
+ .format(new Date(date+"T12:00:00Z")).replace(/\./g,"").toUpperCase();
+
 export default function LigaArgentina(){
- const [section,setSection]=useState("fixture"),[filter,setFilter]=useState("all"),[search,setSearch]=useState(""),[selectedMatch,setSelectedMatch]=useState(null);
+ const [section,setSection]=useState("fixture"),[filter,setFilter]=useState("all"),[search,setSearch]=useState("");
+ const [selectedMatch,setSelectedMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
  const today=todayArgentina();
  const classified=useMemo(()=>fixture.matches.map(m=>{
   const hasScore=m.homeScore!==null&&m.awayScore!==null;
   const now=new Intl.DateTimeFormat("en-GB",{timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date());
   const future=m.date>today||(m.date===today&&m.time&&m.time>now);
-  return {...m,status:m.status==="needs_review"?"needs_review":future?"scheduled":hasScore&&!(m.homeScore===0&&m.awayScore===0)?"finished":"needs_review"};
+  return {...m,status:m.status==="needs_review"?"needs_review":future?"scheduled":hasScore&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0)?"finished":"needs_review"};
  }),[today]);
- const todayMatches=classified.filter(m=>m.date===today).sort((a,b)=>(a.time||"").localeCompare(b.time||""));
  const counts={results:classified.filter(m=>m.status==="finished").length,upcoming:classified.filter(m=>m.status==="scheduled").length,review:classified.filter(m=>m.status==="needs_review").length};
- const visible=classified.filter(m=>(filter==="all"||(filter==="results"&&m.status==="finished")||(filter==="upcoming"&&m.status==="scheduled")||(filter==="review"&&m.status==="needs_review"))&&(!search||`${m.homeTeam.name} ${m.awayTeam.name}`.toLowerCase().includes(search.toLowerCase())));
+ const {todayMatches,allResults,upcomingMatches}=useMemo(()=>({
+  todayMatches:classified.filter(m=>m.date===today&&m.status==="scheduled").sort((a,b)=>(a.time||"").localeCompare(b.time||"")),
+  allResults:classified.filter(m=>m.status==="finished").sort((a,b)=>a.date!==b.date?b.date.localeCompare(a.date):(b.time||"").localeCompare(a.time||"")),
+  upcomingMatches:classified.filter(m=>m.status==="scheduled"&&m.date>=today).sort((a,b)=>a.date!==b.date?a.date.localeCompare(b.date):(a.time||"").localeCompare(b.time||"")).slice(0,10)
+ }),[classified,today]);
+ const resultsPerPage=10,totalResultsPages=Math.ceil(allResults.length/resultsPerPage);
+ const currentResultsPage=Math.min(Math.max(resultsPage??Math.max(totalResultsPages-1,0),0),Math.max(totalResultsPages-1,0));
+ const results=allResults.slice((totalResultsPages-1-currentResultsPage)*resultsPerPage,(totalResultsPages-currentResultsPage)*resultsPerPage);
  const standings=useMemo(()=>{
   const rows=new Map(fixture.teams.map(t=>[t.teamId,{...t,played:0,wins:0,losses:0,pf:0,pc:0}]));
-  classified.filter(m=>m.status==="finished").forEach(m=>{const h=rows.get(m.homeTeam.teamId),a=rows.get(m.awayTeam.teamId);if(!h||!a)return;h.played++;a.played++;h.pf+=m.homeScore;h.pc+=m.awayScore;a.pf+=m.awayScore;a.pc+=m.homeScore;if(m.homeScore>m.awayScore){h.wins++;a.losses++;}else{a.wins++;h.losses++;}});
+  classified.filter(m=>m.status==="finished").forEach(m=>{
+   const h=rows.get(m.homeTeam.teamId),a=rows.get(m.awayTeam.teamId);if(!h||!a)return;
+   h.played++;a.played++;h.pf+=Number(m.homeScore);h.pc+=Number(m.awayScore);a.pf+=Number(m.awayScore);a.pc+=Number(m.homeScore);
+   if(Number(m.homeScore)>Number(m.awayScore)){h.wins++;a.losses++;}else{a.wins++;h.losses++;}
+  });
   return [...rows.values()].sort((a,b)=>b.wins-a.wins||(b.pf-b.pc)-(a.pf-a.pc)||a.name.localeCompare(b.name,"es"));
  },[classified]);
- return <main className="lab-page">
-  <section className="lab-hero"><div className="lab-hero-inner"><img src="/tournament-logos/lab.svg" alt=""/><div><span className="lab-kicker">LA NARANJA ARGENTINA · 2026/27</span><h1>LIGA <strong>ARGENTINA</strong></h1><p>Fixture, resultados y seguimiento de la segunda categoría del básquet argentino.</p></div></div>
-   <div className="lab-summary"><div><strong>{fixture.total}</strong><span>PARTIDOS EN FIXTURE</span></div><div><strong>{fixture.teams.length}</strong><span>EQUIPOS</span></div><div><strong>{counts.results}</strong><span>RESULTADOS IDENTIFICADOS</span></div></div>
-  </section>
-  <div className="lab-content"><div className="lab-tabs"><button className={section==="fixture"?"active":""} onClick={()=>setSection("fixture")}>Fixture y resultados</button><button className={section==="standings"?"active":""} onClick={()=>setSection("standings")}>Posiciones</button></div>
-  {section==="fixture"?<><div className="lab-section-heading"><div><span>COMPETENCIA 2026/27</span><h2>PARTIDOS</h2></div><input aria-label="Buscar equipo" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Buscar equipo..."/></div>
-   {todayMatches.length>0&&<section className="lab-today-section"><div className="lab-section-heading"><div><span>HOY</span><h2>PARTIDOS DE HOY</h2></div></div><div className="lab-today-grid">{todayMatches.map(m=><MatchCard key={m.id} match={m} onOpen={setSelectedMatch}/>)}</div></section>}
-   <div className="lab-filters">{[["all","Todos",fixture.total],["results","Resultados",counts.results],["upcoming","Próximos",counts.upcoming],["review","A verificar",counts.review]].map(([key,label,count])=><button key={key} className={filter===key?"active":""} onClick={()=>setFilter(key)}>{label}<b>{count}</b></button>)}</div>
-   <div className="lab-match-list">{visible.map(m=><MatchCard key={m.id} match={m} onOpen={setSelectedMatch}/>) }{!visible.length&&<p className="lab-empty">No hay partidos para este filtro.</p>}</div>
-  </>:<><div className="lab-section-heading"><div><span>ESTADÍSTICAS DE TEMPORADA</span><h2>POSICIONES</h2></div></div><div className="lab-standings-note">Los equipos todavía no están asignados a las conferencias Norte y Sur. Mostramos una tabla general provisoria, sin atribuir conferencias incorrectamente.</div>
-   <div className="lab-table-wrap"><table className="lab-table"><thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>P</th><th>PF</th><th>PC</th><th>Dif.</th></tr></thead><tbody>{standings.map((t,i)=><tr key={t.teamId}><td>{i+1}</td><td><span className="lab-table-team"><img src={t.crestUrl || `https://www.laliganacional.com.ar/escudos/${t.clubId}/${t.teamId}`} alt="" loading="lazy"/>{t.name}</span></td><td>{t.played}</td><td>{t.wins}</td><td>{t.losses}</td><td>{t.pf}</td><td>{t.pc}</td><td>{t.pf-t.pc}</td></tr>)}</tbody></table></div>
-  </>}
-  {selectedMatch&&<div className="lab-modal-backdrop" role="presentation" onClick={()=>setSelectedMatch(null)}><section className="lab-team-modal lab-match-modal" role="dialog" aria-modal="true" aria-label="Detalle del partido" onClick={e=>e.stopPropagation()}><button className="lab-modal-close" onClick={()=>setSelectedMatch(null)} aria-label="Cerrar">×</button><span className="lab-kicker">{dateLabel(selectedMatch.date)} · {selectedMatch.time||"HORARIO A CONFIRMAR"}</span><h2>{teamLabel(selectedMatch.homeTeam.name)} <strong>{selectedMatch.homeScore} - {selectedMatch.awayScore}</strong> {teamLabel(selectedMatch.awayTeam.name)}</h2><p>{selectedMatch.venue||"Estadio a confirmar"}</p>{selectedMatch.status==="finished" ? <LabBoxscore match={selectedMatch}/> : <a href={selectedMatch.officialUrl} target="_blank" rel="noreferrer">Ver información oficial del partido ↗</a>}</section></div>}
-  <p className="lab-source">Fixture y planillas: <a href="https://www.laliganacional.com.ar/laligaargentina/fixture" target="_blank" rel="noreferrer">sitio oficial de La Liga Nacional ↗</a>. Los resultados se clasifican por fecha y marcador; los casos no confirmados quedan separados para revisión.</p>
-  </div></main>;
+ const conferenceTeams=useMemo(()=>{
+  const allowed=new Set(LAB_CONFERENCES[conference]);
+  return standings.filter(team=>allowed.has(team.slug));
+ },[standings,conference]);
+ const MatchTeam=({team,logoClass="result-logo"})=><div className="result-team"><img src={labTeamCrest(team)} alt="" className={logoClass} loading="lazy"/><span>{teamLabel(team.name)}</span></div>;
+ const standingPositionClass=index=>index<4?"standing-position-direct":index<12?"standing-position-reclasificacion":index===16?"standing-position-descenso":"";
+ const renderStandingRows=()=>conferenceTeams.map((team,index)=><div className="home-standing-row" key={team.teamId}>
+  <span className={"standing-position "+standingPositionClass(index)}>{index+1}</span>
+  <span className="home-standing-team"><img src={labTeamCrest(team)} alt="" loading="lazy"/><span>{teamLabel(team.name)}</span></span>
+  <strong>{team.wins}</strong><strong>{team.losses}</strong>
+ </div>);
+ return <main className="league-page lab-page lab-league-page">
+  <section className="league-content"><div className="page-container">
+   <section className="league-section today-section">
+    <div className="section-heading"><div><span className="section-label">HOY</span><h2 className="league-hero-title">PARTIDOS <span>DE HOY</span></h2></div></div>
+    {todayMatches.length?<div className="today-matches">{todayMatches.map(match=><button key={match.id} type="button" className="today-match-card" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
+     <div className="match-date"><span>{formatLeagueDate(match.date)}</span>{match.time&&<strong>{match.time}</strong>}</div>
+     <div className="match-teams"><div className="match-team"><img src={labTeamCrest(match.homeTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.homeTeam.name)}</span></div><div className="match-vs"><span>VS</span></div><div className="match-team"><img src={labTeamCrest(match.awayTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.awayTeam.name)}</span></div></div>
+     <div className="match-details"><strong>{match.time||"A confirmar"}</strong>{match.venue&&<span>📍 {match.venue}</span>}</div>
+    </button>)}</div>:<div className="no-today-matches"><span className="no-matches-label">SIN PARTIDOS</span><h3>Hoy no hay partidos</h3><p>No hay encuentros programados para hoy.</p></div>}
+   </section>
+   <section className="league-columns lab-league-columns">
+    <div className="league-column standings-column-section">
+     <div className="section-heading"><div><span className="section-label">TEMPORADA</span><h2 className="league-hero-title">TABLA DE <span>POSICIONES</span></h2></div></div>
+     <div className="standings-card lab-conference-standings">
+      <div className="home-stats-tabs lab-league-conference-tabs" aria-label="Conferencias">
+       <button type="button" className={"home-stats-tab "+(conference==="norte"?"active":"")} onClick={()=>setConference("norte")}>NORTE</button>
+       <button type="button" className={"home-stats-tab "+(conference==="sur"?"active":"")} onClick={()=>setConference("sur")}>SUR</button>
+      </div>
+      <div className="standings-table standings-table-desktop">
+       <div className="standings-table-header"><span>#</span><span>Equipo</span><span>PG</span><span>PP</span></div>
+       {renderStandingRows()}
+      </div>
+     </div>
+    </div>
+    <div className="league-column">
+     <div className="section-heading"><div><span className="section-label">ÚLTIMOS 10</span><div className="lab-league-results-title"><h2 className="league-hero-title">RESULTADOS</h2>
+      {totalResultsPages>1&&<div className="lab-results-pagination">
+       <button type="button" aria-label="Resultados anteriores" disabled={currentResultsPage===0} onClick={()=>setResultsPage(currentResultsPage-1)}>‹</button><span>{currentResultsPage+1}/{totalResultsPages}</span>
+       <button type="button" aria-label="Resultados más recientes" disabled={currentResultsPage===totalResultsPages-1} onClick={()=>setResultsPage(currentResultsPage+1)}>›</button>
+      </div>}
+     </div></div></div>
+     <div className="results-card">{results.length?results.map(match=><button key={match.id} type="button" className="result-match" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
+      <div className="result-date"><span className="league-card-weekday">{formatLeagueWeekday(match.date)}</span><span>{formatLeagueDate(match.date)}</span></div>
+      <div className="result-teams"><MatchTeam team={match.homeTeam}/><div className="result-score"><strong className={Number(match.homeScore)>Number(match.awayScore)?"league-score-winner":""}>{match.homeScore}</strong><span>-</span><strong className={Number(match.awayScore)>Number(match.homeScore)?"league-score-winner":""}>{match.awayScore}</strong></div><div className="result-team away"><span>{teamLabel(match.awayTeam.name)}</span><img src={labTeamCrest(match.awayTeam)} alt="" className="result-logo" loading="lazy"/></div></div>
+     </button>):<div className="column-empty">No hay resultados registrados.</div>}</div>
+    </div>
+    <div className="league-column">
+     <div className="section-heading"><div><span className="section-label">PRÓXIMOS 10</span><h2 className="league-hero-title">PRÓXIMOS <span>PARTIDOS</span></h2></div></div>
+     <div className="upcoming-card">{upcomingMatches.length?upcomingMatches.map(match=><button key={match.id} type="button" className="upcoming-match" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
+      <div className="upcoming-date"><small className="league-card-weekday">{formatLeagueWeekday(match.date)}</small><span>{formatLeagueDate(match.date)}</span><strong>{match.time||"A confirmar"}</strong></div>
+      <div className="upcoming-teams"><div><img src={labTeamCrest(match.homeTeam)} alt="" className="upcoming-logo" loading="lazy"/><span>{teamLabel(match.homeTeam.name)}</span></div><span className="upcoming-vs">VS</span><div><span>{teamLabel(match.awayTeam.name)}</span><img src={labTeamCrest(match.awayTeam)} alt="" className="upcoming-logo" loading="lazy"/></div></div>
+     </button>):<div className="column-empty">No hay próximos partidos programados.</div>}</div>
+    </div>
+   </section>
+   <p className="lab-source">Fixture y planillas: <a href="https://www.laliganacional.com.ar/laligaargentina/fixture" target="_blank" rel="noreferrer">sitio oficial de Liga Argentina ↗</a>.</p>
+  </div></section>
+  {selectedMatch&&<div className="lab-modal-backdrop" role="presentation" onClick={()=>setSelectedMatch(null)}><section className="lab-team-modal lab-match-modal" role="dialog" aria-modal="true" aria-label="Detalle del partido" onClick={e=>e.stopPropagation()}><button className="lab-modal-close" onClick={()=>setSelectedMatch(null)} aria-label="Cerrar">×</button><span className="lab-kicker">{dateLabel(selectedMatch.date)} · {selectedMatch.time||"HORARIO A CONFIRMAR"}</span><h2>{teamLabel(selectedMatch.homeTeam.name)} <strong>{selectedMatch.homeScore??"VS"} {selectedMatch.awayScore??""}</strong> {teamLabel(selectedMatch.awayTeam.name)}</h2><p>{selectedMatch.venue||"LIGA ARGENTINA"}</p>{selectedMatch.status==="finished"?<LabBoxscore match={selectedMatch}/>:<a href={selectedMatch.officialUrl} target="_blank" rel="noreferrer">Ver información oficial del partido ↗</a>}</section></div>}
+ </main>;
 }
