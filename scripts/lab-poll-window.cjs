@@ -19,6 +19,7 @@ function hasCompleteBoxscore(box) {
 function pollDecision(event, schedule, requestedMode = "", now = new Date()) {
   if (fixture.competition !== "Liga Argentina" || !Array.isArray(fixture.matches)) throw new Error("Fixture LAB inválido");
   if (event === "workflow_dispatch" && requestedMode === "backfill") return {run:true,mode:"backfill"};
+  if (event === "push") return {run:true,mode:"backfill"};
   if (event === "schedule" && schedule !== "*/10 * * * *") return {run:true,mode:"full"};
   if (event === "workflow_dispatch" && requestedMode === "full") return {run:true,mode:"full"};
   const pending = fixture.matches.some(match => !hasCompleteBoxscore(boxes[match.id]) && isRecentCandidate(match, now));
