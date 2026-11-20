@@ -1,6 +1,10 @@
 name: Sincronización unificada LNB + LAB
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "data/lab/backfill-request.json"
   workflow_dispatch:
     inputs:
       mode:
@@ -22,7 +26,7 @@ concurrency:
 
 jobs:
   sincronizar-lnb:
-    if: inputs.mode != 'backfill'
+    if: github.event_name != 'push' && inputs.mode != 'backfill'
     runs-on: ubuntu-latest
     timeout-minutes: 35
     outputs:
@@ -113,7 +117,7 @@ jobs:
       run: ${{ steps.window.outputs.run }}
       mode: ${{ steps.window.outputs.mode }}
     env:
-      LAB_REQUESTED_MODE: ${{ inputs.mode }}
+      LAB_REQUESTED_MODE: ${{ github.event_name == 'push' && 'backfill' || inputs.mode }}
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
@@ -276,6 +280,6 @@ jobs:
             echo "## Sincronización unificada LNA"
             echo "- LNB: ${{ needs.sincronizar-lnb.outputs.run }}"
             echo "- LAB: ${{ needs.sincronizar-lab.outputs.run }}"
-            echo "- Modo solicitado: ${{ inputs.mode }}"
+            echo "- Modo solicitado: ${{ github.event_name == 'push' && 'backfill' || inputs.mode }}"
             echo "- Publicación: un único commit coordinado"
           } >> "$GITHUB_STEP_SUMMARY"
