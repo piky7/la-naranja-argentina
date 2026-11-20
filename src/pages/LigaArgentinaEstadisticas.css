@@ -107,3 +107,20 @@
  .lab-stats-player-cell>strong{font-size:9px}
  .lab-stats-team-logo{width:21px;height:21px}
 }
+
+/* Podio de posiciones: oro, plata y bronce reales. */
+.lab-stats-player-cell>b.lab-stats-medal-gold{
+ background:linear-gradient(135deg,#fff0a5 0%,#f1c84e 48%,#bd8420 100%);
+ color:#3b2908;
+ box-shadow:inset 0 1px 1px #fff8,0 1px 5px #d9a53655;
+}
+.lab-stats-player-cell>b.lab-stats-medal-silver{
+ background:linear-gradient(135deg,#f5f7fa 0%,#c9d0d9 48%,#8996a5 100%);
+ color:#273443;
+ box-shadow:inset 0 1px 1px #fff9,0 1px 5px #aeb9c855;
+}
+.lab-stats-player-cell>b.lab-stats-medal-bronze{
+ background:linear-gradient(135deg,#f4c49b 0%,#c77b43 48%,#87431f 100%);
+ color:#3c1d0b;
+ box-shadow:inset 0 1px 1px #fff7,0 1px 5px #b76a3b55;
+}
