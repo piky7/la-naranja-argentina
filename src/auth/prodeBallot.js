@@ -1,10 +1,10 @@
-import { requireCareerToken } from "./careerAccount";
+import { getProdeIdToken } from "./prodeAuth";
 
 const API = "https://lna-prode-api.lnab.workers.dev/api/prode/ballot";
 
 // Un pronóstico = una cuenta Google. No hay votaciones anónimas nuevas.
 export async function requestPrediction(kind, partidoId, details = null, signal = undefined) {
-  const token = await requireCareerToken();
+  const token = await getProdeIdToken();
   const isPost = details !== null;
   const response = await fetch(API + (isPost ? "" : "?kind=" + encodeURIComponent(kind) + "&partidoId=" + encodeURIComponent(partidoId)), {
     method: isPost ? "POST" : "GET",
