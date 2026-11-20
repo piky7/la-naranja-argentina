@@ -926,3 +926,8 @@
   white-space: nowrap;
   border: 0;
 }
+
+@media (max-width: 768px) {
+  .header-container > .lna-profile-access-group,
+  .header-container > .lna-profile-access-guest { order: 3; }
+}
