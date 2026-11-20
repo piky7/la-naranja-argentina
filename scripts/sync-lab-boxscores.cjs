@@ -6,6 +6,7 @@ const fixture = require("../data/lab/labSchedule.json");
 const TARGET_ARG = process.argv.find(arg => arg.startsWith("--match="));
 const TARGET = TARGET_ARG ? TARGET_ARG.slice("--match=".length) : null;
 const ALL_FINISHED = process.argv.includes("--all-finished");
+const RECENT = process.argv.includes("--recent");
 const REFRESH_COMPARISON = process.argv.includes("--refresh-comparison");
 const PAUSE_MS = 900;
 const OUTPUT = path.join(__dirname, "../data/lab/labBoxscores.json");
@@ -98,11 +99,18 @@ function parseOfficialTeamComparison($) {
 
 async function main() {
   const importedAtStart = fs.existsSync(OUTPUT) ? JSON.parse(fs.readFileSync(OUTPUT, "utf8")) : {};
-  const today = new Date().toISOString().slice(0, 10);
+  const now = new Date();
+  const today = new Date(now.getTime() - 3 * 3600000).toISOString().slice(0, 10);
+  const yesterday = new Date(now.getTime() - 27 * 3600000).toISOString().slice(0, 10);
   const matches = fixture.matches.filter(match => {
     if (TARGET) return match.id === TARGET;
-    if (!ALL_FINISHED) return true;
+    if (!ALL_FINISHED && !RECENT) return true;
     const date = String(match.date || "");
+    if (RECENT && (date < yesterday || date > today)) return false;
+    if (RECENT && /^\\d{2}:\\d{2}$/.test(match.time || "")) {
+      const start = Date.parse(`${date}T${match.time}:00-03:00`);
+      if (Number.isFinite(start) && start > now.getTime()) return false;
+    }
     const hasRealScore = match.homeScore != null && match.awayScore != null &&
       !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
     return date <= today && hasRealScore && (!importedAtStart[match.id] || REFRESH_COMPARISON);
