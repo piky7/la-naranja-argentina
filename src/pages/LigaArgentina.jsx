@@ -1,10 +1,33 @@
 import { useMemo, useState } from "react";
 import fixture from "../../data/lab/labSchedule.json";
+import boxscores from "../../data/lab/labBoxscores.json";
 import "./LigaArgentina.css";
 
 const todayArgentina = () => new Intl.DateTimeFormat("en-CA", {timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const dateLabel = date => date ? new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"short",timeZone:"UTC"}).format(new Date(date+"T12:00:00Z")).replace(/\./g,"").toUpperCase() : "FECHA A CONFIRMAR";
 const teamLabel = name => name.replace(" (MDP)","").replace(" (SF)","").replace(" (CC)","");
+
+function LabBoxscore({match}) {
+ const box=boxscores[match.id];
+ const [side,setSide]=useState("home"),[tab,setTab]=useState("players");
+ if(!box) return <div className="lab-boxscore-empty"><strong>Estadísticas en preparación</strong><span>La planilla oficial todavía no está incorporada a la base de LNA.</span></div>;
+ const crest=t=>t.crestUrl || ("https://www.laliganacional.com.ar/escudos/"+t.clubId+"/"+t.teamId);
+ const team=side==="home"?match.homeTeam:match.awayTeam;
+ const rows=box.players.filter(p=>p.teamId===team.teamId).sort((a,b)=>b.points-a.points);
+ const mvp=box.players.slice().sort((a,b)=>b.valuation-a.valuation || b.points-a.points)[0];
+ const mvpTeam=mvp && (mvp.teamId===match.homeTeam.teamId?match.homeTeam:match.awayTeam);
+ const date=new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"}).format(new Date(match.date+"T12:00:00Z")).replace(/\./g,"").toUpperCase();
+ return <div className="lab-native-boxscore">
+  <header className="lab-native-head"><b>LIGA ARGENTINA 2026/27</b><span>{date} <i>•</i> FINAL</span>
+   <div className="lab-native-score"><div><img src={crest(match.homeTeam)} alt=""/><strong>{teamLabel(match.homeTeam.name)}</strong></div><b><em>{match.homeScore}</em> - <em>{match.awayScore}</em></b><div><img src={crest(match.awayTeam)} alt=""/><strong>{teamLabel(match.awayTeam.name)}</strong></div></div><small>{match.venue || "LIGA ARGENTINA"}</small>
+  </header>
+  {mvp&&<section className="lab-native-mvp"><label>♛ JUGADOR DESTACADO · MAYOR VALORACIÓN</label><div><img src={crest(mvpTeam)} alt=""/><strong>{mvp.name}</strong><small>{teamLabel(mvpTeam.name)}</small></div><aside>{[[mvp.points,"PTS"],[mvp.rebounds,"REB"],[mvp.assists,"AST"],[mvp.minutes,"MIN"],[mvp.valuation,"VAL"]].map(([v,l])=><b key={l}>{v}<small>{l}</small></b>)}</aside></section>}
+  <nav className="lab-native-tabs"><button className={tab==="players"?"active":""} onClick={()=>setTab("players")}>Stats jugadores</button><button className={tab==="teams"?"active":""} onClick={()=>setTab("teams")}>Estadísticas equipos</button></nav>
+  {tab==="players"?<><nav className="lab-native-team-tabs">{[["home",match.homeTeam],["away",match.awayTeam]].map(([s,t])=><button key={s} className={side===s?"active":""} onClick={()=>setSide(s)}><img src={crest(t)} alt=""/>{teamLabel(t.name)}</button>)}</nav><div className="lab-native-table"><div className="lab-native-th"><b>JUGADOR</b><b>PTS</b><b>REB</b><b>AST</b><b>MIN</b><b>VAL</b></div>{rows.map(p=><div className="lab-native-tr" key={p.id}><strong>{p.number?("#"+p.number+" · "):""}{p.name}</strong><b>{p.points}</b><span>{p.rebounds}</span><span>{p.assists}</span><span>{p.minutes}</span><b>{p.valuation}</b></div>)}</div></>:<div className="lab-native-unavailable">Las estadísticas colectivas comparadas todavía no están disponibles para esta competencia.</div>}
+  <footer className="lab-native-footer"><b>LNA</b><strong>ESTADÍSTICAS DEL PARTIDO</strong></footer>
+ </div>;
+}
+
 function MatchCard({match,onOpen}) {
  const finished=match.status==="finished", review=match.status==="needs_review";
  const Team=({team})=><div className="lab-match-team"><img src={team.crestUrl || `https://www.laliganacional.com.ar/escudos/${team.clubId}/${team.teamId}`} alt="" loading="lazy"/><span>{teamLabel(team.name)}</span></div>;
@@ -43,7 +66,7 @@ export default function LigaArgentina(){
   </>:<><div className="lab-section-heading"><div><span>ESTADÍSTICAS DE TEMPORADA</span><h2>POSICIONES</h2></div></div><div className="lab-standings-note">Los equipos todavía no están asignados a las conferencias Norte y Sur. Mostramos una tabla general provisoria, sin atribuir conferencias incorrectamente.</div>
    <div className="lab-table-wrap"><table className="lab-table"><thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>G</th><th>P</th><th>PF</th><th>PC</th><th>Dif.</th></tr></thead><tbody>{standings.map((t,i)=><tr key={t.teamId}><td>{i+1}</td><td><span className="lab-table-team"><img src={t.crestUrl || `https://www.laliganacional.com.ar/escudos/${t.clubId}/${t.teamId}`} alt="" loading="lazy"/>{t.name}</span></td><td>{t.played}</td><td>{t.wins}</td><td>{t.losses}</td><td>{t.pf}</td><td>{t.pc}</td><td>{t.pf-t.pc}</td></tr>)}</tbody></table></div>
   </>}
-  {selectedMatch&&<div className="lab-modal-backdrop" role="presentation" onClick={()=>setSelectedMatch(null)}><section className="lab-team-modal lab-match-modal" role="dialog" aria-modal="true" aria-label="Detalle del partido" onClick={e=>e.stopPropagation()}><button className="lab-modal-close" onClick={()=>setSelectedMatch(null)} aria-label="Cerrar">×</button><span className="lab-kicker">{dateLabel(selectedMatch.date)} · {selectedMatch.time||"HORARIO A CONFIRMAR"}</span><h2>{teamLabel(selectedMatch.homeTeam.name)} <strong>{selectedMatch.homeScore} - {selectedMatch.awayScore}</strong> {teamLabel(selectedMatch.awayTeam.name)}</h2><p>{selectedMatch.venue||"Estadio a confirmar"}</p>{selectedMatch.status==="finished" ? <div className="lab-official-stats"><iframe title="Estadísticas oficiales del partido" src={selectedMatch.officialUrl} loading="lazy" referrerPolicy="strict-origin-when-cross-origin"/><a href={selectedMatch.officialUrl} target="_blank" rel="noreferrer">Abrir estadísticas en el sitio oficial ↗</a></div> : <a href={selectedMatch.officialUrl} target="_blank" rel="noreferrer">Ver información oficial del partido ↗</a>}</section></div>}
+  {selectedMatch&&<div className="lab-modal-backdrop" role="presentation" onClick={()=>setSelectedMatch(null)}><section className="lab-team-modal lab-match-modal" role="dialog" aria-modal="true" aria-label="Detalle del partido" onClick={e=>e.stopPropagation()}><button className="lab-modal-close" onClick={()=>setSelectedMatch(null)} aria-label="Cerrar">×</button><span className="lab-kicker">{dateLabel(selectedMatch.date)} · {selectedMatch.time||"HORARIO A CONFIRMAR"}</span><h2>{teamLabel(selectedMatch.homeTeam.name)} <strong>{selectedMatch.homeScore} - {selectedMatch.awayScore}</strong> {teamLabel(selectedMatch.awayTeam.name)}</h2><p>{selectedMatch.venue||"Estadio a confirmar"}</p>{selectedMatch.status==="finished" ? <LabBoxscore match={selectedMatch}/> : <a href={selectedMatch.officialUrl} target="_blank" rel="noreferrer">Ver información oficial del partido ↗</a>}</section></div>}
   <p className="lab-source">Fixture y planillas: <a href="https://www.laliganacional.com.ar/laligaargentina/fixture" target="_blank" rel="noreferrer">sitio oficial de La Liga Nacional ↗</a>. Los resultados se clasifican por fecha y marcador; los casos no confirmados quedan separados para revisión.</p>
   </div></main>;
 }
