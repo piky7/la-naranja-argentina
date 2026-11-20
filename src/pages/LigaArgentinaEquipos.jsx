@@ -65,8 +65,8 @@ function TeamDetail({team}) {
  const roster=rosters.teams[String(team.teamId)]||{players:[],playersCount:0};
  const [selectedMatch,setSelectedMatch]=useState(null);
  const teamMatches=fixture.matches.filter(m=>Number(m.homeTeam.teamId)===Number(team.teamId)||Number(m.awayTeam.teamId)===Number(team.teamId));
- const played=teamMatches.filter(m=>m.date<=today()&&m.homeScore!=null&&m.awayScore!=null&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0));
- const upcoming=teamMatches.filter(m=>m.date>=today()&&(m.homeScore==null||m.awayScore==null||((Number(m.homeScore)===0&&Number(m.awayScore)===0)))).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")).slice(0,4);
+ const played=teamMatches.filter(m=>m.status==="finished"&&m.homeScore!=null&&m.awayScore!=null);
+ const upcoming=teamMatches.filter(m=>m.status!=="finished"&&m.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")).slice(0,4);
  const results=[...played].sort((a,b)=>b.date.localeCompare(a.date)||(b.time||"").localeCompare(a.time||"")).slice(0,9);
  let wins=0,losses=0;
  for(const m of played){const home=Number(m.homeTeam.teamId)===Number(team.teamId);const own=Number(home?m.homeScore:m.awayScore),other=Number(home?m.awayScore:m.homeScore);if(own>other)wins++;else if(own<other)losses++;}
@@ -97,7 +97,7 @@ export default function LigaArgentinaEquipos() {
  const {teamId}=useParams();
  const [search,setSearch]=useState("");
  const stats=useMemo(()=>fixture.teams.map(team=>{
-  const played=fixture.matches.filter(m=>m.date<=today()&&m.homeScore!=null&&m.awayScore!=null&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0)&&(Number(m.homeTeam.teamId)===Number(team.teamId)||Number(m.awayTeam.teamId)===Number(team.teamId)));
+  const played=fixture.matches.filter(m=>m.status==="finished"&&m.homeScore!=null&&m.awayScore!=null&&(Number(m.homeTeam.teamId)===Number(team.teamId)||Number(m.awayTeam.teamId)===Number(team.teamId)));
   let wins=0,losses=0;
   for(const m of played){const home=Number(m.homeTeam.teamId)===Number(team.teamId),own=Number(home?m.homeScore:m.awayScore),other=Number(home?m.awayScore:m.homeScore);if(own>other)wins++;else if(own<other)losses++;}
   return {...team,wins,losses,played:wins+losses};
