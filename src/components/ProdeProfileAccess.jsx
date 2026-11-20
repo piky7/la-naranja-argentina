@@ -7,7 +7,7 @@ import ProdeCrest from "./ProdeCrest";
 import { isSportsDesign, serializeSportsDesign } from "./sportsCrestDesign";
 import "./ProdeProfileAccess.css";
 
-export default function CareerProfileAccess(){
+export default function ProdeProfileAccess(){
  const [user,setUser]=useState(null),[loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[profile,setProfile]=useState(null);
  useEffect(()=>{let active=true,stop;watchProdeUser(next=>{if(active){setUser(next);setLoading(false);}}).then(fn=>{if(active)stop=fn;else fn();}).catch(()=>setLoading(false));return()=>{active=false;stop?.();};},[]);
  useEffect(()=>{let active=true;if(!user){setProfile(null);return()=>{active=false;};}fetchProdeProfile().then(p=>{if(active)setProfile(p);}).catch(()=>{if(active)setProfile(null);});const refresh=()=>fetchProdeProfile().then(p=>{if(active)setProfile(p);}).catch(()=>{});window.addEventListener("prode-profile-updated",refresh);return()=>{active=false;window.removeEventListener("prode-profile-updated",refresh);};},[user]);
