@@ -58,7 +58,7 @@ function TeamMatchRow({match,teamId,finished,onClick}) {
    <div className="team-match-side"><img className="team-match-logo" src={labCrest(rival)} alt=""/><strong>{clean(rival.name)}</strong></div>
   </div>
   <span className="team-match-time team-match-time-modern">{finished?"FINAL":(match.time||"A confirmar")}</span>
- </article>;
+ </button>;
 }
 
 function TeamDetail({team}) {
