@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 import boxscores from "../../data/lab/labBoxscores.json";
+import { LabHomeBoxscore, labMatchColor, labCrest } from "./HomeLigaArgentina";
 import "./LigaArgentina.css";
 import "./Equipo.css";
 
@@ -46,25 +47,25 @@ function TeamStats({ team, games, scores, boxes }) {
  </section>;
 }
 
-function TeamMatchRow({match,teamId,finished}) {
+function TeamMatchRow({match,teamId,finished,onClick}) {
  const home=Number(match.homeTeam.teamId)===Number(teamId);
  const own=home?match.homeTeam:match.awayTeam, rival=home?match.awayTeam:match.homeTeam;
- return <article className="team-match-row team-match-modern">
+ return <button type="button" onClick={onClick} className={"team-match-row team-match-modern "+(finished?"lab-team-result-clickable":"")} disabled={!finished}>
   <div className="team-match-date team-match-date-modern"><small>{fmtWeekday(match.date)}</small><strong>{fmtDate(match.date)}</strong><span>{home?"LOCAL":"VISITANTE"}</span></div>
   <div className="team-match-opponent team-match-versus">
-   <div className="team-match-side"><img className="team-match-logo" src={own.crestUrl} alt=""/><strong>{clean(own.name)}</strong></div>
+   <div className="team-match-side"><img className="team-match-logo" src={labCrest(own)} alt=""/><strong>{clean(own.name)}</strong></div>
    {finished?<strong className={"team-result-center "+(Number(home?match.homeScore:match.awayScore)>Number(home?match.awayScore:match.homeScore)?"team-result-win":"team-result-loss")}>{home?match.homeScore:match.awayScore} - {home?match.awayScore:match.homeScore}</strong>:<span className="team-match-vs">VS</span>}
-   <div className="team-match-side"><img className="team-match-logo" src={rival.crestUrl} alt=""/><strong>{clean(rival.name)}</strong></div>
+   <div className="team-match-side"><img className="team-match-logo" src={labCrest(rival)} alt=""/><strong>{clean(rival.name)}</strong></div>
   </div>
   <span className="team-match-time team-match-time-modern">{finished?"FINAL":(match.time||"A confirmar")}</span>
  </article>;
 }
 
 function TeamDetail({team}) {
- const roster=rosters.teams[String(team.teamId)]||{players:[],playersCount:0};
+ const roster=rosters.teams[String(team.teamId)]||{players:[],playersCount:0};\n const [selectedMatch,setSelectedMatch]=useState(null);
  const teamMatches=fixture.matches.filter(m=>Number(m.homeTeam.teamId)===Number(team.teamId)||Number(m.awayTeam.teamId)===Number(team.teamId));
  const played=teamMatches.filter(m=>m.date<=today()&&m.homeScore!=null&&m.awayScore!=null&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0));
- const upcoming=teamMatches.filter(m=>m.date>=today()&&(m.status==="scheduled"||m.homeScore==null||m.awayScore==null)).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")).slice(0,4);
+ const upcoming=teamMatches.filter(m=>m.date>=today()&&(m.homeScore==null||m.awayScore==null||((Number(m.homeScore)===0&&Number(m.awayScore)===0)))).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")).slice(0,4);
  const results=[...played].sort((a,b)=>b.date.localeCompare(a.date)||(b.time||"").localeCompare(a.time||"")).slice(0,9);
  let wins=0,losses=0;
  for(const m of played){const home=Number(m.homeTeam.teamId)===Number(team.teamId);const own=Number(home?m.homeScore:m.awayScore),other=Number(home?m.awayScore:m.homeScore);if(own>other)wins++;else if(own<other)losses++;}
@@ -78,7 +79,7 @@ function TeamDetail({team}) {
    <TeamStats team={team} games={played} scores={played} boxes={boxscores}/>
    <div className="lab-team-agenda-grid">
     <section className="team-section"><div className="section-heading-team"><div><span>AGENDA</span><h2>PRÓXIMOS <span>PARTIDOS</span></h2></div><strong>{upcoming.length}</strong></div>{upcoming.length?<div className="team-matches">{upcoming.map(m=><TeamMatchRow key={m.id} match={m} teamId={team.teamId}/>)}</div>:<div className="team-empty"><strong>No hay próximos partidos</strong></div>}</section>
-    <section className="team-section"><div className="section-heading-team"><div><span>RESULTADOS</span><h2>ÚLTIMOS <span>PARTIDOS</span></h2></div><strong>{played.length}</strong></div>{results.length?<div className="team-matches">{results.map(m=><TeamMatchRow key={m.id} match={m} teamId={team.teamId} finished/>)}</div>:<div className="team-empty"><strong>Todavía no hay resultados</strong></div>}</section>
+    <section className="team-section"><div className="section-heading-team"><div><span>RESULTADOS</span><h2>ÚLTIMOS <span>PARTIDOS</span></h2></div><strong>{played.length}</strong></div>{results.length?<div className="team-matches">{results.map(m=><TeamMatchRow key={m.id} match={m} teamId={team.teamId} finished onClick={()=>setSelectedMatch(m)}/>)}</div>:<div className="team-empty"><strong>Todavía no hay resultados</strong></div>}</section>
    </div>
    <section className="team-section lab-team-roster-section"><div className="section-heading-team"><div><h2><span>PLANTEL</span></h2></div><strong>{roster.playersCount||players.length}</strong></div>
     {players.length?<div className="team-roster-table lab-team-roster-table"><div className="team-roster-head"><span>JUGADOR</span><span>PJ</span><span>PTS</span><span>REB</span><span>AST</span><span>MIN</span><span>VAL</span></div>
@@ -102,10 +103,9 @@ export default function LigaArgentinaEquipos() {
  if(teamId){const team=fixture.teams.find(t=>String(t.teamId)===String(teamId)||t.slug===teamId);return team?<TeamDetail team={team}/>:<main className="team-page"><div className="page-container"><Link to="/equipos" className="back-link">← Volver a equipos</Link><h1>Equipo no encontrado</h1></div></main>;}
  const filtered=stats.filter(t=>clean(t.name).toLowerCase().includes(search.trim().toLowerCase())).sort((a,b)=>clean(a.name).localeCompare(clean(b.name),"es"));
  return <main className="lab-page lab-team-directory">
-  <section className="lab-hero"><div className="lab-hero-inner"><img src="/tournament-logos/lab.svg" alt=""/><div><span className="lab-kicker">LIGA ARGENTINA · 2026/27</span><h1>NUESTROS <strong>EQUIPOS</strong></h1><p>Fichas, planteles detectados en planillas y rendimiento de los 34 clubes.</p></div></div><div className="lab-summary"><div><strong>{fixture.teams.length}</strong><span>EQUIPOS</span></div><div><strong>{stats.reduce((n,t)=>n+t.played,0)/2}</strong><span>PARTIDOS COMPUTADOS</span></div><div><strong>{Object.values(rosters.teams).reduce((n,t)=>n+t.playersCount,0)}</strong><span>JUGADORES DETECTADOS</span></div></div></section>
-  <section className="lab-content"><div className="lab-section-heading"><div><span>COMPETENCIA 2026/27</span><h2>EQUIPOS</h2></div><input aria-label="Buscar equipo" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Buscar equipo..."/></div>
-   <div className="lab-team-directory-list">{filtered.map(team=><Link key={team.teamId} to={"/equipos/"+team.teamId} className="lab-team-directory-row"><img src={team.crestUrl} alt=""/><span className="lab-team-directory-info"><strong>{clean(team.name)}</strong><small>{team.wins} G · {team.losses} P</small></span><span className="lab-team-directory-code">{team.slug.slice(0,2).toUpperCase()}</span><span className="lab-team-directory-arrow">⟶</span></Link>)}</div>
+  <section className="lab-content">
+   <div className="lab-section-heading"><h1>EQUIPOS</h1><input aria-label="Buscar equipo" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Buscar equipo..."/></div>
+   <div className="lab-team-directory-list">{filtered.map(team=><Link key={team.teamId} to={"/equipos/"+team.teamId} className="lab-team-directory-row" style={{"--lab-team-color":labMatchColor(team)}}><img src={labCrest(team)} alt=""/><span className="lab-team-directory-info"><strong>{clean(team.name)}</strong><small>{team.wins} G · {team.losses} P</small></span><span className="lab-team-directory-code">{team.slug.slice(0,2).toUpperCase()}</span><span className="lab-team-directory-arrow">⟶</span></Link>)}</div>
    {!filtered.length&&<p className="lab-empty">No encontramos equipos con esa búsqueda.</p>}
   </section>
  </main>;
-}
