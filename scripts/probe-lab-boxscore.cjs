@@ -50,11 +50,18 @@ async function main() {
       if (snippets.length) external.push({url,status:r.status,bytes:Buffer.byteLength(body),snippets});
     } catch(error) { external.push({url,error:String(error)}); }
   }
+  const aggregateCandidates = $("tr, .row, [class*=team], [id*=team], [class*=estad], [id*=estad]").map((_,el)=>({
+    tag:el.tagName, id:$(el).attr("id")||null, className:$(el).attr("class")||null,
+    text:$(el).text().replace(/\\s+/g," ").trim().slice(0,700),
+    html:$(el).html()?.slice(0,1800)||""
+  })).get().filter(x=>/equipo|local|visitante|puntos|rebotes|asistencias|recuperaciones|p[eé]rdidas|tapones|faltas|dobles|triples|libres|valoraci[oó]n/i.test(x.text)).slice(0,180);
+  const statTextMatches = [...html.matchAll(/.{0,180}(?:comparativa|estad[ií]sticas de equipo|rebotes totales|tiros de campo|p[eé]rdidas|asistencias).{0,260}/gi)]
+    .slice(0,100).map(match=>match[0].replace(/\\s+/g," "));
   const report = {
     url:MATCH_URL,http:response.status,title:$("title").text().trim(),bytes:Buffer.byteLength(html),
     statusText:$("#status-partido").text().trim(),
     scores:{home:$("#score-local").text().trim(),away:$("#score-visitante").text().trim()},
-    tabCandidates:tabs,tables,playerTables,inlineScripts:relevantInline,externalScripts:external,
+    tabCandidates:tabs,tables,playerTables,aggregateCandidates,statTextMatches,inlineScripts:relevantInline,externalScripts:external,
     statClassCount:$("[class*=estad], [id*=estad], [class*=jugador], [id*=jugador]").length,
     htmlHasStatLabels:/rebotes|asistencias|minutos|valoraci[oó]n/i.test(html)
   };
