@@ -25,10 +25,12 @@ const metricWidth = (value, other, isShooting) => {
   return Math.min(100, (current / maximum) * 100);
 };
 
-export default function MatchStatsTabs({ match, stats, home, away, children, customTeamComparison }) {
+export default function MatchStatsTabs({ match, stats, home, away, children, customTeamComparison, teamColors = {} }) {
   const [tab, setTab] = useState("players");
   const [team, setTeam] = useState("home");
   const id = useId();
+  // Permite que cada competencia aporte sus colores sin alterar la paleta histórica de LNB.
+  const matchColors = { ...teamMatchColors, ...teamColors };
   const official = stats?.source === "Liga Nacional" && stats?.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/");
   const collective = official ? stats.teamStats : null;
   return <div className="match-stats-tabs">
@@ -62,7 +64,7 @@ export default function MatchStatsTabs({ match, stats, home, away, children, cus
           </button>
         ))}
       </div>
-      <div className={`match-player-tables match-player-team-${team}`} style={{ "--boxscore-team-color": teamMatchColors[team === "home" ? match.homeTeam : match.awayTeam] || "#18334b" }}>{children}</div>
+      <div className={`match-player-tables match-player-team-${team}`} style={{ "--boxscore-team-color": matchColors[team === "home" ? match.homeTeam : match.awayTeam] || "#18334b" }}>{children}</div>
     </div>
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
       <div className="match-team-comparison-intro">
@@ -70,7 +72,7 @@ export default function MatchStatsTabs({ match, stats, home, away, children, cus
         <span>LIGA NACIONAL · TEMPORADA 2026/27</span>
       </div>
       {customTeamComparison || (!collective && <p className="match-team-unavailable">Estadísticas colectivas no disponibles para este partido.</p>)}
-      {collective && <div className="match-team-comparison-card" style={{ "--comparison-home-color": teamMatchColors[match.homeTeam] || "#18334b", "--comparison-away-color": teamMatchColors[match.awayTeam] || "#18334b" }}>
+      {collective && <div className="match-team-comparison-card" style={{ "--comparison-home-color": matchColors[match.homeTeam] || "#18334b", "--comparison-away-color": matchColors[match.awayTeam] || "#18334b" }}>
         <div className="match-team-comparison-header">
           <div className="match-team-comparison-name">{home?.logo && <img src={home.logo} alt="" />}<span>{home?.shortName || home?.name || "Local"}</span></div>
           <span>INDICADOR</span>
