@@ -25,7 +25,7 @@ test("Popup compartido conserva comparativa, jugadores y votación con MVP",()=>
     "Votación",
     "<MatchVote",
     "<MvpPrediction",
-    "upcoming-career-status",
+    "upcoming-prode-status",
     "upcoming-tabs-three",
   ]) assert.ok(popup.includes(term),"Se perdió: "+term);
 });
