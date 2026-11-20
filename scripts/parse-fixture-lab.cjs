@@ -7,12 +7,12 @@ const END = process.env.LAB_END_DATE || "2027-06-30";
 const UA = "Mozilla/5.0 (compatible; LaNaranjaArgentina/1.0; +https://lanaranjaargentina.com.ar)";
 
 function clean(value) {
-  return String(value || "").replace(/\\s+/g, " ").trim();
+  return String(value || "").replace(/\s+/g, " ").trim();
 }
 
 function parseTeam($, anchor) {
   const href = anchor.attr("href") || "";
-  const match = href.match(/\\/equipo\\/(\\d+)\\/(\\d+)\\/([^/?#]+)/i);
+  const match = href.match(/\/equipo\/(\d+)\/(\d+)\/([^/?#]+)/i);
   const name = clean(anchor.text()) || clean(anchor.find("img").attr("alt"));
   if (!match || !name) return null;
   const crest = anchor.find("img").attr("src");
@@ -24,14 +24,14 @@ function parseTeam($, anchor) {
 }
 
 function parseDateTime(value) {
-  const match = clean(value).match(/(\\d{2})\\/(\\d{2})\\/(\\d{4})(?:\\s+(\\d{2}):(\\d{2}))?/);
+  const match = clean(value).match(/(\d{2})\/(\d{2})\/(\d{4})(?:\s+(\d{2}):(\d{2}))?/);
   if (!match) return { date: null, time: null };
   return { date: `${match[3]}-${match[2]}-${match[1]}`, time: match[4] ? `${match[4]}:${match[5]}` : null };
 }
 
 function parseScore(value) {
   const text = clean(value);
-  return /^\\d+$/.test(text) ? Number(text) : null;
+  return /^\d+$/.test(text) ? Number(text) : null;
 }
 
 function parseFixtureRows(html) {
@@ -42,7 +42,7 @@ function parseFixtureRows(html) {
   $(".fila-tabla-calendarios.datos-estadisticos").each((_, element) => {
     const row = $(element);
     const statsHref = row.find('a[href*="/laligaargentina/partido/"]').first().attr("href") || "";
-    const idMatch = statsHref.match(/\\/partido\\/([^/?#]+)/i);
+    const idMatch = statsHref.match(/\/partido\/([^/?#]+)/i);
     const teams = [];
     const teamSeen = new Set();
 
