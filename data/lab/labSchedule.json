@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-20T18:59:06.066Z",
+  "importedAt": "2026-11-20T19:26:13.844Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -309,10 +309,11 @@
       },
       "homeScore": 78,
       "awayScore": 79,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v21Md4Rsc5qvKBFvvDxOfuz8X1s634_OSxYVTQZHZxYPMpsvEUV38JuA==/quilmes-mdp-vs-river",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:23:52.428Z"
     },
     {
       "id": "v2ApoPkgAMrnRpK3vf_sKmxReZrmt7JC98sIyRu2N5_sEReVanT7PIbA==",
@@ -339,10 +340,11 @@
       },
       "homeScore": 96,
       "awayScore": 87,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2ApoPkgAMrnRpK3vf_sKmxReZrmt7JC98sIyRu2N5_sEReVanT7PIbA==/union-sf-vs-bochas-cc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:23:53.750Z"
     },
     {
       "id": "v2WO2QchV8n6-AuUqFvZevB_O5EoYOhOybV6oV2wQsrG0ad11nWXZJzA==",
@@ -369,10 +371,11 @@
       },
       "homeScore": 79,
       "awayScore": 75,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2WO2QchV8n6-AuUqFvZevB_O5EoYOhOybV6oV2wQsrG0ad11nWXZJzA==/gimnasia-lp-vs-central-entrerriano",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:23:55.068Z"
     },
     {
       "id": "v253IR3xTBtX6-FkcDOWtIlaGSWqHMG82HuO1OVaLZW8_kGoqbdNfS1g==",
@@ -399,10 +402,11 @@
       },
       "homeScore": 88,
       "awayScore": 66,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v253IR3xTBtX6-FkcDOWtIlaGSWqHMG82HuO1OVaLZW8_kGoqbdNfS1g==/centenario-vt-vs-rocamora",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:23:56.355Z"
     },
     {
       "id": "v2x6zavhs9WovDpr88hy_ZGAO3bMkBMO8HhmFw47LIRRMsfq4PNo8BMg==",
@@ -429,10 +433,11 @@
       },
       "homeScore": 84,
       "awayScore": 73,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2x6zavhs9WovDpr88hy_ZGAO3bMkBMO8HhmFw47LIRRMsfq4PNo8BMg==/provincial-r-vs-la-union-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:23:57.631Z"
     },
     {
       "id": "v2M7ZZJMuIhuGSSOj5yh3-S1yDK8SR5iRlY8fgF3cxoztxojcvcVllvg==",
@@ -459,10 +464,11 @@
       },
       "homeScore": 74,
       "awayScore": 83,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2M7ZZJMuIhuGSSOj5yh3-S1yDK8SR5iRlY8fgF3cxoztxojcvcVllvg==/union-mdp-vs-river",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:23:58.937Z"
     },
     {
       "id": "v26nn5frP0c1oi6vV-OUoKr-ZRYy9el4KLOmpuml0SOzJ2RpWe4O6MtA==",
@@ -489,10 +495,11 @@
       },
       "homeScore": 101,
       "awayScore": 74,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v26nn5frP0c1oi6vV-OUoKr-ZRYy9el4KLOmpuml0SOzJ2RpWe4O6MtA==/santa-paula-g-vs-bochas-cc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:00.231Z"
     },
     {
       "id": "v2GNU6UzjQnI_aX3dIqJ5x-eueX6ig6ny7Oo-0RUETLHO35iHh96QzIw==",
@@ -519,10 +526,11 @@
       },
       "homeScore": 92,
       "awayScore": 88,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2GNU6UzjQnI_aX3dIqJ5x-eueX6ig6ny7Oo-0RUETLHO35iHh96QzIw==/comunicaciones-vs-el-ceibo-sf",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:01.515Z"
     },
     {
       "id": "v2DdvHwvEzJydTnIrttCXh982HZx6IOp0J-NzO2Lt14PXd4daz19L0bA==",
@@ -549,10 +557,11 @@
       },
       "homeScore": 69,
       "awayScore": 77,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2DdvHwvEzJydTnIrttCXh982HZx6IOp0J-NzO2Lt14PXd4daz19L0bA==/jujuy-basquet-vs-hindu-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:02.783Z"
     },
     {
       "id": "v28BlzVWeNCAGmFy-QHzPh2ftWTVf0NfJmLvZaaz23UVBwyYLpoYn7sg==",
@@ -579,10 +588,11 @@
       },
       "homeScore": 93,
       "awayScore": 74,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v28BlzVWeNCAGmFy-QHzPh2ftWTVf0NfJmLvZaaz23UVBwyYLpoYn7sg==/quilmes-mdp-vs-central-entrerriano",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:04.034Z"
     },
     {
       "id": "v20UTrBM4sgo6_MJDkzN3aBCMa_nEgy4A1UIlCJ8GT7QxBqxweeVg_Ew==",
@@ -609,10 +619,11 @@
       },
       "homeScore": 65,
       "awayScore": 62,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v20UTrBM4sgo6_MJDkzN3aBCMa_nEgy4A1UIlCJ8GT7QxBqxweeVg_Ew==/dep-norte-vs-rocamora",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:05.391Z"
     },
     {
       "id": "v2PxTOZNEe4kObRNtWMOAjrzSCMwacycwb6LS4vSnRESTiKLxnscYvRg==",
@@ -639,10 +650,11 @@
       },
       "homeScore": 86,
       "awayScore": 76,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2PxTOZNEe4kObRNtWMOAjrzSCMwacycwb6LS4vSnRESTiKLxnscYvRg==/dep-viedma-vs-pico-fc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:06.701Z"
     },
     {
       "id": "v2g_MJGWYOAkuBGxGrANdfA7SoyO36-RmnLJhXr1LYHblsdGeFskhoLQ==",
@@ -669,10 +681,11 @@
       },
       "homeScore": 68,
       "awayScore": 76,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2g_MJGWYOAkuBGxGrANdfA7SoyO36-RmnLJhXr1LYHblsdGeFskhoLQ==/mitre-posadas-vs-el-ceibo-sf",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:07.926Z"
     },
     {
       "id": "v2g6mVtecUdTSNF_I56RU6P9n5VB5sIHfsMNGV7FPYCPlnPId-OsKYsg==",
@@ -699,10 +712,11 @@
       },
       "homeScore": 85,
       "awayScore": 74,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2g6mVtecUdTSNF_I56RU6P9n5VB5sIHfsMNGV7FPYCPlnPId-OsKYsg==/salta-basket-vs-hindu-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:09.181Z"
     },
     {
       "id": "v28mxsVsjQUHO1Vygc7n9nH88pmu5pZhtZa8mAfM7dKpbwVu2HFwASQw==",
@@ -729,10 +743,11 @@
       },
       "homeScore": 80,
       "awayScore": 78,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v28mxsVsjQUHO1Vygc7n9nH88pmu5pZhtZa8mAfM7dKpbwVu2HFwASQw==/regatas-sn-vs-centenario-vt",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:10.460Z"
     },
     {
       "id": "v2EhG8NmPXixFURo5DE85Y5wjy9XN-CnEhnDenEyPBhTan5Z0qWoSExg==",
@@ -759,10 +774,11 @@
       },
       "homeScore": 79,
       "awayScore": 64,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2EhG8NmPXixFURo5DE85Y5wjy9XN-CnEhnDenEyPBhTan5Z0qWoSExg==/la-union-c-vs-pergamino-basquet",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:11.734Z"
     },
     {
       "id": "v2BXDwFJ5Suab_pjebOJEl1YG8rVbtvLxIL2ocgqCURf3VDbPCmq6DHA==",
@@ -789,10 +805,11 @@
       },
       "homeScore": 81,
       "awayScore": 91,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2BXDwFJ5Suab_pjebOJEl1YG8rVbtvLxIL2ocgqCURf3VDbPCmq6DHA==/gimnasia-lp-vs-ciclista-j",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:12.994Z"
     },
     {
       "id": "v27z9j12yBYCV4ffAZ4vbkpUb6czaqBMPRIvirJLSFvlYe5uBNdsbV0w==",
@@ -819,10 +836,11 @@
       },
       "homeScore": 83,
       "awayScore": 89,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v27z9j12yBYCV4ffAZ4vbkpUb6czaqBMPRIvirJLSFvlYe5uBNdsbV0w==/santa-paula-g-vs-barrio-parque",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:14.272Z"
     },
     {
       "id": "v2ud-Ajt3-om19_akVmsTpZUlq4UpfXxmoSn12ojLUxVddGV1BfQnUqQ==",
@@ -849,10 +867,11 @@
       },
       "homeScore": 56,
       "awayScore": 52,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2ud-Ajt3-om19_akVmsTpZUlq4UpfXxmoSn12ojLUxVddGV1BfQnUqQ==/villa-mitre-bb-vs-pico-fc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:15.527Z"
     },
     {
       "id": "v26TpluTaVYau10W1A0vUnCWfkFMJ9KQuxCKH9pircRPXhZRG44_s7sQ==",
@@ -879,10 +898,11 @@
       },
       "homeScore": 71,
       "awayScore": 53,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v26TpluTaVYau10W1A0vUnCWfkFMJ9KQuxCKH9pircRPXhZRG44_s7sQ==/union-mdp-vs-central-entrerriano",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:16.867Z"
     },
     {
       "id": "v23XusNVCipQc5RERg8ZXgL4oOb3s6U1SQSHzuG6WtUOWnHu9PQoavoA==",
@@ -909,10 +929,11 @@
       },
       "homeScore": 75,
       "awayScore": 80,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v23XusNVCipQc5RERg8ZXgL4oOb3s6U1SQSHzuG6WtUOWnHu9PQoavoA==/union-sf-vs-barrio-parque",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:18.178Z"
     },
     {
       "id": "v2pE5ff-qGJ_PMMZe19fH2OwSBIa5plBDyyQVTcKhsyKwE_Jry1bUv7A==",
@@ -939,10 +960,11 @@
       },
       "homeScore": 85,
       "awayScore": 73,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2pE5ff-qGJ_PMMZe19fH2OwSBIa5plBDyyQVTcKhsyKwE_Jry1bUv7A==/villa-san-martin-vs-el-ceibo-sf",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:19.446Z"
     },
     {
       "id": "v2LtvoHqXiueIXcwGCTVVyKojE2Uw5SrL9hYOQI4qivFDd-asSleWBlw==",
@@ -969,10 +991,11 @@
       },
       "homeScore": 77,
       "awayScore": 75,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2LtvoHqXiueIXcwGCTVVyKojE2Uw5SrL9hYOQI4qivFDd-asSleWBlw==/rocamora-vs-pergamino-basquet",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:20.756Z"
     },
     {
       "id": "v2Bea5PUuXXaMjlIjkFeokwMDHpXCZAnJWwTQHEAFlqkMjQCmMYfq9ZQ==",
@@ -999,10 +1022,11 @@
       },
       "homeScore": 76,
       "awayScore": 91,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2Bea5PUuXXaMjlIjkFeokwMDHpXCZAnJWwTQHEAFlqkMjQCmMYfq9ZQ==/bochas-cc-vs-sp-suardi",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:22.087Z"
     },
     {
       "id": "v2rlwiid8MNyho32N9A2ttzAy1iM9WKKeA2KzshCQe9P884CP8TjZ5QA==",
@@ -1029,10 +1053,11 @@
       },
       "homeScore": 54,
       "awayScore": 72,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2rlwiid8MNyho32N9A2ttzAy1iM9WKKeA2KzshCQe9P884CP8TjZ5QA==/regatas-sn-vs-dep-norte",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:23.363Z"
     },
     {
       "id": "v2i8o2-MWJorqmSaAm6TXKKf9IJBFsbzGaq-wZHNf2LgVigcPuktZpDg==",
@@ -1059,10 +1084,11 @@
       },
       "homeScore": 82,
       "awayScore": 94,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2i8o2-MWJorqmSaAm6TXKKf9IJBFsbzGaq-wZHNf2LgVigcPuktZpDg==/riachuelo-lr-vs-santa-paula-g",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:24.658Z"
     },
     {
       "id": "v2b6h3wH2SibFYPj3ChnSHXwKnoW1yJ38NxstTaBmxkQ4ByYpyDPu45w==",
@@ -1089,10 +1115,11 @@
       },
       "homeScore": 90,
       "awayScore": 68,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2b6h3wH2SibFYPj3ChnSHXwKnoW1yJ38NxstTaBmxkQ4ByYpyDPu45w==/central-entrerriano-vs-pergamino-basquet",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:25.936Z"
     },
     {
       "id": "v2o10Os7Fvs076KtoN0lMUcy3YoDveAJCSyCnRbzlqMiKURMqrtBeJTA==",
@@ -1119,10 +1146,11 @@
       },
       "homeScore": 86,
       "awayScore": 87,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2o10Os7Fvs076KtoN0lMUcy3YoDveAJCSyCnRbzlqMiKURMqrtBeJTA==/la-union-c-vs-river",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:27.205Z"
     },
     {
       "id": "v2-ZJrZ7Uzm767bPP6mbR3XFIkMN528Czvv1Yz94BSMbze4gMeoLmlIA==",
@@ -1149,10 +1177,11 @@
       },
       "homeScore": 88,
       "awayScore": 80,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2-ZJrZ7Uzm767bPP6mbR3XFIkMN528Czvv1Yz94BSMbze4gMeoLmlIA==/ciclista-j-vs-quilmes-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:28.495Z"
     },
     {
       "id": "v28mtfLu6BmhfZXyDJY0U_fv19bsPMA4Xnyw6GI6grRVI8yjRqXfVUaQ==",
@@ -1179,10 +1208,11 @@
       },
       "homeScore": 58,
       "awayScore": 73,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v28mtfLu6BmhfZXyDJY0U_fv19bsPMA4Xnyw6GI6grRVI8yjRqXfVUaQ==/centenario-vt-vs-gimnasia-lp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:29.752Z"
     },
     {
       "id": "v2hVkLfn07CeEAZn8FBkFA-q5M9-djSlMgePqrXULu2s-5W1OVrL7_qw==",
@@ -1209,10 +1239,11 @@
       },
       "homeScore": 86,
       "awayScore": 93,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2hVkLfn07CeEAZn8FBkFA-q5M9-djSlMgePqrXULu2s-5W1OVrL7_qw==/amancay-lr-vs-santa-paula-g",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:31.023Z"
     },
     {
       "id": "v2pyFrxRJwYvvAAevmIxJ4wwxgl0rp8XKpsyBNcYe-yT9Ec9almx-qgA==",
@@ -1239,10 +1270,11 @@
       },
       "homeScore": 80,
       "awayScore": 82,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2pyFrxRJwYvvAAevmIxJ4wwxgl0rp8XKpsyBNcYe-yT9Ec9almx-qgA==/villa-san-martin-vs-mitre-posadas",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:32.280Z"
     },
     {
       "id": "v2ML7xIaWnDqrZ-9y8quN4864J4V70jpor5TN-Vu_XVzY839-hjaWYhQ==",
@@ -1269,10 +1301,11 @@
       },
       "homeScore": 81,
       "awayScore": 75,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2ML7xIaWnDqrZ-9y8quN4864J4V70jpor5TN-Vu_XVzY839-hjaWYhQ==/rocamora-vs-river",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:33.610Z"
     },
     {
       "id": "v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==",
@@ -1299,10 +1332,11 @@
       },
       "homeScore": 108,
       "awayScore": 104,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==/regatas-sn-vs-racing-a",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:34.886Z"
     },
     {
       "id": "v2F7EOz1XRbLHH_dquybSwRNehswIomO4nny98uDQriLZ5DomvdWgG7Q==",
@@ -1329,10 +1363,11 @@
       },
       "homeScore": 87,
       "awayScore": 75,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2F7EOz1XRbLHH_dquybSwRNehswIomO4nny98uDQriLZ5DomvdWgG7Q==/san-isidro-vs-riachuelo-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:36.158Z"
     },
     {
       "id": "v2cxaJsAwzO1eVxFiMn5ZsqVRneeO-lL6C7OokvOPMq_lKoitz2DcJWg==",
@@ -1359,10 +1394,11 @@
       },
       "homeScore": 87,
       "awayScore": 84,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2cxaJsAwzO1eVxFiMn5ZsqVRneeO-lL6C7OokvOPMq_lKoitz2DcJWg==/hindu-c-vs-bochas-cc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:37.448Z"
     },
     {
       "id": "v2jHJVgqrpqgbSTuVcBdB35794K30TRemPmDNgky_2bitbhYwiRXnOQw==",
@@ -1389,10 +1425,11 @@
       },
       "homeScore": 80,
       "awayScore": 75,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2jHJVgqrpqgbSTuVcBdB35794K30TRemPmDNgky_2bitbhYwiRXnOQw==/pico-fc-vs-quilmes-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:38.710Z"
     },
     {
       "id": "v2C3dgO25r53iLjRpAhH94JKqLoQtL2XJiu88DcLoZY40VIhVL1iCo5A==",
@@ -1419,10 +1456,11 @@
       },
       "homeScore": 94,
       "awayScore": 82,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2C3dgO25r53iLjRpAhH94JKqLoQtL2XJiu88DcLoZY40VIhVL1iCo5A==/independiente-sde-vs-santa-paula-g",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:39.993Z"
     },
     {
       "id": "v2kU-m-i0gpXYWfjq8aeKYZixdq9JE10xr0evSdmhdFLYoWZXB3gEQ3w==",
@@ -1449,10 +1487,11 @@
       },
       "homeScore": 90,
       "awayScore": 63,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2kU-m-i0gpXYWfjq8aeKYZixdq9JE10xr0evSdmhdFLYoWZXB3gEQ3w==/centenario-vt-vs-union-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:41.248Z"
     },
     {
       "id": "v2tD5Gf3rquBZtVcwKQGybKhNO9z4LSu6Tpx_I3KwjEEhFbS2GT-YUPw==",
@@ -1479,10 +1518,11 @@
       },
       "homeScore": 73,
       "awayScore": 44,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2tD5Gf3rquBZtVcwKQGybKhNO9z4LSu6Tpx_I3KwjEEhFbS2GT-YUPw==/dep-norte-vs-gimnasia-lp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:42.483Z"
     },
     {
       "id": "v2EjqXD7iKq54V57Ga3WiNIaaY-GlejCO8XedRUYeSYeVEsB0th_WRRg==",
@@ -1509,10 +1549,11 @@
       },
       "homeScore": 82,
       "awayScore": 64,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2EjqXD7iKq54V57Ga3WiNIaaY-GlejCO8XedRUYeSYeVEsB0th_WRRg==/el-ceibo-sf-vs-riachuelo-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:43.740Z"
     },
     {
       "id": "v28mNPyZcLYzuLJJTgFc7Ro8xaAi_5tjoTE0cHT4G4Ju3u57IPx3Pz2A==",
@@ -1539,10 +1580,11 @@
       },
       "homeScore": 85,
       "awayScore": 71,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v28mNPyZcLYzuLJJTgFc7Ro8xaAi_5tjoTE0cHT4G4Ju3u57IPx3Pz2A==/racing-a-vs-la-union-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:44.996Z"
     },
     {
       "id": "v2bJgeWgG1I76VIwF270gVtJDpPjxMKxATsLQoHWB0feFVFuMAIL2Caw==",
@@ -1569,10 +1611,11 @@
       },
       "homeScore": 113,
       "awayScore": 84,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2bJgeWgG1I76VIwF270gVtJDpPjxMKxATsLQoHWB0feFVFuMAIL2Caw==/san-isidro-vs-jujuy-basquet",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:46.274Z"
     },
     {
       "id": "v2sGv-U833z2dpy0If6RgMToYvrNvpfl8Oji_fIs-S2WsD1VTG60qNGA==",
@@ -1599,10 +1642,11 @@
       },
       "homeScore": 80,
       "awayScore": 85,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2sGv-U833z2dpy0If6RgMToYvrNvpfl8Oji_fIs-S2WsD1VTG60qNGA==/river-vs-ciclista-j",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:47.559Z"
     },
     {
       "id": "v2Y5GRyzytT0ZB9uWoc7uGpr-TzEgkmfD-WoH3H19cws4CPh1Pr_hgbQ==",
@@ -1629,10 +1673,11 @@
       },
       "homeScore": 79,
       "awayScore": 92,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2Y5GRyzytT0ZB9uWoc7uGpr-TzEgkmfD-WoH3H19cws4CPh1Pr_hgbQ==/bochas-cc-vs-amancay-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:48.851Z"
     },
     {
       "id": "v2r4ndGCiXd6NmlbdGJnNSe3PLhQ_vXPdMKSXrByXlwBBPXRBDFVQNUA==",
@@ -1659,10 +1704,11 @@
       },
       "homeScore": 63,
       "awayScore": 55,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2r4ndGCiXd6NmlbdGJnNSe3PLhQ_vXPdMKSXrByXlwBBPXRBDFVQNUA==/dep-norte-vs-union-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:50.089Z"
     },
     {
       "id": "v212geQLv9zTbK6dBn19inWnNNFpJOLKSEMskOE4CqVQSEEpomS9xdig==",
@@ -1689,10 +1735,11 @@
       },
       "homeScore": 75,
       "awayScore": 53,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v212geQLv9zTbK6dBn19inWnNNFpJOLKSEMskOE4CqVQSEEpomS9xdig==/sp-suardi-vs-riachuelo-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:51.335Z"
     },
     {
       "id": "v2qMwRthqnpYIk6sh6CKWUXW2A8E05x86xiwIQWAPY5ejKZlGzu3BTQA==",
@@ -1719,10 +1766,11 @@
       },
       "homeScore": 96,
       "awayScore": 82,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2qMwRthqnpYIk6sh6CKWUXW2A8E05x86xiwIQWAPY5ejKZlGzu3BTQA==/union-sf-vs-comunicaciones",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:52.657Z"
     },
     {
       "id": "v2IVA2hG4AfNNscV0p1EOLObbXD7BSujPdnFAIICFXnR71TYMdukNZeA==",
@@ -1749,10 +1797,11 @@
       },
       "homeScore": 69,
       "awayScore": 80,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2IVA2hG4AfNNscV0p1EOLObbXD7BSujPdnFAIICFXnR71TYMdukNZeA==/independiente-sde-vs-salta-basket",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:53.933Z"
     },
     {
       "id": "v2qDmQpRWhQGcHVauTgSFHhsVs9yEYB1112iOoTq4R5hKrqx3TdhtXew==",
@@ -1779,10 +1828,11 @@
       },
       "homeScore": 76,
       "awayScore": 80,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2qDmQpRWhQGcHVauTgSFHhsVs9yEYB1112iOoTq4R5hKrqx3TdhtXew==/hindu-c-vs-amancay-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:55.196Z"
     },
     {
       "id": "v2WJpxR_jB9R1BwAeuS1CVu3t2WkXG6_wdKnENLNnj7GjyTuCKsn9deA==",
@@ -1809,10 +1859,11 @@
       },
       "homeScore": 85,
       "awayScore": 81,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2WJpxR_jB9R1BwAeuS1CVu3t2WkXG6_wdKnENLNnj7GjyTuCKsn9deA==/el-ceibo-sf-vs-jujuy-basquet",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:56.506Z"
     },
     {
       "id": "v2D6s8GuNlDosIE0ZBmFK2mcao7Vrxe0Lgwk1WC3FWt8_ASP_g-WTWRA==",
@@ -1839,10 +1890,11 @@
       },
       "homeScore": 82,
       "awayScore": 67,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2D6s8GuNlDosIE0ZBmFK2mcao7Vrxe0Lgwk1WC3FWt8_ASP_g-WTWRA==/ciclista-j-vs-dep-viedma",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:57.745Z"
     },
     {
       "id": "v22OHyxGS7zJuVHs1UI1z67sgr8p8H1BcMtmo0m5U9BVMkhZ3LdGbYBg==",
@@ -1869,10 +1921,11 @@
       },
       "homeScore": 93,
       "awayScore": 87,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v22OHyxGS7zJuVHs1UI1z67sgr8p8H1BcMtmo0m5U9BVMkhZ3LdGbYBg==/santa-paula-g-vs-comunicaciones",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:24:59.001Z"
     },
     {
       "id": "v2RXDmn7UdKvDTJgDqwRLa9pVy4QZiX4qN9n63yss5nZiDDq44wVraVw==",
@@ -1899,10 +1952,11 @@
       },
       "homeScore": 68,
       "awayScore": 84,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2RXDmn7UdKvDTJgDqwRLa9pVy4QZiX4qN9n63yss5nZiDDq44wVraVw==/provincial-r-vs-centenario-vt",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:00.255Z"
     },
     {
       "id": "v2BCQze6wIdTWmGN3loEwCDRwe6HBRGjH5pPCD8JZ6T2Y9huU5LpBdEA==",
@@ -1929,10 +1983,11 @@
       },
       "homeScore": 62,
       "awayScore": 73,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2BCQze6wIdTWmGN3loEwCDRwe6HBRGjH5pPCD8JZ6T2Y9huU5LpBdEA==/barrio-jardin-t-vs-salta-basket",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:01.529Z"
     },
     {
       "id": "v2Hp8lEKG58CIHBXS6xjQxDy5HYHklfMGSZG8z_gcLE6eJma6JD2LdPQ==",
@@ -1959,10 +2014,11 @@
       },
       "homeScore": 83,
       "awayScore": 79,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2Hp8lEKG58CIHBXS6xjQxDy5HYHklfMGSZG8z_gcLE6eJma6JD2LdPQ==/sp-suardi-vs-jujuy-basquet",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:02.805Z"
     },
     {
       "id": "v29cCni5RaddogVFtzun3eQDSr3F8wkN0I1iOzWi68QPj_3l6gu7HKxw==",
@@ -1989,10 +2045,11 @@
       },
       "homeScore": 74,
       "awayScore": 77,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v29cCni5RaddogVFtzun3eQDSr3F8wkN0I1iOzWi68QPj_3l6gu7HKxw==/barrio-parque-vs-amancay-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:04.086Z"
     },
     {
       "id": "v2a_FHa8mbyqQ39bsy6DZR8x4xFB4lFKD5tqpKz0z-aMcxDfckNWdYWw==",
@@ -2019,10 +2076,11 @@
       },
       "homeScore": 103,
       "awayScore": 80,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2a_FHa8mbyqQ39bsy6DZR8x4xFB4lFKD5tqpKz0z-aMcxDfckNWdYWw==/central-entrerriano-vs-la-union-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:05.499Z"
     },
     {
       "id": "v2GkMremaseN-Jw_v7-NiVwGfnjHkjvpjTWGMmWuVBsCzOJkkApfg5Lg==",
@@ -2049,10 +2107,11 @@
       },
       "homeScore": 89,
       "awayScore": 96,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2GkMremaseN-Jw_v7-NiVwGfnjHkjvpjTWGMmWuVBsCzOJkkApfg5Lg==/pergamino-basquet-vs-dep-viedma",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:06.763Z"
     },
     {
       "id": "v2AbA5nbPrT8Vfo4by6_-yFOHW4nrtCLWnbyJsIvp7MXI8ovTM55ZlYw==",
@@ -2079,10 +2138,11 @@
       },
       "homeScore": 69,
       "awayScore": 55,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2AbA5nbPrT8Vfo4by6_-yFOHW4nrtCLWnbyJsIvp7MXI8ovTM55ZlYw==/barrio-jardin-t-vs-villa-san-martin",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:08.020Z"
     },
     {
       "id": "v2PuC_tXjWNDVjVFzVPe-aLLElMyrvC3LvuoxXH3H0hf3SAvnmQV0rXw==",
@@ -2109,10 +2169,11 @@
       },
       "homeScore": 75,
       "awayScore": 61,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2PuC_tXjWNDVjVFzVPe-aLLElMyrvC3LvuoxXH3H0hf3SAvnmQV0rXw==/pico-fc-vs-dep-norte",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:09.289Z"
     },
     {
       "id": "v2ZHgqRCZ5vJeBhnYF-auUXC5vgpnn2QeuzyHYY1lVYtCAjyCRVsyV9A==",
@@ -2139,10 +2200,11 @@
       },
       "homeScore": 96,
       "awayScore": 82,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2ZHgqRCZ5vJeBhnYF-auUXC5vgpnn2QeuzyHYY1lVYtCAjyCRVsyV9A==/gimnasia-lp-vs-river",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:10.575Z"
     },
     {
       "id": "v2QJCJ7xj0vrjm-E_9V413__p8WfiS35WdAoFEty1A6dtI630zq1sd_g==",
@@ -2169,10 +2231,11 @@
       },
       "homeScore": 79,
       "awayScore": 95,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2QJCJ7xj0vrjm-E_9V413__p8WfiS35WdAoFEty1A6dtI630zq1sd_g==/centenario-vt-vs-dep-viedma",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:11.837Z"
     },
     {
       "id": "v2woyGk_h0g98E4bkw-qWbSWOqitXDdpuEXMx1a2QDdHN6SoKlehqJXg==",
@@ -2199,10 +2262,11 @@
       },
       "homeScore": 77,
       "awayScore": 79,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2woyGk_h0g98E4bkw-qWbSWOqitXDdpuEXMx1a2QDdHN6SoKlehqJXg==/sp-suardi-vs-san-isidro",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:13.073Z"
     },
     {
       "id": "v2l7DEoXnZQ-QHOCYFO9sow1-L9pdzgIxJTB-C1lLdN2kkIS0bD0EFJw==",
@@ -2229,10 +2293,11 @@
       },
       "homeScore": 98,
       "awayScore": 63,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2l7DEoXnZQ-QHOCYFO9sow1-L9pdzgIxJTB-C1lLdN2kkIS0bD0EFJw==/provincial-r-vs-ciclista-j",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:14.335Z"
     },
     {
       "id": "v2Y8AhihQaFYIJozt9abpHTalhgFDjmUsuRVM22YPIizqIGNkwU8dJGg==",
@@ -2259,10 +2324,11 @@
       },
       "homeScore": 82,
       "awayScore": 58,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2Y8AhihQaFYIJozt9abpHTalhgFDjmUsuRVM22YPIizqIGNkwU8dJGg==/barrio-parque-vs-independiente-sde",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:15.568Z"
     },
     {
       "id": "v21IfYBOD_9zAEFHdLN3KSUNMXs3ZnxmqQ8yjS7HDp3k7gwFqwBwtTWA==",
@@ -2289,10 +2355,11 @@
       },
       "homeScore": 90,
       "awayScore": 55,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v21IfYBOD_9zAEFHdLN3KSUNMXs3ZnxmqQ8yjS7HDp3k7gwFqwBwtTWA==/villa-mitre-bb-vs-dep-norte",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:17.004Z"
     },
     {
       "id": "v2eB8C_oMjNK1S4tsua2kl_3Zq6Y8czdy6JBnv9FO45tiOjRxOvg772Q==",
@@ -2319,10 +2386,11 @@
       },
       "homeScore": 66,
       "awayScore": 59,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2eB8C_oMjNK1S4tsua2kl_3Zq6Y8czdy6JBnv9FO45tiOjRxOvg772Q==/jujuy-basquet-vs-villa-san-martin",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:18.305Z"
     },
     {
       "id": "v24BXq_rKTgChQbOQ-AoT1RWvjkHzYtJ55mR4nUYcnHYqEoVXzbaFFmg==",
@@ -2349,10 +2417,11 @@
       },
       "homeScore": 94,
       "awayScore": 65,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v24BXq_rKTgChQbOQ-AoT1RWvjkHzYtJ55mR4nUYcnHYqEoVXzbaFFmg==/hindu-c-vs-independiente-sde",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:19.535Z"
     },
     {
       "id": "v2qe2uvj11UaPSkxvzTv43QFI0ld9_mBssf5VWCSh_qSkXcMv681hiNA==",
@@ -2379,10 +2448,11 @@
       },
       "homeScore": 75,
       "awayScore": 92,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2qe2uvj11UaPSkxvzTv43QFI0ld9_mBssf5VWCSh_qSkXcMv681hiNA==/rocamora-vs-regatas-sn",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:21.177Z"
     },
     {
       "id": "v2ih8XjlbLzlxT34lGggCGCFtQpxXk3GLdBBYq83xK-k6OqW7AOslh9A==",
@@ -2409,10 +2479,11 @@
       },
       "homeScore": 90,
       "awayScore": 72,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2ih8XjlbLzlxT34lGggCGCFtQpxXk3GLdBBYq83xK-k6OqW7AOslh9A==/salta-basket-vs-villa-san-martin",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:22.431Z"
     },
     {
       "id": "v2BMirwlYh6w5EEQeh-lFGEw_rEudAuk0gITC141wLC2lH0N3rzEtO8Q==",
@@ -2439,10 +2510,11 @@
       },
       "homeScore": 98,
       "awayScore": 96,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2BMirwlYh6w5EEQeh-lFGEw_rEudAuk0gITC141wLC2lH0N3rzEtO8Q==/gimnasia-lp-vs-pergamino-basquet",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:23.722Z"
     },
     {
       "id": "v2xccax1OoGPPlr-YA0bmUSfNZaLpGZUqm9rQqq1Z1VhrnbAnyGo7HYQ==",
@@ -2469,10 +2541,11 @@
       },
       "homeScore": 96,
       "awayScore": 91,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2xccax1OoGPPlr-YA0bmUSfNZaLpGZUqm9rQqq1Z1VhrnbAnyGo7HYQ==/amancay-lr-vs-barrio-jardin-t",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:24.975Z"
     },
     {
       "id": "v2lH4ExHIT5Zzf-loVGfSf4u7sBLkf0ryb8wsvV69yRywKJ85CvDrjtA==",
@@ -2499,10 +2572,11 @@
       },
       "homeScore": 89,
       "awayScore": 83,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2lH4ExHIT5Zzf-loVGfSf4u7sBLkf0ryb8wsvV69yRywKJ85CvDrjtA==/la-union-c-vs-provincial-r",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:26.298Z"
     },
     {
       "id": "v2bt7D6uvhDpc5bIoV85BOwsOhP9XyUzs6Yi5HuXbeZdLK0WMYuMsA_A==",
@@ -2529,10 +2603,11 @@
       },
       "homeScore": 95,
       "awayScore": 86,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2bt7D6uvhDpc5bIoV85BOwsOhP9XyUzs6Yi5HuXbeZdLK0WMYuMsA_A==/dep-viedma-vs-dep-norte",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:27.542Z"
     },
     {
       "id": "v2WRgPvjwEGkmHKUhg2LQV451_tkWika2sX1CrftFLKYkG4vHb3kleqg==",
@@ -2559,10 +2634,11 @@
       },
       "homeScore": 85,
       "awayScore": 74,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2WRgPvjwEGkmHKUhg2LQV451_tkWika2sX1CrftFLKYkG4vHb3kleqg==/central-entrerriano-vs-regatas-sn",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:28.816Z"
     },
     {
       "id": "v2qvEOsfyAt8_P7HAZdpU4T6JaqU16y2DGCn6IWt0u5B6TjcfO88f9eg==",
@@ -2589,10 +2665,11 @@
       },
       "homeScore": 84,
       "awayScore": 72,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2qvEOsfyAt8_P7HAZdpU4T6JaqU16y2DGCn6IWt0u5B6TjcfO88f9eg==/rocamora-vs-provincial-r",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:30.110Z"
     },
     {
       "id": "v2oKXN1iCeECTWc-WeZ8gTXXNFEg7RB3yiBMVffYDB6ZXvjYK74lDovA==",
@@ -2619,10 +2696,11 @@
       },
       "homeScore": 96,
       "awayScore": 91,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2oKXN1iCeECTWc-WeZ8gTXXNFEg7RB3yiBMVffYDB6ZXvjYK74lDovA==/riachuelo-lr-vs-barrio-jardin-t",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:31.406Z"
     },
     {
       "id": "v2gT2d_DutDdLqxGUvyPQwsu5uNfrMGB2mjR5GsWs-xKMKeAxCGBmv3g==",
@@ -2649,10 +2727,11 @@
       },
       "homeScore": 73,
       "awayScore": 61,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2gT2d_DutDdLqxGUvyPQwsu5uNfrMGB2mjR5GsWs-xKMKeAxCGBmv3g==/racing-a-vs-pico-fc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:32.702Z"
     },
     {
       "id": "v2MymRfs8FgGeZL_HIuiyfzMsSlkI1tqcHodVeNgEAzf9o6J5mRPzUMQ==",
@@ -2679,10 +2758,11 @@
       },
       "homeScore": 96,
       "awayScore": 92,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2MymRfs8FgGeZL_HIuiyfzMsSlkI1tqcHodVeNgEAzf9o6J5mRPzUMQ==/el-ceibo-sf-vs-santa-paula-g",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:34.041Z"
     },
     {
       "id": "v2trbX6Z552veW6cIAp2PwEZQQJAqv7OJVnGRVFYGPTpsBLuBYO40X6Q==",
@@ -2709,10 +2789,11 @@
       },
       "homeScore": 90,
       "awayScore": 101,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2trbX6Z552veW6cIAp2PwEZQQJAqv7OJVnGRVFYGPTpsBLuBYO40X6Q==/comunicaciones-vs-sp-suardi",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:35.314Z"
     },
     {
       "id": "v2Du8YwXPVLrIAAng-aQkoGysyEUA-cDEmrvNJKZMKwJKAXvPBDm9gCw==",
@@ -2739,10 +2820,11 @@
       },
       "homeScore": 95,
       "awayScore": 99,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2Du8YwXPVLrIAAng-aQkoGysyEUA-cDEmrvNJKZMKwJKAXvPBDm9gCw==/union-mdp-vs-villa-mitre-bb",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:36.589Z"
     },
     {
       "id": "v2-jqPydOtpafXtuxPFiBST5NW2-U1m0D4-sO1lrni5A2Ce8IsHHvNMA==",
@@ -2769,10 +2851,11 @@
       },
       "homeScore": 79,
       "awayScore": 72,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2-jqPydOtpafXtuxPFiBST5NW2-U1m0D4-sO1lrni5A2Ce8IsHHvNMA==/quilmes-mdp-vs-villa-mitre-bb",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:37.869Z"
     },
     {
       "id": "v27aBi6f3qbbYQy3zcjidBXpRD6qAXzr4uuX0j5GBOjYcYcwfHCuqIWQ==",
@@ -2799,10 +2882,11 @@
       },
       "homeScore": 74,
       "awayScore": 90,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v27aBi6f3qbbYQy3zcjidBXpRD6qAXzr4uuX0j5GBOjYcYcwfHCuqIWQ==/central-entrerriano-vs-provincial-r",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:39.168Z"
     },
     {
       "id": "v266O_RjG1WaZWz1qYSoun9VKs8-zH9udRFoxbeKlm5bdJcO0O-ZUWLQ==",
@@ -2829,10 +2913,11 @@
       },
       "homeScore": 82,
       "awayScore": 88,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v266O_RjG1WaZWz1qYSoun9VKs8-zH9udRFoxbeKlm5bdJcO0O-ZUWLQ==/amancay-lr-vs-union-sf",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:40.413Z"
     },
     {
       "id": "v2uvzOir-x-UW2eLw7kr5vN-6QrTI3IasFsCumB4tr-Uua5gsj1GO9AQ==",
@@ -2859,10 +2944,11 @@
       },
       "homeScore": 73,
       "awayScore": 74,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2uvzOir-x-UW2eLw7kr5vN-6QrTI3IasFsCumB4tr-Uua5gsj1GO9AQ==/la-union-c-vs-regatas-sn",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:41.693Z"
     },
     {
       "id": "v22MOwUwT7AH1f9GQ08t_RDVkCtOZJcURxAwJZERw4G1YuJwKcAf8-ew==",
@@ -2889,10 +2975,11 @@
       },
       "homeScore": 66,
       "awayScore": 81,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v22MOwUwT7AH1f9GQ08t_RDVkCtOZJcURxAwJZERw4G1YuJwKcAf8-ew==/river-vs-pico-fc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:42.970Z"
     },
     {
       "id": "v2ycdjG-ycTksmgDcGal1jSJnv-m2FmSoNJz0AedGk5590fRa1s03NJQ==",
@@ -2919,10 +3006,11 @@
       },
       "homeScore": 79,
       "awayScore": 68,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2ycdjG-ycTksmgDcGal1jSJnv-m2FmSoNJz0AedGk5590fRa1s03NJQ==/mitre-posadas-vs-sp-suardi",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:44.218Z"
     },
     {
       "id": "v2aNrDzs2CQwonnl7N2CxM6EIn-LuPj82uNm8W7kFf2tNUJjHg78nFdw==",
@@ -2949,10 +3037,11 @@
       },
       "homeScore": 92,
       "awayScore": 104,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2aNrDzs2CQwonnl7N2CxM6EIn-LuPj82uNm8W7kFf2tNUJjHg78nFdw==/riachuelo-lr-vs-union-sf",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:45.515Z"
     },
     {
       "id": "v2mJWpkDfoLUYL1hZfArJUX0kFUTb7I6BHEnlNfxQOBdN2FWQKcStV1A==",
@@ -2979,10 +3068,11 @@
       },
       "homeScore": 81,
       "awayScore": 68,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2mJWpkDfoLUYL1hZfArJUX0kFUTb7I6BHEnlNfxQOBdN2FWQKcStV1A==/barrio-jardin-t-vs-bochas-cc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:46.768Z"
     },
     {
       "id": "v2EcSqulEgh9FTlXFKX2u1c503tHkT-0P_jgfgaelpXprU19PoTSSBWA==",
@@ -3009,10 +3099,11 @@
       },
       "homeScore": 74,
       "awayScore": 81,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2EcSqulEgh9FTlXFKX2u1c503tHkT-0P_jgfgaelpXprU19PoTSSBWA==/racing-a-vs-gimnasia-lp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:48.049Z"
     },
     {
       "id": "v2fmesZKW47WDvnESS7gvb4JPsZXBtPvM5-9DFhQeq4Tzu94biEd-BUA==",
@@ -3039,10 +3130,11 @@
       },
       "homeScore": 82,
       "awayScore": 74,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2fmesZKW47WDvnESS7gvb4JPsZXBtPvM5-9DFhQeq4Tzu94biEd-BUA==/san-isidro-vs-el-ceibo-sf",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:49.309Z"
     },
     {
       "id": "v2shruUu49_8a8r9LCUtjNkdjXM0YjPWV7Yp_MFKjQnz3faGh6yAZlgQ==",
@@ -3069,10 +3161,11 @@
       },
       "homeScore": 75,
       "awayScore": 73,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2shruUu49_8a8r9LCUtjNkdjXM0YjPWV7Yp_MFKjQnz3faGh6yAZlgQ==/central-entrerriano-vs-rocamora",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:50.573Z"
     },
     {
       "id": "v2SZ40aeNChec_2AXpwG1WhW4QowG6rcMCviywHRTy4V1KTlAurlnYbg==",
@@ -3099,10 +3192,11 @@
       },
       "homeScore": 72,
       "awayScore": 64,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2SZ40aeNChec_2AXpwG1WhW4QowG6rcMCviywHRTy4V1KTlAurlnYbg==/villa-san-martin-vs-sp-suardi",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:51.823Z"
     },
     {
       "id": "v2LV2SiaV3--mqwOfft6e_uj7FTl58P1qXjuAJ5GGtf5ZyicL6T2CgzQ==",
@@ -3129,10 +3223,11 @@
       },
       "homeScore": 87,
       "awayScore": 80,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2LV2SiaV3--mqwOfft6e_uj7FTl58P1qXjuAJ5GGtf5ZyicL6T2CgzQ==/centenario-vt-vs-quilmes-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:53.123Z"
     },
     {
       "id": "v2sbhePa8zsrW1Vti6xQly-2UnFgwkd4LzFstxgG87Ltz1EYF_AyirYw==",
@@ -3159,10 +3254,11 @@
       },
       "homeScore": 69,
       "awayScore": 76,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2sbhePa8zsrW1Vti6xQly-2UnFgwkd4LzFstxgG87Ltz1EYF_AyirYw==/independiente-sde-vs-mitre-posadas",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:54.403Z"
     },
     {
       "id": "v22Nh8u88_kI_tP4sHOiMLqpWFUh4Yk192i4iQ0FevPpdgKKk1w18scw==",
@@ -3189,10 +3285,11 @@
       },
       "homeScore": 88,
       "awayScore": 73,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v22Nh8u88_kI_tP4sHOiMLqpWFUh4Yk192i4iQ0FevPpdgKKk1w18scw==/salta-basket-vs-bochas-cc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:55.723Z"
     },
     {
       "id": "v2K9jl8RbW7IONDIpwRwPTK4UjoHBm2mqIRU2zpFO8Q1GWFMHvJngtVw==",
@@ -3219,10 +3316,11 @@
       },
       "homeScore": 96,
       "awayScore": 92,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2K9jl8RbW7IONDIpwRwPTK4UjoHBm2mqIRU2zpFO8Q1GWFMHvJngtVw==/regatas-sn-vs-ciclista-j",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:57.014Z"
     },
     {
       "id": "v2w8RLkLRNcRRGYixWSctukHYWTnJioXpn30-gbzERZsrqQrzaEmQskA==",
@@ -3249,10 +3347,11 @@
       },
       "homeScore": 100,
       "awayScore": 96,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2w8RLkLRNcRRGYixWSctukHYWTnJioXpn30-gbzERZsrqQrzaEmQskA==/jujuy-basquet-vs-bochas-cc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:58.272Z"
     },
     {
       "id": "v2L1ZKnmB2yBp_IM3fxH-dW9V86AdkkyjgPD1ykgCdhY6Ffdsxo36WAw==",
@@ -3279,10 +3378,11 @@
       },
       "homeScore": 79,
       "awayScore": 84,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2L1ZKnmB2yBp_IM3fxH-dW9V86AdkkyjgPD1ykgCdhY6Ffdsxo36WAw==/provincial-r-vs-quilmes-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:25:59.546Z"
     },
     {
       "id": "v27TI8MzZ3IKBaKNIPmFhVTHHBMuBJetqXO1R6xCt2-DK-DNsdZ312OQ==",
@@ -3309,10 +3409,11 @@
       },
       "homeScore": 83,
       "awayScore": 70,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v27TI8MzZ3IKBaKNIPmFhVTHHBMuBJetqXO1R6xCt2-DK-DNsdZ312OQ==/riachuelo-lr-vs-mitre-posadas",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:00.878Z"
     },
     {
       "id": "v2ZOkabaph20ZUJwxMcBkyZpyPCt2_lM0i9nPpNBcLQF-fOkEpP7BFfg==",
@@ -3339,10 +3440,11 @@
       },
       "homeScore": 94,
       "awayScore": 93,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2ZOkabaph20ZUJwxMcBkyZpyPCt2_lM0i9nPpNBcLQF-fOkEpP7BFfg==/santa-paula-g-vs-hindu-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:02.162Z"
     },
     {
       "id": "v2yMAGGQdQw9bdxyr6UHpIgGj9lB_No_n10dKVEe-NcI_6K2Xr3wsCog==",
@@ -3369,10 +3471,11 @@
       },
       "homeScore": 58,
       "awayScore": 71,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2yMAGGQdQw9bdxyr6UHpIgGj9lB_No_n10dKVEe-NcI_6K2Xr3wsCog==/dep-norte-vs-centenario-vt",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:03.430Z"
     },
     {
       "id": "v2VE8F8fOWKt7l3dE2UQNlYp6pBFQNlkEVIw2IehxG0litwiy47mbTJA==",
@@ -3399,10 +3502,11 @@
       },
       "homeScore": 85,
       "awayScore": 64,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2VE8F8fOWKt7l3dE2UQNlYp6pBFQNlkEVIw2IehxG0litwiy47mbTJA==/amancay-lr-vs-mitre-posadas",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:04.707Z"
     },
     {
       "id": "v2PqVr0M-V_kcHw3EXAAQoG0eXjVhmWMg8j6S_RKsE-ZeoN2ycpcHhUg==",
@@ -3429,10 +3533,11 @@
       },
       "homeScore": 88,
       "awayScore": 86,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2PqVr0M-V_kcHw3EXAAQoG0eXjVhmWMg8j6S_RKsE-ZeoN2ycpcHhUg==/union-mdp-vs-racing-a",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:05.984Z"
     },
     {
       "id": "v2oVun9_nqKYDN0H3W4D34kYmY0FzYbBprS092GEyqs44py0A0Tl20mg==",
@@ -3459,10 +3564,11 @@
       },
       "homeScore": 83,
       "awayScore": 99,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2oVun9_nqKYDN0H3W4D34kYmY0FzYbBprS092GEyqs44py0A0Tl20mg==/union-sf-vs-hindu-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:07.244Z"
     },
     {
       "id": "v2eGl15GDMVFlvT9ite8Q-RU5Pzg0zJ9BESXTVQ0JMH1XsJAUrowN3XQ==",
@@ -3489,10 +3595,11 @@
       },
       "homeScore": 82,
       "awayScore": 68,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2eGl15GDMVFlvT9ite8Q-RU5Pzg0zJ9BESXTVQ0JMH1XsJAUrowN3XQ==/pergamino-basquet-vs-central-entrerriano",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:08.635Z"
     },
     {
       "id": "v2KRCYl54NCHyvQOnA3Fra6U0VFGKgILz9VZ2zzwrB9x8aBxvo79Ej3w==",
@@ -3519,10 +3626,11 @@
       },
       "homeScore": 65,
       "awayScore": 79,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2KRCYl54NCHyvQOnA3Fra6U0VFGKgILz9VZ2zzwrB9x8aBxvo79Ej3w==/villa-san-martin-vs-san-isidro",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:09.913Z"
     },
     {
       "id": "v2nV-q3mJ5ZDhynf4i-aSyU-8M8R6v5ZJmFJTwYZFmxwOK2R9FtUvwGw==",
@@ -3549,10 +3657,11 @@
       },
       "homeScore": 75,
       "awayScore": 71,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2nV-q3mJ5ZDhynf4i-aSyU-8M8R6v5ZJmFJTwYZFmxwOK2R9FtUvwGw==/barrio-parque-vs-sp-suardi",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-20T19:26:11.166Z"
     },
     {
       "id": "v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==",
@@ -3583,7 +3692,7 @@
       "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==/river-vs-regatas-sn",
       "source": "Liga Nacional oficial",
-      "boxscoreImportedAt": "2026-11-20T18:59:04.734Z"
+      "boxscoreImportedAt": "2026-11-20T19:26:12.442Z"
     },
     {
       "id": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
@@ -3614,7 +3723,7 @@
       "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==/quilmes-mdp-vs-racing-a",
       "source": "Liga Nacional oficial",
-      "boxscoreImportedAt": "2026-11-20T18:59:06.031Z"
+      "boxscoreImportedAt": "2026-11-20T19:26:13.716Z"
     },
     {
       "id": "v26yIXFWCrri1DVzUUPGyDS-eomIfwTPmxJLS34TC-QmtUtdCjnqAQqw==",
@@ -16457,6 +16566,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 2,
-  "pending": 537
+  "finished": 111,
+  "pending": 428
 }
