@@ -83,3 +83,25 @@
 @media(max-width:640px){.lab-match-modal{width:100%;max-height:94vh;padding:25px 9px 11px}.lab-native-score img{width:30px;height:30px}.lab-native-score>div{gap:4px}.lab-native-mvp{margin:9px}.lab-native-tabs,.lab-native-team-tabs{margin-left:9px;margin-right:9px}.lab-native-table{margin-left:9px;margin-right:9px}.lab-native-th,.lab-native-tr{grid-template-columns:minmax(105px,1fr) 28px 28px 28px 39px 30px;min-width:310px;padding:9px 5px;font-size:8px}.lab-native-tr strong{font-size:9px}}
 
 /* Box score LAB integrado y validado visualmente en estilos nativos. */
+
+
+/* Planteles históricos detectados desde box scores oficiales LAB */
+.lab-roster-modal{width:min(100%,920px);max-height:92vh}
+.lab-roster-modal>.lab-kicker{display:block;text-align:center}
+.lab-roster-note{max-width:650px;margin:0 auto 14px;text-align:center;color:#aebccc;font-size:11px;line-height:1.5}
+.lab-roster-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 9px}
+.lab-roster-toolbar>input{min-width:0;flex:1;background:#111e2c;border:1px solid #34485d;border-radius:8px;padding:9px 10px;color:#fff;font:inherit;font-size:11px}
+.lab-roster-toolbar>div{display:flex;gap:5px}
+.lab-roster-toolbar button{border:1px solid #744a2e;border-radius:7px;padding:8px 10px;background:#101d2b;color:#eaf0f7;font:inherit;font-size:10px}
+.lab-roster-toolbar button.active{background:#e97819;color:#10131a;font-weight:900}
+.lab-roster-table-wrap{max-height:42vh;overflow:auto;border:1px solid #b87938;border-radius:9px}
+.lab-roster-table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:10px}
+.lab-roster-table th{position:sticky;top:0;background:#142438;color:#aebccc;padding:10px 7px;text-align:center;font-size:9px;z-index:1}
+.lab-roster-table td{padding:9px 7px;border-top:1px solid #263648;text-align:center;font-variant-numeric:tabular-nums}
+.lab-roster-table td:first-child{text-align:left;white-space:normal;min-width:150px}
+.lab-roster-table td:first-child strong{display:block;font-size:10px}
+.lab-roster-table td:first-child small{display:block;color:#f49a32;font-size:9px;margin-top:2px}
+.lab-roster-table td:not(:first-child){color:#e5edf5}
+.lab-roster-table td:nth-child(4),.lab-roster-table td:last-child{color:#f49a32;font-weight:900}
+.lab-roster-modal .lab-team-result{grid-template-columns:72px 1fr auto}
+@media(max-width:640px){.lab-roster-modal{width:100%;max-height:94vh;padding:25px 10px 14px}.lab-roster-toolbar{align-items:stretch;flex-direction:column}.lab-roster-toolbar>div button{flex:1}.lab-roster-table-wrap{max-height:38vh}.lab-roster-table{font-size:9px}.lab-roster-table td{padding:8px 6px}}
