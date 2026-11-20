@@ -64,7 +64,7 @@ export default function ProdePredictions() {
 
   return <section className="prode-panel prode-predictions" aria-label="Pronósticos de prueba">
     <div className="prode-panel-heading"><span className="prode-panel-icon"><Trophy size={18}/></span><h2>Mis <em>pronósticos</em></h2><span className="prode-small-tag">Prueba</span></div>
-    <p className="prode-predictions-note">Elegí al ganador antes del inicio. Un pronóstico por partido, válido para todas tus ligas. Por ahora no suma puntos y no modifica Mi Carrera.</p>
+    <p className="prode-predictions-note">Elegí al ganador antes del inicio. Un pronóstico por partido, válido para todas tus ligas. Este módulo de pronósticos todavía no suma puntos al ranking.</p>
     {!user ? <p className="prode-muted-note">Iniciá sesión con Google para participar.</p> : !ready ? <p className="prode-muted-note">Cargando partidos…</p> : <>
       {error && <p role="alert" className="prode-group-error">{error}</p>}
       {available.length === 0 && <p className="prode-muted-note">No hay partidos futuros con horario confirmado.</p>}
