@@ -11226,3 +11226,13 @@
 .home-team-modal-v2 .team-v2-player-category .team-v2-player-entry span{font-size:11px;line-height:1.25;overflow-wrap:anywhere}
 .home-team-modal-v2 .team-v2-player-category .team-v2-player-entry strong{font-size:12px;color:#ff8c00}
 @media(max-width:480px){.home-team-modal-v2 .team-v2-player-category .team-v2-player-entry span{font-size:10px}.home-team-modal-v2 .team-v2-player-category .team-v2-player-entry strong{font-size:11px}}
+
+
+/* Botones seleccionados LNB: mismo degradado, relieve y brillo del selector superior. */
+.home-page .home-stats-tab.active,
+.home-page .standings-panel .home-stats-tab.active {
+  border: 1px solid rgba(255,190,104,.9);
+  background: linear-gradient(160deg,#ffad45 0%,#ff8a20 48%,#d95b0b 100%);
+  color: #11151b;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -5px 12px rgba(112,45,0,.2), 0 0 12px rgba(255,135,30,.22);
+}
