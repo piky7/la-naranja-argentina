@@ -31,6 +31,9 @@ jobs:
       - name: Consultar handler AJAX del fixture LAB
         run: node scripts/probe-lab-fixture.cjs
 
+      - name: Validar extracción estructurada del fixture LAB
+        run: node scripts/parse-fixture-lab.cjs --summary
+
       - name: Inspeccionar boxscore oficial LAB sin tocar datos LNB
         run: |
           node --input-type=commonjs <<'NODE'
