@@ -49,3 +49,26 @@
  .lab-player-ranking td{padding:9px 6px}
 }
 @media(max-width:360px){.lab-stats-leaders{gap:4px}.lab-stats-leader{min-height:132px}.lab-stats-leader .stats-leader-title{font-size:8px}}
+
+/* Tarjetas de líderes LAB: acabado dorado de las tarjetas destacadas de LNB. */
+.lab-stats-leader{
+  --leader-gold:#e7bd62;
+  border:1px solid #b98b3d;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(242,198,105,.22),transparent 58%),
+    radial-gradient(ellipse at 100% 100%,rgba(184,135,48,.18),transparent 62%),
+    repeating-linear-gradient(145deg,transparent 0 29px,rgba(255,255,255,.018) 30px 31px),
+    linear-gradient(155deg,#342d20 0%,#1b2532 48%,#101a28 100%);
+  box-shadow:inset 0 1px 0 rgba(255,229,166,.28),0 3px 14px rgba(0,0,0,.22);
+}
+.lab-stats-leader:before{
+  border-color:rgba(231,189,98,.32);
+  box-shadow:0 0 0 15px rgba(231,189,98,.045),0 0 0 35px rgba(231,189,98,.025);
+}
+.lab-stats-leader .stats-leader-title{color:#f2d48d;text-shadow:0 1px 5px #0008}
+.lab-stats-leader .stats-leader-value strong{color:#f2bd55;text-shadow:0 2px 9px rgba(201,145,47,.25)}
+.lab-stats-leader>img{filter:drop-shadow(0 2px 5px #0009)}
+.lab-stats-leader-name{color:#f5e6c2}
+@media(max-width:600px){
+ .lab-stats-leader{border-color:#c49a4b}
+}
