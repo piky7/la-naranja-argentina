@@ -17,8 +17,9 @@ const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
 }).format(new Date());
 const displayName = name => {
   const clean = String(name || "").replace(/\s+\([^)]*\)$/i, "").trim();
-  if (!clean || clean !== clean.toLocaleUpperCase("es-AR")) return clean;
-  return clean.toLocaleLowerCase("es-AR").replace(/(^|[\s-])([\p{L}])/gu, (_, separator, letter) => separator + letter.toLocaleUpperCase("es-AR"));
+  if (!clean) return clean;
+  const lower = clean.toLocaleLowerCase("es-AR");
+  return lower.charAt(0).toLocaleUpperCase("es-AR") + lower.slice(1);
 };
 const dateFromKey = key => new Date(key + "T12:00:00Z");
 const formatDay = key => new Intl.DateTimeFormat("es-AR", {
