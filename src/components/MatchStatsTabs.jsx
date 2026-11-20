@@ -25,7 +25,7 @@ const metricWidth = (value, other, isShooting) => {
   return Math.min(100, (current / maximum) * 100);
 };
 
-export default function MatchStatsTabs({ match, stats, home, away, children, customTeamComparison }) {
+export default function MatchStatsTabs({ match, stats, home, away, children, customTeamComparison, teamColors, competitionLabel = "LIGA NACIONAL" }) {
   const [tab, setTab] = useState("players");
   const [team, setTeam] = useState("home");
   const id = useId();
@@ -62,12 +62,12 @@ export default function MatchStatsTabs({ match, stats, home, away, children, cus
           </button>
         ))}
       </div>
-      <div className={`match-player-tables match-player-team-${team}`} style={{ "--boxscore-team-color": teamMatchColors[team === "home" ? match.homeTeam : match.awayTeam] || "#18334b" }}>{children}</div>
+      <div className={`match-player-tables match-player-team-${team}`} style={{ "--boxscore-team-color": teamColors?.[team === "home" ? match.homeTeam : match.awayTeam] || teamMatchColors[team === "home" ? match.homeTeam : match.awayTeam] || "#18334b" }}>{children}</div>
     </div>
     <div role="tabpanel" id={`${id}-teams`} aria-labelledby={`${id}-teams-tab`} hidden={tab !== "teams"}>
       <div className="match-team-comparison-intro">
         <strong>Comparativa colectiva</strong>
-        <span>LIGA NACIONAL · TEMPORADA 2026/27</span>
+        <span>{competitionLabel} · TEMPORADA 2026/27</span>
       </div>
       {customTeamComparison || (!collective && <p className="match-team-unavailable">Estadísticas colectivas no disponibles para este partido.</p>)}
       {collective && <div className="match-team-comparison-card" style={{ "--comparison-home-color": teamMatchColors[match.homeTeam] || "#18334b", "--comparison-away-color": teamMatchColors[match.awayTeam] || "#18334b" }}>
