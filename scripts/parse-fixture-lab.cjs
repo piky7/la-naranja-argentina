@@ -19,7 +19,7 @@ function parseTeam($, anchor) {
   return {
     name, clubId: Number(match[1]), teamId: Number(match[2]), slug: match[3],
     url: new URL(href, BASE).href,
-    crestUrl: crest ? new URL(crest, BASE).href : null,
+    crestUrl: new URL(crest || `/escudos/${match[1]}/${match[2]}`, BASE).href,
   };
 }
 

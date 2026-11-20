@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
 import Home from "./pages/Home";
 const loadLiga = () => import("./pages/Liga");
+const loadLigaArgentina = () => import("./pages/LigaArgentina");
+const LigaArgentina = lazy(loadLigaArgentina);
 const loadProde = () => import("./pages/Prode");
 const Liga = lazy(loadLiga);
 const Equipos = lazy(() => import("./pages/Equipos"));
@@ -91,6 +93,9 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
       direction === "right" ? "page-enter-from-left" : "");
   }, [location.key, location.state]);
 
+  if (selectedTournament === "lab") {
+    return <Suspense fallback={<RouteLoading />}><LigaArgentina /></Suspense>;
+  }
   if (selectedTournament !== "lnb") {
     return <TournamentComingSoon tournament={selectedTournament} onBack={() => onTournamentChange("lnb")} />;
   }
