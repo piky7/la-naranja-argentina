@@ -1717,19 +1717,19 @@
       "date": "2026-12-12",
       "time": "00:00",
       "home": {
-        "name": "LA UNION FSA",
-        "officialClubId": 1541,
-        "officialTeamId": 114763
+        "name": "SAN LORENZO",
+        "officialClubId": 88,
+        "officialTeamId": 113373
       },
       "away": {
-        "name": "OLIMPICO (LB)",
-        "officialClubId": 1882,
-        "officialTeamId": 113870
+        "name": "BOCA",
+        "officialClubId": 19,
+        "officialTeamId": 114735
       },
       "homeScore": 0,
       "awayScore": 0,
       "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2tZwPgAoAYomYKDLXx5VKUeamaXJKS88TMe8MBTPtZZ3SA3F6SKM4Pw==/san-lorenzo-vs-boca"
     },
     {
       "date": "2026-12-12",
@@ -1753,19 +1753,19 @@
       "date": "2026-12-12",
       "time": "00:00",
       "home": {
-        "name": "SAN LORENZO",
-        "officialClubId": 88,
-        "officialTeamId": 113373
+        "name": "LA UNION FSA",
+        "officialClubId": 1541,
+        "officialTeamId": 114763
       },
       "away": {
-        "name": "BOCA",
-        "officialClubId": 19,
-        "officialTeamId": 114735
+        "name": "OLIMPICO (LB)",
+        "officialClubId": 1882,
+        "officialTeamId": 113870
       },
       "homeScore": 0,
       "awayScore": 0,
       "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2tZwPgAoAYomYKDLXx5VKUeamaXJKS88TMe8MBTPtZZ3SA3F6SKM4Pw==/san-lorenzo-vs-boca"
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
     },
     {
       "date": "2026-12-12",
@@ -1843,19 +1843,19 @@
       "date": "2026-12-16",
       "time": "00:00",
       "home": {
-        "name": "ARGENTINO (J)",
-        "officialClubId": 1932,
-        "officialTeamId": 115240
+        "name": "SAN MARTÍN (C)",
+        "officialClubId": 1426,
+        "officialTeamId": 113546
       },
       "away": {
-        "name": "SAN LORENZO",
-        "officialClubId": 88,
-        "officialTeamId": 113373
+        "name": "INDEPENDIENTE (O)",
+        "officialClubId": 2025,
+        "officialTeamId": 114628
       },
       "homeScore": 0,
       "awayScore": 0,
       "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2HKi_ZYHGLXEtlS_BCGX4dUnmYAqdq_JYJVNpzMaSqFz93Dj3qE7mbA==/argentino-j-vs-san-lorenzo"
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2bvkhY7NbaMCttdbOcHQ3NfHJnivv_lCkQWqco6zW-vPlSPYNgBVwTg==/san-martin-c-vs-independiente-o"
     },
     {
       "date": "2026-12-16",
@@ -1879,19 +1879,19 @@
       "date": "2026-12-16",
       "time": "00:00",
       "home": {
-        "name": "SAN MARTÍN (C)",
-        "officialClubId": 1426,
-        "officialTeamId": 113546
+        "name": "ARGENTINO (J)",
+        "officialClubId": 1932,
+        "officialTeamId": 115240
       },
       "away": {
-        "name": "INDEPENDIENTE (O)",
-        "officialClubId": 2025,
-        "officialTeamId": 114628
+        "name": "SAN LORENZO",
+        "officialClubId": 88,
+        "officialTeamId": 113373
       },
       "homeScore": 0,
       "awayScore": 0,
       "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2bvkhY7NbaMCttdbOcHQ3NfHJnivv_lCkQWqco6zW-vPlSPYNgBVwTg==/san-martin-c-vs-independiente-o"
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2HKi_ZYHGLXEtlS_BCGX4dUnmYAqdq_JYJVNpzMaSqFz93Dj3qE7mbA==/argentino-j-vs-san-lorenzo"
     },
     {
       "date": "2026-12-18",
@@ -1915,24 +1915,6 @@
       "date": "2026-12-18",
       "time": "00:00",
       "home": {
-        "name": "INSTITUTO",
-        "officialClubId": 1790,
-        "officialTeamId": 112809
-      },
-      "away": {
-        "name": "PLATENSE",
-        "officialClubId": 80,
-        "officialTeamId": 112549
-      },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "unverified",
-      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v28RyLMQd9f8_nEYdpDGbYWWLv8Edlofgnnx3xo81I6dnVq6qvVWxzXg==/instituto-vs-platense"
-    },
-    {
-      "date": "2026-12-18",
-      "time": "00:00",
-      "home": {
         "name": "OBERÁ",
         "officialClubId": 2305,
         "officialTeamId": 113652
@@ -1946,6 +1928,24 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2MtT9HB87UXNtgutA3GyBkBRtkDPrNvgepoi1aaXHVZ5nsYk9fJ3zkw==/obera-vs-quimsa"
+    },
+    {
+      "date": "2026-12-18",
+      "time": "00:00",
+      "home": {
+        "name": "INSTITUTO",
+        "officialClubId": 1790,
+        "officialTeamId": 112809
+      },
+      "away": {
+        "name": "PLATENSE",
+        "officialClubId": 80,
+        "officialTeamId": 112549
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v28RyLMQd9f8_nEYdpDGbYWWLv8Edlofgnnx3xo81I6dnVq6qvVWxzXg==/instituto-vs-platense"
     },
     {
       "date": "2026-12-18",
