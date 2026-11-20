@@ -68,7 +68,7 @@ async function main() {
     tables: $ajax("table").length,
     rows: $ajax("tr").length,
     matchLinks: ajaxLinks.length,
-    links: ajaxLinks.slice(0, 20),
+    links: ajaxLinks.slice(0, 5),\n    sampleRows: $ajax("tr").slice(0, 8).map((_, el) => ({ html: $ajax(el).html()?.slice(0, 5000), attrs: $ajax(el).attr(), text: $ajax(el).text().replace(/\\s+/g, " ").trim() })).get(),
     classes: [...new Set($ajax("[class]").map((_, el) => $ajax(el).attr("class")).get().filter(x => /calendario|partido|fixture/i.test(x || "")))].slice(0, 40),
     snippet: ajaxHtml.slice(0, 1600),
   };
