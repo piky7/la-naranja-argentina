@@ -114,7 +114,7 @@ test("un cambio de datos invalida todas las lecturas compartidas de Prode", asyn
 
 test("la precarga de secciones no consulta APIs autenticadas antes de abrirlas", () => {
   const app = readFileSync(new URL("../src/App.jsx", import.meta.url), "utf8");
-  assert.match(app, /Promise\.allSettled\(\[loadLiga\(\), loadEstadisticas\(\), loadProde\(\), loadMiCarrera\(\)\]\)/);
+  assert.match(app, /Promise\.allSettled\(\[loadLiga\(\), loadEstadisticas\(\), loadProde\(\)\]\)/);
   assert.doesNotMatch(app, /watchProdeUser|fetchProdeRead|fetchCareerData/);
   assert.match(app, /requestIdleCallback\(preload/);
 });
