@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
+import boxscores from "../../data/lab/labBoxscores.json";
+import "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
 
@@ -15,10 +17,35 @@ const formatDay = key => new Intl.DateTimeFormat("es-AR", {
   timeZone: "UTC", weekday: "short", day: "2-digit", month: "short"
 }).format(dateFromKey(key)).replace(/\\./g, "").toUpperCase();
 
+function LabHomeBoxscore({match}) {
+  const box = boxscores[match.id];
+  const [side, setSide] = useState("home");
+  const [tab, setTab] = useState("players");
+  if (!box) return <div className="lab-boxscore-empty"><strong>Estadísticas en preparación</strong><span>La planilla individual de este partido todavía no está incorporada a LNA.</span></div>;
+  const team = side === "home" ? match.homeTeam : match.awayTeam;
+  const rows = box.players.filter(player => player.teamId === team.teamId).sort((a,b) => b.points-a.points);
+  const mvp = box.players.slice().sort((a,b) => b.valuation-a.valuation || b.points-a.points)[0];
+  const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? match.homeTeam : match.awayTeam);
+  const crest = team => team.crestUrl || "";
+  const teamLabel = name => String(name || "").replace(/ \\((MDP|SF|CC|LR|T|VT|J)\\)/g, "");
+  const date = new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"}).format(new Date(match.date+"T12:00:00Z")).replace(/\\./g,"").toUpperCase();
+  return <div className="lab-native-boxscore">
+    <header className="lab-native-head"><b>LIGA ARGENTINA 2026/27</b><span>{date} <i>•</i> FINAL</span>
+      <div className="lab-native-score"><div><img src={crest(match.homeTeam)} alt=""/><strong>{teamLabel(match.homeTeam.name)}</strong></div><b><em>{match.homeScore}</em> - <em>{match.awayScore}</em></b><div><img src={crest(match.awayTeam)} alt=""/><strong>{teamLabel(match.awayTeam.name)}</strong></div></div>
+      <small>{match.venue || "LIGA ARGENTINA"}</small>
+    </header>
+    {mvp && <section className="lab-native-mvp"><label>♛ JUGADOR DESTACADO · MAYOR VALORACIÓN</label><div><img src={crest(mvpTeam)} alt=""/><strong>{mvp.name}</strong><small>{teamLabel(mvpTeam.name)}</small></div><aside>{[[mvp.points,"PTS"],[mvp.rebounds,"REB"],[mvp.assists,"AST"],[mvp.minutes,"MIN"],[mvp.valuation,"VAL"]].map(([value,label])=><b key={label}>{value}<small>{label}</small></b>)}</aside></section>}
+    <nav className="lab-native-tabs"><button className={tab==="players"?"active":""} onClick={()=>setTab("players")}>Stats jugadores</button><button className={tab==="teams"?"active":""} onClick={()=>setTab("teams")}>Estadísticas equipos</button></nav>
+    {tab==="players" ? <><nav className="lab-native-team-tabs">{[["home",match.homeTeam],["away",match.awayTeam]].map(([key,current])=><button key={key} className={side===key?"active":""} onClick={()=>setSide(key)}><img src={crest(current)} alt=""/>{teamLabel(current.name)}</button>)}</nav><div className="lab-native-table"><div className="lab-native-th"><b>JUGADOR</b><b>PTS</b><b>REB</b><b>AST</b><b>MIN</b><b>VAL</b></div>{rows.map(player=><div className="lab-native-tr" key={player.id}><strong>{player.number ? "#"+player.number+" · " : ""}{player.name}</strong><b>{player.points}</b><span>{player.rebounds}</span><span>{player.assists}</span><span>{player.minutes}</span><b>{player.valuation}</b></div>)}</div></> : <div className="lab-native-unavailable">Las estadísticas colectivas comparadas todavía no están disponibles para esta competencia.</div>}
+    <footer className="lab-native-footer"><b>LNA</b><strong>ESTADÍSTICAS DEL PARTIDO</strong></footer>
+  </div>;
+}
+
 function HomeLigaArgentina() {
   const today = todayInArgentina();
   const [selectedDate, setSelectedDate] = useState(today);
   const [statsTab, setStatsTab] = useState("posiciones");
+  const [selectedMatch, setSelectedMatch] = useState(null);
 
   const data = useMemo(() => {
     const table = new Map(fixture.teams.map(team => [team.teamId, {
@@ -67,8 +94,7 @@ function HomeLigaArgentina() {
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
     const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
-    return <a className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished" : ""}`}
-      href={match.officialUrl} target="_blank" rel="noreferrer"
+    return <button type="button" disabled={!hasScore} onClick={() => setSelectedMatch(match)} className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished" : ""}`}
       style={{"--match-home-logo":`url("${match.homeTeam.crestUrl || ""}")`,"--match-away-logo":`url("${match.awayTeam.crestUrl || ""}")`}}>
       <div className="fixture-team fixture-home">
         <div className="fixture-team-name"><span>{displayName(match.homeTeam.name)}</span>
@@ -94,7 +120,7 @@ function HomeLigaArgentina() {
 
   const StandingRows = ({teams, offset=0}) => teams.map((team,index) => {
     const position = offset + index + 1;
-    return <a key={team.teamId} href={team.url} target="_blank" rel="noreferrer" className="home-standing-row">
+    return <div key={team.teamId} className="home-standing-row">
       <span className={`standing-position ${positionClass(position-1)}`}>{position}</span>
       <span className="home-standing-team"><img src={team.crestUrl} alt="" loading="lazy"/><span>{displayName(team.name)}</span></span>
       <strong>{team.wins}</strong><strong>{team.losses}</strong>
