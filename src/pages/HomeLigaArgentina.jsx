@@ -10,7 +10,7 @@ import "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
 
-const labCrest = team => {
+export const labCrest = team => {
   const id = team?.teamId || String(team?.crestUrl || "").split("/").filter(Boolean).at(-1);
   return id ? "/lab-team-logos/" + id + ".webp" : "";
 };
@@ -18,7 +18,7 @@ const LAB_CONFERENCES = {
   norte: ["amancay-lr","barrio-jardin-t","barrio-parque","bochas-cc","comunicaciones","el-ceibo-sf","hindu-c","independiente-sde","jujuy-basquet","mitre-posadas","riachuelo-lr","salta-basket","san-isidro","santa-paula-g","sp-suardi","union-sf","villa-san-martin"],
   sur: ["centenario-vt","central-entrerriano","ciclista-j","dep-norte","dep-viedma","gimnasia-lp","la-union-c","pergamino-basquet","pico-fc","provincial-r","quilmes-mdp","racing-a","regatas-sn","river","rocamora","union-mdp","villa-mitre-bb"]
 };
-const LAB_TEAM_COLORS = {
+export const LAB_TEAM_COLORS = {
   "amancay-lr": "#c49a32",
   "barrio-jardin-t": "#28794b",
   "barrio-parque": "#28794b",
@@ -54,7 +54,7 @@ const LAB_TEAM_COLORS = {
   "villa-mitre-bb": "#28794b",
   "villa-san-martin": "#bd303e"
 };
-const labMatchColor = team => LAB_TEAM_COLORS[team?.slug] || "#315a7b";
+export const labMatchColor = team => LAB_TEAM_COLORS[team?.slug] || "#315a7b";
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
 }).format(new Date());
