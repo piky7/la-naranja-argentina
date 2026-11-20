@@ -71,36 +71,29 @@ const formatDay = key => new Intl.DateTimeFormat("es-AR", {
 }).format(dateFromKey(key)).replace(/\./g, "").toUpperCase();
 
 function LabTeamComparison({comparison, homeTeam, awayTeam}) {
-  if (!comparison) return <p className="match-team-unavailable">La comparativa oficial no está disponible para este partido.</p>;
-  const metrics = [["fieldGoals","Tiros de campo"],["twoPointers","Dobles"],["threePointers","Triples"],["freeThrows","Libres"],["rebounds","Rebotes"],["assists","Asistencias"],["steals","Recuperaciones"],["blocks","Tapones"],["turnovers","Pérdidas"],["fouls","Faltas cometidas"]];
-  const display = value => value == null ? "Sin dato" : typeof value === "object" ? String(value.made) + " / " + String(value.attempted) + " · " + Number(value.percentage).toFixed(0) + "%" : String(value);
-  const number = value => value == null ? null : typeof value === "object" ? Number(value.percentage) : Number(value);
-  const colors = {"--comparison-home-color":labMatchColor(homeTeam),"--comparison-away-color":labMatchColor(awayTeam)};
-  return <div className="match-team-comparison-card lab-team-comparison-card" style={colors}>
-    <div className="match-team-comparison-header">
-      <div className="match-team-comparison-name">{homeTeam.logo && <img src={homeTeam.logo} alt=""/>}<span>{homeTeam.shortName || homeTeam.name}</span></div>
-      <span>INDICADOR</span>
-      <div className="match-team-comparison-name match-team-comparison-name-away"><span>{awayTeam.shortName || awayTeam.name}</span>{awayTeam.logo && <img src={awayTeam.logo} alt=""/>}</div>
-    </div>
-    <div className="match-team-comparison-rows">
-      {metrics.map(([key,label]) => {
-        const homeValue = comparison.home?.[key], awayValue = comparison.away?.[key];
-        const homeNumber = number(homeValue), awayNumber = number(awayValue);
-        const shooting = ["fieldGoals","twoPointers","threePointers","freeThrows"].includes(key);
-        const lower = key === "turnovers" || key === "fouls";
-        const homeWins = homeNumber != null && awayNumber != null && (lower ? homeNumber < awayNumber : homeNumber > awayNumber);
-        const awayWins = homeNumber != null && awayNumber != null && (lower ? awayNumber < homeNumber : awayNumber > homeNumber);
-        const max = shooting ? 100 : Math.max(homeNumber || 0, awayNumber || 0, 1);
-        const homeWidth = homeNumber == null ? 0 : Math.min(100, homeNumber / max * 100);
-        const awayWidth = awayNumber == null ? 0 : Math.min(100, awayNumber / max * 100);
-        return <div className="match-team-comparison-row" key={key}>
-          <div className="match-team-comparison-metric">{label}</div>
-          <div className="match-team-comparison-side match-team-comparison-side-home"><span className={"match-team-comparison-value" + (homeWins ? " match-team-comparison-winner" : "")}>{display(homeValue)}</span><div className={"match-team-comparison-track" + (homeWins ? " match-team-comparison-track-winner" : "")}><span style={{width:homeWidth + "%"}}/></div></div>
-          <div className="match-team-comparison-side match-team-comparison-side-away"><span className={"match-team-comparison-value" + (awayWins ? " match-team-comparison-winner" : "")}>{display(awayValue)}</span><div className={"match-team-comparison-track" + (awayWins ? " match-team-comparison-track-winner" : "")}><span style={{width:awayWidth + "%"}}/></div></div>
-        </div>;
-      })}
-    </div>
-  </div>;
+  if (!comparison) return <p className="lab-team-comparison-empty">La comparativa oficial no está disponible para este partido.</p>;
+  const shotText = shot => `${shot.made} / ${shot.attempted} · ${Number(shot.percentage).toFixed(0)}%`;
+  const rows = [
+    ['TIROS DE CAMPO', 'fieldGoals', true], ['DOBLES', 'twoPointers', true],
+    ['TRIPLES', 'threePointers', true], ['LIBRES', 'freeThrows', true],
+    ['REBOTES', 'rebounds'], ['ASISTENCIAS', 'assists'], ['RECUPERACIONES', 'steals'],
+    ['TAPONES', 'blocks'], ['PÉRDIDAS', 'turnovers'], ['FALTAS COMETIDAS', 'fouls']
+  ];
+  return <section className='lab-team-comparison' style={{'--comparison-home-color':labMatchColor(homeTeam),'--comparison-away-color':labMatchColor(awayTeam)}}>
+    <div className='lab-team-comparison-heading'><span>ESTADÍSTICAS COLECTIVAS OFICIALES</span><strong>COMPARATIVA DE EQUIPOS</strong></div>
+    <div className='lab-team-comparison-teams'><span><img src={homeTeam.logo} alt=''/>{homeTeam.name}</span><small>LOCAL</small><span><img src={awayTeam.logo} alt=''/>{awayTeam.name}</span></div>
+    <div className='lab-team-comparison-rows'>{rows.map(([label,key,isShot]) => {
+      const homeValue = comparison.home[key], awayValue = comparison.away[key];
+      const homeNumber = isShot ? homeValue.made : homeValue, awayNumber = isShot ? awayValue.made : awayValue;
+      const max = Math.max(homeNumber, awayNumber, 1);
+      const display = value => isShot ? shotText(value) : String(value);
+      return <div className='lab-team-comparison-row' key={key}>
+        <div className='lab-team-comparison-values'><strong>{display(homeValue)}</strong><span>{label}</span><strong>{display(awayValue)}</strong></div>
+        <div className='lab-team-comparison-bars'><span className='lab-team-comparison-bar-home' style={{width: `${homeNumber / max * 100}%`}}/><span className='lab-team-comparison-bar-away' style={{width: `${awayNumber / max * 100}%`}}/></div>
+      </div>;
+    })}</div>
+    <p>Datos extraídos directamente de la comparativa oficial publicada en el boxscore de Liga Argentina.</p>
+  </section>;
 }
 function LabHomeBoxscore({match, onClose}) {
   const box = boxscores[match.id];
