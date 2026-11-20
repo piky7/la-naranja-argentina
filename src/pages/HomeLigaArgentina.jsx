@@ -310,7 +310,7 @@ function HomeLigaArgentina() {
               <button type="button" className={`home-stats-tab ${conferenceTab === "norte" ? "active" : ""}`} onClick={()=>setConferenceTab("norte")}>NORTE</button>
               <button type="button" className={`home-stats-tab ${conferenceTab === "sur" ? "active" : ""}`} onClick={()=>setConferenceTab("sur")}>SUR</button>
             </div>
-            <div className="standings-table">
+            <div className="standings-table standings-table-desktop">
               <div className="standings-table-header"><span>#</span><span>Equipo</span><span>PG</span><span>PP</span></div>
               <StandingRows teams={conferenceTeams}/>
             </div>
