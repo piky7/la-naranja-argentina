@@ -95,52 +95,6 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
       direction === "right" ? "page-enter-from-left" : "");
   }, [location.key, location.state]);
 
-  if (selectedTournament === "lab" && location.pathname === "/liga") {
-    return <Suspense fallback={<RouteLoading />}><LigaArgentina /></Suspense>;
-  }
-  if (selectedTournament === "lab" && location.pathname === "/equipos") {
-    return <Suspense fallback={<RouteLoading />}><LigaArgentinaEquipos /></Suspense>;
-  }
-  if (selectedTournament === "lab" && location.pathname === "/estadisticas") {
-    return <Suspense fallback={<RouteLoading />}><LigaArgentinaEstadisticas /></Suspense>;
-  }
-  if (selectedTournament === "lab") {
-    return (
-      <>
-        <div key={location.key} className={animation}>
-          <Suspense fallback={<RouteLoading />}>
-            <Routes location={location}>
-              <Route path="/" element={<Home />} />
-              <Route path="/liga" element={<LigaArgentina />} />
-              <Route path="/equipos" element={<LigaArgentinaEquipos />} />
-              <Route path="/equipos/:teamId" element={<LigaArgentinaEquipos />} />
-              <Route path="/jugadores" element={<Navigate to="/estadisticas" replace />} />
-              <Route path="/estadisticas" element={<LigaArgentinaEstadisticas />} />
-              <Route path="/prode" element={null} />
-              <Route path="/perfil" element={<Perfil />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/invitacion" element={<Navigate to={"/prode" + (() => {
-                const params = new URLSearchParams(location.search);
-                const token = params.get("token") || params.get("invite");
-                return token && /^[a-f0-9]{64}$/i.test(token) ? "?invite=" + encodeURIComponent(token) : "";
-              })()} replace />} />
-              <Route path="/privacidad" element={<Privacidad />} />
-              <Route path="/acerca" element={<Acerca />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Suspense>
-        </div>
-        {prodeVisited && <div style={{ display: isProde ? undefined : "none" }} aria-hidden={!isProde}>
-          <Suspense fallback={isProde ? <RouteLoading /> : null}>
-            <Prode />
-          </Suspense>
-        </div>}
-      </>
-    );
-  }
-  if (selectedTournament !== "lnb") {
-    return <TournamentComingSoon tournament={selectedTournament} onBack={() => onTournamentChange("lnb")} />;
-  }
 
   return (
     <>
@@ -148,11 +102,11 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
       <Suspense fallback={<RouteLoading />}>
       <Routes location={location}>
         <Route path="/" element={<Home />} />
-        <Route path="/liga" element={<Liga />} />
-        <Route path="/equipos" element={<Equipos />} />
-        <Route path="/equipos/:teamId" element={<Equipo />} />
-        <Route path="/jugadores" element={<Jugadores />} />
-        <Route path="/estadisticas" element={<Estadisticas />} />
+        <Route path="/liga" element={selectedTournament === "lab" ? <LigaArgentina /> : <Liga />} />
+        <Route path="/equipos" element={selectedTournament === "lab" ? <LigaArgentinaEquipos /> : <Equipos />} />
+        <Route path="/equipos/:teamId" element={selectedTournament === "lab" ? <LigaArgentinaEquipos /> : <Equipo />} />
+        <Route path="/jugadores" element={selectedTournament === "lab" ? <Navigate to="/estadisticas" replace /> : <Jugadores />} />
+        <Route path="/estadisticas" element={selectedTournament === "lab" ? <LigaArgentinaEstadisticas /> : <Estadisticas />} />
         <Route path="/prode" element={null} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/admin" element={<Admin />} />
