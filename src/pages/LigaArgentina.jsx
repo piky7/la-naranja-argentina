@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import fixture from "../../data/lab/labSchedule.json";
-import { LabHomeBoxscore } from "./HomeLigaArgentina.jsx";
+import { LabHomeBoxscore, LabUpcomingMatchModal } from "./HomeLigaArgentina.jsx";
 import boxscores from "../../data/lab/labBoxscores.json";
 import "./LigaArgentina.css";
 import "./Liga.css";
@@ -71,7 +71,7 @@ const formatLeagueDate = date => new Intl.DateTimeFormat("es-AR",{day:"2-digit",
 
 export default function LigaArgentina(){
  const [section,setSection]=useState("fixture"),[filter,setFilter]=useState("all"),[search,setSearch]=useState("");
- const [selectedMatch,setSelectedMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
+ const [selectedMatch,setSelectedMatch]=useState(null),[selectedUpcomingMatch,setSelectedUpcomingMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
  const today=todayArgentina();
  const classified=useMemo(()=>fixture.matches.map(m=>{
   const hasScore=m.homeScore!==null&&m.awayScore!==null;
@@ -146,7 +146,7 @@ export default function LigaArgentina(){
     </div>
     <div className="league-column">
      <div className="section-heading"><div><span className="section-label">PRÓXIMOS 10</span><h2 className="league-hero-title">PRÓXIMOS <span>PARTIDOS</span></h2></div></div>
-     <div className="upcoming-card">{upcomingMatches.length?upcomingMatches.map(match=><button key={match.id} type="button" className="upcoming-match" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
+     <div className="upcoming-card">{upcomingMatches.length?upcomingMatches.map(match=><button key={match.id} type="button" className="upcoming-match" style={labMatchStyle(match)} onClick={()=>setSelectedUpcomingMatch(match)}>
       <div className="upcoming-date"><small className="league-card-weekday">{formatLeagueWeekday(match.date)}</small><span>{formatLeagueDate(match.date)}</span><strong>{match.time||"A confirmar"}</strong></div>
       <div className="upcoming-teams"><div><img src={labTeamCrest(match.homeTeam)} alt="" className="upcoming-logo" loading="lazy"/><span>{teamLabel(match.homeTeam.name)}</span></div><span className="upcoming-vs">VS</span><div><span>{teamLabel(match.awayTeam.name)}</span><img src={labTeamCrest(match.awayTeam)} alt="" className="upcoming-logo" loading="lazy"/></div></div>
      </button>):<div className="column-empty">No hay próximos partidos programados.</div>}</div>
