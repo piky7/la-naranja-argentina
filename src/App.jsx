@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import Header from "./components/Header";
 import TournamentComingSoon from "./components/TournamentComingSoon";
@@ -175,17 +175,33 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
   );
 }
 
-function App() {
+function AppContent() {
   const [selectedTournament, setSelectedTournament] = useState("lnb");
+  const navigate = useNavigate();
+
+  const changeTournament = (tournament) => {
+    setSelectedTournament(tournament);
+    if (tournament === "lab" && window.location.pathname === "/") {
+      navigate("/liga");
+    }
+  };
 
   return (
-    <BrowserRouter>
+    <>
       <PreloadSections />
       <SeoMeta />
       <SwipeNavigation />
-      <Header selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
-      <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={setSelectedTournament} />
+      <Header selectedTournament={selectedTournament} onTournamentChange={changeTournament} />
+      <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={changeTournament} />
       <Footer />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
