@@ -4,7 +4,7 @@ const MATCH_URL = "https://www.laliganacional.com.ar/laligaargentina/partido/v2u
 const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari/537.36";
 
 async function main() {
-  const response = await fetch(URL, { headers: { "User-Agent": UA, Accept: "text/html" } });
+  const response = await fetch(MATCH_URL, { headers: { "User-Agent": UA, Accept: "text/html" } });
   if (!response.ok) throw new Error(`Partido LAB HTTP ${response.status}`);
   const html = await response.text();
   const $ = cheerio.load(html);
