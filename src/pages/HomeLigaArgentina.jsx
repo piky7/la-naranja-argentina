@@ -14,6 +14,7 @@ export { LAB_TEAM_COLORS, labMatchColor } from "../utils/labPresentation";
 import "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
+import "../components/PlayerModalSeason.css";
 
 export const labCrest = team => {
   const id = team?.teamId || String(team?.crestUrl || "").split("/").filter(Boolean).at(-1);
@@ -67,6 +68,64 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
     <p>Datos extraídos directamente de la comparativa oficial publicada en el boxscore de Liga Argentina.</p>
   </section>;
 }
+
+function LabPlayerModal({player, match, team, onClose}) {
+  const [tab,setTab]=useState("match");
+  const appearances=Object.values(boxscores||{}).flatMap(box=>Array.isArray(box?.players)?box.players:[])
+    .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId));
+  const unique=new Map();
+  appearances.forEach((p)=>{const key=String(p.matchId||p.gameId||p.date||p.id+"-"+p.minutes);if(!unique.has(key))unique.set(key,p);});
+  const games=[...unique.values()];
+  const mean=key=>games.length?(games.reduce((sum,p)=>sum+(Number(p[key])||0),0)/games.length).toFixed(1):"—";
+  const sum=key=>games.reduce((total,p)=>total+(Number(p[key])||0),0);
+  const shot=key=>{const values=games.map(p=>p[key]).filter(v=>v&&typeof v==="object"&&v.made!=null&&v.attempted!=null);const made=values.reduce((n,v)=>n+Number(v.made||0),0),attempted=values.reduce((n,v)=>n+Number(v.attempted||0),0);return {made,attempted,pct:attempted?made/attempted*100:null};};
+  const minutes=games.map(p=>{const v=String(p.minutes||"");const m=v.match(/^(\d+):(\d{2})$/);return m?Number(m[1])+Number(m[2])/60:Number(v)||0;});
+  const avgMinutes=minutes.length?minutes.reduce((a,b)=>a+b,0)/minutes.length:0;
+  const formatMinutes=v=>{if(v==null||!Number.isFinite(v))return "—";const n=Math.round(v*60);return Math.floor(n/60)+":"+String(n%60).padStart(2,"0");};
+  const matchDate=new Intl.DateTimeFormat("es-AR",{day:"2-digit",month:"2-digit",year:"numeric",timeZone:"UTC"}).format(new Date(match.date+"T12:00:00Z"));
+  const teamLogo=team.logo||labCrest(team);
+  const radar=[["PTS",Number(mean("points"))||0,25],["REB",Number(mean("rebounds"))||0,12],["AST",Number(mean("assists"))||0,10],["ROB",Number(mean("steals"))||0,4]];
+  const xy=(i,r)=>{const pts=[[110,68],[178,132],[110,196],[42,132]];return [110+(pts[i][0]-110)*r,132+(pts[i][1]-132)*r];};
+  const radarPoints=r=>radar.map((_,i)=>xy(i,r).join(",")).join(" ");
+  const radarFill=radar.map(([label,value,max],i)=>xy(i,Math.min(1,value/max)).join(",")).join(" ");
+  const extra=[["REB OF","offensiveRebounds"],["REB DEF","defensiveRebounds"],["ROB","steals"],["TAP","blocks"],["PÉRD","turnovers"],["FALTAS","fouls"]];
+  const shooting=[["DOBLES","twoPointers"],["TRIPLES","threePointers"],["LIBRES","freeThrows"]].map(([label,key])=>[label,shot(key)]);
+  const matchShots=[["DOBLES",player.twoPointers],["TRIPLES",player.threePointers],["LIBRES",player.freeThrows]];
+  return createPortal(<div className="home-modal-overlay lab-player-modal-overlay" onClick={onClose}>
+    <div className="home-player-modal lab-player-modal" role="dialog" aria-modal="true" aria-label={player.name} onClick={e=>e.stopPropagation()}>
+      <header className="home-player-modal-header">
+        <img className="home-player-modal-watermark" src={teamLogo} alt="" aria-hidden="true"/>
+        <div className="home-player-modal-logo"><img src={teamLogo} alt=""/></div>
+        <div className="home-player-modal-info"><span>{player.position||"JUGADOR"}</span><h2>{player.name}</h2><p>{team.name}</p><small>{player.nationality||"Liga Argentina"}</small></div>
+        <button type="button" className="home-modal-close" onClick={onClose} aria-label="Cerrar">×</button>
+      </header>
+      <nav className="lna-player-modal-tabs" role="tablist" aria-label="Estadísticas del jugador">
+        <button type="button" role="tab" aria-selected={tab==="match"} className={tab==="match"?"active":""} onClick={()=>setTab("match")}>Este partido</button>
+        <button type="button" role="tab" aria-selected={tab==="season"} className={tab==="season"?"active":""} onClick={()=>setTab("season")}>Promedios temporada</button>
+      </nav>
+      {tab==="match"?<section className="lna-player-match-panel">
+        <div className="lna-player-match-context"><span>ESTADÍSTICAS DEL PARTIDO · {matchDate}</span><strong>{match.homeTeam.name}<em>{match.homeScore} - {match.awayScore}</em>{match.awayTeam.name}</strong></div>
+        <div className="lna-player-match-main">{[["PTS",player.points],["REB",player.rebounds],["AST",player.assists],["VAL",player.valuation],["MIN",player.minutes]].map(([label,value])=><div key={label} className={label==="PTS"?"is-primary":""}><strong>{value??"—"}</strong><span>{label}</span></div>)}</div>
+        <span className="home-player-modal-label">PLANILLA COMPLETA</span>
+        <div className="lna-player-match-extra">{[...extra.map(([label,key])=>[label,player[key]]),["+/-",player.plusMinus]].map(([label,value])=><div key={label}><span>{label}</span><strong>{value??"—"}</strong></div>)}</div>
+        <div className="lna-player-match-shots">{matchShots.map(([label,value])=>{const made=value?.made,attempted=value?.attempted,pct=value?.percentage;return <div key={label}><span>{label}</span><strong>{made!=null&&attempted!=null?made+"/"+attempted:"—"}</strong><div className="lna-player-shot-track"><span style={{width:Number.isFinite(Number(pct))?Math.max(0,Math.min(100,Number(pct)))+"%":"0%"}}/></div><small>{pct!=null?pct+"%":"Sin dato"}</small></div>;})}</div>
+      </section>:<>
+        <div className="home-player-modal-details"><div><span>POSICIÓN</span><strong>{player.position||"—"}</strong></div><div><span>NACIONALIDAD</span><strong>{player.nationality||"—"}</strong></div><div><span>NÚMERO</span><strong>{player.number??"—"}</strong></div></div>
+        <div className="home-player-modal-season"><span className="home-player-modal-label">ESTADÍSTICAS DE LA TEMPORADA</span><div className="home-player-modal-stats">{[["PJ",games.length],["PTS",mean("points")],["REB",mean("rebounds")],["AST",mean("assists")],["VAL",mean("valuation")],["MIN",formatMinutes(avgMinutes)]].map(([label,value])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
+        <section className="lna-player-radar-section"><span className="home-player-modal-label">PERFIL ESTADÍSTICO</span><div className="lna-player-radar-content">
+          <svg className="lna-player-radar-graphic" viewBox="0 45 220 175" role="img" aria-label="Perfil de puntos, rebotes, asistencias y robos">
+            {[.25,.5,.75,1].map(level=><polygon key={level} points={radarPoints(level)} fill="none" stroke="#446178" strokeWidth="1"/>)}{radar.map((_,i)=>{const [x,y]=xy(i,1);return <line key={i} x1="110" y1="132" x2={x} y2={y} stroke="#446178"/>;})}
+            <polygon points={radarFill} fill="#f68b2c" fillOpacity=".25" stroke="#fa9233" strokeWidth="2.8"/>{radar.map(([label],i)=>{const pos=[[110,52],[190,137],[110,216],[30,137]][i];return <text key={label} x={pos[0]} y={pos[1]} textAnchor="middle" fill="#e8f1f8" fontSize="12" fontWeight="800">{label}</text>;})}
+          </svg><div className="lna-player-radar-values">{radar.map(([label,value],i)=><div key={label}><span>{label}</span><strong>{mean(["points","rebounds","assists","steals"][i])}</strong></div>)}</div>
+        </div></section>
+        <section className="lna-player-season-expanded"><span className="home-player-modal-label">PROMEDIOS POR PARTIDO</span><div className="lna-player-match-extra lna-player-season-extra">{extra.map(([label,key])=><div key={key}><span>{label}</span><strong>{mean(key)}</strong></div>)}</div>
+          <span className="home-player-modal-label lna-player-season-shots-title">EFECTIVIDAD DE TIRO</span><div className="lna-player-shot-bars">{shooting.map(([label,s])=><div className="lna-player-shot-bar-row" key={label}><span className="lna-player-shot-bar-label">{label}</span><div className="lna-player-shot-bar-track"><span style={{width:s.pct==null?"0%":Math.min(100,s.pct)+"%"}}/></div><strong>{s.pct==null?"—":s.pct.toFixed(1)+"%"}</strong><small>{s.attempted?s.made+"/"+s.attempted:"S/D"}</small></div>)}</div></section>
+      </>}
+      <footer className="home-player-modal-footer"><span>LIGA ARGENTINA 2026/27</span><strong>{team.name}</strong></footer>
+    </div>
+  </div>,document.body);
+}
+
 export function LabHomeBoxscore({match, onClose}) {
   const box = boxscores[match.id];
   const players = box?.players || [];
@@ -79,6 +138,7 @@ export function LabHomeBoxscore({match, onClose}) {
   const mvp = players.slice().sort((a,b) => Number(b.valuation || 0)-Number(a.valuation || 0) || Number(b.points || 0)-Number(a.points || 0))[0];
   const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? homeTeam : awayTeam);
   const teamComparison = box?.teamComparison || null;
+  const [selectedPlayer,setSelectedPlayer]=useState(null);
   const [dateYear,dateMonth,dateDay] = String(match.date).split("-").map(Number);
   const dateObject = new Date(dateYear,dateMonth-1,dateDay);
   const weekdays = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
@@ -93,7 +153,7 @@ export function LabHomeBoxscore({match, onClose}) {
   };
   const renderTeamRows = (teamPlayers, teamId) => teamPlayers.filter(hasPlayed).slice()
     .sort((a,b)=>Number(b.points||0)-Number(a.points||0))
-    .map(player=><button type="button" className="match-stat-player" key={player.id}>
+    .map(player=><button type="button" className="match-stat-player" key={player.id} onClick={()=>setSelectedPlayer(player)}>
       <strong>{player.number != null && /^\d{1,3}$/.test(String(player.number).trim()) ? "#"+player.number+" · " : ""}{displayPersonName(player.name)}</strong>
       <span>{formatStat(player.points)}</span><span>{formatStat(player.rebounds)}</span>
       <span>{formatStat(player.assists)}</span><span>{player.minutes || "—"}</span>
@@ -107,7 +167,7 @@ export function LabHomeBoxscore({match, onClose}) {
     <div className="match-stats-head"><span>JUGADOR</span><span>PTS</span><span>REB</span><span>AST</span><span>MIN</span><span>VAL</span></div>
     <div className="match-stats-list">{renderTeamRows(teamPlayers,team.id)}</div>
   </section>;
-  return createPortal(
+  return <>{createPortal(
     <div className="match-modal-overlay match-modal-finished-overlay" onClick={onClose}>
       <div className="match-modal-finished-scroll">
         <div className="match-modal match-modal-finished lab-finished-match" onClick={event=>event.stopPropagation()}>
@@ -158,7 +218,7 @@ export function LabHomeBoxscore({match, onClose}) {
         </div>
       </div>
     </div>, document.body
-  );
+  )}{selectedPlayer&&<LabPlayerModal player={selectedPlayer} match={match} team={String(selectedPlayer.teamId)===String(match.homeTeam.teamId)?homeTeam:awayTeam} onClose={()=>setSelectedPlayer(null)}/>}</>;
 }
 
 
