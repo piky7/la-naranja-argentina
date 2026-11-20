@@ -587,3 +587,30 @@
     border-color: #35b8d0 !important;
   }
 }
+
+
+/* Identidad LAB: bordes celestes también en los popups de resultados y próximos partidos. */
+.lab-finished-match {
+  border-color: #43b9d5 !important;
+  box-shadow: 0 20px 65px rgba(0,0,0,.62), 0 0 0 1px rgba(67,185,213,.14);
+}
+.lab-finished-match .match-modal-header {
+  border-bottom-color: rgba(67,185,213,.58) !important;
+}
+.lab-finished-match .lab-team-comparison,
+.lab-finished-match .lab-team-comparison table,
+.lab-finished-match .match-stats-team,
+.lab-finished-match .match-stats-team-header {
+  border-color: #43b9d5 !important;
+}
+.lab-upcoming-match {
+  border-color: #43b9d5 !important;
+  box-shadow: 0 20px 65px rgba(0,0,0,.62), 0 0 0 1px rgba(67,185,213,.14);
+}
+.lab-upcoming-match .match-modal-header {
+  border-bottom-color: rgba(67,185,213,.58) !important;
+}
+.lab-upcoming-match .upcoming-team-comparison,
+.lab-upcoming-match .upcoming-player-category {
+  border-color: #43b9d5 !important;
+}
