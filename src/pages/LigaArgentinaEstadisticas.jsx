@@ -50,8 +50,7 @@ const teamRows = (() => {
     rebounds:0,assists:0,collectiveGames:0
   }]));
   for (const match of fixture.matches) {
-    if (match.homeScore == null || match.awayScore == null ||
-      (number(match.homeScore) === 0 && number(match.awayScore) === 0)) continue;
+    if (match.status !== "finished" || match.homeScore == null || match.awayScore == null) continue;
     const home = map.get(Number(match.homeTeam.teamId)), away = map.get(Number(match.awayTeam.teamId));
     if (!home || !away) continue;
     const hs=number(match.homeScore), as=number(match.awayScore);
