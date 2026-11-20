@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const fixturePath = "data/lab/labSchedule.json";
 const boxesPath = "data/lab/labBoxscores.json";
 const fixture = JSON.parse(fs.readFileSync(fixturePath, "utf8"));
-const boxes = fs.existsSync(boxesPath) && fs.readFileSync(boxesPath, "utf8").trim() ? JSON.parse(fs.readFileSync(boxesPath, "utf8")) : {};
+const beforeMatches = JSON.stringify(fixture.matches);\nconst boxes = fs.existsSync(boxesPath) && fs.readFileSync(boxesPath, "utf8").trim() ? JSON.parse(fs.readFileSync(boxesPath, "utf8")) : {};
 let published = 0;
 for (const match of fixture.matches) {
   const box = boxes[match.id];
