@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
+import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
 import fixture from "../../data/lab/labSchedule.json";
 import { LabHomeBoxscore, LabUpcomingMatchModal } from "./HomeLigaArgentina.jsx";
 import boxscores from "../../data/lab/labBoxscores.json";
@@ -11,6 +12,13 @@ import "./HomeLigaArgentina.css";
 const todayArgentina = () => new Intl.DateTimeFormat("en-CA", {timeZone:"America/Argentina/Buenos_Aires",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const dateLabel = date => date ? new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"short",timeZone:"UTC"}).format(new Date(date+"T12:00:00Z")).replace(/\./g,"").toUpperCase() : "FECHA A CONFIRMAR";
 const teamLabel = name => name.replace(" (MDP)","").replace(" (SF)","").replace(" (CC)","");
+const formatLabLiveRemaining = live => {
+ const parts = typeof live?.lastActionTime === "string" ? live.lastActionTime.match(/^(\\d{2}):(\\d{2}):(\\d{2})$/) : null;
+ if (parts) { const elapsed = Number(parts[1])*3600 + Number(parts[2])*60 + Number(parts[3]); if (elapsed >= 0 && elapsed <= 600) return `${String(Math.floor(elapsed/60)).padStart(2,"0")}:${String(elapsed%60).padStart(2,"0")}`; }
+ const minutes = Number(live?.minutesRemaining);
+ return Number.isFinite(minutes) && minutes >= 0 ? `${String(Math.floor(minutes)).padStart(2,"0")}:00` : null;
+};
+
 
 function LabBoxscore({match}) {
  const box=boxscores[match.id];
@@ -115,10 +123,10 @@ export default function LigaArgentina(){
   <section className="league-content"><div className="page-container">
    <section className="league-section today-section">
     <div className="section-heading"><div><span className="section-label">HOY</span><h2 className="league-hero-title">PARTIDOS <span>DE HOY</span></h2></div></div>
-    {todayMatches.length?<div className="today-matches">{todayMatches.map(match=><button key={match.id} type="button" className="today-match-card" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
+    {todayMatches.length?<div className="today-matches">{todayMatches.map(match=><button key={match.id} type="button" className={`today-match-card ${match.status==="live"?"is-live":""}`} style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
      <div className="match-date"><span>{formatLeagueDate(match.date)}</span>{match.time&&<strong>{match.time}</strong>}</div>
-     <div className="match-teams"><div className="match-team"><img src={labTeamCrest(match.homeTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.homeTeam.name)}</span></div><div className="match-vs"><span>{match.status==="live"?`${match.homeScore ?? "—"} - ${match.awayScore ?? "—"}`:"VS"}</span></div><div className="match-team"><img src={labTeamCrest(match.awayTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.awayTeam.name)}</span></div></div>
-     <div className="match-details"><strong>{match.status==="live"?"EN VIVO":match.time||"A confirmar"}</strong>{match.venue&&<span>📍 {match.venue}</span>}</div>
+     <div className="match-teams"><div className="match-team"><img src={labTeamCrest(match.homeTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.homeTeam.name)}</span></div><div className="match-vs">{match.status==="live"?<div className="lab-live-center"><span className="fixture-live-badge"><span className="fixture-live-dot"></span>EN VIVO</span><LiveLedScore home={match.homeScore ?? 0} away={match.awayScore ?? 0}/><LiveLedPeriod quarter={match.liveData?.quarter} time={formatLabLiveRemaining(match.liveData)} isHalftime={match.liveData?.isHalftime}/></div>:<span>VS</span>}</div><div className="match-team"><img src={labTeamCrest(match.awayTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.awayTeam.name)}</span></div></div>
+     <div className="match-details">{match.status!=="live"&&<strong>{match.time||"A confirmar"}</strong>}{match.venue&&<span>📍 {match.venue}</span>}</div>
     </button>)}</div>:<div className="no-today-matches"><span className="no-matches-label">SIN PARTIDOS</span><h3>Hoy no hay partidos</h3><p>No hay encuentros programados para hoy.</p></div>}
    </section>
    <section className="league-columns lab-league-columns">
