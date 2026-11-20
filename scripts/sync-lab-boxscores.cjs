@@ -45,7 +45,7 @@ function isOfficialFinal(statusText) {
   const value = String(statusText || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, " ").trim().toLowerCase();
   if (!value || /en juego|en curso|jugando|descanso|entretiempo|cuarto|periodo|programado|suspendido|postergado|aplazado/.test(value)) return false;
-  return /^(final|finalizado|finalizada|terminado|terminada)(?:\\s*[-–—(].*)?$/.test(value) || /^(partido finalizado|final del partido)$/.test(value) ||
+  return /^(final|finalizado|finalizada|terminado|terminada)(?:\s*[-–—(].*)?$/.test(value) || /^(partido finalizado|final del partido)$/.test(value) ||
     /\b(partido finalizado|final del partido|encuentro finalizado)\b/.test(value);
 }
 function normalizePlayer(raw, row) {
