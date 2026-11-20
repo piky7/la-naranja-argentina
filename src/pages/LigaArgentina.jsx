@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import fixture from "../../data/lab/labSchedule.json";
+import { LabHomeBoxscore } from "./HomeLigaArgentina.jsx";
 import boxscores from "../../data/lab/labBoxscores.json";
 import "./LigaArgentina.css";
 import "./Liga.css";
@@ -89,12 +90,12 @@ export default function LigaArgentina(){
  const results=allResults.slice((totalResultsPages-1-currentResultsPage)*resultsPerPage,(totalResultsPages-currentResultsPage)*resultsPerPage);
  const standings=useMemo(()=>{
   const rows=new Map(fixture.teams.map(t=>[t.teamId,{...t,played:0,wins:0,losses:0,pf:0,pc:0}]));
-  classified.filter(m=>m.status==="finished").forEach(m=>{
+  fixture.matches.filter(m=>m.date<today&&m.homeScore!=null&&m.awayScore!=null&&!(Number(m.homeScore)===0&&Number(m.awayScore)===0)&&Number.isFinite(Number(m.homeScore))&&Number.isFinite(Number(m.awayScore))).forEach(m=>{
    const h=rows.get(m.homeTeam.teamId),a=rows.get(m.awayTeam.teamId);if(!h||!a)return;
    h.played++;a.played++;h.pf+=Number(m.homeScore);h.pc+=Number(m.awayScore);a.pf+=Number(m.awayScore);a.pc+=Number(m.homeScore);
    if(Number(m.homeScore)>Number(m.awayScore)){h.wins++;a.losses++;}else{a.wins++;h.losses++;}
   });
-  return [...rows.values()].sort((a,b)=>b.wins-a.wins||(b.pf-b.pc)-(a.pf-a.pc)||a.name.localeCompare(b.name,"es"));
+  return [...rows.values()].map(team=>({...team,diff:team.pf-team.pc})).sort((a,b)=>b.wins-a.wins||b.diff-a.diff||b.pf-a.pf);
  },[classified]);
  const conferenceTeams=useMemo(()=>{
   const allowed=new Set(LAB_CONFERENCES[conference]);
@@ -107,7 +108,7 @@ export default function LigaArgentina(){
   <span className="home-standing-team"><img src={labTeamCrest(team)} alt="" loading="lazy"/><span>{teamLabel(team.name)}</span></span>
   <strong>{team.wins}</strong><strong>{team.losses}</strong>
  </div>);
- return <main className="league-page lab-page lab-league-page">
+ return <main className="league-page lab-page lab-league-page lab-home-page">
   <section className="league-content"><div className="page-container">
    <section className="league-section today-section">
     <div className="section-heading"><div><span className="section-label">HOY</span><h2 className="league-hero-title">PARTIDOS <span>DE HOY</span></h2></div></div>
@@ -121,7 +122,7 @@ export default function LigaArgentina(){
     <div className="league-column standings-column-section">
      <div className="section-heading"><div><span className="section-label">TEMPORADA</span><h2 className="league-hero-title">TABLA DE <span>POSICIONES</span></h2></div></div>
      <div className="standings-card lab-conference-standings">
-      <div className="home-stats-tabs lab-league-conference-tabs" aria-label="Conferencias">
+      <div className="home-stats-tabs lab-conference-tabs lab-league-conference-tabs" aria-label="Conferencias">
        <button type="button" className={"home-stats-tab "+(conference==="norte"?"active":"")} onClick={()=>setConference("norte")}>NORTE</button>
        <button type="button" className={"home-stats-tab "+(conference==="sur"?"active":"")} onClick={()=>setConference("sur")}>SUR</button>
       </div>
@@ -153,6 +154,6 @@ export default function LigaArgentina(){
    </section>
    <p className="lab-source">Fixture y planillas: <a href="https://www.laliganacional.com.ar/laligaargentina/fixture" target="_blank" rel="noreferrer">sitio oficial de Liga Argentina ↗</a>.</p>
   </div></section>
-  {selectedMatch&&<div className="lab-modal-backdrop" role="presentation" onClick={()=>setSelectedMatch(null)}><section className="lab-team-modal lab-match-modal" role="dialog" aria-modal="true" aria-label="Detalle del partido" onClick={e=>e.stopPropagation()}><button className="lab-modal-close" onClick={()=>setSelectedMatch(null)} aria-label="Cerrar">×</button><span className="lab-kicker">{dateLabel(selectedMatch.date)} · {selectedMatch.time||"HORARIO A CONFIRMAR"}</span><h2>{teamLabel(selectedMatch.homeTeam.name)} <strong>{selectedMatch.homeScore??"VS"} {selectedMatch.awayScore??""}</strong> {teamLabel(selectedMatch.awayTeam.name)}</h2><p>{selectedMatch.venue||"LIGA ARGENTINA"}</p>{selectedMatch.status==="finished"?<LabBoxscore match={selectedMatch}/>:<a href={selectedMatch.officialUrl} target="_blank" rel="noreferrer">Ver información oficial del partido ↗</a>}</section></div>}
+  {selectedMatch&&<LabHomeBoxscore match={selectedMatch} onClose={()=>setSelectedMatch(null)}/>}
  </main>;
 }
