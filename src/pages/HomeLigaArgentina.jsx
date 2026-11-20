@@ -198,7 +198,7 @@ function LabUpcomingMatchModal({match,onClose}) {
   const [tab,setTab]=useState("comparativa");
   const home={...match.homeTeam,name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
   const away={...match.awayTeam,name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
-  const date=(()=>{const [y,m,d]=String(match.date).split("-").map(Number);return new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"2-digit",timeZone:"UTC"}).format(new Date(Date.UTC(y,m-1,d,12)).replace?.("")||new Date(Date.UTC(y,m-1,d,12))).replace(/\./g,"").toUpperCase()})();
+  const date=(()=>{const [y,m,d]=String(match.date).split("-").map(Number);return new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"2-digit",timeZone:"UTC"}).format(new Date(Date.UTC(y,m-1,d,12))).replace(/\./g,"").toUpperCase()})();
   const completed=fixture.matches.filter(item=>item.homeScore!=null&&item.awayScore!=null&&!(Number(item.homeScore)===0&&Number(item.awayScore)===0));
   const metrics=[["Puntos","points"],["Puntos recibidos","pointsAgainst"],["Rebotes","rebounds"],["Asistencias","assists"],["Recuperaciones","steals"],["Tapones","blocks"],["Pérdidas","turnovers"],["Faltas","fouls"]];
   const aggregate=teamId=>{
