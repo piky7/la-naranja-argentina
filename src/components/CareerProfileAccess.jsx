@@ -4,7 +4,6 @@ import { UserRound, LogIn } from "lucide-react";
 import { fetchCareerData, useCareerSession } from "../auth/careerAccount";
 import { fetchProdeProfile } from "../auth/prodeProfile";
 import ProdeCrest from "./ProdeCrest";
-import NotificationBell from "./NotificationBell";
 import { isSportsDesign, serializeSportsDesign } from "./sportsCrestDesign";
 import "./CareerProfileAccess.css";
 
@@ -28,8 +27,6 @@ export default function CareerProfileAccess(){
    setProfileLoading(true);
   }
   if(cached && Number.isFinite(Number(cached.points))) setPoints(Number(cached.points));
-  // El perfil y los puntos se resuelven por separado: el header no espera
-  // la consulta de Mi Carrera para mostrar el alias y el escudo.
   const profileTask=fetchProdeProfile().then(nextProfile=>{
    if(nextProfile && user.uid===uid){
     setProfile(nextProfile);
@@ -54,8 +51,6 @@ export default function CareerProfileAccess(){
   load();
   const onUpdate=()=>load();
   const onVote=()=>load();
-  // Solo refrescar ante cambios reales del perfil o de los puntos.
-  // El montaje de otras páginas no debe reiniciar esta carga.
   window.addEventListener("prode-profile-updated",onUpdate);
   window.addEventListener("lna-vote-updated",onVote);
   return()=>{window.removeEventListener("prode-profile-updated",onUpdate);window.removeEventListener("lna-vote-updated",onVote)};
@@ -78,6 +73,5 @@ export default function CareerProfileAccess(){
    <span className="lna-profile-access-copy"><strong>{waiting?"Cargando perfil…":profile?.username||"Mi perfil"}</strong><small>Mi perfil</small></span>
    <span className="lna-profile-access-points"><b aria-hidden="true">★</b><strong>{waiting?"…":points===null?"—":points.toLocaleString("es-AR")}</strong></span>
   </Link>
-  <NotificationBell user={user}/>
  </div>;
 }
