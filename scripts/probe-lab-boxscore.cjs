@@ -1,6 +1,6 @@
 const cheerio = require("cheerio");
 
-const URL = "https://www.laliganacional.com.ar/laligaargentina/partido/v2um1j83TfZEvkqWmhIy7wVxUnii7kE_pZTahfcniEeIFTwI7KnOcHOw==/quilmes-mdp-vs-river";
+const MATCH_URL = "https://www.laliganacional.com.ar/laligaargentina/partido/v2um1j83TfZEvkqWmhIy7wVxUnii7kE_pZTahfcniEeIFTwI7KnOcHOw==/quilmes-mdp-vs-river";
 const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari/537.36";
 
 async function main() {
@@ -8,7 +8,7 @@ async function main() {
   if (!response.ok) throw new Error(`Partido LAB HTTP ${response.status}`);
   const html = await response.text();
   const $ = cheerio.load(html);
-  const scripts = $("script[src]").map((_, el) => new URL($(el).attr("src"), URL).href).get();
+  const scripts = $("script[src]").map((_, el) => new globalThis.URL($(el).attr("src"), MATCH_URL).href).get();
   const tabs = $("a,button,[role=tab]").map((_, el) => ({
     tag: el.tagName,
     text: $(el).text().replace(/\s+/g, " ").trim(),
@@ -37,7 +37,7 @@ async function main() {
     } catch(error) { external.push({url,error:String(error)}); }
   }
   const report = {
-    url:URL,http:response.status,title:$("title").text().trim(),bytes:Buffer.byteLength(html),
+    url:MATCH_URL,http:response.status,title:$("title").text().trim(),bytes:Buffer.byteLength(html),
     statusText:$("#status-partido").text().trim(),
     scores:{home:$("#score-local").text().trim(),away:$("#score-visitante").text().trim()},
     tabCandidates:tabs,tables,inlineScripts:relevantInline,externalScripts:external,
@@ -46,7 +46,7 @@ async function main() {
   };
   console.log(JSON.stringify(report,null,2));
   const md=["# Inspección del box score LAB","",
-    `- Partido: [Quilmes–River 15/10/2026](${URL})`,
+    `- Partido: [Quilmes–River 15/10/2026](${MATCH_URL})`,
     `- HTTP: ${report.http}`,`- Tablas HTML iniciales: ${tables.length}`,
     `- Candidatos de pestaña: ${tabs.length}`,
     `- Scripts externos con referencias estadísticas: ${external.length}`,
