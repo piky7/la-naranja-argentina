@@ -259,7 +259,8 @@ function HomeLigaArgentina() {
   const [selectedDate, setSelectedDate] = useState(today);
   const [statsTab, setStatsTab] = useState("posiciones");
   const [conferenceTab, setConferenceTab] = useState("norte");
-  const [selectedMatch, setSelectedMatch] = useState(null);\n  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+  const [selectedMatch, setSelectedMatch] = useState(null);
+  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 
   const data = useMemo(() => {
     const table = new Map(fixture.teams.map(team => [team.teamId, {
@@ -405,6 +406,7 @@ function HomeLigaArgentina() {
       </div>
     </div></section>
       {selectedMatch && <LabHomeBoxscore match={selectedMatch} onClose={() => setSelectedMatch(null)}/>}
+      {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)}/>}
   </main>;
 }
 export default HomeLigaArgentina;
