@@ -5,6 +5,8 @@ const fixture = require("../data/lab/labSchedule.json");
 
 const TARGET_ARG = process.argv.find(arg => arg.startsWith("--match="));
 const TARGET = TARGET_ARG ? TARGET_ARG.slice("--match=".length) : null;
+const ALL_FINISHED = process.argv.includes("--all-finished");
+const PAUSE_MS = 900;
 const OUTPUT = path.join(__dirname, "../data/lab/labBoxscores.json");
 const UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/130 Safari/537.36";
 
@@ -52,17 +54,28 @@ function normalizePlayer(raw, row) {
 }
 
 async function main() {
-  const matches = fixture.matches.filter(match => !TARGET || match.id === TARGET);
+  const importedAtStart = fs.existsSync(OUTPUT) ? JSON.parse(fs.readFileSync(OUTPUT, "utf8")) : {};
+  const today = new Date().toISOString().slice(0, 10);
+  const matches = fixture.matches.filter(match => {
+    if (TARGET) return match.id === TARGET;
+    if (!ALL_FINISHED) return true;
+    const date = String(match.date || "");
+    const hasRealScore = match.homeScore != null && match.awayScore != null &&
+      !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
+    return date <= today && hasRealScore && !importedAtStart[match.id];
+  });
   if (!matches.length) throw new Error("No se encontró el partido solicitado en labSchedule.json");
   const output = fs.existsSync(OUTPUT) ? JSON.parse(fs.readFileSync(OUTPUT, "utf8")) : {};
-  for (const match of matches) {
+  let importedThisRun = 0, skipped = 0, failed = 0;\n  for (const [index, match] of matches.entries()) {
     if (!match.officialUrl) continue;
     const response = await fetch(match.officialUrl, { headers: { "User-Agent": UA, Accept: "text/html" } });
     if (!response.ok) throw new Error("Partido " + match.id + " respondió HTTP " + response.status);
     const $ = cheerio.load(await response.text());
     const tables = $(".tabla-estadisticas");
     if (tables.length !== 2) {
-      console.log("Sin dos planillas individuales:", match.id, "tablas:", tables.length);
+      console.log("SIN PLANILLA COMPLETA:", match.id, "tablas:", tables.length);
+      skipped++;
+      await new Promise(resolve => setTimeout(resolve, PAUSE_MS));
       continue;
     }
     const players = [];
@@ -76,7 +89,12 @@ async function main() {
       });
     });
     const teams = [...new Set(players.map(player => player.teamId))];
-    if (teams.length !== 2 || players.length < 2) throw new Error("Planilla incompleta para " + match.id);
+    if (teams.length !== 2 || players.length < 2) {
+      console.log("PLANILLA INCOMPLETA:", match.id, "equipos:", teams.length, "jugadores:", players.length);
+      skipped++;
+      await new Promise(resolve => setTimeout(resolve, PAUSE_MS));
+      continue;
+    }
     output[match.id] = {
       matchId: match.id, date: match.date, season: match.season,
       homeTeamId: match.homeTeam.teamId, awayTeamId: match.awayTeam.teamId,
@@ -84,7 +102,15 @@ async function main() {
       source: "Liga Nacional oficial", officialUrl: match.officialUrl,
       importedAt: new Date().toISOString(), players
     };
-    console.log("BOX SCORE IMPORTADO", match.homeTeam.name, match.awayTeam.name, "jugadores:", players.length);
+    fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\\n");
+    importedThisRun++;
+    console.log("BOX SCORE IMPORTADO", match.homeTeam.name, match.awayTeam.name, "jugadores:", players.length,
+      "progreso:", index + 1, "/", matches.length);
+    } catch (error) {
+      failed++;
+      console.log("ERROR PARTIDO", match.id, error.message);
+    }
+    if (index < matches.length - 1) await new Promise(resolve => setTimeout(resolve, PAUSE_MS));
   }
   fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
   console.log("ARCHIVO:", OUTPUT, "PARTIDOS:", Object.keys(output).length);
