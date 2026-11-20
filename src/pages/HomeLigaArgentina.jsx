@@ -395,7 +395,7 @@ function HomeLigaArgentina() {
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
     const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
-    return <button type="button" onClick={() => { if (isLive) return; if (hasScore) setSelectedMatch(match); else setSelectedUpcomingMatch(match); }}
+    return <button key={match.id} type="button" onClick={() => { if (isLive) return; if (hasScore) setSelectedMatch(match); else setSelectedUpcomingMatch(match); }}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""} ${isLive ? "home-fixture-live" : ""}`}
       style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`,"--match-home-color":labMatchColor(match.homeTeam),"--match-away-color":labMatchColor(match.awayTeam)}}>
       <div className="fixture-team fixture-home">
@@ -489,7 +489,7 @@ function HomeLigaArgentina() {
             <button type="button" className="fixture-day-button" onClick={()=>changeDate(1)} aria-label="Día siguiente">›</button>
           </div>
           <div className="home-fixtures">
-            {data.todayGames.length ? data.todayGames.map(match=><Match match={match} key={match.id}/>) :
+            {data.todayGames.length ? data.todayGames.map(match=>Match({match})) :
               <div className="home-no-games"><span>LIGA ARGENTINA</span><h3>No hay partidos para esta fecha</h3><p>Usá las flechas para consultar otros días de la temporada.</p></div>}
           </div>
 
