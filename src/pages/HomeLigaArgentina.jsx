@@ -149,9 +149,7 @@ function HomeLigaArgentina() {
             {data.todayGames.length ? data.todayGames.map(match=><Match match={match} key={match.id}/>) :
               <div className="home-no-games"><span>LIGA ARGENTINA</span><h3>No hay partidos para esta fecha</h3><p>Usá las flechas para consultar otros días de la temporada.</p></div>}
           </div>
-          <div className="lab-home-next"><div className="home-panel-header"><div><span>PRÓXIMOS ENCUENTROS</span><h2>Lo que viene</h2></div></div>
-            <div className="home-fixtures">{data.allDates.filter(date=>date>today).slice(0,3).flatMap(date=>fixture.matches.filter(match=>match.date===date)).map(match=><Match match={match} key={match.id}/>)}</div>
-          </div>
+
         </section>
       </div>
     </div></section>
