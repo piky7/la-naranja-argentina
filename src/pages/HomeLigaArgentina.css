@@ -527,3 +527,24 @@
   .lab-home-page .lab-home-live-center .fixture-live-score svg,
   .lab-home-page .lab-home-live-center .fixture-live-period svg { max-width:112px; }
 }
+
+/* Identidad LAB: los contornos finos pasan a celeste; LNB conserva naranja. */
+.lab-home-page {
+  --lab-accent: #43b9d5;
+}
+.lab-home-page .home-panel,
+.lab-home-page .standings-table-desktop,
+.lab-home-page .standings-table-mobile,
+.lab-home-page .home-fixture,
+.lab-home-page .home-standing-row,
+.lab-home-page .lab-team-comparison {
+  border-color: color-mix(in srgb, var(--lab-accent) 72%, #183247);
+}
+.lab-home-page .home-panel,
+.lab-home-page .fixture-panel,
+.lab-home-page .standings-panel {
+  outline-color: var(--lab-accent);
+}
+.lab-home-page .lab-team-comparison {
+  border-color: var(--lab-accent);
+}
