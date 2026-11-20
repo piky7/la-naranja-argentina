@@ -1,7 +1,9 @@
 import { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import MatchStatsTabs from "../components/MatchStatsTabs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
+import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
 import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
@@ -70,6 +72,15 @@ const displayName = name => {
   return lower.charAt(0).toLocaleUpperCase("es-AR") + lower.slice(1);
 };
 const dateFromKey = key => new Date(key + "T12:00:00Z");
+const formatLabLiveRemaining = live => {
+  const parts = typeof live?.lastActionTime === "string" ? live.lastActionTime.match(/^(\\d{2}):(\\d{2}):(\\d{2})$/) : null;
+  if (parts) {
+    const elapsed = Number(parts[1])*3600 + Number(parts[2])*60 + Number(parts[3]);
+    if (elapsed >= 0 && elapsed <= 600) return `${String(Math.floor(elapsed/60)).padStart(2,"0")}:${String(elapsed%60).padStart(2,"0")}`;
+  }
+  const minutes = Number(live?.minutesRemaining);
+  return Number.isFinite(minutes) && minutes >= 0 ? `${String(Math.floor(minutes)).padStart(2,"0")}:00` : null;
+};
 const formatDay = key => new Intl.DateTimeFormat("es-AR", {
   timeZone: "UTC", weekday: "short", day: "2-digit", month: "short"
 }).format(dateFromKey(key)).replace(/\./g, "").toUpperCase();
@@ -348,7 +359,11 @@ function HomeLigaArgentina() {
   };
 
   const Match = ({match}) => {
-    const hasScore = match.date < today && match.homeScore != null && match.awayScore != null &&
+    const liveData = labLiveById.get(String(match.id));
+    const isLive = match.status !== "finished" && liveData?.status === "live";
+    const homeScore = liveData?.homeScore ?? match.homeScore;
+    const awayScore = liveData?.awayScore ?? match.awayScore;
+    const hasScore = !isLive && match.date < today && match.homeScore != null && match.awayScore != null &&
       !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
     const home = data.standings.find(team => team.teamId === match.homeTeam.teamId);
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
@@ -365,7 +380,11 @@ function HomeLigaArgentina() {
         <img src={labCrest(match.homeTeam)} alt="" loading="lazy"/>
       </div>
       <div className="fixture-center">
-        {hasScore ? <>
+        {isLive ? <div className="lab-home-live-center">
+          <span className="fixture-live-badge"><span className="fixture-live-dot"></span>EN VIVO</span>
+          <LiveLedScore home={homeScore ?? 0} away={awayScore ?? 0}/>
+          <LiveLedPeriod quarter={liveData?.quarter} time={formatLabLiveRemaining(liveData)} isHalftime={liveData?.isHalftime}/>
+        </div> : hasScore ? <>
           <strong className="fixture-score">
             <span className={Number(match.homeScore) > Number(match.awayScore) ? "fixture-score-winner" : "fixture-score-loser"}>{match.homeScore}</span>
             <span className="fixture-score-separator"> - </span>
