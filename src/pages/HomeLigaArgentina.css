@@ -334,3 +334,23 @@
  .lab-upcoming-match .upcoming-player-entry>strong{font-size:10px}
  .lab-upcoming-match .upcoming-player-center-icon{font-size:15px}
 }
+
+/* Filas propias de la comparativa colectiva LAB */
+.lab-upcoming-match .lab-team-stat-row{
+  display:grid;grid-template-columns:44px minmax(24px,1fr) 86px minmax(24px,1fr) 44px;
+  align-items:center;gap:6px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);
+}
+.lab-upcoming-match .lab-team-stat-row>strong{
+  display:block;color:#e8edf4;font-size:12px;font-weight:850;text-align:center;font-variant-numeric:tabular-nums;
+}
+.lab-upcoming-match .lab-team-stat-row>strong.collective-better{color:#ff9b37}
+.lab-upcoming-match .lab-team-stat-label{color:#c3ceda;font-size:10px;font-weight:800;text-align:center}
+.lab-upcoming-match .lab-team-stat-track{height:7px;border-radius:9px;background:#263748;overflow:hidden}
+.lab-upcoming-match .lab-team-stat-track span{display:block;height:100%;border-radius:inherit;background:#8493a3}
+.lab-upcoming-match .lab-team-stat-track span.is-better{background:#ff922b}
+@media(max-width:600px){
+ .lab-upcoming-match .lab-team-stat-row{grid-template-columns:38px minmax(18px,1fr) 76px minmax(18px,1fr) 38px;gap:4px;padding:7px 0}
+ .lab-upcoming-match .lab-team-stat-row>strong{font-size:10px}
+ .lab-upcoming-match .lab-team-stat-label{font-size:9px}
+ .lab-upcoming-match .lab-team-stat-track{height:5px}
+}
