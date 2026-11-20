@@ -112,3 +112,4 @@ export default function LigaArgentinaEquipos() {
   </section>
  </main>;
 }
+// La vista de estadísticas LAB reutiliza el sistema visual y los datos oficiales de temporada.
