@@ -174,7 +174,8 @@ function LabHomeBoxscore({match, onClose}) {
           {players.length ? <>
             <MatchStatsTabs match={matchForTabs} stats={stats} home={homeTeam} away={awayTeam}
               customTeamComparison={<LabTeamComparison comparison={teamComparison} homeTeam={homeTeam} awayTeam={awayTeam}/>}
-              teamColors={{[match.homeTeam.teamId]:labMatchColor(match.homeTeam),[match.awayTeam.teamId]:labMatchColor(match.awayTeam)}}\n              competitionLabel="LIGA ARGENTINA">
+              teamColors={{[match.homeTeam.teamId]:labMatchColor(match.homeTeam),[match.awayTeam.teamId]:labMatchColor(match.awayTeam)}}
+              competitionLabel="LIGA ARGENTINA">
             <div className="match-modal-content">
               {renderTeam(homeTeam,homePlayers,"LOCAL")}
               {renderTeam(awayTeam,awayPlayers,"VISITANTE")}
