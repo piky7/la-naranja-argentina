@@ -168,7 +168,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
       )}
 
      {/* NAVEGACIÓN INFERIOR MOBILE */}
-{selectedTournament === "lnb" && (
+{(
 <nav
   className={navCompact ? "bottom-navigation is-compact" : "bottom-navigation"}
   aria-label="Navegación inferior"
