@@ -14,6 +14,7 @@ export { LAB_TEAM_COLORS, labMatchColor } from "../utils/labPresentation";
 import "./LigaArgentina.css";
 import "./Home.css";
 import "./HomeLigaArgentina.css";
+import "../components/PopupDeferredOverrides.css";
 import "../components/PlayerModalSeason.css";
 
 export const labCrest = team => {
@@ -71,13 +72,12 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
 
 function LabPlayerModal({player, match, team, onClose}) {
   const [tab,setTab]=useState("match");
-  const appearances=Object.values(boxscores||{}).flatMap(box=>Array.isArray(box?.players)?box.players:[])
-    .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId));
-  const unique=new Map();
-  appearances.forEach((p)=>{const key=String(p.matchId||p.gameId||p.date||p.id+"-"+p.minutes);if(!unique.has(key))unique.set(key,p);});
-  const games=[...unique.values()];
+  const appearances=Object.entries(boxscores||{}).flatMap(([matchId,box])=>(Array.isArray(box?.players)?box.players:[])
+    .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId)).map(p=>({...p,__matchId:matchId})));
+  const games=[...new Map(appearances.map(p=>[p.__matchId,p])).values()];
+  const rosterPlayer=Object.values(rosters.teams||{}).flatMap(entry=>entry.players||[])
+    .find(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId))||{};
   const mean=key=>games.length?(games.reduce((sum,p)=>sum+(Number(p[key])||0),0)/games.length).toFixed(1):"—";
-  const sum=key=>games.reduce((total,p)=>total+(Number(p[key])||0),0);
   const shot=key=>{const values=games.map(p=>p[key]).filter(v=>v&&typeof v==="object"&&v.made!=null&&v.attempted!=null);const made=values.reduce((n,v)=>n+Number(v.made||0),0),attempted=values.reduce((n,v)=>n+Number(v.attempted||0),0);return {made,attempted,pct:attempted?made/attempted*100:null};};
   const minutes=games.map(p=>{const v=String(p.minutes||"");const m=v.match(/^(\d+):(\d{2})$/);return m?Number(m[1])+Number(m[2])/60:Number(v)||0;});
   const avgMinutes=minutes.length?minutes.reduce((a,b)=>a+b,0)/minutes.length:0;
@@ -96,7 +96,7 @@ function LabPlayerModal({player, match, team, onClose}) {
       <header className="home-player-modal-header">
         <img className="home-player-modal-watermark" src={teamLogo} alt="" aria-hidden="true"/>
         <div className="home-player-modal-logo"><img src={teamLogo} alt=""/></div>
-        <div className="home-player-modal-info"><span>{player.position||"JUGADOR"}</span><h2>{player.name}</h2><p>{team.name}</p><small>{player.nationality||"Liga Argentina"}</small></div>
+        <div className="home-player-modal-info"><span>{player.position||rosterPlayer.position||"JUGADOR"}</span><h2>{player.name}</h2><p>{team.name}</p><small>{player.nationality||rosterPlayer.nationality||"Liga Argentina"}</small></div>
         <button type="button" className="home-modal-close" onClick={onClose} aria-label="Cerrar">×</button>
       </header>
       <nav className="lna-player-modal-tabs" role="tablist" aria-label="Estadísticas del jugador">
@@ -110,7 +110,7 @@ function LabPlayerModal({player, match, team, onClose}) {
         <div className="lna-player-match-extra">{[...extra.map(([label,key])=>[label,player[key]]),["+/-",player.plusMinus]].map(([label,value])=><div key={label}><span>{label}</span><strong>{value??"—"}</strong></div>)}</div>
         <div className="lna-player-match-shots">{matchShots.map(([label,value])=>{const made=value?.made,attempted=value?.attempted,pct=value?.percentage;return <div key={label}><span>{label}</span><strong>{made!=null&&attempted!=null?made+"/"+attempted:"—"}</strong><div className="lna-player-shot-track"><span style={{width:Number.isFinite(Number(pct))?Math.max(0,Math.min(100,Number(pct)))+"%":"0%"}}/></div><small>{pct!=null?pct+"%":"Sin dato"}</small></div>;})}</div>
       </section>:<>
-        <div className="home-player-modal-details"><div><span>POSICIÓN</span><strong>{player.position||"—"}</strong></div><div><span>NACIONALIDAD</span><strong>{player.nationality||"—"}</strong></div><div><span>NÚMERO</span><strong>{player.number??"—"}</strong></div></div>
+        <div className="home-player-modal-details"><div><span>POSICIÓN</span><strong>{player.position||rosterPlayer.position||"—"}</strong></div><div><span>NACIONALIDAD</span><strong>{player.nationality||rosterPlayer.nationality||"—"}</strong></div><div><span>NÚMERO</span><strong>{player.number??rosterPlayer.number??"—"}</strong></div></div>
         <div className="home-player-modal-season"><span className="home-player-modal-label">ESTADÍSTICAS DE LA TEMPORADA</span><div className="home-player-modal-stats">{[["PJ",games.length],["PTS",mean("points")],["REB",mean("rebounds")],["AST",mean("assists")],["VAL",mean("valuation")],["MIN",formatMinutes(avgMinutes)]].map(([label,value])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
         <section className="lna-player-radar-section"><span className="home-player-modal-label">PERFIL ESTADÍSTICO</span><div className="lna-player-radar-content">
           <svg className="lna-player-radar-graphic" viewBox="0 45 220 175" role="img" aria-label="Perfil de puntos, rebotes, asistencias y robos">
