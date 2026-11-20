@@ -146,7 +146,9 @@ function AppContent() {
       <SeoMeta />
       <SwipeNavigation />
       <Header selectedTournament={selectedTournament} onTournamentChange={changeTournament} />
-      <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={changeTournament} />
+      {selectedTournament === "federal"
+        ? <TournamentComingSoon tournament="federal" onBack={() => changeTournament("lnb")} />
+        : <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={changeTournament} />}
       <Footer />
     </>
   );
