@@ -23,6 +23,20 @@ async function main() {
     headers: $(el).find("thead th").map((__, th) => $(th).text().replace(/\s+/g, " ").trim()).get(),
     sample: $(el).find("tbody tr").slice(0,2).map((__, tr) => $(tr).text().replace(/\s+/g, " ").trim()).get()
   })).get();
+  const playerTables = $(".tabla-estadisticas").map((_, table) => {
+    const $table = $(table);
+    const heading = $table.closest(".table-responsive").prevAll(".nombre-equipo").first();
+    const rows = $table.find("tbody tr").map((__, row) => {
+      const $row = $(row);
+      const onclick = $row.attr("onclick") || $row.find("[onclick]").first().attr("onclick") || "";
+      const start = onclick.indexOf("{");
+      let player = null;
+      if (start >= 0) { try { player = JSON.parse(onclick.slice(start, onclick.lastIndexOf("}") + 1)); } catch {} }
+      return { text: $row.find("td").map((___, td) => $(td).text().replace(/\\s+/g, " ").trim()).get(), onclick, player, html: $row.html() };
+    }).get();
+    return { teamHeading: heading.text().replace(/\\s+/g, " ").trim(), tableClass: $table.attr("class") || "",
+      headers: $table.find("thead th").map((__, th) => $(th).text().replace(/\\s+/g, " ").trim()).get(), rows };
+  }).get();
   const inline = $("script:not([src])").map((_, el) => $(el).html() || "").get();
   const relevantInline = inline.map((body,index)=>({index,bytes:Buffer.byteLength(body),
     snippets:body.split(/\r?\n/).map(x=>x.trim()).filter(x=>/estad|jugador|ajax|fetch\(|\.get\(|\.post\(|handler|idEnc|comparativa/i.test(x)).slice(0,80)
@@ -40,7 +54,7 @@ async function main() {
     url:MATCH_URL,http:response.status,title:$("title").text().trim(),bytes:Buffer.byteLength(html),
     statusText:$("#status-partido").text().trim(),
     scores:{home:$("#score-local").text().trim(),away:$("#score-visitante").text().trim()},
-    tabCandidates:tabs,tables,inlineScripts:relevantInline,externalScripts:external,
+    tabCandidates:tabs,tables,playerTables,inlineScripts:relevantInline,externalScripts:external,
     statClassCount:$("[class*=estad], [id*=estad], [class*=jugador], [id*=jugador]").length,
     htmlHasStatLabels:/rebotes|asistencias|minutos|valoraci[oó]n/i.test(html)
   };
@@ -53,6 +67,7 @@ async function main() {
     `- Etiquetas estadísticas en HTML: ${report.htmlHasStatLabels?"Sí":"No"}`,"",
     "## Pestañas","","```json",JSON.stringify(tabs,null,2),"```","",
     "## Tablas","","```json",JSON.stringify(tables,null,2),"```","",
+    "## Jugadores y datos oficiales","","```json",JSON.stringify(playerTables,null,2),"```","",
     "## JavaScript inline","","```json",JSON.stringify(relevantInline,null,2),"```","",
     "## JavaScript externo","","```json",JSON.stringify(external,null,2),"```"
   ].join("\n");
