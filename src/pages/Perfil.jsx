@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Check, LogIn, LogOut, Save, UserRound, X } from "lucide-react";
-import { fetchCareerData, useCareerSession } from "../auth/careerAccount";
+import { useCareerSession } from "../auth/careerAccount";
 import { fetchProdeProfile, saveProdeCrest, saveProdeUsername } from "../auth/prodeProfile";
 import { signOutProde } from "../auth/prodeAuth";
 import ProdeCrest from "../components/ProdeCrest";
@@ -16,7 +16,6 @@ const DEFAULT_PROFILE = { username:"", primary:"#7de83d", secondary:"#10283c", t
 export default function Perfil(){
  const {user,loading,login,busy,error}=useCareerSession();
  const [profile,setProfile]=useState(null);
- const [points,setPoints]=useState(null);
  const [profileLoading,setProfileLoading]=useState(false);
  const [draft,setDraft]=useState(DEFAULT_PROFILE);
  const [saving,setSaving]=useState(false);
@@ -27,13 +26,11 @@ export default function Perfil(){
  const [logoutBusy,setLogoutBusy]=useState(false);
  const [logoutError,setLogoutError]=useState("");
  const loadProfile=useCallback(async()=>{
-  if(!user){setProfile(null);setPoints(null);return}
+  if(!user){setProfile(null);return}
   setProfileLoading(true);
-  const [p,c]=await Promise.allSettled([fetchProdeProfile(),fetchCareerData("points")]);
-  const next=p.status==="fulfilled"?p.value:null;
+  const next=await fetchProdeProfile().catch(()=>null);
   setProfile(next);
-  setLoadError(p.status==="rejected"?(p.reason?.message||"No se pudo cargar el perfil."): "");
-  setPoints(c.status==="fulfilled"&&Number.isFinite(Number(c.value.points))?Number(c.value.points):null);
+  setLoadError(next? "":"No se pudo cargar el perfil.");
   if(next){const design=parseSportsDesign(next.crestSymbol);if(!design.label)design.label=next.username||"";setDraft({username:next.username||"",primary:next.crestPrimary||"#7de83d",secondary:next.crestSecondary||"#10283c",text:next.crestText||"#ffffff",font:next.crestFont||"sport",design});}
   setProfileLoading(false);
  },[user]);
@@ -69,8 +66,7 @@ export default function Perfil(){
   <Link to="/" className="lna-profile-back"><ArrowLeft size={16}/> Volver a LNA</Link>
   <header className="lna-profile-heading"><span><UserRound size={23}/></span><div><small>LA NARANJA ARGENTINA</small><h1>MI PERFIL</h1></div></header>
   {loading?<p className="lna-profile-status"><span className="lna-profile-spinner"/> Cargando tu cuenta…</p>:!user?<section className="lna-profile-card"><h2>Ingresá a tu perfil</h2><p>Usá tu cuenta de Google para configurar tu identidad LNA.</p><button type="button" onClick={login} disabled={busy}><LogIn size={17}/>{busy?"Conectando…":"Continuar con Google"}</button>{error&&<small role="alert">{error}</small>}</section>:profileLoading||!profile?<section className="lna-profile-loading" role="status">{loadError?<><strong>No pudimos cargar tu perfil</strong><small>{loadError}</small><button type="button" onClick={loadProfile}>Reintentar</button></>:<><span className="lna-profile-spinner"/><strong>Cargando tu perfil…</strong><small>Estamos preparando tu escudo y tus datos.</small></>}</section>:<>
-   <section className="lna-profile-identity"><div className="lna-profile-crest"><ProdeCrest name={crestName} primary={draft.primary} secondary={draft.secondary} textColor={draft.text} style="pro" font={draft.font} symbol={crestSymbol} size={94}/></div><div className="lna-profile-identity-copy"><small>IDENTIDAD LNA</small><h2>{profile.username||profile.googleName||"Jugador"}</h2><span>{user.email||""}</span><p>Tu alias y escudo se comparten entre Prode y Mi Carrera.</p></div></section>
-   <section className="lna-profile-history"><span aria-hidden="true">★</span><div><small>PUNTOS HISTÓRICOS</small><strong>{points===null?"—":points.toLocaleString("es-AR")} PTS</strong></div></section>
+   <section className="lna-profile-identity"><div className="lna-profile-crest"><ProdeCrest name={crestName} primary={draft.primary} secondary={draft.secondary} textColor={draft.text} style="pro" font={draft.font} symbol={crestSymbol} size={94}/></div><div className="lna-profile-identity-copy"><small>IDENTIDAD LNA</small><h2>{profile.username||profile.googleName||"Jugador"}</h2><span>{user.email||""}</span><p>Tu identidad dentro de Prode LNA.</p></div></section>
    <section className="lna-profile-session">
     <div><small>SESIÓN ACTIVA</small><strong>{user.email||"Cuenta Google conectada"}</strong></div>
     <button type="button" onClick={()=>{setLogoutError("");setLogoutConfirmOpen(true)}}><LogOut size={16}/>Cerrar sesión</button>
@@ -100,7 +96,7 @@ export default function Perfil(){
    {logoutConfirmOpen&&<div className="lna-profile-dialog-backdrop" onClick={()=>!logoutBusy&&setLogoutConfirmOpen(false)}>
     <section className="lna-profile-dialog" role="alertdialog" aria-modal="true" aria-labelledby="lna-profile-logout-title" aria-describedby="lna-profile-logout-description" onClick={event=>event.stopPropagation()}>
      <div><h2 id="lna-profile-logout-title">¿Querés cerrar sesión?</h2><button type="button" aria-label="Cancelar" disabled={logoutBusy} onClick={()=>setLogoutConfirmOpen(false)}><X size={19}/></button></div>
-     <p id="lna-profile-logout-description">Vas a cerrar tu cuenta Google en LNA. Tus puntos, pronósticos y escudo quedan guardados.</p>
+     <p id="lna-profile-logout-description">Vas a cerrar tu cuenta Google en LNA. Tus pronósticos y escudo de Prode quedan guardados.</p>
      <footer><button type="button" disabled={logoutBusy} onClick={()=>setLogoutConfirmOpen(false)}>Cancelar</button><button type="button" disabled={logoutBusy} onClick={logout}>{logoutBusy?"Saliendo…":"Cerrar sesión"}</button></footer>
     </section>
    </div>}
