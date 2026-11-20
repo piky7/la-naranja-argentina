@@ -66,7 +66,7 @@ function parseOfficialTeamComparison($) {
     const left = cols.eq(0).text().replace(/\s+/g, " ").trim();
     const right = cols.eq(2).text().replace(/\s+/g, " ").trim();
     const parseValue = value => {
-      const shot = value.match(/(\d+)\s*\\/\s*(\d+)\s*(?:([\d.,]+)\s*%)?/);
+      const shot = value.match(/(\d+)\s*\/\s*(\d+)\s*(?:([\d.,]+)\s*%)?/);
       if (shot) return { made: Number(shot[1]), attempted: Number(shot[2]), percentage: Number(String(shot[3] || "0").replace(",", ".")) };
       const numeric = value.match(/-?\d+/);
       return numeric ? Number(numeric[0]) : null;
