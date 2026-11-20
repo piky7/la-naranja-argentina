@@ -753,6 +753,16 @@ async function generarLiveLab(fecha, anteriores, env) {
     try {
       const html = await descargar(match.officialUrl, { headers: { Accept: "text/html", "User-Agent": "Mozilla/5.0 (compatible; LaNaranjaArgentina/1.0)" } });
       const score = interpretarMarcadorLab(html);
+      if (anterior?.status === "finished" && score.status !== "finished") {
+        results.push(anterior);
+        continue;
+      }
+      if (Number.isFinite(anterior?.homeScore) && Number.isFinite(anterior?.awayScore) &&
+          ((score.homeScore == null || score.awayScore == null) ||
+           (score.homeScore === 0 && score.awayScore === 0 && anterior.homeScore + anterior.awayScore > 0))) {
+        results.push({ ...anterior, isStale: true });
+        continue;
+      }
       if (score.status === "unknown") {
         if (anterior) results.push({ ...anterior, isStale: true });
         console.warn("LAB: estado oficial no reconocido", id);
