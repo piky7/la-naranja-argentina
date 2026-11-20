@@ -62,7 +62,18 @@ jobs:
 
       - name: Actualizar fixture oficial de LAB
         if: steps.window.outputs.run == 'true'
-        run: node scripts/sync-lab-fixture.cjs
+        run: |
+          git show HEAD:data/lab/labSchedule.json > /tmp/labSchedule.before.json
+          node scripts/sync-lab-fixture.cjs
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const before=JSON.parse(fs.readFileSync("/tmp/labSchedule.before.json","utf8"));
+            const after=JSON.parse(fs.readFileSync("data/lab/labSchedule.json","utf8"));
+            const unchanged=JSON.stringify(before.teams)===JSON.stringify(after.teams) &&
+              JSON.stringify(before.matches)===JSON.stringify(after.matches);
+            if (unchanged) fs.copyFileSync("/tmp/labSchedule.before.json","data/lab/labSchedule.json");
+            console.log(unchanged ? "Fixture sin cambios deportivos." : "Fixture actualizado con cambios oficiales.");
+          '
 
       - name: Importar boxscores oficiales pendientes
         if: steps.window.outputs.run == 'true'
