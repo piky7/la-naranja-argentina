@@ -26,7 +26,7 @@ function pollDecision(event, schedule, requestedMode = "", now = new Date()) {
   return {run:pending,mode:"recent"};
 }
 if (require.main === module) {
-  const decision = pollDecision(process.env.GITHUB_EVENT_NAME, process.env.OFFICIAL_SCHEDULE, process.env.LAB_REQUESTED_MODE, new Date());
+  const decision = pollDecision(process.env.GITHUB_EVENT_NAME, process.env.LAB_SCHEDULE || process.env.OFFICIAL_SCHEDULE, process.env.LAB_REQUESTED_MODE, new Date());
   const output = `run=${decision.run}\nmode=${decision.mode}\n`;
   console.log(output);
   if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, output);
