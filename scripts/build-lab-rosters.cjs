@@ -3,7 +3,8 @@ const path = require("node:path");
 const fixture = require("../data/lab/labSchedule.json");
 const boxPath = path.join(__dirname, "../data/lab/labBoxscores.json");
 const outPath = path.join(__dirname, "../data/lab/labRosters.json");
-const boxes = fs.existsSync(boxPath) && fs.readFileSync(boxPath, "utf8").trim()\n  ? JSON.parse(fs.readFileSync(boxPath, "utf8")) : {};
+const boxes = fs.existsSync(boxPath) && fs.readFileSync(boxPath, "utf8").trim()
+  ? JSON.parse(fs.readFileSync(boxPath, "utf8")) : {};
 const teamInfo = new Map(fixture.teams.map(t => [Number(t.teamId), t]));
 const teams = new Map();
 const toSeconds = value => {
