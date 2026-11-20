@@ -57,7 +57,7 @@ const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
 const displayPersonName = name => {
   const clean = String(name || "").trim();
   if (!clean) return clean;
-  return clean.toLocaleLowerCase("es-AR").replace(/(^|[\\s-])([\\p{L}])/gu, (_, separator, letter) => separator + letter.toLocaleUpperCase("es-AR"));
+  return clean.toLocaleLowerCase("es-AR").replace(/(^|[\s-'’])([\p{L}])/gu, (_, separator, letter) => separator + letter.toLocaleUpperCase("es-AR"));
 };
 const displayName = name => {
   const clean = String(name || "").replace(/\s+\([^)]*\)$/i, "").trim();
