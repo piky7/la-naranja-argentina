@@ -193,12 +193,73 @@ export function LabHomeBoxscore({match, onClose}) {
   );
 }
 
+
+function LabUpcomingMatchModal({match,onClose}) {
+  const [tab,setTab]=useState("comparativa");
+  const home={...match.homeTeam,name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
+  const away={...match.awayTeam,name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
+  const date=(()=>{const [y,m,d]=String(match.date).split("-").map(Number);return new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"2-digit",timeZone:"UTC"}).format(new Date(Date.UTC(y,m-1,d,12)).replace?.("")||new Date(Date.UTC(y,m-1,d,12))).replace(/\./g,"").toUpperCase()})();
+  const completed=fixture.matches.filter(item=>item.homeScore!=null&&item.awayScore!=null&&!(Number(item.homeScore)===0&&Number(item.awayScore)===0));
+  const metrics=[["Puntos","points"],["Puntos recibidos","pointsAgainst"],["Rebotes","rebounds"],["Asistencias","assists"],["Recuperaciones","steals"],["Tapones","blocks"],["Pérdidas","turnovers"],["Faltas","fouls"]];
+  const aggregate=teamId=>{
+    const result={games:0,points:0,pointsAgainst:0,rebounds:0,assists:0,steals:0,blocks:0,turnovers:0,fouls:0,collectiveGames:0};
+    completed.forEach(game=>{
+      const side=game.homeTeam.teamId===teamId?"home":game.awayTeam.teamId===teamId?"away":null;if(!side)return;
+      result.games++;result.points+=Number(side==="home"?game.homeScore:game.awayScore)||0;result.pointsAgainst+=Number(side==="home"?game.awayScore:game.homeScore)||0;
+      const comparison=boxscores[game.id]?.teamComparison?.[side];if(!comparison)return;
+      result.collectiveGames++;
+      ["rebounds","assists","steals","blocks","turnovers","fouls"].forEach(key=>{result[key]+=Number(comparison[key])||0;});
+    });
+    return Object.fromEntries(Object.entries(result).map(([key,value])=>[key,key==="games"||key==="collectiveGames"?value:value/(key==="points"||key==="pointsAgainst"?Math.max(1,result.games):Math.max(1,result.collectiveGames))]));
+  };
+  const homeStats=aggregate(home.teamId),awayStats=aggregate(away.teamId);
+  const fmt=value=>Number.isFinite(value)?value.toFixed(1).replace(".",","):"—";
+  const players=Object.values(rosters.teams||{}).flatMap(team=>(team.players||[]).map(player=>({...player,teamName:team.name})));
+  const categories=[["PUNTOS","points","🏀"],["VALORACIÓN","valuation","⭐"],["REBOTES","rebounds","↟"],["ASISTENCIAS","assists","↗"]];
+  const leadersFor=(teamId,key)=>players.filter(p=>Number(p.teamId)===Number(teamId)&&Number(p.gamesPlayed)>0&&Number.isFinite(Number(p.averages?.[key])))
+    .sort((a,b)=>Number(b.averages[key])-Number(a.averages[key])).slice(0,2);
+  const time=match.time||"A CONFIRMAR";
+  return createPortal(<div className="match-modal-overlay" onClick={onClose}>
+    <div className="match-modal match-modal-upcoming lab-upcoming-match" onClick={event=>event.stopPropagation()}>
+      <button className="match-modal-close" type="button" onClick={onClose} aria-label="Cerrar">×</button>
+      <div className="match-modal-header">
+        <div className="upcoming-header-meta"><span className="match-modal-label">LIGA ARGENTINA 2026/27</span><strong className="match-modal-date">{date}</strong></div>
+        <div className="match-modal-teams">
+          <div className="match-modal-team"><img src={home.logo} alt=""/><strong>{home.shortName}</strong></div>
+          <div className="match-modal-score"><span className="match-modal-status">PRÓXIMO PARTIDO</span><strong>{time}</strong>{match.tv?.length>0&&<span>{match.tv.join(" · ")}</span>}</div>
+          <div className="match-modal-team"><img src={away.logo} alt=""/><strong>{away.shortName}</strong></div>
+        </div>
+      </div>
+      <div className="match-modal-coaches lab-upcoming-venue"><span>{match.venue||"LIGA ARGENTINA"}</span></div>
+      <div className="upcoming-tabs lab-upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
+        <button type="button" role="tab" aria-selected={tab==="comparativa"} className={tab==="comparativa"?"is-active":""} onClick={()=>setTab("comparativa")}>▥ Comparativa</button>
+        <button type="button" role="tab" aria-selected={tab==="jugadores"} className={tab==="jugadores"?"is-active":""} onClick={()=>setTab("jugadores")}>♟ Jugadores</button>
+      </div>
+      {tab==="comparativa"&&<section className="upcoming-tab-panel lab-upcoming-comparison">
+        <div className="upcoming-team-comparison upcoming-official-comparison">
+          <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
+          <div className="lab-upcoming-team-head"><span><img src={home.logo} alt=""/>{home.name}</span><b>VS</b><span><img src={away.logo} alt=""/>{away.name}</span></div>
+          <p className="upcoming-collective-source">Promedios de temporada · {Math.round(homeStats.games)} / {Math.round(awayStats.games)} partidos</p>
+          {metrics.map(([label,key])=>{const hv=homeStats[key],av=awayStats[key],lower=["pointsAgainst","turnovers","fouls"].includes(key),homeBetter=lower?hv<av:hv>av,awayBetter=lower?av<hv:av>hv,max=Math.max(hv||0,av||0,1);return <div className="upcoming-comparison-row upcoming-ranked-row" key={key}>
+            <strong className={homeBetter?"collective-better":""}>{fmt(hv)}</strong><div className="upcoming-comparison-track"><span className={homeBetter?"collective-better-bar":""} style={{width:`${Math.max(0,hv||0)/max*100}%`}}/></div><span className="upcoming-ranked-label">{label}</span><div className="upcoming-comparison-track"><span className={awayBetter?"collective-better-bar":""} style={{width:`${Math.max(0,av||0)/max*100}%`}}/></div><strong className={awayBetter?"collective-better":""}>{fmt(av)}</strong>
+          </div>})}
+        </div>
+      </section>}
+      {tab==="jugadores"&&<section className="upcoming-tab-panel upcoming-players-comparison lab-upcoming-players">
+        <div className="match-highlighted-title"><h3>JUGADORES DESTACADOS</h3><span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA 2026/27</span></div>
+        {categories.map(([title,key,icon])=>{const h=leadersFor(home.teamId,key),a=leadersFor(away.teamId,key),max=Math.max(0,...[...h,...a].map(p=>Number(p.averages[key])));const side=(items,team)=><div className="upcoming-player-side">{items.length?items.map(p=>{const value=Number(p.averages[key]);return <div className="upcoming-player-entry" key={p.id}><img className="upcoming-player-crest" src={team.logo} alt=""/><div className="upcoming-player-info"><span className="upcoming-player-name">{displayPersonName(p.name)}</span><div className="upcoming-player-meter"><span style={{width:`${max?value/max*100:0}%`}}/></div></div><strong>{fmt(value)}</strong></div>}):<span className="upcoming-player-empty">Sin datos disponibles</span>}</div>;return <div className="upcoming-player-category" key={key}><div className="upcoming-player-category-title">{title}</div><div className="upcoming-player-versus">{side(h,home)}<div className="upcoming-player-center-icon">{icon}</div>{side(a,away)}</div></div>})}
+      </section>}
+      <div className="match-modal-footer"><span>LNA</span><strong>PROMEDIOS DE TEMPORADA</strong></div>
+    </div>
+  </div>,document.body);
+}
+
 function HomeLigaArgentina() {
   const today = todayInArgentina();
   const [selectedDate, setSelectedDate] = useState(today);
   const [statsTab, setStatsTab] = useState("posiciones");
   const [conferenceTab, setConferenceTab] = useState("norte");
-  const [selectedMatch, setSelectedMatch] = useState(null);
+  const [selectedMatch, setSelectedMatch] = useState(null);\n  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
 
   const data = useMemo(() => {
     const table = new Map(fixture.teams.map(team => [team.teamId, {
@@ -247,7 +308,7 @@ function HomeLigaArgentina() {
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
     const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
-    return <button type="button" disabled={!hasScore} onClick={() => setSelectedMatch(match)}
+    return <button type="button" onClick={() => hasScore ? setSelectedMatch(match) : setSelectedUpcomingMatch(match)}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""}`}
       style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`,"--match-home-color":labMatchColor(match.homeTeam),"--match-away-color":labMatchColor(match.awayTeam)}}>
       <div className="fixture-team fixture-home">
