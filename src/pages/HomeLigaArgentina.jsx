@@ -121,6 +121,7 @@ function HomeLigaArgentina() {
           <small><b className="fixture-rank">{awayIndex + 1}°</b> <span className="fixture-record-separator">•</span> <b className="fixture-record">{away?.wins || 0}-{away?.losses || 0}</b></small>
         </div>
       </div>
+    </button>;
   };
 
   const positionClass = index => index < 4 ? "standing-position-direct" :
