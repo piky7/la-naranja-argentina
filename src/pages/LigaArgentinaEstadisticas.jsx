@@ -3,7 +3,7 @@ import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 import boxscores from "../../data/lab/labBoxscores.json";
 import { labMatchColor, labCrest } from "./HomeLigaArgentina";
-import "./LigaArgentina.css";
+import { isLabMatchFinished } from "../utils/labMatchStatus";\nimport "./LigaArgentina.css";
 import "./Estadisticas.css";
 import "../components/TeamRankings.css";
 import "../components/TripleRankings.css";
@@ -54,7 +54,7 @@ const teamRows = (() => {
     awayRebounds:0,awayAssists:0,awayCollectiveGames:0
   }]));
   for (const match of fixture.matches) {
-    if (match.status !== "finished" || match.homeScore == null || match.awayScore == null) continue;
+    if (!isLabMatchFinished(match)) continue;
     const home = map.get(Number(match.homeTeam.teamId)), away = map.get(Number(match.awayTeam.teamId));
     if (!home || !away) continue;
     const hs=number(match.homeScore), as=number(match.awayScore);
