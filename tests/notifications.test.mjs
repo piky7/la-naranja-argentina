@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const read = path => readFileSync(new URL(path, import.meta.url), "utf8");
-const profileAccess = read("../src/components/CareerProfileAccess.jsx");
+const profileAccess = read("../src/components/ProdeProfileAccess.jsx");
 const admin = read("../src/pages/Admin.jsx");
 
 test("el perfil ya no muestra la campanita ni carga la bandeja de notificaciones", () => {
