@@ -1006,3 +1006,39 @@
     flex-basis: 18px;
   }
 }
+
+
+/* Reducir la altura total de la botonera sin perder legibilidad. */
+@media (max-width: 768px) {
+  .bottom-navigation {
+    min-height: 54px;
+    padding: 2px 5px;
+  }
+  .bottom-nav-link {
+    min-height: 46px;
+    padding: 2px 1px 4px;
+    gap: 2px;
+    font-size: 9.5px;
+    line-height: 1;
+  }
+  .bottom-nav-link svg {
+    width: 19px;
+    height: 19px;
+    flex-basis: 19px;
+  }
+  .bottom-navigation.is-compact {
+    min-height: 44px;
+    padding: 1px 5px;
+  }
+  .bottom-navigation.is-compact .bottom-nav-link {
+    min-height: 38px;
+    padding: 2px 1px 3px;
+    gap: 1px;
+    font-size: 8.5px;
+  }
+  .bottom-navigation.is-compact .bottom-nav-link svg {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
+  }
+}
