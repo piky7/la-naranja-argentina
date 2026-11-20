@@ -44,6 +44,19 @@ async function main() {
     structuralClasses: [...classes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 50),
     tables: $("table").length,
     rows: $("tr").length,
+    scripts: $("script[src]").map((_, el) => $(el).attr("src")).get(),
+    forms: $("form").map((_, el) => ({ action: $(el).attr("action"), method: $(el).attr("method") })).get(),
+    inputs: $("input").map((_, el) => ({ name: $(el).attr("name"), id: $(el).attr("id"), value: $(el).attr("value") })).get(),
+    dataAttributes: $("[data-url], [data-endpoint], [data-handler], [data-id]").map((_, el) => ({
+      tag: el.tagName,
+      id: $(el).attr("id"),
+      className: $(el).attr("class"),
+      url: $(el).attr("data-url"),
+      endpoint: $(el).attr("data-endpoint"),
+      handler: $(el).attr("data-handler"),
+      dataId: $(el).attr("data-id"),
+    })).get().slice(0, 50),
+    relevantSnippets: [...html.matchAll(/.{0,100}(?:laligaargentina|mn-fixture|handler|fixture).{0,180}/gi)].slice(0, 80).map(match => match[0].replace(/\\s+/g, " ")),
   };
 
   console.log("LAB_FIXTURE_REPORT");
@@ -69,10 +82,15 @@ async function main() {
     "## Clases estructurales",
     "",
     ...result.structuralClasses.map(([name, count]) => `- ${name}: ${count}`),
+    "",
+    "## Scripts y endpoints candidatos",
+    "",
+    ...result.scripts.map(src => `- Script: ${src}`),
+    ...result.relevantSnippets.slice(0, 30).map(value => `- \` ${value} \``),
   ].join("\\n");
 
   require("node:fs").writeFileSync(process.env.GITHUB_STEP_SUMMARY, summary + "\\n");
-  if (!result.matchLinks) throw new Error("El fixture no expuso enlaces de partidos con la ruta esperada.");
+  if (!result.matchLinks) console.log("FIXTURE_DINAMICO: investigar endpoint de carga antes de extraer partidos.");
 }
 
 main().catch(error => {
