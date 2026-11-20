@@ -4,7 +4,7 @@ import { players } from "../data/players";
 import { playerStats } from "../data/stats";
 import "./MvpPrediction.css";
 import { requestPrediction } from "../auth/prodeBallot";
-import { useCareerSession } from "../auth/careerAccount";
+import { useProdeSession } from "../auth/prodeSession";
 
 export default function MvpPrediction({ match, onStatusChange }) {
   const [expanded, setExpanded] = useState(false);
@@ -17,7 +17,7 @@ export default function MvpPrediction({ match, onStatusChange }) {
   const [ranking, setRanking] = useState([]);
   const id = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
   const [sessionRevision, setSessionRevision] = useState(0);
-  const { user, loading: authLoading, login, busy: authBusy, error: authError } = useCareerSession();
+  const { user, loading: authLoading, login, busy: authBusy, error: authError } = useProdeSession();
   useEffect(() => {
     const refresh = () => setSessionRevision(value => value + 1);
     window.addEventListener("prode-profile-updated", refresh);
