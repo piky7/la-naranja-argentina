@@ -91,7 +91,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
               <strong>EN UN SOLO LUGAR.</strong>
             </div>
 
-            <div className="header-league" aria-hidden="true">LIGA NACIONAL</div>
+            <div className="header-league" aria-hidden="true">{selectedTournament === "lab" ? "LIGA ARGENTINA" : "LIGA NACIONAL"}</div>
           </div>
 
           {/* DECORACIÓN */}
