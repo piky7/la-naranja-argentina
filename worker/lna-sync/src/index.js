@@ -1,16 +1,18 @@
-// Disparador externo de la sincronización oficial de LNA.
+// Disparador único de la sincronización oficial LNB + LAB.
 // El token de GitHub se configura como secreto GITHUB_TOKEN en Cloudflare.
-const WORKFLOW = "actualizar-lnb-oficial.yml";
+const WORKFLOW = "actualizar-lna-completo.yml";
 const REPOSITORY = "piky7/la-naranja-argentina";
 const REF = "main";
 
 function requestedMode(date) {
   const hour = date.getUTCHours();
   const minute = date.getUTCMinutes();
-  // Fixture completo: 03:00, 09:00, 15:00 y 21:00 de Argentina.
+
+  // Fixture completo de ambas competencias cada 6 horas.
   if (minute === 0 && hour % 6 === 0) return "full";
-  // Estadísticas: 11:00–14:55 y 18:00–01:55 de Argentina.
-  if ([0, 1, 2, 3, 4, 14, 15, 16, 17, 21, 22, 23].includes(hour)) {
+
+  // Resultados recientes cada 10 minutos en las franjas habituales de actividad.
+  if (minute % 10 === 0 && [0, 1, 2, 3, 4, 14, 15, 16, 17, 21, 22, 23].includes(hour)) {
     return "recent";
   }
   return null;
@@ -40,9 +42,9 @@ export default {
     if (response.status !== 204) {
       throw new Error(`GitHub rechazó la solicitud: HTTP ${response.status} ${(await response.text()).slice(0, 300)}`);
     }
-    console.log(`Sincronización ${mode} solicitada: ${now.toISOString()}`);
+    console.log(`Sincronización unificada LNB + LAB ${mode} solicitada: ${now.toISOString()}`);
   },
   async fetch() {
-    return new Response("lna-sync activo; disparos por cron", { status: 200 });
+    return new Response("lna-sync activo; dispara la sincronización unificada LNB + LAB", { status: 200 });
   },
 };
