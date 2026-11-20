@@ -94,25 +94,33 @@ function HomeLigaArgentina() {
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
     const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
-    return <button type="button" disabled={!hasScore} onClick={() => setSelectedMatch(match)} className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished" : ""}`}
+    return <button type="button" disabled={!hasScore} onClick={() => setSelectedMatch(match)}
+      className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""}`}
       style={{"--match-home-logo":`url("${match.homeTeam.crestUrl || ""}")`,"--match-away-logo":`url("${match.awayTeam.crestUrl || ""}")`}}>
       <div className="fixture-team fixture-home">
-        <div className="fixture-team-name"><span>{displayName(match.homeTeam.name)}</span>
-          <small>{home ? `${homeIndex+1}° · ${home.wins}-${home.losses}` : ""}</small></div>
+        <div className="fixture-team-name">
+          <span>{displayName(match.homeTeam.name)}</span>
+          <small><b className="fixture-rank">{homeIndex + 1}°</b> <span className="fixture-record-separator">•</span> <b className="fixture-record">{home?.wins || 0}-{home?.losses || 0}</b></small>
+        </div>
         <img src={match.homeTeam.crestUrl} alt="" loading="lazy"/>
       </div>
       <div className="fixture-center">
-        <span>{formatDay(match.date)} · {match.time || "A CONFIRMAR"}</span>
-        {hasScore ? <strong className="fixture-score">{match.homeScore} - {match.awayScore}</strong> :
-          <strong className="fixture-time">{match.time || "HORARIO A CONFIRMAR"}</strong>}
-        <small>{match.venue || "ESTADIO A CONFIRMAR"}</small>
+        {hasScore ? <>
+          <strong className="fixture-score">
+            <span className={Number(match.homeScore) > Number(match.awayScore) ? "fixture-score-winner" : "fixture-score-loser"}>{match.homeScore}</span>
+            <span className="fixture-score-separator"> - </span>
+            <span className={Number(match.awayScore) > Number(match.homeScore) ? "fixture-score-winner" : "fixture-score-loser"}>{match.awayScore}</span>
+          </strong>
+          <span>FINAL</span>
+        </> : <strong className="fixture-time">{match.time || "A CONFIRMAR"}</strong>}
       </div>
       <div className="fixture-team fixture-away">
         <img src={match.awayTeam.crestUrl} alt="" loading="lazy"/>
-        <div className="fixture-team-name"><span>{displayName(match.awayTeam.name)}</span>
-          <small>{away ? `${awayIndex+1}° · ${away.wins}-${away.losses}` : ""}</small></div>
+        <div className="fixture-team-name">
+          <span>{displayName(match.awayTeam.name)}</span>
+          <small><b className="fixture-rank">{awayIndex + 1}°</b> <span className="fixture-record-separator">•</span> <b className="fixture-record">{away?.wins || 0}-{away?.losses || 0}</b></small>
+        </div>
       </div>
-    </button>;
   };
 
   const positionClass = index => index < 4 ? "standing-position-direct" :
