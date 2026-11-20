@@ -73,15 +73,16 @@ function LabHomeBoxscore({match, onClose}) {
   const homePlayers = players.filter(player => player.teamId === match.homeTeam.teamId);
   const awayPlayers = players.filter(player => player.teamId === match.awayTeam.teamId);
   const stats = { [match.homeTeam.teamId]: homePlayers, [match.awayTeam.teamId]: awayPlayers };
+  const matchForTabs = { ...match, homeTeam: String(match.homeTeam.teamId), awayTeam: String(match.awayTeam.teamId) };
   const mvp = players.slice().sort((a,b) => Number(b.valuation || 0)-Number(a.valuation || 0) || Number(b.points || 0)-Number(a.points || 0))[0];
   const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? homeTeam : awayTeam);
   const date = new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"})
-    .format(new Date(match.date+"T12:00:00Z")).replace(/\\./g,"").toUpperCase();
+    .format(new Date(match.date+"T12:00:00Z")).replace(/\./g,"").toUpperCase();
   const formatStat = value => value == null || value === "" ? "0" : value;
   const hasPlayed = player => {
     const raw = String(player.minutes ?? "").trim();
     if (!raw || raw === "—" || raw === "-") return false;
-    if (/^\\d+:\\d+(?::\\d+)?$/.test(raw)) return raw.split(":").some(part => Number(part)>0);
+    if (/^\d+:\d+(?::\d+)?$/.test(raw)) return raw.split(":").some(part => Number(part)>0);
     const minutes = Number(raw.replace(",", "."));
     return Number.isFinite(minutes) && minutes>0;
   };
@@ -135,7 +136,7 @@ function LabHomeBoxscore({match, onClose}) {
               </span>
             </span>
           </button>}
-          {players.length ? <MatchStatsTabs match={match} stats={stats} home={homeTeam} away={awayTeam}>
+          {players.length ? <MatchStatsTabs match={matchForTabs} stats={stats} home={homeTeam} away={awayTeam}>
             <div className="match-modal-content">
               <section className="match-stats-team">
                 <div className="match-stats-head"><span>JUGADOR</span><span>PTS</span><span>REB</span><span>AST</span><span>MIN</span><span>VAL</span></div>
