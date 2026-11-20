@@ -105,3 +105,56 @@
 .lab-roster-table td:nth-child(4),.lab-roster-table td:last-child{color:#f49a32;font-weight:900}
 .lab-roster-modal .lab-team-result{grid-template-columns:72px 1fr auto}
 @media(max-width:640px){.lab-roster-modal{width:100%;max-height:94vh;padding:25px 10px 14px}.lab-roster-toolbar{align-items:stretch;flex-direction:column}.lab-roster-toolbar>div button{flex:1}.lab-roster-table-wrap{max-height:38vh}.lab-roster-table{font-size:9px}.lab-roster-table td{padding:8px 6px}}
+
+
+/* Liga Argentina: replica la composición y las tarjetas compactas de Liga Nacional. */
+.lab-league-page .league-content { padding-top: 28px; }
+.lab-league-page .lab-league-columns { grid-template-columns: minmax(0,1.08fr) minmax(0,1fr) minmax(0,1fr); }
+.lab-league-page .lab-conference-standings { overflow: hidden; }
+.lab-league-page .lab-league-conference-tabs {
+ display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;background:#0c1725;border-bottom:1px solid var(--sports-border-soft);
+}
+.lab-league-page .lab-league-conference-tabs .home-stats-tab {
+ min-height:38px;padding:8px 10px;border:1px solid #34485d;border-radius:9px;background:#111e2d;color:#aebccc;
+ font-size:14px;font-weight:900;letter-spacing:.6px;
+}
+.lab-league-page .lab-league-conference-tabs .home-stats-tab.active {
+ border-color:#ff8c20;background:linear-gradient(180deg,#ff9b2f,#ef7410);color:#111820;
+}
+.lab-league-page .lab-league-conference-tabs .home-stats-tab:hover { color:#fff; }
+.lab-league-page .standings-table-header { grid-template-columns:32px minmax(0,1fr) 34px 34px; }
+.lab-league-page .home-standing-row { grid-template-columns:32px minmax(0,1fr) 34px 34px;min-height:50px;padding:0 10px; }
+.lab-league-page .home-standing-team { gap:8px;font-size:11px; }
+.lab-league-page .home-standing-team img { width:26px;height:26px; }
+.lab-league-page .standing-position { width:27px;height:27px;min-width:27px;font-size:10px; }
+.lab-league-page .lab-league-results-title { display:flex;align-items:center;gap:10px; }
+.lab-league-page .lab-results-pagination { display:flex;align-items:center;gap:7px; }
+.lab-league-page .lab-results-pagination button { width:28px;height:28px;border:1px solid #414956;border-radius:7px;background:#22252b;color:#ff8c20;font-size:19px;line-height:1; }
+.lab-league-page .lab-results-pagination button:disabled { color:#777;cursor:not-allowed; }
+.lab-league-page .results-card,.lab-league-page .upcoming-card { overflow:hidden; }
+.lab-league-page .result-match,.lab-league-page .upcoming-match { cursor:pointer; }
+.lab-league-page .result-match .result-date { display:flex;gap:6px;align-items:center; }
+.lab-league-page .result-match .result-date .league-card-weekday { color:#9eafc1; }
+.lab-league-page .result-match .result-team { font-size:10px; }
+.lab-league-page .result-match .result-logo,.lab-league-page .upcoming-match .upcoming-logo { width:27px;height:27px; }
+.lab-league-page .result-match .result-score strong { font-size:14px; }
+.lab-league-page .upcoming-match { min-height:66px; }
+.lab-league-page .upcoming-date small { color:#9eafc1;font-size:8px;font-weight:800; }
+.lab-league-page .upcoming-date span { color:#fff;font-size:10px;font-weight:800; }
+.lab-league-page .upcoming-date strong { color:#ff9a32; }
+.lab-league-page .today-match-card .match-date { display:flex;justify-content:space-between;gap:8px; }
+.lab-league-page .today-match-card .match-date strong { color:#ff9a32;font-size:11px; }
+.lab-league-page .today-match-card .match-details { justify-content:flex-start; }
+.lab-league-page .league-columns > .league-column { min-width:0; }
+@media(max-width:768px) {
+ .lab-league-page .league-content { padding-top:20px; }
+ .lab-league-page .lab-league-columns { display:flex;flex-direction:column;gap:26px; }
+ .lab-league-page .lab-league-columns > .league-column,
+ .lab-league-page .lab-league-columns > .standings-column-section { width:100%; }
+ .lab-league-page .lab-league-conference-tabs .home-stats-tab { min-height:38px;font-size:14px; }
+ .lab-league-page .home-standing-row { min-height:50px; }
+ .lab-league-page .home-standing-team { font-size:13px; }
+ .lab-league-page .home-standing-team img { width:28px;height:28px; }
+ .lab-league-page .results-card,.lab-league-page .upcoming-card { border-radius:12px; }
+ .lab-league-page .result-teams { min-height:62px; }
+}
