@@ -111,3 +111,4 @@ export default function LigaArgentinaEquipos() {
    {!filtered.length&&<p className="lab-empty">No encontramos equipos con esa búsqueda.</p>}
   </section>
  </main>;
+}
