@@ -63,6 +63,8 @@ async function main() {
     scores:{home:$("#score-local").text().trim(),away:$("#score-visitante").text().trim()},
     tabCandidates:tabs,tables,playerTables,aggregateCandidates,statTextMatches,inlineScripts:relevantInline,externalScripts:external,
     statClassCount:$("[class*=estad], [id*=estad], [class*=jugador], [id*=jugador]").length,
+    comparisonHtml:$("#scroll-comparativa").html() || null,
+    comparisonScript:inline.filter(body=>body.includes("function CargaDatosComparativa")).map(body=>body.slice(body.indexOf("function CargaDatosComparativa"),body.indexOf("function CargaDatosComparativa")+12000)),
     htmlHasStatLabels:/rebotes|asistencias|minutos|valoraci[oó]n/i.test(html)
   };
   console.log(JSON.stringify(report,null,2));
