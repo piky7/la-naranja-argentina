@@ -200,17 +200,39 @@ export function LabUpcomingMatchModal({match,onClose}) {
   const away={...match.awayTeam,name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
   const date=(()=>{const [y,m,d]=String(match.date).split("-").map(Number);return new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"2-digit",timeZone:"UTC"}).format(new Date(Date.UTC(y,m-1,d,12))).replace(/\./g,"").toUpperCase()})();
   const completed=fixture.matches.filter(item=>item.homeScore!=null&&item.awayScore!=null&&!(Number(item.homeScore)===0&&Number(item.awayScore)===0));
-  const metrics=[["Puntos","points"],["Puntos recibidos","pointsAgainst"],["Rebotes","rebounds"],["Asistencias","assists"],["Recuperaciones","steals"],["Tapones","blocks"],["Pérdidas","turnovers"],["Faltas","fouls"]];
+  const metrics=[["Puntos","points"],["Puntos recibidos","pointsAgainst"],["Rebotes","rebounds"],["Asistencias","assists"],["Recuperaciones","steals"],["Tapones","blocks"],["Pérdidas","turnovers"],["Faltas","fouls"],["Dobles","twoPointersPct"],["Triples","threePointersPct"],["Libres","freeThrowsPct"]];
   const aggregate=teamId=>{
-    const result={games:0,points:0,pointsAgainst:0,rebounds:0,assists:0,steals:0,blocks:0,turnovers:0,fouls:0,collectiveGames:0};
+    const totals={games:0,points:0,pointsAgainst:0,rebounds:0,assists:0,steals:0,blocks:0,turnovers:0,fouls:0,twoPointersMade:0,twoPointersAttempted:0,threePointersMade:0,threePointersAttempted:0,freeThrowsMade:0,freeThrowsAttempted:0};
     completed.forEach(game=>{
-      const side=game.homeTeam.teamId===teamId?"home":game.awayTeam.teamId===teamId?"away":null;if(!side)return;
-      result.games++;result.points+=Number(side==="home"?game.homeScore:game.awayScore)||0;result.pointsAgainst+=Number(side==="home"?game.awayScore:game.homeScore)||0;
-      const comparison=boxscores[game.id]?.teamComparison?.[side];if(!comparison)return;
-      result.collectiveGames++;
-      ["rebounds","assists","steals","blocks","turnovers","fouls"].forEach(key=>{result[key]+=Number(comparison[key])||0;});
+      const side=Number(game.homeTeam.teamId)===Number(teamId)?"home":Number(game.awayTeam.teamId)===Number(teamId)?"away":null;
+      if(!side)return;
+      const box=boxscores[game.id];
+      if(!box?.players?.length)return;
+      const teamPlayers=box.players.filter(player=>Number(player.teamId)===Number(teamId));
+      if(!teamPlayers.length)return;
+      totals.games++;
+      totals.points+=Number(side==="home"?game.homeScore:game.awayScore)||0;
+      totals.pointsAgainst+=Number(side==="home"?game.awayScore:game.homeScore)||0;
+      const official=box.teamComparison?.[side];
+      const sum=key=>teamPlayers.reduce((n,p)=>n+(Number(p[key])||0),0);
+      ["rebounds","assists","steals","blocks","turnovers","fouls"].forEach(key=>{
+        totals[key]+=official?.[key]!=null?Number(official[key]):sum(key);
+      });
+      for(const [key,stat] of [["twoPointers","twoPointers"],["threePointers","threePointers"],["freeThrows","freeThrows"]]){
+        totals[key+"Made"]+=official?.[stat]?.made!=null?Number(official[stat].made):teamPlayers.reduce((n,p)=>n+(Number(p[stat]?.made)||0),0);
+        totals[key+"Attempted"]+=official?.[stat]?.attempted!=null?Number(official[stat].attempted):teamPlayers.reduce((n,p)=>n+(Number(p[stat]?.attempted)||0),0);
+      }
     });
-    return Object.fromEntries(Object.entries(result).map(([key,value])=>[key,key==="games"||key==="collectiveGames"?value:value/(key==="points"||key==="pointsAgainst"?Math.max(1,result.games):Math.max(1,result.collectiveGames))]));
+    const games=Math.max(1,totals.games);
+    return {
+      games:totals.games,
+      points:totals.points/games,pointsAgainst:totals.pointsAgainst/games,
+      rebounds:totals.rebounds/games,assists:totals.assists/games,steals:totals.steals/games,
+      blocks:totals.blocks/games,turnovers:totals.turnovers/games,fouls:totals.fouls/games,
+      twoPointersPct:totals.twoPointersAttempted?100*totals.twoPointersMade/totals.twoPointersAttempted:0,
+      threePointersPct:totals.threePointersAttempted?100*totals.threePointersMade/totals.threePointersAttempted:0,
+      freeThrowsPct:totals.freeThrowsAttempted?100*totals.freeThrowsMade/totals.freeThrowsAttempted:0
+    };
   };
   const homeStats=aggregate(home.teamId),awayStats=aggregate(away.teamId);
   const fmt=value=>Number.isFinite(value)?value.toFixed(1).replace(".",","):"—";
@@ -230,7 +252,7 @@ export function LabUpcomingMatchModal({match,onClose}) {
           <div className="match-modal-team"><img src={away.logo} alt=""/><strong>{away.shortName}</strong></div>
         </div>
       </div>
-      <div className="match-modal-coaches lab-upcoming-venue"><span>{match.venue||"LIGA ARGENTINA"}</span></div>
+      <div className="match-modal-coaches lab-upcoming-venue"><span>ESTADIO · {match.venue||"A CONFIRMAR"}</span></div>
       <div className="upcoming-tabs lab-upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
         <button type="button" role="tab" aria-selected={tab==="comparativa"} className={tab==="comparativa"?"is-active":""} onClick={()=>setTab("comparativa")}>▥ Comparativa</button>
         <button type="button" role="tab" aria-selected={tab==="jugadores"} className={tab==="jugadores"?"is-active":""} onClick={()=>setTab("jugadores")}>♟ Jugadores</button>
@@ -240,8 +262,8 @@ export function LabUpcomingMatchModal({match,onClose}) {
           <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
           <div className="lab-upcoming-team-head"><span><img src={home.logo} alt=""/>{home.name}</span><b>VS</b><span><img src={away.logo} alt=""/>{away.name}</span></div>
           <p className="upcoming-collective-source">Promedios de temporada · {Math.round(homeStats.games)} / {Math.round(awayStats.games)} partidos</p>
-          {metrics.map(([label,key])=>{const hv=homeStats[key],av=awayStats[key],lower=["pointsAgainst","turnovers","fouls"].includes(key),homeBetter=lower?hv<av:hv>av,awayBetter=lower?av<hv:av>hv,max=Math.max(hv||0,av||0,1);return <div className="upcoming-comparison-row upcoming-ranked-row" key={key}>
-            <strong className={homeBetter?"collective-better":""}>{fmt(hv)}</strong><div className="upcoming-comparison-track"><span className={homeBetter?"collective-better-bar":""} style={{width:`${Math.max(0,hv||0)/max*100}%`}}/></div><span className="upcoming-ranked-label">{label}</span><div className="upcoming-comparison-track"><span className={awayBetter?"collective-better-bar":""} style={{width:`${Math.max(0,av||0)/max*100}%`}}/></div><strong className={awayBetter?"collective-better":""}>{fmt(av)}</strong>
+          {metrics.map(([label,key])=>{const hv=homeStats[key],av=awayStats[key],lower=["pointsAgainst","turnovers","fouls"].includes(key),homeBetter=lower?hv<av:hv>av,awayBetter=lower?av<hv:av>hv,max=Math.max(hv||0,av||0,1);return <div className="lab-team-stat-row" key={key}>
+            <strong className={homeBetter?"collective-better":""}>{fmt(hv)}</strong><div className="lab-team-stat-track"><span className={homeBetter?"is-better":""} style={{width:`${Math.max(0,hv||0)/max*100}%`}}/></div><span className="lab-team-stat-label">{label}</span><div className="lab-team-stat-track"><span className={awayBetter?"is-better":""} style={{width:`${Math.max(0,av||0)/max*100}%`}}/></div><strong className={awayBetter?"collective-better":""}>{fmt(av)}</strong>
           </div>})}
         </div>
       </section>}
