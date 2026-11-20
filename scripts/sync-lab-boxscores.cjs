@@ -20,7 +20,7 @@ function parseFirstObject(call) {
     const ch = call[i];
     if (quoted) {
       if (escaped) escaped = false;
-      else if (ch === "\\\\") escaped = true;
+      else if (ch === "\\") escaped = true;
       else if (ch === '"') quoted = false;
       continue;
     }
@@ -38,15 +38,15 @@ function number(value) {
   return Number.isFinite(parsed) ? parsed : null;
 }
 function parseScore(value) {
-  const match = String(value || "").replace(/\\s+/g, "").match(/^\\d{1,3}$/);
+  const match = String(value || "").replace(/\s+/g, "").match(/^\d{1,3}$/);
   return match ? Number(match[0]) : null;
 }
 function isOfficialFinal(statusText) {
-  const value = String(statusText || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "")
-    .replace(/\\s+/g, " ").trim().toLowerCase();
+  const value = String(statusText || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ").trim().toLowerCase();
   if (!value || /en juego|en curso|jugando|descanso|entretiempo|cuarto|periodo|programado|suspendido|postergado|aplazado/.test(value)) return false;
   return /^(final|finalizado|finalizada|terminado|terminada|partido finalizado|final del partido)$/.test(value) ||
-    /\\b(partido finalizado|final del partido|encuentro finalizado)\\b/.test(value);
+    /\b(partido finalizado|final del partido|encuentro finalizado)\b/.test(value);
 }
 function normalizePlayer(raw, row) {
   const safe = key => number(raw[key]) ?? 0;
@@ -84,12 +84,12 @@ function parseOfficialTeamComparison($) {
     if (cols.length < 3) return null;
     const label = cols.eq(1).find(".stat-nombre-abrev").text().trim() ||
       cols.eq(1).find(".stat-nombre-completo").text().trim();
-    const left = cols.eq(0).text().replace(/\\s+/g, " ").trim();
-    const right = cols.eq(2).text().replace(/\\s+/g, " ").trim();
+    const left = cols.eq(0).text().replace(/\s+/g, " ").trim();
+    const right = cols.eq(2).text().replace(/\s+/g, " ").trim();
     const parseValue = value => {
-      const shot = value.match(/(\\d+)\\s*\\/\\s*(\\d+)\\s*(?:([\\d.,]+)\\s*%)?/);
+      const shot = value.match(/(\d+)\s*\/\s*(\d+)\s*(?:([\d.,]+)\s*%)?/);
       if (shot) return { made: Number(shot[1]), attempted: Number(shot[2]), percentage: Number(String(shot[3] || "0").replace(",", ".")) };
-      const numeric = value.match(/-?\\d+/);
+      const numeric = value.match(/-?\d+/);
       return numeric ? Number(numeric[0]) : null;
     };
     return { label, home: parseValue(left), away: parseValue(right) };
@@ -147,7 +147,7 @@ async function fetchOfficialPage(match) {
   }
   if (!response?.ok) throw lastError || new Error("No se pudo obtener la planilla");
   const $ = cheerio.load(await response.text());
-  const statusText = $("#status-partido").text().replace(/\\s+/g, " ").trim();
+  const statusText = $("#status-partido").text().replace(/\s+/g, " ").trim();
   const homeScore = parseScore($("#score-local").text());
   const awayScore = parseScore($("#score-visitante").text());
   if (!isOfficialFinal(statusText)) return { final: false, statusText };
@@ -183,7 +183,7 @@ async function main() {
     const date = String(match.date || "");
     if (RECENT && (date < yesterday || date > today)) return false;
     if (!ALL_FINISHED && !RECENT && date > today) return false;
-    if (RECENT && /^\\d{2}:\\d{2}$/.test(match.time || "")) {
+    if (RECENT && /^\d{2}:\d{2}$/.test(match.time || "")) {
       const start = Date.parse(`${date}T${match.time}:00-03:00`);
       if (Number.isFinite(start) && start > now.getTime()) return false;
     }
@@ -210,14 +210,14 @@ async function main() {
           importedAt: new Date().toISOString(), players: result.players,
           teamComparison: result.teamComparison
         };
-        fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\\n");
+        fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
         imported++;
         console.log("LAB BOX SCORE PUBLICABLE", match.homeTeam.name, result.homeScore, "-", result.awayScore, match.awayTeam.name, "jugadores:", result.players.length);
       }
     } catch (error) { errors++; console.log("ERROR LAB", match.id, error.message); }
     if (index < matches.length - 1) await new Promise(resolve => setTimeout(resolve, PAUSE_MS));
   }
-  fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\\n");
+  fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
   console.log("RESUMEN LAB", JSON.stringify({consultados:matches.length,importados:imported,noFinal:notFinal,planillaPendiente:incomplete,errores:errors,totalBase:Object.keys(output).length}));
 }
 if (require.main === module) main().catch(error => { console.error(error); process.exitCode = 1; });
