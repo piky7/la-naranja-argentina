@@ -5,7 +5,6 @@ import { readFileSync } from "node:fs";
 const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8");
 const app = read("src/App.jsx");
 const notices = read("src/components/CareerEntryNotices.jsx");
-const notificationBell = read("src/components/NotificationBell.jsx");
 const fanLevel = read("src/components/FanLevel.jsx");
 const upcomingHeader = read("src/components/UpcomingHeader.css");
 
@@ -31,14 +30,7 @@ test("El aviso de puntos conserva el seguimiento de recompensas y su desglose", 
   assert.match(notices, /PUNTUACIÓN TOTAL/);
 });
 
-test("El recordatorio de pronósticos vive en la campanita y desaparece al completar los votos", () => {
-  assert.match(notificationBell, /America\/Argentina\/Buenos_Aires/);
-  assert.match(notificationBell, /match\.date === today/);
-  assert.match(notificationBell, /requestPrediction\("winner", gameId\)/);
-  assert.match(notificationBell, /requestPrediction\("mvp", gameId\)/);
-  assert.match(notificationBell, /winnerPending \|\| mvpPending/);
-  assert.match(notificationBell, /lna-vote-updated/);
-  assert.match(notificationBell, /pendingMatches\.length/);
+test("Los recordatorios de pronósticos pendientes fueron retirados de Mi Carrera", () => {
   assert.doesNotMatch(notices, /requestPrediction/);
   assert.doesNotMatch(notices, /Todavía no completaste tus pronósticos de hoy/);
 });
