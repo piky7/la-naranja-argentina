@@ -894,5 +894,21 @@ export const officialSchedule = [
     "homeTeam": "atenas",
     "awayTeam": "platense",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2lHH9AqFR7bjSBo6SHoigQz5N3-gtP85i8WQWfF7rMDbignpM8eMIog==/atenas-c-vs-platense"
+  },
+  {
+    "id": "2026-12-21-boca-ferro",
+    "date": "2026-12-21",
+    "time": null,
+    "homeTeam": "boca",
+    "awayTeam": "ferro",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2YSR1g_CIz72-2BuBRgi2T-mJ1Z6HmgjysInm6SrZ22gDQJAF7Yn6iA==/boca-vs-ferro"
+  },
+  {
+    "id": "2026-12-21-quimsa-gimnasia",
+    "date": "2026-12-21",
+    "time": null,
+    "homeTeam": "quimsa",
+    "awayTeam": "gimnasia",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2KQP7LRFHmQAX9D8PifcQA2rWCKBDuKZrCkdRqPevZDoIzGKrB_tJBw==/quimsa-vs-gimnasia-cr"
   }
 ];

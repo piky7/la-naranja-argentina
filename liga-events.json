@@ -1,7 +1,7 @@
 {
   "source": "Liga Nacional",
   "dateFrom": "2026-09-01",
-  "dateTo": "2026-12-19",
+  "dateTo": "2026-12-20",
   "matches": [
     {
       "date": "2026-09-28",
@@ -1421,7 +1421,7 @@
         "officialTeamId": 112600
       },
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 2,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Y9sQ-mmEousQ2AzqHNCHZXmMa7xNarU6-gGK-rQP2rsLb6PjAVNPTw==/argentino-j-vs-lanus"
     },
@@ -2018,6 +2018,42 @@
       "awayScore": 0,
       "status": "unverified",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2lHH9AqFR7bjSBo6SHoigQz5N3-gtP85i8WQWfF7rMDbignpM8eMIog==/atenas-c-vs-platense"
+    },
+    {
+      "date": "2026-12-21",
+      "time": "00:00",
+      "home": {
+        "name": "BOCA",
+        "officialClubId": 19,
+        "officialTeamId": 114735
+      },
+      "away": {
+        "name": "FERRO",
+        "officialClubId": 46,
+        "officialTeamId": 112566
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2YSR1g_CIz72-2BuBRgi2T-mJ1Z6HmgjysInm6SrZ22gDQJAF7Yn6iA==/boca-vs-ferro"
+    },
+    {
+      "date": "2026-12-21",
+      "time": "00:00",
+      "home": {
+        "name": "QUIMSA",
+        "officialClubId": 1869,
+        "officialTeamId": 112657
+      },
+      "away": {
+        "name": "GIMNASIA (CR)",
+        "officialClubId": 1474,
+        "officialTeamId": 112553
+      },
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "unverified",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2KQP7LRFHmQAX9D8PifcQA2rWCKBDuKZrCkdRqPevZDoIzGKrB_tJBw==/quimsa-vs-gimnasia-cr"
     }
   ]
 }
