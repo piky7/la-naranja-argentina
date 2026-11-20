@@ -22,6 +22,14 @@ function pollDecision(event, schedule, requestedMode = "", now = new Date()) {
   if (event === "push") return {run:true,mode:"backfill"};
   if (event === "schedule" && schedule !== "*/10 * * * *") return {run:true,mode:"full"};
   if (event === "workflow_dispatch" && requestedMode === "full") return {run:true,mode:"full"};
+  const today = argentinaDate(now), yesterday = argentinaDate(new Date(now.getTime()-86400000));
+  if (event === "schedule" && schedule === "*/10 * * * *") {
+    const historicalPending = fixture.matches.some(match => match.date && match.date < yesterday &&
+      match.homeScore != null && match.awayScore != null &&
+      (Number(match.homeScore) !== 0 || Number(match.awayScore) !== 0) &&
+      !hasCompleteBoxscore(boxes[match.id]));
+    if (historicalPending) return {run:true,mode:"backfill"};
+  }
   const pending = fixture.matches.some(match => !hasCompleteBoxscore(boxes[match.id]) && isRecentCandidate(match, now));
   return {run:pending,mode:"recent"};
 }
