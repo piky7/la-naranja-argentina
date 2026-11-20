@@ -9,16 +9,16 @@ import "./Home.css";
 import "./HomeLigaArgentina.css";
 
 const labCrest = team => {
-  const id = team?.teamId ?? String(team?.crestUrl || "").match(/\\/(\\d+)\\/?$/)?.[1];
-  return id ? `/lab-team-logos/${id}.webp` : "";
+  const id = team?.teamId || String(team?.crestUrl || "").split("/").filter(Boolean).at(-1);
+  return id ? \`/lab-team-logos/\${id}.webp\` : "";
 };
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
 }).format(new Date());
 const displayName = name => {
-  const clean = String(name || "").replace(/\\s+\\([^)]*\\)$/i, "").trim();
+  const clean = String(name || "").replace(/\s+\([^)]*\)$/i, "").trim();
   if (!clean || clean !== clean.toLocaleUpperCase("es-AR")) return clean;
-  return clean.toLocaleLowerCase("es-AR").replace(/(^|[\\s-])([\\p{L}])/gu, (_, separator, letter) => separator + letter.toLocaleUpperCase("es-AR"));
+  return clean.toLocaleLowerCase("es-AR").replace(/(^|[\s-])([\p{L}])/gu, (_, separator, letter) => separator + letter.toLocaleUpperCase("es-AR"));
 };
 const dateFromKey = key => new Date(key + "T12:00:00Z");
 const formatDay = key => new Intl.DateTimeFormat("es-AR", {
@@ -104,7 +104,7 @@ function HomeLigaArgentina() {
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
     return <button type="button" disabled={!hasScore} onClick={() => setSelectedMatch(match)}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""}`}
-      style={{"--match-home-logo":`url("${match.homeTeam.crestUrl || ""}")`,"--match-away-logo":`url("${match.awayTeam.crestUrl || ""}")`}}>
+      style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`}}>
       <div className="fixture-team fixture-home">
         <div className="fixture-team-name">
           <span>{displayName(match.homeTeam.name)}</span>
