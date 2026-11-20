@@ -24,6 +24,7 @@ const allPlayers = Object.values(rosters.teams || {}).flatMap(roster =>
 
 const teamColors = player => player.team ? labMatchColor(player.team) : "#315a7b";
 const playerStats = ["points","rebounds","assists","steals","blocks","valuation"];
+const minutesInSeconds = value => { const parts=String(value||"").split(":").map(Number); return parts.length===3?parts[0]*3600+parts[1]*60+parts[2]:parts.length===2?parts[0]*60+parts[1]:number(value)*60; };
 
 function calculateMvpCounts() {
   const counts = new Map();
@@ -31,7 +32,7 @@ function calculateMvpCounts() {
   for (const [matchId, box] of Object.entries(boxscores || {})) {
     if (seen.has(matchId) || !Array.isArray(box.players) || !box.players.length) continue;
     seen.add(matchId);
-    const eligible = box.players.filter(player => number(player.minutes?.split?.(":")?.[0] || player.minutes) > 0 || number(player.points) > 0);
+    const eligible = box.players.filter(player => minutesInSeconds(player.minutes) > 0);
     if (!eligible.length || eligible.some(player => player.valuation == null || !Number.isFinite(Number(player.valuation)))) continue;
     const best = Math.max(...eligible.map(player => number(player.valuation)));
     eligible.filter(player => number(player.valuation) === best).forEach(player =>
@@ -112,7 +113,7 @@ function LigaArgentinaEstadisticas(){
     (selectedTeam==="all"||String(player.teamId)===selectedTeam) &&
     player.gamesPlayed>=Number(minGames)
   ).sort((a,b)=>{
-    const av=number(a.averages?.[sortBy]),bv=number(b.averages?.[sortBy]);
+    const av=sortBy==="gamesPlayed"?number(a.gamesPlayed):number(a.averages?.[sortBy]),bv=sortBy==="gamesPlayed"?number(b.gamesPlayed):number(b.averages?.[sortBy]);
     return (sortDir==="desc"?bv-av:av-bv)||a.name.localeCompare(b.name,"es");
   }),[normalized,selectedTeam,minGames,sortBy,sortDir]);
 
@@ -127,8 +128,8 @@ function LigaArgentinaEstadisticas(){
     .sort((a,b)=>b.triplesMade-a.triplesMade||a.name.localeCompare(b.name,"es")).slice(0,20),[]);
   const mvpPlayers=useMemo(()=>allPlayers.map(p=>({...p,mvps:mvpCounts.get(Number(p.id))||0}))
     .filter(p=>p.mvps>0).sort((a,b)=>b.mvps-a.mvps||a.name.localeCompare(b.name,"es")).slice(0,20),[]);
-  const orderedTeams=useMemo(()=>teamRows.map(row=>({...row,value:valueForTeam(row,teamMetric)}))
-    .filter(row=>scope==="overall"||row.games>0)
+  const orderedTeams=useMemo(()=>teamRows.map(row=>({...row,value:valueForTeam(row,teamMetric,scope)}))
+    .filter(row=>scope==="overall"|| (scope==="home"?row.homeGames:row.awayGames)>0)
     .sort((a,b)=>{
       if(a.value==null)return 1;if(b.value==null)return -1;
       const lowerBetter=teamMetric==="pointsAgainst";
