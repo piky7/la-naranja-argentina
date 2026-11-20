@@ -6,9 +6,10 @@ const source=readFileSync(new URL("../src/App.jsx",import.meta.url),"utf8");
 
 test("La portada permanece disponible como ruta inicial directa",()=>{
   assert.match(source,/import Home from "\.\/pages\/Home";/);
-  assert.match(source,/import HomeLigaArgentina from "\.\/pages\/HomeLigaArgentina";/);
+  assert.match(source,/const HomeLigaArgentina = lazy\(\(\) => import\("\.\/pages\/HomeLigaArgentina"\)\);/);
   assert.match(source,/selectedTournament === "lab" \? <HomeLigaArgentina \/> : <Home \/>/);
   assert.match(source,/<Route path="\/" element=/);
+  assert.match(source,/<Suspense fallback=\{<RouteLoading \/>\}>/);
 });
 
 test("Las páginas secundarias se descargan solo cuando se navega a ellas",()=>{
