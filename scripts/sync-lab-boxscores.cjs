@@ -137,7 +137,7 @@ async function fetchOfficialPage(match) {
   let response, lastError;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      response = await fetch(match.officialUrl, { headers: { "User-Agent": UA, Accept: "text/html" } });
+      response = await fetch(match.officialUrl, { headers: { "User-Agent": UA, Accept: "text/html" }, signal: AbortSignal.timeout(7000) });
       if (!response.ok) throw new Error("HTTP " + response.status);
       break;
     } catch (error) {
