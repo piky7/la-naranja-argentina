@@ -36,6 +36,7 @@ on:
       - "scripts/*lab*.cjs"
       - "scripts/parse-fixture-lab.cjs"
       - "data/lab/**"
+      - "tests/lab-sync.test.mjs"
 
 permissions:
   contents: write
