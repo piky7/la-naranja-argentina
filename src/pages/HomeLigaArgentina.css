@@ -177,3 +177,33 @@
 .lab-finished-match .lab-team-comparison-bar-away {
   background: var(--comparison-away-color, #70a6d8);
 }
+
+
+/* Ajuste móvil LAB: reservar ancho real para el marcador entre separadores. */
+@media (max-width: 600px) {
+  .lab-home-dashboard .lab-home-fixture {
+    grid-template-columns: minmax(0, 1fr) 94px minmax(0, 1fr);
+    column-gap: 7px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .lab-home-dashboard .lab-home-fixture .fixture-center {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding-inline: 5px;
+    overflow: hidden;
+  }
+  .lab-home-dashboard .lab-home-fixture .fixture-score {
+    width: 100%;
+    gap: 3px;
+    font-size: 23px;
+    letter-spacing: 0;
+    justify-content: center;
+  }
+  .lab-home-dashboard .lab-home-fixture .fixture-score-separator {
+    font-size: 18px;
+  }
+  .lab-home-dashboard .lab-home-fixture .fixture-team { gap: 5px; }
+  .lab-home-dashboard .lab-home-fixture .fixture-team img { width: 32px; height: 32px; }
+}
