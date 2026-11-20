@@ -6,7 +6,7 @@ import boxscores from "../../data/lab/labBoxscores.json";
 import "./LigaArgentina.css";
 import "./Equipo.css";
 
-const clean = (name = "") => name.replace(/\\s*\\((MDP|SF|CC|LR|T|VT|J)\\)/g, "").trim();
+const clean = (name = "") => name.replace(/\s*\((MDP|SF|CC|LR|T|VT|J)\)/g, "").trim();
 const today = () => new Intl.DateTimeFormat("en-CA", { timeZone:"America/Argentina/Buenos_Aires", year:"numeric", month:"2-digit", day:"2-digit" }).format(new Date());
 const fmtDate = date => new Intl.DateTimeFormat("es-AR",{day:"2-digit",month:"short"}).format(new Date(date+"T12:00:00")).replace(".","").toUpperCase();
 const fmtWeekday = date => new Intl.DateTimeFormat("es-AR",{weekday:"short"}).format(new Date(date+"T12:00:00")).replace(".","").toUpperCase();
