@@ -5,7 +5,7 @@ import { requestPrediction } from "../auth/prodeBallot";
 
 export default function LiveMyVote({ match }) {
   const matchId = `${match.date}-${match.homeTeam}-${match.awayTeam}`;
-  const [votes, setVotes] = useState({ loading: true, winner: null, mvp: null, winnerError: false, mvpError: false, missingCareer: false });
+  const [votes, setVotes] = useState({ loading: true, winner: null, mvp: null, winnerError: false, mvpError: false, missingAccount: false });
 
   useEffect(() => {
     const controller = new AbortController();
@@ -28,7 +28,7 @@ export default function LiveMyVote({ match }) {
   const winnerTeam = teams.find(team => team.id === votes.winner);
   const mvpPlayer = players.find(player => player.id === votes.mvp);
   const mvpTeam = teams.find(team => team.id === mvpPlayer?.teamId);
-  const winnerText = votes.loading ? "Consultando..." : votes.missingCareer ? "Sin carrera en este navegador" : votes.winnerError ? "No se pudo consultar" : winnerTeam?.name || (votes.winner ? "Equipo no disponible" : "No elegiste ganador");
+  const winnerText = votes.loading ? "Consultando..." : votes.missingCareer ? "Iniciá sesión en Prode" : votes.winnerError ? "No se pudo consultar" : winnerTeam?.name || (votes.winner ? "Equipo no disponible" : "No elegiste ganador");
   const mvpText = votes.loading ? "Consultando..." : votes.missingCareer ? "Sin carrera en este navegador" : votes.mvpError ? "No se pudo consultar" : mvpPlayer?.name || (votes.mvp ? "Jugador no disponible" : "No elegiste MVP");
 
   return <section className="live-my-vote-panel upcoming-tab-panel" role="tabpanel" aria-label="Mis pronósticos del partido en vivo">
@@ -50,7 +50,7 @@ export default function LiveMyVote({ match }) {
       </div>
     </div>
     <p className="live-my-vote-footnote">{votes.missingCareer
-      ? "Si tenés Prode iniciado con Google, tus pronósticos se consultan desde la misma cuenta en todos los dispositivos."
+      ? "Iniciá sesión con Google en Prode para consultar tus pronósticos."
       : "Estos son tus pronósticos guardados antes del partido. Durante el vivo no se pueden cambiar."}</p>
   </section>;
 }
