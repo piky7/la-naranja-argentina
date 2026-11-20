@@ -11,11 +11,11 @@ import "./HomeLigaArgentina.css";
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
 }).format(new Date());
-const displayName = name => String(name || "").replace(/\\s+\\([^)]*\\)$/i, "");
+const displayName = name => String(name || "").replace(/\s+\([^)]*\)$/i, "");
 const dateFromKey = key => new Date(key + "T12:00:00Z");
 const formatDay = key => new Intl.DateTimeFormat("es-AR", {
   timeZone: "UTC", weekday: "short", day: "2-digit", month: "short"
-}).format(dateFromKey(key)).replace(/\\./g, "").toUpperCase();
+}).format(dateFromKey(key)).replace(/\./g, "").toUpperCase();
 
 function LabHomeBoxscore({match}) {
   const box = boxscores[match.id];
