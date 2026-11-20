@@ -35,9 +35,11 @@ test("Los escudos de LAB se convierten a WebP local antes del build y desarrollo
   assert.ok(home.includes("src={labCrest(team)}"));
   assert.ok(home.includes("src={player.crestUrl}"));
   assert.ok(home.includes("crestUrl: labCrest(team)"));
-  assert.match(home, /const LAB_TEAM_COLORS = \{/);
-  assert.match(home, /"amancay-lr": "#c49a32"/);
-  assert.match(home, /"villa-san-martin": "#bd303e"/);
+  const presentation = readFileSync(new URL("../src/utils/labPresentation.js", import.meta.url), "utf8");
+  assert.match(home, /from "\.\.\/utils\/labPresentation"/);
+  assert.match(presentation, /export const LAB_TEAM_COLORS = \{/);
+  assert.match(presentation, /"amancay-lr": "#c49a32"/);
+  assert.match(presentation, /"villa-san-martin": "#bd303e"/);
   assert.match(home, /"--match-home-color":labMatchColor\(match.homeTeam\)/);
   assert.match(home, /"--match-away-color":labMatchColor\(match.awayTeam\)/);
   const optimizer = readFileSync(new URL("../scripts/optimize-lab-logos.mjs", import.meta.url), "utf8");
