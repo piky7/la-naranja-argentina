@@ -35,7 +35,6 @@ on:
       - "scripts/sync-official-roster.cjs"
       - "scripts/*lab*.cjs"
       - "scripts/parse-fixture-lab.cjs"
-      - "data/lab/**"
       - "tests/lab-sync.test.mjs"
 
 permissions:
