@@ -282,7 +282,7 @@ export function LabUpcomingMatchModal({match,onClose}) {
               {[{team:match.homeTeam,view:home,color:homeColor},{team:match.awayTeam,view:away,color:awayColor}].map(({team,view,color})=><div className="lab-upcoming-last-team" key={team.teamId} style={{background:`linear-gradient(120deg,${hexRgba(color,.24)},#101a27 80%)`,borderColor:hexRgba(color,.75)}}>
                 <strong>{view.shortName}</strong>
                 {recentFor(team.teamId).map(game=><div className="lab-upcoming-last-result" key={game.id}>
-                  <span>{dateLabel(game.date)}</span><img src={labCrest(game.opponent)} alt=""/><b>{game.scored} - {game.conceded}</b><span className={game.result==="G"?"is-win":"is-loss"}>{game.result}</span>
+                  <span>{formatDay(game.date)}</span><img src={labCrest(game.opponent)} alt=""/><b>{game.scored} - {game.conceded}</b><span className={game.result==="G"?"is-win":"is-loss"}>{game.result}</span>
                 </div>)}
                 {!recentFor(team.teamId).length&&<p>Sin resultados recientes</p>}
               </div>)}
