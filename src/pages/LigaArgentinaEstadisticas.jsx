@@ -46,22 +46,32 @@ const mvpCounts = calculateMvpCounts();
 
 const teamRows = (() => {
   const map = new Map(teams.map(team => [Number(team.teamId), {
-    team, games:0,wins:0,losses:0,points:0,pointsAgainst:0,homeWins:0,awayWins:0,
-    rebounds:0,assists:0,collectiveGames:0
+    team, games:0,homeGames:0,awayGames:0,wins:0,losses:0,
+    points:0,pointsAgainst:0,homePoints:0,homePointsAgainst:0,awayPoints:0,awayPointsAgainst:0,
+    homeWins:0,awayWins:0,
+    rebounds:0,assists:0,collectiveGames:0,
+    homeRebounds:0,homeAssists:0,homeCollectiveGames:0,
+    awayRebounds:0,awayAssists:0,awayCollectiveGames:0
   }]));
   for (const match of fixture.matches) {
     if (match.status !== "finished" || match.homeScore == null || match.awayScore == null) continue;
     const home = map.get(Number(match.homeTeam.teamId)), away = map.get(Number(match.awayTeam.teamId));
     if (!home || !away) continue;
     const hs=number(match.homeScore), as=number(match.awayScore);
-    home.games++; away.games++;
+    home.games++; home.homeGames++; away.games++; away.awayGames++;
     home.points+=hs; home.pointsAgainst+=as; away.points+=as; away.pointsAgainst+=hs;
+    home.homePoints+=hs; home.homePointsAgainst+=as;
+    away.awayPoints+=as; away.awayPointsAgainst+=hs;
     if (hs>as) {home.wins++;away.losses++;home.homeWins++;}
     else if(as>hs) {away.wins++;home.losses++;away.awayWins++;}
     const comparison=boxscores[match.id]?.teamComparison;
     if (comparison?.home && comparison?.away) {
-      home.rebounds+=number(comparison.home.rebounds); home.assists+=number(comparison.home.assists); home.collectiveGames++;
-      away.rebounds+=number(comparison.away.rebounds); away.assists+=number(comparison.away.assists); away.collectiveGames++;
+      const hr=number(comparison.home.rebounds), ha=number(comparison.home.assists);
+      const ar=number(comparison.away.rebounds), aa=number(comparison.away.assists);
+      home.rebounds+=hr; home.assists+=ha; home.collectiveGames++;
+      away.rebounds+=ar; away.assists+=aa; away.collectiveGames++;
+      home.homeRebounds+=hr; home.homeAssists+=ha; home.homeCollectiveGames++;
+      away.awayRebounds+=ar; away.awayAssists+=aa; away.awayCollectiveGames++;
     }
   }
   return [...map.values()];
@@ -72,11 +82,17 @@ const teamMetrics=[
   ["rebounds","REB","Rebotes"],["assists","AST","Asistencias"],
   ["homeWins","G. LOC","Ganados de local"],["awayWins","G. VIS","Ganados de visitante"]
 ];
-const valueForTeam=(row,key)=>{
-  if(key==="homeWins") return row.homeWins;
-  if(key==="awayWins") return row.awayWins;
-  if(key==="rebounds"||key==="assists") return row.collectiveGames ? row[key]/row.collectiveGames : null;
-  return row.games ? row[key]/row.games : null;
+const valueForTeam=(row,key,scope="overall")=>{
+  if(key==="homeWins") return scope==="away" ? row.awayWins : row.homeWins;
+  if(key==="awayWins") return scope==="home" ? row.homeWins : row.awayWins;
+  if(key==="rebounds"||key==="assists") {
+    const totalGames=scope==="home"?row.homeCollectiveGames:scope==="away"?row.awayCollectiveGames:row.collectiveGames;
+    const total=scope==="home"?(key==="rebounds"?row.homeRebounds:row.homeAssists):scope==="away"?(key==="rebounds"?row.awayRebounds:row.awayAssists):row[key];
+    return totalGames ? total/totalGames : null;
+  }
+  const totalGames=scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games;
+  const total=scope==="home"?(key==="points"?row.homePoints:row.homePointsAgainst):scope==="away"?(key==="points"?row.awayPoints:row.awayPointsAgainst):row[key];
+  return totalGames ? total/totalGames : null;
 };
 
 function PlayerPodium({items,stat,label,onSelect}) {
@@ -129,7 +145,7 @@ function LigaArgentinaEstadisticas(){
   const mvpPlayers=useMemo(()=>allPlayers.map(p=>({...p,mvps:mvpCounts.get(Number(p.id))||0}))
     .filter(p=>p.mvps>0).sort((a,b)=>b.mvps-a.mvps||a.name.localeCompare(b.name,"es")).slice(0,20),[]);
   const orderedTeams=useMemo(()=>teamRows.map(row=>({...row,value:valueForTeam(row,teamMetric,scope)}))
-    .filter(row=>scope==="overall"|| (scope==="home"?row.homeGames:row.awayGames)>0)
+    .filter(row=>(scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games)>0)
     .sort((a,b)=>{
       if(a.value==null)return 1;if(b.value==null)return -1;
       const lowerBetter=teamMetric==="pointsAgainst";
@@ -174,7 +190,7 @@ function LigaArgentinaEstadisticas(){
         <div className="team-ranking-tools"><div className="team-ranking-heading"><span className="team-ranking-eyebrow">RANKING DE EQUIPOS · 2026/27</span><h2>{teamMetrics.find(m=>m[0]===teamMetric)?.[2]}</h2><p>{scope==="overall"?"Todos los partidos":scope==="home"?"Partidos como local":"Partidos como visitante"}</p></div>
           <div className="team-ranking-controls"><label>ORDENAR<select value={teamDirection} onChange={e=>setTeamDirection(e.target.value)}><option value="best">Mejor a peor</option><option value="worst">Peor a mejor</option></select></label></div></div>
         <div className="team-ranking-list"><div className="team-ranking-listhead"><span>POS. · EQUIPO</span><span>{teamMetrics.find(m=>m[0]===teamMetric)?.[1]} / PJ</span></div>
-          {orderedTeams.map((row,i)=><div className="team-ranking-row" key={row.team.teamId} style={{"--ranking-team-color":labMatchColor(row.team)}}><span className="team-ranking-position">{i+1}.</span><img className="team-ranking-logo" src={labCrest(row.team)} alt=""/><span className="team-ranking-name">{row.team.name}<small>{row.games} PJ</small></span><span className="team-ranking-track"><span style={{width:`${row.value==null?0:Math.max(4,100*row.value/maxTeamValue)}%`}}/></span><strong className="team-ranking-value">{row.value==null?"—":fmt(row.value)}</strong></div>)}
+          {orderedTeams.map((row,i)=><div className="team-ranking-row" key={row.team.teamId} style={{"--ranking-team-color":labMatchColor(row.team)}}><span className="team-ranking-position">{i+1}.</span><img className="team-ranking-logo" src={labCrest(row.team)} alt=""/><span className="team-ranking-name">{row.team.name}<small>{scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games} PJ</small></span><span className="team-ranking-track"><span style={{width:`${row.value==null?0:Math.max(4,100*row.value/maxTeamValue)}%`}}/></span><strong className="team-ranking-value">{row.value==null?"—":fmt(row.value)}</strong></div>)}
         </div><p className="team-ranking-note">Puntos y victorias se calculan con resultados finales. Rebotes y asistencias utilizan únicamente partidos con comparativa colectiva oficial.</p>
       </div>}
 
