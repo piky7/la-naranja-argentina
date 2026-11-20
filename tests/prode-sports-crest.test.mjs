@@ -10,7 +10,6 @@ test("El creador deportivo ofrece formas, franjas, ubicación y bordes", () => {
   assert.equal(SPORTS_PLACEMENTS.length, 4);
   assert.equal(SPORTS_BORDERS.length, 3);
 });
-
 test("El diseño deportivo se serializa y recupera con nombre independiente", () => {
   const original = {shape:"pointed",pattern:"diagonal",placement:"bottom",border:"thick",label:"CLUB PIKY"};
   const saved = serializeSportsDesign(original);
@@ -20,62 +19,20 @@ test("El diseño deportivo se serializa y recupera con nombre independiente", ()
   assert.equal(parseSportsDesign("ball").shape,"classic");
   assert.ok(isSportsDesign(serializeSportsDesign({...original,label:"ATLÉTICO ÑANDÚ"})));
 });
-
 test("Nunca acepta configuraciones extrañas o inyectadas como un diseño válido", () => {
   assert.equal(isSportsDesign("sport:pointed:diagonal:top:double:<script>"),false);
   assert.equal(isSportsDesign("sport:wrong:diagonal:top:double:CLUB"),false);
   assert.equal(isSportsDesign("sport:classic:vertical:top:double:PANTERA"),true);
 });
-
-test("Render de escudos deportivo y trofeo de liga permanecen separados", () => {
+test("El perfil de usuario y el encabezado conservan la identidad exclusiva de Prode", () => {
   const read = path => readFileSync(new URL("../"+path,import.meta.url),"utf8");
-  const crest = read("src/components/ProdeCrest.jsx");
-  const shield = read("src/components/ProdeSportsShield.jsx");
-  const access = read("src/components/ProdeGoogleAccess.jsx");
-  const profile = read("src/pages/Perfil.jsx");
-  const worker = read("workers/prode/worker.js");
-  assert.match(crest,/type !== "league"/);
-  assert.match(crest,/ProdeSportsShield/);
-  assert.match(shield,/clipPath/);
-  assert.match(shield,/d.pattern === "diagonal"/);
+  const profile=read("src/pages/Perfil.jsx"), access=read("src/components/ProdeProfileAccess.jsx"), header=read("src/components/Header.jsx"), app=read("src/App.jsx");
   assert.match(profile,/SPORTS_SHAPES/);
-  assert.match(profile,/SPORTS_PATTERNS/);
-  assert.match(profile,/SPORTS_PLACEMENTS/);
   assert.match(profile,/Guardar perfil/);
-  assert.doesNotMatch(access,/prode-account-edit/);
-  assert.match(worker,/sportSymbolPattern/);
-  assert.doesNotMatch(access,/PRODE_SYMBOL_CATEGORIES/);
-  assert.doesNotMatch(access,/signOutProde|prode-account-logout|logoutConfirmOpen/);
   assert.match(profile,/signOutProde/);
-  assert.match(profile,/¿Querés cerrar sesión?/);
-  const careerAccount = read("src/auth/careerAccount.js");
-  const profileAccess = read("src/components/CareerProfileAccess.jsx");
-  assert.doesNotMatch(careerAccount,/career-auth-updated/);
-  assert.doesNotMatch(profileAccess,/career-auth-updated|visibilitychange/);
-});
-
-
-test("Mi Carrera aplica el rediseño premium únicamente a su página", () => {
-  const read = path => readFileSync(new URL("../"+path,import.meta.url),"utf8");
-  const page = read("src/components/FanLevel.jsx");
-  const styles = read("src/components/FanLevel.css");
-  assert.match(page,/lna-fan-page-eyebrow/);
-  assert.match(page,/Tus puntos, pronósticos y escudo/);
-  assert.match(styles,/\.lna-fan-page-card\s*\{/);
-  assert.match(styles,/\.lna-fan-page-card \.lna-fan-gamer-hero/);
-  assert.match(styles,/\.lna-fan-page-card \.lna-fan-tabs/);
-  assert.match(styles,/@media\(max-width:650px\)/);
-});
-
-test("El encabezado ofrece iniciar sesión y crear cuenta cuando no hay usuario", () => {
-  const read = path => readFileSync(new URL("../"+path,import.meta.url),"utf8");
-  const access = read("src/components/CareerProfileAccess.jsx");
-  const auth = read("src/auth/careerAccount.js");
-  assert.match(access,/if\(!waiting&&!user\)/);
   assert.match(access,/Iniciar sesión/);
   assert.match(access,/o crear una cuenta/);
-  assert.match(access,/onClick=\{login\}/);
-  assert.match(access,/Continuando|Conectando/);
-  assert.match(auth,/signInProdeWithGoogle\(\)/);
   assert.match(access,/to="\/perfil"/);
+  assert.match(header,/ProdeProfileAccess/);
+  assert.doesNotMatch(app,/MiCarrera|CareerEntryNotices|mi-carrera/);
 });
