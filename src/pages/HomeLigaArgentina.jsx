@@ -12,6 +12,43 @@ const labCrest = team => {
   const id = team?.teamId || String(team?.crestUrl || "").split("/").filter(Boolean).at(-1);
   return id ? "/lab-team-logos/" + id + ".webp" : "";
 };
+const LAB_TEAM_COLORS = {
+  "amancay-lr": "#c49a32",
+  "barrio-jardin-t": "#28794b",
+  "barrio-parque": "#28794b",
+  "bochas-cc": "#c52f3d",
+  "centenario-vt": "#287db8",
+  "central-entrerriano": "#b72d3b",
+  "ciclista-j": "#bd303e",
+  "comunicaciones": "#d5a62c",
+  "dep-norte": "#1783bd",
+  "dep-viedma": "#2775b7",
+  "el-ceibo-sf": "#c52f3d",
+  "gimnasia-lp": "#24558c",
+  "hindu-c": "#28784b",
+  "independiente-sde": "#c32f3d",
+  "jujuy-basquet": "#287bb6",
+  "la-union-c": "#1878b5",
+  "mitre-posadas": "#d2a32b",
+  "pergamino-basquet": "#2774ae",
+  "pico-fc": "#bd303c",
+  "provincial-r": "#c22e3c",
+  "quilmes-mdp": "#2b5689",
+  "racing-a": "#258bc0",
+  "regatas-sn": "#267eb5",
+  "riachuelo-lr": "#b72d3d",
+  "river": "#c32d3b",
+  "rocamora": "#bf303c",
+  "salta-basket": "#287bb6",
+  "san-isidro": "#c52e3d",
+  "santa-paula-g": "#287bb6",
+  "sp-suardi": "#c52f3d",
+  "union-mdp": "#2678b6",
+  "union-sf": "#c52e3c",
+  "villa-mitre-bb": "#28794b",
+  "villa-san-martin": "#bd303e"
+};
+const labMatchColor = team => LAB_TEAM_COLORS[team?.slug] || "#315a7b";
 const todayInArgentina = () => new Intl.DateTimeFormat("en-CA", {
   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
 }).format(new Date());
@@ -105,7 +142,7 @@ function HomeLigaArgentina() {
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
     return <button type="button" disabled={!hasScore} onClick={() => setSelectedMatch(match)}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""}`}
-      style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`}}>
+      style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`,"--match-home-color":labMatchColor(match.homeTeam),"--match-away-color":labMatchColor(match.awayTeam)}}>
       <div className="fixture-team fixture-home">
         <div className="fixture-team-name">
           <span>{displayName(match.homeTeam.name)}</span>
