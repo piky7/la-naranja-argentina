@@ -709,22 +709,43 @@ async function obtenerFixtureLab(fecha, env) {
   return matches;
 }
 
+function extraerTextoElementoPorId(html, id) {
+  const apertura = new RegExp("<([a-z][a-z0-9]*)\\b(?=[^>]*\\bid\\s*=\\s*['\"]" + id + "['\"])[^>]*>", "i");
+  const posicion = html.search(apertura);
+  if (posicion < 0) return "";
+  const matchApertura = html.slice(posicion).match(apertura);
+  if (!matchApertura) return "";
+  const inicio = posicion + matchApertura[0].length;
+  const cierre = new RegExp("</" + matchApertura[1] + "\\s*>", "i");
+  const fin = html.slice(inicio).search(cierre);
+  if (fin < 0) return "";
+  return html.slice(inicio, inicio + fin)
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&").replace(/&aacute;/gi, "á")
+    .replace(/&eacute;/gi, "é").replace(/&iacute;/gi, "í")
+    .replace(/&oacute;/gi, "ó").replace(/&uacute;/gi, "ú")
+    .replace(/\s+/g, " ").trim();
+}
+
 function interpretarMarcadorLab(html) {
-  const statusText = (html.match(/id=["']status-partido["'][^>]*>([\s\S]*?)<\//i)?.[1] || "")
-    .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ").replace(/\s+/g, " ").trim();
-  const estado = html.match(/data-estado=["']([^"']+)["']/i)?.[1] || "";
-  const finalizada = /data-finalizada=["']true["']/i.test(html);
+  // El sitio oficial puede envolver estado y puntos en spans/iconos internos.
+  // Extraemos el contenido completo del elemento y toleramos comillas simples,
+  // atributos en distinto orden y espacios alrededor del signo igual.
+  const statusText = extraerTextoElementoPorId(html, "status-partido");
+  const estado = html.match(/data-estado\s*=\s*['"]([^'"]+)['"]/i)?.[1] || "";
+  const finalizada = /data-finalizada\s*=\s*['"]true['"]/i.test(html);
   const readScore = id => {
-    const match = html.match(new RegExp('id="' + id + '"[^>]*>([\\s\\S]*?)<\\/', "i"));
-    const value = match?.[1]?.replace(/<[^>]+>/g, "").trim();
-    return value != null && /^\d{1,3}$/.test(value) ? Number(value) : null;
+    const value = extraerTextoElementoPorId(html, id);
+    return /^\d{1,3}$/.test(value) ? Number(value) : null;
   };
   const homeScore = readScore("score-local");
   const awayScore = readScore("score-visitante");
   const normalized = statusText.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   let status = "unknown";
-  if (finalizada || /^(final|finalizado|finalizada|terminado|terminada)/.test(normalized) || estado === "FINALIZADO") status = "finished";
-  else if (/en juego|en curso|jugando|descanso|entretiempo|cuarto|periodo/.test(normalized) || estado === "COMENZADO") status = "live";
+  if (finalizada || /^(final|finalizado|finalizada|terminado|terminada)/.test(normalized) || estado.toUpperCase() === "FINALIZADO") status = "finished";
+  else if (/en juego|en curso|jugando|descanso|entretiempo|cuarto|periodo/.test(normalized) || estado.toUpperCase() === "COMENZADO") status = "live";
   else if (/programado|proximo|a jugar|pendiente/.test(normalized)) status = "scheduled";
   const accion = html.match(/Cuarto\s+(\d+)\s*-\s*(\d{2}:\d{2}:\d{2})/i);
   const quarter = accion ? Number(accion[1]) : null;
