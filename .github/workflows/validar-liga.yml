@@ -32,6 +32,10 @@ on:
       - "tests/render-optimization.test.mjs"
       - "tests/match-stats-shared.test.mjs"
       - "src/App.jsx"
+      - "src/pages/LigaArgentina.jsx"
+      - "src/pages/LigaArgentina.css"
+      - "data/lab/labSchedule.json"
+      - "tests/lab-fixture.test.mjs"
       - "src/main.jsx"
       - "tests/lazy-secondary-routes.test.mjs"
       - "src/hooks/useLiveMatch.js"
@@ -91,6 +95,8 @@ jobs:
         run: node --test tests/notifications.test.mjs
       - name: Comparar promedios y rankings colectivos originales y optimizados
         run: node scripts/verify-liga-collective.mjs
+      - name: Validar fixture separado de Liga Argentina
+        run: node --test tests/lab-fixture.test.mjs
       - name: Compilar LNA
         run: npm run build
       - name: Verificar separación de estadísticas oficiales
