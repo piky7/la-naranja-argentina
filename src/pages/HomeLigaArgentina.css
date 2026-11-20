@@ -152,3 +152,28 @@
   .lab-team-comparison-values strong { font-size: 9px; }
   .lab-team-comparison-values span { font-size: 7px; }
 }
+
+
+/* LAB: comparativa colectiva con degradados propios de cada equipo. */
+.lab-finished-match .lab-team-comparison {
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--comparison-home-color, #18334b) 34%, #0b1621) 0%,
+      color-mix(in srgb, var(--comparison-home-color, #18334b) 13%, #0b1621) 30%,
+      #0b1621 50%,
+      color-mix(in srgb, var(--comparison-away-color, #18334b) 13%, #0b1621) 70%,
+      color-mix(in srgb, var(--comparison-away-color, #18334b) 34%, #0b1621) 100%);
+}
+.lab-finished-match .lab-team-comparison-teams,
+.lab-finished-match .lab-team-comparison-row {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--comparison-home-color, #18334b) 25%, transparent) 0%,
+    transparent 48%,
+    color-mix(in srgb, var(--comparison-away-color, #18334b) 25%, transparent) 100%);
+}
+.lab-finished-match .lab-team-comparison-bar-home {
+  background: var(--comparison-home-color, #ff8c00);
+}
+.lab-finished-match .lab-team-comparison-bar-away {
+  background: var(--comparison-away-color, #70a6d8);
+}
