@@ -183,8 +183,8 @@ function LabHomeBoxscore({match, onClose}) {
             </div>
           </div>}
           {players.length ? <>
-            <LabTeamComparison comparison={teamComparison} homeTeam={homeTeam} awayTeam={awayTeam}/>
-            <MatchStatsTabs match={matchForTabs} stats={stats} home={homeTeam} away={awayTeam}>
+            <MatchStatsTabs match={matchForTabs} stats={stats} home={homeTeam} away={awayTeam}
+              customTeamComparison={<LabTeamComparison comparison={teamComparison} homeTeam={homeTeam} awayTeam={awayTeam}/>}>
             <div className="match-modal-content">
               {renderTeam(homeTeam,homePlayers,"LOCAL")}
               {renderTeam(awayTeam,awayPlayers,"VISITANTE")}
