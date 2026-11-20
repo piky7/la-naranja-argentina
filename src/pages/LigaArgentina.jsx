@@ -117,8 +117,8 @@ export default function LigaArgentina(){
     <div className="section-heading"><div><span className="section-label">HOY</span><h2 className="league-hero-title">PARTIDOS <span>DE HOY</span></h2></div></div>
     {todayMatches.length?<div className="today-matches">{todayMatches.map(match=><button key={match.id} type="button" className="today-match-card" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
      <div className="match-date"><span>{formatLeagueDate(match.date)}</span>{match.time&&<strong>{match.time}</strong>}</div>
-     <div className="match-teams"><div className="match-team"><img src={labTeamCrest(match.homeTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.homeTeam.name)}</span></div><div className="match-vs"><span>VS</span></div><div className="match-team"><img src={labTeamCrest(match.awayTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.awayTeam.name)}</span></div></div>
-     <div className="match-details"><strong>{live?"EN VIVO":match.time||"A confirmar"}</strong>{match.venue&&<span>📍 {match.venue}</span>}</div>
+     <div className="match-teams"><div className="match-team"><img src={labTeamCrest(match.homeTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.homeTeam.name)}</span></div><div className="match-vs"><span>{match.status==="live"?`${match.homeScore ?? "—"} - ${match.awayScore ?? "—"}`:"VS"}</span></div><div className="match-team"><img src={labTeamCrest(match.awayTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.awayTeam.name)}</span></div></div>
+     <div className="match-details"><strong>{match.status==="live"?"EN VIVO":match.time||"A confirmar"}</strong>{match.venue&&<span>📍 {match.venue}</span>}</div>
     </button>)}</div>:<div className="no-today-matches"><span className="no-matches-label">SIN PARTIDOS</span><h3>Hoy no hay partidos</h3><p>No hay encuentros programados para hoy.</p></div>}
    </section>
    <section className="league-columns lab-league-columns">
