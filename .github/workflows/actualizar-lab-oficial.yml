@@ -27,6 +27,7 @@ on:
       - "scripts/publish-lab-results.cjs"
       - "scripts/build-lab-rosters.cjs"
       - "tests/lab-sync.test.mjs"
+      - "vite.config.js"
 
 permissions:
   contents: write
