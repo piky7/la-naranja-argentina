@@ -36,11 +36,13 @@ jobs:
         run: node scripts/probe-lab-boxscore.cjs
       - name: Importar todos los box scores oficiales pendientes
         run: node scripts/sync-lab-boxscores.cjs --all-finished
-      - name: Guardar box score importado
+      - name: Consolidar planteles y estadísticas por equipo
+        run: node scripts/build-lab-rosters.cjs
+      - name: Guardar box scores y planteles consolidados
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add data/lab/labBoxscores.json
+          git add data/lab/labBoxscores.json data/lab/labRosters.json
           git diff --cached --quiet || git commit -m 'Importar box scores históricos oficiales LAB'
           git pull --rebase origin main
           git push
