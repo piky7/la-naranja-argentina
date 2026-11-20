@@ -13,7 +13,7 @@ const todayArgentina = () => new Intl.DateTimeFormat("en-CA", {timeZone:"America
 const dateLabel = date => date ? new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"2-digit",month:"short",timeZone:"UTC"}).format(new Date(date+"T12:00:00Z")).replace(/\./g,"").toUpperCase() : "FECHA A CONFIRMAR";
 const teamLabel = name => name.replace(" (MDP)","").replace(" (SF)","").replace(" (CC)","");
 const formatLabLiveRemaining = live => {
- const parts = typeof live?.lastActionTime === "string" ? live.lastActionTime.match(/^(\\d{2}):(\\d{2}):(\\d{2})$/) : null;
+ const parts = typeof live?.lastActionTime === "string" ? live.lastActionTime.match(/^(\d{2}):(\d{2}):(\d{2})$/) : null;
  if (parts) { const elapsed = Number(parts[1])*3600 + Number(parts[2])*60 + Number(parts[3]); if (elapsed >= 0 && elapsed <= 600) return `${String(Math.floor(elapsed/60)).padStart(2,"0")}:${String(elapsed%60).padStart(2,"0")}`; }
  const minutes = Number(live?.minutesRemaining);
  return Number.isFinite(minutes) && minutes >= 0 ? `${String(Math.floor(minutes)).padStart(2,"0")}:00` : null;
