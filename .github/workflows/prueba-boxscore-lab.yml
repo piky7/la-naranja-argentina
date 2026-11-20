@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/prueba-boxscore-lab.yml"
       - "scripts/probe-lab-fixture.cjs"
+      - "scripts/probe-lab-boxscore.cjs"
   workflow_dispatch:
 
 permissions:
@@ -18,146 +19,16 @@ jobs:
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
-
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
       - name: Instalar dependencias
         run: npm ci
-
-      - name: Consultar handler AJAX del fixture LAB
-        run: node scripts/probe-lab-fixture.cjs
-
-      - name: Validar extracción estructurada del fixture LAB
-        run: node scripts/parse-fixture-lab.cjs --summary
-
-      - name: Inspeccionar boxscore oficial LAB sin tocar datos LNB
+      - name: Validar fixture oficial LAB
         run: |
-          node --input-type=commonjs <<'NODE'
-          const cheerio = require("cheerio");
-
-          const url = "https://www.laliganacional.com.ar/laligaargentina/partido/v2dTPbQr2iK36n-4ZKAPaW29tfIoutNo5ftvap_YfLYONYB-V6FAzVXQ==/quilmes-mdp-vs-river";
-
-          (async () => {
-            const response = await fetch(url, {
-              headers: {
-                "User-Agent": "Mozilla/5.0",
-                "Accept": "text/html",
-              },
-            });
-
-            console.log("HTTP:", response.status);
-            if (!response.ok) throw new Error("El sitio oficial respondió HTTP " + response.status);
-
-            const html = await response.text();
-            const $ = cheerio.load(html);
-            const tables = $(".tabla-estadisticas");
-            const teams = [];
-
-            tables.each((_, table) => {
-              const container = $(table).closest(".table-responsive");
-              const heading = container.prevAll(".nombre-equipo").first();
-              const name = heading.find("strong").first().text().trim();
-              const crest = heading.find("img").attr("src") || "";
-              const teamIds = crest.match(/\/escudos\/(\d+)\/(\d+)/);
-              const rows = $(table).find("tbody tr");
-              const samples = [];
-
-              rows.slice(0, 3).each((__, row) => {
-                const onclick = $(row).attr("onclick") || "";
-                const start = onclick.indexOf("{");
-                let player = null;
-                if (start >= 0) {
-                  const raw = onclick.slice(start, onclick.lastIndexOf("}") + 1);
-                  try {
-                    const data = JSON.parse(raw);
-                    player = {
-                      id: data.IdJugador ?? null,
-                      teamId: data.IdEquipo ?? null,
-                      name: data.NombreCompleto || data.Nombre || null,
-                      keys: Object.keys(data),
-                    };
-                  } catch {}
-                }
-                samples.push(player);
-              });
-
-              teams.push({
-                name,
-                officialClubId: teamIds ? Number(teamIds[1]) : null,
-                officialTeamId: teamIds ? Number(teamIds[2]) : null,
-                playerRows: rows.length,
-                samplePlayers: samples,
-              });
-            });
-
-            const result = {
-              url,
-              title: $("title").text().trim(),
-              statusElementCount: $("#status-partido").length,
-              statusText: $("#status-partido").text().trim(),
-              homeScoreElementCount: $("#score-local").length,
-              awayScoreElementCount: $("#score-visitante").length,
-              statsTables: tables.length,
-              teams,
-              comparisonTable: $("#tarjeta-comparativa .comparativa").length,
-              hasMatchId: /var\s+idEnc\s*=/.test(html),
-              htmlBytes: Buffer.byteLength(html),
-            };
-
-            console.log(JSON.stringify(result, null, 2));
-
-            const md = [
-              "# Informe de inspección del boxscore LAB",
-              "",
-              `- **URL:** [Abrir boxscore](${url})`,
-              `- **HTTP:** ${response.status}`,
-              `- **Título:** ${result.title || "No detectado"}`,
-              `- **Estado del partido:** ${result.statusText || "No detectado"}`,
-              `- **Tablas de estadísticas:** ${result.statsTables}`,
-              `- **Comparativa:** ${result.comparisonTable ? "Detectada" : "No detectada"}`,
-              `- **ID de partido en HTML:** ${result.hasMatchId ? "Detectado" : "No detectado"}`,
-              `- **Tamaño HTML:** ${result.htmlBytes} bytes`,
-              "",
-              "## Equipos y jugadores",
-              "",
-              ...result.teams.flatMap((team, index) => [
-                `### ${index + 1}. ${team.name || "Equipo sin nombre"}`,
-                `- ID de club: ${team.officialClubId ?? "No detectado"}`,
-                `- ID oficial de equipo: ${team.officialTeamId ?? "No detectado"}`,
-                `- Filas de jugadores: ${team.playerRows}`,
-                "- Muestra de jugadores:",
-                ...(team.samplePlayers.length
-                  ? team.samplePlayers.map(player => player
-                    ? `  - ${player.name || "Nombre no detectado"} — jugador ID: ${player.id ?? "No detectado"}, equipo ID: ${player.teamId ?? "No detectado"}`
-                    : "  - No se pudo interpretar la fila")
-                  : ["  - Sin filas de muestra"]),
-                "",
-              ]),
-              "## Resultado",
-              "",
-              tables.length === 2 &&
-              teams.every(team => team.name && team.officialTeamId && team.playerRows &&
-                team.samplePlayers.some(player => player?.id && player?.teamId))
-                ? "**Estructura compatible:** se detectaron las dos tablas, equipos e IDs oficiales de jugadores."
-                : "**Estructura incompleta:** revisar los detalles y el log del paso.",
-            ].join("\n");
-
-            require("node:fs").writeFileSync(process.env.GITHUB_STEP_SUMMARY, md + "\n");
-
-            if (tables.length !== 2) throw new Error("Se esperaban dos tablas de estadísticas.");
-            if (teams.some(team => !team.name || !team.officialTeamId || !team.playerRows)) {
-              throw new Error("No se pudieron identificar ambos equipos y sus jugadores.");
-            }
-            if (teams.some(team => !team.samplePlayers.some(player => player?.id && player?.teamId))) {
-              throw new Error("No se encontraron IDs oficiales de jugadores/equipos en las filas.");
-            }
-            console.log("ESTRUCTURA LAB COMPATIBLE: tablas, equipos e IDs de jugadores detectados.");
-          })().catch(error => {
-            console.error(error);
-            process.exitCode = 1;
-          });
-          NODE
+          node scripts/probe-lab-fixture.cjs
+          node scripts/parse-fixture-lab.cjs --summary
+      - name: Inspeccionar pestaña Estadísticas del box score oficial
+        run: node scripts/probe-lab-boxscore.cjs
