@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { createPortal } from "react-dom";
+import MatchStatsTabs from "../components/MatchStatsTabs";
 import { Link } from "react-router-dom";
 import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
@@ -63,28 +65,93 @@ const formatDay = key => new Intl.DateTimeFormat("es-AR", {
   timeZone: "UTC", weekday: "short", day: "2-digit", month: "short"
 }).format(dateFromKey(key)).replace(/\./g, "").toUpperCase();
 
-function LabHomeBoxscore({match}) {
+function LabHomeBoxscore({match, onClose}) {
   const box = boxscores[match.id];
-  const [side, setSide] = useState("home");
-  const [tab, setTab] = useState("players");
-  if (!box) return <div className="lab-boxscore-empty"><strong>Estadísticas en preparación</strong><span>La planilla individual de este partido todavía no está incorporada a LNA.</span></div>;
-  const team = side === "home" ? match.homeTeam : match.awayTeam;
-  const rows = box.players.filter(player => player.teamId === team.teamId).sort((a,b) => b.points-a.points);
-  const mvp = box.players.slice().sort((a,b) => b.valuation-a.valuation || b.points-a.points)[0];
-  const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? match.homeTeam : match.awayTeam);
-  const crest = team => labCrest(team);
-  const teamLabel = name => String(name || "").replace(/ \((MDP|SF|CC|LR|T|VT|J)\)/g, "");
-  const date = new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"}).format(new Date(match.date+"T12:00:00Z")).replace(/\./g,"").toUpperCase();
-  return <div className="lab-native-boxscore">
-    <header className="lab-native-head"><b>LIGA ARGENTINA 2026/27</b><span>{date} <i>•</i> FINAL</span>
-      <div className="lab-native-score"><div><img src={crest(match.homeTeam)} alt=""/><strong>{teamLabel(match.homeTeam.name)}</strong></div><b><em>{match.homeScore}</em> - <em>{match.awayScore}</em></b><div><img src={crest(match.awayTeam)} alt=""/><strong>{teamLabel(match.awayTeam.name)}</strong></div></div>
-      <small>{match.venue || "LIGA ARGENTINA"}</small>
-    </header>
-    {mvp && <section className="lab-native-mvp"><label>♛ JUGADOR DESTACADO · MAYOR VALORACIÓN</label><div><img src={crest(mvpTeam)} alt=""/><strong>{mvp.name}</strong><small>{teamLabel(mvpTeam.name)}</small></div><aside>{[[mvp.points,"PTS"],[mvp.rebounds,"REB"],[mvp.assists,"AST"],[mvp.minutes,"MIN"],[mvp.valuation,"VAL"]].map(([value,label])=><b key={label}>{value}<small>{label}</small></b>)}</aside></section>}
-    <nav className="lab-native-tabs"><button className={tab==="players"?"active":""} onClick={()=>setTab("players")}>Stats jugadores</button><button className={tab==="teams"?"active":""} onClick={()=>setTab("teams")}>Estadísticas equipos</button></nav>
-    {tab==="players" ? <><nav className="lab-native-team-tabs">{[["home",match.homeTeam],["away",match.awayTeam]].map(([key,current])=><button key={key} className={side===key?"active":""} onClick={()=>setSide(key)}><img src={crest(current)} alt=""/>{teamLabel(current.name)}</button>)}</nav><div className="lab-native-table"><div className="lab-native-th"><b>JUGADOR</b><b>PTS</b><b>REB</b><b>AST</b><b>MIN</b><b>VAL</b></div>{rows.map(player=><div className="lab-native-tr" key={player.id}><strong>{player.number ? "#"+player.number+" · " : ""}{player.name}</strong><b>{player.points}</b><span>{player.rebounds}</span><span>{player.assists}</span><span>{player.minutes}</span><b>{player.valuation}</b></div>)}</div></> : <div className="lab-native-unavailable">Las estadísticas colectivas comparadas todavía no están disponibles para esta competencia.</div>}
-    <footer className="lab-native-footer"><b>LNA</b><strong>ESTADÍSTICAS DEL PARTIDO</strong></footer>
-  </div>;
+  const players = box?.players || [];
+  const homeTeam = { ...match.homeTeam, id: String(match.homeTeam.teamId), name: displayName(match.homeTeam.name), shortName: displayName(match.homeTeam.name), logo: labCrest(match.homeTeam) };
+  const awayTeam = { ...match.awayTeam, id: String(match.awayTeam.teamId), name: displayName(match.awayTeam.name), shortName: displayName(match.awayTeam.name), logo: labCrest(match.awayTeam) };
+  const homePlayers = players.filter(player => player.teamId === match.homeTeam.teamId);
+  const awayPlayers = players.filter(player => player.teamId === match.awayTeam.teamId);
+  const stats = { [match.homeTeam.teamId]: homePlayers, [match.awayTeam.teamId]: awayPlayers };
+  const mvp = players.slice().sort((a,b) => Number(b.valuation || 0)-Number(a.valuation || 0) || Number(b.points || 0)-Number(a.points || 0))[0];
+  const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? homeTeam : awayTeam);
+  const date = new Intl.DateTimeFormat("es-AR",{weekday:"short",day:"numeric",month:"numeric",timeZone:"UTC"})
+    .format(new Date(match.date+"T12:00:00Z")).replace(/\\./g,"").toUpperCase();
+  const formatStat = value => value == null || value === "" ? "0" : value;
+  const hasPlayed = player => {
+    const raw = String(player.minutes ?? "").trim();
+    if (!raw || raw === "—" || raw === "-") return false;
+    if (/^\\d+:\\d+(?::\\d+)?$/.test(raw)) return raw.split(":").some(part => Number(part)>0);
+    const minutes = Number(raw.replace(",", "."));
+    return Number.isFinite(minutes) && minutes>0;
+  };
+  const renderTeamRows = (teamId, teamPlayers) => teamPlayers.filter(hasPlayed).slice()
+    .sort((a,b)=>Number(b.points||0)-Number(a.points||0))
+    .map(player=><div className="match-stat-player" key={player.id}>
+      <strong>{player.number ? "#"+player.number+" · " : ""}{player.name}</strong>
+      <span>{formatStat(player.points)}</span><span>{formatStat(player.rebounds)}</span>
+      <span>{formatStat(player.assists)}</span><span>{player.minutes || "—"}</span>
+      <span>{formatStat(player.valuation)}</span>
+    </div>);
+  return createPortal(
+    <div className="match-modal-overlay match-modal-finished-overlay" onClick={onClose}>
+      <div className="match-modal-finished-scroll">
+        <section className="match-modal match-modal-finished lab-finished-match" role="dialog" aria-modal="true" aria-label="Estadísticas del partido" onClick={event=>event.stopPropagation()}>
+          <button className="match-modal-close" type="button" onClick={onClose} aria-label="Cerrar">×</button>
+          <header className="match-modal-header">
+            <div className="match-finished-watermarks" aria-hidden="true">
+              <img src={homeTeam.logo} alt=""/><img src={awayTeam.logo} alt=""/>
+            </div>
+            <div className="match-finished-compact-heading">
+              <span className="match-modal-label">LIGA ARGENTINA 2026/27</span>
+              <div className="match-finished-date-status">
+                <strong className="match-modal-date">{date}</strong><span className="match-finished-heading-dot">•</span>
+                <span className="match-modal-status">FINAL</span>
+              </div>
+            </div>
+            <div className="match-modal-teams">
+              <div className="match-modal-team"><img src={homeTeam.logo} alt=""/><strong>{homeTeam.shortName}</strong></div>
+              <div className="match-modal-score"><strong>
+                <span className={Number(match.homeScore)>Number(match.awayScore)?"match-score-winner":"match-score-loser"}>{match.homeScore}</span>
+                <span className="match-score-dash"> - </span>
+                <span className={Number(match.awayScore)>Number(match.homeScore)?"match-score-winner":"match-score-loser"}>{match.awayScore}</span>
+              </strong></div>
+              <div className="match-modal-team"><strong>{awayTeam.shortName}</strong><img src={awayTeam.logo} alt=""/></div>
+            </div>
+          </header>
+          <div className="lab-finished-venue">{match.venue || "LIGA ARGENTINA"}</div>
+          {mvp && <button type="button" className="match-mvp-card lab-finished-mvp" onClick={event=>event.stopPropagation()}>
+            <span className="match-mvp-heading">♛ JUGADOR DESTACADO · MAYOR VALORACIÓN</span>
+            <span className="match-mvp-body">
+              <span className="match-mvp-identity"><img src={labCrest(mvpTeam)} alt=""/><span className="match-mvp-name">
+                <strong>{mvp.name}</strong><small>{mvpTeam?.name}</small>
+              </span></span>
+              <span className="match-mvp-numbers">
+                <span><strong>{formatStat(mvp.points)}</strong><small>PTS</small></span>
+                <span><strong>{formatStat(mvp.rebounds)}</strong><small>REB</small></span>
+                <span><strong>{formatStat(mvp.assists)}</strong><small>AST</small></span>
+                <span><strong>{mvp.minutes || "—"}</strong><small>MIN</small></span>
+                <span className="match-mvp-valuation"><strong>{formatStat(mvp.valuation)}</strong><small>VAL</small></span>
+              </span>
+            </span>
+          </button>}
+          {players.length ? <MatchStatsTabs match={match} stats={stats} home={homeTeam} away={awayTeam}>
+            <div className="match-modal-content">
+              <section className="match-stats-team">
+                <div className="match-stats-head"><span>JUGADOR</span><span>PTS</span><span>REB</span><span>AST</span><span>MIN</span><span>VAL</span></div>
+                <div className="match-stats-list">{renderTeamRows(match.homeTeam.teamId,homePlayers)}</div>
+              </section>
+              <section className="match-stats-team">
+                <div className="match-stats-head"><span>JUGADOR</span><span>PTS</span><span>REB</span><span>AST</span><span>MIN</span><span>VAL</span></div>
+                <div className="match-stats-list">{renderTeamRows(match.awayTeam.teamId,awayPlayers)}</div>
+              </section>
+            </div>
+          </MatchStatsTabs> : <div className="match-modal-no-stats"><h3>Estadísticas no disponibles</h3><p>La planilla detallada de este partido todavía no fue cargada.</p></div>}
+          <footer className="match-modal-footer"><span>LNA</span><strong>ESTADÍSTICAS DEL PARTIDO</strong></footer>
+        </section>
+      </div>
+    </div>, document.body
+  );
 }
 
 function HomeLigaArgentina() {
@@ -234,15 +301,7 @@ function HomeLigaArgentina() {
         </section>
       </div>
     </div></section>
-      {selectedMatch && <div className="lab-modal-backdrop" role="presentation" onClick={() => setSelectedMatch(null)}>
-        <section className="lab-team-modal lab-match-modal" role="dialog" aria-modal="true" aria-label="Estadísticas del partido" onClick={event => event.stopPropagation()}>
-          <button className="lab-modal-close" onClick={() => setSelectedMatch(null)} aria-label="Cerrar">×</button>
-          <span className="lab-kicker">{formatDay(selectedMatch.date)} · {selectedMatch.time || "FINAL"}</span>
-          <h2>{displayName(selectedMatch.homeTeam.name)} <strong>{selectedMatch.homeScore} - {selectedMatch.awayScore}</strong> {displayName(selectedMatch.awayTeam.name)}</h2>
-          <p>{selectedMatch.venue || "Liga Argentina"}</p>
-          <LabHomeBoxscore match={selectedMatch}/>
-        </section>
-      </div>}
+      {selectedMatch && <LabHomeBoxscore match={selectedMatch} onClose={() => setSelectedMatch(null)}/>}
   </main>;
 }
 export default HomeLigaArgentina;
