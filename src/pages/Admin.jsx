@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ShieldCheck, UsersRound, Trophy, Link2, UserPlus, RefreshCcw, LockKeyhole, ArrowLeft, Database } from "lucide-react";
+import { ShieldCheck, UsersRound, Trophy, UserPlus, RefreshCcw, LockKeyhole, ArrowLeft, Database } from "lucide-react";
 import { signInProdeWithGoogle, watchProdeUser } from "../auth/prodeAuth";
 import "./Admin.css";
 
@@ -57,7 +57,6 @@ export default function Admin() {
   const highest = Math.max(1, ...dailyValues);
   const metrics = [
     { label: "Cuentas Prode", value: summary?.accounts, icon: UsersRound, detail: "Perfiles registrados" },
-    { label: "Mi Carrera vinculadas", value: summary?.linkedCareers, icon: Link2, detail: "Cuentas asociadas" },
     { label: "Ligas creadas", value: summary?.leagues, icon: Trophy, detail: "Ligas de amigos" },
     { label: "Nuevos en 7 días", value: summary?.new7Days, icon: UserPlus, detail: "Registros recientes" },
     { label: "Nuevos en 30 días", value: summary?.new30Days, icon: UserPlus, detail: "Último mes" },
@@ -104,7 +103,7 @@ export default function Admin() {
           <p><span className="lna-admin-status-dot"/> API de Prode y base de datos D1: respondiendo.</p>
           <small>El estado de lna-live, lna-sync y las sincronizaciones oficiales todavía no está conectado a este panel.</small>
         </section>
-        <p className="lna-admin-footnote">Estos contadores corresponden a Prode LNA. No incluyen visitantes anónimos de la web ni todas las carreras locales sin cuenta.</p>
+        <p className="lna-admin-footnote">Estos contadores corresponden a la actividad de Prode LNA.</p>
       </>}
     </div>
   </main>;
