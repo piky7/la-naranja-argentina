@@ -258,3 +258,14 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+
+/* LAB: botones de conferencia más bajos, sin reducir la tipografía. */
+.lab-home-page .lab-home-dashboard .lab-conference-tabs .home-stats-tab {
+  min-height: 34px;
+  height: 34px;
+  padding: 3px 8px;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: .8px;
+}
