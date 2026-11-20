@@ -648,6 +648,7 @@ if (anterior?.status === "finished") {
       }
 
       resultados.push({
+        competition: "LNB",
         eventId: evento.eventId,
         homeTeam: evento.homeTeam,
         awayTeam: evento.awayTeam,
