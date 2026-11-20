@@ -11,6 +11,7 @@ import "./LigaArgentinaEstadisticas.css";
 
 const number = value => Number.isFinite(Number(value)) ? Number(value) : 0;
 const fmt = value => Number(value || 0).toFixed(1).replace(".", ",");
+const formatPersonName = value => String(value || "").toLocaleLowerCase("es").replace(/(^|[\\s'’\\-])([a-záéíóúüñ])/gu, (_, sep, letter) => sep + letter.toLocaleUpperCase("es"));
 const teams = fixture.teams;
 const teamFor = id => teams.find(team => Number(team.teamId) === Number(id));
 const allPlayers = Object.values(rosters.teams || {}).flatMap(roster =>
@@ -89,7 +90,7 @@ function PlayerPodium({items,stat,label,onSelect}) {
         <span className="triple-medal">{["🥇","🥈","🥉"][index]}</span>
         <strong className="triple-podium-value">{player?fmt(stat(player)):"—"}</strong>
         <small>{label}</small>
-        <strong className="triple-podium-name">{player?.name || "Sin datos"}</strong>
+        <strong className="triple-podium-name">{formatPersonName(player?.name || "Sin datos")}</strong>
         {player?.team&&<img src={labCrest(player.team)} alt=""/>}
       </button>;
     })}
@@ -155,13 +156,13 @@ function LigaArgentinaEstadisticas(){
         </div>
         <div className="stats-leaders lab-stats-leaders">{leaders.map(({key,title,unit,player})=><button type="button" className="stats-leader-card lab-stats-leader" key={key} style={{"--stats-team-color":teamColors(player)}} onClick={()=>setSearch(player.name)}>
           <span className="stats-leader-title">{title}</span><div className="stats-leader-value"><strong>{fmt(player.averages?.[key])}</strong><span>{unit}</span></div>
-          {player.team&&<img src={labCrest(player.team)} alt=""/>}<strong className="lab-stats-leader-name">{player.name}</strong>
+          {player.team&&<img src={labCrest(player.team)} alt=""/>}<strong className="lab-stats-leader-name">{formatPersonName(player.name)}</strong>
         </button>)}</div>
         <div className="lab-stats-table-wrap"><table className="stats-table lab-player-ranking"><thead><tr>
           <th>JUGADOR</th><th>EQUIPO</th><th><button onClick={()=>toggleSort("gamesPlayed")}>PJ ↕</button></th>
           {playerStats.map(key=><th key={key}><button onClick={()=>toggleSort(key)}>{({points:"PTS",rebounds:"REB",assists:"AST",steals:"REC",blocks:"TAP",valuation:"VAL"})[key]} {sortBy===key?(sortDir==="desc"?"↓":"↑"):"↕"}</button></th>)}
         </tr></thead><tbody>{playerRows.slice(0,20).map((p,i)=><tr key={p.id} style={{"--stats-team-color":teamColors(p)}} onClick={()=>{}}>
-          <td><span className="lab-stats-player-cell"><b className={i<3?"lab-stats-medal":""}>{i+1}</b><strong>{p.name}</strong></span></td>
+          <td><span className="lab-stats-player-cell"><b className={i<3?"lab-stats-medal":""}>{i+1}</b><strong>{formatPersonName(p.name)}</strong></span></td>
           <td><img className="lab-stats-team-logo" src={labCrest(p.team)} alt={p.team?.name||""}/></td><td>{p.gamesPlayed}</td>
           {playerStats.map(key=><td key={key} className={sortBy===key?"stats-active-column":""}>{fmt(p.averages?.[key])}</td>)}
         </tr>)}</tbody></table>{!playerRows.length&&<p className="triple-empty">No hay jugadores con esos filtros.</p>}</div>
@@ -181,7 +182,7 @@ function LigaArgentinaEstadisticas(){
       {mode==="triples"&&<section className="triple-ranking lab-triple-ranking">
         <div className="triple-heading"><span>LIGA ARGENTINA · 2026/27</span><h2>Ranking de triples</h2><p>Triples convertidos acumulados en partidos con planilla individual oficial.</p></div>
         <PlayerPodium items={triplePlayers.slice(0,3)} stat={p=>p.triplesMade} label="TRIPLES" onSelect={()=>{}}/>
-        <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div><div className="triple-list">{triplePlayers.slice(3,20).map((p,i)=><div className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}}><span className="triple-position">{i+4}</span><span className="triple-player-name">{p.name}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.triplesMade}</strong></div>)}{!triplePlayers.length&&<p className="triple-empty">Todavía no hay triples oficiales disponibles.</p>}</div>
+        <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div><div className="triple-list">{triplePlayers.slice(3,20).map((p,i)=><div className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}}><span className="triple-position">{i+4}</span><span className="triple-player-name">{formatPersonName(p.name)}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.triplesMade}</strong></div>)}{!triplePlayers.length&&<p className="triple-empty">Todavía no hay triples oficiales disponibles.</p>}</div>
         <p className="triple-note">Se muestran hasta 20 jugadores ordenados por triples convertidos acumulados en las planillas oficiales importadas.</p>
       </section>}
 
