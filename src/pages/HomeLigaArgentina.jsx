@@ -235,6 +235,17 @@ export function LabUpcomingMatchModal({match,onClose}) {
     };
   };
   const homeStats=aggregate(home.teamId),awayStats=aggregate(away.teamId);
+  const colorFor=team=>labMatchColor(team);
+  const recentFor=teamId=>completed.filter(game=>Number(game.homeTeam.teamId)===Number(teamId)||Number(game.awayTeam.teamId)===Number(teamId))
+    .sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,2).map(game=>{
+      const isHome=Number(game.homeTeam.teamId)===Number(teamId);
+      const scored=Number(isHome?game.homeScore:game.awayScore)||0;
+      const conceded=Number(isHome?game.awayScore:game.homeScore)||0;
+      const opponent=isHome?game.awayTeam:game.homeTeam;
+      return {...game,scored,conceded,opponent,result:scored>conceded?"G":"P"};
+    });
+  const hexRgba=(hex,alpha)=>{const value=String(hex||"#315a7b").replace("#","");const n=parseInt(value.length===3?value.split("").map(x=>x+x).join(""):value,16);return `rgba(${(n>>16)&255},${(n>>8)&255},${n&255},${alpha})`;};
+  const homeColor=colorFor(match.homeTeam),awayColor=colorFor(match.awayTeam);
   const fmt=value=>Number.isFinite(value)?value.toFixed(1).replace(".",","):"—";
   const players=Object.values(rosters.teams||{}).flatMap(team=>(team.players||[]).map(player=>({...player,teamName:team.name})));
   const categories=[["PUNTOS","points","🏀"],["VALORACIÓN","valuation","⭐"],["REBOTES","rebounds","↟"],["ASISTENCIAS","assists","↗"]];
@@ -258,13 +269,25 @@ export function LabUpcomingMatchModal({match,onClose}) {
         <button type="button" role="tab" aria-selected={tab==="jugadores"} className={tab==="jugadores"?"is-active":""} onClick={()=>setTab("jugadores")}>♟ Jugadores</button>
       </div>
       {tab==="comparativa"&&<section className="upcoming-tab-panel lab-upcoming-comparison">
-        <div className="upcoming-team-comparison upcoming-official-comparison">
+        <div className="upcoming-team-comparison upcoming-official-comparison lab-upcoming-team-comparison" style={{"--lab-home-color":homeColor,"--lab-away-color":awayColor,"background":`linear-gradient(110deg,${hexRgba(homeColor,.24)},#0d1b2a 48%,${hexRgba(awayColor,.24)})`}}>
           <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
           <div className="lab-upcoming-team-head"><span><img src={home.logo} alt=""/>{home.name}</span><b>VS</b><span><img src={away.logo} alt=""/>{away.name}</span></div>
           <p className="upcoming-collective-source">Promedios de temporada · {Math.round(homeStats.games)} / {Math.round(awayStats.games)} partidos</p>
           {metrics.map(([label,key])=>{const hv=homeStats[key],av=awayStats[key],lower=["pointsAgainst","turnovers","fouls"].includes(key),homeBetter=lower?hv<av:hv>av,awayBetter=lower?av<hv:av>hv,max=Math.max(hv||0,av||0,1);return <div className="lab-team-stat-row" key={key}>
             <strong className={homeBetter?"collective-better":""}>{fmt(hv)}</strong><div className="lab-team-stat-track"><span className={homeBetter?"is-better":""} style={{width:`${Math.max(0,hv||0)/max*100}%`}}/></div><span className="lab-team-stat-label">{label}</span><div className="lab-team-stat-track"><span className={awayBetter?"is-better":""} style={{width:`${Math.max(0,av||0)/max*100}%`}}/></div><strong className={awayBetter?"collective-better":""}>{fmt(av)}</strong>
           </div>})}
+          <div className="lab-upcoming-last-matches">
+            <h3>ÚLTIMOS 2 PARTIDOS</h3>
+            <div className="lab-upcoming-last-grid">
+              {[{team:match.homeTeam,view:home,color:homeColor},{team:match.awayTeam,view:away,color:awayColor}].map(({team,view,color})=><div className="lab-upcoming-last-team" key={team.teamId} style={{background:`linear-gradient(120deg,${hexRgba(color,.24)},#101a27 80%)`,borderColor:hexRgba(color,.75)}}>
+                <strong>{view.shortName}</strong>
+                {recentFor(team.teamId).map(game=><div className="lab-upcoming-last-result" key={game.id}>
+                  <span>{dateLabel(game.date)}</span><img src={labCrest(game.opponent)} alt=""/><b>{game.scored} - {game.conceded}</b><span className={game.result==="G"?"is-win":"is-loss"}>{game.result}</span>
+                </div>)}
+                {!recentFor(team.teamId).length&&<p>Sin resultados recientes</p>}
+              </div>)}
+            </div>
+          </div>
         </div>
       </section>}
       {tab==="jugadores"&&<section className="upcoming-tab-panel upcoming-players-comparison lab-upcoming-players">
