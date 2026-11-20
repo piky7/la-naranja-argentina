@@ -264,3 +264,55 @@
   }
 }
 
+
+
+/* Corrección LAB: conservar tamaño de botones Norte/Sur y replicar las filas LNB. */
+.lab-home-page .lab-home-dashboard .lab-conference-tabs .home-stats-tab {
+  min-height: 42px;
+  height: auto;
+  padding: 8px 10px;
+  font-size: 13px;
+  letter-spacing: .8px;
+}
+.lab-home-page .lab-home-dashboard .standings-panel .standings-table-header {
+  min-height: 38px;
+  padding: 0 14px;
+  grid-template-columns: 34px minmax(0,1fr) 34px 34px;
+  font-size: 10px;
+}
+.lab-home-page .lab-home-dashboard .standings-panel .home-standing-row {
+  min-height: 52px;
+  height: 52px;
+  padding: 0 14px;
+  grid-template-columns: 34px minmax(0,1fr) 34px 34px;
+}
+.lab-home-page .lab-home-dashboard .standings-panel .standing-position {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+  font-size: 10px;
+}
+.lab-home-page .lab-home-dashboard .standings-panel .home-standing-team {
+  gap: 9px;
+  font-size: 13px;
+}
+.lab-home-page .lab-home-dashboard .standings-panel .home-standing-team img {
+  width: 28px;
+  height: 28px;
+}
+.lab-home-page .lab-home-dashboard .standings-panel .home-standing-row > strong {
+  font-size: 13px;
+}
+@media (max-width: 768px) {
+  .lab-home-page .lab-home-dashboard .lab-conference-tabs .home-stats-tab {
+    min-height: 42px;
+    height: auto;
+    padding: 8px 10px;
+    font-size: 13px;
+    letter-spacing: .8px;
+  }
+  .lab-home-page .lab-home-dashboard .standings-panel .home-standing-row {
+    min-height: 52px;
+    height: 52px;
+  }
+}
