@@ -136,9 +136,8 @@ function AppContent() {
 
   const changeTournament = (tournament) => {
     setSelectedTournament(tournament);
-    if (tournament === "lab" && window.location.pathname === "/") {
-      navigate("/liga");
-    }
+    // Cada competencia abre siempre en su portada al cambiar el selector.
+    if (window.location.pathname !== "/") navigate("/");
   };
 
   return (
