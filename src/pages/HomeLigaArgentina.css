@@ -548,3 +548,42 @@
 .lab-home-page .lab-team-comparison {
   border-color: var(--lab-accent);
 }
+
+
+/* Identidad LAB en Home: reemplaza únicamente los contornos naranjas de los paneles. */
+.lab-home-page {
+  --sports-border: #35b8d0;
+}
+.lab-home-page .home-panel,
+.lab-home-page .fixture-panel,
+.lab-home-page .standings-panel {
+  border-color: #35b8d0 !important;
+}
+.lab-home-page .fixture-panel .fixture-hero-header,
+.lab-home-page .standings-panel .home-panel-header {
+  border-bottom-color: #35b8d0 !important;
+}
+.lab-home-page .fixture-panel .fixture-selected-date,
+.lab-home-page .fixture-panel .fixture-date-navigation,
+.lab-home-page .fixture-panel .fixture-date-sport {
+  border-color: #35b8d0;
+}
+.lab-home-page .fixture-panel .fixture-selected-date strong,
+.lab-home-page .fixture-panel .fixture-date-trigger:focus-visible {
+  border-bottom-color: #35b8d0 !important;
+}
+.lab-home-page .standings-panel .standings-table-header,
+.lab-home-page .standings-panel .home-standing-row {
+  border-bottom-color: rgba(53,184,208,.20) !important;
+}
+.lab-home-page .standings-panel .home-stats-tabs,
+.lab-home-page .standings-panel .lab-conference-tabs {
+  border-color: rgba(53,184,208,.38) !important;
+}
+@media (max-width: 768px) {
+  .lab-home-page .home-panel,
+  .lab-home-page .fixture-panel,
+  .lab-home-page .standings-panel {
+    border-color: #35b8d0 !important;
+  }
+}
