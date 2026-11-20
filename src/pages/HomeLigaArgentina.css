@@ -207,3 +207,25 @@
   .lab-home-dashboard .lab-home-fixture .fixture-team { gap: 5px; }
   .lab-home-dashboard .lab-home-fixture .fixture-team img { width: 32px; height: 32px; }
 }
+
+/* LAB: la comparativa reutiliza la misma tarjeta, márgenes y radios que LNB. */
+.lab-finished-match .lab-team-comparison-card {
+  margin: 0 12px;
+  border: 1px solid #263747;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(110deg,
+    color-mix(in srgb, var(--comparison-home-color, #18334b) 18%, #0b1a28) 0%,
+    #0b1a28 50%,
+    color-mix(in srgb, var(--comparison-away-color, #18334b) 18%, #0b1a28) 100%);
+}
+.lab-finished-match .lab-team-comparison-card .match-team-comparison-header,
+.lab-finished-match .lab-team-comparison-card .match-team-comparison-row {
+  background: transparent;
+}
+.lab-finished-match .lab-team-comparison-card .match-team-comparison-row:nth-child(even) {
+  background: rgba(255,255,255,.025);
+}
+@media (max-width: 380px) {
+  .lab-finished-match .lab-team-comparison-card { margin: 0 6px; }
+}
