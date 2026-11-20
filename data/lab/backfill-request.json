@@ -1,0 +1,5 @@
+{
+  "requestedAt": "2026-11-20",
+  "reason": "Recuperación controlada de boxscores históricos LAB desde planillas oficiales",
+  "target": "Todos los partidos LAB con marcador oficial no nulo y sin boxscore completo"
+}
