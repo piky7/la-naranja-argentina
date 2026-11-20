@@ -121,7 +121,7 @@ export default function LigaArgentina(){
    <section className="league-columns lab-league-columns">
     <div className="league-column standings-column-section">
      <div className="section-heading"><div><span className="section-label">TEMPORADA</span><h2 className="league-hero-title">TABLA DE <span>POSICIONES</span></h2></div></div>
-     <div className="standings-card lab-conference-standings">
+     <div className="home-panel standings-panel standings-card lab-conference-standings">
       <div className="home-stats-tabs lab-conference-tabs lab-league-conference-tabs" aria-label="Conferencias">
        <button type="button" className={"home-stats-tab "+(conference==="norte"?"active":"")} onClick={()=>setConference("norte")}>NORTE</button>
        <button type="button" className={"home-stats-tab "+(conference==="sur"?"active":"")} onClick={()=>setConference("sur")}>SUR</button>
