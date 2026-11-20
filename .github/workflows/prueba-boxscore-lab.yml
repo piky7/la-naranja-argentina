@@ -9,6 +9,7 @@ on:
       - "scripts/probe-lab-fixture.cjs"
       - "scripts/probe-lab-boxscore.cjs"
       - "scripts/sync-lab-boxscores.cjs"
+      - "scripts/build-lab-rosters.cjs"
   workflow_dispatch:
 
 permissions:
