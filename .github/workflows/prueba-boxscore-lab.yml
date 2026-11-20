@@ -28,7 +28,7 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Descubrir partidos del fixture oficial LAB
+      - name: Investigar carga dinámica del fixture oficial LAB
         run: node scripts/probe-lab-fixture.cjs
 
       - name: Inspeccionar boxscore oficial LAB sin tocar datos LNB
