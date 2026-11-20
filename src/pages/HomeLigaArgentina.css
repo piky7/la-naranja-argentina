@@ -266,53 +266,54 @@
 
 
 
-/* Corrección LAB: conservar tamaño de botones Norte/Sur y replicar las filas LNB. */
-.lab-home-page .lab-home-dashboard .lab-conference-tabs .home-stats-tab {
-  min-height: 42px;
-  height: auto;
-  padding: 8px 10px;
-  font-size: 13px;
-  letter-spacing: .8px;
-}
-.lab-home-page .lab-home-dashboard .standings-panel .standings-table-header {
-  min-height: 38px;
-  padding: 0 14px;
-  grid-template-columns: 34px minmax(0,1fr) 34px 34px;
-  font-size: 10px;
-}
-.lab-home-page .lab-home-dashboard .standings-panel .home-standing-row {
-  min-height: 52px;
-  height: 52px;
-  padding: 0 14px;
-  grid-template-columns: 34px minmax(0,1fr) 34px 34px;
-}
-.lab-home-page .lab-home-dashboard .standings-panel .standing-position {
-  width: 27px;
-  height: 27px;
-  min-width: 27px;
-  font-size: 10px;
-}
-.lab-home-page .lab-home-dashboard .standings-panel .home-standing-team {
-  gap: 9px;
-  font-size: 13px;
-}
-.lab-home-page .lab-home-dashboard .standings-panel .home-standing-team img {
-  width: 28px;
-  height: 28px;
-}
-.lab-home-page .lab-home-dashboard .standings-panel .home-standing-row > strong {
-  font-size: 13px;
-}
+
+/* LAB: las filas móviles replican exactamente la tabla compacta LNB.
+   El selector Norte/Sur conserva sus estilos originales. */
 @media (max-width: 768px) {
-  .lab-home-page .lab-home-dashboard .lab-conference-tabs .home-stats-tab {
-    min-height: 42px;
-    height: auto;
-    padding: 8px 10px;
-    font-size: 13px;
-    letter-spacing: .8px;
+  .lab-home-page .standings-panel .standings-table-desktop .standings-table-header,
+  .lab-home-page .standings-panel .standings-table-desktop .home-standing-row {
+    display: grid;
+    grid-template-columns: 29px minmax(0, 1fr) 29px 29px;
+    align-items: center;
+    column-gap: 7px;
+    padding: 0 10px;
   }
-  .lab-home-page .lab-home-dashboard .standings-panel .home-standing-row {
-    min-height: 52px;
-    height: 52px;
+  .lab-home-page .standings-panel .standings-table-desktop .standings-table-header {
+    min-height: 29px;
+    height: 29px;
+    font-size: 10px;
+    letter-spacing: .3px;
+  }
+  .lab-home-page .standings-panel .standings-table-desktop .home-standing-row {
+    min-height: 31px;
+    height: 31px;
+    border-bottom: 1px solid rgba(255,255,255,.055);
+  }
+  .lab-home-page .standings-panel .standings-table-desktop .standing-position {
+    width: 23px;
+    height: 23px;
+    min-width: 23px;
+    font-size: 10px;
+  }
+  .lab-home-page .standings-panel .standings-table-desktop .home-standing-team {
+    gap: 8px;
+    min-width: 0;
+    font-size: 11.5px;
+  }
+  .lab-home-page .standings-panel .standings-table-desktop .home-standing-team img {
+    width: 23px;
+    height: 23px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .lab-home-page .standings-panel .standings-table-desktop .home-standing-team span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .lab-home-page .standings-panel .standings-table-desktop .home-standing-row > strong {
+    text-align: center;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
   }
 }
