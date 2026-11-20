@@ -35,3 +35,17 @@
   .lab-home-dashboard > .standings-panel { order: 2; }
   .lab-home-dashboard .home-fixture { min-height: 96px; }
 }
+
+/* Las tarjetas de resultados funcionan como botones internos para abrir el boxscore. */
+.lab-home-dashboard button.home-fixture {
+  width: 100%;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+.lab-home-dashboard button.home-fixture:disabled {
+  cursor: default;
+  opacity: 1;
+}
