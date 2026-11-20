@@ -22,7 +22,7 @@ export async function ensureGoogleCareer(token) {
       body:JSON.stringify({visitorId:browserCareerId()})
     }).then(async response => {
       const data = await response.json();
-      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo preparar Mi Carrera");
+      if (!response.ok || !data.ok) throw Error(data.error || "No se pudo preparar la cuenta Prode");
       return true;
     }).catch(error => {ready.delete(token);throw error;});
     ready.set(token,run);
@@ -34,7 +34,6 @@ export async function ensureGoogleCareer(token) {
 export async function requireCareerToken() {
   const token = await getOptionalProdeIdToken();
   if (!token) throw Error("Iniciá sesión con Google para jugar");
-  await ensureGoogleCareer(token);
   return token;
 }
 
@@ -95,7 +94,7 @@ export async function saveCareerJersey(name,number) {
   return data.jersey;
 }
 
-// Un solo acceso para Mi Carrera y Prode. El estado se restaura al abrir la PWA.
+// Sesión Google compartida por las funciones del Prode.
 export function useCareerSession() {
   const [user,setUser] = useState(null);
   const [loading,setLoading] = useState(true);
