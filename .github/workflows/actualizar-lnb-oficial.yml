@@ -47,7 +47,7 @@ concurrency:
 jobs:
   actualizar-oficial:
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ ((github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'recent')) && 12 || 30 }}
+    timeout-minutes: ${{ ((github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'recent')) && 12 || (github.event_name == 'workflow_dispatch' && inputs.mode == 'backfill') && 45 || 30 }}
     env:
       OFFICIAL_SCHEDULE: ${{ github.event.schedule }}
       OFFICIAL_REQUESTED_MODE: ${{ inputs.mode }}
