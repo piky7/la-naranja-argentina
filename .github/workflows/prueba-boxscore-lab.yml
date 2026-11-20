@@ -17,6 +17,7 @@ permissions:
 jobs:
   inspeccionar-boxscore-lab:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
@@ -33,13 +34,13 @@ jobs:
           node scripts/parse-fixture-lab.cjs --summary
       - name: Inspeccionar pestaña Estadísticas del box score oficial
         run: node scripts/probe-lab-boxscore.cjs
-      - name: Importar planilla oficial de Quilmes–River
-        run: node scripts/sync-lab-boxscores.cjs --match=v2um1j83TfZEvkqWmhIy7wVxUnii7kE_pZTahfcniEeIFTwI7KnOcHOw==
+      - name: Importar todos los box scores oficiales pendientes
+        run: node scripts/sync-lab-boxscores.cjs --all-finished
       - name: Guardar box score importado
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add data/lab/labBoxscores.json
-          git diff --cached --quiet || git commit -m 'Importar box score oficial Quilmes River LAB'
+          git diff --cached --quiet || git commit -m 'Importar box scores históricos oficiales LAB'
           git pull --rebase origin main
           git push
