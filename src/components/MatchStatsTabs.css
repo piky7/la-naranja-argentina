@@ -336,3 +336,39 @@
   background-color: rgba(255,255,255,.025);
   background-blend-mode: screen;
 }
+
+
+/* Márgenes internos para que cifras y barras no rocen los bordes del boxscore. */
+.match-team-comparison-card .match-team-comparison-header,
+.match-team-comparison-card .match-team-comparison-row {
+  box-sizing: border-box;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+.match-team-comparison-card .match-team-comparison-side {
+  min-width: 0;
+  padding-inline: 3px;
+}
+.match-team-comparison-card .match-team-comparison-value {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
+}
+@media (max-width: 480px) {
+  .match-team-comparison-card .match-team-comparison-header,
+  .match-team-comparison-card .match-team-comparison-row {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+  .match-team-comparison-card .match-team-comparison-side { padding-inline: 2px; }
+}
+
+/* La comparativa oficial LAB usa una grilla propia: mantener aire lateral en los valores. */
+.lab-team-comparison-values,
+.lab-team-comparison-bars {
+  box-sizing: border-box;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.lab-team-comparison-values strong { min-width: 0; }
