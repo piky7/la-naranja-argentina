@@ -354,3 +354,38 @@
  .lab-upcoming-match .lab-team-stat-label{font-size:9px}
  .lab-upcoming-match .lab-team-stat-track{height:5px}
 }
+
+/* Comparativa LAB: identidad cromática por equipo y últimos resultados */
+.lab-upcoming-match .lab-upcoming-team-comparison{
+  padding:12px;background:linear-gradient(110deg,rgba(32,105,76,.24),#0d1b2a 48%,rgba(132,39,55,.24));
+}
+.lab-upcoming-match .lab-upcoming-last-matches{margin-top:14px}
+.lab-upcoming-match .lab-upcoming-last-matches h3{
+  margin:0 0 9px;color:#ff963d;text-align:center;font-size:13px;font-weight:900;letter-spacing:.8px
+}
+.lab-upcoming-match .lab-upcoming-last-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.lab-upcoming-match .lab-upcoming-last-team{
+  min-width:0;padding:9px;border:1px solid #34475b;border-radius:9px
+}
+.lab-upcoming-match .lab-upcoming-last-team>strong{
+  display:block;margin-bottom:7px;color:#f3f6fa;text-align:center;font-size:12px;font-weight:850
+}
+.lab-upcoming-match .lab-upcoming-last-result{
+  display:grid;grid-template-columns:34px 24px minmax(0,1fr) 14px;align-items:center;gap:5px;
+  margin-top:5px;padding:7px 5px;border:1px solid rgba(155,177,199,.22);border-radius:7px;background:rgba(5,13,23,.65)
+}
+.lab-upcoming-match .lab-upcoming-last-result>span:first-child{color:#aebbc9;font-size:9px;line-height:1.1}
+.lab-upcoming-match .lab-upcoming-last-result img{width:23px;height:23px;object-fit:contain}
+.lab-upcoming-match .lab-upcoming-last-result b{color:#f4f6f9;font-size:11px;text-align:center;white-space:nowrap}
+.lab-upcoming-match .lab-upcoming-last-result>span:last-child{font-size:12px;font-weight:900;text-align:center}
+.lab-upcoming-match .lab-upcoming-last-result .is-win{color:#4ade80}
+.lab-upcoming-match .lab-upcoming-last-result .is-loss{color:#fb7185}
+.lab-upcoming-match .lab-upcoming-last-team p{margin:8px 0 2px;color:#aab7c5;text-align:center;font-size:10px}
+@media(max-width:600px){
+ .lab-upcoming-match .lab-upcoming-last-grid{gap:6px}
+ .lab-upcoming-match .lab-upcoming-last-team{padding:7px 5px}
+ .lab-upcoming-match .lab-upcoming-last-result{grid-template-columns:29px 20px minmax(0,1fr) 12px;gap:3px;padding:6px 3px}
+ .lab-upcoming-match .lab-upcoming-last-result img{width:19px;height:19px}
+ .lab-upcoming-match .lab-upcoming-last-result b{font-size:10px}
+ .lab-upcoming-match .lab-upcoming-last-result>span:first-child{font-size:8px}
+}
