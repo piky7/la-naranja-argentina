@@ -88,7 +88,7 @@ function PlayerPodium({items,stat,label,onSelect}) {
         style={player?{"--podium-glow":`color-mix(in srgb, ${teamColors(player)} 32%, transparent)`}:undefined}
         disabled={!player} onClick={()=>player&&onSelect(player)}>
         <span className="triple-medal">{["🥇","🥈","🥉"][index]}</span>
-        <strong className="triple-podium-value">{player?fmt(stat(player)):"—"}</strong>
+        <strong className="triple-podium-value">{player?Math.round(stat(player)):"—"}</strong>
         <small>{label}</small>
         <strong className="triple-podium-name">{formatPersonName(player?.name || "Sin datos")}</strong>
         {player?.team&&<img src={labCrest(player.team)} alt=""/>}
@@ -162,7 +162,7 @@ function LigaArgentinaEstadisticas(){
           <th>JUGADOR</th><th>EQUIPO</th><th><button onClick={()=>toggleSort("gamesPlayed")}>PJ ↕</button></th>
           {playerStats.map(key=><th key={key}><button onClick={()=>toggleSort(key)}>{({points:"PTS",rebounds:"REB",assists:"AST",valuation:"VAL"})[key]} {sortBy===key?(sortDir==="desc"?"↓":"↑"):"↕"}</button></th>)}
         </tr></thead><tbody>{playerRows.slice(0,20).map((p,i)=><tr key={p.id} style={{"--stats-team-color":teamColors(p)}} onClick={()=>{}}>
-          <td><span className="lab-stats-player-cell"><b className={i<3?"lab-stats-medal":""}>{i+1}</b><strong>{formatPersonName(p.name)}</strong></span></td>
+          <td><span className="lab-stats-player-cell"><b className={i===0?"lab-stats-medal lab-stats-medal-gold":i===1?"lab-stats-medal lab-stats-medal-silver":i===2?"lab-stats-medal lab-stats-medal-bronze":""}>{i+1}</b><strong>{formatPersonName(p.name)}</strong></span></td>
           <td><img className="lab-stats-team-logo" src={labCrest(p.team)} alt={p.team?.name||""}/></td><td>{p.gamesPlayed}</td>
           {playerStats.map(key=><td key={key} className={sortBy===key?"stats-active-column":""}>{fmt(p.averages?.[key])}</td>)}
         </tr>)}</tbody></table>{!playerRows.length&&<p className="triple-empty">No hay jugadores con esos filtros.</p>}</div>
