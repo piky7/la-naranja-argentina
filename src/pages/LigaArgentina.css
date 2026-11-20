@@ -383,3 +383,14 @@
 .lab-player-modal .lna-player-modal-tabs button[aria-selected="true"] {
   border-color: var(--lab-accent, #43b9d5);
 }
+
+
+/* Botones seleccionados LAB: mismo relieve celeste del selector superior. */
+.lab-home-page .home-stats-tab.active,
+.lab-home-page .lab-conference-tabs .home-stats-tab.active,
+.lab-league-page .lab-league-conference-tabs .home-stats-tab.active {
+  border: 1px solid rgba(77,232,247,.9);
+  background: linear-gradient(160deg,#12c9df 0%,#078eae 48%,#07506f 100%);
+  color: #f2fdff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.34), inset 0 -5px 12px rgba(0,35,57,.28), 0 0 12px rgba(27,190,216,.3);
+}
