@@ -71,7 +71,7 @@ export default function MvpPrediction({ match, onStatusChange }) {
   const totalVotes = rankedPlayers.reduce((sum,item) => sum + Number(item.votes),0);
   if (!authLoading && !user) return <section className="lna-mvp-prediction">
     <div className="lna-mvp-prediction-heading"><strong>★ ¿QUIÉN SERÁ EL MVP?</strong><span>+20 PTS</span></div>
-    <p>Ingresá con Google para elegir MVP y sumar puntos en ambos modos.</p>
+    <p>Ingresá con Google para elegir MVP y sumar puntos en Prode.</p>
     <button type="button" onClick={login} disabled={authBusy}>{authBusy ? "Conectando…" : "Continuar con Google"}</button>
     {authError && <small role="alert">{authError}</small>}
   </section>;
