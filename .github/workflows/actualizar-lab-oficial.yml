@@ -2,7 +2,6 @@ name: Actualizar LAB desde la Liga Nacional
 
 on:
   schedule:
-    # Mismo esquema que LNB: polling rápido y sincronizaciones completas espaciadas.
     - cron: "*/10 * * * *"
     - cron: "0 */6 * * *"
     - cron: "30 6 * * *"
@@ -15,6 +14,7 @@ on:
         options:
           - recent
           - full
+          - backfill
         default: full
   push:
     branches: [main]
@@ -23,6 +23,10 @@ on:
       - "scripts/lab-poll-window.cjs"
       - "scripts/sync-lab-boxscores.cjs"
       - "scripts/sync-lab-fixture.cjs"
+      - "scripts/parse-fixture-lab.cjs"
+      - "scripts/publish-lab-results.cjs"
+      - "scripts/build-lab-rosters.cjs"
+      - "tests/lab-sync.test.mjs"
 
 permissions:
   contents: write
@@ -34,7 +38,7 @@ concurrency:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ ((github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'recent')) && 12 || 30 }}
+    timeout-minutes: ${{ ((github.event_name == 'schedule' && github.event.schedule == '*/10 * * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'recent')) && 12 || (github.event_name == 'workflow_dispatch' && inputs.mode == 'backfill') && 45 || 30 }}
     env:
       LAB_SCHEDULE: ${{ github.event.schedule }}
       LAB_REQUESTED_MODE: ${{ inputs.mode }}
@@ -60,8 +64,8 @@ jobs:
         if: steps.window.outputs.run == 'true'
         run: npm ci
 
-      - name: Actualizar fixture oficial de LAB
-        if: steps.window.outputs.run == 'true'
+      - name: Actualizar fixture oficial LAB
+        if: steps.window.outputs.run == 'true' && steps.window.outputs.mode != 'recent'
         run: |
           git show HEAD:data/lab/labSchedule.json > /tmp/labSchedule.before.json
           node scripts/sync-lab-fixture.cjs
@@ -77,39 +81,63 @@ jobs:
 
       - name: Importar boxscores oficiales pendientes
         if: steps.window.outputs.run == 'true'
-        env:
-          LAB_SYNC_MODE: ${{ steps.window.outputs.mode }}
         run: |
-          if [ "$LAB_SYNC_MODE" = "recent" ]; then
-            node scripts/sync-lab-boxscores.cjs --all-finished --recent
+          if [ "${{ steps.window.outputs.mode }}" = "recent" ]; then
+            node scripts/sync-lab-boxscores.cjs --recent
           else
             node scripts/sync-lab-boxscores.cjs --all-finished
           fi
 
-      - name: Consolidar planteles si llegaron nuevas planillas
+      - name: Publicar resultados finales y consolidar planteles
+        if: steps.window.outputs.run == 'true'
+        run: |
+          node scripts/publish-lab-results.cjs
+          if ! git diff --quiet -- data/lab/labBoxscores.json; then
+            node scripts/build-lab-rosters.cjs
+          fi
+          node --check scripts/sync-lab-boxscores.cjs
+          node --check scripts/publish-lab-results.cjs
+          node --check scripts/build-lab-rosters.cjs
+
+      - name: Validar resultados, estadísticas y tabla de posiciones
+        if: steps.window.outputs.run == 'true'
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const fixture=JSON.parse(fs.readFileSync("data/lab/labSchedule.json","utf8"));
+            const boxes=JSON.parse(fs.readFileSync("data/lab/labBoxscores.json","utf8"));
+            const rosters=JSON.parse(fs.readFileSync("data/lab/labRosters.json","utf8"));
+            const finals=fixture.matches.filter(m=>m.status==="finished");
+            for (const match of finals) {
+              const box=boxes[match.id];
+              if (!box || box.status!=="finished" || !box.players?.length || !box.teamComparison?.home || !box.teamComparison?.away)
+                throw new Error("Final LAB sin boxscore completo: "+match.id);
+              if (Number(match.homeScore)!==Number(box.homeScore) || Number(match.awayScore)!==Number(box.awayScore))
+                throw new Error("Marcador y boxscore no coinciden: "+match.id);
+            }
+            if (!Array.isArray(fixture.teams) || fixture.teams.length<30 || !rosters.teams)
+              throw new Error("Fixture o planteles LAB incompletos.");
+            console.log("LAB validada:",fixture.matches.length,"partidos;",finals.length,"finales con boxscore;",Object.keys(rosters.teams).length,"equipos.");
+          '
+
+      - name: Detectar cambios para publicar
         if: steps.window.outputs.run == 'true'
         id: data
         run: |
-          if git diff --quiet -- data/lab/labBoxscores.json; then
-            echo "boxscores_changed=false" >> "$GITHUB_OUTPUT"
-          else
-            node scripts/build-lab-rosters.cjs
-            echo "boxscores_changed=true" >> "$GITHUB_OUTPUT"
-          fi
           if git diff --quiet -- data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Validar datos consolidados
-        if: steps.data.outputs.boxscores_changed == 'true'
-        run: |
-          node -e "const b=require('./data/lab/labBoxscores.json'); const r=require('./data/lab/labRosters.json'); const f=require('./data/lab/labSchedule.json'); if (!f.matches.length || !r.teams) process.exit(1); console.log('Fixture:',f.matches.length,'Boxscores:',Object.keys(b).length,'Equipos:',Object.keys(r.teams).length)"
+      - name: Compilar y probar LNA
+        if: steps.data.outputs.changed == 'true'
+        run: npm run build
 
       - name: Publicar resultados y estadísticas en main
         if: steps.data.outputs.changed == 'true'
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json
