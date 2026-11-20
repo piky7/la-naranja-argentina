@@ -4,7 +4,8 @@ import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 import boxscores from "../../data/lab/labBoxscores.json";
 import { LabHomeBoxscore, labMatchColor, labCrest } from "./HomeLigaArgentina";
-import { isLabMatchFinished } from "../utils/labMatchStatus";\nimport "./LigaArgentina.css";
+import { isLabMatchFinished } from "../utils/labMatchStatus";
+import "./LigaArgentina.css";
 import "./Equipo.css";
 
 const clean = (name = "") => name.replace(/\s*\((MDP|SF|CC|LR|T|VT|J)\)/g, "").trim();
