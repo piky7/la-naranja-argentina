@@ -65,6 +65,8 @@ function HomeLigaArgentina() {
       !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
     const home = data.standings.find(team => team.teamId === match.homeTeam.teamId);
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
+    const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
+    const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
     return <a className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished" : ""}`}
       href={match.officialUrl} target="_blank" rel="noreferrer"
       style={{"--match-home-logo":`url("${match.homeTeam.crestUrl || ""}")`,"--match-away-logo":`url("${match.awayTeam.crestUrl || ""}")`}}>
