@@ -625,3 +625,40 @@
   color: #f2fdff;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.34), inset 0 -5px 12px rgba(0,35,57,.28), 0 0 12px rgba(27,190,216,.3);
 }
+
+
+/* Popup en vivo de Liga Argentina: misma identidad visual que el LIVE de LNB. */
+.lab-live-match-modal{border:1px solid #ed842d!important;box-shadow:0 22px 70px rgba(0,0,0,.62),0 0 24px rgba(238,125,37,.12)!important}
+.lab-live-match-modal .match-modal-header{border-bottom:1px solid rgba(242,139,48,.65)}
+.lab-live-match-modal .match-modal-team img{width:48px;height:48px;object-fit:contain}
+.lab-live-match-modal .match-modal-team strong{font-size:clamp(12px,3.3vw,16px);text-align:center}
+.lab-live-match-modal .match-modal-score .match-modal-status{display:block;line-height:1.35}
+.lab-live-match-modal .match-modal-score .match-modal-live-remaining{display:block;margin-top:5px;color:#dce6f0;font-size:11px;font-weight:800}
+.lab-live-match-modal .lna-live-score-numbers{display:flex;justify-content:center;align-items:center;gap:5px;white-space:nowrap}
+.lab-live-match-modal .lna-live-score-numbers .is-leading{color:#ff9133}
+.lab-live-match-modal .lna-live-score-numbers .is-trailing{color:#f5f7fb}
+.lab-live-match-modal .lab-live-tabs{margin:8px 12px 0}
+.lab-live-match-modal .lab-live-tabs button[aria-selected="true"]{color:#ff9133;border-color:#f28a32;background:linear-gradient(180deg,rgba(255,145,51,.13),rgba(255,145,51,.035))}
+.lab-live-match-modal .lab-live-five{margin:8px 12px 12px;padding:12px;border:1px solid #e9842c;border-radius:12px;background:#071521}
+.lab-live-match-modal .lab-live-five h3{margin:0 0 10px;text-align:center;color:#ff963d;font-size:15px;letter-spacing:.06em}
+.lab-live-five-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lab-live-five-list>div{display:flex;flex-direction:column;gap:5px;min-width:0;padding:8px;border:1px solid #2e485d;border-radius:9px;background:#102437}
+.lab-live-five-list>div>strong{padding:6px;border-radius:7px;background:#172a3e;color:#f4f7fb;text-align:center;font-size:12px}
+.lab-live-five-list>div>span{font-size:11px;color:#dce6f0}
+.lab-live-match-modal .live-five-source{margin:8px 0 0;text-align:center;color:#91a7ba;font-size:9px}
+.lab-live-match-modal .lab-live-rosters{margin:8px 12px 12px}
+.lab-live-match-modal .lab-live-comparison{padding:4px 8px 10px}
+.lab-live-match-modal .lab-live-comparison .lab-team-comparison{margin:8px 0}
+.lab-live-match-modal .lab-live-vote{margin:8px 12px 12px;padding:14px;border:1px solid #30495e;border-radius:10px;background:#0b1b29;color:#dce6f0}
+.lab-live-match-modal .lab-live-vote .live-my-vote-heading{display:flex;justify-content:space-between;gap:8px;color:#ff963d;font-size:12px;font-weight:900}
+.lab-live-match-modal .lab-live-vote p{margin:12px 0 2px;color:#b6c5d3;font-size:12px;line-height:1.5}
+@media(max-width:600px){
+ .lab-live-match-modal .match-modal-team img{width:37px;height:37px}
+ .lab-live-match-modal .match-modal-teams{grid-template-columns:minmax(0,1fr) minmax(104px,1.15fr) minmax(0,1fr)}
+ .lab-live-match-modal .lab-live-tabs{margin:6px 7px 0}
+ .lab-live-match-modal .lab-live-tabs button{font-size:10px;padding-inline:3px}
+ .lab-live-match-modal .lab-live-five{margin:6px 7px 9px;padding:8px}
+ .lab-live-match-modal .lab-live-five h3{font-size:12px}
+ .lab-live-five-list>div{padding:6px}
+ .lab-live-five-list>div>span{font-size:9px}
+}
