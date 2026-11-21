@@ -76,7 +76,7 @@ export default function LigaArgentina(){
   const now=new Intl.DateTimeFormat("en-GB",{timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date());
   const future=m.date>today||(m.date===today&&m.time&&m.time>now);
   const live=labLiveById.get(String(m.id));
-  return {...m,liveData:live||null,homeScore:live?.homeScore??m.homeScore,awayScore:live?.awayScore??m.awayScore,status:isLabMatchFinished(m)?"finished":live?.status==="live"?"live":future?"scheduled":"needs_review"};
+  return {...m,liveData:live||null,homeScore:live?.homeScore??m.homeScore,awayScore:live?.awayScore??m.awayScore,status:isLabMatchFinished(m)||live?.status==="finished"?"finished":live?.status==="live"?"live":future?"scheduled":"needs_review"};
  }),[today,liveMatches]);
  const counts={results:classified.filter(m=>m.status==="finished").length,upcoming:classified.filter(m=>m.status==="scheduled").length,review:classified.filter(m=>m.status==="needs_review").length};
  const {todayMatches,allResults,upcomingMatches}=useMemo(()=>({
