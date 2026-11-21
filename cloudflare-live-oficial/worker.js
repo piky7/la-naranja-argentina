@@ -787,25 +787,50 @@ function textoPlanoLab(value) {
     .replace(/&iacute;/gi,"í").replace(/&oacute;/gi,"ó").replace(/&uacute;/gi,"ú")
     .replace(/&ntilde;/gi,"ñ").replace(/\s+/g," ").trim();
 }
+function extraerBloquesClaseLab(html, className) {
+  const open = new RegExp("<([a-z][a-z0-9]*)\\b(?=[^>]*\\bclass\\s*=\\s*['\"][^'\"]*\\b" + className + "\\b)[^>]*>", "gi");
+  const blocks = [];
+  let match;
+  while ((match = open.exec(html))) {
+    const tag = match[1];
+    const token = new RegExp("</?" + tag + "\\b[^>]*>", "gi");
+    token.lastIndex = open.lastIndex;
+    let depth = 1, close = null, part;
+    while ((part = token.exec(html))) {
+      if (part[0].startsWith("</")) depth--;
+      else if (!/\/\s*>$/.test(part[0])) depth++;
+      if (depth === 0) { close = part; break; }
+    }
+    if (!close) continue;
+    blocks.push(html.slice(open.lastIndex, close.index));
+    open.lastIndex = token.lastIndex;
+  }
+  return blocks;
+}
+
 function obtenerComparativaLab(html) {
-  const start = html.indexOf('id="scroll-comparativa"');
+  const start = html.search(/id\s*=\s*['"]scroll-comparativa['"]/i);
   if (start < 0) return null;
-  const root = html.slice(start, start + 45000);
+  const root = html.slice(start, start + 50000);
   const aliases = {"TC":"fieldGoals","2P":"twoPointers","3P":"threePointers","TL":"freeThrows","Reb.":"rebounds","As.":"assists","Rec.":"steals","Tap.":"blocks","Pér.":"turnovers","Faltas Com.":"fouls"};
   const home={},away={};
-  const lines = [...root.matchAll(/<[^>]*class=["'][^"']*\blinea\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)];
   const parseValue = value => {
     const shot=value.match(/(\d+)\s*\/\s*(\d+)\s*([\d.,]+)?\s*%?/);
     if(shot)return {made:Number(shot[1]),attempted:Number(shot[2]),percentage:Number(String(shot[3]||"0").replace(",","."))};
     const numeric=value.match(/-?\d+(?:[.,]\d+)?/);
     return numeric?Number(numeric[0].replace(",",".")):null;
   };
-  for(const line of lines){
-    const cols=[...line[1].matchAll(/<[^>]*class=["'][^"']*\bcol\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)].map(x=>textoPlanoLab(x[1]));
+  for(const line of extraerBloquesClaseLab(root,"linea")){
+    const cols=extraerBloquesClaseLab(line,"col");
     if(cols.length<3)continue;
-    const key=aliases[cols[1]];
+    const labelBlock=cols[1];
+    const label=textoPlanoLab(labelBlock.match(/class=["'][^"']*stat-nombre-abrev[^"']*["'][^>]*>([\s\S]*?)<\//i)?.[1]
+      ||labelBlock.match(/class=["'][^"']*stat-nombre-completo[^"']*["'][^>]*>([\s\S]*?)<\//i)?.[1]
+      ||labelBlock);
+    const key=aliases[label];
     if(!key)continue;
-    home[key]=parseValue(cols[0]); away[key]=parseValue(cols[2]);
+    home[key]=parseValue(textoPlanoLab(cols[0]));
+    away[key]=parseValue(textoPlanoLab(cols[2]));
   }
   if(!Object.values(aliases).every(key=>home[key]!=null&&away[key]!=null))return null;
   return {source:"Comparativa oficial del boxscore LAB",method:"official-boxscore-comparison",home,away};
