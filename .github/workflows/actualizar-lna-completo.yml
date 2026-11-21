@@ -19,6 +19,10 @@ on:
           - backfill
         default: recent
 
+env:
+  OFFICIAL_SCHEDULE: "*/10 * * * *"
+  LAB_SCHEDULE: "*/10 * * * *"
+
 permissions:
   contents: write
 
