@@ -1044,3 +1044,51 @@
     font-size:clamp(10px,2.8vw,12px)!important;
   }
 }
+
+/* Ajuste final de solapas LIVE LAB: ancho completo y menor altura. */
+.lab-live-match-modal .lab-live-tabs.upcoming-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  width:calc(100% - 14px)!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:8px 7px 0!important;
+  padding:0!important;
+  gap:6px!important;
+  justify-content:stretch!important;
+  align-items:stretch!important;
+  box-sizing:border-box!important;
+}
+.lab-live-match-modal .lab-live-tabs.upcoming-tabs>button{
+  display:flex!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:42px!important;
+  min-height:42px!important;
+  max-height:42px!important;
+  margin:0!important;
+  padding:4px 3px!important;
+  flex:none!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+  white-space:nowrap!important;
+  font-size:inherit!important;
+  line-height:1.1!important;
+}
+@media(max-width:600px){
+  .lab-live-match-modal .lab-live-tabs.upcoming-tabs{
+    width:calc(100% - 14px)!important;
+    margin:8px 7px 0!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:6px!important;
+  }
+  .lab-live-match-modal .lab-live-tabs.upcoming-tabs>button{
+    height:42px!important;
+    min-height:42px!important;
+    max-height:42px!important;
+    padding:4px 2px!important;
+    font-size:inherit!important;
+  }
+}
