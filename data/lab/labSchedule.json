@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-21T00:00:59.672Z",
+  "importedAt": "2026-11-21T01:21:13.108Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3639,12 +3639,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1640/114179/dep-norte/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1640/114179"
       },
-      "homeScore": 43,
-      "awayScore": 34,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 86,
+      "awayScore": 81,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2hDMonNsFe7-ieSq9rinVSUgPUF8zfqOsDODrQj2pVhukWI_m8C5y1w==/gimnasia-lp-vs-dep-norte",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-21T01:21:09.293Z"
     },
     {
       "id": "v2K65P5N0nUsDcGFrI3hxAUit5FxQTAUUG5pysjWL1PEmmI3jcW0DJDQ==",
@@ -16457,6 +16458,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 2,
-  "pending": 537
+  "finished": 3,
+  "pending": 536
 }
