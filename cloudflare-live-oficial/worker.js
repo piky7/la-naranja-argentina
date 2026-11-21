@@ -795,8 +795,10 @@ function extraerQuintetosLab(html) {
 
       // En la planilla LAB el asterisco visible junto al nombre identifica
       // al titular. No usar CincoInicial: no es la marca que muestra el boxscore.
-      const firstCell = body.match(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/i)?.[1] || "";
-      const markedName = decodeMarker(firstCell);
+      const cells = [...body.matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)].map(cell => cell[1]);
+      // La primera celda es el dorsal (#); el asterisco se muestra en la celda JUGADOR.
+      const nameCell = cells[1] || cells[0] || "";
+      const markedName = decodeMarker(nameCell);
       const rawName = String(player.NombreCompleto || player.Nombre || "");
       const isStarter = /\*/.test(markedName) || /\*/.test(rawName);
       if (!isStarter) continue;
