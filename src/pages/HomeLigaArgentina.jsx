@@ -413,7 +413,7 @@ function HomeLigaArgentina() {
           <LiveLedPeriod quarter={liveData?.quarter} time={formatLabLiveRemaining(liveData)} isHalftime={liveData?.isHalftime}/>
         </div> : hasScore ? <>
           <strong className="fixture-score">
-            <span className={Number(match.homeScore) > Number(match.awayScore) ? "fixture-score-winner" : "fixture-score-loser"}>{homeScore}</span>
+            <span className={Number(homeScore) > Number(awayScore) ? "fixture-score-winner" : "fixture-score-loser"}>{homeScore}</span>
             <span className="fixture-score-separator"> - </span>
             <span className={Number(awayScore) > Number(homeScore) ? "fixture-score-winner" : "fixture-score-loser"}>{awayScore}</span>
           </strong>
