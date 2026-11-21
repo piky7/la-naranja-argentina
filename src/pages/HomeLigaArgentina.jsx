@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
 import LiveMatchInfo from "../components/LiveMatchInfo";
+import "../components/LiveRosters.css";
 import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
@@ -363,7 +364,7 @@ export function LabLiveMatchModal({match, live, onClose}) {
           <div className="match-modal-score">
             <span className="match-modal-status">EN VIVO · {currentLive.isHalftime?"ENTRETIEMPO":currentLive.quarter?currentLive.quarter+"° CUARTO":"PARTIDO EN JUEGO"}{!currentLive.isHalftime&&currentLive.quarter&&formatLabLiveRemaining(currentLive)!=null?<span className="match-modal-live-remaining">{formatLabLiveRemaining(currentLive)} RESTANTES</span>:null}</span>
             <strong className="lna-live-score-numbers"><span className={Number(currentLive.homeScore)>Number(currentLive.awayScore)?"is-leading":"is-trailing"}>{formatScore(currentLive.homeScore)}</span><span className="lna-live-score-dash"> - </span><span className={Number(currentLive.awayScore)>Number(currentLive.homeScore)?"is-leading":"is-trailing"}>{formatScore(currentLive.awayScore)}</span></strong>
-            <span>{currentLive.tv||"LNA · SEGUIMIENTO EN VIVO"}</span>
+            
           </div>
           <div className="match-modal-team"><img src={awayTeam.logo} alt=""/><strong>{awayTeam.shortName}</strong></div>
         </div>
@@ -374,7 +375,7 @@ export function LabLiveMatchModal({match, live, onClose}) {
         <button type="button" role="tab" aria-selected={tab==="quintetos"} className={tab==="quintetos"?"is-active":""} onClick={()=>setTab("quintetos")}>🏀 Quintetos</button>
         <button type="button" role="tab" aria-selected={tab==="planteles"} className={tab==="planteles"?"is-active":""} onClick={()=>setTab("planteles")}>♟ Planteles</button>
         <button type="button" role="tab" aria-selected={tab==="comparativa"} className={tab==="comparativa"?"is-active":""} onClick={()=>setTab("comparativa")}>▥ Comparativa</button>
-        <button type="button" role="tab" aria-selected={tab==="mi-voto"} className={tab==="mi-voto"?"is-active live-my-vote-tab":"live-my-vote-tab"} onClick={()=>setTab("mi-voto")}>◎ Mi voto</button>
+        
       </div>
       {tab==="quintetos"&&<section className="live-five lab-live-five">
         <h3>QUINTETOS INICIALES</h3>
@@ -383,7 +384,6 @@ export function LabLiveMatchModal({match, live, onClose}) {
       </section>}
       {tab==="planteles"&&<section className="live-rosters lab-live-rosters"><h3>PLANTELES · 2026/27</h3><div className="live-rosters-grid">{renderRoster(homeTeam,homeRoster)}{renderRoster(awayTeam,awayRoster)}</div><p className="live-five-source">Promedios oficiales de temporada · Tocá un jugador para ver su ficha</p></section>}
       {tab==="comparativa"&&<div className="lab-live-comparison"><LabTeamComparison comparison={currentLive.teamComparison||boxscores[match.id]?.teamComparison||null} homeTeam={homeTeam} awayTeam={awayTeam}/></div>}
-      {tab==="mi-voto"&&<section className="live-my-vote-panel upcoming-tab-panel lab-live-vote"><div className="live-my-vote-heading"><strong>MIS PRONÓSTICOS</strong><span>PARTIDO EN VIVO</span></div><p>Los pronósticos de LAB todavía no están conectados a este panel. No mostraremos votos de Liga Nacional para evitar mezclar competencias.</p></section>}
       <div className="match-modal-footer"><span>LNA</span><strong>SEGUIMIENTO EN VIVO · LIGA ARGENTINA</strong></div>
     </div>
   </div>,document.body)}{selectedPlayer&&<LabPlayerModal player={selectedPlayer} match={match} team={String(selectedPlayer.teamId)===String(match.homeTeam.teamId)?homeTeam:awayTeam} onClose={()=>setSelectedPlayer(null)}/>}</>;
