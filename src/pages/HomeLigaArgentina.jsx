@@ -361,7 +361,7 @@ export function LabLiveMatchModal({match, live, onClose}) {
         <div className="match-modal-teams">
           <div className="match-modal-team"><img src={homeTeam.logo} alt=""/><strong>{homeTeam.shortName}</strong></div>
           <div className="match-modal-score">
-            <span className="match-modal-status">EN VIVO · {currentLive.isHalftime?"ENTRETIEMPO":currentLive.quarter?currentLive.quarter+"° CUARTO":"PARTIDO EN JUEGO"}{!currentLive.isHalftime&&currentLive.quarter&&formatLabLiveRemaining(live)!=null?<span className="match-modal-live-remaining">{formatLabLiveRemaining(live)} RESTANTES</span>:null}</span>
+            <span className="match-modal-status">EN VIVO · {currentLive.isHalftime?"ENTRETIEMPO":currentLive.quarter?currentLive.quarter+"° CUARTO":"PARTIDO EN JUEGO"}{!currentLive.isHalftime&&currentLive.quarter&&formatLabLiveRemaining(currentLive)!=null?<span className="match-modal-live-remaining">{formatLabLiveRemaining(currentLive)} RESTANTES</span>:null}</span>
             <strong className="lna-live-score-numbers"><span className={Number(currentLive.homeScore)>Number(currentLive.awayScore)?"is-leading":"is-trailing"}>{formatScore(currentLive.homeScore)}</span><span className="lna-live-score-dash"> - </span><span className={Number(currentLive.awayScore)>Number(currentLive.homeScore)?"is-leading":"is-trailing"}>{formatScore(currentLive.awayScore)}</span></strong>
             <span>{currentLive.tv||"LNA · SEGUIMIENTO EN VIVO"}</span>
           </div>
