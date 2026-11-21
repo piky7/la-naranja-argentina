@@ -164,6 +164,7 @@ export default function LigaArgentina(){
     </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
    </div></div>,document.body)}
   {selectedMatch&&<LabHomeBoxscore match={selectedMatch} onClose={()=>setSelectedMatch(null)}/>}
-  {selectedUpcomingMatch&&<LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={()=>setSelectedUpcomingMatch(null)}/>}\n  {selectedLiveMatch&&<LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={()=>setSelectedLiveMatch(null)}/>}
+  {selectedUpcomingMatch&&<LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={()=>setSelectedUpcomingMatch(null)}/>}
+  {selectedLiveMatch&&<LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={()=>setSelectedLiveMatch(null)}/>}
  </main>;
 }
