@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
+import { useLabBoxscores } from "../utils/labData";
 import { Link, useParams } from "react-router-dom";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
-import boxscores from "../../data/lab/labBoxscores.json";
+
 import { LabHomeBoxscore, labMatchColor, labCrest } from "./HomeLigaArgentina";
 import { isLabMatchFinished } from "../utils/labMatchStatus";
 import "./LigaArgentina.css";
@@ -63,6 +64,7 @@ function TeamMatchRow({match,teamId,finished,onClick}) {
 }
 
 function TeamDetail({team}) {
+ const boxscores=useLabBoxscores(true) || {};
  const roster=rosters.teams[String(team.teamId)]||{players:[],playersCount:0};
  const [selectedMatch,setSelectedMatch]=useState(null);
  const teamMatches=fixture.matches.filter(m=>Number(m.homeTeam.teamId)===Number(team.teamId)||Number(m.awayTeam.teamId)===Number(team.teamId));
