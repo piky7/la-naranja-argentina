@@ -333,8 +333,8 @@ export function LabLiveMatchModal({match, live, onClose}) {
   if(!match||!live)return null;
   const homeTeam={...match.homeTeam,id:String(match.homeTeam.teamId),name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
   const awayTeam={...match.awayTeam,id:String(match.awayTeam.teamId),name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
-  const homeRoster=rosters.teams?.[String(match.homeTeam.teamId)]?.players||[];
-  const awayRoster=rosters.teams?.[String(match.awayTeam.teamId)]?.players||[];
+  const allLabRosterPlayers=Object.values(rosters.teams||{}).flatMap(entry=>entry.players||[]);\n  const homeRoster=allLabRosterPlayers.filter(player=>String(player.teamId)===String(match.homeTeam.teamId));
+  const awayRoster=allLabRosterPlayers.filter(player=>String(player.teamId)===String(match.awayTeam.teamId));
   const renderRoster=(team,list)=> <section className="live-roster-team" key={team.id}>
     <div className="live-roster-team-head"><img src={team.logo} alt=""/><strong>{team.shortName}</strong></div>
     <div className="live-roster-row live-roster-labels"><span>#</span><span>JUGADOR</span><span>PTS</span><span>REB</span><span>AST</span><span>PJ</span></div>
