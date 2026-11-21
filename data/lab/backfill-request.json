@@ -1,6 +1,4 @@
 {
-  "requestedAt": "2026-11-20",
-  "reason": "Recuperación controlada de boxscores históricos LAB desde planillas oficiales",
-  "target": "Todos los partidos LAB con marcador oficial no nulo y sin boxscore completo",
-  "retry": 2
+  "matchId": "v2hDMonNsFe7-ieSq9rinVSUgPUF8zfqOsDODrQj2pVhukWI_m8C5y1w==",
+  "reason": "Recuperar boxscore oficial de Gimnasia (LP) vs Dep. Norte del 2026-11-20"
 }
