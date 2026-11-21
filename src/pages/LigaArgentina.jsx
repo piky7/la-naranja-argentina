@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
 import fixture from "../../data/lab/labSchedule.json";
-import { LabHomeBoxscore, LabUpcomingMatchModal } from "./HomeLigaArgentina.jsx";
+import { LabHomeBoxscore, LabUpcomingMatchModal, LabLiveMatchModal } from "./HomeLigaArgentina.jsx";
 import boxscores from "../../data/lab/labBoxscores.json";
 import rosters from "../../data/lab/labRosters.json";
 import { isLabMatchFinished } from "../utils/labMatchStatus";
@@ -67,7 +67,7 @@ const formatLeagueDate = date => new Intl.DateTimeFormat("es-AR",{day:"2-digit",
 
 export default function LigaArgentina(){
  const [section,setSection]=useState("fixture"),[filter,setFilter]=useState("all"),[search,setSearch]=useState("");
- const [selectedMatch,setSelectedMatch]=useState(null),[selectedUpcomingMatch,setSelectedUpcomingMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
+ const [selectedMatch,setSelectedMatch]=useState(null),[selectedUpcomingMatch,setSelectedUpcomingMatch]=useState(null),[selectedLiveMatch,setSelectedLiveMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
  const [selectedTeam,setSelectedTeam]=useState(null);
  const today=todayArgentina();
  const {liveMatches=[]}=useLiveSnapshot();
@@ -111,7 +111,7 @@ export default function LigaArgentina(){
   <section className="league-content"><div className="page-container">
    <section className="league-section today-section">
     <div className="section-heading"><div><span className="section-label">HOY</span><h2 className="league-hero-title">PARTIDOS <span>DE HOY</span></h2></div></div>
-    {todayMatches.length?<div className="today-matches">{todayMatches.map(match=><button key={match.id} type="button" className={`today-match-card ${match.status==="live"?"is-live":""}`} style={labMatchStyle(match)} onClick={()=>setSelectedUpcomingMatch(match)}>
+    {todayMatches.length?<div className="today-matches">{todayMatches.map(match=><button key={match.id} type="button" className={`today-match-card ${match.status==="live"?"is-live":""}`} style={labMatchStyle(match)} onClick={()=>{if(match.status==="live")setSelectedLiveMatch({match,live:match.liveData});else setSelectedUpcomingMatch(match);}}>
      <div className="match-date"><span>{formatLeagueDate(match.date)}</span>{match.time&&<strong>{match.time}</strong>}</div>
      <div className="match-teams"><div className="match-team"><img src={labTeamCrest(match.homeTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.homeTeam.name)}</span></div><div className="match-vs">{match.status==="live"?<div className="lab-live-center"><span className="fixture-live-badge"><span className="fixture-live-dot"></span>EN VIVO</span><LiveLedScore home={match.homeScore ?? 0} away={match.awayScore ?? 0}/><LiveLedPeriod quarter={match.liveData?.quarter} time={formatLabLiveRemaining(match.liveData)} isHalftime={match.liveData?.isHalftime}/></div>:<span>VS</span>}</div><div className="match-team"><img src={labTeamCrest(match.awayTeam)} alt="" className="match-team-logo"/><span>{teamLabel(match.awayTeam.name)}</span></div></div>
      <div className="match-details">{match.status!=="live"&&<strong>{match.time||"A confirmar"}</strong>}{match.venue&&<span>📍 {match.venue}</span>}</div>
@@ -164,6 +164,6 @@ export default function LigaArgentina(){
     </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
    </div></div>,document.body)}
   {selectedMatch&&<LabHomeBoxscore match={selectedMatch} onClose={()=>setSelectedMatch(null)}/>}
-  {selectedUpcomingMatch&&<LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={()=>setSelectedUpcomingMatch(null)}/>}
+  {selectedUpcomingMatch&&<LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={()=>setSelectedUpcomingMatch(null)}/>}\n  {selectedLiveMatch&&<LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={()=>setSelectedLiveMatch(null)}/>}
  </main>;
 }
