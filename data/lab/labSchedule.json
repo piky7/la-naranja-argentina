@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-21T02:40:48.926Z",
+  "importedAt": "2026-11-21T02:50:54.069Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3676,7 +3676,7 @@
       "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2K65P5N0nUsDcGFrI3hxAUit5FxQTAUUG5pysjWL1PEmmI3jcW0DJDQ==/ciclista-j-vs-central-entrerriano",
       "source": "Liga Nacional oficial",
-      "boxscoreImportedAt": "2026-11-21T02:40:48.848Z"
+      "boxscoreImportedAt": "2026-11-21T02:50:53.964Z"
     },
     {
       "id": "v2W-HFe9rFp2ENbqSdV6SOH3yDtQmQACpxhsRpmvGpExtfHPdWmwmluQ==",
