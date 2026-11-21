@@ -343,7 +343,7 @@ function HomeLigaArgentina() {
       ...team, played: 0, wins: 0, losses: 0, pointsFor: 0, pointsAgainst: 0, diff: 0
     }]));
     const finished = fixture.matches.filter(match =>
-      match.date < today && match.homeScore != null && match.awayScore != null &&
+      match.date <= today && isLabMatchFinished(match) && match.homeScore != null && match.awayScore != null &&
       !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0) &&
       Number.isFinite(Number(match.homeScore)) && Number.isFinite(Number(match.awayScore))
     );
@@ -386,11 +386,12 @@ function HomeLigaArgentina() {
 
   const Match = ({match}) => {
     const liveData = labLiveById.get(String(match.id));
-    const isLive = match.status !== "finished" && liveData?.status === "live";
+    const isLive = !isLabMatchFinished(match) && liveData?.status === "live";
+    const isFinished = isLabMatchFinished(match) || liveData?.status === "finished";
     const homeScore = liveData?.homeScore ?? match.homeScore;
     const awayScore = liveData?.awayScore ?? match.awayScore;
-    const hasScore = !isLive && match.date < today && match.homeScore != null && match.awayScore != null &&
-      !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
+    const hasScore = !isLive && isFinished && homeScore != null && awayScore != null &&
+      !(Number(homeScore) === 0 && Number(awayScore) === 0);
     const home = data.standings.find(team => team.teamId === match.homeTeam.teamId);
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
     const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
@@ -412,9 +413,9 @@ function HomeLigaArgentina() {
           <LiveLedPeriod quarter={liveData?.quarter} time={formatLabLiveRemaining(liveData)} isHalftime={liveData?.isHalftime}/>
         </div> : hasScore ? <>
           <strong className="fixture-score">
-            <span className={Number(match.homeScore) > Number(match.awayScore) ? "fixture-score-winner" : "fixture-score-loser"}>{match.homeScore}</span>
+            <span className={Number(match.homeScore) > Number(match.awayScore) ? "fixture-score-winner" : "fixture-score-loser"}>{homeScore}</span>
             <span className="fixture-score-separator"> - </span>
-            <span className={Number(match.awayScore) > Number(match.homeScore) ? "fixture-score-winner" : "fixture-score-loser"}>{match.awayScore}</span>
+            <span className={Number(awayScore) > Number(homeScore) ? "fixture-score-winner" : "fixture-score-loser"}>{awayScore}</span>
           </strong>
           <span>FINAL</span>
         </> : <strong className="fixture-time">{match.time || "A CONFIRMAR"}</strong>}
