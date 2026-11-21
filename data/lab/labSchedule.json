@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-21T02:01:01.413Z",
+  "importedAt": "2026-11-21T02:01:51.594Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3670,12 +3670,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1458/113317/central-entrerriano/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1458/113317"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 83,
+      "awayScore": 78,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2K65P5N0nUsDcGFrI3hxAUit5FxQTAUUG5pysjWL1PEmmI3jcW0DJDQ==/ciclista-j-vs-central-entrerriano",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-21T02:01:51.500Z"
     },
     {
       "id": "v2W-HFe9rFp2ENbqSdV6SOH3yDtQmQACpxhsRpmvGpExtfHPdWmwmluQ==",
@@ -16458,6 +16459,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 3,
-  "pending": 536
+  "finished": 4,
+  "pending": 535
 }
