@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useLabBoxscores } from "../utils/labData";
 import { createPortal } from "react-dom";
 import MatchStatsTabs from "../components/MatchStatsTabs";
 import { Link } from "react-router-dom";
@@ -9,7 +10,7 @@ import "../components/LiveRosters.css";
 import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
-import boxscores from "../../data/lab/labBoxscores.json";
+
 import { isLabMatchFinished } from "../utils/labMatchStatus";
 import { LAB_CONFERENCES, labMatchColor, formatLabLiveRemaining } from "../utils/labPresentation";
 export { LAB_TEAM_COLORS, labMatchColor } from "../utils/labPresentation";
@@ -73,6 +74,7 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
 }
 
 function LabPlayerModal({player, match, team, onClose}) {
+  const boxscores = useLabBoxscores();
   const [tab,setTab]=useState("match");
   const appearances=Object.entries(boxscores||{}).flatMap(([matchId,box])=>(Array.isArray(box?.players)?box.players:[])
     .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId)).map(p=>({...p,__matchId:matchId})));
@@ -129,7 +131,8 @@ function LabPlayerModal({player, match, team, onClose}) {
 }
 
 export function LabHomeBoxscore({match, onClose}) {
-  const box = boxscores[match.id];
+  const boxscores = useLabBoxscores();
+  const box = boxscores?.[match.id];
   const players = box?.players || [];
   const homeTeam = { ...match.homeTeam, id: String(match.homeTeam.teamId), name: displayName(match.homeTeam.name), shortName: displayName(match.homeTeam.name), logo: labCrest(match.homeTeam) };
   const awayTeam = { ...match.awayTeam, id: String(match.awayTeam.teamId), name: displayName(match.awayTeam.name), shortName: displayName(match.awayTeam.name), logo: labCrest(match.awayTeam) };
@@ -225,6 +228,7 @@ export function LabHomeBoxscore({match, onClose}) {
 
 
 export function LabUpcomingMatchModal({match,onClose}) {
+  const boxscores = useLabBoxscores();
   const [tab,setTab]=useState("comparativa");
   const home={...match.homeTeam,name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
   const away={...match.awayTeam,name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
@@ -330,6 +334,7 @@ export function LabUpcomingMatchModal({match,onClose}) {
 }
 
 export function LabLiveMatchModal({match, live, onClose}) {
+  const boxscores = useLabBoxscores();
   const [tab,setTab]=useState("quintetos");
   const {liveMatches:latestLiveMatches=[]}=useLiveSnapshot();
   const currentLive=latestLiveMatches.find(item=>item.competition==="LAB"&&String(item.matchId)===String(match?.id))||live;
@@ -401,6 +406,7 @@ function HomeLigaArgentina() {
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const [selectedLiveMatch, setSelectedLiveMatch] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const boxscores = useLabBoxscores(Boolean(selectedTeam));
 
   const data = useMemo(() => {
     const table = new Map(fixture.teams.map(team => [team.teamId, {
