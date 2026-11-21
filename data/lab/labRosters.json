@@ -1,7 +1,7 @@
 {
   "source": "Planillas oficiales de partidos importadas en LNA",
-  "generatedAt": "2026-11-20T19:26:13.947Z",
-  "boxscoresCount": 111,
+  "generatedAt": "2026-11-21T00:00:59.773Z",
+  "boxscoresCount": 113,
   "teams": {
     "112530": {
       "teamId": 112530,
@@ -3365,9 +3365,9 @@
           "teamId": 112559,
           "name": "DUVANCED, VALENTIN ANGEL",
           "number": "12",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 12141,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 14131,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -3417,64 +3417,70 @@
               "date": "2026-11-19",
               "minutes": "33:10",
               "points": 15
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "33:10",
+              "points": 15
             }
           ],
           "totals": {
-            "points": 106,
-            "rebounds": 60,
-            "offensiveRebounds": 18,
-            "defensiveRebounds": 42,
-            "assists": 7,
-            "steals": 11,
+            "points": 121,
+            "rebounds": 70,
+            "offensiveRebounds": 23,
+            "defensiveRebounds": 47,
+            "assists": 8,
+            "steals": 14,
             "turnovers": 10,
             "blocks": 4,
             "blocksReceived": 4,
-            "fouls": 23,
-            "foulsReceived": 21,
-            "valuation": 120,
-            "plusMinus": -23
+            "fouls": 24,
+            "foulsReceived": 26,
+            "valuation": 143,
+            "plusMinus": -29
           },
           "twoPointers": {
-            "made": 39,
-            "attempted": 65
+            "made": 44,
+            "attempted": 75
           },
           "threePointers": {
             "made": 3,
-            "attempted": 18
+            "attempted": 20
           },
           "freeThrows": {
-            "made": 19,
-            "attempted": 30
+            "made": 24,
+            "attempted": 38
           },
-          "minutesTotal": "3:22:21",
-          "minutesAverage": "25:18",
+          "minutesTotal": "3:55:31",
+          "minutesAverage": "26:10",
           "averages": {
-            "points": 13.3,
-            "rebounds": 7.5,
-            "offensiveRebounds": 2.3,
-            "defensiveRebounds": 5.3,
+            "points": 13.4,
+            "rebounds": 7.8,
+            "offensiveRebounds": 2.6,
+            "defensiveRebounds": 5.2,
             "assists": 0.9,
-            "steals": 1.4,
-            "turnovers": 1.3,
-            "blocks": 0.5,
-            "blocksReceived": 0.5,
-            "fouls": 2.9,
-            "foulsReceived": 2.6,
-            "valuation": 15,
-            "plusMinus": -2.9
+            "steals": 1.6,
+            "turnovers": 1.1,
+            "blocks": 0.4,
+            "blocksReceived": 0.4,
+            "fouls": 2.7,
+            "foulsReceived": 2.9,
+            "valuation": 15.9,
+            "plusMinus": -3.2
           },
-          "twoPointersPct": 60,
-          "threePointersPct": 16.7,
-          "freeThrowsPct": 63.3
+          "twoPointersPct": 58.7,
+          "threePointersPct": 15,
+          "freeThrowsPct": 63.2
         },
         {
           "id": 429034,
           "teamId": 112559,
           "name": "BEAMER, BRYCE ANDREW",
           "number": "3",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 11225,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 12067,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -3524,171 +3530,70 @@
               "date": "2026-11-19",
               "minutes": "14:02",
               "points": 2
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "14:02",
+              "points": 2
             }
           ],
           "totals": {
-            "points": 100,
-            "rebounds": 48,
-            "offensiveRebounds": 19,
-            "defensiveRebounds": 29,
-            "assists": 4,
+            "points": 102,
+            "rebounds": 52,
+            "offensiveRebounds": 21,
+            "defensiveRebounds": 31,
+            "assists": 5,
             "steals": 7,
             "turnovers": 9,
             "blocks": 1,
             "blocksReceived": 2,
-            "fouls": 20,
-            "foulsReceived": 18,
-            "valuation": 103,
-            "plusMinus": -5
+            "fouls": 23,
+            "foulsReceived": 21,
+            "valuation": 105,
+            "plusMinus": -14
           },
           "twoPointers": {
             "made": 26,
-            "attempted": 41
+            "attempted": 43
           },
           "threePointers": {
             "made": 9,
-            "attempted": 31
+            "attempted": 34
           },
           "freeThrows": {
-            "made": 21,
-            "attempted": 28
+            "made": 23,
+            "attempted": 30
           },
-          "minutesTotal": "3:07:05",
-          "minutesAverage": "23:23",
+          "minutesTotal": "3:21:07",
+          "minutesAverage": "22:21",
           "averages": {
-            "points": 12.5,
-            "rebounds": 6,
-            "offensiveRebounds": 2.4,
-            "defensiveRebounds": 3.6,
-            "assists": 0.5,
-            "steals": 0.9,
-            "turnovers": 1.1,
+            "points": 11.3,
+            "rebounds": 5.8,
+            "offensiveRebounds": 2.3,
+            "defensiveRebounds": 3.4,
+            "assists": 0.6,
+            "steals": 0.8,
+            "turnovers": 1,
             "blocks": 0.1,
-            "blocksReceived": 0.3,
-            "fouls": 2.5,
+            "blocksReceived": 0.2,
+            "fouls": 2.6,
             "foulsReceived": 2.3,
-            "valuation": 12.9,
-            "plusMinus": -0.6
+            "valuation": 11.7,
+            "plusMinus": -1.6
           },
-          "twoPointersPct": 63.4,
-          "threePointersPct": 29,
-          "freeThrowsPct": 75
-        },
-        {
-          "id": 428868,
-          "teamId": 112559,
-          "name": "ALONSO, AUGUSTO",
-          "number": "11",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 14974,
-          "lastSeen": "2026-11-19",
-          "games": [
-            {
-              "matchId": "v21Md4Rsc5qvKBFvvDxOfuz8X1s634_OSxYVTQZHZxYPMpsvEUV38JuA==",
-              "date": "2026-10-15",
-              "minutes": "32:57",
-              "points": 21
-            },
-            {
-              "matchId": "v28BlzVWeNCAGmFy-QHzPh2ftWTVf0NfJmLvZaaz23UVBwyYLpoYn7sg==",
-              "date": "2026-10-18",
-              "minutes": "23:34",
-              "points": 5
-            },
-            {
-              "matchId": "v2-ZJrZ7Uzm767bPP6mbR3XFIkMN528Czvv1Yz94BSMbze4gMeoLmlIA==",
-              "date": "2026-10-25",
-              "minutes": "32:60",
-              "points": 19
-            },
-            {
-              "matchId": "v2jHJVgqrpqgbSTuVcBdB35794K30TRemPmDNgky_2bitbhYwiRXnOQw==",
-              "date": "2026-10-27",
-              "minutes": "28:57",
-              "points": 5
-            },
-            {
-              "matchId": "v2-jqPydOtpafXtuxPFiBST5NW2-U1m0D4-sO1lrni5A2Ce8IsHHvNMA==",
-              "date": "2026-11-10",
-              "minutes": "35:08",
-              "points": 9
-            },
-            {
-              "matchId": "v2LV2SiaV3--mqwOfft6e_uj7FTl58P1qXjuAJ5GGtf5ZyicL6T2CgzQ==",
-              "date": "2026-11-14",
-              "minutes": "32:18",
-              "points": 7
-            },
-            {
-              "matchId": "v2L1ZKnmB2yBp_IM3fxH-dW9V86AdkkyjgPD1ykgCdhY6Ffdsxo36WAw==",
-              "date": "2026-11-16",
-              "minutes": "36:59",
-              "points": 9
-            },
-            {
-              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
-              "date": "2026-11-19",
-              "minutes": "26:41",
-              "points": 7
-            }
-          ],
-          "totals": {
-            "points": 82,
-            "rebounds": 18,
-            "offensiveRebounds": 4,
-            "defensiveRebounds": 14,
-            "assists": 24,
-            "steals": 3,
-            "turnovers": 15,
-            "blocks": 0,
-            "blocksReceived": 3,
-            "fouls": 20,
-            "foulsReceived": 17,
-            "valuation": 57,
-            "plusMinus": -10
-          },
-          "twoPointers": {
-            "made": 19,
-            "attempted": 37
-          },
-          "threePointers": {
-            "made": 10,
-            "attempted": 37
-          },
-          "freeThrows": {
-            "made": 14,
-            "attempted": 18
-          },
-          "minutesTotal": "4:09:34",
-          "minutesAverage": "31:12",
-          "averages": {
-            "points": 10.3,
-            "rebounds": 2.3,
-            "offensiveRebounds": 0.5,
-            "defensiveRebounds": 1.8,
-            "assists": 3,
-            "steals": 0.4,
-            "turnovers": 1.9,
-            "blocks": 0,
-            "blocksReceived": 0.4,
-            "fouls": 2.5,
-            "foulsReceived": 2.1,
-            "valuation": 7.1,
-            "plusMinus": -1.3
-          },
-          "twoPointersPct": 51.4,
-          "threePointersPct": 27,
-          "freeThrowsPct": 77.8
+          "twoPointersPct": 60.5,
+          "threePointersPct": 26.5,
+          "freeThrowsPct": 76.7
         },
         {
           "id": 431025,
           "teamId": 112559,
           "name": "ALBERTON RODRIGUES, RAFAEL",
           "number": "21",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 10548,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 12343,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -3738,64 +3643,183 @@
               "date": "2026-11-19",
               "minutes": "29:55",
               "points": 15
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "29:55",
+              "points": 15
             }
           ],
           "totals": {
-            "points": 81,
-            "rebounds": 71,
-            "offensiveRebounds": 22,
-            "defensiveRebounds": 49,
+            "points": 96,
+            "rebounds": 80,
+            "offensiveRebounds": 28,
+            "defensiveRebounds": 52,
             "assists": 5,
-            "steals": 5,
-            "turnovers": 11,
+            "steals": 7,
+            "turnovers": 12,
             "blocks": 0,
-            "blocksReceived": 2,
-            "fouls": 24,
-            "foulsReceived": 14,
-            "valuation": 119,
-            "plusMinus": 13
+            "blocksReceived": 3,
+            "fouls": 28,
+            "foulsReceived": 17,
+            "valuation": 137,
+            "plusMinus": 0
           },
           "twoPointers": {
-            "made": 35,
-            "attempted": 48
+            "made": 42,
+            "attempted": 57
           },
           "threePointers": {
             "made": 1,
             "attempted": 1
           },
           "freeThrows": {
-            "made": 8,
-            "attempted": 15
+            "made": 9,
+            "attempted": 19
           },
-          "minutesTotal": "2:55:48",
-          "minutesAverage": "21:59",
+          "minutesTotal": "3:25:43",
+          "minutesAverage": "22:51",
           "averages": {
-            "points": 10.1,
+            "points": 10.7,
             "rebounds": 8.9,
-            "offensiveRebounds": 2.8,
-            "defensiveRebounds": 6.1,
+            "offensiveRebounds": 3.1,
+            "defensiveRebounds": 5.8,
             "assists": 0.6,
-            "steals": 0.6,
-            "turnovers": 1.4,
+            "steals": 0.8,
+            "turnovers": 1.3,
             "blocks": 0,
             "blocksReceived": 0.3,
-            "fouls": 3,
-            "foulsReceived": 1.8,
-            "valuation": 14.9,
-            "plusMinus": 1.6
+            "fouls": 3.1,
+            "foulsReceived": 1.9,
+            "valuation": 15.2,
+            "plusMinus": 0
           },
-          "twoPointersPct": 72.9,
+          "twoPointersPct": 73.7,
           "threePointersPct": 100,
-          "freeThrowsPct": 53.3
+          "freeThrowsPct": 47.4
+        },
+        {
+          "id": 428868,
+          "teamId": 112559,
+          "name": "ALONSO, AUGUSTO",
+          "number": "11",
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 16575,
+          "lastSeen": "2026-11-19",
+          "games": [
+            {
+              "matchId": "v21Md4Rsc5qvKBFvvDxOfuz8X1s634_OSxYVTQZHZxYPMpsvEUV38JuA==",
+              "date": "2026-10-15",
+              "minutes": "32:57",
+              "points": 21
+            },
+            {
+              "matchId": "v28BlzVWeNCAGmFy-QHzPh2ftWTVf0NfJmLvZaaz23UVBwyYLpoYn7sg==",
+              "date": "2026-10-18",
+              "minutes": "23:34",
+              "points": 5
+            },
+            {
+              "matchId": "v2-ZJrZ7Uzm767bPP6mbR3XFIkMN528Czvv1Yz94BSMbze4gMeoLmlIA==",
+              "date": "2026-10-25",
+              "minutes": "32:60",
+              "points": 19
+            },
+            {
+              "matchId": "v2jHJVgqrpqgbSTuVcBdB35794K30TRemPmDNgky_2bitbhYwiRXnOQw==",
+              "date": "2026-10-27",
+              "minutes": "28:57",
+              "points": 5
+            },
+            {
+              "matchId": "v2-jqPydOtpafXtuxPFiBST5NW2-U1m0D4-sO1lrni5A2Ce8IsHHvNMA==",
+              "date": "2026-11-10",
+              "minutes": "35:08",
+              "points": 9
+            },
+            {
+              "matchId": "v2LV2SiaV3--mqwOfft6e_uj7FTl58P1qXjuAJ5GGtf5ZyicL6T2CgzQ==",
+              "date": "2026-11-14",
+              "minutes": "32:18",
+              "points": 7
+            },
+            {
+              "matchId": "v2L1ZKnmB2yBp_IM3fxH-dW9V86AdkkyjgPD1ykgCdhY6Ffdsxo36WAw==",
+              "date": "2026-11-16",
+              "minutes": "36:59",
+              "points": 9
+            },
+            {
+              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "26:41",
+              "points": 7
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "26:41",
+              "points": 7
+            }
+          ],
+          "totals": {
+            "points": 89,
+            "rebounds": 19,
+            "offensiveRebounds": 5,
+            "defensiveRebounds": 14,
+            "assists": 27,
+            "steals": 3,
+            "turnovers": 16,
+            "blocks": 0,
+            "blocksReceived": 4,
+            "fouls": 24,
+            "foulsReceived": 17,
+            "valuation": 55,
+            "plusMinus": -24
+          },
+          "twoPointers": {
+            "made": 21,
+            "attempted": 42
+          },
+          "threePointers": {
+            "made": 11,
+            "attempted": 42
+          },
+          "freeThrows": {
+            "made": 14,
+            "attempted": 18
+          },
+          "minutesTotal": "4:36:15",
+          "minutesAverage": "30:42",
+          "averages": {
+            "points": 9.9,
+            "rebounds": 2.1,
+            "offensiveRebounds": 0.6,
+            "defensiveRebounds": 1.6,
+            "assists": 3,
+            "steals": 0.3,
+            "turnovers": 1.8,
+            "blocks": 0,
+            "blocksReceived": 0.4,
+            "fouls": 2.7,
+            "foulsReceived": 1.9,
+            "valuation": 6.1,
+            "plusMinus": -2.7
+          },
+          "twoPointersPct": 50,
+          "threePointersPct": 26.2,
+          "freeThrowsPct": 77.8
         },
         {
           "id": 378096,
           "teamId": 112559,
           "name": "ALDERETE, PABLO DAVID",
           "number": "9",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 8175,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 8981,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -3845,64 +3869,70 @@
               "date": "2026-11-19",
               "minutes": "13:26",
               "points": 6
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "13:26",
+              "points": 6
             }
           ],
           "totals": {
-            "points": 61,
-            "rebounds": 36,
+            "points": 67,
+            "rebounds": 40,
             "offensiveRebounds": 10,
-            "defensiveRebounds": 26,
+            "defensiveRebounds": 30,
             "assists": 1,
-            "steals": 6,
-            "turnovers": 13,
+            "steals": 7,
+            "turnovers": 16,
             "blocks": 1,
-            "blocksReceived": 2,
-            "fouls": 14,
-            "foulsReceived": 16,
-            "valuation": 62,
-            "plusMinus": 0
+            "blocksReceived": 3,
+            "fouls": 15,
+            "foulsReceived": 18,
+            "valuation": 69,
+            "plusMinus": 5
           },
           "twoPointers": {
-            "made": 22,
-            "attempted": 38
+            "made": 23,
+            "attempted": 40
           },
           "threePointers": {
             "made": 0,
             "attempted": 8
           },
           "freeThrows": {
-            "made": 17,
-            "attempted": 23
+            "made": 21,
+            "attempted": 27
           },
-          "minutesTotal": "2:16:15",
-          "minutesAverage": "17:02",
+          "minutesTotal": "2:29:41",
+          "minutesAverage": "16:38",
           "averages": {
-            "points": 7.6,
-            "rebounds": 4.5,
-            "offensiveRebounds": 1.3,
+            "points": 7.4,
+            "rebounds": 4.4,
+            "offensiveRebounds": 1.1,
             "defensiveRebounds": 3.3,
             "assists": 0.1,
             "steals": 0.8,
-            "turnovers": 1.6,
+            "turnovers": 1.8,
             "blocks": 0.1,
             "blocksReceived": 0.3,
-            "fouls": 1.8,
+            "fouls": 1.7,
             "foulsReceived": 2,
-            "valuation": 7.8,
-            "plusMinus": 0
+            "valuation": 7.7,
+            "plusMinus": 0.6
           },
-          "twoPointersPct": 57.9,
+          "twoPointersPct": 57.5,
           "threePointersPct": 0,
-          "freeThrowsPct": 73.9
+          "freeThrowsPct": 77.8
         },
         {
           "id": 217583,
           "teamId": 112559,
           "name": "LUNA, LEONEL GASTON",
           "number": "10",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 9551,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 11095,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -3952,64 +3982,70 @@
               "date": "2026-11-19",
               "minutes": "25:44",
               "points": 10
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "25:44",
+              "points": 10
             }
           ],
           "totals": {
-            "points": 54,
-            "rebounds": 19,
+            "points": 64,
+            "rebounds": 25,
             "offensiveRebounds": 7,
-            "defensiveRebounds": 12,
-            "assists": 16,
+            "defensiveRebounds": 18,
+            "assists": 18,
             "steals": 11,
-            "turnovers": 5,
+            "turnovers": 6,
             "blocks": 0,
             "blocksReceived": 0,
             "fouls": 15,
-            "foulsReceived": 22,
-            "valuation": 77,
-            "plusMinus": 13
+            "foulsReceived": 27,
+            "valuation": 94,
+            "plusMinus": 3
           },
           "twoPointers": {
             "made": 9,
-            "attempted": 21
+            "attempted": 25
           },
           "threePointers": {
-            "made": 6,
-            "attempted": 15
+            "made": 8,
+            "attempted": 18
           },
           "freeThrows": {
-            "made": 18,
-            "attempted": 22
+            "made": 22,
+            "attempted": 26
           },
-          "minutesTotal": "2:39:11",
-          "minutesAverage": "19:54",
+          "minutesTotal": "3:04:55",
+          "minutesAverage": "20:33",
           "averages": {
-            "points": 6.8,
-            "rebounds": 2.4,
-            "offensiveRebounds": 0.9,
-            "defensiveRebounds": 1.5,
+            "points": 7.1,
+            "rebounds": 2.8,
+            "offensiveRebounds": 0.8,
+            "defensiveRebounds": 2,
             "assists": 2,
-            "steals": 1.4,
-            "turnovers": 0.6,
+            "steals": 1.2,
+            "turnovers": 0.7,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 1.9,
-            "foulsReceived": 2.8,
-            "valuation": 9.6,
-            "plusMinus": 1.6
+            "fouls": 1.7,
+            "foulsReceived": 3,
+            "valuation": 10.4,
+            "plusMinus": 0.3
           },
-          "twoPointersPct": 42.9,
-          "threePointersPct": 40,
-          "freeThrowsPct": 81.8
+          "twoPointersPct": 36,
+          "threePointersPct": 44.4,
+          "freeThrowsPct": 84.6
         },
         {
           "id": 207875,
           "teamId": 112559,
           "name": "DOMINE, MATIAS",
           "number": "44",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 5399,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 6221,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -4059,62 +4095,169 @@
               "date": "2026-11-19",
               "minutes": "13:42",
               "points": 6
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "13:42",
+              "points": 6
             }
           ],
           "totals": {
-            "points": 24,
-            "rebounds": 11,
-            "offensiveRebounds": 5,
+            "points": 30,
+            "rebounds": 12,
+            "offensiveRebounds": 6,
             "defensiveRebounds": 6,
             "assists": 1,
-            "steals": 6,
+            "steals": 7,
             "turnovers": 3,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 9,
-            "foulsReceived": 5,
-            "valuation": 14,
-            "plusMinus": 6
+            "fouls": 11,
+            "foulsReceived": 7,
+            "valuation": 15,
+            "plusMinus": 0
           },
           "twoPointers": {
-            "made": 7,
-            "attempted": 14
+            "made": 8,
+            "attempted": 18
           },
           "threePointers": {
-            "made": 3,
-            "attempted": 14
+            "made": 4,
+            "attempted": 18
           },
           "freeThrows": {
-            "made": 1,
-            "attempted": 4
+            "made": 2,
+            "attempted": 6
           },
-          "minutesTotal": "1:29:59",
-          "minutesAverage": "11:15",
+          "minutesTotal": "1:43:41",
+          "minutesAverage": "11:31",
           "averages": {
-            "points": 3,
-            "rebounds": 1.4,
-            "offensiveRebounds": 0.6,
-            "defensiveRebounds": 0.8,
+            "points": 3.3,
+            "rebounds": 1.3,
+            "offensiveRebounds": 0.7,
+            "defensiveRebounds": 0.7,
             "assists": 0.1,
             "steals": 0.8,
-            "turnovers": 0.4,
+            "turnovers": 0.3,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 1.1,
-            "foulsReceived": 0.6,
-            "valuation": 1.8,
-            "plusMinus": 0.8
+            "fouls": 1.2,
+            "foulsReceived": 0.8,
+            "valuation": 1.7,
+            "plusMinus": 0
           },
-          "twoPointersPct": 50,
-          "threePointersPct": 21.4,
-          "freeThrowsPct": 25
+          "twoPointersPct": 44.4,
+          "threePointersPct": 22.2,
+          "freeThrowsPct": 33.3
+        },
+        {
+          "id": 428701,
+          "teamId": 112559,
+          "name": "ALONSO, MANUEL",
+          "number": "5",
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 11001,
+          "lastSeen": "2026-11-19",
+          "games": [
+            {
+              "matchId": "v21Md4Rsc5qvKBFvvDxOfuz8X1s634_OSxYVTQZHZxYPMpsvEUV38JuA==",
+              "date": "2026-10-15",
+              "minutes": "27:45",
+              "points": 9
+            },
+            {
+              "matchId": "v28BlzVWeNCAGmFy-QHzPh2ftWTVf0NfJmLvZaaz23UVBwyYLpoYn7sg==",
+              "date": "2026-10-18",
+              "minutes": "25:49",
+              "points": 3
+            },
+            {
+              "matchId": "v2-ZJrZ7Uzm767bPP6mbR3XFIkMN528Czvv1Yz94BSMbze4gMeoLmlIA==",
+              "date": "2026-10-25",
+              "minutes": "30:20",
+              "points": 18
+            },
+            {
+              "matchId": "v2jHJVgqrpqgbSTuVcBdB35794K30TRemPmDNgky_2bitbhYwiRXnOQw==",
+              "date": "2026-10-27",
+              "minutes": "28:25",
+              "points": 10
+            },
+            {
+              "matchId": "v2-jqPydOtpafXtuxPFiBST5NW2-U1m0D4-sO1lrni5A2Ce8IsHHvNMA==",
+              "date": "2026-11-10",
+              "minutes": "30:42",
+              "points": 5
+            },
+            {
+              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "20:10",
+              "points": 4
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "20:10",
+              "points": 4
+            }
+          ],
+          "totals": {
+            "points": 53,
+            "rebounds": 19,
+            "offensiveRebounds": 6,
+            "defensiveRebounds": 13,
+            "assists": 28,
+            "steals": 5,
+            "turnovers": 12,
+            "blocks": 1,
+            "blocksReceived": 2,
+            "fouls": 20,
+            "foulsReceived": 18,
+            "valuation": 52,
+            "plusMinus": 29
+          },
+          "twoPointers": {
+            "made": 10,
+            "attempted": 25
+          },
+          "threePointers": {
+            "made": 7,
+            "attempted": 26
+          },
+          "freeThrows": {
+            "made": 12,
+            "attempted": 16
+          },
+          "minutesTotal": "3:03:21",
+          "minutesAverage": "26:12",
+          "averages": {
+            "points": 7.6,
+            "rebounds": 2.7,
+            "offensiveRebounds": 0.9,
+            "defensiveRebounds": 1.9,
+            "assists": 4,
+            "steals": 0.7,
+            "turnovers": 1.7,
+            "blocks": 0.1,
+            "blocksReceived": 0.3,
+            "fouls": 2.9,
+            "foulsReceived": 2.6,
+            "valuation": 7.4,
+            "plusMinus": 4.1
+          },
+          "twoPointersPct": 40,
+          "threePointersPct": 26.9,
+          "freeThrowsPct": 75
         },
         {
           "id": 428669,
           "teamId": 112559,
           "name": "AMAN, SANTIAGO",
           "number": "0",
-          "appearances": 8,
+          "appearances": 9,
           "gamesPlayed": 7,
           "totalSeconds": 3523,
           "lastSeen": "2026-11-19",
@@ -4163,6 +4306,12 @@
             },
             {
               "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
               "date": "2026-11-19",
               "minutes": "00:00",
               "points": 0
@@ -4217,108 +4366,13 @@
           "freeThrowsPct": 50
         },
         {
-          "id": 428701,
-          "teamId": 112559,
-          "name": "ALONSO, MANUEL",
-          "number": "5",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 9791,
-          "lastSeen": "2026-11-19",
-          "games": [
-            {
-              "matchId": "v21Md4Rsc5qvKBFvvDxOfuz8X1s634_OSxYVTQZHZxYPMpsvEUV38JuA==",
-              "date": "2026-10-15",
-              "minutes": "27:45",
-              "points": 9
-            },
-            {
-              "matchId": "v28BlzVWeNCAGmFy-QHzPh2ftWTVf0NfJmLvZaaz23UVBwyYLpoYn7sg==",
-              "date": "2026-10-18",
-              "minutes": "25:49",
-              "points": 3
-            },
-            {
-              "matchId": "v2-ZJrZ7Uzm767bPP6mbR3XFIkMN528Czvv1Yz94BSMbze4gMeoLmlIA==",
-              "date": "2026-10-25",
-              "minutes": "30:20",
-              "points": 18
-            },
-            {
-              "matchId": "v2jHJVgqrpqgbSTuVcBdB35794K30TRemPmDNgky_2bitbhYwiRXnOQw==",
-              "date": "2026-10-27",
-              "minutes": "28:25",
-              "points": 10
-            },
-            {
-              "matchId": "v2-jqPydOtpafXtuxPFiBST5NW2-U1m0D4-sO1lrni5A2Ce8IsHHvNMA==",
-              "date": "2026-11-10",
-              "minutes": "30:42",
-              "points": 5
-            },
-            {
-              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
-              "date": "2026-11-19",
-              "minutes": "20:10",
-              "points": 4
-            }
-          ],
-          "totals": {
-            "points": 49,
-            "rebounds": 17,
-            "offensiveRebounds": 4,
-            "defensiveRebounds": 13,
-            "assists": 27,
-            "steals": 5,
-            "turnovers": 10,
-            "blocks": 1,
-            "blocksReceived": 1,
-            "fouls": 19,
-            "foulsReceived": 15,
-            "valuation": 50,
-            "plusMinus": 24
-          },
-          "twoPointers": {
-            "made": 9,
-            "attempted": 22
-          },
-          "threePointers": {
-            "made": 7,
-            "attempted": 24
-          },
-          "freeThrows": {
-            "made": 10,
-            "attempted": 14
-          },
-          "minutesTotal": "2:43:11",
-          "minutesAverage": "27:12",
-          "averages": {
-            "points": 8.2,
-            "rebounds": 2.8,
-            "offensiveRebounds": 0.7,
-            "defensiveRebounds": 2.2,
-            "assists": 4.5,
-            "steals": 0.8,
-            "turnovers": 1.7,
-            "blocks": 0.2,
-            "blocksReceived": 0.2,
-            "fouls": 3.2,
-            "foulsReceived": 2.5,
-            "valuation": 8.3,
-            "plusMinus": 4
-          },
-          "twoPointersPct": 40.9,
-          "threePointersPct": 29.2,
-          "freeThrowsPct": 71.4
-        },
-        {
           "id": 432891,
           "teamId": 112559,
           "name": "HERNANDEZ, MANUEL ALONSO",
           "number": "24",
-          "appearances": 4,
-          "gamesPlayed": 4,
-          "totalSeconds": 7308,
+          "appearances": 5,
+          "gamesPlayed": 5,
+          "totalSeconds": 8698,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -4344,55 +4398,61 @@
               "date": "2026-11-19",
               "minutes": "23:10",
               "points": 7
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "23:10",
+              "points": 7
             }
           ],
           "totals": {
-            "points": 62,
-            "rebounds": 12,
-            "offensiveRebounds": 3,
-            "defensiveRebounds": 9,
-            "assists": 9,
-            "steals": 3,
-            "turnovers": 14,
+            "points": 69,
+            "rebounds": 17,
+            "offensiveRebounds": 4,
+            "defensiveRebounds": 13,
+            "assists": 11,
+            "steals": 4,
+            "turnovers": 19,
             "blocks": 3,
-            "blocksReceived": 3,
-            "fouls": 11,
-            "foulsReceived": 14,
-            "valuation": 43,
-            "plusMinus": 10
+            "blocksReceived": 4,
+            "fouls": 13,
+            "foulsReceived": 15,
+            "valuation": 48,
+            "plusMinus": 13
           },
           "twoPointers": {
-            "made": 13,
-            "attempted": 27
+            "made": 14,
+            "attempted": 29
           },
           "threePointers": {
-            "made": 5,
-            "attempted": 21
+            "made": 6,
+            "attempted": 24
           },
           "freeThrows": {
-            "made": 21,
-            "attempted": 23
+            "made": 23,
+            "attempted": 25
           },
-          "minutesTotal": "2:01:48",
-          "minutesAverage": "30:27",
+          "minutesTotal": "2:24:58",
+          "minutesAverage": "29:00",
           "averages": {
-            "points": 15.5,
-            "rebounds": 3,
+            "points": 13.8,
+            "rebounds": 3.4,
             "offensiveRebounds": 0.8,
-            "defensiveRebounds": 2.3,
-            "assists": 2.3,
+            "defensiveRebounds": 2.6,
+            "assists": 2.2,
             "steals": 0.8,
-            "turnovers": 3.5,
-            "blocks": 0.8,
+            "turnovers": 3.8,
+            "blocks": 0.6,
             "blocksReceived": 0.8,
-            "fouls": 2.8,
-            "foulsReceived": 3.5,
-            "valuation": 10.8,
-            "plusMinus": 2.5
+            "fouls": 2.6,
+            "foulsReceived": 3,
+            "valuation": 9.6,
+            "plusMinus": 2.6
           },
-          "twoPointersPct": 48.1,
-          "threePointersPct": 23.8,
-          "freeThrowsPct": 91.3
+          "twoPointersPct": 48.3,
+          "threePointersPct": 25,
+          "freeThrowsPct": 92
         },
         {
           "id": 428879,
@@ -4565,7 +4625,7 @@
           "teamId": 112559,
           "name": "SANCHEZ AGNETTI, BENJAMIN",
           "number": "13",
-          "appearances": 6,
+          "appearances": 7,
           "gamesPlayed": 1,
           "totalSeconds": 111,
           "lastSeen": "2026-11-19",
@@ -4602,6 +4662,12 @@
             },
             {
               "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
               "date": "2026-11-19",
               "minutes": "00:00",
               "points": 0
@@ -4731,13 +4797,19 @@
           "teamId": 112559,
           "name": "LABRADOR, TIAGO EZEQUIEL",
           "number": "22",
-          "appearances": 1,
+          "appearances": 2,
           "gamesPlayed": 0,
           "totalSeconds": 0,
           "lastSeen": "2026-11-19",
           "games": [
             {
               "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
               "date": "2026-11-19",
               "minutes": "00:00",
               "points": 0
@@ -18071,108 +18143,13 @@
       "playersCount": 14,
       "players": [
         {
-          "id": 76389,
-          "teamId": 113741,
-          "name": "NUÑEZ, MATIAS ARIEL",
-          "number": "8",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 11755,
-          "lastSeen": "2026-11-19",
-          "games": [
-            {
-              "matchId": "v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==",
-              "date": "2026-10-26",
-              "minutes": "39:53",
-              "points": 27
-            },
-            {
-              "matchId": "v28mNPyZcLYzuLJJTgFc7Ro8xaAi_5tjoTE0cHT4G4Ju3u57IPx3Pz2A==",
-              "date": "2026-10-29",
-              "minutes": "28:11",
-              "points": 14
-            },
-            {
-              "matchId": "v2gT2d_DutDdLqxGUvyPQwsu5uNfrMGB2mjR5GsWs-xKMKeAxCGBmv3g==",
-              "date": "2026-11-09",
-              "minutes": "37:18",
-              "points": 15
-            },
-            {
-              "matchId": "v2EcSqulEgh9FTlXFKX2u1c503tHkT-0P_jgfgaelpXprU19PoTSSBWA==",
-              "date": "2026-11-13",
-              "minutes": "22:55",
-              "points": 8
-            },
-            {
-              "matchId": "v2PqVr0M-V_kcHw3EXAAQoG0eXjVhmWMg8j6S_RKsE-ZeoN2ycpcHhUg==",
-              "date": "2026-11-17",
-              "minutes": "36:22",
-              "points": 11
-            },
-            {
-              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
-              "date": "2026-11-19",
-              "minutes": "31:16",
-              "points": 15
-            }
-          ],
-          "totals": {
-            "points": 90,
-            "rebounds": 27,
-            "offensiveRebounds": 10,
-            "defensiveRebounds": 17,
-            "assists": 11,
-            "steals": 11,
-            "turnovers": 16,
-            "blocks": 1,
-            "blocksReceived": 1,
-            "fouls": 20,
-            "foulsReceived": 19,
-            "valuation": 93,
-            "plusMinus": 16
-          },
-          "twoPointers": {
-            "made": 26,
-            "attempted": 39
-          },
-          "threePointers": {
-            "made": 8,
-            "attempted": 20
-          },
-          "freeThrows": {
-            "made": 14,
-            "attempted": 18
-          },
-          "minutesTotal": "3:15:55",
-          "minutesAverage": "32:39",
-          "averages": {
-            "points": 15,
-            "rebounds": 4.5,
-            "offensiveRebounds": 1.7,
-            "defensiveRebounds": 2.8,
-            "assists": 1.8,
-            "steals": 1.8,
-            "turnovers": 2.7,
-            "blocks": 0.2,
-            "blocksReceived": 0.2,
-            "fouls": 3.3,
-            "foulsReceived": 3.2,
-            "valuation": 15.5,
-            "plusMinus": 2.7
-          },
-          "twoPointersPct": 66.7,
-          "threePointersPct": 40,
-          "freeThrowsPct": 77.8
-        },
-        {
           "id": 272056,
           "teamId": 113741,
           "name": "ROSENDE, RAFAEL EDMUNDO",
           "number": "22",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 10577,
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 12394,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18210,64 +18187,171 @@
               "date": "2026-11-19",
               "minutes": "30:17",
               "points": 22
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "30:17",
+              "points": 22
             }
           ],
           "totals": {
-            "points": 88,
-            "rebounds": 44,
-            "offensiveRebounds": 7,
-            "defensiveRebounds": 37,
-            "assists": 15,
-            "steals": 11,
-            "turnovers": 5,
+            "points": 110,
+            "rebounds": 51,
+            "offensiveRebounds": 8,
+            "defensiveRebounds": 43,
+            "assists": 17,
+            "steals": 12,
+            "turnovers": 7,
             "blocks": 3,
             "blocksReceived": 0,
-            "fouls": 21,
-            "foulsReceived": 18,
-            "valuation": 105,
-            "plusMinus": 57
+            "fouls": 24,
+            "foulsReceived": 21,
+            "valuation": 128,
+            "plusMinus": 68
           },
           "twoPointers": {
-            "made": 21,
-            "attempted": 40
+            "made": 25,
+            "attempted": 49
           },
           "threePointers": {
-            "made": 11,
-            "attempted": 31
+            "made": 15,
+            "attempted": 37
           },
           "freeThrows": {
-            "made": 13,
-            "attempted": 22
+            "made": 15,
+            "attempted": 24
           },
-          "minutesTotal": "2:56:17",
-          "minutesAverage": "29:23",
+          "minutesTotal": "3:26:34",
+          "minutesAverage": "29:31",
           "averages": {
-            "points": 14.7,
+            "points": 15.7,
             "rebounds": 7.3,
-            "offensiveRebounds": 1.2,
-            "defensiveRebounds": 6.2,
-            "assists": 2.5,
-            "steals": 1.8,
-            "turnovers": 0.8,
-            "blocks": 0.5,
+            "offensiveRebounds": 1.1,
+            "defensiveRebounds": 6.1,
+            "assists": 2.4,
+            "steals": 1.7,
+            "turnovers": 1,
+            "blocks": 0.4,
             "blocksReceived": 0,
-            "fouls": 3.5,
+            "fouls": 3.4,
             "foulsReceived": 3,
-            "valuation": 17.5,
-            "plusMinus": 9.5
+            "valuation": 18.3,
+            "plusMinus": 9.7
           },
-          "twoPointersPct": 52.5,
-          "threePointersPct": 35.5,
-          "freeThrowsPct": 59.1
+          "twoPointersPct": 51,
+          "threePointersPct": 40.5,
+          "freeThrowsPct": 62.5
+        },
+        {
+          "id": 76389,
+          "teamId": 113741,
+          "name": "NUÑEZ, MATIAS ARIEL",
+          "number": "8",
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 13631,
+          "lastSeen": "2026-11-19",
+          "games": [
+            {
+              "matchId": "v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==",
+              "date": "2026-10-26",
+              "minutes": "39:53",
+              "points": 27
+            },
+            {
+              "matchId": "v28mNPyZcLYzuLJJTgFc7Ro8xaAi_5tjoTE0cHT4G4Ju3u57IPx3Pz2A==",
+              "date": "2026-10-29",
+              "minutes": "28:11",
+              "points": 14
+            },
+            {
+              "matchId": "v2gT2d_DutDdLqxGUvyPQwsu5uNfrMGB2mjR5GsWs-xKMKeAxCGBmv3g==",
+              "date": "2026-11-09",
+              "minutes": "37:18",
+              "points": 15
+            },
+            {
+              "matchId": "v2EcSqulEgh9FTlXFKX2u1c503tHkT-0P_jgfgaelpXprU19PoTSSBWA==",
+              "date": "2026-11-13",
+              "minutes": "22:55",
+              "points": 8
+            },
+            {
+              "matchId": "v2PqVr0M-V_kcHw3EXAAQoG0eXjVhmWMg8j6S_RKsE-ZeoN2ycpcHhUg==",
+              "date": "2026-11-17",
+              "minutes": "36:22",
+              "points": 11
+            },
+            {
+              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "31:16",
+              "points": 15
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "31:16",
+              "points": 15
+            }
+          ],
+          "totals": {
+            "points": 105,
+            "rebounds": 31,
+            "offensiveRebounds": 12,
+            "defensiveRebounds": 19,
+            "assists": 12,
+            "steals": 13,
+            "turnovers": 18,
+            "blocks": 1,
+            "blocksReceived": 1,
+            "fouls": 24,
+            "foulsReceived": 20,
+            "valuation": 103,
+            "plusMinus": 21
+          },
+          "twoPointers": {
+            "made": 31,
+            "attempted": 47
+          },
+          "threePointers": {
+            "made": 9,
+            "attempted": 25
+          },
+          "freeThrows": {
+            "made": 16,
+            "attempted": 20
+          },
+          "minutesTotal": "3:47:11",
+          "minutesAverage": "32:27",
+          "averages": {
+            "points": 15,
+            "rebounds": 4.4,
+            "offensiveRebounds": 1.7,
+            "defensiveRebounds": 2.7,
+            "assists": 1.7,
+            "steals": 1.9,
+            "turnovers": 2.6,
+            "blocks": 0.1,
+            "blocksReceived": 0.1,
+            "fouls": 3.4,
+            "foulsReceived": 2.9,
+            "valuation": 14.7,
+            "plusMinus": 3
+          },
+          "twoPointersPct": 66,
+          "threePointersPct": 36,
+          "freeThrowsPct": 80
         },
         {
           "id": 375122,
           "teamId": 113741,
           "name": "FERNANDEZ GAGO, MARIANO",
           "number": "3",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 8450,
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 9400,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18305,54 +18389,60 @@
               "date": "2026-11-19",
               "minutes": "15:50",
               "points": 3
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "15:50",
+              "points": 3
             }
           ],
           "totals": {
-            "points": 69,
-            "rebounds": 19,
+            "points": 72,
+            "rebounds": 23,
             "offensiveRebounds": 4,
-            "defensiveRebounds": 15,
-            "assists": 21,
-            "steals": 8,
-            "turnovers": 9,
+            "defensiveRebounds": 19,
+            "assists": 23,
+            "steals": 9,
+            "turnovers": 12,
             "blocks": 0,
             "blocksReceived": 1,
-            "fouls": 16,
-            "foulsReceived": 18,
-            "valuation": 66,
-            "plusMinus": 8
+            "fouls": 19,
+            "foulsReceived": 19,
+            "valuation": 67,
+            "plusMinus": 7
           },
           "twoPointers": {
             "made": 16,
-            "attempted": 27
+            "attempted": 28
           },
           "threePointers": {
-            "made": 7,
-            "attempted": 32
+            "made": 8,
+            "attempted": 36
           },
           "freeThrows": {
             "made": 16,
             "attempted": 23
           },
-          "minutesTotal": "2:20:50",
-          "minutesAverage": "23:28",
+          "minutesTotal": "2:36:40",
+          "minutesAverage": "22:23",
           "averages": {
-            "points": 11.5,
-            "rebounds": 3.2,
-            "offensiveRebounds": 0.7,
-            "defensiveRebounds": 2.5,
-            "assists": 3.5,
+            "points": 10.3,
+            "rebounds": 3.3,
+            "offensiveRebounds": 0.6,
+            "defensiveRebounds": 2.7,
+            "assists": 3.3,
             "steals": 1.3,
-            "turnovers": 1.5,
+            "turnovers": 1.7,
             "blocks": 0,
-            "blocksReceived": 0.2,
+            "blocksReceived": 0.1,
             "fouls": 2.7,
-            "foulsReceived": 3,
-            "valuation": 11,
-            "plusMinus": 1.3
+            "foulsReceived": 2.7,
+            "valuation": 9.6,
+            "plusMinus": 1
           },
-          "twoPointersPct": 59.3,
-          "threePointersPct": 21.9,
+          "twoPointersPct": 57.1,
+          "threePointersPct": 22.2,
           "freeThrowsPct": 69.6
         },
         {
@@ -18360,9 +18450,9 @@
           "teamId": 113741,
           "name": "LOPEZ ESTELA, TIAGO NAHUEL",
           "number": "14",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 6115,
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 7295,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18400,159 +18490,70 @@
               "date": "2026-11-19",
               "minutes": "19:40",
               "points": 11
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "19:40",
+              "points": 11
             }
           ],
           "totals": {
-            "points": 53,
-            "rebounds": 9,
+            "points": 64,
+            "rebounds": 10,
             "offensiveRebounds": 5,
-            "defensiveRebounds": 4,
-            "assists": 4,
+            "defensiveRebounds": 5,
+            "assists": 6,
             "steals": 1,
-            "turnovers": 7,
+            "turnovers": 8,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 16,
-            "foulsReceived": 12,
-            "valuation": 42,
-            "plusMinus": 3
+            "fouls": 18,
+            "foulsReceived": 14,
+            "valuation": 53,
+            "plusMinus": 8
           },
           "twoPointers": {
-            "made": 12,
-            "attempted": 15
+            "made": 16,
+            "attempted": 19
           },
           "threePointers": {
             "made": 5,
-            "attempted": 13
+            "attempted": 15
           },
           "freeThrows": {
-            "made": 14,
-            "attempted": 17
+            "made": 17,
+            "attempted": 20
           },
-          "minutesTotal": "1:41:55",
-          "minutesAverage": "16:59",
+          "minutesTotal": "2:01:35",
+          "minutesAverage": "17:22",
           "averages": {
-            "points": 8.8,
-            "rebounds": 1.5,
-            "offensiveRebounds": 0.8,
+            "points": 9.1,
+            "rebounds": 1.4,
+            "offensiveRebounds": 0.7,
             "defensiveRebounds": 0.7,
-            "assists": 0.7,
-            "steals": 0.2,
-            "turnovers": 1.2,
+            "assists": 0.9,
+            "steals": 0.1,
+            "turnovers": 1.1,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 2.7,
+            "fouls": 2.6,
             "foulsReceived": 2,
-            "valuation": 7,
-            "plusMinus": 0.5
+            "valuation": 7.6,
+            "plusMinus": 1.1
           },
-          "twoPointersPct": 80,
-          "threePointersPct": 38.5,
-          "freeThrowsPct": 82.4
-        },
-        {
-          "id": 432010,
-          "teamId": 113741,
-          "name": "BORSATTI, MATIAS DANIEL",
-          "number": "5",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 7603,
-          "lastSeen": "2026-11-19",
-          "games": [
-            {
-              "matchId": "v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==",
-              "date": "2026-10-26",
-              "minutes": "28:24",
-              "points": 9
-            },
-            {
-              "matchId": "v28mNPyZcLYzuLJJTgFc7Ro8xaAi_5tjoTE0cHT4G4Ju3u57IPx3Pz2A==",
-              "date": "2026-10-29",
-              "minutes": "28:03",
-              "points": 6
-            },
-            {
-              "matchId": "v2gT2d_DutDdLqxGUvyPQwsu5uNfrMGB2mjR5GsWs-xKMKeAxCGBmv3g==",
-              "date": "2026-11-09",
-              "minutes": "16:27",
-              "points": 8
-            },
-            {
-              "matchId": "v2EcSqulEgh9FTlXFKX2u1c503tHkT-0P_jgfgaelpXprU19PoTSSBWA==",
-              "date": "2026-11-13",
-              "minutes": "28:32",
-              "points": 11
-            },
-            {
-              "matchId": "v2PqVr0M-V_kcHw3EXAAQoG0eXjVhmWMg8j6S_RKsE-ZeoN2ycpcHhUg==",
-              "date": "2026-11-17",
-              "minutes": "15:34",
-              "points": 7
-            },
-            {
-              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
-              "date": "2026-11-19",
-              "minutes": "09:43",
-              "points": 0
-            }
-          ],
-          "totals": {
-            "points": 41,
-            "rebounds": 24,
-            "offensiveRebounds": 8,
-            "defensiveRebounds": 16,
-            "assists": 5,
-            "steals": 11,
-            "turnovers": 12,
-            "blocks": 2,
-            "blocksReceived": 0,
-            "fouls": 20,
-            "foulsReceived": 2,
-            "valuation": 24,
-            "plusMinus": 22
-          },
-          "twoPointers": {
-            "made": 7,
-            "attempted": 16
-          },
-          "threePointers": {
-            "made": 9,
-            "attempted": 27
-          },
-          "freeThrows": {
-            "made": 0,
-            "attempted": 2
-          },
-          "minutesTotal": "2:06:43",
-          "minutesAverage": "21:07",
-          "averages": {
-            "points": 6.8,
-            "rebounds": 4,
-            "offensiveRebounds": 1.3,
-            "defensiveRebounds": 2.7,
-            "assists": 0.8,
-            "steals": 1.8,
-            "turnovers": 2,
-            "blocks": 0.3,
-            "blocksReceived": 0,
-            "fouls": 3.3,
-            "foulsReceived": 0.3,
-            "valuation": 4,
-            "plusMinus": 3.7
-          },
-          "twoPointersPct": 43.8,
+          "twoPointersPct": 84.2,
           "threePointersPct": 33.3,
-          "freeThrowsPct": 0
+          "freeThrowsPct": 85
         },
         {
           "id": 272053,
           "teamId": 113741,
           "name": "SILVA, LUCIANO JOAQUIN",
           "number": "10",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 7138,
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 8358,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18590,64 +18591,171 @@
               "date": "2026-11-19",
               "minutes": "20:20",
               "points": 11
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "20:20",
+              "points": 11
             }
           ],
           "totals": {
-            "points": 40,
-            "rebounds": 6,
-            "offensiveRebounds": 3,
-            "defensiveRebounds": 3,
-            "assists": 12,
+            "points": 51,
+            "rebounds": 8,
+            "offensiveRebounds": 4,
+            "defensiveRebounds": 4,
+            "assists": 14,
             "steals": 0,
-            "turnovers": 9,
-            "blocks": 1,
+            "turnovers": 12,
+            "blocks": 2,
             "blocksReceived": 2,
-            "fouls": 10,
-            "foulsReceived": 12,
-            "valuation": 26,
-            "plusMinus": -17
+            "fouls": 11,
+            "foulsReceived": 16,
+            "valuation": 38,
+            "plusMinus": -13
           },
           "twoPointers": {
-            "made": 5,
-            "attempted": 10
+            "made": 6,
+            "attempted": 11
           },
           "threePointers": {
-            "made": 7,
-            "attempted": 26
+            "made": 9,
+            "attempted": 32
           },
           "freeThrows": {
-            "made": 9,
-            "attempted": 9
+            "made": 12,
+            "attempted": 12
           },
-          "minutesTotal": "1:58:58",
-          "minutesAverage": "19:50",
+          "minutesTotal": "2:19:18",
+          "minutesAverage": "19:54",
           "averages": {
-            "points": 6.7,
-            "rebounds": 1,
-            "offensiveRebounds": 0.5,
-            "defensiveRebounds": 0.5,
+            "points": 7.3,
+            "rebounds": 1.1,
+            "offensiveRebounds": 0.6,
+            "defensiveRebounds": 0.6,
             "assists": 2,
             "steals": 0,
-            "turnovers": 1.5,
-            "blocks": 0.2,
+            "turnovers": 1.7,
+            "blocks": 0.3,
             "blocksReceived": 0.3,
-            "fouls": 1.7,
-            "foulsReceived": 2,
-            "valuation": 4.3,
-            "plusMinus": -2.8
+            "fouls": 1.6,
+            "foulsReceived": 2.3,
+            "valuation": 5.4,
+            "plusMinus": -1.9
           },
-          "twoPointersPct": 50,
-          "threePointersPct": 26.9,
+          "twoPointersPct": 54.5,
+          "threePointersPct": 28.1,
           "freeThrowsPct": 100
+        },
+        {
+          "id": 432010,
+          "teamId": 113741,
+          "name": "BORSATTI, MATIAS DANIEL",
+          "number": "5",
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 8186,
+          "lastSeen": "2026-11-19",
+          "games": [
+            {
+              "matchId": "v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==",
+              "date": "2026-10-26",
+              "minutes": "28:24",
+              "points": 9
+            },
+            {
+              "matchId": "v28mNPyZcLYzuLJJTgFc7Ro8xaAi_5tjoTE0cHT4G4Ju3u57IPx3Pz2A==",
+              "date": "2026-10-29",
+              "minutes": "28:03",
+              "points": 6
+            },
+            {
+              "matchId": "v2gT2d_DutDdLqxGUvyPQwsu5uNfrMGB2mjR5GsWs-xKMKeAxCGBmv3g==",
+              "date": "2026-11-09",
+              "minutes": "16:27",
+              "points": 8
+            },
+            {
+              "matchId": "v2EcSqulEgh9FTlXFKX2u1c503tHkT-0P_jgfgaelpXprU19PoTSSBWA==",
+              "date": "2026-11-13",
+              "minutes": "28:32",
+              "points": 11
+            },
+            {
+              "matchId": "v2PqVr0M-V_kcHw3EXAAQoG0eXjVhmWMg8j6S_RKsE-ZeoN2ycpcHhUg==",
+              "date": "2026-11-17",
+              "minutes": "15:34",
+              "points": 7
+            },
+            {
+              "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "09:43",
+              "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "09:43",
+              "points": 0
+            }
+          ],
+          "totals": {
+            "points": 41,
+            "rebounds": 28,
+            "offensiveRebounds": 10,
+            "defensiveRebounds": 18,
+            "assists": 5,
+            "steals": 12,
+            "turnovers": 12,
+            "blocks": 3,
+            "blocksReceived": 0,
+            "fouls": 22,
+            "foulsReceived": 2,
+            "valuation": 23,
+            "plusMinus": 20
+          },
+          "twoPointers": {
+            "made": 7,
+            "attempted": 18
+          },
+          "threePointers": {
+            "made": 9,
+            "attempted": 30
+          },
+          "freeThrows": {
+            "made": 0,
+            "attempted": 2
+          },
+          "minutesTotal": "2:16:26",
+          "minutesAverage": "19:29",
+          "averages": {
+            "points": 5.9,
+            "rebounds": 4,
+            "offensiveRebounds": 1.4,
+            "defensiveRebounds": 2.6,
+            "assists": 0.7,
+            "steals": 1.7,
+            "turnovers": 1.7,
+            "blocks": 0.4,
+            "blocksReceived": 0,
+            "fouls": 3.1,
+            "foulsReceived": 0.3,
+            "valuation": 3.3,
+            "plusMinus": 2.9
+          },
+          "twoPointersPct": 38.9,
+          "threePointersPct": 30,
+          "freeThrowsPct": 0
         },
         {
           "id": 212160,
           "teamId": 113741,
           "name": "REMOLINA, NICOLAS",
           "number": "11",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 7194,
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 8644,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18685,54 +18793,60 @@
               "date": "2026-11-19",
               "minutes": "24:10",
               "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "24:10",
+              "points": 0
             }
           ],
           "totals": {
             "points": 25,
-            "rebounds": 14,
-            "offensiveRebounds": 2,
-            "defensiveRebounds": 12,
-            "assists": 12,
-            "steals": 5,
-            "turnovers": 8,
-            "blocks": 2,
+            "rebounds": 19,
+            "offensiveRebounds": 3,
+            "defensiveRebounds": 16,
+            "assists": 15,
+            "steals": 6,
+            "turnovers": 9,
+            "blocks": 3,
             "blocksReceived": 0,
-            "fouls": 17,
+            "fouls": 20,
             "foulsReceived": 7,
-            "valuation": 26,
-            "plusMinus": 9
+            "valuation": 30,
+            "plusMinus": 19
           },
           "twoPointers": {
             "made": 5,
-            "attempted": 12
+            "attempted": 13
           },
           "threePointers": {
             "made": 4,
-            "attempted": 10
+            "attempted": 11
           },
           "freeThrows": {
             "made": 3,
             "attempted": 4
           },
-          "minutesTotal": "1:59:54",
-          "minutesAverage": "19:59",
+          "minutesTotal": "2:24:04",
+          "minutesAverage": "20:35",
           "averages": {
-            "points": 4.2,
-            "rebounds": 2.3,
-            "offensiveRebounds": 0.3,
-            "defensiveRebounds": 2,
-            "assists": 2,
-            "steals": 0.8,
+            "points": 3.6,
+            "rebounds": 2.7,
+            "offensiveRebounds": 0.4,
+            "defensiveRebounds": 2.3,
+            "assists": 2.1,
+            "steals": 0.9,
             "turnovers": 1.3,
-            "blocks": 0.3,
+            "blocks": 0.4,
             "blocksReceived": 0,
-            "fouls": 2.8,
-            "foulsReceived": 1.2,
+            "fouls": 2.9,
+            "foulsReceived": 1,
             "valuation": 4.3,
-            "plusMinus": 1.5
+            "plusMinus": 2.7
           },
-          "twoPointersPct": 41.7,
-          "threePointersPct": 40,
+          "twoPointersPct": 38.5,
+          "threePointersPct": 36.4,
           "freeThrowsPct": 75
         },
         {
@@ -18740,9 +18854,9 @@
           "teamId": 113741,
           "name": "GAGLIARDI, LUCA",
           "number": "25",
-          "appearances": 6,
-          "gamesPlayed": 6,
-          "totalSeconds": 4604,
+          "appearances": 7,
+          "gamesPlayed": 7,
+          "totalSeconds": 5022,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18780,26 +18894,32 @@
               "date": "2026-11-19",
               "minutes": "06:58",
               "points": 2
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "06:58",
+              "points": 2
             }
           ],
           "totals": {
-            "points": 21,
-            "rebounds": 26,
-            "offensiveRebounds": 11,
+            "points": 23,
+            "rebounds": 27,
+            "offensiveRebounds": 12,
             "defensiveRebounds": 15,
             "assists": 3,
-            "steals": 2,
+            "steals": 3,
             "turnovers": 7,
-            "blocks": 1,
+            "blocks": 2,
             "blocksReceived": 0,
-            "fouls": 11,
+            "fouls": 13,
             "foulsReceived": 6,
-            "valuation": 33,
-            "plusMinus": -4
+            "valuation": 36,
+            "plusMinus": -7
           },
           "twoPointers": {
-            "made": 8,
-            "attempted": 15
+            "made": 9,
+            "attempted": 16
           },
           "threePointers": {
             "made": 0,
@@ -18809,24 +18929,24 @@
             "made": 5,
             "attempted": 6
           },
-          "minutesTotal": "1:16:44",
-          "minutesAverage": "12:47",
+          "minutesTotal": "1:23:42",
+          "minutesAverage": "11:57",
           "averages": {
-            "points": 3.5,
-            "rebounds": 4.3,
-            "offensiveRebounds": 1.8,
-            "defensiveRebounds": 2.5,
-            "assists": 0.5,
-            "steals": 0.3,
-            "turnovers": 1.2,
-            "blocks": 0.2,
+            "points": 3.3,
+            "rebounds": 3.9,
+            "offensiveRebounds": 1.7,
+            "defensiveRebounds": 2.1,
+            "assists": 0.4,
+            "steals": 0.4,
+            "turnovers": 1,
+            "blocks": 0.3,
             "blocksReceived": 0,
-            "fouls": 1.8,
-            "foulsReceived": 1,
-            "valuation": 5.5,
-            "plusMinus": -0.7
+            "fouls": 1.9,
+            "foulsReceived": 0.9,
+            "valuation": 5.1,
+            "plusMinus": -1
           },
-          "twoPointersPct": 53.3,
+          "twoPointersPct": 56.3,
           "threePointersPct": 0,
           "freeThrowsPct": 83.3
         },
@@ -18835,9 +18955,9 @@
           "teamId": 113741,
           "name": "CARNEGLIA, MATIAS",
           "number": "33",
-          "appearances": 6,
-          "gamesPlayed": 4,
-          "totalSeconds": 6075,
+          "appearances": 7,
+          "gamesPlayed": 5,
+          "totalSeconds": 7628,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18875,64 +18995,70 @@
               "date": "2026-11-19",
               "minutes": "25:53",
               "points": 17
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "25:53",
+              "points": 17
             }
           ],
           "totals": {
-            "points": 53,
-            "rebounds": 17,
-            "offensiveRebounds": 6,
-            "defensiveRebounds": 11,
-            "assists": 5,
+            "points": 70,
+            "rebounds": 23,
+            "offensiveRebounds": 10,
+            "defensiveRebounds": 13,
+            "assists": 6,
             "steals": 2,
             "turnovers": 4,
-            "blocks": 2,
+            "blocks": 3,
             "blocksReceived": 0,
-            "fouls": 8,
-            "foulsReceived": 18,
-            "valuation": 56,
-            "plusMinus": 14
+            "fouls": 10,
+            "foulsReceived": 24,
+            "valuation": 75,
+            "plusMinus": 27
           },
           "twoPointers": {
-            "made": 20,
-            "attempted": 39
+            "made": 26,
+            "attempted": 51
           },
           "threePointers": {
             "made": 0,
-            "attempted": 5
+            "attempted": 8
           },
           "freeThrows": {
-            "made": 13,
-            "attempted": 18
+            "made": 18,
+            "attempted": 24
           },
-          "minutesTotal": "1:41:15",
-          "minutesAverage": "25:19",
+          "minutesTotal": "2:07:08",
+          "minutesAverage": "25:26",
           "averages": {
-            "points": 13.3,
-            "rebounds": 4.3,
-            "offensiveRebounds": 1.5,
-            "defensiveRebounds": 2.8,
-            "assists": 1.3,
-            "steals": 0.5,
-            "turnovers": 1,
-            "blocks": 0.5,
+            "points": 14,
+            "rebounds": 4.6,
+            "offensiveRebounds": 2,
+            "defensiveRebounds": 2.6,
+            "assists": 1.2,
+            "steals": 0.4,
+            "turnovers": 0.8,
+            "blocks": 0.6,
             "blocksReceived": 0,
             "fouls": 2,
-            "foulsReceived": 4.5,
-            "valuation": 14,
-            "plusMinus": 3.5
+            "foulsReceived": 4.8,
+            "valuation": 15,
+            "plusMinus": 5.4
           },
-          "twoPointersPct": 51.3,
+          "twoPointersPct": 51,
           "threePointersPct": 0,
-          "freeThrowsPct": 72.2
+          "freeThrowsPct": 75
         },
         {
           "id": 320845,
           "teamId": 113741,
           "name": "TORRENS, JOSE",
           "number": "7",
-          "appearances": 6,
-          "gamesPlayed": 4,
-          "totalSeconds": 3991,
+          "appearances": 7,
+          "gamesPlayed": 5,
+          "totalSeconds": 4944,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -18970,22 +19096,28 @@
               "date": "2026-11-19",
               "minutes": "15:53",
               "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
+              "date": "2026-11-19",
+              "minutes": "15:53",
+              "points": 0
             }
           ],
           "totals": {
             "points": 23,
-            "rebounds": 8,
-            "offensiveRebounds": 2,
-            "defensiveRebounds": 6,
+            "rebounds": 11,
+            "offensiveRebounds": 3,
+            "defensiveRebounds": 8,
             "assists": 3,
-            "steals": 2,
+            "steals": 3,
             "turnovers": 1,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 10,
-            "foulsReceived": 5,
-            "valuation": 23,
-            "plusMinus": 2
+            "fouls": 12,
+            "foulsReceived": 6,
+            "valuation": 26,
+            "plusMinus": 5
           },
           "twoPointers": {
             "made": 10,
@@ -18999,22 +19131,22 @@
             "made": 3,
             "attempted": 8
           },
-          "minutesTotal": "1:06:31",
-          "minutesAverage": "16:38",
+          "minutesTotal": "1:22:24",
+          "minutesAverage": "16:29",
           "averages": {
-            "points": 5.8,
-            "rebounds": 2,
-            "offensiveRebounds": 0.5,
-            "defensiveRebounds": 1.5,
-            "assists": 0.8,
-            "steals": 0.5,
-            "turnovers": 0.3,
+            "points": 4.6,
+            "rebounds": 2.2,
+            "offensiveRebounds": 0.6,
+            "defensiveRebounds": 1.6,
+            "assists": 0.6,
+            "steals": 0.6,
+            "turnovers": 0.2,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 2.5,
-            "foulsReceived": 1.3,
-            "valuation": 5.8,
-            "plusMinus": 0.5
+            "fouls": 2.4,
+            "foulsReceived": 1.2,
+            "valuation": 5.2,
+            "plusMinus": 1
           },
           "twoPointersPct": 83.3,
           "threePointersPct": 0,
@@ -19025,7 +19157,7 @@
           "teamId": 113741,
           "name": "CASTRO CORIA, JOAQUIN BAUTISTA",
           "number": "45",
-          "appearances": 5,
+          "appearances": 6,
           "gamesPlayed": 0,
           "totalSeconds": 0,
           "lastSeen": "2026-11-19",
@@ -19056,6 +19188,12 @@
             },
             {
               "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
               "date": "2026-11-19",
               "minutes": "00:00",
               "points": 0
@@ -19244,7 +19382,7 @@
           "teamId": 113741,
           "name": "MARTINEZ STUPFLER, FEDERICO",
           "number": "12",
-          "appearances": 5,
+          "appearances": 6,
           "gamesPlayed": 0,
           "totalSeconds": 0,
           "lastSeen": "2026-11-19",
@@ -19275,6 +19413,12 @@
             },
             {
               "matchId": "v2buXbdQnUsn_mBdGJTfebfHEwgeHrvxmhUCxLMDXAKva_Xccwc30fzw==",
+              "date": "2026-11-19",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2t6O-gDvwyFjS6ayc5mLwUe8OitAC2ekX8LvScEjscxDfVGNonanNNA==",
               "date": "2026-11-19",
               "minutes": "00:00",
               "points": 0
@@ -27704,9 +27848,9 @@
           "teamId": 114733,
           "name": "WALTON, MAURICE TALBERT",
           "number": "32",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 13670,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 14736,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -27756,54 +27900,60 @@
               "date": "2026-11-19",
               "minutes": "17:46",
               "points": 4
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "17:46",
+              "points": 4
             }
           ],
           "totals": {
-            "points": 138,
-            "rebounds": 68,
+            "points": 142,
+            "rebounds": 70,
             "offensiveRebounds": 24,
-            "defensiveRebounds": 44,
+            "defensiveRebounds": 46,
             "assists": 12,
             "steals": 5,
-            "turnovers": 19,
+            "turnovers": 20,
             "blocks": 12,
             "blocksReceived": 1,
-            "fouls": 28,
+            "fouls": 33,
             "foulsReceived": 45,
-            "valuation": 177,
+            "valuation": 175,
             "plusMinus": -7
           },
           "twoPointers": {
-            "made": 42,
-            "attempted": 68
+            "made": 44,
+            "attempted": 70
           },
           "threePointers": {
             "made": 6,
-            "attempted": 20
+            "attempted": 22
           },
           "freeThrows": {
             "made": 36,
             "attempted": 51
           },
-          "minutesTotal": "3:47:50",
-          "minutesAverage": "28:29",
+          "minutesTotal": "4:05:36",
+          "minutesAverage": "27:17",
           "averages": {
-            "points": 17.3,
-            "rebounds": 8.5,
-            "offensiveRebounds": 3,
-            "defensiveRebounds": 5.5,
-            "assists": 1.5,
+            "points": 15.8,
+            "rebounds": 7.8,
+            "offensiveRebounds": 2.7,
+            "defensiveRebounds": 5.1,
+            "assists": 1.3,
             "steals": 0.6,
-            "turnovers": 2.4,
-            "blocks": 1.5,
+            "turnovers": 2.2,
+            "blocks": 1.3,
             "blocksReceived": 0.1,
-            "fouls": 3.5,
-            "foulsReceived": 5.6,
-            "valuation": 22.1,
-            "plusMinus": -0.9
+            "fouls": 3.7,
+            "foulsReceived": 5,
+            "valuation": 19.4,
+            "plusMinus": -0.8
           },
-          "twoPointersPct": 61.8,
-          "threePointersPct": 30,
+          "twoPointersPct": 62.9,
+          "threePointersPct": 27.3,
           "freeThrowsPct": 70.6
         },
         {
@@ -27811,9 +27961,9 @@
           "teamId": 114733,
           "name": "FERREYRA, NICOLAS",
           "number": "9",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 14600,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 16492,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -27863,54 +28013,60 @@
               "date": "2026-11-19",
               "minutes": "31:32",
               "points": 12
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "31:32",
+              "points": 12
             }
           ],
           "totals": {
-            "points": 91,
+            "points": 103,
             "rebounds": 26,
             "offensiveRebounds": 1,
             "defensiveRebounds": 25,
-            "assists": 11,
+            "assists": 12,
             "steals": 7,
-            "turnovers": 15,
+            "turnovers": 16,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 10,
-            "foulsReceived": 8,
-            "valuation": 91,
-            "plusMinus": -22
+            "fouls": 12,
+            "foulsReceived": 10,
+            "valuation": 98,
+            "plusMinus": -29
           },
           "twoPointers": {
-            "made": 12,
-            "attempted": 19
+            "made": 15,
+            "attempted": 24
           },
           "threePointers": {
-            "made": 18,
-            "attempted": 36
+            "made": 20,
+            "attempted": 41
           },
           "freeThrows": {
             "made": 13,
             "attempted": 15
           },
-          "minutesTotal": "4:03:20",
-          "minutesAverage": "30:25",
+          "minutesTotal": "4:34:52",
+          "minutesAverage": "30:32",
           "averages": {
             "points": 11.4,
-            "rebounds": 3.3,
+            "rebounds": 2.9,
             "offensiveRebounds": 0.1,
-            "defensiveRebounds": 3.1,
-            "assists": 1.4,
-            "steals": 0.9,
-            "turnovers": 1.9,
+            "defensiveRebounds": 2.8,
+            "assists": 1.3,
+            "steals": 0.8,
+            "turnovers": 1.8,
             "blocks": 0,
             "blocksReceived": 0,
             "fouls": 1.3,
-            "foulsReceived": 1,
-            "valuation": 11.4,
-            "plusMinus": -2.8
+            "foulsReceived": 1.1,
+            "valuation": 10.9,
+            "plusMinus": -3.2
           },
-          "twoPointersPct": 63.2,
-          "threePointersPct": 50,
+          "twoPointersPct": 62.5,
+          "threePointersPct": 48.8,
           "freeThrowsPct": 86.7
         },
         {
@@ -27918,9 +28074,9 @@
           "teamId": 114733,
           "name": "ACOSTA, MATIAS EZEQUIEL",
           "number": "8",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 12893,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 14758,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -27970,54 +28126,60 @@
               "date": "2026-11-19",
               "minutes": "31:05",
               "points": 9
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "31:05",
+              "points": 9
             }
           ],
           "totals": {
-            "points": 81,
-            "rebounds": 38,
-            "offensiveRebounds": 6,
-            "defensiveRebounds": 32,
-            "assists": 17,
+            "points": 90,
+            "rebounds": 41,
+            "offensiveRebounds": 7,
+            "defensiveRebounds": 34,
+            "assists": 19,
             "steals": 13,
-            "turnovers": 15,
+            "turnovers": 20,
             "blocks": 2,
             "blocksReceived": 3,
-            "fouls": 22,
-            "foulsReceived": 23,
-            "valuation": 74,
-            "plusMinus": 4
+            "fouls": 24,
+            "foulsReceived": 26,
+            "valuation": 75,
+            "plusMinus": -6
           },
           "twoPointers": {
-            "made": 13,
-            "attempted": 31
+            "made": 16,
+            "attempted": 39
           },
           "threePointers": {
-            "made": 14,
-            "attempted": 48
+            "made": 15,
+            "attempted": 53
           },
           "freeThrows": {
             "made": 13,
             "attempted": 21
           },
-          "minutesTotal": "3:34:53",
-          "minutesAverage": "26:52",
+          "minutesTotal": "4:05:58",
+          "minutesAverage": "27:20",
           "averages": {
-            "points": 10.1,
-            "rebounds": 4.8,
+            "points": 10,
+            "rebounds": 4.6,
             "offensiveRebounds": 0.8,
-            "defensiveRebounds": 4,
+            "defensiveRebounds": 3.8,
             "assists": 2.1,
-            "steals": 1.6,
-            "turnovers": 1.9,
-            "blocks": 0.3,
-            "blocksReceived": 0.4,
-            "fouls": 2.8,
+            "steals": 1.4,
+            "turnovers": 2.2,
+            "blocks": 0.2,
+            "blocksReceived": 0.3,
+            "fouls": 2.7,
             "foulsReceived": 2.9,
-            "valuation": 9.3,
-            "plusMinus": 0.5
+            "valuation": 8.3,
+            "plusMinus": -0.7
           },
-          "twoPointersPct": 41.9,
-          "threePointersPct": 29.2,
+          "twoPointersPct": 41,
+          "threePointersPct": 28.3,
           "freeThrowsPct": 61.9
         },
         {
@@ -28025,9 +28187,9 @@
           "teamId": 114733,
           "name": "ROSSI, TOMAS",
           "number": "30",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 14006,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 15408,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -28077,171 +28239,70 @@
               "date": "2026-11-19",
               "minutes": "23:22",
               "points": 6
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "23:22",
+              "points": 6
             }
           ],
           "totals": {
-            "points": 79,
-            "rebounds": 64,
-            "offensiveRebounds": 21,
-            "defensiveRebounds": 43,
-            "assists": 11,
+            "points": 85,
+            "rebounds": 73,
+            "offensiveRebounds": 24,
+            "defensiveRebounds": 49,
+            "assists": 13,
             "steals": 7,
             "turnovers": 20,
             "blocks": 3,
             "blocksReceived": 0,
-            "fouls": 23,
-            "foulsReceived": 33,
-            "valuation": 96,
-            "plusMinus": 9
+            "fouls": 24,
+            "foulsReceived": 36,
+            "valuation": 107,
+            "plusMinus": 0
           },
           "twoPointers": {
-            "made": 28,
-            "attempted": 54
+            "made": 31,
+            "attempted": 60
           },
           "threePointers": {
             "made": 3,
-            "attempted": 23
+            "attempted": 26
           },
           "freeThrows": {
             "made": 14,
-            "attempted": 26
+            "attempted": 28
           },
-          "minutesTotal": "3:53:26",
-          "minutesAverage": "29:11",
+          "minutesTotal": "4:16:48",
+          "minutesAverage": "28:32",
           "averages": {
-            "points": 9.9,
-            "rebounds": 8,
-            "offensiveRebounds": 2.6,
+            "points": 9.4,
+            "rebounds": 8.1,
+            "offensiveRebounds": 2.7,
             "defensiveRebounds": 5.4,
             "assists": 1.4,
-            "steals": 0.9,
-            "turnovers": 2.5,
-            "blocks": 0.4,
+            "steals": 0.8,
+            "turnovers": 2.2,
+            "blocks": 0.3,
             "blocksReceived": 0,
-            "fouls": 2.9,
-            "foulsReceived": 4.1,
-            "valuation": 12,
-            "plusMinus": 1.1
+            "fouls": 2.7,
+            "foulsReceived": 4,
+            "valuation": 11.9,
+            "plusMinus": 0
           },
-          "twoPointersPct": 51.9,
-          "threePointersPct": 13,
-          "freeThrowsPct": 53.8
-        },
-        {
-          "id": 96858,
-          "teamId": 114733,
-          "name": "MANZANO, JUAN",
-          "number": "5",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 7558,
-          "lastSeen": "2026-11-19",
-          "games": [
-            {
-              "matchId": "v28mxsVsjQUHO1Vygc7n9nH88pmu5pZhtZa8mAfM7dKpbwVu2HFwASQw==",
-              "date": "2026-10-19",
-              "minutes": "10:19",
-              "points": 4
-            },
-            {
-              "matchId": "v2rlwiid8MNyho32N9A2ttzAy1iM9WKKeA2KzshCQe9P884CP8TjZ5QA==",
-              "date": "2026-10-23",
-              "minutes": "15:50",
-              "points": 4
-            },
-            {
-              "matchId": "v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==",
-              "date": "2026-10-26",
-              "minutes": "21:40",
-              "points": 7
-            },
-            {
-              "matchId": "v2qe2uvj11UaPSkxvzTv43QFI0ld9_mBssf5VWCSh_qSkXcMv681hiNA==",
-              "date": "2026-11-06",
-              "minutes": "20:17",
-              "points": 8
-            },
-            {
-              "matchId": "v2WRgPvjwEGkmHKUhg2LQV451_tkWika2sX1CrftFLKYkG4vHb3kleqg==",
-              "date": "2026-11-08",
-              "minutes": "08:36",
-              "points": 0
-            },
-            {
-              "matchId": "v2uvzOir-x-UW2eLw7kr5vN-6QrTI3IasFsCumB4tr-Uua5gsj1GO9AQ==",
-              "date": "2026-11-10",
-              "minutes": "22:14",
-              "points": 9
-            },
-            {
-              "matchId": "v2K9jl8RbW7IONDIpwRwPTK4UjoHBm2mqIRU2zpFO8Q1GWFMHvJngtVw==",
-              "date": "2026-11-15",
-              "minutes": "13:42",
-              "points": 13
-            },
-            {
-              "matchId": "v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==",
-              "date": "2026-11-19",
-              "minutes": "13:20",
-              "points": 3
-            }
-          ],
-          "totals": {
-            "points": 48,
-            "rebounds": 11,
-            "offensiveRebounds": 4,
-            "defensiveRebounds": 7,
-            "assists": 6,
-            "steals": 5,
-            "turnovers": 6,
-            "blocks": 0,
-            "blocksReceived": 3,
-            "fouls": 26,
-            "foulsReceived": 6,
-            "valuation": 23,
-            "plusMinus": -12
-          },
-          "twoPointers": {
-            "made": 12,
-            "attempted": 19
-          },
-          "threePointers": {
-            "made": 6,
-            "attempted": 17
-          },
-          "freeThrows": {
-            "made": 6,
-            "attempted": 6
-          },
-          "minutesTotal": "2:05:58",
-          "minutesAverage": "15:45",
-          "averages": {
-            "points": 6,
-            "rebounds": 1.4,
-            "offensiveRebounds": 0.5,
-            "defensiveRebounds": 0.9,
-            "assists": 0.8,
-            "steals": 0.6,
-            "turnovers": 0.8,
-            "blocks": 0,
-            "blocksReceived": 0.4,
-            "fouls": 3.3,
-            "foulsReceived": 0.8,
-            "valuation": 2.9,
-            "plusMinus": -1.5
-          },
-          "twoPointersPct": 63.2,
-          "threePointersPct": 35.3,
-          "freeThrowsPct": 100
+          "twoPointersPct": 51.7,
+          "threePointersPct": 11.5,
+          "freeThrowsPct": 50
         },
         {
           "id": 429701,
           "teamId": 114733,
           "name": "SINGH, LEONEL",
           "number": "0",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 9449,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 10673,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -28291,64 +28352,183 @@
               "date": "2026-11-19",
               "minutes": "20:24",
               "points": 8
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "20:24",
+              "points": 8
             }
           ],
           "totals": {
-            "points": 44,
-            "rebounds": 41,
+            "points": 52,
+            "rebounds": 45,
             "offensiveRebounds": 8,
-            "defensiveRebounds": 33,
-            "assists": 6,
-            "steals": 8,
+            "defensiveRebounds": 37,
+            "assists": 8,
+            "steals": 10,
             "turnovers": 16,
             "blocks": 3,
             "blocksReceived": 1,
-            "fouls": 21,
-            "foulsReceived": 14,
-            "valuation": 42,
-            "plusMinus": -36
+            "fouls": 23,
+            "foulsReceived": 15,
+            "valuation": 49,
+            "plusMinus": -44
           },
           "twoPointers": {
-            "made": 11,
-            "attempted": 26
+            "made": 15,
+            "attempted": 34
           },
           "threePointers": {
             "made": 4,
-            "attempted": 15
+            "attempted": 19
           },
           "freeThrows": {
             "made": 10,
             "attempted": 20
           },
-          "minutesTotal": "2:37:29",
-          "minutesAverage": "19:41",
+          "minutesTotal": "2:57:53",
+          "minutesAverage": "19:46",
           "averages": {
-            "points": 5.5,
-            "rebounds": 5.1,
-            "offensiveRebounds": 1,
+            "points": 5.8,
+            "rebounds": 5,
+            "offensiveRebounds": 0.9,
             "defensiveRebounds": 4.1,
-            "assists": 0.8,
-            "steals": 1,
-            "turnovers": 2,
-            "blocks": 0.4,
+            "assists": 0.9,
+            "steals": 1.1,
+            "turnovers": 1.8,
+            "blocks": 0.3,
             "blocksReceived": 0.1,
             "fouls": 2.6,
-            "foulsReceived": 1.8,
-            "valuation": 5.3,
-            "plusMinus": -4.5
+            "foulsReceived": 1.7,
+            "valuation": 5.4,
+            "plusMinus": -4.9
           },
-          "twoPointersPct": 42.3,
-          "threePointersPct": 26.7,
+          "twoPointersPct": 44.1,
+          "threePointersPct": 21.1,
           "freeThrowsPct": 50
+        },
+        {
+          "id": 96858,
+          "teamId": 114733,
+          "name": "MANZANO, JUAN",
+          "number": "5",
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 8358,
+          "lastSeen": "2026-11-19",
+          "games": [
+            {
+              "matchId": "v28mxsVsjQUHO1Vygc7n9nH88pmu5pZhtZa8mAfM7dKpbwVu2HFwASQw==",
+              "date": "2026-10-19",
+              "minutes": "10:19",
+              "points": 4
+            },
+            {
+              "matchId": "v2rlwiid8MNyho32N9A2ttzAy1iM9WKKeA2KzshCQe9P884CP8TjZ5QA==",
+              "date": "2026-10-23",
+              "minutes": "15:50",
+              "points": 4
+            },
+            {
+              "matchId": "v2Gdlga7EV_6gVHNzYOJ_2Dr0OzV27STMLtcBrbaJb-2Sk9fqHs9hnVg==",
+              "date": "2026-10-26",
+              "minutes": "21:40",
+              "points": 7
+            },
+            {
+              "matchId": "v2qe2uvj11UaPSkxvzTv43QFI0ld9_mBssf5VWCSh_qSkXcMv681hiNA==",
+              "date": "2026-11-06",
+              "minutes": "20:17",
+              "points": 8
+            },
+            {
+              "matchId": "v2WRgPvjwEGkmHKUhg2LQV451_tkWika2sX1CrftFLKYkG4vHb3kleqg==",
+              "date": "2026-11-08",
+              "minutes": "08:36",
+              "points": 0
+            },
+            {
+              "matchId": "v2uvzOir-x-UW2eLw7kr5vN-6QrTI3IasFsCumB4tr-Uua5gsj1GO9AQ==",
+              "date": "2026-11-10",
+              "minutes": "22:14",
+              "points": 9
+            },
+            {
+              "matchId": "v2K9jl8RbW7IONDIpwRwPTK4UjoHBm2mqIRU2zpFO8Q1GWFMHvJngtVw==",
+              "date": "2026-11-15",
+              "minutes": "13:42",
+              "points": 13
+            },
+            {
+              "matchId": "v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==",
+              "date": "2026-11-19",
+              "minutes": "13:20",
+              "points": 3
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "13:20",
+              "points": 3
+            }
+          ],
+          "totals": {
+            "points": 51,
+            "rebounds": 12,
+            "offensiveRebounds": 4,
+            "defensiveRebounds": 8,
+            "assists": 7,
+            "steals": 5,
+            "turnovers": 9,
+            "blocks": 0,
+            "blocksReceived": 3,
+            "fouls": 29,
+            "foulsReceived": 7,
+            "valuation": 21,
+            "plusMinus": -28
+          },
+          "twoPointers": {
+            "made": 12,
+            "attempted": 21
+          },
+          "threePointers": {
+            "made": 7,
+            "attempted": 18
+          },
+          "freeThrows": {
+            "made": 6,
+            "attempted": 6
+          },
+          "minutesTotal": "2:19:18",
+          "minutesAverage": "15:29",
+          "averages": {
+            "points": 5.7,
+            "rebounds": 1.3,
+            "offensiveRebounds": 0.4,
+            "defensiveRebounds": 0.9,
+            "assists": 0.8,
+            "steals": 0.6,
+            "turnovers": 1,
+            "blocks": 0,
+            "blocksReceived": 0.3,
+            "fouls": 3.2,
+            "foulsReceived": 0.8,
+            "valuation": 2.3,
+            "plusMinus": -3.1
+          },
+          "twoPointersPct": 57.1,
+          "threePointersPct": 38.9,
+          "freeThrowsPct": 100
         },
         {
           "id": 97148,
           "teamId": 114733,
           "name": "INGRATA, VALENTÍN",
           "number": "11",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 7457,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 8175,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -28398,22 +28578,28 @@
               "date": "2026-11-19",
               "minutes": "11:58",
               "points": 0
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "11:58",
+              "points": 0
             }
           ],
           "totals": {
             "points": 36,
-            "rebounds": 11,
+            "rebounds": 12,
             "offensiveRebounds": 0,
-            "defensiveRebounds": 11,
-            "assists": 7,
-            "steals": 5,
-            "turnovers": 11,
+            "defensiveRebounds": 12,
+            "assists": 10,
+            "steals": 7,
+            "turnovers": 12,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 12,
+            "fouls": 13,
             "foulsReceived": 3,
-            "valuation": 5,
-            "plusMinus": -28
+            "valuation": 4,
+            "plusMinus": -45
           },
           "twoPointers": {
             "made": 0,
@@ -28421,31 +28607,31 @@
           },
           "threePointers": {
             "made": 11,
-            "attempted": 42
+            "attempted": 47
           },
           "freeThrows": {
             "made": 3,
             "attempted": 4
           },
-          "minutesTotal": "2:04:17",
-          "minutesAverage": "15:32",
+          "minutesTotal": "2:16:15",
+          "minutesAverage": "15:08",
           "averages": {
-            "points": 4.5,
-            "rebounds": 1.4,
+            "points": 4,
+            "rebounds": 1.3,
             "offensiveRebounds": 0,
-            "defensiveRebounds": 1.4,
-            "assists": 0.9,
-            "steals": 0.6,
-            "turnovers": 1.4,
+            "defensiveRebounds": 1.3,
+            "assists": 1.1,
+            "steals": 0.8,
+            "turnovers": 1.3,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 1.5,
-            "foulsReceived": 0.4,
-            "valuation": 0.6,
-            "plusMinus": -3.5
+            "fouls": 1.4,
+            "foulsReceived": 0.3,
+            "valuation": 0.4,
+            "plusMinus": -5
           },
           "twoPointersPct": 0,
-          "threePointersPct": 26.2,
+          "threePointersPct": 23.4,
           "freeThrowsPct": 75
         },
         {
@@ -28453,9 +28639,9 @@
           "teamId": 114733,
           "name": "LEMME, NICOLÁS",
           "number": "4",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 2727,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 2983,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -28505,26 +28691,32 @@
               "date": "2026-11-19",
               "minutes": "04:16",
               "points": 2
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "04:16",
+              "points": 2
             }
           ],
           "totals": {
-            "points": 15,
-            "rebounds": 7,
+            "points": 17,
+            "rebounds": 8,
             "offensiveRebounds": 1,
-            "defensiveRebounds": 6,
-            "assists": 2,
+            "defensiveRebounds": 7,
+            "assists": 3,
             "steals": 3,
             "turnovers": 6,
             "blocks": 0,
             "blocksReceived": 1,
             "fouls": 4,
             "foulsReceived": 3,
-            "valuation": 12,
-            "plusMinus": 3
+            "valuation": 15,
+            "plusMinus": 0
           },
           "twoPointers": {
-            "made": 3,
-            "attempted": 5
+            "made": 4,
+            "attempted": 7
           },
           "threePointers": {
             "made": 3,
@@ -28534,24 +28726,24 @@
             "made": 0,
             "attempted": 1
           },
-          "minutesTotal": "45:27",
-          "minutesAverage": "5:41",
+          "minutesTotal": "49:43",
+          "minutesAverage": "5:31",
           "averages": {
             "points": 1.9,
             "rebounds": 0.9,
             "offensiveRebounds": 0.1,
             "defensiveRebounds": 0.8,
             "assists": 0.3,
-            "steals": 0.4,
-            "turnovers": 0.8,
+            "steals": 0.3,
+            "turnovers": 0.7,
             "blocks": 0,
             "blocksReceived": 0.1,
-            "fouls": 0.5,
-            "foulsReceived": 0.4,
-            "valuation": 1.5,
-            "plusMinus": 0.4
+            "fouls": 0.4,
+            "foulsReceived": 0.3,
+            "valuation": 1.7,
+            "plusMinus": 0
           },
-          "twoPointersPct": 60,
+          "twoPointersPct": 57.1,
           "threePointersPct": 42.9,
           "freeThrowsPct": 0
         },
@@ -28560,9 +28752,9 @@
           "teamId": 114733,
           "name": "BAEZ, CARLOS JAVIER",
           "number": "33",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 3496,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 4139,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -28612,26 +28804,32 @@
               "date": "2026-11-19",
               "minutes": "10:43",
               "points": 2
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "10:43",
+              "points": 2
             }
           ],
           "totals": {
-            "points": 13,
-            "rebounds": 12,
-            "offensiveRebounds": 4,
-            "defensiveRebounds": 8,
-            "assists": 4,
+            "points": 15,
+            "rebounds": 17,
+            "offensiveRebounds": 6,
+            "defensiveRebounds": 11,
+            "assists": 5,
             "steals": 1,
             "turnovers": 5,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 9,
-            "foulsReceived": 6,
-            "valuation": 13,
-            "plusMinus": -32
+            "fouls": 11,
+            "foulsReceived": 8,
+            "valuation": 19,
+            "plusMinus": -42
           },
           "twoPointers": {
-            "made": 6,
-            "attempted": 9
+            "made": 7,
+            "attempted": 10
           },
           "threePointers": {
             "made": 0,
@@ -28639,28 +28837,28 @@
           },
           "freeThrows": {
             "made": 1,
-            "attempted": 4
+            "attempted": 6
           },
-          "minutesTotal": "58:16",
-          "minutesAverage": "7:17",
+          "minutesTotal": "1:08:59",
+          "minutesAverage": "7:40",
           "averages": {
-            "points": 1.6,
-            "rebounds": 1.5,
-            "offensiveRebounds": 0.5,
-            "defensiveRebounds": 1,
-            "assists": 0.5,
+            "points": 1.7,
+            "rebounds": 1.9,
+            "offensiveRebounds": 0.7,
+            "defensiveRebounds": 1.2,
+            "assists": 0.6,
             "steals": 0.1,
             "turnovers": 0.6,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 1.1,
-            "foulsReceived": 0.8,
-            "valuation": 1.6,
-            "plusMinus": -4
+            "fouls": 1.2,
+            "foulsReceived": 0.9,
+            "valuation": 2.1,
+            "plusMinus": -4.7
           },
-          "twoPointersPct": 66.7,
+          "twoPointersPct": 70,
           "threePointersPct": 0,
-          "freeThrowsPct": 25
+          "freeThrowsPct": 16.7
         },
         {
           "id": 373840,
@@ -28756,9 +28954,9 @@
           "teamId": 114733,
           "name": "CAVE, ELIAS SALVADOR",
           "number": "2",
-          "appearances": 2,
-          "gamesPlayed": 2,
-          "totalSeconds": 4191,
+          "appearances": 3,
+          "gamesPlayed": 3,
+          "totalSeconds": 6208,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -28772,64 +28970,70 @@
               "date": "2026-11-19",
               "minutes": "33:37",
               "points": 19
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "33:37",
+              "points": 19
             }
           ],
           "totals": {
-            "points": 36,
-            "rebounds": 17,
-            "offensiveRebounds": 1,
-            "defensiveRebounds": 16,
-            "assists": 1,
-            "steals": 1,
-            "turnovers": 2,
+            "points": 55,
+            "rebounds": 27,
+            "offensiveRebounds": 2,
+            "defensiveRebounds": 25,
+            "assists": 2,
+            "steals": 2,
+            "turnovers": 3,
             "blocks": 1,
             "blocksReceived": 0,
-            "fouls": 4,
-            "foulsReceived": 4,
-            "valuation": 43,
-            "plusMinus": -1
+            "fouls": 5,
+            "foulsReceived": 7,
+            "valuation": 69,
+            "plusMinus": -15
           },
           "twoPointers": {
-            "made": 11,
-            "attempted": 17
+            "made": 18,
+            "attempted": 28
           },
           "threePointers": {
-            "made": 4,
-            "attempted": 8
+            "made": 5,
+            "attempted": 11
           },
           "freeThrows": {
-            "made": 2,
-            "attempted": 3
+            "made": 4,
+            "attempted": 5
           },
-          "minutesTotal": "1:09:51",
-          "minutesAverage": "34:56",
+          "minutesTotal": "1:43:28",
+          "minutesAverage": "34:29",
           "averages": {
-            "points": 18,
-            "rebounds": 8.5,
-            "offensiveRebounds": 0.5,
-            "defensiveRebounds": 8,
-            "assists": 0.5,
-            "steals": 0.5,
+            "points": 18.3,
+            "rebounds": 9,
+            "offensiveRebounds": 0.7,
+            "defensiveRebounds": 8.3,
+            "assists": 0.7,
+            "steals": 0.7,
             "turnovers": 1,
-            "blocks": 0.5,
+            "blocks": 0.3,
             "blocksReceived": 0,
-            "fouls": 2,
-            "foulsReceived": 2,
-            "valuation": 21.5,
-            "plusMinus": -0.5
+            "fouls": 1.7,
+            "foulsReceived": 2.3,
+            "valuation": 23,
+            "plusMinus": -5
           },
-          "twoPointersPct": 64.7,
-          "threePointersPct": 50,
-          "freeThrowsPct": 66.7
+          "twoPointersPct": 64.3,
+          "threePointersPct": 45.5,
+          "freeThrowsPct": 80
         },
         {
           "id": 152774,
           "teamId": 114733,
           "name": "ROSSI, JONAS",
           "number": "3",
-          "appearances": 8,
-          "gamesPlayed": 1,
-          "totalSeconds": 118,
+          "appearances": 9,
+          "gamesPlayed": 2,
+          "totalSeconds": 236,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -28879,36 +29083,42 @@
               "date": "2026-11-19",
               "minutes": "01:58",
               "points": 3
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "01:58",
+              "points": 3
             }
           ],
           "totals": {
-            "points": 3,
-            "rebounds": 1,
+            "points": 6,
+            "rebounds": 2,
             "offensiveRebounds": 0,
-            "defensiveRebounds": 1,
+            "defensiveRebounds": 2,
             "assists": 0,
             "steals": 0,
             "turnovers": 0,
-            "blocks": 1,
+            "blocks": 2,
             "blocksReceived": 0,
-            "fouls": 1,
+            "fouls": 2,
             "foulsReceived": 0,
-            "valuation": 4,
-            "plusMinus": 4
+            "valuation": 8,
+            "plusMinus": 8
           },
           "twoPointers": {
             "made": 0,
             "attempted": 0
           },
           "threePointers": {
-            "made": 1,
-            "attempted": 1
+            "made": 2,
+            "attempted": 2
           },
           "freeThrows": {
             "made": 0,
             "attempted": 0
           },
-          "minutesTotal": "1:58",
+          "minutesTotal": "3:56",
           "minutesAverage": "1:58",
           "averages": {
             "points": 3,
@@ -29045,9 +29255,9 @@
           "teamId": 114766,
           "name": "CONTE GRAND ALFONSO, JUAN CRUZ",
           "number": "3",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 15095,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 16959,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29097,64 +29307,70 @@
               "date": "2026-11-19",
               "minutes": "31:04",
               "points": 21
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "31:04",
+              "points": 21
             }
           ],
           "totals": {
-            "points": 113,
-            "rebounds": 45,
-            "offensiveRebounds": 10,
-            "defensiveRebounds": 35,
-            "assists": 7,
-            "steals": 9,
+            "points": 134,
+            "rebounds": 54,
+            "offensiveRebounds": 13,
+            "defensiveRebounds": 41,
+            "assists": 9,
+            "steals": 10,
             "turnovers": 6,
             "blocks": 1,
             "blocksReceived": 2,
-            "fouls": 21,
-            "foulsReceived": 18,
-            "valuation": 104,
-            "plusMinus": -13
+            "fouls": 22,
+            "foulsReceived": 21,
+            "valuation": 130,
+            "plusMinus": 2
           },
           "twoPointers": {
-            "made": 26,
-            "attempted": 43
+            "made": 30,
+            "attempted": 50
           },
           "threePointers": {
-            "made": 16,
-            "attempted": 51
+            "made": 19,
+            "attempted": 59
           },
           "freeThrows": {
-            "made": 13,
-            "attempted": 21
+            "made": 17,
+            "attempted": 26
           },
-          "minutesTotal": "4:11:35",
-          "minutesAverage": "31:27",
+          "minutesTotal": "4:42:39",
+          "minutesAverage": "31:24",
           "averages": {
-            "points": 14.1,
-            "rebounds": 5.6,
-            "offensiveRebounds": 1.3,
-            "defensiveRebounds": 4.4,
-            "assists": 0.9,
+            "points": 14.9,
+            "rebounds": 6,
+            "offensiveRebounds": 1.4,
+            "defensiveRebounds": 4.6,
+            "assists": 1,
             "steals": 1.1,
-            "turnovers": 0.8,
+            "turnovers": 0.7,
             "blocks": 0.1,
-            "blocksReceived": 0.3,
-            "fouls": 2.6,
+            "blocksReceived": 0.2,
+            "fouls": 2.4,
             "foulsReceived": 2.3,
-            "valuation": 13,
-            "plusMinus": -1.6
+            "valuation": 14.4,
+            "plusMinus": 0.2
           },
-          "twoPointersPct": 60.5,
-          "threePointersPct": 31.4,
-          "freeThrowsPct": 61.9
+          "twoPointersPct": 60,
+          "threePointersPct": 32.2,
+          "freeThrowsPct": 65.4
         },
         {
           "id": 386468,
           "teamId": 114766,
           "name": "VENEGAS SCHAEFER, JUAN PABLO",
           "number": "2",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 16334,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 18275,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29204,54 +29420,60 @@
               "date": "2026-11-19",
               "minutes": "32:21",
               "points": 5
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "32:21",
+              "points": 5
             }
           ],
           "totals": {
-            "points": 100,
-            "rebounds": 41,
-            "offensiveRebounds": 3,
-            "defensiveRebounds": 38,
-            "assists": 48,
-            "steals": 14,
-            "turnovers": 24,
+            "points": 105,
+            "rebounds": 45,
+            "offensiveRebounds": 4,
+            "defensiveRebounds": 41,
+            "assists": 55,
+            "steals": 17,
+            "turnovers": 27,
             "blocks": 0,
             "blocksReceived": 3,
-            "fouls": 20,
-            "foulsReceived": 33,
-            "valuation": 128,
-            "plusMinus": 8
+            "fouls": 23,
+            "foulsReceived": 34,
+            "valuation": 135,
+            "plusMinus": 20
           },
           "twoPointers": {
-            "made": 17,
-            "attempted": 36
+            "made": 18,
+            "attempted": 38
           },
           "threePointers": {
-            "made": 10,
-            "attempted": 39
+            "made": 11,
+            "attempted": 46
           },
           "freeThrows": {
             "made": 36,
             "attempted": 49
           },
-          "minutesTotal": "4:32:14",
-          "minutesAverage": "34:02",
+          "minutesTotal": "5:04:35",
+          "minutesAverage": "33:51",
           "averages": {
-            "points": 12.5,
-            "rebounds": 5.1,
+            "points": 11.7,
+            "rebounds": 5,
             "offensiveRebounds": 0.4,
-            "defensiveRebounds": 4.8,
-            "assists": 6,
-            "steals": 1.8,
+            "defensiveRebounds": 4.6,
+            "assists": 6.1,
+            "steals": 1.9,
             "turnovers": 3,
             "blocks": 0,
-            "blocksReceived": 0.4,
-            "fouls": 2.5,
-            "foulsReceived": 4.1,
-            "valuation": 16,
-            "plusMinus": 1
+            "blocksReceived": 0.3,
+            "fouls": 2.6,
+            "foulsReceived": 3.8,
+            "valuation": 15,
+            "plusMinus": 2.2
           },
-          "twoPointersPct": 47.2,
-          "threePointersPct": 25.6,
+          "twoPointersPct": 47.4,
+          "threePointersPct": 23.9,
           "freeThrowsPct": 73.5
         },
         {
@@ -29259,9 +29481,9 @@
           "teamId": 114766,
           "name": "PANTANO, AGUSTIN SANTIAGO",
           "number": "11",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 12217,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 13806,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29311,64 +29533,70 @@
               "date": "2026-11-19",
               "minutes": "26:29",
               "points": 14
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "26:29",
+              "points": 14
             }
           ],
           "totals": {
-            "points": 82,
-            "rebounds": 26,
+            "points": 96,
+            "rebounds": 31,
             "offensiveRebounds": 5,
-            "defensiveRebounds": 21,
-            "assists": 13,
-            "steals": 9,
-            "turnovers": 14,
+            "defensiveRebounds": 26,
+            "assists": 15,
+            "steals": 10,
+            "turnovers": 15,
             "blocks": 0,
             "blocksReceived": 4,
             "fouls": 13,
-            "foulsReceived": 14,
-            "valuation": 73,
-            "plusMinus": 5
+            "foulsReceived": 15,
+            "valuation": 90,
+            "plusMinus": 26
           },
           "twoPointers": {
-            "made": 20,
-            "attempted": 38
+            "made": 24,
+            "attempted": 43
           },
           "threePointers": {
-            "made": 10,
-            "attempted": 29
+            "made": 11,
+            "attempted": 33
           },
           "freeThrows": {
-            "made": 12,
-            "attempted": 15
+            "made": 15,
+            "attempted": 19
           },
-          "minutesTotal": "3:23:37",
-          "minutesAverage": "25:27",
+          "minutesTotal": "3:50:06",
+          "minutesAverage": "25:34",
           "averages": {
-            "points": 10.3,
-            "rebounds": 3.3,
+            "points": 10.7,
+            "rebounds": 3.4,
             "offensiveRebounds": 0.6,
-            "defensiveRebounds": 2.6,
-            "assists": 1.6,
+            "defensiveRebounds": 2.9,
+            "assists": 1.7,
             "steals": 1.1,
-            "turnovers": 1.8,
+            "turnovers": 1.7,
             "blocks": 0,
-            "blocksReceived": 0.5,
-            "fouls": 1.6,
-            "foulsReceived": 1.8,
-            "valuation": 9.1,
-            "plusMinus": 0.6
+            "blocksReceived": 0.4,
+            "fouls": 1.4,
+            "foulsReceived": 1.7,
+            "valuation": 10,
+            "plusMinus": 2.9
           },
-          "twoPointersPct": 52.6,
-          "threePointersPct": 34.5,
-          "freeThrowsPct": 80
+          "twoPointersPct": 55.8,
+          "threePointersPct": 33.3,
+          "freeThrowsPct": 78.9
         },
         {
           "id": 386253,
           "teamId": 114766,
           "name": "DIGON, ALEJO ADRIEL",
           "number": "17",
-          "appearances": 8,
-          "gamesPlayed": 8,
-          "totalSeconds": 16057,
+          "appearances": 9,
+          "gamesPlayed": 9,
+          "totalSeconds": 17877,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29418,64 +29646,70 @@
               "date": "2026-11-19",
               "minutes": "30:20",
               "points": 14
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "30:20",
+              "points": 14
             }
           ],
           "totals": {
-            "points": 77,
-            "rebounds": 50,
+            "points": 91,
+            "rebounds": 61,
             "offensiveRebounds": 5,
-            "defensiveRebounds": 45,
-            "assists": 13,
-            "steals": 9,
+            "defensiveRebounds": 56,
+            "assists": 15,
+            "steals": 10,
             "turnovers": 13,
             "blocks": 1,
             "blocksReceived": 0,
-            "fouls": 20,
-            "foulsReceived": 8,
-            "valuation": 82,
-            "plusMinus": -35
+            "fouls": 22,
+            "foulsReceived": 10,
+            "valuation": 108,
+            "plusMinus": -27
           },
           "twoPointers": {
             "made": 7,
             "attempted": 19
           },
           "threePointers": {
-            "made": 19,
-            "attempted": 49
+            "made": 23,
+            "attempted": 55
           },
           "freeThrows": {
-            "made": 6,
-            "attempted": 7
+            "made": 8,
+            "attempted": 9
           },
-          "minutesTotal": "4:27:37",
-          "minutesAverage": "33:27",
+          "minutesTotal": "4:57:57",
+          "minutesAverage": "33:06",
           "averages": {
-            "points": 9.6,
-            "rebounds": 6.3,
+            "points": 10.1,
+            "rebounds": 6.8,
             "offensiveRebounds": 0.6,
-            "defensiveRebounds": 5.6,
-            "assists": 1.6,
+            "defensiveRebounds": 6.2,
+            "assists": 1.7,
             "steals": 1.1,
-            "turnovers": 1.6,
+            "turnovers": 1.4,
             "blocks": 0.1,
             "blocksReceived": 0,
-            "fouls": 2.5,
-            "foulsReceived": 1,
-            "valuation": 10.3,
-            "plusMinus": -4.4
+            "fouls": 2.4,
+            "foulsReceived": 1.1,
+            "valuation": 12,
+            "plusMinus": -3
           },
           "twoPointersPct": 36.8,
-          "threePointersPct": 38.8,
-          "freeThrowsPct": 85.7
+          "threePointersPct": 41.8,
+          "freeThrowsPct": 88.9
         },
         {
           "id": 263013,
           "teamId": 114766,
           "name": "MILOVICH , MÁXIMO",
           "number": "31",
-          "appearances": 8,
-          "gamesPlayed": 7,
-          "totalSeconds": 7424,
+          "appearances": 9,
+          "gamesPlayed": 8,
+          "totalSeconds": 8406,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29525,64 +29759,70 @@
               "date": "2026-11-19",
               "minutes": "16:22",
               "points": 9
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "16:22",
+              "points": 9
             }
           ],
           "totals": {
-            "points": 64,
-            "rebounds": 38,
-            "offensiveRebounds": 16,
-            "defensiveRebounds": 22,
+            "points": 73,
+            "rebounds": 43,
+            "offensiveRebounds": 18,
+            "defensiveRebounds": 25,
             "assists": 6,
             "steals": 3,
-            "turnovers": 8,
+            "turnovers": 10,
             "blocks": 3,
             "blocksReceived": 0,
-            "fouls": 14,
-            "foulsReceived": 27,
-            "valuation": 85,
-            "plusMinus": 7
+            "fouls": 16,
+            "foulsReceived": 33,
+            "valuation": 88,
+            "plusMinus": 17
           },
           "twoPointers": {
-            "made": 21,
-            "attempted": 38
+            "made": 24,
+            "attempted": 47
           },
           "threePointers": {
             "made": 0,
             "attempted": 1
           },
           "freeThrows": {
-            "made": 22,
-            "attempted": 38
+            "made": 25,
+            "attempted": 48
           },
-          "minutesTotal": "2:03:44",
-          "minutesAverage": "17:41",
+          "minutesTotal": "2:20:06",
+          "minutesAverage": "17:31",
           "averages": {
             "points": 9.1,
             "rebounds": 5.4,
             "offensiveRebounds": 2.3,
             "defensiveRebounds": 3.1,
-            "assists": 0.9,
+            "assists": 0.8,
             "steals": 0.4,
-            "turnovers": 1.1,
+            "turnovers": 1.3,
             "blocks": 0.4,
             "blocksReceived": 0,
             "fouls": 2,
-            "foulsReceived": 3.9,
-            "valuation": 12.1,
-            "plusMinus": 1
+            "foulsReceived": 4.1,
+            "valuation": 11,
+            "plusMinus": 2.1
           },
-          "twoPointersPct": 55.3,
+          "twoPointersPct": 51.1,
           "threePointersPct": 0,
-          "freeThrowsPct": 57.9
+          "freeThrowsPct": 52.1
         },
         {
           "id": 376735,
           "teamId": 114766,
           "name": "APREA, JULIAN",
           "number": "7",
-          "appearances": 7,
-          "gamesPlayed": 7,
-          "totalSeconds": 11596,
+          "appearances": 8,
+          "gamesPlayed": 8,
+          "totalSeconds": 13125,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29626,26 +29866,32 @@
               "date": "2026-11-19",
               "minutes": "25:29",
               "points": 4
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "25:29",
+              "points": 4
             }
           ],
           "totals": {
-            "points": 58,
-            "rebounds": 27,
-            "offensiveRebounds": 5,
+            "points": 62,
+            "rebounds": 28,
+            "offensiveRebounds": 6,
             "defensiveRebounds": 22,
             "assists": 12,
             "steals": 4,
             "turnovers": 7,
             "blocks": 3,
             "blocksReceived": 0,
-            "fouls": 8,
-            "foulsReceived": 20,
-            "valuation": 72,
-            "plusMinus": 32
+            "fouls": 9,
+            "foulsReceived": 24,
+            "valuation": 78,
+            "plusMinus": 40
           },
           "twoPointers": {
-            "made": 25,
-            "attempted": 56
+            "made": 27,
+            "attempted": 60
           },
           "threePointers": {
             "made": 0,
@@ -29655,24 +29901,24 @@
             "made": 8,
             "attempted": 12
           },
-          "minutesTotal": "3:13:16",
-          "minutesAverage": "27:37",
+          "minutesTotal": "3:38:45",
+          "minutesAverage": "27:21",
           "averages": {
-            "points": 8.3,
-            "rebounds": 3.9,
-            "offensiveRebounds": 0.7,
-            "defensiveRebounds": 3.1,
-            "assists": 1.7,
-            "steals": 0.6,
-            "turnovers": 1,
+            "points": 7.8,
+            "rebounds": 3.5,
+            "offensiveRebounds": 0.8,
+            "defensiveRebounds": 2.8,
+            "assists": 1.5,
+            "steals": 0.5,
+            "turnovers": 0.9,
             "blocks": 0.4,
             "blocksReceived": 0,
             "fouls": 1.1,
-            "foulsReceived": 2.9,
-            "valuation": 10.3,
-            "plusMinus": 4.6
+            "foulsReceived": 3,
+            "valuation": 9.8,
+            "plusMinus": 5
           },
-          "twoPointersPct": 44.6,
+          "twoPointersPct": 45,
           "threePointersPct": 0,
           "freeThrowsPct": 66.7
         },
@@ -29681,9 +29927,9 @@
           "teamId": 114766,
           "name": "CARRANZA, LAUTARO",
           "number": "8",
-          "appearances": 8,
-          "gamesPlayed": 7,
-          "totalSeconds": 3615,
+          "appearances": 9,
+          "gamesPlayed": 8,
+          "totalSeconds": 4029,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29733,54 +29979,60 @@
               "date": "2026-11-19",
               "minutes": "06:54",
               "points": 5
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "06:54",
+              "points": 5
             }
           ],
           "totals": {
-            "points": 25,
-            "rebounds": 30,
+            "points": 30,
+            "rebounds": 31,
             "offensiveRebounds": 19,
-            "defensiveRebounds": 11,
+            "defensiveRebounds": 12,
             "assists": 0,
             "steals": 0,
-            "turnovers": 1,
+            "turnovers": 2,
             "blocks": 0,
             "blocksReceived": 2,
-            "fouls": 10,
+            "fouls": 13,
             "foulsReceived": 4,
-            "valuation": 30,
-            "plusMinus": 5
+            "valuation": 31,
+            "plusMinus": 15
           },
           "twoPointers": {
-            "made": 10,
-            "attempted": 21
+            "made": 11,
+            "attempted": 22
           },
           "threePointers": {
-            "made": 1,
-            "attempted": 3
+            "made": 2,
+            "attempted": 5
           },
           "freeThrows": {
             "made": 2,
             "attempted": 5
           },
-          "minutesTotal": "1:00:15",
-          "minutesAverage": "8:36",
+          "minutesTotal": "1:07:09",
+          "minutesAverage": "8:24",
           "averages": {
-            "points": 3.6,
-            "rebounds": 4.3,
-            "offensiveRebounds": 2.7,
-            "defensiveRebounds": 1.6,
+            "points": 3.8,
+            "rebounds": 3.9,
+            "offensiveRebounds": 2.4,
+            "defensiveRebounds": 1.5,
             "assists": 0,
             "steals": 0,
-            "turnovers": 0.1,
+            "turnovers": 0.3,
             "blocks": 0,
             "blocksReceived": 0.3,
-            "fouls": 1.4,
-            "foulsReceived": 0.6,
-            "valuation": 4.3,
-            "plusMinus": 0.7
+            "fouls": 1.6,
+            "foulsReceived": 0.5,
+            "valuation": 3.9,
+            "plusMinus": 1.9
           },
-          "twoPointersPct": 47.6,
-          "threePointersPct": 33.3,
+          "twoPointersPct": 50,
+          "threePointersPct": 40,
           "freeThrowsPct": 40
         },
         {
@@ -29788,9 +30040,9 @@
           "teamId": 114766,
           "name": "FAZZINI, MATEO",
           "number": "5",
-          "appearances": 8,
-          "gamesPlayed": 7,
-          "totalSeconds": 1525,
+          "appearances": 9,
+          "gamesPlayed": 8,
+          "totalSeconds": 1663,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29840,6 +30092,12 @@
               "date": "2026-11-19",
               "minutes": "02:18",
               "points": 0
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "02:18",
+              "points": 0
             }
           ],
           "totals": {
@@ -29855,7 +30113,7 @@
             "fouls": 8,
             "foulsReceived": 0,
             "valuation": -7,
-            "plusMinus": -22
+            "plusMinus": -28
           },
           "twoPointers": {
             "made": 1,
@@ -29869,8 +30127,8 @@
             "made": 0,
             "attempted": 0
           },
-          "minutesTotal": "25:25",
-          "minutesAverage": "3:38",
+          "minutesTotal": "27:43",
+          "minutesAverage": "3:28",
           "averages": {
             "points": 0.3,
             "rebounds": 0.1,
@@ -29881,10 +30139,10 @@
             "turnovers": 0,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 1.1,
+            "fouls": 1,
             "foulsReceived": 0,
-            "valuation": -1,
-            "plusMinus": -3.1
+            "valuation": -0.9,
+            "plusMinus": -3.5
           },
           "twoPointersPct": 100,
           "threePointersPct": 0,
@@ -29895,9 +30153,9 @@
           "teamId": 114766,
           "name": "CARDONA, JEREMIAS JOSE",
           "number": "6",
-          "appearances": 4,
-          "gamesPlayed": 4,
-          "totalSeconds": 6324,
+          "appearances": 5,
+          "gamesPlayed": 5,
+          "totalSeconds": 7654,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -29923,55 +30181,156 @@
               "date": "2026-11-19",
               "minutes": "22:10",
               "points": 13
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "22:10",
+              "points": 13
             }
           ],
           "totals": {
-            "points": 52,
-            "rebounds": 7,
+            "points": 65,
+            "rebounds": 12,
             "offensiveRebounds": 0,
-            "defensiveRebounds": 7,
-            "assists": 4,
+            "defensiveRebounds": 12,
+            "assists": 5,
             "steals": 2,
             "turnovers": 8,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 8,
-            "foulsReceived": 11,
-            "valuation": 28,
-            "plusMinus": -25
+            "fouls": 10,
+            "foulsReceived": 13,
+            "valuation": 38,
+            "plusMinus": -9
           },
           "twoPointers": {
             "made": 6,
-            "attempted": 8
+            "attempted": 9
           },
           "threePointers": {
-            "made": 11,
-            "attempted": 35
+            "made": 14,
+            "attempted": 46
           },
           "freeThrows": {
-            "made": 7,
-            "attempted": 13
+            "made": 11,
+            "attempted": 17
           },
-          "minutesTotal": "1:45:24",
-          "minutesAverage": "26:21",
+          "minutesTotal": "2:07:34",
+          "minutesAverage": "25:31",
           "averages": {
             "points": 13,
-            "rebounds": 1.8,
+            "rebounds": 2.4,
             "offensiveRebounds": 0,
-            "defensiveRebounds": 1.8,
+            "defensiveRebounds": 2.4,
             "assists": 1,
-            "steals": 0.5,
-            "turnovers": 2,
+            "steals": 0.4,
+            "turnovers": 1.6,
             "blocks": 0,
             "blocksReceived": 0,
             "fouls": 2,
-            "foulsReceived": 2.8,
-            "valuation": 7,
-            "plusMinus": -6.3
+            "foulsReceived": 2.6,
+            "valuation": 7.6,
+            "plusMinus": -1.8
           },
-          "twoPointersPct": 75,
-          "threePointersPct": 31.4,
-          "freeThrowsPct": 53.8
+          "twoPointersPct": 66.7,
+          "threePointersPct": 30.4,
+          "freeThrowsPct": 64.7
+        },
+        {
+          "id": 386254,
+          "teamId": 114766,
+          "name": "KELMAN , NICOLAS",
+          "number": "23",
+          "appearances": 6,
+          "gamesPlayed": 4,
+          "totalSeconds": 504,
+          "lastSeen": "2026-11-19",
+          "games": [
+            {
+              "matchId": "v21Md4Rsc5qvKBFvvDxOfuz8X1s634_OSxYVTQZHZxYPMpsvEUV38JuA==",
+              "date": "2026-10-15",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2M7ZZJMuIhuGSSOj5yh3-S1yDK8SR5iRlY8fgF3cxoztxojcvcVllvg==",
+              "date": "2026-10-17",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2ML7xIaWnDqrZ-9y8quN4864J4V70jpor5TN-Vu_XVzY839-hjaWYhQ==",
+              "date": "2026-10-26",
+              "minutes": "00:33",
+              "points": 0
+            },
+            {
+              "matchId": "v2ZHgqRCZ5vJeBhnYF-auUXC5vgpnn2QeuzyHYY1lVYtCAjyCRVsyV9A==",
+              "date": "2026-11-04",
+              "minutes": "02:13",
+              "points": 0
+            },
+            {
+              "matchId": "v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==",
+              "date": "2026-11-19",
+              "minutes": "02:49",
+              "points": 1
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "02:49",
+              "points": 1
+            }
+          ],
+          "totals": {
+            "points": 2,
+            "rebounds": 2,
+            "offensiveRebounds": 2,
+            "defensiveRebounds": 0,
+            "assists": 2,
+            "steals": 2,
+            "turnovers": 2,
+            "blocks": 0,
+            "blocksReceived": 2,
+            "fouls": 0,
+            "foulsReceived": 2,
+            "valuation": -2,
+            "plusMinus": 3
+          },
+          "twoPointers": {
+            "made": 0,
+            "attempted": 4
+          },
+          "threePointers": {
+            "made": 0,
+            "attempted": 2
+          },
+          "freeThrows": {
+            "made": 2,
+            "attempted": 4
+          },
+          "minutesTotal": "8:24",
+          "minutesAverage": "2:06",
+          "averages": {
+            "points": 0.5,
+            "rebounds": 0.5,
+            "offensiveRebounds": 0.5,
+            "defensiveRebounds": 0,
+            "assists": 0.5,
+            "steals": 0.5,
+            "turnovers": 0.5,
+            "blocks": 0,
+            "blocksReceived": 0.5,
+            "fouls": 0,
+            "foulsReceived": 0.5,
+            "valuation": -0.5,
+            "plusMinus": 0.8
+          },
+          "twoPointersPct": 0,
+          "threePointersPct": 0,
+          "freeThrowsPct": 50
         },
         {
           "id": 326003,
@@ -30057,102 +30416,13 @@
           "freeThrowsPct": 100
         },
         {
-          "id": 386254,
-          "teamId": 114766,
-          "name": "KELMAN , NICOLAS",
-          "number": "23",
-          "appearances": 5,
-          "gamesPlayed": 3,
-          "totalSeconds": 335,
-          "lastSeen": "2026-11-19",
-          "games": [
-            {
-              "matchId": "v21Md4Rsc5qvKBFvvDxOfuz8X1s634_OSxYVTQZHZxYPMpsvEUV38JuA==",
-              "date": "2026-10-15",
-              "minutes": "00:00",
-              "points": 0
-            },
-            {
-              "matchId": "v2M7ZZJMuIhuGSSOj5yh3-S1yDK8SR5iRlY8fgF3cxoztxojcvcVllvg==",
-              "date": "2026-10-17",
-              "minutes": "00:00",
-              "points": 0
-            },
-            {
-              "matchId": "v2ML7xIaWnDqrZ-9y8quN4864J4V70jpor5TN-Vu_XVzY839-hjaWYhQ==",
-              "date": "2026-10-26",
-              "minutes": "00:33",
-              "points": 0
-            },
-            {
-              "matchId": "v2ZHgqRCZ5vJeBhnYF-auUXC5vgpnn2QeuzyHYY1lVYtCAjyCRVsyV9A==",
-              "date": "2026-11-04",
-              "minutes": "02:13",
-              "points": 0
-            },
-            {
-              "matchId": "v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==",
-              "date": "2026-11-19",
-              "minutes": "02:49",
-              "points": 1
-            }
-          ],
-          "totals": {
-            "points": 1,
-            "rebounds": 1,
-            "offensiveRebounds": 1,
-            "defensiveRebounds": 0,
-            "assists": 1,
-            "steals": 1,
-            "turnovers": 1,
-            "blocks": 0,
-            "blocksReceived": 1,
-            "fouls": 0,
-            "foulsReceived": 1,
-            "valuation": -1,
-            "plusMinus": 2
-          },
-          "twoPointers": {
-            "made": 0,
-            "attempted": 2
-          },
-          "threePointers": {
-            "made": 0,
-            "attempted": 1
-          },
-          "freeThrows": {
-            "made": 1,
-            "attempted": 2
-          },
-          "minutesTotal": "5:35",
-          "minutesAverage": "1:52",
-          "averages": {
-            "points": 0.3,
-            "rebounds": 0.3,
-            "offensiveRebounds": 0.3,
-            "defensiveRebounds": 0,
-            "assists": 0.3,
-            "steals": 0.3,
-            "turnovers": 0.3,
-            "blocks": 0,
-            "blocksReceived": 0.3,
-            "fouls": 0,
-            "foulsReceived": 0.3,
-            "valuation": -0.3,
-            "plusMinus": 0.7
-          },
-          "twoPointersPct": 0,
-          "threePointersPct": 0,
-          "freeThrowsPct": 50
-        },
-        {
           "id": 268708,
           "teamId": 114766,
           "name": "SAWCHUK, ANDRES",
           "number": "22",
-          "appearances": 8,
-          "gamesPlayed": 2,
-          "totalSeconds": 370,
+          "appearances": 9,
+          "gamesPlayed": 3,
+          "totalSeconds": 488,
           "lastSeen": "2026-11-19",
           "games": [
             {
@@ -30202,22 +30472,28 @@
               "date": "2026-11-19",
               "minutes": "01:58",
               "points": 0
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "01:58",
+              "points": 0
             }
           ],
           "totals": {
             "points": 4,
-            "rebounds": 3,
+            "rebounds": 4,
             "offensiveRebounds": 1,
-            "defensiveRebounds": 2,
-            "assists": 1,
+            "defensiveRebounds": 3,
+            "assists": 2,
             "steals": 0,
-            "turnovers": 1,
+            "turnovers": 2,
             "blocks": 0,
             "blocksReceived": 0,
             "fouls": 1,
             "foulsReceived": 1,
-            "valuation": 7,
-            "plusMinus": -8
+            "valuation": 8,
+            "plusMinus": -12
           },
           "twoPointers": {
             "made": 1,
@@ -30231,26 +30507,103 @@
             "made": 2,
             "attempted": 2
           },
-          "minutesTotal": "6:10",
-          "minutesAverage": "3:05",
+          "minutesTotal": "8:08",
+          "minutesAverage": "2:43",
           "averages": {
-            "points": 2,
-            "rebounds": 1.5,
-            "offensiveRebounds": 0.5,
+            "points": 1.3,
+            "rebounds": 1.3,
+            "offensiveRebounds": 0.3,
             "defensiveRebounds": 1,
-            "assists": 0.5,
+            "assists": 0.7,
             "steals": 0,
-            "turnovers": 0.5,
+            "turnovers": 0.7,
             "blocks": 0,
             "blocksReceived": 0,
-            "fouls": 0.5,
-            "foulsReceived": 0.5,
-            "valuation": 3.5,
+            "fouls": 0.3,
+            "foulsReceived": 0.3,
+            "valuation": 2.7,
             "plusMinus": -4
           },
           "twoPointersPct": 100,
           "threePointersPct": 0,
           "freeThrowsPct": 100
+        },
+        {
+          "id": 386926,
+          "teamId": 114766,
+          "name": "BERENBROEK, MATIAS",
+          "number": "9",
+          "appearances": 3,
+          "gamesPlayed": 2,
+          "totalSeconds": 216,
+          "lastSeen": "2026-11-19",
+          "games": [
+            {
+              "matchId": "v22MOwUwT7AH1f9GQ08t_RDVkCtOZJcURxAwJZERw4G1YuJwKcAf8-ew==",
+              "date": "2026-11-11",
+              "minutes": "00:00",
+              "points": 0
+            },
+            {
+              "matchId": "v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==",
+              "date": "2026-11-19",
+              "minutes": "01:48",
+              "points": 0
+            },
+            {
+              "matchId": "v2mLQo1OG6M7EPBe_9Q2lzJqThwo-JeA9iIUJseR2bj-6hZAtDEP4PWQ==",
+              "date": "2026-11-19",
+              "minutes": "01:48",
+              "points": 0
+            }
+          ],
+          "totals": {
+            "points": 0,
+            "rebounds": 0,
+            "offensiveRebounds": 0,
+            "defensiveRebounds": 0,
+            "assists": 0,
+            "steals": 0,
+            "turnovers": 0,
+            "blocks": 0,
+            "blocksReceived": 0,
+            "fouls": 2,
+            "foulsReceived": 0,
+            "valuation": -4,
+            "plusMinus": -2
+          },
+          "twoPointers": {
+            "made": 0,
+            "attempted": 2
+          },
+          "threePointers": {
+            "made": 0,
+            "attempted": 0
+          },
+          "freeThrows": {
+            "made": 0,
+            "attempted": 0
+          },
+          "minutesTotal": "3:36",
+          "minutesAverage": "1:48",
+          "averages": {
+            "points": 0,
+            "rebounds": 0,
+            "offensiveRebounds": 0,
+            "defensiveRebounds": 0,
+            "assists": 0,
+            "steals": 0,
+            "turnovers": 0,
+            "blocks": 0,
+            "blocksReceived": 0,
+            "fouls": 1,
+            "foulsReceived": 0,
+            "valuation": -2,
+            "plusMinus": -1
+          },
+          "twoPointersPct": 0,
+          "threePointersPct": 0,
+          "freeThrowsPct": 0
         },
         {
           "id": 333085,
@@ -30334,77 +30687,6 @@
           "twoPointersPct": 58.3,
           "threePointersPct": 0,
           "freeThrowsPct": 50
-        },
-        {
-          "id": 386926,
-          "teamId": 114766,
-          "name": "BERENBROEK, MATIAS",
-          "number": "9",
-          "appearances": 2,
-          "gamesPlayed": 1,
-          "totalSeconds": 108,
-          "lastSeen": "2026-11-19",
-          "games": [
-            {
-              "matchId": "v22MOwUwT7AH1f9GQ08t_RDVkCtOZJcURxAwJZERw4G1YuJwKcAf8-ew==",
-              "date": "2026-11-11",
-              "minutes": "00:00",
-              "points": 0
-            },
-            {
-              "matchId": "v2_KKkhpmQlWehMyXoNGfvSK5_Hd-97omdzXAnbhomwtlPQkEV1hHF1g==",
-              "date": "2026-11-19",
-              "minutes": "01:48",
-              "points": 0
-            }
-          ],
-          "totals": {
-            "points": 0,
-            "rebounds": 0,
-            "offensiveRebounds": 0,
-            "defensiveRebounds": 0,
-            "assists": 0,
-            "steals": 0,
-            "turnovers": 0,
-            "blocks": 0,
-            "blocksReceived": 0,
-            "fouls": 1,
-            "foulsReceived": 0,
-            "valuation": -2,
-            "plusMinus": -1
-          },
-          "twoPointers": {
-            "made": 0,
-            "attempted": 1
-          },
-          "threePointers": {
-            "made": 0,
-            "attempted": 0
-          },
-          "freeThrows": {
-            "made": 0,
-            "attempted": 0
-          },
-          "minutesTotal": "1:48",
-          "minutesAverage": "1:48",
-          "averages": {
-            "points": 0,
-            "rebounds": 0,
-            "offensiveRebounds": 0,
-            "defensiveRebounds": 0,
-            "assists": 0,
-            "steals": 0,
-            "turnovers": 0,
-            "blocks": 0,
-            "blocksReceived": 0,
-            "fouls": 1,
-            "foulsReceived": 0,
-            "valuation": -2,
-            "plusMinus": -1
-          },
-          "twoPointersPct": 0,
-          "threePointersPct": 0,
-          "freeThrowsPct": 0
         },
         {
           "id": 66154,
