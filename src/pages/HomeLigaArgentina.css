@@ -938,3 +938,66 @@
   }
   .lab-live-match-modal .lab-live-five h3{font-size:13px!important}
 }
+
+
+/* LAB LIVE: quintetos con la misma cancha táctica del popup LNB. */
+.lab-live-match-modal .lab-live-five-court{
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  min-height:300px;overflow:hidden;border:2px solid #c9894d;border-radius:11px;
+  background:repeating-linear-gradient(0deg,#995127 0,#995127 12px,#a85c2d 13px,#a85c2d 26px);
+}
+.lab-live-match-modal .lab-live-five-half{position:relative;z-index:1;min-width:0;padding:8px 5px}
+.lab-live-match-modal .lab-live-five-home{border-right:2px solid #eec28e}
+.lab-live-match-modal .lab-live-five-team{
+  display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;
+  padding:5px 3px;border-radius:7px;background:#09192de8;color:#fff;
+  font-size:12px;text-align:center;
+}
+.lab-live-match-modal .lab-live-five-team img{width:24px;height:24px;object-fit:contain;flex:0 0 auto}
+.lab-live-match-modal .lab-live-five-team strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lab-live-match-modal .lab-live-five-players{position:relative;height:240px;margin-top:5px}
+.lab-live-match-modal .lab-live-five-player{
+  position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;
+  width:48%;min-width:0;transform:translate(-50%,-50%);text-align:center;
+}
+.lab-live-match-modal .lab-live-five-player b{
+  display:grid;place-items:center;width:30px;height:30px;border:2px solid #fff;
+  border-radius:50%;background:#123d59;color:#fff;font-size:10px;box-shadow:0 2px 7px #0008;
+}
+.lab-live-match-modal .lab-live-five-away .lab-live-five-player b{background:#a62d3d}
+.lab-live-match-modal .lab-live-five-player span{
+  display:block;max-width:100%;padding:3px 4px;border-radius:4px;
+  background:#07172fe8;color:#fff;font-size:9px;font-weight:800;line-height:1.15;
+  overflow-wrap:anywhere;
+}
+.lab-live-match-modal .lab-live-five-player-0{left:75%;top:50%}
+.lab-live-match-modal .lab-live-five-player-1{left:68%;top:17%}
+.lab-live-match-modal .lab-live-five-player-2{left:68%;top:83%}
+.lab-live-match-modal .lab-live-five-player-3{left:24%;top:29%}
+.lab-live-match-modal .lab-live-five-player-4{left:24%;top:71%}
+.lab-live-match-modal .lab-live-five-away .lab-live-five-player-0{left:25%;top:50%}
+.lab-live-match-modal .lab-live-five-away .lab-live-five-player-1{left:32%;top:17%}
+.lab-live-match-modal .lab-live-five-away .lab-live-five-player-2{left:32%;top:83%}
+.lab-live-match-modal .lab-live-five-away .lab-live-five-player-3{left:76%;top:29%}
+.lab-live-match-modal .lab-live-five-away .lab-live-five-player-4{left:76%;top:71%}
+
+/* Mantener ambos planteles en paralelo en iPhone, igual que el popup LNB. */
+@media(max-width:600px){
+ .lab-live-match-modal .lab-live-rosters{margin:7px!important;padding:8px 5px!important}
+ .lab-live-match-modal .live-rosters-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:5px!important}
+ .lab-live-match-modal .live-roster-team+.live-roster-team{border-left:1px solid #294154!important;border-top:0!important;padding:0 0 0 5px!important}
+ .lab-live-match-modal .live-roster-team-head{min-height:27px!important;margin-bottom:3px!important;gap:3px!important;font-size:10px!important}
+ .lab-live-match-modal .live-roster-team-head img{width:21px!important;height:21px!important}
+ .lab-live-match-modal .live-roster-row{grid-template-columns:19px minmax(0,1fr) 24px 24px 24px 20px!important;gap:2px!important}
+ .lab-live-match-modal .live-roster-labels{font-size:7px!important;padding:3px 0!important}
+ .lab-live-match-modal .live-roster-player{font-size:8px!important;line-height:1.1!important;min-height:25px!important;padding:4px 0!important}
+ .lab-live-match-modal .live-roster-number{padding:2px 0!important}
+ .lab-live-match-modal .lab-live-five-court{min-height:260px}
+ .lab-live-match-modal .lab-live-five-half{padding:6px 3px}
+ .lab-live-match-modal .lab-live-five-team{font-size:10px}
+ .lab-live-match-modal .lab-live-five-team img{width:19px;height:19px}
+ .lab-live-match-modal .lab-live-five-players{height:210px}
+ .lab-live-match-modal .lab-live-five-player{width:49%}
+ .lab-live-match-modal .lab-live-five-player b{width:26px;height:26px;font-size:9px}
+ .lab-live-match-modal .lab-live-five-player span{font-size:8px;padding:2px}
+}
