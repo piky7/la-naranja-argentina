@@ -327,6 +327,65 @@ export function LabUpcomingMatchModal({match,onClose}) {
   </div>,document.body);
 }
 
+export function LabLiveMatchModal({match, live, onClose}) {
+  const [tab,setTab]=useState("quintetos");
+  const [selectedPlayer,setSelectedPlayer]=useState(null);
+  if(!match||!live)return null;
+  const homeTeam={...match.homeTeam,id:String(match.homeTeam.teamId),name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
+  const awayTeam={...match.awayTeam,id:String(match.awayTeam.teamId),name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
+  const homeRoster=rosters.teams?.[String(match.homeTeam.teamId)]?.players||[];
+  const awayRoster=rosters.teams?.[String(match.awayTeam.teamId)]?.players||[];
+  const renderRoster=(team,list)=> <section className="live-roster-team" key={team.id}>
+    <div className="live-roster-team-head"><img src={team.logo} alt=""/><strong>{team.shortName}</strong></div>
+    <div className="live-roster-row live-roster-labels"><span>#</span><span>JUGADOR</span><span>PTS</span><span>REB</span><span>AST</span><span>PJ</span></div>
+    {list.slice().sort((a,b)=>(Number(b.averages?.points)||0)-(Number(a.averages?.points)||0)).map(player=><button type="button" className="live-roster-row live-roster-player" key={player.id} onClick={()=>setSelectedPlayer(player)}>
+      <span className="live-roster-number">{player.number??"—"}</span><span className="live-roster-name" title={player.name}>{displayPersonName(player.name)}</span>
+      <span>{Number.isFinite(Number(player.averages?.points))?Number(player.averages.points).toFixed(1):"—"}</span>
+      <span>{Number.isFinite(Number(player.averages?.rebounds))?Number(player.averages.rebounds).toFixed(1):"—"}</span>
+      <span>{Number.isFinite(Number(player.averages?.assists))?Number(player.averages.assists).toFixed(1):"—"}</span>
+      <strong>{player.gamesPlayed??"—"}</strong>
+    </button>)}
+    {!list.length&&<p className="live-roster-empty">Sin plantel publicado</p>}
+  </section>;
+  const quintets=live.quintetos;
+  const formatScore=value=>value==null?"—":value;
+  return <>{createPortal(<div className="match-modal-overlay match-modal-live-overlay" onClick={onClose}>
+    <div className="match-modal match-modal-upcoming match-modal-is-live lab-live-match-modal" role="dialog" aria-modal="true" aria-label={`Partido en vivo: ${homeTeam.name} vs ${awayTeam.name}`} onClick={e=>e.stopPropagation()}>
+      <button className="match-modal-close" type="button" onClick={onClose} aria-label="Cerrar">×</button>
+      <div className="match-modal-header">
+        <div className="upcoming-header-meta"><span className="match-modal-label">LIGA ARGENTINA 2026/27</span><strong className="match-modal-date">{formatDay(match.date)}</strong></div>
+        <div className="match-modal-teams">
+          <div className="match-modal-team"><img src={homeTeam.logo} alt=""/><strong>{homeTeam.shortName}</strong></div>
+          <div className="match-modal-score">
+            <span className="match-modal-status">EN VIVO · {live.isHalftime?"ENTRETIEMPO":live.quarter?live.quarter+"° CUARTO":"PARTIDO EN JUEGO"}{!live.isHalftime&&live.quarter&&formatLabLiveRemaining(live)!=null?<span className="match-modal-live-remaining">{formatLabLiveRemaining(live)} RESTANTES</span>:null}</span>
+            <strong className="lna-live-score-numbers"><span className={Number(live.homeScore)>Number(live.awayScore)?"is-leading":"is-trailing"}>{formatScore(live.homeScore)}</span><span className="lna-live-score-dash"> - </span><span className={Number(live.awayScore)>Number(live.homeScore)?"is-leading":"is-trailing"}>{formatScore(live.awayScore)}</span></strong>
+            <span>{live.tv||"LNA · SEGUIMIENTO EN VIVO"}</span>
+          </div>
+          <div className="match-modal-team"><img src={awayTeam.logo} alt=""/><strong>{awayTeam.shortName}</strong></div>
+        </div>
+      </div>
+      {(match.homeTeam.coach||match.awayTeam.coach)&&<div className="match-modal-coaches"><div className="match-modal-coach-item"><span>DT:</span><strong>{match.homeTeam.coach||"—"}</strong></div><div className="match-modal-coach-item"><span>DT:</span><strong>{match.awayTeam.coach||"—"}</strong></div></div>}
+      <LiveMatchInfo live={live} homeName={homeTeam.shortName} awayName={awayTeam.shortName}/>
+      <div className="upcoming-tabs upcoming-live-tabs lab-live-tabs" role="tablist" aria-label="Información del partido en vivo">
+        <button type="button" role="tab" aria-selected={tab==="quintetos"} className={tab==="quintetos"?"is-active":""} onClick={()=>setTab("quintetos")}>🏀 Quintetos</button>
+        <button type="button" role="tab" aria-selected={tab==="planteles"} className={tab==="planteles"?"is-active":""} onClick={()=>setTab("planteles")}>♟ Planteles</button>
+        <button type="button" role="tab" aria-selected={tab==="comparativa"} className={tab==="comparativa"?"is-active":""} onClick={()=>setTab("comparativa")}>▥ Comparativa</button>
+        <button type="button" role="tab" aria-selected={tab==="mi-voto"} className={tab==="mi-voto"?"is-active live-my-vote-tab":"live-my-vote-tab"} onClick={()=>setTab("mi-voto")}>◎ Mi voto</button>
+      </div>
+      {tab==="quintetos"&&<section className="live-five lab-live-five">
+        <h3>QUINTETOS INICIALES</h3>
+        {Array.isArray(quintets?.home)&&Array.isArray(quintets?.away)?<div className="lab-live-five-list"><div><strong>{homeTeam.shortName}</strong>{quintets.home.map((p,i)=><span key={p.id||i}>#{p.number??"—"} · {displayPersonName(p.name)}</span>)}</div><div><strong>{awayTeam.shortName}</strong>{quintets.away.map((p,i)=><span key={p.id||i}>#{p.number??"—"} · {displayPersonName(p.name)}</span>)}</div></div>:<p className="live-five-unavailable">La planilla oficial todavía no publicó los quintetos iniciales de este partido.</p>}
+        <p className="live-five-source">Fuente: planilla oficial Liga Argentina</p>
+      </section>}
+      {tab==="planteles"&&<section className="live-rosters lab-live-rosters"><h3>PLANTELES · 2026/27</h3><div className="live-rosters-grid">{renderRoster(homeTeam,homeRoster)}{renderRoster(awayTeam,awayRoster)}</div><p className="live-five-source">Promedios oficiales de temporada · Tocá un jugador para ver su ficha</p></section>}
+      {tab==="comparativa"&&<div className="lab-live-comparison"><LabTeamComparison comparison={live.teamComparison||boxscores[match.id]?.teamComparison||null} homeTeam={homeTeam} awayTeam={awayTeam}/></div>}
+      {tab==="mi-voto"&&<section className="live-my-vote-panel upcoming-tab-panel lab-live-vote"><div className="live-my-vote-heading"><strong>MIS PRONÓSTICOS</strong><span>PARTIDO EN VIVO</span></div><p>Los pronósticos de LAB todavía no están conectados a este panel. No mostraremos votos de Liga Nacional para evitar mezclar competencias.</p></section>}
+      <div className="match-modal-footer"><span>LNA</span><strong>SEGUIMIENTO EN VIVO · LIGA ARGENTINA</strong></div>
+    </div>
+  </div>,document.body)}{selectedPlayer&&<LabPlayerModal player={selectedPlayer} match={match} team={String(selectedPlayer.teamId)===String(match.homeTeam.teamId)?homeTeam:awayTeam} onClose={()=>setSelectedPlayer(null)}/>}</>;
+}
+
+
 function HomeLigaArgentina() {
   const today = todayInArgentina();
   const { liveMatches = [] } = useLiveSnapshot();
@@ -335,7 +394,7 @@ function HomeLigaArgentina() {
   const [statsTab, setStatsTab] = useState("posiciones");
   const [conferenceTab, setConferenceTab] = useState("norte");
   const [selectedMatch, setSelectedMatch] = useState(null);
-  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);\n  const [selectedLiveMatch, setSelectedLiveMatch] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
 
   const data = useMemo(() => {
@@ -396,7 +455,7 @@ function HomeLigaArgentina() {
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
     const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
     const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
-    return <button key={match.id} type="button" onClick={() => { if (isLive) return; if (hasScore) setSelectedMatch(match); else setSelectedUpcomingMatch(match); }}
+    return <button key={match.id} type="button" onClick={() => { if (isLive) { setSelectedLiveMatch({match,live:liveData}); return; } if (hasScore) setSelectedMatch(match); else setSelectedUpcomingMatch(match); }}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""} ${isLive ? "home-fixture-live" : ""}`}
       style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`,"--match-home-color":labMatchColor(match.homeTeam),"--match-away-color":labMatchColor(match.awayTeam)}}>
       <div className="fixture-team fixture-home">
@@ -509,7 +568,7 @@ function HomeLigaArgentina() {
        </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
       </div></div>,document.body)}
       {selectedMatch && <LabHomeBoxscore match={selectedMatch} onClose={() => setSelectedMatch(null)}/>}
-      {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)}/>}
+      {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)}/>}\n      {selectedLiveMatch && <LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={() => setSelectedLiveMatch(null)}/>}
   </main>;
 }
 export default HomeLigaArgentina;
