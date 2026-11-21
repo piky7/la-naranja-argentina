@@ -320,3 +320,28 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+
+/* Botón de cierre del popup final: aislarlo de los estilos globales de botones. */
+.match-modal.match-modal-finished > .match-modal-close {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  left: auto !important;
+  bottom: auto !important;
+  z-index: 20 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  line-height: 1 !important;
+  flex: 0 0 34px !important;
+}
