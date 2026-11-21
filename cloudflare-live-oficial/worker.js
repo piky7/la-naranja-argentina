@@ -759,6 +759,58 @@ function interpretarMarcadorLab(html) {
   return { status, homeScore, awayScore, quarter, lastActionTime, minutesRemaining, isHalftime: /entretiempo|descanso/i.test(normalized) };
 }
 
+
+function extraerQuintetosLab(html) {
+  const tables = [...html.matchAll(/<table\b[^>]*class=["'][^"']*tabla-estadisticas[^"']*["'][^>]*>[\s\S]*?<\/table>/gi)];
+  if (tables.length !== 2) return null;
+  const parseSide = table => {
+    const starters = [];
+    for (const row of table.matchAll(/<tr\b[^>]*\bonclick=(["'])([\s\S]*?)\1[^>]*>/gi)) {
+      const attr = row[2].replace(/&quot;|&#34;|&#x22;/gi, '"').replace(/&#39;|&#x27;/gi, "'").replace(/&amp;/gi, "&");
+      const start = attr.indexOf("{"), end = attr.lastIndexOf("}");
+      if (start < 0 || end < start) continue;
+      try {
+        const player = JSON.parse(attr.slice(start, end + 1));
+        if ([true, 1, "True", "true"].includes(player.CincoInicial)) {
+          starters.push({officialPlayerId:player.IdJugador,name:player.NombreCompleto||player.Nombre,number:player.Dorsal});
+        }
+      } catch (_) {}
+    }
+    return starters.length === 5 ? starters : null;
+  };
+  const home = parseSide(tables[0][0]), away = parseSide(tables[1][0]);
+  return home && away ? {home,away} : null;
+}
+function textoPlanoLab(value) {
+  return String(value||"").replace(/<[^>]+>/g," ").replace(/&nbsp;|&#160;/gi," ")
+    .replace(/&amp;/gi,"&").replace(/&aacute;/gi,"á").replace(/&eacute;/gi,"é")
+    .replace(/&iacute;/gi,"í").replace(/&oacute;/gi,"ó").replace(/&uacute;/gi,"ú")
+    .replace(/&ntilde;/gi,"ñ").replace(/\s+/g," ").trim();
+}
+function obtenerComparativaLab(html) {
+  const start = html.indexOf('id="scroll-comparativa"');
+  if (start < 0) return null;
+  const root = html.slice(start, start + 45000);
+  const aliases = {"TC":"fieldGoals","2P":"twoPointers","3P":"threePointers","TL":"freeThrows","Reb.":"rebounds","As.":"assists","Rec.":"steals","Tap.":"blocks","Pér.":"turnovers","Faltas Com.":"fouls"};
+  const home={},away={};
+  const lines = [...root.matchAll(/<[^>]*class=["'][^"']*\blinea\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)];
+  const parseValue = value => {
+    const shot=value.match(/(\d+)\s*\/\s*(\d+)\s*([\d.,]+)?\s*%?/);
+    if(shot)return {made:Number(shot[1]),attempted:Number(shot[2]),percentage:Number(String(shot[3]||"0").replace(",","."))};
+    const numeric=value.match(/-?\d+(?:[.,]\d+)?/);
+    return numeric?Number(numeric[0].replace(",",".")):null;
+  };
+  for(const line of lines){
+    const cols=[...line[1].matchAll(/<[^>]*class=["'][^"']*\bcol\b[^"']*["'][^>]*>([\s\S]*?)<\/[^>]+>/gi)].map(x=>textoPlanoLab(x[1]));
+    if(cols.length<3)continue;
+    const key=aliases[cols[1]];
+    if(!key)continue;
+    home[key]=parseValue(cols[0]); away[key]=parseValue(cols[2]);
+  }
+  if(!Object.values(aliases).every(key=>home[key]!=null&&away[key]!=null))return null;
+  return {source:"Comparativa oficial del boxscore LAB",method:"official-boxscore-comparison",home,away};
+}
+
 async function generarLiveLab(fecha, anteriores, env) {
   const fixture = await obtenerFixtureLab(fecha, env);
   const previous = new Map((anteriores?.liveMatches || []).filter(match => match.competition === "LAB").map(match => [match.matchId, match]));
@@ -774,6 +826,9 @@ async function generarLiveLab(fecha, anteriores, env) {
     try {
       const html = await descargar(match.officialUrl, { headers: { Accept: "text/html", "User-Agent": "Mozilla/5.0 (compatible; LaNaranjaArgentina/1.0)" } });
       const score = interpretarMarcadorLab(html);
+      const quintetos = extraerQuintetosLab(html);
+      const quarterScores = obtenerParcialesOficiales(html, score, score);
+      const teamComparison = obtenerComparativaLab(html);
       if (anterior?.status === "finished" && score.status !== "finished") {
         results.push(anterior);
         continue;
@@ -797,6 +852,9 @@ async function generarLiveLab(fecha, anteriores, env) {
         homeScore: score.homeScore, awayScore: score.awayScore,
         quarter: score.quarter, minutesRemaining: score.minutesRemaining,
         lastActionTime: score.lastActionTime, isHalftime: score.isHalftime,
+        quarterScores: quarterScores || anterior?.quarterScores || null,
+        quintetos: quintetos || anterior?.quintetos || null,
+        teamComparison: teamComparison || anterior?.teamComparison || null,
         timestamp: Number.isFinite(start) ? Math.floor(start / 1000) : null,
         status: score.status, isLive: score.status === "live", officialUrl: match.officialUrl
       });
