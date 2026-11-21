@@ -763,23 +763,56 @@ function interpretarMarcadorLab(html) {
 function extraerQuintetosLab(html) {
   const tables = [...html.matchAll(/<table\b[^>]*class=["'][^"']*tabla-estadisticas[^"']*["'][^>]*>[\s\S]*?<\/table>/gi)];
   if (tables.length !== 2) return null;
+
+  const decodeMarker = value => String(value || "")
+    .replace(/&#42;|&#x2a;|&ast;/gi, "*")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&aacute;/gi, "á").replace(/&eacute;/gi, "é")
+    .replace(/&iacute;/gi, "í").replace(/&oacute;/gi, "ó")
+    .replace(/&uacute;/gi, "ú").replace(/&ntilde;/gi, "ñ")
+    .replace(/\s+/g, " ").trim();
+
   const parseSide = table => {
     const starters = [];
-    for (const row of table.matchAll(/<tr\b[^>]*\bonclick=(["'])([\s\S]*?)\1[^>]*>/gi)) {
-      const attr = row[2].replace(/&quot;|&#34;|&#x22;/gi, '"').replace(/&#39;|&#x27;/gi, "'").replace(/&amp;/gi, "&");
-      const start = attr.indexOf("{"), end = attr.lastIndexOf("}");
-      if (start < 0 || end < start) continue;
+    for (const row of table.matchAll(/<tr\b([^>]*)>([\s\S]*?)<\/tr>/gi)) {
+      const attrs = row[1] || "";
+      const body = row[2] || "";
+      const onclick = attrs.match(/\bonclick=(["'])([\s\S]*?)\1/i)?.[2] || "";
+      const start = onclick.indexOf("{"), finish = onclick.lastIndexOf("}");
+      if (start < 0 || finish < start) continue;
+
+      let player;
       try {
-        const player = JSON.parse(attr.slice(start, end + 1));
-        if ([true, 1, "True", "true"].includes(player.CincoInicial)) {
-          starters.push({officialPlayerId:player.IdJugador,name:player.NombreCompleto||player.Nombre,number:player.Dorsal});
-        }
-      } catch (_) {}
+        const attr = onclick.slice(start, finish + 1)
+          .replace(/&quot;|&#34;|&#x22;/gi, '"')
+          .replace(/&#39;|&#x27;/gi, "'")
+          .replace(/&amp;/gi, "&");
+        player = JSON.parse(attr);
+      } catch (_) { continue; }
+
+      // En la planilla LAB el asterisco visible junto al nombre identifica
+      // al titular. No usar CincoInicial: no es la marca que muestra el boxscore.
+      const firstCell = body.match(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/i)?.[1] || "";
+      const markedName = decodeMarker(firstCell);
+      const rawName = String(player.NombreCompleto || player.Nombre || "");
+      const isStarter = /\*/.test(markedName) || /\*/.test(rawName);
+      if (!isStarter) continue;
+
+      const name = decodeMarker(rawName || markedName).replace(/\s*\*\s*/g, " ").trim();
+      starters.push({
+        officialPlayerId: player.IdJugador,
+        name: name || markedName.replace(/\s*\*\s*/g, " ").trim(),
+        number: player.Dorsal
+      });
     }
     return starters.length === 5 ? starters : null;
   };
+
   const home = parseSide(tables[0][0]), away = parseSide(tables[1][0]);
-  return home && away ? {home,away} : null;
+  return home && away ? { home, away, source: "official-boxscore-asterisk" } : null;
 }
 function textoPlanoLab(value) {
   return String(value||"").replace(/<[^>]+>/g," ").replace(/&nbsp;|&#160;/gi," ")
