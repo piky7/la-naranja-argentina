@@ -1186,5 +1186,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2a3rzGONK9rElcviFTj2BCYNJQVw8goI7MrWsrUiBHqCVxLUjQWV6vA==/atenas-c-vs-instituto"
     }
+  },
+  "2026-11-21-quimsa-ferro": {
+    "status": "finished",
+    "homeScore": 87,
+    "awayScore": 74,
+    "time": "11:30",
+    "homeTeam": "quimsa",
+    "awayTeam": "ferro",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro"
+    }
   }
 };
