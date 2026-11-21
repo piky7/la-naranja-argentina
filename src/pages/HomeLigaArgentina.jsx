@@ -4,6 +4,7 @@ import MatchStatsTabs from "../components/MatchStatsTabs";
 import { Link } from "react-router-dom";
 import { useLiveSnapshot } from "../hooks/useLiveSnapshot";
 import LiveLedScore, { LiveLedPeriod } from "../components/LiveLedScore";
+import LiveMatchInfo from "../components/LiveMatchInfo";
 import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
@@ -329,6 +330,8 @@ export function LabUpcomingMatchModal({match,onClose}) {
 
 export function LabLiveMatchModal({match, live, onClose}) {
   const [tab,setTab]=useState("quintetos");
+  const {liveMatches:latestLiveMatches=[]}=useLiveSnapshot();
+  const currentLive=latestLiveMatches.find(item=>item.competition==="LAB"&&String(item.matchId)===String(match?.id))||live;
   const [selectedPlayer,setSelectedPlayer]=useState(null);
   if(!match||!live)return null;
   const homeTeam={...match.homeTeam,id:String(match.homeTeam.teamId),name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
@@ -348,7 +351,7 @@ export function LabLiveMatchModal({match, live, onClose}) {
     </button>)}
     {!list.length&&<p className="live-roster-empty">Sin plantel publicado</p>}
   </section>;
-  const quintets=live.quintetos;
+  const quintets=currentLive.quintetos;
   const formatScore=value=>value==null?"—":value;
   return <>{createPortal(<div className="match-modal-overlay match-modal-live-overlay" onClick={onClose}>
     <div className="match-modal match-modal-upcoming match-modal-is-live lab-live-match-modal" role="dialog" aria-modal="true" aria-label={`Partido en vivo: ${homeTeam.name} vs ${awayTeam.name}`} onClick={e=>e.stopPropagation()}>
@@ -358,15 +361,15 @@ export function LabLiveMatchModal({match, live, onClose}) {
         <div className="match-modal-teams">
           <div className="match-modal-team"><img src={homeTeam.logo} alt=""/><strong>{homeTeam.shortName}</strong></div>
           <div className="match-modal-score">
-            <span className="match-modal-status">EN VIVO · {live.isHalftime?"ENTRETIEMPO":live.quarter?live.quarter+"° CUARTO":"PARTIDO EN JUEGO"}{!live.isHalftime&&live.quarter&&formatLabLiveRemaining(live)!=null?<span className="match-modal-live-remaining">{formatLabLiveRemaining(live)} RESTANTES</span>:null}</span>
-            <strong className="lna-live-score-numbers"><span className={Number(live.homeScore)>Number(live.awayScore)?"is-leading":"is-trailing"}>{formatScore(live.homeScore)}</span><span className="lna-live-score-dash"> - </span><span className={Number(live.awayScore)>Number(live.homeScore)?"is-leading":"is-trailing"}>{formatScore(live.awayScore)}</span></strong>
-            <span>{live.tv||"LNA · SEGUIMIENTO EN VIVO"}</span>
+            <span className="match-modal-status">EN VIVO · {currentLive.isHalftime?"ENTRETIEMPO":currentLive.quarter?currentLive.quarter+"° CUARTO":"PARTIDO EN JUEGO"}{!currentLive.isHalftime&&currentLive.quarter&&formatLabLiveRemaining(live)!=null?<span className="match-modal-live-remaining">{formatLabLiveRemaining(live)} RESTANTES</span>:null}</span>
+            <strong className="lna-live-score-numbers"><span className={Number(currentLive.homeScore)>Number(currentLive.awayScore)?"is-leading":"is-trailing"}>{formatScore(currentLive.homeScore)}</span><span className="lna-live-score-dash"> - </span><span className={Number(currentLive.awayScore)>Number(currentLive.homeScore)?"is-leading":"is-trailing"}>{formatScore(currentLive.awayScore)}</span></strong>
+            <span>{currentLive.tv||"LNA · SEGUIMIENTO EN VIVO"}</span>
           </div>
           <div className="match-modal-team"><img src={awayTeam.logo} alt=""/><strong>{awayTeam.shortName}</strong></div>
         </div>
       </div>
       {(match.homeTeam.coach||match.awayTeam.coach)&&<div className="match-modal-coaches"><div className="match-modal-coach-item"><span>DT:</span><strong>{match.homeTeam.coach||"—"}</strong></div><div className="match-modal-coach-item"><span>DT:</span><strong>{match.awayTeam.coach||"—"}</strong></div></div>}
-      <LiveMatchInfo live={live} homeName={homeTeam.shortName} awayName={awayTeam.shortName}/>
+      <LiveMatchInfo live={currentLive} homeName={homeTeam.shortName} awayName={awayTeam.shortName}/>
       <div className="upcoming-tabs upcoming-live-tabs lab-live-tabs" role="tablist" aria-label="Información del partido en vivo">
         <button type="button" role="tab" aria-selected={tab==="quintetos"} className={tab==="quintetos"?"is-active":""} onClick={()=>setTab("quintetos")}>🏀 Quintetos</button>
         <button type="button" role="tab" aria-selected={tab==="planteles"} className={tab==="planteles"?"is-active":""} onClick={()=>setTab("planteles")}>♟ Planteles</button>
@@ -379,7 +382,7 @@ export function LabLiveMatchModal({match, live, onClose}) {
         <p className="live-five-source">Fuente: planilla oficial Liga Argentina</p>
       </section>}
       {tab==="planteles"&&<section className="live-rosters lab-live-rosters"><h3>PLANTELES · 2026/27</h3><div className="live-rosters-grid">{renderRoster(homeTeam,homeRoster)}{renderRoster(awayTeam,awayRoster)}</div><p className="live-five-source">Promedios oficiales de temporada · Tocá un jugador para ver su ficha</p></section>}
-      {tab==="comparativa"&&<div className="lab-live-comparison"><LabTeamComparison comparison={live.teamComparison||boxscores[match.id]?.teamComparison||null} homeTeam={homeTeam} awayTeam={awayTeam}/></div>}
+      {tab==="comparativa"&&<div className="lab-live-comparison"><LabTeamComparison comparison={currentLive.teamComparison||boxscores[match.id]?.teamComparison||null} homeTeam={homeTeam} awayTeam={awayTeam}/></div>}
       {tab==="mi-voto"&&<section className="live-my-vote-panel upcoming-tab-panel lab-live-vote"><div className="live-my-vote-heading"><strong>MIS PRONÓSTICOS</strong><span>PARTIDO EN VIVO</span></div><p>Los pronósticos de LAB todavía no están conectados a este panel. No mostraremos votos de Liga Nacional para evitar mezclar competencias.</p></section>}
       <div className="match-modal-footer"><span>LNA</span><strong>SEGUIMIENTO EN VIVO · LIGA ARGENTINA</strong></div>
     </div>
