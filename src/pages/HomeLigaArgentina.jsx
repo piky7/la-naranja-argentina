@@ -333,7 +333,8 @@ export function LabLiveMatchModal({match, live, onClose}) {
   if(!match||!live)return null;
   const homeTeam={...match.homeTeam,id:String(match.homeTeam.teamId),name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
   const awayTeam={...match.awayTeam,id:String(match.awayTeam.teamId),name:displayName(match.awayTeam.name),shortName:displayName(match.awayTeam.name),logo:labCrest(match.awayTeam)};
-  const allLabRosterPlayers=Object.values(rosters.teams||{}).flatMap(entry=>entry.players||[]);\n  const homeRoster=allLabRosterPlayers.filter(player=>String(player.teamId)===String(match.homeTeam.teamId));
+  const allLabRosterPlayers=Object.values(rosters.teams||{}).flatMap(entry=>entry.players||[]);
+  const homeRoster=allLabRosterPlayers.filter(player=>String(player.teamId)===String(match.homeTeam.teamId));
   const awayRoster=allLabRosterPlayers.filter(player=>String(player.teamId)===String(match.awayTeam.teamId));
   const renderRoster=(team,list)=> <section className="live-roster-team" key={team.id}>
     <div className="live-roster-team-head"><img src={team.logo} alt=""/><strong>{team.shortName}</strong></div>
@@ -394,7 +395,8 @@ function HomeLigaArgentina() {
   const [statsTab, setStatsTab] = useState("posiciones");
   const [conferenceTab, setConferenceTab] = useState("norte");
   const [selectedMatch, setSelectedMatch] = useState(null);
-  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);\n  const [selectedLiveMatch, setSelectedLiveMatch] = useState(null);
+  const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
+  const [selectedLiveMatch, setSelectedLiveMatch] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
 
   const data = useMemo(() => {
@@ -568,7 +570,8 @@ function HomeLigaArgentina() {
        </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
       </div></div>,document.body)}
       {selectedMatch && <LabHomeBoxscore match={selectedMatch} onClose={() => setSelectedMatch(null)}/>}
-      {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)}/>}\n      {selectedLiveMatch && <LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={() => setSelectedLiveMatch(null)}/>}
+      {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)}/>}
+      {selectedLiveMatch && <LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={() => setSelectedLiveMatch(null)}/>}
   </main>;
 }
 export default HomeLigaArgentina;
