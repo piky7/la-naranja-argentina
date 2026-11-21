@@ -131,12 +131,12 @@ export function LabHomeBoxscore({match, onClose}) {
   const players = box?.players || [];
   const homeTeam = { ...match.homeTeam, id: String(match.homeTeam.teamId), name: displayName(match.homeTeam.name), shortName: displayName(match.homeTeam.name), logo: labCrest(match.homeTeam) };
   const awayTeam = { ...match.awayTeam, id: String(match.awayTeam.teamId), name: displayName(match.awayTeam.name), shortName: displayName(match.awayTeam.name), logo: labCrest(match.awayTeam) };
-  const homePlayers = players.filter(player => player.teamId === match.homeTeam.teamId);
-  const awayPlayers = players.filter(player => player.teamId === match.awayTeam.teamId);
+  const homePlayers = players.filter(player => Number(player.teamId) === Number(match.homeTeam.teamId));
+  const awayPlayers = players.filter(player => Number(player.teamId) === Number(match.awayTeam.teamId));
   const stats = { [match.homeTeam.teamId]: homePlayers, [match.awayTeam.teamId]: awayPlayers };
   const matchForTabs = { ...match, homeTeam: String(match.homeTeam.teamId), awayTeam: String(match.awayTeam.teamId) };
   const mvp = players.slice().sort((a,b) => Number(b.valuation || 0)-Number(a.valuation || 0) || Number(b.points || 0)-Number(a.points || 0))[0];
-  const mvpTeam = mvp && (mvp.teamId === match.homeTeam.teamId ? homeTeam : awayTeam);
+  const mvpTeam = mvp && (Number(mvp.teamId) === Number(match.homeTeam.teamId) ? homeTeam : awayTeam);
   const teamComparison = box?.teamComparison || null;
   const [selectedPlayer,setSelectedPlayer]=useState(null);
   const [dateYear,dateMonth,dateDay] = String(match.date).split("-").map(Number);
