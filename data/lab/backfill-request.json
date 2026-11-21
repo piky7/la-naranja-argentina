@@ -1,4 +1,5 @@
 {
   "matchId": "v2K65P5N0nUsDcGFrI3hxAUit5FxQTAUUG5pysjWL1PEmmI3jcW0DJDQ==",
-  "reason": "Recuperar boxscore oficial de Ciclista (J) vs Central Entrerriano del 2026-11-20"
+  "reason": "Backfill completo de todas las planillas oficiales LAB con resultado final para generar promedios colectivos e individuales",
+  "allFinished": true
 }
