@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { isLabMatchFinished } from "../src/utils/labMatchStatus.js";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
@@ -54,4 +55,15 @@ test("LAB no interpreta el 0-0 del fixture como resultado final", () => {
   assert.equal(match.status,"scheduled");
   assert.equal(match.homeScore,0);
   assert.equal(match.awayScore,0);
+});
+
+test("LAB conserva como jugados los resultados históricos score_available", () => {
+  const yesterday = new Date(Date.now() - 86400000);
+  const date = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
+  }).format(yesterday);
+  assert.equal(isLabMatchFinished({status:"score_available",date,homeScore:83,awayScore:78}), true);
+  assert.equal(isLabMatchFinished({status:"score_available",date,homeScore:0,awayScore:0}), false);
+  assert.equal(isLabMatchFinished({status:"score_available",date:"2999-01-01",homeScore:83,awayScore:78}), false);
+  assert.equal(isLabMatchFinished({status:"finished",date:"2999-01-01",homeScore:83,awayScore:78}), true);
 });
