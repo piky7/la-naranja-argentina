@@ -295,7 +295,7 @@ export function LabUpcomingMatchModal({match,onClose}) {
       </div>
       <div className="match-modal-coaches lab-upcoming-venue"><span>ESTADIO · {match.venue||"A CONFIRMAR"}</span></div>
       <div className="upcoming-tabs lab-upcoming-tabs" role="tablist" aria-label="Información del próximo partido">
-        <button type="button" role="tab" aria-selected={tab==="comparativa"} className={tab==="comparativa"?"is-active":""} onClick={()=>setTab("comparativa")}>▥ Comparativa</button>
+        <button type="button" style={{width:"100%",minWidth:0,maxWidth:"none",height:"42px",minHeight:"42px",maxHeight:"42px",boxSizing:"border-box",margin:0,padding:"4px 3px",display:"flex",alignItems:"center",justifyContent:"center",whiteSpace:"nowrap",fontSize:"inherit",lineHeight:1.1}} role="tab" aria-selected={tab==="comparativa"} className={tab==="comparativa"?"is-active":""} onClick={()=>setTab("comparativa")}>▥ Comparativa</button>
         <button type="button" role="tab" aria-selected={tab==="jugadores"} className={tab==="jugadores"?"is-active":""} onClick={()=>setTab("jugadores")}>♟ Jugadores</button>
       </div>
       {tab==="comparativa"&&<section className="upcoming-tab-panel lab-upcoming-comparison">
@@ -371,9 +371,9 @@ export function LabLiveMatchModal({match, live, onClose}) {
       </div>
       {(match.homeTeam.coach||match.awayTeam.coach)&&<div className="match-modal-coaches"><div className="match-modal-coach-item"><span>DT:</span><strong>{match.homeTeam.coach||"—"}</strong></div><div className="match-modal-coach-item"><span>DT:</span><strong>{match.awayTeam.coach||"—"}</strong></div></div>}
       <LiveMatchInfo live={currentLive} homeName={homeTeam.shortName} awayName={awayTeam.shortName}/>
-      <div className="upcoming-tabs upcoming-live-tabs lab-live-tabs" role="tablist" aria-label="Información del partido en vivo">
-        <button type="button" role="tab" aria-selected={tab==="quintetos"} className={tab==="quintetos"?"is-active":""} onClick={()=>setTab("quintetos")}>🏀 Quintetos</button>
-        <button type="button" role="tab" aria-selected={tab==="planteles"} className={tab==="planteles"?"is-active":""} onClick={()=>setTab("planteles")}>♟ Planteles</button>
+      <div className="upcoming-tabs upcoming-live-tabs lab-live-tabs" role="tablist" aria-label="Información del partido en vivo" style={{display:"grid",gridTemplateColumns:"repeat(3,minmax(0,1fr))",width:"100%",boxSizing:"border-box",gap:"6px",margin:"8px 0 0",padding:0,alignItems:"stretch"}}>
+        <button type="button" style={{width:"100%",minWidth:0,maxWidth:"none",height:"42px",minHeight:"42px",maxHeight:"42px",boxSizing:"border-box",margin:0,padding:"4px 3px",display:"flex",alignItems:"center",justifyContent:"center",whiteSpace:"nowrap",fontSize:"inherit",lineHeight:1.1}} role="tab" aria-selected={tab==="quintetos"} className={tab==="quintetos"?"is-active":""} onClick={()=>setTab("quintetos")}>🏀 Quintetos</button>
+        <button type="button" style={{width:"100%",minWidth:0,maxWidth:"none",height:"42px",minHeight:"42px",maxHeight:"42px",boxSizing:"border-box",margin:0,padding:"4px 3px",display:"flex",alignItems:"center",justifyContent:"center",whiteSpace:"nowrap",fontSize:"inherit",lineHeight:1.1}} role="tab" aria-selected={tab==="planteles"} className={tab==="planteles"?"is-active":""} onClick={()=>setTab("planteles")}>♟ Planteles</button>
         <button type="button" role="tab" aria-selected={tab==="comparativa"} className={tab==="comparativa"?"is-active":""} onClick={()=>setTab("comparativa")}>▥ Comparativa</button>
         
       </div>
