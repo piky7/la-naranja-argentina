@@ -1001,3 +1001,46 @@
  .lab-live-match-modal .lab-live-five-player b{width:26px;height:26px;font-size:9px}
  .lab-live-match-modal .lab-live-five-player span{font-size:8px;padding:2px}
 }
+
+/* LAB LIVE: repartir las tres solapas a todo el ancho disponible. */
+.lab-live-match-modal .lab-live-tabs.upcoming-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  justify-content:stretch!important;
+  width:auto!important;
+  min-width:0!important;
+  margin:8px 12px 0!important;
+  padding:0!important;
+  gap:8px!important;
+  box-sizing:border-box!important;
+}
+.lab-live-match-modal .lab-live-tabs.upcoming-tabs>button{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:54px!important;
+  margin:0!important;
+  padding:9px 5px!important;
+  flex:initial!important;
+  box-sizing:border-box!important;
+  text-align:center!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+@media(max-width:600px){
+  .lab-live-match-modal .lab-live-tabs.upcoming-tabs{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    width:auto!important;
+    margin:8px 7px 0!important;
+    gap:6px!important;
+  }
+  .lab-live-match-modal .lab-live-tabs.upcoming-tabs>button{
+    min-height:52px!important;
+    padding:8px 3px!important;
+    font-size:clamp(10px,2.8vw,12px)!important;
+  }
+}
