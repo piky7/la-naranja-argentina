@@ -153,7 +153,10 @@ jobs:
       - name: Importar boxscores LAB
         if: steps.window.outputs.run == 'true'
         run: |
-          if [ "${{ steps.window.outputs.mode }}" = "backfill" ]; then
+          if [ -f data/lab/backfill-request.json ]; then
+            MATCH_ID=$(node -p "JSON.parse(require('fs').readFileSync('data/lab/backfill-request.json','utf8')).matchId")
+            node scripts/sync-lab-boxscores.cjs --match="$MATCH_ID"
+          elif [ "${{ steps.window.outputs.mode }}" = "backfill" ]; then
             node scripts/sync-lab-boxscores.cjs --all-finished
           else
             node scripts/sync-lab-boxscores.cjs --recent
