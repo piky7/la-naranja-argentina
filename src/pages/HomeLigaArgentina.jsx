@@ -334,8 +334,8 @@ export function LabUpcomingMatchModal({match,onClose}) {
 }
 
 export function LabLiveMatchModal({match, live, onClose}) {
-  const boxscores = useLabBoxscores();
   const [tab,setTab]=useState("quintetos");
+  const boxscores = useLabBoxscores(tab === "comparativa");
   const {liveMatches:latestLiveMatches=[]}=useLiveSnapshot();
   const currentLive=latestLiveMatches.find(item=>item.competition==="LAB"&&String(item.matchId)===String(match?.id))||live;
   const [selectedPlayer,setSelectedPlayer]=useState(null);
