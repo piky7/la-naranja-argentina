@@ -1170,5 +1170,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v24xvC_QYBw6z3gfFJ1WDyYzkNhCyApzGcontxgC0_x8Fz8mb64t7KQg==/olimpico-lb-vs-ferro"
     }
+  },
+  "2026-11-20-atenas-instituto": {
+    "status": "finished",
+    "homeScore": 80,
+    "awayScore": 88,
+    "time": "21:30",
+    "homeTeam": "atenas",
+    "awayTeam": "instituto",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2a3rzGONK9rElcviFTj2BCYNJQVw8goI7MrWsrUiBHqCVxLUjQWV6vA==/atenas-c-vs-instituto",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2a3rzGONK9rElcviFTj2BCYNJQVw8goI7MrWsrUiBHqCVxLUjQWV6vA==/atenas-c-vs-instituto"
+    }
   }
 };

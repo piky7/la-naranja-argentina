@@ -2598,4 +2598,12 @@ export const players = [
     teamId: "olimpico",
     number: 17,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-424981",
+    officialPlayerId: 424981,
+    name: "Lautaro Agustin Gomez Lantero",
+    teamId: "instituto",
+    number: 4,
+  },
 ];
