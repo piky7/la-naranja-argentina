@@ -11259,13 +11259,10 @@
     border-color .2s ease,
     box-shadow .2s ease;
 }
-.home-fixture::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(105deg, rgba(255,255,255,.025), transparent 38%, rgba(255,255,255,.018));
+/* El brillo sutil va en la superficie de la card: ::after queda libre
+   para mostrar la marca de agua del equipo visitante. */
+.home-fixture {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
 }
 .home-fixture-clickable:hover {
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), inset 3px 0 0 var(--color-primary);
