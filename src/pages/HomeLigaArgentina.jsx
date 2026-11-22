@@ -11,7 +11,7 @@ import FixtureCalendar from "../components/FixtureCalendar";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 
-import { isLabMatchFinished } from "../utils/labMatchStatus";
+import { isLabMatchFinished, hasValidLabFinalScore } from "../utils/labMatchStatus";
 import { LAB_CONFERENCES, labMatchColor, formatLabLiveRemaining } from "../utils/labPresentation";
 export { LAB_TEAM_COLORS, labMatchColor } from "../utils/labPresentation";
 import "./LigaArgentina.css";
@@ -457,7 +457,7 @@ function HomeLigaArgentina() {
   const Match = ({match}) => {
     const liveData = labLiveById.get(String(match.id));
     const isLive = !isLabMatchFinished(match) && liveData?.status === "live";
-    const isFinished = isLabMatchFinished(match) || liveData?.status === "finished";
+    const isFinished = isLabMatchFinished(match) || (liveData?.status === "finished" && hasValidLabFinalScore(liveData?.homeScore ?? match.homeScore, liveData?.awayScore ?? match.awayScore));
     const homeScore = liveData?.homeScore ?? match.homeScore;
     const awayScore = liveData?.awayScore ?? match.awayScore;
     const hasScore = !isLive && isFinished && homeScore != null && awayScore != null &&
