@@ -1,5 +1,5 @@
 {
-  "matchId": "v24h0RTXnVgw5VGhWDTvXAeQ-dhFn7nqv92dVFJPG_Z9AJbj9gnQTEEA==",
-  "reason": "Reintentar la planilla oficial del partido Pico FC vs Unión (MDP) del 21/11 usando el ID correcto del fixture LAB.",
-  "allFinished": false
+  "matchId": null,
+  "reason": "Reconstruir los boxscores de todos los partidos LAB con marcador oficial, porque los IDs del fixture cambiaron y quedaron 453 planillas históricas sin asociar.",
+  "allFinished": true
 }
