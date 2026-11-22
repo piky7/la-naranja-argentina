@@ -656,6 +656,7 @@ if (anterior?.status === "finished") {
       resultados.push({
         competition: "LNB",
         eventId: evento.eventId,
+        officialUrl: oficial.url,
         homeTeam: evento.homeTeam,
         awayTeam: evento.awayTeam,
         homeName: evento.homeName,
@@ -930,6 +931,43 @@ async function generarLiveLab(fecha, anteriores, env) {
 const CLAVE_KV = "live-matches";
 
 
+
+async function dispararSincronizacionDeEstadisticas(env, partidosFinalizados) {
+  if (!Array.isArray(partidosFinalizados) || partidosFinalizados.length === 0) return;
+  if (!env.GITHUB_TOKEN) {
+    console.warn("GITHUB_TOKEN no configurado: se omite la publicación puntual de estadísticas.");
+    return;
+  }
+  for (const partido of partidosFinalizados) {
+    const competition = partido.competition === "LAB" ? "LAB" : "LNB";
+    const matchId = String(partido.matchId || partido.eventId || "");
+    const officialUrl = partido.officialUrl || null;
+    if (!matchId || (competition === "LNB" && !officialUrl)) {
+      console.warn("No se puede solicitar publicación puntual: faltan identificadores oficiales.", competition, matchId);
+      continue;
+    }
+    try {
+      const response = await fetch("https://api.github.com/repos/piky7/la-naranja-argentina/dispatches", {
+        method: "POST",
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Authorization": "Bearer " + env.GITHUB_TOKEN,
+          "X-GitHub-Api-Version": "2022-11-28",
+          "Content-Type": "application/json",
+          "User-Agent": "LaNaranjaArgentina-Live"
+        },
+        body: JSON.stringify({
+          event_type: "match-finished",
+          client_payload: { competition, matchId, officialUrl }
+        })
+      });
+      if (!response.ok) throw new Error("GitHub dispatch HTTP " + response.status);
+      console.log("Sincronización puntual solicitada:", competition, matchId);
+    } catch (error) {
+      console.error("No se pudo disparar sincronización puntual:", competition, matchId, error.message);
+    }
+  }
+}
 
 async function actualizarMarcadores(env) {
   const ahoraArgentina = fechaHoraArgentina(new Date());
