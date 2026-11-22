@@ -1,0 +1,67 @@
+name: Publicación puntual de estadísticas al finalizar
+
+on:
+  repository_dispatch:
+    types: [match-finished]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estadisticas-partido-${{ github.event.client_payload.competition }}-${{ github.event.client_payload.matchId }}
+  cancel-in-progress: false
+
+jobs:
+  publicar-partido:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Extraer y validar estadísticas del partido finalizado
+        env:
+          COMPETITION: ${{ github.event.client_payload.competition }}
+          MATCH_ID: ${{ github.event.client_payload.matchId }}
+          OFFICIAL_MATCH_URL: ${{ github.event.client_payload.officialUrl }}
+        run: |
+          set -euo pipefail
+          if [ "$COMPETITION" = "LAB" ]; then
+            node scripts/sync-lab-boxscores.cjs --match="$MATCH_ID"
+            node scripts/publish-lab-results.cjs
+            node scripts/build-lab-rosters.cjs
+          elif [ "$COMPETITION" = "LNB" ]; then
+            test -n "$OFFICIAL_MATCH_URL"
+            OFFICIAL_SYNC_MODE=full OFFICIAL_MATCH_URL="$OFFICIAL_MATCH_URL" node sync-liga-history.cjs
+            node sync-official-stats-preview.cjs
+            node publish-official-stats.cjs
+          else
+            echo "::error::Competencia no reconocida"
+            exit 1
+          fi
+      - name: Validar y compilar
+        run: |
+          set -euo pipefail
+          node --check cloudflare-live-oficial/worker.js
+          npm run build
+      - name: Publicar datos del partido
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/matchStats.js src/data/matchResults.js data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json liga-history.json
+          if git diff --cached --quiet; then
+            echo "No hubo estadísticas oficiales completas para publicar."
+            exit 1
+          fi
+          git commit -m "Publicar estadísticas oficiales del partido finalizado"
+          git push origin HEAD:main
