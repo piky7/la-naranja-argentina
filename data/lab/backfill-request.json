@@ -1,5 +1,5 @@
 {
-  "matchId": "v2K65P5N0nUsDcGFrI3hxAUit5FxQTAUUG5pysjWL1PEmmI3jcW0DJDQ==",
-  "reason": "Backfill completo de todas las planillas oficiales LAB con resultado final para generar promedios colectivos e individuales",
-  "allFinished": true
+  "matchId": "v2BRj-rpMTa5gJ65K0SjBPwaQCIpiKvUmr5zXMEsUo6ibPXeJmjBws7A==",
+  "reason": "Reconsultar planilla oficial del partido Pico FC vs Unión (MDP) del 21/11 y publicar marcador y estadísticas si la fuente oficial ya lo finalizó.",
+  "allFinished": false
 }
