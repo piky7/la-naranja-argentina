@@ -45,9 +45,23 @@ async function main() {
     ? leerJSON(OUTPUT)
     : { source: "Liga Nacional", matches: [] };
 
-  const urlsProcesadas = new Set(
-    historial.matches.map((p) => p.officialUrl)
-  );
+  // Solo se considera procesado un partido si su planilla oficial ya llegó
+  // a matchStats.js. El historial por sí solo puede contener una extracción
+  // que nunca se publicó por fallos de mapeo o validación.
+  let statsByMatch = null;
+  try {
+    statsByMatch = (await import("./src/data/matchStats.js?official-history-sync")).matchPlayerStats;
+  } catch (error) {
+    if (fs.existsSync("src/data/matchStats.js")) throw error;
+  }
+  const urlsProcesadas = statsByMatch
+    ? new Set(Object.values(statsByMatch)
+      .filter(record => record?.source === "Liga Nacional" &&
+        record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/") &&
+        Array.isArray(record[record.homeTeam]) && record[record.homeTeam].length > 0 &&
+        Array.isArray(record[record.awayTeam]) && record[record.awayTeam].length > 0)
+      .map(record => record.officialUrl))
+    : new Set(historial.matches.map(p => p.officialUrl));
 
   // En modo recent se consultan primero los partidos con mayor probabilidad
   // de haber terminado. No se excluyen encuentros en juego ni prorrogas:
@@ -81,7 +95,7 @@ async function main() {
   for (const partido of partidosAConsultar) {
     if (urlsProcesadas.has(partido.officialUrl)) {
       console.log(
-        `Ya procesado: ${partido.home.name} - ${partido.away.name}`
+        `Planilla oficial ya publicada: ${partido.home.name} - ${partido.away.name}`
       );
       omitidos++;
       continue;
@@ -237,7 +251,9 @@ async function main() {
       teams: [local, visitante],
     };
 
-    historial.matches.push(registro);
+    const existingIndex = historial.matches.findIndex(p => p.officialUrl === partido.officialUrl);
+    if (existingIndex >= 0) historial.matches[existingIndex] = registro;
+    else historial.matches.push(registro);
     urlsProcesadas.add(partido.officialUrl);
     agregados++;
 
