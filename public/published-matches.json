@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T02:41:36.960Z",
+  "generatedAt": "2026-11-22T02:51:27.124Z",
   "matches": {
     "2026-10-08-san-lorenzo-gimnasia": {
       "status": "published",
@@ -663,6 +663,14 @@
       "awayScore": 74,
       "homeTeam": "quimsa",
       "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-11-21-la-union-independiente-oliva": {
+      "status": "published",
+      "homeScore": 82,
+      "awayScore": 89,
+      "homeTeam": "la-union",
+      "awayTeam": "independiente-oliva",
       "hasStats": true
     }
   }

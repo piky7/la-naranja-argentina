@@ -1202,5 +1202,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2IsKdUZ7wWquxFWJH0ZdWnDacMhyooDmDCdbX-Uwj8EQpjfMRql_p9Q==/quimsa-vs-ferro"
     }
+  },
+  "2026-11-21-la-union-independiente-oliva": {
+    "status": "finished",
+    "homeScore": 82,
+    "awayScore": 89,
+    "time": "21:30",
+    "homeTeam": "la-union",
+    "awayTeam": "independiente-oliva",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o"
+    }
   }
 };

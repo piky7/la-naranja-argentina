@@ -2606,4 +2606,12 @@ export const players = [
     teamId: "instituto",
     number: 4,
   },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-325825",
+    officialPlayerId: 325825,
+    name: "Augusto Moresco",
+    teamId: "la-union",
+    number: 21,
+  },
 ];
