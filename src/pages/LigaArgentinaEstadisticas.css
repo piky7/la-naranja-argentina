@@ -124,3 +124,12 @@
  color:#3c1d0b;
  box-shadow:inset 0 1px 1px #fff7,0 1px 5px #b76a3b55;
 }
+
+
+.lab-statistics-page .lab-player-ranking tbody tr.lab-stats-player-clickable {
+  cursor: pointer;
+}
+.lab-statistics-page .lab-player-ranking tbody tr.lab-stats-player-clickable:focus-within,
+.lab-statistics-page .lab-player-ranking tbody tr.lab-stats-player-clickable:hover {
+  filter: brightness(1.12);
+}
