@@ -173,9 +173,9 @@ jobs:
         if: steps.window.outputs.run == 'true'
         run: |
           node scripts/publish-lab-results.cjs
-          if ! git diff --quiet -- data/lab/labBoxscores.json; then
-            node scripts/build-lab-rosters.cjs
-          fi
+          # Regenerar siempre los planteles: el generador puede corregirse
+          # aunque los boxscores no cambien (por ejemplo, para reparar PJ).
+          node scripts/build-lab-rosters.cjs
           node --check scripts/sync-lab-boxscores.cjs
           node --check scripts/publish-lab-results.cjs
           node --check scripts/build-lab-rosters.cjs
