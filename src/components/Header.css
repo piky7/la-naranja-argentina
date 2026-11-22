@@ -1064,3 +1064,17 @@
       0 0 12px rgba(255,135,30,.22);
   }
 }
+
+
+/* Pulido sutil del estado activo de la navegación inferior. */
+@media (max-width: 768px) {
+  .bottom-nav-link.active {
+    text-shadow: 0 0 10px rgba(255,140,0,.12);
+  }
+  .bottom-nav-link.active::after {
+    box-shadow: 0 0 9px rgba(255,140,0,.65);
+  }
+  .bottom-nav-link.prode-nav-link.active::after {
+    box-shadow: 0 0 9px rgba(125,232,61,.6);
+  }
+}
