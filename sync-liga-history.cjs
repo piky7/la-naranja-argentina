@@ -81,7 +81,13 @@ async function main() {
           return (Number.isFinite(bInicio) ? bInicio : 0) - (Number.isFinite(aInicio) ? aInicio : 0);
         })
     : null;
-  const partidosAConsultar = recent ? pendientesRecientes : partidos;
+  const targetUrl = process.env.OFFICIAL_MATCH_URL || "";
+  const partidosAConsultar = targetUrl
+    ? partidos.filter(partido => partido.officialUrl === targetUrl)
+    : recent ? pendientesRecientes : partidos;
+  if (targetUrl && partidosAConsultar.length !== 1) {
+    throw new Error("El partido solicitado no coincide con una única URL del fixture oficial.");
+  }
 
   let agregados = 0;
   let omitidos = 0;
