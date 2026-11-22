@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-22T06:00:50.403Z",
+  "importedAt": "2026-11-22T11:34:33.772Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3759,10 +3759,11 @@
       },
       "homeScore": 83,
       "awayScore": 68,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v24h0RTXnVgw5VGhWDTvXAeQ-dhFn7nqv92dVFJPG_Z9AJbj9gnQTEEA==/pico-fc-vs-union-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-22T11:34:33.514Z"
     },
     {
       "id": "v2x4ocR_1L8HeqZfXj1hGwR8b76L2-Fdx-MAO0dlBhSB2aETmMERvf9A==",
@@ -16454,5 +16455,7 @@
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2nmYS0vFktLk0jsvbD8SvksAYMHHM6lfx4gQbR1jp7LL_5f_ksA3-XA==/river-vs-dep-viedma",
       "source": "Liga Nacional oficial"
     }
-  ]
+  ],
+  "finished": 1,
+  "pending": 538
 }
