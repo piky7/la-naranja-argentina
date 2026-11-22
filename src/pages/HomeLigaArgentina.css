@@ -1092,3 +1092,46 @@
     font-size:inherit!important;
   }
 }
+
+
+/* Refinamiento visual compartido con LNB, adaptado al layout compacto de LAB. */
+.lab-home-page .lab-home-fixture {
+  position: relative;
+  isolation: isolate;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.lab-home-page .lab-home-fixture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(105deg, rgba(255,255,255,.025), transparent 38%, rgba(255,255,255,.018));
+}
+.lab-home-page .lab-home-fixture.home-fixture-clickable:hover {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), inset 3px 0 0 var(--color-primary);
+}
+.lab-home-page .lab-home-fixture .fixture-team img {
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,.38));
+}
+.lab-home-page .lab-home-fixture .fixture-score {
+  text-shadow: 0 0 14px rgba(255,139,35,.16);
+}
+.lab-home-page .standings-panel .home-standing-row {
+  border-bottom-color: rgba(255,255,255,.085);
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.12);
+}
+.lab-home-page .standings-panel .home-standing-team img {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.35));
+}
+.lab-home-page .standings-panel .home-standing-row > strong {
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 5px rgba(0,0,0,.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab-home-page .lab-home-fixture,
+  .lab-home-page .standings-panel .home-standing-row {
+    transition: none;
+  }
+}
