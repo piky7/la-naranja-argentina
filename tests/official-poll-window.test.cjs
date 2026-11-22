@@ -25,6 +25,14 @@ test("frequent runs skip completed games and idle days; daily and manual always 
   const schedule = "*/15 0-4,14-17,21-23 * * *";
   assert.deepEqual(pollDecision(fixture, history, "schedule", schedule, now), { run: true, mode: "recent" });
   assert.equal(pollDecision(fixture, { ...history, matches: [match] }, "schedule", schedule, now).run, false);
+  // A history entry without its exact official stats must be retried.
+  assert.equal(pollDecision(fixture, { ...history, matches: [match] }, "schedule", schedule, now, "", {}).run, true);
+  const validStats = { game: {
+    source: "Liga Nacional", officialUrl: match.officialUrl,
+    homeTeam: "home", awayTeam: "away",
+    home: [{ points: 80 }], away: [{ points: 70 }],
+  }};
+  assert.equal(pollDecision(fixture, { ...history, matches: [match] }, "schedule", schedule, now, "", validStats).run, false);
   assert.equal(pollDecision({ ...fixture, matches: [] }, history, "schedule", schedule, now).run, false);
   for (const [event, cron] of [["schedule", "30 6 * * *"], ["workflow_dispatch", ""], ["push", ""]]) {
     assert.deepEqual(pollDecision(fixture, history, event, cron, now), { run: true, mode: "full" });
