@@ -288,7 +288,7 @@ export function LabUpcomingMatchModal({match,onClose,onNavigateTeam}) {
   const leadersFor=(teamId,key)=>players.filter(p=>Number(p.teamId)===Number(teamId)&&Number(p.gamesPlayed)>0&&Number.isFinite(Number(p.averages?.[key])))
     .sort((a,b)=>Number(b.averages[key])-Number(a.averages[key])).slice(0,2);
   const time=match.time||"A CONFIRMAR";
-  return createPortal(<div className="match-modal-overlay lab-upcoming-overlay" onClick={onClose}>
+  return <>{createPortal(<div className="match-modal-overlay lab-upcoming-overlay" onClick={onClose}>
     <div className="match-modal match-modal-upcoming lab-upcoming-match" onClick={event=>event.stopPropagation()}>
       <button className="match-modal-close" type="button" onClick={onClose} aria-label="Cerrar">×</button>
       <div className="match-modal-header">
@@ -332,7 +332,7 @@ export function LabUpcomingMatchModal({match,onClose,onNavigateTeam}) {
       </section>}
       <div className="match-modal-footer"><span>LNA</span><strong>PROMEDIOS DE TEMPORADA</strong></div>
     </div>
-  </div>,document.body)}{selectedPlayer&&<LabPlayerModal player={selectedPlayer} match={match} team={String(selectedPlayer.teamId)===String(match.homeTeam.teamId)?home:away} initialTab="season" onClose={()=>setSelectedPlayer(null)}/>}
+  </div>,document.body)}{selectedPlayer&&<LabPlayerModal player={selectedPlayer} match={match} team={String(selectedPlayer.teamId)===String(match.homeTeam.teamId)?home:away} initialTab="season" onClose={()=>setSelectedPlayer(null)}/>}</>;
 }
 
 export function LabLiveMatchModal({match, live, onClose}) {
