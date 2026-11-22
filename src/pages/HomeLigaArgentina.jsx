@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLabBoxscores } from "../utils/labData";
 import { createPortal } from "react-dom";
 import MatchStatsTabs from "../components/MatchStatsTabs";
@@ -73,9 +74,9 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
   </section>;
 }
 
-function LabPlayerModal({player, match, team, onClose}) {
+export function LabPlayerModal({player, match, team, onClose, initialTab = "match"}) {
   const boxscores = useLabBoxscores();
-  const [tab,setTab]=useState("match");
+  const [tab,setTab]=useState(initialTab);
   const appearances=Object.entries(boxscores||{}).flatMap(([matchId,box])=>(Array.isArray(box?.players)?box.players:[])
     .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId)).map(p=>({...p,__matchId:matchId})));
   const games=[...new Map(appearances.map(p=>[p.__matchId,p])).values()];
@@ -227,7 +228,8 @@ export function LabHomeBoxscore({match, onClose}) {
 }
 
 
-export function LabUpcomingMatchModal({match,onClose}) {
+export function LabUpcomingMatchModal({match,onClose,onNavigateTeam}) {
+  const [selectedPlayer,setSelectedPlayer]=useState(null);
   const boxscores = useLabBoxscores();
   const [tab,setTab]=useState("comparativa");
   const home={...match.homeTeam,name:displayName(match.homeTeam.name),shortName:displayName(match.homeTeam.name),logo:labCrest(match.homeTeam)};
@@ -292,9 +294,9 @@ export function LabUpcomingMatchModal({match,onClose}) {
       <div className="match-modal-header">
         <div className="upcoming-header-meta"><span className="match-modal-label">LIGA ARGENTINA 2026/27</span><strong className="match-modal-date">{date}</strong></div>
         <div className="match-modal-teams">
-          <div className="match-modal-team"><img src={home.logo} alt=""/><strong>{home.shortName}</strong></div>
+          <div className="match-modal-team"><button type="button" className="home-modal-team-logo-button" onClick={()=>onNavigateTeam?.(home.teamId)} aria-label={"Ver equipo "+home.name}><img src={home.logo} alt=""/></button><strong>{home.shortName}</strong></div>
           <div className="match-modal-score"><span className="match-modal-status">PRÓXIMO PARTIDO</span><strong>{time}</strong>{match.tv?.length>0&&<span>{match.tv.join(" · ")}</span>}</div>
-          <div className="match-modal-team"><img src={away.logo} alt=""/><strong>{away.shortName}</strong></div>
+          <div className="match-modal-team"><button type="button" className="home-modal-team-logo-button" onClick={()=>onNavigateTeam?.(away.teamId)} aria-label={"Ver equipo "+away.name}><img src={away.logo} alt=""/></button><strong>{away.shortName}</strong></div>
         </div>
       </div>
       <div className="match-modal-coaches lab-upcoming-venue"><span>ESTADIO · {match.venue||"A CONFIRMAR"}</span></div>
@@ -326,11 +328,11 @@ export function LabUpcomingMatchModal({match,onClose}) {
       </section>}
       {tab==="jugadores"&&<section className="upcoming-tab-panel upcoming-players-comparison lab-upcoming-players">
         <div className="match-highlighted-title"><h3>JUGADORES DESTACADOS</h3><span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA 2026/27</span></div>
-        {categories.map(([title,key,icon])=>{const h=leadersFor(home.teamId,key),a=leadersFor(away.teamId,key),max=Math.max(0,...[...h,...a].map(p=>Number(p.averages[key])));const side=(items,team)=><div className="upcoming-player-side">{items.length?items.map(p=>{const value=Number(p.averages[key]);return <div className="upcoming-player-entry" key={p.id}><img className="upcoming-player-crest" src={team.logo} alt=""/><div className="upcoming-player-info"><span className="upcoming-player-name">{displayPersonName(p.name)}</span><div className="upcoming-player-meter"><span style={{width:`${max?value/max*100:0}%`}}/></div></div><strong>{fmt(value)}</strong></div>}):<span className="upcoming-player-empty">Sin datos disponibles</span>}</div>;return <div className="upcoming-player-category" key={key}><div className="upcoming-player-category-title">{title}</div><div className="upcoming-player-versus">{side(h,home)}<div className="upcoming-player-center-icon">{icon}</div>{side(a,away)}</div></div>})}
+        {categories.map(([title,key,icon])=>{const h=leadersFor(home.teamId,key),a=leadersFor(away.teamId,key),max=Math.max(0,...[...h,...a].map(p=>Number(p.averages[key])));const side=(items,team)=><div className="upcoming-player-side">{items.length?items.map(p=>{const value=Number(p.averages[key]);return <button type="button" className="upcoming-player-entry" key={p.id} onClick={()=>setSelectedPlayer({...p,teamId:team.teamId})} aria-label={"Ver ficha de "+p.name}><img className="upcoming-player-crest" src={team.logo} alt=""/><div className="upcoming-player-info"><span className="upcoming-player-name">{displayPersonName(p.name)}</span><div className="upcoming-player-meter"><span style={{width:`${max?value/max*100:0}%`}}/></div></div><strong>{fmt(value)}</strong></button>}):<span className="upcoming-player-empty">Sin datos disponibles</span>}</div>;return <div className="upcoming-player-category" key={key}><div className="upcoming-player-category-title">{title}</div><div className="upcoming-player-versus">{side(h,home)}<div className="upcoming-player-center-icon">{icon}</div>{side(a,away)}</div></div>})}
       </section>}
       <div className="match-modal-footer"><span>LNA</span><strong>PROMEDIOS DE TEMPORADA</strong></div>
     </div>
-  </div>,document.body);
+  </div>,document.body)}{selectedPlayer&&<LabPlayerModal player={selectedPlayer} match={match} team={String(selectedPlayer.teamId)===String(match.homeTeam.teamId)?home:away} initialTab="season" onClose={()=>setSelectedPlayer(null)}/>}
 }
 
 export function LabLiveMatchModal({match, live, onClose}) {
@@ -396,6 +398,8 @@ export function LabLiveMatchModal({match, live, onClose}) {
 
 
 function HomeLigaArgentina() {
+  const navigate = useNavigate();
+  const goToLabTeam = teamId => { if (teamId == null) return; setSelectedTeam(null); setSelectedUpcomingMatch(null); navigate("/equipos/"+teamId); };
   const today = todayInArgentina();
   const { liveMatches = [] } = useLiveSnapshot();
   const labLiveById = useMemo(() => new Map(liveMatches.filter(item => item.competition === "LAB" && item.matchId).map(item => [String(item.matchId), item])), [liveMatches]);
@@ -569,7 +573,7 @@ function HomeLigaArgentina() {
     </div></section>
 
 {selectedTeam&&createPortal(<div className="home-modal-overlay" onClick={()=>setSelectedTeam(null)}><div className="home-team-modal home-team-modal-v2" role="dialog" aria-modal="true" aria-label={displayName(selectedTeam.name)} onClick={event=>event.stopPropagation()}>
-       <header className="team-v2-hero"><img className="team-v2-watermark" src={labCrest(selectedTeam)} alt="" aria-hidden="true"/><button type="button" className="home-modal-close team-v2-close" onClick={()=>setSelectedTeam(null)} aria-label="Cerrar">×</button><div className="team-v2-identity"><div className="team-v2-crest"><img src={labCrest(selectedTeam)} alt=""/></div><div><span>LIGA ARGENTINA 2026/27</span><h2>{displayName(selectedTeam.name)} <span className="team-v2-record">({selectedTeam.wins}-{selectedTeam.losses})</span></h2><p>Conferencia {conferenceTab==="norte"?"Norte":"Sur"}</p></div></div></header>
+       <header className="team-v2-hero"><img className="team-v2-watermark" src={labCrest(selectedTeam)} alt="" aria-hidden="true"/><button type="button" className="home-modal-close team-v2-close" onClick={()=>setSelectedTeam(null)} aria-label="Cerrar">×</button><div className="team-v2-identity"><button type="button" className="team-v2-crest" onClick={()=>goToLabTeam(selectedTeam.teamId)} aria-label={"Ver equipo "+displayName(selectedTeam.name)}><img src={labCrest(selectedTeam)} alt=""/></button><div><span>LIGA ARGENTINA 2026/27</span><h2>{displayName(selectedTeam.name)} <span className="team-v2-record">({selectedTeam.wins}-{selectedTeam.losses})</span></h2><p>Conferencia {conferenceTab==="norte"?"Norte":"Sur"}</p></div></div></header>
        <div className="team-v2-body">
         {(()=>{const games=classified.filter(m=>m.status==="finished"&&(m.homeTeam.teamId===selectedTeam.teamId||m.awayTeam.teamId===selectedTeam.teamId));const totals={points:0,pointsAgainst:0,rebounds:0,assists:0,steals:0,blocks:0,turnovers:0,fouls:0};const shots={fieldGoals:[0,0],twoPointers:[0,0],threePointers:[0,0],freeThrows:[0,0]};let n=0;games.forEach(g=>{const home=g.homeTeam.teamId===selectedTeam.teamId,cmp=boxscores?.[g.id]?.teamComparison?.[home?"home":"away"];if(!cmp)return;n++;totals.points+=Number(home?g.homeScore:g.awayScore)||0;totals.pointsAgainst+=Number(home?g.awayScore:g.homeScore)||0;Object.keys(totals).filter(k=>!["points","pointsAgainst"].includes(k)).forEach(k=>totals[k]+=Number(cmp[k])||0);Object.keys(shots).forEach(k=>{shots[k][0]+=Number(cmp[k]?.made)||0;shots[k][1]+=Number(cmp[k]?.attempted)||0;});});const metrics=[["PTS/P","points"],["REC/P","pointsAgainst"],["REB/P","rebounds"],["AST/P","assists"],["RECUP/P","steals"],["TAP/P","blocks"],["PÉRD/P","turnovers"],["FALTAS/P","fouls"]];return <section className="team-v2-section team-v2-collective-section"><div className="team-v2-section-head"><h3>ESTADÍSTICAS COLECTIVAS</h3><span className="team-v2-official-count">{n} PJ con datos</span></div><div className="team-v2-collective-grid">{metrics.map(([l,k])=><div className="team-v2-collective-item" key={k}><span>{l}</span><strong>{n?(totals[k]/n).toFixed(1):"—"}</strong></div>)}</div><div className="team-v2-collective-shooting">{[["TC","fieldGoals"],["T2","twoPointers"],["T3","threePointers"],["TL","freeThrows"]].map(([l,k])=><div className="team-v2-collective-item" key={k}><span>{l}</span><strong>{shots[k][1]?(100*shots[k][0]/shots[k][1]).toFixed(1)+"%":"—"}</strong></div>)}</div></section>;})()}
         {(()=>{const m=classified.filter(g=>g.status!=="finished"&&(g.homeTeam.teamId===selectedTeam.teamId||g.awayTeam.teamId===selectedTeam.teamId)&&g.date>=today).sort((a,b)=>(a.date+" "+(a.time||"")).localeCompare(b.date+" "+(b.time||"")))[0];return m?<section className="team-v2-section"><div className="team-v2-section-head"><h3>PRÓXIMO PARTIDO</h3><Link to="/liga" onClick={()=>setSelectedTeam(null)}>Ver fixture completo →</Link></div><button type="button" className="team-v2-next" onClick={()=>{setSelectedTeam(null);setSelectedUpcomingMatch(m);}}><div><img src={labCrest(m.homeTeam)} alt=""/><strong>{displayName(m.homeTeam.name)}</strong></div><div className="team-v2-next-center"><span>{formatDay(m.date)}</span><strong>{m.time||"A confirmar"}</strong><span>{m.tv?.join(" · ")||"Transmisión a confirmar"}</span></div><div><img src={labCrest(m.awayTeam)} alt=""/><strong>{displayName(m.awayTeam.name)}</strong></div></button></section>:null;})()}
@@ -579,7 +583,7 @@ function HomeLigaArgentina() {
        </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
       </div></div>,document.body)}
       {selectedMatch && <LabHomeBoxscore match={selectedMatch} onClose={() => setSelectedMatch(null)}/>}
-      {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)}/>}
+      {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)} onNavigateTeam={goToLabTeam}/>}
       {selectedLiveMatch && <LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={() => setSelectedLiveMatch(null)}/>}
   </main>;
 }
