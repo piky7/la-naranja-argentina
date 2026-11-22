@@ -16,3 +16,11 @@ export const isLabMatchFinished = match => {
   // fue publicado, pero todavía no se importó su boxscore completo.
   return match.status === "score_available" && Boolean(match.date) && match.date < argentinaToday();
 };
+
+
+// Un estado LIVE=finished sin un marcador real no alcanza para publicar FINAL.
+export const hasValidLabFinalScore = (homeScore, awayScore) => {
+  const home = Number(homeScore), away = Number(awayScore);
+  return homeScore != null && awayScore != null && Number.isFinite(home) && Number.isFinite(away) &&
+    !(home === 0 && away === 0) && home !== away;
+};
