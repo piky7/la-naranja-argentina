@@ -1094,6 +1094,11 @@ if (!nuevo) {
     ...datos,
     liveMatches: [...nuevosPorId.values()],
   };
+  const finalesNuevos = resultado.liveMatches.filter(partido => {
+    const anterior = anterioresPorId.get(partido.eventId);
+    return partido.status === "finished" && anterior?.status !== "finished";
+  });
+  await dispararSincronizacionDeEstadisticas(env, finalesNuevos);
 
   // Comparar los datos de los partidos sin incluir updatedAt.
   const partidosAnteriores =
