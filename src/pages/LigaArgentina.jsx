@@ -7,7 +7,7 @@ import fixture from "../../data/lab/labSchedule.json";
 import { LabHomeBoxscore, LabUpcomingMatchModal, LabLiveMatchModal } from "./HomeLigaArgentina.jsx";
 import { useLabBoxscores } from "../utils/labData";
 import rosters from "../../data/lab/labRosters.json";
-import { isLabMatchFinished } from "../utils/labMatchStatus";
+import { isLabMatchFinished, hasValidLabFinalScore } from "../utils/labMatchStatus";
 import { LAB_CONFERENCES, labMatchColor, formatLabLiveRemaining } from "../utils/labPresentation";
 import "./LigaArgentina.css";
 import "./Liga.css";
@@ -78,7 +78,7 @@ export default function LigaArgentina(){
   const now=new Intl.DateTimeFormat("en-GB",{timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date());
   const future=m.date>today||(m.date===today&&m.time&&m.time>now);
   const live=labLiveById.get(String(m.id));
-  return {...m,liveData:live||null,homeScore:live?.homeScore??m.homeScore,awayScore:live?.awayScore??m.awayScore,status:isLabMatchFinished(m)||live?.status==="finished"?"finished":live?.status==="live"?"live":future?"scheduled":"needs_review"};
+  return {...m,liveData:live||null,homeScore:live?.homeScore??m.homeScore,awayScore:live?.awayScore??m.awayScore,status:isLabMatchFinished(m)||(live?.status==="finished"&&hasValidLabFinalScore(live?.homeScore??m.homeScore,live?.awayScore??m.awayScore))?"finished":live?.status==="live"?"live":future?"scheduled":"needs_review"};
  }),[today,liveMatches]);
  const counts={results:classified.filter(m=>m.status==="finished").length,upcoming:classified.filter(m=>m.status==="scheduled").length,review:classified.filter(m=>m.status==="needs_review").length};
  const {todayMatches,allResults,upcomingMatches}=useMemo(()=>({
@@ -140,7 +140,7 @@ export default function LigaArgentina(){
        <button type="button" aria-label="Resultados más recientes" disabled={currentResultsPage===totalResultsPages-1} onClick={()=>setResultsPage(currentResultsPage+1)}>›</button>
       </div>}
      </div></div></div>
-     <div className="results-card">{results.length?results.map(match=><button key={match.id} type="button" className="result-match" style={labMatchStyle(match)} onClick={()=>setSelectedMatch(match)}>
+     <div className="results-card">{results.length?results.map(match=><button key={match.id} type="button" className="result-match" style={labMatchStyle(match)} onClick={()=>{if(hasValidLabFinalScore(match.homeScore,match.awayScore))setSelectedMatch(match);else setSelectedUpcomingMatch(match);}}>
       <div className="result-date"><span className="league-card-weekday">{formatLeagueWeekday(match.date)}</span><span>{formatLeagueDate(match.date)}</span></div>
       <div className="result-teams"><MatchTeam team={match.homeTeam}/><div className="result-score"><strong className={Number(match.homeScore)>Number(match.awayScore)?"league-score-winner":""}>{match.homeScore}</strong><span>-</span><strong className={Number(match.awayScore)>Number(match.homeScore)?"league-score-winner":""}>{match.awayScore}</strong></div><div className="result-team away"><span>{teamLabel(match.awayTeam.name)}</span><img src={labTeamCrest(match.awayTeam)} alt="" className="result-logo" loading="lazy"/></div></div>
      </button>):<div className="column-empty">No hay resultados registrados.</div>}</div>
