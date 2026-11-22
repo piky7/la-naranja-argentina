@@ -514,7 +514,7 @@ async function generarLive(fecha, anteriores = null, env) {
     proximos = await obtenerConCache(
       cacheReferencia,
       `fixture-oficial:${fecha}`,
-      600,
+      1800,
       () => obtenerFixture(fecha)
     );
   } catch (error) {
@@ -525,7 +525,7 @@ async function generarLive(fecha, anteriores = null, env) {
     respaldo = await obtenerConCache(
       cacheReferencia,
       `calendario-respaldo:${fecha}`,
-      600,
+      1800,
       () => obtenerCalendarioRespaldo(fecha)
     );
   } catch (error) {
@@ -700,7 +700,7 @@ if (anterior?.status === "finished") {
 async function obtenerFixtureLab(fecha, env) {
   const clave = "fixture-lab:" + fecha;
   const cache = await env.LNA_LIVE_OFICIAL.get(clave, "json");
-  if (cache && Array.isArray(cache.matches) && Date.now() - cache.guardadoEn < 5 * 60 * 1000) return cache.matches;
+  if (cache && Array.isArray(cache.matches) && Date.now() - cache.guardadoEn < 30 * 60 * 1000) return cache.matches;
   const source = await descargar("https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/data/lab/labSchedule.json");
   const data = JSON.parse(source);
   if (!Array.isArray(data.matches)) throw new Error("Fixture LAB inválido");
