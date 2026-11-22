@@ -79,7 +79,12 @@ async function main() {
     const teamsKey = dateMatch[1];
     // Las estadísticas oficiales usan la clave completa con fecha.
     // El formato anterior de Flashscore solo usaba los equipos.
-    const matchStats = stats[resultKey] ?? stats[teamsKey];
+    // Los resultados LNB con URL oficial solo se publican como "con stats"
+    // si existe su planilla oficial exacta. No aceptar el fallback legado
+    // por equipos: puede corresponder a otra fecha/partido y ocultar faltantes.
+    const matchStats = result.source === "Liga Nacional"
+      ? stats[resultKey]
+      : (stats[resultKey] ?? stats[teamsKey]);
 
     if (!matchStats || typeof matchStats !== "object") continue;
 
