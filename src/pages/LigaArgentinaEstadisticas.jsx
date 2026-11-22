@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 import boxscores from "../../data/lab/labBoxscores.json";
-import { labMatchColor, labCrest } from "./HomeLigaArgentina";
+import { labMatchColor, labCrest, LabPlayerModal } from "./HomeLigaArgentina";
 import { isLabMatchFinished } from "../utils/labMatchStatus";
 import "./LigaArgentina.css";
 import "./Estadisticas.css";
@@ -123,6 +123,7 @@ function LigaArgentinaEstadisticas(){
   const [scope,setScope]=useState("overall");
   const [teamMetric,setTeamMetric]=useState("points");
   const [teamDirection,setTeamDirection]=useState("best");
+  const [selectedPlayer,setSelectedPlayer]=useState(null);
   const normalized=search.trim().toLocaleLowerCase("es");
 
   const playerRows=useMemo(()=>allPlayers.filter(player=>
@@ -155,6 +156,11 @@ function LigaArgentinaEstadisticas(){
     }),[scope,teamMetric,teamDirection]);
   const maxTeamValue=Math.max(1,...orderedTeams.map(r=>r.value||0));
   const toggleSort=key=>{if(sortBy===key)setSortDir(d=>d==="desc"?"asc":"desc");else{setSortBy(key);setSortDir("desc");}};
+  const selectedPlayerMatch=selectedPlayer ? [...fixture.matches].filter(game=>
+    (Number(game.homeTeam.teamId)===Number(selectedPlayer.teamId)||Number(game.awayTeam.teamId)===Number(selectedPlayer.teamId)) &&
+    (boxscores?.[game.id]?.players||[]).some(p=>String(p.id)===String(selectedPlayer.id)&&String(p.teamId)===String(selectedPlayer.teamId))
+  ).sort((x,y)=>String(y.date).localeCompare(String(x.date)))[0] : null;
+  const selectedPlayerMatchContext=selectedPlayerMatch ? {...selectedPlayerMatch,homeTeam:{...selectedPlayerMatch.homeTeam,id:String(selectedPlayerMatch.homeTeam.teamId),logo:labCrest(selectedPlayerMatch.homeTeam)},awayTeam:{...selectedPlayerMatch.awayTeam,id:String(selectedPlayerMatch.awayTeam.teamId),logo:labCrest(selectedPlayerMatch.awayTeam)}} : null;
   const selectOptions=[["players","Jugadores"],["teams","Equipos"],["triples","Triples"],["mvp","MVP"]];
 
   return <main className="lab-page lab-statistics-page">
@@ -170,14 +176,14 @@ function LigaArgentinaEstadisticas(){
           <label>EQUIPO<select value={selectedTeam} onChange={e=>setSelectedTeam(e.target.value)}><option value="all">Todos los equipos</option>{teams.map(t=><option key={t.teamId} value={String(t.teamId)}>{t.name}</option>)}</select></label>
           <label>MÍN. PJ<select value={minGames} onChange={e=>setMinGames(e.target.value)}><option value="0">Todos</option><option value="2">2 partidos</option><option value="3">3 partidos</option><option value="5">5 partidos</option></select></label>
         </div>
-        <div className="stats-leaders lab-stats-leaders">{leaders.map(({key,title,unit,player})=><button type="button" className="stats-leader-card lab-stats-leader" key={key} style={{"--stats-team-color":teamColors(player)}} onClick={()=>setSearch(player.name)}>
+        <div className="stats-leaders lab-stats-leaders">{leaders.map(({key,title,unit,player})=><button type="button" className="stats-leader-card lab-stats-leader" key={key} style={{"--stats-team-color":teamColors(player)}} onClick={()=>setSelectedPlayer(player)}>
           <span className="stats-leader-title">{title}</span><div className="stats-leader-value"><strong>{fmt(player.averages?.[key])}</strong><span>{unit}</span></div>
           {player.team&&<img src={labCrest(player.team)} alt=""/>}<strong className="lab-stats-leader-name">{formatPersonName(player.name)}</strong>
         </button>)}</div>
         <div className="lab-stats-table-wrap"><table className="stats-table lab-player-ranking"><thead><tr>
           <th>JUGADOR</th><th>EQUIPO</th><th><button onClick={()=>toggleSort("gamesPlayed")}>PJ ↕</button></th>
           {playerStats.map(key=><th key={key}><button onClick={()=>toggleSort(key)}>{({points:"PTS",rebounds:"REB",assists:"AST",valuation:"VAL"})[key]} {sortBy===key?(sortDir==="desc"?"↓":"↑"):"↕"}</button></th>)}
-        </tr></thead><tbody>{playerRows.slice(0,20).map((p,i)=><tr key={p.id} style={{"--stats-team-color":teamColors(p)}} onClick={()=>{}}>
+        </tr></thead><tbody>{playerRows.slice(0,20).map((p,i)=><tr key={p.id} style={{"--stats-team-color":teamColors(p)}} onClick={()=>setSelectedPlayer(p)} className="lab-stats-player-clickable">
           <td><span className="lab-stats-player-cell"><b className={i===0?"lab-stats-medal lab-stats-medal-gold":i===1?"lab-stats-medal lab-stats-medal-silver":i===2?"lab-stats-medal lab-stats-medal-bronze":""}>{i+1}</b><strong>{formatPersonName(p.name)}</strong></span></td>
           <td><img className="lab-stats-team-logo" src={labCrest(p.team)} alt={p.team?.name||""}/></td><td>{p.gamesPlayed}</td>
           {playerStats.map(key=><td key={key} className={sortBy===key?"stats-active-column":""}>{fmt(p.averages?.[key])}</td>)}
@@ -209,6 +215,7 @@ function LigaArgentinaEstadisticas(){
         <p className="triple-note">El MVP se calcula por mayor valoración individual en cada boxscore oficial. En caso de empate, todos los jugadores empatados reciben una distinción.</p>
       </section>}
     </section>
+    {selectedPlayer && selectedPlayerMatchContext && <LabPlayerModal player={selectedPlayer} match={selectedPlayerMatchContext} team={{...selectedPlayer.team,id:String(selectedPlayer.teamId),logo:labCrest(selectedPlayer.team)}} initialTab="season" onClose={()=>setSelectedPlayer(null)}/>}
   </main>;
 }
 export default LigaArgentinaEstadisticas;
