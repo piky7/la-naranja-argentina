@@ -16,7 +16,7 @@ function isCandidate(match, now = new Date(), recent = false) {
   return Number.isFinite(start) && start <= now.getTime();
 }
 
-function pollDecision(fixture, history, event, schedule, now = new Date(), requestedMode = "") {
+function pollDecision(fixture, history, event, schedule, now = new Date(), requestedMode = "", statsByMatch = null) {
   const recent = event === "schedule" && schedule === "*/10 * * * *" ||
     event === "workflow_dispatch" && requestedMode === "recent";
   if (!recent) return { run: true, mode: "full" };
@@ -24,20 +24,33 @@ function pollDecision(fixture, history, event, schedule, now = new Date(), reque
       !Array.isArray(fixture.matches) || !Array.isArray(history.matches)) {
     throw new Error("Fixture o historial oficial inválido");
   }
-  const processed = new Set(history.matches.map(m => m.officialUrl));
+  // El historial de extracción no alcanza: un partido puede estar guardado
+  // allí y aun así no tener una planilla oficial publicada en la web.
+  const processed = statsByMatch
+    ? new Set(Object.values(statsByMatch)
+      .filter(record => record?.source === "Liga Nacional" &&
+        record.officialUrl?.startsWith("https://www.laliganacional.com.ar/laliga/partido/") &&
+        Array.isArray(record[record.homeTeam]) && record[record.homeTeam].length > 0 &&
+        Array.isArray(record[record.awayTeam]) && record[record.awayTeam].length > 0)
+      .map(record => record.officialUrl))
+    : new Set(history.matches.map(m => m.officialUrl));
   return { run: fixture.matches.some(m => !processed.has(m.officialUrl) && isCandidate(m, now, true)), mode: "recent" };
 }
 
 if (require.main === module) {
-  const decision = pollDecision(
-    JSON.parse(fs.readFileSync("liga-events.json", "utf8")),
-    JSON.parse(fs.readFileSync("liga-history.json", "utf8")),
-    process.env.GITHUB_EVENT_NAME, process.env.OFFICIAL_SCHEDULE,
-    new Date(), process.env.OFFICIAL_REQUESTED_MODE
-  );
-  const output = `run=${decision.run}\nmode=${decision.mode}\n`;
-  console.log(output);
-  if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, output);
+  (async () => {
+    const statsModule = await import("../src/data/matchStats.js?official-poll");
+    const decision = pollDecision(
+      JSON.parse(fs.readFileSync("liga-events.json", "utf8")),
+      JSON.parse(fs.readFileSync("liga-history.json", "utf8")),
+      process.env.GITHUB_EVENT_NAME, process.env.OFFICIAL_SCHEDULE,
+      new Date(), process.env.OFFICIAL_REQUESTED_MODE,
+      statsModule.matchPlayerStats
+    );
+    const output = `run=${decision.run}\nmode=${decision.mode}\n`;
+    console.log(output);
+    if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, output);
+  })().catch(error => { console.error(error); process.exitCode = 1; });
 }
 
 module.exports = { argentinaDate, isCandidate, pollDecision };
