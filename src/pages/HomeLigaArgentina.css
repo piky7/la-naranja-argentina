@@ -1127,3 +1127,28 @@
     transition: none;
   }
 }
+
+
+/* Accesibilidad de interacciones agregadas a las cards de jugadores LAB. */
+.lab-upcoming-match .upcoming-player-entry {
+  width: 100%;
+  border: 1px solid #263b50;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: rgba(255,255,255,.025);
+  cursor: pointer;
+}
+.lab-upcoming-match .upcoming-player-entry:focus-visible,
+.lab-upcoming-match .match-modal-team .home-modal-team-logo-button:focus-visible,
+.lab-home-page .team-v2-crest:focus-visible {
+  outline: 2px solid #65d7ef;
+  outline-offset: 3px;
+}
+.lab-home-page .team-v2-crest {
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
