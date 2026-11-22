@@ -55,9 +55,9 @@ export default defineConfig({
       },
 
       workbox: {
-        // El bundle oficial incluye las estadísticas de LAB y supera 4 MiB.
-        // Mantener la precarga offline sin excluir el JavaScript principal.
-        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
+        // El bundle oficial de estadísticas LAB puede superar 6 MiB tras reconstruir el historial.
+        // Permitir su precarga offline completa sin excluir el JavaScript de estadísticas.
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
         navigateFallback: "/index.html",
         // Las navegaciones buscan primero la versión actual en la red.
         // Los recursos estáticos versionados siguen en precaché.
