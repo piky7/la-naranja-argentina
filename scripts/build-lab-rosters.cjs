@@ -19,31 +19,47 @@ const fmt = seconds => {
   return h ? `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}` : `${m}:${String(s).padStart(2,"0")}`;
 };
 const fields = ["points","rebounds","offensiveRebounds","defensiveRebounds","assists","steals","turnovers","blocks","blocksReceived","fouls","foulsReceived","valuation","plusMinus"];
-for (const [matchId, box] of Object.entries(boxes)) {
-  for (const p of box.players || []) {
-    const teamId = Number(p.teamId), playerId = Number(p.id);
-    if (!teamInfo.has(teamId) || !playerId) continue;
-    if (!teams.has(teamId)) teams.set(teamId, new Map());
-    const roster = teams.get(teamId);
-    if (!roster.has(playerId)) roster.set(playerId, {
-      id: playerId, teamId, name: p.name, number: p.number, appearances: 0, gamesPlayed: 0,
-      totalSeconds: 0, lastSeen: box.date, games: [], totals: Object.fromEntries(fields.map(k=>[k,0])),
-      twoPointers:{made:0,attempted:0},threePointers:{made:0,attempted:0},freeThrows:{made:0,attempted:0}
-    });
-    const player = roster.get(playerId);
-    player.appearances++;
-    const seconds = toSeconds(p.minutes);
-    player.totalSeconds += seconds;
-    if (seconds > 0) player.gamesPlayed++;
-    if (box.date >= player.lastSeen) { player.lastSeen = box.date; player.name = p.name; player.number = p.number; }
-    player.games.push({matchId,date:box.date,minutes:p.minutes,points:p.points});
-    for (const key of fields) player.totals[key] += Number(p[key] || 0);
-    for (const key of ["twoPointers","threePointers","freeThrows"]) {
-      player[key].made += Number(p[key]?.made || 0);
-      player[key].attempted += Number(p[key]?.attempted || 0);
-    }
-  }
-}
+// Usar exclusivamente los boxscores vinculados a los IDs vigentes del fixture.
+ // El archivo histórico puede conservar entradas antiguas con IDs anteriores;
+ // recorrerlo completo infla PJ y duplica participaciones.
+ const countedMatches = new Set();
+ for (const match of fixture.matches) {
+   if (match.status !== "finished" || countedMatches.has(match.id)) continue;
+   const box = boxes[match.id];
+   if (box?.status !== "finished" || !Array.isArray(box.players) || !box.players.length ||
+       Number(box.homeTeamId) !== Number(match.homeTeam.teamId) ||
+       Number(box.awayTeamId) !== Number(match.awayTeam.teamId) ||
+       Number(box.homeScore) !== Number(match.homeScore) ||
+       Number(box.awayScore) !== Number(match.awayScore)) continue;
+   countedMatches.add(match.id);
+   const seenPlayers = new Set();
+   for (const p of box.players) {
+     const teamId = Number(p.teamId), playerId = Number(p.id);
+     if (!teamInfo.has(teamId) || !playerId) continue;
+     const appearanceKey = `${teamId}:${playerId}`;
+     if (seenPlayers.has(appearanceKey)) continue;
+     seenPlayers.add(appearanceKey);
+     if (!teams.has(teamId)) teams.set(teamId, new Map());
+     const roster = teams.get(teamId);
+     if (!roster.has(playerId)) roster.set(playerId, {
+       id: playerId, teamId, name: p.name, number: p.number, appearances: 0, gamesPlayed: 0,
+       totalSeconds: 0, lastSeen: box.date, games: [], totals: Object.fromEntries(fields.map(k=>[k,0])),
+       twoPointers:{made:0,attempted:0},threePointers:{made:0,attempted:0},freeThrows:{made:0,attempted:0}
+     });
+     const player = roster.get(playerId);
+     player.appearances++;
+     const seconds = toSeconds(p.minutes);
+     player.totalSeconds += seconds;
+     if (seconds > 0) player.gamesPlayed++;
+     if (box.date >= player.lastSeen) { player.lastSeen = box.date; player.name = p.name; player.number = p.number; }
+     player.games.push({matchId:match.id,date:box.date,minutes:p.minutes,points:p.points});
+     for (const key of fields) player.totals[key] += Number(p[key] || 0);
+     for (const key of ["twoPointers","threePointers","freeThrows"]) {
+       player[key].made += Number(p[key]?.made || 0);
+       player[key].attempted += Number(p[key]?.attempted || 0);
+     }
+   }
+ }
 const result = {
   source: "Planillas oficiales de partidos importadas en LNA",
   generatedAt: new Date().toISOString(),
