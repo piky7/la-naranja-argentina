@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-22T00:03:30.945Z",
+  "importedAt": "2026-11-22T03:31:58.586Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3871,12 +3871,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2378/115029/union-mdp/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2378/115029"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 83,
+      "awayScore": 68,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2BRj-rpMTa5gJ65K0SjBPwaQCIpiKvUmr5zXMEsUo6ibPXeJmjBws7A==/pico-fc-vs-union-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-22T03:31:58.372Z"
     },
     {
       "id": "v2fx6MrXylHnWLXr3td_IIVKI_AjF0NZJ6riTPFILwkiueHWXvTF3dag==",
@@ -16569,6 +16570,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 114,
-  "pending": 425
+  "finished": 115,
+  "pending": 424
 }
