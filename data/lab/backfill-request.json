@@ -1,5 +1,5 @@
 {
   "matchId": null,
-  "reason": "Reintentar publicación del backfill LAB: las 114 planillas oficiales ya fueron recuperadas y validadas; el build anterior falló por el límite de precache PWA de 6 MiB. Reprocesar y publicar historial completo.",
+  "reason": "Regenerar planteles LAB con PJ corregidos: contar únicamente boxscores oficiales asociados una sola vez a los IDs vigentes del fixture, excluyendo registros históricos huérfanos o duplicados.",
   "allFinished": true
 }
