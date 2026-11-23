@@ -13,7 +13,7 @@ function splitBoxscores(sourceFile, outputDir) {
   fs.mkdirSync(outputDir, { recursive: true });
   for (const [matchId, box] of entries) {
     if (!matchId || !box || typeof box !== "object") throw new Error("Boxscore inválido: " + matchId);
-    const filename = encodeURIComponent(String(matchId)) + ".json";
+    const filename = "labBoxscores-" + encodeURIComponent(String(matchId)) + ".json";
     const destination = path.join(outputDir, filename);
     fs.writeFileSync(destination, JSON.stringify(box) + "\n");
     nextFiles.add(filename);
