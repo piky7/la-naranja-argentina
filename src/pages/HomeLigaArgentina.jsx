@@ -75,7 +75,7 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
 }
 
 export function LabPlayerModal({player, match, team, onClose, initialTab = "match"}) {
-  const boxscores = useLabBoxscores();
+  const boxscores = useLabBoxscores(tab === "season");
   const [tab,setTab]=useState(initialTab);
   // Los promedios deben calcularse solo con partidos de la temporada del encuentro
   // desde el que se abrió la ficha. El archivo también conserva boxscores históricos.
@@ -140,7 +140,7 @@ export function LabPlayerModal({player, match, team, onClose, initialTab = "matc
 }
 
 export function LabHomeBoxscore({match, onClose}) {
-  const boxscores = useLabBoxscores();
+  const boxscores = useLabBoxscores(true, [match.id]);
   const box = boxscores?.[match.id];
   const players = box?.players || [];
   const homeTeam = { ...match.homeTeam, id: String(match.homeTeam.teamId), name: displayName(match.homeTeam.name), shortName: displayName(match.homeTeam.name), logo: labCrest(match.homeTeam) };
