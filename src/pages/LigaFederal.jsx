@@ -6,7 +6,7 @@ const zones = [
   { name: "Chaco", short: "CHA", color: "#e3a72f", teams: ["Don Bosco de Resistencia","Asociación Italiana de Charata","Hércules de Charata","Unión Progresista de Villa Ángela"] },
   { name: "Santa Fe", short: "SF", color: "#3c82bd", teams: ["Sanjustino","Almagro de Esperanza","Gimnasia de Santa Fe","Rivadavia Juniors de Santa Fe"] },
   { name: "Córdoba", short: "CBA", color: "#7b6bc5", teams: ["Complejo Deportivo de Justiniano Posse","Banda Norte de Río Cuarto","Sportivo 9 de Julio de Río Tercero","Sparta de Villa María","Matienzo de Córdoba","Unión Central de Villa María"] },
-  { name: "Neuquén / Río Negro", short: "PAT", color: "#2b9fa4", teams: ["Deportivo Roca","Centro Español de Plottier"] },
+  { name: "Neuquén / Río Negro", short: "PAT", color: "#2b9fa4", teams: ["Deportivo Roca","Centro Español de Plottier","Pérfora (Plaza Huincul)","Pacífico (Neuquén)"] },
 ];
 
 const teamLogos = {
@@ -44,6 +44,8 @@ const teamLogos = {
   "Unión Central de Villa María": "/federal-team-logos/union-central-villa-maria.webp",
   "Deportivo Roca": "/federal-team-logos/deportivo-roca.webp",
   "Centro Español de Plottier": "/federal-team-logos/centro-espanol-plottier.webp",
+  "Pérfora (Plaza Huincul)": "/federal-team-logos/perfora.webp",
+  "Pacífico (Neuquén)": "/federal-team-logos/pacifico.webp",
 };
 
 const pending = [
