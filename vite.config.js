@@ -55,12 +55,12 @@ export default defineConfig({
       },
 
       workbox: {
-        // El bundle oficial de estadísticas LAB puede superar 6 MiB tras reconstruir el historial.
-        // Permitir su precarga offline completa sin excluir el JavaScript de estadísticas.
+        // El historial completo de boxscores LAB puede superar el límite de precaché.
+        // Se descarga bajo demanda al abrir funciones que necesitan estadísticas y luego
+        // queda disponible en caché runtime, sin bloquear la instalación/actualización de la PWA.
+        globIgnores: ["**/labBoxscores-*.js"],
         maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
         navigateFallback: "/index.html",
-        // Las navegaciones buscan primero la versión actual en la red.
-        // Los recursos estáticos versionados siguen en precaché.
         runtimeCaching: [
           {
             urlPattern: ({ request }) => request.mode === "navigate",
@@ -69,6 +69,15 @@ export default defineConfig({
               cacheName: "lna-navigation-v1",
               networkTimeoutSeconds: 4,
               expiration: { maxEntries: 10, maxAgeSeconds: 86400 },
+            },
+          },
+          {
+            urlPattern: /\/assets\/labBoxscores-[^/]+\.js$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "lna-lab-boxscores-v1",
+              cacheableResponse: { statuses: [0, 200] },
+              expiration: { maxEntries: 2, maxAgeSeconds: 30 * 24 * 60 * 60 },
             },
           },
         ],
