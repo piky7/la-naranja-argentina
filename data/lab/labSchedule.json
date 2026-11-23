@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-23T01:48:04.124Z",
+  "importedAt": "2026-11-23T01:51:54.945Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3994,12 +3994,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1458/113317/central-entrerriano/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1458/113317"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 67,
+      "awayScore": 71,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2h8k_17UwRhejDDcIh2fpv6ug8GiUsLfZemuLjbmrXdFOlOkUegYosQ==/centenario-vt-vs-central-entrerriano",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-23T01:51:54.720Z"
     },
     {
       "id": "v2WgLCxZyYmNR1nefTrl0Hi6dOnV3Rp_rGI-5dUX5LNCniTuDn6LOIGQ==",
@@ -16572,6 +16573,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 117,
-  "pending": 422
+  "finished": 118,
+  "pending": 421
 }
