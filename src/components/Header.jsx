@@ -91,7 +91,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
               <strong>EN UN SOLO LUGAR.</strong>
             </div>
 
-            <div className="header-league" aria-hidden="true">{selectedTournament === "lab" ? "LIGA ARGENTINA" : "LIGA NACIONAL"}</div>
+            <div className="header-league" aria-hidden="true">{selectedTournament === "lab" ? "LIGA ARGENTINA" : selectedTournament === "federal" ? "LIGA FEDERAL" : "LIGA NACIONAL"}</div>
           </div>
 
           {/* DECORACIÓN */}
@@ -101,7 +101,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
             <div className="header-ball-line header-ball-line-3"></div>
           </div>
 
-          <ProdeProfileAccess />
+          {selectedTournament !== "federal" && <ProdeProfileAccess />}
 
           <div className="tournament-selector" role="group" aria-label="Seleccionar torneo">
             <button type="button" className={selectedTournament === "lnb" ? "tournament-option active" : "tournament-option"} aria-pressed={selectedTournament === "lnb"} onClick={() => onTournamentChange("lnb")}>
@@ -119,7 +119,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
           </div>
 
           {/* NAVEGACIÓN ESCRITORIO */}
-          <nav className="navigation">
+          <nav className="navigation" style={selectedTournament === "federal" ? {display:"none"} : undefined}>
             <Link to="/">Inicio</Link>
             <Link to="/liga">Liga</Link>
             <Link to="/equipos">Equipos</Link>
@@ -168,7 +168,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
       )}
 
      {/* NAVEGACIÓN INFERIOR MOBILE */}
-<nav
+{selectedTournament !== "federal" && <nav
   className={navCompact ? "bottom-navigation is-compact" : "bottom-navigation"}
   aria-label="Navegación inferior"
 >
@@ -225,7 +225,7 @@ function Header({ selectedTournament = "lnb", onTournamentChange = () => {} }) {
     <span>Prode</span>
   </NavLink>
 
-</nav>
+</nav>}
     </>
   );
 }
