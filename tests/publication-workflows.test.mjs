@@ -4,12 +4,15 @@ import test from "node:test";
 
 const read = path => fs.readFileSync(new URL(path, import.meta.url), "utf8");
 
-test("LNA usa un único scheduler automático y mantiene el disparador manual", () => {
+test("LNA separa el polling frecuente de la sincronización completa de respaldo", () => {
   const unified = read("../.github/workflows/actualizar-lna-completo.yml");
-  const worker = read("../worker/lna-sync/wrangler.toml");
-  assert.match(worker, /crons\s*=\s*\["\*\/5 \* \* \* \*"\]/);
-  assert.doesNotMatch(unified, /^\s{2}schedule:/m);
+  const workerConfig = read("../worker/lna-sync/wrangler.toml");
+  const worker = read("../worker/lna-sync/src/index.js");
+  assert.match(workerConfig, /crons\s*=\s*\["\*\/5 \* \* \* \*"\]/);
+  assert.match(unified, /cron: "\*\/10 \* \* \* \*"/);
   assert.match(unified, /^\s{2}workflow_dispatch:/m);
+  assert.match(worker, /minute === 5 && hour % 6 === 0/);
+  assert.doesNotMatch(worker, /minute % 10 === 0/);
   assert.match(unified, /data\/lab\/backfill-request\.json/);
 });
 
