@@ -20,6 +20,14 @@ const teamLogos = {
   "Defensores Unidos de Zárate": "/federal-team-logos/defensores-unidos-zarate.webp",
   "Los Andes de Villa Ramallo": "/federal-team-logos/los-andes-villa-ramallo.webp",
   "Ciudad de Campana": "/federal-team-logos/ciudad-campana.webp",
+  "Sionista": { sprite: "0% 0%" },
+  "Luis Luciano": { sprite: "33.333% 0%" },
+  "Regatas": { sprite: "66.666% 0%" },
+  "Peñarol": { sprite: "100% 0%" },
+  "Racing": { sprite: "0% 100%" },
+  "Urquiza": { sprite: "33.333% 100%" },
+  "Ferro de San Salvador": { sprite: "66.666% 100%" },
+  "Atlético Tala": { sprite: "100% 100%" },
 };
 
 const pending = [
@@ -31,7 +39,9 @@ const pending = [
 
 function Shield({ name, color }) {
   const logo = teamLogos[name];
-  if (logo) return <img className="federal-team-logo" src={logo} alt={"Escudo de " + name} loading="lazy" decoding="async"/>;
+  if (logo) return typeof logo === "string"
+    ? <img className="federal-team-logo" src={logo} alt={"Escudo de " + name} loading="lazy" decoding="async"/>
+    : <span className="federal-team-logo" role="img" aria-label={"Escudo de " + name} style={{backgroundPosition:logo.sprite}}/>;
   const initials = name.split(/\s+/).filter(Boolean).slice(0,3).map(word => word[0]).join("").toUpperCase();
   return <svg className="federal-team-shield" viewBox="0 0 56 64" role="img" aria-label={"Identificador provisorio de " + name}>
     <path d="M5 4H51V36Q49 50 28 60Q7 50 5 36Z" fill="#0d1b29" stroke={color} strokeWidth="2.5"/>
