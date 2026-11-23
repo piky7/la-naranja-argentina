@@ -9,6 +9,19 @@ const zones = [
   { name: "Neuquén / Río Negro", short: "PAT", color: "#2b9fa4", teams: ["Deportivo Roca","Centro Español de Plottier"] },
 ];
 
+const teamLogos = {
+  "Racing de Olavarría": "/federal-team-logos/racing-olavarria.webp",
+  "Estudiantes de Olavarría": "/federal-team-logos/estudiantes-olavarria.webp",
+  "Estudiantes de La Plata": "/federal-team-logos/estudiantes-la-plata.webp",
+  "Atenas de La Plata": "/federal-team-logos/atenas-la-plata.webp",
+  "Somisa de San Nicolás": "/federal-team-logos/somisa-san-nicolas.webp",
+  "Belgrano de San Nicolás": "/federal-team-logos/belgrano-san-nicolas.webp",
+  "Colón de Chivilcoy": "/federal-team-logos/colon-chivilcoy.webp",
+  "Defensores Unidos de Zárate": "/federal-team-logos/defensores-unidos-zarate.webp",
+  "Los Andes de Villa Ramallo": "/federal-team-logos/los-andes-villa-ramallo.webp",
+  "Ciudad de Campana": "/federal-team-logos/ciudad-campana.webp",
+};
+
 const pending = [
   { name: "Córdoba", detail: "Quedan dos plazas por definir entre cuatro equipos.", teams: [] },
   { name: "Misiones", detail: "Semifinales provinciales: CAPRI, Mitre, Tokio y Oberá.", teams: ["CAPRI","Mitre","Tokio","Oberá"] },
@@ -17,6 +30,8 @@ const pending = [
 ];
 
 function Shield({ name, color }) {
+  const logo = teamLogos[name];
+  if (logo) return <img className="federal-team-logo" src={logo} alt={"Escudo de " + name} loading="lazy" decoding="async"/>;
   const initials = name.split(/\s+/).filter(Boolean).slice(0,3).map(word => word[0]).join("").toUpperCase();
   return <svg className="federal-team-shield" viewBox="0 0 56 64" role="img" aria-label={"Identificador provisorio de " + name}>
     <path d="M5 4H51V36Q49 50 28 60Q7 50 5 36Z" fill="#0d1b29" stroke={color} strokeWidth="2.5"/>
@@ -77,6 +92,6 @@ export default function LigaFederal() {
       <div><span>FORMATO DE CLASIFICACIÓN</span><h2>EL TORNEO FEDERAL</h2><p>Las plazas provinciales se calculan sobre el 40% de los participantes de los respectivos Prefederales. La competencia nacional está prevista para febrero-junio de 2027.</p></div>
       <div className="federal-info-note"><strong>RELEVAMIENTO PRELIMINAR · 23/11/2026</strong><p>Este listado no es una nómina oficial definitiva de la CAB. Se actualizará a medida que las federaciones provinciales confirmen plazas, repechajes y resultados.</p><small>Organismo: Confederación Argentina de Básquet (CAB).</small></div>
     </section>
-    <footer className="federal-disclaimer">Los escudos mostrados son identificadores gráficos provisorios, no los escudos oficiales de los clubes. Se reemplazarán al incorporar los archivos oficiales.</footer>
+    <footer className="federal-disclaimer">Los escudos oficiales se muestran en los equipos de Buenos Aires cuyos archivos fueron incorporados; los demás identificadores son provisorios.</footer>
   </main>;
 }
