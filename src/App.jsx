@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import Header from "./components/Header";
-import TournamentComingSoon from "./components/TournamentComingSoon";
+const LigaFederal = lazy(() => import("./pages/LigaFederal"));
 import SeoMeta from "./components/SeoMeta";
 import Footer from "./components/Footer";
 import SwipeNavigation from "./components/SwipeNavigation";
@@ -147,7 +147,7 @@ function AppContent() {
       <SwipeNavigation />
       <Header selectedTournament={selectedTournament} onTournamentChange={changeTournament} />
       {selectedTournament === "federal"
-        ? <TournamentComingSoon tournament="federal" onBack={() => changeTournament("lnb")} />
+        ? <LigaFederal />
         : <AnimatedRoutes selectedTournament={selectedTournament} onTournamentChange={changeTournament} />}
       <Footer />
     </>
