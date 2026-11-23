@@ -10,10 +10,10 @@ const zones = [
 ];
 
 const teamLogos = {
-  "Don Bosco de Resistencia": "/federal-team-logos/don-bosco-resistencia.svg",
-  "Asociación Italiana de Charata": "/federal-team-logos/italiana-charata.svg",
-  "Hércules de Charata": "/federal-team-logos/hercules-charata.svg",
-  "Unión Progresista de Villa Ángela": "/federal-team-logos/union-progresista-villa-angela.svg",
+  "Don Bosco de Resistencia": "/federal-team-logos/don-bosco-resistencia.webp",
+  "Asociación Italiana de Charata": "/federal-team-logos/italiana-charata.webp",
+  "Hércules de Charata": "/federal-team-logos/hercules-charata.webp",
+  "Unión Progresista de Villa Ángela": "/federal-team-logos/union-progresista-villa-angela.webp",
   "Racing de Olavarría": "/federal-team-logos/racing-olavarria.webp",
   "Estudiantes de Olavarría": "/federal-team-logos/estudiantes-olavarria.webp",
   "Estudiantes de La Plata": "/federal-team-logos/estudiantes-la-plata.webp",
