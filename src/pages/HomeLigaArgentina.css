@@ -1152,3 +1152,16 @@
   font: inherit;
   cursor: pointer;
 }
+
+/* Identificación de conferencia debajo del horario en el fixture LAB. */
+.lab-home-page .fixture-center .lab-fixture-conference{
+  display:block;
+  margin-top:3px;
+  color:#69d9ee;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em;
+  line-height:1.15;
+  text-align:center;
+  text-shadow:0 0 9px rgba(75,210,235,.22);
+}
