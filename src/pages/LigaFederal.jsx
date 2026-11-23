@@ -17,7 +17,7 @@ const pending = [
 ];
 
 function Shield({ name, color }) {
-  const initials = name.split(/\\s+/).filter(Boolean).slice(0,3).map(word => word[0]).join("").toUpperCase();
+  const initials = name.split(/\s+/).filter(Boolean).slice(0,3).map(word => word[0]).join("").toUpperCase();
   return <svg className="federal-team-shield" viewBox="0 0 56 64" role="img" aria-label={"Identificador provisorio de " + name}>
     <path d="M5 4H51V36Q49 50 28 60Q7 50 5 36Z" fill="#0d1b29" stroke={color} strokeWidth="2.5"/>
     <path d="M10 9H46V35Q44 46 28 54Q12 46 10 35Z" fill={color} opacity=".22"/>
