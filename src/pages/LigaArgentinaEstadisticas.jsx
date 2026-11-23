@@ -143,8 +143,10 @@ function LigaArgentinaEstadisticas(){
     .sort((a,b)=>b.triplesMade-a.triplesMade||a.name.localeCompare(b.name,"es")).slice(0,20),[]);
   const mvpPlayers=useMemo(()=>allPlayers.map(p=>({...p,mvps:mvpCounts.get(Number(p.id))||0}))
     .filter(p=>p.mvps>0).sort((a,b)=>b.mvps-a.mvps||a.name.localeCompare(b.name,"es")).slice(0,20),[]);
+  const teamGamesForMetric=row=>teamMetric==="homeWins"?row.homeGames:teamMetric==="awayWins"?row.awayGames:scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games;
+  const fixedTeamScope=teamMetric==="homeWins"||teamMetric==="awayWins";
   const orderedTeams=useMemo(()=>teamRows.map(row=>({...row,value:valueForTeam(row,teamMetric,scope)}))
-    .filter(row=>(scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games)>0)
+    .filter(row=>(teamMetric==="homeWins"?row.homeGames:teamMetric==="awayWins"?row.awayGames:scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games)>0)
     .sort((a,b)=>{
       if(a.value==null)return 1;if(b.value==null)return -1;
       const lowerBetter=teamMetric==="pointsAgainst";
@@ -191,24 +193,24 @@ function LigaArgentinaEstadisticas(){
       {mode==="teams"&&<div className="team-ranking lab-team-ranking">
         <div className="team-ranking-scopes">{[["overall","General"],["home","Local"],["away","Visitante"]].map(([key,label])=><button type="button" key={key} className={scope===key?"active":""} onClick={()=>setScope(key)}>{label}</button>)}</div>
         <div className="team-ranking-metrics">{teamMetrics.map(([key,label])=><button type="button" key={key} className={teamMetric===key?"active":""} onClick={()=>setTeamMetric(key)}>{label}</button>)}</div>
-        <div className="team-ranking-tools"><div className="team-ranking-heading"><span className="team-ranking-eyebrow">RANKING DE EQUIPOS · 2026/27</span><h2>{teamMetrics.find(m=>m[0]===teamMetric)?.[2]}</h2><p>{scope==="overall"?"Todos los partidos":scope==="home"?"Partidos como local":"Partidos como visitante"}</p></div>
+        <div className="team-ranking-tools"><div className="team-ranking-heading"><span className="team-ranking-eyebrow">RANKING DE EQUIPOS · 2026/27</span><h2>{teamMetrics.find(m=>m[0]===teamMetric)?.[2]}</h2><p>{fixedTeamScope?(teamMetric==="homeWins"?"Victorias acumuladas como local":"Victorias acumuladas como visitante"):scope==="overall"?"Todos los partidos":scope==="home"?"Partidos como local":"Partidos como visitante"}</p></div>
           <div className="team-ranking-controls"><label>ORDENAR<select value={teamDirection} onChange={e=>setTeamDirection(e.target.value)}><option value="best">Mejor a peor</option><option value="worst">Peor a mejor</option></select></label></div></div>
         <div className="team-ranking-list"><div className="team-ranking-listhead"><span>POS. · EQUIPO</span><span>{teamMetrics.find(m=>m[0]===teamMetric)?.[1]} / PJ</span></div>
-          {orderedTeams.map((row,i)=><div className="team-ranking-row" key={row.team.teamId} style={{"--ranking-team-color":labMatchColor(row.team)}}><span className="team-ranking-position">{i+1}.</span><img className="team-ranking-logo" src={labCrest(row.team)} alt=""/><span className="team-ranking-name">{row.team.name}<small>{scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games} PJ</small></span><span className="team-ranking-track"><span style={{width:`${row.value==null?0:Math.max(4,100*row.value/maxTeamValue)}%`}}/></span><strong className="team-ranking-value">{row.value==null?"—":fmt(row.value)}</strong></div>)}
+          {orderedTeams.map((row,i)=><div className="team-ranking-row" key={row.team.teamId} style={{"--ranking-team-color":labMatchColor(row.team)}}><span className="team-ranking-position">{i+1}.</span><img className="team-ranking-logo" src={labCrest(row.team)} alt=""/><span className="team-ranking-name">{row.team.name}<small>{teamGamesForMetric(row)} PJ</small></span><span className="team-ranking-track"><span style={{width:`${row.value==null?0:Math.max(4,100*row.value/maxTeamValue)}%`}}/></span><strong className="team-ranking-value">{row.value==null?"—":fmt(row.value)}</strong></div>)}
         </div><p className="team-ranking-note">Puntos y victorias se calculan con resultados finales. Rebotes y asistencias utilizan únicamente partidos con comparativa colectiva oficial.</p>
       </div>}
 
       {mode==="triples"&&<section className="triple-ranking lab-triple-ranking">
         <div className="triple-heading"><span>LIGA ARGENTINA · 2026/27</span><h2>Ranking de triples</h2><p>Triples convertidos acumulados en partidos con planilla individual oficial.</p></div>
-        <PlayerPodium items={triplePlayers.slice(0,3)} stat={p=>p.triplesMade} label="TRIPLES" onSelect={()=>{}}/>
-        <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div><div className="triple-list">{triplePlayers.slice(3,20).map((p,i)=><div className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}}><span className="triple-position">{i+4}</span><span className="triple-player-name">{formatPersonName(p.name)}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.triplesMade}</strong></div>)}{!triplePlayers.length&&<p className="triple-empty">Todavía no hay triples oficiales disponibles.</p>}</div>
+        <PlayerPodium items={triplePlayers.slice(0,3)} stat={p=>p.triplesMade} label="TRIPLES" onSelect={setSelectedPlayer}/>
+        <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div><div className="triple-list">{triplePlayers.slice(3,20).map((p,i)=><button type="button" className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}} onClick={()=>setSelectedPlayer(p)}><span className="triple-position">{i+4}</span><span className="triple-player-name">{formatPersonName(p.name)}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.triplesMade}</strong></button>)}{!triplePlayers.length&&<p className="triple-empty">Todavía no hay triples oficiales disponibles.</p>}</div>
         <p className="triple-note">Se muestran hasta 20 jugadores ordenados por triples convertidos acumulados en las planillas oficiales importadas.</p>
       </section>}
 
       {mode==="mvp"&&<section className="triple-ranking lab-triple-ranking">
         <div className="triple-heading"><span>LIGA ARGENTINA · 2026/27</span><h2>Ranking de MVP</h2><p>Jugadores con más distinciones por valoración individual en los partidos importados.</p></div>
-        <PlayerPodium items={mvpPlayers.slice(0,3)} stat={p=>p.mvps} label="MVP" onSelect={()=>{}}/>
-        <div className="triple-table-head"><span>JUGADOR</span><span>MVP</span></div><div className="triple-list">{mvpPlayers.slice(3,20).map((p,i)=><div className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}}><span className="triple-position">{i+4}</span><span className="triple-player-name">{p.name}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.mvps}</strong></div>)}{!mvpPlayers.length&&<p className="triple-empty">Todavía no hay MVP calculables con planillas completas.</p>}</div>
+        <PlayerPodium items={mvpPlayers.slice(0,3)} stat={p=>p.mvps} label="MVP" onSelect={setSelectedPlayer}/>
+        <div className="triple-table-head"><span>JUGADOR</span><span>MVP</span></div><div className="triple-list">{mvpPlayers.slice(3,20).map((p,i)=><button type="button" className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}} onClick={()=>setSelectedPlayer(p)}><span className="triple-position">{i+4}</span><span className="triple-player-name">{formatPersonName(p.name)}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.mvps}</strong></button>)}{!mvpPlayers.length&&<p className="triple-empty">Todavía no hay MVP calculables con planillas completas.</p>}</div>
         <p className="triple-note">El MVP se calcula por mayor valoración individual en cada boxscore oficial. En caso de empate, todos los jugadores empatados reciben una distinción.</p>
       </section>}
     </section>
