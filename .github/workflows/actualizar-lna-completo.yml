@@ -27,7 +27,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: sincronizacion-unificada-lna-main
+  group: lna-publicacion-datos-main
   cancel-in-progress: false
 
 jobs:
