@@ -21,7 +21,7 @@ test("la partición LAB conserva cada boxscore histórico sin alterar su conteni
   assert.equal(result.matches, 2);
   assert.equal(result.files, 2);
   for (const [id, expected] of Object.entries(historical)) {
-    const actual = JSON.parse(fs.readFileSync(path.join(output, encodeURIComponent(id) + ".json"), "utf8"));
+    const actual = JSON.parse(fs.readFileSync(path.join(output, "labBoxscores-" + encodeURIComponent(id) + ".json"), "utf8"));
     assert.deepEqual(actual, expected);
   }
   fs.rmSync(root, { recursive: true, force: true });
@@ -35,6 +35,6 @@ test("la partición elimina shards obsoletos y mantiene la cantidad exacta de pa
   fs.writeFileSync(path.join(output, "ANTIGUO.json"), "{}");
   fs.writeFileSync(source, JSON.stringify({ "PARTIDO-1": { players: [] } }));
   splitBoxscores(source, output);
-  assert.deepEqual(fs.readdirSync(output).sort(), ["PARTIDO-1.json"]);
+  assert.deepEqual(fs.readdirSync(output).sort(), ["labBoxscores-PARTIDO-1.json"]);
   fs.rmSync(root, { recursive: true, force: true });
 });
