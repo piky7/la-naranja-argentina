@@ -1,0 +1,685 @@
+{
+  "generatedAt": "2026-11-23T02:21:18.504Z",
+  "matches": {
+    "2026-10-08-san-lorenzo-gimnasia": {
+      "status": "published",
+      "homeScore": 89,
+      "awayScore": 73,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-10-08-independiente-oliva-ferro": {
+      "status": "published",
+      "homeScore": 92,
+      "awayScore": 97,
+      "homeTeam": "independiente-oliva",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-10-08-racing-chivilcoy-san-martin": {
+      "status": "published",
+      "homeScore": 126,
+      "awayScore": 123,
+      "homeTeam": "racing-chivilcoy",
+      "awayTeam": "san-martin",
+      "hasStats": true
+    },
+    "2026-10-07-olimpico-atenas": {
+      "status": "published",
+      "homeScore": 87,
+      "awayScore": 91,
+      "homeTeam": "olimpico",
+      "awayTeam": "atenas",
+      "hasStats": true
+    },
+    "2026-10-07-boca-obera": {
+      "status": "published",
+      "homeScore": 96,
+      "awayScore": 73,
+      "homeTeam": "boca",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-10-06-platense-la-union": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 90,
+      "homeTeam": "platense",
+      "awayTeam": "la-union",
+      "hasStats": true
+    },
+    "2026-10-05-quimsa-atenas": {
+      "status": "published",
+      "homeScore": 83,
+      "awayScore": 77,
+      "homeTeam": "quimsa",
+      "awayTeam": "atenas",
+      "hasStats": true
+    },
+    "2026-10-04-gimnasia-la-union": {
+      "status": "published",
+      "homeScore": 92,
+      "awayScore": 86,
+      "homeTeam": "gimnasia",
+      "awayTeam": "la-union",
+      "hasStats": true
+    },
+    "2026-10-03-quimsa-platense": {
+      "status": "published",
+      "homeScore": 94,
+      "awayScore": 67,
+      "homeTeam": "quimsa",
+      "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-10-02-regatas-instituto": {
+      "status": "published",
+      "homeScore": 73,
+      "awayScore": 63,
+      "homeTeam": "regatas",
+      "awayTeam": "instituto",
+      "hasStats": true
+    },
+    "2026-10-01-olimpico-platense": {
+      "status": "published",
+      "homeScore": 74,
+      "awayScore": 82,
+      "homeTeam": "olimpico",
+      "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-09-30-san-martin-instituto": {
+      "status": "published",
+      "homeScore": 73,
+      "awayScore": 81,
+      "homeTeam": "san-martin",
+      "awayTeam": "instituto",
+      "hasStats": true
+    },
+    "2026-09-30-argentino-ferro": {
+      "status": "published",
+      "homeScore": 79,
+      "awayScore": 68,
+      "homeTeam": "argentino",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-09-30-penarol-gimnasia": {
+      "status": "published",
+      "homeScore": 62,
+      "awayScore": 57,
+      "homeTeam": "penarol",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-09-28-lanus-gimnasia": {
+      "status": "published",
+      "homeScore": 74,
+      "awayScore": 92,
+      "homeTeam": "lanus",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-10-09-lanus-obera": {
+      "status": "published",
+      "homeScore": 67,
+      "awayScore": 58,
+      "homeTeam": "lanus",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-10-10-instituto-ferro": {
+      "status": "published",
+      "homeScore": 97,
+      "awayScore": 94,
+      "homeTeam": "instituto",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-10-10-quimsa-boca": {
+      "status": "published",
+      "homeScore": 105,
+      "awayScore": 96,
+      "homeTeam": "quimsa",
+      "awayTeam": "boca",
+      "hasStats": true
+    },
+    "2026-10-10-argentino-san-martin": {
+      "status": "published",
+      "homeScore": 82,
+      "awayScore": 79,
+      "homeTeam": "argentino",
+      "awayTeam": "san-martin",
+      "hasStats": true
+    },
+    "2026-10-10-racing-chivilcoy-gimnasia": {
+      "status": "published",
+      "homeScore": 72,
+      "awayScore": 78,
+      "homeTeam": "racing-chivilcoy",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-10-12-argentino-gimnasia": {
+      "status": "published",
+      "homeScore": 82,
+      "awayScore": 87,
+      "homeTeam": "argentino",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-10-12-atenas-ferro": {
+      "status": "published",
+      "homeScore": 91,
+      "awayScore": 86,
+      "homeTeam": "atenas",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-10-12-olimpico-boca": {
+      "status": "published",
+      "homeScore": 93,
+      "awayScore": 80,
+      "homeTeam": "olimpico",
+      "awayTeam": "boca",
+      "hasStats": true
+    },
+    "2026-10-13-obera-racing-chivilcoy": {
+      "status": "published",
+      "homeScore": 78,
+      "awayScore": 84,
+      "homeTeam": "obera",
+      "awayTeam": "racing-chivilcoy",
+      "hasStats": true
+    },
+    "2026-10-14-lanus-penarol": {
+      "status": "published",
+      "homeScore": 77,
+      "awayScore": 84,
+      "homeTeam": "lanus",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-10-15-la-union-racing-chivilcoy": {
+      "status": "published",
+      "homeScore": 68,
+      "awayScore": 74,
+      "homeTeam": "la-union",
+      "awayTeam": "racing-chivilcoy",
+      "hasStats": true
+    },
+    "2026-10-16-platense-obera": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 80,
+      "homeTeam": "platense",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-10-16-san-lorenzo-penarol": {
+      "status": "published",
+      "homeScore": 85,
+      "awayScore": 92,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-10-18-san-lorenzo-obera": {
+      "status": "published",
+      "homeScore": 73,
+      "awayScore": 78,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-10-18-regatas-olimpico": {
+      "status": "published",
+      "homeScore": 80,
+      "awayScore": 83,
+      "homeTeam": "regatas",
+      "awayTeam": "olimpico",
+      "hasStats": true
+    },
+    "2026-10-19-independiente-oliva-lanus": {
+      "status": "published",
+      "homeScore": 108,
+      "awayScore": 93,
+      "homeTeam": "independiente-oliva",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-10-20-san-martin-olimpico": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 106,
+      "homeTeam": "san-martin",
+      "awayTeam": "olimpico",
+      "hasStats": true
+    },
+    "2026-10-20-ferro-platense": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 81,
+      "homeTeam": "ferro",
+      "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-10-21-argentino-boca": {
+      "status": "published",
+      "homeScore": 84,
+      "awayScore": 82,
+      "homeTeam": "argentino",
+      "awayTeam": "boca",
+      "hasStats": true
+    },
+    "2026-10-21-instituto-lanus": {
+      "status": "published",
+      "homeScore": 75,
+      "awayScore": 73,
+      "homeTeam": "instituto",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-10-23-argentino-quimsa": {
+      "status": "published",
+      "homeScore": 76,
+      "awayScore": 78,
+      "homeTeam": "argentino",
+      "awayTeam": "quimsa",
+      "hasStats": true
+    },
+    "2026-10-23-atenas-lanus": {
+      "status": "published",
+      "homeScore": 80,
+      "awayScore": 69,
+      "homeTeam": "atenas",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-10-23-racing-chivilcoy-boca": {
+      "status": "published",
+      "homeScore": 72,
+      "awayScore": 80,
+      "homeTeam": "racing-chivilcoy",
+      "awayTeam": "boca",
+      "hasStats": true
+    },
+    "2026-10-25-racing-chivilcoy-quimsa": {
+      "status": "published",
+      "homeScore": 54,
+      "awayScore": 68,
+      "homeTeam": "racing-chivilcoy",
+      "awayTeam": "quimsa",
+      "hasStats": true
+    },
+    "2026-10-26-lanus-regatas": {
+      "status": "published",
+      "homeScore": 72,
+      "awayScore": 63,
+      "homeTeam": "lanus",
+      "awayTeam": "regatas",
+      "hasStats": true
+    },
+    "2026-10-27-penarol-san-martin": {
+      "status": "published",
+      "homeScore": 95,
+      "awayScore": 76,
+      "homeTeam": "penarol",
+      "awayTeam": "san-martin",
+      "hasStats": true
+    },
+    "2026-10-28-san-lorenzo-platense": {
+      "status": "published",
+      "homeScore": 58,
+      "awayScore": 80,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-10-28-boca-regatas": {
+      "status": "published",
+      "homeScore": 95,
+      "awayScore": 83,
+      "homeTeam": "boca",
+      "awayTeam": "regatas",
+      "hasStats": true
+    },
+    "2026-10-28-gimnasia-ferro": {
+      "status": "published",
+      "homeScore": 73,
+      "awayScore": 61,
+      "homeTeam": "gimnasia",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-10-29-lanus-san-martin": {
+      "status": "published",
+      "homeScore": 81,
+      "awayScore": 72,
+      "homeTeam": "lanus",
+      "awayTeam": "san-martin",
+      "hasStats": true
+    },
+    "2026-10-31-quimsa-penarol": {
+      "status": "published",
+      "homeScore": 78,
+      "awayScore": 73,
+      "homeTeam": "quimsa",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-11-01-instituto-gimnasia": {
+      "status": "published",
+      "homeScore": 57,
+      "awayScore": 58,
+      "homeTeam": "instituto",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-11-01-atenas-racing-chivilcoy": {
+      "status": "published",
+      "homeScore": 95,
+      "awayScore": 94,
+      "homeTeam": "atenas",
+      "awayTeam": "racing-chivilcoy",
+      "hasStats": true
+    },
+    "2026-11-02-olimpico-penarol": {
+      "status": "published",
+      "homeScore": 74,
+      "awayScore": 87,
+      "homeTeam": "olimpico",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-11-03-instituto-racing-chivilcoy": {
+      "status": "published",
+      "homeScore": 75,
+      "awayScore": 71,
+      "homeTeam": "instituto",
+      "awayTeam": "racing-chivilcoy",
+      "hasStats": true
+    },
+    "2026-11-03-atenas-gimnasia": {
+      "status": "published",
+      "homeScore": 76,
+      "awayScore": 79,
+      "homeTeam": "atenas",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-11-03-la-union-argentino": {
+      "status": "published",
+      "homeScore": 75,
+      "awayScore": 57,
+      "homeTeam": "la-union",
+      "awayTeam": "argentino",
+      "hasStats": true
+    },
+    "2026-11-04-olimpico-lanus": {
+      "status": "published",
+      "homeScore": 95,
+      "awayScore": 94,
+      "homeTeam": "olimpico",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-11-05-obera-argentino": {
+      "status": "published",
+      "homeScore": 98,
+      "awayScore": 84,
+      "homeTeam": "obera",
+      "awayTeam": "argentino",
+      "hasStats": true
+    },
+    "2026-11-05-independiente-oliva-gimnasia": {
+      "status": "published",
+      "homeScore": 76,
+      "awayScore": 77,
+      "homeTeam": "independiente-oliva",
+      "awayTeam": "gimnasia",
+      "hasStats": true
+    },
+    "2026-11-06-quimsa-lanus": {
+      "status": "published",
+      "homeScore": 88,
+      "awayScore": 71,
+      "homeTeam": "quimsa",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-11-06-boca-san-martin": {
+      "status": "published",
+      "homeScore": 90,
+      "awayScore": 63,
+      "homeTeam": "boca",
+      "awayTeam": "san-martin",
+      "hasStats": true
+    },
+    "2026-11-06-san-lorenzo-regatas": {
+      "status": "published",
+      "homeScore": 70,
+      "awayScore": 65,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "regatas",
+      "hasStats": true
+    },
+    "2026-11-08-san-lorenzo-san-martin": {
+      "status": "published",
+      "homeScore": 42,
+      "awayScore": 75,
+      "homeTeam": "san-lorenzo",
+      "awayTeam": "san-martin",
+      "hasStats": true
+    },
+    "2026-11-08-quimsa-instituto": {
+      "status": "published",
+      "homeScore": 88,
+      "awayScore": 92,
+      "homeTeam": "quimsa",
+      "awayTeam": "instituto",
+      "hasStats": true
+    },
+    "2026-11-08-racing-chivilcoy-regatas": {
+      "status": "published",
+      "homeScore": 68,
+      "awayScore": 80,
+      "homeTeam": "racing-chivilcoy",
+      "awayTeam": "regatas",
+      "hasStats": true
+    },
+    "2026-11-09-boca-la-union": {
+      "status": "published",
+      "homeScore": 97,
+      "awayScore": 93,
+      "homeTeam": "boca",
+      "awayTeam": "la-union",
+      "hasStats": true
+    },
+    "2026-11-09-gimnasia-obera": {
+      "status": "published",
+      "homeScore": 92,
+      "awayScore": 95,
+      "homeTeam": "gimnasia",
+      "awayTeam": "obera",
+      "hasStats": true
+    },
+    "2026-11-10-argentino-regatas": {
+      "status": "published",
+      "homeScore": 79,
+      "awayScore": 69,
+      "homeTeam": "argentino",
+      "awayTeam": "regatas",
+      "hasStats": true
+    },
+    "2026-11-10-olimpico-instituto": {
+      "status": "published",
+      "homeScore": 82,
+      "awayScore": 83,
+      "homeTeam": "olimpico",
+      "awayTeam": "instituto",
+      "hasStats": true
+    },
+    "2026-11-10-ferro-san-martin": {
+      "status": "published",
+      "homeScore": 84,
+      "awayScore": 87,
+      "homeTeam": "ferro",
+      "awayTeam": "san-martin",
+      "hasStats": true
+    },
+    "2026-11-11-lanus-la-union": {
+      "status": "published",
+      "homeScore": 93,
+      "awayScore": 57,
+      "homeTeam": "lanus",
+      "awayTeam": "la-union",
+      "hasStats": true
+    },
+    "2026-11-11-platense-penarol": {
+      "status": "published",
+      "homeScore": 75,
+      "awayScore": 79,
+      "homeTeam": "platense",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-11-12-atenas-san-lorenzo": {
+      "status": "published",
+      "homeScore": 81,
+      "awayScore": 55,
+      "homeTeam": "atenas",
+      "awayTeam": "san-lorenzo",
+      "hasStats": true
+    },
+    "2026-11-13-ferro-penarol": {
+      "status": "published",
+      "homeScore": 76,
+      "awayScore": 85,
+      "homeTeam": "ferro",
+      "awayTeam": "penarol",
+      "hasStats": true
+    },
+    "2026-11-14-gimnasia-platense": {
+      "status": "published",
+      "homeScore": 68,
+      "awayScore": 58,
+      "homeTeam": "gimnasia",
+      "awayTeam": "platense",
+      "hasStats": true
+    },
+    "2026-11-14-independiente-oliva-san-lorenzo": {
+      "status": "published",
+      "homeScore": 122,
+      "awayScore": 89,
+      "homeTeam": "independiente-oliva",
+      "awayTeam": "san-lorenzo",
+      "hasStats": true
+    },
+    "2026-11-15-san-martin-quimsa": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 81,
+      "homeTeam": "san-martin",
+      "awayTeam": "quimsa",
+      "hasStats": true
+    },
+    "2026-11-15-la-union-atenas": {
+      "status": "published",
+      "homeScore": 76,
+      "awayScore": 69,
+      "homeTeam": "la-union",
+      "awayTeam": "atenas",
+      "hasStats": true
+    },
+    "2026-11-16-instituto-san-lorenzo": {
+      "status": "published",
+      "homeScore": 82,
+      "awayScore": 70,
+      "homeTeam": "instituto",
+      "awayTeam": "san-lorenzo",
+      "hasStats": true
+    },
+    "2026-11-17-racing-chivilcoy-lanus": {
+      "status": "published",
+      "homeScore": 69,
+      "awayScore": 66,
+      "homeTeam": "racing-chivilcoy",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-11-17-obera-atenas": {
+      "status": "published",
+      "homeScore": 79,
+      "awayScore": 72,
+      "homeTeam": "obera",
+      "awayTeam": "atenas",
+      "hasStats": true
+    },
+    "2026-11-17-regatas-quimsa": {
+      "status": "published",
+      "homeScore": 79,
+      "awayScore": 83,
+      "homeTeam": "regatas",
+      "awayTeam": "quimsa",
+      "hasStats": true
+    },
+    "2026-11-19-argentino-lanus": {
+      "status": "published",
+      "homeScore": 86,
+      "awayScore": 69,
+      "homeTeam": "argentino",
+      "awayTeam": "lanus",
+      "hasStats": true
+    },
+    "2026-11-19-obera-independiente-oliva": {
+      "status": "published",
+      "homeScore": 96,
+      "awayScore": 89,
+      "homeTeam": "obera",
+      "awayTeam": "independiente-oliva",
+      "hasStats": true
+    },
+    "2026-11-19-olimpico-ferro": {
+      "status": "published",
+      "homeScore": 80,
+      "awayScore": 84,
+      "homeTeam": "olimpico",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-11-20-atenas-instituto": {
+      "status": "published",
+      "homeScore": 80,
+      "awayScore": 88,
+      "homeTeam": "atenas",
+      "awayTeam": "instituto",
+      "hasStats": true
+    },
+    "2026-11-21-quimsa-ferro": {
+      "status": "published",
+      "homeScore": 87,
+      "awayScore": 74,
+      "homeTeam": "quimsa",
+      "awayTeam": "ferro",
+      "hasStats": true
+    },
+    "2026-11-21-la-union-independiente-oliva": {
+      "status": "published",
+      "homeScore": 82,
+      "awayScore": 89,
+      "homeTeam": "la-union",
+      "awayTeam": "independiente-oliva",
+      "hasStats": true
+    },
+    "2026-11-22-gimnasia-boca": {
+      "status": "published",
+      "homeScore": 83,
+      "awayScore": 66,
+      "homeTeam": "gimnasia",
+      "awayTeam": "boca",
+      "hasStats": true
+    }
+  }
+}

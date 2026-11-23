@@ -1,0 +1,135 @@
+.lab-stats-content{padding-top:18px}
+.lab-stats-mode{margin:0 0 18px}
+.lab-stats-filters{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,.8fr);gap:10px;margin:14px 0 18px}
+.lab-stats-filters label{display:grid;gap:6px;min-width:0;color:#aebccc;font-size:10px;font-weight:850;letter-spacing:.65px}
+.lab-stats-filters input,.lab-stats-filters select{width:100%;min-width:0;border:1px solid #344b62;border-radius:10px;background:linear-gradient(155deg,#152a40,#0d2033);color:#f3f6fb;padding:12px 11px;font:inherit;font-size:13px}
+.lab-stats-leaders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:0 0 20px}
+.lab-stats-leader{position:relative;overflow:hidden;isolation:isolate;min-width:0;min-height:178px;padding:12px 8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:7px;border:1px solid color-mix(in srgb,var(--stats-team-color) 65%,#40536a);border-radius:13px;color:#f4f7fc;background:radial-gradient(ellipse at 100% 100%,color-mix(in srgb,var(--stats-team-color) 34%,transparent),transparent 60%),linear-gradient(150deg,#192d43,#0b192a 82%);cursor:pointer;text-align:center}
+.lab-stats-leader:before{content:"";position:absolute;z-index:-1;right:-25%;bottom:-35%;width:90%;aspect-ratio:1;border:1px solid color-mix(in srgb,var(--stats-team-color) 35%,transparent);border-radius:50%;box-shadow:0 0 0 15px #ffffff08,0 0 0 35px #ffffff05}
+.lab-stats-leader .stats-leader-title{font-family:Anton,Impact,sans-serif;font-size:clamp(11px,1.5vw,16px);line-height:1.15;color:#eaf0f7}
+.lab-stats-leader .stats-leader-value{display:grid;gap:3px}
+.lab-stats-leader .stats-leader-value strong{font-family:Anton,Impact,sans-serif;color:#ff9221;font-size:clamp(27px,4vw,38px);font-weight:400;line-height:1}
+.lab-stats-leader .stats-leader-value span{font-size:8px;color:#aebccc;font-weight:800}
+.lab-stats-leader>img{width:29px;height:29px;object-fit:contain}
+.lab-stats-leader-name{font-size:clamp(10px,1.35vw,14px);line-height:1.2;overflow-wrap:anywhere}
+.lab-stats-table-wrap{width:100%;overflow-x:auto;border:1px solid #2d4359;border-radius:12px;background:#0d1c2c}
+.lab-player-ranking{width:100%;min-width:590px;border-collapse:collapse;color:#eef3f9;font-size:12px}
+.lab-player-ranking thead{background:linear-gradient(135deg,#1b334b,#10263b)}
+.lab-player-ranking th{padding:12px 8px;color:#b8c8d8;font-size:10px;white-space:nowrap;text-align:center}
+.lab-player-ranking th:first-child{text-align:left;min-width:155px}
+.lab-player-ranking th button{border:0;background:none;color:inherit;font:inherit;font-weight:850;cursor:pointer}
+.lab-player-ranking td{padding:10px 8px;border-top:1px solid #2a3d50;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lab-player-ranking tbody tr{background:linear-gradient(90deg,color-mix(in srgb,var(--stats-team-color) 34%,#102236),color-mix(in srgb,var(--stats-team-color) 13%,#102236) 42%,#102236 82%)}
+.lab-player-ranking tbody tr:nth-child(even){background:linear-gradient(90deg,color-mix(in srgb,var(--stats-team-color) 39%,#142a40),color-mix(in srgb,var(--stats-team-color) 13%,#142a40) 42%,#142a40 82%)}
+.lab-player-ranking td:first-child{text-align:left}
+.lab-stats-player-cell{display:flex;align-items:center;gap:8px;min-width:0}
+.lab-stats-player-cell>b{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:#263b50;color:#c6d3df;font-size:11px}
+.lab-stats-player-cell>b.lab-stats-medal{background:linear-gradient(135deg,#f5d36c,#c99525);color:#1b1b1b}
+.lab-stats-player-cell>strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+.lab-stats-team-logo{width:27px;height:27px;object-fit:contain;vertical-align:middle}
+.lab-player-ranking td.stats-active-column{color:#ff9829;font-weight:900}
+.lab-team-ranking{padding-top:2px}
+.lab-team-ranking .team-ranking-row{cursor:default}
+.lab-triple-ranking{padding-top:8px}
+.lab-triple-ranking .triple-podium-card{min-height:177px}
+.lab-triple-ranking .triple-podium-1{min-height:195px}
+.lab-triple-ranking .triple-list .triple-row{cursor:default}
+.lab-stats-podium .triple-podium-card{background:radial-gradient(ellipse at 100% 100%,var(--podium-glow),transparent 60%),linear-gradient(155deg,#192d43,#0b192a 82%)}
+@media(max-width:600px){
+ .lab-stats-filters{grid-template-columns:1fr 1fr;gap:8px}
+ .lab-stats-filters .lab-stats-search{grid-column:1/-1}
+ .lab-stats-leaders{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+ .lab-stats-leader{min-height:139px;padding:9px 4px}
+ .lab-stats-leader .stats-leader-title{font-size:clamp(9px,2.7vw,12px)}
+ .lab-stats-leader .stats-leader-value strong{font-size:clamp(24px,7vw,32px)}
+ .lab-stats-leader .stats-leader-value span{font-size:7px}
+ .lab-stats-leader>img{width:25px;height:25px}
+ .lab-stats-leader-name{font-size:10px}
+ .lab-player-ranking th{padding:10px 6px}
+ .lab-player-ranking td{padding:9px 6px}
+}
+@media(max-width:360px){.lab-stats-leaders{gap:4px}.lab-stats-leader{min-height:132px}.lab-stats-leader .stats-leader-title{font-size:8px}}
+
+/* Tarjetas de líderes LAB: acabado dorado de las tarjetas destacadas de LNB. */
+.lab-stats-leader{
+  --leader-gold:#e7bd62;
+  border:1px solid #b98b3d;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(242,198,105,.22),transparent 58%),
+    radial-gradient(ellipse at 100% 100%,rgba(184,135,48,.18),transparent 62%),
+    repeating-linear-gradient(145deg,transparent 0 29px,rgba(255,255,255,.018) 30px 31px),
+    linear-gradient(155deg,#342d20 0%,#1b2532 48%,#101a28 100%);
+  box-shadow:inset 0 1px 0 rgba(255,229,166,.28),0 3px 14px rgba(0,0,0,.22);
+}
+.lab-stats-leader:before{
+  border-color:rgba(231,189,98,.32);
+  box-shadow:0 0 0 15px rgba(231,189,98,.045),0 0 0 35px rgba(231,189,98,.025);
+}
+.lab-stats-leader .stats-leader-title{color:#f2d48d;text-shadow:0 1px 5px #0008}
+.lab-stats-leader .stats-leader-value strong{color:#f2bd55;text-shadow:0 2px 9px rgba(201,145,47,.25)}
+.lab-stats-leader>img{filter:drop-shadow(0 2px 5px #0009)}
+.lab-stats-leader-name{color:#f5e6c2}
+@media(max-width:600px){
+ .lab-stats-leader{border-color:#c49a4b}
+}
+
+/* Tabla LAB: mismas columnas visibles que LNB, sin desplazamiento horizontal. */
+.lab-stats-table-wrap{overflow-x:hidden}
+.lab-player-ranking{width:100%;min-width:0;table-layout:fixed}
+.lab-player-ranking th:first-child,.lab-player-ranking td:first-child{width:40%;min-width:0}
+.lab-player-ranking th:nth-child(2),.lab-player-ranking td:nth-child(2){width:12%}
+.lab-player-ranking th:nth-child(n+3),.lab-player-ranking td:nth-child(n+3){width:9.6%}
+.lab-player-ranking th:first-child{text-align:left}
+.lab-player-ranking td:first-child{overflow:hidden}
+.lab-stats-player-cell{gap:6px}
+.lab-stats-player-cell>strong{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lab-player-ranking th,.lab-player-ranking td{padding-left:4px;padding-right:4px}
+.lab-player-ranking th:nth-child(2),.lab-player-ranking td:nth-child(2){text-align:center}
+.lab-stats-team-logo{display:block;margin:0 auto}
+@media(max-width:600px){
+ .lab-player-ranking{min-width:0;width:100%}
+ .lab-player-ranking th{font-size:9px;padding:0 2px;letter-spacing:0}
+ .lab-player-ranking td{font-size:11px;padding:7px 2px}
+ .lab-player-ranking th:first-child,.lab-player-ranking td:first-child{width:40%}
+ .lab-player-ranking th:nth-child(2),.lab-player-ranking td:nth-child(2){width:12%}
+ .lab-player-ranking th:nth-child(n+3),.lab-player-ranking td:nth-child(n+3){width:9.6%}
+ .lab-stats-player-cell{gap:5px}
+ .lab-stats-player-cell>b{width:25px;height:25px;font-size:10px}
+ .lab-stats-player-cell>strong{font-size:10px}
+ .lab-stats-team-logo{width:24px;height:24px}
+ .lab-player-ranking td:nth-child(n+3){font-size:10px}
+ .lab-player-ranking td.stats-active-column{font-size:11px}
+}
+@media(max-width:380px){
+ .lab-player-ranking th{font-size:8px}
+ .lab-player-ranking td{font-size:9px}
+ .lab-stats-player-cell>b{width:22px;height:22px}
+ .lab-stats-player-cell>strong{font-size:9px}
+ .lab-stats-team-logo{width:21px;height:21px}
+}
+
+/* Podio de posiciones: oro, plata y bronce reales. */
+.lab-stats-player-cell>b.lab-stats-medal-gold{
+ background:linear-gradient(135deg,#fff0a5 0%,#f1c84e 48%,#bd8420 100%);
+ color:#3b2908;
+ box-shadow:inset 0 1px 1px #fff8,0 1px 5px #d9a53655;
+}
+.lab-stats-player-cell>b.lab-stats-medal-silver{
+ background:linear-gradient(135deg,#f5f7fa 0%,#c9d0d9 48%,#8996a5 100%);
+ color:#273443;
+ box-shadow:inset 0 1px 1px #fff9,0 1px 5px #aeb9c855;
+}
+.lab-stats-player-cell>b.lab-stats-medal-bronze{
+ background:linear-gradient(135deg,#f4c49b 0%,#c77b43 48%,#87431f 100%);
+ color:#3c1d0b;
+ box-shadow:inset 0 1px 1px #fff7,0 1px 5px #b76a3b55;
+}
+
+
+.lab-statistics-page .lab-player-ranking tbody tr.lab-stats-player-clickable {
+  cursor: pointer;
+}
+.lab-statistics-page .lab-player-ranking tbody tr.lab-stats-player-clickable:focus-within,
+.lab-statistics-page .lab-player-ranking tbody tr.lab-stats-player-clickable:hover {
+  filter: brightness(1.12);
+}

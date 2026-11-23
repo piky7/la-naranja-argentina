@@ -1,0 +1,374 @@
+.match-stats-tabs { width: 100%; min-width: 0; }
+.match-stats-switch { display: flex; gap: 8px; margin: 16px 0; }
+.match-stats-switch button { flex: 1; border: 1px solid #754021; background: #191919; color: #eee; border-radius: 10px; padding: 12px 6px; cursor: pointer; font: inherit; }
+.match-stats-switch button[aria-selected="true"], .match-stats-switch button[aria-pressed="true"] { background: #e76c16; color: #111; font-weight: 800; }
+.match-stats-tabs .match-player-team-switch { display: none; }
+.match-stats-tabs .match-player-tables > .match-modal-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+@media (width < 768px) {
+  .match-stats-tabs .match-player-team-switch { display: flex; }
+  .match-stats-tabs .match-player-team-home .match-stats-team:nth-child(2),
+  .match-stats-tabs .match-player-team-away .match-stats-team:first-child { display: none; }
+}
+@media (min-width: 768px) {
+  /* Scope the boxscore so global modal rules cannot split its wrappers. */
+  .match-stats-tabs .match-player-tables > .match-modal-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .match-stats-tabs .match-player-tables > .match-modal-content > .match-stats-team {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+}
+.match-stats-switch button:focus-visible { outline: 2px solid #ff9b47; outline-offset: 3px; }
+.match-stats-switch button img { width: 24px; height: 24px; object-fit: contain; vertical-align: middle; margin-right: 6px; }
+.match-stats-tabs [hidden] { display: none !important; }
+.match-team-comparison { width: 100%; border-collapse: collapse; table-layout: fixed; color: #eee; background: #171717; }
+.match-team-comparison th, .match-team-comparison td { padding: 12px 6px; text-align: center; border-bottom: 1px solid #39302a; overflow-wrap: anywhere; }
+.match-team-comparison thead th { color: #ff913c; }
+.match-team-comparison tbody th { font-weight: 500; }
+.match-team-source { color: #bbb; font-size: 12px; margin: 12px 0; }
+@media (max-width: 480px) { .match-team-comparison { font-size: 12px; } .match-stats-switch { font-size: 13px; } }
+/* LNA - Comparativa colectiva compacta en escritorio */
+@media (min-width: 768px) {
+  .match-stats-tabs .match-team-source {
+    margin: 4px 12px 6px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .match-stats-tabs .match-team-comparison {
+    width: calc(100% - 24px);
+    margin: 0 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .match-stats-tabs .match-team-comparison th,
+  .match-stats-tabs .match-team-comparison td {
+    padding: 5px 8px;
+    line-height: 1.15;
+    height: 27px;
+    box-sizing: border-box;
+  }
+
+  .match-stats-tabs .match-team-comparison thead th {
+    height: 30px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .match-stats-tabs .match-team-comparison tbody th {
+    font-weight: 600;
+  }
+
+  .match-stats-tabs .match-team-comparison tbody td {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+}
+/* Selector compacto de dos equipos, sin flechas. */
+.match-stats-tabs .match-player-team-selector { display: none; }
+@media (max-width: 767px) {
+  .match-stats-tabs .match-player-team-selector {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin: 8px 12px 0;
+    width: calc(100% - 24px);
+  }
+  .match-stats-tabs .match-player-team-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 7px 8px;
+    border: 1px solid #526477;
+    border-radius: 9px 9px 0 0;
+    background: #0b1b29;
+    color: #f5f7fa;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  .match-stats-tabs .match-player-team-option.is-active {
+    background: #f47a1b;
+    border-color: #ff9a40;
+    color: #111820;
+    font-weight: 800;
+  }
+  .match-stats-tabs .match-player-team-option img {
+    width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+    object-fit: contain;
+  }
+  .match-stats-tabs .match-player-team-option-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .match-stats-tabs .match-player-team-option-text strong {
+    font-size: 12px;
+    line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .match-stats-tabs .match-player-team-option-text small {
+    font-size: 9px;
+    line-height: 1.1;
+    letter-spacing: .3px;
+    color: #aebbc9;
+  }
+  .match-stats-tabs .match-player-team-option.is-active small { color: #342316; }
+  .match-stats-tabs .match-player-team-option:focus-visible {
+    outline: 2px solid #ffb44d;
+    outline-offset: 2px;
+  }
+  .match-stats-tabs .match-player-tables .match-stats-team-header { display: none; }
+  .match-stats-tabs .match-player-tables .match-stats-team {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+/* LNA - Comparativa colectiva oficial, barras enfrentadas. */
+.match-stats-tabs .match-team-comparison-intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 8px 12px 10px;
+}
+.match-team-comparison-intro strong { color: #f5f6f8; font-size: 15px; }
+.match-team-comparison-intro span { color: #99a9ba; font-size: 10px; letter-spacing: .4px; }
+.match-team-comparison-card {
+  margin: 0 12px;
+  overflow: hidden;
+  border: 1px solid #263747;
+  border-radius: 12px;
+  background: #0b1a28;
+  color: #edf1f5;
+}
+.match-team-comparison-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(90px, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+  padding: 9px 10px;
+  border-bottom: 1px solid #334352;
+  font-size: 10px;
+  font-weight: 800;
+  color: #ff942b;
+  text-align: center;
+}
+.match-team-comparison-name { display: flex; align-items: center; justify-content: flex-start; gap: 6px; min-width: 0; color: #f3f5f7; }
+.match-team-comparison-name-away { justify-content: flex-end; }
+.match-team-comparison-name span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.match-team-comparison-name img { width: 25px; height: 25px; object-fit: contain; flex-shrink: 0; }
+.match-team-comparison-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(90px, 1fr) minmax(0, 1fr);
+  grid-template-areas: "home label away" "home label away";
+  align-items: center;
+  gap: 5px;
+  min-height: 48px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #253442;
+}
+.match-team-comparison-row:last-child { border-bottom: 0; }
+.match-team-comparison-row:nth-child(even) { background: rgba(255,255,255,.025); }
+.match-team-comparison-metric { grid-area: label; text-align: center; font-size: 11px; line-height: 1.15; color: #e6ebf1; }
+.match-team-comparison-side { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0; }
+.match-team-comparison-side-home { grid-area: home; text-align: left; }
+.match-team-comparison-side-away { grid-area: away; text-align: right; }
+.match-team-comparison-value { font-size: 12px; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.match-team-comparison-track { width: 100%; height: 5px; border-radius: 6px; background: #223443; overflow: hidden; }
+.match-team-comparison-track span { display: block; height: 100%; border-radius: inherit; background: #aab8c7; }
+.match-team-comparison-side-away .match-team-comparison-track span { background: #f58220; }
+.match-team-unavailable { margin: 12px; color: #d4dde5; font-size: 13px; }
+.match-stats-tabs .match-team-source { margin: 10px 12px; color: #9aabba; font-size: 10px; line-height: 1.35; }
+@media (min-width: 768px) {
+  .match-team-comparison-row { min-height: 42px; padding: 5px 16px; }
+  .match-team-comparison-metric { font-size: 12px; }
+  .match-team-comparison-value { font-size: 13px; }
+  .match-team-comparison-header { padding: 10px 16px; font-size: 12px; }
+  .match-team-comparison-name img { width: 29px; height: 29px; }
+}
+@media (max-width: 380px) {
+  .match-team-comparison-card { margin: 0 6px; }
+  .match-team-comparison-header, .match-team-comparison-row { grid-template-columns: minmax(0, 1fr) 85px minmax(0, 1fr); padding-left: 6px; padding-right: 6px; }
+  .match-team-comparison-value { font-size: 10px; }
+  .match-team-comparison-metric { font-size: 10px; }
+  .match-team-comparison-name img { width: 20px; height: 20px; }
+}
+
+/* LNA - Comparativa movil compacta y lideres resaltados. */
+.match-stats-tabs .match-team-comparison-winner {
+  color: #ff9329;
+  font-weight: 850;
+}
+@media (max-width: 767px) {
+  .match-stats-tabs .match-stats-switch {
+    margin-top: 9px;
+    margin-bottom: 7px;
+  }
+  .match-stats-tabs .match-stats-switch button {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .match-stats-tabs .match-team-comparison-intro {
+    margin: 4px 12px 6px;
+    gap: 2px 8px;
+    align-items: center;
+  }
+  .match-stats-tabs .match-team-comparison-intro strong { font-size: 12px; }
+  .match-stats-tabs .match-team-comparison-intro span { font-size: 8px; }
+  .match-stats-tabs .match-team-comparison-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .match-stats-tabs .match-team-comparison-name img {
+    width: 20px;
+    height: 20px;
+  }
+  .match-stats-tabs .match-team-comparison-row {
+    min-height: 34px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  .match-stats-tabs .match-team-comparison-side { gap: 3px; }
+  .match-stats-tabs .match-team-comparison-track { height: 3px; }
+  .match-stats-tabs .match-team-comparison-value { font-size: 11px; line-height: 1.15; }
+  .match-stats-tabs .match-team-comparison-metric { font-size: 10px; }
+  .match-stats-tabs .match-team-source {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 9px;
+  }
+}
+
+/* Naranja solo en la barra del equipo que lidera cada indicador. */
+.match-stats-tabs .match-team-comparison-side-away .match-team-comparison-track span {
+  background: #aab8c7;
+}
+.match-stats-tabs .match-team-comparison-track.match-team-comparison-track-winner span {
+  background: #f58220;
+}
+
+
+/* LNA: selector móvil compacto y mayor prioridad para nombres del boxscore. */
+@media (max-width: 767px) {
+  .match-modal-finished .match-stats-tabs .match-player-team-selector {
+    margin-top: 5px;
+    gap: 5px;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option {
+    min-height: 35px;
+    padding: 4px 7px;
+    gap: 7px;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option img {
+    width: 25px;
+    height: 25px;
+    flex-basis: 25px;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option-text strong {
+    font-size: 13px;
+    font-weight: 850;
+  }
+  .match-modal-finished .match-stats-tabs .match-player-team-option-text small {
+    display: none;
+  }
+  .match-modal-finished .match-stats-tabs .match-stats-head,
+  .match-modal-finished .match-stats-tabs .match-stat-player {
+    grid-template-columns: minmax(0, 1fr) 25px 25px 25px 39px 27px !important;
+    column-gap: 1px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+  .match-modal-finished .match-stats-tabs .match-stat-player strong {
+    font-size: 10px;
+    font-weight: 800;
+  }
+}
+
+/* Degradado institucional sutil: concentrado detrás del nombre, sin teñir cifras. */
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player,
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player:nth-child(even) {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--boxscore-team-color, #18334b) 38%, #101d2a) 0%,
+    color-mix(in srgb, var(--boxscore-team-color, #18334b) 14%, #101d2a) 43%,
+    #101d2a 78%) !important;
+}
+.match-modal-finished .match-stats-tabs .match-player-tables .match-stats-list .match-stat-player:hover {
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--boxscore-team-color, #18334b) 50%, #172a3b) 0%,
+    #172a3b 80%) !important;
+}
+
+/* Comparativa colectiva: identidad institucional en extremos, centro neutro. */
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-header,
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-row,
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-row:nth-child(even) {
+  background-image: linear-gradient(90deg,
+    color-mix(in srgb, var(--comparison-home-color, #18334b) 31%, #0b1a28) 0%,
+    color-mix(in srgb, var(--comparison-home-color, #18334b) 12%, #0b1a28) 27%,
+    #0b1a28 44%,
+    #0b1a28 56%,
+    color-mix(in srgb, var(--comparison-away-color, #18334b) 12%, #0b1a28) 73%,
+    color-mix(in srgb, var(--comparison-away-color, #18334b) 31%, #0b1a28) 100%);
+}
+.match-stats-tabs .match-team-comparison-card .match-team-comparison-row:nth-child(even) {
+  background-color: rgba(255,255,255,.025);
+  background-blend-mode: screen;
+}
+
+
+/* Márgenes internos para que cifras y barras no rocen los bordes del boxscore. */
+.match-team-comparison-card .match-team-comparison-header,
+.match-team-comparison-card .match-team-comparison-row {
+  box-sizing: border-box;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+.match-team-comparison-card .match-team-comparison-side {
+  min-width: 0;
+  padding-inline: 3px;
+}
+.match-team-comparison-card .match-team-comparison-value {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
+}
+@media (max-width: 480px) {
+  .match-team-comparison-card .match-team-comparison-header,
+  .match-team-comparison-card .match-team-comparison-row {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+  .match-team-comparison-card .match-team-comparison-side { padding-inline: 2px; }
+}
+
+/* La comparativa oficial LAB usa una grilla propia: mantener aire lateral en los valores. */
+.lab-team-comparison-values,
+.lab-team-comparison-bars {
+  box-sizing: border-box;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.lab-team-comparison-values strong { min-width: 0; }

@@ -1,0 +1,34 @@
+name: Test official results publication
+on:
+  pull_request:
+    paths:
+      - "sync-liga-history.cjs"
+      - "sync-official-stats-preview.cjs"
+      - "publish-official-stats.cjs"
+      - "merge-liga-events.cjs"
+      - "scripts/official-final.cjs"
+      - "scripts/parse-official-final.cjs"
+      - "scripts/generate-published-matches.cjs"
+      - "scripts/official-team-stats.cjs"
+      - "scripts/audited-official-finals.json"
+      - "src/data/matchStats.js"
+      - "src/data/matchResults.js"
+      - "tests/official-sync.test.cjs"
+      - "package.json"
+      - "package-lock.json"
+  push:
+    branches: [codex/prevent-partial-finals]
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/*.test.cjs
+      - run: npm run build

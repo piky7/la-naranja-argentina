@@ -1,0 +1,322 @@
+<div id="tarjeta-comparativa" class="tarjeta-widget">
+
+
+
+<div id="scroll-comparativa" class="tarjeta-widget-contenido partido-en-vivo">
+        <div class="comparativa">
+            <div class="tituloEquipoLocal">
+                <h3>
+                    <img src="/escudos/46/112566?key=" alt="FERRO" title="FERRO">
+                        <strong>FERRO</strong>
+
+                    </h3>
+                </div>
+                <div class="tituloEquipoVisitante">
+                    <h3>
+                        <img src="/escudos/80/112549?key=" alt="PLATENSE" title="PLATENSE">
+                            <strong>PLATENSE</strong>
+                        </h3>
+                    </div>
+                    <div class="tablaResultadosEstadisticas">
+                            <div class="linea izquierda">
+                                <div class="col">27 / 59 <strong>45%</strong></div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Tiros de campo</span><span class="stat-nombre-abrev">TC</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">28 / 68 <strong>41%</strong></div>
+                            </div>
+                            <div class="linea izquierda">
+                                <div class="col">20 / 31 <strong>65%</strong></div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Tiros 2P</span><span class="stat-nombre-abrev">2P</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">19 / 41 <strong>46%</strong></div>
+                            </div>
+                            <div class="linea derecha">
+                                <div class="col">7 / 28 <strong>25%</strong></div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Tiros 3P</span><span class="stat-nombre-abrev">3P</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">9 / 27 <strong>33%</strong></div>
+                            </div>
+                            <div class="linea izquierda">
+                                <div class="col">25 / 33 <strong>76%</strong></div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Tiros Libres</span><span class="stat-nombre-abrev">TL</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">16 / 25 <strong>64%</strong></div>
+                            </div>
+                            <div class="linea izquierda">
+                                <div class="col">37</div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Rebotes totales</span><span class="stat-nombre-abrev">Reb.</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">33</div>
+                            </div>
+                            <div class="linea izquierda">
+                                <div class="col">15</div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Asistencias</span><span class="stat-nombre-abrev">As.</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">13</div>
+                            </div>
+                            <div class="linea ">
+                                <div class="col">8</div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Recuperaciones</span><span class="stat-nombre-abrev">Rec.</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">8</div>
+                            </div>
+                            <div class="linea izquierda">
+                                <div class="col">3</div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Tapones</span><span class="stat-nombre-abrev">Tap.</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">1</div>
+                            </div>
+                            <div class="linea ">
+                                <div class="col">12</div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Pérdidas</span><span class="stat-nombre-abrev">Pér.</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">12</div>
+                            </div>
+                            <div class="linea ">
+                                <div class="col">29</div>
+                                <div class="col"><strong><span class="stat-nombre-completo">Faltas cometidas</span><span class="stat-nombre-abrev">Faltas Com.</span></strong><span class="flecha"><i class="fas fa-caret-up"></i></span></div>
+                                <div class="col">29</div>
+                            </div>
+                    </div>
+
+
+
+                </div>
+
+
+        </div>
+
+
+            <script>
+
+                var colorLocal = "VERDE";
+                var colorVisitante = "MARR&#xD3;N";
+
+                var colorLocalAscii = '#4caf50';
+                var colorLocal2Ascii = '#C9E7CA';
+                var colorVisitanteAscii = '';
+                var colorVisitante2Ascii = '';
+
+                function CargaDatosEstadisticasComparativa() {
+
+
+                    const chartRebotes = document.getElementById('chartRebotes');
+                    const chartAsistencias = document.getElementById('chartAsistencias');
+                    const chartTapones = document.getElementById('chartTapones');
+                    const chartRecuperaciones = document.getElementById('chartRecuperaciones');
+
+                    const chartCompTiros2pLocal = document.getElementById('chartCompTiros2pLocal');
+                    const chartCompTiros3pLocal = document.getElementById('chartCompTiros3pLocal');
+
+                    const chartCompTiros2pVisitante = document.getElementById('chartCompTiros2pVisitante');
+                    const chartCompTiros3pVisitante = document.getElementById('chartCompTiros3pVisitante');
+
+                    [chartRebotes, chartAsistencias, chartTapones, chartRecuperaciones,
+                     chartCompTiros2pLocal, chartCompTiros3pLocal, chartCompTiros2pVisitante, chartCompTiros3pVisitante]
+                        .forEach(function(el) { if (el) { var c = Chart.getChart(el); if (c) c.destroy(); } });
+
+                    new Chart(chartRebotes, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Local.', 'Visitante.'],
+                            datasets: [{
+                                data: [37, 33],
+                                backgroundColor: [colorLocalAscii, colorVisitanteAscii],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: false
+                            },
+                            tooltips: {
+                                enabled: true
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    labels: {
+                                        color: 'rgb(255, 99, 132)'
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    new Chart(chartAsistencias, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Local.', 'Visitante.'],
+                            datasets: [{
+                                data: [15, 13],
+                                backgroundColor: [colorLocalAscii, colorVisitanteAscii],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    labels: {
+                                        color: 'rgb(255, 99, 132)'
+                                    }
+                                }
+                            },
+                            title: {
+                                display: false
+                            },
+                            tooltips: {
+                                enabled: true
+                            }
+                        }
+                    });
+
+                    new Chart(chartTapones, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Local.', 'Visitante.'],
+                            datasets: [{
+                                data: [3, 1],
+                                backgroundColor: [colorLocalAscii, colorVisitanteAscii],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    labels: {
+                                        color: 'rgb(255, 99, 132)'
+                                    }
+                                }
+                            },
+                            title: {
+                                display: false
+                            },
+                            tooltips: {
+                                enabled: true
+                            }
+                        }
+                    });
+
+                    new Chart(chartRecuperaciones, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Local.', 'Visitante.'],
+                            datasets: [{
+                                data: [8, 8],
+                                backgroundColor: [colorLocalAscii, colorVisitanteAscii],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    labels: {
+                                        color: 'rgb(255, 99, 132)'
+                                    }
+                                }
+                            },
+                            title: {
+                                display: false
+                            },
+                            tooltips: {
+                                enabled: true
+                            }
+                        }
+                    });
+
+
+
+                    new Chart(chartCompTiros2pLocal, {
+                        type: "doughnut",
+                        data: { datasets: [{ data: [65, (100 - 65)], backgroundColor: [colorLocalAscii, colorLocal2Ascii], borderWidth: 0 }] },
+                        options: { legend: { display: false }, title: { display: false }, tooltips: { enabled: false } }
+                    });
+
+                    new Chart(chartCompTiros3pLocal, {
+                        type: "doughnut",
+                        data: { datasets: [{ data: [25, (100 - 25)], backgroundColor: [colorLocalAscii, colorLocal2Ascii], borderWidth: 0 }] },
+                        options: { legend: { display: false }, title: { display: false }, tooltips: { enabled: false } }
+                    });
+
+
+                    new Chart(chartCompTiros2pVisitante, {
+                        type: "doughnut",
+                        data: { datasets: [{ data: [46, (100 - 46)], backgroundColor: [colorVisitanteAscii, colorVisitante2Ascii], borderWidth: 0 }] },
+                        options: { legend: { display: false }, title: { display: false }, tooltips: { enabled: false } }
+                    });
+
+                    new Chart(chartCompTiros3pVisitante, {
+                        type: "doughnut",
+                        data: { datasets: [{ data: [33, (100 - 33)], backgroundColor: [colorVisitanteAscii, colorVisitante2Ascii], borderWidth: 0 }] },
+                        options: { legend: { display: false }, title: { display: false }, tooltips: { enabled: false } }
+                    });
+
+                    CargaDatosComparativa();
+                }
+
+                function CargaDatosComparativa() {
+                    const chartDistanciaPuntos = document.getElementById('chartDistanciaPuntos');
+                    const chartCompTirosLibresLocal = document.getElementById('chartCompTirosLibresLocal');
+                    const chartCompTirosLibresVisitante = document.getElementById('chartCompTirosLibresVisitante');
+
+                    [chartDistanciaPuntos, chartCompTirosLibresLocal, chartCompTirosLibresVisitante]
+                        .forEach(function(el) { if (el) { var c = Chart.getChart(el); if (c) c.destroy(); } });
+
+                    new Chart(chartDistanciaPuntos, {
+                        "type": "bar",
+                        "data": {
+                            "labels": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40],
+                            "datasets": [
+                                {
+                                    "label": "FERRO",
+                                    "backgroundColor": colorLocalAscii,
+                                    "stack": "Stack 0",
+                                    "data": [7,10,12,9,5,5,6,8,9,10,14,17,13,13,15,15,16,14,14,13,13,9,9,6,6,12,15,15,17,18,20,20,15,15,12,13,11,8,10,5]
+                                                                                                                }, {
+                                    "label": "PLATENSE",
+                                    "backgroundColor": colorVisitanteAscii,
+                                    "stack": "Stack 0",
+                                    "data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                                                                                                                }]
+                        },
+                        "options": {
+                            "responsive": true,
+                            "maintainAspectRatio": false,
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    labels: {
+                                        color: 'rgb(255, 99, 132)'
+                                    }
+                                }
+                            },
+                            "title": { "display": false },
+                            "tooltips": { "enabled": true }
+                        }
+                    });
+
+                    new Chart(chartCompTirosLibresLocal, {
+                        type: "doughnut",
+                        data: { datasets: [{ data: [76, (100 - 76)], backgroundColor: [colorLocalAscii, colorLocal2Ascii], borderWidth: 0 }] },
+                        options: { legend: { display: false }, title: { display: false }, tooltips: { enabled: false } }
+                    });
+
+                    new Chart(chartCompTirosLibresVisitante, {
+                        type: "doughnut",
+                        data: { datasets: [{ data: [64, (100 - 64)], backgroundColor: [colorVisitanteAscii, colorVisitante2Ascii], borderWidth: 0 }] },
+                        options: {
+                            legend: { display: false }, title: { display: false }, tooltips: { enabled: false }
+                        }
+                    });
+                }
+            </script>
+
+
+        <script>
+            var containerComparativa = document.getElementById('scroll-comparativa');
+            function saveScrollPositionComparativa() {
+                localStorage.setItem('scrollPositionComparativa', containerComparativa.scrollTop);
+            }
+
+            function restoreScrollPositionComparativa() {
+                const scrollPosition = localStorage.getItem('scrollPositionComparativa');
+                if (scrollPosition !== null) {
+                    containerComparativa.scrollTop = parseInt(scrollPosition, 10);
+                }
+            }
+        </script>
+                                                            </div>
