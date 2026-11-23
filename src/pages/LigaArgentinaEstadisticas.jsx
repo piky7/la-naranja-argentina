@@ -143,8 +143,10 @@ function LigaArgentinaEstadisticas(){
     .sort((a,b)=>b.triplesMade-a.triplesMade||a.name.localeCompare(b.name,"es")).slice(0,20),[]);
   const mvpPlayers=useMemo(()=>allPlayers.map(p=>({...p,mvps:mvpCounts.get(Number(p.id))||0}))
     .filter(p=>p.mvps>0).sort((a,b)=>b.mvps-a.mvps||a.name.localeCompare(b.name,"es")).slice(0,20),[]);
+  const teamGamesForMetric=row=>teamMetric==="homeWins"?row.homeGames:teamMetric==="awayWins"?row.awayGames:scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games;
+  const fixedTeamScope=teamMetric==="homeWins"||teamMetric==="awayWins";
   const orderedTeams=useMemo(()=>teamRows.map(row=>({...row,value:valueForTeam(row,teamMetric,scope)}))
-    .filter(row=>(scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games)>0)
+    .filter(row=>(teamMetric==="homeWins"?row.homeGames:teamMetric==="awayWins"?row.awayGames:scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games)>0)
     .sort((a,b)=>{
       if(a.value==null)return 1;if(b.value==null)return -1;
       const lowerBetter=teamMetric==="pointsAgainst";
@@ -191,10 +193,10 @@ function LigaArgentinaEstadisticas(){
       {mode==="teams"&&<div className="team-ranking lab-team-ranking">
         <div className="team-ranking-scopes">{[["overall","General"],["home","Local"],["away","Visitante"]].map(([key,label])=><button type="button" key={key} className={scope===key?"active":""} onClick={()=>setScope(key)}>{label}</button>)}</div>
         <div className="team-ranking-metrics">{teamMetrics.map(([key,label])=><button type="button" key={key} className={teamMetric===key?"active":""} onClick={()=>setTeamMetric(key)}>{label}</button>)}</div>
-        <div className="team-ranking-tools"><div className="team-ranking-heading"><span className="team-ranking-eyebrow">RANKING DE EQUIPOS · 2026/27</span><h2>{teamMetrics.find(m=>m[0]===teamMetric)?.[2]}</h2><p>{scope==="overall"?"Todos los partidos":scope==="home"?"Partidos como local":"Partidos como visitante"}</p></div>
+        <div className="team-ranking-tools"><div className="team-ranking-heading"><span className="team-ranking-eyebrow">RANKING DE EQUIPOS · 2026/27</span><h2>{teamMetrics.find(m=>m[0]===teamMetric)?.[2]}</h2><p>{fixedTeamScope?(teamMetric==="homeWins"?"Victorias acumuladas como local":"Victorias acumuladas como visitante"):scope==="overall"?"Todos los partidos":scope==="home"?"Partidos como local":"Partidos como visitante"}</p></div>
           <div className="team-ranking-controls"><label>ORDENAR<select value={teamDirection} onChange={e=>setTeamDirection(e.target.value)}><option value="best">Mejor a peor</option><option value="worst">Peor a mejor</option></select></label></div></div>
         <div className="team-ranking-list"><div className="team-ranking-listhead"><span>POS. · EQUIPO</span><span>{teamMetrics.find(m=>m[0]===teamMetric)?.[1]} / PJ</span></div>
-          {orderedTeams.map((row,i)=><div className="team-ranking-row" key={row.team.teamId} style={{"--ranking-team-color":labMatchColor(row.team)}}><span className="team-ranking-position">{i+1}.</span><img className="team-ranking-logo" src={labCrest(row.team)} alt=""/><span className="team-ranking-name">{row.team.name}<small>{scope==="home"?row.homeGames:scope==="away"?row.awayGames:row.games} PJ</small></span><span className="team-ranking-track"><span style={{width:`${row.value==null?0:Math.max(4,100*row.value/maxTeamValue)}%`}}/></span><strong className="team-ranking-value">{row.value==null?"—":fmt(row.value)}</strong></div>)}
+          {orderedTeams.map((row,i)=><div className="team-ranking-row" key={row.team.teamId} style={{"--ranking-team-color":labMatchColor(row.team)}}><span className="team-ranking-position">{i+1}.</span><img className="team-ranking-logo" src={labCrest(row.team)} alt=""/><span className="team-ranking-name">{row.team.name}<small>{teamGamesForMetric(row)} PJ</small></span><span className="team-ranking-track"><span style={{width:`${row.value==null?0:Math.max(4,100*row.value/maxTeamValue)}%`}}/></span><strong className="team-ranking-value">{row.value==null?"—":fmt(row.value)}</strong></div>)}
         </div><p className="team-ranking-note">Puntos y victorias se calculan con resultados finales. Rebotes y asistencias utilizan únicamente partidos con comparativa colectiva oficial.</p>
       </div>}
 
