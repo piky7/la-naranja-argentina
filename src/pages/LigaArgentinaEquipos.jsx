@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
 
-import { LabHomeBoxscore, labMatchColor, labCrest } from "./HomeLigaArgentina";
+import { LabHomeBoxscore, LabPlayerModal, labMatchColor, labCrest } from "./HomeLigaArgentina";
 import { isLabMatchFinished } from "../utils/labMatchStatus";
 import "./LigaArgentina.css";
 import "./Equipo.css";
@@ -67,6 +67,7 @@ function TeamDetail({team}) {
  const boxscores=useLabBoxscores(true) || {};
  const roster=rosters.teams[String(team.teamId)]||{players:[],playersCount:0};
  const [selectedMatch,setSelectedMatch]=useState(null);
+ const [selectedPlayer,setSelectedPlayer]=useState(null);
  const teamMatches=fixture.matches.filter(m=>Number(m.homeTeam.teamId)===Number(team.teamId)||Number(m.awayTeam.teamId)===Number(team.teamId));
  const played=teamMatches.filter(isLabMatchFinished);
  const upcoming=teamMatches.filter(m=>!isLabMatchFinished(m)&&m.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")).slice(0,4);
@@ -74,6 +75,19 @@ function TeamDetail({team}) {
  let wins=0,losses=0;
  for(const m of played){const home=Number(m.homeTeam.teamId)===Number(team.teamId);const own=Number(home?m.homeScore:m.awayScore),other=Number(home?m.awayScore:m.homeScore);if(own>other)wins++;else if(own<other)losses++;}
  const players=[...(roster.players||[])].sort((a,b)=>(b.gamesPlayed||0)-(a.gamesPlayed||0)||(b.totals?.points||0)-(a.totals?.points||0));
+ const openPlayer=player=>{
+  const appearances=teamMatches
+   .filter(game=>isLabMatchFinished(game)&&Array.isArray(boxscores?.[game.id]?.players))
+   .sort((a,b)=>b.date.localeCompare(a.date)||(b.time||"").localeCompare(a.time||""))
+   .flatMap(game=>(boxscores[game.id].players||[])
+    .filter(row=>String(row.id)===String(player.id)&&String(row.teamId)===String(team.teamId))
+    .map(row=>({player:row,match:game})));
+  const latest=appearances[0];
+  const fallbackMatch=latest?.match||played.slice().sort((a,b)=>b.date.localeCompare(a.date))[0]||upcoming[0]||teamMatches[0];
+  if(!fallbackMatch)return;
+  setSelectedPlayer({player:latest?.player||player,match:fallbackMatch,initialTab:latest?"match":"season"});
+ };
+ const modalTeam={...team,name:clean(team.name),logo:team.crestUrl};
  return <main className="team-page lab-team-detail">
   <section className="team-header"><img className="team-header-watermark" src={team.crestUrl} alt="" aria-hidden="true"/><div className="page-container">
    <Link to="/equipos" className="back-link">← Volver a equipos</Link>
@@ -87,12 +101,13 @@ function TeamDetail({team}) {
    </div>
    <section className="team-section lab-team-roster-section"><div className="section-heading-team"><div><h2><span>PLANTEL</span></h2></div></div>
     {players.length?<div className="team-roster-table lab-team-roster-table"><div className="team-roster-head"><span>JUGADOR</span><span>PJ</span><span>PTS</span><span>REB</span><span>AST</span><span>MIN</span><span>VAL</span></div>
-     {players.map(p=><div className="team-roster-row" key={p.id}><span className="team-roster-name"><img className="team-roster-crest" src={team.crestUrl} alt=""/><span>{p.name}</span></span><span>{p.gamesPlayed||0}</span><span>{fmt(p.averages?.points)}</span><span>{fmt(p.averages?.rebounds)}</span><span>{fmt(p.averages?.assists)}</span><span>{p.minutesAverage||"—"}</span><span>{fmt(p.averages?.valuation)}</span></div>)}
+     {players.map(p=><button type="button" className="team-roster-row" key={p.id} onClick={()=>openPlayer(p)} aria-label={`Ver ficha de ${p.name}`}><span className="team-roster-name"><img className="team-roster-crest" src={team.crestUrl} alt=""/><span>{p.name}</span></span><span>{p.gamesPlayed||0}</span><span>{fmt(p.averages?.points)}</span><span>{fmt(p.averages?.rebounds)}</span><span>{fmt(p.averages?.assists)}</span><span>{p.minutesAverage||"—"}</span><span>{fmt(p.averages?.valuation)}</span></button>)}
     </div>:<div className="team-empty"><strong>Plantel todavía no disponible</strong><p>Se incorporará a medida que se importen nuevas planillas oficiales.</p></div>}
    </section>
    <p className="lab-team-source-note">Plantel detectado en planillas oficiales importadas. No representa necesariamente la lista de buena fe completa.</p>
   </div></section>
   {selectedMatch&&<LabHomeBoxscore match={selectedMatch} onClose={()=>setSelectedMatch(null)}/>}
+  {selectedPlayer&&<LabPlayerModal player={selectedPlayer.player} match={selectedPlayer.match} team={modalTeam} initialTab={selectedPlayer.initialTab} onClose={()=>setSelectedPlayer(null)}/>}
  </main>;
 }
 
