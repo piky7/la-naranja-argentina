@@ -8,6 +8,8 @@ on:
       - "src/pages/Liga.jsx"
       - "src/pages/Home.jsx"
       - "src/pages/HomeLigaArgentina.jsx"
+      - "src/pages/Equipo.css"
+      - "tests/lab-modal-loading.test.mjs"
       - "src/pages/HomeLigaArgentina.css"
       - "data/lab/labRosters.json"
       - "src/components/FixtureCalendar.jsx"

@@ -217,7 +217,12 @@ export function LabHomeBoxscore({match, onClose}) {
               </span>
             </div>
           </div>}
-          {players.length ? <>
+          {boxscores === null ? <div className="match-modal-loading" role="status" aria-live="polite">
+            <span className="match-modal-loading-spinner" aria-hidden="true"/>
+            <strong>CARGANDO ESTADÍSTICAS</strong>
+            <small>Estamos preparando la planilla oficial del partido…</small>
+            <div className="match-modal-loading-skeleton"><i/><i/><i/><i/></div>
+          </div> : players.length ? <>
             <MatchStatsTabs match={matchForTabs} stats={stats} home={homeTeam} away={awayTeam}
               customTeamComparison={<LabTeamComparison comparison={teamComparison} homeTeam={homeTeam} awayTeam={awayTeam}/>}
               teamColors={{[match.homeTeam.teamId]:labMatchColor(match.homeTeam),[match.awayTeam.teamId]:labMatchColor(match.awayTeam)}}

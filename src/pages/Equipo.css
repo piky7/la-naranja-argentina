@@ -2947,3 +2947,32 @@
 
 .team-head-coach{margin-top:7px!important;color:#aebdce!important;font-size:13px;font-weight:500}
 .team-head-coach strong{color:#ffad62;font-weight:800}
+
+
+/* Estado de carga de planillas en el popup LAB */
+.match-modal-loading {
+  min-height: 230px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 10px; padding: 32px 20px; text-align: center;
+  color: var(--sports-text-soft);
+}
+.match-modal-loading-spinner {
+  width: 30px; height: 30px; border: 3px solid rgba(255,255,255,.14);
+  border-top-color: var(--match-accent, #ff7a1a); border-radius: 50%;
+  animation: match-modal-loading-spin .75s linear infinite;
+}
+.match-modal-loading strong { color: var(--sports-text); font-size: 10px; letter-spacing: 1.1px; }
+.match-modal-loading small { font-size: 10px; line-height: 1.5; }
+.match-modal-loading-skeleton { width: min(100%, 360px); display: grid; gap: 7px; margin-top: 7px; }
+.match-modal-loading-skeleton i {
+  display: block; height: 17px; border-radius: 4px;
+  background: linear-gradient(90deg, rgba(255,255,255,.04), rgba(255,255,255,.11), rgba(255,255,255,.04));
+  background-size: 200% 100%; animation: match-modal-loading-shimmer 1.25s ease-in-out infinite;
+}
+.match-modal-loading-skeleton i:nth-child(2) { width: 92%; }
+.match-modal-loading-skeleton i:nth-child(3) { width: 96%; }
+.match-modal-loading-skeleton i:nth-child(4) { width: 84%; }
+@keyframes match-modal-loading-spin { to { transform: rotate(360deg); } }
+@keyframes match-modal-loading-shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .match-modal-loading-spinner, .match-modal-loading-skeleton i { animation: none; }
+}
