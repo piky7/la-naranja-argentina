@@ -88,6 +88,17 @@ export function LabPlayerModal({player, match, team, onClose, initialTab = "matc
       .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId))
       .map(p=>({...p,__matchId:matchId})));
   const games=[...new Map(appearances.map(p=>[p.__matchId,p])).values()];
+  const recentGames = games.map(game => {
+    const gameMatch = fixture.matches.find(item => String(item.id) === String(game.__matchId));
+    if (!gameMatch) return null;
+    const isHome = String(gameMatch.homeTeam.teamId) === String(player.teamId);
+    const rival = isHome ? gameMatch.awayTeam : gameMatch.homeTeam;
+    return {
+      ...game, date: gameMatch.date, rivalName: rival.name, rivalLogo: labCrest(rival),
+      score: String(gameMatch.homeScore) + " - " + String(gameMatch.awayScore),
+      result: Number(isHome ? gameMatch.homeScore : gameMatch.awayScore) > Number(isHome ? gameMatch.awayScore : gameMatch.homeScore) ? "VICTORIA" : "DERROTA",
+    };
+  }).filter(Boolean).sort((a,b) => String(b.date).localeCompare(String(a.date))).slice(0,2);
   const rosterPlayer=Object.values(rosters.teams||{}).flatMap(entry=>entry.players||[])
     .find(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId))||{};
   const mean=key=>games.length?(games.reduce((sum,p)=>sum+(Number(p[key])||0),0)/games.length).toFixed(1):"—";
@@ -122,6 +133,10 @@ export function LabPlayerModal({player, match, team, onClose, initialTab = "matc
         <span className="home-player-modal-label">PLANILLA COMPLETA</span>
         <div className="lna-player-match-extra">{[...extra.map(([label,key])=>[label,player[key]]),["+/-",player.plusMinus]].map(([label,value])=><div key={label}><span>{label}</span><strong>{value??"—"}</strong></div>)}</div>
         <div className="lna-player-match-shots">{matchShots.map(([label,value])=>{const made=value?.made,attempted=value?.attempted;const rawPct=value?.percentage;const pct=rawPct!=null&&Number.isFinite(Number(rawPct))?Number(rawPct):(made!=null&&attempted!=null&&Number(attempted)>0?Number(made)/Number(attempted)*100:null);const validPct=pct!=null&&Number.isFinite(pct);return <div key={label}><span>{label}</span><strong>{made!=null&&attempted!=null?made+"/"+attempted:"—"}</strong><div className="lna-player-shot-track"><span style={{width:validPct?Math.max(0,Math.min(100,pct))+"%":"0%"}}/></div><small>{validPct?pct.toFixed(1)+"%":"Sin intentos"}</small></div>;})}</div>
+      </section>:boxscores===null?<section className="lna-player-season-loading" role="status" aria-live="polite">
+        <span className="match-modal-loading-spinner" aria-hidden="true"/>
+        <strong>CARGANDO PROMEDIOS</strong>
+        <small>Estamos reuniendo las planillas oficiales de la temporada…</small>
       </section>:<>
         <div className="home-player-modal-details"><div><span>POSICIÓN</span><strong>{player.position||rosterPlayer.position||"—"}</strong></div><div><span>NACIONALIDAD</span><strong>{player.nationality||rosterPlayer.nationality||"—"}</strong></div><div><span>NÚMERO</span><strong>{player.number??rosterPlayer.number??"—"}</strong></div></div>
         <div className="home-player-modal-season"><span className="home-player-modal-label">ESTADÍSTICAS DE LA TEMPORADA</span><div className="home-player-modal-stats">{[["PJ",games.length],["PTS",mean("points")],["REB",mean("rebounds")],["AST",mean("assists")],["VAL",mean("valuation")],["MIN",formatMinutes(avgMinutes)]].map(([label,value])=><div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div>
@@ -133,6 +148,24 @@ export function LabPlayerModal({player, match, team, onClose, initialTab = "matc
         </div></section>
         <section className="lna-player-season-expanded"><span className="home-player-modal-label">PROMEDIOS POR PARTIDO</span><div className="lna-player-match-extra lna-player-season-extra">{extra.map(([label,key])=><div key={key}><span>{label}</span><strong>{mean(key)}</strong></div>)}</div>
           <span className="home-player-modal-label lna-player-season-shots-title">EFECTIVIDAD DE TIRO</span><div className="lna-player-shot-bars">{shooting.map(([label,s])=><div className="lna-player-shot-bar-row" key={label}><span className="lna-player-shot-bar-label">{label}</span><div className="lna-player-shot-bar-track"><span style={{width:s.pct==null?"0%":Math.min(100,s.pct)+"%"}}/></div><strong>{s.pct==null?"—":s.pct.toFixed(1)+"%"}</strong><small>{s.attempted?s.made+"/"+s.attempted:"S/D"}</small></div>)}</div></section>
+        <section className="home-player-modal-recent-section lab-player-recent-section">
+          <span className="home-player-modal-label">ÚLTIMOS 2 PARTIDOS</span>
+          {recentGames.length ? <div className="home-player-modal-recent-list">
+            {recentGames.map(game => <div className="home-player-modal-recent-match" key={game.__matchId}>
+              <div className="home-player-modal-recent-header">
+                <div className="home-player-modal-rival"><img src={game.rivalLogo} alt="" loading="lazy"/><strong>vs. {displayName(game.rivalName)}</strong></div>
+                <span className="home-player-modal-recent-meta">{String(game.date).split("-").reverse().join("/")} · {game.minutes || "—"} min</span>
+              </div>
+              <div className="home-player-modal-recent-stats">
+                <div><strong>{game.points ?? "—"}</strong><span>PTS</span></div>
+                <div><strong>{game.rebounds ?? "—"}</strong><span>REB</span></div>
+                <div><strong>{game.assists ?? "—"}</strong><span>AST</span></div>
+                <div><strong>{game.valuation ?? "—"}</strong><span>VAL</span></div>
+              </div>
+              <small className={"lab-player-recent-result " + (game.result === "VICTORIA" ? "is-win" : "is-loss")}>{game.result} · {game.score}</small>
+            </div>)}
+          </div> : <p className="home-player-modal-recent-empty">Todavía no hay estadísticas oficiales de otros partidos disponibles.</p>}
+        </section>
       </>}
       <footer className="home-player-modal-footer"><span>LIGA ARGENTINA 2026/27</span><strong>{team.name}</strong></footer>
     </div>
