@@ -1,8 +1,8 @@
 name: Sincronización unificada LNB + LAB
 
 on:
-  schedule:
-    - cron: "*/10 * * * *"
+  # La programación automática queda centralizada en Cloudflare Worker lna-sync.
+  # Se conservan los disparadores manuales y el backfill explícito.
   push:
     branches: [main]
     paths:
@@ -27,7 +27,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: sincronizacion-unificada-lna-main
+  group: lna-publicacion-datos-main
   cancel-in-progress: false
 
 jobs:
