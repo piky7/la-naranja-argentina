@@ -75,8 +75,8 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
 }
 
 export function LabPlayerModal({player, match, team, onClose, initialTab = "match"}) {
-  const boxscores = useLabBoxscores(tab === "season");
   const [tab,setTab]=useState(initialTab);
+  const boxscores = useLabBoxscores(tab === "season");
   // Los promedios deben calcularse solo con partidos de la temporada del encuentro
   // desde el que se abrió la ficha. El archivo también conserva boxscores históricos.
   const seasonMatchIds = new Set(fixture.matches
