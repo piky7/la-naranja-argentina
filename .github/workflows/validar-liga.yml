@@ -83,6 +83,10 @@ on:
       - "src/components/MatchStatsTabs.css"
       - "scripts/verify-liga-popups.mjs"
       - "scripts/verify-liga-collective.mjs"
+      - ".github/workflows/actualizar-lna-completo.yml"
+      - ".github/workflows/publicar-estadisticas-partido.yml"
+      - "worker/lna-sync/wrangler.toml"
+      - "tests/publication-workflows.test.mjs"
       - ".github/workflows/validar-liga.yml"
   workflow_dispatch:
 permissions:
