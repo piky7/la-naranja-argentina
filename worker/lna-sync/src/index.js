@@ -8,13 +8,11 @@ function requestedMode(date) {
   const hour = date.getUTCHours();
   const minute = date.getUTCMinutes();
 
-  // Fixture completo de ambas competencias cada 6 horas.
-  if (minute === 0 && hour % 6 === 0) return "full";
+  // Sincronización completa de respaldo cada 6 horas, cinco minutos después
+  // del polling reciente de GitHub Actions para evitar ejecuciones duplicadas.
+  if (minute === 5 && hour % 6 === 0) return "full";
 
-  // Resultados recientes cada 10 minutos en las franjas habituales de actividad.
-  if (minute % 10 === 0 && [0, 1, 2, 3, 4, 14, 15, 16, 17, 21, 22, 23].includes(hour)) {
-    return "recent";
-  }
+  // El polling reciente de cada 10 minutos queda a cargo del cron de GitHub Actions.
   return null;
 }
 
