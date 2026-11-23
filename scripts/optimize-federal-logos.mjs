@@ -2,9 +2,9 @@ import sharp from "sharp";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-// Fuentes identificadas para escudos de clubes clasificados; ampliar solo tras verificar cada club.
+// Fuentes verificadas para escudos de clubes clasificados. Sumar nuevas entradas
+// únicamente después de confirmar que la imagen corresponde al club correcto.
 const sources = [
-  { team: "Centro Español de Plottier", file: "centro-espanol-plottier.webp", url: "https://www.argentina.basketball/themes/ee/site/default/asset/img/competiciones/Centro_Espa%C3%B1ol_Plottier_1.png", source: "CAB" },
   { team: "Racing de Olavarría", file: "racing-olavarria.webp", url: "https://images.seeklogo.com/logo-png/46/1/club-racing-de-olavarria-logo-png_seeklogo-461949.png", source: "Seeklogo" },
 ];
 const outputDir = resolve("public/federal-team-logos");

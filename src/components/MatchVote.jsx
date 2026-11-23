@@ -1,0 +1,90 @@
+import { teams } from "../data/teams";
+import { useEffect, useState } from "react";
+import "./MatchVote.css";
+import { requestPrediction } from "../auth/prodeBallot";
+import { useProdeSession } from "../auth/prodeSession";
+
+export default function MatchVote({ match, onStatusChange }) {
+  const date = match?.date;
+  const home = match?.homeTeam;
+  const away = match?.awayTeam;
+  const id = date && home && away ? `${date}-${home}-${away}` : null;
+  const [data, setData] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [error, setError] = useState("");
+  const [sessionRevision, setSessionRevision] = useState(0);
+  const { user, loading: authLoading, login, busy: authBusy, error: authError } = useProdeSession();
+  useEffect(() => {
+    const refresh = () => setSessionRevision(value => value + 1);
+    window.addEventListener("prode-profile-updated", refresh);
+    return () => window.removeEventListener("prode-profile-updated", refresh);
+  }, []);
+
+  useEffect(() => {
+    if (!id || authLoading || !user) return;
+    const controller = new AbortController();
+    setData(null);
+    setEditing(false);
+    setError("");
+    requestPrediction("winner", id, null, controller.signal)
+      .then(body => { if (!controller.signal.aborted) setData(body); })
+      .catch(err => { if (!controller.signal.aborted) setError(err.message || "Votación no disponible"); });
+    return () => controller.abort();
+  }, [id, sessionRevision, user, authLoading]);
+
+  useEffect(() => { if (data && onStatusChange) onStatusChange({ voted: data.voted, open: data.open }); }, [data, onStatusChange]);
+
+  if (!id) return null;
+  if (!authLoading && !user) return <section className="lna-vote lna-vote-login">
+    <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div></div>
+    <p>Iniciá sesión con Google para pronosticar y sumar puntos en Prode.</p>
+    <button type="button" onClick={login} disabled={authBusy}> {authBusy ? "Conectando…" : "Continuar con Google"} </button>
+    {authError && <small role="alert">{authError}</small>}
+  </section>;
+  if (!data) return <section className="lna-vote" aria-label="Pronóstico de hinchas" aria-busy="true"><div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div><span>Consultando votos…</span></div><div className="lna-vote-options">{[home, away].map(team => <div key={team} className="lna-vote-option" style={{opacity:.65,cursor:"default"}}><span className="lna-vote-team">{teams.find(item => item.id === team)?.logo && <img className="lna-vote-logo" src={teams.find(item => item.id === team).logo} alt="" />}{teams.find(item => item.id === team)?.shortName || team.replace(/-/g," ")}</span><span>—</span></div>)}</div><small>{error || "Cargando tu pronóstico y los porcentajes…"}</small></section>;
+  if (!data.open && !data.voted) return null;
+
+  async function vote(team) {
+    if (busy || !data.open || (data.voted && !editing) || (data.voted && data.selected === team)) return;
+    setBusy(true);
+    setError("");
+    try {
+      await requestPrediction("winner", id, team);
+      let refreshed;
+      try {
+        // El POST confirma el guardado, pero no devuelve los totales colectivos.
+        refreshed = await requestPrediction("winner", id);
+      } catch {
+        // El voto ya quedó guardado: conservar el estado confirmado si falla la lectura.
+        refreshed = { ...data, voted: true, selected: team };
+      }
+      setData(refreshed);
+      setEditing(false);
+      window.dispatchEvent(new Event("lna-vote-updated"));
+    } catch (err) { setError(err.message || "No se pudo registrar el voto. Reintentá."); }
+    finally { setBusy(false); }
+  }
+
+  const teamInfo = teamId => teams.find(team => team.id === teamId);
+  const total = (data.home?.votes || 0) + (data.away?.votes || 0);
+  const percent = votes => total ? Math.round(votes * 100 / total) : 0;
+  return (
+    <section className="lna-vote" aria-label="Pronóstico de hinchas">
+      <div className="lna-vote-title"><div className="lna-vote-title-group"><strong>¿QUIÉN GANA EL PARTIDO?</strong></div><span>{data.voted ? `${total} ${total === 1 ? "voto" : "votos"}` : "Elegí el ganador"}</span></div>
+      <div className="lna-vote-options">
+        {[{ team: home, result: data.home }, { team: away, result: data.away }].map(({ team, result }) => (
+          <button key={team} type="button" disabled={busy || !data.open || (data.voted && !editing) || (data.voted && data.selected === team)}
+            className={`lna-vote-option ${data.selected === team ? "is-selected" : ""}`}
+            onClick={() => vote(team)}>
+            <span className="lna-vote-team">{teamInfo(team)?.logo && <img className="lna-vote-logo" src={teamInfo(team).logo} alt="" />}{teamInfo(team)?.shortName || team.replace(/-/g, " ")}</span>
+            {data.voted ? <strong>{percent(result?.votes || 0)}%</strong> : <span className="lna-vote-radio" aria-hidden="true" />}
+            {data.voted && <span className="lna-vote-bar" style={{ width: `${percent(result?.votes || 0)}%` }} />}
+          </button>
+        ))}
+      </div>
+      {error && <small role="status">{error}</small>}
+      {data.voted && <div className="lna-vote-change"><small>{data.open ? (editing ? "Elegí el nuevo ganador para confirmar el cambio." : "Podés cambiar tu pronóstico hasta que empiece el partido.") : "Votación cerrada"}</small>{data.open && <button type="button" disabled={busy} onClick={() => setEditing(value => !value)}>{editing ? "Cancelar" : "Cambiar pronóstico"}</button>}</div>}
+    </section>
+  );
+}

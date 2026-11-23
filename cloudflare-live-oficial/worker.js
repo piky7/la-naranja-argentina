@@ -1,0 +1,1325 @@
+// Activar despliegue del Worker oficial
+const BASE = "https://www.laliganacional.com.ar";
+const ZONA = "America/Argentina/Buenos_Aires";
+
+const EQUIPOS = {
+  "argentino-j": "argentino",
+  "atenas-c": "atenas",
+  boca: "boca",
+  ferro: "ferro",
+  "gimnasia-cr": "gimnasia",
+  "independiente-o": "independiente-oliva",
+  instituto: "instituto",
+  lanus: "lanus",
+  "la-union": "la-union",
+  obera: "obera",
+  olimpico: "olimpico",
+  "penarol-mdp": "penarol",
+  platense: "platense",
+  quimsa: "quimsa",
+  "racing-ch": "racing-chivilcoy",
+  "regatas-c": "regatas",
+  "san-lorenzo": "san-lorenzo",
+  "san-martin-c": "san-martin",
+};
+
+function fechaHoraArgentina(fecha) {
+  const partes = new Intl.DateTimeFormat("en-US", {
+    timeZone: ZONA,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(fecha);
+
+  const dato = (tipo) =>
+    partes.find((p) => p.type === tipo)?.value;
+
+  return {
+    fecha: `${dato("year")}-${dato("month")}-${dato("day")}`,
+    hora: `${dato("hour")}:${dato("minute")}`,
+  };
+}
+
+async function descargar(url, opciones = {}) {
+  const respuesta = await fetch(url, {
+    ...opciones,
+    signal: AbortSignal.timeout(15000),
+  });
+
+  if (!respuesta.ok) {
+    throw new Error(`HTTP ${respuesta.status}: ${url}`);
+  }
+
+  return respuesta.text();
+}
+
+async function obtenerConCache(cacheReferencia, clave, duracionSegundos, obtenerDatos) {
+  const ahora = Date.now();
+  const guardado = cacheReferencia[clave];
+  if (guardado && Array.isArray(guardado.datos) && Number.isFinite(guardado.guardadoEn) && ahora - guardado.guardadoEn < duracionSegundos * 1000) {
+    console.log("Caché de referencias utilizada:", clave);
+    return guardado.datos;
+  }
+  const datos = await obtenerDatos();
+  if (!Array.isArray(datos)) throw new Error("Datos inválidos para caché: " + clave);
+  cacheReferencia[clave] = { guardadoEn: ahora, datos };
+  cacheReferencia.modificada = true;
+  console.log("Caché de referencias actualizada:", clave);
+  return datos;
+}
+
+async function obtenerEventos() {
+  const url =
+    "https://raw.githubusercontent.com/" +
+    "piky7/la-naranja-argentina/main/lnb-events.json";
+
+  const datos = JSON.parse(await descargar(url));
+
+  if (!Array.isArray(datos.matches)) {
+    throw new Error("lnb-events.json no contiene matches");
+  }
+
+  return datos.matches;
+}
+
+function obtenerFechaFixture(fila) {
+  const texto = fila.match(
+    /class="[^"]*fecha-campo[^"]*"[\s\S]*?<strong[^>]*>([^<]+)<\/strong>/i
+  )?.[1];
+
+  const fecha = texto?.match(
+    /(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})/
+  );
+
+  if (!fecha) return null;
+
+  return {
+    fecha: `${fecha[3]}-${fecha[2]}-${fecha[1]}`,
+    hora: `${fecha[4]}:${fecha[5]}`,
+  };
+}
+
+async function obtenerFixture(fecha) {
+  const url = new URL("/laliga/fixture", BASE);
+
+  url.searchParams.set("handler", "ProximosPartidos");
+  url.searchParams.set("fechaInicio", fecha);
+  url.searchParams.set("fechaFin", fecha);
+
+  const html = await descargar(url);
+
+  const filas =
+    html.match(/<tr\b[^>]*>[\s\S]*?<\/tr>/gi) || [];
+
+  const partidos = [];
+
+  for (const fila of filas) {
+    const enlace = fila.match(
+      /href="(\/laliga\/partido\/[^"]+)"/i
+    )?.[1];
+
+    if (!enlace) continue;
+
+    const fechaPartido = obtenerFechaFixture(fila);
+
+    if (!fechaPartido || fechaPartido.fecha !== fecha) {
+      continue;
+    }
+
+    const slug = enlace.split("/").pop();
+    const separador = slug.indexOf("-vs-");
+
+    if (separador === -1) continue;
+
+    const localSlug = slug.slice(0, separador);
+    const visitanteSlug = slug.slice(separador + 4);
+
+    partidos.push({
+      ...fechaPartido,
+      localLNA: EQUIPOS[localSlug] || null,
+      visitanteLNA: EQUIPOS[visitanteSlug] || null,
+      url: BASE + enlace,
+    });
+  }
+
+  return partidos;
+}
+
+// Respaldo cuando el endpoint de próximos partidos deja de listar
+// un encuentro que ya comenzó. Las URLs provienen del calendario oficial
+// publicado en este mismo repositorio, no de un marcador estimado.
+async function obtenerCalendarioRespaldo(fecha) {
+  const source = await descargar("https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/src/data/officialSchedule.js");
+  const match = source.match(/export const officialSchedule\s*=\s*(\[[\s\S]*\]);?\s*$/);
+  if (!match) throw new Error("Calendario oficial de respaldo inválido");
+  const rows = JSON.parse(match[1]);
+  return rows.filter(item => item.date === fecha && item.homeTeam && item.awayTeam &&
+    item.officialUrl && item.time && /^\d{2}:\d{2}$/.test(item.time))
+    .map(item => ({
+      fecha: item.date, hora: item.time,
+      localLNA: item.homeTeam, visitanteLNA: item.awayTeam,
+      url: item.officialUrl,
+    }));
+}
+
+function interpretarMarcador(html) {
+  const estado =
+    html.match(/data-estado="([^"]*)"/)?.[1] || null;
+
+  const finalizada =
+    html.match(/data-finalizada="([^"]*)"/)?.[1] === "true";
+
+  const puntos = [
+    ...html.matchAll(
+      /class="marcador-box[^"]*">\s*(\d+)\s*</g
+    ),
+  ].map((m) => Number(m[1]));
+
+  let status = "unknown";
+
+  if (finalizada || estado === "FINALIZADO") {
+    status = "finished";
+  } else if (estado === "COMENZADO") {
+    status = "live";
+  } else if (!estado && puntos.length === 0) {
+    status = "scheduled";
+  }
+
+  return {
+    status,
+    homeScore: puntos.length === 2 ? puntos[0] : null,
+    awayScore: puntos.length === 2 ? puntos[1] : null,
+  };
+}
+
+function obtenerPeriodo(html, status) {
+  const vacio = {
+    quarter: null,
+    minutesRemaining: null,
+    isHalftime: false,
+    lastActionTime: null,
+  };
+
+  if (status !== "live") return vacio;
+
+  const cambios = [
+    ...html.matchAll(
+      /<li\b[^>]*class="[^"]*\b(INICIO|FINAL)-PERIODO\b[^"]*"[^>]*>/gi
+    ),
+  ].map((m) => {
+    const fragmento = html.slice(m.index, m.index + 500);
+
+    const numero = fragmento.match(
+      /<strong[^>]*>[\s\S]*?(?:INICIO|FINAL)-PERIODO\s*<span>\s*(\d+)\s*<\/span>/i
+    );
+
+    return {
+      tipo: m[1].toUpperCase(),
+      periodo: numero ? Number(numero[1]) : null,
+      posicion: m.index,
+    };
+  });
+
+  const ultimaAccion = html.match(
+    /Cuarto\s+(\d+)\s*-\s*(\d{2}:\d{2}:\d{2})/i
+  );
+
+  const ultimoCambio = cambios[0] || null;
+  const cuartoAccion = ultimaAccion ? Number(ultimaAccion[1]) : null;
+  const cuartoCambio = ultimoCambio?.periodo || null;
+  // Un evento viejo de FINAL-PERIODO no puede devolver el partido
+  // a entretiempo cuando ya existen acciones de un cuarto posterior.
+  const quarter = Math.max(cuartoAccion || 0, cuartoCambio || 0) || null;
+  const isHalftime =
+    ultimoCambio?.tipo === "FINAL" &&
+    cuartoCambio === 2 &&
+    (cuartoAccion == null || cuartoAccion <= 2) &&
+    ultimoCambio.posicion < (ultimaAccion?.index ?? Infinity);
+
+  // La web oficial indica el tiempo transcurrido en la última acción
+  // (HH:MM:SS). Home convierte minutos jugados en minutos restantes.
+  // No interpolar el reloj: es el último dato disponible, no tiempo real.
+  let minutesPlayed = null;
+  if (ultimaAccion && !isHalftime) {
+    const [hours, minutes, seconds] = ultimaAccion[2].split(":").map(Number);
+    const elapsed = hours * 3600 + minutes * 60 + seconds;
+    if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed <= 600) {
+      minutesPlayed = Math.floor(elapsed / 60);
+    }
+  }
+
+  return {
+    quarter,
+    minutesRemaining: minutesPlayed,
+    isHalftime,
+    lastActionTime: ultimaAccion?.[2] || null,
+  };
+}
+
+
+// Parciales en vivo reconstruidos desde las jugadas oficiales.
+ // Cada acción incluye el cuarto y el marcador acumulado. La lista llega
+ // en orden inverso, por lo que el primer marcador de cada cuarto es el último.
+function obtenerParcialesOficiales(html, marcador, periodo) {
+  if (marcador.status !== "live" && marcador.status !== "finished") return null;
+  const home = marcador.homeScore;
+  const away = marcador.awayScore;
+  if (!Number.isInteger(home) || !Number.isInteger(away) || home < 0 || away < 0) return null;
+
+  const acciones = [...html.matchAll(/<li\b[^>]*class="[^"]*\baccion\b[^"]*"[^>]*>[\s\S]*?<\/li>/gi)];
+  const acumulados = new Map();
+  for (const [fragmento] of acciones) {
+    const cuarto = fragmento.match(/Cuarto\s+(\d+)\s*-\s*\d{2}:\d{2}:\d{2}/i);
+    const marcadorAccion = fragmento.match(/class="[^"]*informacionAdicional[^"]*"[^>]*>\s*(\d+)\s*-\s*(\d+)\s*<\/strong>/i);
+    if (!cuarto || !marcadorAccion) continue;
+    const n = Number(cuarto[1]);
+    if (n >= 1 && n <= 10 && !acumulados.has(n)) {
+      acumulados.set(n, [Number(marcadorAccion[1]), Number(marcadorAccion[2])]);
+    }
+  }
+
+  // El cuarto actual se toma del marcador oficial, no de una acción que
+  // podría estar retrasada respecto al último tanteador publicado.
+  const actual = Number(periodo.quarter);
+  if (!Number.isInteger(actual) || actual < 1 || actual > 10) return null;
+  const parciales = [];
+  let previoLocal = 0;
+  let previoVisitante = 0;
+  for (let n = 1; n <= actual; n++) {
+    const acumulado = n === actual ? [home, away] : acumulados.get(n);
+    if (!acumulado) return null;
+    const [local, visitante] = acumulado;
+    if (local < previoLocal || visitante < previoVisitante ||
+        local > home || visitante > away) return null;
+    parciales.push({
+      period: n <= 4 ? String(n) : `OT${n - 4}`,
+      home: local - previoLocal,
+      away: visitante - previoVisitante,
+    });
+    previoLocal = local;
+    previoVisitante = visitante;
+  }
+  return previoLocal === home && previoVisitante === away ? parciales : null;
+}
+
+// Los cinco iniciales se identifican por CincoInicial en la planilla oficial.
+// No se infieren a partir de minutos ni promedios.
+function extraerQuintetos(html) {
+  const tablas = [...html.matchAll(/<table\b[^>]*class=["'][^"']*tabla-estadisticas[^"']*["'][^>]*>[\s\S]*?<\/table>/gi)];
+  if (tablas.length !== 2) return null;
+  const parsear = tabla => {
+    const titulares = [];
+    for (const fila of tabla.matchAll(/<tr\b[^>]*\bonclick=(["'])([\s\S]*?)\1[^>]*>/gi)) {
+      const attr = fila[2].replace(/&quot;|&#34;|&#x22;/gi, '"').replace(/&#39;|&#x27;/gi, "'").replace(/&amp;/gi, '&');
+      const inicio = attr.indexOf('{');
+      const fin = attr.lastIndexOf('}');
+      if (inicio < 0 || fin < inicio) continue;
+      try {
+        const jugador = JSON.parse(attr.slice(inicio, fin + 1));
+        if (jugador.CincoInicial === true || jugador.CincoInicial === 1 || jugador.CincoInicial === 'True' || jugador.CincoInicial === 'true') {
+          titulares.push({ officialPlayerId: jugador.IdJugador, name: jugador.NombreCompleto || jugador.Nombre, number: jugador.Dorsal });
+        }
+      } catch (_) { /* Fila incompleta: no inventar titulares. */ }
+    }
+    return titulares.length === 5 ? titulares : null;
+  };
+  const home = parsear(tablas[0][0]);
+  const away = parsear(tablas[1][0]);
+  return home && away ? { home, away } : null;
+}
+
+async function obtenerMarcador(partido) {
+  console.log(
+    "Consultando marcador oficial:",
+    partido.localLNA,
+    partido.visitanteLNA,
+    partido.url
+  );
+
+  const html = await descargar(partido.url);
+  const quintetos = extraerQuintetos(html);
+
+  const idEnc = html.match(
+    /var\s+idEnc\s*=\s*['"]([^'"]+)['"]/
+  )?.[1];
+
+  if (!idEnc) {
+    throw new Error("No se encontró idEnc");
+  }
+
+  const url = new URL(
+    `/laliga/partido/Marcador/${idEnc}`,
+    BASE
+  );
+
+  url.searchParams.set("handler", "Recargar");
+  url.searchParams.set("key", "");
+
+  const marcadorHTML = await descargar(url, {
+    headers: {
+      Referer: partido.url,
+      Accept: "*/*",
+    },
+  });
+
+  const marcador = interpretarMarcador(marcadorHTML);
+  const periodo = obtenerPeriodo(html, marcador.status);
+
+  const quarterScores = obtenerParcialesOficiales(html, marcador, periodo);
+  return { ...marcador, ...periodo, ...(quarterScores ? { quarterScores } : {}), ...(quintetos ? { quintetos } : {}) };
+}
+
+
+async function obtenerMarcadorConRecuperacion(
+  partido,
+  fecha,
+  env
+) {
+  try {
+   return await obtenerMarcador(partido);
+  } catch (error) {
+    console.warn(
+      "Falló URL oficial, buscando nuevamente:",
+      partido.localLNA,
+      partido.visitanteLNA,
+      error.message
+    );
+
+    // Descargar un fixture nuevo, sin utilizar la caché.
+    const fixtureNuevo = await obtenerFixture(fecha);
+
+    // Buscar exactamente el mismo encuentro.
+    const coincidencias = fixtureNuevo.filter(
+      (candidato) =>
+        candidato.localLNA === partido.localLNA &&
+        candidato.visitanteLNA === partido.visitanteLNA &&
+        candidato.fecha === partido.fecha &&
+        candidato.hora === partido.hora
+    );
+
+    if (coincidencias.length !== 1) {
+      throw new Error(
+        "No se pudo recuperar una URL oficial única"
+      );
+    }
+
+    const partidoActualizado = coincidencias[0];
+
+    // Reintentar una sola vez con la URL nueva.
+    const marcador = await obtenerMarcador(partidoActualizado);
+
+    // Actualizar el fixture almacenado solo después
+    // de comprobar que la URL nueva funciona.
+    await env.LNA_LIVE_OFICIAL.put(
+      `fixture-oficial:${fecha}`,
+      JSON.stringify({
+        guardadoEn: Date.now(),
+        datos: fixtureNuevo,
+      })
+    );
+
+    console.log(
+      "URL oficial recuperada:",
+      partido.localLNA,
+      partido.visitanteLNA
+    );
+
+    return marcador;
+  }
+}
+
+
+async function generarLive(fecha, anteriores = null, env) {
+  // Un solo GET KV agrupa eventos, fixture y calendario de respaldo.
+  // Debe cargarse antes de utilizarlo en obtenerConCache.
+  const cacheReferencia =
+    await env.LNA_LIVE_OFICIAL.get("live-reference-data", "json") || {};
+
+  // Primero consultamos únicamente los eventos, usando su caché de 30 minutos.
+  // Así podemos evitar descargar el fixture oficial cuando no hay partidos
+  // dentro de la ventana de seguimiento.
+  let eventos = [];
+  try {
+    eventos = await obtenerConCache(
+      cacheReferencia,
+      "eventos-lnb",
+      1800,
+      () => obtenerEventos()
+    );
+  } catch (error) {
+    // La falla de la fuente LNB no debe impedir consultar la fuente LAB.
+    console.warn("Eventos LNB no disponibles; se continúa con fixture oficial y LAB:", error.message);
+  }
+
+  const ahora = Date.now();
+  const anterioresDelDia =
+    anteriores?.date === fecha
+      ? anteriores.liveMatches || []
+      : [];
+
+  const partidosEnSeguimiento = new Set(
+    anterioresDelDia
+      .filter((partido) =>
+        partido.status === "live" || partido.isLive === true
+      )
+      .map((partido) => String(partido.eventId))
+  );
+
+  const margenAntes = 30 * 60 * 1000;
+  const margenDespues = 240 * 60 * 1000;
+
+  const hayCandidatos = eventos.some((evento) => {
+    const timestamp = Number(evento.timestamp) * 1000;
+
+    if (
+      !evento.eventId ||
+      !Number.isFinite(timestamp) ||
+      timestamp <= 0
+    ) {
+      return false;
+    }
+
+    // Un partido ya marcado como LIVE debe seguirse incluso si cruza
+    // la medianoche argentina y su fecha de inicio ya es la anterior.
+    if (partidosEnSeguimiento.has(String(evento.eventId))) {
+      return true;
+    }
+
+    // Para nuevos candidatos, solo consideramos partidos de la fecha actual.
+    if (fechaHoraArgentina(new Date(timestamp)).fecha !== fecha) {
+      return false;
+    }
+
+    const tiempoDesdeInicio = ahora - timestamp;
+    return (
+      tiempoDesdeInicio >= -margenAntes &&
+      tiempoDesdeInicio <= margenDespues
+    );
+  });
+
+  if (!hayCandidatos) {
+    // El calendario histórico de eventos puede tener fechas reprogramadas.
+    // Consultar el fixture OFICIAL (cacheado 10 min) como respaldo para
+    // no perder partidos en vivo por timestamps obsoletos.
+    console.log("Sin candidatos en eventos-lnb; verificando fixture oficial:", fecha);
+  }
+
+  // El endpoint ProximosPartidos puede omitir partidos al comenzar.
+  // Completar solamente los encuentros ausentes usando sus URLs oficiales.
+  let proximos = [];
+  try {
+    proximos = await obtenerConCache(
+      cacheReferencia,
+      `fixture-oficial:${fecha}`,
+      1800,
+      () => obtenerFixture(fecha)
+    );
+  } catch (error) {
+    console.warn("Fixture oficial no disponible, usando respaldo:", error.message);
+  }
+  let respaldo = [];
+  try {
+    respaldo = await obtenerConCache(
+      cacheReferencia,
+      `calendario-respaldo:${fecha}`,
+      1800,
+      () => obtenerCalendarioRespaldo(fecha)
+    );
+  } catch (error) {
+    console.warn("No se pudo obtener calendario de respaldo:", error.message);
+  }
+  if (cacheReferencia.modificada) {
+    delete cacheReferencia.modificada;
+    await env.LNA_LIVE_OFICIAL.put("live-reference-data", JSON.stringify(cacheReferencia));
+  }
+  const oficiales = [...proximos];
+  const conocidos = new Set(proximos.map(item => item.localLNA + "|" + item.visitanteLNA));
+  for (const item of respaldo) {
+    const key = item.localLNA + "|" + item.visitanteLNA;
+    if (!conocidos.has(key)) {
+      oficiales.push(item);
+      conocidos.add(key);
+      console.log("Partido recuperado del calendario:", item.localLNA, item.visitanteLNA, fecha);
+    }
+  }
+
+  const anterioresPorId = new Map(
+    (anteriores?.date === fecha
+      ? anteriores.liveMatches || []
+      : []
+    ).map((partido) => [partido.eventId, partido])
+  );
+
+  const resultados = [];
+
+  for (const oficial of oficiales) {
+    if (!oficial.localLNA || !oficial.visitanteLNA) {
+      continue;
+    }
+
+    const coincidencias = eventos.filter((evento) => {
+      const fechaEvento = fechaHoraArgentina(
+        new Date(evento.timestamp * 1000)
+      );
+
+      return (
+        evento.homeTeam === oficial.localLNA &&
+        evento.awayTeam === oficial.visitanteLNA &&
+        fechaEvento.fecha === oficial.fecha &&
+        fechaEvento.hora === oficial.hora
+      );
+    });
+
+    // Preferir la correspondencia exacta. Si hubo reprogramación,
+    // aceptar el par de equipos SOLO cuando sea único en el historial.
+    const porEquipos = eventos.filter((evento) =>
+      evento.homeTeam === oficial.localLNA &&
+      evento.awayTeam === oficial.visitanteLNA
+    );
+    // El calendario oficial es la fuente de verdad para identificar
+    // partidos. lnb-events.json puede llegar incompleto o con horarios
+    // desactualizados; no descartar un partido oficial por faltar allí.
+    const evento = coincidencias.length === 1
+      ? coincidencias[0]
+      : porEquipos.length === 1 ? porEquipos[0] : {
+          eventId: `oficial-${oficial.fecha}-${oficial.localLNA}-${oficial.visitanteLNA}`,
+          homeTeam: oficial.localLNA,
+          awayTeam: oficial.visitanteLNA,
+          homeName: oficial.localLNA,
+          awayName: oficial.visitanteLNA,
+          homeScore: null,
+          awayScore: null,
+          status: "scheduled",
+          timestamp: Math.floor(Date.parse(`${oficial.fecha}T${oficial.hora}:00-03:00`) / 1000),
+        };
+    if (coincidencias.length !== 1) {
+      console.log("Partido identificado por calendario oficial:", oficial.localLNA, oficial.visitanteLNA, oficial.fecha, oficial.hora);
+    }
+    if (coincidencias.length !== 1) {
+      console.log("Partido reprogramado detectado en fixture oficial:", oficial.localLNA, oficial.visitanteLNA, oficial.fecha, oficial.hora);
+    }
+    const anterior = anterioresPorId.get(evento.eventId);
+
+    // Un partido finalizado ya no necesita consultas.
+
+if (anterior?.status === "finished") {
+  console.log(
+    "Marcador finalizado reutilizado desde KV:",
+    evento.eventId,
+    anterior.homeScore,
+    anterior.awayScore
+  );
+
+  resultados.push(anterior);
+  continue;
+}
+
+
+    // La hora del fixture oficial prevalece sobre la del evento histórico.
+    // Argentina opera en UTC-03 durante la temporada LNB.
+    const inicio = Date.parse(`${oficial.fecha}T${oficial.hora}:00-03:00`);
+
+    // Seguir partidos desde 30 minutos antes hasta 4 horas después
+    // del inicio. Un partido que ya estaba en vivo continúa en seguimiento.
+    if (
+      !anterior?.isLive &&
+      (
+        ahora < inicio - 30 * 60 * 1000 ||
+        ahora > inicio + 240 * 60 * 1000
+      )
+    ) {
+      if (anterior) {
+        resultados.push(anterior);
+      }
+      continue;
+    }
+
+    try {
+      const marcador = await obtenerMarcadorConRecuperacion(
+  oficial,
+  fecha,
+  env
+);
+
+
+
+
+
+      if (marcador.status === "unknown") {
+        console.warn("Estado desconocido:", evento.eventId);
+        continue;
+      }
+
+      resultados.push({
+        competition: "LNB",
+        eventId: evento.eventId,
+        officialUrl: oficial.url,
+        homeTeam: evento.homeTeam,
+        awayTeam: evento.awayTeam,
+        homeName: evento.homeName,
+        awayName: evento.awayName,
+        homeScore: marcador.homeScore,
+        awayScore: marcador.awayScore,
+        quarter: marcador.quarter,
+        minutesRemaining: marcador.minutesRemaining,
+        isHalftime: marcador.isHalftime,
+        lastActionTime: marcador.lastActionTime,
+        quarterScores: marcador.quarterScores || null,
+        quintetos: marcador.quintetos || anterior?.quintetos || null,
+        timestamp: Math.floor(inicio / 1000),
+        status: marcador.status,
+        isLive: marcador.status === "live",
+      });
+    } catch (error) {
+      console.error(
+        "Error consultando:",
+        evento.eventId,
+        error.message
+      );
+    }
+  }
+
+  const resultadosLab = await generarLiveLab(fecha, anteriores, env).catch(error => {
+    console.error("Error consultando LIVE LAB:", error.message);
+    return (anteriores?.date === fecha ? anteriores.liveMatches || [] : [])
+      .filter(match => match.competition === "LAB")
+      .map(match => ({ ...match, isStale: true }));
+  });
+
+  return {
+    updatedAt: new Date().toISOString(),
+    date: fecha,
+    liveMatches: [...resultados, ...resultadosLab],
+  };
+}
+
+
+// ---------------- LIVE LIGA ARGENTINA ----------------
+async function obtenerFixtureLab(fecha, env) {
+  const clave = "fixture-lab:" + fecha;
+  const cache = await env.LNA_LIVE_OFICIAL.get(clave, "json");
+  if (cache && Array.isArray(cache.matches) && Date.now() - cache.guardadoEn < 30 * 60 * 1000) return cache.matches;
+  const source = await descargar("https://raw.githubusercontent.com/piky7/la-naranja-argentina/main/data/lab/labSchedule.json");
+  const data = JSON.parse(source);
+  if (!Array.isArray(data.matches)) throw new Error("Fixture LAB inválido");
+  const matches = data.matches.filter(match => match.date === fecha && match.officialUrl && match.homeTeam?.teamId && match.awayTeam?.teamId);
+  await env.LNA_LIVE_OFICIAL.put(clave, JSON.stringify({ guardadoEn: Date.now(), matches }));
+  return matches;
+}
+
+function extraerTextoElementoPorId(html, id) {
+  const apertura = new RegExp("<([a-z][a-z0-9]*)\\b(?=[^>]*\\bid\\s*=\\s*['\"]" + id + "['\"])[^>]*>", "i");
+  const posicion = html.search(apertura);
+  if (posicion < 0) return "";
+  const matchApertura = html.slice(posicion).match(apertura);
+  if (!matchApertura) return "";
+  const inicio = posicion + matchApertura[0].length;
+  const cierre = new RegExp("</" + matchApertura[1] + "\\s*>", "i");
+  const fin = html.slice(inicio).search(cierre);
+  if (fin < 0) return "";
+  return html.slice(inicio, inicio + fin)
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&").replace(/&aacute;/gi, "á")
+    .replace(/&eacute;/gi, "é").replace(/&iacute;/gi, "í")
+    .replace(/&oacute;/gi, "ó").replace(/&uacute;/gi, "ú")
+    .replace(/\s+/g, " ").trim();
+}
+
+function interpretarMarcadorLab(html) {
+  // El sitio oficial puede envolver estado y puntos en spans/iconos internos.
+  // Extraemos el contenido completo del elemento y toleramos comillas simples,
+  // atributos en distinto orden y espacios alrededor del signo igual.
+  const statusText = extraerTextoElementoPorId(html, "status-partido");
+  const estado = html.match(/data-estado\s*=\s*['"]([^'"]+)['"]/i)?.[1] || "";
+  const finalizada = /data-finalizada\s*=\s*['"]true['"]/i.test(html);
+  const readScore = id => {
+    const value = extraerTextoElementoPorId(html, id);
+    return /^\d{1,3}$/.test(value) ? Number(value) : null;
+  };
+  const homeScore = readScore("score-local");
+  const awayScore = readScore("score-visitante");
+  const normalized = statusText.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  let status = "unknown";
+  if (finalizada || /^(final|finalizado|finalizada|terminado|terminada)/.test(normalized) || estado.toUpperCase() === "FINALIZADO") status = "finished";
+  else if (/en juego|en curso|jugando|descanso|entretiempo|cuarto|periodo/.test(normalized) || estado.toUpperCase() === "COMENZADO") status = "live";
+  else if (/programado|proximo|a jugar|pendiente/.test(normalized)) status = "scheduled";
+  const accion = html.match(/Cuarto\s+(\d+)\s*-\s*(\d{2}:\d{2}:\d{2})/i);
+  const quarter = accion ? Number(accion[1]) : null;
+  const lastActionTime = accion?.[2] || null;
+  let minutesRemaining = null;
+  if (lastActionTime) {
+    const [h,m,s] = lastActionTime.split(":").map(Number);
+    const elapsed = h * 3600 + m * 60 + s;
+    if (elapsed >= 0 && elapsed <= 600) minutesRemaining = Math.floor(elapsed / 60);
+  }
+  return { status, homeScore, awayScore, quarter, lastActionTime, minutesRemaining, isHalftime: /entretiempo|descanso/i.test(normalized) };
+}
+
+
+function extraerQuintetosLab(html) {
+  const tables = [...html.matchAll(/<table\b[^>]*class=["'][^"']*tabla-estadisticas[^"']*["'][^>]*>[\s\S]*?<\/table>/gi)];
+  if (tables.length !== 2) return null;
+
+  const decodeMarker = value => String(value || "")
+    .replace(/&#42;|&#x2a;|&ast;/gi, "*")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&aacute;/gi, "á").replace(/&eacute;/gi, "é")
+    .replace(/&iacute;/gi, "í").replace(/&oacute;/gi, "ó")
+    .replace(/&uacute;/gi, "ú").replace(/&ntilde;/gi, "ñ")
+    .replace(/\s+/g, " ").trim();
+
+  const parseSide = table => {
+    const starters = [];
+    for (const row of table.matchAll(/<tr\b([^>]*)>([\s\S]*?)<\/tr>/gi)) {
+      const attrs = row[1] || "";
+      const body = row[2] || "";
+      const onclick = attrs.match(/\bonclick=(["'])([\s\S]*?)\1/i)?.[2] || "";
+      const start = onclick.indexOf("{"), finish = onclick.lastIndexOf("}");
+      if (start < 0 || finish < start) continue;
+
+      let player;
+      try {
+        const attr = onclick.slice(start, finish + 1)
+          .replace(/&quot;|&#34;|&#x22;/gi, '"')
+          .replace(/&#39;|&#x27;/gi, "'")
+          .replace(/&amp;/gi, "&");
+        player = JSON.parse(attr);
+      } catch (_) { continue; }
+
+      // En la planilla LAB el asterisco visible junto al nombre identifica
+      // al titular. No usar CincoInicial: no es la marca que muestra el boxscore.
+      const cells = [...body.matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)].map(cell => cell[1]);
+      // La primera celda es el dorsal (#); el asterisco se muestra en la celda JUGADOR.
+      const nameCell = cells[1] || cells[0] || "";
+      const markedName = decodeMarker(nameCell);
+      const rawName = String(player.NombreCompleto || player.Nombre || "");
+      const isStarter = /\*/.test(markedName) || /\*/.test(rawName);
+      if (!isStarter) continue;
+
+      const name = decodeMarker(rawName || markedName).replace(/\s*\*\s*/g, " ").trim();
+      starters.push({
+        officialPlayerId: player.IdJugador,
+        name: name || markedName.replace(/\s*\*\s*/g, " ").trim(),
+        number: player.Dorsal
+      });
+    }
+    return starters.length === 5 ? starters : null;
+  };
+
+  const home = parseSide(tables[0][0]), away = parseSide(tables[1][0]);
+  return home && away ? { home, away, source: "official-boxscore-asterisk" } : null;
+}
+function textoPlanoLab(value) {
+  return String(value||"").replace(/<[^>]+>/g," ").replace(/&nbsp;|&#160;/gi," ")
+    .replace(/&amp;/gi,"&").replace(/&aacute;/gi,"á").replace(/&eacute;/gi,"é")
+    .replace(/&iacute;/gi,"í").replace(/&oacute;/gi,"ó").replace(/&uacute;/gi,"ú")
+    .replace(/&ntilde;/gi,"ñ").replace(/\s+/g," ").trim();
+}
+function extraerBloquesClaseLab(html, className) {
+  const open = new RegExp("<([a-z][a-z0-9]*)\\b(?=[^>]*\\bclass\\s*=\\s*['\"][^'\"]*\\b" + className + "\\b)[^>]*>", "gi");
+  const blocks = [];
+  let match;
+  while ((match = open.exec(html))) {
+    const tag = match[1];
+    const token = new RegExp("</?" + tag + "\\b[^>]*>", "gi");
+    token.lastIndex = open.lastIndex;
+    let depth = 1, close = null, part;
+    while ((part = token.exec(html))) {
+      if (part[0].startsWith("</")) depth--;
+      else if (!/\/\s*>$/.test(part[0])) depth++;
+      if (depth === 0) { close = part; break; }
+    }
+    if (!close) continue;
+    blocks.push(html.slice(open.lastIndex, close.index));
+    open.lastIndex = token.lastIndex;
+  }
+  return blocks;
+}
+
+function obtenerComparativaLab(html) {
+  const start = html.search(/id\s*=\s*['"]scroll-comparativa['"]/i);
+  if (start < 0) return null;
+  const root = html.slice(start, start + 50000);
+  const aliases = {"TC":"fieldGoals","2P":"twoPointers","3P":"threePointers","TL":"freeThrows","Reb.":"rebounds","As.":"assists","Rec.":"steals","Tap.":"blocks","Pér.":"turnovers","Faltas Com.":"fouls"};
+  const home={},away={};
+  const parseValue = value => {
+    const shot=value.match(/(\d+)\s*\/\s*(\d+)\s*([\d.,]+)?\s*%?/);
+    if(shot)return {made:Number(shot[1]),attempted:Number(shot[2]),percentage:Number(String(shot[3]||"0").replace(",","."))};
+    const numeric=value.match(/-?\d+(?:[.,]\d+)?/);
+    return numeric?Number(numeric[0].replace(",",".")):null;
+  };
+  for(const line of extraerBloquesClaseLab(root,"linea")){
+    const cols=extraerBloquesClaseLab(line,"col");
+    if(cols.length<3)continue;
+    const labelBlock=cols[1];
+    const label=textoPlanoLab(labelBlock.match(/class=["'][^"']*stat-nombre-abrev[^"']*["'][^>]*>([\s\S]*?)<\//i)?.[1]
+      ||labelBlock.match(/class=["'][^"']*stat-nombre-completo[^"']*["'][^>]*>([\s\S]*?)<\//i)?.[1]
+      ||labelBlock);
+    const key=aliases[label];
+    if(!key)continue;
+    home[key]=parseValue(textoPlanoLab(cols[0]));
+    away[key]=parseValue(textoPlanoLab(cols[2]));
+  }
+  if(!Object.values(aliases).every(key=>home[key]!=null&&away[key]!=null))return null;
+  return {source:"Comparativa oficial del boxscore LAB",method:"official-boxscore-comparison",home,away};
+}
+
+async function generarLiveLab(fecha, anteriores, env) {
+  const fixture = await obtenerFixtureLab(fecha, env);
+  const previous = new Map((anteriores?.liveMatches || []).filter(match => match.competition === "LAB").map(match => [match.matchId, match]));
+  const now = Date.now();
+  const results = [];
+  for (const match of fixture) {
+    const id = String(match.id);
+    const anterior = previous.get(id);
+    if (anterior?.status === "finished") { results.push(anterior); continue; }
+    const start = Date.parse(match.date + "T" + (match.time || "20:00") + ":00-03:00");
+    const tracked = anterior?.status === "live" || anterior?.isLive === true;
+    if (!tracked && (!Number.isFinite(start) || now < start - 30 * 60 * 1000 || now > start + 240 * 60 * 1000)) continue;
+    try {
+      const html = await descargar(match.officialUrl, { headers: { Accept: "text/html", "User-Agent": "Mozilla/5.0 (compatible; LaNaranjaArgentina/1.0)" } });
+      const score = interpretarMarcadorLab(html);
+      const quintetos = extraerQuintetosLab(html);
+      const quarterScores = obtenerParcialesOficiales(html, score, score);
+      const teamComparison = obtenerComparativaLab(html);
+      if (anterior?.status === "finished" && score.status !== "finished") {
+        results.push(anterior);
+        continue;
+      }
+      if (Number.isFinite(anterior?.homeScore) && Number.isFinite(anterior?.awayScore) &&
+          ((score.homeScore == null || score.awayScore == null) ||
+           (score.homeScore === 0 && score.awayScore === 0 && anterior.homeScore + anterior.awayScore > 0))) {
+        results.push({ ...anterior, isStale: true });
+        continue;
+      }
+      if (score.status === "unknown") {
+        if (anterior) results.push({ ...anterior, isStale: true });
+        console.warn("LAB: estado oficial no reconocido", id);
+        continue;
+      }
+      results.push({
+        eventId: "LAB:" + id, matchId: id, competition: "LAB",
+        homeTeam: match.homeTeam.slug, awayTeam: match.awayTeam.slug,
+        homeName: match.homeTeam.name, awayName: match.awayTeam.name,
+        homeTeamId: Number(match.homeTeam.teamId), awayTeamId: Number(match.awayTeam.teamId),
+        homeScore: score.homeScore, awayScore: score.awayScore,
+        quarter: score.quarter, minutesRemaining: score.minutesRemaining,
+        lastActionTime: score.lastActionTime, isHalftime: score.isHalftime,
+        quarterScores: quarterScores || anterior?.quarterScores || null,
+        quintetos: quintetos || anterior?.quintetos || null,
+        teamComparison: teamComparison || anterior?.teamComparison || null,
+        timestamp: Number.isFinite(start) ? Math.floor(start / 1000) : null,
+        status: score.status, isLive: score.status === "live", officialUrl: match.officialUrl
+      });
+    } catch (error) {
+      console.error("LAB LIVE error", id, error.message);
+      if (anterior) results.push({ ...anterior, isStale: true });
+    }
+  }
+  return results;
+}
+
+
+const CLAVE_KV = "live-matches";
+
+
+
+async function dispararSincronizacionDeEstadisticas(env, partidosFinalizados) {
+  if (!Array.isArray(partidosFinalizados) || partidosFinalizados.length === 0) return;
+  if (!env.GITHUB_TOKEN) {
+    console.warn("GITHUB_TOKEN no configurado: se omite la publicación puntual de estadísticas.");
+    return;
+  }
+  for (const partido of partidosFinalizados) {
+    const competition = partido.competition === "LAB" ? "LAB" : "LNB";
+    const matchId = String(partido.matchId || partido.eventId || "");
+    const officialUrl = partido.officialUrl || null;
+    if (!matchId || (competition === "LNB" && !officialUrl)) {
+      console.warn("No se puede solicitar publicación puntual: faltan identificadores oficiales.", competition, matchId);
+      continue;
+    }
+    try {
+      const response = await fetch("https://api.github.com/repos/piky7/la-naranja-argentina/dispatches", {
+        method: "POST",
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Authorization": "Bearer " + env.GITHUB_TOKEN,
+          "X-GitHub-Api-Version": "2022-11-28",
+          "Content-Type": "application/json",
+          "User-Agent": "LaNaranjaArgentina-Live"
+        },
+        body: JSON.stringify({
+          event_type: "match-finished",
+          client_payload: { competition, matchId, officialUrl }
+        })
+      });
+      if (!response.ok) throw new Error("GitHub dispatch HTTP " + response.status);
+      console.log("Sincronización puntual solicitada:", competition, matchId);
+    } catch (error) {
+      console.error("No se pudo disparar sincronización puntual:", competition, matchId, error.message);
+    }
+  }
+}
+
+async function actualizarMarcadores(env) {
+  const ahoraArgentina = fechaHoraArgentina(new Date());
+  const hoy = ahoraArgentina.fecha;
+  const ayer = fechaHoraArgentina(new Date(Date.now() - 24 * 60 * 60 * 1000)).fecha;
+
+  // Leer primero los marcadores guardados.
+  const anteriores = await env.LNA_LIVE_OFICIAL.get(
+    CLAVE_KV,
+    "json"
+  );
+
+  // Seguir los partidos iniciados ayer si cruzan la medianoche. El cron
+  // debe poder detectar el final sin depender de las planillas de jugadores.
+  const continuaPartidoDeAyer =
+    anteriores?.date === ayer &&
+    ahoraArgentina.hora < "06:00" &&
+    Array.isArray(anteriores.liveMatches) &&
+    anteriores.liveMatches.some((partido) =>
+      partido.status === "live" || partido.isLive === true
+    );
+  const fecha = continuaPartidoDeAyer ? ayer : hoy;
+
+  // Pasarlos al extractor para evitar consultas innecesarias.
+  const datos = await generarLive(fecha, anteriores, env);
+
+
+  if (!Array.isArray(datos.liveMatches)) {
+    throw new Error("Respuesta inválida del extractor");
+  }
+
+
+  // Si no hay partidos, no reemplazar los datos anteriores.
+  if (datos.liveMatches.length === 0) {
+    console.log("Sin partidos para actualizar:", fecha);
+    return;
+  }
+
+  // Conservar datos válidos cuando falle una consulta individual.
+  const anterioresPorId = new Map(
+    (anteriores?.date === fecha
+      ? anteriores.liveMatches || []
+      : []
+    ).map((partido) => [partido.eventId, partido])
+  );
+
+
+const ahora = Date.now();
+
+
+const nuevosPorId = new Map(
+  datos.liveMatches.map((partido) => {
+    const anterior = anterioresPorId.get(partido.eventId);
+
+    // Si el extractor reutilizó el objeto anterior,
+    // no hubo una nueva consulta al sitio oficial.
+    const reutilizado = partido === anterior;
+
+    return [
+      partido.eventId,
+      reutilizado
+        ? { ...anterior }
+        : {
+            ...partido,
+            lastSuccessfulUpdate: new Date(ahora).toISOString(),
+            isStale: false,
+          },
+    ];
+  })
+);
+
+
+  for (const [eventId, anterior] of anterioresPorId) {
+    const nuevo = nuevosPorId.get(eventId);
+
+    // No perder un partido por un fallo temporal.
+
+if (!nuevo) {
+  const ultimaActualizacion = Date.parse(
+    anterior.lastSuccessfulUpdate || anteriores.updatedAt || ""
+  );
+
+  const desactualizado =
+    !Number.isFinite(ultimaActualizacion) ||
+    ahora - ultimaActualizacion > 3 * 60 * 1000;
+
+ nuevosPorId.set(eventId, {
+  ...anterior,
+  isStale:
+    anterior.status === "finished"
+      ? false
+      : desactualizado,
+});
+
+  continue;
+}
+
+
+    // No retroceder de cuarto por lecturas desactualizadas del sitio oficial.
+    if (
+      anterior.status === "live" &&
+      nuevo.status === "live" &&
+      Number(anterior.quarter) > Number(nuevo.quarter)
+    ) {
+      nuevo.quarter = anterior.quarter;
+      nuevo.isHalftime = false;
+    }
+    if (
+      nuevo.status === "live" &&
+      Number(nuevo.quarter) >= 3
+    ) {
+      nuevo.isHalftime = false;
+    }
+
+    // Evitar retroceder de finalizado a en vivo.
+    if (
+      anterior.status === "finished" &&
+      nuevo.status !== "finished"
+    ) {
+      nuevosPorId.set(eventId, anterior);
+      continue;
+    }
+
+    // Evitar reemplazar un marcador válido por uno sin puntos.
+
+    // Evitar reemplazar un marcador válido por datos incompletos
+    // o por un 0-0 inesperado.
+    const marcadorAnteriorValido =
+      Number.isFinite(anterior.homeScore) &&
+      Number.isFinite(anterior.awayScore);
+
+    const marcadorNuevoIncompleto =
+      !Number.isFinite(nuevo.homeScore) ||
+      !Number.isFinite(nuevo.awayScore);
+
+    const ceroCeroInesperado =
+      marcadorAnteriorValido &&
+      anterior.homeScore + anterior.awayScore > 0 &&
+      nuevo.homeScore === 0 &&
+      nuevo.awayScore === 0;
+
+    if (
+      marcadorAnteriorValido &&
+      (marcadorNuevoIncompleto || ceroCeroInesperado)
+    ) {
+      console.warn(
+        "Marcador sospechoso, conservando anterior:",
+        eventId
+      );
+
+      nuevosPorId.set(eventId, {
+        ...anterior,
+        isStale: anterior.status === "finished"
+          ? false
+          : true,
+      });
+    }
+
+  }
+
+  const resultado = {
+    ...datos,
+    liveMatches: [...nuevosPorId.values()],
+  };
+  const finalesNuevos = resultado.liveMatches.filter(partido => {
+    const anterior = anterioresPorId.get(partido.eventId);
+    return partido.status === "finished" && anterior?.status !== "finished";
+  });
+  await dispararSincronizacionDeEstadisticas(env, finalesNuevos);
+
+  // Comparar los datos de los partidos sin incluir updatedAt.
+  const partidosAnteriores =
+    anteriores?.date === fecha
+      ? anteriores.liveMatches || []
+      : [];
+
+  const partidosNuevos = resultado.liveMatches;
+
+  const sinCambios =
+    JSON.stringify(partidosAnteriores) ===
+    JSON.stringify(partidosNuevos);
+
+  if (sinCambios) {
+    console.log(
+      "Sin cambios en marcadores: escritura KV evitada"
+    );
+    return anteriores;
+  }
+
+  await env.LNA_LIVE_OFICIAL.put(
+    CLAVE_KV,
+    JSON.stringify(resultado)
+  );
+
+  console.log(
+    "Marcadores oficiales guardados:",
+    resultado.liveMatches.length
+  );
+
+  return resultado;
+}
+
+
+const ORIGENES_PERMITIDOS = [
+  "https://lanaranjaargentina.com.ar",
+  "http://localhost:5173",
+  "http://localhost:5174",
+];
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Methods": "GET",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+function obtenerCorsHeaders(request) {
+  const origen = request.headers.get("Origin");
+
+  return {
+    ...CORS_HEADERS,
+    ...(ORIGENES_PERMITIDOS.includes(origen)
+      ? { "Access-Control-Allow-Origin": origen }
+      : {}),
+    "Vary": "Origin",
+  };
+}
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+
+if (url.pathname !== "/api/live") {
+  return new Response("Not found", {
+    status: 404,
+    headers: obtenerCorsHeaders(request),
+  });
+}
+
+if (request.method !== "GET") {
+  return new Response("Method not allowed", {
+    status: 405,
+    headers: obtenerCorsHeaders(request),
+  });
+}
+
+
+    try {
+      const guardado = await env.LNA_LIVE_OFICIAL.get(
+        CLAVE_KV,
+        "json"
+      );
+
+// Los partidos de ayer siguen siendo consultables después de medianoche
+// mientras llega su publicación definitiva a matchResults.js.
+const hoy = fechaHoraArgentina(new Date()).fecha;
+const ayer = fechaHoraArgentina(new Date(Date.now() - 24 * 60 * 60 * 1000)).fecha;
+
+if (!guardado || (guardado.date !== hoy && guardado.date !== ayer)) {
+  return Response.json(
+    {
+      updatedAt: null,
+      date: hoy,
+      liveMatches: [],
+      message: "Todavía no hay marcadores oficiales actualizados",
+    },
+    {
+      headers: {
+        ...obtenerCorsHeaders(request),
+"Cache-Control": "no-store",
+      },
+    }
+  );
+}
+
+
+
+const ahora = Date.now();
+const LIMITE_ANTIGUEDAD = 3 * 60 * 1000;
+
+const datosActualizados = {
+  ...guardado,
+  liveMatches: guardado.liveMatches.map((partido) => {
+    const ultimaActualizacion = Date.parse(
+      partido.lastSuccessfulUpdate || guardado.updatedAt || ""
+    );
+
+
+
+const desactualizado =
+  partido.status !== "finished" &&
+  (
+    partido.isStale === true ||
+    !Number.isFinite(ultimaActualizacion) ||
+    ahora - ultimaActualizacion > LIMITE_ANTIGUEDAD
+  );
+
+
+
+    return {
+      ...partido,
+      isStale: desactualizado,
+    };
+  }),
+};
+
+
+return Response.json(datosActualizados, {
+  headers: {
+    ...obtenerCorsHeaders(request),
+    "Cache-Control": "public, max-age=15",
+  },
+});
+
+
+    } catch (error) {
+      console.error("Error leyendo KV:", error.message);
+
+
+return Response.json(
+  { error: "No se pudieron leer los marcadores" },
+  {
+    status: 502,
+    headers: {
+     ...obtenerCorsHeaders(request),
+"Cache-Control": "no-store",
+    },
+  }
+);
+
+    }
+  },
+
+ async scheduled(event, env, ctx) {
+  ctx.waitUntil(
+    (async () => {
+      const inicio = Date.now();
+
+      try {
+        await actualizarMarcadores(env);
+      } catch (error) {
+        console.error(
+          "Error actualizando LIVE oficial:",
+          error.message
+        );
+      } finally {
+        console.log(
+          "Duración actualización LIVE oficial:",
+          ((Date.now() - inicio) / 1000).toFixed(2),
+          "segundos"
+        );
+      }
+      })()
+  );
+},
+};

@@ -1,0 +1,146 @@
+/* Cabecera de próximos partidos: marcador compacto con iluminación naranja */
+.match-modal-upcoming .match-modal-header{
+  position:relative;isolation:isolate;box-sizing:border-box;
+  padding:0 0 12px!important;min-height:0!important;
+  background:
+    radial-gradient(ellipse 62% 90% at -6% 120%,rgba(255,120,22,.58) 0%,rgba(235,92,17,.27) 42%,transparent 78%),
+    radial-gradient(ellipse 62% 90% at 106% 120%,rgba(255,120,22,.58) 0%,rgba(235,92,17,.27) 42%,transparent 78%),
+    linear-gradient(145deg,#0b1d2b 0%,#101923 49%,#181d27 100%)!important;
+  border-bottom:1px solid #f28b30;
+  overflow:hidden;
+}
+.match-modal-upcoming .upcoming-header-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;padding:10px 54px 9px 16px;
+  border-bottom:1px solid rgba(148,173,195,.19);
+}
+.match-modal-upcoming .upcoming-header-meta .match-modal-label{
+  display:block;margin:0!important;color:#ff9338;
+  font-size:11px!important;line-height:1.2;font-weight:800;letter-spacing:.08em;
+}
+.match-modal-upcoming .upcoming-header-meta .match-modal-date{
+  display:block;margin:0!important;font-size:11px!important;line-height:1.2;
+  color:#bac8d8;font-weight:700;white-space:nowrap;
+}
+.match-modal-upcoming .match-modal-teams{
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(100px,1fr) minmax(0,1fr);
+  align-items:center;gap:4px!important;margin:0!important;
+  padding:12px 14px 0!important;min-height:0!important;
+}
+.match-modal-upcoming .match-modal-team{
+  display:flex!important;flex-direction:row!important;align-items:center!important;
+  justify-content:center!important;gap:8px!important;min-width:0;
+}
+.match-modal-upcoming .match-modal-team img,
+.match-modal-upcoming .home-modal-team-logo-button img{
+  width:60px!important;height:60px!important;object-fit:contain;
+}
+.match-modal-upcoming .match-modal-team > strong{
+  display:flex;flex-direction:column;align-items:flex-start!important;
+  gap:3px;min-width:0;font-size:15px!important;line-height:1.1!important;
+  text-align:left;
+}
+.match-modal-upcoming .match-modal-team > strong small{
+  color:#ff983e;font-size:11px!important;white-space:nowrap;
+}
+.match-modal-upcoming .match-modal-score{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px!important;min-width:0;
+  border-left:1px solid rgba(165,183,202,.25);
+  border-right:1px solid rgba(165,183,202,.25);
+}
+.match-modal-upcoming .match-modal-score .match-modal-status{
+  display:block;margin:0!important;color:#b9c8d9;
+  font-size:10px!important;font-weight:800;line-height:1.15;letter-spacing:.045em;
+  white-space:nowrap;
+}
+.match-modal-upcoming .match-modal-score > strong{
+  color:#ff9133!important;font-family:inherit!important;
+  font-size:clamp(30px,4vw,40px)!important;line-height:1!important;
+  font-weight:800!important;font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum";letter-spacing:-.035em;
+  text-shadow:0 2px 12px rgba(255,113,20,.15);
+}
+.match-modal-upcoming .match-modal-score > span:not(.match-modal-status){
+  font-size:11px!important;color:#bfcbd8;line-height:1.2;font-weight:600;
+}
+.match-modal-upcoming > .match-modal-close{z-index:3;}
+@media(max-width:600px){
+  .match-modal-upcoming .upcoming-header-meta{padding:8px 46px 8px 11px;}
+  .match-modal-upcoming .upcoming-header-meta .match-modal-label{font-size:9px!important;letter-spacing:.035em;}
+  .match-modal-upcoming .upcoming-header-meta .match-modal-date{font-size:10px!important;}
+  .match-modal-upcoming .match-modal-header{padding-bottom:9px!important;}
+  .match-modal-upcoming .match-modal-teams{
+    grid-template-columns:minmax(0,1fr) minmax(94px,1.05fr) minmax(0,1fr);
+    padding:9px 8px 0!important;gap:3px!important;
+  }
+  .match-modal-upcoming .match-modal-team{gap:5px!important;}
+  .match-modal-upcoming .match-modal-team img,
+  .match-modal-upcoming .home-modal-team-logo-button img{width:43px!important;height:43px!important;}
+  .match-modal-upcoming .match-modal-team > strong{font-size:12px!important;}
+  .match-modal-upcoming .match-modal-team > strong small{font-size:9px!important;}
+  .match-modal-upcoming .match-modal-score .match-modal-status{font-size:8px!important;letter-spacing:0;}
+  .match-modal-upcoming .match-modal-score > strong{font-size:clamp(27px,7.4vw,35px)!important;}
+  .match-modal-upcoming .match-modal-score > span:not(.match-modal-status){font-size:9px!important;}
+}
+@media(max-width:380px){
+  .match-modal-upcoming .match-modal-teams{grid-template-columns:minmax(0,1fr) 91px minmax(0,1fr);padding-left:5px!important;padding-right:5px!important;}
+  .match-modal-upcoming .match-modal-team img,.match-modal-upcoming .home-modal-team-logo-button img{width:35px!important;height:35px!important;}
+  .match-modal-upcoming .match-modal-team > strong{font-size:11px!important;}
+}
+
+/* Quitar por completo las marcas de cancha heredadas del encabezado anterior. */
+.match-modal-upcoming .match-modal-header::before,
+.match-modal-upcoming .match-modal-header::after,
+.match-modal-upcoming .match-modal-teams::before,
+.match-modal-upcoming .match-modal-teams::after{
+  content:none!important;display:none!important;background:none!important;
+}
+.match-modal-upcoming .match-modal-header .match-modal-team::before,
+.match-modal-upcoming .match-modal-header .match-modal-team::after,
+.match-modal-upcoming .match-modal-header .match-modal-score::before,
+.match-modal-upcoming .match-modal-header .match-modal-score::after{
+  content:none!important;display:none!important;
+}
+
+
+.match-modal-coach{display:inline!important;margin-left:3px;color:#ffb36e!important;font-size:10px!important;font-weight:700;line-height:1.25;white-space:normal!important}
+
+
+/* Franja independiente para los cuerpos técnicos, debajo del encabezado de equipos. */
+.match-modal-coaches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 12px 10px;padding:7px 9px;border:1px solid rgba(255,157,72,.28);border-radius:9px;background:linear-gradient(110deg,rgba(255,137,47,.075),rgba(20,43,65,.72))}
+.match-modal-coach-item{display:flex;flex-direction:row;align-items:center;gap:5px;min-width:0;white-space:nowrap}
+.match-modal-coach-item+ .match-modal-coach-item{border-left:1px solid rgba(255,255,255,.12);padding-left:10px}
+.match-modal-coach-item span{color:#91a4b8;font-size:8px;font-weight:800;letter-spacing:1px}
+.match-modal-coach-item strong{color:#ffb36e;font-size:11px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:380px){.match-modal-coaches{margin-left:8px;margin-right:8px;padding:6px 7px;gap:5px}.match-modal-coach-item strong{font-size:10px}.match-modal-coach-item+ .match-modal-coach-item{padding-left:7px}}
+
+/* iPhone: mantener el popup debajo del área segura y el cierre dentro del panel. */
+@media(max-width:600px){
+  .match-modal-overlay:has(> .match-modal-upcoming){
+    display:flex!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    height:100dvh!important;
+    min-height:100dvh!important;
+    padding: max(18px, env(safe-area-inset-top)) 10px max(20px, env(safe-area-inset-bottom))!important;
+    box-sizing:border-box!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+  }
+  .match-modal-overlay:has(> .match-modal-upcoming) > .match-modal-upcoming{
+    position:relative!important;
+    width:100%!important;
+    max-width:520px!important;
+    max-height:calc(100dvh - max(18px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)))!important;
+    margin:0 auto 12px!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+  }
+  .match-modal-upcoming > .match-modal-close{
+    position:absolute!important;
+    top:10px!important;
+    right:10px!important;
+    z-index:20!important;
+  }
+}

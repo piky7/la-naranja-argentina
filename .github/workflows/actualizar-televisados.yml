@@ -1,0 +1,50 @@
+name: Actualizar televisaciones LNA
+
+on:
+  schedule:
+    # 09:40 Argentina (UTC-3).
+    - cron: "40 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-televisados-main
+  cancel-in-progress: false
+
+jobs:
+  actualizar-televisados:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Consultar canales publicados
+        run: node update-broadcasts.cjs
+
+      - name: Comprobar formato de datos
+        run: |
+          node --input-type=module -e "import('./src/data/broadcasts.js').then(({broadcasts}) => { if (!broadcasts || typeof broadcasts !== 'object' || Array.isArray(broadcasts)) process.exit(1); for (const [key, item] of Object.entries(broadcasts)) { if (!item || !item.date || !item.homeTeam || !item.awayTeam || !['TyC Sports','DSports','Básquet Pass'].includes(item.channel)) { console.error('Registro inválido:', key); process.exit(1); } } console.log('Televisaciones validadas:', Object.keys(broadcasts).length); })"
+
+      - name: Publicar solamente si hay cambios
+        run: |
+          git add src/data/broadcasts.js
+          if git diff --cached --quiet; then
+            echo "Sin cambios en las televisaciones."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Actualizar televisaciones LNA"
+          git fetch origin main
+          test "$(git rev-parse HEAD^)" = "$(git rev-parse origin/main)"
+          git push origin HEAD:main

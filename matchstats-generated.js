@@ -1,0 +1,174 @@
+  "lanus-gimnasia": {
+  "lanus": [
+    {
+      "id": "martin-franchino",
+      "name": "Franchino M.",
+      "points": 23,
+      "rebounds": 10,
+      "assists": 1,
+      "minutes": "33:41"
+    },
+    {
+      "id": "christian-james",
+      "name": "James C.",
+      "points": 17,
+      "rebounds": 3,
+      "assists": 2,
+      "minutes": "20:32"
+    },
+    {
+      "id": "lucas-andujar",
+      "name": "Andujar L.",
+      "points": 6,
+      "rebounds": 2,
+      "assists": 7,
+      "minutes": "34:58"
+    },
+    {
+      "id": "melvin-johnson",
+      "name": "Johnson M.",
+      "points": 10,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "28:20"
+    },
+    {
+      "id": "fabian-ramirez-barrios",
+      "name": "Ramírez C.",
+      "points": 0,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "27:27"
+    },
+    {
+      "id": "robert-whitfield",
+      "name": "Whitfield R.",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 0,
+      "minutes": "16:02"
+    },
+    {
+      "id": "junior-merchant",
+      "name": "Merchant E.",
+      "points": 11,
+      "rebounds": 4,
+      "assists": 0,
+      "minutes": "18:59"
+    },
+    {
+      "id": "alejo-sacchi",
+      "name": "Sacchi A.",
+      "points": 7,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "14:59"
+    },
+    {
+      "id": "joaquin-celiz",
+      "name": "Celiz J.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "05:02"
+    }
+  ],
+  "gimnasia": [
+    {
+      "id": "obi-okafor",
+      "name": "Okafor O.",
+      "points": 7,
+      "rebounds": 4,
+      "assists": 2,
+      "minutes": "14:52"
+    },
+    {
+      "id": "felipe-inyaco",
+      "name": "Inyaco F.",
+      "points": 3,
+      "rebounds": 2,
+      "assists": 1,
+      "minutes": "18:48"
+    },
+    {
+      "id": "martiniano-dato",
+      "name": "Dato M.",
+      "points": 8,
+      "rebounds": 0,
+      "assists": 3,
+      "minutes": "22:28"
+    },
+    {
+      "id": "emiliano-toretta",
+      "name": "Toretta E.",
+      "points": 8,
+      "rebounds": 1,
+      "assists": 10,
+      "minutes": "25:48"
+    },
+    {
+      "id": "carlos-rivero",
+      "name": "Rivero C.",
+      "points": 13,
+      "rebounds": 5,
+      "assists": 2,
+      "minutes": "19:30"
+    },
+    {
+      "id": "natalio-santacroce",
+      "name": "Santacroce N.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "01:51"
+    },
+    {
+      "id": "marcos-chacon",
+      "name": "Chacon M.",
+      "points": 28,
+      "rebounds": 4,
+      "assists": 5,
+      "minutes": "29:23"
+    },
+    {
+      "id": "sebastian-carrasco",
+      "name": "Carrasco S.",
+      "points": 0,
+      "rebounds": 1,
+      "assists": 1,
+      "minutes": "14:12"
+    },
+    {
+      "id": "valentin-forestier",
+      "name": "Forestier V.",
+      "points": 2,
+      "rebounds": 1,
+      "assists": 2,
+      "minutes": "15:06"
+    },
+    {
+      "id": "ciro-melo",
+      "name": "Melo C.",
+      "points": 0,
+      "rebounds": 0,
+      "assists": 0,
+      "minutes": "02:57"
+    },
+    {
+      "id": "ben-stevens",
+      "name": "Stevens B.",
+      "points": 8,
+      "rebounds": 8,
+      "assists": 0,
+      "minutes": "17:32"
+    },
+    {
+      "id": "gino-balbo",
+      "name": "Balbo G.",
+      "points": 15,
+      "rebounds": 3,
+      "assists": 0,
+      "minutes": "17:31"
+    }
+  ]
+},

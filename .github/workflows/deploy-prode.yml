@@ -1,0 +1,79 @@
+name: Desplegar API Prode LNA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "workers/prode/worker.js"
+      - "tests/global-ranking-cache.test.mjs"
+      - "tests/career-rules-regression.test.mjs"
+      - "tests/prode-ranking-medals.test.mjs"
+      - "tests/prode-db-performance.test.mjs"
+      - "tests/prode-optimization.test.mjs"
+      - "tests/prode-league-cache.test.mjs"
+      - "tests/notifications.test.mjs"
+      - "database/prode/001_initial.sql"
+      - "database/prode/002_runtime_tables.sql"
+      - "database/prode/003_notifications.sql"
+      - "database/prode/004_read_indexes.sql"
+      - ".github/workflows/deploy-prode.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-prode
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verificar sintaxis del Worker
+        run: node --check workers/prode/worker.js
+      - name: Verificar caché y reglas existentes
+        run: node --test tests/global-ranking-cache.test.mjs tests/prode-optimization.test.mjs tests/career-rules-regression.test.mjs tests/prode-ranking-medals.test.mjs tests/prode-db-performance.test.mjs tests/prode-league-cache.test.mjs tests/notifications.test.mjs
+      - name: Aplicar esquema D1 de Prode
+        run: npx --yes wrangler@4 d1 execute lna-prode --remote --config workers/prode/wrangler.toml --file database/prode/001_initial.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Aplicar migración de tablas operativas Prode
+        run: npx --yes wrangler@4 d1 execute lna-prode --remote --config workers/prode/wrangler.toml --file database/prode/002_runtime_tables.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Aplicar migración del centro de notificaciones
+        run: npx --yes wrangler@4 d1 execute lna-prode --remote --config workers/prode/wrangler.toml --file database/prode/003_notifications.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Aplicar índices de lectura de Prode
+        run: npx --yes wrangler@4 d1 execute lna-prode --remote --config workers/prode/wrangler.toml --file database/prode/004_read_indexes.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Desplegar Worker Prode
+        run: npx --yes wrangler@4 deploy --config workers/prode/wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Configurar UID del administrador si está definido
+        run: |
+          if [ -n "$ADMIN_FIREBASE_UID" ]; then
+            printf '%s' "$ADMIN_FIREBASE_UID" | npx --yes wrangler@4 secret put ADMIN_FIREBASE_UID --config workers/prode/wrangler.toml
+          else
+            echo "ADMIN_FIREBASE_UID no está configurado; panel privado permanece cerrado."
+          fi
+        env:
+          ADMIN_FIREBASE_UID: ${{ secrets.ADMIN_FIREBASE_UID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

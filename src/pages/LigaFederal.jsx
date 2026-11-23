@@ -29,7 +29,6 @@ function Shield({ name, color }) {
 }
 
 const federalLogos = {
-  "Centro Español de Plottier": "/federal-team-logos/centro-espanol-plottier.webp",
   "Racing de Olavarría": "/federal-team-logos/racing-olavarria.webp",
 };
 

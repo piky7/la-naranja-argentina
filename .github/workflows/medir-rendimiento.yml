@@ -1,0 +1,103 @@
+name: Medir rendimiento móvil LNA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/medir-rendimiento.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse-mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar Lighthouse
+        run: npm install --no-save --no-package-lock --ignore-scripts lighthouse@12
+      - name: Medir Home y Prode en producción
+        run: |
+          mkdir -p lighthouse-reports
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --preset=desktop --output=json --output-path=lighthouse-reports/desktop.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile-2.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/ --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/mobile-3.json --quiet
+          # Prode se mide también en móvil y escritorio.
+          # Las rutas protegidas se evalúan en su estado público sin sesión.
+          npx lighthouse https://lanaranjaargentina.com.ar/prode --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --preset=desktop --output=json --output-path=lighthouse-reports/prode-desktop.json --quiet
+          npx lighthouse https://lanaranjaargentina.com.ar/prode --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=3 --throttling-method=simulate --output=json --output-path=lighthouse-reports/prode-mobile.json --quiet
+      - name: Resumir métricas
+        if: always()
+        run: |
+          node --input-type=module <<'EOF'
+          import fs from 'node:fs';
+          for (const label of ['mobile','desktop','prode-mobile','prode-desktop']) {
+            const path = `lighthouse-reports/${label}.json`;
+            if(!fs.existsSync(path)) {console.log(`${label}: no hubo medición`);continue;}
+            const data=JSON.parse(fs.readFileSync(path,'utf8'));
+            const perf=data.categories?.performance;
+            console.log(`${label}: score=${Math.round((perf?.score ?? 0)*100)} | URL=${data.finalDisplayedUrl || data.finalUrl}`);
+            for (const id of ['first-contentful-paint','largest-contentful-paint','speed-index','total-blocking-time','cumulative-layout-shift','interactive','total-byte-weight']) {
+              console.log(`  ${id}: ${data.audits?.[id]?.displayValue ?? 'sin datos'}`);
+            }
+            const lcp=data.audits?.['largest-contentful-paint-element']?.details?.items?.flatMap(item=>item?.items||[])?.[0]?.node;
+            console.log(`  LCP element: ${lcp?.snippet || lcp?.selector || 'no identificado'}`);
+            const discover=data.audits?.['lcp-discovery-insight']?.details?.items?.find(item=>item.type==='checklist')?.items;
+            console.log(`  LCP detectable en HTML: ${discover?.requestDiscoverable?.value ?? 'no disponible'}`);
+            console.log(`  LCP precargado: ${discover?.priorityHinted?.value ?? 'no disponible'}`);
+            const boot=data.audits?.['bootup-time'];
+            console.log(`  Tiempo ejecución JS: ${boot?.displayValue ?? 'no disponible'}`);
+            const blocking=data.audits?.['render-blocking-insight']?.details?.items || [];
+            console.log(`  Recursos bloqueantes: ${blocking.map(x=>x.url).join(' | ') || 'ninguno'}`);
+            console.log(`  CSS principal: ${blocking.filter(x=>x.url?.includes("/assets/index-")).map(x=>x.url.split("/").pop()).join(", ") || "sin datos"}`);
+            const assetItems=data.audits?.['network-requests']?.details?.items || [];
+            const cssRequests=assetItems.filter(item=>/\/assets\/[^/]+\.css(?:\?|$)/.test(item.url || ""));
+            console.log(`  CSS descargado: ${cssRequests.map(item=>item.url.split("/").pop()+": "+Math.round((item.transferSize || item.resourceSize || 0)/1024)+" KiB").join(" | ") || "sin datos"}`);
+            const shieldRequests=assetItems.filter(item=>['quimsa-','lanus-','boca-','san-martin-'].some(name=>(item.url || '').includes('/assets/'+name)));
+            console.log(`  Escudos del día: ${shieldRequests.map(item=>item.url.split('/').pop()+': '+Math.round((item.transferSize || 0)/1024)+' KiB').join(' | ') || 'sin registros'}`);
+            const breakdown=data.audits?.['lcp-breakdown-insight']?.details?.items || [];
+            console.log(`  LCP breakdown: ${JSON.stringify(breakdown).slice(0,500)}`);
+            const images=data.audits?.['total-byte-weight']?.details?.items || [];
+            const oldLogo=images.find(item=>item.url?.includes('/logo-lna.png'));
+            const favicon=images.find(item=>item.url?.includes('/favicon-lna-64.png'));
+            console.log(`  PNG heredado: ${oldLogo ? (oldLogo.totalBytes/1024).toFixed(1)+' KiB' : 'no descargado'}`);
+            console.log(`  Favicon liviano: ${favicon ? (favicon.totalBytes/1024).toFixed(1)+' KiB' : 'no descargado'}`);
+            for(const item of images.filter(item=>item.url?.includes('logo-lna.'))) {
+              console.log(`  Logo descargado: ${item.url} / ${(item.totalBytes/1024).toFixed(1)} KiB`);
+            }
+            if(data.runtimeError) console.error('Error del navegador:',data.runtimeError.message);
+          }
+          EOF
+      - name: Mediana de las tres mediciones móviles
+        run: |
+          node --input-type=module <<'EOF'
+          import fs from 'node:fs';
+          const names=['mobile','mobile-2','mobile-3'];
+          const records=names.map(name=>JSON.parse(fs.readFileSync(`lighthouse-reports/${name}.json`,'utf8')));
+          const median=xs=>[...xs].sort((a,b)=>a-b)[1];
+          for(const metric of ['first-contentful-paint','largest-contentful-paint','total-blocking-time','cumulative-layout-shift']) {
+            const values=records.map(r=>r.audits[metric].numericValue);
+            console.log(`Mediana móvil ${metric}: ${median(values).toFixed(metric==='cumulative-layout-shift'?3:0)}`);
+          }
+          console.log(`Mediana móvil puntuación: ${median(records.map(r=>Math.round(r.categories.performance.score*100)))}/100`);
+          const images=records[0].audits?.['total-byte-weight']?.details?.items || [];
+          const png=images.find(item=>item.url?.endsWith('/logo-lna.png'));
+          console.log(`Comprobación PNG antiguo: ${png ? (png.totalBytes/1024).toFixed(1)+' KiB' : 'no descargado'}`);
+          if(png && png.totalBytes>180000) {
+            console.error('La web pública sigue sirviendo el logo PNG pesado: verificar despliegue Cloudflare');
+            process.exitCode=1;
+          }
+          EOF
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-lna
+          path: lighthouse-reports/
+          if-no-files-found: warn
+          retention-days: 14

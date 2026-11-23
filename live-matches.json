@@ -1,0 +1,20 @@
+{
+  "updatedAt": "2026-10-06T01:23:43.241Z",
+  "date": "2026-10-05",
+  "liveMatches": [
+    {
+      "eventId": "WrKSlX0l",
+      "homeTeam": "quimsa",
+      "awayTeam": "atenas",
+      "homeName": "Quimsa",
+      "awayName": "Atenas",
+      "homeScore": 16,
+      "awayScore": 21,
+      "timestamp": 1791248700,
+      "status": "live",
+      "isLive": true,
+      "feedStatus": "1",
+      "feedScoreStatus": "0"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+name: Validar ranking Home
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/verify-home-scorers.mjs"
+      - ".github/workflows/validar-ranking-home.yml"
+      - "src/pages/Home.jsx"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Comparar ranking anterior y optimizado
+        run: node scripts/verify-home-scorers.mjs
+      - name: Compilar LNA
+        run: npm run build

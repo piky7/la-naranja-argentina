@@ -1,0 +1,5 @@
+{
+  "matchId": null,
+  "reason": "Ejecutar nuevamente la reconstrucción LAB con el generador de planteles corregido y regeneración incondicional de labRosters.json; verificar los PJ recalculados.",
+  "allFinished": true
+}
