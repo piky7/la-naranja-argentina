@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-22T12:03:30.822Z",
+  "importedAt": "2026-11-23T00:53:08.563Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3902,12 +3902,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1640/114179/dep-norte/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1640/114179"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 77,
+      "awayScore": 81,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v25hN3TLRqBgrQVpGcCK99cIfUJEPl12yUY40QP1wa9KE2hgxyr11NIw==/racing-a-vs-dep-norte",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-23T00:53:08.280Z"
     },
     {
       "id": "v2wbKzt84blZqhnqhQJBqgES1f5ProyfZPZp3hTXaOaPGBplTovFV95w==",
@@ -16570,6 +16571,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 115,
-  "pending": 424
+  "finished": 116,
+  "pending": 423
 }
