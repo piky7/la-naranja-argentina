@@ -191,7 +191,9 @@
 .lab-team-detail .lab-team-roster-table{overflow-x:auto}
 .lab-team-detail .lab-team-roster-table .team-roster-head,
 .lab-team-detail .lab-team-roster-table .team-roster-row{grid-template-columns:minmax(160px,1fr) 34px 42px 42px 42px 55px 42px;min-width:510px}
-.lab-team-detail .lab-team-roster-table .team-roster-row{display:grid;cursor:default}
+.lab-team-detail .lab-team-roster-table .team-roster-row{display:grid;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.lab-team-detail .lab-team-roster-table .team-roster-row:hover{background:rgba(255,145,45,.09)}
+.lab-team-detail .lab-team-roster-table .team-roster-row:focus-visible{outline:2px solid #54c9e0;outline-offset:-2px}
 .lab-team-detail .lab-team-roster-table .team-roster-name{display:flex;align-items:center;gap:8px;min-width:0}
 .lab-team-detail .lab-team-roster-table .team-roster-name>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lab-team-detail .lab-team-roster-table .team-roster-crest{width:25px;height:25px;object-fit:contain;flex-shrink:0}
