@@ -41,7 +41,7 @@ function Shield({ name, color }) {
   const logo = teamLogos[name];
   if (logo) return typeof logo === "string"
     ? <img className="federal-team-logo" src={logo} alt={"Escudo de " + name} loading="lazy" decoding="async"/>
-    : <span className="federal-team-logo" role="img" aria-label={"Escudo de " + name} style={{backgroundPosition:logo.sprite}}/>;
+    : <span className="federal-team-logo federal-team-logo-sprite" role="img" aria-label={"Escudo de " + name} style={{backgroundPosition:logo.sprite}}/>;
   const initials = name.split(/\s+/).filter(Boolean).slice(0,3).map(word => word[0]).join("").toUpperCase();
   return <svg className="federal-team-shield" viewBox="0 0 56 64" role="img" aria-label={"Identificador provisorio de " + name}>
     <path d="M5 4H51V36Q49 50 28 60Q7 50 5 36Z" fill="#0d1b29" stroke={color} strokeWidth="2.5"/>
@@ -102,6 +102,6 @@ export default function LigaFederal() {
       <div><span>FORMATO DE CLASIFICACIÓN</span><h2>EL TORNEO FEDERAL</h2><p>Las plazas provinciales se calculan sobre el 40% de los participantes de los respectivos Prefederales. La competencia nacional está prevista para febrero-junio de 2027.</p></div>
       <div className="federal-info-note"><strong>RELEVAMIENTO PRELIMINAR · 23/11/2026</strong><p>Este listado no es una nómina oficial definitiva de la CAB. Se actualizará a medida que las federaciones provinciales confirmen plazas, repechajes y resultados.</p><small>Organismo: Confederación Argentina de Básquet (CAB).</small></div>
     </section>
-    <footer className="federal-disclaimer">Los escudos oficiales se muestran en los equipos de Buenos Aires cuyos archivos fueron incorporados; los demás identificadores son provisorios.</footer>
+    <footer className="federal-disclaimer">Los escudos oficiales se muestran en los equipos cuyos archivos fueron incorporados; los demás identificadores son provisorios.</footer>
   </main>;
 }
