@@ -32,6 +32,16 @@ const teamLogos = {
   "Urquiza": "/federal-team-logos/urquiza.webp",
   "Ferro de San Salvador": "/federal-team-logos/ferro-san-salvador.webp",
   "Atlético Tala": "/federal-team-logos/atletico-tala.webp",
+  "Sanjustino": "/federal-team-logos/sanjustino.webp",
+  "Almagro de Esperanza": "/federal-team-logos/almagro-esperanza.webp",
+  "Gimnasia de Santa Fe": "/federal-team-logos/gimnasia-santa-fe.webp",
+  "Rivadavia Juniors de Santa Fe": "/federal-team-logos/rivadavia-juniors.webp",
+  "Complejo Deportivo de Justiniano Posse": "/federal-team-logos/complejo-justiniano-posse.webp",
+  "Banda Norte de Río Cuarto": "/federal-team-logos/banda-norte.webp",
+  "Sportivo 9 de Julio de Río Tercero": "/federal-team-logos/sportivo-9-julio.webp",
+  "Sparta de Villa María": "/federal-team-logos/sparta-villa-maria.webp",
+  "Matienzo de Córdoba": "/federal-team-logos/matienzo-cordoba.webp",
+  "Unión Central de Villa María": "/federal-team-logos/union-central-villa-maria.webp",
 };
 
 const pending = [
