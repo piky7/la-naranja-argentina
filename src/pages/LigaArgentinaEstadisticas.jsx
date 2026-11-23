@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import fixture from "../../data/lab/labSchedule.json";
 import rosters from "../../data/lab/labRosters.json";
-import boxscores from "../../data/lab/labBoxscores.json";
+import boxscoreSummary from "../../data/lab/labBoxscoreSummary.json";
 import { labMatchColor, labCrest, LabPlayerModal } from "./HomeLigaArgentina";
 import { isLabMatchFinished } from "../utils/labMatchStatus";
 import "./LigaArgentina.css";
@@ -31,14 +31,11 @@ const minutesInSeconds = value => { const parts=String(value||"").split(":").map
 function calculateMvpCounts() {
   const counts = new Map();
   const seen = new Set();
-  for (const [matchId, box] of Object.entries(boxscores || {})) {
-    if (seen.has(matchId) || !Array.isArray(box.players) || !box.players.length) continue;
+  for (const [matchId, summary] of Object.entries(boxscoreSummary || {})) {
+    if (seen.has(matchId) || !Array.isArray(summary.mvpPlayerIds)) continue;
     seen.add(matchId);
-    const eligible = box.players.filter(player => minutesInSeconds(player.minutes) > 0);
-    if (!eligible.length || eligible.some(player => player.valuation == null || !Number.isFinite(Number(player.valuation)))) continue;
-    const best = Math.max(...eligible.map(player => number(player.valuation)));
-    eligible.filter(player => number(player.valuation) === best).forEach(player =>
-      counts.set(Number(player.id), (counts.get(Number(player.id)) || 0) + 1)
+    summary.mvpPlayerIds.forEach(playerId =>
+      counts.set(Number(playerId), (counts.get(Number(playerId)) || 0) + 1)
     );
   }
   return counts;
@@ -65,7 +62,7 @@ const teamRows = (() => {
     away.awayPoints+=as; away.awayPointsAgainst+=hs;
     if (hs>as) {home.wins++;away.losses++;home.homeWins++;}
     else if(as>hs) {away.wins++;home.losses++;away.awayWins++;}
-    const comparison=boxscores[match.id]?.teamComparison;
+    const comparison=boxscoreSummary[match.id]?.teamComparison;
     if (comparison?.home && comparison?.away) {
       const hr=number(comparison.home.rebounds), ha=number(comparison.home.assists);
       const ar=number(comparison.away.rebounds), aa=number(comparison.away.assists);
@@ -156,9 +153,9 @@ function LigaArgentinaEstadisticas(){
     }),[scope,teamMetric,teamDirection]);
   const maxTeamValue=Math.max(1,...orderedTeams.map(r=>r.value||0));
   const toggleSort=key=>{if(sortBy===key)setSortDir(d=>d==="desc"?"asc":"desc");else{setSortBy(key);setSortDir("desc");}};
-  const selectedPlayerMatch=selectedPlayer ? [...fixture.matches].filter(game=>
-    (Number(game.homeTeam.teamId)===Number(selectedPlayer.teamId)||Number(game.awayTeam.teamId)===Number(selectedPlayer.teamId)) &&
-    (boxscores?.[game.id]?.players||[]).some(p=>String(p.id)===String(selectedPlayer.id)&&String(p.teamId)===String(selectedPlayer.teamId))
+  const selectedPlayerMatch=selectedPlayer ? fixture.matches.filter(game=>
+    game.status === "finished" &&
+    (Number(game.homeTeam.teamId)===Number(selectedPlayer.teamId)||Number(game.awayTeam.teamId)===Number(selectedPlayer.teamId))
   ).sort((x,y)=>String(y.date).localeCompare(String(x.date)))[0] : null;
   const selectedPlayerMatchContext=selectedPlayerMatch ? {...selectedPlayerMatch,homeTeam:{...selectedPlayerMatch.homeTeam,id:String(selectedPlayerMatch.homeTeam.teamId),logo:labCrest(selectedPlayerMatch.homeTeam)},awayTeam:{...selectedPlayerMatch.awayTeam,id:String(selectedPlayerMatch.awayTeam.teamId),logo:labCrest(selectedPlayerMatch.awayTeam)}} : null;
   const selectOptions=[["players","Jugadores"],["teams","Equipos"],["triples","Triples"],["mvp","MVP"]];

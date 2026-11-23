@@ -29,3 +29,9 @@ dist-ssr
 
 # Escudos convertidos automáticamente desde los PNG originales
 /src/assets/teams-webp/
+
+# Boxscores LAB particionados localmente durante predev/prebuild
+/data/lab/boxscores/
+
+# Resumen derivado de boxscores LAB
+/data/lab/labBoxscoreSummary.json

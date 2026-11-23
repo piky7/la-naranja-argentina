@@ -21,7 +21,7 @@ const teamLabel = name => name.replace(" (MDP)","").replace(" (SF)","").replace(
 
 
 function LabBoxscore({match}) {
- const boxscores=useLabBoxscores();
+ const boxscores=useLabBoxscores(true,[match.id]);
  const box=boxscores?.[match.id];
  const [side,setSide]=useState("home"),[tab,setTab]=useState("players");
  if(!box) return <div className="lab-boxscore-empty"><strong>Estadísticas en preparación</strong><span>La planilla oficial todavía no está incorporada a la base de LNA.</span></div>;
@@ -70,7 +70,7 @@ export default function LigaArgentina(){
  const [section,setSection]=useState("fixture"),[filter,setFilter]=useState("all"),[search,setSearch]=useState("");
  const [selectedMatch,setSelectedMatch]=useState(null),[selectedUpcomingMatch,setSelectedUpcomingMatch]=useState(null),[selectedLiveMatch,setSelectedLiveMatch]=useState(null),[resultsPage,setResultsPage]=useState(null),[conference,setConference]=useState("norte");
  const [selectedTeam,setSelectedTeam]=useState(null);
- const boxscores=useLabBoxscores(Boolean(selectedTeam||selectedMatch));
+ const boxscores=useLabBoxscores(Boolean(selectedTeam));
  const today=todayArgentina();
  const {liveMatches=[]}=useLiveSnapshot();
  const labLiveById=new Map(liveMatches.filter(item=>item.competition==="LAB"&&item.matchId).map(item=>[String(item.matchId),item]));
