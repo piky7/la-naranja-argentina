@@ -77,8 +77,16 @@ function LabTeamComparison({comparison, homeTeam, awayTeam}) {
 export function LabPlayerModal({player, match, team, onClose, initialTab = "match"}) {
   const boxscores = useLabBoxscores();
   const [tab,setTab]=useState(initialTab);
-  const appearances=Object.entries(boxscores||{}).flatMap(([matchId,box])=>(Array.isArray(box?.players)?box.players:[])
-    .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId)).map(p=>({...p,__matchId:matchId})));
+  // Los promedios deben calcularse solo con partidos de la temporada del encuentro
+  // desde el que se abrió la ficha. El archivo también conserva boxscores históricos.
+  const seasonMatchIds = new Set(fixture.matches
+    .filter(game => String(game.season || "") === String(match.season || ""))
+    .map(game => String(game.id)));
+  const appearances=Object.entries(boxscores||{})
+    .filter(([matchId]) => seasonMatchIds.has(String(matchId)))
+    .flatMap(([matchId,box])=>(Array.isArray(box?.players)?box.players:[])
+      .filter(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId))
+      .map(p=>({...p,__matchId:matchId})));
   const games=[...new Map(appearances.map(p=>[p.__matchId,p])).values()];
   const rosterPlayer=Object.values(rosters.teams||{}).flatMap(entry=>entry.players||[])
     .find(p=>String(p.id)===String(player.id)&&String(p.teamId)===String(player.teamId))||{};
