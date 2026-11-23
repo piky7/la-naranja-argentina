@@ -319,7 +319,7 @@ export function LabUpcomingMatchModal({match,onClose,onNavigateTeam}) {
   const homeStats=aggregate(home.teamId),awayStats=aggregate(away.teamId);
   const colorFor=team=>labMatchColor(team);
   const recentFor=teamId=>completed.filter(game=>Number(game.homeTeam.teamId)===Number(teamId)||Number(game.awayTeam.teamId)===Number(teamId))
-    .sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,2).map(game=>{
+    .sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,5).map(game=>{
       const isHome=Number(game.homeTeam.teamId)===Number(teamId);
       const scored=Number(isHome?game.homeScore:game.awayScore)||0;
       const conceded=Number(isHome?game.awayScore:game.homeScore)||0;
