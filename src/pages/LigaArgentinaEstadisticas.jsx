@@ -200,15 +200,15 @@ function LigaArgentinaEstadisticas(){
 
       {mode==="triples"&&<section className="triple-ranking lab-triple-ranking">
         <div className="triple-heading"><span>LIGA ARGENTINA · 2026/27</span><h2>Ranking de triples</h2><p>Triples convertidos acumulados en partidos con planilla individual oficial.</p></div>
-        <PlayerPodium items={triplePlayers.slice(0,3)} stat={p=>p.triplesMade} label="TRIPLES" onSelect={()=>{}}/>
-        <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div><div className="triple-list">{triplePlayers.slice(3,20).map((p,i)=><div className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}}><span className="triple-position">{i+4}</span><span className="triple-player-name">{formatPersonName(p.name)}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.triplesMade}</strong></div>)}{!triplePlayers.length&&<p className="triple-empty">Todavía no hay triples oficiales disponibles.</p>}</div>
+        <PlayerPodium items={triplePlayers.slice(0,3)} stat={p=>p.triplesMade} label="TRIPLES" onSelect={setSelectedPlayer}/>
+        <div className="triple-table-head"><span>JUGADOR</span><span>TRIPLES</span></div><div className="triple-list">{triplePlayers.slice(3,20).map((p,i)=><button type="button" className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}} onClick={()=>setSelectedPlayer(p)}><span className="triple-position">{i+4}</span><span className="triple-player-name">{formatPersonName(p.name)}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.triplesMade}</strong></button>)}{!triplePlayers.length&&<p className="triple-empty">Todavía no hay triples oficiales disponibles.</p>}</div>
         <p className="triple-note">Se muestran hasta 20 jugadores ordenados por triples convertidos acumulados en las planillas oficiales importadas.</p>
       </section>}
 
       {mode==="mvp"&&<section className="triple-ranking lab-triple-ranking">
         <div className="triple-heading"><span>LIGA ARGENTINA · 2026/27</span><h2>Ranking de MVP</h2><p>Jugadores con más distinciones por valoración individual en los partidos importados.</p></div>
-        <PlayerPodium items={mvpPlayers.slice(0,3)} stat={p=>p.mvps} label="MVP" onSelect={()=>{}}/>
-        <div className="triple-table-head"><span>JUGADOR</span><span>MVP</span></div><div className="triple-list">{mvpPlayers.slice(3,20).map((p,i)=><div className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}}><span className="triple-position">{i+4}</span><span className="triple-player-name">{p.name}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.mvps}</strong></div>)}{!mvpPlayers.length&&<p className="triple-empty">Todavía no hay MVP calculables con planillas completas.</p>}</div>
+        <PlayerPodium items={mvpPlayers.slice(0,3)} stat={p=>p.mvps} label="MVP" onSelect={setSelectedPlayer}/>
+        <div className="triple-table-head"><span>JUGADOR</span><span>MVP</span></div><div className="triple-list">{mvpPlayers.slice(3,20).map((p,i)=><button type="button" className="triple-row" key={p.id} style={{"--ranking-team-color":teamColors(p)}} onClick={()=>setSelectedPlayer(p)}><span className="triple-position">{i+4}</span><span className="triple-player-name">{formatPersonName(p.name)}<small>{p.team?.name||""}</small></span><img src={labCrest(p.team)} alt=""/><strong>{p.mvps}</strong></button>)}{!mvpPlayers.length&&<p className="triple-empty">Todavía no hay MVP calculables con planillas completas.</p>}</div>
         <p className="triple-note">El MVP se calcula por mayor valoración individual en cada boxscore oficial. En caso de empate, todos los jugadores empatados reciben una distinción.</p>
       </section>}
     </section>
