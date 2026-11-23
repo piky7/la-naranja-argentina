@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-23T00:53:08.563Z",
+  "importedAt": "2026-11-23T01:48:04.124Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3933,12 +3933,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1761/114897/provincial-r/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1761/114897"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 89,
+      "awayScore": 87,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2wbKzt84blZqhnqhQJBqgES1f5ProyfZPZp3hTXaOaPGBplTovFV95w==/regatas-sn-vs-provincial-r",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-23T01:48:03.773Z"
     },
     {
       "id": "v28fYz3OMvsHwBN_MuirRs5re4Oj9kuiA7HUVwdc3MDGDtlFc1aR07FA==",
@@ -16571,6 +16572,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 116,
-  "pending": 423
+  "finished": 117,
+  "pending": 422
 }
