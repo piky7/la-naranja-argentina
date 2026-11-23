@@ -42,6 +42,8 @@ const teamLogos = {
   "Sparta de Villa María": "/federal-team-logos/sparta-villa-maria.webp",
   "Matienzo de Córdoba": "/federal-team-logos/matienzo-cordoba.webp",
   "Unión Central de Villa María": "/federal-team-logos/union-central-villa-maria.webp",
+  "Deportivo Roca": "/federal-team-logos/deportivo-roca.webp",
+  "Centro Español de Plottier": "/federal-team-logos/centro-espanol-plottier.webp",
 };
 
 const pending = [
