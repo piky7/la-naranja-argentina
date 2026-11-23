@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: estadisticas-partido-${{ github.event.client_payload.competition }}-${{ github.event.client_payload.matchId }}
+  group: lna-publicacion-datos-main
   cancel-in-progress: false
 
 jobs:
@@ -28,40 +28,76 @@ jobs:
           cache: npm
       - name: Instalar dependencias
         run: npm ci
-      - name: Extraer y validar estadísticas del partido finalizado
+      - name: Extraer, validar y publicar con reintentos seguros
         env:
           COMPETITION: ${{ github.event.client_payload.competition }}
           MATCH_ID: ${{ github.event.client_payload.matchId }}
           OFFICIAL_MATCH_URL: ${{ github.event.client_payload.officialUrl }}
         run: |
           set -euo pipefail
-          if [ "$COMPETITION" = "LAB" ]; then
-            node scripts/sync-lab-boxscores.cjs --match="$MATCH_ID"
-            node scripts/publish-lab-results.cjs
-            node scripts/build-lab-rosters.cjs
-          elif [ "$COMPETITION" = "LNB" ]; then
-            test -n "$OFFICIAL_MATCH_URL"
-            OFFICIAL_SYNC_MODE=full OFFICIAL_MATCH_URL="$OFFICIAL_MATCH_URL" node sync-liga-history.cjs
-            node sync-official-stats-preview.cjs
-            node publish-official-stats.cjs
-          else
-            echo "::error::Competencia no reconocida"
-            exit 1
-          fi
-      - name: Validar y compilar
-        run: |
-          set -euo pipefail
-          node --check cloudflare-live-oficial/worker.js
-          npm run build
-      - name: Publicar datos del partido
-        run: |
-          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/matchStats.js src/data/matchResults.js data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json liga-history.json
-          if git diff --cached --quiet; then
-            echo "No hubo estadísticas oficiales completas para publicar."
-            exit 1
-          fi
-          git commit -m "Publicar estadísticas oficiales del partido finalizado"
-          git push origin HEAD:main
+
+          # Cada intento vuelve a partir del main más reciente y repite la
+          # extracción sobre esos datos. Así no se pisan boxscores ni resultados
+          # publicados por otra ejecución entre el fetch y el push.
+          for intento in 1 2 3; do
+            echo "Publicación de ${COMPETITION}/${MATCH_ID}: intento ${intento}/3"
+            git fetch origin main
+            git reset --hard origin/main
+
+            if [ "$COMPETITION" = "LAB" ]; then
+              node scripts/sync-lab-boxscores.cjs --match="$MATCH_ID"
+              node scripts/publish-lab-results.cjs
+              node scripts/build-lab-rosters.cjs
+              node --input-type=module -e '
+                import fs from "node:fs";
+                const fixture=JSON.parse(fs.readFileSync("data/lab/labSchedule.json","utf8"));
+                const boxes=JSON.parse(fs.readFileSync("data/lab/labBoxscores.json","utf8"));
+                const match=fixture.matches.find(item=>item.id===process.env.MATCH_ID);
+                const box=boxes[process.env.MATCH_ID];
+                if (!match || !box || box.status!=="finished" || !box.players?.length ||
+                    !box.teamComparison?.home || !box.teamComparison?.away ||
+                    Number(match.homeScore)!==Number(box.homeScore) ||
+                    Number(match.awayScore)!==Number(box.awayScore)) {
+                  throw new Error("El boxscore LAB no superó la validación de integridad.");
+                }
+              '
+            elif [ "$COMPETITION" = "LNB" ]; then
+              test -n "$OFFICIAL_MATCH_URL"
+              OFFICIAL_SYNC_MODE=full OFFICIAL_MATCH_URL="$OFFICIAL_MATCH_URL" node sync-liga-history.cjs
+              node sync-official-stats-preview.cjs
+              node publish-official-stats.cjs
+              node --input-type=module -e '
+                const {matchPlayerStats}=await import("./src/data/matchStats.js?verify-publish");
+                const record=Object.values(matchPlayerStats).find(item=>item?.officialUrl===process.env.OFFICIAL_MATCH_URL);
+                if (!record || !Array.isArray(record[record.homeTeam]) || !record[record.homeTeam].length ||
+                    !Array.isArray(record[record.awayTeam]) || !record[record.awayTeam].length) {
+                  throw new Error("La planilla LNB no quedó publicada con estadísticas de ambos equipos.");
+                }
+              '
+            else
+              echo "::error::Competencia no reconocida"
+              exit 1
+            fi
+
+            node --check cloudflare-live-oficial/worker.js
+            npm run build
+
+            git add src/data/matchStats.js src/data/matchResults.js public/published-matches.json data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json liga-history.json
+            if git diff --cached --quiet; then
+              echo "Los datos ya estaban publicados; ejecución idempotente."
+              exit 0
+            fi
+
+            git commit -m "Publicar estadísticas oficiales del partido finalizado"
+            if git push origin HEAD:main; then
+              echo "Estadísticas publicadas correctamente."
+              exit 0
+            fi
+
+            echo "El push fue rechazado; se volverá a extraer desde el main actualizado."
+          done
+
+          echo "::error::No se pudo publicar después de tres intentos."
+          exit 1
