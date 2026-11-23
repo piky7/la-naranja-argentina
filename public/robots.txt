@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://lanaranjaargentina.com.ar/sitemap.xml

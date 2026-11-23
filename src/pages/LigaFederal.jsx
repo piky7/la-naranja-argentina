@@ -1,3 +1,4 @@
+import React from "react";
 import "./LigaFederal.css";
 
 const zones = [
@@ -27,6 +28,18 @@ function Shield({ name, color }) {
   </svg>;
 }
 
+const federalLogos = {
+  "Centro Español de Plottier": "/federal-team-logos/centro-espanol-plottier.webp",
+  "Racing de Olavarría": "/federal-team-logos/racing-olavarria.webp",
+};
+
+function TeamShield({ name, color }) {
+  const [failed, setFailed] = React.useState(false);
+  const src = federalLogos[name];
+  if (src && !failed) return <img className="federal-team-shield" src={src} alt={"Escudo de " + name} loading="lazy" onError={() => setFailed(true)} />;
+  return <Shield name={name} color={color}/>;
+}
+
 export default function LigaFederal() {
   const total = zones.reduce((sum, zone) => sum + zone.teams.length, 0);
   return <main className="federal-page">
@@ -54,7 +67,7 @@ export default function LigaFederal() {
           <header><div className="federal-zone-mark">{zone.short}</div><div><h3>{zone.name}</h3><span>{zone.teams.length} CLASIFICADOS</span></div><b>✓</b></header>
           <div className="federal-team-list">
             {zone.teams.map((team,index) => <div className="federal-team-row" key={team}>
-              <Shield name={team} color={zone.color}/>
+              <TeamShield name={team} color={zone.color}/>
               <span>{team}</span><small>{String(index+1).padStart(2,"0")}</small>
             </div>)}
           </div>
@@ -77,6 +90,6 @@ export default function LigaFederal() {
       <div><span>FORMATO DE CLASIFICACIÓN</span><h2>EL TORNEO FEDERAL</h2><p>Las plazas provinciales se calculan sobre el 40% de los participantes de los respectivos Prefederales. La competencia nacional está prevista para febrero-junio de 2027.</p></div>
       <div className="federal-info-note"><strong>RELEVAMIENTO PRELIMINAR · 23/11/2026</strong><p>Este listado no es una nómina oficial definitiva de la CAB. Se actualizará a medida que las federaciones provinciales confirmen plazas, repechajes y resultados.</p><small>Organismo: Confederación Argentina de Básquet (CAB).</small></div>
     </section>
-    <footer className="federal-disclaimer">Los escudos mostrados son identificadores gráficos provisorios, no los escudos oficiales de los clubes. Se reemplazarán al incorporar los archivos oficiales.</footer>
+    <footer className="federal-disclaimer">Los escudos oficiales se incorporan progresivamente a medida que se verifican sus fuentes. Los clubes sin archivo validado conservan un identificador gráfico provisorio.</footer>
   </main>;
 }
