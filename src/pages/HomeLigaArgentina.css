@@ -1186,3 +1186,65 @@
 @media (prefers-reduced-motion: reduce) {
   .lab-match-opening-spinner { animation: none; }
 }
+
+
+/* Fase 3: ficha LAB, historial reciente y estado real de carga de promedios */
+.lab-player-modal .lab-player-recent-section {
+  margin: 8px 10px 10px;
+  padding: 10px;
+  border: 1px solid rgba(91, 190, 219, .28);
+  border-radius: 12px;
+  background: #071f32;
+}
+.lab-player-modal .lab-player-recent-match {
+  background: #0d2a40;
+  border-color: rgba(91, 190, 219, .2);
+}
+.lab-player-modal .lab-player-recent-section .home-player-modal-recent-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.lab-player-modal .lab-player-recent-section .home-player-modal-recent-stats strong {
+  color: #75d7f1;
+}
+.lab-player-modal .lab-player-recent-result {
+  display: block;
+  margin-top: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-align: right;
+  color: #b8cad7;
+}
+.lab-player-modal .lab-player-recent-result.is-win { color: #69d6a3; }
+.lab-player-modal .lab-player-recent-result.is-loss { color: #f19a9a; }
+.lab-player-modal .lna-player-season-loading {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  color: #dce7f5;
+  text-align: center;
+}
+.lab-player-modal .lna-player-season-loading .match-modal-loading-spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(255,255,255,.15);
+  border-top-color: #75d7f1;
+  border-radius: 50%;
+  animation: lab-player-season-spin .75s linear infinite;
+}
+.lab-player-modal .lna-player-season-loading strong {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.lab-player-modal .lna-player-season-loading small {
+  color: #9eb6c8;
+  font-size: 10px;
+}
+@keyframes lab-player-season-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .lab-player-modal .lna-player-season-loading .match-modal-loading-spinner { animation: none; }
+}
