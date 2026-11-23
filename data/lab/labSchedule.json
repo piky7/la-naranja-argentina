@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-23T01:51:54.945Z",
+  "importedAt": "2026-11-23T02:25:55.443Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -3964,12 +3964,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2043/114446/san-isidro/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2043/114446"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 59,
+      "awayScore": 64,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v28fYz3OMvsHwBN_MuirRs5re4Oj9kuiA7HUVwdc3MDGDtlFc1aR07FA==/mitre-posadas-vs-san-isidro",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-23T02:25:55.162Z"
     },
     {
       "id": "v2h8k_17UwRhejDDcIh2fpv6ug8GiUsLfZemuLjbmrXdFOlOkUegYosQ==",
@@ -16573,6 +16574,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 118,
-  "pending": 421
+  "finished": 119,
+  "pending": 420
 }
