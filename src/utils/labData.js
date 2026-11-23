@@ -10,7 +10,7 @@ async function loadOne(matchId) {
   const id = String(matchId);
   if (loadedBoxscores.has(id)) return loadedBoxscores.get(id);
   if (pendingBoxscores.has(id)) return pendingBoxscores.get(id);
-  const filename = encodeURIComponent(id) + ".json";
+  const filename = "labBoxscores-" + encodeURIComponent(id) + ".json";
   const entry = Object.entries(boxscoreModules).find(([key]) => key.endsWith("/" + filename));
   if (!entry) return null;
   const request = entry[1]().then(module => {
@@ -28,7 +28,7 @@ async function loadOne(matchId) {
 
 export async function loadLabBoxscores(matchIds = null) {
   const ids = matchIds == null ? Object.keys(boxscoreModules).map(key =>
-    decodeURIComponent(key.slice(key.lastIndexOf("/") + 1, -5))
+    decodeURIComponent(key.slice(key.lastIndexOf("/") + 1 + "labBoxscores-".length, -5))
   ) : [...new Set(matchIds.map(String))];
   const entries = await Promise.all(ids.map(async id => [id, await loadOne(id)]));
   return Object.fromEntries(entries.filter(([, box]) => box));
