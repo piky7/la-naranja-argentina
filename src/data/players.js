@@ -656,7 +656,7 @@ export const players = [
   name: "Amar Sylla",
   teamId: "gimnasia",
   position: "Pívot",
-  number: null,
+  number: 20,
   nationality: "Senegal",
   category: "E",
 },
@@ -2613,5 +2613,13 @@ export const players = [
     name: "Augusto Moresco",
     teamId: "la-union",
     number: 21,
+  },
+  // Incorporaciones detectadas en planillas oficiales
+  {
+    id: "oficial-278412",
+    officialPlayerId: 278412,
+    name: "Bautista Caraballo",
+    teamId: "boca",
+    number: 10,
   },
 ];

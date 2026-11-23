@@ -1218,5 +1218,21 @@ export const matchResults = {
       "type": "official-final-status",
       "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2I7LbBjNVZOT9sP5WfIYkwwJAmIp_9UfR-8a5YrUREps8vxLvD_eBfg==/la-union-fsa-vs-independiente-o"
     }
+  },
+  "2026-11-22-gimnasia-boca": {
+    "status": "finished",
+    "homeScore": 83,
+    "awayScore": 66,
+    "time": "20:00",
+    "homeTeam": "gimnasia",
+    "awayTeam": "boca",
+    "venue": null,
+    "tv": [],
+    "source": "Liga Nacional",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Uc7y8vlWq9ohrAhi9Bd9CV_FWmeJs-0jpwjQxoCHW4-_EvSq6F4Wgg==/gimnasia-cr-vs-boca",
+    "finalEvidence": {
+      "type": "official-final-status",
+      "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2Uc7y8vlWq9ohrAhi9Bd9CV_FWmeJs-0jpwjQxoCHW4-_EvSq6F4Wgg==/gimnasia-cr-vs-boca"
+    }
   }
 };
