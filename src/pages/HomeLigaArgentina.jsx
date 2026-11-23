@@ -442,6 +442,11 @@ function HomeLigaArgentina() {
     const standings = [...table.values()].map(team => ({
       ...team, diff: team.pointsFor - team.pointsAgainst
     })).sort((a,b) => b.wins-a.wins || b.diff-a.diff || b.pointsFor-a.pointsFor);
+    // La Liga Argentina tiene dos tablas independientes de 17 equipos.
+    const conferenceStandings = {
+      norte: standings.filter(team => LAB_CONFERENCES.norte.includes(team.slug)),
+      sur: standings.filter(team => LAB_CONFERENCES.sur.includes(team.slug))
+    };
 
     const todayGames = fixture.matches.filter(match => match.date === selectedDate)
       .sort((a,b) => (a.time || "").localeCompare(b.time || ""));
@@ -451,7 +456,7 @@ function HomeLigaArgentina() {
     }))).filter(player => player.gamesPlayed > 0)
       .sort((a,b) => (b.averages?.points || 0) - (a.averages?.points || 0) || a.name.localeCompare(b.name, "es"))
       .slice(0,10);
-    return { standings, todayGames, allDates, scorers, finishedCount: finished.length };
+    return { standings, conferenceStandings, todayGames, allDates, scorers, finishedCount: finished.length };
   }, [today, selectedDate]);
 
   const classified = useMemo(() => fixture.matches.map(match => ({
@@ -476,8 +481,14 @@ function HomeLigaArgentina() {
       !(Number(homeScore) === 0 && Number(awayScore) === 0);
     const home = data.standings.find(team => team.teamId === match.homeTeam.teamId);
     const away = data.standings.find(team => team.teamId === match.awayTeam.teamId);
-    const homeIndex = data.standings.findIndex(team => team.teamId === match.homeTeam.teamId);
-    const awayIndex = data.standings.findIndex(team => team.teamId === match.awayTeam.teamId);
+    const conference = LAB_CONFERENCES.norte.includes(match.homeTeam.slug) ? "norte" :
+      LAB_CONFERENCES.sur.includes(match.homeTeam.slug) ? "sur" : null;
+    const matchConference = conference && (
+      (conference === "norte" ? LAB_CONFERENCES.norte : LAB_CONFERENCES.sur).includes(match.awayTeam.slug)
+    ) ? conference : null;
+    const conferenceStandings = matchConference ? data.conferenceStandings[matchConference] : data.standings;
+    const homeIndex = conferenceStandings.findIndex(team => team.teamId === match.homeTeam.teamId);
+    const awayIndex = conferenceStandings.findIndex(team => team.teamId === match.awayTeam.teamId);
     return <button key={match.id} type="button" onClick={() => { if (isLive) { setSelectedLiveMatch({match,live:liveData}); return; } if (hasScore) setSelectedMatch(match); else setSelectedUpcomingMatch(match); }}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""} ${isLive ? "home-fixture-live" : ""}`}
       style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`,"--match-home-color":labMatchColor(match.homeTeam),"--match-away-color":labMatchColor(match.awayTeam)}}>
@@ -501,6 +512,7 @@ function HomeLigaArgentina() {
           </strong>
           <span>FINAL</span>
         </> : <strong className="fixture-time">{match.time || "A CONFIRMAR"}</strong>}
+        {matchConference && <small className="lab-fixture-conference">ZONA {matchConference.toUpperCase()}</small>}
       </div>
       <div className="fixture-team fixture-away">
         <img src={labCrest(match.awayTeam)} alt="" loading="lazy"/>
