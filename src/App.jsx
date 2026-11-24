@@ -146,7 +146,9 @@ function AppContent() {
     setSelectedTournament(nextTournament);
     try {
       sessionStorage.setItem("lna-selected-tournament", nextTournament);
-    } catch {}
+    } catch {
+      // sessionStorage puede estar bloqueado; la navegación debe seguir funcionando.
+    }
     // Cada competencia abre siempre en su portada al cambiar el selector.
     if (window.location.pathname !== "/") navigate("/");
   };
