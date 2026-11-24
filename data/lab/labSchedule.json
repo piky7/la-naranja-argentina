@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-24T02:27:02.126Z",
+  "importedAt": "2026-11-24T02:27:37.617Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4088,12 +4088,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1420/113925/la-union-c/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1420/113925"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 87,
+      "awayScore": 72,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v271xkQcrIVzgMdvFLO7DMu2iO7e0HSN6TPTOO-eS4dWU0LA2Zy-7yPA==/pico-fc-vs-la-union-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-24T02:27:37.207Z"
     },
     {
       "id": "v229Q0Qxh6n7GJYxfNHPhsJn2I18mbwbcguz7jv-ZC2REV9Oc-Zo5Dag==",
@@ -16577,6 +16578,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 122,
-  "pending": 417
+  "finished": 123,
+  "pending": 416
 }
