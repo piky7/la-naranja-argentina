@@ -123,13 +123,14 @@ export default function LigaFederal() {
           <div className="federal-calendar-body">
             <strong className="federal-calendar-label">R16 · SEGUNDOS PARTIDOS</strong>
             <p>Viernes 28 de noviembre</p>
+            <strong className="federal-calendar-label">RESULTADOS · JUEGO 1</strong>
             <ul>
-              <li>Independiente de Tandil vs. Unión y Progreso</li>
-              <li>Alumni de Orense vs. Kimberley</li>
-              <li>Riberas del Paraná vs. Los Indios de Junín</li>
-              <li>Sacachispas vs. Defensores de Belgrano de Villa Ramallo</li>
-              <li>Náutico de San Pedro vs. Argentino de Pergamino</li>
-              <li>Porteño de Chacabuco vs. Náutico de Zárate</li>
+              <li><b>Independiente de Tandil 70-64</b> Unión y Progreso</li>
+              <li><b>Kimberley 89-64</b> Alumni de Orense</li>
+              <li><b>Riberas del Paraná 85-69</b> Los Indios de Junín</li>
+              <li><b>Defensores de Belgrano 66-60</b> Sacachispas</li>
+              <li><b>Argentino de Pergamino 66-65</b> Náutico de San Pedro</li>
+              <li><b>Porteño de Chacabuco 82-64</b> Náutico de Zárate</li>
             </ul>
             <p><b>29/11:</b> terceros partidos, si hacen falta.</p>
             <div className="federal-calendar-divider"/>
