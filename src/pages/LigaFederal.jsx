@@ -114,6 +114,93 @@ export default function LigaFederal() {
       </div>
     </section>
 
+    <section className="federal-section federal-calendar-section">
+      <div className="federal-section-title"><div><span>CAMINO A LA LIGA FEDERAL 2027</span><h2>PRÓXIMOS PARTIDOS</h2></div><strong>CALENDARIO MANUAL</strong></div>
+      <p className="federal-calendar-intro">Fechas de las series que todavía pueden modificar la lista de clasificados. Los horarios que no fueron confirmados por las organizaciones se muestran sin hora.</p>
+      <div className="federal-calendar-grid">
+        <article className="federal-calendar-card">
+          <header><div><span>REPECHAJES · 4 PLAZAS</span><h3>BUENOS AIRES</h3></div><b>R16 / R8</b></header>
+          <div className="federal-calendar-body">
+            <strong className="federal-calendar-label">R16 · SEGUNDOS PARTIDOS</strong>
+            <p>Viernes 28 de noviembre</p>
+            <ul>
+              <li>Independiente de Tandil vs. Unión y Progreso</li>
+              <li>Alumni de Orense vs. Kimberley</li>
+              <li>Riberas del Paraná vs. Los Indios de Junín</li>
+              <li>Sacachispas vs. Defensores de Belgrano de Villa Ramallo</li>
+              <li>Náutico de San Pedro vs. Argentino de Pergamino</li>
+              <li>Porteño de Chacabuco vs. Náutico de Zárate</li>
+            </ul>
+            <p><b>29/11:</b> terceros partidos, si hacen falta.</p>
+            <div className="federal-calendar-divider"/>
+            <strong className="federal-calendar-label">R8 · DEFINICIÓN DE LAS 4 PLAZAS</strong>
+            <p><b>4/12:</b> primeros partidos · <b>11/12:</b> segundos · <b>12/12:</b> terceros, si hacen falta.</p>
+            <small>San Martín de Junín y Gimnasia de Pergamino esperan directamente en R8. Sus cruces serán ante los ganadores de Náutico SP/Argentino y Porteño/Náutico Zárate, respectivamente. Las otras dos llaves se completan con los ganadores de los cruces restantes.</small>
+          </div>
+        </article>
+
+        <article className="federal-calendar-card">
+          <header><div><span>REPECHAJES · 2 PLAZAS</span><h3>CÓRDOBA</h3></div><b>AL MEJOR DE 3</b></header>
+          <div className="federal-calendar-body">
+            <div className="federal-series">
+              <strong>Unión de San Guillermo vs. Almafuerte</strong>
+              <span className="federal-series-status">Juego 1 disputado · resultado pendiente de cargar</span>
+              <p><b>27/11:</b> Juego 2 en Las Varillas</p>
+              <p><b>29/11:</b> Juego 3 en San Guillermo, si hace falta</p>
+            </div>
+            <div className="federal-calendar-divider"/>
+            <div className="federal-series">
+              <strong>El Tala vs. 9 de Julio de Morteros</strong>
+              <span className="federal-series-status">El Tala lidera 1-0 · ganó 79-75</span>
+              <p><b>27/11:</b> Juego 2 en Morteros</p>
+              <p><b>29/11:</b> Juego 3 en San Francisco, si hace falta</p>
+            </div>
+            <small>El ganador de cada serie obtiene una plaza para la Liga Federal 2027.</small>
+          </div>
+        </article>
+
+        <article className="federal-calendar-card">
+          <header><div><span>SEMIFINALES · 2 PLAZAS</span><h3>MISIONES</h3></div><b>AL MEJOR DE 3</b></header>
+          <div className="federal-calendar-body">
+            <div className="federal-series">
+              <strong>CAPRI vs. Bartolomé Mitre</strong>
+              <span className="federal-series-status">CAPRI lidera 1-0 · ganó 85-39</span>
+              <p><b>27/11:</b> Juego 2 en cancha de Mitre</p>
+            </div>
+            <div className="federal-calendar-divider"/>
+            <div className="federal-series">
+              <strong>Tokio vs. Oberá Tenis Club</strong>
+              <span className="federal-series-status">Tokio lidera 1-0 · ganó 80-58</span>
+              <p><b>27/11:</b> Juego 2 en Oberá</p>
+            </div>
+            <p><b>29/11:</b> terceros partidos, si hacen falta. Horarios a confirmar.</p>
+            <small>Los ganadores de ambas semifinales consiguen las plazas misioneras para la Liga Federal 2027.</small>
+          </div>
+        </article>
+
+        <article className="federal-calendar-card">
+          <header><div><span>ZONA ASCENSO · 1 ASCENSO DIRECTO</span><h3>NEUQUÉN / RÍO NEGRO</h3></div><b>SEMIFINALES</b></header>
+          <div className="federal-calendar-body">
+            <div className="federal-series">
+              <strong>Biguá vs. Centenario</strong>
+              <span className="federal-series-status">Juego 1 disputado · 21/11</span>
+              <p><b>24/11:</b> Juego 2 en Centenario</p>
+              <p><b>28/11:</b> Juego 3 en Neuquén, si hace falta</p>
+            </div>
+            <div className="federal-calendar-divider"/>
+            <div className="federal-series">
+              <strong>Del Progreso vs. Unión de Allen</strong>
+              <span className="federal-series-status">Juego 1 disputado · 21/11</span>
+              <p><b>25/11:</b> Juego 2 en Allen</p>
+              <p><b>28/11:</b> Juego 3 en General Roca, si hace falta</p>
+            </div>
+            <small>Los finalistas jugarán por el ascenso: el campeón sube directamente y el subcampeón tendrá una promoción ante el 7.º de la zona campeonato.</small>
+          </div>
+        </article>
+      </div>
+      <p className="federal-calendar-footnote">Información relevada al 23/11/2026. Este calendario es estático y no se actualiza automáticamente. Resultados y fechas podrán corregirse cuando LNA realice un nuevo relevamiento manual.</p>
+    </section>
+
     <section className="federal-info">
       <div><span>FORMATO DE CLASIFICACIÓN</span><h2>EL TORNEO FEDERAL</h2><p>Las plazas provinciales se calculan sobre el 40% de los participantes de los respectivos Prefederales. La competencia nacional está prevista para febrero-junio de 2027.</p></div>
       <div className="federal-info-note"><strong>RELEVAMIENTO PRELIMINAR · 23/11/2026</strong><p>Este listado no es una nómina oficial definitiva de la CAB. Se actualizará a medida que las federaciones provinciales confirmen plazas, repechajes y resultados.</p><small>Organismo: Confederación Argentina de Básquet (CAB).</small></div>
