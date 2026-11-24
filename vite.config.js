@@ -25,7 +25,7 @@ export default defineConfig({
     react(),
 
     VitePWA({
-      registerType: "autoUpdate",
+      registerType: "prompt",
       // El registro se gestiona desde main.jsx para comprobar actualizaciones al reanudar.
       injectRegister: null,
 
