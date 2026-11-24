@@ -1248,3 +1248,22 @@
 @media (prefers-reduced-motion: reduce) {
   .lab-player-modal .lna-player-season-loading .match-modal-loading-spinner { animation: none; }
 }
+
+
+/* En escritorio LAB solo renderiza la tabla de conferencia.
+   Home.css conserva el diseño de dos columnas de LNB, pero no debe ocultar
+   la tabla desktop de LAB (esta página no monta la variante mobile). */
+@media (min-width: 769px) {
+  .lab-home-page .standings-table-desktop {
+    display: block !important;
+    width: 100%;
+  }
+
+  .lab-home-page .standings-table-mobile {
+    display: none !important;
+  }
+
+  .lab-home-page .standings-panel {
+    min-width: 0;
+  }
+}
