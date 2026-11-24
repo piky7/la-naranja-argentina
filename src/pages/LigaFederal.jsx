@@ -144,7 +144,7 @@ export default function LigaFederal() {
           <div className="federal-calendar-body">
             <div className="federal-series">
               <strong>Unión de San Guillermo vs. Almafuerte</strong>
-              <span className="federal-series-status">Juego 1 disputado · resultado pendiente de cargar</span>
+              <span className="federal-series-status">Unión de San Guillermo lidera 1-0 · marcador no consignado</span>
               <p><b>27/11:</b> Juego 2 en Las Varillas</p>
               <p><b>29/11:</b> Juego 3 en San Guillermo, si hace falta</p>
             </div>
