@@ -351,7 +351,11 @@ export function LabUpcomingMatchModal({match,onClose,onNavigateTeam}) {
         <button type="button" role="tab" aria-selected={tab==="jugadores"} className={tab==="jugadores"?"is-active":""} onClick={()=>setTab("jugadores")}>♟ Jugadores</button>
       </div>
       {tab==="comparativa"&&<section className="upcoming-tab-panel lab-upcoming-comparison">
-        <div className="upcoming-team-comparison upcoming-official-comparison lab-upcoming-team-comparison" style={{"--lab-home-color":homeColor,"--lab-away-color":awayColor,"background":`linear-gradient(110deg,${hexRgba(homeColor,.24)},#0d1b2a 48%,${hexRgba(awayColor,.24)})`}}>
+        {boxscores === null ? <div className="lna-player-season-loading lab-upcoming-season-loading" role="status" aria-live="polite">
+          <span className="match-modal-loading-spinner" aria-hidden="true"/>
+          <strong>CARGANDO PROMEDIOS DE TEMPORADA</strong>
+          <small>Estamos reuniendo las planillas oficiales para completar la comparativa…</small>
+        </div> : <div className="upcoming-team-comparison upcoming-official-comparison lab-upcoming-team-comparison" style={{"--lab-home-color":homeColor,"--lab-away-color":awayColor,"background":`linear-gradient(110deg,${hexRgba(homeColor,.24)},#0d1b2a 48%,${hexRgba(awayColor,.24)})`}}>
           <span className="upcoming-comparison-label">COMPARATIVA COLECTIVA · 2026/27</span>
           <div className="lab-upcoming-team-head"><span><img src={home.logo} alt=""/>{home.name}</span><b>VS</b><span><img src={away.logo} alt=""/>{away.name}</span></div>
           <p className="upcoming-collective-source">Promedios de temporada · {Math.round(homeStats.games)} / {Math.round(awayStats.games)} partidos</p>
@@ -370,7 +374,7 @@ export function LabUpcomingMatchModal({match,onClose,onNavigateTeam}) {
               </div>)}
             </div>
           </div>
-        </div>
+        </div>}
       </section>}
       {tab==="jugadores"&&<section className="upcoming-tab-panel upcoming-players-comparison lab-upcoming-players">
         <div className="match-highlighted-title"><h3>JUGADORES DESTACADOS</h3><span className="upcoming-highlighted-subtitle">PROMEDIOS DE TEMPORADA 2026/27</span></div>
