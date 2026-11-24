@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-24T01:34:03.237Z",
+  "importedAt": "2026-11-24T01:42:00.467Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4057,12 +4057,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2420/113230/gimnasia-lp/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2420/113230"
       },
-      "homeScore": 7,
-      "awayScore": 15,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 86,
+      "awayScore": 70,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2STL7qGlSbSEgwRCoaY366fKLrqU4DDXGZmpKkrUJxZJU-_nNOkCF6Q==/dep-viedma-vs-gimnasia-lp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-24T01:42:00.116Z"
     },
     {
       "id": "v271xkQcrIVzgMdvFLO7DMu2iO7e0HSN6TPTOO-eS4dWU0LA2Zy-7yPA==",
@@ -16575,6 +16576,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 120,
-  "pending": 419
+  "finished": 121,
+  "pending": 418
 }
