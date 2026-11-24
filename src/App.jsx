@@ -130,24 +130,41 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
   );
 }
 
+function readSelectedTournament() {
+  const valid = value => ["lnb", "lab", "federal"].includes(value);
+  // localStorage conserva la competencia entre recargas y nuevas pestañas.
+  // sessionStorage queda como respaldo para navegadores con restricciones.
+  try {
+    const saved = localStorage.getItem("lna-selected-tournament");
+    if (valid(saved)) return saved;
+  } catch {
+    // Puede estar bloqueado en algunos modos de navegación.
+  }
+  try {
+    const saved = sessionStorage.getItem("lna-selected-tournament");
+    if (valid(saved)) return saved;
+  } catch {
+    // Si ambos almacenamientos están bloqueados, se usa LNB como valor inicial.
+  }
+  return "lnb";
+}
+
 function AppContent() {
-  const [selectedTournament, setSelectedTournament] = useState(() => {
-    try {
-      const saved = sessionStorage.getItem("lna-selected-tournament");
-      return ["lnb", "lab", "federal"].includes(saved) ? saved : "lnb";
-    } catch {
-      return "lnb";
-    }
-  });
+  const [selectedTournament, setSelectedTournament] = useState(readSelectedTournament);
   const navigate = useNavigate();
 
   const changeTournament = (tournament) => {
     const nextTournament = ["lnb", "lab", "federal"].includes(tournament) ? tournament : "lnb";
     setSelectedTournament(nextTournament);
     try {
+      localStorage.setItem("lna-selected-tournament", nextTournament);
+    } catch {
+      // localStorage puede estar bloqueado; se intenta conservar la selección en sesión.
+    }
+    try {
       sessionStorage.setItem("lna-selected-tournament", nextTournament);
     } catch {
-      // sessionStorage puede estar bloqueado; la navegación debe seguir funcionando.
+      // sessionStorage también puede estar bloqueado; la navegación debe seguir funcionando.
     }
     // Cada competencia abre siempre en su portada al cambiar el selector.
     if (window.location.pathname !== "/") navigate("/");
