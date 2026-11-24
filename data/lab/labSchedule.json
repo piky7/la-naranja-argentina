@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-24T00:09:03.510Z",
+  "importedAt": "2026-11-24T01:34:03.237Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4026,12 +4026,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1903/115104/riachuelo-lr/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1903/115104"
       },
-      "homeScore": 15,
-      "awayScore": 5,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 94,
+      "awayScore": 65,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2AqE9WuXNB9X7Bp_dlx_oClm3OT718cYQQfoYlaKDnw82Ejp8KaOYUg==/barrio-parque-vs-riachuelo-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-24T01:34:02.776Z"
     },
     {
       "id": "v2STL7qGlSbSEgwRCoaY366fKLrqU4DDXGZmpKkrUJxZJU-_nNOkCF6Q==",
@@ -16574,6 +16575,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 119,
-  "pending": 420
+  "finished": 120,
+  "pending": 419
 }
