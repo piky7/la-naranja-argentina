@@ -131,11 +131,22 @@ function AnimatedRoutes({ selectedTournament, onTournamentChange }) {
 }
 
 function AppContent() {
-  const [selectedTournament, setSelectedTournament] = useState("lnb");
+  const [selectedTournament, setSelectedTournament] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem("lna-selected-tournament");
+      return ["lnb", "lab", "federal"].includes(saved) ? saved : "lnb";
+    } catch {
+      return "lnb";
+    }
+  });
   const navigate = useNavigate();
 
   const changeTournament = (tournament) => {
-    setSelectedTournament(tournament);
+    const nextTournament = ["lnb", "lab", "federal"].includes(tournament) ? tournament : "lnb";
+    setSelectedTournament(nextTournament);
+    try {
+      sessionStorage.setItem("lna-selected-tournament", nextTournament);
+    } catch {}
     // Cada competencia abre siempre en su portada al cambiar el selector.
     if (window.location.pathname !== "/") navigate("/");
   };
