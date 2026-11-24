@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-24T01:42:00.467Z",
+  "importedAt": "2026-11-24T02:27:02.126Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4118,12 +4118,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2378/115029/union-mdp/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2378/115029"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 84,
+      "awayScore": 89,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v229Q0Qxh6n7GJYxfNHPhsJn2I18mbwbcguz7jv-ZC2REV9Oc-Zo5Dag==/pergamino-basquet-vs-union-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-24T02:27:01.639Z"
     },
     {
       "id": "v2obgP1ifaN1GE0McLrOnvXPydBU1dCQRxRD517kCxxfSzJhEnJUGE9w==",
@@ -16576,6 +16577,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 121,
-  "pending": 418
+  "finished": 122,
+  "pending": 417
 }
