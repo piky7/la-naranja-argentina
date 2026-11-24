@@ -5,9 +5,39 @@ import './index.css'
 import App from './App.jsx'
 
 // La PWA comprueba nuevas versiones al iniciarse y al volver al primer plano.
-// vite-plugin-pwa gestiona la activación y la recarga de la versión nueva.
-registerSW({
+// Si hay un popup o una planilla LAB abriéndose, espera a que termine antes de recargar.
+let updateSW = () => Promise.resolve()
+let updatePending = false
+let updateObserver = null
+
+const hasBlockingOverlay = () => Boolean(document.querySelector(
+  '[role="dialog"], [aria-modal="true"], .match-modal-overlay, .home-modal-overlay, .lab-match-opening'
+))
+
+const applyUpdateWhenSafe = () => {
+  if (!updatePending || hasBlockingOverlay()) return
+  updatePending = false
+  updateObserver?.disconnect()
+  updateObserver = null
+  void updateSW(true)
+}
+
+updateSW = registerSW({
   immediate: true,
+  onNeedRefresh() {
+    updatePending = true
+    if (hasBlockingOverlay()) {
+      updateObserver = new MutationObserver(applyUpdateWhenSafe)
+      updateObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'role', 'aria-modal'],
+      })
+      return
+    }
+    applyUpdateWhenSafe()
+  },
   onRegisteredSW(_swUrl, registration) {
     if (!registration) return
 
