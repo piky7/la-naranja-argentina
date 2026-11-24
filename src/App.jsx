@@ -152,6 +152,32 @@ function readSelectedTournament() {
 function AppContent() {
   const [selectedTournament, setSelectedTournament] = useState(readSelectedTournament);
   const navigate = useNavigate();
+  const location = useLocation();
+  const routeRestoreAttempted = useRef(false);
+
+  // Recordar también la sección visitada, no solamente el torneo seleccionado.
+  useEffect(() => {
+    if (!routeRestoreAttempted.current) {
+      routeRestoreAttempted.current = true;
+      if (location.pathname === "/" && selectedTournament !== "federal") {
+        try {
+          const savedRoute = localStorage.getItem("lna-last-route");
+          if (savedRoute && savedRoute.startsWith("/") && !savedRoute.startsWith("/invitacion")) {
+            navigate(savedRoute, { replace: true });
+            return;
+          }
+        } catch {
+          // Si el almacenamiento está bloqueado, se conserva la portada.
+        }
+      }
+    }
+
+    try {
+      localStorage.setItem("lna-last-route", location.pathname + location.search);
+    } catch {
+      // La navegación sigue funcionando aunque no se pueda recordar la sección.
+    }
+  }, [location.pathname, location.search, selectedTournament, navigate]);
 
   const changeTournament = (tournament) => {
     const nextTournament = ["lnb", "lab", "federal"].includes(tournament) ? tournament : "lnb";
