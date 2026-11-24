@@ -15,3 +15,24 @@
 @media(max-width:700px){.federal-page{padding:12px 12px 48px}.federal-hero{padding:25px 18px 20px;border-radius:13px}.federal-hero:after{right:-180px}.federal-hero h1{font-size:48px}.federal-hero>p{font-size:12px;max-width:280px}.federal-hero-stats div{padding:0 12px}.federal-hero-stats strong{font-size:19px}.federal-hero-stats span{font-size:7px;max-width:90px;line-height:1.3}.federal-zones-grid,.federal-pending-grid{grid-template-columns:1fr;gap:10px}.federal-zone-card>header{padding:11px 13px}.federal-team-row{min-height:49px}.federal-team-row>span{font-size:11px}.federal-info{grid-template-columns:1fr;gap:15px;padding:16px}.federal-info-note{padding:13px 0 0;border-left:0;border-top:1px solid #ffffff1a}.federal-section-title h2{font-size:19px}.federal-section-title>strong{font-size:8px}}
 
 .federal-team-logo{width:36px;height:36px;flex:0 0 36px;display:block;object-fit:contain}
+
+
+.federal-calendar-section{margin-top:34px}
+.federal-calendar-intro{margin:-4px 0 15px;color:#9eafbe;font-size:11px;line-height:1.5}
+.federal-calendar-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.federal-calendar-card{overflow:hidden;border:1px solid #2a4053;border-radius:12px;background:linear-gradient(145deg,#101f2d,#0b1723)}
+.federal-calendar-card>header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid #ffffff14;background:linear-gradient(90deg,#f28a241b,transparent 75%)}
+.federal-calendar-card>header span{display:block;color:#f28a24;font-size:8px;font-weight:900;letter-spacing:1px}
+.federal-calendar-card>header h3{margin:4px 0 0;font-size:16px;font-weight:950}
+.federal-calendar-card>header>b{flex:0 0 auto;color:#a9bac9;font-size:8px;letter-spacing:.7px}
+.federal-calendar-body{padding:13px 15px 15px;color:#b9c6d1;font-size:10px;line-height:1.55}
+.federal-calendar-body p{margin:6px 0}
+.federal-calendar-body ul{margin:7px 0;padding-left:17px}
+.federal-calendar-body li{padding:2px 0}
+.federal-calendar-label{display:block;color:#f0b15a;font-size:9px;letter-spacing:.7px}
+.federal-calendar-divider{height:1px;margin:12px 0;background:#ffffff16}
+.federal-calendar-body small{display:block;margin-top:10px;color:#8197aa;font-size:9px;line-height:1.55}
+.federal-series strong{display:block;color:#eef4fa;font-size:11px}
+.federal-series-status{display:inline-block;margin:5px 0;color:#54cb97;font-size:9px;font-weight:800}
+.federal-calendar-footnote{margin:13px 2px 0;color:#74899c;font-size:9px;line-height:1.5}
+@media(max-width:700px){.federal-calendar-grid{grid-template-columns:1fr;gap:10px}.federal-calendar-card>header{padding:12px 13px}.federal-calendar-body{padding:12px 13px}.federal-calendar-card>header h3{font-size:15px}}
