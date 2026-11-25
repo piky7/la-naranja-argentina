@@ -31,12 +31,22 @@ const minutesInSeconds = value => { const parts=String(value||"").split(":").map
 function calculateMvpCounts() {
   const counts = new Map();
   const seen = new Set();
-  for (const [matchId, summary] of Object.entries(boxscoreSummary || {})) {
-    if (seen.has(matchId) || !Array.isArray(summary.mvpPlayerIds)) continue;
+  // El resumen también conserva boxscores históricos. Contar únicamente
+  // partidos finalizados del fixture de la temporada LAB actualmente publicada.
+  const currentSeasonMatches = fixture.matches.filter(match =>
+    String(match.season || fixture.season) === String(fixture.season) &&
+    isLabMatchFinished(match)
+  );
+  for (const match of currentSeasonMatches) {
+    const matchId = String(match.id);
+    const summary = boxscoreSummary?.[matchId];
+    if (seen.has(matchId) || !Array.isArray(summary?.mvpPlayerIds)) continue;
     seen.add(matchId);
-    summary.mvpPlayerIds.forEach(playerId =>
-      counts.set(Number(playerId), (counts.get(Number(playerId)) || 0) + 1)
-    );
+    summary.mvpPlayerIds.forEach(playerId => {
+      const id = Number(playerId);
+      if (!Number.isFinite(id) || id <= 0) return;
+      counts.set(id, (counts.get(id) || 0) + 1);
+    });
   }
   return counts;
 }
