@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-25T00:09:14.743Z",
+  "importedAt": "2026-11-25T01:38:04.196Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4210,12 +4210,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2378/115029/union-mdp/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2378/115029"
       },
-      "homeScore": 8,
-      "awayScore": 4,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 80,
+      "awayScore": 70,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2nHxPpqELE9Ohj-1Nu245bexWTPU7wg4o4A8_qgFzJA9onbsFpHj1QA==/ciclista-j-vs-union-mdp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-25T01:38:03.487Z"
     },
     {
       "id": "v2hbJaLJK9jGb6E6g87nKjplQ5Q4Er3gdBf8VsgTTBJYXODUKUpjbqVA==",
@@ -16578,6 +16579,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 123,
-  "pending": 416
+  "finished": 124,
+  "pending": 415
 }
