@@ -461,12 +461,15 @@ function HomeLigaArgentina() {
   const openFinishedMatch = async match => {
     setOpeningMatchId(String(match.id));
     try {
-      await loadLabBoxscores([match.id]);
+      const loaded = await loadLabBoxscores([match.id]);
+      const boxscore = loaded?.[String(match.id)];
+      // No abrir el popup si la planilla oficial todavía no está publicada.
+      if (!Array.isArray(boxscore?.players) || boxscore.players.length === 0) return;
+      setSelectedMatch(match);
     } catch (error) {
       console.error("No se pudo precargar la planilla LAB:", error);
     } finally {
       setOpeningMatchId(null);
-      setSelectedMatch(match);
     }
   };
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
