@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-25T01:38:04.196Z",
+  "importedAt": "2026-11-25T01:49:05.620Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4180,12 +4180,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1640/114179/dep-norte/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1640/114179"
       },
-      "homeScore": 6,
-      "awayScore": 7,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 91,
+      "awayScore": 83,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v23aj4O55ruDO2aEAssn2K2MXpDxyWUYLAksRu5LctwL7Wm7fdxZtRbA==/river-vs-dep-norte",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-25T01:49:04.940Z"
     },
     {
       "id": "v2nHxPpqELE9Ohj-1Nu245bexWTPU7wg4o4A8_qgFzJA9onbsFpHj1QA==",
@@ -16579,6 +16580,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 124,
-  "pending": 415
+  "finished": 125,
+  "pending": 414
 }
