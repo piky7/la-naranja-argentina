@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-25T01:51:03.536Z",
+  "importedAt": "2026-11-25T02:05:06.123Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4243,12 +4243,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1903/115104/riachuelo-lr/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1903/115104"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 96,
+      "awayScore": 74,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2hbJaLJK9jGb6E6g87nKjplQ5Q4Er3gdBf8VsgTTBJYXODUKUpjbqVA==/hindu-c-vs-riachuelo-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-25T02:05:05.442Z"
     },
     {
       "id": "v2dssKSJLtARIQ7QIEt84wcZVXQn5tTEdZ4KBcG_uxsileamDhr3pMbw==",
@@ -16581,6 +16582,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 126,
-  "pending": 413
+  "finished": 127,
+  "pending": 412
 }
