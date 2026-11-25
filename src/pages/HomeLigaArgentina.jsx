@@ -543,7 +543,7 @@ function HomeLigaArgentina() {
     const conferenceStandings = matchConference ? data.conferenceStandings[matchConference] : data.standings;
     const homeIndex = conferenceStandings.findIndex(team => team.teamId === match.homeTeam.teamId);
     const awayIndex = conferenceStandings.findIndex(team => team.teamId === match.awayTeam.teamId);
-    return <button key={match.id} type="button" onClick={() => { if (isLive) { setSelectedLiveMatch({match,live:liveData}); return; } if (hasScore) openFinishedMatch(match); else setSelectedUpcomingMatch(match); }}
+    return <button key={match.id} type="button" onClick={() => { if (isLive) { setSelectedLiveMatch({match,live:liveData}); return; } if (hasScore) openFinishedMatch({ ...match, homeScore, awayScore }); else setSelectedUpcomingMatch(match); }}
       className={`home-fixture lab-home-fixture ${hasScore ? "home-fixture-finished home-fixture-clickable" : ""} ${isLive ? "home-fixture-live" : ""}`}
       style={{"--match-home-logo":`url("${labCrest(match.homeTeam)}")`,"--match-away-logo":`url("${labCrest(match.awayTeam)}")`,"--match-home-color":labMatchColor(match.homeTeam),"--match-away-color":labMatchColor(match.awayTeam)}}>
       <div className="fixture-team fixture-home">
