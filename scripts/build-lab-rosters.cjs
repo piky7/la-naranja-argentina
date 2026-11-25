@@ -22,9 +22,17 @@ const fields = ["points","rebounds","offensiveRebounds","defensiveRebounds","ass
 // Usar exclusivamente los boxscores vinculados a los IDs vigentes del fixture.
  // El archivo histórico puede conservar entradas antiguas con IDs anteriores;
  // recorrerlo completo infla PJ y duplica participaciones.
+ const argentinaToday = new Intl.DateTimeFormat("en-CA", {
+   timeZone: "America/Argentina/Buenos_Aires", year: "numeric", month: "2-digit", day: "2-digit"
+ }).format(new Date());
  const countedMatches = new Set();
  for (const match of fixture.matches) {
-   if (match.status !== "finished" || countedMatches.has(match.id)) continue;
+   const finalByStatus = match.status === "finished" ||
+     (match.status === "score_available" && String(match.date || "") < argentinaToday);
+   const hasValidScore = match.homeScore != null && match.awayScore != null &&
+     Number.isFinite(Number(match.homeScore)) && Number.isFinite(Number(match.awayScore)) &&
+     !(Number(match.homeScore) === 0 && Number(match.awayScore) === 0);
+   if (!finalByStatus || !hasValidScore || countedMatches.has(match.id)) continue;
    const box = boxes[match.id];
    if (box?.status !== "finished" || !Array.isArray(box.players) || !box.players.length ||
        Number(box.homeTeamId) !== Number(match.homeTeam.teamId) ||
