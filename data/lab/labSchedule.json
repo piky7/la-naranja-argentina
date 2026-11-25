@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-25T01:49:05.620Z",
+  "importedAt": "2026-11-25T01:51:03.536Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4150,12 +4150,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2039/114853/el-ceibo-sf/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2039/114853"
       },
-      "homeScore": 11,
-      "awayScore": 3,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 94,
+      "awayScore": 99,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2sJV2ihJWHFnjrlMpON9ku6DeMGJyhGHcs1h9CSvqT-KnOmgB-KX1GQ==/bochas-cc-vs-el-ceibo-sf",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-25T01:51:02.848Z"
     },
     {
       "id": "v23aj4O55ruDO2aEAssn2K2MXpDxyWUYLAksRu5LctwL7Wm7fdxZtRbA==",
@@ -16580,6 +16581,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 125,
-  "pending": 414
+  "finished": 126,
+  "pending": 413
 }
