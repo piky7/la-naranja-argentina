@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-25T02:05:06.123Z",
+  "importedAt": "2026-11-25T02:18:03.369Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4274,12 +4274,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2501/114142/barrio-jardin-t/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2501/114142"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 97,
+      "awayScore": 79,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2dssKSJLtARIQ7QIEt84wcZVXQn5tTEdZ4KBcG_uxsileamDhr3pMbw==/jujuy-basquet-vs-barrio-jardin-t",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-25T02:18:02.561Z"
     },
     {
       "id": "v2nq6R3Jp7xxF-2f4P6y1ouxSfmdadekUmvTHfHdwA2N3JH3aWkc9d6w==",
@@ -16582,6 +16583,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 127,
-  "pending": 412
+  "finished": 128,
+  "pending": 411
 }
