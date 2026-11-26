@@ -768,20 +768,20 @@ export const officialSchedule = [
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2iDPbHFFXD91VEyY_0WWkQSqw2cCZaAw9r2mDthyMzZ7oytwcsctJzA==/la-union-fsa-vs-olimpico-lb"
   },
   {
-    "id": "2026-12-12-independiente-oliva-racing-chivilcoy",
-    "date": "2026-12-12",
-    "time": null,
-    "homeTeam": "independiente-oliva",
-    "awayTeam": "racing-chivilcoy",
-    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2OytywGsqxHvvWg2VgSu2oX62Qkgiy2HGUgozOs5PenPp1VoHbJkVRA==/independiente-o-vs-racing-ch"
-  },
-  {
     "id": "2026-12-12-san-lorenzo-boca",
     "date": "2026-12-12",
     "time": null,
     "homeTeam": "san-lorenzo",
     "awayTeam": "boca",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2tZwPgAoAYomYKDLXx5VKUeamaXJKS88TMe8MBTPtZZ3SA3F6SKM4Pw==/san-lorenzo-vs-boca"
+  },
+  {
+    "id": "2026-12-12-independiente-oliva-racing-chivilcoy",
+    "date": "2026-12-12",
+    "time": null,
+    "homeTeam": "independiente-oliva",
+    "awayTeam": "racing-chivilcoy",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2OytywGsqxHvvWg2VgSu2oX62Qkgiy2HGUgozOs5PenPp1VoHbJkVRA==/independiente-o-vs-racing-ch"
   },
   {
     "id": "2026-12-12-lanus-platense",
@@ -942,5 +942,29 @@ export const officialSchedule = [
     "homeTeam": "penarol",
     "awayTeam": "argentino",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2qZdgNN8EXFXlLSGvuq8Eh1cSp7Oq7m9sNVXN0eMFRl1fUybY4UFc3A==/penarol-mdp-vs-argentino-j"
+  },
+  {
+    "id": "2026-12-27-independiente-oliva-atenas",
+    "date": "2026-12-27",
+    "time": null,
+    "homeTeam": "independiente-oliva",
+    "awayTeam": "atenas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2KkU3yYH6QDahU2RoGHULpE3_eZF84G4pSLyiT7XsA7RzKjpAzIo_zw==/independiente-o-vs-atenas-c"
+  },
+  {
+    "id": "2026-12-27-olimpico-quimsa",
+    "date": "2026-12-27",
+    "time": null,
+    "homeTeam": "olimpico",
+    "awayTeam": "quimsa",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2BiChVn3IoxW9YzfO6QCpst1ySujy_E9DuV-M_YB5lt5ey7U0aSSajw==/olimpico-lb-vs-quimsa"
+  },
+  {
+    "id": "2026-12-27-obera-regatas",
+    "date": "2026-12-27",
+    "time": null,
+    "homeTeam": "obera",
+    "awayTeam": "regatas",
+    "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v20EwD-uidPW06MQuds9O_Pyi_YyOqBRGTvio0xSfocUjpkjp8Jx3BDQ==/obera-vs-regatas-c"
   }
 ];
