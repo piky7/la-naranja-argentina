@@ -459,6 +459,9 @@ function HomeLigaArgentina() {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [openingMatchId, setOpeningMatchId] = useState(null);
   const openFinishedMatch = async match => {
+    // Bloquear actualizaciones PWA de forma síncrona, antes del primer await.
+    // Así no puede producirse una recarga entre el toque y el render del spinner.
+    document.body.classList.add("lna-stats-loading");
     setOpeningMatchId(String(match.id));
     try {
       const loaded = await loadLabBoxscores([match.id]);
@@ -470,6 +473,7 @@ function HomeLigaArgentina() {
       console.error("No se pudo precargar la planilla LAB:", error);
     } finally {
       setOpeningMatchId(null);
+      document.body.classList.remove("lna-stats-loading");
     }
   };
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
