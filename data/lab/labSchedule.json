@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-26T00:09:30.298Z",
+  "importedAt": "2026-11-26T01:48:05.272Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4305,12 +4305,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1691/114985/santa-paula-g/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1691/114985"
       },
-      "homeScore": 5,
-      "awayScore": 2,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 93,
+      "awayScore": 71,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2dEUBEscRDNQirSdQ2IFXQU43jZzjcpdjL1KkEIpLgMDcWTJv5dHWfw==/sp-suardi-vs-santa-paula-g",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-26T01:48:04.308Z"
     },
     {
       "id": "v22fjy_ox0ClFGQss9BGT8dkINTMZY5uwFGR9HbXDj_l6P2c743eCuBw==",
@@ -16583,6 +16584,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 128,
-  "pending": 411
+  "finished": 129,
+  "pending": 410
 }
