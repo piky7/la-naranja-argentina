@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadLabBoxscores, useLabBoxscores } from "../utils/labData";
 import { createPortal } from "react-dom";
@@ -525,6 +525,38 @@ function HomeLigaArgentina() {
     status: isLabMatchFinished(match) ? "finished" :
       (match.date > today || (match.date === today && match.time && match.time > new Intl.DateTimeFormat("en-GB", {timeZone:"America/Argentina/Buenos_Aires",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(new Date()))) ? "scheduled" : "needs_review"
   })), [today]);
+
+  // Igual que LNB precarga los modales en inactividad, LAB prepara las
+  // planillas de los partidos que el usuario probablemente abrirá primero.
+  // Se limita a resultados recientes y partidos de hoy: no descarga el histórico entero.
+  useEffect(() => {
+    const recentFinished = fixture.matches
+      .filter(match => isLabMatchFinished(match))
+      .sort((a, b) => (String(b.date) + " " + String(b.time || "")).localeCompare(String(a.date) + " " + String(a.time || "")))
+      .slice(0, 20);
+    const todayFinished = data.todayGames.filter(match => isLabMatchFinished(match));
+    const ids = [...new Set([...recentFinished, ...todayFinished].map(match => String(match.id)))];
+    if (!ids.length) return undefined;
+    let cancelled = false;
+    const preload = () => {
+      if (cancelled) return;
+      void loadLabBoxscores(ids).catch(error => {
+        console.warn("No se pudieron precargar las planillas recientes LAB:", error);
+      });
+    };
+    let timer;
+    let idleId;
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(preload, { timeout: 5000 });
+    } else {
+      timer = window.setTimeout(preload, 1200);
+    }
+    return () => {
+      cancelled = true;
+      if (timer) window.clearTimeout(timer);
+      if (idleId && "cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
+    };
+  }, [data.todayGames]);
 
   const changeDate = direction => {
     const current = dateFromKey(selectedDate);
