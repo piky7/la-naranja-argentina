@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-26T01:51:58.287Z",
+  "importedAt": "2026-11-26T02:09:09.612Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4367,12 +4367,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1420/113925/la-union-c/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1420/113925"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 73,
+      "awayScore": 65,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2o-24277_FQghZz-4fmV3B7YmvpjbMDkQHLlwCHo2SoxWtukAP02L1A==/centenario-vt-vs-la-union-c",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-26T02:09:08.906Z"
     },
     {
       "id": "v2cwuX5gbLznRHiorByDl9tAZVKtAhvBwXkOg1dEEdcF-SlYQuZYavCg==",
@@ -16585,6 +16586,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 130,
-  "pending": 409
+  "finished": 131,
+  "pending": 408
 }
