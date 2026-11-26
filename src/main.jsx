@@ -11,7 +11,7 @@ let updatePending = false
 let updateObserver = null
 
 const hasBlockingOverlay = () => Boolean(document.querySelector(
-  '[role="dialog"], [aria-modal="true"], .match-modal-overlay, .home-modal-overlay, .lab-match-opening'
+  'body.lna-stats-loading, [role="dialog"], [aria-modal="true"], .match-modal-overlay, .home-modal-overlay, .lab-match-opening'
 ))
 
 const applyUpdateWhenSafe = () => {
