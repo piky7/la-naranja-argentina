@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-26T01:48:05.272Z",
+  "importedAt": "2026-11-26T01:51:58.287Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4336,12 +4336,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2420/113230/gimnasia-lp/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2420/113230"
       },
-      "homeScore": 8,
-      "awayScore": 12,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 84,
+      "awayScore": 77,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v22fjy_ox0ClFGQss9BGT8dkINTMZY5uwFGR9HbXDj_l6P2c743eCuBw==/villa-mitre-bb-vs-gimnasia-lp",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-26T01:51:57.302Z"
     },
     {
       "id": "v2o-24277_FQghZz-4fmV3B7YmvpjbMDkQHLlwCHo2SoxWtukAP02L1A==",
@@ -16584,6 +16585,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 129,
-  "pending": 410
+  "finished": 130,
+  "pending": 409
 }
