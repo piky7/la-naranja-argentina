@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-function splitBoxscores(sourceFile, outputDir, publicDir = null) {
+function publicFilename(matchId) {\n  return String(matchId).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "") + ".json";\n}\n\nfunction splitBoxscores(sourceFile, outputDir, publicDir = null) {
   if (!fs.existsSync(sourceFile)) throw new Error("No existe la base histórica LAB: " + sourceFile);
   const raw = fs.readFileSync(sourceFile, "utf8");
   const boxes = JSON.parse(raw);
@@ -27,7 +27,7 @@ function splitBoxscores(sourceFile, outputDir, publicDir = null) {
   }
   let publicFiles = new Set();
   if (publicDir) {
-    publicFiles = new Set([...entries.map(([matchId]) => encodeURIComponent(String(matchId)) + ".json"), "index.json"]);
+    publicFiles = new Set([...entries.map(([matchId]) => publicFilename(matchId)), "index.json"]);
     for (const filename of fs.readdirSync(publicDir)) {
       if (filename.endsWith(".json") && !publicFiles.has(filename)) fs.unlinkSync(path.join(publicDir, filename));
     }
