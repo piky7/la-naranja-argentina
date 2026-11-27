@@ -11445,3 +11445,99 @@
   }
 }
 
+/* LNB — cabeceras con textura de cancha y básquet, solo ambientación visual. */
+.home-page:not(.lab-home-page) .fixture-hero-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(5, 15, 25, .97) 0%, rgba(8, 22, 34, .88) 62%, rgba(18, 28, 35, .82) 100%),
+    linear-gradient(110deg, #0d2030, #111923);
+}
+
+.home-page:not(.lab-home-page) .fixture-hero-header::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  opacity: .34;
+  background:
+    radial-gradient(ellipse at 50% 115%, rgba(255, 126, 24, .68) 0%, rgba(255, 126, 24, .22) 22%, transparent 55%),
+    radial-gradient(ellipse at 0% 58%, transparent 0 15%, rgba(214, 226, 237, .40) 15.2% 15.6%, transparent 15.8% 23%, rgba(214, 226, 237, .30) 23.2% 23.5%, transparent 23.7%),
+    radial-gradient(ellipse at 100% 58%, transparent 0 15%, rgba(214, 226, 237, .40) 15.2% 15.6%, transparent 15.8% 23%, rgba(214, 226, 237, .30) 23.2% 23.5%, transparent 23.7%),
+    linear-gradient(90deg, transparent 49.7%, rgba(214, 226, 237, .22) 49.9% 50.1%, transparent 50.3%);
+}
+
+.home-page:not(.lab-home-page) .fixture-hero-header::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 35%;
+  pointer-events: none;
+  opacity: .42;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(255, 174, 99, .10) 32px, transparent 33px),
+    repeating-linear-gradient(0deg, rgba(255, 164, 83, .08) 0 1px, transparent 1px 9px),
+    linear-gradient(0deg, rgba(255, 124, 25, .26), transparent 90%);
+  mask-image: linear-gradient(0deg, #000, transparent);
+}
+
+.home-page:not(.lab-home-page) .fixture-hero-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-page:not(.lab-home-page) .standings-panel .home-panel-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.home-page:not(.lab-home-page) .standings-panel .home-panel-header::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 166px;
+  height: 166px;
+  right: 12px;
+  top: -49px;
+  pointer-events: none;
+  opacity: .27;
+  border-radius: 50%;
+  background:
+    linear-gradient(32deg, transparent 47.5%, rgba(30, 12, 3, .9) 48.2% 49.1%, transparent 49.8%),
+    linear-gradient(91deg, transparent 46%, rgba(30, 12, 3, .85) 47% 48%, transparent 49%),
+    linear-gradient(145deg, transparent 47%, rgba(30, 12, 3, .85) 48% 49%, transparent 50%),
+    radial-gradient(circle at 50% 50%, transparent 0 65%, rgba(30, 12, 3, .9) 66% 67.5%, transparent 68%),
+    radial-gradient(circle at 35% 28%, #ffb04b 0%, #e87519 56%, #8c390d 100%);
+  box-shadow: inset -10px -12px 18px rgba(35, 10, 0, .42), 0 0 30px rgba(255, 126, 25, .20);
+}
+
+.home-page:not(.lab-home-page) .standings-panel .home-panel-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .home-page:not(.lab-home-page) .fixture-hero-header::before { opacity: .26; }
+  .home-page:not(.lab-home-page) .fixture-hero-header::after { height: 30%; opacity: .34; }
+  .home-page:not(.lab-home-page) .standings-panel .home-panel-header::after {
+    width: 132px;
+    height: 132px;
+    right: 2px;
+    top: -34px;
+    opacity: .22;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page:not(.lab-home-page) .fixture-hero-header,
+  .home-page:not(.lab-home-page) .standings-panel .home-panel-header {
+    transition: none;
+  }
+}
+
