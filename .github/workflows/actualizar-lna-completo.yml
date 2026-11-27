@@ -270,7 +270,7 @@ jobs:
             git reset --hard origin/main
             aplicar_datos
             npm run build
-            git add liga-events.json liga-history.json src/data/officialSchedule.js src/data/matchStats.js src/data/matchResults.js src/data/players.js public/published-matches.json data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json
+            git add liga-events.json liga-history.json src/data/officialSchedule.js src/data/matchStats.js src/data/matchResults.js src/data/players.js public/published-matches.json public/lab-boxscores data/lab/labSchedule.json data/lab/labBoxscores.json data/lab/labRosters.json
             if git diff --cached --quiet; then
               echo "No hay datos nuevos para publicar."
               exit 0
