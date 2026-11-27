@@ -458,23 +458,10 @@ function HomeLigaArgentina() {
   const [conferenceTab, setConferenceTab] = useState("norte");
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [openingMatchId, setOpeningMatchId] = useState(null);
-  const openFinishedMatch = async match => {
-    // Bloquear actualizaciones PWA de forma síncrona, antes del primer await.
-    // Así no puede producirse una recarga entre el toque y el render del spinner.
-    document.body.classList.add("lna-stats-loading");
-    setOpeningMatchId(String(match.id));
-    try {
-      const loaded = await loadLabBoxscores([match.id]);
-      const boxscore = loaded?.[String(match.id)];
-      // No abrir el popup si la planilla oficial todavía no está publicada.
-      if (!Array.isArray(boxscore?.players) || boxscore.players.length === 0) return;
-      setSelectedMatch(match);
-    } catch (error) {
-      console.error("No se pudo precargar la planilla LAB:", error);
-    } finally {
-      setOpeningMatchId(null);
-      document.body.classList.remove("lna-stats-loading");
-    }
+  const openFinishedMatch = match => {
+    // Abrir el popup inmediatamente: la planilla se consulta dentro del modal.
+    // Así un error de red o un archivo aún no publicado nunca descarta la selección.
+    setSelectedMatch(match);
   };
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const [selectedLiveMatch, setSelectedLiveMatch] = useState(null);
@@ -695,7 +682,6 @@ function HomeLigaArgentina() {
         <Link className="team-v2-full-link" to={"/equipos/"+selectedTeam.teamId} onClick={()=>setSelectedTeam(null)}>Ver equipo completo →</Link>
        </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
       </div></div>,document.body)}
-      {openingMatchId && <div className="lab-match-opening" role="status" aria-live="polite"><span className="lab-match-opening-spinner" aria-hidden="true"/><strong>CARGANDO ESTADÍSTICAS</strong><small>Preparando la planilla del partido…</small></div>}
       {selectedMatch && <LabHomeBoxscore match={selectedMatch} onClose={() => setSelectedMatch(null)}/>}
       {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)} onNavigateTeam={goToLabTeam}/>}
       {selectedLiveMatch && <LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={() => setSelectedLiveMatch(null)}/>}
