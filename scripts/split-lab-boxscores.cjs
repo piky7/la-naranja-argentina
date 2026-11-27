@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-function splitBoxscores(sourceFile, outputDir, publicDir) {
+function splitBoxscores(sourceFile, outputDir, publicDir = null) {
   if (!fs.existsSync(sourceFile)) throw new Error("No existe la base histórica LAB: " + sourceFile);
   const raw = fs.readFileSync(sourceFile, "utf8");
   const boxes = JSON.parse(raw);
@@ -12,33 +12,35 @@ function splitBoxscores(sourceFile, outputDir, publicDir) {
   const entries = Object.entries(boxes);
   const nextFiles = new Set();
   fs.mkdirSync(outputDir, { recursive: true });
-  fs.mkdirSync(publicDir, { recursive: true });
+  if (publicDir) fs.mkdirSync(publicDir, { recursive: true });
 
   for (const [matchId, box] of entries) {
     if (!matchId || !box || typeof box !== "object") throw new Error("Boxscore inválido: " + matchId);
     const filename = "labBoxscores-" + encodeURIComponent(String(matchId)) + ".json";
     fs.writeFileSync(path.join(outputDir, filename), JSON.stringify(box) + "\n");
-    fs.writeFileSync(path.join(publicDir, encodeURIComponent(String(matchId)) + ".json"), JSON.stringify(box) + "\n");
+    if (publicDir) fs.writeFileSync(path.join(publicDir, encodeURIComponent(String(matchId)) + ".json"), JSON.stringify(box) + "\n");
     nextFiles.add(filename);
   }
 
   for (const filename of fs.readdirSync(outputDir)) {
     if (filename.endsWith(".json") && !nextFiles.has(filename)) fs.unlinkSync(path.join(outputDir, filename));
   }
-  const publicFiles = new Set([...entries.map(([matchId]) => encodeURIComponent(String(matchId)) + ".json"), "index.json"]);
-  for (const filename of fs.readdirSync(publicDir)) {
-    if (filename.endsWith(".json") && !publicFiles.has(filename)) fs.unlinkSync(path.join(publicDir, filename));
+  let publicFiles = new Set();
+  if (publicDir) {
+    publicFiles = new Set([...entries.map(([matchId]) => encodeURIComponent(String(matchId)) + ".json"), "index.json"]);
+    for (const filename of fs.readdirSync(publicDir)) {
+      if (filename.endsWith(".json") && !publicFiles.has(filename)) fs.unlinkSync(path.join(publicDir, filename));
+    }
+    const matchIds = entries.map(([matchId]) => String(matchId));
+    fs.writeFileSync(path.join(publicDir, "index.json"), JSON.stringify({ matchIds }) + "\n");
   }
-
-  const matchIds = entries.map(([matchId]) => String(matchId));
-  fs.writeFileSync(path.join(publicDir, "index.json"), JSON.stringify({ matchIds }) + "\n");
 
   const result = {
     matches: entries.length,
     sourceBytes: Buffer.byteLength(raw),
     shardBytes: [...nextFiles].reduce((sum, filename) => sum + fs.statSync(path.join(outputDir, filename)).size, 0),
     files: nextFiles.size,
-    publicFiles: publicFiles.size
+    publicFiles: publicDir ? publicFiles.size : 0
   };
   console.log("BOX SCORES LAB PARTICIONADOS", JSON.stringify(result));
   return result;
