@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-27T02:04:05.123Z",
+  "importedAt": "2026-11-27T02:21:12.494Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4398,12 +4398,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2173/114689/dep-viedma/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2173/114689"
       },
-      "homeScore": 5,
-      "awayScore": 3,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 88,
+      "awayScore": 87,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2Z8dC9NEddNMu683vf1a6trf6OAmG2lOS6naLRLV5UQUEVAaV5-6uxg==/quilmes-mdp-vs-dep-viedma",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-27T02:21:11.274Z"
     },
     {
       "id": "v2vRyo0CHUTwgwzkLSHZrZalcxKjT61HVB-mYf3wf7kBADfSt18gymFg==",
@@ -16587,6 +16588,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 132,
-  "pending": 407
+  "finished": 133,
+  "pending": 406
 }
