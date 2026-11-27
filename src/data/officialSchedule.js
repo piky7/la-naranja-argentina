@@ -682,7 +682,7 @@ export const officialSchedule = [
   {
     "id": "2026-12-03-ferro-racing-chivilcoy",
     "date": "2026-12-03",
-    "time": "20:00",
+    "time": "22:05",
     "homeTeam": "ferro",
     "awayTeam": "racing-chivilcoy",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2jkXEggLcqmOtU6k7qs-2huSi-FvCtxb0V4VAKsyqBXo30MhMut5nEQ==/ferro-vs-racing-ch"
@@ -690,7 +690,7 @@ export const officialSchedule = [
   {
     "id": "2026-12-04-olimpico-san-lorenzo",
     "date": "2026-12-04",
-    "time": null,
+    "time": "22:00",
     "homeTeam": "olimpico",
     "awayTeam": "san-lorenzo",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2qwBh5lhRELhJ68L4jENX68dZw9Ctmvul79VWI9NgGz4kBqU96ZwXjA==/olimpico-lb-vs-san-lorenzo"
@@ -698,7 +698,7 @@ export const officialSchedule = [
   {
     "id": "2026-12-05-platense-racing-chivilcoy",
     "date": "2026-12-05",
-    "time": null,
+    "time": "20:05",
     "homeTeam": "platense",
     "awayTeam": "racing-chivilcoy",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v2p3ayCBhlDOmrhURyg96dZ8u4v8xFrpL1sRddWggxVruzxjv2QIDnPA==/platense-vs-racing-ch"
@@ -706,7 +706,7 @@ export const officialSchedule = [
   {
     "id": "2026-12-06-quimsa-san-lorenzo",
     "date": "2026-12-06",
-    "time": null,
+    "time": "21:00",
     "homeTeam": "quimsa",
     "awayTeam": "san-lorenzo",
     "officialUrl": "https://www.laliganacional.com.ar/laliga/partido/v22bQrDwJ1KEg25AlnagjXL62W_1w1I7A72IQHJ3KUacMte8Gz7j2zOA==/quimsa-vs-san-lorenzo"
