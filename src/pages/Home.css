@@ -11380,3 +11380,68 @@
   }
 }
 
+/* LAB Home — mismos paneles premium que LNB, respetando la identidad celeste.
+   Solo presentación de las tarjetas principales; no modifica estructura ni datos. */
+.home-page.lab-home-page .home-panel.standings-panel,
+.home-page.lab-home-page .home-panel.fixture-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(48, 205, 231, .66);
+  background:
+    radial-gradient(ellipse at 92% 0%, rgba(23, 194, 222, .12) 0%, transparent 36%),
+    radial-gradient(ellipse at 8% 18%, rgba(0, 125, 183, .18) 0%, transparent 44%),
+    linear-gradient(145deg, #0d2b3c 0%, #0a1d2c 47%, #071521 100%);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, .38),
+    0 0 0 1px rgba(45, 199, 224, .08),
+    inset 0 1px 0 rgba(255, 255, 255, .10);
+}
+
+.home-page.lab-home-page .home-panel.standings-panel::before,
+.home-page.lab-home-page .home-panel.fixture-panel::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(111, 231, 245, .76), rgba(27, 190, 218, .88), transparent);
+  box-shadow: 0 0 11px rgba(25, 188, 218, .26);
+}
+
+.home-page.lab-home-page .home-panel.standings-panel > *,
+.home-page.lab-home-page .home-panel.fixture-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-page.lab-home-page .fixture-hero-header,
+.home-page.lab-home-page .standings-panel .home-panel-header {
+  background:
+    radial-gradient(ellipse at 90% 0%, rgba(31, 195, 221, .15), transparent 48%),
+    linear-gradient(110deg, rgba(13, 46, 65, .96), rgba(8, 25, 39, .90));
+  border-bottom-color: rgba(61, 201, 225, .30);
+}
+
+.home-page.lab-home-page .fixture-date-navigation {
+  background: linear-gradient(100deg, rgba(6, 21, 34, .94), rgba(12, 43, 59, .94), rgba(6, 21, 34, .94));
+  border-bottom-color: rgba(58, 197, 221, .25);
+}
+
+.home-page.lab-home-page .standings-panel .home-stats-tabs {
+  background: rgba(5, 19, 31, .76);
+}
+
+@media (max-width: 768px) {
+  .home-page.lab-home-page .home-panel.standings-panel,
+  .home-page.lab-home-page .home-panel.fixture-panel {
+    box-shadow:
+      0 10px 25px rgba(0, 0, 0, .34),
+      0 0 0 1px rgba(45, 199, 224, .07),
+      inset 0 1px 0 rgba(255, 255, 255, .09);
+  }
+}
+
