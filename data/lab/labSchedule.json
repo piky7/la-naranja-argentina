@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-27T02:21:12.494Z",
+  "importedAt": "2026-11-27T02:24:05.246Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4429,12 +4429,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2501/114142/barrio-jardin-t/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2501/114142"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 87,
+      "awayScore": 67,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2vRyo0CHUTwgwzkLSHZrZalcxKjT61HVB-mYf3wf7kBADfSt18gymFg==/salta-basket-vs-barrio-jardin-t",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-27T02:24:03.912Z"
     },
     {
       "id": "v28Mes5liru2pGqIVpqVX0OfFh0DumreX6o1t-5RGZBBANIKnfS--9gQ==",
@@ -16588,6 +16589,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 133,
-  "pending": 406
+  "finished": 134,
+  "pending": 405
 }
