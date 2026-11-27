@@ -457,7 +457,6 @@ function HomeLigaArgentina() {
   const [statsTab, setStatsTab] = useState("posiciones");
   const [conferenceTab, setConferenceTab] = useState("norte");
   const [selectedMatch, setSelectedMatch] = useState(null);
-  const [openingMatchId, setOpeningMatchId] = useState(null);
   const openFinishedMatch = match => {
     // Abrir el popup inmediatamente: la planilla se consulta dentro del modal.
     // Así un error de red o un archivo aún no publicado nunca descarta la selección.
