@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 const BASE_URL = import.meta.env.BASE_URL || "/";
 const loadedBoxscores = new Map();
 const pendingBoxscores = new Map();
+
+const publicFilename = id => String(id).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "") + ".json";
 let publishedMatchIdsPromise = null;
 
 async function getPublishedMatchIds() {
@@ -26,7 +28,7 @@ async function loadOne(matchId) {
   if (loadedBoxscores.has(id)) return loadedBoxscores.get(id);
   if (pendingBoxscores.has(id)) return pendingBoxscores.get(id);
 
-  const filename = encodeURIComponent(id) + ".json";
+  const filename = publicFilename(id);
   const request = fetch(`${BASE_URL}lab-boxscores/${filename}`, { cache: "no-store" })
     .then(async response => {
       if (response.status === 404) return null;
