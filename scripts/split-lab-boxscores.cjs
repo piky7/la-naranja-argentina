@@ -31,10 +31,7 @@ function splitBoxscores(sourceFile, outputDir, publicDir) {
   }
 
   const matchIds = entries.map(([matchId]) => String(matchId));
-  fs.writeFileSync(path.join(publicDir, "index.json"), JSON.stringify({
-    updatedAt: new Date().toISOString(),
-    matchIds
-  }) + "\n");
+  fs.writeFileSync(path.join(publicDir, "index.json"), JSON.stringify({ matchIds }) + "\n");
 
   const result = {
     matches: entries.length,
