@@ -1,7 +1,11 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-function publicFilename(matchId) {\n  return String(matchId).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "") + ".json";\n}\n\nfunction splitBoxscores(sourceFile, outputDir, publicDir = null) {
+function publicFilename(matchId) {\n  return String(matchId).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "") + ".json";\n}\n\nfunction publicFilename(matchId) {
+  return String(matchId).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "") + ".json";
+}
+
+function splitBoxscores(sourceFile, outputDir, publicDir = null) {
   if (!fs.existsSync(sourceFile)) throw new Error("No existe la base histórica LAB: " + sourceFile);
   const raw = fs.readFileSync(sourceFile, "utf8");
   const boxes = JSON.parse(raw);
@@ -18,7 +22,7 @@ function publicFilename(matchId) {\n  return String(matchId).replace(/\\+/g, "-"
     if (!matchId || !box || typeof box !== "object") throw new Error("Boxscore inválido: " + matchId);
     const filename = "labBoxscores-" + encodeURIComponent(String(matchId)) + ".json";
     fs.writeFileSync(path.join(outputDir, filename), JSON.stringify(box) + "\n");
-    if (publicDir) fs.writeFileSync(path.join(publicDir, encodeURIComponent(String(matchId)) + ".json"), JSON.stringify(box) + "\n");
+    if (publicDir) fs.writeFileSync(path.join(publicDir, publicFilename(matchId)), JSON.stringify(box) + "\n");
     nextFiles.add(filename);
   }
 
