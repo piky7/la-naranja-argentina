@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-function publicFilename(matchId) {\n  return String(matchId).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "") + ".json";\n}\n\nfunction publicFilename(matchId) {
+function publicFilename(matchId) {
   return String(matchId).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "") + ".json";
 }
 
@@ -12,12 +12,10 @@ function splitBoxscores(sourceFile, outputDir, publicDir = null) {
   if (!boxes || typeof boxes !== "object" || Array.isArray(boxes)) {
     throw new Error("La base histórica LAB debe ser un objeto indexado por ID de partido.");
   }
-
   const entries = Object.entries(boxes);
   const nextFiles = new Set();
   fs.mkdirSync(outputDir, { recursive: true });
   if (publicDir) fs.mkdirSync(publicDir, { recursive: true });
-
   for (const [matchId, box] of entries) {
     if (!matchId || !box || typeof box !== "object") throw new Error("Boxscore inválido: " + matchId);
     const filename = "labBoxscores-" + encodeURIComponent(String(matchId)) + ".json";
@@ -25,7 +23,6 @@ function splitBoxscores(sourceFile, outputDir, publicDir = null) {
     if (publicDir) fs.writeFileSync(path.join(publicDir, publicFilename(matchId)), JSON.stringify(box) + "\n");
     nextFiles.add(filename);
   }
-
   for (const filename of fs.readdirSync(outputDir)) {
     if (filename.endsWith(".json") && !nextFiles.has(filename)) fs.unlinkSync(path.join(outputDir, filename));
   }
@@ -35,10 +32,8 @@ function splitBoxscores(sourceFile, outputDir, publicDir = null) {
     for (const filename of fs.readdirSync(publicDir)) {
       if (filename.endsWith(".json") && !publicFiles.has(filename)) fs.unlinkSync(path.join(publicDir, filename));
     }
-    const matchIds = entries.map(([matchId]) => String(matchId));
-    fs.writeFileSync(path.join(publicDir, "index.json"), JSON.stringify({ matchIds }) + "\n");
+    fs.writeFileSync(path.join(publicDir, "index.json"), JSON.stringify({ matchIds: entries.map(([matchId]) => String(matchId)) }) + "\n");
   }
-
   const result = {
     matches: entries.length,
     sourceBytes: Buffer.byteLength(raw),
