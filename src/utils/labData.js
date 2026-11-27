@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.BASE_URL || "/";
 const loadedBoxscores = new Map();
 const pendingBoxscores = new Map();
 
-const publicFilename = id => String(id).replace(/\\+/g, "-").replace(/\\//g, "_").replace(/=+$/g, "") + ".json";
+const publicFilename = id => String(id).split("+").join("-").split("/").join("_").replace(/=+$/g, "") + ".json";
 let publishedMatchIdsPromise = null;
 
 async function getPublishedMatchIds() {
