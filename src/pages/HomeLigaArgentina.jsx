@@ -457,10 +457,15 @@ function HomeLigaArgentina() {
   const [statsTab, setStatsTab] = useState("posiciones");
   const [conferenceTab, setConferenceTab] = useState("norte");
   const [selectedMatch, setSelectedMatch] = useState(null);
+  const [openingMatchId, setOpeningMatchId] = useState(null);
   const openFinishedMatch = match => {
-    // Abrir el popup inmediatamente: la planilla se consulta dentro del modal.
-    // Así un error de red o un archivo aún no publicado nunca descarta la selección.
+    // Abrir el popup inmediatamente y mostrar la animación mientras llega la planilla.
+    // Un fallo de descarga no cancela la apertura del partido.
     setSelectedMatch(match);
+    setOpeningMatchId(String(match.id));
+    loadLabBoxscores([match.id])
+      .catch(error => console.error("No se pudo precargar la planilla LAB:", error))
+      .finally(() => setOpeningMatchId(current => current === String(match.id) ? null : current));
   };
   const [selectedUpcomingMatch, setSelectedUpcomingMatch] = useState(null);
   const [selectedLiveMatch, setSelectedLiveMatch] = useState(null);
@@ -681,6 +686,7 @@ function HomeLigaArgentina() {
         <Link className="team-v2-full-link" to={"/equipos/"+selectedTeam.teamId} onClick={()=>setSelectedTeam(null)}>Ver equipo completo →</Link>
        </div><div className="home-team-modal-footer"><span>LNA</span><strong>LAB</strong></div>
       </div></div>,document.body)}
+      {openingMatchId && <div className="lab-match-opening" role="status" aria-live="polite"><span className="lab-match-opening-spinner" aria-hidden="true"/><strong>CARGANDO ESTADÍSTICAS</strong><small>Preparando la planilla del partido…</small></div>}
       {selectedMatch && <LabHomeBoxscore match={selectedMatch} onClose={() => setSelectedMatch(null)}/>}
       {selectedUpcomingMatch && <LabUpcomingMatchModal match={selectedUpcomingMatch} onClose={() => setSelectedUpcomingMatch(null)} onNavigateTeam={goToLabTeam}/>}
       {selectedLiveMatch && <LabLiveMatchModal match={selectedLiveMatch.match} live={selectedLiveMatch.live} onClose={() => setSelectedLiveMatch(null)}/>}
