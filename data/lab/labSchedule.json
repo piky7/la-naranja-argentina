@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-28T01:45:09.324Z",
+  "importedAt": "2026-11-28T02:11:03.149Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4522,12 +4522,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/2168/112811/amancay-lr/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/2168/112811"
       },
-      "homeScore": 0,
-      "awayScore": 0,
-      "status": "scheduled",
-      "statusSource": "score_presence_only",
+      "homeScore": 69,
+      "awayScore": 93,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2nZ6ckdx8Ok1wLLgK6iKTkN5mTIX-zkuXmhGWG-ZO4C3dppBhocEJWg==/independiente-sde-vs-amancay-lr",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-28T02:11:01.567Z"
     },
     {
       "id": "v2wMAQn7lk2UUqN96lpl-oBGei5A3l7lDubz2zEF69bF9fUijYl1bTiw==",
@@ -16590,6 +16591,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 135,
-  "pending": 404
+  "finished": 136,
+  "pending": 403
 }
