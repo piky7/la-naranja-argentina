@@ -196,7 +196,7 @@ const [homeStatsTab, setHomeStatsTab] = useState("posiciones");
       ? getUpcomingCollectives()
       : EMPTY_UPCOMING_COLLECTIVES;
 const { liveMatches, date: liveDate } = useLiveSnapshot();
-const lnbLiveMatches = liveMatches.filter((liveMatch) => liveMatch.competition !== "LAB");
+const lnbLiveMatches = liveMatches.filter((liveMatch) => liveMatch.competition !== "LAB" && liveMatch.isStale !== true);
 
 
   // El reloj oficial indica los minutos restantes del cuarto.
