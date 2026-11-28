@@ -3,7 +3,7 @@
   "season": "2026-2027",
   "source": "Liga Nacional oficial",
   "sourceUrl": "https://www.laliganacional.com.ar/laligaargentina/fixture?handler=ProximosPartidos&fechaInicio=2026-09-01&fechaFin=2027-06-30",
-  "importedAt": "2026-11-28T00:09:43.063Z",
+  "importedAt": "2026-11-28T01:45:09.324Z",
   "range": {
     "start": "2026-09-01",
     "end": "2027-06-30"
@@ -4491,12 +4491,13 @@
         "url": "https://www.laliganacional.com.ar/laligaargentina/equipo/1503/114919/pico-fc/inicio",
         "crestUrl": "https://www.laliganacional.com.ar/escudos/1503/114919"
       },
-      "homeScore": 11,
-      "awayScore": 9,
-      "status": "score_available",
-      "statusSource": "score_presence_only",
+      "homeScore": 80,
+      "awayScore": 68,
+      "status": "finished",
+      "statusSource": "official-final-and-complete-boxscore",
       "officialUrl": "https://www.laliganacional.com.ar/laligaargentina/partido/v2AwGgC-wGF9P7Tk7NO2wgEmcYZc3qv6GOHxiXrN174QFZ1Ttue4moCQ==/ciclista-j-vs-pico-fc",
-      "source": "Liga Nacional oficial"
+      "source": "Liga Nacional oficial",
+      "boxscoreImportedAt": "2026-11-28T01:45:08.356Z"
     },
     {
       "id": "v2nZ6ckdx8Ok1wLLgK6iKTkN5mTIX-zkuXmhGWG-ZO4C3dppBhocEJWg==",
@@ -16589,6 +16590,6 @@
       "source": "Liga Nacional oficial"
     }
   ],
-  "finished": 134,
-  "pending": 405
+  "finished": 135,
+  "pending": 404
 }
