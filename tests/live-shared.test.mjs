@@ -25,5 +25,8 @@ test("El estado compartido deduplica solicitudes y evita polling en segundo plan
   assert.match(store, /document\.hidden/);
   assert.match(store, /clearInterval\(timer\)/);
   assert.match(store, /visibilitychange/);
-  assert.match(store, /POLL_MS = 60_000/);
+  assert.match(store, /POLL_MS = 20_000/);
+  assert.match(store, /refreshLiveSnapshot\(\{ force: true \}\)/);
+  assert.match(store, /STALE_AFTER_MS = 90_000/);
+  assert.match(store, /Cache-Control/);
 });
