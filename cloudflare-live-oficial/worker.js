@@ -1277,7 +1277,7 @@ const desactualizado =
 return Response.json(datosActualizados, {
   headers: {
     ...obtenerCorsHeaders(request),
-    "Cache-Control": "public, max-age=15",
+    "Cache-Control": "no-store, no-cache, must-revalidate",
   },
 });
 
